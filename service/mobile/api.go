@@ -11,31 +11,36 @@ import (
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws.Request" representing the
-// client's request for the CreateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProjectRequest is a API request type for the CreateProject API operation.
+type CreateProjectRequest struct {
+	*aws.Request
+	Input *CreateProjectInput
+}
+
+// Send marshals and sends the CreateProject API request.
+func (r *CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProjectOutput), nil
+}
+
+// CreateProjectRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProject for more information on using the CreateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an AWS Mobile Hub project.
 //
 //    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProject
-func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -46,100 +51,42 @@ func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) (req *aws.Reque
 		input = &CreateProjectInput{}
 	}
 
-	output = &CreateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProject API operation for AWS Mobile.
-//
-// Creates an AWS Mobile Hub project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation CreateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   There are too many AWS Mobile Hub projects in the account or the account
-//   has exceeded the maximum number of resources in some AWS service. You should
-//   create another sub-account using AWS Organizations or remove some resources
-//   and retry your request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProject
-func (c *Mobile) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	return out, req.Send()
-}
-
-// CreateProjectWithContext is the same as CreateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProjectOutput{})
+	return CreateProjectRequest{Request: req, Input: input}
 }
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProjectRequest is a API request type for the DeleteProject API operation.
+type DeleteProjectRequest struct {
+	*aws.Request
+	Input *DeleteProjectInput
+}
+
+// Send marshals and sends the DeleteProject API request.
+func (r *DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProjectOutput), nil
+}
+
+// DeleteProjectRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProject for more information on using the DeleteProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delets a project in AWS Mobile Hub.
 //
 //    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProject
-func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "DELETE",
@@ -150,90 +97,42 @@ func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Reque
 		input = &DeleteProjectInput{}
 	}
 
-	output = &DeleteProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProject API operation for AWS Mobile.
-//
-// Delets a project in AWS Mobile Hub.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation DeleteProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProject
-func (c *Mobile) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProjectWithContext is the same as DeleteProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	return DeleteProjectRequest{Request: req, Input: input}
 }
 
 const opDescribeBundle = "DescribeBundle"
 
-// DescribeBundleRequest generates a "aws.Request" representing the
-// client's request for the DescribeBundle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBundleRequest is a API request type for the DescribeBundle API operation.
+type DescribeBundleRequest struct {
+	*aws.Request
+	Input *DescribeBundleInput
+}
+
+// Send marshals and sends the DescribeBundle API request.
+func (r *DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBundleOutput), nil
+}
+
+// DescribeBundleRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeBundle for more information on using the DescribeBundle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the bundle details for the requested bundle id.
 //
 //    // Example sending a request using the DescribeBundleRequest method.
-//    req, resp := client.DescribeBundleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBundleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundle
-func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) (req *aws.Request, output *DescribeBundleOutput) {
+func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) DescribeBundleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBundle,
 		HTTPMethod: "GET",
@@ -244,94 +143,42 @@ func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) (req *aws.Req
 		input = &DescribeBundleInput{}
 	}
 
-	output = &DescribeBundleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBundle API operation for AWS Mobile.
-//
-// Get the bundle details for the requested bundle id.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation DescribeBundle for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundle
-func (c *Mobile) DescribeBundle(input *DescribeBundleInput) (*DescribeBundleOutput, error) {
-	req, out := c.DescribeBundleRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBundleWithContext is the same as DescribeBundle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBundle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) DescribeBundleWithContext(ctx aws.Context, input *DescribeBundleInput, opts ...aws.Option) (*DescribeBundleOutput, error) {
-	req, out := c.DescribeBundleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBundleOutput{})
+	return DescribeBundleRequest{Request: req, Input: input}
 }
 
 const opDescribeProject = "DescribeProject"
 
-// DescribeProjectRequest generates a "aws.Request" representing the
-// client's request for the DescribeProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeProjectRequest is a API request type for the DescribeProject API operation.
+type DescribeProjectRequest struct {
+	*aws.Request
+	Input *DescribeProjectInput
+}
+
+// Send marshals and sends the DescribeProject API request.
+func (r *DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProjectOutput), nil
+}
+
+// DescribeProjectRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeProject for more information on using the DescribeProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets details about a project in AWS Mobile Hub.
 //
 //    // Example sending a request using the DescribeProjectRequest method.
-//    req, resp := client.DescribeProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProject
-func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) (req *aws.Request, output *DescribeProjectOutput) {
+func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) DescribeProjectRequest {
 	op := &aws.Operation{
 		Name:       opDescribeProject,
 		HTTPMethod: "GET",
@@ -342,94 +189,43 @@ func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) (req *aws.R
 		input = &DescribeProjectInput{}
 	}
 
-	output = &DescribeProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeProject API operation for AWS Mobile.
-//
-// Gets details about a project in AWS Mobile Hub.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation DescribeProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProject
-func (c *Mobile) DescribeProject(input *DescribeProjectInput) (*DescribeProjectOutput, error) {
-	req, out := c.DescribeProjectRequest(input)
-	return out, req.Send()
-}
-
-// DescribeProjectWithContext is the same as DescribeProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...aws.Option) (*DescribeProjectOutput, error) {
-	req, out := c.DescribeProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeProjectOutput{})
+	return DescribeProjectRequest{Request: req, Input: input}
 }
 
 const opExportBundle = "ExportBundle"
 
-// ExportBundleRequest generates a "aws.Request" representing the
-// client's request for the ExportBundle operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExportBundleRequest is a API request type for the ExportBundle API operation.
+type ExportBundleRequest struct {
+	*aws.Request
+	Input *ExportBundleInput
+}
+
+// Send marshals and sends the ExportBundle API request.
+func (r *ExportBundleRequest) Send() (*ExportBundleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportBundleOutput), nil
+}
+
+// ExportBundleRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ExportBundle for more information on using the ExportBundle
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Generates customized software development kit (SDK) and or tool packages
+// used to integrate mobile web or mobile app clients with backend AWS resources.
 //
 //    // Example sending a request using the ExportBundleRequest method.
-//    req, resp := client.ExportBundleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExportBundleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportBundle
-func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) (req *aws.Request, output *ExportBundleOutput) {
+func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) ExportBundleRequest {
 	op := &aws.Operation{
 		Name:       opExportBundle,
 		HTTPMethod: "POST",
@@ -440,95 +236,44 @@ func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) (req *aws.Request
 		input = &ExportBundleInput{}
 	}
 
-	output = &ExportBundleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ExportBundle API operation for AWS Mobile.
-//
-// Generates customized software development kit (SDK) and or tool packages
-// used to integrate mobile web or mobile app clients with backend AWS resources.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation ExportBundle for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportBundle
-func (c *Mobile) ExportBundle(input *ExportBundleInput) (*ExportBundleOutput, error) {
-	req, out := c.ExportBundleRequest(input)
-	return out, req.Send()
-}
-
-// ExportBundleWithContext is the same as ExportBundle with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExportBundle for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) ExportBundleWithContext(ctx aws.Context, input *ExportBundleInput, opts ...aws.Option) (*ExportBundleOutput, error) {
-	req, out := c.ExportBundleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ExportBundleOutput{})
+	return ExportBundleRequest{Request: req, Input: input}
 }
 
 const opExportProject = "ExportProject"
 
-// ExportProjectRequest generates a "aws.Request" representing the
-// client's request for the ExportProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExportProjectRequest is a API request type for the ExportProject API operation.
+type ExportProjectRequest struct {
+	*aws.Request
+	Input *ExportProjectInput
+}
+
+// Send marshals and sends the ExportProject API request.
+func (r *ExportProjectRequest) Send() (*ExportProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportProjectOutput), nil
+}
+
+// ExportProjectRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ExportProject for more information on using the ExportProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Exports project configuration to a snapshot which can be downloaded and shared.
+// Note that mobile app push credentials are encrypted in exported projects,
+// so they can only be shared successfully within the same AWS account.
 //
 //    // Example sending a request using the ExportProjectRequest method.
-//    req, resp := client.ExportProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExportProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportProject
-func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) (req *aws.Request, output *ExportProjectOutput) {
+func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) ExportProjectRequest {
 	op := &aws.Operation{
 		Name:       opExportProject,
 		HTTPMethod: "POST",
@@ -539,96 +284,42 @@ func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) (req *aws.Reque
 		input = &ExportProjectInput{}
 	}
 
-	output = &ExportProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ExportProject API operation for AWS Mobile.
-//
-// Exports project configuration to a snapshot which can be downloaded and shared.
-// Note that mobile app push credentials are encrypted in exported projects,
-// so they can only be shared successfully within the same AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation ExportProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportProject
-func (c *Mobile) ExportProject(input *ExportProjectInput) (*ExportProjectOutput, error) {
-	req, out := c.ExportProjectRequest(input)
-	return out, req.Send()
-}
-
-// ExportProjectWithContext is the same as ExportProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExportProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) ExportProjectWithContext(ctx aws.Context, input *ExportProjectInput, opts ...aws.Option) (*ExportProjectOutput, error) {
-	req, out := c.ExportProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ExportProjectOutput{})
+	return ExportProjectRequest{Request: req, Input: input}
 }
 
 const opListBundles = "ListBundles"
 
-// ListBundlesRequest generates a "aws.Request" representing the
-// client's request for the ListBundles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBundlesRequest is a API request type for the ListBundles API operation.
+type ListBundlesRequest struct {
+	*aws.Request
+	Input *ListBundlesInput
+}
+
+// Send marshals and sends the ListBundles API request.
+func (r *ListBundlesRequest) Send() (*ListBundlesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBundlesOutput), nil
+}
+
+// ListBundlesRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBundles for more information on using the ListBundles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all available bundles.
 //
 //    // Example sending a request using the ListBundlesRequest method.
-//    req, resp := client.ListBundlesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBundlesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundles
-func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) (req *aws.Request, output *ListBundlesOutput) {
+func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest {
 	op := &aws.Operation{
 		Name:       opListBundles,
 		HTTPMethod: "GET",
@@ -645,62 +336,8 @@ func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) (req *aws.Request, 
 		input = &ListBundlesInput{}
 	}
 
-	output = &ListBundlesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBundles API operation for AWS Mobile.
-//
-// List all available bundles.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation ListBundles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundles
-func (c *Mobile) ListBundles(input *ListBundlesInput) (*ListBundlesOutput, error) {
-	req, out := c.ListBundlesRequest(input)
-	return out, req.Send()
-}
-
-// ListBundlesWithContext is the same as ListBundles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBundles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) ListBundlesWithContext(ctx aws.Context, input *ListBundlesInput, opts ...aws.Option) (*ListBundlesOutput, error) {
-	req, out := c.ListBundlesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBundlesOutput{})
+	return ListBundlesRequest{Request: req, Input: input}
 }
 
 // ListBundlesPages iterates over the pages of a ListBundles operation,
@@ -739,10 +376,10 @@ func (c *Mobile) ListBundlesPagesWithContext(ctx aws.Context, input *ListBundles
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListBundlesRequest(inCpy)
+			req := c.ListBundlesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -755,31 +392,36 @@ func (c *Mobile) ListBundlesPagesWithContext(ctx aws.Context, input *ListBundles
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws.Request" representing the
-// client's request for the ListProjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProjectsRequest is a API request type for the ListProjects API operation.
+type ListProjectsRequest struct {
+	*aws.Request
+	Input *ListProjectsInput
+}
+
+// Send marshals and sends the ListProjects API request.
+func (r *ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProjectsOutput), nil
+}
+
+// ListProjectsRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProjects for more information on using the ListProjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists projects in AWS Mobile Hub.
 //
 //    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjects
-func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "GET",
@@ -796,62 +438,8 @@ func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request
 		input = &ListProjectsInput{}
 	}
 
-	output = &ListProjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProjects API operation for AWS Mobile.
-//
-// Lists projects in AWS Mobile Hub.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation ListProjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjects
-func (c *Mobile) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	return out, req.Send()
-}
-
-// ListProjectsWithContext is the same as ListProjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProjectsOutput{})
+	return ListProjectsRequest{Request: req, Input: input}
 }
 
 // ListProjectsPages iterates over the pages of a ListProjects operation,
@@ -890,10 +478,10 @@ func (c *Mobile) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjec
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListProjectsRequest(inCpy)
+			req := c.ListProjectsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -906,31 +494,36 @@ func (c *Mobile) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjec
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws.Request" representing the
-// client's request for the UpdateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProjectRequest is a API request type for the UpdateProject API operation.
+type UpdateProjectRequest struct {
+	*aws.Request
+	Input *UpdateProjectInput
+}
+
+// Send marshals and sends the UpdateProject API request.
+func (r *UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProjectOutput), nil
+}
+
+// UpdateProjectRequest returns a request value for making API operation for
+// AWS Mobile.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProject for more information on using the UpdateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an existing project.
 //
 //    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProject
-func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -941,74 +534,8 @@ func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Reque
 		input = &UpdateProjectInput{}
 	}
 
-	output = &UpdateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProject API operation for AWS Mobile.
-//
-// Update an existing project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Mobile's
-// API operation UpdateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalFailureException "InternalFailureException"
-//   The service has encountered an unexpected error condition which prevents
-//   it from servicing the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is temporarily unavailable. The request should be retried after
-//   some time delay.
-//
-//   * ErrCodeUnauthorizedException "UnauthorizedException"
-//   Credentials of the caller are insufficient to authorize the request.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Too many requests have been received for this AWS account in too short a
-//   time. The request should be retried after some time delay.
-//
-//   * ErrCodeBadRequestException "BadRequestException"
-//   The request cannot be processed because some parameter is not valid or the
-//   project state prevents the operation from being performed.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   No entity can be found with the specified identifier.
-//
-//   * ErrCodeAccountActionRequiredException "AccountActionRequiredException"
-//   Account Action is required in order to continue the request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   There are too many AWS Mobile Hub projects in the account or the account
-//   has exceeded the maximum number of resources in some AWS service. You should
-//   create another sub-account using AWS Organizations or remove some resources
-//   and retry your request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProject
-func (c *Mobile) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProjectWithContext is the same as UpdateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Mobile) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	return UpdateProjectRequest{Request: req, Input: input}
 }
 
 // The details of the bundle.

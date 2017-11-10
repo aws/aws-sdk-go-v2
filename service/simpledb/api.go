@@ -13,47 +13,24 @@ import (
 
 const opBatchDeleteAttributes = "BatchDeleteAttributes"
 
-// BatchDeleteAttributesRequest generates a "aws.Request" representing the
-// client's request for the BatchDeleteAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeleteAttributes for more information on using the BatchDeleteAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchDeleteAttributesRequest method.
-//    req, resp := client.BatchDeleteAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) (req *aws.Request, output *BatchDeleteAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opBatchDeleteAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &BatchDeleteAttributesInput{}
-	}
-
-	output = &BatchDeleteAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// BatchDeleteAttributesRequest is a API request type for the BatchDeleteAttributes API operation.
+type BatchDeleteAttributesRequest struct {
+	*aws.Request
+	Input *BatchDeleteAttributesInput
 }
 
-// BatchDeleteAttributes API operation for Amazon SimpleDB.
+// Send marshals and sends the BatchDeleteAttributes API request.
+func (r *BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteAttributesOutput), nil
+}
+
+// BatchDeleteAttributesRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // Performs multiple DeleteAttributes operations in a single call, which reduces
 // round trips and latencies. This enables Amazon SimpleDB to optimize requests,
@@ -80,76 +57,49 @@ func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInpu
 //
 // 25 item limit per BatchDeleteAttributes operation
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation BatchDeleteAttributes for usage and error information.
-func (c *SimpleDB) BatchDeleteAttributes(input *BatchDeleteAttributesInput) (*BatchDeleteAttributesOutput, error) {
-	req, out := c.BatchDeleteAttributesRequest(input)
-	return out, req.Send()
-}
-
-// BatchDeleteAttributesWithContext is the same as BatchDeleteAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeleteAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) BatchDeleteAttributesWithContext(ctx aws.Context, input *BatchDeleteAttributesInput, opts ...aws.Option) (*BatchDeleteAttributesOutput, error) {
-	req, out := c.BatchDeleteAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opBatchPutAttributes = "BatchPutAttributes"
-
-// BatchPutAttributesRequest generates a "aws.Request" representing the
-// client's request for the BatchPutAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchPutAttributes for more information on using the BatchPutAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchPutAttributesRequest method.
-//    req, resp := client.BatchPutAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the BatchDeleteAttributesRequest method.
+//    req := client.BatchDeleteAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (req *aws.Request, output *BatchPutAttributesOutput) {
+func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) BatchDeleteAttributesRequest {
 	op := &aws.Operation{
-		Name:       opBatchPutAttributes,
+		Name:       opBatchDeleteAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &BatchPutAttributesInput{}
+		input = &BatchDeleteAttributesInput{}
 	}
 
-	output = &BatchPutAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &BatchDeleteAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return BatchDeleteAttributesRequest{Request: req, Input: input}
 }
 
-// BatchPutAttributes API operation for Amazon SimpleDB.
+const opBatchPutAttributes = "BatchPutAttributes"
+
+// BatchPutAttributesRequest is a API request type for the BatchPutAttributes API operation.
+type BatchPutAttributesRequest struct {
+	*aws.Request
+	Input *BatchPutAttributesInput
+}
+
+// Send marshals and sends the BatchPutAttributes API request.
+func (r *BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchPutAttributesOutput), nil
+}
+
+// BatchPutAttributesRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // The BatchPutAttributes operation creates or replaces attributes within one
 // or more items. By using this operation, the client can perform multiple PutAttribute
@@ -195,105 +145,49 @@ func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (re
 // 10 GB of total user data storage per domain
 // 25 item limit per BatchPutAttributes operation
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation BatchPutAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDuplicateItemName "DuplicateItemName"
-//   The item name was specified more than once.
-//
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-//   * ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
-//   Too many attributes in this item.
-//
-//   * ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
-//   Too many attributes in this domain.
-//
-//   * ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
-//   Too many bytes in this domain.
-//
-//   * ErrCodeNumberSubmittedItemsExceeded "NumberSubmittedItemsExceeded"
-//   Too many items exist in a single call.
-//
-//   * ErrCodeNumberSubmittedAttributesExceeded "NumberSubmittedAttributesExceeded"
-//   Too many attributes exist in a single call.
-//
-func (c *SimpleDB) BatchPutAttributes(input *BatchPutAttributesInput) (*BatchPutAttributesOutput, error) {
-	req, out := c.BatchPutAttributesRequest(input)
-	return out, req.Send()
-}
-
-// BatchPutAttributesWithContext is the same as BatchPutAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchPutAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) BatchPutAttributesWithContext(ctx aws.Context, input *BatchPutAttributesInput, opts ...aws.Option) (*BatchPutAttributesOutput, error) {
-	req, out := c.BatchPutAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDomain = "CreateDomain"
-
-// CreateDomainRequest generates a "aws.Request" representing the
-// client's request for the CreateDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDomain for more information on using the CreateDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDomainRequest method.
-//    req, resp := client.CreateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the BatchPutAttributesRequest method.
+//    req := client.BatchPutAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) BatchPutAttributesRequest {
 	op := &aws.Operation{
-		Name:       opCreateDomain,
+		Name:       opBatchPutAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDomainInput{}
+		input = &BatchPutAttributesInput{}
 	}
 
-	output = &CreateDomainOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &BatchPutAttributesOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return BatchPutAttributesRequest{Request: req, Input: input}
 }
 
-// CreateDomain API operation for Amazon SimpleDB.
+const opCreateDomain = "CreateDomain"
+
+// CreateDomainRequest is a API request type for the CreateDomain API operation.
+type CreateDomainRequest struct {
+	*aws.Request
+	Input *CreateDomainInput
+}
+
+// Send marshals and sends the CreateDomain API request.
+func (r *CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDomainOutput), nil
+}
+
+// CreateDomainRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // The CreateDomain operation creates a new domain. The domain name should be
 // unique among the domains associated with the Access Key ID provided in the
@@ -305,87 +199,49 @@ func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *aws.Reque
 // If the client requires additional domains, go to  http://aws.amazon.com/contact-us/simpledb-limit-request/
 // (http://aws.amazon.com/contact-us/simpledb-limit-request/).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation CreateDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNumberDomainsExceeded "NumberDomainsExceeded"
-//   Too many domains exist per this account.
-//
-func (c *SimpleDB) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	return out, req.Send()
-}
-
-// CreateDomainWithContext is the same as CreateDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteAttributes = "DeleteAttributes"
-
-// DeleteAttributesRequest generates a "aws.Request" representing the
-// client's request for the DeleteAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAttributes for more information on using the DeleteAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteAttributesRequest method.
-//    req, resp := client.DeleteAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDomainRequest method.
+//    req := client.CreateDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *aws.Request, output *DeleteAttributesOutput) {
+func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) CreateDomainRequest {
 	op := &aws.Operation{
-		Name:       opDeleteAttributes,
+		Name:       opCreateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteAttributesInput{}
+		input = &CreateDomainInput{}
 	}
 
-	output = &DeleteAttributesOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateDomainOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return CreateDomainRequest{Request: req, Input: input}
 }
 
-// DeleteAttributes API operation for Amazon SimpleDB.
+const opDeleteAttributes = "DeleteAttributes"
+
+// DeleteAttributesRequest is a API request type for the DeleteAttributes API operation.
+type DeleteAttributesRequest struct {
+	*aws.Request
+	Input *DeleteAttributesInput
+}
+
+// Send marshals and sends the DeleteAttributes API request.
+func (r *DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAttributesOutput), nil
+}
+
+// DeleteAttributesRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // Deletes one or more attributes associated with an item. If all attributes
 // of the item are deleted, the item is deleted.
@@ -399,72 +255,64 @@ func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *a
 // (read) immediately after a DeleteAttributes or PutAttributes operation (write)
 // might not return updated item data.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation DeleteAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-//   * ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
-//   The specified attribute does not exist.
-//
-func (c *SimpleDB) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttributesOutput, error) {
-	req, out := c.DeleteAttributesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DeleteAttributesRequest method.
+//    req := client.DeleteAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttributesRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteAttributesWithContext is the same as DeleteAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...aws.Option) (*DeleteAttributesOutput, error) {
-	req, out := c.DeleteAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteAttributesRequest{Request: req, Input: input}
 }
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws.Request" representing the
-// client's request for the DeleteDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDomainRequest is a API request type for the DeleteDomain API operation.
+type DeleteDomainRequest struct {
+	*aws.Request
+	Input *DeleteDomainInput
+}
+
+// Send marshals and sends the DeleteDomain API request.
+func (r *DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDomainOutput), nil
+}
+
+// DeleteDomainRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The DeleteDomain operation deletes a domain. Any items (and their attributes)
+// in the domain are deleted as well. The DeleteDomain operation might take
+// 10 or more seconds to complete.
 //
-// See DeleteDomain for more information on using the DeleteDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Running DeleteDomain on a domain that does not exist or running the function
+// multiple times using the same domain name will not result in an error response.
 //
 //    // Example sending a request using the DeleteDomainRequest method.
-//    req, resp := client.DeleteDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
@@ -475,79 +323,44 @@ func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Reque
 		input = &DeleteDomainInput{}
 	}
 
-	output = &DeleteDomainOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDomainOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDomain API operation for Amazon SimpleDB.
-//
-// The DeleteDomain operation deletes a domain. Any items (and their attributes)
-// in the domain are deleted as well. The DeleteDomain operation might take
-// 10 or more seconds to complete.
-//
-// Running DeleteDomain on a domain that does not exist or running the function
-// multiple times using the same domain name will not result in an error response.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation DeleteDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-func (c *SimpleDB) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDomainWithContext is the same as DeleteDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDomainRequest{Request: req, Input: input}
 }
 
 const opDomainMetadata = "DomainMetadata"
 
-// DomainMetadataRequest generates a "aws.Request" representing the
-// client's request for the DomainMetadata operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DomainMetadataRequest is a API request type for the DomainMetadata API operation.
+type DomainMetadataRequest struct {
+	*aws.Request
+	Input *DomainMetadataInput
+}
+
+// Send marshals and sends the DomainMetadata API request.
+func (r *DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DomainMetadataOutput), nil
+}
+
+// DomainMetadataRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DomainMetadata for more information on using the DomainMetadata
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the domain, including when the domain was created,
+// the number of items and attributes in the domain, and the size of the attribute
+// names and values.
 //
 //    // Example sending a request using the DomainMetadataRequest method.
-//    req, resp := client.DomainMetadataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DomainMetadataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *aws.Request, output *DomainMetadataOutput) {
+func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) DomainMetadataRequest {
 	op := &aws.Operation{
 		Name:       opDomainMetadata,
 		HTTPMethod: "POST",
@@ -558,93 +371,30 @@ func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *aws.R
 		input = &DomainMetadataInput{}
 	}
 
-	output = &DomainMetadataOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DomainMetadata API operation for Amazon SimpleDB.
-//
-// Returns information about the domain, including when the domain was created,
-// the number of items and attributes in the domain, and the size of the attribute
-// names and values.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation DomainMetadata for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-func (c *SimpleDB) DomainMetadata(input *DomainMetadataInput) (*DomainMetadataOutput, error) {
-	req, out := c.DomainMetadataRequest(input)
-	return out, req.Send()
-}
-
-// DomainMetadataWithContext is the same as DomainMetadata with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DomainMetadata for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) DomainMetadataWithContext(ctx aws.Context, input *DomainMetadataInput, opts ...aws.Option) (*DomainMetadataOutput, error) {
-	req, out := c.DomainMetadataRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DomainMetadataOutput{})
+	return DomainMetadataRequest{Request: req, Input: input}
 }
 
 const opGetAttributes = "GetAttributes"
 
-// GetAttributesRequest generates a "aws.Request" representing the
-// client's request for the GetAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAttributes for more information on using the GetAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetAttributesRequest method.
-//    req, resp := client.GetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *aws.Request, output *GetAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opGetAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetAttributesInput{}
-	}
-
-	output = &GetAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetAttributesRequest is a API request type for the GetAttributes API operation.
+type GetAttributesRequest struct {
+	*aws.Request
+	Input *GetAttributesInput
 }
 
-// GetAttributes API operation for Amazon SimpleDB.
+// Send marshals and sends the GetAttributes API request.
+func (r *GetAttributesRequest) Send() (*GetAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAttributesOutput), nil
+}
+
+// GetAttributesRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // Returns all of the attributes associated with the specified item. Optionally,
 // the attributes returned can be limited to one or more attributes by specifying
@@ -657,69 +407,62 @@ func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *aws.Req
 // If GetAttributes is called without being passed any attribute names, all
 // the attributes for the item are returned.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation GetAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-func (c *SimpleDB) GetAttributes(input *GetAttributesInput) (*GetAttributesOutput, error) {
-	req, out := c.GetAttributesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the GetAttributesRequest method.
+//    req := client.GetAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) GetAttributesRequest {
+	op := &aws.Operation{
+		Name:       opGetAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetAttributesWithContext is the same as GetAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) GetAttributesWithContext(ctx aws.Context, input *GetAttributesInput, opts ...aws.Option) (*GetAttributesOutput, error) {
-	req, out := c.GetAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &GetAttributesOutput{})
+	return GetAttributesRequest{Request: req, Input: input}
 }
 
 const opListDomains = "ListDomains"
 
-// ListDomainsRequest generates a "aws.Request" representing the
-// client's request for the ListDomains operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDomainsRequest is a API request type for the ListDomains API operation.
+type ListDomainsRequest struct {
+	*aws.Request
+	Input *ListDomainsInput
+}
+
+// Send marshals and sends the ListDomains API request.
+func (r *ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDomainsOutput), nil
+}
+
+// ListDomainsRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDomains for more information on using the ListDomains
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListDomains operation lists all domains associated with the Access Key
+// ID. It returns domain names up to the limit set by MaxNumberOfDomains (#MaxNumberOfDomains).
+// A NextToken (#NextToken) is returned if there are more than MaxNumberOfDomains
+// domains. Calling ListDomains successive times with the NextToken provided
+// by the operation returns up to MaxNumberOfDomains more domain names with
+// each successive operation call.
 //
 //    // Example sending a request using the ListDomainsRequest method.
-//    req, resp := client.ListDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDomainsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, output *ListDomainsOutput) {
+func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 	op := &aws.Operation{
 		Name:       opListDomains,
 		HTTPMethod: "POST",
@@ -736,53 +479,8 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request
 		input = &ListDomainsInput{}
 	}
 
-	output = &ListDomainsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDomains API operation for Amazon SimpleDB.
-//
-// The ListDomains operation lists all domains associated with the Access Key
-// ID. It returns domain names up to the limit set by MaxNumberOfDomains (#MaxNumberOfDomains).
-// A NextToken (#NextToken) is returned if there are more than MaxNumberOfDomains
-// domains. Calling ListDomains successive times with the NextToken provided
-// by the operation returns up to MaxNumberOfDomains more domain names with
-// each successive operation call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation ListDomains for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified NextToken is not valid.
-//
-func (c *SimpleDB) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
-	req, out := c.ListDomainsRequest(input)
-	return out, req.Send()
-}
-
-// ListDomainsWithContext is the same as ListDomains with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDomains for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...aws.Option) (*ListDomainsOutput, error) {
-	req, out := c.ListDomainsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDomainsOutput{})
+	return ListDomainsRequest{Request: req, Input: input}
 }
 
 // ListDomainsPages iterates over the pages of a ListDomains operation,
@@ -821,10 +519,10 @@ func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomai
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDomainsRequest(inCpy)
+			req := c.ListDomainsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -837,47 +535,24 @@ func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomai
 
 const opPutAttributes = "PutAttributes"
 
-// PutAttributesRequest generates a "aws.Request" representing the
-// client's request for the PutAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutAttributes for more information on using the PutAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutAttributesRequest method.
-//    req, resp := client.PutAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *aws.Request, output *PutAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opPutAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutAttributesInput{}
-	}
-
-	output = &PutAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// PutAttributesRequest is a API request type for the PutAttributes API operation.
+type PutAttributesRequest struct {
+	*aws.Request
+	Input *PutAttributesInput
 }
 
-// PutAttributes API operation for Amazon SimpleDB.
+// Send marshals and sends the PutAttributes API request.
+func (r *PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutAttributesOutput), nil
+}
+
+// PutAttributesRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
 // The PutAttributes operation creates or replaces attributes in an item. The
 // client may specify new attributes using a combination of the Attribute.X.Name
@@ -911,81 +586,69 @@ func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *aws.Req
 // One billion attributes per domain
 // 10 GB of total user data storage per domain
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation PutAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-//   * ErrCodeNumberDomainAttributesExceeded "NumberDomainAttributesExceeded"
-//   Too many attributes in this domain.
-//
-//   * ErrCodeNumberDomainBytesExceeded "NumberDomainBytesExceeded"
-//   Too many bytes in this domain.
-//
-//   * ErrCodeNumberItemAttributesExceeded "NumberItemAttributesExceeded"
-//   Too many attributes in this item.
-//
-//   * ErrCodeAttributeDoesNotExist "AttributeDoesNotExist"
-//   The specified attribute does not exist.
-//
-func (c *SimpleDB) PutAttributes(input *PutAttributesInput) (*PutAttributesOutput, error) {
-	req, out := c.PutAttributesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the PutAttributesRequest method.
+//    req := client.PutAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) PutAttributesRequest {
+	op := &aws.Operation{
+		Name:       opPutAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutAttributesWithContext is the same as PutAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...aws.Option) (*PutAttributesOutput, error) {
-	req, out := c.PutAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &PutAttributesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PutAttributesRequest{Request: req, Input: input}
 }
 
 const opSelect = "Select"
 
-// SelectRequest generates a "aws.Request" representing the
-// client's request for the Select operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SelectRequest is a API request type for the Select API operation.
+type SelectRequest struct {
+	*aws.Request
+	Input *SelectInput
+}
+
+// Send marshals and sends the Select API request.
+func (r *SelectRequest) Send() (*SelectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SelectOutput), nil
+}
+
+// SelectRequest returns a request value for making API operation for
+// Amazon SimpleDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The Select operation returns a set of attributes for ItemNames that match
+// the select expression. Select is similar to the standard SQL SELECT statement.
 //
-// See Select for more information on using the Select
-// API call, and error handling.
+// The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB
+// automatically adjusts the number of items returned per page to enforce this
+// limit. For example, if the client asks to retrieve 2500 items, but each individual
+// item is 10 kB in size, the system returns 100 items and an appropriate NextToken
+// so the client can access the next page of results.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information on how to construct select expressions, see Using Select
+// to Create Amazon SimpleDB Queries in the Developer Guide.
 //
 //    // Example sending a request using the SelectRequest method.
-//    req, resp := client.SelectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SelectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) SelectRequest(input *SelectInput) (req *aws.Request, output *SelectOutput) {
+func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 	op := &aws.Operation{
 		Name:       opSelect,
 		HTTPMethod: "POST",
@@ -1002,80 +665,8 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) (req *aws.Request, output *
 		input = &SelectInput{}
 	}
 
-	output = &SelectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// Select API operation for Amazon SimpleDB.
-//
-// The Select operation returns a set of attributes for ItemNames that match
-// the select expression. Select is similar to the standard SQL SELECT statement.
-//
-// The total size of the response cannot exceed 1 MB in total size. Amazon SimpleDB
-// automatically adjusts the number of items returned per page to enforce this
-// limit. For example, if the client asks to retrieve 2500 items, but each individual
-// item is 10 kB in size, the system returns 100 items and an appropriate NextToken
-// so the client can access the next page of results.
-//
-// For information on how to construct select expressions, see Using Select
-// to Create Amazon SimpleDB Queries in the Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon SimpleDB's
-// API operation Select for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValue "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The specified NextToken is not valid.
-//
-//   * ErrCodeInvalidNumberPredicates "InvalidNumberPredicates"
-//   Too many predicates exist in the query expression.
-//
-//   * ErrCodeInvalidNumberValueTests "InvalidNumberValueTests"
-//   Too many predicates exist in the query expression.
-//
-//   * ErrCodeInvalidQueryExpression "InvalidQueryExpression"
-//   The specified query expression syntax is not valid.
-//
-//   * ErrCodeMissingParameter "MissingParameter"
-//   The request must contain the specified missing parameter.
-//
-//   * ErrCodeNoSuchDomain "NoSuchDomain"
-//   The specified domain does not exist.
-//
-//   * ErrCodeRequestTimeout "RequestTimeout"
-//   A timeout occurred when attempting to query the specified domain with specified
-//   query expression.
-//
-//   * ErrCodeTooManyRequestedAttributes "TooManyRequestedAttributes"
-//   Too many attributes requested.
-//
-func (c *SimpleDB) Select(input *SelectInput) (*SelectOutput, error) {
-	req, out := c.SelectRequest(input)
-	return out, req.Send()
-}
-
-// SelectWithContext is the same as Select with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Select for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) SelectWithContext(ctx aws.Context, input *SelectInput, opts ...aws.Option) (*SelectOutput, error) {
-	req, out := c.SelectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SelectOutput{})
+	return SelectRequest{Request: req, Input: input}
 }
 
 // SelectPages iterates over the pages of a Select operation,
@@ -1114,10 +705,10 @@ func (c *SimpleDB) SelectPagesWithContext(ctx aws.Context, input *SelectInput, f
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.SelectRequest(inCpy)
+			req := c.SelectRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 

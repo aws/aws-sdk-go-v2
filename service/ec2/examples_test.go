@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To allocate an Elastic IP address for EC2-VPC
 //
 // This example allocates an Elastic IP address to use with an instance in a VPC.
-func ExampleEC2_AllocateAddress_shared00() {
+func ExampleEC2_AllocateAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -39,7 +39,8 @@ func ExampleEC2_AllocateAddress_shared00() {
 		Domain: ec2.DomainTypeVpc,
 	}
 
-	result, err := svc.AllocateAddress(input)
+	req := svc.AllocateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -60,7 +61,7 @@ func ExampleEC2_AllocateAddress_shared00() {
 // To allocate an Elastic IP address for EC2-Classic
 //
 // This example allocates an Elastic IP address to use with an instance in EC2-Classic.
-func ExampleEC2_AllocateAddress_shared01() {
+func ExampleEC2_AllocateAddressRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -69,7 +70,8 @@ func ExampleEC2_AllocateAddress_shared01() {
 	svc := ec2.New(cfg)
 	input := &ec2.AllocateAddressInput{}
 
-	result, err := svc.AllocateAddress(input)
+	req := svc.AllocateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -91,7 +93,7 @@ func ExampleEC2_AllocateAddress_shared01() {
 //
 // This example assigns the specified secondary private IP address to the specified
 // network interface.
-func ExampleEC2_AssignPrivateIpAddresses_shared00() {
+func ExampleEC2_AssignPrivateIpAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -105,7 +107,8 @@ func ExampleEC2_AssignPrivateIpAddresses_shared00() {
 		},
 	}
 
-	result, err := svc.AssignPrivateIpAddresses(input)
+	req := svc.AssignPrivateIpAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -129,7 +132,7 @@ func ExampleEC2_AssignPrivateIpAddresses_shared00() {
 // interface. Amazon EC2 automatically assigns these IP addresses from the available
 // IP addresses in the CIDR block range of the subnet the network interface is associated
 // with.
-func ExampleEC2_AssignPrivateIpAddresses_shared01() {
+func ExampleEC2_AssignPrivateIpAddressesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -141,7 +144,8 @@ func ExampleEC2_AssignPrivateIpAddresses_shared01() {
 		SecondaryPrivateIpAddressCount: aws.Int64(2),
 	}
 
-	result, err := svc.AssignPrivateIpAddresses(input)
+	req := svc.AssignPrivateIpAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -163,7 +167,7 @@ func ExampleEC2_AssignPrivateIpAddresses_shared01() {
 //
 // This example associates the specified Elastic IP address with the specified instance
 // in a VPC.
-func ExampleEC2_AssociateAddress_shared00() {
+func ExampleEC2_AssociateAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -175,7 +179,8 @@ func ExampleEC2_AssociateAddress_shared00() {
 		InstanceId:   aws.String("i-0b263919b6498b123"),
 	}
 
-	result, err := svc.AssociateAddress(input)
+	req := svc.AssociateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -197,7 +202,7 @@ func ExampleEC2_AssociateAddress_shared00() {
 //
 // This example associates the specified Elastic IP address with the specified network
 // interface.
-func ExampleEC2_AssociateAddress_shared01() {
+func ExampleEC2_AssociateAddressRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -209,7 +214,8 @@ func ExampleEC2_AssociateAddress_shared01() {
 		NetworkInterfaceId: aws.String("eni-1a2b3c4d"),
 	}
 
-	result, err := svc.AssociateAddress(input)
+	req := svc.AssociateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -230,7 +236,7 @@ func ExampleEC2_AssociateAddress_shared01() {
 // To associate an Elastic IP address in EC2-Classic
 //
 // This example associates an Elastic IP address with an instance in EC2-Classic.
-func ExampleEC2_AssociateAddress_shared02() {
+func ExampleEC2_AssociateAddressRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -242,7 +248,8 @@ func ExampleEC2_AssociateAddress_shared02() {
 		PublicIp:   aws.String("198.51.100.0"),
 	}
 
-	result, err := svc.AssociateAddress(input)
+	req := svc.AssociateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -263,7 +270,7 @@ func ExampleEC2_AssociateAddress_shared02() {
 // To associate a DHCP options set with a VPC
 //
 // This example associates the specified DHCP options set with the specified VPC.
-func ExampleEC2_AssociateDhcpOptions_shared00() {
+func ExampleEC2_AssociateDhcpOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -275,7 +282,8 @@ func ExampleEC2_AssociateDhcpOptions_shared00() {
 		VpcId:         aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.AssociateDhcpOptions(input)
+	req := svc.AssociateDhcpOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -296,7 +304,7 @@ func ExampleEC2_AssociateDhcpOptions_shared00() {
 // To associate the default DHCP options set with a VPC
 //
 // This example associates the default DHCP options set with the specified VPC.
-func ExampleEC2_AssociateDhcpOptions_shared01() {
+func ExampleEC2_AssociateDhcpOptionsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -308,7 +316,8 @@ func ExampleEC2_AssociateDhcpOptions_shared01() {
 		VpcId:         aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.AssociateDhcpOptions(input)
+	req := svc.AssociateDhcpOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -329,7 +338,7 @@ func ExampleEC2_AssociateDhcpOptions_shared01() {
 // To associate a route table with a subnet
 //
 // This example associates the specified route table with the specified subnet.
-func ExampleEC2_AssociateRouteTable_shared00() {
+func ExampleEC2_AssociateRouteTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -341,7 +350,8 @@ func ExampleEC2_AssociateRouteTable_shared00() {
 		SubnetId:     aws.String("subnet-9d4a7b6"),
 	}
 
-	result, err := svc.AssociateRouteTable(input)
+	req := svc.AssociateRouteTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -362,7 +372,7 @@ func ExampleEC2_AssociateRouteTable_shared00() {
 // To attach an Internet gateway to a VPC
 //
 // This example attaches the specified Internet gateway to the specified VPC.
-func ExampleEC2_AttachInternetGateway_shared00() {
+func ExampleEC2_AttachInternetGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -374,7 +384,8 @@ func ExampleEC2_AttachInternetGateway_shared00() {
 		VpcId:             aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.AttachInternetGateway(input)
+	req := svc.AttachInternetGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -395,7 +406,7 @@ func ExampleEC2_AttachInternetGateway_shared00() {
 // To attach a network interface to an instance
 //
 // This example attaches the specified network interface to the specified instance.
-func ExampleEC2_AttachNetworkInterface_shared00() {
+func ExampleEC2_AttachNetworkInterfaceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -408,7 +419,8 @@ func ExampleEC2_AttachNetworkInterface_shared00() {
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 	}
 
-	result, err := svc.AttachNetworkInterface(input)
+	req := svc.AttachNetworkInterfaceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -430,7 +442,7 @@ func ExampleEC2_AttachNetworkInterface_shared00() {
 //
 // This example attaches a volume (``vol-1234567890abcdef0``) to an instance (``i-01474ef662b89480``)
 // as ``/dev/sdf``.
-func ExampleEC2_AttachVolume_shared00() {
+func ExampleEC2_AttachVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -443,7 +455,8 @@ func ExampleEC2_AttachVolume_shared00() {
 		VolumeId:   aws.String("vol-1234567890abcdef0"),
 	}
 
-	result, err := svc.AttachVolume(input)
+	req := svc.AttachVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -465,7 +478,7 @@ func ExampleEC2_AttachVolume_shared00() {
 //
 // This example cancels the specified Spot fleet request and terminates its associated
 // Spot Instances.
-func ExampleEC2_CancelSpotFleetRequests_shared00() {
+func ExampleEC2_CancelSpotFleetRequestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -479,7 +492,8 @@ func ExampleEC2_CancelSpotFleetRequests_shared00() {
 		TerminateInstances: aws.Bool(true),
 	}
 
-	result, err := svc.CancelSpotFleetRequests(input)
+	req := svc.CancelSpotFleetRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -501,7 +515,7 @@ func ExampleEC2_CancelSpotFleetRequests_shared00() {
 //
 // This example cancels the specified Spot fleet request without terminating its associated
 // Spot Instances.
-func ExampleEC2_CancelSpotFleetRequests_shared01() {
+func ExampleEC2_CancelSpotFleetRequestsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -515,7 +529,8 @@ func ExampleEC2_CancelSpotFleetRequests_shared01() {
 		TerminateInstances: aws.Bool(false),
 	}
 
-	result, err := svc.CancelSpotFleetRequests(input)
+	req := svc.CancelSpotFleetRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -536,7 +551,7 @@ func ExampleEC2_CancelSpotFleetRequests_shared01() {
 // To cancel Spot Instance requests
 //
 // This example cancels a Spot Instance request.
-func ExampleEC2_CancelSpotInstanceRequests_shared00() {
+func ExampleEC2_CancelSpotInstanceRequestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -549,7 +564,8 @@ func ExampleEC2_CancelSpotInstanceRequests_shared00() {
 		},
 	}
 
-	result, err := svc.CancelSpotInstanceRequests(input)
+	req := svc.CancelSpotInstanceRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -571,7 +587,7 @@ func ExampleEC2_CancelSpotInstanceRequests_shared00() {
 //
 // This example determines whether the specified product code is associated with the
 // specified instance.
-func ExampleEC2_ConfirmProductInstance_shared00() {
+func ExampleEC2_ConfirmProductInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -583,7 +599,8 @@ func ExampleEC2_ConfirmProductInstance_shared00() {
 		ProductCode: aws.String("774F4FF8"),
 	}
 
-	result, err := svc.ConfirmProductInstance(input)
+	req := svc.ConfirmProductInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -606,7 +623,7 @@ func ExampleEC2_ConfirmProductInstance_shared00() {
 // This example copies a snapshot with the snapshot ID of ``snap-066877671789bd71b``
 // from the ``us-west-2`` region to the ``us-east-1`` region and adds a short description
 // to identify the snapshot.
-func ExampleEC2_CopySnapshot_shared00() {
+func ExampleEC2_CopySnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -620,7 +637,8 @@ func ExampleEC2_CopySnapshot_shared00() {
 		SourceSnapshotId:  aws.String("snap-066877671789bd71b"),
 	}
 
-	result, err := svc.CopySnapshot(input)
+	req := svc.CopySnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -642,7 +660,7 @@ func ExampleEC2_CopySnapshot_shared00() {
 //
 // This example creates a customer gateway with the specified IP address for its outside
 // interface.
-func ExampleEC2_CreateCustomerGateway_shared00() {
+func ExampleEC2_CreateCustomerGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -655,7 +673,8 @@ func ExampleEC2_CreateCustomerGateway_shared00() {
 		Type:     ec2.GatewayTypeIpsec1,
 	}
 
-	result, err := svc.CreateCustomerGateway(input)
+	req := svc.CreateCustomerGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -676,7 +695,7 @@ func ExampleEC2_CreateCustomerGateway_shared00() {
 // To create a DHCP options set
 //
 // This example creates a DHCP options set.
-func ExampleEC2_CreateDhcpOptions_shared00() {
+func ExampleEC2_CreateDhcpOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -695,7 +714,8 @@ func ExampleEC2_CreateDhcpOptions_shared00() {
 		},
 	}
 
-	result, err := svc.CreateDhcpOptions(input)
+	req := svc.CreateDhcpOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -716,7 +736,7 @@ func ExampleEC2_CreateDhcpOptions_shared00() {
 // To create an Internet gateway
 //
 // This example creates an Internet gateway.
-func ExampleEC2_CreateInternetGateway_shared00() {
+func ExampleEC2_CreateInternetGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -725,7 +745,8 @@ func ExampleEC2_CreateInternetGateway_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.CreateInternetGatewayInput{}
 
-	result, err := svc.CreateInternetGateway(input)
+	req := svc.CreateInternetGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -746,7 +767,7 @@ func ExampleEC2_CreateInternetGateway_shared00() {
 // To create a key pair
 //
 // This example creates a key pair named my-key-pair.
-func ExampleEC2_CreateKeyPair_shared00() {
+func ExampleEC2_CreateKeyPairRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -757,7 +778,8 @@ func ExampleEC2_CreateKeyPair_shared00() {
 		KeyName: aws.String("my-key-pair"),
 	}
 
-	result, err := svc.CreateKeyPair(input)
+	req := svc.CreateKeyPairRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -779,7 +801,7 @@ func ExampleEC2_CreateKeyPair_shared00() {
 //
 // This example creates a NAT gateway in subnet subnet-1a2b3c4d and associates an Elastic
 // IP address with the allocation ID eipalloc-37fc1a52 with the NAT gateway.
-func ExampleEC2_CreateNatGateway_shared00() {
+func ExampleEC2_CreateNatGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -791,7 +813,8 @@ func ExampleEC2_CreateNatGateway_shared00() {
 		SubnetId:     aws.String("subnet-1a2b3c4d"),
 	}
 
-	result, err := svc.CreateNatGateway(input)
+	req := svc.CreateNatGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -812,7 +835,7 @@ func ExampleEC2_CreateNatGateway_shared00() {
 // To create a network ACL
 //
 // This example creates a network ACL for the specified VPC.
-func ExampleEC2_CreateNetworkAcl_shared00() {
+func ExampleEC2_CreateNetworkAclRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -823,7 +846,8 @@ func ExampleEC2_CreateNetworkAcl_shared00() {
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.CreateNetworkAcl(input)
+	req := svc.CreateNetworkAclRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -845,7 +869,7 @@ func ExampleEC2_CreateNetworkAcl_shared00() {
 //
 // This example creates an entry for the specified network ACL. The rule allows ingress
 // traffic from anywhere (0.0.0.0/0) on UDP port 53 (DNS) into any associated subnet.
-func ExampleEC2_CreateNetworkAclEntry_shared00() {
+func ExampleEC2_CreateNetworkAclEntryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -865,7 +889,8 @@ func ExampleEC2_CreateNetworkAclEntry_shared00() {
 		RuleNumber: aws.Int64(100),
 	}
 
-	result, err := svc.CreateNetworkAclEntry(input)
+	req := svc.CreateNetworkAclEntryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -886,7 +911,7 @@ func ExampleEC2_CreateNetworkAclEntry_shared00() {
 // To create a network interface
 //
 // This example creates a network interface for the specified subnet.
-func ExampleEC2_CreateNetworkInterface_shared00() {
+func ExampleEC2_CreateNetworkInterfaceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -902,7 +927,8 @@ func ExampleEC2_CreateNetworkInterface_shared00() {
 		SubnetId:         aws.String("subnet-9d4a7b6c"),
 	}
 
-	result, err := svc.CreateNetworkInterface(input)
+	req := svc.CreateNetworkInterfaceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -923,7 +949,7 @@ func ExampleEC2_CreateNetworkInterface_shared00() {
 // To create a placement group
 //
 // This example creates a placement group with the specified name.
-func ExampleEC2_CreatePlacementGroup_shared00() {
+func ExampleEC2_CreatePlacementGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -935,7 +961,8 @@ func ExampleEC2_CreatePlacementGroup_shared00() {
 		Strategy:  ec2.PlacementStrategyCluster,
 	}
 
-	result, err := svc.CreatePlacementGroup(input)
+	req := svc.CreatePlacementGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -957,7 +984,7 @@ func ExampleEC2_CreatePlacementGroup_shared00() {
 //
 // This example creates a route for the specified route table. The route matches all
 // traffic (0.0.0.0/0) and routes it to the specified Internet gateway.
-func ExampleEC2_CreateRoute_shared00() {
+func ExampleEC2_CreateRouteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -970,7 +997,8 @@ func ExampleEC2_CreateRoute_shared00() {
 		RouteTableId:         aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.CreateRoute(input)
+	req := svc.CreateRouteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -991,7 +1019,7 @@ func ExampleEC2_CreateRoute_shared00() {
 // To create a route table
 //
 // This example creates a route table for the specified VPC.
-func ExampleEC2_CreateRouteTable_shared00() {
+func ExampleEC2_CreateRouteTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1002,7 +1030,8 @@ func ExampleEC2_CreateRouteTable_shared00() {
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.CreateRouteTable(input)
+	req := svc.CreateRouteTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1024,7 +1053,7 @@ func ExampleEC2_CreateRouteTable_shared00() {
 //
 // This example creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0``
 // and a short description to identify the snapshot.
-func ExampleEC2_CreateSnapshot_shared00() {
+func ExampleEC2_CreateSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1036,7 +1065,8 @@ func ExampleEC2_CreateSnapshot_shared00() {
 		VolumeId:    aws.String("vol-1234567890abcdef0"),
 	}
 
-	result, err := svc.CreateSnapshot(input)
+	req := svc.CreateSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1057,7 +1087,7 @@ func ExampleEC2_CreateSnapshot_shared00() {
 // To create a Spot Instance datafeed
 //
 // This example creates a Spot Instance data feed for your AWS account.
-func ExampleEC2_CreateSpotDatafeedSubscription_shared00() {
+func ExampleEC2_CreateSpotDatafeedSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1069,7 +1099,8 @@ func ExampleEC2_CreateSpotDatafeedSubscription_shared00() {
 		Prefix: aws.String("spotdata"),
 	}
 
-	result, err := svc.CreateSpotDatafeedSubscription(input)
+	req := svc.CreateSpotDatafeedSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1091,7 +1122,7 @@ func ExampleEC2_CreateSpotDatafeedSubscription_shared00() {
 //
 // This example creates a subnet in the specified VPC with the specified CIDR block.
 // We recommend that you let us select an Availability Zone for you.
-func ExampleEC2_CreateSubnet_shared00() {
+func ExampleEC2_CreateSubnetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1103,7 +1134,8 @@ func ExampleEC2_CreateSubnet_shared00() {
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.CreateSubnet(input)
+	req := svc.CreateSubnetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1125,7 +1157,7 @@ func ExampleEC2_CreateSubnet_shared00() {
 //
 // This example adds the tag Stack=production to the specified image, or overwrites
 // an existing tag for the AMI where the tag key is Stack.
-func ExampleEC2_CreateTags_shared00() {
+func ExampleEC2_CreateTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1144,7 +1176,8 @@ func ExampleEC2_CreateTags_shared00() {
 		},
 	}
 
-	result, err := svc.CreateTags(input)
+	req := svc.CreateTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1166,7 +1199,7 @@ func ExampleEC2_CreateTags_shared00() {
 //
 // This example creates an 80 GiB General Purpose (SSD) volume in the Availability Zone
 // ``us-east-1a``.
-func ExampleEC2_CreateVolume_shared00() {
+func ExampleEC2_CreateVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1179,7 +1212,8 @@ func ExampleEC2_CreateVolume_shared00() {
 		VolumeType:       ec2.VolumeTypeGp2,
 	}
 
-	result, err := svc.CreateVolume(input)
+	req := svc.CreateVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1201,7 +1235,7 @@ func ExampleEC2_CreateVolume_shared00() {
 //
 // This example creates a new Provisioned IOPS (SSD) volume with 1000 provisioned IOPS
 // from a snapshot in the Availability Zone ``us-east-1a``.
-func ExampleEC2_CreateVolume_shared01() {
+func ExampleEC2_CreateVolumeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1215,7 +1249,8 @@ func ExampleEC2_CreateVolume_shared01() {
 		VolumeType:       ec2.VolumeTypeIo1,
 	}
 
-	result, err := svc.CreateVolume(input)
+	req := svc.CreateVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1236,7 +1271,7 @@ func ExampleEC2_CreateVolume_shared01() {
 // To create a VPC
 //
 // This example creates a VPC with the specified CIDR block.
-func ExampleEC2_CreateVpc_shared00() {
+func ExampleEC2_CreateVpcRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1247,7 +1282,8 @@ func ExampleEC2_CreateVpc_shared00() {
 		CidrBlock: aws.String("10.0.0.0/16"),
 	}
 
-	result, err := svc.CreateVpc(input)
+	req := svc.CreateVpcRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1268,7 +1304,7 @@ func ExampleEC2_CreateVpc_shared00() {
 // To delete a customer gateway
 //
 // This example deletes the specified customer gateway.
-func ExampleEC2_DeleteCustomerGateway_shared00() {
+func ExampleEC2_DeleteCustomerGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1279,7 +1315,8 @@ func ExampleEC2_DeleteCustomerGateway_shared00() {
 		CustomerGatewayId: aws.String("cgw-0e11f167"),
 	}
 
-	result, err := svc.DeleteCustomerGateway(input)
+	req := svc.DeleteCustomerGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1337,7 @@ func ExampleEC2_DeleteCustomerGateway_shared00() {
 // To delete a DHCP options set
 //
 // This example deletes the specified DHCP options set.
-func ExampleEC2_DeleteDhcpOptions_shared00() {
+func ExampleEC2_DeleteDhcpOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1311,7 +1348,8 @@ func ExampleEC2_DeleteDhcpOptions_shared00() {
 		DhcpOptionsId: aws.String("dopt-d9070ebb"),
 	}
 
-	result, err := svc.DeleteDhcpOptions(input)
+	req := svc.DeleteDhcpOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1332,7 +1370,7 @@ func ExampleEC2_DeleteDhcpOptions_shared00() {
 // To delete an Internet gateway
 //
 // This example deletes the specified Internet gateway.
-func ExampleEC2_DeleteInternetGateway_shared00() {
+func ExampleEC2_DeleteInternetGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1343,7 +1381,8 @@ func ExampleEC2_DeleteInternetGateway_shared00() {
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 	}
 
-	result, err := svc.DeleteInternetGateway(input)
+	req := svc.DeleteInternetGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1364,7 +1403,7 @@ func ExampleEC2_DeleteInternetGateway_shared00() {
 // To delete a key pair
 //
 // This example deletes the specified key pair.
-func ExampleEC2_DeleteKeyPair_shared00() {
+func ExampleEC2_DeleteKeyPairRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1375,7 +1414,8 @@ func ExampleEC2_DeleteKeyPair_shared00() {
 		KeyName: aws.String("my-key-pair"),
 	}
 
-	result, err := svc.DeleteKeyPair(input)
+	req := svc.DeleteKeyPairRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1396,7 +1436,7 @@ func ExampleEC2_DeleteKeyPair_shared00() {
 // To delete a NAT gateway
 //
 // This example deletes the specified NAT gateway.
-func ExampleEC2_DeleteNatGateway_shared00() {
+func ExampleEC2_DeleteNatGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1407,7 +1447,8 @@ func ExampleEC2_DeleteNatGateway_shared00() {
 		NatGatewayId: aws.String("nat-04ae55e711cec5680"),
 	}
 
-	result, err := svc.DeleteNatGateway(input)
+	req := svc.DeleteNatGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1428,7 +1469,7 @@ func ExampleEC2_DeleteNatGateway_shared00() {
 // To delete a network ACL
 //
 // This example deletes the specified network ACL.
-func ExampleEC2_DeleteNetworkAcl_shared00() {
+func ExampleEC2_DeleteNetworkAclRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1439,7 +1480,8 @@ func ExampleEC2_DeleteNetworkAcl_shared00() {
 		NetworkAclId: aws.String("acl-5fb85d36"),
 	}
 
-	result, err := svc.DeleteNetworkAcl(input)
+	req := svc.DeleteNetworkAclRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1460,7 +1502,7 @@ func ExampleEC2_DeleteNetworkAcl_shared00() {
 // To delete a network ACL entry
 //
 // This example deletes ingress rule number 100 from the specified network ACL.
-func ExampleEC2_DeleteNetworkAclEntry_shared00() {
+func ExampleEC2_DeleteNetworkAclEntryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1473,7 +1515,8 @@ func ExampleEC2_DeleteNetworkAclEntry_shared00() {
 		RuleNumber:   aws.Int64(100),
 	}
 
-	result, err := svc.DeleteNetworkAclEntry(input)
+	req := svc.DeleteNetworkAclEntryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1494,7 +1537,7 @@ func ExampleEC2_DeleteNetworkAclEntry_shared00() {
 // To delete a network interface
 //
 // This example deletes the specified network interface.
-func ExampleEC2_DeleteNetworkInterface_shared00() {
+func ExampleEC2_DeleteNetworkInterfaceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1505,7 +1548,8 @@ func ExampleEC2_DeleteNetworkInterface_shared00() {
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 	}
 
-	result, err := svc.DeleteNetworkInterface(input)
+	req := svc.DeleteNetworkInterfaceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1527,7 +1571,7 @@ func ExampleEC2_DeleteNetworkInterface_shared00() {
 //
 // This example deletes the specified placement group.
 //
-func ExampleEC2_DeletePlacementGroup_shared00() {
+func ExampleEC2_DeletePlacementGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1538,7 +1582,8 @@ func ExampleEC2_DeletePlacementGroup_shared00() {
 		GroupName: aws.String("my-cluster"),
 	}
 
-	result, err := svc.DeletePlacementGroup(input)
+	req := svc.DeletePlacementGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1559,7 +1604,7 @@ func ExampleEC2_DeletePlacementGroup_shared00() {
 // To delete a route
 //
 // This example deletes the specified route from the specified route table.
-func ExampleEC2_DeleteRoute_shared00() {
+func ExampleEC2_DeleteRouteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1571,7 +1616,8 @@ func ExampleEC2_DeleteRoute_shared00() {
 		RouteTableId:         aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.DeleteRoute(input)
+	req := svc.DeleteRouteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1592,7 +1638,7 @@ func ExampleEC2_DeleteRoute_shared00() {
 // To delete a route table
 //
 // This example deletes the specified route table.
-func ExampleEC2_DeleteRouteTable_shared00() {
+func ExampleEC2_DeleteRouteTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1603,7 +1649,8 @@ func ExampleEC2_DeleteRouteTable_shared00() {
 		RouteTableId: aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.DeleteRouteTable(input)
+	req := svc.DeleteRouteTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1625,7 +1672,7 @@ func ExampleEC2_DeleteRouteTable_shared00() {
 //
 // This example deletes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``.
 // If the command succeeds, no output is returned.
-func ExampleEC2_DeleteSnapshot_shared00() {
+func ExampleEC2_DeleteSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1636,7 +1683,8 @@ func ExampleEC2_DeleteSnapshot_shared00() {
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
 
-	result, err := svc.DeleteSnapshot(input)
+	req := svc.DeleteSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1657,7 +1705,7 @@ func ExampleEC2_DeleteSnapshot_shared00() {
 // To cancel a Spot Instance data feed subscription
 //
 // This example deletes a Spot data feed subscription for the account.
-func ExampleEC2_DeleteSpotDatafeedSubscription_shared00() {
+func ExampleEC2_DeleteSpotDatafeedSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1666,7 +1714,8 @@ func ExampleEC2_DeleteSpotDatafeedSubscription_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DeleteSpotDatafeedSubscriptionInput{}
 
-	result, err := svc.DeleteSpotDatafeedSubscription(input)
+	req := svc.DeleteSpotDatafeedSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1687,7 +1736,7 @@ func ExampleEC2_DeleteSpotDatafeedSubscription_shared00() {
 // To delete a subnet
 //
 // This example deletes the specified subnet.
-func ExampleEC2_DeleteSubnet_shared00() {
+func ExampleEC2_DeleteSubnetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1698,7 +1747,8 @@ func ExampleEC2_DeleteSubnet_shared00() {
 		SubnetId: aws.String("subnet-9d4a7b6c"),
 	}
 
-	result, err := svc.DeleteSubnet(input)
+	req := svc.DeleteSubnetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1719,7 +1769,7 @@ func ExampleEC2_DeleteSubnet_shared00() {
 // To delete a tag from a resource
 //
 // This example deletes the tag Stack=test from the specified image.
-func ExampleEC2_DeleteTags_shared00() {
+func ExampleEC2_DeleteTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1738,7 +1788,8 @@ func ExampleEC2_DeleteTags_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteTags(input)
+	req := svc.DeleteTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1760,7 +1811,7 @@ func ExampleEC2_DeleteTags_shared00() {
 //
 // This example deletes an available volume with the volume ID of ``vol-049df61146c4d7901``.
 // If the command succeeds, no output is returned.
-func ExampleEC2_DeleteVolume_shared00() {
+func ExampleEC2_DeleteVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1771,7 +1822,8 @@ func ExampleEC2_DeleteVolume_shared00() {
 		VolumeId: aws.String("vol-049df61146c4d7901"),
 	}
 
-	result, err := svc.DeleteVolume(input)
+	req := svc.DeleteVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1792,7 +1844,7 @@ func ExampleEC2_DeleteVolume_shared00() {
 // To delete a VPC
 //
 // This example deletes the specified VPC.
-func ExampleEC2_DeleteVpc_shared00() {
+func ExampleEC2_DeleteVpcRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1803,7 +1855,8 @@ func ExampleEC2_DeleteVpc_shared00() {
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.DeleteVpc(input)
+	req := svc.DeleteVpcRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1824,7 +1877,7 @@ func ExampleEC2_DeleteVpc_shared00() {
 // To describe a single attribute for your AWS account
 //
 // This example describes the supported-platforms attribute for your AWS account.
-func ExampleEC2_DescribeAccountAttributes_shared00() {
+func ExampleEC2_DescribeAccountAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1837,7 +1890,8 @@ func ExampleEC2_DescribeAccountAttributes_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeAccountAttributes(input)
+	req := svc.DescribeAccountAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1858,7 +1912,7 @@ func ExampleEC2_DescribeAccountAttributes_shared00() {
 // To describe all attributes for your AWS account
 //
 // This example describes the attributes for your AWS account.
-func ExampleEC2_DescribeAccountAttributes_shared01() {
+func ExampleEC2_DescribeAccountAttributesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1867,7 +1921,8 @@ func ExampleEC2_DescribeAccountAttributes_shared01() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeAccountAttributesInput{}
 
-	result, err := svc.DescribeAccountAttributes(input)
+	req := svc.DescribeAccountAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1888,7 +1943,7 @@ func ExampleEC2_DescribeAccountAttributes_shared01() {
 // To describe your Elastic IP addresses
 //
 // This example describes your Elastic IP addresses.
-func ExampleEC2_DescribeAddresses_shared00() {
+func ExampleEC2_DescribeAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1897,7 +1952,8 @@ func ExampleEC2_DescribeAddresses_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeAddressesInput{}
 
-	result, err := svc.DescribeAddresses(input)
+	req := svc.DescribeAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1918,7 +1974,7 @@ func ExampleEC2_DescribeAddresses_shared00() {
 // To describe your Elastic IP addresses for EC2-VPC
 //
 // This example describes your Elastic IP addresses for use with instances in a VPC.
-func ExampleEC2_DescribeAddresses_shared01() {
+func ExampleEC2_DescribeAddressesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1936,7 +1992,8 @@ func ExampleEC2_DescribeAddresses_shared01() {
 		},
 	}
 
-	result, err := svc.DescribeAddresses(input)
+	req := svc.DescribeAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1957,7 +2014,7 @@ func ExampleEC2_DescribeAddresses_shared01() {
 // To describe your Elastic IP addresses for EC2-Classic
 //
 // This example describes your Elastic IP addresses for use with instances in EC2-Classic.
-func ExampleEC2_DescribeAddresses_shared02() {
+func ExampleEC2_DescribeAddressesRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1975,7 +2032,8 @@ func ExampleEC2_DescribeAddresses_shared02() {
 		},
 	}
 
-	result, err := svc.DescribeAddresses(input)
+	req := svc.DescribeAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1997,7 +2055,7 @@ func ExampleEC2_DescribeAddresses_shared02() {
 //
 // This example describes the Availability Zones that are available to you. The response
 // includes Availability Zones only for the current region.
-func ExampleEC2_DescribeAvailabilityZones_shared00() {
+func ExampleEC2_DescribeAvailabilityZonesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2006,7 +2064,8 @@ func ExampleEC2_DescribeAvailabilityZones_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeAvailabilityZonesInput{}
 
-	result, err := svc.DescribeAvailabilityZones(input)
+	req := svc.DescribeAvailabilityZonesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2027,7 +2086,7 @@ func ExampleEC2_DescribeAvailabilityZones_shared00() {
 // To describe a customer gateway
 //
 // This example describes the specified customer gateway.
-func ExampleEC2_DescribeCustomerGateways_shared00() {
+func ExampleEC2_DescribeCustomerGatewaysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2040,7 +2099,8 @@ func ExampleEC2_DescribeCustomerGateways_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeCustomerGateways(input)
+	req := svc.DescribeCustomerGatewaysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2061,7 +2121,7 @@ func ExampleEC2_DescribeCustomerGateways_shared00() {
 // To describe a DHCP options set
 //
 // This example describes the specified DHCP options set.
-func ExampleEC2_DescribeDhcpOptions_shared00() {
+func ExampleEC2_DescribeDhcpOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2074,7 +2134,8 @@ func ExampleEC2_DescribeDhcpOptions_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeDhcpOptions(input)
+	req := svc.DescribeDhcpOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2096,7 +2157,7 @@ func ExampleEC2_DescribeDhcpOptions_shared00() {
 //
 // This example describes the instance type of the specified instance.
 //
-func ExampleEC2_DescribeInstanceAttribute_shared00() {
+func ExampleEC2_DescribeInstanceAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2108,7 +2169,8 @@ func ExampleEC2_DescribeInstanceAttribute_shared00() {
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
-	result, err := svc.DescribeInstanceAttribute(input)
+	req := svc.DescribeInstanceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2130,7 +2192,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared00() {
 //
 // This example describes the ``disableApiTermination`` attribute of the specified instance.
 //
-func ExampleEC2_DescribeInstanceAttribute_shared01() {
+func ExampleEC2_DescribeInstanceAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2142,7 +2204,8 @@ func ExampleEC2_DescribeInstanceAttribute_shared01() {
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
-	result, err := svc.DescribeInstanceAttribute(input)
+	req := svc.DescribeInstanceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2164,7 +2227,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared01() {
 //
 // This example describes the ``blockDeviceMapping`` attribute of the specified instance.
 //
-func ExampleEC2_DescribeInstanceAttribute_shared02() {
+func ExampleEC2_DescribeInstanceAttributeRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2176,7 +2239,8 @@ func ExampleEC2_DescribeInstanceAttribute_shared02() {
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
-	result, err := svc.DescribeInstanceAttribute(input)
+	req := svc.DescribeInstanceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2197,7 +2261,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared02() {
 // To describe the Internet gateway for a VPC
 //
 // This example describes the Internet gateway for the specified VPC.
-func ExampleEC2_DescribeInternetGateways_shared00() {
+func ExampleEC2_DescribeInternetGatewaysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2215,7 +2279,8 @@ func ExampleEC2_DescribeInternetGateways_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeInternetGateways(input)
+	req := svc.DescribeInternetGatewaysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2236,7 +2301,7 @@ func ExampleEC2_DescribeInternetGateways_shared00() {
 // To display a key pair
 //
 // This example displays the fingerprint for the specified key.
-func ExampleEC2_DescribeKeyPairs_shared00() {
+func ExampleEC2_DescribeKeyPairsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2249,7 +2314,8 @@ func ExampleEC2_DescribeKeyPairs_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeKeyPairs(input)
+	req := svc.DescribeKeyPairsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2270,7 +2336,7 @@ func ExampleEC2_DescribeKeyPairs_shared00() {
 // To describe your moving addresses
 //
 // This example describes all of your moving Elastic IP addresses.
-func ExampleEC2_DescribeMovingAddresses_shared00() {
+func ExampleEC2_DescribeMovingAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2279,7 +2345,8 @@ func ExampleEC2_DescribeMovingAddresses_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeMovingAddressesInput{}
 
-	result, err := svc.DescribeMovingAddresses(input)
+	req := svc.DescribeMovingAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2300,7 +2367,7 @@ func ExampleEC2_DescribeMovingAddresses_shared00() {
 // To describe a NAT gateway
 //
 // This example describes the NAT gateway for the specified VPC.
-func ExampleEC2_DescribeNatGateways_shared00() {
+func ExampleEC2_DescribeNatGatewaysRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2318,7 +2385,8 @@ func ExampleEC2_DescribeNatGateways_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeNatGateways(input)
+	req := svc.DescribeNatGatewaysRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2339,7 +2407,7 @@ func ExampleEC2_DescribeNatGateways_shared00() {
 // To describe a network ACL
 //
 // This example describes the specified network ACL.
-func ExampleEC2_DescribeNetworkAcls_shared00() {
+func ExampleEC2_DescribeNetworkAclsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2352,7 +2420,8 @@ func ExampleEC2_DescribeNetworkAcls_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeNetworkAcls(input)
+	req := svc.DescribeNetworkAclsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2373,7 +2442,7 @@ func ExampleEC2_DescribeNetworkAcls_shared00() {
 // To describe the attachment attribute of a network interface
 //
 // This example describes the attachment attribute of the specified network interface.
-func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
+func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2385,7 +2454,8 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.DescribeNetworkInterfaceAttribute(input)
+	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2406,7 +2476,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
 // To describe the description attribute of a network interface
 //
 // This example describes the description attribute of the specified network interface.
-func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
+func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2418,7 +2488,8 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.DescribeNetworkInterfaceAttribute(input)
+	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2439,7 +2510,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
 // To describe the groupSet attribute of a network interface
 //
 // This example describes the groupSet attribute of the specified network interface.
-func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
+func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2451,7 +2522,8 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.DescribeNetworkInterfaceAttribute(input)
+	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2472,7 +2544,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
 // To describe the sourceDestCheck attribute of a network interface
 //
 // This example describes the sourceDestCheck attribute of the specified network interface.
-func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
+func ExampleEC2_DescribeNetworkInterfaceAttributeRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2484,7 +2556,8 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.DescribeNetworkInterfaceAttribute(input)
+	req := svc.DescribeNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2505,7 +2578,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
 // To describe a network interface
 //
 
-func ExampleEC2_DescribeNetworkInterfaces_shared00() {
+func ExampleEC2_DescribeNetworkInterfacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2518,7 +2591,8 @@ func ExampleEC2_DescribeNetworkInterfaces_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeNetworkInterfaces(input)
+	req := svc.DescribeNetworkInterfacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2539,7 +2613,7 @@ func ExampleEC2_DescribeNetworkInterfaces_shared00() {
 // To describe your regions
 //
 // This example describes all the regions that are available to you.
-func ExampleEC2_DescribeRegions_shared00() {
+func ExampleEC2_DescribeRegionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2548,7 +2622,8 @@ func ExampleEC2_DescribeRegions_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeRegionsInput{}
 
-	result, err := svc.DescribeRegions(input)
+	req := svc.DescribeRegionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2569,7 +2644,7 @@ func ExampleEC2_DescribeRegions_shared00() {
 // To describe a route table
 //
 // This example describes the specified route table.
-func ExampleEC2_DescribeRouteTables_shared00() {
+func ExampleEC2_DescribeRouteTablesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2582,7 +2657,8 @@ func ExampleEC2_DescribeRouteTables_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeRouteTables(input)
+	req := svc.DescribeRouteTablesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2604,7 +2680,7 @@ func ExampleEC2_DescribeRouteTables_shared00() {
 //
 // This example describes a schedule that occurs every week on Sunday, starting on the
 // specified date. Note that the output contains a single schedule as an example.
-func ExampleEC2_DescribeScheduledInstanceAvailability_shared00() {
+func ExampleEC2_DescribeScheduledInstanceAvailabilityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2625,7 +2701,8 @@ func ExampleEC2_DescribeScheduledInstanceAvailability_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeScheduledInstanceAvailability(input)
+	req := svc.DescribeScheduledInstanceAvailabilityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2646,7 +2723,7 @@ func ExampleEC2_DescribeScheduledInstanceAvailability_shared00() {
 // To describe your Scheduled Instances
 //
 // This example describes the specified Scheduled Instance.
-func ExampleEC2_DescribeScheduledInstances_shared00() {
+func ExampleEC2_DescribeScheduledInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2659,7 +2736,8 @@ func ExampleEC2_DescribeScheduledInstances_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeScheduledInstances(input)
+	req := svc.DescribeScheduledInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2681,7 +2759,7 @@ func ExampleEC2_DescribeScheduledInstances_shared00() {
 //
 // This example describes the ``createVolumePermission`` attribute on a snapshot with
 // the snapshot ID of ``snap-066877671789bd71b``.
-func ExampleEC2_DescribeSnapshotAttribute_shared00() {
+func ExampleEC2_DescribeSnapshotAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2693,7 +2771,8 @@ func ExampleEC2_DescribeSnapshotAttribute_shared00() {
 		SnapshotId: aws.String("snap-066877671789bd71b"),
 	}
 
-	result, err := svc.DescribeSnapshotAttribute(input)
+	req := svc.DescribeSnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2714,7 +2793,7 @@ func ExampleEC2_DescribeSnapshotAttribute_shared00() {
 // To describe a snapshot
 //
 // This example describes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``.
-func ExampleEC2_DescribeSnapshots_shared00() {
+func ExampleEC2_DescribeSnapshotsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2727,7 +2806,8 @@ func ExampleEC2_DescribeSnapshots_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeSnapshots(input)
+	req := svc.DescribeSnapshotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2749,7 +2829,7 @@ func ExampleEC2_DescribeSnapshots_shared00() {
 //
 // This example describes all snapshots owned by the ID 012345678910 that are in the
 // ``pending`` status.
-func ExampleEC2_DescribeSnapshots_shared01() {
+func ExampleEC2_DescribeSnapshotsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2770,7 +2850,8 @@ func ExampleEC2_DescribeSnapshots_shared01() {
 		},
 	}
 
-	result, err := svc.DescribeSnapshots(input)
+	req := svc.DescribeSnapshotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2791,7 +2872,7 @@ func ExampleEC2_DescribeSnapshots_shared01() {
 // To describe the datafeed for your AWS account
 //
 // This example describes the Spot Instance datafeed subscription for your AWS account.
-func ExampleEC2_DescribeSpotDatafeedSubscription_shared00() {
+func ExampleEC2_DescribeSpotDatafeedSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2800,7 +2881,8 @@ func ExampleEC2_DescribeSpotDatafeedSubscription_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotDatafeedSubscriptionInput{}
 
-	result, err := svc.DescribeSpotDatafeedSubscription(input)
+	req := svc.DescribeSpotDatafeedSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2821,7 +2903,7 @@ func ExampleEC2_DescribeSpotDatafeedSubscription_shared00() {
 // To describe the Spot Instances associated with a Spot fleet
 //
 // This example lists the Spot Instances associated with the specified Spot fleet.
-func ExampleEC2_DescribeSpotFleetInstances_shared00() {
+func ExampleEC2_DescribeSpotFleetInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2832,7 +2914,8 @@ func ExampleEC2_DescribeSpotFleetInstances_shared00() {
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 	}
 
-	result, err := svc.DescribeSpotFleetInstances(input)
+	req := svc.DescribeSpotFleetInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2854,7 +2937,7 @@ func ExampleEC2_DescribeSpotFleetInstances_shared00() {
 //
 // This example returns the history for the specified Spot fleet starting at the specified
 // time.
-func ExampleEC2_DescribeSpotFleetRequestHistory_shared00() {
+func ExampleEC2_DescribeSpotFleetRequestHistoryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2866,7 +2949,8 @@ func ExampleEC2_DescribeSpotFleetRequestHistory_shared00() {
 		StartTime:          parseTime("2006-01-02T15:04:05Z", "2015-05-26T00:00:00Z"),
 	}
 
-	result, err := svc.DescribeSpotFleetRequestHistory(input)
+	req := svc.DescribeSpotFleetRequestHistoryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2887,7 +2971,7 @@ func ExampleEC2_DescribeSpotFleetRequestHistory_shared00() {
 // To describe a Spot fleet request
 //
 // This example describes the specified Spot fleet request.
-func ExampleEC2_DescribeSpotFleetRequests_shared00() {
+func ExampleEC2_DescribeSpotFleetRequestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2900,7 +2984,8 @@ func ExampleEC2_DescribeSpotFleetRequests_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeSpotFleetRequests(input)
+	req := svc.DescribeSpotFleetRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2921,7 +3006,7 @@ func ExampleEC2_DescribeSpotFleetRequests_shared00() {
 // To describe a Spot Instance request
 //
 // This example describes the specified Spot Instance request.
-func ExampleEC2_DescribeSpotInstanceRequests_shared00() {
+func ExampleEC2_DescribeSpotInstanceRequestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2934,7 +3019,8 @@ func ExampleEC2_DescribeSpotInstanceRequests_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeSpotInstanceRequests(input)
+	req := svc.DescribeSpotInstanceRequestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2956,7 +3042,7 @@ func ExampleEC2_DescribeSpotInstanceRequests_shared00() {
 //
 // This example returns the Spot Price history for m1.xlarge, Linux/UNIX (Amazon VPC)
 // instances for a particular day in January.
-func ExampleEC2_DescribeSpotPriceHistory_shared00() {
+func ExampleEC2_DescribeSpotPriceHistoryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2974,7 +3060,8 @@ func ExampleEC2_DescribeSpotPriceHistory_shared00() {
 		StartTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T07:08:09"),
 	}
 
-	result, err := svc.DescribeSpotPriceHistory(input)
+	req := svc.DescribeSpotPriceHistoryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2995,7 +3082,7 @@ func ExampleEC2_DescribeSpotPriceHistory_shared00() {
 // To describe the subnets for a VPC
 //
 // This example describes the subnets for the specified VPC.
-func ExampleEC2_DescribeSubnets_shared00() {
+func ExampleEC2_DescribeSubnetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3013,7 +3100,8 @@ func ExampleEC2_DescribeSubnets_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeSubnets(input)
+	req := svc.DescribeSubnetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3034,7 +3122,7 @@ func ExampleEC2_DescribeSubnets_shared00() {
 // To describe the tags for a single resource
 //
 // This example describes the tags for the specified instance.
-func ExampleEC2_DescribeTags_shared00() {
+func ExampleEC2_DescribeTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3052,7 +3140,8 @@ func ExampleEC2_DescribeTags_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeTags(input)
+	req := svc.DescribeTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3073,7 +3162,7 @@ func ExampleEC2_DescribeTags_shared00() {
 // To describe a volume attribute
 //
 // This example describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-049df61146c4d7901``.
-func ExampleEC2_DescribeVolumeAttribute_shared00() {
+func ExampleEC2_DescribeVolumeAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3085,7 +3174,8 @@ func ExampleEC2_DescribeVolumeAttribute_shared00() {
 		VolumeId:  aws.String("vol-049df61146c4d7901"),
 	}
 
-	result, err := svc.DescribeVolumeAttribute(input)
+	req := svc.DescribeVolumeAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3106,7 +3196,7 @@ func ExampleEC2_DescribeVolumeAttribute_shared00() {
 // To describe the status of a single volume
 //
 // This example describes the status for the volume ``vol-1234567890abcdef0``.
-func ExampleEC2_DescribeVolumeStatus_shared00() {
+func ExampleEC2_DescribeVolumeStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3119,7 +3209,8 @@ func ExampleEC2_DescribeVolumeStatus_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeVolumeStatus(input)
+	req := svc.DescribeVolumeStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3141,7 +3232,7 @@ func ExampleEC2_DescribeVolumeStatus_shared00() {
 //
 // This example describes the status for all volumes that are impaired. In this example
 // output, there are no impaired volumes.
-func ExampleEC2_DescribeVolumeStatus_shared01() {
+func ExampleEC2_DescribeVolumeStatusRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3159,7 +3250,8 @@ func ExampleEC2_DescribeVolumeStatus_shared01() {
 		},
 	}
 
-	result, err := svc.DescribeVolumeStatus(input)
+	req := svc.DescribeVolumeStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3180,7 +3272,7 @@ func ExampleEC2_DescribeVolumeStatus_shared01() {
 // To describe all volumes
 //
 // This example describes all of your volumes in the default region.
-func ExampleEC2_DescribeVolumes_shared00() {
+func ExampleEC2_DescribeVolumesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3189,7 +3281,8 @@ func ExampleEC2_DescribeVolumes_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumesInput{}
 
-	result, err := svc.DescribeVolumes(input)
+	req := svc.DescribeVolumesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3211,7 +3304,7 @@ func ExampleEC2_DescribeVolumes_shared00() {
 //
 // This example describes all volumes that are both attached to the instance with the
 // ID i-1234567890abcdef0 and set to delete when the instance terminates.
-func ExampleEC2_DescribeVolumes_shared01() {
+func ExampleEC2_DescribeVolumesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3235,7 +3328,8 @@ func ExampleEC2_DescribeVolumes_shared01() {
 		},
 	}
 
-	result, err := svc.DescribeVolumes(input)
+	req := svc.DescribeVolumesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3259,7 +3353,7 @@ func ExampleEC2_DescribeVolumes_shared01() {
 // DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS
 // server resolves DNS hostnames for your instances to their corresponding IP addresses;
 // otherwise, it does not.
-func ExampleEC2_DescribeVpcAttribute_shared00() {
+func ExampleEC2_DescribeVpcAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3271,7 +3365,8 @@ func ExampleEC2_DescribeVpcAttribute_shared00() {
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.DescribeVpcAttribute(input)
+	req := svc.DescribeVpcAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3294,7 +3389,7 @@ func ExampleEC2_DescribeVpcAttribute_shared00() {
 // This example describes the enableDnsHostnames attribute. This attribute indicates
 // whether the instances launched in the VPC get DNS hostnames. If this attribute is
 // true, instances in the VPC get DNS hostnames; otherwise, they do not.
-func ExampleEC2_DescribeVpcAttribute_shared01() {
+func ExampleEC2_DescribeVpcAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3306,7 +3401,8 @@ func ExampleEC2_DescribeVpcAttribute_shared01() {
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.DescribeVpcAttribute(input)
+	req := svc.DescribeVpcAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3327,7 +3423,7 @@ func ExampleEC2_DescribeVpcAttribute_shared01() {
 // To describe a VPC
 //
 // This example describes the specified VPC.
-func ExampleEC2_DescribeVpcs_shared00() {
+func ExampleEC2_DescribeVpcsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3340,7 +3436,8 @@ func ExampleEC2_DescribeVpcs_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeVpcs(input)
+	req := svc.DescribeVpcsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3361,7 +3458,7 @@ func ExampleEC2_DescribeVpcs_shared00() {
 // To detach an Internet gateway from a VPC
 //
 // This example detaches the specified Internet gateway from the specified VPC.
-func ExampleEC2_DetachInternetGateway_shared00() {
+func ExampleEC2_DetachInternetGatewayRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3373,7 +3470,8 @@ func ExampleEC2_DetachInternetGateway_shared00() {
 		VpcId:             aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.DetachInternetGateway(input)
+	req := svc.DetachInternetGatewayRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3394,7 +3492,7 @@ func ExampleEC2_DetachInternetGateway_shared00() {
 // To detach a network interface from an instance
 //
 // This example detaches the specified network interface from its attached instance.
-func ExampleEC2_DetachNetworkInterface_shared00() {
+func ExampleEC2_DetachNetworkInterfaceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3405,7 +3503,8 @@ func ExampleEC2_DetachNetworkInterface_shared00() {
 		AttachmentId: aws.String("eni-attach-66c4350a"),
 	}
 
-	result, err := svc.DetachNetworkInterface(input)
+	req := svc.DetachNetworkInterfaceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3427,7 +3526,7 @@ func ExampleEC2_DetachNetworkInterface_shared00() {
 //
 // This example detaches the volume (``vol-049df61146c4d7901``) from the instance it
 // is attached to.
-func ExampleEC2_DetachVolume_shared00() {
+func ExampleEC2_DetachVolumeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3438,7 +3537,8 @@ func ExampleEC2_DetachVolume_shared00() {
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
 
-	result, err := svc.DetachVolume(input)
+	req := svc.DetachVolumeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3460,7 +3560,7 @@ func ExampleEC2_DetachVolume_shared00() {
 //
 // This example disables the specified virtual private gateway from propagating static
 // routes to the specified route table.
-func ExampleEC2_DisableVgwRoutePropagation_shared00() {
+func ExampleEC2_DisableVgwRoutePropagationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3472,7 +3572,8 @@ func ExampleEC2_DisableVgwRoutePropagation_shared00() {
 		RouteTableId: aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.DisableVgwRoutePropagation(input)
+	req := svc.DisableVgwRoutePropagationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3493,7 +3594,7 @@ func ExampleEC2_DisableVgwRoutePropagation_shared00() {
 // To disassociate an Elastic IP address in EC2-VPC
 //
 // This example disassociates an Elastic IP address from an instance in a VPC.
-func ExampleEC2_DisassociateAddress_shared00() {
+func ExampleEC2_DisassociateAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3504,7 +3605,8 @@ func ExampleEC2_DisassociateAddress_shared00() {
 		AssociationId: aws.String("eipassoc-2bebb745"),
 	}
 
-	result, err := svc.DisassociateAddress(input)
+	req := svc.DisassociateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3525,7 +3627,7 @@ func ExampleEC2_DisassociateAddress_shared00() {
 // To disassociate an Elastic IP addresses in EC2-Classic
 //
 // This example disassociates an Elastic IP address from an instance in EC2-Classic.
-func ExampleEC2_DisassociateAddress_shared01() {
+func ExampleEC2_DisassociateAddressRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3536,7 +3638,8 @@ func ExampleEC2_DisassociateAddress_shared01() {
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
-	result, err := svc.DisassociateAddress(input)
+	req := svc.DisassociateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3557,7 +3660,7 @@ func ExampleEC2_DisassociateAddress_shared01() {
 // To disassociate a route table
 //
 // This example disassociates the specified route table from its associated subnet.
-func ExampleEC2_DisassociateRouteTable_shared00() {
+func ExampleEC2_DisassociateRouteTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3568,7 +3671,8 @@ func ExampleEC2_DisassociateRouteTable_shared00() {
 		AssociationId: aws.String("rtbassoc-781d0d1a"),
 	}
 
-	result, err := svc.DisassociateRouteTable(input)
+	req := svc.DisassociateRouteTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3590,7 +3694,7 @@ func ExampleEC2_DisassociateRouteTable_shared00() {
 //
 // This example enables the specified virtual private gateway to propagate static routes
 // to the specified route table.
-func ExampleEC2_EnableVgwRoutePropagation_shared00() {
+func ExampleEC2_EnableVgwRoutePropagationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3602,7 +3706,8 @@ func ExampleEC2_EnableVgwRoutePropagation_shared00() {
 		RouteTableId: aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.EnableVgwRoutePropagation(input)
+	req := svc.EnableVgwRoutePropagationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3623,7 +3728,7 @@ func ExampleEC2_EnableVgwRoutePropagation_shared00() {
 // To enable I/O for a volume
 //
 // This example enables I/O on volume ``vol-1234567890abcdef0``.
-func ExampleEC2_EnableVolumeIO_shared00() {
+func ExampleEC2_EnableVolumeIORequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3634,7 +3739,8 @@ func ExampleEC2_EnableVolumeIO_shared00() {
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
 
-	result, err := svc.EnableVolumeIO(input)
+	req := svc.EnableVolumeIORequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3655,7 +3761,7 @@ func ExampleEC2_EnableVolumeIO_shared00() {
 // To modify the attachment attribute of a network interface
 //
 // This example modifies the attachment attribute of the specified network interface.
-func ExampleEC2_ModifyNetworkInterfaceAttribute_shared00() {
+func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3670,7 +3776,8 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared00() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.ModifyNetworkInterfaceAttribute(input)
+	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3691,7 +3798,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared00() {
 // To modify the description attribute of a network interface
 //
 // This example modifies the description attribute of the specified network interface.
-func ExampleEC2_ModifyNetworkInterfaceAttribute_shared01() {
+func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3705,7 +3812,8 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared01() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.ModifyNetworkInterfaceAttribute(input)
+	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3726,7 +3834,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared01() {
 // To modify the groupSet attribute of a network interface
 //
 // This example command modifies the groupSet attribute of the specified network interface.
-func ExampleEC2_ModifyNetworkInterfaceAttribute_shared02() {
+func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3741,7 +3849,8 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared02() {
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
-	result, err := svc.ModifyNetworkInterfaceAttribute(input)
+	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3763,7 +3872,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared02() {
 //
 // This example command modifies the sourceDestCheck attribute of the specified network
 // interface.
-func ExampleEC2_ModifyNetworkInterfaceAttribute_shared03() {
+func ExampleEC2_ModifyNetworkInterfaceAttributeRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3777,7 +3886,8 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared03() {
 		},
 	}
 
-	result, err := svc.ModifyNetworkInterfaceAttribute(input)
+	req := svc.ModifyNetworkInterfaceAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3800,7 +3910,7 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared03() {
 // This example modifies snapshot ``snap-1234567890abcdef0`` to remove the create volume
 // permission for a user with the account ID ``123456789012``. If the command succeeds,
 // no output is returned.
-func ExampleEC2_ModifySnapshotAttribute_shared00() {
+func ExampleEC2_ModifySnapshotAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3816,7 +3926,8 @@ func ExampleEC2_ModifySnapshotAttribute_shared00() {
 		},
 	}
 
-	result, err := svc.ModifySnapshotAttribute(input)
+	req := svc.ModifySnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3837,7 +3948,7 @@ func ExampleEC2_ModifySnapshotAttribute_shared00() {
 // To make a snapshot public
 //
 // This example makes the snapshot ``snap-1234567890abcdef0`` public.
-func ExampleEC2_ModifySnapshotAttribute_shared01() {
+func ExampleEC2_ModifySnapshotAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3853,7 +3964,8 @@ func ExampleEC2_ModifySnapshotAttribute_shared01() {
 		SnapshotId:    aws.String("snap-1234567890abcdef0"),
 	}
 
-	result, err := svc.ModifySnapshotAttribute(input)
+	req := svc.ModifySnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3874,7 +3986,7 @@ func ExampleEC2_ModifySnapshotAttribute_shared01() {
 // To increase the target capacity of a Spot fleet request
 //
 // This example increases the target capacity of the specified Spot fleet request.
-func ExampleEC2_ModifySpotFleetRequest_shared00() {
+func ExampleEC2_ModifySpotFleetRequestRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3886,7 +3998,8 @@ func ExampleEC2_ModifySpotFleetRequest_shared00() {
 		TargetCapacity:     aws.Int64(20),
 	}
 
-	result, err := svc.ModifySpotFleetRequest(input)
+	req := svc.ModifySpotFleetRequestRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3908,7 +4021,7 @@ func ExampleEC2_ModifySpotFleetRequest_shared00() {
 //
 // This example decreases the target capacity of the specified Spot fleet request without
 // terminating any Spot Instances as a result.
-func ExampleEC2_ModifySpotFleetRequest_shared01() {
+func ExampleEC2_ModifySpotFleetRequestRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3921,7 +4034,8 @@ func ExampleEC2_ModifySpotFleetRequest_shared01() {
 		TargetCapacity:                  aws.Int64(10),
 	}
 
-	result, err := svc.ModifySpotFleetRequest(input)
+	req := svc.ModifySpotFleetRequestRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3943,7 +4057,7 @@ func ExampleEC2_ModifySpotFleetRequest_shared01() {
 //
 // This example modifies the specified subnet so that all instances launched into this
 // subnet are assigned a public IP address.
-func ExampleEC2_ModifySubnetAttribute_shared00() {
+func ExampleEC2_ModifySubnetAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3957,7 +4071,8 @@ func ExampleEC2_ModifySubnetAttribute_shared00() {
 		SubnetId: aws.String("subnet-1a2b3c4d"),
 	}
 
-	result, err := svc.ModifySubnetAttribute(input)
+	req := svc.ModifySubnetAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3979,7 +4094,7 @@ func ExampleEC2_ModifySubnetAttribute_shared00() {
 //
 // This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1234567890abcdef0``
 // to ``true``. If the command succeeds, no output is returned.
-func ExampleEC2_ModifyVolumeAttribute_shared00() {
+func ExampleEC2_ModifyVolumeAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3994,7 +4109,8 @@ func ExampleEC2_ModifyVolumeAttribute_shared00() {
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
 
-	result, err := svc.ModifyVolumeAttribute(input)
+	req := svc.ModifyVolumeAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4018,7 +4134,7 @@ func ExampleEC2_ModifyVolumeAttribute_shared00() {
 // DNS resolution is enabled for the VPC. If this attribute is true, the Amazon DNS
 // server resolves DNS hostnames for instances in the VPC to their corresponding IP
 // addresses; otherwise, it does not.
-func ExampleEC2_ModifyVpcAttribute_shared00() {
+func ExampleEC2_ModifyVpcAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4032,7 +4148,8 @@ func ExampleEC2_ModifyVpcAttribute_shared00() {
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.ModifyVpcAttribute(input)
+	req := svc.ModifyVpcAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4055,7 +4172,7 @@ func ExampleEC2_ModifyVpcAttribute_shared00() {
 // This example modifies the enableDnsHostnames attribute. This attribute indicates
 // whether instances launched in the VPC get DNS hostnames. If this attribute is true,
 // instances in the VPC get DNS hostnames; otherwise, they do not.
-func ExampleEC2_ModifyVpcAttribute_shared01() {
+func ExampleEC2_ModifyVpcAttributeRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4069,7 +4186,8 @@ func ExampleEC2_ModifyVpcAttribute_shared01() {
 		VpcId: aws.String("vpc-a01106c2"),
 	}
 
-	result, err := svc.ModifyVpcAttribute(input)
+	req := svc.ModifyVpcAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4090,7 +4208,7 @@ func ExampleEC2_ModifyVpcAttribute_shared01() {
 // To move an address to EC2-VPC
 //
 // This example moves the specified Elastic IP address to the EC2-VPC platform.
-func ExampleEC2_MoveAddressToVpc_shared00() {
+func ExampleEC2_MoveAddressToVpcRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4101,7 +4219,8 @@ func ExampleEC2_MoveAddressToVpc_shared00() {
 		PublicIp: aws.String("54.123.4.56"),
 	}
 
-	result, err := svc.MoveAddressToVpc(input)
+	req := svc.MoveAddressToVpcRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4122,7 +4241,7 @@ func ExampleEC2_MoveAddressToVpc_shared00() {
 // To purchase a Scheduled Instance
 //
 // This example purchases a Scheduled Instance.
-func ExampleEC2_PurchaseScheduledInstances_shared00() {
+func ExampleEC2_PurchaseScheduledInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4138,7 +4257,8 @@ func ExampleEC2_PurchaseScheduledInstances_shared00() {
 		},
 	}
 
-	result, err := svc.PurchaseScheduledInstances(input)
+	req := svc.PurchaseScheduledInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4159,7 +4279,7 @@ func ExampleEC2_PurchaseScheduledInstances_shared00() {
 // To release an Elastic IP address for EC2-VPC
 //
 // This example releases an Elastic IP address for use with instances in a VPC.
-func ExampleEC2_ReleaseAddress_shared00() {
+func ExampleEC2_ReleaseAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4170,7 +4290,8 @@ func ExampleEC2_ReleaseAddress_shared00() {
 		AllocationId: aws.String("eipalloc-64d5890a"),
 	}
 
-	result, err := svc.ReleaseAddress(input)
+	req := svc.ReleaseAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4191,7 +4312,7 @@ func ExampleEC2_ReleaseAddress_shared00() {
 // To release an Elastic IP addresses for EC2-Classic
 //
 // This example releases an Elastic IP address for use with instances in EC2-Classic.
-func ExampleEC2_ReleaseAddress_shared01() {
+func ExampleEC2_ReleaseAddressRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4202,7 +4323,8 @@ func ExampleEC2_ReleaseAddress_shared01() {
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
-	result, err := svc.ReleaseAddress(input)
+	req := svc.ReleaseAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4224,7 +4346,7 @@ func ExampleEC2_ReleaseAddress_shared01() {
 //
 // This example associates the specified network ACL with the subnet for the specified
 // network ACL association.
-func ExampleEC2_ReplaceNetworkAclAssociation_shared00() {
+func ExampleEC2_ReplaceNetworkAclAssociationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4236,7 +4358,8 @@ func ExampleEC2_ReplaceNetworkAclAssociation_shared00() {
 		NetworkAclId:  aws.String("acl-5fb85d36"),
 	}
 
-	result, err := svc.ReplaceNetworkAclAssociation(input)
+	req := svc.ReplaceNetworkAclAssociationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4258,7 +4381,7 @@ func ExampleEC2_ReplaceNetworkAclAssociation_shared00() {
 //
 // This example replaces an entry for the specified network ACL. The new rule 100 allows
 // ingress traffic from 203.0.113.12/24 on UDP port 53 (DNS) into any associated subnet.
-func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
+func ExampleEC2_ReplaceNetworkAclEntryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4278,7 +4401,8 @@ func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
 		RuleNumber: aws.Int64(100),
 	}
 
-	result, err := svc.ReplaceNetworkAclEntry(input)
+	req := svc.ReplaceNetworkAclEntryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4301,7 +4425,7 @@ func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
 // This example replaces the specified route in the specified table table. The new route
 // matches the specified CIDR and sends the traffic to the specified virtual private
 // gateway.
-func ExampleEC2_ReplaceRoute_shared00() {
+func ExampleEC2_ReplaceRouteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4314,7 +4438,8 @@ func ExampleEC2_ReplaceRoute_shared00() {
 		RouteTableId:         aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.ReplaceRoute(input)
+	req := svc.ReplaceRouteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4336,7 +4461,7 @@ func ExampleEC2_ReplaceRoute_shared00() {
 //
 // This example associates the specified route table with the subnet for the specified
 // route table association.
-func ExampleEC2_ReplaceRouteTableAssociation_shared00() {
+func ExampleEC2_ReplaceRouteTableAssociationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4348,7 +4473,8 @@ func ExampleEC2_ReplaceRouteTableAssociation_shared00() {
 		RouteTableId:  aws.String("rtb-22574640"),
 	}
 
-	result, err := svc.ReplaceRouteTableAssociation(input)
+	req := svc.ReplaceRouteTableAssociationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4374,7 +4500,7 @@ func ExampleEC2_ReplaceRouteTableAssociation_shared00() {
 // public IP address by default. If the instances are launched in a nondefault VPC,
 // they do not receive a public IP address by default. Note that you can't specify different
 // subnets from the same Availability Zone in a Spot fleet request.
-func ExampleEC2_RequestSpotFleet_shared00() {
+func ExampleEC2_RequestSpotFleetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4402,7 +4528,8 @@ func ExampleEC2_RequestSpotFleet_shared00() {
 		},
 	}
 
-	result, err := svc.RequestSpotFleet(input)
+	req := svc.RequestSpotFleetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4428,7 +4555,7 @@ func ExampleEC2_RequestSpotFleet_shared00() {
 // EC2 launches the Spot instances in the default subnet of the Availability Zone. If
 // your account supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic
 // in the Availability Zone.
-func ExampleEC2_RequestSpotFleet_shared01() {
+func ExampleEC2_RequestSpotFleetRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4455,7 +4582,8 @@ func ExampleEC2_RequestSpotFleet_shared01() {
 		},
 	}
 
-	result, err := svc.RequestSpotFleet(input)
+	req := svc.RequestSpotFleetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4478,7 +4606,7 @@ func ExampleEC2_RequestSpotFleet_shared01() {
 // This example assigns public addresses to instances launched in a nondefault VPC.
 // Note that when you specify a network interface, you must include the subnet ID and
 // security group ID using the network interface.
-func ExampleEC2_RequestSpotFleet_shared02() {
+func ExampleEC2_RequestSpotFleetRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4510,7 +4638,8 @@ func ExampleEC2_RequestSpotFleet_shared02() {
 		},
 	}
 
-	result, err := svc.RequestSpotFleet(input)
+	req := svc.RequestSpotFleetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4534,7 +4663,7 @@ func ExampleEC2_RequestSpotFleet_shared02() {
 // allocation strategy. The launch specifications differ by instance type. The Spot
 // fleet distributes the instances across the launch specifications such that there
 // are 10 instances of each type.
-func ExampleEC2_RequestSpotFleet_shared03() {
+func ExampleEC2_RequestSpotFleetRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4567,7 +4696,8 @@ func ExampleEC2_RequestSpotFleet_shared03() {
 		},
 	}
 
-	result, err := svc.RequestSpotFleet(input)
+	req := svc.RequestSpotFleetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4592,7 +4722,7 @@ func ExampleEC2_RequestSpotFleet_shared03() {
 // instances in the default subnet of the specified Availability Zone. If your account
 // supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the specified
 // Availability Zone.
-func ExampleEC2_RequestSpotInstances_shared00() {
+func ExampleEC2_RequestSpotInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4619,7 +4749,8 @@ func ExampleEC2_RequestSpotInstances_shared00() {
 		Type:      ec2.SpotInstanceTypeOneTime,
 	}
 
-	result, err := svc.RequestSpotInstances(input)
+	req := svc.RequestSpotInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4643,7 +4774,7 @@ func ExampleEC2_RequestSpotInstances_shared00() {
 // in the specified subnet. Amazon EC2 launches the instances in the specified subnet.
 // If the VPC is a nondefault VPC, the instances do not receive a public IP address
 // by default.
-func ExampleEC2_RequestSpotInstances_shared01() {
+func ExampleEC2_RequestSpotInstancesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4667,7 +4798,8 @@ func ExampleEC2_RequestSpotInstances_shared01() {
 		Type:      ec2.SpotInstanceTypeOneTime,
 	}
 
-	result, err := svc.RequestSpotInstances(input)
+	req := svc.RequestSpotInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4689,7 +4821,7 @@ func ExampleEC2_RequestSpotInstances_shared01() {
 //
 // This example resets the create volume permissions for snapshot ``snap-1234567890abcdef0``.
 // If the command succeeds, no output is returned.
-func ExampleEC2_ResetSnapshotAttribute_shared00() {
+func ExampleEC2_ResetSnapshotAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4701,7 +4833,8 @@ func ExampleEC2_ResetSnapshotAttribute_shared00() {
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
 
-	result, err := svc.ResetSnapshotAttribute(input)
+	req := svc.ResetSnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4722,7 +4855,7 @@ func ExampleEC2_ResetSnapshotAttribute_shared00() {
 // To restore an address to EC2-Classic
 //
 // This example restores the specified Elastic IP address to the EC2-Classic platform.
-func ExampleEC2_RestoreAddressToClassic_shared00() {
+func ExampleEC2_RestoreAddressToClassicRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4733,7 +4866,8 @@ func ExampleEC2_RestoreAddressToClassic_shared00() {
 		PublicIp: aws.String("198.51.100.0"),
 	}
 
-	result, err := svc.RestoreAddressToClassic(input)
+	req := svc.RestoreAddressToClassicRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4754,7 +4888,7 @@ func ExampleEC2_RestoreAddressToClassic_shared00() {
 // To launch a Scheduled Instance in a VPC
 //
 // This example launches the specified Scheduled Instance in a VPC.
-func ExampleEC2_RunScheduledInstances_shared00() {
+func ExampleEC2_RunScheduledInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4784,7 +4918,8 @@ func ExampleEC2_RunScheduledInstances_shared00() {
 		ScheduledInstanceId: aws.String("sci-1234-1234-1234-1234-123456789012"),
 	}
 
-	result, err := svc.RunScheduledInstances(input)
+	req := svc.RunScheduledInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4805,7 +4940,7 @@ func ExampleEC2_RunScheduledInstances_shared00() {
 // To launch a Scheduled Instance in EC2-Classic
 //
 // This example launches the specified Scheduled Instance in EC2-Classic.
-func ExampleEC2_RunScheduledInstances_shared01() {
+func ExampleEC2_RunScheduledInstancesRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4831,7 +4966,8 @@ func ExampleEC2_RunScheduledInstances_shared01() {
 		ScheduledInstanceId: aws.String("sci-1234-1234-1234-1234-123456789012"),
 	}
 
-	result, err := svc.RunScheduledInstances(input)
+	req := svc.RunScheduledInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -4853,7 +4989,7 @@ func ExampleEC2_RunScheduledInstances_shared01() {
 //
 // This example unassigns the specified private IP address from the specified network
 // interface.
-func ExampleEC2_UnassignPrivateIpAddresses_shared00() {
+func ExampleEC2_UnassignPrivateIpAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -4867,7 +5003,8 @@ func ExampleEC2_UnassignPrivateIpAddresses_shared00() {
 		},
 	}
 
-	result, err := svc.UnassignPrivateIpAddresses(input)
+	req := svc.UnassignPrivateIpAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

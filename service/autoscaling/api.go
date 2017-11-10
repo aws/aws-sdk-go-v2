@@ -14,49 +14,24 @@ import (
 
 const opAttachInstances = "AttachInstances"
 
-// AttachInstancesRequest generates a "aws.Request" representing the
-// client's request for the AttachInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachInstances for more information on using the AttachInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachInstancesRequest method.
-//    req, resp := client.AttachInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstances
-func (c *AutoScaling) AttachInstancesRequest(input *AttachInstancesInput) (req *aws.Request, output *AttachInstancesOutput) {
-	op := &aws.Operation{
-		Name:       opAttachInstances,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AttachInstancesInput{}
-	}
-
-	output = &AttachInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AttachInstancesRequest is a API request type for the AttachInstances API operation.
+type AttachInstancesRequest struct {
+	*aws.Request
+	Input *AttachInstancesInput
 }
 
-// AttachInstances API operation for Auto Scaling.
+// Send marshals and sends the AttachInstances API request.
+func (r *AttachInstancesRequest) Send() (*AttachInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachInstancesOutput), nil
+}
+
+// AttachInstancesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Attaches one or more EC2 instances to the specified Auto Scaling group.
 //
@@ -74,83 +49,51 @@ func (c *AutoScaling) AttachInstancesRequest(input *AttachInstancesInput) (req *
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation AttachInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstances
-func (c *AutoScaling) AttachInstances(input *AttachInstancesInput) (*AttachInstancesOutput, error) {
-	req, out := c.AttachInstancesRequest(input)
-	return out, req.Send()
-}
-
-// AttachInstancesWithContext is the same as AttachInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) AttachInstancesWithContext(ctx aws.Context, input *AttachInstancesInput, opts ...aws.Option) (*AttachInstancesOutput, error) {
-	req, out := c.AttachInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
-
-// AttachLoadBalancerTargetGroupsRequest generates a "aws.Request" representing the
-// client's request for the AttachLoadBalancerTargetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachLoadBalancerTargetGroups for more information on using the AttachLoadBalancerTargetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachLoadBalancerTargetGroupsRequest method.
-//    req, resp := client.AttachLoadBalancerTargetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AttachInstancesRequest method.
+//    req := client.AttachInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroups
-func (c *AutoScaling) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBalancerTargetGroupsInput) (req *aws.Request, output *AttachLoadBalancerTargetGroupsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstances
+func (c *AutoScaling) AttachInstancesRequest(input *AttachInstancesInput) AttachInstancesRequest {
 	op := &aws.Operation{
-		Name:       opAttachLoadBalancerTargetGroups,
+		Name:       opAttachInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancerTargetGroupsInput{}
+		input = &AttachInstancesInput{}
 	}
 
-	output = &AttachLoadBalancerTargetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AttachInstancesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AttachInstancesRequest{Request: req, Input: input}
 }
 
-// AttachLoadBalancerTargetGroups API operation for Auto Scaling.
+const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
+
+// AttachLoadBalancerTargetGroupsRequest is a API request type for the AttachLoadBalancerTargetGroups API operation.
+type AttachLoadBalancerTargetGroupsRequest struct {
+	*aws.Request
+	Input *AttachLoadBalancerTargetGroupsInput
+}
+
+// Send marshals and sends the AttachLoadBalancerTargetGroups API request.
+func (r *AttachLoadBalancerTargetGroupsRequest) Send() (*AttachLoadBalancerTargetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachLoadBalancerTargetGroupsOutput), nil
+}
+
+// AttachLoadBalancerTargetGroupsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Attaches one or more target groups to the specified Auto Scaling group.
 //
@@ -161,83 +104,49 @@ func (c *AutoScaling) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBal
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation AttachLoadBalancerTargetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroups
-func (c *AutoScaling) AttachLoadBalancerTargetGroups(input *AttachLoadBalancerTargetGroupsInput) (*AttachLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.AttachLoadBalancerTargetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// AttachLoadBalancerTargetGroupsWithContext is the same as AttachLoadBalancerTargetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachLoadBalancerTargetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) AttachLoadBalancerTargetGroupsWithContext(ctx aws.Context, input *AttachLoadBalancerTargetGroupsInput, opts ...aws.Option) (*AttachLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.AttachLoadBalancerTargetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAttachLoadBalancers = "AttachLoadBalancers"
-
-// AttachLoadBalancersRequest generates a "aws.Request" representing the
-// client's request for the AttachLoadBalancers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachLoadBalancers for more information on using the AttachLoadBalancers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachLoadBalancersRequest method.
-//    req, resp := client.AttachLoadBalancersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AttachLoadBalancerTargetGroupsRequest method.
+//    req := client.AttachLoadBalancerTargetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancers
-func (c *AutoScaling) AttachLoadBalancersRequest(input *AttachLoadBalancersInput) (req *aws.Request, output *AttachLoadBalancersOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroups
+func (c *AutoScaling) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
-		Name:       opAttachLoadBalancers,
+		Name:       opAttachLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachLoadBalancersInput{}
+		input = &AttachLoadBalancerTargetGroupsInput{}
 	}
 
-	output = &AttachLoadBalancersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AttachLoadBalancerTargetGroupsOutput{})
+	return AttachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
-// AttachLoadBalancers API operation for Auto Scaling.
+const opAttachLoadBalancers = "AttachLoadBalancers"
+
+// AttachLoadBalancersRequest is a API request type for the AttachLoadBalancers API operation.
+type AttachLoadBalancersRequest struct {
+	*aws.Request
+	Input *AttachLoadBalancersInput
+}
+
+// Send marshals and sends the AttachLoadBalancers API request.
+func (r *AttachLoadBalancersRequest) Send() (*AttachLoadBalancersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachLoadBalancersOutput), nil
+}
+
+// AttachLoadBalancersRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Attaches one or more Classic Load Balancers to the specified Auto Scaling
 // group.
@@ -251,83 +160,49 @@ func (c *AutoScaling) AttachLoadBalancersRequest(input *AttachLoadBalancersInput
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation AttachLoadBalancers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancers
-func (c *AutoScaling) AttachLoadBalancers(input *AttachLoadBalancersInput) (*AttachLoadBalancersOutput, error) {
-	req, out := c.AttachLoadBalancersRequest(input)
-	return out, req.Send()
-}
-
-// AttachLoadBalancersWithContext is the same as AttachLoadBalancers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachLoadBalancers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) AttachLoadBalancersWithContext(ctx aws.Context, input *AttachLoadBalancersInput, opts ...aws.Option) (*AttachLoadBalancersOutput, error) {
-	req, out := c.AttachLoadBalancersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCompleteLifecycleAction = "CompleteLifecycleAction"
-
-// CompleteLifecycleActionRequest generates a "aws.Request" representing the
-// client's request for the CompleteLifecycleAction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CompleteLifecycleAction for more information on using the CompleteLifecycleAction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CompleteLifecycleActionRequest method.
-//    req, resp := client.CompleteLifecycleActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AttachLoadBalancersRequest method.
+//    req := client.AttachLoadBalancersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleAction
-func (c *AutoScaling) CompleteLifecycleActionRequest(input *CompleteLifecycleActionInput) (req *aws.Request, output *CompleteLifecycleActionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancers
+func (c *AutoScaling) AttachLoadBalancersRequest(input *AttachLoadBalancersInput) AttachLoadBalancersRequest {
 	op := &aws.Operation{
-		Name:       opCompleteLifecycleAction,
+		Name:       opAttachLoadBalancers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CompleteLifecycleActionInput{}
+		input = &AttachLoadBalancersInput{}
 	}
 
-	output = &CompleteLifecycleActionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AttachLoadBalancersOutput{})
+	return AttachLoadBalancersRequest{Request: req, Input: input}
 }
 
-// CompleteLifecycleAction API operation for Auto Scaling.
+const opCompleteLifecycleAction = "CompleteLifecycleAction"
+
+// CompleteLifecycleActionRequest is a API request type for the CompleteLifecycleAction API operation.
+type CompleteLifecycleActionRequest struct {
+	*aws.Request
+	Input *CompleteLifecycleActionInput
+}
+
+// Send marshals and sends the CompleteLifecycleAction API request.
+func (r *CompleteLifecycleActionRequest) Send() (*CompleteLifecycleActionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CompleteLifecycleActionOutput), nil
+}
+
+// CompleteLifecycleActionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Completes the lifecycle action for the specified token or instance with the
 // specified result.
@@ -353,85 +228,49 @@ func (c *AutoScaling) CompleteLifecycleActionRequest(input *CompleteLifecycleAct
 // For more information, see Auto Scaling Lifecycle (http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation CompleteLifecycleAction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleAction
-func (c *AutoScaling) CompleteLifecycleAction(input *CompleteLifecycleActionInput) (*CompleteLifecycleActionOutput, error) {
-	req, out := c.CompleteLifecycleActionRequest(input)
-	return out, req.Send()
-}
-
-// CompleteLifecycleActionWithContext is the same as CompleteLifecycleAction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompleteLifecycleAction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) CompleteLifecycleActionWithContext(ctx aws.Context, input *CompleteLifecycleActionInput, opts ...aws.Option) (*CompleteLifecycleActionOutput, error) {
-	req, out := c.CompleteLifecycleActionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateAutoScalingGroup = "CreateAutoScalingGroup"
-
-// CreateAutoScalingGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateAutoScalingGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAutoScalingGroup for more information on using the CreateAutoScalingGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAutoScalingGroupRequest method.
-//    req, resp := client.CreateAutoScalingGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CompleteLifecycleActionRequest method.
+//    req := client.CompleteLifecycleActionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup
-func (c *AutoScaling) CreateAutoScalingGroupRequest(input *CreateAutoScalingGroupInput) (req *aws.Request, output *CreateAutoScalingGroupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleAction
+func (c *AutoScaling) CompleteLifecycleActionRequest(input *CompleteLifecycleActionInput) CompleteLifecycleActionRequest {
 	op := &aws.Operation{
-		Name:       opCreateAutoScalingGroup,
+		Name:       opCompleteLifecycleAction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateAutoScalingGroupInput{}
+		input = &CompleteLifecycleActionInput{}
 	}
 
-	output = &CreateAutoScalingGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &CompleteLifecycleActionOutput{})
+	return CompleteLifecycleActionRequest{Request: req, Input: input}
 }
 
-// CreateAutoScalingGroup API operation for Auto Scaling.
+const opCreateAutoScalingGroup = "CreateAutoScalingGroup"
+
+// CreateAutoScalingGroupRequest is a API request type for the CreateAutoScalingGroup API operation.
+type CreateAutoScalingGroupRequest struct {
+	*aws.Request
+	Input *CreateAutoScalingGroupInput
+}
+
+// Send marshals and sends the CreateAutoScalingGroup API request.
+func (r *CreateAutoScalingGroupRequest) Send() (*CreateAutoScalingGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAutoScalingGroupOutput), nil
+}
+
+// CreateAutoScalingGroupRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Creates an Auto Scaling group with the specified name and attributes.
 //
@@ -442,94 +281,51 @@ func (c *AutoScaling) CreateAutoScalingGroupRequest(input *CreateAutoScalingGrou
 // For more information, see Auto Scaling Groups (http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation CreateAutoScalingGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsFault "AlreadyExists"
-//   You already have an Auto Scaling group or launch configuration with this
-//   name.
-//
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup
-func (c *AutoScaling) CreateAutoScalingGroup(input *CreateAutoScalingGroupInput) (*CreateAutoScalingGroupOutput, error) {
-	req, out := c.CreateAutoScalingGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateAutoScalingGroupWithContext is the same as CreateAutoScalingGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAutoScalingGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) CreateAutoScalingGroupWithContext(ctx aws.Context, input *CreateAutoScalingGroupInput, opts ...aws.Option) (*CreateAutoScalingGroupOutput, error) {
-	req, out := c.CreateAutoScalingGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLaunchConfiguration = "CreateLaunchConfiguration"
-
-// CreateLaunchConfigurationRequest generates a "aws.Request" representing the
-// client's request for the CreateLaunchConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLaunchConfiguration for more information on using the CreateLaunchConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLaunchConfigurationRequest method.
-//    req, resp := client.CreateLaunchConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateAutoScalingGroupRequest method.
+//    req := client.CreateAutoScalingGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfiguration
-func (c *AutoScaling) CreateLaunchConfigurationRequest(input *CreateLaunchConfigurationInput) (req *aws.Request, output *CreateLaunchConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup
+func (c *AutoScaling) CreateAutoScalingGroupRequest(input *CreateAutoScalingGroupInput) CreateAutoScalingGroupRequest {
 	op := &aws.Operation{
-		Name:       opCreateLaunchConfiguration,
+		Name:       opCreateAutoScalingGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLaunchConfigurationInput{}
+		input = &CreateAutoScalingGroupInput{}
 	}
 
-	output = &CreateLaunchConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateAutoScalingGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return CreateAutoScalingGroupRequest{Request: req, Input: input}
 }
 
-// CreateLaunchConfiguration API operation for Auto Scaling.
+const opCreateLaunchConfiguration = "CreateLaunchConfiguration"
+
+// CreateLaunchConfigurationRequest is a API request type for the CreateLaunchConfiguration API operation.
+type CreateLaunchConfigurationRequest struct {
+	*aws.Request
+	Input *CreateLaunchConfigurationInput
+}
+
+// Send marshals and sends the CreateLaunchConfiguration API request.
+func (r *CreateLaunchConfigurationRequest) Send() (*CreateLaunchConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLaunchConfigurationOutput), nil
+}
+
+// CreateLaunchConfigurationRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Creates a launch configuration.
 //
@@ -540,76 +336,69 @@ func (c *AutoScaling) CreateLaunchConfigurationRequest(input *CreateLaunchConfig
 // For more information, see Launch Configurations (http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation CreateLaunchConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsFault "AlreadyExists"
-//   You already have an Auto Scaling group or launch configuration with this
-//   name.
-//
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the CreateLaunchConfigurationRequest method.
+//    req := client.CreateLaunchConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfiguration
-func (c *AutoScaling) CreateLaunchConfiguration(input *CreateLaunchConfigurationInput) (*CreateLaunchConfigurationOutput, error) {
-	req, out := c.CreateLaunchConfigurationRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) CreateLaunchConfigurationRequest(input *CreateLaunchConfigurationInput) CreateLaunchConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opCreateLaunchConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateLaunchConfigurationWithContext is the same as CreateLaunchConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLaunchConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) CreateLaunchConfigurationWithContext(ctx aws.Context, input *CreateLaunchConfigurationInput, opts ...aws.Option) (*CreateLaunchConfigurationOutput, error) {
-	req, out := c.CreateLaunchConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateLaunchConfigurationInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateLaunchConfigurationOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return CreateLaunchConfigurationRequest{Request: req, Input: input}
 }
 
 const opCreateOrUpdateTags = "CreateOrUpdateTags"
 
-// CreateOrUpdateTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateOrUpdateTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateOrUpdateTagsRequest is a API request type for the CreateOrUpdateTags API operation.
+type CreateOrUpdateTagsRequest struct {
+	*aws.Request
+	Input *CreateOrUpdateTagsInput
+}
+
+// Send marshals and sends the CreateOrUpdateTags API request.
+func (r *CreateOrUpdateTagsRequest) Send() (*CreateOrUpdateTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateOrUpdateTagsOutput), nil
+}
+
+// CreateOrUpdateTagsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates or updates tags for the specified Auto Scaling group.
 //
-// See CreateOrUpdateTags for more information on using the CreateOrUpdateTags
-// API call, and error handling.
+// When you specify a tag with a key that already exists, the operation overwrites
+// the previous tag definition, and you do not get an error message.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Tagging Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the CreateOrUpdateTagsRequest method.
-//    req, resp := client.CreateOrUpdateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateOrUpdateTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTags
-func (c *AutoScaling) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) (req *aws.Request, output *CreateOrUpdateTagsOutput) {
+func (c *AutoScaling) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) CreateOrUpdateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateOrUpdateTags,
 		HTTPMethod: "POST",
@@ -620,114 +409,32 @@ func (c *AutoScaling) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) 
 		input = &CreateOrUpdateTagsInput{}
 	}
 
-	output = &CreateOrUpdateTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateOrUpdateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CreateOrUpdateTags API operation for Auto Scaling.
-//
-// Creates or updates tags for the specified Auto Scaling group.
-//
-// When you specify a tag with a key that already exists, the operation overwrites
-// the previous tag definition, and you do not get an error message.
-//
-// For more information, see Tagging Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation CreateOrUpdateTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeAlreadyExistsFault "AlreadyExists"
-//   You already have an Auto Scaling group or launch configuration with this
-//   name.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTags
-func (c *AutoScaling) CreateOrUpdateTags(input *CreateOrUpdateTagsInput) (*CreateOrUpdateTagsOutput, error) {
-	req, out := c.CreateOrUpdateTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateOrUpdateTagsWithContext is the same as CreateOrUpdateTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateOrUpdateTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) CreateOrUpdateTagsWithContext(ctx aws.Context, input *CreateOrUpdateTagsInput, opts ...aws.Option) (*CreateOrUpdateTagsOutput, error) {
-	req, out := c.CreateOrUpdateTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CreateOrUpdateTagsRequest{Request: req, Input: input}
 }
 
 const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
 
-// DeleteAutoScalingGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteAutoScalingGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAutoScalingGroup for more information on using the DeleteAutoScalingGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteAutoScalingGroupRequest method.
-//    req, resp := client.DeleteAutoScalingGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroup
-func (c *AutoScaling) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInput) (req *aws.Request, output *DeleteAutoScalingGroupOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteAutoScalingGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteAutoScalingGroupInput{}
-	}
-
-	output = &DeleteAutoScalingGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteAutoScalingGroupRequest is a API request type for the DeleteAutoScalingGroup API operation.
+type DeleteAutoScalingGroupRequest struct {
+	*aws.Request
+	Input *DeleteAutoScalingGroupInput
 }
 
-// DeleteAutoScalingGroup API operation for Auto Scaling.
+// Send marshals and sends the DeleteAutoScalingGroup API request.
+func (r *DeleteAutoScalingGroupRequest) Send() (*DeleteAutoScalingGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAutoScalingGroupOutput), nil
+}
+
+// DeleteAutoScalingGroupRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Deletes the specified Auto Scaling group.
 //
@@ -745,74 +452,67 @@ func (c *AutoScaling) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGrou
 // and set the minimum size and desired capacity of the Auto Scaling group to
 // zero.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteAutoScalingGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeScalingActivityInProgressFault "ScalingActivityInProgress"
-//   The operation can't be performed because there are scaling activities in
-//   progress.
-//
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the DeleteAutoScalingGroupRequest method.
+//    req := client.DeleteAutoScalingGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroup
-func (c *AutoScaling) DeleteAutoScalingGroup(input *DeleteAutoScalingGroupInput) (*DeleteAutoScalingGroupOutput, error) {
-	req, out := c.DeleteAutoScalingGroupRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAutoScalingGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteAutoScalingGroupWithContext is the same as DeleteAutoScalingGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAutoScalingGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteAutoScalingGroupWithContext(ctx aws.Context, input *DeleteAutoScalingGroupInput, opts ...aws.Option) (*DeleteAutoScalingGroupOutput, error) {
-	req, out := c.DeleteAutoScalingGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteAutoScalingGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteAutoScalingGroupOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteAutoScalingGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteLaunchConfiguration = "DeleteLaunchConfiguration"
 
-// DeleteLaunchConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteLaunchConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLaunchConfigurationRequest is a API request type for the DeleteLaunchConfiguration API operation.
+type DeleteLaunchConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteLaunchConfigurationInput
+}
+
+// Send marshals and sends the DeleteLaunchConfiguration API request.
+func (r *DeleteLaunchConfigurationRequest) Send() (*DeleteLaunchConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLaunchConfigurationOutput), nil
+}
+
+// DeleteLaunchConfigurationRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified launch configuration.
 //
-// See DeleteLaunchConfiguration for more information on using the DeleteLaunchConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The launch configuration must not be attached to an Auto Scaling group. When
+// this call completes, the launch configuration is no longer available for
+// use.
 //
 //    // Example sending a request using the DeleteLaunchConfigurationRequest method.
-//    req, resp := client.DeleteLaunchConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLaunchConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfiguration
-func (c *AutoScaling) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurationInput) (req *aws.Request, output *DeleteLaunchConfigurationOutput) {
+func (c *AutoScaling) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLaunchConfiguration,
 		HTTPMethod: "POST",
@@ -823,85 +523,47 @@ func (c *AutoScaling) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfig
 		input = &DeleteLaunchConfigurationInput{}
 	}
 
-	output = &DeleteLaunchConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteLaunchConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteLaunchConfiguration API operation for Auto Scaling.
-//
-// Deletes the specified launch configuration.
-//
-// The launch configuration must not be attached to an Auto Scaling group. When
-// this call completes, the launch configuration is no longer available for
-// use.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteLaunchConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfiguration
-func (c *AutoScaling) DeleteLaunchConfiguration(input *DeleteLaunchConfigurationInput) (*DeleteLaunchConfigurationOutput, error) {
-	req, out := c.DeleteLaunchConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLaunchConfigurationWithContext is the same as DeleteLaunchConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLaunchConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteLaunchConfigurationWithContext(ctx aws.Context, input *DeleteLaunchConfigurationInput, opts ...aws.Option) (*DeleteLaunchConfigurationOutput, error) {
-	req, out := c.DeleteLaunchConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteLaunchConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeleteLifecycleHook = "DeleteLifecycleHook"
 
-// DeleteLifecycleHookRequest generates a "aws.Request" representing the
-// client's request for the DeleteLifecycleHook operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLifecycleHookRequest is a API request type for the DeleteLifecycleHook API operation.
+type DeleteLifecycleHookRequest struct {
+	*aws.Request
+	Input *DeleteLifecycleHookInput
+}
+
+// Send marshals and sends the DeleteLifecycleHook API request.
+func (r *DeleteLifecycleHookRequest) Send() (*DeleteLifecycleHookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLifecycleHookOutput), nil
+}
+
+// DeleteLifecycleHookRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified lifecycle hook.
 //
-// See DeleteLifecycleHook for more information on using the DeleteLifecycleHook
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If there are any outstanding lifecycle actions, they are completed first
+// (ABANDON for launching instances, CONTINUE for terminating instances).
 //
 //    // Example sending a request using the DeleteLifecycleHookRequest method.
-//    req, resp := client.DeleteLifecycleHookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLifecycleHookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHook
-func (c *AutoScaling) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) (req *aws.Request, output *DeleteLifecycleHookOutput) {
+func (c *AutoScaling) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput) DeleteLifecycleHookRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLifecycleHook,
 		HTTPMethod: "POST",
@@ -912,79 +574,42 @@ func (c *AutoScaling) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput
 		input = &DeleteLifecycleHookInput{}
 	}
 
-	output = &DeleteLifecycleHookOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLifecycleHook API operation for Auto Scaling.
-//
-// Deletes the specified lifecycle hook.
-//
-// If there are any outstanding lifecycle actions, they are completed first
-// (ABANDON for launching instances, CONTINUE for terminating instances).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteLifecycleHook for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHook
-func (c *AutoScaling) DeleteLifecycleHook(input *DeleteLifecycleHookInput) (*DeleteLifecycleHookOutput, error) {
-	req, out := c.DeleteLifecycleHookRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLifecycleHookWithContext is the same as DeleteLifecycleHook with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLifecycleHook for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteLifecycleHookWithContext(ctx aws.Context, input *DeleteLifecycleHookInput, opts ...aws.Option) (*DeleteLifecycleHookOutput, error) {
-	req, out := c.DeleteLifecycleHookRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLifecycleHookOutput{})
+	return DeleteLifecycleHookRequest{Request: req, Input: input}
 }
 
 const opDeleteNotificationConfiguration = "DeleteNotificationConfiguration"
 
-// DeleteNotificationConfigurationRequest generates a "aws.Request" representing the
-// client's request for the DeleteNotificationConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteNotificationConfigurationRequest is a API request type for the DeleteNotificationConfiguration API operation.
+type DeleteNotificationConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteNotificationConfigurationInput
+}
+
+// Send marshals and sends the DeleteNotificationConfiguration API request.
+func (r *DeleteNotificationConfigurationRequest) Send() (*DeleteNotificationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteNotificationConfigurationOutput), nil
+}
+
+// DeleteNotificationConfigurationRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteNotificationConfiguration for more information on using the DeleteNotificationConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified notification.
 //
 //    // Example sending a request using the DeleteNotificationConfigurationRequest method.
-//    req, resp := client.DeleteNotificationConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteNotificationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfiguration
-func (c *AutoScaling) DeleteNotificationConfigurationRequest(input *DeleteNotificationConfigurationInput) (req *aws.Request, output *DeleteNotificationConfigurationOutput) {
+func (c *AutoScaling) DeleteNotificationConfigurationRequest(input *DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opDeleteNotificationConfiguration,
 		HTTPMethod: "POST",
@@ -995,78 +620,47 @@ func (c *AutoScaling) DeleteNotificationConfigurationRequest(input *DeleteNotifi
 		input = &DeleteNotificationConfigurationInput{}
 	}
 
-	output = &DeleteNotificationConfigurationOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteNotificationConfigurationOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteNotificationConfiguration API operation for Auto Scaling.
-//
-// Deletes the specified notification.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteNotificationConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfiguration
-func (c *AutoScaling) DeleteNotificationConfiguration(input *DeleteNotificationConfigurationInput) (*DeleteNotificationConfigurationOutput, error) {
-	req, out := c.DeleteNotificationConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// DeleteNotificationConfigurationWithContext is the same as DeleteNotificationConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteNotificationConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteNotificationConfigurationWithContext(ctx aws.Context, input *DeleteNotificationConfigurationInput, opts ...aws.Option) (*DeleteNotificationConfigurationOutput, error) {
-	req, out := c.DeleteNotificationConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteNotificationConfigurationRequest{Request: req, Input: input}
 }
 
 const opDeletePolicy = "DeletePolicy"
 
-// DeletePolicyRequest generates a "aws.Request" representing the
-// client's request for the DeletePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeletePolicyRequest is a API request type for the DeletePolicy API operation.
+type DeletePolicyRequest struct {
+	*aws.Request
+	Input *DeletePolicyInput
+}
+
+// Send marshals and sends the DeletePolicy API request.
+func (r *DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePolicyOutput), nil
+}
+
+// DeletePolicyRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified Auto Scaling policy.
 //
-// See DeletePolicy for more information on using the DeletePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deleting a policy deletes the underlying alarm action, but does not delete
+// the alarm, even if it no longer has an associated action.
 //
 //    // Example sending a request using the DeletePolicyRequest method.
-//    req, resp := client.DeletePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeletePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicy
-func (c *AutoScaling) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Request, output *DeletePolicyOutput) {
+func (c *AutoScaling) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePolicy,
 		HTTPMethod: "POST",
@@ -1077,81 +671,44 @@ func (c *AutoScaling) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Re
 		input = &DeletePolicyInput{}
 	}
 
-	output = &DeletePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeletePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeletePolicy API operation for Auto Scaling.
-//
-// Deletes the specified Auto Scaling policy.
-//
-// Deleting a policy deletes the underlying alarm action, but does not delete
-// the alarm, even if it no longer has an associated action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeletePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicy
-func (c *AutoScaling) DeletePolicy(input *DeletePolicyInput) (*DeletePolicyOutput, error) {
-	req, out := c.DeletePolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeletePolicyWithContext is the same as DeletePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeletePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...aws.Option) (*DeletePolicyOutput, error) {
-	req, out := c.DeletePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeletePolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteScheduledAction = "DeleteScheduledAction"
 
-// DeleteScheduledActionRequest generates a "aws.Request" representing the
-// client's request for the DeleteScheduledAction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteScheduledActionRequest is a API request type for the DeleteScheduledAction API operation.
+type DeleteScheduledActionRequest struct {
+	*aws.Request
+	Input *DeleteScheduledActionInput
+}
+
+// Send marshals and sends the DeleteScheduledAction API request.
+func (r *DeleteScheduledActionRequest) Send() (*DeleteScheduledActionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteScheduledActionOutput), nil
+}
+
+// DeleteScheduledActionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteScheduledAction for more information on using the DeleteScheduledAction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified scheduled action.
 //
 //    // Example sending a request using the DeleteScheduledActionRequest method.
-//    req, resp := client.DeleteScheduledActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteScheduledActionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledAction
-func (c *AutoScaling) DeleteScheduledActionRequest(input *DeleteScheduledActionInput) (req *aws.Request, output *DeleteScheduledActionOutput) {
+func (c *AutoScaling) DeleteScheduledActionRequest(input *DeleteScheduledActionInput) DeleteScheduledActionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteScheduledAction,
 		HTTPMethod: "POST",
@@ -1162,78 +719,44 @@ func (c *AutoScaling) DeleteScheduledActionRequest(input *DeleteScheduledActionI
 		input = &DeleteScheduledActionInput{}
 	}
 
-	output = &DeleteScheduledActionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteScheduledActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteScheduledAction API operation for Auto Scaling.
-//
-// Deletes the specified scheduled action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteScheduledAction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledAction
-func (c *AutoScaling) DeleteScheduledAction(input *DeleteScheduledActionInput) (*DeleteScheduledActionOutput, error) {
-	req, out := c.DeleteScheduledActionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteScheduledActionWithContext is the same as DeleteScheduledAction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteScheduledAction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteScheduledActionWithContext(ctx aws.Context, input *DeleteScheduledActionInput, opts ...aws.Option) (*DeleteScheduledActionOutput, error) {
-	req, out := c.DeleteScheduledActionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteScheduledActionRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified tags.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTags
-func (c *AutoScaling) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+func (c *AutoScaling) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -1244,81 +767,48 @@ func (c *AutoScaling) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Reques
 		input = &DeleteTagsInput{}
 	}
 
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteTags API operation for Auto Scaling.
-//
-// Deletes the specified tags.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTags
-func (c *AutoScaling) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountLimitsRequest is a API request type for the DescribeAccountLimits API operation.
+type DescribeAccountLimitsRequest struct {
+	*aws.Request
+	Input *DescribeAccountLimitsInput
+}
+
+// Send marshals and sends the DescribeAccountLimits API request.
+func (r *DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountLimitsOutput), nil
+}
+
+// DescribeAccountLimitsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the current Auto Scaling resource limits for your AWS account.
 //
-// See DescribeAccountLimits for more information on using the DescribeAccountLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about requesting an increase in these limits, see AWS Service
+// Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+// in the Amazon Web Services General Reference.
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
-//    req, resp := client.DescribeAccountLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimits
-func (c *AutoScaling) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+func (c *AutoScaling) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) DescribeAccountLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
@@ -1329,80 +819,42 @@ func (c *AutoScaling) DescribeAccountLimitsRequest(input *DescribeAccountLimitsI
 		input = &DescribeAccountLimitsInput{}
 	}
 
-	output = &DescribeAccountLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountLimits API operation for Auto Scaling.
-//
-// Describes the current Auto Scaling resource limits for your AWS account.
-//
-// For information about requesting an increase in these limits, see AWS Service
-// Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-// in the Amazon Web Services General Reference.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeAccountLimits for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimits
-func (c *AutoScaling) DescribeAccountLimits(input *DescribeAccountLimitsInput) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountLimitsWithContext is the same as DescribeAccountLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
-	req, out := c.DescribeAccountLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountLimitsOutput{})
+	return DescribeAccountLimitsRequest{Request: req, Input: input}
 }
 
 const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
 
-// DescribeAdjustmentTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAdjustmentTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAdjustmentTypesRequest is a API request type for the DescribeAdjustmentTypes API operation.
+type DescribeAdjustmentTypesRequest struct {
+	*aws.Request
+	Input *DescribeAdjustmentTypesInput
+}
+
+// Send marshals and sends the DescribeAdjustmentTypes API request.
+func (r *DescribeAdjustmentTypesRequest) Send() (*DescribeAdjustmentTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAdjustmentTypesOutput), nil
+}
+
+// DescribeAdjustmentTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAdjustmentTypes for more information on using the DescribeAdjustmentTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the policy adjustment types for use with PutScalingPolicy.
 //
 //    // Example sending a request using the DescribeAdjustmentTypesRequest method.
-//    req, resp := client.DescribeAdjustmentTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAdjustmentTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypes
-func (c *AutoScaling) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesInput) (req *aws.Request, output *DescribeAdjustmentTypesOutput) {
+func (c *AutoScaling) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAdjustmentTypes,
 		HTTPMethod: "POST",
@@ -1413,76 +865,42 @@ func (c *AutoScaling) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTy
 		input = &DescribeAdjustmentTypesInput{}
 	}
 
-	output = &DescribeAdjustmentTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAdjustmentTypes API operation for Auto Scaling.
-//
-// Describes the policy adjustment types for use with PutScalingPolicy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeAdjustmentTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypes
-func (c *AutoScaling) DescribeAdjustmentTypes(input *DescribeAdjustmentTypesInput) (*DescribeAdjustmentTypesOutput, error) {
-	req, out := c.DescribeAdjustmentTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAdjustmentTypesWithContext is the same as DescribeAdjustmentTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAdjustmentTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAdjustmentTypesWithContext(ctx aws.Context, input *DescribeAdjustmentTypesInput, opts ...aws.Option) (*DescribeAdjustmentTypesOutput, error) {
-	req, out := c.DescribeAdjustmentTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAdjustmentTypesOutput{})
+	return DescribeAdjustmentTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeAutoScalingGroups = "DescribeAutoScalingGroups"
 
-// DescribeAutoScalingGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAutoScalingGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAutoScalingGroupsRequest is a API request type for the DescribeAutoScalingGroups API operation.
+type DescribeAutoScalingGroupsRequest struct {
+	*aws.Request
+	Input *DescribeAutoScalingGroupsInput
+}
+
+// Send marshals and sends the DescribeAutoScalingGroups API request.
+func (r *DescribeAutoScalingGroupsRequest) Send() (*DescribeAutoScalingGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAutoScalingGroupsOutput), nil
+}
+
+// DescribeAutoScalingGroupsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAutoScalingGroups for more information on using the DescribeAutoScalingGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more Auto Scaling groups.
 //
 //    // Example sending a request using the DescribeAutoScalingGroupsRequest method.
-//    req, resp := client.DescribeAutoScalingGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAutoScalingGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups
-func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGroupsInput) (req *aws.Request, output *DescribeAutoScalingGroupsOutput) {
+func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingGroups,
 		HTTPMethod: "POST",
@@ -1499,50 +917,8 @@ func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalin
 		input = &DescribeAutoScalingGroupsInput{}
 	}
 
-	output = &DescribeAutoScalingGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAutoScalingGroups API operation for Auto Scaling.
-//
-// Describes one or more Auto Scaling groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeAutoScalingGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups
-func (c *AutoScaling) DescribeAutoScalingGroups(input *DescribeAutoScalingGroupsInput) (*DescribeAutoScalingGroupsOutput, error) {
-	req, out := c.DescribeAutoScalingGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAutoScalingGroupsWithContext is the same as DescribeAutoScalingGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAutoScalingGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAutoScalingGroupsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.Option) (*DescribeAutoScalingGroupsOutput, error) {
-	req, out := c.DescribeAutoScalingGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAutoScalingGroupsOutput{})
+	return DescribeAutoScalingGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeAutoScalingGroupsPages iterates over the pages of a DescribeAutoScalingGroups operation,
@@ -1581,10 +957,10 @@ func (c *AutoScaling) DescribeAutoScalingGroupsPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAutoScalingGroupsRequest(inCpy)
+			req := c.DescribeAutoScalingGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1597,31 +973,36 @@ func (c *AutoScaling) DescribeAutoScalingGroupsPagesWithContext(ctx aws.Context,
 
 const opDescribeAutoScalingInstances = "DescribeAutoScalingInstances"
 
-// DescribeAutoScalingInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAutoScalingInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAutoScalingInstancesRequest is a API request type for the DescribeAutoScalingInstances API operation.
+type DescribeAutoScalingInstancesRequest struct {
+	*aws.Request
+	Input *DescribeAutoScalingInstancesInput
+}
+
+// Send marshals and sends the DescribeAutoScalingInstances API request.
+func (r *DescribeAutoScalingInstancesRequest) Send() (*DescribeAutoScalingInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAutoScalingInstancesOutput), nil
+}
+
+// DescribeAutoScalingInstancesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAutoScalingInstances for more information on using the DescribeAutoScalingInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more Auto Scaling instances.
 //
 //    // Example sending a request using the DescribeAutoScalingInstancesRequest method.
-//    req, resp := client.DescribeAutoScalingInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAutoScalingInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances
-func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingInstancesInput) (req *aws.Request, output *DescribeAutoScalingInstancesOutput) {
+func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingInstances,
 		HTTPMethod: "POST",
@@ -1638,50 +1019,8 @@ func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoSca
 		input = &DescribeAutoScalingInstancesInput{}
 	}
 
-	output = &DescribeAutoScalingInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAutoScalingInstances API operation for Auto Scaling.
-//
-// Describes one or more Auto Scaling instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeAutoScalingInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances
-func (c *AutoScaling) DescribeAutoScalingInstances(input *DescribeAutoScalingInstancesInput) (*DescribeAutoScalingInstancesOutput, error) {
-	req, out := c.DescribeAutoScalingInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAutoScalingInstancesWithContext is the same as DescribeAutoScalingInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAutoScalingInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAutoScalingInstancesWithContext(ctx aws.Context, input *DescribeAutoScalingInstancesInput, opts ...aws.Option) (*DescribeAutoScalingInstancesOutput, error) {
-	req, out := c.DescribeAutoScalingInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAutoScalingInstancesOutput{})
+	return DescribeAutoScalingInstancesRequest{Request: req, Input: input}
 }
 
 // DescribeAutoScalingInstancesPages iterates over the pages of a DescribeAutoScalingInstances operation,
@@ -1720,10 +1059,10 @@ func (c *AutoScaling) DescribeAutoScalingInstancesPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeAutoScalingInstancesRequest(inCpy)
+			req := c.DescribeAutoScalingInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1736,31 +1075,36 @@ func (c *AutoScaling) DescribeAutoScalingInstancesPagesWithContext(ctx aws.Conte
 
 const opDescribeAutoScalingNotificationTypes = "DescribeAutoScalingNotificationTypes"
 
-// DescribeAutoScalingNotificationTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAutoScalingNotificationTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAutoScalingNotificationTypesRequest is a API request type for the DescribeAutoScalingNotificationTypes API operation.
+type DescribeAutoScalingNotificationTypesRequest struct {
+	*aws.Request
+	Input *DescribeAutoScalingNotificationTypesInput
+}
+
+// Send marshals and sends the DescribeAutoScalingNotificationTypes API request.
+func (r *DescribeAutoScalingNotificationTypesRequest) Send() (*DescribeAutoScalingNotificationTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAutoScalingNotificationTypesOutput), nil
+}
+
+// DescribeAutoScalingNotificationTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAutoScalingNotificationTypes for more information on using the DescribeAutoScalingNotificationTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the notification types that are supported by Auto Scaling.
 //
 //    // Example sending a request using the DescribeAutoScalingNotificationTypesRequest method.
-//    req, resp := client.DescribeAutoScalingNotificationTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAutoScalingNotificationTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypes
-func (c *AutoScaling) DescribeAutoScalingNotificationTypesRequest(input *DescribeAutoScalingNotificationTypesInput) (req *aws.Request, output *DescribeAutoScalingNotificationTypesOutput) {
+func (c *AutoScaling) DescribeAutoScalingNotificationTypesRequest(input *DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAutoScalingNotificationTypes,
 		HTTPMethod: "POST",
@@ -1771,76 +1115,42 @@ func (c *AutoScaling) DescribeAutoScalingNotificationTypesRequest(input *Describ
 		input = &DescribeAutoScalingNotificationTypesInput{}
 	}
 
-	output = &DescribeAutoScalingNotificationTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAutoScalingNotificationTypes API operation for Auto Scaling.
-//
-// Describes the notification types that are supported by Auto Scaling.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeAutoScalingNotificationTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypes
-func (c *AutoScaling) DescribeAutoScalingNotificationTypes(input *DescribeAutoScalingNotificationTypesInput) (*DescribeAutoScalingNotificationTypesOutput, error) {
-	req, out := c.DescribeAutoScalingNotificationTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAutoScalingNotificationTypesWithContext is the same as DescribeAutoScalingNotificationTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAutoScalingNotificationTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAutoScalingNotificationTypesWithContext(ctx aws.Context, input *DescribeAutoScalingNotificationTypesInput, opts ...aws.Option) (*DescribeAutoScalingNotificationTypesOutput, error) {
-	req, out := c.DescribeAutoScalingNotificationTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAutoScalingNotificationTypesOutput{})
+	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeLaunchConfigurations = "DescribeLaunchConfigurations"
 
-// DescribeLaunchConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLaunchConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLaunchConfigurationsRequest is a API request type for the DescribeLaunchConfigurations API operation.
+type DescribeLaunchConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeLaunchConfigurationsInput
+}
+
+// Send marshals and sends the DescribeLaunchConfigurations API request.
+func (r *DescribeLaunchConfigurationsRequest) Send() (*DescribeLaunchConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLaunchConfigurationsOutput), nil
+}
+
+// DescribeLaunchConfigurationsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLaunchConfigurations for more information on using the DescribeLaunchConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more launch configurations.
 //
 //    // Example sending a request using the DescribeLaunchConfigurationsRequest method.
-//    req, resp := client.DescribeLaunchConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLaunchConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations
-func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfigurationsInput) (req *aws.Request, output *DescribeLaunchConfigurationsOutput) {
+func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLaunchConfigurations,
 		HTTPMethod: "POST",
@@ -1857,50 +1167,8 @@ func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchC
 		input = &DescribeLaunchConfigurationsInput{}
 	}
 
-	output = &DescribeLaunchConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLaunchConfigurations API operation for Auto Scaling.
-//
-// Describes one or more launch configurations.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeLaunchConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations
-func (c *AutoScaling) DescribeLaunchConfigurations(input *DescribeLaunchConfigurationsInput) (*DescribeLaunchConfigurationsOutput, error) {
-	req, out := c.DescribeLaunchConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLaunchConfigurationsWithContext is the same as DescribeLaunchConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLaunchConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLaunchConfigurationsWithContext(ctx aws.Context, input *DescribeLaunchConfigurationsInput, opts ...aws.Option) (*DescribeLaunchConfigurationsOutput, error) {
-	req, out := c.DescribeLaunchConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLaunchConfigurationsOutput{})
+	return DescribeLaunchConfigurationsRequest{Request: req, Input: input}
 }
 
 // DescribeLaunchConfigurationsPages iterates over the pages of a DescribeLaunchConfigurations operation,
@@ -1939,10 +1207,10 @@ func (c *AutoScaling) DescribeLaunchConfigurationsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLaunchConfigurationsRequest(inCpy)
+			req := c.DescribeLaunchConfigurationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1955,31 +1223,36 @@ func (c *AutoScaling) DescribeLaunchConfigurationsPagesWithContext(ctx aws.Conte
 
 const opDescribeLifecycleHookTypes = "DescribeLifecycleHookTypes"
 
-// DescribeLifecycleHookTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeLifecycleHookTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLifecycleHookTypesRequest is a API request type for the DescribeLifecycleHookTypes API operation.
+type DescribeLifecycleHookTypesRequest struct {
+	*aws.Request
+	Input *DescribeLifecycleHookTypesInput
+}
+
+// Send marshals and sends the DescribeLifecycleHookTypes API request.
+func (r *DescribeLifecycleHookTypesRequest) Send() (*DescribeLifecycleHookTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLifecycleHookTypesOutput), nil
+}
+
+// DescribeLifecycleHookTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLifecycleHookTypes for more information on using the DescribeLifecycleHookTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the available types of lifecycle hooks.
 //
 //    // Example sending a request using the DescribeLifecycleHookTypesRequest method.
-//    req, resp := client.DescribeLifecycleHookTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLifecycleHookTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypes
-func (c *AutoScaling) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookTypesInput) (req *aws.Request, output *DescribeLifecycleHookTypesOutput) {
+func (c *AutoScaling) DescribeLifecycleHookTypesRequest(input *DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLifecycleHookTypes,
 		HTTPMethod: "POST",
@@ -1990,76 +1263,42 @@ func (c *AutoScaling) DescribeLifecycleHookTypesRequest(input *DescribeLifecycle
 		input = &DescribeLifecycleHookTypesInput{}
 	}
 
-	output = &DescribeLifecycleHookTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLifecycleHookTypes API operation for Auto Scaling.
-//
-// Describes the available types of lifecycle hooks.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeLifecycleHookTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypes
-func (c *AutoScaling) DescribeLifecycleHookTypes(input *DescribeLifecycleHookTypesInput) (*DescribeLifecycleHookTypesOutput, error) {
-	req, out := c.DescribeLifecycleHookTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLifecycleHookTypesWithContext is the same as DescribeLifecycleHookTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLifecycleHookTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLifecycleHookTypesWithContext(ctx aws.Context, input *DescribeLifecycleHookTypesInput, opts ...aws.Option) (*DescribeLifecycleHookTypesOutput, error) {
-	req, out := c.DescribeLifecycleHookTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLifecycleHookTypesOutput{})
+	return DescribeLifecycleHookTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeLifecycleHooks = "DescribeLifecycleHooks"
 
-// DescribeLifecycleHooksRequest generates a "aws.Request" representing the
-// client's request for the DescribeLifecycleHooks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLifecycleHooksRequest is a API request type for the DescribeLifecycleHooks API operation.
+type DescribeLifecycleHooksRequest struct {
+	*aws.Request
+	Input *DescribeLifecycleHooksInput
+}
+
+// Send marshals and sends the DescribeLifecycleHooks API request.
+func (r *DescribeLifecycleHooksRequest) Send() (*DescribeLifecycleHooksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLifecycleHooksOutput), nil
+}
+
+// DescribeLifecycleHooksRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLifecycleHooks for more information on using the DescribeLifecycleHooks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the lifecycle hooks for the specified Auto Scaling group.
 //
 //    // Example sending a request using the DescribeLifecycleHooksRequest method.
-//    req, resp := client.DescribeLifecycleHooksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLifecycleHooksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooks
-func (c *AutoScaling) DescribeLifecycleHooksRequest(input *DescribeLifecycleHooksInput) (req *aws.Request, output *DescribeLifecycleHooksOutput) {
+func (c *AutoScaling) DescribeLifecycleHooksRequest(input *DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLifecycleHooks,
 		HTTPMethod: "POST",
@@ -2070,76 +1309,42 @@ func (c *AutoScaling) DescribeLifecycleHooksRequest(input *DescribeLifecycleHook
 		input = &DescribeLifecycleHooksInput{}
 	}
 
-	output = &DescribeLifecycleHooksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLifecycleHooks API operation for Auto Scaling.
-//
-// Describes the lifecycle hooks for the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeLifecycleHooks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooks
-func (c *AutoScaling) DescribeLifecycleHooks(input *DescribeLifecycleHooksInput) (*DescribeLifecycleHooksOutput, error) {
-	req, out := c.DescribeLifecycleHooksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLifecycleHooksWithContext is the same as DescribeLifecycleHooks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLifecycleHooks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLifecycleHooksWithContext(ctx aws.Context, input *DescribeLifecycleHooksInput, opts ...aws.Option) (*DescribeLifecycleHooksOutput, error) {
-	req, out := c.DescribeLifecycleHooksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLifecycleHooksOutput{})
+	return DescribeLifecycleHooksRequest{Request: req, Input: input}
 }
 
 const opDescribeLoadBalancerTargetGroups = "DescribeLoadBalancerTargetGroups"
 
-// DescribeLoadBalancerTargetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancerTargetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLoadBalancerTargetGroupsRequest is a API request type for the DescribeLoadBalancerTargetGroups API operation.
+type DescribeLoadBalancerTargetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancerTargetGroupsInput
+}
+
+// Send marshals and sends the DescribeLoadBalancerTargetGroups API request.
+func (r *DescribeLoadBalancerTargetGroupsRequest) Send() (*DescribeLoadBalancerTargetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancerTargetGroupsOutput), nil
+}
+
+// DescribeLoadBalancerTargetGroupsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBalancerTargetGroups for more information on using the DescribeLoadBalancerTargetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the target groups for the specified Auto Scaling group.
 //
 //    // Example sending a request using the DescribeLoadBalancerTargetGroupsRequest method.
-//    req, resp := client.DescribeLoadBalancerTargetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLoadBalancerTargetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroups
-func (c *AutoScaling) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBalancerTargetGroupsInput) (req *aws.Request, output *DescribeLoadBalancerTargetGroupsOutput) {
+func (c *AutoScaling) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
@@ -2150,76 +1355,45 @@ func (c *AutoScaling) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoa
 		input = &DescribeLoadBalancerTargetGroupsInput{}
 	}
 
-	output = &DescribeLoadBalancerTargetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLoadBalancerTargetGroups API operation for Auto Scaling.
-//
-// Describes the target groups for the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeLoadBalancerTargetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroups
-func (c *AutoScaling) DescribeLoadBalancerTargetGroups(input *DescribeLoadBalancerTargetGroupsInput) (*DescribeLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.DescribeLoadBalancerTargetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoadBalancerTargetGroupsWithContext is the same as DescribeLoadBalancerTargetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancerTargetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLoadBalancerTargetGroupsWithContext(ctx aws.Context, input *DescribeLoadBalancerTargetGroupsInput, opts ...aws.Option) (*DescribeLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.DescribeLoadBalancerTargetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLoadBalancerTargetGroupsOutput{})
+	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
-// DescribeLoadBalancersRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBalancers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLoadBalancersRequest is a API request type for the DescribeLoadBalancers API operation.
+type DescribeLoadBalancersRequest struct {
+	*aws.Request
+	Input *DescribeLoadBalancersInput
+}
+
+// Send marshals and sends the DescribeLoadBalancers API request.
+func (r *DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBalancersOutput), nil
+}
+
+// DescribeLoadBalancersRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the load balancers for the specified Auto Scaling group.
 //
-// See DescribeLoadBalancers for more information on using the DescribeLoadBalancers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note that this operation describes only Classic Load Balancers. If you have
+// Application Load Balancers, use DescribeLoadBalancerTargetGroups instead.
 //
 //    // Example sending a request using the DescribeLoadBalancersRequest method.
-//    req, resp := client.DescribeLoadBalancersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLoadBalancersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancers
-func (c *AutoScaling) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *aws.Request, output *DescribeLoadBalancersOutput) {
+func (c *AutoScaling) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) DescribeLoadBalancersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
@@ -2230,79 +1404,45 @@ func (c *AutoScaling) DescribeLoadBalancersRequest(input *DescribeLoadBalancersI
 		input = &DescribeLoadBalancersInput{}
 	}
 
-	output = &DescribeLoadBalancersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLoadBalancers API operation for Auto Scaling.
-//
-// Describes the load balancers for the specified Auto Scaling group.
-//
-// Note that this operation describes only Classic Load Balancers. If you have
-// Application Load Balancers, use DescribeLoadBalancerTargetGroups instead.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeLoadBalancers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancers
-func (c *AutoScaling) DescribeLoadBalancers(input *DescribeLoadBalancersInput) (*DescribeLoadBalancersOutput, error) {
-	req, out := c.DescribeLoadBalancersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLoadBalancersWithContext is the same as DescribeLoadBalancers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBalancers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.Option) (*DescribeLoadBalancersOutput, error) {
-	req, out := c.DescribeLoadBalancersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLoadBalancersOutput{})
+	return DescribeLoadBalancersRequest{Request: req, Input: input}
 }
 
 const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
 
-// DescribeMetricCollectionTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeMetricCollectionTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMetricCollectionTypesRequest is a API request type for the DescribeMetricCollectionTypes API operation.
+type DescribeMetricCollectionTypesRequest struct {
+	*aws.Request
+	Input *DescribeMetricCollectionTypesInput
+}
+
+// Send marshals and sends the DescribeMetricCollectionTypes API request.
+func (r *DescribeMetricCollectionTypesRequest) Send() (*DescribeMetricCollectionTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMetricCollectionTypesOutput), nil
+}
+
+// DescribeMetricCollectionTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the available CloudWatch metrics for Auto Scaling.
 //
-// See DescribeMetricCollectionTypes for more information on using the DescribeMetricCollectionTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Note that the GroupStandbyInstances metric is not returned by default. You
+// must explicitly request this metric when calling EnableMetricsCollection.
 //
 //    // Example sending a request using the DescribeMetricCollectionTypesRequest method.
-//    req, resp := client.DescribeMetricCollectionTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMetricCollectionTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypes
-func (c *AutoScaling) DescribeMetricCollectionTypesRequest(input *DescribeMetricCollectionTypesInput) (req *aws.Request, output *DescribeMetricCollectionTypesOutput) {
+func (c *AutoScaling) DescribeMetricCollectionTypesRequest(input *DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMetricCollectionTypes,
 		HTTPMethod: "POST",
@@ -2313,79 +1453,43 @@ func (c *AutoScaling) DescribeMetricCollectionTypesRequest(input *DescribeMetric
 		input = &DescribeMetricCollectionTypesInput{}
 	}
 
-	output = &DescribeMetricCollectionTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMetricCollectionTypes API operation for Auto Scaling.
-//
-// Describes the available CloudWatch metrics for Auto Scaling.
-//
-// Note that the GroupStandbyInstances metric is not returned by default. You
-// must explicitly request this metric when calling EnableMetricsCollection.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeMetricCollectionTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypes
-func (c *AutoScaling) DescribeMetricCollectionTypes(input *DescribeMetricCollectionTypesInput) (*DescribeMetricCollectionTypesOutput, error) {
-	req, out := c.DescribeMetricCollectionTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMetricCollectionTypesWithContext is the same as DescribeMetricCollectionTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMetricCollectionTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeMetricCollectionTypesWithContext(ctx aws.Context, input *DescribeMetricCollectionTypesInput, opts ...aws.Option) (*DescribeMetricCollectionTypesOutput, error) {
-	req, out := c.DescribeMetricCollectionTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMetricCollectionTypesOutput{})
+	return DescribeMetricCollectionTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeNotificationConfigurations = "DescribeNotificationConfigurations"
 
-// DescribeNotificationConfigurationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeNotificationConfigurations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeNotificationConfigurationsRequest is a API request type for the DescribeNotificationConfigurations API operation.
+type DescribeNotificationConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeNotificationConfigurationsInput
+}
+
+// Send marshals and sends the DescribeNotificationConfigurations API request.
+func (r *DescribeNotificationConfigurationsRequest) Send() (*DescribeNotificationConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeNotificationConfigurationsOutput), nil
+}
+
+// DescribeNotificationConfigurationsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeNotificationConfigurations for more information on using the DescribeNotificationConfigurations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the notification actions associated with the specified Auto Scaling
+// group.
 //
 //    // Example sending a request using the DescribeNotificationConfigurationsRequest method.
-//    req, resp := client.DescribeNotificationConfigurationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeNotificationConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurations
-func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeNotificationConfigurationsInput) (req *aws.Request, output *DescribeNotificationConfigurationsOutput) {
+func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNotificationConfigurations,
 		HTTPMethod: "POST",
@@ -2402,51 +1506,8 @@ func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeN
 		input = &DescribeNotificationConfigurationsInput{}
 	}
 
-	output = &DescribeNotificationConfigurationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeNotificationConfigurations API operation for Auto Scaling.
-//
-// Describes the notification actions associated with the specified Auto Scaling
-// group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeNotificationConfigurations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurations
-func (c *AutoScaling) DescribeNotificationConfigurations(input *DescribeNotificationConfigurationsInput) (*DescribeNotificationConfigurationsOutput, error) {
-	req, out := c.DescribeNotificationConfigurationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeNotificationConfigurationsWithContext is the same as DescribeNotificationConfigurations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeNotificationConfigurations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeNotificationConfigurationsWithContext(ctx aws.Context, input *DescribeNotificationConfigurationsInput, opts ...aws.Option) (*DescribeNotificationConfigurationsOutput, error) {
-	req, out := c.DescribeNotificationConfigurationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeNotificationConfigurationsOutput{})
+	return DescribeNotificationConfigurationsRequest{Request: req, Input: input}
 }
 
 // DescribeNotificationConfigurationsPages iterates over the pages of a DescribeNotificationConfigurations operation,
@@ -2485,10 +1546,10 @@ func (c *AutoScaling) DescribeNotificationConfigurationsPagesWithContext(ctx aws
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeNotificationConfigurationsRequest(inCpy)
+			req := c.DescribeNotificationConfigurationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2501,31 +1562,36 @@ func (c *AutoScaling) DescribeNotificationConfigurationsPagesWithContext(ctx aws
 
 const opDescribePolicies = "DescribePolicies"
 
-// DescribePoliciesRequest generates a "aws.Request" representing the
-// client's request for the DescribePolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePoliciesRequest is a API request type for the DescribePolicies API operation.
+type DescribePoliciesRequest struct {
+	*aws.Request
+	Input *DescribePoliciesInput
+}
+
+// Send marshals and sends the DescribePolicies API request.
+func (r *DescribePoliciesRequest) Send() (*DescribePoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePoliciesOutput), nil
+}
+
+// DescribePoliciesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePolicies for more information on using the DescribePolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the policies for the specified Auto Scaling group.
 //
 //    // Example sending a request using the DescribePoliciesRequest method.
-//    req, resp := client.DescribePoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies
-func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) (req *aws.Request, output *DescribePoliciesOutput) {
+func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) DescribePoliciesRequest {
 	op := &aws.Operation{
 		Name:       opDescribePolicies,
 		HTTPMethod: "POST",
@@ -2542,50 +1608,8 @@ func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) (req
 		input = &DescribePoliciesInput{}
 	}
 
-	output = &DescribePoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePolicies API operation for Auto Scaling.
-//
-// Describes the policies for the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribePolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies
-func (c *AutoScaling) DescribePolicies(input *DescribePoliciesInput) (*DescribePoliciesOutput, error) {
-	req, out := c.DescribePoliciesRequest(input)
-	return out, req.Send()
-}
-
-// DescribePoliciesWithContext is the same as DescribePolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribePoliciesWithContext(ctx aws.Context, input *DescribePoliciesInput, opts ...aws.Option) (*DescribePoliciesOutput, error) {
-	req, out := c.DescribePoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePoliciesOutput{})
+	return DescribePoliciesRequest{Request: req, Input: input}
 }
 
 // DescribePoliciesPages iterates over the pages of a DescribePolicies operation,
@@ -2624,10 +1648,10 @@ func (c *AutoScaling) DescribePoliciesPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribePoliciesRequest(inCpy)
+			req := c.DescribePoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2640,31 +1664,36 @@ func (c *AutoScaling) DescribePoliciesPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
 
-// DescribeScalingActivitiesRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingActivities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalingActivitiesRequest is a API request type for the DescribeScalingActivities API operation.
+type DescribeScalingActivitiesRequest struct {
+	*aws.Request
+	Input *DescribeScalingActivitiesInput
+}
+
+// Send marshals and sends the DescribeScalingActivities API request.
+func (r *DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingActivitiesOutput), nil
+}
+
+// DescribeScalingActivitiesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeScalingActivities for more information on using the DescribeScalingActivities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more scaling activities for the specified Auto Scaling group.
 //
 //    // Example sending a request using the DescribeScalingActivitiesRequest method.
-//    req, resp := client.DescribeScalingActivitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalingActivitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivities
-func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) (req *aws.Request, output *DescribeScalingActivitiesOutput) {
+func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingActivities,
 		HTTPMethod: "POST",
@@ -2681,50 +1710,8 @@ func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingAct
 		input = &DescribeScalingActivitiesInput{}
 	}
 
-	output = &DescribeScalingActivitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalingActivities API operation for Auto Scaling.
-//
-// Describes one or more scaling activities for the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeScalingActivities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivities
-func (c *AutoScaling) DescribeScalingActivities(input *DescribeScalingActivitiesInput) (*DescribeScalingActivitiesOutput, error) {
-	req, out := c.DescribeScalingActivitiesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingActivitiesWithContext is the same as DescribeScalingActivities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingActivities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeScalingActivitiesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, opts ...aws.Option) (*DescribeScalingActivitiesOutput, error) {
-	req, out := c.DescribeScalingActivitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalingActivitiesOutput{})
+	return DescribeScalingActivitiesRequest{Request: req, Input: input}
 }
 
 // DescribeScalingActivitiesPages iterates over the pages of a DescribeScalingActivities operation,
@@ -2763,10 +1750,10 @@ func (c *AutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeScalingActivitiesRequest(inCpy)
+			req := c.DescribeScalingActivitiesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2779,31 +1766,36 @@ func (c *AutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context,
 
 const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
 
-// DescribeScalingProcessTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeScalingProcessTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScalingProcessTypesRequest is a API request type for the DescribeScalingProcessTypes API operation.
+type DescribeScalingProcessTypesRequest struct {
+	*aws.Request
+	Input *DescribeScalingProcessTypesInput
+}
+
+// Send marshals and sends the DescribeScalingProcessTypes API request.
+func (r *DescribeScalingProcessTypesRequest) Send() (*DescribeScalingProcessTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScalingProcessTypesOutput), nil
+}
+
+// DescribeScalingProcessTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeScalingProcessTypes for more information on using the DescribeScalingProcessTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the scaling process types for use with ResumeProcesses and SuspendProcesses.
 //
 //    // Example sending a request using the DescribeScalingProcessTypesRequest method.
-//    req, resp := client.DescribeScalingProcessTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScalingProcessTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingProcessTypes
-func (c *AutoScaling) DescribeScalingProcessTypesRequest(input *DescribeScalingProcessTypesInput) (req *aws.Request, output *DescribeScalingProcessTypesOutput) {
+func (c *AutoScaling) DescribeScalingProcessTypesRequest(input *DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScalingProcessTypes,
 		HTTPMethod: "POST",
@@ -2814,76 +1806,43 @@ func (c *AutoScaling) DescribeScalingProcessTypesRequest(input *DescribeScalingP
 		input = &DescribeScalingProcessTypesInput{}
 	}
 
-	output = &DescribeScalingProcessTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScalingProcessTypes API operation for Auto Scaling.
-//
-// Describes the scaling process types for use with ResumeProcesses and SuspendProcesses.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeScalingProcessTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingProcessTypes
-func (c *AutoScaling) DescribeScalingProcessTypes(input *DescribeScalingProcessTypesInput) (*DescribeScalingProcessTypesOutput, error) {
-	req, out := c.DescribeScalingProcessTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScalingProcessTypesWithContext is the same as DescribeScalingProcessTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScalingProcessTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeScalingProcessTypesWithContext(ctx aws.Context, input *DescribeScalingProcessTypesInput, opts ...aws.Option) (*DescribeScalingProcessTypesOutput, error) {
-	req, out := c.DescribeScalingProcessTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScalingProcessTypesOutput{})
+	return DescribeScalingProcessTypesRequest{Request: req, Input: input}
 }
 
 const opDescribeScheduledActions = "DescribeScheduledActions"
 
-// DescribeScheduledActionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeScheduledActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeScheduledActionsRequest is a API request type for the DescribeScheduledActions API operation.
+type DescribeScheduledActionsRequest struct {
+	*aws.Request
+	Input *DescribeScheduledActionsInput
+}
+
+// Send marshals and sends the DescribeScheduledActions API request.
+func (r *DescribeScheduledActionsRequest) Send() (*DescribeScheduledActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeScheduledActionsOutput), nil
+}
+
+// DescribeScheduledActionsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeScheduledActions for more information on using the DescribeScheduledActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the actions scheduled for your Auto Scaling group that haven't
+// run. To describe the actions that have already run, use DescribeScalingActivities.
 //
 //    // Example sending a request using the DescribeScheduledActionsRequest method.
-//    req, resp := client.DescribeScheduledActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeScheduledActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActions
-func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledActionsInput) (req *aws.Request, output *DescribeScheduledActionsOutput) {
+func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledActionsInput) DescribeScheduledActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeScheduledActions,
 		HTTPMethod: "POST",
@@ -2900,51 +1859,8 @@ func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledAc
 		input = &DescribeScheduledActionsInput{}
 	}
 
-	output = &DescribeScheduledActionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeScheduledActions API operation for Auto Scaling.
-//
-// Describes the actions scheduled for your Auto Scaling group that haven't
-// run. To describe the actions that have already run, use DescribeScalingActivities.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeScheduledActions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActions
-func (c *AutoScaling) DescribeScheduledActions(input *DescribeScheduledActionsInput) (*DescribeScheduledActionsOutput, error) {
-	req, out := c.DescribeScheduledActionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeScheduledActionsWithContext is the same as DescribeScheduledActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeScheduledActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeScheduledActionsWithContext(ctx aws.Context, input *DescribeScheduledActionsInput, opts ...aws.Option) (*DescribeScheduledActionsOutput, error) {
-	req, out := c.DescribeScheduledActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeScheduledActionsOutput{})
+	return DescribeScheduledActionsRequest{Request: req, Input: input}
 }
 
 // DescribeScheduledActionsPages iterates over the pages of a DescribeScheduledActions operation,
@@ -2983,10 +1899,10 @@ func (c *AutoScaling) DescribeScheduledActionsPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeScheduledActionsRequest(inCpy)
+			req := c.DescribeScheduledActionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2999,31 +1915,45 @@ func (c *AutoScaling) DescribeScheduledActionsPagesWithContext(ctx aws.Context, 
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the specified tags.
 //
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
+// You can use filters to limit the results. For example, you can query for
+// the tags for a specific Auto Scaling group. You can specify multiple values
+// for a filter. A tag must match at least one of the specified values for it
+// to be included in the results.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can also specify multiple filters. The result includes information for
+// a particular tag only if it matches all the filters. If there's no match,
+// no special message is returned.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTags
-func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -3040,59 +1970,8 @@ func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Re
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for Auto Scaling.
-//
-// Describes the specified tags.
-//
-// You can use filters to limit the results. For example, you can query for
-// the tags for a specific Auto Scaling group. You can specify multiple values
-// for a filter. A tag must match at least one of the specified values for it
-// to be included in the results.
-//
-// You can also specify multiple filters. The result includes information for
-// a particular tag only if it matches all the filters. If there's no match,
-// no special message is returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextToken "InvalidNextToken"
-//   The NextToken value is not valid.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTags
-func (c *AutoScaling) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 // DescribeTagsPages iterates over the pages of a DescribeTags operation,
@@ -3131,10 +2010,10 @@ func (c *AutoScaling) DescribeTagsPagesWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTagsRequest(inCpy)
+			req := c.DescribeTagsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3147,31 +2026,36 @@ func (c *AutoScaling) DescribeTagsPagesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeTerminationPolicyTypes = "DescribeTerminationPolicyTypes"
 
-// DescribeTerminationPolicyTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeTerminationPolicyTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTerminationPolicyTypesRequest is a API request type for the DescribeTerminationPolicyTypes API operation.
+type DescribeTerminationPolicyTypesRequest struct {
+	*aws.Request
+	Input *DescribeTerminationPolicyTypesInput
+}
+
+// Send marshals and sends the DescribeTerminationPolicyTypes API request.
+func (r *DescribeTerminationPolicyTypesRequest) Send() (*DescribeTerminationPolicyTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTerminationPolicyTypesOutput), nil
+}
+
+// DescribeTerminationPolicyTypesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTerminationPolicyTypes for more information on using the DescribeTerminationPolicyTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the termination policies supported by Auto Scaling.
 //
 //    // Example sending a request using the DescribeTerminationPolicyTypesRequest method.
-//    req, resp := client.DescribeTerminationPolicyTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTerminationPolicyTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypes
-func (c *AutoScaling) DescribeTerminationPolicyTypesRequest(input *DescribeTerminationPolicyTypesInput) (req *aws.Request, output *DescribeTerminationPolicyTypesOutput) {
+func (c *AutoScaling) DescribeTerminationPolicyTypesRequest(input *DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTerminationPolicyTypes,
 		HTTPMethod: "POST",
@@ -3182,92 +2066,30 @@ func (c *AutoScaling) DescribeTerminationPolicyTypesRequest(input *DescribeTermi
 		input = &DescribeTerminationPolicyTypesInput{}
 	}
 
-	output = &DescribeTerminationPolicyTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTerminationPolicyTypes API operation for Auto Scaling.
-//
-// Describes the termination policies supported by Auto Scaling.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DescribeTerminationPolicyTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypes
-func (c *AutoScaling) DescribeTerminationPolicyTypes(input *DescribeTerminationPolicyTypesInput) (*DescribeTerminationPolicyTypesOutput, error) {
-	req, out := c.DescribeTerminationPolicyTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTerminationPolicyTypesWithContext is the same as DescribeTerminationPolicyTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTerminationPolicyTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeTerminationPolicyTypesWithContext(ctx aws.Context, input *DescribeTerminationPolicyTypesInput, opts ...aws.Option) (*DescribeTerminationPolicyTypesOutput, error) {
-	req, out := c.DescribeTerminationPolicyTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTerminationPolicyTypesOutput{})
+	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input}
 }
 
 const opDetachInstances = "DetachInstances"
 
-// DetachInstancesRequest generates a "aws.Request" representing the
-// client's request for the DetachInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachInstances for more information on using the DetachInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DetachInstancesRequest method.
-//    req, resp := client.DetachInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstances
-func (c *AutoScaling) DetachInstancesRequest(input *DetachInstancesInput) (req *aws.Request, output *DetachInstancesOutput) {
-	op := &aws.Operation{
-		Name:       opDetachInstances,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DetachInstancesInput{}
-	}
-
-	output = &DetachInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DetachInstancesRequest is a API request type for the DetachInstances API operation.
+type DetachInstancesRequest struct {
+	*aws.Request
+	Input *DetachInstancesInput
 }
 
-// DetachInstances API operation for Auto Scaling.
+// Send marshals and sends the DetachInstances API request.
+func (r *DetachInstancesRequest) Send() (*DetachInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachInstancesOutput), nil
+}
+
+// DetachInstancesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Removes one or more instances from the specified Auto Scaling group.
 //
@@ -3286,67 +2108,61 @@ func (c *AutoScaling) DetachInstancesRequest(input *DetachInstancesInput) (req *
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DetachInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the DetachInstancesRequest method.
+//    req := client.DetachInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstances
-func (c *AutoScaling) DetachInstances(input *DetachInstancesInput) (*DetachInstancesOutput, error) {
-	req, out := c.DetachInstancesRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) DetachInstancesRequest(input *DetachInstancesInput) DetachInstancesRequest {
+	op := &aws.Operation{
+		Name:       opDetachInstances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DetachInstancesWithContext is the same as DetachInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DetachInstancesWithContext(ctx aws.Context, input *DetachInstancesInput, opts ...aws.Option) (*DetachInstancesOutput, error) {
-	req, out := c.DetachInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DetachInstancesInput{}
+	}
+
+	req := c.newRequest(op, input, &DetachInstancesOutput{})
+	return DetachInstancesRequest{Request: req, Input: input}
 }
 
 const opDetachLoadBalancerTargetGroups = "DetachLoadBalancerTargetGroups"
 
-// DetachLoadBalancerTargetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DetachLoadBalancerTargetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachLoadBalancerTargetGroupsRequest is a API request type for the DetachLoadBalancerTargetGroups API operation.
+type DetachLoadBalancerTargetGroupsRequest struct {
+	*aws.Request
+	Input *DetachLoadBalancerTargetGroupsInput
+}
+
+// Send marshals and sends the DetachLoadBalancerTargetGroups API request.
+func (r *DetachLoadBalancerTargetGroupsRequest) Send() (*DetachLoadBalancerTargetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachLoadBalancerTargetGroupsOutput), nil
+}
+
+// DetachLoadBalancerTargetGroupsRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachLoadBalancerTargetGroups for more information on using the DetachLoadBalancerTargetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches one or more target groups from the specified Auto Scaling group.
 //
 //    // Example sending a request using the DetachLoadBalancerTargetGroupsRequest method.
-//    req, resp := client.DetachLoadBalancerTargetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachLoadBalancerTargetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroups
-func (c *AutoScaling) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancerTargetGroupsInput) (req *aws.Request, output *DetachLoadBalancerTargetGroupsOutput) {
+func (c *AutoScaling) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDetachLoadBalancerTargetGroups,
 		HTTPMethod: "POST",
@@ -3357,92 +2173,30 @@ func (c *AutoScaling) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBal
 		input = &DetachLoadBalancerTargetGroupsInput{}
 	}
 
-	output = &DetachLoadBalancerTargetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachLoadBalancerTargetGroups API operation for Auto Scaling.
-//
-// Detaches one or more target groups from the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DetachLoadBalancerTargetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroups
-func (c *AutoScaling) DetachLoadBalancerTargetGroups(input *DetachLoadBalancerTargetGroupsInput) (*DetachLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.DetachLoadBalancerTargetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DetachLoadBalancerTargetGroupsWithContext is the same as DetachLoadBalancerTargetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachLoadBalancerTargetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DetachLoadBalancerTargetGroupsWithContext(ctx aws.Context, input *DetachLoadBalancerTargetGroupsInput, opts ...aws.Option) (*DetachLoadBalancerTargetGroupsOutput, error) {
-	req, out := c.DetachLoadBalancerTargetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachLoadBalancerTargetGroupsOutput{})
+	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
 }
 
 const opDetachLoadBalancers = "DetachLoadBalancers"
 
-// DetachLoadBalancersRequest generates a "aws.Request" representing the
-// client's request for the DetachLoadBalancers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachLoadBalancers for more information on using the DetachLoadBalancers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DetachLoadBalancersRequest method.
-//    req, resp := client.DetachLoadBalancersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancers
-func (c *AutoScaling) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) (req *aws.Request, output *DetachLoadBalancersOutput) {
-	op := &aws.Operation{
-		Name:       opDetachLoadBalancers,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DetachLoadBalancersInput{}
-	}
-
-	output = &DetachLoadBalancersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DetachLoadBalancersRequest is a API request type for the DetachLoadBalancers API operation.
+type DetachLoadBalancersRequest struct {
+	*aws.Request
+	Input *DetachLoadBalancersInput
 }
 
-// DetachLoadBalancers API operation for Auto Scaling.
+// Send marshals and sends the DetachLoadBalancers API request.
+func (r *DetachLoadBalancersRequest) Send() (*DetachLoadBalancersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachLoadBalancersOutput), nil
+}
+
+// DetachLoadBalancersRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Detaches one or more Classic Load Balancers from the specified Auto Scaling
 // group.
@@ -3455,67 +2209,61 @@ func (c *AutoScaling) DetachLoadBalancersRequest(input *DetachLoadBalancersInput
 // can no longer describe the load balancer using DescribeLoadBalancers. Note
 // that the instances remain running.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DetachLoadBalancers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the DetachLoadBalancersRequest method.
+//    req := client.DetachLoadBalancersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancers
-func (c *AutoScaling) DetachLoadBalancers(input *DetachLoadBalancersInput) (*DetachLoadBalancersOutput, error) {
-	req, out := c.DetachLoadBalancersRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) DetachLoadBalancersRequest(input *DetachLoadBalancersInput) DetachLoadBalancersRequest {
+	op := &aws.Operation{
+		Name:       opDetachLoadBalancers,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DetachLoadBalancersWithContext is the same as DetachLoadBalancers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachLoadBalancers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DetachLoadBalancersWithContext(ctx aws.Context, input *DetachLoadBalancersInput, opts ...aws.Option) (*DetachLoadBalancersOutput, error) {
-	req, out := c.DetachLoadBalancersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DetachLoadBalancersInput{}
+	}
+
+	req := c.newRequest(op, input, &DetachLoadBalancersOutput{})
+	return DetachLoadBalancersRequest{Request: req, Input: input}
 }
 
 const opDisableMetricsCollection = "DisableMetricsCollection"
 
-// DisableMetricsCollectionRequest generates a "aws.Request" representing the
-// client's request for the DisableMetricsCollection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableMetricsCollectionRequest is a API request type for the DisableMetricsCollection API operation.
+type DisableMetricsCollectionRequest struct {
+	*aws.Request
+	Input *DisableMetricsCollectionInput
+}
+
+// Send marshals and sends the DisableMetricsCollection API request.
+func (r *DisableMetricsCollectionRequest) Send() (*DisableMetricsCollectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableMetricsCollectionOutput), nil
+}
+
+// DisableMetricsCollectionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableMetricsCollection for more information on using the DisableMetricsCollection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disables group metrics for the specified Auto Scaling group.
 //
 //    // Example sending a request using the DisableMetricsCollectionRequest method.
-//    req, resp := client.DisableMetricsCollectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableMetricsCollectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollection
-func (c *AutoScaling) DisableMetricsCollectionRequest(input *DisableMetricsCollectionInput) (req *aws.Request, output *DisableMetricsCollectionOutput) {
+func (c *AutoScaling) DisableMetricsCollectionRequest(input *DisableMetricsCollectionInput) DisableMetricsCollectionRequest {
 	op := &aws.Operation{
 		Name:       opDisableMetricsCollection,
 		HTTPMethod: "POST",
@@ -3526,78 +2274,46 @@ func (c *AutoScaling) DisableMetricsCollectionRequest(input *DisableMetricsColle
 		input = &DisableMetricsCollectionInput{}
 	}
 
-	output = &DisableMetricsCollectionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DisableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DisableMetricsCollection API operation for Auto Scaling.
-//
-// Disables group metrics for the specified Auto Scaling group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation DisableMetricsCollection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollection
-func (c *AutoScaling) DisableMetricsCollection(input *DisableMetricsCollectionInput) (*DisableMetricsCollectionOutput, error) {
-	req, out := c.DisableMetricsCollectionRequest(input)
-	return out, req.Send()
-}
-
-// DisableMetricsCollectionWithContext is the same as DisableMetricsCollection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableMetricsCollection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DisableMetricsCollectionWithContext(ctx aws.Context, input *DisableMetricsCollectionInput, opts ...aws.Option) (*DisableMetricsCollectionOutput, error) {
-	req, out := c.DisableMetricsCollectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DisableMetricsCollectionRequest{Request: req, Input: input}
 }
 
 const opEnableMetricsCollection = "EnableMetricsCollection"
 
-// EnableMetricsCollectionRequest generates a "aws.Request" representing the
-// client's request for the EnableMetricsCollection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableMetricsCollectionRequest is a API request type for the EnableMetricsCollection API operation.
+type EnableMetricsCollectionRequest struct {
+	*aws.Request
+	Input *EnableMetricsCollectionInput
+}
+
+// Send marshals and sends the EnableMetricsCollection API request.
+func (r *EnableMetricsCollectionRequest) Send() (*EnableMetricsCollectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableMetricsCollectionOutput), nil
+}
+
+// EnableMetricsCollectionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableMetricsCollection for more information on using the EnableMetricsCollection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables group metrics for the specified Auto Scaling group. For more information,
+// see Monitoring Your Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the EnableMetricsCollectionRequest method.
-//    req, resp := client.EnableMetricsCollectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableMetricsCollectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollection
-func (c *AutoScaling) EnableMetricsCollectionRequest(input *EnableMetricsCollectionInput) (req *aws.Request, output *EnableMetricsCollectionOutput) {
+func (c *AutoScaling) EnableMetricsCollectionRequest(input *EnableMetricsCollectionInput) EnableMetricsCollectionRequest {
 	op := &aws.Operation{
 		Name:       opEnableMetricsCollection,
 		HTTPMethod: "POST",
@@ -3608,80 +2324,48 @@ func (c *AutoScaling) EnableMetricsCollectionRequest(input *EnableMetricsCollect
 		input = &EnableMetricsCollectionInput{}
 	}
 
-	output = &EnableMetricsCollectionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &EnableMetricsCollectionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// EnableMetricsCollection API operation for Auto Scaling.
-//
-// Enables group metrics for the specified Auto Scaling group. For more information,
-// see Monitoring Your Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation EnableMetricsCollection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollection
-func (c *AutoScaling) EnableMetricsCollection(input *EnableMetricsCollectionInput) (*EnableMetricsCollectionOutput, error) {
-	req, out := c.EnableMetricsCollectionRequest(input)
-	return out, req.Send()
-}
-
-// EnableMetricsCollectionWithContext is the same as EnableMetricsCollection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableMetricsCollection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) EnableMetricsCollectionWithContext(ctx aws.Context, input *EnableMetricsCollectionInput, opts ...aws.Option) (*EnableMetricsCollectionOutput, error) {
-	req, out := c.EnableMetricsCollectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return EnableMetricsCollectionRequest{Request: req, Input: input}
 }
 
 const opEnterStandby = "EnterStandby"
 
-// EnterStandbyRequest generates a "aws.Request" representing the
-// client's request for the EnterStandby operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnterStandbyRequest is a API request type for the EnterStandby API operation.
+type EnterStandbyRequest struct {
+	*aws.Request
+	Input *EnterStandbyInput
+}
+
+// Send marshals and sends the EnterStandby API request.
+func (r *EnterStandbyRequest) Send() (*EnterStandbyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnterStandbyOutput), nil
+}
+
+// EnterStandbyRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Moves the specified instances into the standby state.
 //
-// See EnterStandby for more information on using the EnterStandby
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Temporarily Removing Instances from Your Auto Scaling
+// Group (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the EnterStandbyRequest method.
-//    req, resp := client.EnterStandbyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnterStandbyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandby
-func (c *AutoScaling) EnterStandbyRequest(input *EnterStandbyInput) (req *aws.Request, output *EnterStandbyOutput) {
+func (c *AutoScaling) EnterStandbyRequest(input *EnterStandbyInput) EnterStandbyRequest {
 	op := &aws.Operation{
 		Name:       opEnterStandby,
 		HTTPMethod: "POST",
@@ -3692,80 +2376,42 @@ func (c *AutoScaling) EnterStandbyRequest(input *EnterStandbyInput) (req *aws.Re
 		input = &EnterStandbyInput{}
 	}
 
-	output = &EnterStandbyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EnterStandby API operation for Auto Scaling.
-//
-// Moves the specified instances into the standby state.
-//
-// For more information, see Temporarily Removing Instances from Your Auto Scaling
-// Group (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation EnterStandby for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandby
-func (c *AutoScaling) EnterStandby(input *EnterStandbyInput) (*EnterStandbyOutput, error) {
-	req, out := c.EnterStandbyRequest(input)
-	return out, req.Send()
-}
-
-// EnterStandbyWithContext is the same as EnterStandby with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnterStandby for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) EnterStandbyWithContext(ctx aws.Context, input *EnterStandbyInput, opts ...aws.Option) (*EnterStandbyOutput, error) {
-	req, out := c.EnterStandbyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnterStandbyOutput{})
+	return EnterStandbyRequest{Request: req, Input: input}
 }
 
 const opExecutePolicy = "ExecutePolicy"
 
-// ExecutePolicyRequest generates a "aws.Request" representing the
-// client's request for the ExecutePolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExecutePolicyRequest is a API request type for the ExecutePolicy API operation.
+type ExecutePolicyRequest struct {
+	*aws.Request
+	Input *ExecutePolicyInput
+}
+
+// Send marshals and sends the ExecutePolicy API request.
+func (r *ExecutePolicyRequest) Send() (*ExecutePolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExecutePolicyOutput), nil
+}
+
+// ExecutePolicyRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ExecutePolicy for more information on using the ExecutePolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Executes the specified policy.
 //
 //    // Example sending a request using the ExecutePolicyRequest method.
-//    req, resp := client.ExecutePolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExecutePolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicy
-func (c *AutoScaling) ExecutePolicyRequest(input *ExecutePolicyInput) (req *aws.Request, output *ExecutePolicyOutput) {
+func (c *AutoScaling) ExecutePolicyRequest(input *ExecutePolicyInput) ExecutePolicyRequest {
 	op := &aws.Operation{
 		Name:       opExecutePolicy,
 		HTTPMethod: "POST",
@@ -3776,82 +2422,48 @@ func (c *AutoScaling) ExecutePolicyRequest(input *ExecutePolicyInput) (req *aws.
 		input = &ExecutePolicyInput{}
 	}
 
-	output = &ExecutePolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &ExecutePolicyOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// ExecutePolicy API operation for Auto Scaling.
-//
-// Executes the specified policy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation ExecutePolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeScalingActivityInProgressFault "ScalingActivityInProgress"
-//   The operation can't be performed because there are scaling activities in
-//   progress.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicy
-func (c *AutoScaling) ExecutePolicy(input *ExecutePolicyInput) (*ExecutePolicyOutput, error) {
-	req, out := c.ExecutePolicyRequest(input)
-	return out, req.Send()
-}
-
-// ExecutePolicyWithContext is the same as ExecutePolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExecutePolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) ExecutePolicyWithContext(ctx aws.Context, input *ExecutePolicyInput, opts ...aws.Option) (*ExecutePolicyOutput, error) {
-	req, out := c.ExecutePolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return ExecutePolicyRequest{Request: req, Input: input}
 }
 
 const opExitStandby = "ExitStandby"
 
-// ExitStandbyRequest generates a "aws.Request" representing the
-// client's request for the ExitStandby operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExitStandbyRequest is a API request type for the ExitStandby API operation.
+type ExitStandbyRequest struct {
+	*aws.Request
+	Input *ExitStandbyInput
+}
+
+// Send marshals and sends the ExitStandby API request.
+func (r *ExitStandbyRequest) Send() (*ExitStandbyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExitStandbyOutput), nil
+}
+
+// ExitStandbyRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Moves the specified instances out of the standby state.
 //
-// See ExitStandby for more information on using the ExitStandby
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Temporarily Removing Instances from Your Auto Scaling
+// Group (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the ExitStandbyRequest method.
-//    req, resp := client.ExitStandbyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExitStandbyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandby
-func (c *AutoScaling) ExitStandbyRequest(input *ExitStandbyInput) (req *aws.Request, output *ExitStandbyOutput) {
+func (c *AutoScaling) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyRequest {
 	op := &aws.Operation{
 		Name:       opExitStandby,
 		HTTPMethod: "POST",
@@ -3862,96 +2474,30 @@ func (c *AutoScaling) ExitStandbyRequest(input *ExitStandbyInput) (req *aws.Requ
 		input = &ExitStandbyInput{}
 	}
 
-	output = &ExitStandbyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ExitStandby API operation for Auto Scaling.
-//
-// Moves the specified instances out of the standby state.
-//
-// For more information, see Temporarily Removing Instances from Your Auto Scaling
-// Group (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation ExitStandby for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandby
-func (c *AutoScaling) ExitStandby(input *ExitStandbyInput) (*ExitStandbyOutput, error) {
-	req, out := c.ExitStandbyRequest(input)
-	return out, req.Send()
-}
-
-// ExitStandbyWithContext is the same as ExitStandby with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExitStandby for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) ExitStandbyWithContext(ctx aws.Context, input *ExitStandbyInput, opts ...aws.Option) (*ExitStandbyOutput, error) {
-	req, out := c.ExitStandbyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ExitStandbyOutput{})
+	return ExitStandbyRequest{Request: req, Input: input}
 }
 
 const opPutLifecycleHook = "PutLifecycleHook"
 
-// PutLifecycleHookRequest generates a "aws.Request" representing the
-// client's request for the PutLifecycleHook operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutLifecycleHook for more information on using the PutLifecycleHook
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutLifecycleHookRequest method.
-//    req, resp := client.PutLifecycleHookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHook
-func (c *AutoScaling) PutLifecycleHookRequest(input *PutLifecycleHookInput) (req *aws.Request, output *PutLifecycleHookOutput) {
-	op := &aws.Operation{
-		Name:       opPutLifecycleHook,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutLifecycleHookInput{}
-	}
-
-	output = &PutLifecycleHookOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutLifecycleHookRequest is a API request type for the PutLifecycleHook API operation.
+type PutLifecycleHookRequest struct {
+	*aws.Request
+	Input *PutLifecycleHookInput
 }
 
-// PutLifecycleHook API operation for Auto Scaling.
+// Send marshals and sends the PutLifecycleHook API request.
+func (r *PutLifecycleHookRequest) Send() (*PutLifecycleHookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutLifecycleHookOutput), nil
+}
+
+// PutLifecycleHookRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Creates or updates a lifecycle hook for the specified Auto Scaling Group.
 //
@@ -3985,90 +2531,49 @@ func (c *AutoScaling) PutLifecycleHookRequest(input *PutLifecycleHookInput) (req
 // this limit, see AWS Service Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
 // in the Amazon Web Services General Reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation PutLifecycleHook for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHook
-func (c *AutoScaling) PutLifecycleHook(input *PutLifecycleHookInput) (*PutLifecycleHookOutput, error) {
-	req, out := c.PutLifecycleHookRequest(input)
-	return out, req.Send()
-}
-
-// PutLifecycleHookWithContext is the same as PutLifecycleHook with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutLifecycleHook for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) PutLifecycleHookWithContext(ctx aws.Context, input *PutLifecycleHookInput, opts ...aws.Option) (*PutLifecycleHookOutput, error) {
-	req, out := c.PutLifecycleHookRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutNotificationConfiguration = "PutNotificationConfiguration"
-
-// PutNotificationConfigurationRequest generates a "aws.Request" representing the
-// client's request for the PutNotificationConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutNotificationConfiguration for more information on using the PutNotificationConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutNotificationConfigurationRequest method.
-//    req, resp := client.PutNotificationConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutLifecycleHookRequest method.
+//    req := client.PutLifecycleHookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration
-func (c *AutoScaling) PutNotificationConfigurationRequest(input *PutNotificationConfigurationInput) (req *aws.Request, output *PutNotificationConfigurationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHook
+func (c *AutoScaling) PutLifecycleHookRequest(input *PutLifecycleHookInput) PutLifecycleHookRequest {
 	op := &aws.Operation{
-		Name:       opPutNotificationConfiguration,
+		Name:       opPutLifecycleHook,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutNotificationConfigurationInput{}
+		input = &PutLifecycleHookInput{}
 	}
 
-	output = &PutNotificationConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &PutLifecycleHookOutput{})
+	return PutLifecycleHookRequest{Request: req, Input: input}
 }
 
-// PutNotificationConfiguration API operation for Auto Scaling.
+const opPutNotificationConfiguration = "PutNotificationConfiguration"
+
+// PutNotificationConfigurationRequest is a API request type for the PutNotificationConfiguration API operation.
+type PutNotificationConfigurationRequest struct {
+	*aws.Request
+	Input *PutNotificationConfigurationInput
+}
+
+// Send marshals and sends the PutNotificationConfiguration API request.
+func (r *PutNotificationConfigurationRequest) Send() (*PutNotificationConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutNotificationConfigurationOutput), nil
+}
+
+// PutNotificationConfigurationRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Configures an Auto Scaling group to send notifications when specified events
 // take place. Subscribers to the specified topic can have messages delivered
@@ -4080,88 +2585,51 @@ func (c *AutoScaling) PutNotificationConfigurationRequest(input *PutNotification
 // Group Scales (http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation PutNotificationConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration
-func (c *AutoScaling) PutNotificationConfiguration(input *PutNotificationConfigurationInput) (*PutNotificationConfigurationOutput, error) {
-	req, out := c.PutNotificationConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// PutNotificationConfigurationWithContext is the same as PutNotificationConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutNotificationConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) PutNotificationConfigurationWithContext(ctx aws.Context, input *PutNotificationConfigurationInput, opts ...aws.Option) (*PutNotificationConfigurationOutput, error) {
-	req, out := c.PutNotificationConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutScalingPolicy = "PutScalingPolicy"
-
-// PutScalingPolicyRequest generates a "aws.Request" representing the
-// client's request for the PutScalingPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutScalingPolicy for more information on using the PutScalingPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutScalingPolicyRequest method.
-//    req, resp := client.PutScalingPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutNotificationConfigurationRequest method.
+//    req := client.PutNotificationConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicy
-func (c *AutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *aws.Request, output *PutScalingPolicyOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration
+func (c *AutoScaling) PutNotificationConfigurationRequest(input *PutNotificationConfigurationInput) PutNotificationConfigurationRequest {
 	op := &aws.Operation{
-		Name:       opPutScalingPolicy,
+		Name:       opPutNotificationConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutScalingPolicyInput{}
+		input = &PutNotificationConfigurationInput{}
 	}
 
-	output = &PutScalingPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutNotificationConfigurationOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PutNotificationConfigurationRequest{Request: req, Input: input}
 }
 
-// PutScalingPolicy API operation for Auto Scaling.
+const opPutScalingPolicy = "PutScalingPolicy"
+
+// PutScalingPolicyRequest is a API request type for the PutScalingPolicy API operation.
+type PutScalingPolicyRequest struct {
+	*aws.Request
+	Input *PutScalingPolicyInput
+}
+
+// Send marshals and sends the PutScalingPolicy API request.
+func (r *PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutScalingPolicyOutput), nil
+}
+
+// PutScalingPolicyRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Creates or updates a policy for an Auto Scaling group. To update an existing
 // policy, use the existing policy name and set the parameters you want to change.
@@ -4173,72 +2641,66 @@ func (c *AutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req
 // see AWS Service Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
 // in the Amazon Web Services General Reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation PutScalingPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the PutScalingPolicyRequest method.
+//    req := client.PutScalingPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicy
-func (c *AutoScaling) PutScalingPolicy(input *PutScalingPolicyInput) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScalingPolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutScalingPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutScalingPolicyWithContext is the same as PutScalingPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutScalingPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...aws.Option) (*PutScalingPolicyOutput, error) {
-	req, out := c.PutScalingPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutScalingPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &PutScalingPolicyOutput{})
+	return PutScalingPolicyRequest{Request: req, Input: input}
 }
 
 const opPutScheduledUpdateGroupAction = "PutScheduledUpdateGroupAction"
 
-// PutScheduledUpdateGroupActionRequest generates a "aws.Request" representing the
-// client's request for the PutScheduledUpdateGroupAction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutScheduledUpdateGroupActionRequest is a API request type for the PutScheduledUpdateGroupAction API operation.
+type PutScheduledUpdateGroupActionRequest struct {
+	*aws.Request
+	Input *PutScheduledUpdateGroupActionInput
+}
+
+// Send marshals and sends the PutScheduledUpdateGroupAction API request.
+func (r *PutScheduledUpdateGroupActionRequest) Send() (*PutScheduledUpdateGroupActionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutScheduledUpdateGroupActionOutput), nil
+}
+
+// PutScheduledUpdateGroupActionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates or updates a scheduled scaling action for an Auto Scaling group.
+// When updating a scheduled scaling action, if you leave a parameter unspecified,
+// the corresponding value remains unchanged.
 //
-// See PutScheduledUpdateGroupAction for more information on using the PutScheduledUpdateGroupAction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Scheduled Scaling (http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the PutScheduledUpdateGroupActionRequest method.
-//    req, resp := client.PutScheduledUpdateGroupActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutScheduledUpdateGroupActionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupAction
-func (c *AutoScaling) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateGroupActionInput) (req *aws.Request, output *PutScheduledUpdateGroupActionOutput) {
+func (c *AutoScaling) PutScheduledUpdateGroupActionRequest(input *PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest {
 	op := &aws.Operation{
 		Name:       opPutScheduledUpdateGroupAction,
 		HTTPMethod: "POST",
@@ -4249,108 +2711,32 @@ func (c *AutoScaling) PutScheduledUpdateGroupActionRequest(input *PutScheduledUp
 		input = &PutScheduledUpdateGroupActionInput{}
 	}
 
-	output = &PutScheduledUpdateGroupActionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutScheduledUpdateGroupActionOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutScheduledUpdateGroupAction API operation for Auto Scaling.
-//
-// Creates or updates a scheduled scaling action for an Auto Scaling group.
-// When updating a scheduled scaling action, if you leave a parameter unspecified,
-// the corresponding value remains unchanged.
-//
-// For more information, see Scheduled Scaling (http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation PutScheduledUpdateGroupAction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAlreadyExistsFault "AlreadyExists"
-//   You already have an Auto Scaling group or launch configuration with this
-//   name.
-//
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupAction
-func (c *AutoScaling) PutScheduledUpdateGroupAction(input *PutScheduledUpdateGroupActionInput) (*PutScheduledUpdateGroupActionOutput, error) {
-	req, out := c.PutScheduledUpdateGroupActionRequest(input)
-	return out, req.Send()
-}
-
-// PutScheduledUpdateGroupActionWithContext is the same as PutScheduledUpdateGroupAction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutScheduledUpdateGroupAction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) PutScheduledUpdateGroupActionWithContext(ctx aws.Context, input *PutScheduledUpdateGroupActionInput, opts ...aws.Option) (*PutScheduledUpdateGroupActionOutput, error) {
-	req, out := c.PutScheduledUpdateGroupActionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input}
 }
 
 const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
 
-// RecordLifecycleActionHeartbeatRequest generates a "aws.Request" representing the
-// client's request for the RecordLifecycleActionHeartbeat operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RecordLifecycleActionHeartbeat for more information on using the RecordLifecycleActionHeartbeat
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RecordLifecycleActionHeartbeatRequest method.
-//    req, resp := client.RecordLifecycleActionHeartbeatRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat
-func (c *AutoScaling) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleActionHeartbeatInput) (req *aws.Request, output *RecordLifecycleActionHeartbeatOutput) {
-	op := &aws.Operation{
-		Name:       opRecordLifecycleActionHeartbeat,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RecordLifecycleActionHeartbeatInput{}
-	}
-
-	output = &RecordLifecycleActionHeartbeatOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RecordLifecycleActionHeartbeatRequest is a API request type for the RecordLifecycleActionHeartbeat API operation.
+type RecordLifecycleActionHeartbeatRequest struct {
+	*aws.Request
+	Input *RecordLifecycleActionHeartbeatInput
 }
 
-// RecordLifecycleActionHeartbeat API operation for Auto Scaling.
+// Send marshals and sends the RecordLifecycleActionHeartbeat API request.
+func (r *RecordLifecycleActionHeartbeatRequest) Send() (*RecordLifecycleActionHeartbeatOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RecordLifecycleActionHeartbeatOutput), nil
+}
+
+// RecordLifecycleActionHeartbeatRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Records a heartbeat for the lifecycle action associated with the specified
 // token or instance. This extends the timeout by the length of time defined
@@ -4377,85 +2763,49 @@ func (c *AutoScaling) RecordLifecycleActionHeartbeatRequest(input *RecordLifecyc
 // For more information, see Auto Scaling Lifecycle (http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation RecordLifecycleActionHeartbeat for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat
-func (c *AutoScaling) RecordLifecycleActionHeartbeat(input *RecordLifecycleActionHeartbeatInput) (*RecordLifecycleActionHeartbeatOutput, error) {
-	req, out := c.RecordLifecycleActionHeartbeatRequest(input)
-	return out, req.Send()
-}
-
-// RecordLifecycleActionHeartbeatWithContext is the same as RecordLifecycleActionHeartbeat with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RecordLifecycleActionHeartbeat for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) RecordLifecycleActionHeartbeatWithContext(ctx aws.Context, input *RecordLifecycleActionHeartbeatInput, opts ...aws.Option) (*RecordLifecycleActionHeartbeatOutput, error) {
-	req, out := c.RecordLifecycleActionHeartbeatRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opResumeProcesses = "ResumeProcesses"
-
-// ResumeProcessesRequest generates a "aws.Request" representing the
-// client's request for the ResumeProcesses operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResumeProcesses for more information on using the ResumeProcesses
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ResumeProcessesRequest method.
-//    req, resp := client.ResumeProcessesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RecordLifecycleActionHeartbeatRequest method.
+//    req := client.RecordLifecycleActionHeartbeatRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcesses
-func (c *AutoScaling) ResumeProcessesRequest(input *ScalingProcessQuery) (req *aws.Request, output *ResumeProcessesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat
+func (c *AutoScaling) RecordLifecycleActionHeartbeatRequest(input *RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest {
 	op := &aws.Operation{
-		Name:       opResumeProcesses,
+		Name:       opRecordLifecycleActionHeartbeat,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ScalingProcessQuery{}
+		input = &RecordLifecycleActionHeartbeatInput{}
 	}
 
-	output = &ResumeProcessesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &RecordLifecycleActionHeartbeatOutput{})
+	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input}
 }
 
-// ResumeProcesses API operation for Auto Scaling.
+const opResumeProcesses = "ResumeProcesses"
+
+// ResumeProcessesRequest is a API request type for the ResumeProcesses API operation.
+type ResumeProcessesRequest struct {
+	*aws.Request
+	Input *SuspendProcessesInput
+}
+
+// Send marshals and sends the ResumeProcesses API request.
+func (r *ResumeProcessesRequest) Send() (*ResumeProcessesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResumeProcessesOutput), nil
+}
+
+// ResumeProcessesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Resumes the specified suspended Auto Scaling processes, or all suspended
 // process, for the specified Auto Scaling group.
@@ -4464,70 +2814,66 @@ func (c *AutoScaling) ResumeProcessesRequest(input *ScalingProcessQuery) (req *a
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation ResumeProcesses for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the ResumeProcessesRequest method.
+//    req := client.ResumeProcessesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcesses
-func (c *AutoScaling) ResumeProcesses(input *ScalingProcessQuery) (*ResumeProcessesOutput, error) {
-	req, out := c.ResumeProcessesRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) ResumeProcessesRequest(input *SuspendProcessesInput) ResumeProcessesRequest {
+	op := &aws.Operation{
+		Name:       opResumeProcesses,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ResumeProcessesWithContext is the same as ResumeProcesses with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResumeProcesses for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) ResumeProcessesWithContext(ctx aws.Context, input *ScalingProcessQuery, opts ...aws.Option) (*ResumeProcessesOutput, error) {
-	req, out := c.ResumeProcessesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SuspendProcessesInput{}
+	}
+
+	req := c.newRequest(op, input, &ResumeProcessesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return ResumeProcessesRequest{Request: req, Input: input}
 }
 
 const opSetDesiredCapacity = "SetDesiredCapacity"
 
-// SetDesiredCapacityRequest generates a "aws.Request" representing the
-// client's request for the SetDesiredCapacity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetDesiredCapacityRequest is a API request type for the SetDesiredCapacity API operation.
+type SetDesiredCapacityRequest struct {
+	*aws.Request
+	Input *SetDesiredCapacityInput
+}
+
+// Send marshals and sends the SetDesiredCapacity API request.
+func (r *SetDesiredCapacityRequest) Send() (*SetDesiredCapacityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetDesiredCapacityOutput), nil
+}
+
+// SetDesiredCapacityRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets the size of the specified Auto Scaling group.
 //
-// See SetDesiredCapacity for more information on using the SetDesiredCapacity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about desired capacity, see What Is Auto Scaling? (http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the SetDesiredCapacityRequest method.
-//    req, resp := client.SetDesiredCapacityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetDesiredCapacityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacity
-func (c *AutoScaling) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) (req *aws.Request, output *SetDesiredCapacityOutput) {
+func (c *AutoScaling) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) SetDesiredCapacityRequest {
 	op := &aws.Operation{
 		Name:       opSetDesiredCapacity,
 		HTTPMethod: "POST",
@@ -4538,85 +2884,47 @@ func (c *AutoScaling) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) 
 		input = &SetDesiredCapacityInput{}
 	}
 
-	output = &SetDesiredCapacityOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetDesiredCapacityOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetDesiredCapacity API operation for Auto Scaling.
-//
-// Sets the size of the specified Auto Scaling group.
-//
-// For more information about desired capacity, see What Is Auto Scaling? (http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation SetDesiredCapacity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeScalingActivityInProgressFault "ScalingActivityInProgress"
-//   The operation can't be performed because there are scaling activities in
-//   progress.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacity
-func (c *AutoScaling) SetDesiredCapacity(input *SetDesiredCapacityInput) (*SetDesiredCapacityOutput, error) {
-	req, out := c.SetDesiredCapacityRequest(input)
-	return out, req.Send()
-}
-
-// SetDesiredCapacityWithContext is the same as SetDesiredCapacity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetDesiredCapacity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) SetDesiredCapacityWithContext(ctx aws.Context, input *SetDesiredCapacityInput, opts ...aws.Option) (*SetDesiredCapacityOutput, error) {
-	req, out := c.SetDesiredCapacityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetDesiredCapacityRequest{Request: req, Input: input}
 }
 
 const opSetInstanceHealth = "SetInstanceHealth"
 
-// SetInstanceHealthRequest generates a "aws.Request" representing the
-// client's request for the SetInstanceHealth operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetInstanceHealthRequest is a API request type for the SetInstanceHealth API operation.
+type SetInstanceHealthRequest struct {
+	*aws.Request
+	Input *SetInstanceHealthInput
+}
+
+// Send marshals and sends the SetInstanceHealth API request.
+func (r *SetInstanceHealthRequest) Send() (*SetInstanceHealthOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetInstanceHealthOutput), nil
+}
+
+// SetInstanceHealthRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets the health status of the specified instance.
 //
-// See SetInstanceHealth for more information on using the SetInstanceHealth
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Health Checks (http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the SetInstanceHealthRequest method.
-//    req, resp := client.SetInstanceHealthRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetInstanceHealthRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealth
-func (c *AutoScaling) SetInstanceHealthRequest(input *SetInstanceHealthInput) (req *aws.Request, output *SetInstanceHealthOutput) {
+func (c *AutoScaling) SetInstanceHealthRequest(input *SetInstanceHealthInput) SetInstanceHealthRequest {
 	op := &aws.Operation{
 		Name:       opSetInstanceHealth,
 		HTTPMethod: "POST",
@@ -4627,81 +2935,47 @@ func (c *AutoScaling) SetInstanceHealthRequest(input *SetInstanceHealthInput) (r
 		input = &SetInstanceHealthInput{}
 	}
 
-	output = &SetInstanceHealthOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetInstanceHealthOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetInstanceHealth API operation for Auto Scaling.
-//
-// Sets the health status of the specified instance.
-//
-// For more information, see Health Checks (http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation SetInstanceHealth for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealth
-func (c *AutoScaling) SetInstanceHealth(input *SetInstanceHealthInput) (*SetInstanceHealthOutput, error) {
-	req, out := c.SetInstanceHealthRequest(input)
-	return out, req.Send()
-}
-
-// SetInstanceHealthWithContext is the same as SetInstanceHealth with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetInstanceHealth for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) SetInstanceHealthWithContext(ctx aws.Context, input *SetInstanceHealthInput, opts ...aws.Option) (*SetInstanceHealthOutput, error) {
-	req, out := c.SetInstanceHealthRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetInstanceHealthRequest{Request: req, Input: input}
 }
 
 const opSetInstanceProtection = "SetInstanceProtection"
 
-// SetInstanceProtectionRequest generates a "aws.Request" representing the
-// client's request for the SetInstanceProtection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetInstanceProtectionRequest is a API request type for the SetInstanceProtection API operation.
+type SetInstanceProtectionRequest struct {
+	*aws.Request
+	Input *SetInstanceProtectionInput
+}
+
+// Send marshals and sends the SetInstanceProtection API request.
+func (r *SetInstanceProtectionRequest) Send() (*SetInstanceProtectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetInstanceProtectionOutput), nil
+}
+
+// SetInstanceProtectionRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the instance protection settings of the specified instances.
 //
-// See SetInstanceProtection for more information on using the SetInstanceProtection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Instance Protection (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the SetInstanceProtectionRequest method.
-//    req, resp := client.SetInstanceProtectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetInstanceProtectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtection
-func (c *AutoScaling) SetInstanceProtectionRequest(input *SetInstanceProtectionInput) (req *aws.Request, output *SetInstanceProtectionOutput) {
+func (c *AutoScaling) SetInstanceProtectionRequest(input *SetInstanceProtectionInput) SetInstanceProtectionRequest {
 	op := &aws.Operation{
 		Name:       opSetInstanceProtection,
 		HTTPMethod: "POST",
@@ -4712,102 +2986,30 @@ func (c *AutoScaling) SetInstanceProtectionRequest(input *SetInstanceProtectionI
 		input = &SetInstanceProtectionInput{}
 	}
 
-	output = &SetInstanceProtectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetInstanceProtection API operation for Auto Scaling.
-//
-// Updates the instance protection settings of the specified instances.
-//
-// For more information, see Instance Protection (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection)
-// in the Auto Scaling User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation SetInstanceProtection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededFault "LimitExceeded"
-//   You have already reached a limit for your Auto Scaling resources (for example,
-//   groups, launch configurations, or lifecycle hooks). For more information,
-//   see DescribeAccountLimits.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtection
-func (c *AutoScaling) SetInstanceProtection(input *SetInstanceProtectionInput) (*SetInstanceProtectionOutput, error) {
-	req, out := c.SetInstanceProtectionRequest(input)
-	return out, req.Send()
-}
-
-// SetInstanceProtectionWithContext is the same as SetInstanceProtection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetInstanceProtection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) SetInstanceProtectionWithContext(ctx aws.Context, input *SetInstanceProtectionInput, opts ...aws.Option) (*SetInstanceProtectionOutput, error) {
-	req, out := c.SetInstanceProtectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetInstanceProtectionOutput{})
+	return SetInstanceProtectionRequest{Request: req, Input: input}
 }
 
 const opSuspendProcesses = "SuspendProcesses"
 
-// SuspendProcessesRequest generates a "aws.Request" representing the
-// client's request for the SuspendProcesses operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SuspendProcesses for more information on using the SuspendProcesses
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SuspendProcessesRequest method.
-//    req, resp := client.SuspendProcessesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcesses
-func (c *AutoScaling) SuspendProcessesRequest(input *ScalingProcessQuery) (req *aws.Request, output *SuspendProcessesOutput) {
-	op := &aws.Operation{
-		Name:       opSuspendProcesses,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ScalingProcessQuery{}
-	}
-
-	output = &SuspendProcessesOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// SuspendProcessesRequest is a API request type for the SuspendProcesses API operation.
+type SuspendProcessesRequest struct {
+	*aws.Request
+	Input *SuspendProcessesInput
 }
 
-// SuspendProcesses API operation for Auto Scaling.
+// Send marshals and sends the SuspendProcesses API request.
+func (r *SuspendProcessesRequest) Send() (*SuspendProcessesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SuspendProcessesOutput), nil
+}
+
+// SuspendProcessesRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Suspends the specified Auto Scaling processes, or all processes, for the
 // specified Auto Scaling group.
@@ -4821,70 +3023,67 @@ func (c *AutoScaling) SuspendProcessesRequest(input *ScalingProcessQuery) (req *
 // (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html)
 // in the Auto Scaling User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation SuspendProcesses for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseFault "ResourceInUse"
-//   The operation can't be performed because the resource is in use.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the SuspendProcessesRequest method.
+//    req := client.SuspendProcessesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcesses
-func (c *AutoScaling) SuspendProcesses(input *ScalingProcessQuery) (*SuspendProcessesOutput, error) {
-	req, out := c.SuspendProcessesRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) SuspendProcessesRequest(input *SuspendProcessesInput) SuspendProcessesRequest {
+	op := &aws.Operation{
+		Name:       opSuspendProcesses,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SuspendProcessesWithContext is the same as SuspendProcesses with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SuspendProcesses for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) SuspendProcessesWithContext(ctx aws.Context, input *ScalingProcessQuery, opts ...aws.Option) (*SuspendProcessesOutput, error) {
-	req, out := c.SuspendProcessesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SuspendProcessesInput{}
+	}
+
+	req := c.newRequest(op, input, &SuspendProcessesOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SuspendProcessesRequest{Request: req, Input: input}
 }
 
 const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGroup"
 
-// TerminateInstanceInAutoScalingGroupRequest generates a "aws.Request" representing the
-// client's request for the TerminateInstanceInAutoScalingGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TerminateInstanceInAutoScalingGroupRequest is a API request type for the TerminateInstanceInAutoScalingGroup API operation.
+type TerminateInstanceInAutoScalingGroupRequest struct {
+	*aws.Request
+	Input *TerminateInstanceInAutoScalingGroupInput
+}
+
+// Send marshals and sends the TerminateInstanceInAutoScalingGroup API request.
+func (r *TerminateInstanceInAutoScalingGroupRequest) Send() (*TerminateInstanceInAutoScalingGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateInstanceInAutoScalingGroupOutput), nil
+}
+
+// TerminateInstanceInAutoScalingGroupRequest returns a request value for making API operation for
+// Auto Scaling.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Terminates the specified instance and optionally adjusts the desired group
+// size.
 //
-// See TerminateInstanceInAutoScalingGroup for more information on using the TerminateInstanceInAutoScalingGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This call simply makes a termination request. The instance is not terminated
+// immediately.
 //
 //    // Example sending a request using the TerminateInstanceInAutoScalingGroupRequest method.
-//    req, resp := client.TerminateInstanceInAutoScalingGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TerminateInstanceInAutoScalingGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup
-func (c *AutoScaling) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInstanceInAutoScalingGroupInput) (req *aws.Request, output *TerminateInstanceInAutoScalingGroupOutput) {
+func (c *AutoScaling) TerminateInstanceInAutoScalingGroupRequest(input *TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest {
 	op := &aws.Operation{
 		Name:       opTerminateInstanceInAutoScalingGroup,
 		HTTPMethod: "POST",
@@ -4895,102 +3094,30 @@ func (c *AutoScaling) TerminateInstanceInAutoScalingGroupRequest(input *Terminat
 		input = &TerminateInstanceInAutoScalingGroupInput{}
 	}
 
-	output = &TerminateInstanceInAutoScalingGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TerminateInstanceInAutoScalingGroup API operation for Auto Scaling.
-//
-// Terminates the specified instance and optionally adjusts the desired group
-// size.
-//
-// This call simply makes a termination request. The instance is not terminated
-// immediately.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation TerminateInstanceInAutoScalingGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeScalingActivityInProgressFault "ScalingActivityInProgress"
-//   The operation can't be performed because there are scaling activities in
-//   progress.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup
-func (c *AutoScaling) TerminateInstanceInAutoScalingGroup(input *TerminateInstanceInAutoScalingGroupInput) (*TerminateInstanceInAutoScalingGroupOutput, error) {
-	req, out := c.TerminateInstanceInAutoScalingGroupRequest(input)
-	return out, req.Send()
-}
-
-// TerminateInstanceInAutoScalingGroupWithContext is the same as TerminateInstanceInAutoScalingGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateInstanceInAutoScalingGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) TerminateInstanceInAutoScalingGroupWithContext(ctx aws.Context, input *TerminateInstanceInAutoScalingGroupInput, opts ...aws.Option) (*TerminateInstanceInAutoScalingGroupOutput, error) {
-	req, out := c.TerminateInstanceInAutoScalingGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TerminateInstanceInAutoScalingGroupOutput{})
+	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input}
 }
 
 const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 
-// UpdateAutoScalingGroupRequest generates a "aws.Request" representing the
-// client's request for the UpdateAutoScalingGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateAutoScalingGroup for more information on using the UpdateAutoScalingGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateAutoScalingGroupRequest method.
-//    req, resp := client.UpdateAutoScalingGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup
-func (c *AutoScaling) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGroupInput) (req *aws.Request, output *UpdateAutoScalingGroupOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateAutoScalingGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateAutoScalingGroupInput{}
-	}
-
-	output = &UpdateAutoScalingGroupOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UpdateAutoScalingGroupRequest is a API request type for the UpdateAutoScalingGroup API operation.
+type UpdateAutoScalingGroupRequest struct {
+	*aws.Request
+	Input *UpdateAutoScalingGroupInput
 }
 
-// UpdateAutoScalingGroup API operation for Auto Scaling.
+// Send marshals and sends the UpdateAutoScalingGroup API request.
+func (r *UpdateAutoScalingGroupRequest) Send() (*UpdateAutoScalingGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAutoScalingGroupOutput), nil
+}
+
+// UpdateAutoScalingGroupRequest returns a request value for making API operation for
+// Auto Scaling.
 //
 // Updates the configuration for the specified Auto Scaling group.
 //
@@ -5016,42 +3143,29 @@ func (c *AutoScaling) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGrou
 //
 //    * All other optional parameters are left unchanged if not specified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Auto Scaling's
-// API operation UpdateAutoScalingGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeScalingActivityInProgressFault "ScalingActivityInProgress"
-//   The operation can't be performed because there are scaling activities in
-//   progress.
-//
-//   * ErrCodeResourceContentionFault "ResourceContention"
-//   You already have a pending update to an Auto Scaling resource (for example,
-//   a group, instance, or load balancer).
+//    // Example sending a request using the UpdateAutoScalingGroupRequest method.
+//    req := client.UpdateAutoScalingGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup
-func (c *AutoScaling) UpdateAutoScalingGroup(input *UpdateAutoScalingGroupInput) (*UpdateAutoScalingGroupOutput, error) {
-	req, out := c.UpdateAutoScalingGroupRequest(input)
-	return out, req.Send()
-}
+func (c *AutoScaling) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGroupInput) UpdateAutoScalingGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateAutoScalingGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateAutoScalingGroupWithContext is the same as UpdateAutoScalingGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateAutoScalingGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) UpdateAutoScalingGroupWithContext(ctx aws.Context, input *UpdateAutoScalingGroupInput, opts ...aws.Option) (*UpdateAutoScalingGroupOutput, error) {
-	req, out := c.UpdateAutoScalingGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateAutoScalingGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateAutoScalingGroupOutput{})
+	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UpdateAutoScalingGroupRequest{Request: req, Input: input}
 }
 
 // Describes scaling activity, which is a long-running process that represents
@@ -11415,75 +9529,6 @@ func (s *ScalingPolicy) SetTargetTrackingConfiguration(v *TargetTrackingConfigur
 	return s
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingProcessQuery
-type ScalingProcessQuery struct {
-	_ struct{} `type:"structure"`
-
-	// The name or Amazon Resource Name (ARN) of the Auto Scaling group.
-	//
-	// AutoScalingGroupName is a required field
-	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
-
-	// One or more of the following processes. If you omit this parameter, all processes
-	// are specified.
-	//
-	//    * Launch
-	//
-	//    * Terminate
-	//
-	//    * HealthCheck
-	//
-	//    * ReplaceUnhealthy
-	//
-	//    * AZRebalance
-	//
-	//    * AlarmNotification
-	//
-	//    * ScheduledActions
-	//
-	//    * AddToLoadBalancer
-	ScalingProcesses []*string `type:"list"`
-}
-
-// String returns the string representation
-func (s ScalingProcessQuery) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ScalingProcessQuery) GoString() string {
-	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *ScalingProcessQuery) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "ScalingProcessQuery"}
-
-	if s.AutoScalingGroupName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
-	}
-	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// SetAutoScalingGroupName sets the AutoScalingGroupName field's value.
-func (s *ScalingProcessQuery) SetAutoScalingGroupName(v string) *ScalingProcessQuery {
-	s.AutoScalingGroupName = &v
-	return s
-}
-
-// SetScalingProcesses sets the ScalingProcesses field's value.
-func (s *ScalingProcessQuery) SetScalingProcesses(v []*string) *ScalingProcessQuery {
-	s.ScalingProcesses = v
-	return s
-}
-
 // Describes a scheduled update to an Auto Scaling group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction
 type ScheduledUpdateGroupAction struct {
@@ -11958,6 +10003,75 @@ func (s *StepAdjustment) SetMetricIntervalUpperBound(v float64) *StepAdjustment 
 // SetScalingAdjustment sets the ScalingAdjustment field's value.
 func (s *StepAdjustment) SetScalingAdjustment(v int64) *StepAdjustment {
 	s.ScalingAdjustment = &v
+	return s
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcessesInput
+type SuspendProcessesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+	//
+	// AutoScalingGroupName is a required field
+	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
+
+	// One or more of the following processes. If you omit this parameter, all processes
+	// are specified.
+	//
+	//    * Launch
+	//
+	//    * Terminate
+	//
+	//    * HealthCheck
+	//
+	//    * ReplaceUnhealthy
+	//
+	//    * AZRebalance
+	//
+	//    * AlarmNotification
+	//
+	//    * ScheduledActions
+	//
+	//    * AddToLoadBalancer
+	ScalingProcesses []*string `type:"list"`
+}
+
+// String returns the string representation
+func (s SuspendProcessesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SuspendProcessesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SuspendProcessesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SuspendProcessesInput"}
+
+	if s.AutoScalingGroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// SetAutoScalingGroupName sets the AutoScalingGroupName field's value.
+func (s *SuspendProcessesInput) SetAutoScalingGroupName(v string) *SuspendProcessesInput {
+	s.AutoScalingGroupName = &v
+	return s
+}
+
+// SetScalingProcesses sets the ScalingProcesses field's value.
+func (s *SuspendProcessesInput) SetScalingProcesses(v []*string) *SuspendProcessesInput {
+	s.ScalingProcesses = v
 	return s
 }
 

@@ -12,31 +12,36 @@ import (
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTagsRequest is a API request type for the CreateTags API operation.
+type CreateTagsRequest struct {
+	*aws.Request
+	Input *CreateTagsInput
+}
+
+// Send marshals and sends the CreateTags API request.
+func (r *CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagsOutput), nil
+}
+
+// CreateTagsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTags for more information on using the CreateTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates tags for a WorkSpace.
 //
 //    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags
-func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -47,81 +52,44 @@ func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request
 		input = &CreateTagsInput{}
 	}
 
-	output = &CreateTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTags API operation for Amazon WorkSpaces.
-//
-// Creates tags for a WorkSpace.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation CreateTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags
-func (c *WorkSpaces) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateTagsWithContext is the same as CreateTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTagsOutput{})
+	return CreateTagsRequest{Request: req, Input: input}
 }
 
 const opCreateWorkspaces = "CreateWorkspaces"
 
-// CreateWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the CreateWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateWorkspacesRequest is a API request type for the CreateWorkspaces API operation.
+type CreateWorkspacesRequest struct {
+	*aws.Request
+	Input *CreateWorkspacesInput
+}
+
+// Send marshals and sends the CreateWorkspaces API request.
+func (r *CreateWorkspacesRequest) Send() (*CreateWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateWorkspacesOutput), nil
+}
+
+// CreateWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates one or more WorkSpaces.
 //
-// See CreateWorkspaces for more information on using the CreateWorkspaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is asynchronous and returns before the WorkSpaces are created.
 //
 //    // Example sending a request using the CreateWorkspacesRequest method.
-//    req, resp := client.CreateWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
-func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req *aws.Request, output *CreateWorkspacesOutput) {
+func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) CreateWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opCreateWorkspaces,
 		HTTPMethod: "POST",
@@ -132,80 +100,42 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) (req 
 		input = &CreateWorkspacesInput{}
 	}
 
-	output = &CreateWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateWorkspaces API operation for Amazon WorkSpaces.
-//
-// Creates one or more WorkSpaces.
-//
-// This operation is asynchronous and returns before the WorkSpaces are created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation CreateWorkspaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceLimitExceededException "ResourceLimitExceededException"
-//   Your resource limits have been exceeded.
-//
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces
-func (c *WorkSpaces) CreateWorkspaces(input *CreateWorkspacesInput) (*CreateWorkspacesOutput, error) {
-	req, out := c.CreateWorkspacesRequest(input)
-	return out, req.Send()
-}
-
-// CreateWorkspacesWithContext is the same as CreateWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) CreateWorkspacesWithContext(ctx aws.Context, input *CreateWorkspacesInput, opts ...aws.Option) (*CreateWorkspacesOutput, error) {
-	req, out := c.CreateWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateWorkspacesOutput{})
+	return CreateWorkspacesRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
+}
+
+// Send marshals and sends the DeleteTags API request.
+func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes tags from a WorkSpace.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags
-func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
@@ -216,78 +146,42 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request
 		input = &DeleteTagsInput{}
 	}
 
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTags API operation for Amazon WorkSpaces.
-//
-// Deletes tags from a WorkSpace.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags
-func (c *WorkSpaces) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes tags for a WorkSpace.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags
-func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -298,75 +192,51 @@ func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Req
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for Amazon WorkSpaces.
-//
-// Describes tags for a WorkSpace.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags
-func (c *WorkSpaces) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 
-// DescribeWorkspaceBundlesRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkspaceBundles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeWorkspaceBundlesRequest is a API request type for the DescribeWorkspaceBundles API operation.
+type DescribeWorkspaceBundlesRequest struct {
+	*aws.Request
+	Input *DescribeWorkspaceBundlesInput
+}
+
+// Send marshals and sends the DescribeWorkspaceBundles API request.
+func (r *DescribeWorkspaceBundlesRequest) Send() (*DescribeWorkspaceBundlesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkspaceBundlesOutput), nil
+}
+
+// DescribeWorkspaceBundlesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Obtains information about the WorkSpace bundles that are available to your
+// account in the specified region.
 //
-// See DescribeWorkspaceBundles for more information on using the DescribeWorkspaceBundles
-// API call, and error handling.
+// You can filter the results with either the BundleIds parameter, or the Owner
+// parameter, but not both.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken request
+// and response parameters. If more results are available, the NextToken response
+// member contains a token that you pass in the next call to this operation
+// to retrieve the next set of items.
 //
 //    // Example sending a request using the DescribeWorkspaceBundlesRequest method.
-//    req, resp := client.DescribeWorkspaceBundlesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeWorkspaceBundlesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
-func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) (req *aws.Request, output *DescribeWorkspaceBundlesOutput) {
+func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceBundles,
 		HTTPMethod: "POST",
@@ -383,55 +253,8 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBun
 		input = &DescribeWorkspaceBundlesInput{}
 	}
 
-	output = &DescribeWorkspaceBundlesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeWorkspaceBundles API operation for Amazon WorkSpaces.
-//
-// Obtains information about the WorkSpace bundles that are available to your
-// account in the specified region.
-//
-// You can filter the results with either the BundleIds parameter, or the Owner
-// parameter, but not both.
-//
-// This operation supports pagination with the use of the NextToken request
-// and response parameters. If more results are available, the NextToken response
-// member contains a token that you pass in the next call to this operation
-// to retrieve the next set of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DescribeWorkspaceBundles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles
-func (c *WorkSpaces) DescribeWorkspaceBundles(input *DescribeWorkspaceBundlesInput) (*DescribeWorkspaceBundlesOutput, error) {
-	req, out := c.DescribeWorkspaceBundlesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkspaceBundlesWithContext is the same as DescribeWorkspaceBundles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkspaceBundles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceBundlesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, opts ...aws.Option) (*DescribeWorkspaceBundlesOutput, error) {
-	req, out := c.DescribeWorkspaceBundlesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeWorkspaceBundlesOutput{})
+	return DescribeWorkspaceBundlesRequest{Request: req, Input: input}
 }
 
 // DescribeWorkspaceBundlesPages iterates over the pages of a DescribeWorkspaceBundles operation,
@@ -470,10 +293,10 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeWorkspaceBundlesRequest(inCpy)
+			req := c.DescribeWorkspaceBundlesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -486,31 +309,43 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, i
 
 const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 
-// DescribeWorkspaceDirectoriesRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkspaceDirectories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeWorkspaceDirectoriesRequest is a API request type for the DescribeWorkspaceDirectories API operation.
+type DescribeWorkspaceDirectoriesRequest struct {
+	*aws.Request
+	Input *DescribeWorkspaceDirectoriesInput
+}
+
+// Send marshals and sends the DescribeWorkspaceDirectories API request.
+func (r *DescribeWorkspaceDirectoriesRequest) Send() (*DescribeWorkspaceDirectoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkspaceDirectoriesOutput), nil
+}
+
+// DescribeWorkspaceDirectoriesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves information about the AWS Directory Service directories in the
+// region that are registered with Amazon WorkSpaces and are available to your
+// account.
 //
-// See DescribeWorkspaceDirectories for more information on using the DescribeWorkspaceDirectories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken request
+// and response parameters. If more results are available, the NextToken response
+// member contains a token that you pass in the next call to this operation
+// to retrieve the next set of items.
 //
 //    // Example sending a request using the DescribeWorkspaceDirectoriesRequest method.
-//    req, resp := client.DescribeWorkspaceDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeWorkspaceDirectoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) (req *aws.Request, output *DescribeWorkspaceDirectoriesOutput) {
+func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaceDirectories,
 		HTTPMethod: "POST",
@@ -527,53 +362,8 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 		input = &DescribeWorkspaceDirectoriesInput{}
 	}
 
-	output = &DescribeWorkspaceDirectoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeWorkspaceDirectories API operation for Amazon WorkSpaces.
-//
-// Retrieves information about the AWS Directory Service directories in the
-// region that are registered with Amazon WorkSpaces and are available to your
-// account.
-//
-// This operation supports pagination with the use of the NextToken request
-// and response parameters. If more results are available, the NextToken response
-// member contains a token that you pass in the next call to this operation
-// to retrieve the next set of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DescribeWorkspaceDirectories for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories
-func (c *WorkSpaces) DescribeWorkspaceDirectories(input *DescribeWorkspaceDirectoriesInput) (*DescribeWorkspaceDirectoriesOutput, error) {
-	req, out := c.DescribeWorkspaceDirectoriesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkspaceDirectoriesWithContext is the same as DescribeWorkspaceDirectories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkspaceDirectories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, opts ...aws.Option) (*DescribeWorkspaceDirectoriesOutput, error) {
-	req, out := c.DescribeWorkspaceDirectoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeWorkspaceDirectoriesOutput{})
+	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input}
 }
 
 // DescribeWorkspaceDirectoriesPages iterates over the pages of a DescribeWorkspaceDirectories operation,
@@ -612,10 +402,10 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeWorkspaceDirectoriesRequest(inCpy)
+			req := c.DescribeWorkspaceDirectoriesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -628,31 +418,44 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Contex
 
 const opDescribeWorkspaces = "DescribeWorkspaces"
 
-// DescribeWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeWorkspacesRequest is a API request type for the DescribeWorkspaces API operation.
+type DescribeWorkspacesRequest struct {
+	*aws.Request
+	Input *DescribeWorkspacesInput
+}
+
+// Send marshals and sends the DescribeWorkspaces API request.
+func (r *DescribeWorkspacesRequest) Send() (*DescribeWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkspacesOutput), nil
+}
+
+// DescribeWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Obtains information about the specified WorkSpaces.
 //
-// See DescribeWorkspaces for more information on using the DescribeWorkspaces
-// API call, and error handling.
+// Only one of the filter parameters, such as BundleId, DirectoryId, or WorkspaceIds,
+// can be specified at a time.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation supports pagination with the use of the NextToken request
+// and response parameters. If more results are available, the NextToken response
+// member contains a token that you pass in the next call to this operation
+// to retrieve the next set of items.
 //
 //    // Example sending a request using the DescribeWorkspacesRequest method.
-//    req, resp := client.DescribeWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
-func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (req *aws.Request, output *DescribeWorkspacesOutput) {
+func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) DescribeWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspaces,
 		HTTPMethod: "POST",
@@ -669,57 +472,8 @@ func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) (
 		input = &DescribeWorkspacesInput{}
 	}
 
-	output = &DescribeWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeWorkspaces API operation for Amazon WorkSpaces.
-//
-// Obtains information about the specified WorkSpaces.
-//
-// Only one of the filter parameters, such as BundleId, DirectoryId, or WorkspaceIds,
-// can be specified at a time.
-//
-// This operation supports pagination with the use of the NextToken request
-// and response parameters. If more results are available, the NextToken response
-// member contains a token that you pass in the next call to this operation
-// to retrieve the next set of items.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DescribeWorkspaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-//   * ErrCodeResourceUnavailableException "ResourceUnavailableException"
-//   The specified resource is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces
-func (c *WorkSpaces) DescribeWorkspaces(input *DescribeWorkspacesInput) (*DescribeWorkspacesOutput, error) {
-	req, out := c.DescribeWorkspacesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkspacesWithContext is the same as DescribeWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, opts ...aws.Option) (*DescribeWorkspacesOutput, error) {
-	req, out := c.DescribeWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeWorkspacesOutput{})
+	return DescribeWorkspacesRequest{Request: req, Input: input}
 }
 
 // DescribeWorkspacesPages iterates over the pages of a DescribeWorkspaces operation,
@@ -758,10 +512,10 @@ func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeWorkspacesRequest(inCpy)
+			req := c.DescribeWorkspacesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -774,31 +528,36 @@ func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *
 
 const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus"
 
-// DescribeWorkspacesConnectionStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkspacesConnectionStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeWorkspacesConnectionStatusRequest is a API request type for the DescribeWorkspacesConnectionStatus API operation.
+type DescribeWorkspacesConnectionStatusRequest struct {
+	*aws.Request
+	Input *DescribeWorkspacesConnectionStatusInput
+}
+
+// Send marshals and sends the DescribeWorkspacesConnectionStatus API request.
+func (r *DescribeWorkspacesConnectionStatusRequest) Send() (*DescribeWorkspacesConnectionStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkspacesConnectionStatusOutput), nil
+}
+
+// DescribeWorkspacesConnectionStatusRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeWorkspacesConnectionStatus for more information on using the DescribeWorkspacesConnectionStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the connection status of a specified WorkSpace.
 //
 //    // Example sending a request using the DescribeWorkspacesConnectionStatusRequest method.
-//    req, resp := client.DescribeWorkspacesConnectionStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeWorkspacesConnectionStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
-func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) (req *aws.Request, output *DescribeWorkspacesConnectionStatusOutput) {
+func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeWorkspacesConnectionStatus,
 		HTTPMethod: "POST",
@@ -809,75 +568,43 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWo
 		input = &DescribeWorkspacesConnectionStatusInput{}
 	}
 
-	output = &DescribeWorkspacesConnectionStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeWorkspacesConnectionStatus API operation for Amazon WorkSpaces.
-//
-// Describes the connection status of a specified WorkSpace.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation DescribeWorkspacesConnectionStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus
-func (c *WorkSpaces) DescribeWorkspacesConnectionStatus(input *DescribeWorkspacesConnectionStatusInput) (*DescribeWorkspacesConnectionStatusOutput, error) {
-	req, out := c.DescribeWorkspacesConnectionStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkspacesConnectionStatusWithContext is the same as DescribeWorkspacesConnectionStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkspacesConnectionStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesConnectionStatusWithContext(ctx aws.Context, input *DescribeWorkspacesConnectionStatusInput, opts ...aws.Option) (*DescribeWorkspacesConnectionStatusOutput, error) {
-	req, out := c.DescribeWorkspacesConnectionStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeWorkspacesConnectionStatusOutput{})
+	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input}
 }
 
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 
-// ModifyWorkspacePropertiesRequest generates a "aws.Request" representing the
-// client's request for the ModifyWorkspaceProperties operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyWorkspacePropertiesRequest is a API request type for the ModifyWorkspaceProperties API operation.
+type ModifyWorkspacePropertiesRequest struct {
+	*aws.Request
+	Input *ModifyWorkspacePropertiesInput
+}
+
+// Send marshals and sends the ModifyWorkspaceProperties API request.
+func (r *ModifyWorkspacePropertiesRequest) Send() (*ModifyWorkspacePropertiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyWorkspacePropertiesOutput), nil
+}
+
+// ModifyWorkspacePropertiesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyWorkspaceProperties for more information on using the ModifyWorkspaceProperties
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the WorkSpace properties, including the running mode and AutoStop
+// time.
 //
 //    // Example sending a request using the ModifyWorkspacePropertiesRequest method.
-//    req, resp := client.ModifyWorkspacePropertiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyWorkspacePropertiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
-func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) (req *aws.Request, output *ModifyWorkspacePropertiesOutput) {
+func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest {
 	op := &aws.Operation{
 		Name:       opModifyWorkspaceProperties,
 		HTTPMethod: "POST",
@@ -888,96 +615,47 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 		input = &ModifyWorkspacePropertiesInput{}
 	}
 
-	output = &ModifyWorkspacePropertiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyWorkspaceProperties API operation for Amazon WorkSpaces.
-//
-// Modifies the WorkSpace properties, including the running mode and AutoStop
-// time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation ModifyWorkspaceProperties for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValuesException "InvalidParameterValuesException"
-//   One or more parameter values are not valid.
-//
-//   * ErrCodeInvalidResourceStateException "InvalidResourceStateException"
-//   The state of the WorkSpace is not valid for this operation.
-//
-//   * ErrCodeOperationInProgressException "OperationInProgressException"
-//   The properties of this WorkSpace are currently being modified. Try again
-//   in a moment.
-//
-//   * ErrCodeUnsupportedWorkspaceConfigurationException "UnsupportedWorkspaceConfigurationException"
-//   The configuration of this WorkSpace is not supported for this operation.
-//   For more information, see the Amazon WorkSpaces Administration Guide (http://docs.aws.amazon.com/workspaces/latest/adminguide/).
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The resource could not be found.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   The user is not authorized to access a resource.
-//
-//   * ErrCodeResourceUnavailableException "ResourceUnavailableException"
-//   The specified resource is not available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties
-func (c *WorkSpaces) ModifyWorkspaceProperties(input *ModifyWorkspacePropertiesInput) (*ModifyWorkspacePropertiesOutput, error) {
-	req, out := c.ModifyWorkspacePropertiesRequest(input)
-	return out, req.Send()
-}
-
-// ModifyWorkspacePropertiesWithContext is the same as ModifyWorkspaceProperties with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyWorkspaceProperties for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) ModifyWorkspacePropertiesWithContext(ctx aws.Context, input *ModifyWorkspacePropertiesInput, opts ...aws.Option) (*ModifyWorkspacePropertiesOutput, error) {
-	req, out := c.ModifyWorkspacePropertiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyWorkspacePropertiesOutput{})
+	return ModifyWorkspacePropertiesRequest{Request: req, Input: input}
 }
 
 const opRebootWorkspaces = "RebootWorkspaces"
 
-// RebootWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the RebootWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebootWorkspacesRequest is a API request type for the RebootWorkspaces API operation.
+type RebootWorkspacesRequest struct {
+	*aws.Request
+	Input *RebootWorkspacesInput
+}
+
+// Send marshals and sends the RebootWorkspaces API request.
+func (r *RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootWorkspacesOutput), nil
+}
+
+// RebootWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Reboots the specified WorkSpaces.
 //
-// See RebootWorkspaces for more information on using the RebootWorkspaces
-// API call, and error handling.
+// To be able to reboot a WorkSpace, the WorkSpace must have a State of AVAILABLE,
+// IMPAIRED, or INOPERABLE.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is asynchronous and returns before the WorkSpaces have rebooted.
 //
 //    // Example sending a request using the RebootWorkspacesRequest method.
-//    req, resp := client.RebootWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebootWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
-func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req *aws.Request, output *RebootWorkspacesOutput) {
+func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) RebootWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opRebootWorkspaces,
 		HTTPMethod: "POST",
@@ -988,91 +666,30 @@ func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) (req 
 		input = &RebootWorkspacesInput{}
 	}
 
-	output = &RebootWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RebootWorkspaces API operation for Amazon WorkSpaces.
-//
-// Reboots the specified WorkSpaces.
-//
-// To be able to reboot a WorkSpace, the WorkSpace must have a State of AVAILABLE,
-// IMPAIRED, or INOPERABLE.
-//
-// This operation is asynchronous and returns before the WorkSpaces have rebooted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation RebootWorkspaces for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces
-func (c *WorkSpaces) RebootWorkspaces(input *RebootWorkspacesInput) (*RebootWorkspacesOutput, error) {
-	req, out := c.RebootWorkspacesRequest(input)
-	return out, req.Send()
-}
-
-// RebootWorkspacesWithContext is the same as RebootWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) RebootWorkspacesWithContext(ctx aws.Context, input *RebootWorkspacesInput, opts ...aws.Option) (*RebootWorkspacesOutput, error) {
-	req, out := c.RebootWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RebootWorkspacesOutput{})
+	return RebootWorkspacesRequest{Request: req, Input: input}
 }
 
 const opRebuildWorkspaces = "RebuildWorkspaces"
 
-// RebuildWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the RebuildWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebuildWorkspaces for more information on using the RebuildWorkspaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RebuildWorkspacesRequest method.
-//    req, resp := client.RebuildWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
-func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (req *aws.Request, output *RebuildWorkspacesOutput) {
-	op := &aws.Operation{
-		Name:       opRebuildWorkspaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RebuildWorkspacesInput{}
-	}
-
-	output = &RebuildWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RebuildWorkspacesRequest is a API request type for the RebuildWorkspaces API operation.
+type RebuildWorkspacesRequest struct {
+	*aws.Request
+	Input *RebuildWorkspacesInput
 }
 
-// RebuildWorkspaces API operation for Amazon WorkSpaces.
+// Send marshals and sends the RebuildWorkspaces API request.
+func (r *RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebuildWorkspacesOutput), nil
+}
+
+// RebuildWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
 // Rebuilds the specified WorkSpaces.
 //
@@ -1094,61 +711,62 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) (re
 // This operation is asynchronous and returns before the WorkSpaces have been
 // completely rebuilt.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the RebuildWorkspacesRequest method.
+//    req := client.RebuildWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation RebuildWorkspaces for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces
-func (c *WorkSpaces) RebuildWorkspaces(input *RebuildWorkspacesInput) (*RebuildWorkspacesOutput, error) {
-	req, out := c.RebuildWorkspacesRequest(input)
-	return out, req.Send()
-}
+func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) RebuildWorkspacesRequest {
+	op := &aws.Operation{
+		Name:       opRebuildWorkspaces,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RebuildWorkspacesWithContext is the same as RebuildWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebuildWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) RebuildWorkspacesWithContext(ctx aws.Context, input *RebuildWorkspacesInput, opts ...aws.Option) (*RebuildWorkspacesOutput, error) {
-	req, out := c.RebuildWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RebuildWorkspacesInput{}
+	}
+
+	req := c.newRequest(op, input, &RebuildWorkspacesOutput{})
+	return RebuildWorkspacesRequest{Request: req, Input: input}
 }
 
 const opStartWorkspaces = "StartWorkspaces"
 
-// StartWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the StartWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartWorkspacesRequest is a API request type for the StartWorkspaces API operation.
+type StartWorkspacesRequest struct {
+	*aws.Request
+	Input *StartWorkspacesInput
+}
+
+// Send marshals and sends the StartWorkspaces API request.
+func (r *StartWorkspacesRequest) Send() (*StartWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartWorkspacesOutput), nil
+}
+
+// StartWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartWorkspaces for more information on using the StartWorkspaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts the specified WorkSpaces. The WorkSpaces must have a running mode
+// of AutoStop and a state of STOPPED.
 //
 //    // Example sending a request using the StartWorkspacesRequest method.
-//    req, resp := client.StartWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces
-func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) (req *aws.Request, output *StartWorkspacesOutput) {
+func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) StartWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opStartWorkspaces,
 		HTTPMethod: "POST",
@@ -1159,71 +777,43 @@ func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) (req *a
 		input = &StartWorkspacesInput{}
 	}
 
-	output = &StartWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartWorkspaces API operation for Amazon WorkSpaces.
-//
-// Starts the specified WorkSpaces. The WorkSpaces must have a running mode
-// of AutoStop and a state of STOPPED.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation StartWorkspaces for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces
-func (c *WorkSpaces) StartWorkspaces(input *StartWorkspacesInput) (*StartWorkspacesOutput, error) {
-	req, out := c.StartWorkspacesRequest(input)
-	return out, req.Send()
-}
-
-// StartWorkspacesWithContext is the same as StartWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) StartWorkspacesWithContext(ctx aws.Context, input *StartWorkspacesInput, opts ...aws.Option) (*StartWorkspacesOutput, error) {
-	req, out := c.StartWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartWorkspacesOutput{})
+	return StartWorkspacesRequest{Request: req, Input: input}
 }
 
 const opStopWorkspaces = "StopWorkspaces"
 
-// StopWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the StopWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopWorkspacesRequest is a API request type for the StopWorkspaces API operation.
+type StopWorkspacesRequest struct {
+	*aws.Request
+	Input *StopWorkspacesInput
+}
+
+// Send marshals and sends the StopWorkspaces API request.
+func (r *StopWorkspacesRequest) Send() (*StopWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopWorkspacesOutput), nil
+}
+
+// StopWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopWorkspaces for more information on using the StopWorkspaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops the specified WorkSpaces. The WorkSpaces must have a running mode of
+// AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
 //
 //    // Example sending a request using the StopWorkspacesRequest method.
-//    req, resp := client.StopWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces
-func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) (req *aws.Request, output *StopWorkspacesOutput) {
+func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorkspacesRequest {
 	op := &aws.Operation{
 		Name:       opStopWorkspaces,
 		HTTPMethod: "POST",
@@ -1234,87 +824,30 @@ func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) (req *aws
 		input = &StopWorkspacesInput{}
 	}
 
-	output = &StopWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopWorkspaces API operation for Amazon WorkSpaces.
-//
-// Stops the specified WorkSpaces. The WorkSpaces must have a running mode of
-// AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation StopWorkspaces for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces
-func (c *WorkSpaces) StopWorkspaces(input *StopWorkspacesInput) (*StopWorkspacesOutput, error) {
-	req, out := c.StopWorkspacesRequest(input)
-	return out, req.Send()
-}
-
-// StopWorkspacesWithContext is the same as StopWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) StopWorkspacesWithContext(ctx aws.Context, input *StopWorkspacesInput, opts ...aws.Option) (*StopWorkspacesOutput, error) {
-	req, out := c.StopWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopWorkspacesOutput{})
+	return StopWorkspacesRequest{Request: req, Input: input}
 }
 
 const opTerminateWorkspaces = "TerminateWorkspaces"
 
-// TerminateWorkspacesRequest generates a "aws.Request" representing the
-// client's request for the TerminateWorkspaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateWorkspaces for more information on using the TerminateWorkspaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TerminateWorkspacesRequest method.
-//    req, resp := client.TerminateWorkspacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces
-func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) (req *aws.Request, output *TerminateWorkspacesOutput) {
-	op := &aws.Operation{
-		Name:       opTerminateWorkspaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &TerminateWorkspacesInput{}
-	}
-
-	output = &TerminateWorkspacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// TerminateWorkspacesRequest is a API request type for the TerminateWorkspaces API operation.
+type TerminateWorkspacesRequest struct {
+	*aws.Request
+	Input *TerminateWorkspacesInput
 }
 
-// TerminateWorkspaces API operation for Amazon WorkSpaces.
+// Send marshals and sends the TerminateWorkspaces API request.
+func (r *TerminateWorkspacesRequest) Send() (*TerminateWorkspacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateWorkspacesOutput), nil
+}
+
+// TerminateWorkspacesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
 //
 // Terminates the specified WorkSpaces.
 //
@@ -1327,32 +860,27 @@ func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput)
 // This operation is asynchronous and returns before the WorkSpaces have been
 // completely terminated.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
+//    // Example sending a request using the TerminateWorkspacesRequest method.
+//    req := client.TerminateWorkspacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
-// See the AWS API reference guide for Amazon WorkSpaces's
-// API operation TerminateWorkspaces for usage and error information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces
-func (c *WorkSpaces) TerminateWorkspaces(input *TerminateWorkspacesInput) (*TerminateWorkspacesOutput, error) {
-	req, out := c.TerminateWorkspacesRequest(input)
-	return out, req.Send()
-}
+func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput) TerminateWorkspacesRequest {
+	op := &aws.Operation{
+		Name:       opTerminateWorkspaces,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TerminateWorkspacesWithContext is the same as TerminateWorkspaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateWorkspaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) TerminateWorkspacesWithContext(ctx aws.Context, input *TerminateWorkspacesInput, opts ...aws.Option) (*TerminateWorkspacesOutput, error) {
-	req, out := c.TerminateWorkspacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TerminateWorkspacesInput{}
+	}
+
+	req := c.newRequest(op, input, &TerminateWorkspacesOutput{})
+	return TerminateWorkspacesRequest{Request: req, Input: input}
 }
 
 // Contains information about the compute type of a WorkSpace bundle.

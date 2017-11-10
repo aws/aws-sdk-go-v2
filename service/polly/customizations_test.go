@@ -15,9 +15,9 @@ func TestRestGETStrategy(t *testing.T) {
 	cfg.Region = "us-west-2"
 
 	svc := New(cfg)
-	r, _ := svc.SynthesizeSpeechRequest(nil)
+	r := svc.SynthesizeSpeechRequest(nil)
 
-	if err := restGETPresignStrategy(r); err != nil {
+	if err := restGETPresignStrategy(r.Request); err != nil {
 		t.Error(err)
 	}
 	if "GET" != r.HTTPRequest.Method {
@@ -34,7 +34,7 @@ func TestPresign(t *testing.T) {
 	cfg.EndpointResolver = modeledendpoints.NewDefaultResolver()
 
 	svc := New(cfg)
-	r, _ := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{
+	r := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{
 		Text:         aws.String("Moo"),
 		OutputFormat: OutputFormatMp3,
 		VoiceId:      VoiceIdGeraint,

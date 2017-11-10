@@ -12,47 +12,24 @@ import (
 
 const opCreateDeliveryStream = "CreateDeliveryStream"
 
-// CreateDeliveryStreamRequest generates a "aws.Request" representing the
-// client's request for the CreateDeliveryStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeliveryStream for more information on using the CreateDeliveryStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDeliveryStreamRequest method.
-//    req, resp := client.CreateDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
-func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) (req *aws.Request, output *CreateDeliveryStreamOutput) {
-	op := &aws.Operation{
-		Name:       opCreateDeliveryStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateDeliveryStreamInput{}
-	}
-
-	output = &CreateDeliveryStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateDeliveryStreamRequest is a API request type for the CreateDeliveryStream API operation.
+type CreateDeliveryStreamRequest struct {
+	*aws.Request
+	Input *CreateDeliveryStreamInput
 }
 
-// CreateDeliveryStream API operation for Amazon Kinesis Firehose.
+// Send marshals and sends the CreateDeliveryStream API request.
+func (r *CreateDeliveryStreamRequest) Send() (*CreateDeliveryStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeliveryStreamOutput), nil
+}
+
+// CreateDeliveryStreamRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Creates a delivery stream.
 //
@@ -107,88 +84,49 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 // data. For more information, see Amazon S3 Bucket Access (http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
 // in the Amazon Kinesis Firehose Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation CreateDeliveryStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   You have already reached the limit for a requested resource.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
-func (c *Firehose) CreateDeliveryStream(input *CreateDeliveryStreamInput) (*CreateDeliveryStreamOutput, error) {
-	req, out := c.CreateDeliveryStreamRequest(input)
-	return out, req.Send()
-}
-
-// CreateDeliveryStreamWithContext is the same as CreateDeliveryStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeliveryStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) CreateDeliveryStreamWithContext(ctx aws.Context, input *CreateDeliveryStreamInput, opts ...aws.Option) (*CreateDeliveryStreamOutput, error) {
-	req, out := c.CreateDeliveryStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteDeliveryStream = "DeleteDeliveryStream"
-
-// DeleteDeliveryStreamRequest generates a "aws.Request" representing the
-// client's request for the DeleteDeliveryStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDeliveryStream for more information on using the DeleteDeliveryStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteDeliveryStreamRequest method.
-//    req, resp := client.DeleteDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDeliveryStreamRequest method.
+//    req := client.CreateDeliveryStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
-func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) (req *aws.Request, output *DeleteDeliveryStreamOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
+func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) CreateDeliveryStreamRequest {
 	op := &aws.Operation{
-		Name:       opDeleteDeliveryStream,
+		Name:       opCreateDeliveryStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteDeliveryStreamInput{}
+		input = &CreateDeliveryStreamInput{}
 	}
 
-	output = &DeleteDeliveryStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDeliveryStreamOutput{})
+	return CreateDeliveryStreamRequest{Request: req, Input: input}
 }
 
-// DeleteDeliveryStream API operation for Amazon Kinesis Firehose.
+const opDeleteDeliveryStream = "DeleteDeliveryStream"
+
+// DeleteDeliveryStreamRequest is a API request type for the DeleteDeliveryStream API operation.
+type DeleteDeliveryStreamRequest struct {
+	*aws.Request
+	Input *DeleteDeliveryStreamInput
+}
+
+// Send marshals and sends the DeleteDeliveryStream API request.
+func (r *DeleteDeliveryStreamRequest) Send() (*DeleteDeliveryStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeliveryStreamOutput), nil
+}
+
+// DeleteDeliveryStreamRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Deletes a delivery stream and its data.
 //
@@ -203,69 +141,64 @@ func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput)
 // to delivering the data. Therefore, as a best practice, you should first stop
 // any applications that are sending records before deleting a delivery stream.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation DeleteDeliveryStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
+//    // Example sending a request using the DeleteDeliveryStreamRequest method.
+//    req := client.DeleteDeliveryStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
-func (c *Firehose) DeleteDeliveryStream(input *DeleteDeliveryStreamInput) (*DeleteDeliveryStreamOutput, error) {
-	req, out := c.DeleteDeliveryStreamRequest(input)
-	return out, req.Send()
-}
+func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest {
+	op := &aws.Operation{
+		Name:       opDeleteDeliveryStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteDeliveryStreamWithContext is the same as DeleteDeliveryStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDeliveryStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) DeleteDeliveryStreamWithContext(ctx aws.Context, input *DeleteDeliveryStreamInput, opts ...aws.Option) (*DeleteDeliveryStreamOutput, error) {
-	req, out := c.DeleteDeliveryStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteDeliveryStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteDeliveryStreamOutput{})
+	return DeleteDeliveryStreamRequest{Request: req, Input: input}
 }
 
 const opDescribeDeliveryStream = "DescribeDeliveryStream"
 
-// DescribeDeliveryStreamRequest generates a "aws.Request" representing the
-// client's request for the DescribeDeliveryStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDeliveryStreamRequest is a API request type for the DescribeDeliveryStream API operation.
+type DescribeDeliveryStreamRequest struct {
+	*aws.Request
+	Input *DescribeDeliveryStreamInput
+}
+
+// Send marshals and sends the DescribeDeliveryStream API request.
+func (r *DescribeDeliveryStreamRequest) Send() (*DescribeDeliveryStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDeliveryStreamOutput), nil
+}
+
+// DescribeDeliveryStreamRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDeliveryStream for more information on using the DescribeDeliveryStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified delivery stream and gets the status. For example,
+// after your delivery stream is created, call DescribeDeliveryStream to see
+// if the delivery stream is ACTIVE and therefore ready for data to be sent
+// to it.
 //
 //    // Example sending a request using the DescribeDeliveryStreamRequest method.
-//    req, resp := client.DescribeDeliveryStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDeliveryStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
-func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) (req *aws.Request, output *DescribeDeliveryStreamOutput) {
+func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryStream,
 		HTTPMethod: "POST",
@@ -276,78 +209,40 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 		input = &DescribeDeliveryStreamInput{}
 	}
 
-	output = &DescribeDeliveryStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDeliveryStream API operation for Amazon Kinesis Firehose.
-//
-// Describes the specified delivery stream and gets the status. For example,
-// after your delivery stream is created, call DescribeDeliveryStream to see
-// if the delivery stream is ACTIVE and therefore ready for data to be sent
-// to it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation DescribeDeliveryStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
-func (c *Firehose) DescribeDeliveryStream(input *DescribeDeliveryStreamInput) (*DescribeDeliveryStreamOutput, error) {
-	req, out := c.DescribeDeliveryStreamRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDeliveryStreamWithContext is the same as DescribeDeliveryStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDeliveryStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) DescribeDeliveryStreamWithContext(ctx aws.Context, input *DescribeDeliveryStreamInput, opts ...aws.Option) (*DescribeDeliveryStreamOutput, error) {
-	req, out := c.DescribeDeliveryStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDeliveryStreamOutput{})
+	return DescribeDeliveryStreamRequest{Request: req, Input: input}
 }
 
 const opGetKinesisStream = "GetKinesisStream"
 
-// GetKinesisStreamRequest generates a "aws.Request" representing the
-// client's request for the GetKinesisStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetKinesisStream for more information on using the GetKinesisStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// GetKinesisStreamRequest is a API request type for the GetKinesisStream API operation.
+type GetKinesisStreamRequest struct {
+	*aws.Request
+	Input *GetKinesisStreamInput
+}
+
+// Send marshals and sends the GetKinesisStream API request.
+func (r *GetKinesisStreamRequest) Send() (*GetKinesisStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetKinesisStreamOutput), nil
+}
+
+// GetKinesisStreamRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 //    // Example sending a request using the GetKinesisStreamRequest method.
-//    req, resp := client.GetKinesisStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetKinesisStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream
-func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) (req *aws.Request, output *GetKinesisStreamOutput) {
+func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) GetKinesisStreamRequest {
 	op := &aws.Operation{
 		Name:       opGetKinesisStream,
 		HTTPMethod: "POST",
@@ -358,94 +253,30 @@ func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) (req *a
 		input = &GetKinesisStreamInput{}
 	}
 
-	output = &GetKinesisStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetKinesisStream API operation for Amazon Kinesis Firehose.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation GetKinesisStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
-//
-//   * ErrCodeInvalidStreamTypeException "InvalidStreamTypeException"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream
-func (c *Firehose) GetKinesisStream(input *GetKinesisStreamInput) (*GetKinesisStreamOutput, error) {
-	req, out := c.GetKinesisStreamRequest(input)
-	return out, req.Send()
-}
-
-// GetKinesisStreamWithContext is the same as GetKinesisStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetKinesisStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) GetKinesisStreamWithContext(ctx aws.Context, input *GetKinesisStreamInput, opts ...aws.Option) (*GetKinesisStreamOutput, error) {
-	req, out := c.GetKinesisStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetKinesisStreamOutput{})
+	return GetKinesisStreamRequest{Request: req, Input: input}
 }
 
 const opListDeliveryStreams = "ListDeliveryStreams"
 
-// ListDeliveryStreamsRequest generates a "aws.Request" representing the
-// client's request for the ListDeliveryStreams operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDeliveryStreams for more information on using the ListDeliveryStreams
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListDeliveryStreamsRequest method.
-//    req, resp := client.ListDeliveryStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
-func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) (req *aws.Request, output *ListDeliveryStreamsOutput) {
-	op := &aws.Operation{
-		Name:       opListDeliveryStreams,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListDeliveryStreamsInput{}
-	}
-
-	output = &ListDeliveryStreamsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListDeliveryStreamsRequest is a API request type for the ListDeliveryStreams API operation.
+type ListDeliveryStreamsRequest struct {
+	*aws.Request
+	Input *ListDeliveryStreamsInput
 }
 
-// ListDeliveryStreams API operation for Amazon Kinesis Firehose.
+// Send marshals and sends the ListDeliveryStreams API request.
+func (r *ListDeliveryStreamsRequest) Send() (*ListDeliveryStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeliveryStreamsOutput), nil
+}
+
+// ListDeliveryStreamsRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Lists your delivery streams.
 //
@@ -457,77 +288,49 @@ func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) (
 // by specifying the name of the last delivery stream returned in the call in
 // the ExclusiveStartDeliveryStreamName parameter of a subsequent call.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation ListDeliveryStreams for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
-func (c *Firehose) ListDeliveryStreams(input *ListDeliveryStreamsInput) (*ListDeliveryStreamsOutput, error) {
-	req, out := c.ListDeliveryStreamsRequest(input)
-	return out, req.Send()
-}
-
-// ListDeliveryStreamsWithContext is the same as ListDeliveryStreams with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDeliveryStreams for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) ListDeliveryStreamsWithContext(ctx aws.Context, input *ListDeliveryStreamsInput, opts ...aws.Option) (*ListDeliveryStreamsOutput, error) {
-	req, out := c.ListDeliveryStreamsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRecord = "PutRecord"
-
-// PutRecordRequest generates a "aws.Request" representing the
-// client's request for the PutRecord operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRecord for more information on using the PutRecord
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRecordRequest method.
-//    req, resp := client.PutRecordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListDeliveryStreamsRequest method.
+//    req := client.ListDeliveryStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
-func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *aws.Request, output *PutRecordOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
+func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) ListDeliveryStreamsRequest {
 	op := &aws.Operation{
-		Name:       opPutRecord,
+		Name:       opListDeliveryStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRecordInput{}
+		input = &ListDeliveryStreamsInput{}
 	}
 
-	output = &PutRecordOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListDeliveryStreamsOutput{})
+	return ListDeliveryStreamsRequest{Request: req, Input: input}
 }
 
-// PutRecord API operation for Amazon Kinesis Firehose.
+const opPutRecord = "PutRecord"
+
+// PutRecordRequest is a API request type for the PutRecord API operation.
+type PutRecordRequest struct {
+	*aws.Request
+	Input *PutRecordInput
+}
+
+// Send marshals and sends the PutRecord API request.
+func (r *PutRecordRequest) Send() (*PutRecordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRecordOutput), nil
+}
+
+// PutRecordRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Writes a single data record into an Amazon Kinesis Firehose delivery stream.
 // To write multiple data records into a delivery stream, use PutRecordBatch.
@@ -563,91 +366,49 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *aws.Request, ou
 // the destination. If the destination is unreachable for more than 24 hours,
 // the data is no longer available.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation PutRecord for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is unavailable, back off and retry the operation. If you continue
-//   to see the exception, throughput limits for the delivery stream may have
-//   been exceeded. For more information about limits and how to request an increase,
-//   see Amazon Kinesis Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
-func (c *Firehose) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
-	req, out := c.PutRecordRequest(input)
-	return out, req.Send()
-}
-
-// PutRecordWithContext is the same as PutRecord with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRecord for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...aws.Option) (*PutRecordOutput, error) {
-	req, out := c.PutRecordRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRecordBatch = "PutRecordBatch"
-
-// PutRecordBatchRequest generates a "aws.Request" representing the
-// client's request for the PutRecordBatch operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRecordBatch for more information on using the PutRecordBatch
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRecordBatchRequest method.
-//    req, resp := client.PutRecordBatchRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutRecordRequest method.
+//    req := client.PutRecordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
-func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *aws.Request, output *PutRecordBatchOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
+func (c *Firehose) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	op := &aws.Operation{
-		Name:       opPutRecordBatch,
+		Name:       opPutRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRecordBatchInput{}
+		input = &PutRecordInput{}
 	}
 
-	output = &PutRecordBatchOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutRecordOutput{})
+	return PutRecordRequest{Request: req, Input: input}
 }
 
-// PutRecordBatch API operation for Amazon Kinesis Firehose.
+const opPutRecordBatch = "PutRecordBatch"
+
+// PutRecordBatchRequest is a API request type for the PutRecordBatch API operation.
+type PutRecordBatchRequest struct {
+	*aws.Request
+	Input *PutRecordBatchInput
+}
+
+// Send marshals and sends the PutRecordBatch API request.
+func (r *PutRecordBatchRequest) Send() (*PutRecordBatchOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRecordBatchOutput), nil
+}
+
+// PutRecordBatchRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Writes multiple data records into a delivery stream in a single call, which
 // can achieve higher throughput per producer than when writing single records.
@@ -708,91 +469,49 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *aws.R
 // the destination. If the destination is unreachable for more than 24 hours,
 // the data is no longer available.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation PutRecordBatch for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   The service is unavailable, back off and retry the operation. If you continue
-//   to see the exception, throughput limits for the delivery stream may have
-//   been exceeded. For more information about limits and how to request an increase,
-//   see Amazon Kinesis Firehose Limits (http://docs.aws.amazon.com/firehose/latest/dev/limits.html).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
-func (c *Firehose) PutRecordBatch(input *PutRecordBatchInput) (*PutRecordBatchOutput, error) {
-	req, out := c.PutRecordBatchRequest(input)
-	return out, req.Send()
-}
-
-// PutRecordBatchWithContext is the same as PutRecordBatch with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRecordBatch for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) PutRecordBatchWithContext(ctx aws.Context, input *PutRecordBatchInput, opts ...aws.Option) (*PutRecordBatchOutput, error) {
-	req, out := c.PutRecordBatchRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateDestination = "UpdateDestination"
-
-// UpdateDestinationRequest generates a "aws.Request" representing the
-// client's request for the UpdateDestination operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDestination for more information on using the UpdateDestination
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateDestinationRequest method.
-//    req, resp := client.UpdateDestinationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutRecordBatchRequest method.
+//    req := client.PutRecordBatchRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
-func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req *aws.Request, output *UpdateDestinationOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
+func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBatchRequest {
 	op := &aws.Operation{
-		Name:       opUpdateDestination,
+		Name:       opPutRecordBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateDestinationInput{}
+		input = &PutRecordBatchInput{}
 	}
 
-	output = &UpdateDestinationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutRecordBatchOutput{})
+	return PutRecordBatchRequest{Request: req, Input: input}
 }
 
-// UpdateDestination API operation for Amazon Kinesis Firehose.
+const opUpdateDestination = "UpdateDestination"
+
+// UpdateDestinationRequest is a API request type for the UpdateDestination API operation.
+type UpdateDestinationRequest struct {
+	*aws.Request
+	Input *UpdateDestinationInput
+}
+
+// Send marshals and sends the UpdateDestination API request.
+func (r *UpdateDestinationRequest) Send() (*UpdateDestinationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDestinationOutput), nil
+}
+
+// UpdateDestinationRequest returns a request value for making API operation for
+// Amazon Kinesis Firehose.
 //
 // Updates the specified destination of the specified delivery stream.
 //
@@ -825,47 +544,27 @@ func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req 
 // and can be retrieved using DescribeDeliveryStream. Use the new version ID
 // to set CurrentDeliveryStreamVersionId in the next call.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis Firehose's
-// API operation UpdateDestination for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   The specified input parameter has a value that is not valid.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is already in use and not available for this operation.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Another modification has already happened. Fetch VersionId again and use
-//   it to update the destination.
+//    // Example sending a request using the UpdateDestinationRequest method.
+//    req := client.UpdateDestinationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
-func (c *Firehose) UpdateDestination(input *UpdateDestinationInput) (*UpdateDestinationOutput, error) {
-	req, out := c.UpdateDestinationRequest(input)
-	return out, req.Send()
-}
+func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) UpdateDestinationRequest {
+	op := &aws.Operation{
+		Name:       opUpdateDestination,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateDestinationWithContext is the same as UpdateDestination with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDestination for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Firehose) UpdateDestinationWithContext(ctx aws.Context, input *UpdateDestinationInput, opts ...aws.Option) (*UpdateDestinationOutput, error) {
-	req, out := c.UpdateDestinationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateDestinationInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateDestinationOutput{})
+	return UpdateDestinationRequest{Request: req, Input: input}
 }
 
 // Describes hints for the buffering to perform before delivering data to the

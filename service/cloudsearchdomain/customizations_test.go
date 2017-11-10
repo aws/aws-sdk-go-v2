@@ -15,7 +15,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := cloudsearchdomain.New(cfg)
-	req, _ := svc.SearchRequest(nil)
+	req := svc.SearchRequest(nil)
 	err := req.Build()
 
 	if e, a := "", req.Metadata.Endpoint; e != a {
@@ -35,7 +35,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := cloudsearchdomain.New(cfg)
-	req, _ := svc.SearchRequest(nil)
+	req := svc.SearchRequest(nil)
 	err := req.Build()
 
 	if e, a := "", req.Metadata.Endpoint; e != a {
@@ -56,7 +56,7 @@ func TestRequireEndpointUsed(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 
 	svc := cloudsearchdomain.New(cfg)
-	req, _ := svc.SearchRequest(nil)
+	req := svc.SearchRequest(nil)
 	err := req.Build()
 
 	if e, a := "https://endpoint", req.Metadata.Endpoint; e != a {

@@ -60,7 +60,8 @@ func main() {
 	}
 
 	// Make the DynamoDB Query API call
-	result, err := svc.Scan(params)
+	req := svc.ScanRequest(params)
+	result, err := req.Send()
 	if err != nil {
 		exitErrorf("failed to make Query API call, %v", err)
 	}

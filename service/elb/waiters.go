@@ -43,10 +43,10 @@ func (c *ELB) WaitUntilAnyInstanceInServiceWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceHealthRequest(inCpy)
+			req := c.DescribeInstanceHealthRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -94,10 +94,10 @@ func (c *ELB) WaitUntilInstanceDeregisteredWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceHealthRequest(inCpy)
+			req := c.DescribeInstanceHealthRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -145,10 +145,10 @@ func (c *ELB) WaitUntilInstanceInServiceWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeInstanceHealthRequest(inCpy)
+			req := c.DescribeInstanceHealthRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

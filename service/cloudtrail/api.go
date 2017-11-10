@@ -12,31 +12,41 @@ import (
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
+}
+
+// Send marshals and sends the AddTags API request.
+func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds one or more tags to a trail, up to a limit of 50. Tags must be unique
+// per trail. Overwrites an existing tag's value when a new value is specified
+// for an existing tag key. If you specify a key without a value, the tag will
+// be created with the specified key and a value of null. You can tag a trail
+// that applies to all regions only from the region in which the trail was created
+// (that is, from its home region).
 //
 //    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTags
-func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -47,120 +57,44 @@ func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) (req *aws.Request, outp
 		input = &AddTagsInput{}
 	}
 
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTags API operation for AWS CloudTrail.
-//
-// Adds one or more tags to a trail, up to a limit of 50. Tags must be unique
-// per trail. Overwrites an existing tag's value when a new value is specified
-// for an existing tag key. If you specify a key without a value, the tag will
-// be created with the specified key and a value of null. You can tag a trail
-// that applies to all regions only from the region in which the trail was created
-// (that is, from its home region).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   This exception is thrown when the specified resource is not found.
-//
-//   * ErrCodeARNInvalidException "ARNInvalidException"
-//   This exception is thrown when an operation is called with an invalid trail
-//   ARN. The format of a trail ARN is:
-//
-//   arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail
-//
-//   * ErrCodeResourceTypeNotSupportedException "ResourceTypeNotSupportedException"
-//   This exception is thrown when the specified resource type is not supported
-//   by CloudTrail.
-//
-//   * ErrCodeTagsLimitExceededException "TagsLimitExceededException"
-//   The number of tags per trail has exceeded the permitted amount. Currently,
-//   the limit is 50.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidTagParameterException "InvalidTagParameterException"
-//   This exception is thrown when the key or value specified for the tag does
-//   not match the regular expression ^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTags
-func (c *CloudTrail) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsOutput{})
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opCreateTrail = "CreateTrail"
 
-// CreateTrailRequest generates a "aws.Request" representing the
-// client's request for the CreateTrail operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTrailRequest is a API request type for the CreateTrail API operation.
+type CreateTrailRequest struct {
+	*aws.Request
+	Input *CreateTrailInput
+}
+
+// Send marshals and sends the CreateTrail API request.
+func (r *CreateTrailRequest) Send() (*CreateTrailOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTrailOutput), nil
+}
+
+// CreateTrailRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTrail for more information on using the CreateTrail
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a trail that specifies the settings for delivery of log data to an
+// Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective
+// of the region in which they were created.
 //
 //    // Example sending a request using the CreateTrailRequest method.
-//    req, resp := client.CreateTrailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTrailRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail
-func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *aws.Request, output *CreateTrailOutput) {
+func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) CreateTrailRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrail,
 		HTTPMethod: "POST",
@@ -171,154 +105,44 @@ func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *aws.Reque
 		input = &CreateTrailInput{}
 	}
 
-	output = &CreateTrailOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTrail API operation for AWS CloudTrail.
-//
-// Creates a trail that specifies the settings for delivery of log data to an
-// Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective
-// of the region in which they were created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation CreateTrail for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMaximumNumberOfTrailsExceededException "MaximumNumberOfTrailsExceededException"
-//   This exception is thrown when the maximum number of trails is reached.
-//
-//   * ErrCodeTrailAlreadyExistsException "TrailAlreadyExistsException"
-//   This exception is thrown when the specified trail already exists.
-//
-//   * ErrCodeS3BucketDoesNotExistException "S3BucketDoesNotExistException"
-//   This exception is thrown when the specified S3 bucket does not exist.
-//
-//   * ErrCodeInsufficientS3BucketPolicyException "InsufficientS3BucketPolicyException"
-//   This exception is thrown when the policy on the S3 bucket is not sufficient.
-//
-//   * ErrCodeInsufficientSnsTopicPolicyException "InsufficientSnsTopicPolicyException"
-//   This exception is thrown when the policy on the SNS topic is not sufficient.
-//
-//   * ErrCodeInsufficientEncryptionPolicyException "InsufficientEncryptionPolicyException"
-//   This exception is thrown when the policy on the S3 bucket or KMS key is not
-//   sufficient.
-//
-//   * ErrCodeInvalidS3BucketNameException "InvalidS3BucketNameException"
-//   This exception is thrown when the provided S3 bucket name is not valid.
-//
-//   * ErrCodeInvalidS3PrefixException "InvalidS3PrefixException"
-//   This exception is thrown when the provided S3 prefix is not valid.
-//
-//   * ErrCodeInvalidSnsTopicNameException "InvalidSnsTopicNameException"
-//   This exception is thrown when the provided SNS topic name is not valid.
-//
-//   * ErrCodeInvalidKmsKeyIdException "InvalidKmsKeyIdException"
-//   This exception is thrown when the KMS key ARN is invalid.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeTrailNotProvidedException "TrailNotProvidedException"
-//   This exception is deprecated.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   This exception is thrown when the combination of parameters provided is not
-//   valid.
-//
-//   * ErrCodeKmsKeyNotFoundException "KmsKeyNotFoundException"
-//   This exception is thrown when the KMS key does not exist, or when the S3
-//   bucket and the KMS key are not in the same region.
-//
-//   * ErrCodeKmsKeyDisabledException "KmsKeyDisabledException"
-//   This exception is deprecated.
-//
-//   * ErrCodeKmsException "KmsException"
-//   This exception is thrown when there is an issue with the specified KMS key
-//   and the trail can’t be updated.
-//
-//   * ErrCodeInvalidCloudWatchLogsLogGroupArnException "InvalidCloudWatchLogsLogGroupArnException"
-//   This exception is thrown when the provided CloudWatch log group is not valid.
-//
-//   * ErrCodeInvalidCloudWatchLogsRoleArnException "InvalidCloudWatchLogsRoleArnException"
-//   This exception is thrown when the provided role is not valid.
-//
-//   * ErrCodeCloudWatchLogsDeliveryUnavailableException "CloudWatchLogsDeliveryUnavailableException"
-//   Cannot set a CloudWatch Logs delivery for this region.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail
-func (c *CloudTrail) CreateTrail(input *CreateTrailInput) (*CreateTrailOutput, error) {
-	req, out := c.CreateTrailRequest(input)
-	return out, req.Send()
-}
-
-// CreateTrailWithContext is the same as CreateTrail with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTrail for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) CreateTrailWithContext(ctx aws.Context, input *CreateTrailInput, opts ...aws.Option) (*CreateTrailOutput, error) {
-	req, out := c.CreateTrailRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTrailOutput{})
+	return CreateTrailRequest{Request: req, Input: input}
 }
 
 const opDeleteTrail = "DeleteTrail"
 
-// DeleteTrailRequest generates a "aws.Request" representing the
-// client's request for the DeleteTrail operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTrailRequest is a API request type for the DeleteTrail API operation.
+type DeleteTrailRequest struct {
+	*aws.Request
+	Input *DeleteTrailInput
+}
+
+// Send marshals and sends the DeleteTrail API request.
+func (r *DeleteTrailRequest) Send() (*DeleteTrailOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTrailOutput), nil
+}
+
+// DeleteTrailRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTrail for more information on using the DeleteTrail
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a trail. This operation must be called from the region in which the
+// trail was created. DeleteTrail cannot be called on the shadow trails (replicated
+// trails in other regions) of a trail that is enabled in all regions.
 //
 //    // Example sending a request using the DeleteTrailRequest method.
-//    req, resp := client.DeleteTrailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTrailRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrail
-func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *aws.Request, output *DeleteTrailOutput) {
+func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrail,
 		HTTPMethod: "POST",
@@ -329,97 +153,43 @@ func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *aws.Reque
 		input = &DeleteTrailInput{}
 	}
 
-	output = &DeleteTrailOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTrail API operation for AWS CloudTrail.
-//
-// Deletes a trail. This operation must be called from the region in which the
-// trail was created. DeleteTrail cannot be called on the shadow trails (replicated
-// trails in other regions) of a trail that is enabled in all regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation DeleteTrail for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidHomeRegionException "InvalidHomeRegionException"
-//   This exception is thrown when an operation is called on a trail from a region
-//   other than the region in which the trail was created.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrail
-func (c *CloudTrail) DeleteTrail(input *DeleteTrailInput) (*DeleteTrailOutput, error) {
-	req, out := c.DeleteTrailRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTrailWithContext is the same as DeleteTrail with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTrail for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) DeleteTrailWithContext(ctx aws.Context, input *DeleteTrailInput, opts ...aws.Option) (*DeleteTrailOutput, error) {
-	req, out := c.DeleteTrailRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTrailOutput{})
+	return DeleteTrailRequest{Request: req, Input: input}
 }
 
 const opDescribeTrails = "DescribeTrails"
 
-// DescribeTrailsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTrails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTrailsRequest is a API request type for the DescribeTrails API operation.
+type DescribeTrailsRequest struct {
+	*aws.Request
+	Input *DescribeTrailsInput
+}
+
+// Send marshals and sends the DescribeTrails API request.
+func (r *DescribeTrailsRequest) Send() (*DescribeTrailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTrailsOutput), nil
+}
+
+// DescribeTrailsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTrails for more information on using the DescribeTrails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves settings for the trail associated with the current region for your
+// account.
 //
 //    // Example sending a request using the DescribeTrailsRequest method.
-//    req, resp := client.DescribeTrailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTrailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails
-func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *aws.Request, output *DescribeTrailsOutput) {
+func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeTrailsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTrails,
 		HTTPMethod: "POST",
@@ -430,95 +200,30 @@ func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *aws
 		input = &DescribeTrailsInput{}
 	}
 
-	output = &DescribeTrailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTrails API operation for AWS CloudTrail.
-//
-// Retrieves settings for the trail associated with the current region for your
-// account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation DescribeTrails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails
-func (c *CloudTrail) DescribeTrails(input *DescribeTrailsInput) (*DescribeTrailsOutput, error) {
-	req, out := c.DescribeTrailsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTrailsWithContext is the same as DescribeTrails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTrails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) DescribeTrailsWithContext(ctx aws.Context, input *DescribeTrailsInput, opts ...aws.Option) (*DescribeTrailsOutput, error) {
-	req, out := c.DescribeTrailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTrailsOutput{})
+	return DescribeTrailsRequest{Request: req, Input: input}
 }
 
 const opGetEventSelectors = "GetEventSelectors"
 
-// GetEventSelectorsRequest generates a "aws.Request" representing the
-// client's request for the GetEventSelectors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetEventSelectors for more information on using the GetEventSelectors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetEventSelectorsRequest method.
-//    req, resp := client.GetEventSelectorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors
-func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) (req *aws.Request, output *GetEventSelectorsOutput) {
-	op := &aws.Operation{
-		Name:       opGetEventSelectors,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetEventSelectorsInput{}
-	}
-
-	output = &GetEventSelectorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetEventSelectorsRequest is a API request type for the GetEventSelectors API operation.
+type GetEventSelectorsRequest struct {
+	*aws.Request
+	Input *GetEventSelectorsInput
 }
 
-// GetEventSelectors API operation for AWS CloudTrail.
+// Send marshals and sends the GetEventSelectors API request.
+func (r *GetEventSelectorsRequest) Send() (*GetEventSelectorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEventSelectorsOutput), nil
+}
+
+// GetEventSelectorsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
 // Describes the settings for the event selectors that you configured for your
 // trail. The information returned for your event selectors includes the following:
@@ -534,88 +239,65 @@ func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) (re
 // (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // in the AWS CloudTrail User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation GetEventSelectors for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
+//    // Example sending a request using the GetEventSelectorsRequest method.
+//    req := client.GetEventSelectorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors
-func (c *CloudTrail) GetEventSelectors(input *GetEventSelectorsInput) (*GetEventSelectorsOutput, error) {
-	req, out := c.GetEventSelectorsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) GetEventSelectorsRequest {
+	op := &aws.Operation{
+		Name:       opGetEventSelectors,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetEventSelectorsWithContext is the same as GetEventSelectors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetEventSelectors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) GetEventSelectorsWithContext(ctx aws.Context, input *GetEventSelectorsInput, opts ...aws.Option) (*GetEventSelectorsOutput, error) {
-	req, out := c.GetEventSelectorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetEventSelectorsInput{}
+	}
+
+	req := c.newRequest(op, input, &GetEventSelectorsOutput{})
+	return GetEventSelectorsRequest{Request: req, Input: input}
 }
 
 const opGetTrailStatus = "GetTrailStatus"
 
-// GetTrailStatusRequest generates a "aws.Request" representing the
-// client's request for the GetTrailStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTrailStatusRequest is a API request type for the GetTrailStatus API operation.
+type GetTrailStatusRequest struct {
+	*aws.Request
+	Input *GetTrailStatusInput
+}
+
+// Send marshals and sends the GetTrailStatus API request.
+func (r *GetTrailStatusRequest) Send() (*GetTrailStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTrailStatusOutput), nil
+}
+
+// GetTrailStatusRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTrailStatus for more information on using the GetTrailStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a JSON-formatted list of information about the specified trail. Fields
+// include information on delivery errors, Amazon SNS and Amazon S3 errors,
+// and start and stop logging times for each trail. This operation returns trail
+// status from a single region. To return trail status from all regions, you
+// must call the operation on each region.
 //
 //    // Example sending a request using the GetTrailStatusRequest method.
-//    req, resp := client.GetTrailStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTrailStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatus
-func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *aws.Request, output *GetTrailStatusOutput) {
+func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) GetTrailStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetTrailStatus,
 		HTTPMethod: "POST",
@@ -626,111 +308,30 @@ func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *aws
 		input = &GetTrailStatusInput{}
 	}
 
-	output = &GetTrailStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTrailStatus API operation for AWS CloudTrail.
-//
-// Returns a JSON-formatted list of information about the specified trail. Fields
-// include information on delivery errors, Amazon SNS and Amazon S3 errors,
-// and start and stop logging times for each trail. This operation returns trail
-// status from a single region. To return trail status from all regions, you
-// must call the operation on each region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation GetTrailStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatus
-func (c *CloudTrail) GetTrailStatus(input *GetTrailStatusInput) (*GetTrailStatusOutput, error) {
-	req, out := c.GetTrailStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetTrailStatusWithContext is the same as GetTrailStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTrailStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) GetTrailStatusWithContext(ctx aws.Context, input *GetTrailStatusInput, opts ...aws.Option) (*GetTrailStatusOutput, error) {
-	req, out := c.GetTrailStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTrailStatusOutput{})
+	return GetTrailStatusRequest{Request: req, Input: input}
 }
 
 const opListPublicKeys = "ListPublicKeys"
 
-// ListPublicKeysRequest generates a "aws.Request" representing the
-// client's request for the ListPublicKeys operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPublicKeys for more information on using the ListPublicKeys
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListPublicKeysRequest method.
-//    req, resp := client.ListPublicKeysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeys
-func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) (req *aws.Request, output *ListPublicKeysOutput) {
-	op := &aws.Operation{
-		Name:       opListPublicKeys,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListPublicKeysInput{}
-	}
-
-	output = &ListPublicKeysOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListPublicKeysRequest is a API request type for the ListPublicKeys API operation.
+type ListPublicKeysRequest struct {
+	*aws.Request
+	Input *ListPublicKeysInput
 }
 
-// ListPublicKeys API operation for AWS CloudTrail.
+// Send marshals and sends the ListPublicKeys API request.
+func (r *ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPublicKeysOutput), nil
+}
+
+// ListPublicKeysRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
 // Returns all public keys whose private keys were used to sign the digest files
 // within the specified time range. The public key is needed to validate digest
@@ -741,76 +342,61 @@ func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) (req *aws
 // validate a digest file from a particular region, you must look in the same
 // region for its corresponding public key.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation ListPublicKeys for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidTimeRangeException "InvalidTimeRangeException"
-//   Occurs if the timestamp values are invalid. Either the start time occurs
-//   after the end time or the time range is outside the range of possible values.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-//   * ErrCodeInvalidTokenException "InvalidTokenException"
-//   Reserved for future use.
+//    // Example sending a request using the ListPublicKeysRequest method.
+//    req := client.ListPublicKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeys
-func (c *CloudTrail) ListPublicKeys(input *ListPublicKeysInput) (*ListPublicKeysOutput, error) {
-	req, out := c.ListPublicKeysRequest(input)
-	return out, req.Send()
-}
+func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKeysRequest {
+	op := &aws.Operation{
+		Name:       opListPublicKeys,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListPublicKeysWithContext is the same as ListPublicKeys with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPublicKeys for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) ListPublicKeysWithContext(ctx aws.Context, input *ListPublicKeysInput, opts ...aws.Option) (*ListPublicKeysOutput, error) {
-	req, out := c.ListPublicKeysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListPublicKeysInput{}
+	}
+
+	req := c.newRequest(op, input, &ListPublicKeysOutput{})
+	return ListPublicKeysRequest{Request: req, Input: input}
 }
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tags for the trail in the current region.
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTags
-func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -821,132 +407,30 @@ func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) (req *aws.Request, ou
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for AWS CloudTrail.
-//
-// Lists the tags for the trail in the current region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   This exception is thrown when the specified resource is not found.
-//
-//   * ErrCodeARNInvalidException "ARNInvalidException"
-//   This exception is thrown when an operation is called with an invalid trail
-//   ARN. The format of a trail ARN is:
-//
-//   arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail
-//
-//   * ErrCodeResourceTypeNotSupportedException "ResourceTypeNotSupportedException"
-//   This exception is thrown when the specified resource type is not supported
-//   by CloudTrail.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-//   * ErrCodeInvalidTokenException "InvalidTokenException"
-//   Reserved for future use.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTags
-func (c *CloudTrail) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 const opLookupEvents = "LookupEvents"
 
-// LookupEventsRequest generates a "aws.Request" representing the
-// client's request for the LookupEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See LookupEvents for more information on using the LookupEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the LookupEventsRequest method.
-//    req, resp := client.LookupEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEvents
-func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *aws.Request, output *LookupEventsOutput) {
-	op := &aws.Operation{
-		Name:       opLookupEvents,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"NextToken"},
-			OutputTokens:    []string{"NextToken"},
-			LimitToken:      "MaxResults",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &LookupEventsInput{}
-	}
-
-	output = &LookupEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// LookupEventsRequest is a API request type for the LookupEvents API operation.
+type LookupEventsRequest struct {
+	*aws.Request
+	Input *LookupEventsInput
 }
 
-// LookupEvents API operation for AWS CloudTrail.
+// Send marshals and sends the LookupEvents API request.
+func (r *LookupEventsRequest) Send() (*LookupEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*LookupEventsOutput), nil
+}
+
+// LookupEventsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
 // Looks up API activity events captured by CloudTrail that create, update,
 // or delete resources in your account. Events for a region can be looked up
@@ -975,48 +459,33 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *aws.Req
 // Events that occurred during the selected time range will not be available
 // for lookup if CloudTrail logging was not enabled when the events occurred.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation LookupEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidLookupAttributesException "InvalidLookupAttributesException"
-//   Occurs when an invalid lookup attribute is specified.
-//
-//   * ErrCodeInvalidTimeRangeException "InvalidTimeRangeException"
-//   Occurs if the timestamp values are invalid. Either the start time occurs
-//   after the end time or the time range is outside the range of possible values.
-//
-//   * ErrCodeInvalidMaxResultsException "InvalidMaxResultsException"
-//   This exception is thrown if the limit specified is invalid.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Invalid token or token that was previously used in a request with different
-//   parameters. This exception is thrown if the token is invalid.
+//    // Example sending a request using the LookupEventsRequest method.
+//    req := client.LookupEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEvents
-func (c *CloudTrail) LookupEvents(input *LookupEventsInput) (*LookupEventsOutput, error) {
-	req, out := c.LookupEventsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsRequest {
+	op := &aws.Operation{
+		Name:       opLookupEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
 
-// LookupEventsWithContext is the same as LookupEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See LookupEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) LookupEventsWithContext(ctx aws.Context, input *LookupEventsInput, opts ...aws.Option) (*LookupEventsOutput, error) {
-	req, out := c.LookupEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &LookupEventsInput{}
+	}
+
+	req := c.newRequest(op, input, &LookupEventsOutput{})
+	return LookupEventsRequest{Request: req, Input: input}
 }
 
 // LookupEventsPages iterates over the pages of a LookupEvents operation,
@@ -1055,10 +524,10 @@ func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *Lookup
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.LookupEventsRequest(inCpy)
+			req := c.LookupEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1071,47 +540,24 @@ func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *Lookup
 
 const opPutEventSelectors = "PutEventSelectors"
 
-// PutEventSelectorsRequest generates a "aws.Request" representing the
-// client's request for the PutEventSelectors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutEventSelectors for more information on using the PutEventSelectors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutEventSelectorsRequest method.
-//    req, resp := client.PutEventSelectorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors
-func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) (req *aws.Request, output *PutEventSelectorsOutput) {
-	op := &aws.Operation{
-		Name:       opPutEventSelectors,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutEventSelectorsInput{}
-	}
-
-	output = &PutEventSelectorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutEventSelectorsRequest is a API request type for the PutEventSelectors API operation.
+type PutEventSelectorsRequest struct {
+	*aws.Request
+	Input *PutEventSelectorsInput
 }
 
-// PutEventSelectors API operation for AWS CloudTrail.
+// Send marshals and sends the PutEventSelectors API request.
+func (r *PutEventSelectorsRequest) Send() (*PutEventSelectorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEventSelectorsOutput), nil
+}
+
+// PutEventSelectorsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
 // Configures an event selector for your trail. Use event selectors to specify
 // whether you want your trail to log management and/or data events. When an
@@ -1142,104 +588,61 @@ func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) (re
 // see Logging Data and Management Events for Trails  (http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
 // in the AWS CloudTrail User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation PutEventSelectors for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidHomeRegionException "InvalidHomeRegionException"
-//   This exception is thrown when an operation is called on a trail from a region
-//   other than the region in which the trail was created.
-//
-//   * ErrCodeInvalidEventSelectorsException "InvalidEventSelectorsException"
-//   This exception is thrown when the PutEventSelectors operation is called with
-//   an invalid number of event selectors, data resources, or an invalid value
-//   for a parameter:
-//
-//      * Specify a valid number of event selectors (1 to 5) for a trail.
-//
-//      * Specify a valid number of data resources (1 to 250) for an event selector.
-//
-//      * Specify a valid value for a parameter. For example, specifying the ReadWriteType
-//      parameter with a value of read-only is invalid.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
+//    // Example sending a request using the PutEventSelectorsRequest method.
+//    req := client.PutEventSelectorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors
-func (c *CloudTrail) PutEventSelectors(input *PutEventSelectorsInput) (*PutEventSelectorsOutput, error) {
-	req, out := c.PutEventSelectorsRequest(input)
-	return out, req.Send()
-}
+func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) PutEventSelectorsRequest {
+	op := &aws.Operation{
+		Name:       opPutEventSelectors,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutEventSelectorsWithContext is the same as PutEventSelectors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutEventSelectors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) PutEventSelectorsWithContext(ctx aws.Context, input *PutEventSelectorsInput, opts ...aws.Option) (*PutEventSelectorsOutput, error) {
-	req, out := c.PutEventSelectorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutEventSelectorsInput{}
+	}
+
+	req := c.newRequest(op, input, &PutEventSelectorsOutput{})
+	return PutEventSelectorsRequest{Request: req, Input: input}
 }
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsRequest is a API request type for the RemoveTags API operation.
+type RemoveTagsRequest struct {
+	*aws.Request
+	Input *RemoveTagsInput
+}
+
+// Send marshals and sends the RemoveTags API request.
+func (r *RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsOutput), nil
+}
+
+// RemoveTagsRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTags for more information on using the RemoveTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the specified tags from a trail.
 //
 //    // Example sending a request using the RemoveTagsRequest method.
-//    req, resp := client.RemoveTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTags
-func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -1250,111 +653,46 @@ func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request
 		input = &RemoveTagsInput{}
 	}
 
-	output = &RemoveTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTags API operation for AWS CloudTrail.
-//
-// Removes the specified tags from a trail.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation RemoveTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   This exception is thrown when the specified resource is not found.
-//
-//   * ErrCodeARNInvalidException "ARNInvalidException"
-//   This exception is thrown when an operation is called with an invalid trail
-//   ARN. The format of a trail ARN is:
-//
-//   arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail
-//
-//   * ErrCodeResourceTypeNotSupportedException "ResourceTypeNotSupportedException"
-//   This exception is thrown when the specified resource type is not supported
-//   by CloudTrail.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidTagParameterException "InvalidTagParameterException"
-//   This exception is thrown when the key or value specified for the tag does
-//   not match the regular expression ^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTags
-func (c *CloudTrail) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsWithContext is the same as RemoveTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsOutput{})
+	return RemoveTagsRequest{Request: req, Input: input}
 }
 
 const opStartLogging = "StartLogging"
 
-// StartLoggingRequest generates a "aws.Request" representing the
-// client's request for the StartLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartLoggingRequest is a API request type for the StartLogging API operation.
+type StartLoggingRequest struct {
+	*aws.Request
+	Input *StartLoggingInput
+}
+
+// Send marshals and sends the StartLogging API request.
+func (r *StartLoggingRequest) Send() (*StartLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartLoggingOutput), nil
+}
+
+// StartLoggingRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartLogging for more information on using the StartLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts the recording of AWS API calls and log file delivery for a trail.
+// For a trail that is enabled in all regions, this operation must be called
+// from the region in which the trail was created. This operation cannot be
+// called on the shadow trails (replicated trails in other regions) of a trail
+// that is enabled in all regions.
 //
 //    // Example sending a request using the StartLoggingRequest method.
-//    req, resp := client.StartLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLogging
-func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *aws.Request, output *StartLoggingOutput) {
+func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) StartLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStartLogging,
 		HTTPMethod: "POST",
@@ -1365,99 +703,48 @@ func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *aws.Req
 		input = &StartLoggingInput{}
 	}
 
-	output = &StartLoggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartLogging API operation for AWS CloudTrail.
-//
-// Starts the recording of AWS API calls and log file delivery for a trail.
-// For a trail that is enabled in all regions, this operation must be called
-// from the region in which the trail was created. This operation cannot be
-// called on the shadow trails (replicated trails in other regions) of a trail
-// that is enabled in all regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation StartLogging for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidHomeRegionException "InvalidHomeRegionException"
-//   This exception is thrown when an operation is called on a trail from a region
-//   other than the region in which the trail was created.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLogging
-func (c *CloudTrail) StartLogging(input *StartLoggingInput) (*StartLoggingOutput, error) {
-	req, out := c.StartLoggingRequest(input)
-	return out, req.Send()
-}
-
-// StartLoggingWithContext is the same as StartLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) StartLoggingWithContext(ctx aws.Context, input *StartLoggingInput, opts ...aws.Option) (*StartLoggingOutput, error) {
-	req, out := c.StartLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartLoggingOutput{})
+	return StartLoggingRequest{Request: req, Input: input}
 }
 
 const opStopLogging = "StopLogging"
 
-// StopLoggingRequest generates a "aws.Request" representing the
-// client's request for the StopLogging operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopLoggingRequest is a API request type for the StopLogging API operation.
+type StopLoggingRequest struct {
+	*aws.Request
+	Input *StopLoggingInput
+}
+
+// Send marshals and sends the StopLogging API request.
+func (r *StopLoggingRequest) Send() (*StopLoggingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopLoggingOutput), nil
+}
+
+// StopLoggingRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopLogging for more information on using the StopLogging
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Suspends the recording of AWS API calls and log file delivery for the specified
+// trail. Under most circumstances, there is no need to use this action. You
+// can update a trail without stopping it first. This action is the only way
+// to stop recording. For a trail enabled in all regions, this operation must
+// be called from the region in which the trail was created, or an InvalidHomeRegionException
+// will occur. This operation cannot be called on the shadow trails (replicated
+// trails in other regions) of a trail enabled in all regions.
 //
 //    // Example sending a request using the StopLoggingRequest method.
-//    req, resp := client.StopLoggingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopLoggingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLogging
-func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *aws.Request, output *StopLoggingOutput) {
+func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequest {
 	op := &aws.Operation{
 		Name:       opStopLogging,
 		HTTPMethod: "POST",
@@ -1468,101 +755,47 @@ func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *aws.Reque
 		input = &StopLoggingInput{}
 	}
 
-	output = &StopLoggingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopLogging API operation for AWS CloudTrail.
-//
-// Suspends the recording of AWS API calls and log file delivery for the specified
-// trail. Under most circumstances, there is no need to use this action. You
-// can update a trail without stopping it first. This action is the only way
-// to stop recording. For a trail enabled in all regions, this operation must
-// be called from the region in which the trail was created, or an InvalidHomeRegionException
-// will occur. This operation cannot be called on the shadow trails (replicated
-// trails in other regions) of a trail enabled in all regions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation StopLogging for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeInvalidHomeRegionException "InvalidHomeRegionException"
-//   This exception is thrown when an operation is called on a trail from a region
-//   other than the region in which the trail was created.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLogging
-func (c *CloudTrail) StopLogging(input *StopLoggingInput) (*StopLoggingOutput, error) {
-	req, out := c.StopLoggingRequest(input)
-	return out, req.Send()
-}
-
-// StopLoggingWithContext is the same as StopLogging with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopLogging for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) StopLoggingWithContext(ctx aws.Context, input *StopLoggingInput, opts ...aws.Option) (*StopLoggingOutput, error) {
-	req, out := c.StopLoggingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopLoggingOutput{})
+	return StopLoggingRequest{Request: req, Input: input}
 }
 
 const opUpdateTrail = "UpdateTrail"
 
-// UpdateTrailRequest generates a "aws.Request" representing the
-// client's request for the UpdateTrail operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTrailRequest is a API request type for the UpdateTrail API operation.
+type UpdateTrailRequest struct {
+	*aws.Request
+	Input *UpdateTrailInput
+}
+
+// Send marshals and sends the UpdateTrail API request.
+func (r *UpdateTrailRequest) Send() (*UpdateTrailOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTrailOutput), nil
+}
+
+// UpdateTrailRequest returns a request value for making API operation for
+// AWS CloudTrail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTrail for more information on using the UpdateTrail
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the settings that specify delivery of log files. Changes to a trail
+// do not require stopping the CloudTrail service. Use this action to designate
+// an existing bucket for log delivery. If the existing bucket has previously
+// been a target for CloudTrail log files, an IAM policy exists for the bucket.
+// UpdateTrail must be called from the region in which the trail was created;
+// otherwise, an InvalidHomeRegionException is thrown.
 //
 //    // Example sending a request using the UpdateTrailRequest method.
-//    req, resp := client.UpdateTrailRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTrailRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail
-func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *aws.Request, output *UpdateTrailOutput) {
+func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) UpdateTrailRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTrail,
 		HTTPMethod: "POST",
@@ -1573,129 +806,8 @@ func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *aws.Reque
 		input = &UpdateTrailInput{}
 	}
 
-	output = &UpdateTrailOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTrail API operation for AWS CloudTrail.
-//
-// Updates the settings that specify delivery of log files. Changes to a trail
-// do not require stopping the CloudTrail service. Use this action to designate
-// an existing bucket for log delivery. If the existing bucket has previously
-// been a target for CloudTrail log files, an IAM policy exists for the bucket.
-// UpdateTrail must be called from the region in which the trail was created;
-// otherwise, an InvalidHomeRegionException is thrown.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CloudTrail's
-// API operation UpdateTrail for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeS3BucketDoesNotExistException "S3BucketDoesNotExistException"
-//   This exception is thrown when the specified S3 bucket does not exist.
-//
-//   * ErrCodeInsufficientS3BucketPolicyException "InsufficientS3BucketPolicyException"
-//   This exception is thrown when the policy on the S3 bucket is not sufficient.
-//
-//   * ErrCodeInsufficientSnsTopicPolicyException "InsufficientSnsTopicPolicyException"
-//   This exception is thrown when the policy on the SNS topic is not sufficient.
-//
-//   * ErrCodeInsufficientEncryptionPolicyException "InsufficientEncryptionPolicyException"
-//   This exception is thrown when the policy on the S3 bucket or KMS key is not
-//   sufficient.
-//
-//   * ErrCodeTrailNotFoundException "TrailNotFoundException"
-//   This exception is thrown when the trail with the given name is not found.
-//
-//   * ErrCodeInvalidS3BucketNameException "InvalidS3BucketNameException"
-//   This exception is thrown when the provided S3 bucket name is not valid.
-//
-//   * ErrCodeInvalidS3PrefixException "InvalidS3PrefixException"
-//   This exception is thrown when the provided S3 prefix is not valid.
-//
-//   * ErrCodeInvalidSnsTopicNameException "InvalidSnsTopicNameException"
-//   This exception is thrown when the provided SNS topic name is not valid.
-//
-//   * ErrCodeInvalidKmsKeyIdException "InvalidKmsKeyIdException"
-//   This exception is thrown when the KMS key ARN is invalid.
-//
-//   * ErrCodeInvalidTrailNameException "InvalidTrailNameException"
-//   This exception is thrown when the provided trail name is not valid. Trail
-//   names must meet the following requirements:
-//
-//      * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores
-//      (_), or dashes (-)
-//
-//      * Start with a letter or number, and end with a letter or number
-//
-//      * Be between 3 and 128 characters
-//
-//      * Have no adjacent periods, underscores or dashes. Names like my-_namespace
-//      and my--namespace are invalid.
-//
-//      * Not be in IP address format (for example, 192.168.5.4)
-//
-//   * ErrCodeTrailNotProvidedException "TrailNotProvidedException"
-//   This exception is deprecated.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   This exception is thrown when the combination of parameters provided is not
-//   valid.
-//
-//   * ErrCodeInvalidHomeRegionException "InvalidHomeRegionException"
-//   This exception is thrown when an operation is called on a trail from a region
-//   other than the region in which the trail was created.
-//
-//   * ErrCodeKmsKeyNotFoundException "KmsKeyNotFoundException"
-//   This exception is thrown when the KMS key does not exist, or when the S3
-//   bucket and the KMS key are not in the same region.
-//
-//   * ErrCodeKmsKeyDisabledException "KmsKeyDisabledException"
-//   This exception is deprecated.
-//
-//   * ErrCodeKmsException "KmsException"
-//   This exception is thrown when there is an issue with the specified KMS key
-//   and the trail can’t be updated.
-//
-//   * ErrCodeInvalidCloudWatchLogsLogGroupArnException "InvalidCloudWatchLogsLogGroupArnException"
-//   This exception is thrown when the provided CloudWatch log group is not valid.
-//
-//   * ErrCodeInvalidCloudWatchLogsRoleArnException "InvalidCloudWatchLogsRoleArnException"
-//   This exception is thrown when the provided role is not valid.
-//
-//   * ErrCodeCloudWatchLogsDeliveryUnavailableException "CloudWatchLogsDeliveryUnavailableException"
-//   Cannot set a CloudWatch Logs delivery for this region.
-//
-//   * ErrCodeUnsupportedOperationException "UnsupportedOperationException"
-//   This exception is thrown when the requested operation is not supported.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   This exception is thrown when the requested operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail
-func (c *CloudTrail) UpdateTrail(input *UpdateTrailInput) (*UpdateTrailOutput, error) {
-	req, out := c.UpdateTrailRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTrailWithContext is the same as UpdateTrail with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTrail for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) UpdateTrailWithContext(ctx aws.Context, input *UpdateTrailInput, opts ...aws.Option) (*UpdateTrailOutput, error) {
-	req, out := c.UpdateTrailRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTrailOutput{})
+	return UpdateTrailRequest{Request: req, Input: input}
 }
 
 // Specifies the tags to add to a trail.

@@ -62,7 +62,7 @@ func TestPutObject(t *testing.T) {
 		Bucket: aws.String("test"),
 		Body:   bytes.NewReader(data),
 	}
-	req, _ := c.PutObjectRequest(input)
+	req := c.PutObjectRequest(input)
 	req.Handlers.Send.Clear()
 	req.Handlers.Send.PushBack(func(r *request.Request) {
 		r.Error = errors.New("stop")
@@ -70,7 +70,7 @@ func TestPutObject(t *testing.T) {
 			StatusCode: 200,
 		}
 	})
-	err := req.Send()
+	_, err := req.Send()
 	if e, a := "stop", err.Error(); e != a {
 		t.Errorf("expected %s error, but received %s", e, a)
 	}

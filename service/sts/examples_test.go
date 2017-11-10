@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To assume a role
 //
 
-func ExampleSTS_AssumeRole_shared00() {
+func ExampleSTS_AssumeRoleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -43,7 +43,8 @@ func ExampleSTS_AssumeRole_shared00() {
 		RoleSessionName: aws.String("Bob"),
 	}
 
-	result, err := svc.AssumeRole(input)
+	req := svc.AssumeRoleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -70,7 +71,7 @@ func ExampleSTS_AssumeRole_shared00() {
 // To assume a role as an OpenID Connect-federated user
 //
 
-func ExampleSTS_AssumeRoleWithWebIdentity_shared00() {
+func ExampleSTS_AssumeRoleWithWebIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -85,7 +86,8 @@ func ExampleSTS_AssumeRoleWithWebIdentity_shared00() {
 		WebIdentityToken: aws.String("Atza%7CIQEBLjAsAhRFiXuWpUXuRvQ9PZL3GMFcYevydwIUFAHZwXZXXXXXXXXJnrulxKDHwy87oGKPznh0D6bEQZTSCzyoCtL_8S07pLpr0zMbn6w1lfVZKNTBdDansFBmtGnIsIapjI6xKR02Yc_2bQ8LZbUXSGm6Ry6_BG7PrtLZtj_dfCTj92xNGed-CrKqjG7nPBjNIL016GGvuS5gSvPRUxWES3VYfm1wl7WTI7jn-Pcb6M-buCgHhFOzTQxod27L9CqnOLio7N3gZAGpsp6n1-AJBOCJckcyXe2c6uD0srOJeZlKUm2eTDVMf8IehDVI0r1QOnTV6KzzAI3OY87Vd_cVMQ"),
 	}
 
-	result, err := svc.AssumeRoleWithWebIdentity(input)
+	req := svc.AssumeRoleWithWebIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -120,7 +122,7 @@ func ExampleSTS_AssumeRoleWithWebIdentity_shared00() {
 // To decode information about an authorization status of a request
 //
 
-func ExampleSTS_DecodeAuthorizationMessage_shared00() {
+func ExampleSTS_DecodeAuthorizationMessageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -131,7 +133,8 @@ func ExampleSTS_DecodeAuthorizationMessage_shared00() {
 		EncodedMessage: aws.String("<encoded-message>"),
 	}
 
-	result, err := svc.DecodeAuthorizationMessage(input)
+	req := svc.DecodeAuthorizationMessageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -155,7 +158,7 @@ func ExampleSTS_DecodeAuthorizationMessage_shared00() {
 //
 // This example shows a request and response made with the credentials for a user named
 // Alice in the AWS account 123456789012.
-func ExampleSTS_GetCallerIdentity_shared00() {
+func ExampleSTS_GetCallerIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -164,7 +167,8 @@ func ExampleSTS_GetCallerIdentity_shared00() {
 	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
-	result, err := svc.GetCallerIdentity(input)
+	req := svc.GetCallerIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -187,7 +191,7 @@ func ExampleSTS_GetCallerIdentity_shared00() {
 // This example shows a request and response made with temporary credentials created
 // by AssumeRole. The name of the assumed role is my-role-name, and the RoleSessionName
 // is set to my-role-session-name.
-func ExampleSTS_GetCallerIdentity_shared01() {
+func ExampleSTS_GetCallerIdentityRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -196,7 +200,8 @@ func ExampleSTS_GetCallerIdentity_shared01() {
 	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
-	result, err := svc.GetCallerIdentity(input)
+	req := svc.GetCallerIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -218,7 +223,7 @@ func ExampleSTS_GetCallerIdentity_shared01() {
 //
 // This example shows a request and response made with temporary credentials created
 // by using GetFederationToken. The Name parameter is set to my-federated-user-name.
-func ExampleSTS_GetCallerIdentity_shared02() {
+func ExampleSTS_GetCallerIdentityRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -227,7 +232,8 @@ func ExampleSTS_GetCallerIdentity_shared02() {
 	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
-	result, err := svc.GetCallerIdentity(input)
+	req := svc.GetCallerIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -248,7 +254,7 @@ func ExampleSTS_GetCallerIdentity_shared02() {
 // To get temporary credentials for a role by using GetFederationToken
 //
 
-func ExampleSTS_GetFederationToken_shared00() {
+func ExampleSTS_GetFederationTokenRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -261,7 +267,8 @@ func ExampleSTS_GetFederationToken_shared00() {
 		Policy:          aws.String("{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Stmt1\",\"Effect\":\"Allow\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}"),
 	}
 
-	result, err := svc.GetFederationToken(input)
+	req := svc.GetFederationTokenRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -288,7 +295,7 @@ func ExampleSTS_GetFederationToken_shared00() {
 // To get temporary credentials for an IAM user or an AWS account
 //
 
-func ExampleSTS_GetSessionToken_shared00() {
+func ExampleSTS_GetSessionTokenRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -301,7 +308,8 @@ func ExampleSTS_GetSessionToken_shared00() {
 		TokenCode:       aws.String("123456"),
 	}
 
-	result, err := svc.GetSessionToken(input)
+	req := svc.GetSessionTokenRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

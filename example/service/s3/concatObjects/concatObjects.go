@@ -21,26 +21,28 @@ type client struct {
 // concatenate will contenate key1's object to key2's object under the key testKey
 func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string, *string, error) {
 	// The first part to be uploaded which is represented as part number 1
-	foo, err := c.s3Client.UploadPartCopy(&s3.UploadPartCopyInput{
+	req := c.s3Client.UploadPartCopyRequest(&s3.UploadPartCopyInput{
 		Bucket:     c.bucket,
 		CopySource: aws.String(url.QueryEscape(*c.bucket + "/" + key1)),
 		PartNumber: aws.Int64(1),
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
+	 foo, err := req.Send()
 	if err != nil {
 		return nil, nil, err
 	}
 
 	// The second part that is going to be appended to the newly created testKey
 	// object.
-	bar, err := c.s3Client.UploadPartCopy(&s3.UploadPartCopyInput{
+	req = c.s3Client.UploadPartCopyRequest(&s3.UploadPartCopyInput{
 		Bucket:     c.bucket,
 		CopySource: aws.String(url.QueryEscape(*c.bucket + "/" + key2)),
 		PartNumber: aws.Int64(2),
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
+	 bar, err := req.Send()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -73,10 +75,11 @@ func main() {
 	c := client{svc, &bucket}
 
 	// We let the service know that we want to do a multipart upload
-	output, err := c.s3Client.CreateMultipartUpload(&s3.CreateMultipartUploadInput{
+	createReq := c.s3Client.CreateMultipartUploadRequest(&s3.CreateMultipartUploadInput{
 		Bucket: &bucket,
 		Key:    &key3,
 	})
+	 output, err := createReq.Send()
 
 	if err != nil {
 		exitErrorf("failed to create upload, %v", err)
@@ -88,7 +91,7 @@ func main() {
 	}
 
 	// We finally complete the multipart upload.
-	_, err = c.s3Client.CompleteMultipartUpload(&s3.CompleteMultipartUploadInput{
+	compReq := c.s3Client.CompleteMultipartUploadRequest(&s3.CompleteMultipartUploadInput{
 		Bucket:   &bucket,
 		Key:      &key3,
 		UploadId: output.UploadId,
@@ -105,7 +108,7 @@ func main() {
 			},
 		},
 	})
-	if err != nil {
+	if _, err := compReq.Send(); err != nil {
 		exitErrorf("failed to complete CompleteMultipartUpload, %v", err)
 	}
 }

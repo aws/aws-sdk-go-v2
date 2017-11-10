@@ -12,31 +12,36 @@ import (
 
 const opAssociateFleet = "AssociateFleet"
 
-// AssociateFleetRequest generates a "aws.Request" representing the
-// client's request for the AssociateFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateFleetRequest is a API request type for the AssociateFleet API operation.
+type AssociateFleetRequest struct {
+	*aws.Request
+	Input *AssociateFleetInput
+}
+
+// Send marshals and sends the AssociateFleet API request.
+func (r *AssociateFleetRequest) Send() (*AssociateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateFleetOutput), nil
+}
+
+// AssociateFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateFleet for more information on using the AssociateFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates the specified fleet with the specified stack.
 //
 //    // Example sending a request using the AssociateFleetRequest method.
-//    req, resp := client.AssociateFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleet
-func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) (req *aws.Request, output *AssociateFleetOutput) {
+func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) AssociateFleetRequest {
 	op := &aws.Operation{
 		Name:       opAssociateFleet,
 		HTTPMethod: "POST",
@@ -47,87 +52,42 @@ func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) (req *aws.
 		input = &AssociateFleetInput{}
 	}
 
-	output = &AssociateFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateFleet API operation for Amazon AppStream.
-//
-// Associates the specified fleet with the specified stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation AssociateFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-//   * ErrCodeIncompatibleImageException "IncompatibleImageException"
-//   The image does not support storage connectors.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleet
-func (c *AppStream) AssociateFleet(input *AssociateFleetInput) (*AssociateFleetOutput, error) {
-	req, out := c.AssociateFleetRequest(input)
-	return out, req.Send()
-}
-
-// AssociateFleetWithContext is the same as AssociateFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) AssociateFleetWithContext(ctx aws.Context, input *AssociateFleetInput, opts ...aws.Option) (*AssociateFleetOutput, error) {
-	req, out := c.AssociateFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AssociateFleetOutput{})
+	return AssociateFleetRequest{Request: req, Input: input}
 }
 
 const opCreateDirectoryConfig = "CreateDirectoryConfig"
 
-// CreateDirectoryConfigRequest generates a "aws.Request" representing the
-// client's request for the CreateDirectoryConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDirectoryConfigRequest is a API request type for the CreateDirectoryConfig API operation.
+type CreateDirectoryConfigRequest struct {
+	*aws.Request
+	Input *CreateDirectoryConfigInput
+}
+
+// Send marshals and sends the CreateDirectoryConfig API request.
+func (r *CreateDirectoryConfigRequest) Send() (*CreateDirectoryConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDirectoryConfigOutput), nil
+}
+
+// CreateDirectoryConfigRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDirectoryConfig for more information on using the CreateDirectoryConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a directory configuration.
 //
 //    // Example sending a request using the CreateDirectoryConfigRequest method.
-//    req, resp := client.CreateDirectoryConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDirectoryConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig
-func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput) (req *aws.Request, output *CreateDirectoryConfigOutput) {
+func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput) CreateDirectoryConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectoryConfig,
 		HTTPMethod: "POST",
@@ -138,78 +98,42 @@ func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInp
 		input = &CreateDirectoryConfigInput{}
 	}
 
-	output = &CreateDirectoryConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDirectoryConfig API operation for Amazon AppStream.
-//
-// Creates a directory configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateDirectoryConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig
-func (c *AppStream) CreateDirectoryConfig(input *CreateDirectoryConfigInput) (*CreateDirectoryConfigOutput, error) {
-	req, out := c.CreateDirectoryConfigRequest(input)
-	return out, req.Send()
-}
-
-// CreateDirectoryConfigWithContext is the same as CreateDirectoryConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDirectoryConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateDirectoryConfigWithContext(ctx aws.Context, input *CreateDirectoryConfigInput, opts ...aws.Option) (*CreateDirectoryConfigOutput, error) {
-	req, out := c.CreateDirectoryConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDirectoryConfigOutput{})
+	return CreateDirectoryConfigRequest{Request: req, Input: input}
 }
 
 const opCreateFleet = "CreateFleet"
 
-// CreateFleetRequest generates a "aws.Request" representing the
-// client's request for the CreateFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateFleetRequest is a API request type for the CreateFleet API operation.
+type CreateFleetRequest struct {
+	*aws.Request
+	Input *CreateFleetInput
+}
+
+// Send marshals and sends the CreateFleet API request.
+func (r *CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFleetOutput), nil
+}
+
+// CreateFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFleet for more information on using the CreateFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a fleet.
 //
 //    // Example sending a request using the CreateFleetRequest method.
-//    req, resp := client.CreateFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet
-func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) (req *aws.Request, output *CreateFleetOutput) {
+func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest {
 	op := &aws.Operation{
 		Name:       opCreateFleet,
 		HTTPMethod: "POST",
@@ -220,96 +144,40 @@ func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) (req *aws.Reques
 		input = &CreateFleetInput{}
 	}
 
-	output = &CreateFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateFleet API operation for Amazon AppStream.
-//
-// Creates a fleet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeResourceNotAvailableException "ResourceNotAvailableException"
-//   The specified resource exists and is not in use, but isn't available.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The specified role is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-//   * ErrCodeIncompatibleImageException "IncompatibleImageException"
-//   The image does not support storage connectors.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet
-func (c *AppStream) CreateFleet(input *CreateFleetInput) (*CreateFleetOutput, error) {
-	req, out := c.CreateFleetRequest(input)
-	return out, req.Send()
-}
-
-// CreateFleetWithContext is the same as CreateFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...aws.Option) (*CreateFleetOutput, error) {
-	req, out := c.CreateFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateFleetOutput{})
+	return CreateFleetRequest{Request: req, Input: input}
 }
 
 const opCreateImageBuilder = "CreateImageBuilder"
 
-// CreateImageBuilderRequest generates a "aws.Request" representing the
-// client's request for the CreateImageBuilder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateImageBuilder for more information on using the CreateImageBuilder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// CreateImageBuilderRequest is a API request type for the CreateImageBuilder API operation.
+type CreateImageBuilderRequest struct {
+	*aws.Request
+	Input *CreateImageBuilderInput
+}
+
+// Send marshals and sends the CreateImageBuilder API request.
+func (r *CreateImageBuilderRequest) Send() (*CreateImageBuilderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateImageBuilderOutput), nil
+}
+
+// CreateImageBuilderRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the CreateImageBuilderRequest method.
-//    req, resp := client.CreateImageBuilderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateImageBuilderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder
-func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) (req *aws.Request, output *CreateImageBuilderOutput) {
+func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) CreateImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opCreateImageBuilder,
 		HTTPMethod: "POST",
@@ -320,94 +188,40 @@ func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) (r
 		input = &CreateImageBuilderInput{}
 	}
 
-	output = &CreateImageBuilderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateImageBuilder API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateImageBuilder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeResourceNotAvailableException "ResourceNotAvailableException"
-//   The specified resource exists and is not in use, but isn't available.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The specified role is invalid.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-//   * ErrCodeIncompatibleImageException "IncompatibleImageException"
-//   The image does not support storage connectors.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder
-func (c *AppStream) CreateImageBuilder(input *CreateImageBuilderInput) (*CreateImageBuilderOutput, error) {
-	req, out := c.CreateImageBuilderRequest(input)
-	return out, req.Send()
-}
-
-// CreateImageBuilderWithContext is the same as CreateImageBuilder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateImageBuilder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateImageBuilderWithContext(ctx aws.Context, input *CreateImageBuilderInput, opts ...aws.Option) (*CreateImageBuilderOutput, error) {
-	req, out := c.CreateImageBuilderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateImageBuilderOutput{})
+	return CreateImageBuilderRequest{Request: req, Input: input}
 }
 
 const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 
-// CreateImageBuilderStreamingURLRequest generates a "aws.Request" representing the
-// client's request for the CreateImageBuilderStreamingURL operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateImageBuilderStreamingURL for more information on using the CreateImageBuilderStreamingURL
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// CreateImageBuilderStreamingURLRequest is a API request type for the CreateImageBuilderStreamingURL API operation.
+type CreateImageBuilderStreamingURLRequest struct {
+	*aws.Request
+	Input *CreateImageBuilderStreamingURLInput
+}
+
+// Send marshals and sends the CreateImageBuilderStreamingURL API request.
+func (r *CreateImageBuilderStreamingURLRequest) Send() (*CreateImageBuilderStreamingURLOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateImageBuilderStreamingURLOutput), nil
+}
+
+// CreateImageBuilderStreamingURLRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the CreateImageBuilderStreamingURLRequest method.
-//    req, resp := client.CreateImageBuilderStreamingURLRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateImageBuilderStreamingURLRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURL
-func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilderStreamingURLInput) (req *aws.Request, output *CreateImageBuilderStreamingURLOutput) {
+func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest {
 	op := &aws.Operation{
 		Name:       opCreateImageBuilderStreamingURL,
 		HTTPMethod: "POST",
@@ -418,76 +232,42 @@ func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuil
 		input = &CreateImageBuilderStreamingURLInput{}
 	}
 
-	output = &CreateImageBuilderStreamingURLOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateImageBuilderStreamingURL API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateImageBuilderStreamingURL for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURL
-func (c *AppStream) CreateImageBuilderStreamingURL(input *CreateImageBuilderStreamingURLInput) (*CreateImageBuilderStreamingURLOutput, error) {
-	req, out := c.CreateImageBuilderStreamingURLRequest(input)
-	return out, req.Send()
-}
-
-// CreateImageBuilderStreamingURLWithContext is the same as CreateImageBuilderStreamingURL with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateImageBuilderStreamingURL for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateImageBuilderStreamingURLWithContext(ctx aws.Context, input *CreateImageBuilderStreamingURLInput, opts ...aws.Option) (*CreateImageBuilderStreamingURLOutput, error) {
-	req, out := c.CreateImageBuilderStreamingURLRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateImageBuilderStreamingURLOutput{})
+	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input}
 }
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws.Request" representing the
-// client's request for the CreateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStackRequest is a API request type for the CreateStack API operation.
+type CreateStackRequest struct {
+	*aws.Request
+	Input *CreateStackInput
+}
+
+// Send marshals and sends the CreateStack API request.
+func (r *CreateStackRequest) Send() (*CreateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStackOutput), nil
+}
+
+// CreateStackRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStack for more information on using the CreateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a stack.
 //
 //    // Example sending a request using the CreateStackRequest method.
-//    req, resp := client.CreateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack
-func (c *AppStream) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+func (c *AppStream) CreateStackRequest(input *CreateStackInput) CreateStackRequest {
 	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
@@ -498,90 +278,45 @@ func (c *AppStream) CreateStackRequest(input *CreateStackInput) (req *aws.Reques
 		input = &CreateStackInput{}
 	}
 
-	output = &CreateStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStack API operation for Amazon AppStream.
-//
-// Creates a stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified resource already exists.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The specified role is invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack
-func (c *AppStream) CreateStack(input *CreateStackInput) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	return out, req.Send()
-}
-
-// CreateStackWithContext is the same as CreateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStackOutput{})
+	return CreateStackRequest{Request: req, Input: input}
 }
 
 const opCreateStreamingURL = "CreateStreamingURL"
 
-// CreateStreamingURLRequest generates a "aws.Request" representing the
-// client's request for the CreateStreamingURL operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStreamingURLRequest is a API request type for the CreateStreamingURL API operation.
+type CreateStreamingURLRequest struct {
+	*aws.Request
+	Input *CreateStreamingURLInput
+}
+
+// Send marshals and sends the CreateStreamingURL API request.
+func (r *CreateStreamingURLRequest) Send() (*CreateStreamingURLOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStreamingURLOutput), nil
+}
+
+// CreateStreamingURLRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a URL to start a streaming session for the specified user.
 //
-// See CreateStreamingURL for more information on using the CreateStreamingURL
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// By default, the URL is valid only for one minute from the time that it is
+// generated.
 //
 //    // Example sending a request using the CreateStreamingURLRequest method.
-//    req, resp := client.CreateStreamingURLRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStreamingURLRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURL
-func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) (req *aws.Request, output *CreateStreamingURLOutput) {
+func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) CreateStreamingURLRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingURL,
 		HTTPMethod: "POST",
@@ -592,87 +327,42 @@ func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) (r
 		input = &CreateStreamingURLInput{}
 	}
 
-	output = &CreateStreamingURLOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStreamingURL API operation for Amazon AppStream.
-//
-// Creates a URL to start a streaming session for the specified user.
-//
-// By default, the URL is valid only for one minute from the time that it is
-// generated.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation CreateStreamingURL for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceNotAvailableException "ResourceNotAvailableException"
-//   The specified resource exists and is not in use, but isn't available.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURL
-func (c *AppStream) CreateStreamingURL(input *CreateStreamingURLInput) (*CreateStreamingURLOutput, error) {
-	req, out := c.CreateStreamingURLRequest(input)
-	return out, req.Send()
-}
-
-// CreateStreamingURLWithContext is the same as CreateStreamingURL with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStreamingURL for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) CreateStreamingURLWithContext(ctx aws.Context, input *CreateStreamingURLInput, opts ...aws.Option) (*CreateStreamingURLOutput, error) {
-	req, out := c.CreateStreamingURLRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStreamingURLOutput{})
+	return CreateStreamingURLRequest{Request: req, Input: input}
 }
 
 const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
 
-// DeleteDirectoryConfigRequest generates a "aws.Request" representing the
-// client's request for the DeleteDirectoryConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDirectoryConfigRequest is a API request type for the DeleteDirectoryConfig API operation.
+type DeleteDirectoryConfigRequest struct {
+	*aws.Request
+	Input *DeleteDirectoryConfigInput
+}
+
+// Send marshals and sends the DeleteDirectoryConfig API request.
+func (r *DeleteDirectoryConfigRequest) Send() (*DeleteDirectoryConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDirectoryConfigOutput), nil
+}
+
+// DeleteDirectoryConfigRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDirectoryConfig for more information on using the DeleteDirectoryConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified directory configuration.
 //
 //    // Example sending a request using the DeleteDirectoryConfigRequest method.
-//    req, resp := client.DeleteDirectoryConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDirectoryConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfig
-func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInput) (req *aws.Request, output *DeleteDirectoryConfigOutput) {
+func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInput) DeleteDirectoryConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectoryConfig,
 		HTTPMethod: "POST",
@@ -683,78 +373,42 @@ func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInp
 		input = &DeleteDirectoryConfigInput{}
 	}
 
-	output = &DeleteDirectoryConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDirectoryConfig API operation for Amazon AppStream.
-//
-// Deletes the specified directory configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DeleteDirectoryConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfig
-func (c *AppStream) DeleteDirectoryConfig(input *DeleteDirectoryConfigInput) (*DeleteDirectoryConfigOutput, error) {
-	req, out := c.DeleteDirectoryConfigRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDirectoryConfigWithContext is the same as DeleteDirectoryConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDirectoryConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DeleteDirectoryConfigWithContext(ctx aws.Context, input *DeleteDirectoryConfigInput, opts ...aws.Option) (*DeleteDirectoryConfigOutput, error) {
-	req, out := c.DeleteDirectoryConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDirectoryConfigOutput{})
+	return DeleteDirectoryConfigRequest{Request: req, Input: input}
 }
 
 const opDeleteFleet = "DeleteFleet"
 
-// DeleteFleetRequest generates a "aws.Request" representing the
-// client's request for the DeleteFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteFleetRequest is a API request type for the DeleteFleet API operation.
+type DeleteFleetRequest struct {
+	*aws.Request
+	Input *DeleteFleetInput
+}
+
+// Send marshals and sends the DeleteFleet API request.
+func (r *DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFleetOutput), nil
+}
+
+// DeleteFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFleet for more information on using the DeleteFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified fleet.
 //
 //    // Example sending a request using the DeleteFleetRequest method.
-//    req, resp := client.DeleteFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleet
-func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Request, output *DeleteFleetOutput) {
+func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
@@ -765,81 +419,40 @@ func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Reques
 		input = &DeleteFleetInput{}
 	}
 
-	output = &DeleteFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteFleet API operation for Amazon AppStream.
-//
-// Deletes the specified fleet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DeleteFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleet
-func (c *AppStream) DeleteFleet(input *DeleteFleetInput) (*DeleteFleetOutput, error) {
-	req, out := c.DeleteFleetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFleetWithContext is the same as DeleteFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...aws.Option) (*DeleteFleetOutput, error) {
-	req, out := c.DeleteFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteFleetOutput{})
+	return DeleteFleetRequest{Request: req, Input: input}
 }
 
 const opDeleteImage = "DeleteImage"
 
-// DeleteImageRequest generates a "aws.Request" representing the
-// client's request for the DeleteImage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteImage for more information on using the DeleteImage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// DeleteImageRequest is a API request type for the DeleteImage API operation.
+type DeleteImageRequest struct {
+	*aws.Request
+	Input *DeleteImageInput
+}
+
+// Send marshals and sends the DeleteImage API request.
+func (r *DeleteImageRequest) Send() (*DeleteImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteImageOutput), nil
+}
+
+// DeleteImageRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the DeleteImageRequest method.
-//    req, resp := client.DeleteImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage
-func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) (req *aws.Request, output *DeleteImageOutput) {
+func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) DeleteImageRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImage,
 		HTTPMethod: "POST",
@@ -850,82 +463,40 @@ func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) (req *aws.Reques
 		input = &DeleteImageInput{}
 	}
 
-	output = &DeleteImageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteImage API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DeleteImage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage
-func (c *AppStream) DeleteImage(input *DeleteImageInput) (*DeleteImageOutput, error) {
-	req, out := c.DeleteImageRequest(input)
-	return out, req.Send()
-}
-
-// DeleteImageWithContext is the same as DeleteImage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteImage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DeleteImageWithContext(ctx aws.Context, input *DeleteImageInput, opts ...aws.Option) (*DeleteImageOutput, error) {
-	req, out := c.DeleteImageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteImageOutput{})
+	return DeleteImageRequest{Request: req, Input: input}
 }
 
 const opDeleteImageBuilder = "DeleteImageBuilder"
 
-// DeleteImageBuilderRequest generates a "aws.Request" representing the
-// client's request for the DeleteImageBuilder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteImageBuilder for more information on using the DeleteImageBuilder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// DeleteImageBuilderRequest is a API request type for the DeleteImageBuilder API operation.
+type DeleteImageBuilderRequest struct {
+	*aws.Request
+	Input *DeleteImageBuilderInput
+}
+
+// Send marshals and sends the DeleteImageBuilder API request.
+func (r *DeleteImageBuilderRequest) Send() (*DeleteImageBuilderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteImageBuilderOutput), nil
+}
+
+// DeleteImageBuilderRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the DeleteImageBuilderRequest method.
-//    req, resp := client.DeleteImageBuilderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteImageBuilderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder
-func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) (req *aws.Request, output *DeleteImageBuilderOutput) {
+func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) DeleteImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opDeleteImageBuilder,
 		HTTPMethod: "POST",
@@ -936,79 +507,43 @@ func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) (r
 		input = &DeleteImageBuilderInput{}
 	}
 
-	output = &DeleteImageBuilderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteImageBuilder API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DeleteImageBuilder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder
-func (c *AppStream) DeleteImageBuilder(input *DeleteImageBuilderInput) (*DeleteImageBuilderOutput, error) {
-	req, out := c.DeleteImageBuilderRequest(input)
-	return out, req.Send()
-}
-
-// DeleteImageBuilderWithContext is the same as DeleteImageBuilder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteImageBuilder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DeleteImageBuilderWithContext(ctx aws.Context, input *DeleteImageBuilderInput, opts ...aws.Option) (*DeleteImageBuilderOutput, error) {
-	req, out := c.DeleteImageBuilderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteImageBuilderOutput{})
+	return DeleteImageBuilderRequest{Request: req, Input: input}
 }
 
 const opDeleteStack = "DeleteStack"
 
-// DeleteStackRequest generates a "aws.Request" representing the
-// client's request for the DeleteStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteStackRequest is a API request type for the DeleteStack API operation.
+type DeleteStackRequest struct {
+	*aws.Request
+	Input *DeleteStackInput
+}
+
+// Send marshals and sends the DeleteStack API request.
+func (r *DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStackOutput), nil
+}
+
+// DeleteStackRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStack for more information on using the DeleteStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified stack. After this operation completes, the environment
+// can no longer be activated and any reservations made for the stack are released.
 //
 //    // Example sending a request using the DeleteStackRequest method.
-//    req, resp := client.DeleteStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStack
-func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
@@ -1019,82 +554,42 @@ func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) (req *aws.Reques
 		input = &DeleteStackInput{}
 	}
 
-	output = &DeleteStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteStack API operation for Amazon AppStream.
-//
-// Deletes the specified stack. After this operation completes, the environment
-// can no longer be activated and any reservations made for the stack are released.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DeleteStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStack
-func (c *AppStream) DeleteStack(input *DeleteStackInput) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	return out, req.Send()
-}
-
-// DeleteStackWithContext is the same as DeleteStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteStackOutput{})
+	return DeleteStackRequest{Request: req, Input: input}
 }
 
 const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
 
-// DescribeDirectoryConfigsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDirectoryConfigs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDirectoryConfigsRequest is a API request type for the DescribeDirectoryConfigs API operation.
+type DescribeDirectoryConfigsRequest struct {
+	*aws.Request
+	Input *DescribeDirectoryConfigsInput
+}
+
+// Send marshals and sends the DescribeDirectoryConfigs API request.
+func (r *DescribeDirectoryConfigsRequest) Send() (*DescribeDirectoryConfigsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDirectoryConfigsOutput), nil
+}
+
+// DescribeDirectoryConfigsRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDirectoryConfigs for more information on using the DescribeDirectoryConfigs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified directory configurations.
 //
 //    // Example sending a request using the DescribeDirectoryConfigsRequest method.
-//    req, resp := client.DescribeDirectoryConfigsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDirectoryConfigsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigs
-func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConfigsInput) (req *aws.Request, output *DescribeDirectoryConfigsOutput) {
+func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConfigsInput) DescribeDirectoryConfigsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDirectoryConfigs,
 		HTTPMethod: "POST",
@@ -1105,75 +600,42 @@ func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConf
 		input = &DescribeDirectoryConfigsInput{}
 	}
 
-	output = &DescribeDirectoryConfigsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDirectoryConfigs API operation for Amazon AppStream.
-//
-// Describes the specified directory configurations.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeDirectoryConfigs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigs
-func (c *AppStream) DescribeDirectoryConfigs(input *DescribeDirectoryConfigsInput) (*DescribeDirectoryConfigsOutput, error) {
-	req, out := c.DescribeDirectoryConfigsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDirectoryConfigsWithContext is the same as DescribeDirectoryConfigs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDirectoryConfigs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeDirectoryConfigsWithContext(ctx aws.Context, input *DescribeDirectoryConfigsInput, opts ...aws.Option) (*DescribeDirectoryConfigsOutput, error) {
-	req, out := c.DescribeDirectoryConfigsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDirectoryConfigsOutput{})
+	return DescribeDirectoryConfigsRequest{Request: req, Input: input}
 }
 
 const opDescribeFleets = "DescribeFleets"
 
-// DescribeFleetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeFleets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeFleetsRequest is a API request type for the DescribeFleets API operation.
+type DescribeFleetsRequest struct {
+	*aws.Request
+	Input *DescribeFleetsInput
+}
+
+// Send marshals and sends the DescribeFleets API request.
+func (r *DescribeFleetsRequest) Send() (*DescribeFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetsOutput), nil
+}
+
+// DescribeFleetsRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFleets for more information on using the DescribeFleets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified fleets or all fleets in the account.
 //
 //    // Example sending a request using the DescribeFleetsRequest method.
-//    req, resp := client.DescribeFleetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets
-func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) (req *aws.Request, output *DescribeFleetsOutput) {
+func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeFleets,
 		HTTPMethod: "POST",
@@ -1184,75 +646,40 @@ func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) (req *aws.
 		input = &DescribeFleetsInput{}
 	}
 
-	output = &DescribeFleetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeFleets API operation for Amazon AppStream.
-//
-// Describes the specified fleets or all fleets in the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeFleets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets
-func (c *AppStream) DescribeFleets(input *DescribeFleetsInput) (*DescribeFleetsOutput, error) {
-	req, out := c.DescribeFleetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeFleetsWithContext is the same as DescribeFleets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFleets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeFleetsWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...aws.Option) (*DescribeFleetsOutput, error) {
-	req, out := c.DescribeFleetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeFleetsOutput{})
+	return DescribeFleetsRequest{Request: req, Input: input}
 }
 
 const opDescribeImageBuilders = "DescribeImageBuilders"
 
-// DescribeImageBuildersRequest generates a "aws.Request" representing the
-// client's request for the DescribeImageBuilders operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeImageBuilders for more information on using the DescribeImageBuilders
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// DescribeImageBuildersRequest is a API request type for the DescribeImageBuilders API operation.
+type DescribeImageBuildersRequest struct {
+	*aws.Request
+	Input *DescribeImageBuildersInput
+}
+
+// Send marshals and sends the DescribeImageBuilders API request.
+func (r *DescribeImageBuildersRequest) Send() (*DescribeImageBuildersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeImageBuildersOutput), nil
+}
+
+// DescribeImageBuildersRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the DescribeImageBuildersRequest method.
-//    req, resp := client.DescribeImageBuildersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeImageBuildersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders
-func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInput) (req *aws.Request, output *DescribeImageBuildersOutput) {
+func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInput) DescribeImageBuildersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImageBuilders,
 		HTTPMethod: "POST",
@@ -1263,73 +690,42 @@ func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInp
 		input = &DescribeImageBuildersInput{}
 	}
 
-	output = &DescribeImageBuildersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeImageBuilders API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeImageBuilders for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders
-func (c *AppStream) DescribeImageBuilders(input *DescribeImageBuildersInput) (*DescribeImageBuildersOutput, error) {
-	req, out := c.DescribeImageBuildersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeImageBuildersWithContext is the same as DescribeImageBuilders with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeImageBuilders for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeImageBuildersWithContext(ctx aws.Context, input *DescribeImageBuildersInput, opts ...aws.Option) (*DescribeImageBuildersOutput, error) {
-	req, out := c.DescribeImageBuildersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeImageBuildersOutput{})
+	return DescribeImageBuildersRequest{Request: req, Input: input}
 }
 
 const opDescribeImages = "DescribeImages"
 
-// DescribeImagesRequest generates a "aws.Request" representing the
-// client's request for the DescribeImages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeImagesRequest is a API request type for the DescribeImages API operation.
+type DescribeImagesRequest struct {
+	*aws.Request
+	Input *DescribeImagesInput
+}
+
+// Send marshals and sends the DescribeImages API request.
+func (r *DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeImagesOutput), nil
+}
+
+// DescribeImagesRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeImages for more information on using the DescribeImages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified images or all images in the account.
 //
 //    // Example sending a request using the DescribeImagesRequest method.
-//    req, resp := client.DescribeImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeImagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages
-func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Request, output *DescribeImagesOutput) {
+func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
@@ -1340,75 +736,45 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.
 		input = &DescribeImagesInput{}
 	}
 
-	output = &DescribeImagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeImages API operation for Amazon AppStream.
-//
-// Describes the specified images or all images in the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeImages for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages
-func (c *AppStream) DescribeImages(input *DescribeImagesInput) (*DescribeImagesOutput, error) {
-	req, out := c.DescribeImagesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeImagesWithContext is the same as DescribeImages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeImages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.Option) (*DescribeImagesOutput, error) {
-	req, out := c.DescribeImagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	return DescribeImagesRequest{Request: req, Input: input}
 }
 
 const opDescribeSessions = "DescribeSessions"
 
-// DescribeSessionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSessions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSessionsRequest is a API request type for the DescribeSessions API operation.
+type DescribeSessionsRequest struct {
+	*aws.Request
+	Input *DescribeSessionsInput
+}
+
+// Send marshals and sends the DescribeSessions API request.
+func (r *DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSessionsOutput), nil
+}
+
+// DescribeSessionsRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSessions for more information on using the DescribeSessions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the streaming sessions for the specified stack and fleet. If a
+// user ID is provided, only the streaming sessions for only that user are returned.
+// If an authentication type is not provided, the default is to authenticate
+// users using a streaming URL.
 //
 //    // Example sending a request using the DescribeSessionsRequest method.
-//    req, resp := client.DescribeSessionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSessionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions
-func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) (req *aws.Request, output *DescribeSessionsOutput) {
+func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) DescribeSessionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSessions,
 		HTTPMethod: "POST",
@@ -1419,78 +785,42 @@ func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) (req *
 		input = &DescribeSessionsInput{}
 	}
 
-	output = &DescribeSessionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSessions API operation for Amazon AppStream.
-//
-// Describes the streaming sessions for the specified stack and fleet. If a
-// user ID is provided, only the streaming sessions for only that user are returned.
-// If an authentication type is not provided, the default is to authenticate
-// users using a streaming URL.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeSessions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions
-func (c *AppStream) DescribeSessions(input *DescribeSessionsInput) (*DescribeSessionsOutput, error) {
-	req, out := c.DescribeSessionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSessionsWithContext is the same as DescribeSessions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSessions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeSessionsWithContext(ctx aws.Context, input *DescribeSessionsInput, opts ...aws.Option) (*DescribeSessionsOutput, error) {
-	req, out := c.DescribeSessionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSessionsOutput{})
+	return DescribeSessionsRequest{Request: req, Input: input}
 }
 
 const opDescribeStacks = "DescribeStacks"
 
-// DescribeStacksRequest generates a "aws.Request" representing the
-// client's request for the DescribeStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStacksRequest is a API request type for the DescribeStacks API operation.
+type DescribeStacksRequest struct {
+	*aws.Request
+	Input *DescribeStacksInput
+}
+
+// Send marshals and sends the DescribeStacks API request.
+func (r *DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStacksOutput), nil
+}
+
+// DescribeStacksRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStacks for more information on using the DescribeStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified stacks or all stacks in the account.
 //
 //    // Example sending a request using the DescribeStacksRequest method.
-//    req, resp := client.DescribeStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks
-func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -1501,75 +831,42 @@ func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.
 		input = &DescribeStacksInput{}
 	}
 
-	output = &DescribeStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStacks API operation for Amazon AppStream.
-//
-// Describes the specified stacks or all stacks in the account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DescribeStacks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks
-func (c *AppStream) DescribeStacks(input *DescribeStacksInput) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStacksWithContext is the same as DescribeStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	return DescribeStacksRequest{Request: req, Input: input}
 }
 
 const opDisassociateFleet = "DisassociateFleet"
 
-// DisassociateFleetRequest generates a "aws.Request" representing the
-// client's request for the DisassociateFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateFleetRequest is a API request type for the DisassociateFleet API operation.
+type DisassociateFleetRequest struct {
+	*aws.Request
+	Input *DisassociateFleetInput
+}
+
+// Send marshals and sends the DisassociateFleet API request.
+func (r *DisassociateFleetRequest) Send() (*DisassociateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateFleetOutput), nil
+}
+
+// DisassociateFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateFleet for more information on using the DisassociateFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates the specified fleet from the specified stack.
 //
 //    // Example sending a request using the DisassociateFleetRequest method.
-//    req, resp := client.DisassociateFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleet
-func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) (req *aws.Request, output *DisassociateFleetOutput) {
+func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) DisassociateFleetRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateFleet,
 		HTTPMethod: "POST",
@@ -1580,81 +877,42 @@ func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) (req
 		input = &DisassociateFleetInput{}
 	}
 
-	output = &DisassociateFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateFleet API operation for Amazon AppStream.
-//
-// Disassociates the specified fleet from the specified stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation DisassociateFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleet
-func (c *AppStream) DisassociateFleet(input *DisassociateFleetInput) (*DisassociateFleetOutput, error) {
-	req, out := c.DisassociateFleetRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateFleetWithContext is the same as DisassociateFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) DisassociateFleetWithContext(ctx aws.Context, input *DisassociateFleetInput, opts ...aws.Option) (*DisassociateFleetOutput, error) {
-	req, out := c.DisassociateFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateFleetOutput{})
+	return DisassociateFleetRequest{Request: req, Input: input}
 }
 
 const opExpireSession = "ExpireSession"
 
-// ExpireSessionRequest generates a "aws.Request" representing the
-// client's request for the ExpireSession operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ExpireSessionRequest is a API request type for the ExpireSession API operation.
+type ExpireSessionRequest struct {
+	*aws.Request
+	Input *ExpireSessionInput
+}
+
+// Send marshals and sends the ExpireSession API request.
+func (r *ExpireSessionRequest) Send() (*ExpireSessionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExpireSessionOutput), nil
+}
+
+// ExpireSessionRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ExpireSession for more information on using the ExpireSession
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops the specified streaming session.
 //
 //    // Example sending a request using the ExpireSessionRequest method.
-//    req, resp := client.ExpireSessionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ExpireSessionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSession
-func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) (req *aws.Request, output *ExpireSessionOutput) {
+func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessionRequest {
 	op := &aws.Operation{
 		Name:       opExpireSession,
 		HTTPMethod: "POST",
@@ -1665,70 +923,42 @@ func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) (req *aws.Re
 		input = &ExpireSessionInput{}
 	}
 
-	output = &ExpireSessionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ExpireSession API operation for Amazon AppStream.
-//
-// Stops the specified streaming session.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation ExpireSession for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSession
-func (c *AppStream) ExpireSession(input *ExpireSessionInput) (*ExpireSessionOutput, error) {
-	req, out := c.ExpireSessionRequest(input)
-	return out, req.Send()
-}
-
-// ExpireSessionWithContext is the same as ExpireSession with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ExpireSession for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) ExpireSessionWithContext(ctx aws.Context, input *ExpireSessionInput, opts ...aws.Option) (*ExpireSessionOutput, error) {
-	req, out := c.ExpireSessionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ExpireSessionOutput{})
+	return ExpireSessionRequest{Request: req, Input: input}
 }
 
 const opListAssociatedFleets = "ListAssociatedFleets"
 
-// ListAssociatedFleetsRequest generates a "aws.Request" representing the
-// client's request for the ListAssociatedFleets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAssociatedFleetsRequest is a API request type for the ListAssociatedFleets API operation.
+type ListAssociatedFleetsRequest struct {
+	*aws.Request
+	Input *ListAssociatedFleetsInput
+}
+
+// Send marshals and sends the ListAssociatedFleets API request.
+func (r *ListAssociatedFleetsRequest) Send() (*ListAssociatedFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAssociatedFleetsOutput), nil
+}
+
+// ListAssociatedFleetsRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAssociatedFleets for more information on using the ListAssociatedFleets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the fleets associated with the specified stack.
 //
 //    // Example sending a request using the ListAssociatedFleetsRequest method.
-//    req, resp := client.ListAssociatedFleetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAssociatedFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleets
-func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) (req *aws.Request, output *ListAssociatedFleetsOutput) {
+func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) ListAssociatedFleetsRequest {
 	op := &aws.Operation{
 		Name:       opListAssociatedFleets,
 		HTTPMethod: "POST",
@@ -1739,70 +969,42 @@ func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput
 		input = &ListAssociatedFleetsInput{}
 	}
 
-	output = &ListAssociatedFleetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAssociatedFleets API operation for Amazon AppStream.
-//
-// Lists the fleets associated with the specified stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation ListAssociatedFleets for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleets
-func (c *AppStream) ListAssociatedFleets(input *ListAssociatedFleetsInput) (*ListAssociatedFleetsOutput, error) {
-	req, out := c.ListAssociatedFleetsRequest(input)
-	return out, req.Send()
-}
-
-// ListAssociatedFleetsWithContext is the same as ListAssociatedFleets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAssociatedFleets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) ListAssociatedFleetsWithContext(ctx aws.Context, input *ListAssociatedFleetsInput, opts ...aws.Option) (*ListAssociatedFleetsOutput, error) {
-	req, out := c.ListAssociatedFleetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAssociatedFleetsOutput{})
+	return ListAssociatedFleetsRequest{Request: req, Input: input}
 }
 
 const opListAssociatedStacks = "ListAssociatedStacks"
 
-// ListAssociatedStacksRequest generates a "aws.Request" representing the
-// client's request for the ListAssociatedStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAssociatedStacksRequest is a API request type for the ListAssociatedStacks API operation.
+type ListAssociatedStacksRequest struct {
+	*aws.Request
+	Input *ListAssociatedStacksInput
+}
+
+// Send marshals and sends the ListAssociatedStacks API request.
+func (r *ListAssociatedStacksRequest) Send() (*ListAssociatedStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAssociatedStacksOutput), nil
+}
+
+// ListAssociatedStacksRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAssociatedStacks for more information on using the ListAssociatedStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the stacks associated with the specified fleet.
 //
 //    // Example sending a request using the ListAssociatedStacksRequest method.
-//    req, resp := client.ListAssociatedStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAssociatedStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacks
-func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) (req *aws.Request, output *ListAssociatedStacksOutput) {
+func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) ListAssociatedStacksRequest {
 	op := &aws.Operation{
 		Name:       opListAssociatedStacks,
 		HTTPMethod: "POST",
@@ -1813,70 +1015,42 @@ func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput
 		input = &ListAssociatedStacksInput{}
 	}
 
-	output = &ListAssociatedStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAssociatedStacks API operation for Amazon AppStream.
-//
-// Lists the stacks associated with the specified fleet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation ListAssociatedStacks for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacks
-func (c *AppStream) ListAssociatedStacks(input *ListAssociatedStacksInput) (*ListAssociatedStacksOutput, error) {
-	req, out := c.ListAssociatedStacksRequest(input)
-	return out, req.Send()
-}
-
-// ListAssociatedStacksWithContext is the same as ListAssociatedStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAssociatedStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) ListAssociatedStacksWithContext(ctx aws.Context, input *ListAssociatedStacksInput, opts ...aws.Option) (*ListAssociatedStacksOutput, error) {
-	req, out := c.ListAssociatedStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAssociatedStacksOutput{})
+	return ListAssociatedStacksRequest{Request: req, Input: input}
 }
 
 const opStartFleet = "StartFleet"
 
-// StartFleetRequest generates a "aws.Request" representing the
-// client's request for the StartFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartFleetRequest is a API request type for the StartFleet API operation.
+type StartFleetRequest struct {
+	*aws.Request
+	Input *StartFleetInput
+}
+
+// Send marshals and sends the StartFleet API request.
+func (r *StartFleetRequest) Send() (*StartFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartFleetOutput), nil
+}
+
+// StartFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartFleet for more information on using the StartFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts the specified fleet.
 //
 //    // Example sending a request using the StartFleetRequest method.
-//    req, resp := client.StartFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleet
-func (c *AppStream) StartFleetRequest(input *StartFleetInput) (req *aws.Request, output *StartFleetOutput) {
+func (c *AppStream) StartFleetRequest(input *StartFleetInput) StartFleetRequest {
 	op := &aws.Operation{
 		Name:       opStartFleet,
 		HTTPMethod: "POST",
@@ -1887,84 +1061,40 @@ func (c *AppStream) StartFleetRequest(input *StartFleetInput) (req *aws.Request,
 		input = &StartFleetInput{}
 	}
 
-	output = &StartFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartFleet API operation for Amazon AppStream.
-//
-// Starts the specified fleet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation StartFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleet
-func (c *AppStream) StartFleet(input *StartFleetInput) (*StartFleetOutput, error) {
-	req, out := c.StartFleetRequest(input)
-	return out, req.Send()
-}
-
-// StartFleetWithContext is the same as StartFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) StartFleetWithContext(ctx aws.Context, input *StartFleetInput, opts ...aws.Option) (*StartFleetOutput, error) {
-	req, out := c.StartFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartFleetOutput{})
+	return StartFleetRequest{Request: req, Input: input}
 }
 
 const opStartImageBuilder = "StartImageBuilder"
 
-// StartImageBuilderRequest generates a "aws.Request" representing the
-// client's request for the StartImageBuilder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartImageBuilder for more information on using the StartImageBuilder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// StartImageBuilderRequest is a API request type for the StartImageBuilder API operation.
+type StartImageBuilderRequest struct {
+	*aws.Request
+	Input *StartImageBuilderInput
+}
+
+// Send marshals and sends the StartImageBuilder API request.
+func (r *StartImageBuilderRequest) Send() (*StartImageBuilderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartImageBuilderOutput), nil
+}
+
+// StartImageBuilderRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the StartImageBuilderRequest method.
-//    req, resp := client.StartImageBuilderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartImageBuilderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder
-func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) (req *aws.Request, output *StartImageBuilderOutput) {
+func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) StartImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opStartImageBuilder,
 		HTTPMethod: "POST",
@@ -1975,79 +1105,42 @@ func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) (req
 		input = &StartImageBuilderInput{}
 	}
 
-	output = &StartImageBuilderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartImageBuilder API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation StartImageBuilder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotAvailableException "ResourceNotAvailableException"
-//   The specified resource exists and is not in use, but isn't available.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder
-func (c *AppStream) StartImageBuilder(input *StartImageBuilderInput) (*StartImageBuilderOutput, error) {
-	req, out := c.StartImageBuilderRequest(input)
-	return out, req.Send()
-}
-
-// StartImageBuilderWithContext is the same as StartImageBuilder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartImageBuilder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) StartImageBuilderWithContext(ctx aws.Context, input *StartImageBuilderInput, opts ...aws.Option) (*StartImageBuilderOutput, error) {
-	req, out := c.StartImageBuilderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartImageBuilderOutput{})
+	return StartImageBuilderRequest{Request: req, Input: input}
 }
 
 const opStopFleet = "StopFleet"
 
-// StopFleetRequest generates a "aws.Request" representing the
-// client's request for the StopFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopFleetRequest is a API request type for the StopFleet API operation.
+type StopFleetRequest struct {
+	*aws.Request
+	Input *StopFleetInput
+}
+
+// Send marshals and sends the StopFleet API request.
+func (r *StopFleetRequest) Send() (*StopFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopFleetOutput), nil
+}
+
+// StopFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopFleet for more information on using the StopFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops the specified fleet.
 //
 //    // Example sending a request using the StopFleetRequest method.
-//    req, resp := client.StopFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleet
-func (c *AppStream) StopFleetRequest(input *StopFleetInput) (req *aws.Request, output *StopFleetOutput) {
+func (c *AppStream) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
 	op := &aws.Operation{
 		Name:       opStopFleet,
 		HTTPMethod: "POST",
@@ -2058,78 +1151,40 @@ func (c *AppStream) StopFleetRequest(input *StopFleetInput) (req *aws.Request, o
 		input = &StopFleetInput{}
 	}
 
-	output = &StopFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopFleet API operation for Amazon AppStream.
-//
-// Stops the specified fleet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation StopFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleet
-func (c *AppStream) StopFleet(input *StopFleetInput) (*StopFleetOutput, error) {
-	req, out := c.StopFleetRequest(input)
-	return out, req.Send()
-}
-
-// StopFleetWithContext is the same as StopFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) StopFleetWithContext(ctx aws.Context, input *StopFleetInput, opts ...aws.Option) (*StopFleetOutput, error) {
-	req, out := c.StopFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopFleetOutput{})
+	return StopFleetRequest{Request: req, Input: input}
 }
 
 const opStopImageBuilder = "StopImageBuilder"
 
-// StopImageBuilderRequest generates a "aws.Request" representing the
-// client's request for the StopImageBuilder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopImageBuilder for more information on using the StopImageBuilder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// StopImageBuilderRequest is a API request type for the StopImageBuilder API operation.
+type StopImageBuilderRequest struct {
+	*aws.Request
+	Input *StopImageBuilderInput
+}
+
+// Send marshals and sends the StopImageBuilder API request.
+func (r *StopImageBuilderRequest) Send() (*StopImageBuilderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopImageBuilderOutput), nil
+}
+
+// StopImageBuilderRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
 //    // Example sending a request using the StopImageBuilderRequest method.
-//    req, resp := client.StopImageBuilderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopImageBuilderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder
-func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) (req *aws.Request, output *StopImageBuilderOutput) {
+func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) StopImageBuilderRequest {
 	op := &aws.Operation{
 		Name:       opStopImageBuilder,
 		HTTPMethod: "POST",
@@ -2140,79 +1195,42 @@ func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) (req *
 		input = &StopImageBuilderInput{}
 	}
 
-	output = &StopImageBuilderOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopImageBuilder API operation for Amazon AppStream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation StopImageBuilder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder
-func (c *AppStream) StopImageBuilder(input *StopImageBuilderInput) (*StopImageBuilderOutput, error) {
-	req, out := c.StopImageBuilderRequest(input)
-	return out, req.Send()
-}
-
-// StopImageBuilderWithContext is the same as StopImageBuilder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopImageBuilder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) StopImageBuilderWithContext(ctx aws.Context, input *StopImageBuilderInput, opts ...aws.Option) (*StopImageBuilderOutput, error) {
-	req, out := c.StopImageBuilderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopImageBuilderOutput{})
+	return StopImageBuilderRequest{Request: req, Input: input}
 }
 
 const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 
-// UpdateDirectoryConfigRequest generates a "aws.Request" representing the
-// client's request for the UpdateDirectoryConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDirectoryConfigRequest is a API request type for the UpdateDirectoryConfig API operation.
+type UpdateDirectoryConfigRequest struct {
+	*aws.Request
+	Input *UpdateDirectoryConfigInput
+}
+
+// Send marshals and sends the UpdateDirectoryConfig API request.
+func (r *UpdateDirectoryConfigRequest) Send() (*UpdateDirectoryConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDirectoryConfigOutput), nil
+}
+
+// UpdateDirectoryConfigRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDirectoryConfig for more information on using the UpdateDirectoryConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the specified directory configuration.
 //
 //    // Example sending a request using the UpdateDirectoryConfigRequest method.
-//    req, resp := client.UpdateDirectoryConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDirectoryConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig
-func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput) (req *aws.Request, output *UpdateDirectoryConfigOutput) {
+func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDirectoryConfig,
 		HTTPMethod: "POST",
@@ -2223,81 +1241,47 @@ func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInp
 		input = &UpdateDirectoryConfigInput{}
 	}
 
-	output = &UpdateDirectoryConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDirectoryConfig API operation for Amazon AppStream.
-//
-// Updates the specified directory configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation UpdateDirectoryConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig
-func (c *AppStream) UpdateDirectoryConfig(input *UpdateDirectoryConfigInput) (*UpdateDirectoryConfigOutput, error) {
-	req, out := c.UpdateDirectoryConfigRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDirectoryConfigWithContext is the same as UpdateDirectoryConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDirectoryConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) UpdateDirectoryConfigWithContext(ctx aws.Context, input *UpdateDirectoryConfigInput, opts ...aws.Option) (*UpdateDirectoryConfigOutput, error) {
-	req, out := c.UpdateDirectoryConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDirectoryConfigOutput{})
+	return UpdateDirectoryConfigRequest{Request: req, Input: input}
 }
 
 const opUpdateFleet = "UpdateFleet"
 
-// UpdateFleetRequest generates a "aws.Request" representing the
-// client's request for the UpdateFleet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateFleetRequest is a API request type for the UpdateFleet API operation.
+type UpdateFleetRequest struct {
+	*aws.Request
+	Input *UpdateFleetInput
+}
+
+// Send marshals and sends the UpdateFleet API request.
+func (r *UpdateFleetRequest) Send() (*UpdateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFleetOutput), nil
+}
+
+// UpdateFleetRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the specified fleet.
 //
-// See UpdateFleet for more information on using the UpdateFleet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If the fleet is in the STOPPED state, you can update any attribute except
+// the fleet name. If the fleet is in the RUNNING state, you can update the
+// DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING
+// or STOPPING state, you can't update it.
 //
 //    // Example sending a request using the UpdateFleetRequest method.
-//    req, resp := client.UpdateFleetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet
-func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) (req *aws.Request, output *UpdateFleetOutput) {
+func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) UpdateFleetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFleet,
 		HTTPMethod: "POST",
@@ -2308,104 +1292,42 @@ func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) (req *aws.Reques
 		input = &UpdateFleetInput{}
 	}
 
-	output = &UpdateFleetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateFleet API operation for Amazon AppStream.
-//
-// Updates the specified fleet.
-//
-// If the fleet is in the STOPPED state, you can update any attribute except
-// the fleet name. If the fleet is in the RUNNING state, you can update the
-// DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING
-// or STOPPING state, you can't update it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation UpdateFleet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The specified role is invalid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceNotAvailableException "ResourceNotAvailableException"
-//   The specified resource exists and is not in use, but isn't available.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   An API error occurred. Wait a few minutes and try again.
-//
-//   * ErrCodeIncompatibleImageException "IncompatibleImageException"
-//   The image does not support storage connectors.
-//
-//   * ErrCodeOperationNotPermittedException "OperationNotPermittedException"
-//   The attempted operation is not permitted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet
-func (c *AppStream) UpdateFleet(input *UpdateFleetInput) (*UpdateFleetOutput, error) {
-	req, out := c.UpdateFleetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFleetWithContext is the same as UpdateFleet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFleet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) UpdateFleetWithContext(ctx aws.Context, input *UpdateFleetInput, opts ...aws.Option) (*UpdateFleetOutput, error) {
-	req, out := c.UpdateFleetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateFleetOutput{})
+	return UpdateFleetRequest{Request: req, Input: input}
 }
 
 const opUpdateStack = "UpdateStack"
 
-// UpdateStackRequest generates a "aws.Request" representing the
-// client's request for the UpdateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateStackRequest is a API request type for the UpdateStack API operation.
+type UpdateStackRequest struct {
+	*aws.Request
+	Input *UpdateStackInput
+}
+
+// Send marshals and sends the UpdateStack API request.
+func (r *UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateStackOutput), nil
+}
+
+// UpdateStackRequest returns a request value for making API operation for
+// Amazon AppStream.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateStack for more information on using the UpdateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the specified stack.
 //
 //    // Example sending a request using the UpdateStackRequest method.
-//    req, resp := client.UpdateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack
-func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
+func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) UpdateStackRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStack,
 		HTTPMethod: "POST",
@@ -2416,61 +1338,8 @@ func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) (req *aws.Reques
 		input = &UpdateStackInput{}
 	}
 
-	output = &UpdateStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateStack API operation for Amazon AppStream.
-//
-// Updates the specified stack.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon AppStream's
-// API operation UpdateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource was not found.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The specified resource is in use.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   The specified role is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombinationException"
-//   Indicates an incorrect combination of parameters, or a missing parameter.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested limit exceeds the permitted limit for an account.
-//
-//   * ErrCodeIncompatibleImageException "IncompatibleImageException"
-//   The image does not support storage connectors.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack
-func (c *AppStream) UpdateStack(input *UpdateStackInput) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	return out, req.Send()
-}
-
-// UpdateStackWithContext is the same as UpdateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AppStream) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateStackOutput{})
+	return UpdateStackRequest{Request: req, Input: input}
 }
 
 // Describes an application in the application catalog.

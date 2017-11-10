@@ -11,31 +11,41 @@ import (
 
 const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 
-// BatchCheckLayerAvailabilityRequest generates a "aws.Request" representing the
-// client's request for the BatchCheckLayerAvailability operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchCheckLayerAvailabilityRequest is a API request type for the BatchCheckLayerAvailability API operation.
+type BatchCheckLayerAvailabilityRequest struct {
+	*aws.Request
+	Input *BatchCheckLayerAvailabilityInput
+}
+
+// Send marshals and sends the BatchCheckLayerAvailability API request.
+func (r *BatchCheckLayerAvailabilityRequest) Send() (*BatchCheckLayerAvailabilityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchCheckLayerAvailabilityOutput), nil
+}
+
+// BatchCheckLayerAvailabilityRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Check the availability of multiple image layers in a specified registry and
+// repository.
 //
-// See BatchCheckLayerAvailability for more information on using the BatchCheckLayerAvailability
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the BatchCheckLayerAvailabilityRequest method.
-//    req, resp := client.BatchCheckLayerAvailabilityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchCheckLayerAvailabilityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailability
-func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabilityInput) (req *aws.Request, output *BatchCheckLayerAvailabilityOutput) {
+func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest {
 	op := &aws.Operation{
 		Name:       opBatchCheckLayerAvailability,
 		HTTPMethod: "POST",
@@ -46,104 +56,30 @@ func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabil
 		input = &BatchCheckLayerAvailabilityInput{}
 	}
 
-	output = &BatchCheckLayerAvailabilityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchCheckLayerAvailability API operation for Amazon EC2 Container Registry.
-//
-// Check the availability of multiple image layers in a specified registry and
-// repository.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation BatchCheckLayerAvailability for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailability
-func (c *ECR) BatchCheckLayerAvailability(input *BatchCheckLayerAvailabilityInput) (*BatchCheckLayerAvailabilityOutput, error) {
-	req, out := c.BatchCheckLayerAvailabilityRequest(input)
-	return out, req.Send()
-}
-
-// BatchCheckLayerAvailabilityWithContext is the same as BatchCheckLayerAvailability with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchCheckLayerAvailability for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) BatchCheckLayerAvailabilityWithContext(ctx aws.Context, input *BatchCheckLayerAvailabilityInput, opts ...aws.Option) (*BatchCheckLayerAvailabilityOutput, error) {
-	req, out := c.BatchCheckLayerAvailabilityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchCheckLayerAvailabilityOutput{})
+	return BatchCheckLayerAvailabilityRequest{Request: req, Input: input}
 }
 
 const opBatchDeleteImage = "BatchDeleteImage"
 
-// BatchDeleteImageRequest generates a "aws.Request" representing the
-// client's request for the BatchDeleteImage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeleteImage for more information on using the BatchDeleteImage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchDeleteImageRequest method.
-//    req, resp := client.BatchDeleteImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage
-func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) (req *aws.Request, output *BatchDeleteImageOutput) {
-	op := &aws.Operation{
-		Name:       opBatchDeleteImage,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &BatchDeleteImageInput{}
-	}
-
-	output = &BatchDeleteImageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// BatchDeleteImageRequest is a API request type for the BatchDeleteImage API operation.
+type BatchDeleteImageRequest struct {
+	*aws.Request
+	Input *BatchDeleteImageInput
 }
 
-// BatchDeleteImage API operation for Amazon EC2 Container Registry.
+// Send marshals and sends the BatchDeleteImage API request.
+func (r *BatchDeleteImageRequest) Send() (*BatchDeleteImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteImageOutput), nil
+}
+
+// BatchDeleteImageRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
 // Deletes a list of specified images within a specified repository. Images
 // are specified with either imageTag or imageDigest.
@@ -155,74 +91,62 @@ func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) (req *aws.Re
 // You can completely delete an image (and all of its tags) by specifying the
 // image's digest in your request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation BatchDeleteImage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
+//    // Example sending a request using the BatchDeleteImageRequest method.
+//    req := client.BatchDeleteImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage
-func (c *ECR) BatchDeleteImage(input *BatchDeleteImageInput) (*BatchDeleteImageOutput, error) {
-	req, out := c.BatchDeleteImageRequest(input)
-	return out, req.Send()
-}
+func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDeleteImageRequest {
+	op := &aws.Operation{
+		Name:       opBatchDeleteImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// BatchDeleteImageWithContext is the same as BatchDeleteImage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeleteImage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) BatchDeleteImageWithContext(ctx aws.Context, input *BatchDeleteImageInput, opts ...aws.Option) (*BatchDeleteImageOutput, error) {
-	req, out := c.BatchDeleteImageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &BatchDeleteImageInput{}
+	}
+
+	req := c.newRequest(op, input, &BatchDeleteImageOutput{})
+	return BatchDeleteImageRequest{Request: req, Input: input}
 }
 
 const opBatchGetImage = "BatchGetImage"
 
-// BatchGetImageRequest generates a "aws.Request" representing the
-// client's request for the BatchGetImage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetImageRequest is a API request type for the BatchGetImage API operation.
+type BatchGetImageRequest struct {
+	*aws.Request
+	Input *BatchGetImageInput
+}
+
+// Send marshals and sends the BatchGetImage API request.
+func (r *BatchGetImageRequest) Send() (*BatchGetImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetImageOutput), nil
+}
+
+// BatchGetImageRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetImage for more information on using the BatchGetImage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets detailed information for specified images within a specified repository.
+// Images are specified with either imageTag or imageDigest.
 //
 //    // Example sending a request using the BatchGetImageRequest method.
-//    req, resp := client.BatchGetImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage
-func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) (req *aws.Request, output *BatchGetImageOutput) {
+func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetImage,
 		HTTPMethod: "POST",
@@ -233,84 +157,48 @@ func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) (req *aws.Request,
 		input = &BatchGetImageInput{}
 	}
 
-	output = &BatchGetImageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetImage API operation for Amazon EC2 Container Registry.
-//
-// Gets detailed information for specified images within a specified repository.
-// Images are specified with either imageTag or imageDigest.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation BatchGetImage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage
-func (c *ECR) BatchGetImage(input *BatchGetImageInput) (*BatchGetImageOutput, error) {
-	req, out := c.BatchGetImageRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetImageWithContext is the same as BatchGetImage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetImage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) BatchGetImageWithContext(ctx aws.Context, input *BatchGetImageInput, opts ...aws.Option) (*BatchGetImageOutput, error) {
-	req, out := c.BatchGetImageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetImageOutput{})
+	return BatchGetImageRequest{Request: req, Input: input}
 }
 
 const opCompleteLayerUpload = "CompleteLayerUpload"
 
-// CompleteLayerUploadRequest generates a "aws.Request" representing the
-// client's request for the CompleteLayerUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CompleteLayerUploadRequest is a API request type for the CompleteLayerUpload API operation.
+type CompleteLayerUploadRequest struct {
+	*aws.Request
+	Input *CompleteLayerUploadInput
+}
+
+// Send marshals and sends the CompleteLayerUpload API request.
+func (r *CompleteLayerUploadRequest) Send() (*CompleteLayerUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CompleteLayerUploadOutput), nil
+}
+
+// CompleteLayerUploadRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Inform Amazon ECR that the image layer upload for a specified registry, repository
+// name, and upload ID, has completed. You can optionally provide a sha256 digest
+// of the image layer for data validation purposes.
 //
-// See CompleteLayerUpload for more information on using the CompleteLayerUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the CompleteLayerUploadRequest method.
-//    req, resp := client.CompleteLayerUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CompleteLayerUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUpload
-func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) (req *aws.Request, output *CompleteLayerUploadOutput) {
+func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) CompleteLayerUploadRequest {
 	op := &aws.Operation{
 		Name:       opCompleteLayerUpload,
 		HTTPMethod: "POST",
@@ -321,106 +209,42 @@ func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) (req *
 		input = &CompleteLayerUploadInput{}
 	}
 
-	output = &CompleteLayerUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CompleteLayerUpload API operation for Amazon EC2 Container Registry.
-//
-// Inform Amazon ECR that the image layer upload for a specified registry, repository
-// name, and upload ID, has completed. You can optionally provide a sha256 digest
-// of the image layer for data validation purposes.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation CompleteLayerUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeUploadNotFoundException "UploadNotFoundException"
-//   The upload could not be found, or the specified upload id is not valid for
-//   this repository.
-//
-//   * ErrCodeInvalidLayerException "InvalidLayerException"
-//   The layer digest calculation performed by Amazon ECR upon receipt of the
-//   image layer does not match the digest specified.
-//
-//   * ErrCodeLayerPartTooSmallException "LayerPartTooSmallException"
-//   Layer parts must be at least 5 MiB in size.
-//
-//   * ErrCodeLayerAlreadyExistsException "LayerAlreadyExistsException"
-//   The image layer already exists in the associated repository.
-//
-//   * ErrCodeEmptyUploadException "EmptyUploadException"
-//   The specified layer upload does not contain any layer parts.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUpload
-func (c *ECR) CompleteLayerUpload(input *CompleteLayerUploadInput) (*CompleteLayerUploadOutput, error) {
-	req, out := c.CompleteLayerUploadRequest(input)
-	return out, req.Send()
-}
-
-// CompleteLayerUploadWithContext is the same as CompleteLayerUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompleteLayerUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) CompleteLayerUploadWithContext(ctx aws.Context, input *CompleteLayerUploadInput, opts ...aws.Option) (*CompleteLayerUploadOutput, error) {
-	req, out := c.CompleteLayerUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CompleteLayerUploadOutput{})
+	return CompleteLayerUploadRequest{Request: req, Input: input}
 }
 
 const opCreateRepository = "CreateRepository"
 
-// CreateRepositoryRequest generates a "aws.Request" representing the
-// client's request for the CreateRepository operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateRepositoryRequest is a API request type for the CreateRepository API operation.
+type CreateRepositoryRequest struct {
+	*aws.Request
+	Input *CreateRepositoryInput
+}
+
+// Send marshals and sends the CreateRepository API request.
+func (r *CreateRepositoryRequest) Send() (*CreateRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateRepositoryOutput), nil
+}
+
+// CreateRepositoryRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateRepository for more information on using the CreateRepository
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an image repository.
 //
 //    // Example sending a request using the CreateRepositoryRequest method.
-//    req, resp := client.CreateRepositoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository
-func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) (req *aws.Request, output *CreateRepositoryOutput) {
+func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) CreateRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateRepository,
 		HTTPMethod: "POST",
@@ -431,88 +255,43 @@ func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) (req *aws.Re
 		input = &CreateRepositoryInput{}
 	}
 
-	output = &CreateRepositoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateRepository API operation for Amazon EC2 Container Registry.
-//
-// Creates an image repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation CreateRepository for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryAlreadyExistsException "RepositoryAlreadyExistsException"
-//   The specified repository already exists in the specified registry.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The operation did not succeed because it would have exceeded a service limit
-//   for your account. For more information, see Amazon ECR Default Service Limits
-//   (http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html)
-//   in the Amazon EC2 Container Registry User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository
-func (c *ECR) CreateRepository(input *CreateRepositoryInput) (*CreateRepositoryOutput, error) {
-	req, out := c.CreateRepositoryRequest(input)
-	return out, req.Send()
-}
-
-// CreateRepositoryWithContext is the same as CreateRepository with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateRepository for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...aws.Option) (*CreateRepositoryOutput, error) {
-	req, out := c.CreateRepositoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateRepositoryOutput{})
+	return CreateRepositoryRequest{Request: req, Input: input}
 }
 
 const opDeleteRepository = "DeleteRepository"
 
-// DeleteRepositoryRequest generates a "aws.Request" representing the
-// client's request for the DeleteRepository operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRepositoryRequest is a API request type for the DeleteRepository API operation.
+type DeleteRepositoryRequest struct {
+	*aws.Request
+	Input *DeleteRepositoryInput
+}
+
+// Send marshals and sends the DeleteRepository API request.
+func (r *DeleteRepositoryRequest) Send() (*DeleteRepositoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRepositoryOutput), nil
+}
+
+// DeleteRepositoryRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteRepository for more information on using the DeleteRepository
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an existing image repository. If a repository contains images, you
+// must use the force option to delete it.
 //
 //    // Example sending a request using the DeleteRepositoryRequest method.
-//    req, resp := client.DeleteRepositoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRepositoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository
-func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *aws.Request, output *DeleteRepositoryOutput) {
+func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteRepositoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRepository,
 		HTTPMethod: "POST",
@@ -523,88 +302,42 @@ func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *aws.Re
 		input = &DeleteRepositoryInput{}
 	}
 
-	output = &DeleteRepositoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRepository API operation for Amazon EC2 Container Registry.
-//
-// Deletes an existing image repository. If a repository contains images, you
-// must use the force option to delete it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation DeleteRepository for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeRepositoryNotEmptyException "RepositoryNotEmptyException"
-//   The specified repository contains images. To delete a repository that contains
-//   images, you must force the deletion with the force parameter.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository
-func (c *ECR) DeleteRepository(input *DeleteRepositoryInput) (*DeleteRepositoryOutput, error) {
-	req, out := c.DeleteRepositoryRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRepositoryWithContext is the same as DeleteRepository with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRepository for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...aws.Option) (*DeleteRepositoryOutput, error) {
-	req, out := c.DeleteRepositoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRepositoryOutput{})
+	return DeleteRepositoryRequest{Request: req, Input: input}
 }
 
 const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 
-// DeleteRepositoryPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteRepositoryPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteRepositoryPolicyRequest is a API request type for the DeleteRepositoryPolicy API operation.
+type DeleteRepositoryPolicyRequest struct {
+	*aws.Request
+	Input *DeleteRepositoryPolicyInput
+}
+
+// Send marshals and sends the DeleteRepositoryPolicy API request.
+func (r *DeleteRepositoryPolicyRequest) Send() (*DeleteRepositoryPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRepositoryPolicyOutput), nil
+}
+
+// DeleteRepositoryPolicyRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteRepositoryPolicy for more information on using the DeleteRepositoryPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the repository policy from a specified repository.
 //
 //    // Example sending a request using the DeleteRepositoryPolicyRequest method.
-//    req, resp := client.DeleteRepositoryPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteRepositoryPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicy
-func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) (req *aws.Request, output *DeleteRepositoryPolicyOutput) {
+func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteRepositoryPolicy,
 		HTTPMethod: "POST",
@@ -615,87 +348,48 @@ func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) 
 		input = &DeleteRepositoryPolicyInput{}
 	}
 
-	output = &DeleteRepositoryPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteRepositoryPolicy API operation for Amazon EC2 Container Registry.
-//
-// Deletes the repository policy from a specified repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation DeleteRepositoryPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeRepositoryPolicyNotFoundException "RepositoryPolicyNotFoundException"
-//   The specified repository and registry combination does not have an associated
-//   repository policy.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicy
-func (c *ECR) DeleteRepositoryPolicy(input *DeleteRepositoryPolicyInput) (*DeleteRepositoryPolicyOutput, error) {
-	req, out := c.DeleteRepositoryPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteRepositoryPolicyWithContext is the same as DeleteRepositoryPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteRepositoryPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DeleteRepositoryPolicyWithContext(ctx aws.Context, input *DeleteRepositoryPolicyInput, opts ...aws.Option) (*DeleteRepositoryPolicyOutput, error) {
-	req, out := c.DeleteRepositoryPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteRepositoryPolicyOutput{})
+	return DeleteRepositoryPolicyRequest{Request: req, Input: input}
 }
 
 const opDescribeImages = "DescribeImages"
 
-// DescribeImagesRequest generates a "aws.Request" representing the
-// client's request for the DescribeImages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeImagesRequest is a API request type for the DescribeImages API operation.
+type DescribeImagesRequest struct {
+	*aws.Request
+	Input *DescribeImagesInput
+}
+
+// Send marshals and sends the DescribeImages API request.
+func (r *DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeImagesOutput), nil
+}
+
+// DescribeImagesRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns metadata about the images in a repository, including image size,
+// image tags, and creation date.
 //
-// See DescribeImages for more information on using the DescribeImages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Beginning with Docker version 1.9, the Docker client compresses image layers
+// before pushing them to a V2 Docker registry. The output of the docker images
+// command shows the uncompressed image size, so it may return a larger image
+// size than the image sizes returned by DescribeImages.
 //
 //    // Example sending a request using the DescribeImagesRequest method.
-//    req, resp := client.DescribeImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeImagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages
-func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Request, output *DescribeImagesOutput) {
+func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
@@ -712,63 +406,8 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Reques
 		input = &DescribeImagesInput{}
 	}
 
-	output = &DescribeImagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeImages API operation for Amazon EC2 Container Registry.
-//
-// Returns metadata about the images in a repository, including image size,
-// image tags, and creation date.
-//
-// Beginning with Docker version 1.9, the Docker client compresses image layers
-// before pushing them to a V2 Docker registry. The output of the docker images
-// command shows the uncompressed image size, so it may return a larger image
-// size than the image sizes returned by DescribeImages.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation DescribeImages for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeImageNotFoundException "ImageNotFoundException"
-//   The image requested does not exist in the specified repository.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages
-func (c *ECR) DescribeImages(input *DescribeImagesInput) (*DescribeImagesOutput, error) {
-	req, out := c.DescribeImagesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeImagesWithContext is the same as DescribeImages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeImages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.Option) (*DescribeImagesOutput, error) {
-	req, out := c.DescribeImagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeImagesOutput{})
+	return DescribeImagesRequest{Request: req, Input: input}
 }
 
 // DescribeImagesPages iterates over the pages of a DescribeImages operation,
@@ -807,10 +446,10 @@ func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeIma
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeImagesRequest(inCpy)
+			req := c.DescribeImagesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -823,31 +462,36 @@ func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeIma
 
 const opDescribeRepositories = "DescribeRepositories"
 
-// DescribeRepositoriesRequest generates a "aws.Request" representing the
-// client's request for the DescribeRepositories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeRepositoriesRequest is a API request type for the DescribeRepositories API operation.
+type DescribeRepositoriesRequest struct {
+	*aws.Request
+	Input *DescribeRepositoriesInput
+}
+
+// Send marshals and sends the DescribeRepositories API request.
+func (r *DescribeRepositoriesRequest) Send() (*DescribeRepositoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRepositoriesOutput), nil
+}
+
+// DescribeRepositoriesRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRepositories for more information on using the DescribeRepositories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes image repositories in a registry.
 //
 //    // Example sending a request using the DescribeRepositoriesRequest method.
-//    req, resp := client.DescribeRepositoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeRepositoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories
-func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) (req *aws.Request, output *DescribeRepositoriesOutput) {
+func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) DescribeRepositoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRepositories,
 		HTTPMethod: "POST",
@@ -864,54 +508,8 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) (req
 		input = &DescribeRepositoriesInput{}
 	}
 
-	output = &DescribeRepositoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeRepositories API operation for Amazon EC2 Container Registry.
-//
-// Describes image repositories in a registry.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation DescribeRepositories for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories
-func (c *ECR) DescribeRepositories(input *DescribeRepositoriesInput) (*DescribeRepositoriesOutput, error) {
-	req, out := c.DescribeRepositoriesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRepositoriesWithContext is the same as DescribeRepositories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRepositories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DescribeRepositoriesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, opts ...aws.Option) (*DescribeRepositoriesOutput, error) {
-	req, out := c.DescribeRepositoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeRepositoriesOutput{})
+	return DescribeRepositoriesRequest{Request: req, Input: input}
 }
 
 // DescribeRepositoriesPages iterates over the pages of a DescribeRepositories operation,
@@ -950,10 +548,10 @@ func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeRepositoriesRequest(inCpy)
+			req := c.DescribeRepositoriesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -966,47 +564,24 @@ func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *Descr
 
 const opGetAuthorizationToken = "GetAuthorizationToken"
 
-// GetAuthorizationTokenRequest generates a "aws.Request" representing the
-// client's request for the GetAuthorizationToken operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAuthorizationToken for more information on using the GetAuthorizationToken
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetAuthorizationTokenRequest method.
-//    req, resp := client.GetAuthorizationTokenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken
-func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) (req *aws.Request, output *GetAuthorizationTokenOutput) {
-	op := &aws.Operation{
-		Name:       opGetAuthorizationToken,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetAuthorizationTokenInput{}
-	}
-
-	output = &GetAuthorizationTokenOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetAuthorizationTokenRequest is a API request type for the GetAuthorizationToken API operation.
+type GetAuthorizationTokenRequest struct {
+	*aws.Request
+	Input *GetAuthorizationTokenInput
 }
 
-// GetAuthorizationToken API operation for Amazon EC2 Container Registry.
+// Send marshals and sends the GetAuthorizationToken API request.
+func (r *GetAuthorizationTokenRequest) Send() (*GetAuthorizationTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAuthorizationTokenOutput), nil
+}
+
+// GetAuthorizationTokenRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
 // Retrieves a token that is valid for a specified registry for 12 hours. This
 // command allows you to use the docker CLI to push and pull images with Amazon
@@ -1017,70 +592,66 @@ func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) (r
 // to a registry. The AWS CLI offers an aws ecr get-login command that simplifies
 // the login process.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation GetAuthorizationToken for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
+//    // Example sending a request using the GetAuthorizationTokenRequest method.
+//    req := client.GetAuthorizationTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken
-func (c *ECR) GetAuthorizationToken(input *GetAuthorizationTokenInput) (*GetAuthorizationTokenOutput, error) {
-	req, out := c.GetAuthorizationTokenRequest(input)
-	return out, req.Send()
-}
+func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) GetAuthorizationTokenRequest {
+	op := &aws.Operation{
+		Name:       opGetAuthorizationToken,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetAuthorizationTokenWithContext is the same as GetAuthorizationToken with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAuthorizationToken for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) GetAuthorizationTokenWithContext(ctx aws.Context, input *GetAuthorizationTokenInput, opts ...aws.Option) (*GetAuthorizationTokenOutput, error) {
-	req, out := c.GetAuthorizationTokenRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetAuthorizationTokenInput{}
+	}
+
+	req := c.newRequest(op, input, &GetAuthorizationTokenOutput{})
+	return GetAuthorizationTokenRequest{Request: req, Input: input}
 }
 
 const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 
-// GetDownloadUrlForLayerRequest generates a "aws.Request" representing the
-// client's request for the GetDownloadUrlForLayer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDownloadUrlForLayerRequest is a API request type for the GetDownloadUrlForLayer API operation.
+type GetDownloadUrlForLayerRequest struct {
+	*aws.Request
+	Input *GetDownloadUrlForLayerInput
+}
+
+// Send marshals and sends the GetDownloadUrlForLayer API request.
+func (r *GetDownloadUrlForLayerRequest) Send() (*GetDownloadUrlForLayerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDownloadUrlForLayerOutput), nil
+}
+
+// GetDownloadUrlForLayerRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves the pre-signed Amazon S3 download URL corresponding to an image
+// layer. You can only get URLs for image layers that are referenced in an image.
 //
-// See GetDownloadUrlForLayer for more information on using the GetDownloadUrlForLayer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the GetDownloadUrlForLayerRequest method.
-//    req, resp := client.GetDownloadUrlForLayerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDownloadUrlForLayerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayer
-func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) (req *aws.Request, output *GetDownloadUrlForLayerOutput) {
+func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest {
 	op := &aws.Operation{
 		Name:       opGetDownloadUrlForLayer,
 		HTTPMethod: "POST",
@@ -1091,96 +662,42 @@ func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) 
 		input = &GetDownloadUrlForLayerInput{}
 	}
 
-	output = &GetDownloadUrlForLayerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDownloadUrlForLayer API operation for Amazon EC2 Container Registry.
-//
-// Retrieves the pre-signed Amazon S3 download URL corresponding to an image
-// layer. You can only get URLs for image layers that are referenced in an image.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation GetDownloadUrlForLayer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeLayersNotFoundException "LayersNotFoundException"
-//   The specified layers could not be found, or the specified layer is not valid
-//   for this repository.
-//
-//   * ErrCodeLayerInaccessibleException "LayerInaccessibleException"
-//   The specified layer is not available because it is not associated with an
-//   image. Unassociated image layers may be cleaned up at any time.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayer
-func (c *ECR) GetDownloadUrlForLayer(input *GetDownloadUrlForLayerInput) (*GetDownloadUrlForLayerOutput, error) {
-	req, out := c.GetDownloadUrlForLayerRequest(input)
-	return out, req.Send()
-}
-
-// GetDownloadUrlForLayerWithContext is the same as GetDownloadUrlForLayer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDownloadUrlForLayer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) GetDownloadUrlForLayerWithContext(ctx aws.Context, input *GetDownloadUrlForLayerInput, opts ...aws.Option) (*GetDownloadUrlForLayerOutput, error) {
-	req, out := c.GetDownloadUrlForLayerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDownloadUrlForLayerOutput{})
+	return GetDownloadUrlForLayerRequest{Request: req, Input: input}
 }
 
 const opGetRepositoryPolicy = "GetRepositoryPolicy"
 
-// GetRepositoryPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetRepositoryPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRepositoryPolicyRequest is a API request type for the GetRepositoryPolicy API operation.
+type GetRepositoryPolicyRequest struct {
+	*aws.Request
+	Input *GetRepositoryPolicyInput
+}
+
+// Send marshals and sends the GetRepositoryPolicy API request.
+func (r *GetRepositoryPolicyRequest) Send() (*GetRepositoryPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRepositoryPolicyOutput), nil
+}
+
+// GetRepositoryPolicyRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRepositoryPolicy for more information on using the GetRepositoryPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the repository policy for a specified repository.
 //
 //    // Example sending a request using the GetRepositoryPolicyRequest method.
-//    req, resp := client.GetRepositoryPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRepositoryPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicy
-func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) (req *aws.Request, output *GetRepositoryPolicyOutput) {
+func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) GetRepositoryPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetRepositoryPolicy,
 		HTTPMethod: "POST",
@@ -1191,87 +708,46 @@ func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) (req *
 		input = &GetRepositoryPolicyInput{}
 	}
 
-	output = &GetRepositoryPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRepositoryPolicy API operation for Amazon EC2 Container Registry.
-//
-// Retrieves the repository policy for a specified repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation GetRepositoryPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeRepositoryPolicyNotFoundException "RepositoryPolicyNotFoundException"
-//   The specified repository and registry combination does not have an associated
-//   repository policy.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicy
-func (c *ECR) GetRepositoryPolicy(input *GetRepositoryPolicyInput) (*GetRepositoryPolicyOutput, error) {
-	req, out := c.GetRepositoryPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetRepositoryPolicyWithContext is the same as GetRepositoryPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRepositoryPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) GetRepositoryPolicyWithContext(ctx aws.Context, input *GetRepositoryPolicyInput, opts ...aws.Option) (*GetRepositoryPolicyOutput, error) {
-	req, out := c.GetRepositoryPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRepositoryPolicyOutput{})
+	return GetRepositoryPolicyRequest{Request: req, Input: input}
 }
 
 const opInitiateLayerUpload = "InitiateLayerUpload"
 
-// InitiateLayerUploadRequest generates a "aws.Request" representing the
-// client's request for the InitiateLayerUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// InitiateLayerUploadRequest is a API request type for the InitiateLayerUpload API operation.
+type InitiateLayerUploadRequest struct {
+	*aws.Request
+	Input *InitiateLayerUploadInput
+}
+
+// Send marshals and sends the InitiateLayerUpload API request.
+func (r *InitiateLayerUploadRequest) Send() (*InitiateLayerUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InitiateLayerUploadOutput), nil
+}
+
+// InitiateLayerUploadRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Notify Amazon ECR that you intend to upload an image layer.
 //
-// See InitiateLayerUpload for more information on using the InitiateLayerUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the InitiateLayerUploadRequest method.
-//    req, resp := client.InitiateLayerUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.InitiateLayerUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUpload
-func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) (req *aws.Request, output *InitiateLayerUploadOutput) {
+func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) InitiateLayerUploadRequest {
 	op := &aws.Operation{
 		Name:       opInitiateLayerUpload,
 		HTTPMethod: "POST",
@@ -1282,87 +758,48 @@ func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) (req *
 		input = &InitiateLayerUploadInput{}
 	}
 
-	output = &InitiateLayerUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// InitiateLayerUpload API operation for Amazon EC2 Container Registry.
-//
-// Notify Amazon ECR that you intend to upload an image layer.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation InitiateLayerUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUpload
-func (c *ECR) InitiateLayerUpload(input *InitiateLayerUploadInput) (*InitiateLayerUploadOutput, error) {
-	req, out := c.InitiateLayerUploadRequest(input)
-	return out, req.Send()
-}
-
-// InitiateLayerUploadWithContext is the same as InitiateLayerUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InitiateLayerUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) InitiateLayerUploadWithContext(ctx aws.Context, input *InitiateLayerUploadInput, opts ...aws.Option) (*InitiateLayerUploadOutput, error) {
-	req, out := c.InitiateLayerUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &InitiateLayerUploadOutput{})
+	return InitiateLayerUploadRequest{Request: req, Input: input}
 }
 
 const opListImages = "ListImages"
 
-// ListImagesRequest generates a "aws.Request" representing the
-// client's request for the ListImages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListImagesRequest is a API request type for the ListImages API operation.
+type ListImagesRequest struct {
+	*aws.Request
+	Input *ListImagesInput
+}
+
+// Send marshals and sends the ListImages API request.
+func (r *ListImagesRequest) Send() (*ListImagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListImagesOutput), nil
+}
+
+// ListImagesRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all the image IDs for a given repository.
 //
-// See ListImages for more information on using the ListImages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can filter images based on whether or not they are tagged by setting
+// the tagStatus parameter to TAGGED or UNTAGGED. For example, you can filter
+// your results to return only UNTAGGED images and then pipe that result to
+// a BatchDeleteImage operation to delete them. Or, you can filter your results
+// to return only TAGGED images to list all of the tags in your repository.
 //
 //    // Example sending a request using the ListImagesRequest method.
-//    req, resp := client.ListImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListImagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImages
-func (c *ECR) ListImagesRequest(input *ListImagesInput) (req *aws.Request, output *ListImagesOutput) {
+func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 	op := &aws.Operation{
 		Name:       opListImages,
 		HTTPMethod: "POST",
@@ -1379,60 +816,8 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) (req *aws.Request, outpu
 		input = &ListImagesInput{}
 	}
 
-	output = &ListImagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListImages API operation for Amazon EC2 Container Registry.
-//
-// Lists all the image IDs for a given repository.
-//
-// You can filter images based on whether or not they are tagged by setting
-// the tagStatus parameter to TAGGED or UNTAGGED. For example, you can filter
-// your results to return only UNTAGGED images and then pipe that result to
-// a BatchDeleteImage operation to delete them. Or, you can filter your results
-// to return only TAGGED images to list all of the tags in your repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation ListImages for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImages
-func (c *ECR) ListImages(input *ListImagesInput) (*ListImagesOutput, error) {
-	req, out := c.ListImagesRequest(input)
-	return out, req.Send()
-}
-
-// ListImagesWithContext is the same as ListImages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListImages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) ListImagesWithContext(ctx aws.Context, input *ListImagesInput, opts ...aws.Option) (*ListImagesOutput, error) {
-	req, out := c.ListImagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListImagesOutput{})
+	return ListImagesRequest{Request: req, Input: input}
 }
 
 // ListImagesPages iterates over the pages of a ListImages operation,
@@ -1471,10 +856,10 @@ func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListImagesRequest(inCpy)
+			req := c.ListImagesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1487,31 +872,40 @@ func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput
 
 const opPutImage = "PutImage"
 
-// PutImageRequest generates a "aws.Request" representing the
-// client's request for the PutImage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutImageRequest is a API request type for the PutImage API operation.
+type PutImageRequest struct {
+	*aws.Request
+	Input *PutImageInput
+}
+
+// Send marshals and sends the PutImage API request.
+func (r *PutImageRequest) Send() (*PutImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutImageOutput), nil
+}
+
+// PutImageRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates or updates the image manifest and tags associated with an image.
 //
-// See PutImage for more information on using the PutImage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the PutImageRequest method.
-//    req, resp := client.PutImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage
-func (c *ECR) PutImageRequest(input *PutImageInput) (req *aws.Request, output *PutImageOutput) {
+func (c *ECR) PutImageRequest(input *PutImageInput) PutImageRequest {
 	op := &aws.Operation{
 		Name:       opPutImage,
 		HTTPMethod: "POST",
@@ -1522,101 +916,42 @@ func (c *ECR) PutImageRequest(input *PutImageInput) (req *aws.Request, output *P
 		input = &PutImageInput{}
 	}
 
-	output = &PutImageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutImage API operation for Amazon EC2 Container Registry.
-//
-// Creates or updates the image manifest and tags associated with an image.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation PutImage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeImageAlreadyExistsException "ImageAlreadyExistsException"
-//   The specified image has already been pushed, and there are no changes to
-//   the manifest or image tag since the last push.
-//
-//   * ErrCodeLayersNotFoundException "LayersNotFoundException"
-//   The specified layers could not be found, or the specified layer is not valid
-//   for this repository.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The operation did not succeed because it would have exceeded a service limit
-//   for your account. For more information, see Amazon ECR Default Service Limits
-//   (http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html)
-//   in the Amazon EC2 Container Registry User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage
-func (c *ECR) PutImage(input *PutImageInput) (*PutImageOutput, error) {
-	req, out := c.PutImageRequest(input)
-	return out, req.Send()
-}
-
-// PutImageWithContext is the same as PutImage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutImage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) PutImageWithContext(ctx aws.Context, input *PutImageInput, opts ...aws.Option) (*PutImageOutput, error) {
-	req, out := c.PutImageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutImageOutput{})
+	return PutImageRequest{Request: req, Input: input}
 }
 
 const opSetRepositoryPolicy = "SetRepositoryPolicy"
 
-// SetRepositoryPolicyRequest generates a "aws.Request" representing the
-// client's request for the SetRepositoryPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetRepositoryPolicyRequest is a API request type for the SetRepositoryPolicy API operation.
+type SetRepositoryPolicyRequest struct {
+	*aws.Request
+	Input *SetRepositoryPolicyInput
+}
+
+// Send marshals and sends the SetRepositoryPolicy API request.
+func (r *SetRepositoryPolicyRequest) Send() (*SetRepositoryPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetRepositoryPolicyOutput), nil
+}
+
+// SetRepositoryPolicyRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetRepositoryPolicy for more information on using the SetRepositoryPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Applies a repository policy on a specified repository to control access permissions.
 //
 //    // Example sending a request using the SetRepositoryPolicyRequest method.
-//    req, resp := client.SetRepositoryPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetRepositoryPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicy
-func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) (req *aws.Request, output *SetRepositoryPolicyOutput) {
+func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) SetRepositoryPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetRepositoryPolicy,
 		HTTPMethod: "POST",
@@ -1627,83 +962,46 @@ func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) (req *
 		input = &SetRepositoryPolicyInput{}
 	}
 
-	output = &SetRepositoryPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetRepositoryPolicy API operation for Amazon EC2 Container Registry.
-//
-// Applies a repository policy on a specified repository to control access permissions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation SetRepositoryPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicy
-func (c *ECR) SetRepositoryPolicy(input *SetRepositoryPolicyInput) (*SetRepositoryPolicyOutput, error) {
-	req, out := c.SetRepositoryPolicyRequest(input)
-	return out, req.Send()
-}
-
-// SetRepositoryPolicyWithContext is the same as SetRepositoryPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetRepositoryPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) SetRepositoryPolicyWithContext(ctx aws.Context, input *SetRepositoryPolicyInput, opts ...aws.Option) (*SetRepositoryPolicyOutput, error) {
-	req, out := c.SetRepositoryPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetRepositoryPolicyOutput{})
+	return SetRepositoryPolicyRequest{Request: req, Input: input}
 }
 
 const opUploadLayerPart = "UploadLayerPart"
 
-// UploadLayerPartRequest generates a "aws.Request" representing the
-// client's request for the UploadLayerPart operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UploadLayerPartRequest is a API request type for the UploadLayerPart API operation.
+type UploadLayerPartRequest struct {
+	*aws.Request
+	Input *UploadLayerPartInput
+}
+
+// Send marshals and sends the UploadLayerPart API request.
+func (r *UploadLayerPartRequest) Send() (*UploadLayerPartOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadLayerPartOutput), nil
+}
+
+// UploadLayerPartRequest returns a request value for making API operation for
+// Amazon EC2 Container Registry.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Uploads an image layer part to Amazon ECR.
 //
-// See UploadLayerPart for more information on using the UploadLayerPart
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is used by the Amazon ECR proxy, and it is not intended for
+// general use by customers for pulling and pushing images. In most cases, you
+// should use the docker CLI to pull, tag, and push images.
 //
 //    // Example sending a request using the UploadLayerPartRequest method.
-//    req, resp := client.UploadLayerPartRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UploadLayerPartRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPart
-func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) (req *aws.Request, output *UploadLayerPartOutput) {
+func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayerPartRequest {
 	op := &aws.Operation{
 		Name:       opUploadLayerPart,
 		HTTPMethod: "POST",
@@ -1714,72 +1012,8 @@ func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) (req *aws.Requ
 		input = &UploadLayerPartInput{}
 	}
 
-	output = &UploadLayerPartOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UploadLayerPart API operation for Amazon EC2 Container Registry.
-//
-// Uploads an image layer part to Amazon ECR.
-//
-// This operation is used by the Amazon ECR proxy, and it is not intended for
-// general use by customers for pulling and pushing images. In most cases, you
-// should use the docker CLI to pull, tag, and push images.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Registry's
-// API operation UploadLayerPart for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server-side issue.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeInvalidLayerPartException "InvalidLayerPartException"
-//   The layer part size is not valid, or the first byte specified is not consecutive
-//   to the last byte of a previous layer part upload.
-//
-//   * ErrCodeRepositoryNotFoundException "RepositoryNotFoundException"
-//   The specified repository could not be found. Check the spelling of the specified
-//   repository and ensure that you are performing operations on the correct registry.
-//
-//   * ErrCodeUploadNotFoundException "UploadNotFoundException"
-//   The upload could not be found, or the specified upload id is not valid for
-//   this repository.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The operation did not succeed because it would have exceeded a service limit
-//   for your account. For more information, see Amazon ECR Default Service Limits
-//   (http://docs.aws.amazon.com/AmazonECR/latest/userguide/service_limits.html)
-//   in the Amazon EC2 Container Registry User Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPart
-func (c *ECR) UploadLayerPart(input *UploadLayerPartInput) (*UploadLayerPartOutput, error) {
-	req, out := c.UploadLayerPartRequest(input)
-	return out, req.Send()
-}
-
-// UploadLayerPartWithContext is the same as UploadLayerPart with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadLayerPart for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) UploadLayerPartWithContext(ctx aws.Context, input *UploadLayerPartInput, opts ...aws.Option) (*UploadLayerPartOutput, error) {
-	req, out := c.UploadLayerPartRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UploadLayerPartOutput{})
+	return UploadLayerPartRequest{Request: req, Input: input}
 }
 
 // An object representing authorization data for an Amazon ECR registry.

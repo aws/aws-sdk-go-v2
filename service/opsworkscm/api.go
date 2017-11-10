@@ -11,47 +11,24 @@ import (
 
 const opAssociateNode = "AssociateNode"
 
-// AssociateNodeRequest generates a "aws.Request" representing the
-// client's request for the AssociateNode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateNode for more information on using the AssociateNode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateNodeRequest method.
-//    req, resp := client.AssociateNodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode
-func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) (req *aws.Request, output *AssociateNodeOutput) {
-	op := &aws.Operation{
-		Name:       opAssociateNode,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssociateNodeInput{}
-	}
-
-	output = &AssociateNodeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AssociateNodeRequest is a API request type for the AssociateNode API operation.
+type AssociateNodeRequest struct {
+	*aws.Request
+	Input *AssociateNodeInput
 }
 
-// AssociateNode API operation for AWS OpsWorks for Chef Automate.
+// Send marshals and sends the AssociateNode API request.
+func (r *AssociateNodeRequest) Send() (*AssociateNodeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateNodeOutput), nil
+}
+
+// AssociateNodeRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Associates a new node with the Chef server. This command is an alternative
 // to knife bootstrap. For more information about how to disassociate a node,
@@ -67,89 +44,49 @@ func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) (req *aws.R
 // Example: aws opsworks-cm associate-node --server-name MyServer --node-name
 // MyManagedNode --engine-attributes "Name=MyOrganization,Value=default" "Name=Chef_node_public_key,Value=Public_key_contents"
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation AssociateNode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode
-func (c *OpsWorksCM) AssociateNode(input *AssociateNodeInput) (*AssociateNodeOutput, error) {
-	req, out := c.AssociateNodeRequest(input)
-	return out, req.Send()
-}
-
-// AssociateNodeWithContext is the same as AssociateNode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateNode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) AssociateNodeWithContext(ctx aws.Context, input *AssociateNodeInput, opts ...aws.Option) (*AssociateNodeOutput, error) {
-	req, out := c.AssociateNodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateBackup = "CreateBackup"
-
-// CreateBackupRequest generates a "aws.Request" representing the
-// client's request for the CreateBackup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBackup for more information on using the CreateBackup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateBackupRequest method.
-//    req, resp := client.CreateBackupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssociateNodeRequest method.
+//    req := client.AssociateNodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup
-func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) (req *aws.Request, output *CreateBackupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode
+func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) AssociateNodeRequest {
 	op := &aws.Operation{
-		Name:       opCreateBackup,
+		Name:       opAssociateNode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateBackupInput{}
+		input = &AssociateNodeInput{}
 	}
 
-	output = &CreateBackupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AssociateNodeOutput{})
+	return AssociateNodeRequest{Request: req, Input: input}
 }
 
-// CreateBackup API operation for AWS OpsWorks for Chef Automate.
+const opCreateBackup = "CreateBackup"
+
+// CreateBackupRequest is a API request type for the CreateBackup API operation.
+type CreateBackupRequest struct {
+	*aws.Request
+	Input *CreateBackupInput
+}
+
+// Send marshals and sends the CreateBackup API request.
+func (r *CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBackupOutput), nil
+}
+
+// CreateBackupRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Creates an application-level backup of a server. While the server is in the
 // BACKING_UP state, the server cannot be changed, and no additional backup
@@ -166,92 +103,49 @@ func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) (req *aws.Req
 // is thrown when the server is not found. A ValidationException is thrown when
 // parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation CreateBackup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The limit of servers or backups has been reached.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup
-func (c *OpsWorksCM) CreateBackup(input *CreateBackupInput) (*CreateBackupOutput, error) {
-	req, out := c.CreateBackupRequest(input)
-	return out, req.Send()
-}
-
-// CreateBackupWithContext is the same as CreateBackup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBackup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) CreateBackupWithContext(ctx aws.Context, input *CreateBackupInput, opts ...aws.Option) (*CreateBackupOutput, error) {
-	req, out := c.CreateBackupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateServer = "CreateServer"
-
-// CreateServerRequest generates a "aws.Request" representing the
-// client's request for the CreateServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateServer for more information on using the CreateServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateServerRequest method.
-//    req, resp := client.CreateServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateBackupRequest method.
+//    req := client.CreateBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServer
-func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) (req *aws.Request, output *CreateServerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup
+func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) CreateBackupRequest {
 	op := &aws.Operation{
-		Name:       opCreateServer,
+		Name:       opCreateBackup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateServerInput{}
+		input = &CreateBackupInput{}
 	}
 
-	output = &CreateServerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateBackupOutput{})
+	return CreateBackupRequest{Request: req, Input: input}
 }
 
-// CreateServer API operation for AWS OpsWorks for Chef Automate.
+const opCreateServer = "CreateServer"
+
+// CreateServerRequest is a API request type for the CreateServer API operation.
+type CreateServerRequest struct {
+	*aws.Request
+	Input *CreateServerInput
+}
+
+// Send marshals and sends the CreateServer API request.
+func (r *CreateServerRequest) Send() (*CreateServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateServerOutput), nil
+}
+
+// CreateServerRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Creates and immedately starts a new server. The server is ready to use when
 // it is in the HEALTHY state. By default, you can create a maximum of 10 servers.
@@ -275,75 +169,66 @@ func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) (req *aws.Req
 // and address ranges only. To edit security group rules, open Security Groups
 // in the navigation pane of the EC2 management console.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation CreateServer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The limit of servers or backups has been reached.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The requested resource cannot be created because it already exists.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
+//    // Example sending a request using the CreateServerRequest method.
+//    req := client.CreateServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServer
-func (c *OpsWorksCM) CreateServer(input *CreateServerInput) (*CreateServerOutput, error) {
-	req, out := c.CreateServerRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) CreateServerRequest {
+	op := &aws.Operation{
+		Name:       opCreateServer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateServerWithContext is the same as CreateServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) CreateServerWithContext(ctx aws.Context, input *CreateServerInput, opts ...aws.Option) (*CreateServerOutput, error) {
-	req, out := c.CreateServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateServerInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateServerOutput{})
+	return CreateServerRequest{Request: req, Input: input}
 }
 
 const opDeleteBackup = "DeleteBackup"
 
-// DeleteBackupRequest generates a "aws.Request" representing the
-// client's request for the DeleteBackup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBackupRequest is a API request type for the DeleteBackup API operation.
+type DeleteBackupRequest struct {
+	*aws.Request
+	Input *DeleteBackupInput
+}
+
+// Send marshals and sends the DeleteBackup API request.
+func (r *DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBackupOutput), nil
+}
+
+// DeleteBackupRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a backup. You can delete both manual and automated backups. This
+// operation is asynchronous.
 //
-// See DeleteBackup for more information on using the DeleteBackup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// An InvalidStateException is thrown when a backup deletion is already in progress.
+// A ResourceNotFoundException is thrown when the backup does not exist. A ValidationException
+// is thrown when parameters of the request are not valid.
 //
 //    // Example sending a request using the DeleteBackupRequest method.
-//    req, resp := client.DeleteBackupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackup
-func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) (req *aws.Request, output *DeleteBackupOutput) {
+func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBackup,
 		HTTPMethod: "POST",
@@ -354,103 +239,30 @@ func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) (req *aws.Req
 		input = &DeleteBackupInput{}
 	}
 
-	output = &DeleteBackupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBackup API operation for AWS OpsWorks for Chef Automate.
-//
-// Deletes a backup. You can delete both manual and automated backups. This
-// operation is asynchronous.
-//
-// An InvalidStateException is thrown when a backup deletion is already in progress.
-// A ResourceNotFoundException is thrown when the backup does not exist. A ValidationException
-// is thrown when parameters of the request are not valid.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DeleteBackup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackup
-func (c *OpsWorksCM) DeleteBackup(input *DeleteBackupInput) (*DeleteBackupOutput, error) {
-	req, out := c.DeleteBackupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBackupWithContext is the same as DeleteBackup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBackup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DeleteBackupWithContext(ctx aws.Context, input *DeleteBackupInput, opts ...aws.Option) (*DeleteBackupOutput, error) {
-	req, out := c.DeleteBackupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBackupOutput{})
+	return DeleteBackupRequest{Request: req, Input: input}
 }
 
 const opDeleteServer = "DeleteServer"
 
-// DeleteServerRequest generates a "aws.Request" representing the
-// client's request for the DeleteServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteServer for more information on using the DeleteServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteServerRequest method.
-//    req, resp := client.DeleteServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServer
-func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) (req *aws.Request, output *DeleteServerOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteServer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteServerInput{}
-	}
-
-	output = &DeleteServerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteServerRequest is a API request type for the DeleteServer API operation.
+type DeleteServerRequest struct {
+	*aws.Request
+	Input *DeleteServerInput
 }
 
-// DeleteServer API operation for AWS OpsWorks for Chef Automate.
+// Send marshals and sends the DeleteServer API request.
+func (r *DeleteServerRequest) Send() (*DeleteServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServerOutput), nil
+}
+
+// DeleteServerRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Deletes the server and the underlying AWS CloudFormation stack (including
 // the server's EC2 instance). When you run this command, the server state is
@@ -464,73 +276,64 @@ func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) (req *aws.Req
 // A ResourceNotFoundException is thrown when the server does not exist. A ValidationException
 // is raised when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DeleteServer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
+//    // Example sending a request using the DeleteServerRequest method.
+//    req := client.DeleteServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServer
-func (c *OpsWorksCM) DeleteServer(input *DeleteServerInput) (*DeleteServerOutput, error) {
-	req, out := c.DeleteServerRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) DeleteServerRequest {
+	op := &aws.Operation{
+		Name:       opDeleteServer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteServerWithContext is the same as DeleteServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DeleteServerWithContext(ctx aws.Context, input *DeleteServerInput, opts ...aws.Option) (*DeleteServerOutput, error) {
-	req, out := c.DeleteServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteServerInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteServerOutput{})
+	return DeleteServerRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountAttributesRequest is a API request type for the DescribeAccountAttributes API operation.
+type DescribeAccountAttributesRequest struct {
+	*aws.Request
+	Input *DescribeAccountAttributesInput
+}
+
+// Send marshals and sends the DescribeAccountAttributes API request.
+func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountAttributesOutput), nil
+}
+
+// DescribeAccountAttributesRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes your account attributes, and creates requests to increase limits
+// before they are reached or exceeded.
 //
-// See DescribeAccountAttributes for more information on using the DescribeAccountAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is synchronous.
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
-//    req, resp := client.DescribeAccountAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributes
-func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
@@ -541,73 +344,48 @@ func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttr
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	output = &DescribeAccountAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountAttributes API operation for AWS OpsWorks for Chef Automate.
-//
-// Describes your account attributes, and creates requests to increase limits
-// before they are reached or exceeded.
-//
-// This operation is synchronous.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DescribeAccountAttributes for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributes
-func (c *OpsWorksCM) DescribeAccountAttributes(input *DescribeAccountAttributesInput) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountAttributesWithContext is the same as DescribeAccountAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeBackups = "DescribeBackups"
 
-// DescribeBackupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeBackups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBackupsRequest is a API request type for the DescribeBackups API operation.
+type DescribeBackupsRequest struct {
+	*aws.Request
+	Input *DescribeBackupsInput
+}
+
+// Send marshals and sends the DescribeBackups API request.
+func (r *DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBackupsOutput), nil
+}
+
+// DescribeBackupsRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes backups. The results are ordered by time, with newest backups first.
+// If you do not specify a BackupId or ServerName, the command returns all backups.
 //
-// See DescribeBackups for more information on using the DescribeBackups
-// API call, and error handling.
+// This operation is synchronous.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A ResourceNotFoundException is thrown when the backup does not exist. A ValidationException
+// is raised when parameters of the request are not valid.
 //
 //    // Example sending a request using the DescribeBackupsRequest method.
-//    req, resp := client.DescribeBackupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBackupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups
-func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) (req *aws.Request, output *DescribeBackupsOutput) {
+func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) DescribeBackupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
@@ -618,87 +396,48 @@ func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) (req *a
 		input = &DescribeBackupsInput{}
 	}
 
-	output = &DescribeBackupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBackups API operation for AWS OpsWorks for Chef Automate.
-//
-// Describes backups. The results are ordered by time, with newest backups first.
-// If you do not specify a BackupId or ServerName, the command returns all backups.
-//
-// This operation is synchronous.
-//
-// A ResourceNotFoundException is thrown when the backup does not exist. A ValidationException
-// is raised when parameters of the request are not valid.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DescribeBackups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This occurs when the provided nextToken is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups
-func (c *OpsWorksCM) DescribeBackups(input *DescribeBackupsInput) (*DescribeBackupsOutput, error) {
-	req, out := c.DescribeBackupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBackupsWithContext is the same as DescribeBackups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBackups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...aws.Option) (*DescribeBackupsOutput, error) {
-	req, out := c.DescribeBackupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBackupsOutput{})
+	return DescribeBackupsRequest{Request: req, Input: input}
 }
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes events for a specified server. Results are ordered by time, with
+// newest events first.
 //
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
+// This operation is synchronous.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A ResourceNotFoundException is thrown when the server does not exist. A ValidationException
+// is raised when parameters of the request are not valid.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents
-func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -709,87 +448,46 @@ func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) (req *aws
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for AWS OpsWorks for Chef Automate.
-//
-// Describes events for a specified server. Results are ordered by time, with
-// newest events first.
-//
-// This operation is synchronous.
-//
-// A ResourceNotFoundException is thrown when the server does not exist. A ValidationException
-// is raised when parameters of the request are not valid.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DescribeEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This occurs when the provided nextToken is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents
-func (c *OpsWorksCM) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 
-// DescribeNodeAssociationStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeNodeAssociationStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeNodeAssociationStatusRequest is a API request type for the DescribeNodeAssociationStatus API operation.
+type DescribeNodeAssociationStatusRequest struct {
+	*aws.Request
+	Input *DescribeNodeAssociationStatusInput
+}
+
+// Send marshals and sends the DescribeNodeAssociationStatus API request.
+func (r *DescribeNodeAssociationStatusRequest) Send() (*DescribeNodeAssociationStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeNodeAssociationStatusOutput), nil
+}
+
+// DescribeNodeAssociationStatusRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the current status of an existing association or disassociation request.
 //
-// See DescribeNodeAssociationStatus for more information on using the DescribeNodeAssociationStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A ResourceNotFoundException is thrown when no recent association or disassociation
+// request with the specified token is found, or when the server does not exist.
+// A ValidationException is raised when parameters of the request are not valid.
 //
 //    // Example sending a request using the DescribeNodeAssociationStatusRequest method.
-//    req, resp := client.DescribeNodeAssociationStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeNodeAssociationStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus
-func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssociationStatusInput) (req *aws.Request, output *DescribeNodeAssociationStatusOutput) {
+func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNodeAssociationStatus,
 		HTTPMethod: "POST",
@@ -800,98 +498,30 @@ func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAss
 		input = &DescribeNodeAssociationStatusInput{}
 	}
 
-	output = &DescribeNodeAssociationStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeNodeAssociationStatus API operation for AWS OpsWorks for Chef Automate.
-//
-// Returns the current status of an existing association or disassociation request.
-//
-// A ResourceNotFoundException is thrown when no recent association or disassociation
-// request with the specified token is found, or when the server does not exist.
-// A ValidationException is raised when parameters of the request are not valid.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DescribeNodeAssociationStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus
-func (c *OpsWorksCM) DescribeNodeAssociationStatus(input *DescribeNodeAssociationStatusInput) (*DescribeNodeAssociationStatusOutput, error) {
-	req, out := c.DescribeNodeAssociationStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeNodeAssociationStatusWithContext is the same as DescribeNodeAssociationStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeNodeAssociationStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DescribeNodeAssociationStatusWithContext(ctx aws.Context, input *DescribeNodeAssociationStatusInput, opts ...aws.Option) (*DescribeNodeAssociationStatusOutput, error) {
-	req, out := c.DescribeNodeAssociationStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeNodeAssociationStatusOutput{})
+	return DescribeNodeAssociationStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeServers = "DescribeServers"
 
-// DescribeServersRequest generates a "aws.Request" representing the
-// client's request for the DescribeServers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeServers for more information on using the DescribeServers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeServersRequest method.
-//    req, resp := client.DescribeServersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers
-func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) (req *aws.Request, output *DescribeServersOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeServers,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeServersInput{}
-	}
-
-	output = &DescribeServersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeServersRequest is a API request type for the DescribeServers API operation.
+type DescribeServersRequest struct {
+	*aws.Request
+	Input *DescribeServersInput
 }
 
-// DescribeServers API operation for AWS OpsWorks for Chef Automate.
+// Send marshals and sends the DescribeServers API request.
+func (r *DescribeServersRequest) Send() (*DescribeServersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeServersOutput), nil
+}
+
+// DescribeServersRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Lists all configuration management servers that are identified with your
 // account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks
@@ -902,88 +532,49 @@ func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) (req *a
 // A ResourceNotFoundException is thrown when the server does not exist. A ValidationException
 // is raised when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DescribeServers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   This occurs when the provided nextToken is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers
-func (c *OpsWorksCM) DescribeServers(input *DescribeServersInput) (*DescribeServersOutput, error) {
-	req, out := c.DescribeServersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeServersWithContext is the same as DescribeServers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeServers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DescribeServersWithContext(ctx aws.Context, input *DescribeServersInput, opts ...aws.Option) (*DescribeServersOutput, error) {
-	req, out := c.DescribeServersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDisassociateNode = "DisassociateNode"
-
-// DisassociateNodeRequest generates a "aws.Request" representing the
-// client's request for the DisassociateNode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateNode for more information on using the DisassociateNode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisassociateNodeRequest method.
-//    req, resp := client.DisassociateNodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeServersRequest method.
+//    req := client.DescribeServersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode
-func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) (req *aws.Request, output *DisassociateNodeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers
+func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) DescribeServersRequest {
 	op := &aws.Operation{
-		Name:       opDisassociateNode,
+		Name:       opDescribeServers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DisassociateNodeInput{}
+		input = &DescribeServersInput{}
 	}
 
-	output = &DisassociateNodeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeServersOutput{})
+	return DescribeServersRequest{Request: req, Input: input}
 }
 
-// DisassociateNode API operation for AWS OpsWorks for Chef Automate.
+const opDisassociateNode = "DisassociateNode"
+
+// DisassociateNodeRequest is a API request type for the DisassociateNode API operation.
+type DisassociateNodeRequest struct {
+	*aws.Request
+	Input *DisassociateNodeInput
+}
+
+// Send marshals and sends the DisassociateNode API request.
+func (r *DisassociateNodeRequest) Send() (*DisassociateNodeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateNodeOutput), nil
+}
+
+// DisassociateNodeRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Disassociates a node from a Chef server, and removes the node from the Chef
 // server's managed nodes. After a node is disassociated, the node key pair
@@ -995,89 +586,49 @@ func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) (req 
 // is thrown when the server does not exist. A ValidationException is raised
 // when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation DisassociateNode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode
-func (c *OpsWorksCM) DisassociateNode(input *DisassociateNodeInput) (*DisassociateNodeOutput, error) {
-	req, out := c.DisassociateNodeRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateNodeWithContext is the same as DisassociateNode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateNode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) DisassociateNodeWithContext(ctx aws.Context, input *DisassociateNodeInput, opts ...aws.Option) (*DisassociateNodeOutput, error) {
-	req, out := c.DisassociateNodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRestoreServer = "RestoreServer"
-
-// RestoreServerRequest generates a "aws.Request" representing the
-// client's request for the RestoreServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreServer for more information on using the RestoreServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreServerRequest method.
-//    req, resp := client.RestoreServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DisassociateNodeRequest method.
+//    req := client.DisassociateNodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer
-func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) (req *aws.Request, output *RestoreServerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode
+func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) DisassociateNodeRequest {
 	op := &aws.Operation{
-		Name:       opRestoreServer,
+		Name:       opDisassociateNode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RestoreServerInput{}
+		input = &DisassociateNodeInput{}
 	}
 
-	output = &RestoreServerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DisassociateNodeOutput{})
+	return DisassociateNodeRequest{Request: req, Input: input}
 }
 
-// RestoreServer API operation for AWS OpsWorks for Chef Automate.
+const opRestoreServer = "RestoreServer"
+
+// RestoreServerRequest is a API request type for the RestoreServer API operation.
+type RestoreServerRequest struct {
+	*aws.Request
+	Input *RestoreServerInput
+}
+
+// Send marshals and sends the RestoreServer API request.
+func (r *RestoreServerRequest) Send() (*RestoreServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreServerOutput), nil
+}
+
+// RestoreServerRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING,
 // UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's
@@ -1091,89 +642,49 @@ func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) (req *aws.R
 // A ResourceNotFoundException is thrown when the server does not exist. A ValidationException
 // is raised when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation RestoreServer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer
-func (c *OpsWorksCM) RestoreServer(input *RestoreServerInput) (*RestoreServerOutput, error) {
-	req, out := c.RestoreServerRequest(input)
-	return out, req.Send()
-}
-
-// RestoreServerWithContext is the same as RestoreServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) RestoreServerWithContext(ctx aws.Context, input *RestoreServerInput, opts ...aws.Option) (*RestoreServerOutput, error) {
-	req, out := c.RestoreServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartMaintenance = "StartMaintenance"
-
-// StartMaintenanceRequest generates a "aws.Request" representing the
-// client's request for the StartMaintenance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartMaintenance for more information on using the StartMaintenance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartMaintenanceRequest method.
-//    req, resp := client.StartMaintenanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RestoreServerRequest method.
+//    req := client.RestoreServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance
-func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) (req *aws.Request, output *StartMaintenanceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer
+func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) RestoreServerRequest {
 	op := &aws.Operation{
-		Name:       opStartMaintenance,
+		Name:       opRestoreServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartMaintenanceInput{}
+		input = &RestoreServerInput{}
 	}
 
-	output = &StartMaintenanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RestoreServerOutput{})
+	return RestoreServerRequest{Request: req, Input: input}
 }
 
-// StartMaintenance API operation for AWS OpsWorks for Chef Automate.
+const opStartMaintenance = "StartMaintenance"
+
+// StartMaintenanceRequest is a API request type for the StartMaintenance API operation.
+type StartMaintenanceRequest struct {
+	*aws.Request
+	Input *StartMaintenanceInput
+}
+
+// Send marshals and sends the StartMaintenance API request.
+func (r *StartMaintenanceRequest) Send() (*StartMaintenanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartMaintenanceOutput), nil
+}
+
+// StartMaintenanceRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Manually starts server maintenance. This command can be useful if an earlier
 // maintenance attempt failed, and the underlying cause of maintenance failure
@@ -1185,73 +696,63 @@ func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) (req 
 // is thrown when the server does not exist. A ValidationException is raised
 // when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation StartMaintenance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
+//    // Example sending a request using the StartMaintenanceRequest method.
+//    req := client.StartMaintenanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance
-func (c *OpsWorksCM) StartMaintenance(input *StartMaintenanceInput) (*StartMaintenanceOutput, error) {
-	req, out := c.StartMaintenanceRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) StartMaintenanceRequest {
+	op := &aws.Operation{
+		Name:       opStartMaintenance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StartMaintenanceWithContext is the same as StartMaintenance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartMaintenance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) StartMaintenanceWithContext(ctx aws.Context, input *StartMaintenanceInput, opts ...aws.Option) (*StartMaintenanceOutput, error) {
-	req, out := c.StartMaintenanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StartMaintenanceInput{}
+	}
+
+	req := c.newRequest(op, input, &StartMaintenanceOutput{})
+	return StartMaintenanceRequest{Request: req, Input: input}
 }
 
 const opUpdateServer = "UpdateServer"
 
-// UpdateServerRequest generates a "aws.Request" representing the
-// client's request for the UpdateServer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateServerRequest is a API request type for the UpdateServer API operation.
+type UpdateServerRequest struct {
+	*aws.Request
+	Input *UpdateServerInput
+}
+
+// Send marshals and sends the UpdateServer API request.
+func (r *UpdateServerRequest) Send() (*UpdateServerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServerOutput), nil
+}
+
+// UpdateServerRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates settings for a server.
 //
-// See UpdateServer for more information on using the UpdateServer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is synchronous.
 //
 //    // Example sending a request using the UpdateServerRequest method.
-//    req, resp := client.UpdateServerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateServerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServer
-func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) (req *aws.Request, output *UpdateServerOutput) {
+func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) UpdateServerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateServer,
 		HTTPMethod: "POST",
@@ -1262,100 +763,30 @@ func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) (req *aws.Req
 		input = &UpdateServerInput{}
 	}
 
-	output = &UpdateServerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateServer API operation for AWS OpsWorks for Chef Automate.
-//
-// Updates settings for a server.
-//
-// This operation is synchronous.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation UpdateServer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServer
-func (c *OpsWorksCM) UpdateServer(input *UpdateServerInput) (*UpdateServerOutput, error) {
-	req, out := c.UpdateServerRequest(input)
-	return out, req.Send()
-}
-
-// UpdateServerWithContext is the same as UpdateServer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateServer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) UpdateServerWithContext(ctx aws.Context, input *UpdateServerInput, opts ...aws.Option) (*UpdateServerOutput, error) {
-	req, out := c.UpdateServerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateServerOutput{})
+	return UpdateServerRequest{Request: req, Input: input}
 }
 
 const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 
-// UpdateServerEngineAttributesRequest generates a "aws.Request" representing the
-// client's request for the UpdateServerEngineAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateServerEngineAttributes for more information on using the UpdateServerEngineAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateServerEngineAttributesRequest method.
-//    req, resp := client.UpdateServerEngineAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes
-func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAttributesInput) (req *aws.Request, output *UpdateServerEngineAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateServerEngineAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateServerEngineAttributesInput{}
-	}
-
-	output = &UpdateServerEngineAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateServerEngineAttributesRequest is a API request type for the UpdateServerEngineAttributes API operation.
+type UpdateServerEngineAttributesRequest struct {
+	*aws.Request
+	Input *UpdateServerEngineAttributesInput
 }
 
-// UpdateServerEngineAttributes API operation for AWS OpsWorks for Chef Automate.
+// Send marshals and sends the UpdateServerEngineAttributes API request.
+func (r *UpdateServerEngineAttributesRequest) Send() (*UpdateServerEngineAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServerEngineAttributesOutput), nil
+}
+
+// UpdateServerEngineAttributesRequest returns a request value for making API operation for
+// AWS OpsWorks for Chef Automate.
 //
 // Updates engine-specific attributes on a specified server. The server enters
 // the MODIFYING state when this operation is in progress. Only one update can
@@ -1369,44 +800,27 @@ func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngi
 // is thrown when the server does not exist. A ValidationException is raised
 // when parameters of the request are not valid.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks for Chef Automate's
-// API operation UpdateServerEngineAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidStateException "InvalidStateException"
-//   The resource is in a state that does not allow you to perform a specified
-//   action.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource does not exist, or access was denied.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   One or more of the provided request parameters are not valid.
+//    // Example sending a request using the UpdateServerEngineAttributesRequest method.
+//    req := client.UpdateServerEngineAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes
-func (c *OpsWorksCM) UpdateServerEngineAttributes(input *UpdateServerEngineAttributesInput) (*UpdateServerEngineAttributesOutput, error) {
-	req, out := c.UpdateServerEngineAttributesRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest {
+	op := &aws.Operation{
+		Name:       opUpdateServerEngineAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateServerEngineAttributesWithContext is the same as UpdateServerEngineAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateServerEngineAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorksCM) UpdateServerEngineAttributesWithContext(ctx aws.Context, input *UpdateServerEngineAttributesInput, opts ...aws.Option) (*UpdateServerEngineAttributesOutput, error) {
-	req, out := c.UpdateServerEngineAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateServerEngineAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateServerEngineAttributesOutput{})
+	return UpdateServerEngineAttributesRequest{Request: req, Input: input}
 }
 
 // Stores account attributes.

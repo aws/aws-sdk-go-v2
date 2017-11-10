@@ -63,271 +63,147 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type StorageGatewayAPI interface {
-	ActivateGateway(*storagegateway.ActivateGatewayInput) (*storagegateway.ActivateGatewayOutput, error)
-	ActivateGatewayWithContext(aws.Context, *storagegateway.ActivateGatewayInput, ...aws.Option) (*storagegateway.ActivateGatewayOutput, error)
-	ActivateGatewayRequest(*storagegateway.ActivateGatewayInput) (*aws.Request, *storagegateway.ActivateGatewayOutput)
+	ActivateGatewayRequest(*storagegateway.ActivateGatewayInput) storagegateway.ActivateGatewayRequest
 
-	AddCache(*storagegateway.AddCacheInput) (*storagegateway.AddCacheOutput, error)
-	AddCacheWithContext(aws.Context, *storagegateway.AddCacheInput, ...aws.Option) (*storagegateway.AddCacheOutput, error)
-	AddCacheRequest(*storagegateway.AddCacheInput) (*aws.Request, *storagegateway.AddCacheOutput)
+	AddCacheRequest(*storagegateway.AddCacheInput) storagegateway.AddCacheRequest
 
-	AddTagsToResource(*storagegateway.AddTagsToResourceInput) (*storagegateway.AddTagsToResourceOutput, error)
-	AddTagsToResourceWithContext(aws.Context, *storagegateway.AddTagsToResourceInput, ...aws.Option) (*storagegateway.AddTagsToResourceOutput, error)
-	AddTagsToResourceRequest(*storagegateway.AddTagsToResourceInput) (*aws.Request, *storagegateway.AddTagsToResourceOutput)
+	AddTagsToResourceRequest(*storagegateway.AddTagsToResourceInput) storagegateway.AddTagsToResourceRequest
 
-	AddUploadBuffer(*storagegateway.AddUploadBufferInput) (*storagegateway.AddUploadBufferOutput, error)
-	AddUploadBufferWithContext(aws.Context, *storagegateway.AddUploadBufferInput, ...aws.Option) (*storagegateway.AddUploadBufferOutput, error)
-	AddUploadBufferRequest(*storagegateway.AddUploadBufferInput) (*aws.Request, *storagegateway.AddUploadBufferOutput)
+	AddUploadBufferRequest(*storagegateway.AddUploadBufferInput) storagegateway.AddUploadBufferRequest
 
-	AddWorkingStorage(*storagegateway.AddWorkingStorageInput) (*storagegateway.AddWorkingStorageOutput, error)
-	AddWorkingStorageWithContext(aws.Context, *storagegateway.AddWorkingStorageInput, ...aws.Option) (*storagegateway.AddWorkingStorageOutput, error)
-	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) (*aws.Request, *storagegateway.AddWorkingStorageOutput)
+	AddWorkingStorageRequest(*storagegateway.AddWorkingStorageInput) storagegateway.AddWorkingStorageRequest
 
-	CancelArchival(*storagegateway.CancelArchivalInput) (*storagegateway.CancelArchivalOutput, error)
-	CancelArchivalWithContext(aws.Context, *storagegateway.CancelArchivalInput, ...aws.Option) (*storagegateway.CancelArchivalOutput, error)
-	CancelArchivalRequest(*storagegateway.CancelArchivalInput) (*aws.Request, *storagegateway.CancelArchivalOutput)
+	CancelArchivalRequest(*storagegateway.CancelArchivalInput) storagegateway.CancelArchivalRequest
 
-	CancelRetrieval(*storagegateway.CancelRetrievalInput) (*storagegateway.CancelRetrievalOutput, error)
-	CancelRetrievalWithContext(aws.Context, *storagegateway.CancelRetrievalInput, ...aws.Option) (*storagegateway.CancelRetrievalOutput, error)
-	CancelRetrievalRequest(*storagegateway.CancelRetrievalInput) (*aws.Request, *storagegateway.CancelRetrievalOutput)
+	CancelRetrievalRequest(*storagegateway.CancelRetrievalInput) storagegateway.CancelRetrievalRequest
 
-	CreateCachediSCSIVolume(*storagegateway.CreateCachediSCSIVolumeInput) (*storagegateway.CreateCachediSCSIVolumeOutput, error)
-	CreateCachediSCSIVolumeWithContext(aws.Context, *storagegateway.CreateCachediSCSIVolumeInput, ...aws.Option) (*storagegateway.CreateCachediSCSIVolumeOutput, error)
-	CreateCachediSCSIVolumeRequest(*storagegateway.CreateCachediSCSIVolumeInput) (*aws.Request, *storagegateway.CreateCachediSCSIVolumeOutput)
+	CreateCachediSCSIVolumeRequest(*storagegateway.CreateCachediSCSIVolumeInput) storagegateway.CreateCachediSCSIVolumeRequest
 
-	CreateNFSFileShare(*storagegateway.CreateNFSFileShareInput) (*storagegateway.CreateNFSFileShareOutput, error)
-	CreateNFSFileShareWithContext(aws.Context, *storagegateway.CreateNFSFileShareInput, ...aws.Option) (*storagegateway.CreateNFSFileShareOutput, error)
-	CreateNFSFileShareRequest(*storagegateway.CreateNFSFileShareInput) (*aws.Request, *storagegateway.CreateNFSFileShareOutput)
+	CreateNFSFileShareRequest(*storagegateway.CreateNFSFileShareInput) storagegateway.CreateNFSFileShareRequest
 
-	CreateSnapshot(*storagegateway.CreateSnapshotInput) (*storagegateway.CreateSnapshotOutput, error)
-	CreateSnapshotWithContext(aws.Context, *storagegateway.CreateSnapshotInput, ...aws.Option) (*storagegateway.CreateSnapshotOutput, error)
-	CreateSnapshotRequest(*storagegateway.CreateSnapshotInput) (*aws.Request, *storagegateway.CreateSnapshotOutput)
+	CreateSnapshotRequest(*storagegateway.CreateSnapshotInput) storagegateway.CreateSnapshotRequest
 
-	CreateSnapshotFromVolumeRecoveryPoint(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) (*storagegateway.CreateSnapshotFromVolumeRecoveryPointOutput, error)
-	CreateSnapshotFromVolumeRecoveryPointWithContext(aws.Context, *storagegateway.CreateSnapshotFromVolumeRecoveryPointInput, ...aws.Option) (*storagegateway.CreateSnapshotFromVolumeRecoveryPointOutput, error)
-	CreateSnapshotFromVolumeRecoveryPointRequest(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) (*aws.Request, *storagegateway.CreateSnapshotFromVolumeRecoveryPointOutput)
+	CreateSnapshotFromVolumeRecoveryPointRequest(*storagegateway.CreateSnapshotFromVolumeRecoveryPointInput) storagegateway.CreateSnapshotFromVolumeRecoveryPointRequest
 
-	CreateStorediSCSIVolume(*storagegateway.CreateStorediSCSIVolumeInput) (*storagegateway.CreateStorediSCSIVolumeOutput, error)
-	CreateStorediSCSIVolumeWithContext(aws.Context, *storagegateway.CreateStorediSCSIVolumeInput, ...aws.Option) (*storagegateway.CreateStorediSCSIVolumeOutput, error)
-	CreateStorediSCSIVolumeRequest(*storagegateway.CreateStorediSCSIVolumeInput) (*aws.Request, *storagegateway.CreateStorediSCSIVolumeOutput)
+	CreateStorediSCSIVolumeRequest(*storagegateway.CreateStorediSCSIVolumeInput) storagegateway.CreateStorediSCSIVolumeRequest
 
-	CreateTapeWithBarcode(*storagegateway.CreateTapeWithBarcodeInput) (*storagegateway.CreateTapeWithBarcodeOutput, error)
-	CreateTapeWithBarcodeWithContext(aws.Context, *storagegateway.CreateTapeWithBarcodeInput, ...aws.Option) (*storagegateway.CreateTapeWithBarcodeOutput, error)
-	CreateTapeWithBarcodeRequest(*storagegateway.CreateTapeWithBarcodeInput) (*aws.Request, *storagegateway.CreateTapeWithBarcodeOutput)
+	CreateTapeWithBarcodeRequest(*storagegateway.CreateTapeWithBarcodeInput) storagegateway.CreateTapeWithBarcodeRequest
 
-	CreateTapes(*storagegateway.CreateTapesInput) (*storagegateway.CreateTapesOutput, error)
-	CreateTapesWithContext(aws.Context, *storagegateway.CreateTapesInput, ...aws.Option) (*storagegateway.CreateTapesOutput, error)
-	CreateTapesRequest(*storagegateway.CreateTapesInput) (*aws.Request, *storagegateway.CreateTapesOutput)
+	CreateTapesRequest(*storagegateway.CreateTapesInput) storagegateway.CreateTapesRequest
 
-	DeleteBandwidthRateLimit(*storagegateway.DeleteBandwidthRateLimitInput) (*storagegateway.DeleteBandwidthRateLimitOutput, error)
-	DeleteBandwidthRateLimitWithContext(aws.Context, *storagegateway.DeleteBandwidthRateLimitInput, ...aws.Option) (*storagegateway.DeleteBandwidthRateLimitOutput, error)
-	DeleteBandwidthRateLimitRequest(*storagegateway.DeleteBandwidthRateLimitInput) (*aws.Request, *storagegateway.DeleteBandwidthRateLimitOutput)
+	DeleteBandwidthRateLimitRequest(*storagegateway.DeleteBandwidthRateLimitInput) storagegateway.DeleteBandwidthRateLimitRequest
 
-	DeleteChapCredentials(*storagegateway.DeleteChapCredentialsInput) (*storagegateway.DeleteChapCredentialsOutput, error)
-	DeleteChapCredentialsWithContext(aws.Context, *storagegateway.DeleteChapCredentialsInput, ...aws.Option) (*storagegateway.DeleteChapCredentialsOutput, error)
-	DeleteChapCredentialsRequest(*storagegateway.DeleteChapCredentialsInput) (*aws.Request, *storagegateway.DeleteChapCredentialsOutput)
+	DeleteChapCredentialsRequest(*storagegateway.DeleteChapCredentialsInput) storagegateway.DeleteChapCredentialsRequest
 
-	DeleteFileShare(*storagegateway.DeleteFileShareInput) (*storagegateway.DeleteFileShareOutput, error)
-	DeleteFileShareWithContext(aws.Context, *storagegateway.DeleteFileShareInput, ...aws.Option) (*storagegateway.DeleteFileShareOutput, error)
-	DeleteFileShareRequest(*storagegateway.DeleteFileShareInput) (*aws.Request, *storagegateway.DeleteFileShareOutput)
+	DeleteFileShareRequest(*storagegateway.DeleteFileShareInput) storagegateway.DeleteFileShareRequest
 
-	DeleteGateway(*storagegateway.DeleteGatewayInput) (*storagegateway.DeleteGatewayOutput, error)
-	DeleteGatewayWithContext(aws.Context, *storagegateway.DeleteGatewayInput, ...aws.Option) (*storagegateway.DeleteGatewayOutput, error)
-	DeleteGatewayRequest(*storagegateway.DeleteGatewayInput) (*aws.Request, *storagegateway.DeleteGatewayOutput)
+	DeleteGatewayRequest(*storagegateway.DeleteGatewayInput) storagegateway.DeleteGatewayRequest
 
-	DeleteSnapshotSchedule(*storagegateway.DeleteSnapshotScheduleInput) (*storagegateway.DeleteSnapshotScheduleOutput, error)
-	DeleteSnapshotScheduleWithContext(aws.Context, *storagegateway.DeleteSnapshotScheduleInput, ...aws.Option) (*storagegateway.DeleteSnapshotScheduleOutput, error)
-	DeleteSnapshotScheduleRequest(*storagegateway.DeleteSnapshotScheduleInput) (*aws.Request, *storagegateway.DeleteSnapshotScheduleOutput)
+	DeleteSnapshotScheduleRequest(*storagegateway.DeleteSnapshotScheduleInput) storagegateway.DeleteSnapshotScheduleRequest
 
-	DeleteTape(*storagegateway.DeleteTapeInput) (*storagegateway.DeleteTapeOutput, error)
-	DeleteTapeWithContext(aws.Context, *storagegateway.DeleteTapeInput, ...aws.Option) (*storagegateway.DeleteTapeOutput, error)
-	DeleteTapeRequest(*storagegateway.DeleteTapeInput) (*aws.Request, *storagegateway.DeleteTapeOutput)
+	DeleteTapeRequest(*storagegateway.DeleteTapeInput) storagegateway.DeleteTapeRequest
 
-	DeleteTapeArchive(*storagegateway.DeleteTapeArchiveInput) (*storagegateway.DeleteTapeArchiveOutput, error)
-	DeleteTapeArchiveWithContext(aws.Context, *storagegateway.DeleteTapeArchiveInput, ...aws.Option) (*storagegateway.DeleteTapeArchiveOutput, error)
-	DeleteTapeArchiveRequest(*storagegateway.DeleteTapeArchiveInput) (*aws.Request, *storagegateway.DeleteTapeArchiveOutput)
+	DeleteTapeArchiveRequest(*storagegateway.DeleteTapeArchiveInput) storagegateway.DeleteTapeArchiveRequest
 
-	DeleteVolume(*storagegateway.DeleteVolumeInput) (*storagegateway.DeleteVolumeOutput, error)
-	DeleteVolumeWithContext(aws.Context, *storagegateway.DeleteVolumeInput, ...aws.Option) (*storagegateway.DeleteVolumeOutput, error)
-	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) (*aws.Request, *storagegateway.DeleteVolumeOutput)
+	DeleteVolumeRequest(*storagegateway.DeleteVolumeInput) storagegateway.DeleteVolumeRequest
 
-	DescribeBandwidthRateLimit(*storagegateway.DescribeBandwidthRateLimitInput) (*storagegateway.DescribeBandwidthRateLimitOutput, error)
-	DescribeBandwidthRateLimitWithContext(aws.Context, *storagegateway.DescribeBandwidthRateLimitInput, ...aws.Option) (*storagegateway.DescribeBandwidthRateLimitOutput, error)
-	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) (*aws.Request, *storagegateway.DescribeBandwidthRateLimitOutput)
+	DescribeBandwidthRateLimitRequest(*storagegateway.DescribeBandwidthRateLimitInput) storagegateway.DescribeBandwidthRateLimitRequest
 
-	DescribeCache(*storagegateway.DescribeCacheInput) (*storagegateway.DescribeCacheOutput, error)
-	DescribeCacheWithContext(aws.Context, *storagegateway.DescribeCacheInput, ...aws.Option) (*storagegateway.DescribeCacheOutput, error)
-	DescribeCacheRequest(*storagegateway.DescribeCacheInput) (*aws.Request, *storagegateway.DescribeCacheOutput)
+	DescribeCacheRequest(*storagegateway.DescribeCacheInput) storagegateway.DescribeCacheRequest
 
-	DescribeCachediSCSIVolumes(*storagegateway.DescribeCachediSCSIVolumesInput) (*storagegateway.DescribeCachediSCSIVolumesOutput, error)
-	DescribeCachediSCSIVolumesWithContext(aws.Context, *storagegateway.DescribeCachediSCSIVolumesInput, ...aws.Option) (*storagegateway.DescribeCachediSCSIVolumesOutput, error)
-	DescribeCachediSCSIVolumesRequest(*storagegateway.DescribeCachediSCSIVolumesInput) (*aws.Request, *storagegateway.DescribeCachediSCSIVolumesOutput)
+	DescribeCachediSCSIVolumesRequest(*storagegateway.DescribeCachediSCSIVolumesInput) storagegateway.DescribeCachediSCSIVolumesRequest
 
-	DescribeChapCredentials(*storagegateway.DescribeChapCredentialsInput) (*storagegateway.DescribeChapCredentialsOutput, error)
-	DescribeChapCredentialsWithContext(aws.Context, *storagegateway.DescribeChapCredentialsInput, ...aws.Option) (*storagegateway.DescribeChapCredentialsOutput, error)
-	DescribeChapCredentialsRequest(*storagegateway.DescribeChapCredentialsInput) (*aws.Request, *storagegateway.DescribeChapCredentialsOutput)
+	DescribeChapCredentialsRequest(*storagegateway.DescribeChapCredentialsInput) storagegateway.DescribeChapCredentialsRequest
 
-	DescribeGatewayInformation(*storagegateway.DescribeGatewayInformationInput) (*storagegateway.DescribeGatewayInformationOutput, error)
-	DescribeGatewayInformationWithContext(aws.Context, *storagegateway.DescribeGatewayInformationInput, ...aws.Option) (*storagegateway.DescribeGatewayInformationOutput, error)
-	DescribeGatewayInformationRequest(*storagegateway.DescribeGatewayInformationInput) (*aws.Request, *storagegateway.DescribeGatewayInformationOutput)
+	DescribeGatewayInformationRequest(*storagegateway.DescribeGatewayInformationInput) storagegateway.DescribeGatewayInformationRequest
 
-	DescribeMaintenanceStartTime(*storagegateway.DescribeMaintenanceStartTimeInput) (*storagegateway.DescribeMaintenanceStartTimeOutput, error)
-	DescribeMaintenanceStartTimeWithContext(aws.Context, *storagegateway.DescribeMaintenanceStartTimeInput, ...aws.Option) (*storagegateway.DescribeMaintenanceStartTimeOutput, error)
-	DescribeMaintenanceStartTimeRequest(*storagegateway.DescribeMaintenanceStartTimeInput) (*aws.Request, *storagegateway.DescribeMaintenanceStartTimeOutput)
+	DescribeMaintenanceStartTimeRequest(*storagegateway.DescribeMaintenanceStartTimeInput) storagegateway.DescribeMaintenanceStartTimeRequest
 
-	DescribeNFSFileShares(*storagegateway.DescribeNFSFileSharesInput) (*storagegateway.DescribeNFSFileSharesOutput, error)
-	DescribeNFSFileSharesWithContext(aws.Context, *storagegateway.DescribeNFSFileSharesInput, ...aws.Option) (*storagegateway.DescribeNFSFileSharesOutput, error)
-	DescribeNFSFileSharesRequest(*storagegateway.DescribeNFSFileSharesInput) (*aws.Request, *storagegateway.DescribeNFSFileSharesOutput)
+	DescribeNFSFileSharesRequest(*storagegateway.DescribeNFSFileSharesInput) storagegateway.DescribeNFSFileSharesRequest
 
-	DescribeSnapshotSchedule(*storagegateway.DescribeSnapshotScheduleInput) (*storagegateway.DescribeSnapshotScheduleOutput, error)
-	DescribeSnapshotScheduleWithContext(aws.Context, *storagegateway.DescribeSnapshotScheduleInput, ...aws.Option) (*storagegateway.DescribeSnapshotScheduleOutput, error)
-	DescribeSnapshotScheduleRequest(*storagegateway.DescribeSnapshotScheduleInput) (*aws.Request, *storagegateway.DescribeSnapshotScheduleOutput)
+	DescribeSnapshotScheduleRequest(*storagegateway.DescribeSnapshotScheduleInput) storagegateway.DescribeSnapshotScheduleRequest
 
-	DescribeStorediSCSIVolumes(*storagegateway.DescribeStorediSCSIVolumesInput) (*storagegateway.DescribeStorediSCSIVolumesOutput, error)
-	DescribeStorediSCSIVolumesWithContext(aws.Context, *storagegateway.DescribeStorediSCSIVolumesInput, ...aws.Option) (*storagegateway.DescribeStorediSCSIVolumesOutput, error)
-	DescribeStorediSCSIVolumesRequest(*storagegateway.DescribeStorediSCSIVolumesInput) (*aws.Request, *storagegateway.DescribeStorediSCSIVolumesOutput)
+	DescribeStorediSCSIVolumesRequest(*storagegateway.DescribeStorediSCSIVolumesInput) storagegateway.DescribeStorediSCSIVolumesRequest
 
-	DescribeTapeArchives(*storagegateway.DescribeTapeArchivesInput) (*storagegateway.DescribeTapeArchivesOutput, error)
-	DescribeTapeArchivesWithContext(aws.Context, *storagegateway.DescribeTapeArchivesInput, ...aws.Option) (*storagegateway.DescribeTapeArchivesOutput, error)
-	DescribeTapeArchivesRequest(*storagegateway.DescribeTapeArchivesInput) (*aws.Request, *storagegateway.DescribeTapeArchivesOutput)
+	DescribeTapeArchivesRequest(*storagegateway.DescribeTapeArchivesInput) storagegateway.DescribeTapeArchivesRequest
 
 	DescribeTapeArchivesPages(*storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool) error
 	DescribeTapeArchivesPagesWithContext(aws.Context, *storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool, ...aws.Option) error
 
-	DescribeTapeRecoveryPoints(*storagegateway.DescribeTapeRecoveryPointsInput) (*storagegateway.DescribeTapeRecoveryPointsOutput, error)
-	DescribeTapeRecoveryPointsWithContext(aws.Context, *storagegateway.DescribeTapeRecoveryPointsInput, ...aws.Option) (*storagegateway.DescribeTapeRecoveryPointsOutput, error)
-	DescribeTapeRecoveryPointsRequest(*storagegateway.DescribeTapeRecoveryPointsInput) (*aws.Request, *storagegateway.DescribeTapeRecoveryPointsOutput)
+	DescribeTapeRecoveryPointsRequest(*storagegateway.DescribeTapeRecoveryPointsInput) storagegateway.DescribeTapeRecoveryPointsRequest
 
 	DescribeTapeRecoveryPointsPages(*storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool) error
 	DescribeTapeRecoveryPointsPagesWithContext(aws.Context, *storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool, ...aws.Option) error
 
-	DescribeTapes(*storagegateway.DescribeTapesInput) (*storagegateway.DescribeTapesOutput, error)
-	DescribeTapesWithContext(aws.Context, *storagegateway.DescribeTapesInput, ...aws.Option) (*storagegateway.DescribeTapesOutput, error)
-	DescribeTapesRequest(*storagegateway.DescribeTapesInput) (*aws.Request, *storagegateway.DescribeTapesOutput)
+	DescribeTapesRequest(*storagegateway.DescribeTapesInput) storagegateway.DescribeTapesRequest
 
 	DescribeTapesPages(*storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool) error
 	DescribeTapesPagesWithContext(aws.Context, *storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool, ...aws.Option) error
 
-	DescribeUploadBuffer(*storagegateway.DescribeUploadBufferInput) (*storagegateway.DescribeUploadBufferOutput, error)
-	DescribeUploadBufferWithContext(aws.Context, *storagegateway.DescribeUploadBufferInput, ...aws.Option) (*storagegateway.DescribeUploadBufferOutput, error)
-	DescribeUploadBufferRequest(*storagegateway.DescribeUploadBufferInput) (*aws.Request, *storagegateway.DescribeUploadBufferOutput)
+	DescribeUploadBufferRequest(*storagegateway.DescribeUploadBufferInput) storagegateway.DescribeUploadBufferRequest
 
-	DescribeVTLDevices(*storagegateway.DescribeVTLDevicesInput) (*storagegateway.DescribeVTLDevicesOutput, error)
-	DescribeVTLDevicesWithContext(aws.Context, *storagegateway.DescribeVTLDevicesInput, ...aws.Option) (*storagegateway.DescribeVTLDevicesOutput, error)
-	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) (*aws.Request, *storagegateway.DescribeVTLDevicesOutput)
+	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
 
 	DescribeVTLDevicesPages(*storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool) error
 	DescribeVTLDevicesPagesWithContext(aws.Context, *storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool, ...aws.Option) error
 
-	DescribeWorkingStorage(*storagegateway.DescribeWorkingStorageInput) (*storagegateway.DescribeWorkingStorageOutput, error)
-	DescribeWorkingStorageWithContext(aws.Context, *storagegateway.DescribeWorkingStorageInput, ...aws.Option) (*storagegateway.DescribeWorkingStorageOutput, error)
-	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) (*aws.Request, *storagegateway.DescribeWorkingStorageOutput)
+	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
 
-	DisableGateway(*storagegateway.DisableGatewayInput) (*storagegateway.DisableGatewayOutput, error)
-	DisableGatewayWithContext(aws.Context, *storagegateway.DisableGatewayInput, ...aws.Option) (*storagegateway.DisableGatewayOutput, error)
-	DisableGatewayRequest(*storagegateway.DisableGatewayInput) (*aws.Request, *storagegateway.DisableGatewayOutput)
+	DisableGatewayRequest(*storagegateway.DisableGatewayInput) storagegateway.DisableGatewayRequest
 
-	ListFileShares(*storagegateway.ListFileSharesInput) (*storagegateway.ListFileSharesOutput, error)
-	ListFileSharesWithContext(aws.Context, *storagegateway.ListFileSharesInput, ...aws.Option) (*storagegateway.ListFileSharesOutput, error)
-	ListFileSharesRequest(*storagegateway.ListFileSharesInput) (*aws.Request, *storagegateway.ListFileSharesOutput)
+	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
 
-	ListGateways(*storagegateway.ListGatewaysInput) (*storagegateway.ListGatewaysOutput, error)
-	ListGatewaysWithContext(aws.Context, *storagegateway.ListGatewaysInput, ...aws.Option) (*storagegateway.ListGatewaysOutput, error)
-	ListGatewaysRequest(*storagegateway.ListGatewaysInput) (*aws.Request, *storagegateway.ListGatewaysOutput)
+	ListGatewaysRequest(*storagegateway.ListGatewaysInput) storagegateway.ListGatewaysRequest
 
 	ListGatewaysPages(*storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool) error
 	ListGatewaysPagesWithContext(aws.Context, *storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool, ...aws.Option) error
 
-	ListLocalDisks(*storagegateway.ListLocalDisksInput) (*storagegateway.ListLocalDisksOutput, error)
-	ListLocalDisksWithContext(aws.Context, *storagegateway.ListLocalDisksInput, ...aws.Option) (*storagegateway.ListLocalDisksOutput, error)
-	ListLocalDisksRequest(*storagegateway.ListLocalDisksInput) (*aws.Request, *storagegateway.ListLocalDisksOutput)
+	ListLocalDisksRequest(*storagegateway.ListLocalDisksInput) storagegateway.ListLocalDisksRequest
 
-	ListTagsForResource(*storagegateway.ListTagsForResourceInput) (*storagegateway.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *storagegateway.ListTagsForResourceInput, ...aws.Option) (*storagegateway.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*storagegateway.ListTagsForResourceInput) (*aws.Request, *storagegateway.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*storagegateway.ListTagsForResourceInput) storagegateway.ListTagsForResourceRequest
 
-	ListTapes(*storagegateway.ListTapesInput) (*storagegateway.ListTapesOutput, error)
-	ListTapesWithContext(aws.Context, *storagegateway.ListTapesInput, ...aws.Option) (*storagegateway.ListTapesOutput, error)
-	ListTapesRequest(*storagegateway.ListTapesInput) (*aws.Request, *storagegateway.ListTapesOutput)
+	ListTapesRequest(*storagegateway.ListTapesInput) storagegateway.ListTapesRequest
 
-	ListVolumeInitiators(*storagegateway.ListVolumeInitiatorsInput) (*storagegateway.ListVolumeInitiatorsOutput, error)
-	ListVolumeInitiatorsWithContext(aws.Context, *storagegateway.ListVolumeInitiatorsInput, ...aws.Option) (*storagegateway.ListVolumeInitiatorsOutput, error)
-	ListVolumeInitiatorsRequest(*storagegateway.ListVolumeInitiatorsInput) (*aws.Request, *storagegateway.ListVolumeInitiatorsOutput)
+	ListVolumeInitiatorsRequest(*storagegateway.ListVolumeInitiatorsInput) storagegateway.ListVolumeInitiatorsRequest
 
-	ListVolumeRecoveryPoints(*storagegateway.ListVolumeRecoveryPointsInput) (*storagegateway.ListVolumeRecoveryPointsOutput, error)
-	ListVolumeRecoveryPointsWithContext(aws.Context, *storagegateway.ListVolumeRecoveryPointsInput, ...aws.Option) (*storagegateway.ListVolumeRecoveryPointsOutput, error)
-	ListVolumeRecoveryPointsRequest(*storagegateway.ListVolumeRecoveryPointsInput) (*aws.Request, *storagegateway.ListVolumeRecoveryPointsOutput)
+	ListVolumeRecoveryPointsRequest(*storagegateway.ListVolumeRecoveryPointsInput) storagegateway.ListVolumeRecoveryPointsRequest
 
-	ListVolumes(*storagegateway.ListVolumesInput) (*storagegateway.ListVolumesOutput, error)
-	ListVolumesWithContext(aws.Context, *storagegateway.ListVolumesInput, ...aws.Option) (*storagegateway.ListVolumesOutput, error)
-	ListVolumesRequest(*storagegateway.ListVolumesInput) (*aws.Request, *storagegateway.ListVolumesOutput)
+	ListVolumesRequest(*storagegateway.ListVolumesInput) storagegateway.ListVolumesRequest
 
 	ListVolumesPages(*storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool) error
 	ListVolumesPagesWithContext(aws.Context, *storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool, ...aws.Option) error
 
-	RefreshCache(*storagegateway.RefreshCacheInput) (*storagegateway.RefreshCacheOutput, error)
-	RefreshCacheWithContext(aws.Context, *storagegateway.RefreshCacheInput, ...aws.Option) (*storagegateway.RefreshCacheOutput, error)
-	RefreshCacheRequest(*storagegateway.RefreshCacheInput) (*aws.Request, *storagegateway.RefreshCacheOutput)
+	RefreshCacheRequest(*storagegateway.RefreshCacheInput) storagegateway.RefreshCacheRequest
 
-	RemoveTagsFromResource(*storagegateway.RemoveTagsFromResourceInput) (*storagegateway.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceWithContext(aws.Context, *storagegateway.RemoveTagsFromResourceInput, ...aws.Option) (*storagegateway.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceRequest(*storagegateway.RemoveTagsFromResourceInput) (*aws.Request, *storagegateway.RemoveTagsFromResourceOutput)
+	RemoveTagsFromResourceRequest(*storagegateway.RemoveTagsFromResourceInput) storagegateway.RemoveTagsFromResourceRequest
 
-	ResetCache(*storagegateway.ResetCacheInput) (*storagegateway.ResetCacheOutput, error)
-	ResetCacheWithContext(aws.Context, *storagegateway.ResetCacheInput, ...aws.Option) (*storagegateway.ResetCacheOutput, error)
-	ResetCacheRequest(*storagegateway.ResetCacheInput) (*aws.Request, *storagegateway.ResetCacheOutput)
+	ResetCacheRequest(*storagegateway.ResetCacheInput) storagegateway.ResetCacheRequest
 
-	RetrieveTapeArchive(*storagegateway.RetrieveTapeArchiveInput) (*storagegateway.RetrieveTapeArchiveOutput, error)
-	RetrieveTapeArchiveWithContext(aws.Context, *storagegateway.RetrieveTapeArchiveInput, ...aws.Option) (*storagegateway.RetrieveTapeArchiveOutput, error)
-	RetrieveTapeArchiveRequest(*storagegateway.RetrieveTapeArchiveInput) (*aws.Request, *storagegateway.RetrieveTapeArchiveOutput)
+	RetrieveTapeArchiveRequest(*storagegateway.RetrieveTapeArchiveInput) storagegateway.RetrieveTapeArchiveRequest
 
-	RetrieveTapeRecoveryPoint(*storagegateway.RetrieveTapeRecoveryPointInput) (*storagegateway.RetrieveTapeRecoveryPointOutput, error)
-	RetrieveTapeRecoveryPointWithContext(aws.Context, *storagegateway.RetrieveTapeRecoveryPointInput, ...aws.Option) (*storagegateway.RetrieveTapeRecoveryPointOutput, error)
-	RetrieveTapeRecoveryPointRequest(*storagegateway.RetrieveTapeRecoveryPointInput) (*aws.Request, *storagegateway.RetrieveTapeRecoveryPointOutput)
+	RetrieveTapeRecoveryPointRequest(*storagegateway.RetrieveTapeRecoveryPointInput) storagegateway.RetrieveTapeRecoveryPointRequest
 
-	SetLocalConsolePassword(*storagegateway.SetLocalConsolePasswordInput) (*storagegateway.SetLocalConsolePasswordOutput, error)
-	SetLocalConsolePasswordWithContext(aws.Context, *storagegateway.SetLocalConsolePasswordInput, ...aws.Option) (*storagegateway.SetLocalConsolePasswordOutput, error)
-	SetLocalConsolePasswordRequest(*storagegateway.SetLocalConsolePasswordInput) (*aws.Request, *storagegateway.SetLocalConsolePasswordOutput)
+	SetLocalConsolePasswordRequest(*storagegateway.SetLocalConsolePasswordInput) storagegateway.SetLocalConsolePasswordRequest
 
-	ShutdownGateway(*storagegateway.ShutdownGatewayInput) (*storagegateway.ShutdownGatewayOutput, error)
-	ShutdownGatewayWithContext(aws.Context, *storagegateway.ShutdownGatewayInput, ...aws.Option) (*storagegateway.ShutdownGatewayOutput, error)
-	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) (*aws.Request, *storagegateway.ShutdownGatewayOutput)
+	ShutdownGatewayRequest(*storagegateway.ShutdownGatewayInput) storagegateway.ShutdownGatewayRequest
 
-	StartGateway(*storagegateway.StartGatewayInput) (*storagegateway.StartGatewayOutput, error)
-	StartGatewayWithContext(aws.Context, *storagegateway.StartGatewayInput, ...aws.Option) (*storagegateway.StartGatewayOutput, error)
-	StartGatewayRequest(*storagegateway.StartGatewayInput) (*aws.Request, *storagegateway.StartGatewayOutput)
+	StartGatewayRequest(*storagegateway.StartGatewayInput) storagegateway.StartGatewayRequest
 
-	UpdateBandwidthRateLimit(*storagegateway.UpdateBandwidthRateLimitInput) (*storagegateway.UpdateBandwidthRateLimitOutput, error)
-	UpdateBandwidthRateLimitWithContext(aws.Context, *storagegateway.UpdateBandwidthRateLimitInput, ...aws.Option) (*storagegateway.UpdateBandwidthRateLimitOutput, error)
-	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) (*aws.Request, *storagegateway.UpdateBandwidthRateLimitOutput)
+	UpdateBandwidthRateLimitRequest(*storagegateway.UpdateBandwidthRateLimitInput) storagegateway.UpdateBandwidthRateLimitRequest
 
-	UpdateChapCredentials(*storagegateway.UpdateChapCredentialsInput) (*storagegateway.UpdateChapCredentialsOutput, error)
-	UpdateChapCredentialsWithContext(aws.Context, *storagegateway.UpdateChapCredentialsInput, ...aws.Option) (*storagegateway.UpdateChapCredentialsOutput, error)
-	UpdateChapCredentialsRequest(*storagegateway.UpdateChapCredentialsInput) (*aws.Request, *storagegateway.UpdateChapCredentialsOutput)
+	UpdateChapCredentialsRequest(*storagegateway.UpdateChapCredentialsInput) storagegateway.UpdateChapCredentialsRequest
 
-	UpdateGatewayInformation(*storagegateway.UpdateGatewayInformationInput) (*storagegateway.UpdateGatewayInformationOutput, error)
-	UpdateGatewayInformationWithContext(aws.Context, *storagegateway.UpdateGatewayInformationInput, ...aws.Option) (*storagegateway.UpdateGatewayInformationOutput, error)
-	UpdateGatewayInformationRequest(*storagegateway.UpdateGatewayInformationInput) (*aws.Request, *storagegateway.UpdateGatewayInformationOutput)
+	UpdateGatewayInformationRequest(*storagegateway.UpdateGatewayInformationInput) storagegateway.UpdateGatewayInformationRequest
 
-	UpdateGatewaySoftwareNow(*storagegateway.UpdateGatewaySoftwareNowInput) (*storagegateway.UpdateGatewaySoftwareNowOutput, error)
-	UpdateGatewaySoftwareNowWithContext(aws.Context, *storagegateway.UpdateGatewaySoftwareNowInput, ...aws.Option) (*storagegateway.UpdateGatewaySoftwareNowOutput, error)
-	UpdateGatewaySoftwareNowRequest(*storagegateway.UpdateGatewaySoftwareNowInput) (*aws.Request, *storagegateway.UpdateGatewaySoftwareNowOutput)
+	UpdateGatewaySoftwareNowRequest(*storagegateway.UpdateGatewaySoftwareNowInput) storagegateway.UpdateGatewaySoftwareNowRequest
 
-	UpdateMaintenanceStartTime(*storagegateway.UpdateMaintenanceStartTimeInput) (*storagegateway.UpdateMaintenanceStartTimeOutput, error)
-	UpdateMaintenanceStartTimeWithContext(aws.Context, *storagegateway.UpdateMaintenanceStartTimeInput, ...aws.Option) (*storagegateway.UpdateMaintenanceStartTimeOutput, error)
-	UpdateMaintenanceStartTimeRequest(*storagegateway.UpdateMaintenanceStartTimeInput) (*aws.Request, *storagegateway.UpdateMaintenanceStartTimeOutput)
+	UpdateMaintenanceStartTimeRequest(*storagegateway.UpdateMaintenanceStartTimeInput) storagegateway.UpdateMaintenanceStartTimeRequest
 
-	UpdateNFSFileShare(*storagegateway.UpdateNFSFileShareInput) (*storagegateway.UpdateNFSFileShareOutput, error)
-	UpdateNFSFileShareWithContext(aws.Context, *storagegateway.UpdateNFSFileShareInput, ...aws.Option) (*storagegateway.UpdateNFSFileShareOutput, error)
-	UpdateNFSFileShareRequest(*storagegateway.UpdateNFSFileShareInput) (*aws.Request, *storagegateway.UpdateNFSFileShareOutput)
+	UpdateNFSFileShareRequest(*storagegateway.UpdateNFSFileShareInput) storagegateway.UpdateNFSFileShareRequest
 
-	UpdateSnapshotSchedule(*storagegateway.UpdateSnapshotScheduleInput) (*storagegateway.UpdateSnapshotScheduleOutput, error)
-	UpdateSnapshotScheduleWithContext(aws.Context, *storagegateway.UpdateSnapshotScheduleInput, ...aws.Option) (*storagegateway.UpdateSnapshotScheduleOutput, error)
-	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) (*aws.Request, *storagegateway.UpdateSnapshotScheduleOutput)
+	UpdateSnapshotScheduleRequest(*storagegateway.UpdateSnapshotScheduleInput) storagegateway.UpdateSnapshotScheduleRequest
 
-	UpdateVTLDeviceType(*storagegateway.UpdateVTLDeviceTypeInput) (*storagegateway.UpdateVTLDeviceTypeOutput, error)
-	UpdateVTLDeviceTypeWithContext(aws.Context, *storagegateway.UpdateVTLDeviceTypeInput, ...aws.Option) (*storagegateway.UpdateVTLDeviceTypeOutput, error)
-	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) (*aws.Request, *storagegateway.UpdateVTLDeviceTypeOutput)
+	UpdateVTLDeviceTypeRequest(*storagegateway.UpdateVTLDeviceTypeInput) storagegateway.UpdateVTLDeviceTypeRequest
 }
 
 var _ StorageGatewayAPI = (*storagegateway.StorageGateway)(nil)

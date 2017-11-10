@@ -12,47 +12,24 @@ import (
 
 const opAcceptQualificationRequest = "AcceptQualificationRequest"
 
-// AcceptQualificationRequestRequest generates a "aws.Request" representing the
-// client's request for the AcceptQualificationRequest operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AcceptQualificationRequest for more information on using the AcceptQualificationRequest
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AcceptQualificationRequestRequest method.
-//    req, resp := client.AcceptQualificationRequestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
-func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) (req *aws.Request, output *AcceptQualificationRequestOutput) {
-	op := &aws.Operation{
-		Name:       opAcceptQualificationRequest,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AcceptQualificationRequestInput{}
-	}
-
-	output = &AcceptQualificationRequestOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AcceptQualificationRequestRequest is a API request type for the AcceptQualificationRequest API operation.
+type AcceptQualificationRequestRequest struct {
+	*aws.Request
+	Input *AcceptQualificationRequestInput
 }
 
-// AcceptQualificationRequest API operation for Amazon Mechanical Turk.
+// Send marshals and sends the AcceptQualificationRequest API request.
+func (r *AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AcceptQualificationRequestOutput), nil
+}
+
+// AcceptQualificationRequestRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The AcceptQualificationRequest operation approves a Worker's request for
 // a Qualification.
@@ -63,86 +40,49 @@ func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequ
 // A successful request for the AcceptQualificationRequest operation returns
 // with no errors and an empty body.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation AcceptQualificationRequest for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
-func (c *MTurk) AcceptQualificationRequest(input *AcceptQualificationRequestInput) (*AcceptQualificationRequestOutput, error) {
-	req, out := c.AcceptQualificationRequestRequest(input)
-	return out, req.Send()
-}
-
-// AcceptQualificationRequestWithContext is the same as AcceptQualificationRequest with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AcceptQualificationRequest for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) AcceptQualificationRequestWithContext(ctx aws.Context, input *AcceptQualificationRequestInput, opts ...aws.Option) (*AcceptQualificationRequestOutput, error) {
-	req, out := c.AcceptQualificationRequestRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opApproveAssignment = "ApproveAssignment"
-
-// ApproveAssignmentRequest generates a "aws.Request" representing the
-// client's request for the ApproveAssignment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ApproveAssignment for more information on using the ApproveAssignment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ApproveAssignmentRequest method.
-//    req, resp := client.ApproveAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AcceptQualificationRequestRequest method.
+//    req := client.AcceptQualificationRequestRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
-func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *aws.Request, output *ApproveAssignmentOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
+func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) AcceptQualificationRequestRequest {
 	op := &aws.Operation{
-		Name:       opApproveAssignment,
+		Name:       opAcceptQualificationRequest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ApproveAssignmentInput{}
+		input = &AcceptQualificationRequestInput{}
 	}
 
-	output = &ApproveAssignmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AcceptQualificationRequestOutput{})
+	return AcceptQualificationRequestRequest{Request: req, Input: input}
 }
 
-// ApproveAssignment API operation for Amazon Mechanical Turk.
+const opApproveAssignment = "ApproveAssignment"
+
+// ApproveAssignmentRequest is a API request type for the ApproveAssignment API operation.
+type ApproveAssignmentRequest struct {
+	*aws.Request
+	Input *ApproveAssignmentInput
+}
+
+// Send marshals and sends the ApproveAssignment API request.
+func (r *ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApproveAssignmentOutput), nil
+}
+
+// ApproveAssignmentRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The ApproveAssignment operation approves the results of a completed assignment.
 //
@@ -164,86 +104,49 @@ func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *aw
 // works on rejected assignments that were submitted within the previous 30
 // days and only if the assignment's related HIT has not been deleted.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ApproveAssignment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
-func (c *MTurk) ApproveAssignment(input *ApproveAssignmentInput) (*ApproveAssignmentOutput, error) {
-	req, out := c.ApproveAssignmentRequest(input)
-	return out, req.Send()
-}
-
-// ApproveAssignmentWithContext is the same as ApproveAssignment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ApproveAssignment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ApproveAssignmentWithContext(ctx aws.Context, input *ApproveAssignmentInput, opts ...aws.Option) (*ApproveAssignmentOutput, error) {
-	req, out := c.ApproveAssignmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
-
-// AssociateQualificationWithWorkerRequest generates a "aws.Request" representing the
-// client's request for the AssociateQualificationWithWorker operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateQualificationWithWorker for more information on using the AssociateQualificationWithWorker
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateQualificationWithWorkerRequest method.
-//    req, resp := client.AssociateQualificationWithWorkerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ApproveAssignmentRequest method.
+//    req := client.ApproveAssignmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
-func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualificationWithWorkerInput) (req *aws.Request, output *AssociateQualificationWithWorkerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
+func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) ApproveAssignmentRequest {
 	op := &aws.Operation{
-		Name:       opAssociateQualificationWithWorker,
+		Name:       opApproveAssignment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssociateQualificationWithWorkerInput{}
+		input = &ApproveAssignmentInput{}
 	}
 
-	output = &AssociateQualificationWithWorkerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ApproveAssignmentOutput{})
+	return ApproveAssignmentRequest{Request: req, Input: input}
 }
 
-// AssociateQualificationWithWorker API operation for Amazon Mechanical Turk.
+const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
+
+// AssociateQualificationWithWorkerRequest is a API request type for the AssociateQualificationWithWorker API operation.
+type AssociateQualificationWithWorkerRequest struct {
+	*aws.Request
+	Input *AssociateQualificationWithWorkerInput
+}
+
+// Send marshals and sends the AssociateQualificationWithWorker API request.
+func (r *AssociateQualificationWithWorkerRequest) Send() (*AssociateQualificationWithWorkerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateQualificationWithWorkerOutput), nil
+}
+
+// AssociateQualificationWithWorkerRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The AssociateQualificationWithWorker operation gives a Worker a Qualification.
 // AssociateQualificationWithWorker does not require that the Worker submit
@@ -259,86 +162,49 @@ func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualific
 // a pending Qualification request without affecting the Qualification the Worker
 // already has, reject the request with the RejectQualificationRequest operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation AssociateQualificationWithWorker for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
-func (c *MTurk) AssociateQualificationWithWorker(input *AssociateQualificationWithWorkerInput) (*AssociateQualificationWithWorkerOutput, error) {
-	req, out := c.AssociateQualificationWithWorkerRequest(input)
-	return out, req.Send()
-}
-
-// AssociateQualificationWithWorkerWithContext is the same as AssociateQualificationWithWorker with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateQualificationWithWorker for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) AssociateQualificationWithWorkerWithContext(ctx aws.Context, input *AssociateQualificationWithWorkerInput, opts ...aws.Option) (*AssociateQualificationWithWorkerOutput, error) {
-	req, out := c.AssociateQualificationWithWorkerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
-
-// CreateAdditionalAssignmentsForHITRequest generates a "aws.Request" representing the
-// client's request for the CreateAdditionalAssignmentsForHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateAdditionalAssignmentsForHIT for more information on using the CreateAdditionalAssignmentsForHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateAdditionalAssignmentsForHITRequest method.
-//    req, resp := client.CreateAdditionalAssignmentsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssociateQualificationWithWorkerRequest method.
+//    req := client.AssociateQualificationWithWorkerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
-func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) (req *aws.Request, output *CreateAdditionalAssignmentsForHITOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
+func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualificationWithWorkerInput) AssociateQualificationWithWorkerRequest {
 	op := &aws.Operation{
-		Name:       opCreateAdditionalAssignmentsForHIT,
+		Name:       opAssociateQualificationWithWorker,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateAdditionalAssignmentsForHITInput{}
+		input = &AssociateQualificationWithWorkerInput{}
 	}
 
-	output = &CreateAdditionalAssignmentsForHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &AssociateQualificationWithWorkerOutput{})
+	return AssociateQualificationWithWorkerRequest{Request: req, Input: input}
 }
 
-// CreateAdditionalAssignmentsForHIT API operation for Amazon Mechanical Turk.
+const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
+
+// CreateAdditionalAssignmentsForHITRequest is a API request type for the CreateAdditionalAssignmentsForHIT API operation.
+type CreateAdditionalAssignmentsForHITRequest struct {
+	*aws.Request
+	Input *CreateAdditionalAssignmentsForHITInput
+}
+
+// Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
+func (r *CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssignmentsForHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAdditionalAssignmentsForHITOutput), nil
+}
+
+// CreateAdditionalAssignmentsForHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The CreateAdditionalAssignmentsForHIT operation increases the maximum number
 // of assignments of an existing HIT.
@@ -356,86 +222,49 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditional
 // to extend HITs that were created before July 22, 2015 will result in an AWS.MechanicalTurk.HITTooOldForExtension
 // exception.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateAdditionalAssignmentsForHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
-func (c *MTurk) CreateAdditionalAssignmentsForHIT(input *CreateAdditionalAssignmentsForHITInput) (*CreateAdditionalAssignmentsForHITOutput, error) {
-	req, out := c.CreateAdditionalAssignmentsForHITRequest(input)
-	return out, req.Send()
-}
-
-// CreateAdditionalAssignmentsForHITWithContext is the same as CreateAdditionalAssignmentsForHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateAdditionalAssignmentsForHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateAdditionalAssignmentsForHITWithContext(ctx aws.Context, input *CreateAdditionalAssignmentsForHITInput, opts ...aws.Option) (*CreateAdditionalAssignmentsForHITOutput, error) {
-	req, out := c.CreateAdditionalAssignmentsForHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateHIT = "CreateHIT"
-
-// CreateHITRequest generates a "aws.Request" representing the
-// client's request for the CreateHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHIT for more information on using the CreateHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHITRequest method.
-//    req, resp := client.CreateHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateAdditionalAssignmentsForHITRequest method.
+//    req := client.CreateAdditionalAssignmentsForHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHIT
-func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *aws.Request, output *CreateHITOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
+func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest {
 	op := &aws.Operation{
-		Name:       opCreateHIT,
+		Name:       opCreateAdditionalAssignmentsForHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateHITInput{}
+		input = &CreateAdditionalAssignmentsForHITInput{}
 	}
 
-	output = &CreateHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateAdditionalAssignmentsForHITOutput{})
+	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input}
 }
 
-// CreateHIT API operation for Amazon Mechanical Turk.
+const opCreateHIT = "CreateHIT"
+
+// CreateHITRequest is a API request type for the CreateHIT API operation.
+type CreateHITRequest struct {
+	*aws.Request
+	Input *CreateHITInput
+}
+
+// Send marshals and sends the CreateHIT API request.
+func (r *CreateHITRequest) Send() (*CreateHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHITOutput), nil
+}
+
+// CreateHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The CreateHIT operation creates a new Human Intelligence Task (HIT). The
 // new HIT is made available for Workers to find and accept on the Amazon Mechanical
@@ -460,70 +289,64 @@ func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *aws.Request, outpu
 // If a HIT is created with 10 or more maximum assignments, there is an additional
 // fee. For more information, see Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the CreateHITRequest method.
+//    req := client.CreateHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHIT
-func (c *MTurk) CreateHIT(input *CreateHITInput) (*CreateHITOutput, error) {
-	req, out := c.CreateHITRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) CreateHITRequest(input *CreateHITInput) CreateHITRequest {
+	op := &aws.Operation{
+		Name:       opCreateHIT,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateHITWithContext is the same as CreateHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateHITWithContext(ctx aws.Context, input *CreateHITInput, opts ...aws.Option) (*CreateHITOutput, error) {
-	req, out := c.CreateHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHITInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHITOutput{})
+	return CreateHITRequest{Request: req, Input: input}
 }
 
 const opCreateHITType = "CreateHITType"
 
-// CreateHITTypeRequest generates a "aws.Request" representing the
-// client's request for the CreateHITType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateHITTypeRequest is a API request type for the CreateHITType API operation.
+type CreateHITTypeRequest struct {
+	*aws.Request
+	Input *CreateHITTypeInput
+}
+
+// Send marshals and sends the CreateHITType API request.
+func (r *CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHITTypeOutput), nil
+}
+
+// CreateHITTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHITType for more information on using the CreateHITType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The CreateHITType operation creates a new HIT type. This operation allows
+// you to define a standard set of HIT properties to use when creating HITs.
+// If you register a HIT type with values that match an existing HIT type, the
+// HIT type ID of the existing type will be returned.
 //
 //    // Example sending a request using the CreateHITTypeRequest method.
-//    req, resp := client.CreateHITTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateHITTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITType
-func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *aws.Request, output *CreateHITTypeOutput) {
+func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) CreateHITTypeRequest {
 	op := &aws.Operation{
 		Name:       opCreateHITType,
 		HTTPMethod: "POST",
@@ -534,98 +357,30 @@ func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *aws.Reques
 		input = &CreateHITTypeInput{}
 	}
 
-	output = &CreateHITTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateHITType API operation for Amazon Mechanical Turk.
-//
-// The CreateHITType operation creates a new HIT type. This operation allows
-// you to define a standard set of HIT properties to use when creating HITs.
-// If you register a HIT type with values that match an existing HIT type, the
-// HIT type ID of the existing type will be returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateHITType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITType
-func (c *MTurk) CreateHITType(input *CreateHITTypeInput) (*CreateHITTypeOutput, error) {
-	req, out := c.CreateHITTypeRequest(input)
-	return out, req.Send()
-}
-
-// CreateHITTypeWithContext is the same as CreateHITType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHITType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateHITTypeWithContext(ctx aws.Context, input *CreateHITTypeInput, opts ...aws.Option) (*CreateHITTypeOutput, error) {
-	req, out := c.CreateHITTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateHITTypeOutput{})
+	return CreateHITTypeRequest{Request: req, Input: input}
 }
 
 const opCreateHITWithHITType = "CreateHITWithHITType"
 
-// CreateHITWithHITTypeRequest generates a "aws.Request" representing the
-// client's request for the CreateHITWithHITType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHITWithHITType for more information on using the CreateHITWithHITType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHITWithHITTypeRequest method.
-//    req, resp := client.CreateHITWithHITTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITType
-func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (req *aws.Request, output *CreateHITWithHITTypeOutput) {
-	op := &aws.Operation{
-		Name:       opCreateHITWithHITType,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateHITWithHITTypeInput{}
-	}
-
-	output = &CreateHITWithHITTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateHITWithHITTypeRequest is a API request type for the CreateHITWithHITType API operation.
+type CreateHITWithHITTypeRequest struct {
+	*aws.Request
+	Input *CreateHITWithHITTypeInput
 }
 
-// CreateHITWithHITType API operation for Amazon Mechanical Turk.
+// Send marshals and sends the CreateHITWithHITType API request.
+func (r *CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHITWithHITTypeOutput), nil
+}
+
+// CreateHITWithHITTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The CreateHITWithHITType operation creates a new Human Intelligence Task
 // (HIT) using an existing HITTypeID generated by the CreateHITType operation.
@@ -641,70 +396,62 @@ func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (r
 // If a HIT is created with 10 or more maximum assignments, there is an additional
 // fee. For more information, see Amazon Mechanical Turk Pricing (https://requester.mturk.com/pricing).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateHITWithHITType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the CreateHITWithHITTypeRequest method.
+//    req := client.CreateHITWithHITTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITType
-func (c *MTurk) CreateHITWithHITType(input *CreateHITWithHITTypeInput) (*CreateHITWithHITTypeOutput, error) {
-	req, out := c.CreateHITWithHITTypeRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) CreateHITWithHITTypeRequest {
+	op := &aws.Operation{
+		Name:       opCreateHITWithHITType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateHITWithHITTypeWithContext is the same as CreateHITWithHITType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHITWithHITType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateHITWithHITTypeWithContext(ctx aws.Context, input *CreateHITWithHITTypeInput, opts ...aws.Option) (*CreateHITWithHITTypeOutput, error) {
-	req, out := c.CreateHITWithHITTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHITWithHITTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHITWithHITTypeOutput{})
+	return CreateHITWithHITTypeRequest{Request: req, Input: input}
 }
 
 const opCreateQualificationType = "CreateQualificationType"
 
-// CreateQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the CreateQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateQualificationTypeRequest is a API request type for the CreateQualificationType API operation.
+type CreateQualificationTypeRequest struct {
+	*aws.Request
+	Input *CreateQualificationTypeInput
+}
+
+// Send marshals and sends the CreateQualificationType API request.
+func (r *CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateQualificationTypeOutput), nil
+}
+
+// CreateQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateQualificationType for more information on using the CreateQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The CreateQualificationType operation creates a new Qualification type, which
+// is represented by a QualificationType data structure.
 //
 //    // Example sending a request using the CreateQualificationTypeRequest method.
-//    req, resp := client.CreateQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationType
-func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInput) (req *aws.Request, output *CreateQualificationTypeOutput) {
+func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInput) CreateQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opCreateQualificationType,
 		HTTPMethod: "POST",
@@ -715,80 +462,44 @@ func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInp
 		input = &CreateQualificationTypeInput{}
 	}
 
-	output = &CreateQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateQualificationType API operation for Amazon Mechanical Turk.
-//
-// The CreateQualificationType operation creates a new Qualification type, which
-// is represented by a QualificationType data structure.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationType
-func (c *MTurk) CreateQualificationType(input *CreateQualificationTypeInput) (*CreateQualificationTypeOutput, error) {
-	req, out := c.CreateQualificationTypeRequest(input)
-	return out, req.Send()
-}
-
-// CreateQualificationTypeWithContext is the same as CreateQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateQualificationTypeWithContext(ctx aws.Context, input *CreateQualificationTypeInput, opts ...aws.Option) (*CreateQualificationTypeOutput, error) {
-	req, out := c.CreateQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateQualificationTypeOutput{})
+	return CreateQualificationTypeRequest{Request: req, Input: input}
 }
 
 const opCreateWorkerBlock = "CreateWorkerBlock"
 
-// CreateWorkerBlockRequest generates a "aws.Request" representing the
-// client's request for the CreateWorkerBlock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateWorkerBlockRequest is a API request type for the CreateWorkerBlock API operation.
+type CreateWorkerBlockRequest struct {
+	*aws.Request
+	Input *CreateWorkerBlockInput
+}
+
+// Send marshals and sends the CreateWorkerBlock API request.
+func (r *CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateWorkerBlockOutput), nil
+}
+
+// CreateWorkerBlockRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateWorkerBlock for more information on using the CreateWorkerBlock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The CreateWorkerBlock operation allows you to prevent a Worker from working
+// on your HITs. For example, you can block a Worker who is producing poor quality
+// work. You can block up to 100,000 Workers.
 //
 //    // Example sending a request using the CreateWorkerBlockRequest method.
-//    req, resp := client.CreateWorkerBlockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateWorkerBlockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
-func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *aws.Request, output *CreateWorkerBlockOutput) {
+func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateWorkerBlockRequest {
 	op := &aws.Operation{
 		Name:       opCreateWorkerBlock,
 		HTTPMethod: "POST",
@@ -799,97 +510,30 @@ func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *aw
 		input = &CreateWorkerBlockInput{}
 	}
 
-	output = &CreateWorkerBlockOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateWorkerBlock API operation for Amazon Mechanical Turk.
-//
-// The CreateWorkerBlock operation allows you to prevent a Worker from working
-// on your HITs. For example, you can block a Worker who is producing poor quality
-// work. You can block up to 100,000 Workers.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation CreateWorkerBlock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
-func (c *MTurk) CreateWorkerBlock(input *CreateWorkerBlockInput) (*CreateWorkerBlockOutput, error) {
-	req, out := c.CreateWorkerBlockRequest(input)
-	return out, req.Send()
-}
-
-// CreateWorkerBlockWithContext is the same as CreateWorkerBlock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateWorkerBlock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) CreateWorkerBlockWithContext(ctx aws.Context, input *CreateWorkerBlockInput, opts ...aws.Option) (*CreateWorkerBlockOutput, error) {
-	req, out := c.CreateWorkerBlockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateWorkerBlockOutput{})
+	return CreateWorkerBlockRequest{Request: req, Input: input}
 }
 
 const opDeleteHIT = "DeleteHIT"
 
-// DeleteHITRequest generates a "aws.Request" representing the
-// client's request for the DeleteHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHIT for more information on using the DeleteHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteHITRequest method.
-//    req, resp := client.DeleteHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
-func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *aws.Request, output *DeleteHITOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteHIT,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteHITInput{}
-	}
-
-	output = &DeleteHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteHITRequest is a API request type for the DeleteHIT API operation.
+type DeleteHITRequest struct {
+	*aws.Request
+	Input *DeleteHITInput
 }
 
-// DeleteHIT API operation for Amazon Mechanical Turk.
+// Send marshals and sends the DeleteHIT API request.
+func (r *DeleteHITRequest) Send() (*DeleteHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHITOutput), nil
+}
+
+// DeleteHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The DeleteHIT operation is used to delete HIT that is no longer needed. Only
 // the Requester who created the HIT can delete it.
@@ -911,86 +555,49 @@ func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *aws.Request, outpu
 //  Disposing HITs can improve the performance of operations such as ListReviewableHITs
 // and ListHITs.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation DeleteHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
-func (c *MTurk) DeleteHIT(input *DeleteHITInput) (*DeleteHITOutput, error) {
-	req, out := c.DeleteHITRequest(input)
-	return out, req.Send()
-}
-
-// DeleteHITWithContext is the same as DeleteHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) DeleteHITWithContext(ctx aws.Context, input *DeleteHITInput, opts ...aws.Option) (*DeleteHITOutput, error) {
-	req, out := c.DeleteHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteQualificationType = "DeleteQualificationType"
-
-// DeleteQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the DeleteQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteQualificationType for more information on using the DeleteQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteQualificationTypeRequest method.
-//    req, resp := client.DeleteQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteHITRequest method.
+//    req := client.DeleteHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
-func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) (req *aws.Request, output *DeleteQualificationTypeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
+func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 	op := &aws.Operation{
-		Name:       opDeleteQualificationType,
+		Name:       opDeleteHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteQualificationTypeInput{}
+		input = &DeleteHITInput{}
 	}
 
-	output = &DeleteQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteHITOutput{})
+	return DeleteHITRequest{Request: req, Input: input}
 }
 
-// DeleteQualificationType API operation for Amazon Mechanical Turk.
+const opDeleteQualificationType = "DeleteQualificationType"
+
+// DeleteQualificationTypeRequest is a API request type for the DeleteQualificationType API operation.
+type DeleteQualificationTypeRequest struct {
+	*aws.Request
+	Input *DeleteQualificationTypeInput
+}
+
+// Send marshals and sends the DeleteQualificationType API request.
+func (r *DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteQualificationTypeOutput), nil
+}
+
+// DeleteQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The DeleteQualificationType deletes a Qualification type and deletes any
 // HIT types that are associated with the Qualification type.
@@ -1006,70 +613,66 @@ func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInp
 // completes and the unique name of the Qualification type is available for
 // reuse with CreateQualificationType.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation DeleteQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the DeleteQualificationTypeRequest method.
+//    req := client.DeleteQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
-func (c *MTurk) DeleteQualificationType(input *DeleteQualificationTypeInput) (*DeleteQualificationTypeOutput, error) {
-	req, out := c.DeleteQualificationTypeRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) DeleteQualificationTypeRequest {
+	op := &aws.Operation{
+		Name:       opDeleteQualificationType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteQualificationTypeWithContext is the same as DeleteQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) DeleteQualificationTypeWithContext(ctx aws.Context, input *DeleteQualificationTypeInput, opts ...aws.Option) (*DeleteQualificationTypeOutput, error) {
-	req, out := c.DeleteQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteQualificationTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteQualificationTypeOutput{})
+	return DeleteQualificationTypeRequest{Request: req, Input: input}
 }
 
 const opDeleteWorkerBlock = "DeleteWorkerBlock"
 
-// DeleteWorkerBlockRequest generates a "aws.Request" representing the
-// client's request for the DeleteWorkerBlock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteWorkerBlockRequest is a API request type for the DeleteWorkerBlock API operation.
+type DeleteWorkerBlockRequest struct {
+	*aws.Request
+	Input *DeleteWorkerBlockInput
+}
+
+// Send marshals and sends the DeleteWorkerBlock API request.
+func (r *DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteWorkerBlockOutput), nil
+}
+
+// DeleteWorkerBlockRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteWorkerBlock for more information on using the DeleteWorkerBlock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The DeleteWorkerBlock operation allows you to reinstate a blocked Worker
+// to work on your HITs. This operation reverses the effects of the CreateWorkerBlock
+// operation. You need the Worker ID to use this operation. If the Worker ID
+// is missing or invalid, this operation fails and returns the message “WorkerId
+// is invalid.” If the specified Worker is not blocked, this operation returns
+// successfully.
 //
 //    // Example sending a request using the DeleteWorkerBlockRequest method.
-//    req, resp := client.DeleteWorkerBlockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteWorkerBlockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
-func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *aws.Request, output *DeleteWorkerBlockOutput) {
+func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteWorkerBlockRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWorkerBlock,
 		HTTPMethod: "POST",
@@ -1080,84 +683,46 @@ func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *aw
 		input = &DeleteWorkerBlockInput{}
 	}
 
-	output = &DeleteWorkerBlockOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteWorkerBlock API operation for Amazon Mechanical Turk.
-//
-// The DeleteWorkerBlock operation allows you to reinstate a blocked Worker
-// to work on your HITs. This operation reverses the effects of the CreateWorkerBlock
-// operation. You need the Worker ID to use this operation. If the Worker ID
-// is missing or invalid, this operation fails and returns the message “WorkerId
-// is invalid.” If the specified Worker is not blocked, this operation returns
-// successfully.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation DeleteWorkerBlock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
-func (c *MTurk) DeleteWorkerBlock(input *DeleteWorkerBlockInput) (*DeleteWorkerBlockOutput, error) {
-	req, out := c.DeleteWorkerBlockRequest(input)
-	return out, req.Send()
-}
-
-// DeleteWorkerBlockWithContext is the same as DeleteWorkerBlock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteWorkerBlock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) DeleteWorkerBlockWithContext(ctx aws.Context, input *DeleteWorkerBlockInput, opts ...aws.Option) (*DeleteWorkerBlockOutput, error) {
-	req, out := c.DeleteWorkerBlockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteWorkerBlockOutput{})
+	return DeleteWorkerBlockRequest{Request: req, Input: input}
 }
 
 const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWorker"
 
-// DisassociateQualificationFromWorkerRequest generates a "aws.Request" representing the
-// client's request for the DisassociateQualificationFromWorker operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateQualificationFromWorkerRequest is a API request type for the DisassociateQualificationFromWorker API operation.
+type DisassociateQualificationFromWorkerRequest struct {
+	*aws.Request
+	Input *DisassociateQualificationFromWorkerInput
+}
+
+// Send marshals and sends the DisassociateQualificationFromWorker API request.
+func (r *DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualificationFromWorkerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateQualificationFromWorkerOutput), nil
+}
+
+// DisassociateQualificationFromWorkerRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The DisassociateQualificationFromWorker revokes a previously granted Qualification
+// from a user.
 //
-// See DisassociateQualificationFromWorker for more information on using the DisassociateQualificationFromWorker
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can provide a text message explaining why the Qualification was revoked.
+// The user who had the Qualification can see this message.
 //
 //    // Example sending a request using the DisassociateQualificationFromWorkerRequest method.
-//    req, resp := client.DisassociateQualificationFromWorkerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateQualificationFromWorkerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
-func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) (req *aws.Request, output *DisassociateQualificationFromWorkerOutput) {
+func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateQualificationFromWorker,
 		HTTPMethod: "POST",
@@ -1168,83 +733,43 @@ func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQu
 		input = &DisassociateQualificationFromWorkerInput{}
 	}
 
-	output = &DisassociateQualificationFromWorkerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateQualificationFromWorker API operation for Amazon Mechanical Turk.
-//
-// The DisassociateQualificationFromWorker revokes a previously granted Qualification
-// from a user.
-//
-// You can provide a text message explaining why the Qualification was revoked.
-// The user who had the Qualification can see this message.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation DisassociateQualificationFromWorker for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
-func (c *MTurk) DisassociateQualificationFromWorker(input *DisassociateQualificationFromWorkerInput) (*DisassociateQualificationFromWorkerOutput, error) {
-	req, out := c.DisassociateQualificationFromWorkerRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateQualificationFromWorkerWithContext is the same as DisassociateQualificationFromWorker with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateQualificationFromWorker for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) DisassociateQualificationFromWorkerWithContext(ctx aws.Context, input *DisassociateQualificationFromWorkerInput, opts ...aws.Option) (*DisassociateQualificationFromWorkerOutput, error) {
-	req, out := c.DisassociateQualificationFromWorkerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateQualificationFromWorkerOutput{})
+	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input}
 }
 
 const opGetAccountBalance = "GetAccountBalance"
 
-// GetAccountBalanceRequest generates a "aws.Request" representing the
-// client's request for the GetAccountBalance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAccountBalanceRequest is a API request type for the GetAccountBalance API operation.
+type GetAccountBalanceRequest struct {
+	*aws.Request
+	Input *GetAccountBalanceInput
+}
+
+// Send marshals and sends the GetAccountBalance API request.
+func (r *GetAccountBalanceRequest) Send() (*GetAccountBalanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAccountBalanceOutput), nil
+}
+
+// GetAccountBalanceRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAccountBalance for more information on using the GetAccountBalance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetAccountBalance operation retrieves the amount of money in your Amazon
+// Mechanical Turk account.
 //
 //    // Example sending a request using the GetAccountBalanceRequest method.
-//    req, resp := client.GetAccountBalanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAccountBalanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
-func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *aws.Request, output *GetAccountBalanceOutput) {
+func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAccountBalanceRequest {
 	op := &aws.Operation{
 		Name:       opGetAccountBalance,
 		HTTPMethod: "POST",
@@ -1255,80 +780,42 @@ func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *aw
 		input = &GetAccountBalanceInput{}
 	}
 
-	output = &GetAccountBalanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAccountBalance API operation for Amazon Mechanical Turk.
-//
-// The GetAccountBalance operation retrieves the amount of money in your Amazon
-// Mechanical Turk account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetAccountBalance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
-func (c *MTurk) GetAccountBalance(input *GetAccountBalanceInput) (*GetAccountBalanceOutput, error) {
-	req, out := c.GetAccountBalanceRequest(input)
-	return out, req.Send()
-}
-
-// GetAccountBalanceWithContext is the same as GetAccountBalance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAccountBalance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetAccountBalanceWithContext(ctx aws.Context, input *GetAccountBalanceInput, opts ...aws.Option) (*GetAccountBalanceOutput, error) {
-	req, out := c.GetAccountBalanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAccountBalanceOutput{})
+	return GetAccountBalanceRequest{Request: req, Input: input}
 }
 
 const opGetAssignment = "GetAssignment"
 
-// GetAssignmentRequest generates a "aws.Request" representing the
-// client's request for the GetAssignment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetAssignmentRequest is a API request type for the GetAssignment API operation.
+type GetAssignmentRequest struct {
+	*aws.Request
+	Input *GetAssignmentInput
+}
+
+// Send marshals and sends the GetAssignment API request.
+func (r *GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAssignmentOutput), nil
+}
+
+// GetAssignmentRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetAssignment for more information on using the GetAssignment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetAssignment operation retrieves the details of the specified Assignment.
 //
 //    // Example sending a request using the GetAssignmentRequest method.
-//    req, resp := client.GetAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetAssignmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
-func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *aws.Request, output *GetAssignmentOutput) {
+func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentRequest {
 	op := &aws.Operation{
 		Name:       opGetAssignment,
 		HTTPMethod: "POST",
@@ -1339,79 +826,48 @@ func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *aws.Reques
 		input = &GetAssignmentInput{}
 	}
 
-	output = &GetAssignmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetAssignment API operation for Amazon Mechanical Turk.
-//
-// The GetAssignment operation retrieves the details of the specified Assignment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetAssignment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
-func (c *MTurk) GetAssignment(input *GetAssignmentInput) (*GetAssignmentOutput, error) {
-	req, out := c.GetAssignmentRequest(input)
-	return out, req.Send()
-}
-
-// GetAssignmentWithContext is the same as GetAssignment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetAssignment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetAssignmentWithContext(ctx aws.Context, input *GetAssignmentInput, opts ...aws.Option) (*GetAssignmentOutput, error) {
-	req, out := c.GetAssignmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetAssignmentOutput{})
+	return GetAssignmentRequest{Request: req, Input: input}
 }
 
 const opGetFileUploadURL = "GetFileUploadURL"
 
-// GetFileUploadURLRequest generates a "aws.Request" representing the
-// client's request for the GetFileUploadURL operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetFileUploadURLRequest is a API request type for the GetFileUploadURL API operation.
+type GetFileUploadURLRequest struct {
+	*aws.Request
+	Input *GetFileUploadURLInput
+}
+
+// Send marshals and sends the GetFileUploadURL API request.
+func (r *GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFileUploadURLOutput), nil
+}
+
+// GetFileUploadURLRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFileUploadURL for more information on using the GetFileUploadURL
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetFileUploadURL operation generates and returns a temporary URL. You
+// use the temporary URL to retrieve a file uploaded by a Worker as an answer
+// to a FileUploadAnswer question for a HIT. The temporary URL is generated
+// the instant the GetFileUploadURL operation is called, and is valid for 60
+// seconds. You can get a temporary file upload URL any time until the HIT is
+// disposed. After the HIT is disposed, any uploaded files are deleted, and
+// cannot be retrieved.
 //
 //    // Example sending a request using the GetFileUploadURLRequest method.
-//    req, resp := client.GetFileUploadURLRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetFileUploadURLRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
-func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *aws.Request, output *GetFileUploadURLOutput) {
+func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUploadURLRequest {
 	op := &aws.Operation{
 		Name:       opGetFileUploadURL,
 		HTTPMethod: "POST",
@@ -1422,85 +878,42 @@ func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *aws.
 		input = &GetFileUploadURLInput{}
 	}
 
-	output = &GetFileUploadURLOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetFileUploadURL API operation for Amazon Mechanical Turk.
-//
-// The GetFileUploadURL operation generates and returns a temporary URL. You
-// use the temporary URL to retrieve a file uploaded by a Worker as an answer
-// to a FileUploadAnswer question for a HIT. The temporary URL is generated
-// the instant the GetFileUploadURL operation is called, and is valid for 60
-// seconds. You can get a temporary file upload URL any time until the HIT is
-// disposed. After the HIT is disposed, any uploaded files are deleted, and
-// cannot be retrieved.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetFileUploadURL for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
-func (c *MTurk) GetFileUploadURL(input *GetFileUploadURLInput) (*GetFileUploadURLOutput, error) {
-	req, out := c.GetFileUploadURLRequest(input)
-	return out, req.Send()
-}
-
-// GetFileUploadURLWithContext is the same as GetFileUploadURL with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFileUploadURL for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetFileUploadURLWithContext(ctx aws.Context, input *GetFileUploadURLInput, opts ...aws.Option) (*GetFileUploadURLOutput, error) {
-	req, out := c.GetFileUploadURLRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetFileUploadURLOutput{})
+	return GetFileUploadURLRequest{Request: req, Input: input}
 }
 
 const opGetHIT = "GetHIT"
 
-// GetHITRequest generates a "aws.Request" representing the
-// client's request for the GetHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHITRequest is a API request type for the GetHIT API operation.
+type GetHITRequest struct {
+	*aws.Request
+	Input *GetHITInput
+}
+
+// Send marshals and sends the GetHIT API request.
+func (r *GetHITRequest) Send() (*GetHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHITOutput), nil
+}
+
+// GetHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHIT for more information on using the GetHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetHIT operation retrieves the details of the specified HIT.
 //
 //    // Example sending a request using the GetHITRequest method.
-//    req, resp := client.GetHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHIT
-func (c *MTurk) GetHITRequest(input *GetHITInput) (req *aws.Request, output *GetHITOutput) {
+func (c *MTurk) GetHITRequest(input *GetHITInput) GetHITRequest {
 	op := &aws.Operation{
 		Name:       opGetHIT,
 		HTTPMethod: "POST",
@@ -1511,95 +924,30 @@ func (c *MTurk) GetHITRequest(input *GetHITInput) (req *aws.Request, output *Get
 		input = &GetHITInput{}
 	}
 
-	output = &GetHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHIT API operation for Amazon Mechanical Turk.
-//
-// The GetHIT operation retrieves the details of the specified HIT.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHIT
-func (c *MTurk) GetHIT(input *GetHITInput) (*GetHITOutput, error) {
-	req, out := c.GetHITRequest(input)
-	return out, req.Send()
-}
-
-// GetHITWithContext is the same as GetHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetHITWithContext(ctx aws.Context, input *GetHITInput, opts ...aws.Option) (*GetHITOutput, error) {
-	req, out := c.GetHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHITOutput{})
+	return GetHITRequest{Request: req, Input: input}
 }
 
 const opGetQualificationScore = "GetQualificationScore"
 
-// GetQualificationScoreRequest generates a "aws.Request" representing the
-// client's request for the GetQualificationScore operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQualificationScore for more information on using the GetQualificationScore
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetQualificationScoreRequest method.
-//    req, resp := client.GetQualificationScoreRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
-func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) (req *aws.Request, output *GetQualificationScoreOutput) {
-	op := &aws.Operation{
-		Name:       opGetQualificationScore,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetQualificationScoreInput{}
-	}
-
-	output = &GetQualificationScoreOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetQualificationScoreRequest is a API request type for the GetQualificationScore API operation.
+type GetQualificationScoreRequest struct {
+	*aws.Request
+	Input *GetQualificationScoreInput
 }
 
-// GetQualificationScore API operation for Amazon Mechanical Turk.
+// Send marshals and sends the GetQualificationScore API request.
+func (r *GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQualificationScoreOutput), nil
+}
+
+// GetQualificationScoreRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The GetQualificationScore operation returns the value of a Worker's Qualification
 // for a given Qualification type.
@@ -1611,70 +959,62 @@ func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) 
 // Only the owner of a Qualification type can query the value of a Worker's
 // Qualification of that type.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetQualificationScore for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the GetQualificationScoreRequest method.
+//    req := client.GetQualificationScoreRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
-func (c *MTurk) GetQualificationScore(input *GetQualificationScoreInput) (*GetQualificationScoreOutput, error) {
-	req, out := c.GetQualificationScoreRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) GetQualificationScoreRequest {
+	op := &aws.Operation{
+		Name:       opGetQualificationScore,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetQualificationScoreWithContext is the same as GetQualificationScore with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQualificationScore for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetQualificationScoreWithContext(ctx aws.Context, input *GetQualificationScoreInput, opts ...aws.Option) (*GetQualificationScoreOutput, error) {
-	req, out := c.GetQualificationScoreRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetQualificationScoreInput{}
+	}
+
+	req := c.newRequest(op, input, &GetQualificationScoreOutput{})
+	return GetQualificationScoreRequest{Request: req, Input: input}
 }
 
 const opGetQualificationType = "GetQualificationType"
 
-// GetQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the GetQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetQualificationTypeRequest is a API request type for the GetQualificationType API operation.
+type GetQualificationTypeRequest struct {
+	*aws.Request
+	Input *GetQualificationTypeInput
+}
+
+// Send marshals and sends the GetQualificationType API request.
+func (r *GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQualificationTypeOutput), nil
+}
+
+// GetQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetQualificationType for more information on using the GetQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The GetQualificationTypeoperation retrieves information about a Qualification
+// type using its ID.
 //
 //    // Example sending a request using the GetQualificationTypeRequest method.
-//    req, resp := client.GetQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
-func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (req *aws.Request, output *GetQualificationTypeOutput) {
+func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) GetQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetQualificationType,
 		HTTPMethod: "POST",
@@ -1685,102 +1025,30 @@ func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (r
 		input = &GetQualificationTypeInput{}
 	}
 
-	output = &GetQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetQualificationType API operation for Amazon Mechanical Turk.
-//
-// The GetQualificationTypeoperation retrieves information about a Qualification
-// type using its ID.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation GetQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
-func (c *MTurk) GetQualificationType(input *GetQualificationTypeInput) (*GetQualificationTypeOutput, error) {
-	req, out := c.GetQualificationTypeRequest(input)
-	return out, req.Send()
-}
-
-// GetQualificationTypeWithContext is the same as GetQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) GetQualificationTypeWithContext(ctx aws.Context, input *GetQualificationTypeInput, opts ...aws.Option) (*GetQualificationTypeOutput, error) {
-	req, out := c.GetQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetQualificationTypeOutput{})
+	return GetQualificationTypeRequest{Request: req, Input: input}
 }
 
 const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 
-// ListAssignmentsForHITRequest generates a "aws.Request" representing the
-// client's request for the ListAssignmentsForHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAssignmentsForHIT for more information on using the ListAssignmentsForHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListAssignmentsForHITRequest method.
-//    req, resp := client.ListAssignmentsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
-func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) (req *aws.Request, output *ListAssignmentsForHITOutput) {
-	op := &aws.Operation{
-		Name:       opListAssignmentsForHIT,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"NextToken"},
-			OutputTokens:    []string{"NextToken"},
-			LimitToken:      "MaxResults",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListAssignmentsForHITInput{}
-	}
-
-	output = &ListAssignmentsForHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListAssignmentsForHITRequest is a API request type for the ListAssignmentsForHIT API operation.
+type ListAssignmentsForHITRequest struct {
+	*aws.Request
+	Input *ListAssignmentsForHITInput
 }
 
-// ListAssignmentsForHIT API operation for Amazon Mechanical Turk.
+// Send marshals and sends the ListAssignmentsForHIT API request.
+func (r *ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAssignmentsForHITOutput), nil
+}
+
+// ListAssignmentsForHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The ListAssignmentsForHIT operation retrieves completed assignments for a
 // HIT. You can use this operation to retrieve the results for a HIT.
@@ -1804,41 +1072,33 @@ func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) 
 // a single page of results. You can use the parameters of the operation to
 // control sorting and pagination.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListAssignmentsForHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the ListAssignmentsForHITRequest method.
+//    req := client.ListAssignmentsForHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
-func (c *MTurk) ListAssignmentsForHIT(input *ListAssignmentsForHITInput) (*ListAssignmentsForHITOutput, error) {
-	req, out := c.ListAssignmentsForHITRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) ListAssignmentsForHITRequest {
+	op := &aws.Operation{
+		Name:       opListAssignmentsForHIT,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
 
-// ListAssignmentsForHITWithContext is the same as ListAssignmentsForHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAssignmentsForHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListAssignmentsForHITWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, opts ...aws.Option) (*ListAssignmentsForHITOutput, error) {
-	req, out := c.ListAssignmentsForHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListAssignmentsForHITInput{}
+	}
+
+	req := c.newRequest(op, input, &ListAssignmentsForHITOutput{})
+	return ListAssignmentsForHITRequest{Request: req, Input: input}
 }
 
 // ListAssignmentsForHITPages iterates over the pages of a ListAssignmentsForHIT operation,
@@ -1877,10 +1137,10 @@ func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAssignmentsForHITRequest(inCpy)
+			req := c.ListAssignmentsForHITRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1893,31 +1153,37 @@ func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *Li
 
 const opListBonusPayments = "ListBonusPayments"
 
-// ListBonusPaymentsRequest generates a "aws.Request" representing the
-// client's request for the ListBonusPayments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBonusPaymentsRequest is a API request type for the ListBonusPayments API operation.
+type ListBonusPaymentsRequest struct {
+	*aws.Request
+	Input *ListBonusPaymentsInput
+}
+
+// Send marshals and sends the ListBonusPayments API request.
+func (r *ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBonusPaymentsOutput), nil
+}
+
+// ListBonusPaymentsRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBonusPayments for more information on using the ListBonusPayments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListBonusPayments operation retrieves the amounts of bonuses you have
+// paid to Workers for a given HIT or assignment.
 //
 //    // Example sending a request using the ListBonusPaymentsRequest method.
-//    req, resp := client.ListBonusPaymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBonusPaymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPayments
-func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *aws.Request, output *ListBonusPaymentsOutput) {
+func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) ListBonusPaymentsRequest {
 	op := &aws.Operation{
 		Name:       opListBonusPayments,
 		HTTPMethod: "POST",
@@ -1934,51 +1200,8 @@ func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *aw
 		input = &ListBonusPaymentsInput{}
 	}
 
-	output = &ListBonusPaymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBonusPayments API operation for Amazon Mechanical Turk.
-//
-// The ListBonusPayments operation retrieves the amounts of bonuses you have
-// paid to Workers for a given HIT or assignment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListBonusPayments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPayments
-func (c *MTurk) ListBonusPayments(input *ListBonusPaymentsInput) (*ListBonusPaymentsOutput, error) {
-	req, out := c.ListBonusPaymentsRequest(input)
-	return out, req.Send()
-}
-
-// ListBonusPaymentsWithContext is the same as ListBonusPayments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBonusPayments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListBonusPaymentsWithContext(ctx aws.Context, input *ListBonusPaymentsInput, opts ...aws.Option) (*ListBonusPaymentsOutput, error) {
-	req, out := c.ListBonusPaymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBonusPaymentsOutput{})
+	return ListBonusPaymentsRequest{Request: req, Input: input}
 }
 
 // ListBonusPaymentsPages iterates over the pages of a ListBonusPayments operation,
@@ -2017,10 +1240,10 @@ func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBo
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListBonusPaymentsRequest(inCpy)
+			req := c.ListBonusPaymentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2033,31 +1256,38 @@ func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBo
 
 const opListHITs = "ListHITs"
 
-// ListHITsRequest generates a "aws.Request" representing the
-// client's request for the ListHITs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHITsRequest is a API request type for the ListHITs API operation.
+type ListHITsRequest struct {
+	*aws.Request
+	Input *ListHITsInput
+}
+
+// Send marshals and sends the ListHITs API request.
+func (r *ListHITsRequest) Send() (*ListHITsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHITsOutput), nil
+}
+
+// ListHITsRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListHITs for more information on using the ListHITs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListHITs operation returns all of a Requester's HITs. The operation returns
+// HITs of any status, except for HITs that have been deleted of with the DeleteHIT
+// operation or that have been auto-deleted.
 //
 //    // Example sending a request using the ListHITsRequest method.
-//    req, resp := client.ListHITsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHITsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
-func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *aws.Request, output *ListHITsOutput) {
+func (c *MTurk) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 	op := &aws.Operation{
 		Name:       opListHITs,
 		HTTPMethod: "POST",
@@ -2074,52 +1304,8 @@ func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *aws.Request, output 
 		input = &ListHITsInput{}
 	}
 
-	output = &ListHITsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHITs API operation for Amazon Mechanical Turk.
-//
-// The ListHITs operation returns all of a Requester's HITs. The operation returns
-// HITs of any status, except for HITs that have been deleted of with the DeleteHIT
-// operation or that have been auto-deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListHITs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
-func (c *MTurk) ListHITs(input *ListHITsInput) (*ListHITsOutput, error) {
-	req, out := c.ListHITsRequest(input)
-	return out, req.Send()
-}
-
-// ListHITsWithContext is the same as ListHITs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHITs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListHITsWithContext(ctx aws.Context, input *ListHITsInput, opts ...aws.Option) (*ListHITsOutput, error) {
-	req, out := c.ListHITsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHITsOutput{})
+	return ListHITsRequest{Request: req, Input: input}
 }
 
 // ListHITsPages iterates over the pages of a ListHITs operation,
@@ -2158,10 +1344,10 @@ func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListHITsRequest(inCpy)
+			req := c.ListHITsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2174,31 +1360,39 @@ func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, 
 
 const opListHITsForQualificationType = "ListHITsForQualificationType"
 
-// ListHITsForQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the ListHITsForQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHITsForQualificationTypeRequest is a API request type for the ListHITsForQualificationType API operation.
+type ListHITsForQualificationTypeRequest struct {
+	*aws.Request
+	Input *ListHITsForQualificationTypeInput
+}
+
+// Send marshals and sends the ListHITsForQualificationType API request.
+func (r *ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHITsForQualificationTypeOutput), nil
+}
+
+// ListHITsForQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListHITsForQualificationType for more information on using the ListHITsForQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListHITsForQualificationType operation returns the HITs that use the
+// given Qualification type for a Qualification requirement. The operation returns
+// HITs of any status, except for HITs that have been deleted with the DeleteHIT
+// operation or that have been auto-deleted.
 //
 //    // Example sending a request using the ListHITsForQualificationTypeRequest method.
-//    req, resp := client.ListHITsForQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHITsForQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType
-func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificationTypeInput) (req *aws.Request, output *ListHITsForQualificationTypeOutput) {
+func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificationTypeInput) ListHITsForQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opListHITsForQualificationType,
 		HTTPMethod: "POST",
@@ -2215,53 +1409,8 @@ func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificat
 		input = &ListHITsForQualificationTypeInput{}
 	}
 
-	output = &ListHITsForQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHITsForQualificationType API operation for Amazon Mechanical Turk.
-//
-// The ListHITsForQualificationType operation returns the HITs that use the
-// given Qualification type for a Qualification requirement. The operation returns
-// HITs of any status, except for HITs that have been deleted with the DeleteHIT
-// operation or that have been auto-deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListHITsForQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType
-func (c *MTurk) ListHITsForQualificationType(input *ListHITsForQualificationTypeInput) (*ListHITsForQualificationTypeOutput, error) {
-	req, out := c.ListHITsForQualificationTypeRequest(input)
-	return out, req.Send()
-}
-
-// ListHITsForQualificationTypeWithContext is the same as ListHITsForQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHITsForQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListHITsForQualificationTypeWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, opts ...aws.Option) (*ListHITsForQualificationTypeOutput, error) {
-	req, out := c.ListHITsForQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHITsForQualificationTypeOutput{})
+	return ListHITsForQualificationTypeRequest{Request: req, Input: input}
 }
 
 // ListHITsForQualificationTypePages iterates over the pages of a ListHITsForQualificationType operation,
@@ -2300,10 +1449,10 @@ func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListHITsForQualificationTypeRequest(inCpy)
+			req := c.ListHITsForQualificationTypeRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2316,31 +1465,39 @@ func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, in
 
 const opListQualificationRequests = "ListQualificationRequests"
 
-// ListQualificationRequestsRequest generates a "aws.Request" representing the
-// client's request for the ListQualificationRequests operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListQualificationRequestsRequest is a API request type for the ListQualificationRequests API operation.
+type ListQualificationRequestsRequest struct {
+	*aws.Request
+	Input *ListQualificationRequestsInput
+}
+
+// Send marshals and sends the ListQualificationRequests API request.
+func (r *ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListQualificationRequestsOutput), nil
+}
+
+// ListQualificationRequestsRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListQualificationRequests for more information on using the ListQualificationRequests
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListQualificationRequests operation retrieves requests for Qualifications
+// of a particular Qualification type. The owner of the Qualification type calls
+// this operation to poll for pending requests, and accepts them using the AcceptQualification
+// operation.
 //
 //    // Example sending a request using the ListQualificationRequestsRequest method.
-//    req, resp := client.ListQualificationRequestsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListQualificationRequestsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
-func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) (req *aws.Request, output *ListQualificationRequestsOutput) {
+func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) ListQualificationRequestsRequest {
 	op := &aws.Operation{
 		Name:       opListQualificationRequests,
 		HTTPMethod: "POST",
@@ -2357,53 +1514,8 @@ func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequest
 		input = &ListQualificationRequestsInput{}
 	}
 
-	output = &ListQualificationRequestsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListQualificationRequests API operation for Amazon Mechanical Turk.
-//
-// The ListQualificationRequests operation retrieves requests for Qualifications
-// of a particular Qualification type. The owner of the Qualification type calls
-// this operation to poll for pending requests, and accepts them using the AcceptQualification
-// operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListQualificationRequests for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
-func (c *MTurk) ListQualificationRequests(input *ListQualificationRequestsInput) (*ListQualificationRequestsOutput, error) {
-	req, out := c.ListQualificationRequestsRequest(input)
-	return out, req.Send()
-}
-
-// ListQualificationRequestsWithContext is the same as ListQualificationRequests with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListQualificationRequests for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListQualificationRequestsWithContext(ctx aws.Context, input *ListQualificationRequestsInput, opts ...aws.Option) (*ListQualificationRequestsOutput, error) {
-	req, out := c.ListQualificationRequestsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListQualificationRequestsOutput{})
+	return ListQualificationRequestsRequest{Request: req, Input: input}
 }
 
 // ListQualificationRequestsPages iterates over the pages of a ListQualificationRequests operation,
@@ -2442,10 +1554,10 @@ func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListQualificationRequestsRequest(inCpy)
+			req := c.ListQualificationRequestsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2458,31 +1570,39 @@ func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input
 
 const opListQualificationTypes = "ListQualificationTypes"
 
-// ListQualificationTypesRequest generates a "aws.Request" representing the
-// client's request for the ListQualificationTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListQualificationTypesRequest is a API request type for the ListQualificationTypes API operation.
+type ListQualificationTypesRequest struct {
+	*aws.Request
+	Input *ListQualificationTypesInput
+}
+
+// Send marshals and sends the ListQualificationTypes API request.
+func (r *ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListQualificationTypesOutput), nil
+}
+
+// ListQualificationTypesRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListQualificationTypes for more information on using the ListQualificationTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListQualificationRequests operation retrieves requests for Qualifications
+// of a particular Qualification type. The owner of the Qualification type calls
+// this operation to poll for pending requests, and accepts them using the AcceptQualification
+// operation.
 //
 //    // Example sending a request using the ListQualificationTypesRequest method.
-//    req, resp := client.ListQualificationTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListQualificationTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypes
-func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput) (req *aws.Request, output *ListQualificationTypesOutput) {
+func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput) ListQualificationTypesRequest {
 	op := &aws.Operation{
 		Name:       opListQualificationTypes,
 		HTTPMethod: "POST",
@@ -2499,53 +1619,8 @@ func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput
 		input = &ListQualificationTypesInput{}
 	}
 
-	output = &ListQualificationTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListQualificationTypes API operation for Amazon Mechanical Turk.
-//
-// The ListQualificationRequests operation retrieves requests for Qualifications
-// of a particular Qualification type. The owner of the Qualification type calls
-// this operation to poll for pending requests, and accepts them using the AcceptQualification
-// operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListQualificationTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypes
-func (c *MTurk) ListQualificationTypes(input *ListQualificationTypesInput) (*ListQualificationTypesOutput, error) {
-	req, out := c.ListQualificationTypesRequest(input)
-	return out, req.Send()
-}
-
-// ListQualificationTypesWithContext is the same as ListQualificationTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListQualificationTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListQualificationTypesWithContext(ctx aws.Context, input *ListQualificationTypesInput, opts ...aws.Option) (*ListQualificationTypesOutput, error) {
-	req, out := c.ListQualificationTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListQualificationTypesOutput{})
+	return ListQualificationTypesRequest{Request: req, Input: input}
 }
 
 // ListQualificationTypesPages iterates over the pages of a ListQualificationTypes operation,
@@ -2584,10 +1659,10 @@ func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListQualificationTypesRequest(inCpy)
+			req := c.ListQualificationTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2600,31 +1675,40 @@ func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *L
 
 const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
 
-// ListReviewPolicyResultsForHITRequest generates a "aws.Request" representing the
-// client's request for the ListReviewPolicyResultsForHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListReviewPolicyResultsForHITRequest is a API request type for the ListReviewPolicyResultsForHIT API operation.
+type ListReviewPolicyResultsForHITRequest struct {
+	*aws.Request
+	Input *ListReviewPolicyResultsForHITInput
+}
+
+// Send marshals and sends the ListReviewPolicyResultsForHIT API request.
+func (r *ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsForHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListReviewPolicyResultsForHITOutput), nil
+}
+
+// ListReviewPolicyResultsForHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListReviewPolicyResultsForHIT for more information on using the ListReviewPolicyResultsForHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListReviewPolicyResultsForHIT operation retrieves the computed results
+// and the actions taken in the course of executing your Review Policies for
+// a given HIT. For information about how to specify Review Policies when you
+// call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation
+// can return results for both Assignment-level and HIT-level review results.
 //
 //    // Example sending a request using the ListReviewPolicyResultsForHITRequest method.
-//    req, resp := client.ListReviewPolicyResultsForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListReviewPolicyResultsForHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHIT
-func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResultsForHITInput) (req *aws.Request, output *ListReviewPolicyResultsForHITOutput) {
+func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResultsForHITInput) ListReviewPolicyResultsForHITRequest {
 	op := &aws.Operation{
 		Name:       opListReviewPolicyResultsForHIT,
 		HTTPMethod: "POST",
@@ -2641,54 +1725,8 @@ func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResu
 		input = &ListReviewPolicyResultsForHITInput{}
 	}
 
-	output = &ListReviewPolicyResultsForHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListReviewPolicyResultsForHIT API operation for Amazon Mechanical Turk.
-//
-// The ListReviewPolicyResultsForHIT operation retrieves the computed results
-// and the actions taken in the course of executing your Review Policies for
-// a given HIT. For information about how to specify Review Policies when you
-// call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation
-// can return results for both Assignment-level and HIT-level review results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListReviewPolicyResultsForHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHIT
-func (c *MTurk) ListReviewPolicyResultsForHIT(input *ListReviewPolicyResultsForHITInput) (*ListReviewPolicyResultsForHITOutput, error) {
-	req, out := c.ListReviewPolicyResultsForHITRequest(input)
-	return out, req.Send()
-}
-
-// ListReviewPolicyResultsForHITWithContext is the same as ListReviewPolicyResultsForHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListReviewPolicyResultsForHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListReviewPolicyResultsForHITWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, opts ...aws.Option) (*ListReviewPolicyResultsForHITOutput, error) {
-	req, out := c.ListReviewPolicyResultsForHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListReviewPolicyResultsForHITOutput{})
+	return ListReviewPolicyResultsForHITRequest{Request: req, Input: input}
 }
 
 // ListReviewPolicyResultsForHITPages iterates over the pages of a ListReviewPolicyResultsForHIT operation,
@@ -2727,10 +1765,10 @@ func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListReviewPolicyResultsForHITRequest(inCpy)
+			req := c.ListReviewPolicyResultsForHITRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2743,31 +1781,38 @@ func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, i
 
 const opListReviewableHITs = "ListReviewableHITs"
 
-// ListReviewableHITsRequest generates a "aws.Request" representing the
-// client's request for the ListReviewableHITs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListReviewableHITsRequest is a API request type for the ListReviewableHITs API operation.
+type ListReviewableHITsRequest struct {
+	*aws.Request
+	Input *ListReviewableHITsInput
+}
+
+// Send marshals and sends the ListReviewableHITs API request.
+func (r *ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListReviewableHITsOutput), nil
+}
+
+// ListReviewableHITsRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListReviewableHITs for more information on using the ListReviewableHITs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListReviewableHITs operation retrieves the HITs with Status equal to
+// Reviewable or Status equal to Reviewing that belong to the Requester calling
+// the operation.
 //
 //    // Example sending a request using the ListReviewableHITsRequest method.
-//    req, resp := client.ListReviewableHITsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListReviewableHITsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs
-func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *aws.Request, output *ListReviewableHITsOutput) {
+func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) ListReviewableHITsRequest {
 	op := &aws.Operation{
 		Name:       opListReviewableHITs,
 		HTTPMethod: "POST",
@@ -2784,52 +1829,8 @@ func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *
 		input = &ListReviewableHITsInput{}
 	}
 
-	output = &ListReviewableHITsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListReviewableHITs API operation for Amazon Mechanical Turk.
-//
-// The ListReviewableHITs operation retrieves the HITs with Status equal to
-// Reviewable or Status equal to Reviewing that belong to the Requester calling
-// the operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListReviewableHITs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs
-func (c *MTurk) ListReviewableHITs(input *ListReviewableHITsInput) (*ListReviewableHITsOutput, error) {
-	req, out := c.ListReviewableHITsRequest(input)
-	return out, req.Send()
-}
-
-// ListReviewableHITsWithContext is the same as ListReviewableHITs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListReviewableHITs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListReviewableHITsWithContext(ctx aws.Context, input *ListReviewableHITsInput, opts ...aws.Option) (*ListReviewableHITsOutput, error) {
-	req, out := c.ListReviewableHITsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListReviewableHITsOutput{})
+	return ListReviewableHITsRequest{Request: req, Input: input}
 }
 
 // ListReviewableHITsPages iterates over the pages of a ListReviewableHITs operation,
@@ -2868,10 +1869,10 @@ func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListR
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListReviewableHITsRequest(inCpy)
+			req := c.ListReviewableHITsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2884,31 +1885,37 @@ func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListR
 
 const opListWorkerBlocks = "ListWorkerBlocks"
 
-// ListWorkerBlocksRequest generates a "aws.Request" representing the
-// client's request for the ListWorkerBlocks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListWorkerBlocksRequest is a API request type for the ListWorkerBlocks API operation.
+type ListWorkerBlocksRequest struct {
+	*aws.Request
+	Input *ListWorkerBlocksInput
+}
+
+// Send marshals and sends the ListWorkerBlocks API request.
+func (r *ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListWorkerBlocksOutput), nil
+}
+
+// ListWorkerBlocksRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListWorkerBlocks for more information on using the ListWorkerBlocks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListWorkersBlocks operation retrieves a list of Workers who are blocked
+// from working on your HITs.
 //
 //    // Example sending a request using the ListWorkerBlocksRequest method.
-//    req, resp := client.ListWorkerBlocksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListWorkerBlocksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
-func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *aws.Request, output *ListWorkerBlocksOutput) {
+func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorkerBlocksRequest {
 	op := &aws.Operation{
 		Name:       opListWorkerBlocks,
 		HTTPMethod: "POST",
@@ -2925,51 +1932,8 @@ func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *aws.
 		input = &ListWorkerBlocksInput{}
 	}
 
-	output = &ListWorkerBlocksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListWorkerBlocks API operation for Amazon Mechanical Turk.
-//
-// The ListWorkersBlocks operation retrieves a list of Workers who are blocked
-// from working on your HITs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListWorkerBlocks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
-func (c *MTurk) ListWorkerBlocks(input *ListWorkerBlocksInput) (*ListWorkerBlocksOutput, error) {
-	req, out := c.ListWorkerBlocksRequest(input)
-	return out, req.Send()
-}
-
-// ListWorkerBlocksWithContext is the same as ListWorkerBlocks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListWorkerBlocks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListWorkerBlocksWithContext(ctx aws.Context, input *ListWorkerBlocksInput, opts ...aws.Option) (*ListWorkerBlocksOutput, error) {
-	req, out := c.ListWorkerBlocksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListWorkerBlocksOutput{})
+	return ListWorkerBlocksRequest{Request: req, Input: input}
 }
 
 // ListWorkerBlocksPages iterates over the pages of a ListWorkerBlocks operation,
@@ -3008,10 +1972,10 @@ func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWor
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListWorkerBlocksRequest(inCpy)
+			req := c.ListWorkerBlocksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3024,31 +1988,37 @@ func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWor
 
 const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
 
-// ListWorkersWithQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the ListWorkersWithQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListWorkersWithQualificationTypeRequest is a API request type for the ListWorkersWithQualificationType API operation.
+type ListWorkersWithQualificationTypeRequest struct {
+	*aws.Request
+	Input *ListWorkersWithQualificationTypeInput
+}
+
+// Send marshals and sends the ListWorkersWithQualificationType API request.
+func (r *ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListWorkersWithQualificationTypeOutput), nil
+}
+
+// ListWorkersWithQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListWorkersWithQualificationType for more information on using the ListWorkersWithQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The ListWorkersWithQualificationType operation returns all of the Workers
+// that have been associated with a given Qualification type.
 //
 //    // Example sending a request using the ListWorkersWithQualificationTypeRequest method.
-//    req, resp := client.ListWorkersWithQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListWorkersWithQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationType
-func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQualificationTypeInput) (req *aws.Request, output *ListWorkersWithQualificationTypeOutput) {
+func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQualificationTypeInput) ListWorkersWithQualificationTypeRequest {
 	op := &aws.Operation{
 		Name:       opListWorkersWithQualificationType,
 		HTTPMethod: "POST",
@@ -3065,51 +2035,8 @@ func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQu
 		input = &ListWorkersWithQualificationTypeInput{}
 	}
 
-	output = &ListWorkersWithQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListWorkersWithQualificationType API operation for Amazon Mechanical Turk.
-//
-// The ListWorkersWithQualificationType operation returns all of the Workers
-// that have been associated with a given Qualification type.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation ListWorkersWithQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationType
-func (c *MTurk) ListWorkersWithQualificationType(input *ListWorkersWithQualificationTypeInput) (*ListWorkersWithQualificationTypeOutput, error) {
-	req, out := c.ListWorkersWithQualificationTypeRequest(input)
-	return out, req.Send()
-}
-
-// ListWorkersWithQualificationTypeWithContext is the same as ListWorkersWithQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListWorkersWithQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListWorkersWithQualificationTypeWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, opts ...aws.Option) (*ListWorkersWithQualificationTypeOutput, error) {
-	req, out := c.ListWorkersWithQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListWorkersWithQualificationTypeOutput{})
+	return ListWorkersWithQualificationTypeRequest{Request: req, Input: input}
 }
 
 // ListWorkersWithQualificationTypePages iterates over the pages of a ListWorkersWithQualificationType operation,
@@ -3148,10 +2075,10 @@ func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListWorkersWithQualificationTypeRequest(inCpy)
+			req := c.ListWorkersWithQualificationTypeRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3164,31 +2091,40 @@ func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context
 
 const opNotifyWorkers = "NotifyWorkers"
 
-// NotifyWorkersRequest generates a "aws.Request" representing the
-// client's request for the NotifyWorkers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// NotifyWorkersRequest is a API request type for the NotifyWorkers API operation.
+type NotifyWorkersRequest struct {
+	*aws.Request
+	Input *NotifyWorkersInput
+}
+
+// Send marshals and sends the NotifyWorkers API request.
+func (r *NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*NotifyWorkersOutput), nil
+}
+
+// NotifyWorkersRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See NotifyWorkers for more information on using the NotifyWorkers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The NotifyWorkers operation sends an email to one or more Workers that you
+// specify with the Worker ID. You can specify up to 100 Worker IDs to send
+// the same message with a single call to the NotifyWorkers operation. The NotifyWorkers
+// operation will send a notification email to a Worker only if you have previously
+// approved or rejected work from the Worker.
 //
 //    // Example sending a request using the NotifyWorkersRequest method.
-//    req, resp := client.NotifyWorkersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.NotifyWorkersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkers
-func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *aws.Request, output *NotifyWorkersOutput) {
+func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) NotifyWorkersRequest {
 	op := &aws.Operation{
 		Name:       opNotifyWorkers,
 		HTTPMethod: "POST",
@@ -3199,99 +2135,30 @@ func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *aws.Reques
 		input = &NotifyWorkersInput{}
 	}
 
-	output = &NotifyWorkersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// NotifyWorkers API operation for Amazon Mechanical Turk.
-//
-// The NotifyWorkers operation sends an email to one or more Workers that you
-// specify with the Worker ID. You can specify up to 100 Worker IDs to send
-// the same message with a single call to the NotifyWorkers operation. The NotifyWorkers
-// operation will send a notification email to a Worker only if you have previously
-// approved or rejected work from the Worker.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation NotifyWorkers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkers
-func (c *MTurk) NotifyWorkers(input *NotifyWorkersInput) (*NotifyWorkersOutput, error) {
-	req, out := c.NotifyWorkersRequest(input)
-	return out, req.Send()
-}
-
-// NotifyWorkersWithContext is the same as NotifyWorkers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See NotifyWorkers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) NotifyWorkersWithContext(ctx aws.Context, input *NotifyWorkersInput, opts ...aws.Option) (*NotifyWorkersOutput, error) {
-	req, out := c.NotifyWorkersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &NotifyWorkersOutput{})
+	return NotifyWorkersRequest{Request: req, Input: input}
 }
 
 const opRejectAssignment = "RejectAssignment"
 
-// RejectAssignmentRequest generates a "aws.Request" representing the
-// client's request for the RejectAssignment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RejectAssignment for more information on using the RejectAssignment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RejectAssignmentRequest method.
-//    req, resp := client.RejectAssignmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
-func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *aws.Request, output *RejectAssignmentOutput) {
-	op := &aws.Operation{
-		Name:       opRejectAssignment,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RejectAssignmentInput{}
-	}
-
-	output = &RejectAssignmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RejectAssignmentRequest is a API request type for the RejectAssignment API operation.
+type RejectAssignmentRequest struct {
+	*aws.Request
+	Input *RejectAssignmentInput
 }
 
-// RejectAssignment API operation for Amazon Mechanical Turk.
+// Send marshals and sends the RejectAssignment API request.
+func (r *RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RejectAssignmentOutput), nil
+}
+
+// RejectAssignmentRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The RejectAssignment operation rejects the results of a completed assignment.
 //
@@ -3303,70 +2170,64 @@ func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *aws.
 //
 // Only the Requester who created the HIT can reject an assignment for the HIT.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation RejectAssignment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the RejectAssignmentRequest method.
+//    req := client.RejectAssignmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
-func (c *MTurk) RejectAssignment(input *RejectAssignmentInput) (*RejectAssignmentOutput, error) {
-	req, out := c.RejectAssignmentRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAssignmentRequest {
+	op := &aws.Operation{
+		Name:       opRejectAssignment,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RejectAssignmentWithContext is the same as RejectAssignment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RejectAssignment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) RejectAssignmentWithContext(ctx aws.Context, input *RejectAssignmentInput, opts ...aws.Option) (*RejectAssignmentOutput, error) {
-	req, out := c.RejectAssignmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RejectAssignmentInput{}
+	}
+
+	req := c.newRequest(op, input, &RejectAssignmentOutput{})
+	return RejectAssignmentRequest{Request: req, Input: input}
 }
 
 const opRejectQualificationRequest = "RejectQualificationRequest"
 
-// RejectQualificationRequestRequest generates a "aws.Request" representing the
-// client's request for the RejectQualificationRequest operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RejectQualificationRequestRequest is a API request type for the RejectQualificationRequest API operation.
+type RejectQualificationRequestRequest struct {
+	*aws.Request
+	Input *RejectQualificationRequestInput
+}
+
+// Send marshals and sends the RejectQualificationRequest API request.
+func (r *RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RejectQualificationRequestOutput), nil
+}
+
+// RejectQualificationRequestRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The RejectQualificationRequest operation rejects a user's request for a Qualification.
 //
-// See RejectQualificationRequest for more information on using the RejectQualificationRequest
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can provide a text message explaining why the request was rejected. The
+// Worker who made the request can see this message.
 //
 //    // Example sending a request using the RejectQualificationRequestRequest method.
-//    req, resp := client.RejectQualificationRequestRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RejectQualificationRequestRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
-func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) (req *aws.Request, output *RejectQualificationRequestOutput) {
+func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) RejectQualificationRequestRequest {
 	op := &aws.Operation{
 		Name:       opRejectQualificationRequest,
 		HTTPMethod: "POST",
@@ -3377,98 +2238,30 @@ func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequ
 		input = &RejectQualificationRequestInput{}
 	}
 
-	output = &RejectQualificationRequestOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RejectQualificationRequest API operation for Amazon Mechanical Turk.
-//
-// The RejectQualificationRequest operation rejects a user's request for a Qualification.
-//
-// You can provide a text message explaining why the request was rejected. The
-// Worker who made the request can see this message.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation RejectQualificationRequest for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
-func (c *MTurk) RejectQualificationRequest(input *RejectQualificationRequestInput) (*RejectQualificationRequestOutput, error) {
-	req, out := c.RejectQualificationRequestRequest(input)
-	return out, req.Send()
-}
-
-// RejectQualificationRequestWithContext is the same as RejectQualificationRequest with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RejectQualificationRequest for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) RejectQualificationRequestWithContext(ctx aws.Context, input *RejectQualificationRequestInput, opts ...aws.Option) (*RejectQualificationRequestOutput, error) {
-	req, out := c.RejectQualificationRequestRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RejectQualificationRequestOutput{})
+	return RejectQualificationRequestRequest{Request: req, Input: input}
 }
 
 const opSendBonus = "SendBonus"
 
-// SendBonusRequest generates a "aws.Request" representing the
-// client's request for the SendBonus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendBonus for more information on using the SendBonus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SendBonusRequest method.
-//    req, resp := client.SendBonusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonus
-func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *aws.Request, output *SendBonusOutput) {
-	op := &aws.Operation{
-		Name:       opSendBonus,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SendBonusInput{}
-	}
-
-	output = &SendBonusOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// SendBonusRequest is a API request type for the SendBonus API operation.
+type SendBonusRequest struct {
+	*aws.Request
+	Input *SendBonusInput
 }
 
-// SendBonus API operation for Amazon Mechanical Turk.
+// Send marshals and sends the SendBonus API request.
+func (r *SendBonusRequest) Send() (*SendBonusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendBonusOutput), nil
+}
+
+// SendBonusRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The SendBonus operation issues a payment of money from your account to a
 // Worker. This payment happens separately from the reward you pay to the Worker
@@ -3480,70 +2273,66 @@ func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *aws.Request, outpu
 // operation fails if your account does not have enough funds to pay for both
 // the bonus and the fees.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation SendBonus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the SendBonusRequest method.
+//    req := client.SendBonusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonus
-func (c *MTurk) SendBonus(input *SendBonusInput) (*SendBonusOutput, error) {
-	req, out := c.SendBonusRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) SendBonusRequest(input *SendBonusInput) SendBonusRequest {
+	op := &aws.Operation{
+		Name:       opSendBonus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SendBonusWithContext is the same as SendBonus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendBonus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) SendBonusWithContext(ctx aws.Context, input *SendBonusInput, opts ...aws.Option) (*SendBonusOutput, error) {
-	req, out := c.SendBonusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SendBonusInput{}
+	}
+
+	req := c.newRequest(op, input, &SendBonusOutput{})
+	return SendBonusRequest{Request: req, Input: input}
 }
 
 const opSendTestEventNotification = "SendTestEventNotification"
 
-// SendTestEventNotificationRequest generates a "aws.Request" representing the
-// client's request for the SendTestEventNotification operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SendTestEventNotificationRequest is a API request type for the SendTestEventNotification API operation.
+type SendTestEventNotificationRequest struct {
+	*aws.Request
+	Input *SendTestEventNotificationInput
+}
+
+// Send marshals and sends the SendTestEventNotification API request.
+func (r *SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SendTestEventNotificationOutput), nil
+}
+
+// SendTestEventNotificationRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SendTestEventNotification for more information on using the SendTestEventNotification
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The SendTestEventNotification operation causes Amazon Mechanical Turk to
+// send a notification message as if a HIT event occurred, according to the
+// provided notification specification. This allows you to test notifications
+// without setting up notifications for a real HIT type and trying to trigger
+// them using the website. When you call this operation, the service attempts
+// to send the test notification immediately.
 //
 //    // Example sending a request using the SendTestEventNotificationRequest method.
-//    req, resp := client.SendTestEventNotificationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SendTestEventNotificationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
-func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) (req *aws.Request, output *SendTestEventNotificationOutput) {
+func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) SendTestEventNotificationRequest {
 	op := &aws.Operation{
 		Name:       opSendTestEventNotification,
 		HTTPMethod: "POST",
@@ -3554,84 +2343,44 @@ func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificatio
 		input = &SendTestEventNotificationInput{}
 	}
 
-	output = &SendTestEventNotificationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SendTestEventNotification API operation for Amazon Mechanical Turk.
-//
-// The SendTestEventNotification operation causes Amazon Mechanical Turk to
-// send a notification message as if a HIT event occurred, according to the
-// provided notification specification. This allows you to test notifications
-// without setting up notifications for a real HIT type and trying to trigger
-// them using the website. When you call this operation, the service attempts
-// to send the test notification immediately.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation SendTestEventNotification for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
-func (c *MTurk) SendTestEventNotification(input *SendTestEventNotificationInput) (*SendTestEventNotificationOutput, error) {
-	req, out := c.SendTestEventNotificationRequest(input)
-	return out, req.Send()
-}
-
-// SendTestEventNotificationWithContext is the same as SendTestEventNotification with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SendTestEventNotification for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) SendTestEventNotificationWithContext(ctx aws.Context, input *SendTestEventNotificationInput, opts ...aws.Option) (*SendTestEventNotificationOutput, error) {
-	req, out := c.SendTestEventNotificationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SendTestEventNotificationOutput{})
+	return SendTestEventNotificationRequest{Request: req, Input: input}
 }
 
 const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 
-// UpdateExpirationForHITRequest generates a "aws.Request" representing the
-// client's request for the UpdateExpirationForHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateExpirationForHITRequest is a API request type for the UpdateExpirationForHIT API operation.
+type UpdateExpirationForHITRequest struct {
+	*aws.Request
+	Input *UpdateExpirationForHITInput
+}
+
+// Send marshals and sends the UpdateExpirationForHIT API request.
+func (r *UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateExpirationForHITOutput), nil
+}
+
+// UpdateExpirationForHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateExpirationForHIT for more information on using the UpdateExpirationForHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The UpdateExpirationForHIT operation allows you update the expiration time
+// of a HIT. If you update it to a time in the past, the HIT will be immediately
+// expired.
 //
 //    // Example sending a request using the UpdateExpirationForHITRequest method.
-//    req, resp := client.UpdateExpirationForHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateExpirationForHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
-func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) (req *aws.Request, output *UpdateExpirationForHITOutput) {
+func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) UpdateExpirationForHITRequest {
 	op := &aws.Operation{
 		Name:       opUpdateExpirationForHIT,
 		HTTPMethod: "POST",
@@ -3642,81 +2391,44 @@ func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput
 		input = &UpdateExpirationForHITInput{}
 	}
 
-	output = &UpdateExpirationForHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateExpirationForHIT API operation for Amazon Mechanical Turk.
-//
-// The UpdateExpirationForHIT operation allows you update the expiration time
-// of a HIT. If you update it to a time in the past, the HIT will be immediately
-// expired.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation UpdateExpirationForHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
-func (c *MTurk) UpdateExpirationForHIT(input *UpdateExpirationForHITInput) (*UpdateExpirationForHITOutput, error) {
-	req, out := c.UpdateExpirationForHITRequest(input)
-	return out, req.Send()
-}
-
-// UpdateExpirationForHITWithContext is the same as UpdateExpirationForHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateExpirationForHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) UpdateExpirationForHITWithContext(ctx aws.Context, input *UpdateExpirationForHITInput, opts ...aws.Option) (*UpdateExpirationForHITOutput, error) {
-	req, out := c.UpdateExpirationForHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateExpirationForHITOutput{})
+	return UpdateExpirationForHITRequest{Request: req, Input: input}
 }
 
 const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 
-// UpdateHITReviewStatusRequest generates a "aws.Request" representing the
-// client's request for the UpdateHITReviewStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateHITReviewStatusRequest is a API request type for the UpdateHITReviewStatus API operation.
+type UpdateHITReviewStatusRequest struct {
+	*aws.Request
+	Input *UpdateHITReviewStatusInput
+}
+
+// Send marshals and sends the UpdateHITReviewStatus API request.
+func (r *UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateHITReviewStatusOutput), nil
+}
+
+// UpdateHITReviewStatusRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateHITReviewStatus for more information on using the UpdateHITReviewStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The UpdateHITReviewStatus operation updates the status of a HIT. If the status
+// is Reviewable, this operation can update the status to Reviewing, or it can
+// revert a Reviewing HIT back to the Reviewable status.
 //
 //    // Example sending a request using the UpdateHITReviewStatusRequest method.
-//    req, resp := client.UpdateHITReviewStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateHITReviewStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
-func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) (req *aws.Request, output *UpdateHITReviewStatusOutput) {
+func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHITReviewStatus,
 		HTTPMethod: "POST",
@@ -3727,81 +2439,45 @@ func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) 
 		input = &UpdateHITReviewStatusInput{}
 	}
 
-	output = &UpdateHITReviewStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateHITReviewStatus API operation for Amazon Mechanical Turk.
-//
-// The UpdateHITReviewStatus operation updates the status of a HIT. If the status
-// is Reviewable, this operation can update the status to Reviewing, or it can
-// revert a Reviewing HIT back to the Reviewable status.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation UpdateHITReviewStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
-func (c *MTurk) UpdateHITReviewStatus(input *UpdateHITReviewStatusInput) (*UpdateHITReviewStatusOutput, error) {
-	req, out := c.UpdateHITReviewStatusRequest(input)
-	return out, req.Send()
-}
-
-// UpdateHITReviewStatusWithContext is the same as UpdateHITReviewStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateHITReviewStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) UpdateHITReviewStatusWithContext(ctx aws.Context, input *UpdateHITReviewStatusInput, opts ...aws.Option) (*UpdateHITReviewStatusOutput, error) {
-	req, out := c.UpdateHITReviewStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateHITReviewStatusOutput{})
+	return UpdateHITReviewStatusRequest{Request: req, Input: input}
 }
 
 const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 
-// UpdateHITTypeOfHITRequest generates a "aws.Request" representing the
-// client's request for the UpdateHITTypeOfHIT operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateHITTypeOfHITRequest is a API request type for the UpdateHITTypeOfHIT API operation.
+type UpdateHITTypeOfHITRequest struct {
+	*aws.Request
+	Input *UpdateHITTypeOfHITInput
+}
+
+// Send marshals and sends the UpdateHITTypeOfHIT API request.
+func (r *UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateHITTypeOfHITOutput), nil
+}
+
+// UpdateHITTypeOfHITRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateHITTypeOfHIT for more information on using the UpdateHITTypeOfHIT
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The UpdateHITTypeOfHIT operation allows you to change the HITType properties
+// of a HIT. This operation disassociates the HIT from its old HITType properties
+// and associates it with the new HITType properties. The HIT takes on the properties
+// of the new HITType in place of the old ones.
 //
 //    // Example sending a request using the UpdateHITTypeOfHITRequest method.
-//    req, resp := client.UpdateHITTypeOfHITRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateHITTypeOfHITRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
-func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *aws.Request, output *UpdateHITTypeOfHITOutput) {
+func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHITTypeOfHIT,
 		HTTPMethod: "POST",
@@ -3812,98 +2488,30 @@ func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *
 		input = &UpdateHITTypeOfHITInput{}
 	}
 
-	output = &UpdateHITTypeOfHITOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateHITTypeOfHIT API operation for Amazon Mechanical Turk.
-//
-// The UpdateHITTypeOfHIT operation allows you to change the HITType properties
-// of a HIT. This operation disassociates the HIT from its old HITType properties
-// and associates it with the new HITType properties. The HIT takes on the properties
-// of the new HITType in place of the old ones.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation UpdateHITTypeOfHIT for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
-func (c *MTurk) UpdateHITTypeOfHIT(input *UpdateHITTypeOfHITInput) (*UpdateHITTypeOfHITOutput, error) {
-	req, out := c.UpdateHITTypeOfHITRequest(input)
-	return out, req.Send()
-}
-
-// UpdateHITTypeOfHITWithContext is the same as UpdateHITTypeOfHIT with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateHITTypeOfHIT for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) UpdateHITTypeOfHITWithContext(ctx aws.Context, input *UpdateHITTypeOfHITInput, opts ...aws.Option) (*UpdateHITTypeOfHITOutput, error) {
-	req, out := c.UpdateHITTypeOfHITRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateHITTypeOfHITOutput{})
+	return UpdateHITTypeOfHITRequest{Request: req, Input: input}
 }
 
 const opUpdateNotificationSettings = "UpdateNotificationSettings"
 
-// UpdateNotificationSettingsRequest generates a "aws.Request" representing the
-// client's request for the UpdateNotificationSettings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateNotificationSettings for more information on using the UpdateNotificationSettings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateNotificationSettingsRequest method.
-//    req, resp := client.UpdateNotificationSettingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
-func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) (req *aws.Request, output *UpdateNotificationSettingsOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateNotificationSettings,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateNotificationSettingsInput{}
-	}
-
-	output = &UpdateNotificationSettingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateNotificationSettingsRequest is a API request type for the UpdateNotificationSettings API operation.
+type UpdateNotificationSettingsRequest struct {
+	*aws.Request
+	Input *UpdateNotificationSettingsInput
 }
 
-// UpdateNotificationSettings API operation for Amazon Mechanical Turk.
+// Send marshals and sends the UpdateNotificationSettings API request.
+func (r *UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateNotificationSettingsOutput), nil
+}
+
+// UpdateNotificationSettingsRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The UpdateNotificationSettings operation creates, updates, disables or re-enables
 // notifications for a HIT type. If you call the UpdateNotificationSettings
@@ -3916,86 +2524,49 @@ func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSetti
 // the HIT type must already have a notification specification, or one must
 // be provided in the same call to UpdateNotificationSettings.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation UpdateNotificationSettings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
-func (c *MTurk) UpdateNotificationSettings(input *UpdateNotificationSettingsInput) (*UpdateNotificationSettingsOutput, error) {
-	req, out := c.UpdateNotificationSettingsRequest(input)
-	return out, req.Send()
-}
-
-// UpdateNotificationSettingsWithContext is the same as UpdateNotificationSettings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateNotificationSettings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) UpdateNotificationSettingsWithContext(ctx aws.Context, input *UpdateNotificationSettingsInput, opts ...aws.Option) (*UpdateNotificationSettingsOutput, error) {
-	req, out := c.UpdateNotificationSettingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateQualificationType = "UpdateQualificationType"
-
-// UpdateQualificationTypeRequest generates a "aws.Request" representing the
-// client's request for the UpdateQualificationType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateQualificationType for more information on using the UpdateQualificationType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateQualificationTypeRequest method.
-//    req, resp := client.UpdateQualificationTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateNotificationSettingsRequest method.
+//    req := client.UpdateNotificationSettingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
-func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) (req *aws.Request, output *UpdateQualificationTypeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
+func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest {
 	op := &aws.Operation{
-		Name:       opUpdateQualificationType,
+		Name:       opUpdateNotificationSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateQualificationTypeInput{}
+		input = &UpdateNotificationSettingsInput{}
 	}
 
-	output = &UpdateQualificationTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateNotificationSettingsOutput{})
+	return UpdateNotificationSettingsRequest{Request: req, Input: input}
 }
 
-// UpdateQualificationType API operation for Amazon Mechanical Turk.
+const opUpdateQualificationType = "UpdateQualificationType"
+
+// UpdateQualificationTypeRequest is a API request type for the UpdateQualificationType API operation.
+type UpdateQualificationTypeRequest struct {
+	*aws.Request
+	Input *UpdateQualificationTypeInput
+}
+
+// Send marshals and sends the UpdateQualificationType API request.
+func (r *UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateQualificationTypeOutput), nil
+}
+
+// UpdateQualificationTypeRequest returns a request value for making API operation for
+// Amazon Mechanical Turk.
 //
 // The UpdateQualificationType operation modifies the attributes of an existing
 // Qualification type, which is represented by a QualificationType data structure.
@@ -4029,41 +2600,27 @@ func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInp
 // You can also update the AutoGranted and AutoGrantedValue attributes of the
 // Qualification type.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mechanical Turk's
-// API operation UpdateQualificationType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceFault "ServiceFault"
-//   Amazon Mechanical Turk is temporarily unable to process your request. Try
-//   your call again.
-//
-//   * ErrCodeRequestError "RequestError"
-//   Your request is invalid.
+//    // Example sending a request using the UpdateQualificationTypeRequest method.
+//    req := client.UpdateQualificationTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
-func (c *MTurk) UpdateQualificationType(input *UpdateQualificationTypeInput) (*UpdateQualificationTypeOutput, error) {
-	req, out := c.UpdateQualificationTypeRequest(input)
-	return out, req.Send()
-}
+func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) UpdateQualificationTypeRequest {
+	op := &aws.Operation{
+		Name:       opUpdateQualificationType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateQualificationTypeWithContext is the same as UpdateQualificationType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateQualificationType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) UpdateQualificationTypeWithContext(ctx aws.Context, input *UpdateQualificationTypeInput, opts ...aws.Option) (*UpdateQualificationTypeOutput, error) {
-	req, out := c.UpdateQualificationTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateQualificationTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateQualificationTypeOutput{})
+	return UpdateQualificationTypeRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestRequest

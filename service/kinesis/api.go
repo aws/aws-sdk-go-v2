@@ -14,31 +14,40 @@ import (
 
 const opAddTagsToStream = "AddTagsToStream"
 
-// AddTagsToStreamRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToStreamRequest is a API request type for the AddTagsToStream API operation.
+type AddTagsToStreamRequest struct {
+	*aws.Request
+	Input *AddTagsToStreamInput
+}
+
+// Send marshals and sends the AddTagsToStream API request.
+func (r *AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToStreamOutput), nil
+}
+
+// AddTagsToStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds or updates tags for the specified Amazon Kinesis stream. Each stream
+// can have up to 10 tags.
 //
-// See AddTagsToStream for more information on using the AddTagsToStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If tags have already been assigned to the stream, AddTagsToStream overwrites
+// any existing tags that correspond to the specified tag keys.
 //
 //    // Example sending a request using the AddTagsToStreamRequest method.
-//    req, resp := client.AddTagsToStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStream
-func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *aws.Request, output *AddTagsToStreamOutput) {
+func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToStreamRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToStream,
 		HTTPMethod: "POST",
@@ -49,112 +58,32 @@ func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *aws.
 		input = &AddTagsToStreamInput{}
 	}
 
-	output = &AddTagsToStreamOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsToStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddTagsToStream API operation for Amazon Kinesis.
-//
-// Adds or updates tags for the specified Amazon Kinesis stream. Each stream
-// can have up to 10 tags.
-//
-// If tags have already been assigned to the stream, AddTagsToStream overwrites
-// any existing tags that correspond to the specified tag keys.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation AddTagsToStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStream
-func (c *Kinesis) AddTagsToStream(input *AddTagsToStreamInput) (*AddTagsToStreamOutput, error) {
-	req, out := c.AddTagsToStreamRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToStreamWithContext is the same as AddTagsToStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) AddTagsToStreamWithContext(ctx aws.Context, input *AddTagsToStreamInput, opts ...aws.Option) (*AddTagsToStreamOutput, error) {
-	req, out := c.AddTagsToStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddTagsToStreamRequest{Request: req, Input: input}
 }
 
 const opCreateStream = "CreateStream"
 
-// CreateStreamRequest generates a "aws.Request" representing the
-// client's request for the CreateStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStream for more information on using the CreateStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateStreamRequest method.
-//    req, resp := client.CreateStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream
-func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *aws.Request, output *CreateStreamOutput) {
-	op := &aws.Operation{
-		Name:       opCreateStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateStreamInput{}
-	}
-
-	output = &CreateStreamOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// CreateStreamRequest is a API request type for the CreateStream API operation.
+type CreateStreamRequest struct {
+	*aws.Request
+	Input *CreateStreamInput
 }
 
-// CreateStream API operation for Amazon Kinesis.
+// Send marshals and sends the CreateStream API request.
+func (r *CreateStreamRequest) Send() (*CreateStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStreamOutput), nil
+}
+
+// CreateStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Creates an Amazon Kinesis stream. A stream captures and transports data records
 // that are continuously emitted from different data sources or producers. Scale-out
@@ -195,75 +124,69 @@ func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *aws.Reques
 //
 // CreateStream has a limit of 5 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation CreateStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
+//    // Example sending a request using the CreateStreamRequest method.
+//    req := client.CreateStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream
-func (c *Kinesis) CreateStream(input *CreateStreamInput) (*CreateStreamOutput, error) {
-	req, out := c.CreateStreamRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) CreateStreamRequest {
+	op := &aws.Operation{
+		Name:       opCreateStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateStreamWithContext is the same as CreateStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) CreateStreamWithContext(ctx aws.Context, input *CreateStreamInput, opts ...aws.Option) (*CreateStreamOutput, error) {
-	req, out := c.CreateStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateStreamOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return CreateStreamRequest{Request: req, Input: input}
 }
 
 const opDecreaseStreamRetentionPeriod = "DecreaseStreamRetentionPeriod"
 
-// DecreaseStreamRetentionPeriodRequest generates a "aws.Request" representing the
-// client's request for the DecreaseStreamRetentionPeriod operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DecreaseStreamRetentionPeriodRequest is a API request type for the DecreaseStreamRetentionPeriod API operation.
+type DecreaseStreamRetentionPeriodRequest struct {
+	*aws.Request
+	Input *DecreaseStreamRetentionPeriodInput
+}
+
+// Send marshals and sends the DecreaseStreamRetentionPeriod API request.
+func (r *DecreaseStreamRetentionPeriodRequest) Send() (*DecreaseStreamRetentionPeriodOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DecreaseStreamRetentionPeriodOutput), nil
+}
+
+// DecreaseStreamRetentionPeriodRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Decreases the Amazon Kinesis stream's retention period, which is the length
+// of time data records are accessible after they are added to the stream. The
+// minimum value of a stream's retention period is 24 hours.
 //
-// See DecreaseStreamRetentionPeriod for more information on using the DecreaseStreamRetentionPeriod
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation may result in lost data. For example, if the stream's retention
+// period is 48 hours and is decreased to 24 hours, any data already in the
+// stream that is older than 24 hours is inaccessible.
 //
 //    // Example sending a request using the DecreaseStreamRetentionPeriodRequest method.
-//    req, resp := client.DecreaseStreamRetentionPeriodRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DecreaseStreamRetentionPeriodRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriod
-func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRetentionPeriodInput) (req *aws.Request, output *DecreaseStreamRetentionPeriodOutput) {
+func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRetentionPeriodInput) DecreaseStreamRetentionPeriodRequest {
 	op := &aws.Operation{
 		Name:       opDecreaseStreamRetentionPeriod,
 		HTTPMethod: "POST",
@@ -274,110 +197,32 @@ func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRete
 		input = &DecreaseStreamRetentionPeriodInput{}
 	}
 
-	output = &DecreaseStreamRetentionPeriodOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DecreaseStreamRetentionPeriodOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DecreaseStreamRetentionPeriod API operation for Amazon Kinesis.
-//
-// Decreases the Amazon Kinesis stream's retention period, which is the length
-// of time data records are accessible after they are added to the stream. The
-// minimum value of a stream's retention period is 24 hours.
-//
-// This operation may result in lost data. For example, if the stream's retention
-// period is 48 hours and is decreased to 24 hours, any data already in the
-// stream that is older than 24 hours is inaccessible.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation DecreaseStreamRetentionPeriod for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriod
-func (c *Kinesis) DecreaseStreamRetentionPeriod(input *DecreaseStreamRetentionPeriodInput) (*DecreaseStreamRetentionPeriodOutput, error) {
-	req, out := c.DecreaseStreamRetentionPeriodRequest(input)
-	return out, req.Send()
-}
-
-// DecreaseStreamRetentionPeriodWithContext is the same as DecreaseStreamRetentionPeriod with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DecreaseStreamRetentionPeriod for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DecreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *DecreaseStreamRetentionPeriodInput, opts ...aws.Option) (*DecreaseStreamRetentionPeriodOutput, error) {
-	req, out := c.DecreaseStreamRetentionPeriodRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DecreaseStreamRetentionPeriodRequest{Request: req, Input: input}
 }
 
 const opDeleteStream = "DeleteStream"
 
-// DeleteStreamRequest generates a "aws.Request" representing the
-// client's request for the DeleteStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStream for more information on using the DeleteStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteStreamRequest method.
-//    req, resp := client.DeleteStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream
-func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *aws.Request, output *DeleteStreamOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteStreamInput{}
-	}
-
-	output = &DeleteStreamOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteStreamRequest is a API request type for the DeleteStream API operation.
+type DeleteStreamRequest struct {
+	*aws.Request
+	Input *DeleteStreamInput
 }
 
-// DeleteStream API operation for Amazon Kinesis.
+// Send marshals and sends the DeleteStream API request.
+func (r *DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStreamOutput), nil
+}
+
+// DeleteStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Deletes an Amazon Kinesis stream and all its shards and data. You must shut
 // down any applications that are operating on the stream before you delete
@@ -400,71 +245,68 @@ func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *aws.Reques
 //
 // DeleteStream has a limit of 5 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation DeleteStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
+//    // Example sending a request using the DeleteStreamRequest method.
+//    req := client.DeleteStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream
-func (c *Kinesis) DeleteStream(input *DeleteStreamInput) (*DeleteStreamOutput, error) {
-	req, out := c.DeleteStreamRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequest {
+	op := &aws.Operation{
+		Name:       opDeleteStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteStreamWithContext is the same as DeleteStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DeleteStreamWithContext(ctx aws.Context, input *DeleteStreamInput, opts ...aws.Option) (*DeleteStreamOutput, error) {
-	req, out := c.DeleteStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteStreamOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteStreamRequest{Request: req, Input: input}
 }
 
 const opDescribeLimits = "DescribeLimits"
 
-// DescribeLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLimitsRequest is a API request type for the DescribeLimits API operation.
+type DescribeLimitsRequest struct {
+	*aws.Request
+	Input *DescribeLimitsInput
+}
+
+// Send marshals and sends the DescribeLimits API request.
+func (r *DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLimitsOutput), nil
+}
+
+// DescribeLimitsRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the shard limits and usage for the account.
 //
-// See DescribeLimits for more information on using the DescribeLimits
-// API call, and error handling.
+// If you update your account limits, the old limits might be returned for a
+// few minutes.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation has a limit of 1 transaction per second per account.
 //
 //    // Example sending a request using the DescribeLimitsRequest method.
-//    req, resp := client.DescribeLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits
-func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.Request, output *DescribeLimitsOutput) {
+func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
@@ -475,103 +317,30 @@ func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.Re
 		input = &DescribeLimitsInput{}
 	}
 
-	output = &DescribeLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLimits API operation for Amazon Kinesis.
-//
-// Describes the shard limits and usage for the account.
-//
-// If you update your account limits, the old limits might be returned for a
-// few minutes.
-//
-// This operation has a limit of 1 transaction per second per account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation DescribeLimits for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits
-func (c *Kinesis) DescribeLimits(input *DescribeLimitsInput) (*DescribeLimitsOutput, error) {
-	req, out := c.DescribeLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLimitsWithContext is the same as DescribeLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...aws.Option) (*DescribeLimitsOutput, error) {
-	req, out := c.DescribeLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	return DescribeLimitsRequest{Request: req, Input: input}
 }
 
 const opDescribeStream = "DescribeStream"
 
-// DescribeStreamRequest generates a "aws.Request" representing the
-// client's request for the DescribeStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStream for more information on using the DescribeStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeStreamRequest method.
-//    req, resp := client.DescribeStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream
-func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Request, output *DescribeStreamOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"ExclusiveStartShardId"},
-			OutputTokens:    []string{"StreamDescription.Shards[-1].ShardId"},
-			LimitToken:      "Limit",
-			TruncationToken: "StreamDescription.HasMoreShards",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeStreamInput{}
-	}
-
-	output = &DescribeStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeStreamRequest is a API request type for the DescribeStream API operation.
+type DescribeStreamRequest struct {
+	*aws.Request
+	Input *DescribeStreamInput
 }
 
-// DescribeStream API operation for Amazon Kinesis.
+// Send marshals and sends the DescribeStream API request.
+func (r *DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStreamOutput), nil
+}
+
+// DescribeStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Describes the specified Amazon Kinesis stream.
 //
@@ -593,42 +362,33 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Re
 //
 // This operation has a limit of 10 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation DescribeStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
+//    // Example sending a request using the DescribeStreamRequest method.
+//    req := client.DescribeStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream
-func (c *Kinesis) DescribeStream(input *DescribeStreamInput) (*DescribeStreamOutput, error) {
-	req, out := c.DescribeStreamRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRequest {
+	op := &aws.Operation{
+		Name:       opDescribeStream,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"ExclusiveStartShardId"},
+			OutputTokens:    []string{"StreamDescription.Shards[-1].ShardId"},
+			LimitToken:      "Limit",
+			TruncationToken: "StreamDescription.HasMoreShards",
+		},
+	}
 
-// DescribeStreamWithContext is the same as DescribeStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.Option) (*DescribeStreamOutput, error) {
-	req, out := c.DescribeStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeStreamInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	return DescribeStreamRequest{Request: req, Input: input}
 }
 
 // DescribeStreamPages iterates over the pages of a DescribeStream operation,
@@ -667,10 +427,10 @@ func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStreamRequest(inCpy)
+			req := c.DescribeStreamRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -683,31 +443,36 @@ func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *Describ
 
 const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 
-// DisableEnhancedMonitoringRequest generates a "aws.Request" representing the
-// client's request for the DisableEnhancedMonitoring operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableEnhancedMonitoringRequest is a API request type for the DisableEnhancedMonitoring API operation.
+type DisableEnhancedMonitoringRequest struct {
+	*aws.Request
+	Input *DisableEnhancedMonitoringInput
+}
+
+// Send marshals and sends the DisableEnhancedMonitoring API request.
+func (r *DisableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableEnhancedMonitoringOutput), nil
+}
+
+// DisableEnhancedMonitoringRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableEnhancedMonitoring for more information on using the DisableEnhancedMonitoring
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disables enhanced monitoring.
 //
 //    // Example sending a request using the DisableEnhancedMonitoringRequest method.
-//    req, resp := client.DisableEnhancedMonitoringRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableEnhancedMonitoringRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring
-func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitoringInput) (req *aws.Request, output *EnhancedMonitoringOutput) {
+func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest {
 	op := &aws.Operation{
 		Name:       opDisableEnhancedMonitoring,
 		HTTPMethod: "POST",
@@ -718,88 +483,42 @@ func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitor
 		input = &DisableEnhancedMonitoringInput{}
 	}
 
-	output = &EnhancedMonitoringOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisableEnhancedMonitoring API operation for Amazon Kinesis.
-//
-// Disables enhanced monitoring.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation DisableEnhancedMonitoring for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring
-func (c *Kinesis) DisableEnhancedMonitoring(input *DisableEnhancedMonitoringInput) (*EnhancedMonitoringOutput, error) {
-	req, out := c.DisableEnhancedMonitoringRequest(input)
-	return out, req.Send()
-}
-
-// DisableEnhancedMonitoringWithContext is the same as DisableEnhancedMonitoring with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableEnhancedMonitoring for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DisableEnhancedMonitoringWithContext(ctx aws.Context, input *DisableEnhancedMonitoringInput, opts ...aws.Option) (*EnhancedMonitoringOutput, error) {
-	req, out := c.DisableEnhancedMonitoringRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableEnhancedMonitoringOutput{})
+	return DisableEnhancedMonitoringRequest{Request: req, Input: input}
 }
 
 const opEnableEnhancedMonitoring = "EnableEnhancedMonitoring"
 
-// EnableEnhancedMonitoringRequest generates a "aws.Request" representing the
-// client's request for the EnableEnhancedMonitoring operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableEnhancedMonitoringRequest is a API request type for the EnableEnhancedMonitoring API operation.
+type EnableEnhancedMonitoringRequest struct {
+	*aws.Request
+	Input *EnableEnhancedMonitoringInput
+}
+
+// Send marshals and sends the EnableEnhancedMonitoring API request.
+func (r *EnableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableEnhancedMonitoringOutput), nil
+}
+
+// EnableEnhancedMonitoringRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableEnhancedMonitoring for more information on using the EnableEnhancedMonitoring
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables enhanced Amazon Kinesis stream monitoring for shard-level metrics.
 //
 //    // Example sending a request using the EnableEnhancedMonitoringRequest method.
-//    req, resp := client.EnableEnhancedMonitoringRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableEnhancedMonitoringRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoring
-func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitoringInput) (req *aws.Request, output *EnhancedMonitoringOutput) {
+func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitoringInput) EnableEnhancedMonitoringRequest {
 	op := &aws.Operation{
 		Name:       opEnableEnhancedMonitoring,
 		HTTPMethod: "POST",
@@ -810,104 +529,30 @@ func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitorin
 		input = &EnableEnhancedMonitoringInput{}
 	}
 
-	output = &EnhancedMonitoringOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EnableEnhancedMonitoring API operation for Amazon Kinesis.
-//
-// Enables enhanced Amazon Kinesis stream monitoring for shard-level metrics.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation EnableEnhancedMonitoring for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoring
-func (c *Kinesis) EnableEnhancedMonitoring(input *EnableEnhancedMonitoringInput) (*EnhancedMonitoringOutput, error) {
-	req, out := c.EnableEnhancedMonitoringRequest(input)
-	return out, req.Send()
-}
-
-// EnableEnhancedMonitoringWithContext is the same as EnableEnhancedMonitoring with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableEnhancedMonitoring for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) EnableEnhancedMonitoringWithContext(ctx aws.Context, input *EnableEnhancedMonitoringInput, opts ...aws.Option) (*EnhancedMonitoringOutput, error) {
-	req, out := c.EnableEnhancedMonitoringRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableEnhancedMonitoringOutput{})
+	return EnableEnhancedMonitoringRequest{Request: req, Input: input}
 }
 
 const opGetRecords = "GetRecords"
 
-// GetRecordsRequest generates a "aws.Request" representing the
-// client's request for the GetRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRecords for more information on using the GetRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetRecordsRequest method.
-//    req, resp := client.GetRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords
-func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, output *GetRecordsOutput) {
-	op := &aws.Operation{
-		Name:       opGetRecords,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetRecordsInput{}
-	}
-
-	output = &GetRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetRecordsRequest is a API request type for the GetRecords API operation.
+type GetRecordsRequest struct {
+	*aws.Request
+	Input *GetRecordsInput
 }
 
-// GetRecords API operation for Amazon Kinesis.
+// Send marshals and sends the GetRecords API request.
+func (r *GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRecordsOutput), nil
+}
+
+// GetRecordsRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Gets data records from an Amazon Kinesis stream's shard.
 //
@@ -963,123 +608,49 @@ func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, o
 // always increasing. For example, records in a shard or across a stream might
 // have timestamps that are out of order.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation GetRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The request rate for the stream is too high, or the requested data is too
-//   large for the available throughput. Reduce the frequency or size of your
-//   requests. For more information, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-//   in the Amazon Kinesis Streams Developer Guide, and Error Retries and Exponential
-//   Backoff in AWS (http://docs.aws.amazon.com/general/latest/gr/api-retries.html)
-//   in the AWS General Reference.
-//
-//   * ErrCodeExpiredIteratorException "ExpiredIteratorException"
-//   The provided iterator exceeds the maximum age allowed.
-//
-//   * ErrCodeKMSDisabledException "KMSDisabledException"
-//   The request was rejected because the specified CMK isn't enabled.
-//
-//   * ErrCodeKMSInvalidStateException "KMSInvalidStateException"
-//   The request was rejected because the state of the specified resource isn't
-//   valid for this request. For more information, see How Key State Affects Use
-//   of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeKMSAccessDeniedException "KMSAccessDeniedException"
-//   The ciphertext references a key that doesn't exist or that you don't have
-//   access to.
-//
-//   * ErrCodeKMSNotFoundException "KMSNotFoundException"
-//   The request was rejected because the specified entity or resource couldn't
-//   be found.
-//
-//   * ErrCodeKMSOptInRequired "KMSOptInRequired"
-//   The AWS access key ID needs a subscription for the service.
-//
-//   * ErrCodeKMSThrottlingException "KMSThrottlingException"
-//   The request was denied due to request throttling. For more information about
-//   throttling, see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords
-func (c *Kinesis) GetRecords(input *GetRecordsInput) (*GetRecordsOutput, error) {
-	req, out := c.GetRecordsRequest(input)
-	return out, req.Send()
-}
-
-// GetRecordsWithContext is the same as GetRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...aws.Option) (*GetRecordsOutput, error) {
-	req, out := c.GetRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetShardIterator = "GetShardIterator"
-
-// GetShardIteratorRequest generates a "aws.Request" representing the
-// client's request for the GetShardIterator operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetShardIterator for more information on using the GetShardIterator
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetShardIteratorRequest method.
-//    req, resp := client.GetShardIteratorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetRecordsRequest method.
+//    req := client.GetRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator
-func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aws.Request, output *GetShardIteratorOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords
+func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) GetRecordsRequest {
 	op := &aws.Operation{
-		Name:       opGetShardIterator,
+		Name:       opGetRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetShardIteratorInput{}
+		input = &GetRecordsInput{}
 	}
 
-	output = &GetShardIteratorOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GetRecordsOutput{})
+	return GetRecordsRequest{Request: req, Input: input}
 }
 
-// GetShardIterator API operation for Amazon Kinesis.
+const opGetShardIterator = "GetShardIterator"
+
+// GetShardIteratorRequest is a API request type for the GetShardIterator API operation.
+type GetShardIteratorRequest struct {
+	*aws.Request
+	Input *GetShardIteratorInput
+}
+
+// Send marshals and sends the GetShardIterator API request.
+func (r *GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetShardIteratorOutput), nil
+}
+
+// GetShardIteratorRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Gets an Amazon Kinesis shard iterator. A shard iterator expires five minutes
 // after it is returned to the requester.
@@ -1120,97 +691,49 @@ func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aw
 // GetShardIterator has a limit of 5 transactions per second per account per
 // open shard.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation GetShardIterator for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The request rate for the stream is too high, or the requested data is too
-//   large for the available throughput. Reduce the frequency or size of your
-//   requests. For more information, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-//   in the Amazon Kinesis Streams Developer Guide, and Error Retries and Exponential
-//   Backoff in AWS (http://docs.aws.amazon.com/general/latest/gr/api-retries.html)
-//   in the AWS General Reference.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator
-func (c *Kinesis) GetShardIterator(input *GetShardIteratorInput) (*GetShardIteratorOutput, error) {
-	req, out := c.GetShardIteratorRequest(input)
-	return out, req.Send()
-}
-
-// GetShardIteratorWithContext is the same as GetShardIterator with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetShardIterator for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...aws.Option) (*GetShardIteratorOutput, error) {
-	req, out := c.GetShardIteratorRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
-
-// IncreaseStreamRetentionPeriodRequest generates a "aws.Request" representing the
-// client's request for the IncreaseStreamRetentionPeriod operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See IncreaseStreamRetentionPeriod for more information on using the IncreaseStreamRetentionPeriod
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the IncreaseStreamRetentionPeriodRequest method.
-//    req, resp := client.IncreaseStreamRetentionPeriodRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GetShardIteratorRequest method.
+//    req := client.GetShardIteratorRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod
-func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRetentionPeriodInput) (req *aws.Request, output *IncreaseStreamRetentionPeriodOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator
+func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardIteratorRequest {
 	op := &aws.Operation{
-		Name:       opIncreaseStreamRetentionPeriod,
+		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &IncreaseStreamRetentionPeriodInput{}
+		input = &GetShardIteratorInput{}
 	}
 
-	output = &IncreaseStreamRetentionPeriodOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+	return GetShardIteratorRequest{Request: req, Input: input}
 }
 
-// IncreaseStreamRetentionPeriod API operation for Amazon Kinesis.
+const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
+
+// IncreaseStreamRetentionPeriodRequest is a API request type for the IncreaseStreamRetentionPeriod API operation.
+type IncreaseStreamRetentionPeriodRequest struct {
+	*aws.Request
+	Input *IncreaseStreamRetentionPeriodInput
+}
+
+// Send marshals and sends the IncreaseStreamRetentionPeriod API request.
+func (r *IncreaseStreamRetentionPeriodRequest) Send() (*IncreaseStreamRetentionPeriodOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*IncreaseStreamRetentionPeriodOutput), nil
+}
+
+// IncreaseStreamRetentionPeriodRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Increases the Amazon Kinesis stream's retention period, which is the length
 // of time data records are accessible after they are added to the stream. The
@@ -1224,97 +747,51 @@ func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRete
 // to 168 hours, any data that is older than 24 hours will remain inaccessible
 // to consumer applications.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation IncreaseStreamRetentionPeriod for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
+//    // Example sending a request using the IncreaseStreamRetentionPeriodRequest method.
+//    req := client.IncreaseStreamRetentionPeriodRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod
-func (c *Kinesis) IncreaseStreamRetentionPeriod(input *IncreaseStreamRetentionPeriodInput) (*IncreaseStreamRetentionPeriodOutput, error) {
-	req, out := c.IncreaseStreamRetentionPeriodRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest {
+	op := &aws.Operation{
+		Name:       opIncreaseStreamRetentionPeriod,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// IncreaseStreamRetentionPeriodWithContext is the same as IncreaseStreamRetentionPeriod with the addition of
-// the ability to pass a context and additional request options.
-//
-// See IncreaseStreamRetentionPeriod for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) IncreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *IncreaseStreamRetentionPeriodInput, opts ...aws.Option) (*IncreaseStreamRetentionPeriodOutput, error) {
-	req, out := c.IncreaseStreamRetentionPeriodRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &IncreaseStreamRetentionPeriodInput{}
+	}
+
+	req := c.newRequest(op, input, &IncreaseStreamRetentionPeriodOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input}
 }
 
 const opListStreams = "ListStreams"
 
-// ListStreamsRequest generates a "aws.Request" representing the
-// client's request for the ListStreams operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStreams for more information on using the ListStreams
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListStreamsRequest method.
-//    req, resp := client.ListStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams
-func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request, output *ListStreamsOutput) {
-	op := &aws.Operation{
-		Name:       opListStreams,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"ExclusiveStartStreamName"},
-			OutputTokens:    []string{"StreamNames[-1]"},
-			LimitToken:      "Limit",
-			TruncationToken: "HasMoreStreams",
-		},
-	}
-
-	if input == nil {
-		input = &ListStreamsInput{}
-	}
-
-	output = &ListStreamsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListStreamsRequest is a API request type for the ListStreams API operation.
+type ListStreamsRequest struct {
+	*aws.Request
+	Input *ListStreamsInput
 }
 
-// ListStreams API operation for Amazon Kinesis.
+// Send marshals and sends the ListStreams API request.
+func (r *ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStreamsOutput), nil
+}
+
+// ListStreamsRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Lists your Amazon Kinesis streams.
 //
@@ -1333,38 +810,33 @@ func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request,
 //
 // ListStreams has a limit of 5 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation ListStreams for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
+//    // Example sending a request using the ListStreamsRequest method.
+//    req := client.ListStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams
-func (c *Kinesis) ListStreams(input *ListStreamsInput) (*ListStreamsOutput, error) {
-	req, out := c.ListStreamsRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
+	op := &aws.Operation{
+		Name:       opListStreams,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"ExclusiveStartStreamName"},
+			OutputTokens:    []string{"StreamNames[-1]"},
+			LimitToken:      "Limit",
+			TruncationToken: "HasMoreStreams",
+		},
+	}
 
-// ListStreamsWithContext is the same as ListStreams with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStreams for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...aws.Option) (*ListStreamsOutput, error) {
-	req, out := c.ListStreamsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListStreamsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListStreamsOutput{})
+	return ListStreamsRequest{Request: req, Input: input}
 }
 
 // ListStreamsPages iterates over the pages of a ListStreams operation,
@@ -1403,10 +875,10 @@ func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStream
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStreamsRequest(inCpy)
+			req := c.ListStreamsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1419,31 +891,36 @@ func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStream
 
 const opListTagsForStream = "ListTagsForStream"
 
-// ListTagsForStreamRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForStreamRequest is a API request type for the ListTagsForStream API operation.
+type ListTagsForStreamRequest struct {
+	*aws.Request
+	Input *ListTagsForStreamInput
+}
+
+// Send marshals and sends the ListTagsForStream API request.
+func (r *ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForStreamOutput), nil
+}
+
+// ListTagsForStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForStream for more information on using the ListTagsForStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tags for the specified Amazon Kinesis stream.
 //
 //    // Example sending a request using the ListTagsForStreamRequest method.
-//    req, resp := client.ListTagsForStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream
-func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *aws.Request, output *ListTagsForStreamOutput) {
+func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTagsForStreamRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForStream,
 		HTTPMethod: "POST",
@@ -1454,102 +931,30 @@ func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *
 		input = &ListTagsForStreamInput{}
 	}
 
-	output = &ListTagsForStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForStream API operation for Amazon Kinesis.
-//
-// Lists the tags for the specified Amazon Kinesis stream.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation ListTagsForStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream
-func (c *Kinesis) ListTagsForStream(input *ListTagsForStreamInput) (*ListTagsForStreamOutput, error) {
-	req, out := c.ListTagsForStreamRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForStreamWithContext is the same as ListTagsForStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) ListTagsForStreamWithContext(ctx aws.Context, input *ListTagsForStreamInput, opts ...aws.Option) (*ListTagsForStreamOutput, error) {
-	req, out := c.ListTagsForStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForStreamOutput{})
+	return ListTagsForStreamRequest{Request: req, Input: input}
 }
 
 const opMergeShards = "MergeShards"
 
-// MergeShardsRequest generates a "aws.Request" representing the
-// client's request for the MergeShards operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See MergeShards for more information on using the MergeShards
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the MergeShardsRequest method.
-//    req, resp := client.MergeShardsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards
-func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *aws.Request, output *MergeShardsOutput) {
-	op := &aws.Operation{
-		Name:       opMergeShards,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &MergeShardsInput{}
-	}
-
-	output = &MergeShardsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// MergeShardsRequest is a API request type for the MergeShards API operation.
+type MergeShardsRequest struct {
+	*aws.Request
+	Input *MergeShardsInput
 }
 
-// MergeShards API operation for Amazon Kinesis.
+// Send marshals and sends the MergeShards API request.
+func (r *MergeShardsRequest) Send() (*MergeShardsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*MergeShardsOutput), nil
+}
+
+// MergeShardsRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Merges two adjacent shards in an Amazon Kinesis stream and combines them
 // into a single shard to reduce the stream's capacity to ingest and transport
@@ -1588,95 +993,51 @@ func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *aws.Request,
 //
 // MergeShards has limit of 5 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation MergeShards for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards
-func (c *Kinesis) MergeShards(input *MergeShardsInput) (*MergeShardsOutput, error) {
-	req, out := c.MergeShardsRequest(input)
-	return out, req.Send()
-}
-
-// MergeShardsWithContext is the same as MergeShards with the addition of
-// the ability to pass a context and additional request options.
-//
-// See MergeShards for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) MergeShardsWithContext(ctx aws.Context, input *MergeShardsInput, opts ...aws.Option) (*MergeShardsOutput, error) {
-	req, out := c.MergeShardsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRecord = "PutRecord"
-
-// PutRecordRequest generates a "aws.Request" representing the
-// client's request for the PutRecord operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRecord for more information on using the PutRecord
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRecordRequest method.
-//    req, resp := client.PutRecordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the MergeShardsRequest method.
+//    req := client.MergeShardsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord
-func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *aws.Request, output *PutRecordOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards
+func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest {
 	op := &aws.Operation{
-		Name:       opPutRecord,
+		Name:       opMergeShards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRecordInput{}
+		input = &MergeShardsInput{}
 	}
 
-	output = &PutRecordOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &MergeShardsOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return MergeShardsRequest{Request: req, Input: input}
 }
 
-// PutRecord API operation for Amazon Kinesis.
+const opPutRecord = "PutRecord"
+
+// PutRecordRequest is a API request type for the PutRecord API operation.
+type PutRecordRequest struct {
+	*aws.Request
+	Input *PutRecordInput
+}
+
+// Send marshals and sends the PutRecord API request.
+func (r *PutRecordRequest) Send() (*PutRecordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRecordOutput), nil
+}
+
+// PutRecordRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Writes a single data record into an Amazon Kinesis stream. Call PutRecord
 // to send data into the stream for real-time ingestion and subsequent processing,
@@ -1718,120 +1079,49 @@ func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *aws.Request, out
 // are added to a stream. You can use IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod
 // to modify this retention period.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation PutRecord for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The request rate for the stream is too high, or the requested data is too
-//   large for the available throughput. Reduce the frequency or size of your
-//   requests. For more information, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-//   in the Amazon Kinesis Streams Developer Guide, and Error Retries and Exponential
-//   Backoff in AWS (http://docs.aws.amazon.com/general/latest/gr/api-retries.html)
-//   in the AWS General Reference.
-//
-//   * ErrCodeKMSDisabledException "KMSDisabledException"
-//   The request was rejected because the specified CMK isn't enabled.
-//
-//   * ErrCodeKMSInvalidStateException "KMSInvalidStateException"
-//   The request was rejected because the state of the specified resource isn't
-//   valid for this request. For more information, see How Key State Affects Use
-//   of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeKMSAccessDeniedException "KMSAccessDeniedException"
-//   The ciphertext references a key that doesn't exist or that you don't have
-//   access to.
-//
-//   * ErrCodeKMSNotFoundException "KMSNotFoundException"
-//   The request was rejected because the specified entity or resource couldn't
-//   be found.
-//
-//   * ErrCodeKMSOptInRequired "KMSOptInRequired"
-//   The AWS access key ID needs a subscription for the service.
-//
-//   * ErrCodeKMSThrottlingException "KMSThrottlingException"
-//   The request was denied due to request throttling. For more information about
-//   throttling, see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord
-func (c *Kinesis) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
-	req, out := c.PutRecordRequest(input)
-	return out, req.Send()
-}
-
-// PutRecordWithContext is the same as PutRecord with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRecord for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...aws.Option) (*PutRecordOutput, error) {
-	req, out := c.PutRecordRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutRecords = "PutRecords"
-
-// PutRecordsRequest generates a "aws.Request" representing the
-// client's request for the PutRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutRecords for more information on using the PutRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutRecordsRequest method.
-//    req, resp := client.PutRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutRecordRequest method.
+//    req := client.PutRecordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords
-func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *aws.Request, output *PutRecordsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord
+func (c *Kinesis) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	op := &aws.Operation{
-		Name:       opPutRecords,
+		Name:       opPutRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutRecordsInput{}
+		input = &PutRecordInput{}
 	}
 
-	output = &PutRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &PutRecordOutput{})
+	return PutRecordRequest{Request: req, Input: input}
 }
 
-// PutRecords API operation for Amazon Kinesis.
+const opPutRecords = "PutRecords"
+
+// PutRecordsRequest is a API request type for the PutRecords API operation.
+type PutRecordsRequest struct {
+	*aws.Request
+	Input *PutRecordsInput
+}
+
+// Send marshals and sends the PutRecords API request.
+func (r *PutRecordsRequest) Send() (*PutRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRecordsOutput), nil
+}
+
+// PutRecordsRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Writes multiple data records into an Amazon Kinesis stream in a single call
 // (also referred to as a PutRecords request). Use this operation to send data
@@ -1893,104 +1183,64 @@ func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *aws.Request, o
 // are added to a stream. You can use IncreaseStreamRetentionPeriod or DecreaseStreamRetentionPeriod
 // to modify this retention period.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation PutRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The request rate for the stream is too high, or the requested data is too
-//   large for the available throughput. Reduce the frequency or size of your
-//   requests. For more information, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
-//   in the Amazon Kinesis Streams Developer Guide, and Error Retries and Exponential
-//   Backoff in AWS (http://docs.aws.amazon.com/general/latest/gr/api-retries.html)
-//   in the AWS General Reference.
-//
-//   * ErrCodeKMSDisabledException "KMSDisabledException"
-//   The request was rejected because the specified CMK isn't enabled.
-//
-//   * ErrCodeKMSInvalidStateException "KMSInvalidStateException"
-//   The request was rejected because the state of the specified resource isn't
-//   valid for this request. For more information, see How Key State Affects Use
-//   of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeKMSAccessDeniedException "KMSAccessDeniedException"
-//   The ciphertext references a key that doesn't exist or that you don't have
-//   access to.
-//
-//   * ErrCodeKMSNotFoundException "KMSNotFoundException"
-//   The request was rejected because the specified entity or resource couldn't
-//   be found.
-//
-//   * ErrCodeKMSOptInRequired "KMSOptInRequired"
-//   The AWS access key ID needs a subscription for the service.
-//
-//   * ErrCodeKMSThrottlingException "KMSThrottlingException"
-//   The request was denied due to request throttling. For more information about
-//   throttling, see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-//   in the AWS Key Management Service Developer Guide.
+//    // Example sending a request using the PutRecordsRequest method.
+//    req := client.PutRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords
-func (c *Kinesis) PutRecords(input *PutRecordsInput) (*PutRecordsOutput, error) {
-	req, out := c.PutRecordsRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
+	op := &aws.Operation{
+		Name:       opPutRecords,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutRecordsWithContext is the same as PutRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) PutRecordsWithContext(ctx aws.Context, input *PutRecordsInput, opts ...aws.Option) (*PutRecordsOutput, error) {
-	req, out := c.PutRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutRecordsInput{}
+	}
+
+	req := c.newRequest(op, input, &PutRecordsOutput{})
+	return PutRecordsRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
 
-// RemoveTagsFromStreamRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromStreamRequest is a API request type for the RemoveTagsFromStream API operation.
+type RemoveTagsFromStreamRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromStreamInput
+}
+
+// Send marshals and sends the RemoveTagsFromStream API request.
+func (r *RemoveTagsFromStreamRequest) Send() (*RemoveTagsFromStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromStreamOutput), nil
+}
+
+// RemoveTagsFromStreamRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes tags from the specified Amazon Kinesis stream. Removed tags are deleted
+// and cannot be recovered after this operation successfully completes.
 //
-// See RemoveTagsFromStream for more information on using the RemoveTagsFromStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you specify a tag that does not exist, it is ignored.
 //
 //    // Example sending a request using the RemoveTagsFromStreamRequest method.
-//    req, resp := client.RemoveTagsFromStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStream
-func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) (req *aws.Request, output *RemoveTagsFromStreamOutput) {
+func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromStream,
 		HTTPMethod: "POST",
@@ -2001,111 +1251,32 @@ func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) 
 		input = &RemoveTagsFromStreamInput{}
 	}
 
-	output = &RemoveTagsFromStreamOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveTagsFromStreamOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveTagsFromStream API operation for Amazon Kinesis.
-//
-// Removes tags from the specified Amazon Kinesis stream. Removed tags are deleted
-// and cannot be recovered after this operation successfully completes.
-//
-// If you specify a tag that does not exist, it is ignored.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation RemoveTagsFromStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStream
-func (c *Kinesis) RemoveTagsFromStream(input *RemoveTagsFromStreamInput) (*RemoveTagsFromStreamOutput, error) {
-	req, out := c.RemoveTagsFromStreamRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromStreamWithContext is the same as RemoveTagsFromStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) RemoveTagsFromStreamWithContext(ctx aws.Context, input *RemoveTagsFromStreamInput, opts ...aws.Option) (*RemoveTagsFromStreamOutput, error) {
-	req, out := c.RemoveTagsFromStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveTagsFromStreamRequest{Request: req, Input: input}
 }
 
 const opSplitShard = "SplitShard"
 
-// SplitShardRequest generates a "aws.Request" representing the
-// client's request for the SplitShard operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SplitShard for more information on using the SplitShard
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SplitShardRequest method.
-//    req, resp := client.SplitShardRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard
-func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *aws.Request, output *SplitShardOutput) {
-	op := &aws.Operation{
-		Name:       opSplitShard,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SplitShardInput{}
-	}
-
-	output = &SplitShardOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// SplitShardRequest is a API request type for the SplitShard API operation.
+type SplitShardRequest struct {
+	*aws.Request
+	Input *SplitShardInput
 }
 
-// SplitShard API operation for Amazon Kinesis.
+// Send marshals and sends the SplitShard API request.
+func (r *SplitShardRequest) Send() (*SplitShardOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SplitShardOutput), nil
+}
+
+// SplitShardRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Splits a shard into two new shards in the Amazon Kinesis stream to increase
 // the stream's capacity to ingest and transport data. SplitShard is called
@@ -2153,97 +1324,51 @@ func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *aws.Request, o
 //
 // SplitShard has limit of 5 transactions per second per account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation SplitShard for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard
-func (c *Kinesis) SplitShard(input *SplitShardInput) (*SplitShardOutput, error) {
-	req, out := c.SplitShardRequest(input)
-	return out, req.Send()
-}
-
-// SplitShardWithContext is the same as SplitShard with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SplitShard for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) SplitShardWithContext(ctx aws.Context, input *SplitShardInput, opts ...aws.Option) (*SplitShardOutput, error) {
-	req, out := c.SplitShardRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartStreamEncryption = "StartStreamEncryption"
-
-// StartStreamEncryptionRequest generates a "aws.Request" representing the
-// client's request for the StartStreamEncryption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartStreamEncryption for more information on using the StartStreamEncryption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartStreamEncryptionRequest method.
-//    req, resp := client.StartStreamEncryptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SplitShardRequest method.
+//    req := client.SplitShardRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption
-func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput) (req *aws.Request, output *StartStreamEncryptionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard
+func (c *Kinesis) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 	op := &aws.Operation{
-		Name:       opStartStreamEncryption,
+		Name:       opSplitShard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartStreamEncryptionInput{}
+		input = &SplitShardInput{}
 	}
 
-	output = &StartStreamEncryptionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SplitShardOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return SplitShardRequest{Request: req, Input: input}
 }
 
-// StartStreamEncryption API operation for Amazon Kinesis.
+const opStartStreamEncryption = "StartStreamEncryption"
+
+// StartStreamEncryptionRequest is a API request type for the StartStreamEncryption API operation.
+type StartStreamEncryptionRequest struct {
+	*aws.Request
+	Input *StartStreamEncryptionInput
+}
+
+// Send marshals and sends the StartStreamEncryption API request.
+func (r *StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartStreamEncryptionOutput), nil
+}
+
+// StartStreamEncryptionRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Enables or updates server-side encryption using an AWS KMS key for a specified
 // stream.
@@ -2264,122 +1389,51 @@ func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput
 // encryption, you can verify encryption was applied by inspecting the API response
 // from PutRecord or PutRecords.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation StartStreamEncryption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-//   * ErrCodeKMSDisabledException "KMSDisabledException"
-//   The request was rejected because the specified CMK isn't enabled.
-//
-//   * ErrCodeKMSInvalidStateException "KMSInvalidStateException"
-//   The request was rejected because the state of the specified resource isn't
-//   valid for this request. For more information, see How Key State Affects Use
-//   of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-//   in the AWS Key Management Service Developer Guide.
-//
-//   * ErrCodeKMSAccessDeniedException "KMSAccessDeniedException"
-//   The ciphertext references a key that doesn't exist or that you don't have
-//   access to.
-//
-//   * ErrCodeKMSNotFoundException "KMSNotFoundException"
-//   The request was rejected because the specified entity or resource couldn't
-//   be found.
-//
-//   * ErrCodeKMSOptInRequired "KMSOptInRequired"
-//   The AWS access key ID needs a subscription for the service.
-//
-//   * ErrCodeKMSThrottlingException "KMSThrottlingException"
-//   The request was denied due to request throttling. For more information about
-//   throttling, see Limits (http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second)
-//   in the AWS Key Management Service Developer Guide.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption
-func (c *Kinesis) StartStreamEncryption(input *StartStreamEncryptionInput) (*StartStreamEncryptionOutput, error) {
-	req, out := c.StartStreamEncryptionRequest(input)
-	return out, req.Send()
-}
-
-// StartStreamEncryptionWithContext is the same as StartStreamEncryption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartStreamEncryption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) StartStreamEncryptionWithContext(ctx aws.Context, input *StartStreamEncryptionInput, opts ...aws.Option) (*StartStreamEncryptionOutput, error) {
-	req, out := c.StartStreamEncryptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStopStreamEncryption = "StopStreamEncryption"
-
-// StopStreamEncryptionRequest generates a "aws.Request" representing the
-// client's request for the StopStreamEncryption operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopStreamEncryption for more information on using the StopStreamEncryption
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopStreamEncryptionRequest method.
-//    req, resp := client.StopStreamEncryptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartStreamEncryptionRequest method.
+//    req := client.StartStreamEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption
-func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) (req *aws.Request, output *StopStreamEncryptionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption
+func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput) StartStreamEncryptionRequest {
 	op := &aws.Operation{
-		Name:       opStopStreamEncryption,
+		Name:       opStartStreamEncryption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StopStreamEncryptionInput{}
+		input = &StartStreamEncryptionInput{}
 	}
 
-	output = &StopStreamEncryptionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StartStreamEncryptionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return StartStreamEncryptionRequest{Request: req, Input: input}
 }
 
-// StopStreamEncryption API operation for Amazon Kinesis.
+const opStopStreamEncryption = "StopStreamEncryption"
+
+// StopStreamEncryptionRequest is a API request type for the StopStreamEncryption API operation.
+type StopStreamEncryptionRequest struct {
+	*aws.Request
+	Input *StopStreamEncryptionInput
+}
+
+// Send marshals and sends the StopStreamEncryption API request.
+func (r *StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopStreamEncryptionOutput), nil
+}
+
+// StopStreamEncryptionRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Disables server-side encryption for a specified stream.
 //
@@ -2400,95 +1454,51 @@ func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) 
 // After you’ve disabled encryption, you can verify encryption was not applied
 // by inspecting the API response from PutRecord or PutRecords.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation StopStreamEncryption for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption
-func (c *Kinesis) StopStreamEncryption(input *StopStreamEncryptionInput) (*StopStreamEncryptionOutput, error) {
-	req, out := c.StopStreamEncryptionRequest(input)
-	return out, req.Send()
-}
-
-// StopStreamEncryptionWithContext is the same as StopStreamEncryption with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopStreamEncryption for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) StopStreamEncryptionWithContext(ctx aws.Context, input *StopStreamEncryptionInput, opts ...aws.Option) (*StopStreamEncryptionOutput, error) {
-	req, out := c.StopStreamEncryptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateShardCount = "UpdateShardCount"
-
-// UpdateShardCountRequest generates a "aws.Request" representing the
-// client's request for the UpdateShardCount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateShardCount for more information on using the UpdateShardCount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateShardCountRequest method.
-//    req, resp := client.UpdateShardCountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StopStreamEncryptionRequest method.
+//    req := client.StopStreamEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount
-func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) (req *aws.Request, output *UpdateShardCountOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption
+func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) StopStreamEncryptionRequest {
 	op := &aws.Operation{
-		Name:       opUpdateShardCount,
+		Name:       opStopStreamEncryption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateShardCountInput{}
+		input = &StopStreamEncryptionInput{}
 	}
 
-	output = &UpdateShardCountOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StopStreamEncryptionOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return StopStreamEncryptionRequest{Request: req, Input: input}
 }
 
-// UpdateShardCount API operation for Amazon Kinesis.
+const opUpdateShardCount = "UpdateShardCount"
+
+// UpdateShardCountRequest is a API request type for the UpdateShardCount API operation.
+type UpdateShardCountRequest struct {
+	*aws.Request
+	Input *UpdateShardCountInput
+}
+
+// Send marshals and sends the UpdateShardCount API request.
+func (r *UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateShardCountOutput), nil
+}
+
+// UpdateShardCountRequest returns a request value for making API operation for
+// Amazon Kinesis.
 //
 // Updates the shard count of the specified stream to the specified number of
 // shards.
@@ -2525,50 +1535,27 @@ func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) (req *aw
 //
 // For the default limits for an AWS account, see Streams Limits (http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)in the Amazon Kinesis Streams Developer Guide. If you need to increase a limit, contact AWS Support (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Kinesis's
-// API operation UpdateShardCount for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgumentException "InvalidArgumentException"
-//   A specified parameter exceeds its restrictions, is not supported, or can't
-//   be used. For more information, see the returned message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The requested resource exceeds the maximum number allowed, or the number
-//   of concurrent stream requests exceeds the maximum number allowed (5).
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The resource is not available for this operation. For successful operation,
-//   the resource needs to be in the ACTIVE state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The requested resource could not be found. The stream might not be specified
-//   correctly.
+//    // Example sending a request using the UpdateShardCountRequest method.
+//    req := client.UpdateShardCountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount
-func (c *Kinesis) UpdateShardCount(input *UpdateShardCountInput) (*UpdateShardCountOutput, error) {
-	req, out := c.UpdateShardCountRequest(input)
-	return out, req.Send()
-}
+func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateShardCountRequest {
+	op := &aws.Operation{
+		Name:       opUpdateShardCount,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateShardCountWithContext is the same as UpdateShardCount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateShardCount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) UpdateShardCountWithContext(ctx aws.Context, input *UpdateShardCountInput, opts ...aws.Option) (*UpdateShardCountOutput, error) {
-	req, out := c.UpdateShardCountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateShardCountInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateShardCountOutput{})
+	return UpdateShardCountRequest{Request: req, Input: input}
 }
 
 // Represents the input for AddTagsToStream.
@@ -3189,6 +2176,51 @@ func (s *EnableEnhancedMonitoringInput) SetStreamName(v string) *EnableEnhancedM
 	return s
 }
 
+// Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoringOutput
+type EnableEnhancedMonitoringOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the current state of the metrics that are in the enhanced state
+	// before the operation.
+	CurrentShardLevelMetrics []MetricsName `min:"1" type:"list"`
+
+	// Represents the list of all the metrics that would be in the enhanced state
+	// after the operation.
+	DesiredShardLevelMetrics []MetricsName `min:"1" type:"list"`
+
+	// The name of the Amazon Kinesis stream.
+	StreamName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s EnableEnhancedMonitoringOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EnableEnhancedMonitoringOutput) GoString() string {
+	return s.String()
+}
+
+// SetCurrentShardLevelMetrics sets the CurrentShardLevelMetrics field's value.
+func (s *EnableEnhancedMonitoringOutput) SetCurrentShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringOutput {
+	s.CurrentShardLevelMetrics = v
+	return s
+}
+
+// SetDesiredShardLevelMetrics sets the DesiredShardLevelMetrics field's value.
+func (s *EnableEnhancedMonitoringOutput) SetDesiredShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringOutput {
+	s.DesiredShardLevelMetrics = v
+	return s
+}
+
+// SetStreamName sets the StreamName field's value.
+func (s *EnableEnhancedMonitoringOutput) SetStreamName(v string) *EnableEnhancedMonitoringOutput {
+	s.StreamName = &v
+	return s
+}
+
 // Represents enhanced metrics types.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMetrics
 type EnhancedMetrics struct {
@@ -3234,51 +2266,6 @@ func (s EnhancedMetrics) GoString() string {
 // SetShardLevelMetrics sets the ShardLevelMetrics field's value.
 func (s *EnhancedMetrics) SetShardLevelMetrics(v []MetricsName) *EnhancedMetrics {
 	s.ShardLevelMetrics = v
-	return s
-}
-
-// Represents the output for EnableEnhancedMonitoring and DisableEnhancedMonitoring.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMonitoringOutput
-type EnhancedMonitoringOutput struct {
-	_ struct{} `type:"structure"`
-
-	// Represents the current state of the metrics that are in the enhanced state
-	// before the operation.
-	CurrentShardLevelMetrics []MetricsName `min:"1" type:"list"`
-
-	// Represents the list of all the metrics that would be in the enhanced state
-	// after the operation.
-	DesiredShardLevelMetrics []MetricsName `min:"1" type:"list"`
-
-	// The name of the Amazon Kinesis stream.
-	StreamName *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s EnhancedMonitoringOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s EnhancedMonitoringOutput) GoString() string {
-	return s.String()
-}
-
-// SetCurrentShardLevelMetrics sets the CurrentShardLevelMetrics field's value.
-func (s *EnhancedMonitoringOutput) SetCurrentShardLevelMetrics(v []MetricsName) *EnhancedMonitoringOutput {
-	s.CurrentShardLevelMetrics = v
-	return s
-}
-
-// SetDesiredShardLevelMetrics sets the DesiredShardLevelMetrics field's value.
-func (s *EnhancedMonitoringOutput) SetDesiredShardLevelMetrics(v []MetricsName) *EnhancedMonitoringOutput {
-	s.DesiredShardLevelMetrics = v
-	return s
-}
-
-// SetStreamName sets the StreamName field's value.
-func (s *EnhancedMonitoringOutput) SetStreamName(v string) *EnhancedMonitoringOutput {
-	s.StreamName = &v
 	return s
 }
 

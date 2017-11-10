@@ -66,21 +66,21 @@ func NewEncryptionClient(cfg aws.Config, builder ContentCipherBuilder, options .
 //	  Body: strings.NewReader("test data"),
 //	})
 //	err := req.Send()
-func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) (*request.Request, *s3.PutObjectOutput) {
-	req, out := c.S3Client.PutObjectRequest(input)
+func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
+	req := c.S3Client.PutObjectRequest(input)
 
 	// Get Size of file
 	n, err := input.Body.Seek(0, 2)
 	if err != nil {
 		req.Error = err
-		return req, out
+		return req
 	}
 	input.Body.Seek(0, 0)
 
-	dst, err := getWriterStore(req, c.TempFolderPath, n >= c.MinFileSize)
+	dst, err := getWriterStore(req.Request, c.TempFolderPath, n >= c.MinFileSize)
 	if err != nil {
 		req.Error = err
-		return req, out
+		return req
 	}
 
 	encryptor, err := c.ContentCipherBuilder.ContentCipher()
@@ -121,13 +121,13 @@ func (c *EncryptionClient) PutObjectRequest(input *s3.PutObjectInput) (*request.
 		r.Error = err
 	})
 
-	return req, out
+	return req
 }
 
 // PutObject is a wrapper for PutObjectRequest
 func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOutput, error) {
-	req, out := c.PutObjectRequest(input)
-	return out, req.Send()
+	req := c.PutObjectRequest(input)
+	return req.Send()
 }
 
 // PutObjectWithContext is a wrapper for PutObjectRequest with the additional
@@ -138,8 +138,8 @@ func (c *EncryptionClient) PutObject(input *s3.PutObjectInput) (*s3.PutObjectOut
 // cause a panic. Use the Context to add deadlining, timeouts, ect. In the future
 // this may create sub-contexts for individual underlying requests.
 func (c *EncryptionClient) PutObjectWithContext(ctx aws.Context, input *s3.PutObjectInput, opts ...request.Option) (*s3.PutObjectOutput, error) {
-	req, out := c.PutObjectRequest(input)
+	req := c.PutObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return req.Send()
 }

@@ -63,63 +63,37 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ElasticsearchServiceAPI interface {
-	AddTags(*elasticsearchservice.AddTagsInput) (*elasticsearchservice.AddTagsOutput, error)
-	AddTagsWithContext(aws.Context, *elasticsearchservice.AddTagsInput, ...aws.Option) (*elasticsearchservice.AddTagsOutput, error)
-	AddTagsRequest(*elasticsearchservice.AddTagsInput) (*aws.Request, *elasticsearchservice.AddTagsOutput)
+	AddTagsRequest(*elasticsearchservice.AddTagsInput) elasticsearchservice.AddTagsRequest
 
-	CreateElasticsearchDomain(*elasticsearchservice.CreateElasticsearchDomainInput) (*elasticsearchservice.CreateElasticsearchDomainOutput, error)
-	CreateElasticsearchDomainWithContext(aws.Context, *elasticsearchservice.CreateElasticsearchDomainInput, ...aws.Option) (*elasticsearchservice.CreateElasticsearchDomainOutput, error)
-	CreateElasticsearchDomainRequest(*elasticsearchservice.CreateElasticsearchDomainInput) (*aws.Request, *elasticsearchservice.CreateElasticsearchDomainOutput)
+	CreateElasticsearchDomainRequest(*elasticsearchservice.CreateElasticsearchDomainInput) elasticsearchservice.CreateElasticsearchDomainRequest
 
-	DeleteElasticsearchDomain(*elasticsearchservice.DeleteElasticsearchDomainInput) (*elasticsearchservice.DeleteElasticsearchDomainOutput, error)
-	DeleteElasticsearchDomainWithContext(aws.Context, *elasticsearchservice.DeleteElasticsearchDomainInput, ...aws.Option) (*elasticsearchservice.DeleteElasticsearchDomainOutput, error)
-	DeleteElasticsearchDomainRequest(*elasticsearchservice.DeleteElasticsearchDomainInput) (*aws.Request, *elasticsearchservice.DeleteElasticsearchDomainOutput)
+	DeleteElasticsearchDomainRequest(*elasticsearchservice.DeleteElasticsearchDomainInput) elasticsearchservice.DeleteElasticsearchDomainRequest
 
-	DescribeElasticsearchDomain(*elasticsearchservice.DescribeElasticsearchDomainInput) (*elasticsearchservice.DescribeElasticsearchDomainOutput, error)
-	DescribeElasticsearchDomainWithContext(aws.Context, *elasticsearchservice.DescribeElasticsearchDomainInput, ...aws.Option) (*elasticsearchservice.DescribeElasticsearchDomainOutput, error)
-	DescribeElasticsearchDomainRequest(*elasticsearchservice.DescribeElasticsearchDomainInput) (*aws.Request, *elasticsearchservice.DescribeElasticsearchDomainOutput)
+	DescribeElasticsearchDomainRequest(*elasticsearchservice.DescribeElasticsearchDomainInput) elasticsearchservice.DescribeElasticsearchDomainRequest
 
-	DescribeElasticsearchDomainConfig(*elasticsearchservice.DescribeElasticsearchDomainConfigInput) (*elasticsearchservice.DescribeElasticsearchDomainConfigOutput, error)
-	DescribeElasticsearchDomainConfigWithContext(aws.Context, *elasticsearchservice.DescribeElasticsearchDomainConfigInput, ...aws.Option) (*elasticsearchservice.DescribeElasticsearchDomainConfigOutput, error)
-	DescribeElasticsearchDomainConfigRequest(*elasticsearchservice.DescribeElasticsearchDomainConfigInput) (*aws.Request, *elasticsearchservice.DescribeElasticsearchDomainConfigOutput)
+	DescribeElasticsearchDomainConfigRequest(*elasticsearchservice.DescribeElasticsearchDomainConfigInput) elasticsearchservice.DescribeElasticsearchDomainConfigRequest
 
-	DescribeElasticsearchDomains(*elasticsearchservice.DescribeElasticsearchDomainsInput) (*elasticsearchservice.DescribeElasticsearchDomainsOutput, error)
-	DescribeElasticsearchDomainsWithContext(aws.Context, *elasticsearchservice.DescribeElasticsearchDomainsInput, ...aws.Option) (*elasticsearchservice.DescribeElasticsearchDomainsOutput, error)
-	DescribeElasticsearchDomainsRequest(*elasticsearchservice.DescribeElasticsearchDomainsInput) (*aws.Request, *elasticsearchservice.DescribeElasticsearchDomainsOutput)
+	DescribeElasticsearchDomainsRequest(*elasticsearchservice.DescribeElasticsearchDomainsInput) elasticsearchservice.DescribeElasticsearchDomainsRequest
 
-	DescribeElasticsearchInstanceTypeLimits(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) (*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsOutput, error)
-	DescribeElasticsearchInstanceTypeLimitsWithContext(aws.Context, *elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput, ...aws.Option) (*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsOutput, error)
-	DescribeElasticsearchInstanceTypeLimitsRequest(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) (*aws.Request, *elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsOutput)
+	DescribeElasticsearchInstanceTypeLimitsRequest(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsRequest
 
-	ListDomainNames(*elasticsearchservice.ListDomainNamesInput) (*elasticsearchservice.ListDomainNamesOutput, error)
-	ListDomainNamesWithContext(aws.Context, *elasticsearchservice.ListDomainNamesInput, ...aws.Option) (*elasticsearchservice.ListDomainNamesOutput, error)
-	ListDomainNamesRequest(*elasticsearchservice.ListDomainNamesInput) (*aws.Request, *elasticsearchservice.ListDomainNamesOutput)
+	ListDomainNamesRequest(*elasticsearchservice.ListDomainNamesInput) elasticsearchservice.ListDomainNamesRequest
 
-	ListElasticsearchInstanceTypes(*elasticsearchservice.ListElasticsearchInstanceTypesInput) (*elasticsearchservice.ListElasticsearchInstanceTypesOutput, error)
-	ListElasticsearchInstanceTypesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchInstanceTypesInput, ...aws.Option) (*elasticsearchservice.ListElasticsearchInstanceTypesOutput, error)
-	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) (*aws.Request, *elasticsearchservice.ListElasticsearchInstanceTypesOutput)
+	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) elasticsearchservice.ListElasticsearchInstanceTypesRequest
 
 	ListElasticsearchInstanceTypesPages(*elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool) error
 	ListElasticsearchInstanceTypesPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool, ...aws.Option) error
 
-	ListElasticsearchVersions(*elasticsearchservice.ListElasticsearchVersionsInput) (*elasticsearchservice.ListElasticsearchVersionsOutput, error)
-	ListElasticsearchVersionsWithContext(aws.Context, *elasticsearchservice.ListElasticsearchVersionsInput, ...aws.Option) (*elasticsearchservice.ListElasticsearchVersionsOutput, error)
-	ListElasticsearchVersionsRequest(*elasticsearchservice.ListElasticsearchVersionsInput) (*aws.Request, *elasticsearchservice.ListElasticsearchVersionsOutput)
+	ListElasticsearchVersionsRequest(*elasticsearchservice.ListElasticsearchVersionsInput) elasticsearchservice.ListElasticsearchVersionsRequest
 
 	ListElasticsearchVersionsPages(*elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool) error
 	ListElasticsearchVersionsPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool, ...aws.Option) error
 
-	ListTags(*elasticsearchservice.ListTagsInput) (*elasticsearchservice.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *elasticsearchservice.ListTagsInput, ...aws.Option) (*elasticsearchservice.ListTagsOutput, error)
-	ListTagsRequest(*elasticsearchservice.ListTagsInput) (*aws.Request, *elasticsearchservice.ListTagsOutput)
+	ListTagsRequest(*elasticsearchservice.ListTagsInput) elasticsearchservice.ListTagsRequest
 
-	RemoveTags(*elasticsearchservice.RemoveTagsInput) (*elasticsearchservice.RemoveTagsOutput, error)
-	RemoveTagsWithContext(aws.Context, *elasticsearchservice.RemoveTagsInput, ...aws.Option) (*elasticsearchservice.RemoveTagsOutput, error)
-	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) (*aws.Request, *elasticsearchservice.RemoveTagsOutput)
+	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) elasticsearchservice.RemoveTagsRequest
 
-	UpdateElasticsearchDomainConfig(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) (*elasticsearchservice.UpdateElasticsearchDomainConfigOutput, error)
-	UpdateElasticsearchDomainConfigWithContext(aws.Context, *elasticsearchservice.UpdateElasticsearchDomainConfigInput, ...aws.Option) (*elasticsearchservice.UpdateElasticsearchDomainConfigOutput, error)
-	UpdateElasticsearchDomainConfigRequest(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) (*aws.Request, *elasticsearchservice.UpdateElasticsearchDomainConfigOutput)
+	UpdateElasticsearchDomainConfigRequest(*elasticsearchservice.UpdateElasticsearchDomainConfigInput) elasticsearchservice.UpdateElasticsearchDomainConfigRequest
 }
 
 var _ ElasticsearchServiceAPI = (*elasticsearchservice.ElasticsearchService)(nil)

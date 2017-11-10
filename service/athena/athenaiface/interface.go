@@ -63,58 +63,36 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type AthenaAPI interface {
-	BatchGetNamedQuery(*athena.BatchGetNamedQueryInput) (*athena.BatchGetNamedQueryOutput, error)
-	BatchGetNamedQueryWithContext(aws.Context, *athena.BatchGetNamedQueryInput, ...aws.Option) (*athena.BatchGetNamedQueryOutput, error)
-	BatchGetNamedQueryRequest(*athena.BatchGetNamedQueryInput) (*aws.Request, *athena.BatchGetNamedQueryOutput)
+	BatchGetNamedQueryRequest(*athena.BatchGetNamedQueryInput) athena.BatchGetNamedQueryRequest
 
-	BatchGetQueryExecution(*athena.BatchGetQueryExecutionInput) (*athena.BatchGetQueryExecutionOutput, error)
-	BatchGetQueryExecutionWithContext(aws.Context, *athena.BatchGetQueryExecutionInput, ...aws.Option) (*athena.BatchGetQueryExecutionOutput, error)
-	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) (*aws.Request, *athena.BatchGetQueryExecutionOutput)
+	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
 
-	CreateNamedQuery(*athena.CreateNamedQueryInput) (*athena.CreateNamedQueryOutput, error)
-	CreateNamedQueryWithContext(aws.Context, *athena.CreateNamedQueryInput, ...aws.Option) (*athena.CreateNamedQueryOutput, error)
-	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) (*aws.Request, *athena.CreateNamedQueryOutput)
+	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
 
-	DeleteNamedQuery(*athena.DeleteNamedQueryInput) (*athena.DeleteNamedQueryOutput, error)
-	DeleteNamedQueryWithContext(aws.Context, *athena.DeleteNamedQueryInput, ...aws.Option) (*athena.DeleteNamedQueryOutput, error)
-	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) (*aws.Request, *athena.DeleteNamedQueryOutput)
+	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
 
-	GetNamedQuery(*athena.GetNamedQueryInput) (*athena.GetNamedQueryOutput, error)
-	GetNamedQueryWithContext(aws.Context, *athena.GetNamedQueryInput, ...aws.Option) (*athena.GetNamedQueryOutput, error)
-	GetNamedQueryRequest(*athena.GetNamedQueryInput) (*aws.Request, *athena.GetNamedQueryOutput)
+	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
 
-	GetQueryExecution(*athena.GetQueryExecutionInput) (*athena.GetQueryExecutionOutput, error)
-	GetQueryExecutionWithContext(aws.Context, *athena.GetQueryExecutionInput, ...aws.Option) (*athena.GetQueryExecutionOutput, error)
-	GetQueryExecutionRequest(*athena.GetQueryExecutionInput) (*aws.Request, *athena.GetQueryExecutionOutput)
+	GetQueryExecutionRequest(*athena.GetQueryExecutionInput) athena.GetQueryExecutionRequest
 
-	GetQueryResults(*athena.GetQueryResultsInput) (*athena.GetQueryResultsOutput, error)
-	GetQueryResultsWithContext(aws.Context, *athena.GetQueryResultsInput, ...aws.Option) (*athena.GetQueryResultsOutput, error)
-	GetQueryResultsRequest(*athena.GetQueryResultsInput) (*aws.Request, *athena.GetQueryResultsOutput)
+	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
 
 	GetQueryResultsPages(*athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool) error
 	GetQueryResultsPagesWithContext(aws.Context, *athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool, ...aws.Option) error
 
-	ListNamedQueries(*athena.ListNamedQueriesInput) (*athena.ListNamedQueriesOutput, error)
-	ListNamedQueriesWithContext(aws.Context, *athena.ListNamedQueriesInput, ...aws.Option) (*athena.ListNamedQueriesOutput, error)
-	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) (*aws.Request, *athena.ListNamedQueriesOutput)
+	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
 
 	ListNamedQueriesPages(*athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool) error
 	ListNamedQueriesPagesWithContext(aws.Context, *athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool, ...aws.Option) error
 
-	ListQueryExecutions(*athena.ListQueryExecutionsInput) (*athena.ListQueryExecutionsOutput, error)
-	ListQueryExecutionsWithContext(aws.Context, *athena.ListQueryExecutionsInput, ...aws.Option) (*athena.ListQueryExecutionsOutput, error)
-	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) (*aws.Request, *athena.ListQueryExecutionsOutput)
+	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
 
 	ListQueryExecutionsPages(*athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool) error
 	ListQueryExecutionsPagesWithContext(aws.Context, *athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool, ...aws.Option) error
 
-	StartQueryExecution(*athena.StartQueryExecutionInput) (*athena.StartQueryExecutionOutput, error)
-	StartQueryExecutionWithContext(aws.Context, *athena.StartQueryExecutionInput, ...aws.Option) (*athena.StartQueryExecutionOutput, error)
-	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) (*aws.Request, *athena.StartQueryExecutionOutput)
+	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
 
-	StopQueryExecution(*athena.StopQueryExecutionInput) (*athena.StopQueryExecutionOutput, error)
-	StopQueryExecutionWithContext(aws.Context, *athena.StopQueryExecutionInput, ...aws.Option) (*athena.StopQueryExecutionOutput, error)
-	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) (*aws.Request, *athena.StopQueryExecutionOutput)
+	StopQueryExecutionRequest(*athena.StopQueryExecutionInput) athena.StopQueryExecutionRequest
 }
 
 var _ AthenaAPI = (*athena.Athena)(nil)

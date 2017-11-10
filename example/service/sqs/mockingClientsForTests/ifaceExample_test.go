@@ -16,9 +16,13 @@ type mockedReceiveMsgs struct {
 	Resp sqs.ReceiveMessageOutput
 }
 
-func (m mockedReceiveMsgs) ReceiveMessage(in *sqs.ReceiveMessageInput) (*sqs.ReceiveMessageOutput, error) {
+func (m mockedReceiveMsgs) ReceiveMessageRequest(in *sqs.ReceiveMessageInput) sqs.ReceiveMessageRequest {
 	// Only need to return mocked response output
-	return &m.Resp, nil
+	return sqs.ReceiveMessageRequest{
+		Request: &aws.Request{
+			Data: &m.Resp,
+		},
+	}
 }
 
 func TestQueueGetMessage(t *testing.T) {

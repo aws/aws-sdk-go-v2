@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example reads multiple items from the Music table using a batch of three GetItem
 // requests.  Only the AlbumTitle attribute is returned.
-func ExampleDynamoDB_BatchGetItem_shared00() {
+func ExampleDynamoDB_BatchGetItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -70,7 +70,8 @@ func ExampleDynamoDB_BatchGetItem_shared00() {
 		},
 	}
 
-	result, err := svc.BatchGetItem(input)
+	req := svc.BatchGetItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -98,7 +99,7 @@ func ExampleDynamoDB_BatchGetItem_shared00() {
 //
 // This example adds three new items to the Music table using a batch of three PutItem
 // requests.
-func ExampleDynamoDB_BatchWriteItem_shared00() {
+func ExampleDynamoDB_BatchWriteItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -157,7 +158,8 @@ func ExampleDynamoDB_BatchWriteItem_shared00() {
 		},
 	}
 
-	result, err := svc.BatchWriteItem(input)
+	req := svc.BatchWriteItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -186,7 +188,7 @@ func ExampleDynamoDB_BatchWriteItem_shared00() {
 // To create a table
 //
 // This example creates a table named Music.
-func ExampleDynamoDB_CreateTable_shared00() {
+func ExampleDynamoDB_CreateTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -221,7 +223,8 @@ func ExampleDynamoDB_CreateTable_shared00() {
 		TableName: aws.String("Music"),
 	}
 
-	result, err := svc.CreateTable(input)
+	req := svc.CreateTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -248,7 +251,7 @@ func ExampleDynamoDB_CreateTable_shared00() {
 // To delete an item
 //
 // This example deletes an item from the Music table.
-func ExampleDynamoDB_DeleteItem_shared00() {
+func ExampleDynamoDB_DeleteItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -267,7 +270,8 @@ func ExampleDynamoDB_DeleteItem_shared00() {
 		TableName: aws.String("Music"),
 	}
 
-	result, err := svc.DeleteItem(input)
+	req := svc.DeleteItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -298,7 +302,7 @@ func ExampleDynamoDB_DeleteItem_shared00() {
 // To delete a table
 //
 // This example deletes the Music table.
-func ExampleDynamoDB_DeleteTable_shared00() {
+func ExampleDynamoDB_DeleteTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -309,7 +313,8 @@ func ExampleDynamoDB_DeleteTable_shared00() {
 		TableName: aws.String("Music"),
 	}
 
-	result, err := svc.DeleteTable(input)
+	req := svc.DeleteTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -339,7 +344,7 @@ func ExampleDynamoDB_DeleteTable_shared00() {
 //
 // The following example returns the maximum read and write capacity units per table,
 // and for the AWS account, in the current AWS region.
-func ExampleDynamoDB_DescribeLimits_shared00() {
+func ExampleDynamoDB_DescribeLimitsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -348,7 +353,8 @@ func ExampleDynamoDB_DescribeLimits_shared00() {
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.DescribeLimitsInput{}
 
-	result, err := svc.DescribeLimits(input)
+	req := svc.DescribeLimitsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -371,7 +377,7 @@ func ExampleDynamoDB_DescribeLimits_shared00() {
 // To describe a table
 //
 // This example describes the Music table.
-func ExampleDynamoDB_DescribeTable_shared00() {
+func ExampleDynamoDB_DescribeTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -382,7 +388,8 @@ func ExampleDynamoDB_DescribeTable_shared00() {
 		TableName: aws.String("Music"),
 	}
 
-	result, err := svc.DescribeTable(input)
+	req := svc.DescribeTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -408,7 +415,7 @@ func ExampleDynamoDB_DescribeTable_shared00() {
 //
 // This example retrieves an item from the Music table. The table has a partition key
 // and a sort key (Artist and SongTitle), so you must specify both of these attributes.
-func ExampleDynamoDB_GetItem_shared00() {
+func ExampleDynamoDB_GetItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -427,7 +434,8 @@ func ExampleDynamoDB_GetItem_shared00() {
 		TableName: aws.String("Music"),
 	}
 
-	result, err := svc.GetItem(input)
+	req := svc.GetItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -455,7 +463,7 @@ func ExampleDynamoDB_GetItem_shared00() {
 //
 // This example lists all of the tables associated with the current AWS account and
 // endpoint.
-func ExampleDynamoDB_ListTables_shared00() {
+func ExampleDynamoDB_ListTablesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -464,7 +472,8 @@ func ExampleDynamoDB_ListTables_shared00() {
 	svc := dynamodb.New(cfg)
 	input := &dynamodb.ListTablesInput{}
 
-	result, err := svc.ListTables(input)
+	req := svc.ListTablesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -487,7 +496,7 @@ func ExampleDynamoDB_ListTables_shared00() {
 // To add an item to a table
 //
 // This example adds a new item to the Music table.
-func ExampleDynamoDB_PutItem_shared00() {
+func ExampleDynamoDB_PutItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -510,7 +519,8 @@ func ExampleDynamoDB_PutItem_shared00() {
 		TableName:              aws.String("Music"),
 	}
 
-	result, err := svc.PutItem(input)
+	req := svc.PutItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -543,7 +553,7 @@ func ExampleDynamoDB_PutItem_shared00() {
 // This example queries items in the Music table. The table has a partition key and
 // sort key (Artist and SongTitle), but this query only specifies the partition key
 // value. It returns song titles by the artist named "No One You Know".
-func ExampleDynamoDB_Query_shared00() {
+func ExampleDynamoDB_QueryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -561,7 +571,8 @@ func ExampleDynamoDB_Query_shared00() {
 		TableName:              aws.String("Music"),
 	}
 
-	result, err := svc.Query(input)
+	req := svc.QueryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -590,7 +601,7 @@ func ExampleDynamoDB_Query_shared00() {
 // This example scans the entire Music table, and then narrows the results to songs
 // by the artist "No One You Know". For each item, only the album title and song title
 // are returned.
-func ExampleDynamoDB_Scan_shared00() {
+func ExampleDynamoDB_ScanRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -612,7 +623,8 @@ func ExampleDynamoDB_Scan_shared00() {
 		TableName:            aws.String("Music"),
 	}
 
-	result, err := svc.Scan(input)
+	req := svc.ScanRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -641,7 +653,7 @@ func ExampleDynamoDB_Scan_shared00() {
 // This example updates an item in the Music table. It adds a new attribute (Year) and
 // modifies the AlbumTitle attribute.  All of the attributes in the item, as they appear
 // after the update, are returned in the response.
-func ExampleDynamoDB_UpdateItem_shared00() {
+func ExampleDynamoDB_UpdateItemRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -674,7 +686,8 @@ func ExampleDynamoDB_UpdateItem_shared00() {
 		UpdateExpression: aws.String("SET #Y = :y, #AT = :t"),
 	}
 
-	result, err := svc.UpdateItem(input)
+	req := svc.UpdateItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -705,7 +718,7 @@ func ExampleDynamoDB_UpdateItem_shared00() {
 // To modify a table's provisioned throughput
 //
 // This example increases the provisioned read and write capacity on the Music table.
-func ExampleDynamoDB_UpdateTable_shared00() {
+func ExampleDynamoDB_UpdateTableRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -720,7 +733,8 @@ func ExampleDynamoDB_UpdateTable_shared00() {
 		TableName: aws.String("MusicCollection"),
 	}
 
-	result, err := svc.UpdateTable(input)
+	req := svc.UpdateTableRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

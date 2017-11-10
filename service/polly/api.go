@@ -12,31 +12,40 @@ import (
 
 const opDeleteLexicon = "DeleteLexicon"
 
-// DeleteLexiconRequest generates a "aws.Request" representing the
-// client's request for the DeleteLexicon operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLexiconRequest is a API request type for the DeleteLexicon API operation.
+type DeleteLexiconRequest struct {
+	*aws.Request
+	Input *DeleteLexiconInput
+}
+
+// Send marshals and sends the DeleteLexicon API request.
+func (r *DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLexiconOutput), nil
+}
+
+// DeleteLexiconRequest returns a request value for making API operation for
+// Amazon Polly.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon
+// which has been deleted is not available for speech synthesis, nor is it possible
+// to retrieve it using either the GetLexicon or ListLexicon APIs.
 //
-// See DeleteLexicon for more information on using the DeleteLexicon
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using the DeleteLexiconRequest method.
-//    req, resp := client.DeleteLexiconRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLexiconRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexicon
-func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) (req *aws.Request, output *DeleteLexiconOutput) {
+func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLexicon,
 		HTTPMethod: "DELETE",
@@ -47,103 +56,30 @@ func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) (req *aws.Reques
 		input = &DeleteLexiconInput{}
 	}
 
-	output = &DeleteLexiconOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLexicon API operation for Amazon Polly.
-//
-// Deletes the specified pronunciation lexicon stored in an AWS Region. A lexicon
-// which has been deleted is not available for speech synthesis, nor is it possible
-// to retrieve it using either the GetLexicon or ListLexicon APIs.
-//
-// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation DeleteLexicon for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLexiconNotFoundException "LexiconNotFoundException"
-//   Amazon Polly can't find the specified lexicon. This could be caused by a
-//   lexicon that is missing, its name is misspelled or specifying a lexicon that
-//   is in a different region.
-//
-//   Verify that the lexicon exists, is in the region (see ListLexicons) and that
-//   you spelled its name is spelled correctly. Then try again.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexicon
-func (c *Polly) DeleteLexicon(input *DeleteLexiconInput) (*DeleteLexiconOutput, error) {
-	req, out := c.DeleteLexiconRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLexiconWithContext is the same as DeleteLexicon with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLexicon for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) DeleteLexiconWithContext(ctx aws.Context, input *DeleteLexiconInput, opts ...aws.Option) (*DeleteLexiconOutput, error) {
-	req, out := c.DeleteLexiconRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteLexiconOutput{})
+	return DeleteLexiconRequest{Request: req, Input: input}
 }
 
 const opDescribeVoices = "DescribeVoices"
 
-// DescribeVoicesRequest generates a "aws.Request" representing the
-// client's request for the DescribeVoices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVoices for more information on using the DescribeVoices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVoicesRequest method.
-//    req, resp := client.DescribeVoicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices
-func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) (req *aws.Request, output *DescribeVoicesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVoices,
-		HTTPMethod: "GET",
-		HTTPPath:   "/v1/voices",
-	}
-
-	if input == nil {
-		input = &DescribeVoicesInput{}
-	}
-
-	output = &DescribeVoicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeVoicesRequest is a API request type for the DescribeVoices API operation.
+type DescribeVoicesRequest struct {
+	*aws.Request
+	Input *DescribeVoicesInput
 }
 
-// DescribeVoices API operation for Amazon Polly.
+// Send marshals and sends the DescribeVoices API request.
+func (r *DescribeVoicesRequest) Send() (*DescribeVoicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVoicesOutput), nil
+}
+
+// DescribeVoicesRequest returns a request value for making API operation for
+// Amazon Polly.
 //
 // Returns the list of voices that are available for use when requesting speech
 // synthesis. Each voice speaks a specified language, is either male or female,
@@ -163,70 +99,62 @@ func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) (req *aws.Requ
 //
 // This operation requires permissions to perform the polly:DescribeVoices action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation DescribeVoices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken is invalid. Verify that it's spelled correctly, and then try
-//   again.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
+//    // Example sending a request using the DescribeVoicesRequest method.
+//    req := client.DescribeVoicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices
-func (c *Polly) DescribeVoices(input *DescribeVoicesInput) (*DescribeVoicesOutput, error) {
-	req, out := c.DescribeVoicesRequest(input)
-	return out, req.Send()
-}
+func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) DescribeVoicesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeVoices,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/voices",
+	}
 
-// DescribeVoicesWithContext is the same as DescribeVoices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVoices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) DescribeVoicesWithContext(ctx aws.Context, input *DescribeVoicesInput, opts ...aws.Option) (*DescribeVoicesOutput, error) {
-	req, out := c.DescribeVoicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeVoicesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeVoicesOutput{})
+	return DescribeVoicesRequest{Request: req, Input: input}
 }
 
 const opGetLexicon = "GetLexicon"
 
-// GetLexiconRequest generates a "aws.Request" representing the
-// client's request for the GetLexicon operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetLexiconRequest is a API request type for the GetLexicon API operation.
+type GetLexiconRequest struct {
+	*aws.Request
+	Input *GetLexiconInput
+}
+
+// Send marshals and sends the GetLexicon API request.
+func (r *GetLexiconRequest) Send() (*GetLexiconOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetLexiconOutput), nil
+}
+
+// GetLexiconRequest returns a request value for making API operation for
+// Amazon Polly.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetLexicon for more information on using the GetLexicon
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the content of the specified pronunciation lexicon stored in an AWS
+// Region. For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using the GetLexiconRequest method.
-//    req, resp := client.GetLexiconRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetLexiconRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexicon
-func (c *Polly) GetLexiconRequest(input *GetLexiconInput) (req *aws.Request, output *GetLexiconOutput) {
+func (c *Polly) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 	op := &aws.Operation{
 		Name:       opGetLexicon,
 		HTTPMethod: "GET",
@@ -237,84 +165,43 @@ func (c *Polly) GetLexiconRequest(input *GetLexiconInput) (req *aws.Request, out
 		input = &GetLexiconInput{}
 	}
 
-	output = &GetLexiconOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetLexicon API operation for Amazon Polly.
-//
-// Returns the content of the specified pronunciation lexicon stored in an AWS
-// Region. For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation GetLexicon for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLexiconNotFoundException "LexiconNotFoundException"
-//   Amazon Polly can't find the specified lexicon. This could be caused by a
-//   lexicon that is missing, its name is misspelled or specifying a lexicon that
-//   is in a different region.
-//
-//   Verify that the lexicon exists, is in the region (see ListLexicons) and that
-//   you spelled its name is spelled correctly. Then try again.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexicon
-func (c *Polly) GetLexicon(input *GetLexiconInput) (*GetLexiconOutput, error) {
-	req, out := c.GetLexiconRequest(input)
-	return out, req.Send()
-}
-
-// GetLexiconWithContext is the same as GetLexicon with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetLexicon for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) GetLexiconWithContext(ctx aws.Context, input *GetLexiconInput, opts ...aws.Option) (*GetLexiconOutput, error) {
-	req, out := c.GetLexiconRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetLexiconOutput{})
+	return GetLexiconRequest{Request: req, Input: input}
 }
 
 const opListLexicons = "ListLexicons"
 
-// ListLexiconsRequest generates a "aws.Request" representing the
-// client's request for the ListLexicons operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListLexiconsRequest is a API request type for the ListLexicons API operation.
+type ListLexiconsRequest struct {
+	*aws.Request
+	Input *ListLexiconsInput
+}
+
+// Send marshals and sends the ListLexicons API request.
+func (r *ListLexiconsRequest) Send() (*ListLexiconsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLexiconsOutput), nil
+}
+
+// ListLexiconsRequest returns a request value for making API operation for
+// Amazon Polly.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListLexicons for more information on using the ListLexicons
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of pronunciation lexicons stored in an AWS Region. For more
+// information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using the ListLexiconsRequest method.
-//    req, resp := client.ListLexiconsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListLexiconsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexicons
-func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) (req *aws.Request, output *ListLexiconsOutput) {
+func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsRequest {
 	op := &aws.Operation{
 		Name:       opListLexicons,
 		HTTPMethod: "GET",
@@ -325,80 +212,47 @@ func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) (req *aws.Request,
 		input = &ListLexiconsInput{}
 	}
 
-	output = &ListLexiconsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListLexicons API operation for Amazon Polly.
-//
-// Returns a list of pronunciation lexicons stored in an AWS Region. For more
-// information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation ListLexicons for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The NextToken is invalid. Verify that it's spelled correctly, and then try
-//   again.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexicons
-func (c *Polly) ListLexicons(input *ListLexiconsInput) (*ListLexiconsOutput, error) {
-	req, out := c.ListLexiconsRequest(input)
-	return out, req.Send()
-}
-
-// ListLexiconsWithContext is the same as ListLexicons with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLexicons for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) ListLexiconsWithContext(ctx aws.Context, input *ListLexiconsInput, opts ...aws.Option) (*ListLexiconsOutput, error) {
-	req, out := c.ListLexiconsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListLexiconsOutput{})
+	return ListLexiconsRequest{Request: req, Input: input}
 }
 
 const opPutLexicon = "PutLexicon"
 
-// PutLexiconRequest generates a "aws.Request" representing the
-// client's request for the PutLexicon operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutLexiconRequest is a API request type for the PutLexicon API operation.
+type PutLexiconRequest struct {
+	*aws.Request
+	Input *PutLexiconInput
+}
+
+// Send marshals and sends the PutLexicon API request.
+func (r *PutLexiconRequest) Send() (*PutLexiconOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutLexiconOutput), nil
+}
+
+// PutLexiconRequest returns a request value for making API operation for
+// Amazon Polly.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same
+// name already exists in the region, it is overwritten by the new lexicon.
+// Lexicon operations have eventual consistency, therefore, it might take some
+// time before the lexicon is available to the SynthesizeSpeech operation.
 //
-// See PutLexicon for more information on using the PutLexicon
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 //
 //    // Example sending a request using the PutLexiconRequest method.
-//    req, resp := client.PutLexiconRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutLexiconRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon
-func (c *Polly) PutLexiconRequest(input *PutLexiconInput) (req *aws.Request, output *PutLexiconOutput) {
+func (c *Polly) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 	op := &aws.Operation{
 		Name:       opPutLexicon,
 		HTTPMethod: "PUT",
@@ -409,101 +263,46 @@ func (c *Polly) PutLexiconRequest(input *PutLexiconInput) (req *aws.Request, out
 		input = &PutLexiconInput{}
 	}
 
-	output = &PutLexiconOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutLexicon API operation for Amazon Polly.
-//
-// Stores a pronunciation lexicon in an AWS Region. If a lexicon with the same
-// name already exists in the region, it is overwritten by the new lexicon.
-// Lexicon operations have eventual consistency, therefore, it might take some
-// time before the lexicon is available to the SynthesizeSpeech operation.
-//
-// For more information, see Managing Lexicons (http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation PutLexicon for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidLexiconException "InvalidLexiconException"
-//   Amazon Polly can't find the specified lexicon. Verify that the lexicon's
-//   name is spelled correctly, and then try again.
-//
-//   * ErrCodeUnsupportedPlsAlphabetException "UnsupportedPlsAlphabetException"
-//   The alphabet specified by the lexicon is not a supported alphabet. Valid
-//   values are x-sampa and ipa.
-//
-//   * ErrCodeUnsupportedPlsLanguageException "UnsupportedPlsLanguageException"
-//   The language specified in the lexicon is unsupported. For a list of supported
-//   languages, see Lexicon Attributes (http://docs.aws.amazon.com/polly/latest/dg/API_LexiconAttributes.html).
-//
-//   * ErrCodeLexiconSizeExceededException "LexiconSizeExceededException"
-//   The maximum size of the specified lexicon would be exceeded by this operation.
-//
-//   * ErrCodeMaxLexemeLengthExceededException "MaxLexemeLengthExceededException"
-//   The maximum size of the lexeme would be exceeded by this operation.
-//
-//   * ErrCodeMaxLexiconsNumberExceededException "MaxLexiconsNumberExceededException"
-//   The maximum number of lexicons would be exceeded by this operation.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon
-func (c *Polly) PutLexicon(input *PutLexiconInput) (*PutLexiconOutput, error) {
-	req, out := c.PutLexiconRequest(input)
-	return out, req.Send()
-}
-
-// PutLexiconWithContext is the same as PutLexicon with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutLexicon for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) PutLexiconWithContext(ctx aws.Context, input *PutLexiconInput, opts ...aws.Option) (*PutLexiconOutput, error) {
-	req, out := c.PutLexiconRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutLexiconOutput{})
+	return PutLexiconRequest{Request: req, Input: input}
 }
 
 const opSynthesizeSpeech = "SynthesizeSpeech"
 
-// SynthesizeSpeechRequest generates a "aws.Request" representing the
-// client's request for the SynthesizeSpeech operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SynthesizeSpeechRequest is a API request type for the SynthesizeSpeech API operation.
+type SynthesizeSpeechRequest struct {
+	*aws.Request
+	Input *SynthesizeSpeechInput
+}
+
+// Send marshals and sends the SynthesizeSpeech API request.
+func (r *SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SynthesizeSpeechOutput), nil
+}
+
+// SynthesizeSpeechRequest returns a request value for making API operation for
+// Amazon Polly.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SynthesizeSpeech for more information on using the SynthesizeSpeech
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML input
+// must be valid, well-formed SSML. Some alphabets might not be available with
+// all the voices (for example, Cyrillic might not be read at all by English
+// voices) unless phoneme mapping is used. For more information, see How it
+// Works (http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
 //
 //    // Example sending a request using the SynthesizeSpeechRequest method.
-//    req, resp := client.SynthesizeSpeechRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SynthesizeSpeechRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeech
-func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) (req *aws.Request, output *SynthesizeSpeechOutput) {
+func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) SynthesizeSpeechRequest {
 	op := &aws.Operation{
 		Name:       opSynthesizeSpeech,
 		HTTPMethod: "POST",
@@ -514,77 +313,8 @@ func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) (req *aws.
 		input = &SynthesizeSpeechInput{}
 	}
 
-	output = &SynthesizeSpeechOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SynthesizeSpeech API operation for Amazon Polly.
-//
-// Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML input
-// must be valid, well-formed SSML. Some alphabets might not be available with
-// all the voices (for example, Cyrillic might not be read at all by English
-// voices) unless phoneme mapping is used. For more information, see How it
-// Works (http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Polly's
-// API operation SynthesizeSpeech for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTextLengthExceededException "TextLengthExceededException"
-//   The value of the "Text" parameter is longer than the accepted limits. The
-//   limit for input text is a maximum of 3000 characters total, of which no more
-//   than 1500 can be billed characters. SSML tags are not counted as billed characters.
-//
-//   * ErrCodeInvalidSampleRateException "InvalidSampleRateException"
-//   The specified sample rate is not valid.
-//
-//   * ErrCodeInvalidSsmlException "InvalidSsmlException"
-//   The SSML you provided is invalid. Verify the SSML syntax, spelling of tags
-//   and values, and then try again.
-//
-//   * ErrCodeLexiconNotFoundException "LexiconNotFoundException"
-//   Amazon Polly can't find the specified lexicon. This could be caused by a
-//   lexicon that is missing, its name is misspelled or specifying a lexicon that
-//   is in a different region.
-//
-//   Verify that the lexicon exists, is in the region (see ListLexicons) and that
-//   you spelled its name is spelled correctly. Then try again.
-//
-//   * ErrCodeServiceFailureException "ServiceFailureException"
-//   An unknown condition has caused a service failure.
-//
-//   * ErrCodeMarksNotSupportedForFormatException "MarksNotSupportedForFormatException"
-//   Speech marks are not supported for the OutputFormat selected. Speech marks
-//   are only available for content in json format.
-//
-//   * ErrCodeSsmlMarksNotSupportedForTextTypeException "SsmlMarksNotSupportedForTextTypeException"
-//   SSML speech marks are not supported for plain text-type input.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeech
-func (c *Polly) SynthesizeSpeech(input *SynthesizeSpeechInput) (*SynthesizeSpeechOutput, error) {
-	req, out := c.SynthesizeSpeechRequest(input)
-	return out, req.Send()
-}
-
-// SynthesizeSpeechWithContext is the same as SynthesizeSpeech with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SynthesizeSpeech for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Polly) SynthesizeSpeechWithContext(ctx aws.Context, input *SynthesizeSpeechInput, opts ...aws.Option) (*SynthesizeSpeechOutput, error) {
-	req, out := c.SynthesizeSpeechRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SynthesizeSpeechOutput{})
+	return SynthesizeSpeechRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconInput

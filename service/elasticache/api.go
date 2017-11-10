@@ -13,47 +13,24 @@ import (
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResource
-func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *TagListMessage) {
-	op := &aws.Operation{
-		Name:       opAddTagsToResource,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddTagsToResourceInput{}
-	}
-
-	output = &TagListMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
 }
 
-// AddTagsToResource API operation for Amazon ElastiCache.
+// Send marshals and sends the AddTagsToResource API request.
+func (r *AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Adds up to 50 cost allocation tags to the named resource. A cost allocation
 // tag is a key-value pair where the key and value are case-sensitive. You can
@@ -67,77 +44,66 @@ func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) (r
 // Amazon ElastiCache (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Tagging.html)
 // in the ElastiCache User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeTagQuotaPerResourceExceeded "TagQuotaPerResourceExceeded"
-//   The request cannot be processed because it would cause the resource to have
-//   more than the allowed number of tags. The maximum number of tags permitted
-//   on a resource is 50.
-//
-//   * ErrCodeInvalidARNFault "InvalidARN"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+//    // Example sending a request using the AddTagsToResourceRequest method.
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResource
-func (c *ElastiCache) AddTagsToResource(input *AddTagsToResourceInput) (*TagListMessage, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
+	op := &aws.Operation{
+		Name:       opAddTagsToResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*TagListMessage, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddTagsToResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opAuthorizeCacheSecurityGroupIngress = "AuthorizeCacheSecurityGroupIngress"
 
-// AuthorizeCacheSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the AuthorizeCacheSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AuthorizeCacheSecurityGroupIngressRequest is a API request type for the AuthorizeCacheSecurityGroupIngress API operation.
+type AuthorizeCacheSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *AuthorizeCacheSecurityGroupIngressInput
+}
+
+// Send marshals and sends the AuthorizeCacheSecurityGroupIngress API request.
+func (r *AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AuthorizeCacheSecurityGroupIngressOutput), nil
+}
+
+// AuthorizeCacheSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Allows network ingress to a cache security group. Applications using ElastiCache
+// must be running on Amazon EC2, and Amazon EC2 security groups are used as
+// the authorization mechanism.
 //
-// See AuthorizeCacheSecurityGroupIngress for more information on using the AuthorizeCacheSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot authorize ingress from an Amazon EC2 security group in one region
+// to an ElastiCache cluster in another region.
 //
 //    // Example sending a request using the AuthorizeCacheSecurityGroupIngressRequest method.
-//    req, resp := client.AuthorizeCacheSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AuthorizeCacheSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngress
-func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *AuthorizeCacheSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeCacheSecurityGroupIngressOutput) {
+func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *AuthorizeCacheSecurityGroupIngressInput) AuthorizeCacheSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opAuthorizeCacheSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -148,110 +114,30 @@ func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *Authorize
 		input = &AuthorizeCacheSecurityGroupIngressInput{}
 	}
 
-	output = &AuthorizeCacheSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AuthorizeCacheSecurityGroupIngress API operation for Amazon ElastiCache.
-//
-// Allows network ingress to a cache security group. Applications using ElastiCache
-// must be running on Amazon EC2, and Amazon EC2 security groups are used as
-// the authorization mechanism.
-//
-// You cannot authorize ingress from an Amazon EC2 security group in one region
-// to an ElastiCache cluster in another region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation AuthorizeCacheSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeInvalidCacheSecurityGroupStateFault "InvalidCacheSecurityGroupState"
-//   The current state of the cache security group does not allow deletion.
-//
-//   * ErrCodeAuthorizationAlreadyExistsFault "AuthorizationAlreadyExists"
-//   The specified Amazon EC2 security group is already authorized for the specified
-//   cache security group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngress
-func (c *ElastiCache) AuthorizeCacheSecurityGroupIngress(input *AuthorizeCacheSecurityGroupIngressInput) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeCacheSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
-
-// AuthorizeCacheSecurityGroupIngressWithContext is the same as AuthorizeCacheSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AuthorizeCacheSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeCacheSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeCacheSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AuthorizeCacheSecurityGroupIngressOutput{})
+	return AuthorizeCacheSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opCopySnapshot = "CopySnapshot"
 
-// CopySnapshotRequest generates a "aws.Request" representing the
-// client's request for the CopySnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopySnapshot for more information on using the CopySnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CopySnapshotRequest method.
-//    req, resp := client.CopySnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot
-func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) (req *aws.Request, output *CopySnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opCopySnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CopySnapshotInput{}
-	}
-
-	output = &CopySnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CopySnapshotRequest is a API request type for the CopySnapshot API operation.
+type CopySnapshotRequest struct {
+	*aws.Request
+	Input *CopySnapshotInput
 }
 
-// CopySnapshot API operation for Amazon ElastiCache.
+// Send marshals and sends the CopySnapshot API request.
+func (r *CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopySnapshotOutput), nil
+}
+
+// CopySnapshotRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Makes a copy of an existing snapshot.
 //
@@ -319,83 +205,66 @@ func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) (req *aws.Re
 //    2: Grant ElastiCache Access to Your Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess)
 //    in the ElastiCache User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CopySnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSnapshotAlreadyExistsFault "SnapshotAlreadyExistsFault"
-//   You already have a snapshot with the given name.
-//
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceededFault"
-//   The request cannot be processed because it would exceed the maximum number
-//   of snapshots.
-//
-//   * ErrCodeInvalidSnapshotStateFault "InvalidSnapshotState"
-//   The current state of the snapshot does not allow the requested operation
-//   to occur.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the CopySnapshotRequest method.
+//    req := client.CopySnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot
-func (c *ElastiCache) CopySnapshot(input *CopySnapshotInput) (*CopySnapshotOutput, error) {
-	req, out := c.CopySnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCopySnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CopySnapshotWithContext is the same as CopySnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopySnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CopySnapshotWithContext(ctx aws.Context, input *CopySnapshotInput, opts ...aws.Option) (*CopySnapshotOutput, error) {
-	req, out := c.CopySnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CopySnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &CopySnapshotOutput{})
+	return CopySnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateCacheCluster = "CreateCacheCluster"
 
-// CreateCacheClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCacheCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCacheClusterRequest is a API request type for the CreateCacheCluster API operation.
+type CreateCacheClusterRequest struct {
+	*aws.Request
+	Input *CreateCacheClusterInput
+}
+
+// Send marshals and sends the CreateCacheCluster API request.
+func (r *CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCacheClusterOutput), nil
+}
+
+// CreateCacheClusterRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a cache cluster. All nodes in the cache cluster run the same protocol-compliant
+// cache engine software, either Memcached or Redis.
 //
-// See CreateCacheCluster for more information on using the CreateCacheCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Due to current limitations on Redis (cluster mode disabled), this operation
+// or parameter is not supported on Redis (cluster mode enabled) replication
+// groups.
 //
 //    // Example sending a request using the CreateCacheClusterRequest method.
-//    req, resp := client.CreateCacheClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCacheClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster
-func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) (req *aws.Request, output *CreateCacheClusterOutput) {
+func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) CreateCacheClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheCluster,
 		HTTPMethod: "POST",
@@ -406,144 +275,30 @@ func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) 
 		input = &CreateCacheClusterInput{}
 	}
 
-	output = &CreateCacheClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCacheCluster API operation for Amazon ElastiCache.
-//
-// Creates a cache cluster. All nodes in the cache cluster run the same protocol-compliant
-// cache engine software, either Memcached or Redis.
-//
-// Due to current limitations on Redis (cluster mode disabled), this operation
-// or parameter is not supported on Redis (cluster mode enabled) replication
-// groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateCacheCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidReplicationGroupStateFault "InvalidReplicationGroupState"
-//   The requested replication group is not in the available state.
-//
-//   * ErrCodeCacheClusterAlreadyExistsFault "CacheClusterAlreadyExists"
-//   You already have a cache cluster with the given identifier.
-//
-//   * ErrCodeInsufficientCacheClusterCapacityFault "InsufficientCacheClusterCapacity"
-//   The requested cache node type is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeCacheSubnetGroupNotFoundFault "CacheSubnetGroupNotFoundFault"
-//   The requested cache subnet group name does not refer to an existing cache
-//   subnet group.
-//
-//   * ErrCodeClusterQuotaForCustomerExceededFault "ClusterQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache clusters per customer.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes in a single cache cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes per customer.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeTagQuotaPerResourceExceeded "TagQuotaPerResourceExceeded"
-//   The request cannot be processed because it would cause the resource to have
-//   more than the allowed number of tags. The maximum number of tags permitted
-//   on a resource is 50.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster
-func (c *ElastiCache) CreateCacheCluster(input *CreateCacheClusterInput) (*CreateCacheClusterOutput, error) {
-	req, out := c.CreateCacheClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateCacheClusterWithContext is the same as CreateCacheCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCacheCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateCacheClusterWithContext(ctx aws.Context, input *CreateCacheClusterInput, opts ...aws.Option) (*CreateCacheClusterOutput, error) {
-	req, out := c.CreateCacheClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCacheClusterOutput{})
+	return CreateCacheClusterRequest{Request: req, Input: input}
 }
 
 const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 
-// CreateCacheParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateCacheParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCacheParameterGroup for more information on using the CreateCacheParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateCacheParameterGroupRequest method.
-//    req, resp := client.CreateCacheParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup
-func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParameterGroupInput) (req *aws.Request, output *CreateCacheParameterGroupOutput) {
-	op := &aws.Operation{
-		Name:       opCreateCacheParameterGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateCacheParameterGroupInput{}
-	}
-
-	output = &CreateCacheParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateCacheParameterGroupRequest is a API request type for the CreateCacheParameterGroup API operation.
+type CreateCacheParameterGroupRequest struct {
+	*aws.Request
+	Input *CreateCacheParameterGroupInput
 }
 
-// CreateCacheParameterGroup API operation for Amazon ElastiCache.
+// Send marshals and sends the CreateCacheParameterGroup API request.
+func (r *CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCacheParameterGroupOutput), nil
+}
+
+// CreateCacheParameterGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache
 // parameter group is a collection of parameters and their values that are applied
@@ -560,80 +315,67 @@ func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParamet
 //    * Parameters and Parameter Groups (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ParameterGroups.html)
 //    in the ElastiCache User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateCacheParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheParameterGroupQuotaExceededFault "CacheParameterGroupQuotaExceeded"
-//   The request cannot be processed because it would exceed the maximum number
-//   of cache security groups.
-//
-//   * ErrCodeCacheParameterGroupAlreadyExistsFault "CacheParameterGroupAlreadyExists"
-//   A cache parameter group with the requested name already exists.
-//
-//   * ErrCodeInvalidCacheParameterGroupStateFault "InvalidCacheParameterGroupState"
-//   The current state of the cache parameter group does not allow the requested
-//   operation to occur.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the CreateCacheParameterGroupRequest method.
+//    req := client.CreateCacheParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup
-func (c *ElastiCache) CreateCacheParameterGroup(input *CreateCacheParameterGroupInput) (*CreateCacheParameterGroupOutput, error) {
-	req, out := c.CreateCacheParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateCacheParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateCacheParameterGroupWithContext is the same as CreateCacheParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCacheParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateCacheParameterGroupWithContext(ctx aws.Context, input *CreateCacheParameterGroupInput, opts ...aws.Option) (*CreateCacheParameterGroupOutput, error) {
-	req, out := c.CreateCacheParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateCacheParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateCacheParameterGroupOutput{})
+	return CreateCacheParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 
-// CreateCacheSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateCacheSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCacheSecurityGroupRequest is a API request type for the CreateCacheSecurityGroup API operation.
+type CreateCacheSecurityGroupRequest struct {
+	*aws.Request
+	Input *CreateCacheSecurityGroupInput
+}
+
+// Send marshals and sends the CreateCacheSecurityGroup API request.
+func (r *CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCacheSecurityGroupOutput), nil
+}
+
+// CreateCacheSecurityGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new cache security group. Use a cache security group to control
+// access to one or more cache clusters.
 //
-// See CreateCacheSecurityGroup for more information on using the CreateCacheSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cache security groups are only used when you are creating a cache cluster
+// outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating
+// a cache cluster inside of a VPC, use a cache subnet group instead. For more
+// information, see CreateCacheSubnetGroup (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
 //
 //    // Example sending a request using the CreateCacheSecurityGroupRequest method.
-//    req, resp := client.CreateCacheSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCacheSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup
-func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroupInput) (req *aws.Request, output *CreateCacheSecurityGroupOutput) {
+func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheSecurityGroup,
 		HTTPMethod: "POST",
@@ -644,91 +386,45 @@ func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurity
 		input = &CreateCacheSecurityGroupInput{}
 	}
 
-	output = &CreateCacheSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCacheSecurityGroup API operation for Amazon ElastiCache.
-//
-// Creates a new cache security group. Use a cache security group to control
-// access to one or more cache clusters.
-//
-// Cache security groups are only used when you are creating a cache cluster
-// outside of an Amazon Virtual Private Cloud (Amazon VPC). If you are creating
-// a cache cluster inside of a VPC, use a cache subnet group instead. For more
-// information, see CreateCacheSubnetGroup (http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateCacheSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSecurityGroupAlreadyExistsFault "CacheSecurityGroupAlreadyExists"
-//   A cache security group with the specified name already exists.
-//
-//   * ErrCodeCacheSecurityGroupQuotaExceededFault "QuotaExceeded.CacheSecurityGroup"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache security groups.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup
-func (c *ElastiCache) CreateCacheSecurityGroup(input *CreateCacheSecurityGroupInput) (*CreateCacheSecurityGroupOutput, error) {
-	req, out := c.CreateCacheSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateCacheSecurityGroupWithContext is the same as CreateCacheSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCacheSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateCacheSecurityGroupWithContext(ctx aws.Context, input *CreateCacheSecurityGroupInput, opts ...aws.Option) (*CreateCacheSecurityGroupOutput, error) {
-	req, out := c.CreateCacheSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCacheSecurityGroupOutput{})
+	return CreateCacheSecurityGroupRequest{Request: req, Input: input}
 }
 
 const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 
-// CreateCacheSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateCacheSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCacheSubnetGroupRequest is a API request type for the CreateCacheSubnetGroup API operation.
+type CreateCacheSubnetGroupRequest struct {
+	*aws.Request
+	Input *CreateCacheSubnetGroupInput
+}
+
+// Send marshals and sends the CreateCacheSubnetGroup API request.
+func (r *CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCacheSubnetGroupOutput), nil
+}
+
+// CreateCacheSubnetGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new cache subnet group.
 //
-// See CreateCacheSubnetGroup for more information on using the CreateCacheSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use this parameter only when you are creating a cluster in an Amazon Virtual
+// Private Cloud (Amazon VPC).
 //
 //    // Example sending a request using the CreateCacheSubnetGroupRequest method.
-//    req, resp := client.CreateCacheSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCacheSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup
-func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInput) (req *aws.Request, output *CreateCacheSubnetGroupOutput) {
+func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateCacheSubnetGroup,
 		HTTPMethod: "POST",
@@ -739,106 +435,30 @@ func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGrou
 		input = &CreateCacheSubnetGroupInput{}
 	}
 
-	output = &CreateCacheSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCacheSubnetGroup API operation for Amazon ElastiCache.
-//
-// Creates a new cache subnet group.
-//
-// Use this parameter only when you are creating a cluster in an Amazon Virtual
-// Private Cloud (Amazon VPC).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateCacheSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSubnetGroupAlreadyExistsFault "CacheSubnetGroupAlreadyExists"
-//   The requested cache subnet group name is already in use by an existing cache
-//   subnet group.
-//
-//   * ErrCodeCacheSubnetGroupQuotaExceededFault "CacheSubnetGroupQuotaExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache subnet groups.
-//
-//   * ErrCodeCacheSubnetQuotaExceededFault "CacheSubnetQuotaExceededFault"
-//   The request cannot be processed because it would exceed the allowed number
-//   of subnets in a cache subnet group.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   An invalid subnet identifier was specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup
-func (c *ElastiCache) CreateCacheSubnetGroup(input *CreateCacheSubnetGroupInput) (*CreateCacheSubnetGroupOutput, error) {
-	req, out := c.CreateCacheSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateCacheSubnetGroupWithContext is the same as CreateCacheSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCacheSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateCacheSubnetGroupWithContext(ctx aws.Context, input *CreateCacheSubnetGroupInput, opts ...aws.Option) (*CreateCacheSubnetGroupOutput, error) {
-	req, out := c.CreateCacheSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCacheSubnetGroupOutput{})
+	return CreateCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opCreateReplicationGroup = "CreateReplicationGroup"
 
-// CreateReplicationGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateReplicationGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReplicationGroup for more information on using the CreateReplicationGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateReplicationGroupRequest method.
-//    req, resp := client.CreateReplicationGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup
-func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGroupInput) (req *aws.Request, output *CreateReplicationGroupOutput) {
-	op := &aws.Operation{
-		Name:       opCreateReplicationGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateReplicationGroupInput{}
-	}
-
-	output = &CreateReplicationGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateReplicationGroupRequest is a API request type for the CreateReplicationGroup API operation.
+type CreateReplicationGroupRequest struct {
+	*aws.Request
+	Input *CreateReplicationGroupInput
 }
 
-// CreateReplicationGroup API operation for Amazon ElastiCache.
+// Send marshals and sends the CreateReplicationGroup API request.
+func (r *CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReplicationGroupOutput), nil
+}
+
+// CreateReplicationGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled)
 // replication group.
@@ -865,118 +485,64 @@ func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGrou
 //
 // This operation is valid for Redis only.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateReplicationGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeReplicationGroupAlreadyExistsFault "ReplicationGroupAlreadyExists"
-//   The specified replication group already exists.
-//
-//   * ErrCodeInsufficientCacheClusterCapacityFault "InsufficientCacheClusterCapacity"
-//   The requested cache node type is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeCacheSubnetGroupNotFoundFault "CacheSubnetGroupNotFoundFault"
-//   The requested cache subnet group name does not refer to an existing cache
-//   subnet group.
-//
-//   * ErrCodeClusterQuotaForCustomerExceededFault "ClusterQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache clusters per customer.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes in a single cache cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes per customer.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeTagQuotaPerResourceExceeded "TagQuotaPerResourceExceeded"
-//   The request cannot be processed because it would cause the resource to have
-//   more than the allowed number of tags. The maximum number of tags permitted
-//   on a resource is 50.
-//
-//   * ErrCodeNodeGroupsPerReplicationGroupQuotaExceededFault "NodeGroupsPerReplicationGroupQuotaExceeded"
-//   The request cannot be processed because it would exceed the maximum of 15
-//   node groups (shards) in a single replication group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the CreateReplicationGroupRequest method.
+//    req := client.CreateReplicationGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup
-func (c *ElastiCache) CreateReplicationGroup(input *CreateReplicationGroupInput) (*CreateReplicationGroupOutput, error) {
-	req, out := c.CreateReplicationGroupRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGroupInput) CreateReplicationGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateReplicationGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateReplicationGroupWithContext is the same as CreateReplicationGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReplicationGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateReplicationGroupWithContext(ctx aws.Context, input *CreateReplicationGroupInput, opts ...aws.Option) (*CreateReplicationGroupOutput, error) {
-	req, out := c.CreateReplicationGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateReplicationGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateReplicationGroupOutput{})
+	return CreateReplicationGroupRequest{Request: req, Input: input}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
 
-// CreateSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateSnapshotRequest is a API request type for the CreateSnapshot API operation.
+type CreateSnapshotRequest struct {
+	*aws.Request
+	Input *CreateSnapshotInput
+}
+
+// Send marshals and sends the CreateSnapshot API request.
+func (r *CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSnapshotOutput), nil
+}
+
+// CreateSnapshotRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a copy of an entire cache cluster or replication group at a specific
+// moment in time.
 //
-// See CreateSnapshot for more information on using the CreateSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is valid for Redis only.
 //
 //    // Example sending a request using the CreateSnapshotRequest method.
-//    req, resp := client.CreateSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot
-func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
+func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
@@ -987,127 +553,30 @@ func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aw
 		input = &CreateSnapshotInput{}
 	}
 
-	output = &CreateSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateSnapshot API operation for Amazon ElastiCache.
-//
-// Creates a copy of an entire cache cluster or replication group at a specific
-// moment in time.
-//
-// This operation is valid for Redis only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation CreateSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSnapshotAlreadyExistsFault "SnapshotAlreadyExistsFault"
-//   You already have a snapshot with the given name.
-//
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeInvalidReplicationGroupStateFault "InvalidReplicationGroupState"
-//   The requested replication group is not in the available state.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceededFault"
-//   The request cannot be processed because it would exceed the maximum number
-//   of snapshots.
-//
-//   * ErrCodeSnapshotFeatureNotSupportedFault "SnapshotFeatureNotSupportedFault"
-//   You attempted one of the following operations:
-//
-//      * Creating a snapshot of a Redis cache cluster running on a cache.t1.micro
-//      cache node.
-//
-//      * Creating a snapshot of a cache cluster that is running Memcached rather
-//      than Redis.
-//
-//   Neither of these are supported by ElastiCache.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot
-func (c *ElastiCache) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnapshotOutput, error) {
-	req, out := c.CreateSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateSnapshotWithContext is the same as CreateSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...aws.Option) (*CreateSnapshotOutput, error) {
-	req, out := c.CreateSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
 const opDeleteCacheCluster = "DeleteCacheCluster"
 
-// DeleteCacheClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteCacheCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCacheCluster for more information on using the DeleteCacheCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteCacheClusterRequest method.
-//    req, resp := client.DeleteCacheClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster
-func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) (req *aws.Request, output *DeleteCacheClusterOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteCacheCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteCacheClusterInput{}
-	}
-
-	output = &DeleteCacheClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteCacheClusterRequest is a API request type for the DeleteCacheCluster API operation.
+type DeleteCacheClusterRequest struct {
+	*aws.Request
+	Input *DeleteCacheClusterInput
 }
 
-// DeleteCacheCluster API operation for Amazon ElastiCache.
+// Send marshals and sends the DeleteCacheCluster API request.
+func (r *DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCacheClusterOutput), nil
+}
+
+// DeleteCacheClusterRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Deletes a previously provisioned cache cluster. DeleteCacheCluster deletes
 // all associated cache nodes, node endpoints and the cache cluster itself.
@@ -1124,93 +593,62 @@ func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) 
 // or parameter is not supported on Redis (cluster mode enabled) replication
 // groups.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteCacheCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeSnapshotAlreadyExistsFault "SnapshotAlreadyExistsFault"
-//   You already have a snapshot with the given name.
-//
-//   * ErrCodeSnapshotFeatureNotSupportedFault "SnapshotFeatureNotSupportedFault"
-//   You attempted one of the following operations:
-//
-//      * Creating a snapshot of a Redis cache cluster running on a cache.t1.micro
-//      cache node.
-//
-//      * Creating a snapshot of a cache cluster that is running Memcached rather
-//      than Redis.
-//
-//   Neither of these are supported by ElastiCache.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceededFault"
-//   The request cannot be processed because it would exceed the maximum number
-//   of snapshots.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the DeleteCacheClusterRequest method.
+//    req := client.DeleteCacheClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster
-func (c *ElastiCache) DeleteCacheCluster(input *DeleteCacheClusterInput) (*DeleteCacheClusterOutput, error) {
-	req, out := c.DeleteCacheClusterRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) DeleteCacheClusterRequest {
+	op := &aws.Operation{
+		Name:       opDeleteCacheCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteCacheClusterWithContext is the same as DeleteCacheCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCacheCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheClusterWithContext(ctx aws.Context, input *DeleteCacheClusterInput, opts ...aws.Option) (*DeleteCacheClusterOutput, error) {
-	req, out := c.DeleteCacheClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteCacheClusterInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteCacheClusterOutput{})
+	return DeleteCacheClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 
-// DeleteCacheParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteCacheParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCacheParameterGroupRequest is a API request type for the DeleteCacheParameterGroup API operation.
+type DeleteCacheParameterGroupRequest struct {
+	*aws.Request
+	Input *DeleteCacheParameterGroupInput
+}
+
+// Send marshals and sends the DeleteCacheParameterGroup API request.
+func (r *DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCacheParameterGroupOutput), nil
+}
+
+// DeleteCacheParameterGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCacheParameterGroup for more information on using the DeleteCacheParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified cache parameter group. You cannot delete a cache parameter
+// group if it is associated with any cache clusters.
 //
 //    // Example sending a request using the DeleteCacheParameterGroupRequest method.
-//    req, resp := client.DeleteCacheParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCacheParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroup
-func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGroupInput) (req *aws.Request, output *DeleteCacheParameterGroupOutput) {
+func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -1221,89 +659,47 @@ func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParamet
 		input = &DeleteCacheParameterGroupInput{}
 	}
 
-	output = &DeleteCacheParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteCacheParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteCacheParameterGroup API operation for Amazon ElastiCache.
-//
-// Deletes the specified cache parameter group. You cannot delete a cache parameter
-// group if it is associated with any cache clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteCacheParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidCacheParameterGroupStateFault "InvalidCacheParameterGroupState"
-//   The current state of the cache parameter group does not allow the requested
-//   operation to occur.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroup
-func (c *ElastiCache) DeleteCacheParameterGroup(input *DeleteCacheParameterGroupInput) (*DeleteCacheParameterGroupOutput, error) {
-	req, out := c.DeleteCacheParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCacheParameterGroupWithContext is the same as DeleteCacheParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCacheParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheParameterGroupWithContext(ctx aws.Context, input *DeleteCacheParameterGroupInput, opts ...aws.Option) (*DeleteCacheParameterGroupOutput, error) {
-	req, out := c.DeleteCacheParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteCacheParameterGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 
-// DeleteCacheSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteCacheSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCacheSecurityGroupRequest is a API request type for the DeleteCacheSecurityGroup API operation.
+type DeleteCacheSecurityGroupRequest struct {
+	*aws.Request
+	Input *DeleteCacheSecurityGroupInput
+}
+
+// Send marshals and sends the DeleteCacheSecurityGroup API request.
+func (r *DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCacheSecurityGroupOutput), nil
+}
+
+// DeleteCacheSecurityGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a cache security group.
 //
-// See DeleteCacheSecurityGroup for more information on using the DeleteCacheSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete a cache security group if it is associated with any cache
+// clusters.
 //
 //    // Example sending a request using the DeleteCacheSecurityGroupRequest method.
-//    req, resp := client.DeleteCacheSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCacheSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroup
-func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroupInput) (req *aws.Request, output *DeleteCacheSecurityGroupOutput) {
+func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheSecurityGroup,
 		HTTPMethod: "POST",
@@ -1314,90 +710,47 @@ func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurity
 		input = &DeleteCacheSecurityGroupInput{}
 	}
 
-	output = &DeleteCacheSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteCacheSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteCacheSecurityGroup API operation for Amazon ElastiCache.
-//
-// Deletes a cache security group.
-//
-// You cannot delete a cache security group if it is associated with any cache
-// clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteCacheSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidCacheSecurityGroupStateFault "InvalidCacheSecurityGroupState"
-//   The current state of the cache security group does not allow deletion.
-//
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroup
-func (c *ElastiCache) DeleteCacheSecurityGroup(input *DeleteCacheSecurityGroupInput) (*DeleteCacheSecurityGroupOutput, error) {
-	req, out := c.DeleteCacheSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCacheSecurityGroupWithContext is the same as DeleteCacheSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCacheSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheSecurityGroupWithContext(ctx aws.Context, input *DeleteCacheSecurityGroupInput, opts ...aws.Option) (*DeleteCacheSecurityGroupOutput, error) {
-	req, out := c.DeleteCacheSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteCacheSecurityGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteCacheSubnetGroup = "DeleteCacheSubnetGroup"
 
-// DeleteCacheSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteCacheSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCacheSubnetGroupRequest is a API request type for the DeleteCacheSubnetGroup API operation.
+type DeleteCacheSubnetGroupRequest struct {
+	*aws.Request
+	Input *DeleteCacheSubnetGroupInput
+}
+
+// Send marshals and sends the DeleteCacheSubnetGroup API request.
+func (r *DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCacheSubnetGroupOutput), nil
+}
+
+// DeleteCacheSubnetGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a cache subnet group.
 //
-// See DeleteCacheSubnetGroup for more information on using the DeleteCacheSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You cannot delete a cache subnet group if it is associated with any cache
+// clusters.
 //
 //    // Example sending a request using the DeleteCacheSubnetGroupRequest method.
-//    req, resp := client.DeleteCacheSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCacheSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroup
-func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGroupInput) (req *aws.Request, output *DeleteCacheSubnetGroupOutput) {
+func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGroupInput) DeleteCacheSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCacheSubnetGroup,
 		HTTPMethod: "POST",
@@ -1408,100 +761,32 @@ func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGrou
 		input = &DeleteCacheSubnetGroupInput{}
 	}
 
-	output = &DeleteCacheSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteCacheSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteCacheSubnetGroup API operation for Amazon ElastiCache.
-//
-// Deletes a cache subnet group.
-//
-// You cannot delete a cache subnet group if it is associated with any cache
-// clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteCacheSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSubnetGroupInUse "CacheSubnetGroupInUse"
-//   The requested cache subnet group is currently in use.
-//
-//   * ErrCodeCacheSubnetGroupNotFoundFault "CacheSubnetGroupNotFoundFault"
-//   The requested cache subnet group name does not refer to an existing cache
-//   subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroup
-func (c *ElastiCache) DeleteCacheSubnetGroup(input *DeleteCacheSubnetGroupInput) (*DeleteCacheSubnetGroupOutput, error) {
-	req, out := c.DeleteCacheSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCacheSubnetGroupWithContext is the same as DeleteCacheSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCacheSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheSubnetGroupWithContext(ctx aws.Context, input *DeleteCacheSubnetGroupInput, opts ...aws.Option) (*DeleteCacheSubnetGroupOutput, error) {
-	req, out := c.DeleteCacheSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteReplicationGroup = "DeleteReplicationGroup"
 
-// DeleteReplicationGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteReplicationGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReplicationGroup for more information on using the DeleteReplicationGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteReplicationGroupRequest method.
-//    req, resp := client.DeleteReplicationGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup
-func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInput) (req *aws.Request, output *DeleteReplicationGroupOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteReplicationGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteReplicationGroupInput{}
-	}
-
-	output = &DeleteReplicationGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteReplicationGroupRequest is a API request type for the DeleteReplicationGroup API operation.
+type DeleteReplicationGroupRequest struct {
+	*aws.Request
+	Input *DeleteReplicationGroupInput
 }
 
-// DeleteReplicationGroup API operation for Amazon ElastiCache.
+// Send marshals and sends the DeleteReplicationGroup API request.
+func (r *DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReplicationGroupOutput), nil
+}
+
+// DeleteReplicationGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Deletes an existing replication group. By default, this operation deletes
 // the entire replication group, including the primary/primaries and all of
@@ -1515,93 +800,65 @@ func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGrou
 //
 // This operation is valid for Redis only.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteReplicationGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidReplicationGroupStateFault "InvalidReplicationGroupState"
-//   The requested replication group is not in the available state.
-//
-//   * ErrCodeSnapshotAlreadyExistsFault "SnapshotAlreadyExistsFault"
-//   You already have a snapshot with the given name.
-//
-//   * ErrCodeSnapshotFeatureNotSupportedFault "SnapshotFeatureNotSupportedFault"
-//   You attempted one of the following operations:
-//
-//      * Creating a snapshot of a Redis cache cluster running on a cache.t1.micro
-//      cache node.
-//
-//      * Creating a snapshot of a cache cluster that is running Memcached rather
-//      than Redis.
-//
-//   Neither of these are supported by ElastiCache.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceededFault"
-//   The request cannot be processed because it would exceed the maximum number
-//   of snapshots.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the DeleteReplicationGroupRequest method.
+//    req := client.DeleteReplicationGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup
-func (c *ElastiCache) DeleteReplicationGroup(input *DeleteReplicationGroupInput) (*DeleteReplicationGroupOutput, error) {
-	req, out := c.DeleteReplicationGroupRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInput) DeleteReplicationGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteReplicationGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteReplicationGroupWithContext is the same as DeleteReplicationGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReplicationGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteReplicationGroupWithContext(ctx aws.Context, input *DeleteReplicationGroupInput, opts ...aws.Option) (*DeleteReplicationGroupOutput, error) {
-	req, out := c.DeleteReplicationGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteReplicationGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteReplicationGroupOutput{})
+	return DeleteReplicationGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteSnapshot = "DeleteSnapshot"
 
-// DeleteSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeleteSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSnapshotRequest is a API request type for the DeleteSnapshot API operation.
+type DeleteSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteSnapshotInput
+}
+
+// Send marshals and sends the DeleteSnapshot API request.
+func (r *DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSnapshotOutput), nil
+}
+
+// DeleteSnapshotRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes an existing snapshot. When you receive a successful response from
+// this operation, ElastiCache immediately begins deleting the snapshot; you
+// cannot cancel or revert this operation.
 //
-// See DeleteSnapshot for more information on using the DeleteSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is valid for Redis only.
 //
 //    // Example sending a request using the DeleteSnapshotRequest method.
-//    req, resp := client.DeleteSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot
-func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *aws.Request, output *DeleteSnapshotOutput) {
+func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSnapshot,
 		HTTPMethod: "POST",
@@ -1612,111 +869,30 @@ func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *aw
 		input = &DeleteSnapshotInput{}
 	}
 
-	output = &DeleteSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSnapshot API operation for Amazon ElastiCache.
-//
-// Deletes an existing snapshot. When you receive a successful response from
-// this operation, ElastiCache immediately begins deleting the snapshot; you
-// cannot cancel or revert this operation.
-//
-// This operation is valid for Redis only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DeleteSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeInvalidSnapshotStateFault "InvalidSnapshotState"
-//   The current state of the snapshot does not allow the requested operation
-//   to occur.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot
-func (c *ElastiCache) DeleteSnapshot(input *DeleteSnapshotInput) (*DeleteSnapshotOutput, error) {
-	req, out := c.DeleteSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSnapshotWithContext is the same as DeleteSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSnapshotInput, opts ...aws.Option) (*DeleteSnapshotOutput, error) {
-	req, out := c.DeleteSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSnapshotOutput{})
+	return DeleteSnapshotRequest{Request: req, Input: input}
 }
 
 const opDescribeCacheClusters = "DescribeCacheClusters"
 
-// DescribeCacheClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheClusters for more information on using the DescribeCacheClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeCacheClustersRequest method.
-//    req, resp := client.DescribeCacheClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters
-func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersInput) (req *aws.Request, output *DescribeCacheClustersOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeCacheClusters,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"Marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "MaxRecords",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &DescribeCacheClustersInput{}
-	}
-
-	output = &DescribeCacheClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeCacheClustersRequest is a API request type for the DescribeCacheClusters API operation.
+type DescribeCacheClustersRequest struct {
+	*aws.Request
+	Input *DescribeCacheClustersInput
 }
 
-// DescribeCacheClusters API operation for Amazon ElastiCache.
+// Send marshals and sends the DescribeCacheClusters API request.
+func (r *DescribeCacheClustersRequest) Send() (*DescribeCacheClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheClustersOutput), nil
+}
+
+// DescribeCacheClustersRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Returns information about all provisioned cache clusters if no cache cluster
 // identifier is specified, or about a specific cache cluster if a cache cluster
@@ -1741,43 +917,33 @@ func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersI
 // If cache nodes are currently being removed from the cache cluster, no endpoint
 // information for the removed nodes is displayed.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the DescribeCacheClustersRequest method.
+//    req := client.DescribeCacheClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters
-func (c *ElastiCache) DescribeCacheClusters(input *DescribeCacheClustersInput) (*DescribeCacheClustersOutput, error) {
-	req, out := c.DescribeCacheClustersRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersInput) DescribeCacheClustersRequest {
+	op := &aws.Operation{
+		Name:       opDescribeCacheClusters,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
 
-// DescribeCacheClustersWithContext is the same as DescribeCacheClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheClustersWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.Option) (*DescribeCacheClustersOutput, error) {
-	req, out := c.DescribeCacheClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeCacheClustersInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeCacheClustersOutput{})
+	return DescribeCacheClustersRequest{Request: req, Input: input}
 }
 
 // DescribeCacheClustersPages iterates over the pages of a DescribeCacheClusters operation,
@@ -1816,10 +982,10 @@ func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheClustersRequest(inCpy)
+			req := c.DescribeCacheClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1832,31 +998,36 @@ func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, inp
 
 const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 
-// DescribeCacheEngineVersionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheEngineVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheEngineVersionsRequest is a API request type for the DescribeCacheEngineVersions API operation.
+type DescribeCacheEngineVersionsRequest struct {
+	*aws.Request
+	Input *DescribeCacheEngineVersionsInput
+}
+
+// Send marshals and sends the DescribeCacheEngineVersions API request.
+func (r *DescribeCacheEngineVersionsRequest) Send() (*DescribeCacheEngineVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheEngineVersionsOutput), nil
+}
+
+// DescribeCacheEngineVersionsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheEngineVersions for more information on using the DescribeCacheEngineVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the available cache engines and their versions.
 //
 //    // Example sending a request using the DescribeCacheEngineVersionsRequest method.
-//    req, resp := client.DescribeCacheEngineVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheEngineVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersions
-func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVersionsInput) (req *aws.Request, output *DescribeCacheEngineVersionsOutput) {
+func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheEngineVersions,
 		HTTPMethod: "POST",
@@ -1873,41 +1044,8 @@ func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEng
 		input = &DescribeCacheEngineVersionsInput{}
 	}
 
-	output = &DescribeCacheEngineVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCacheEngineVersions API operation for Amazon ElastiCache.
-//
-// Returns a list of the available cache engines and their versions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheEngineVersions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersions
-func (c *ElastiCache) DescribeCacheEngineVersions(input *DescribeCacheEngineVersionsInput) (*DescribeCacheEngineVersionsOutput, error) {
-	req, out := c.DescribeCacheEngineVersionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheEngineVersionsWithContext is the same as DescribeCacheEngineVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheEngineVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheEngineVersionsWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, opts ...aws.Option) (*DescribeCacheEngineVersionsOutput, error) {
-	req, out := c.DescribeCacheEngineVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheEngineVersionsOutput{})
+	return DescribeCacheEngineVersionsRequest{Request: req, Input: input}
 }
 
 // DescribeCacheEngineVersionsPages iterates over the pages of a DescribeCacheEngineVersions operation,
@@ -1946,10 +1084,10 @@ func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheEngineVersionsRequest(inCpy)
+			req := c.DescribeCacheEngineVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1962,31 +1100,38 @@ func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Contex
 
 const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 
-// DescribeCacheParameterGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheParameterGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheParameterGroupsRequest is a API request type for the DescribeCacheParameterGroups API operation.
+type DescribeCacheParameterGroupsRequest struct {
+	*aws.Request
+	Input *DescribeCacheParameterGroupsInput
+}
+
+// Send marshals and sends the DescribeCacheParameterGroups API request.
+func (r *DescribeCacheParameterGroupsRequest) Send() (*DescribeCacheParameterGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheParameterGroupsOutput), nil
+}
+
+// DescribeCacheParameterGroupsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheParameterGroups for more information on using the DescribeCacheParameterGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of cache parameter group descriptions. If a cache parameter
+// group name is specified, the list contains only the descriptions for that
+// group.
 //
 //    // Example sending a request using the DescribeCacheParameterGroupsRequest method.
-//    req, resp := client.DescribeCacheParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheParameterGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups
-func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCacheParameterGroupsInput) (req *aws.Request, output *DescribeCacheParameterGroupsOutput) {
+func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheParameterGroups,
 		HTTPMethod: "POST",
@@ -2003,55 +1148,8 @@ func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCachePa
 		input = &DescribeCacheParameterGroupsInput{}
 	}
 
-	output = &DescribeCacheParameterGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCacheParameterGroups API operation for Amazon ElastiCache.
-//
-// Returns a list of cache parameter group descriptions. If a cache parameter
-// group name is specified, the list contains only the descriptions for that
-// group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheParameterGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups
-func (c *ElastiCache) DescribeCacheParameterGroups(input *DescribeCacheParameterGroupsInput) (*DescribeCacheParameterGroupsOutput, error) {
-	req, out := c.DescribeCacheParameterGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheParameterGroupsWithContext is the same as DescribeCacheParameterGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheParameterGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParameterGroupsWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, opts ...aws.Option) (*DescribeCacheParameterGroupsOutput, error) {
-	req, out := c.DescribeCacheParameterGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheParameterGroupsOutput{})
+	return DescribeCacheParameterGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeCacheParameterGroupsPages iterates over the pages of a DescribeCacheParameterGroups operation,
@@ -2090,10 +1188,10 @@ func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheParameterGroupsRequest(inCpy)
+			req := c.DescribeCacheParameterGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2106,31 +1204,36 @@ func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Conte
 
 const opDescribeCacheParameters = "DescribeCacheParameters"
 
-// DescribeCacheParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheParametersRequest is a API request type for the DescribeCacheParameters API operation.
+type DescribeCacheParametersRequest struct {
+	*aws.Request
+	Input *DescribeCacheParametersInput
+}
+
+// Send marshals and sends the DescribeCacheParameters API request.
+func (r *DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheParametersOutput), nil
+}
+
+// DescribeCacheParametersRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheParameters for more information on using the DescribeCacheParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the detailed parameter list for a particular cache parameter group.
 //
 //    // Example sending a request using the DescribeCacheParametersRequest method.
-//    req, resp := client.DescribeCacheParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters
-func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParametersInput) (req *aws.Request, output *DescribeCacheParametersOutput) {
+func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParametersInput) DescribeCacheParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheParameters,
 		HTTPMethod: "POST",
@@ -2147,53 +1250,8 @@ func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParamet
 		input = &DescribeCacheParametersInput{}
 	}
 
-	output = &DescribeCacheParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCacheParameters API operation for Amazon ElastiCache.
-//
-// Returns the detailed parameter list for a particular cache parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters
-func (c *ElastiCache) DescribeCacheParameters(input *DescribeCacheParametersInput) (*DescribeCacheParametersOutput, error) {
-	req, out := c.DescribeCacheParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheParametersWithContext is the same as DescribeCacheParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParametersWithContext(ctx aws.Context, input *DescribeCacheParametersInput, opts ...aws.Option) (*DescribeCacheParametersOutput, error) {
-	req, out := c.DescribeCacheParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheParametersOutput{})
+	return DescribeCacheParametersRequest{Request: req, Input: input}
 }
 
 // DescribeCacheParametersPages iterates over the pages of a DescribeCacheParameters operation,
@@ -2232,10 +1290,10 @@ func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheParametersRequest(inCpy)
+			req := c.DescribeCacheParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2248,31 +1306,37 @@ func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, i
 
 const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 
-// DescribeCacheSecurityGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheSecurityGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheSecurityGroupsRequest is a API request type for the DescribeCacheSecurityGroups API operation.
+type DescribeCacheSecurityGroupsRequest struct {
+	*aws.Request
+	Input *DescribeCacheSecurityGroupsInput
+}
+
+// Send marshals and sends the DescribeCacheSecurityGroups API request.
+func (r *DescribeCacheSecurityGroupsRequest) Send() (*DescribeCacheSecurityGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheSecurityGroupsOutput), nil
+}
+
+// DescribeCacheSecurityGroupsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheSecurityGroups for more information on using the DescribeCacheSecurityGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of cache security group descriptions. If a cache security
+// group name is specified, the list contains only the description of that group.
 //
 //    // Example sending a request using the DescribeCacheSecurityGroupsRequest method.
-//    req, resp := client.DescribeCacheSecurityGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheSecurityGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups
-func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurityGroupsInput) (req *aws.Request, output *DescribeCacheSecurityGroupsOutput) {
+func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheSecurityGroups,
 		HTTPMethod: "POST",
@@ -2289,54 +1353,8 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSec
 		input = &DescribeCacheSecurityGroupsInput{}
 	}
 
-	output = &DescribeCacheSecurityGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCacheSecurityGroups API operation for Amazon ElastiCache.
-//
-// Returns a list of cache security group descriptions. If a cache security
-// group name is specified, the list contains only the description of that group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheSecurityGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups
-func (c *ElastiCache) DescribeCacheSecurityGroups(input *DescribeCacheSecurityGroupsInput) (*DescribeCacheSecurityGroupsOutput, error) {
-	req, out := c.DescribeCacheSecurityGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheSecurityGroupsWithContext is the same as DescribeCacheSecurityGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheSecurityGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSecurityGroupsWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, opts ...aws.Option) (*DescribeCacheSecurityGroupsOutput, error) {
-	req, out := c.DescribeCacheSecurityGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheSecurityGroupsOutput{})
+	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeCacheSecurityGroupsPages iterates over the pages of a DescribeCacheSecurityGroups operation,
@@ -2375,10 +1393,10 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheSecurityGroupsRequest(inCpy)
+			req := c.DescribeCacheSecurityGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2391,31 +1409,37 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Contex
 
 const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 
-// DescribeCacheSubnetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCacheSubnetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheSubnetGroupsRequest is a API request type for the DescribeCacheSubnetGroups API operation.
+type DescribeCacheSubnetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeCacheSubnetGroupsInput
+}
+
+// Send marshals and sends the DescribeCacheSubnetGroups API request.
+func (r *DescribeCacheSubnetGroupsRequest) Send() (*DescribeCacheSubnetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheSubnetGroupsOutput), nil
+}
+
+// DescribeCacheSubnetGroupsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCacheSubnetGroups for more information on using the DescribeCacheSubnetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of cache subnet group descriptions. If a subnet group name
+// is specified, the list contains only the description of that group.
 //
 //    // Example sending a request using the DescribeCacheSubnetGroupsRequest method.
-//    req, resp := client.DescribeCacheSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheSubnetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups
-func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGroupsInput) (req *aws.Request, output *DescribeCacheSubnetGroupsOutput) {
+func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCacheSubnetGroups,
 		HTTPMethod: "POST",
@@ -2432,48 +1456,8 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubne
 		input = &DescribeCacheSubnetGroupsInput{}
 	}
 
-	output = &DescribeCacheSubnetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCacheSubnetGroups API operation for Amazon ElastiCache.
-//
-// Returns a list of cache subnet group descriptions. If a subnet group name
-// is specified, the list contains only the description of that group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeCacheSubnetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSubnetGroupNotFoundFault "CacheSubnetGroupNotFoundFault"
-//   The requested cache subnet group name does not refer to an existing cache
-//   subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups
-func (c *ElastiCache) DescribeCacheSubnetGroups(input *DescribeCacheSubnetGroupsInput) (*DescribeCacheSubnetGroupsOutput, error) {
-	req, out := c.DescribeCacheSubnetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheSubnetGroupsWithContext is the same as DescribeCacheSubnetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCacheSubnetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSubnetGroupsWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, opts ...aws.Option) (*DescribeCacheSubnetGroupsOutput, error) {
-	req, out := c.DescribeCacheSubnetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheSubnetGroupsOutput{})
+	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeCacheSubnetGroupsPages iterates over the pages of a DescribeCacheSubnetGroups operation,
@@ -2512,10 +1496,10 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheSubnetGroupsRequest(inCpy)
+			req := c.DescribeCacheSubnetGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2528,31 +1512,37 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context,
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 
-// DescribeEngineDefaultParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeEngineDefaultParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEngineDefaultParametersRequest is a API request type for the DescribeEngineDefaultParameters API operation.
+type DescribeEngineDefaultParametersRequest struct {
+	*aws.Request
+	Input *DescribeEngineDefaultParametersInput
+}
+
+// Send marshals and sends the DescribeEngineDefaultParameters API request.
+func (r *DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEngineDefaultParametersOutput), nil
+}
+
+// DescribeEngineDefaultParametersRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEngineDefaultParameters for more information on using the DescribeEngineDefaultParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the default engine and system parameter information for the specified
+// cache engine.
 //
 //    // Example sending a request using the DescribeEngineDefaultParametersRequest method.
-//    req, resp := client.DescribeEngineDefaultParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEngineDefaultParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParameters
-func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *aws.Request, output *DescribeEngineDefaultParametersOutput) {
+func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultParameters,
 		HTTPMethod: "POST",
@@ -2569,50 +1559,8 @@ func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngi
 		input = &DescribeEngineDefaultParametersInput{}
 	}
 
-	output = &DescribeEngineDefaultParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEngineDefaultParameters API operation for Amazon ElastiCache.
-//
-// Returns the default engine and system parameter information for the specified
-// cache engine.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeEngineDefaultParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParameters
-func (c *ElastiCache) DescribeEngineDefaultParameters(input *DescribeEngineDefaultParametersInput) (*DescribeEngineDefaultParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEngineDefaultParametersWithContext is the same as DescribeEngineDefaultParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEngineDefaultParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...aws.Option) (*DescribeEngineDefaultParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
 }
 
 // DescribeEngineDefaultParametersPages iterates over the pages of a DescribeEngineDefaultParameters operation,
@@ -2651,10 +1599,10 @@ func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Co
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEngineDefaultParametersRequest(inCpy)
+			req := c.DescribeEngineDefaultParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2667,31 +1615,42 @@ func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Co
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns events related to cache clusters, cache security groups, and cache
+// parameter groups. You can obtain events specific to a particular cache cluster,
+// cache security group, or cache parameter group by providing the name as a
+// parameter.
 //
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// By default, only the events occurring within the last hour are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEvents
-func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -2708,55 +1667,8 @@ func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) (req *aw
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for Amazon ElastiCache.
-//
-// Returns events related to cache clusters, cache security groups, and cache
-// parameter groups. You can obtain events specific to a particular cache cluster,
-// cache security group, or cache parameter group by providing the name as a
-// parameter.
-//
-// By default, only the events occurring within the last hour are returned;
-// however, you can retrieve up to 14 days' worth of events if necessary.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEvents
-func (c *ElastiCache) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -2795,10 +1707,10 @@ func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2811,31 +1723,40 @@ func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeReplicationGroups = "DescribeReplicationGroups"
 
-// DescribeReplicationGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReplicationGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReplicationGroupsRequest is a API request type for the DescribeReplicationGroups API operation.
+type DescribeReplicationGroupsRequest struct {
+	*aws.Request
+	Input *DescribeReplicationGroupsInput
+}
+
+// Send marshals and sends the DescribeReplicationGroups API request.
+func (r *DescribeReplicationGroupsRequest) Send() (*DescribeReplicationGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReplicationGroupsOutput), nil
+}
+
+// DescribeReplicationGroupsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about a particular replication group. If no identifier
+// is specified, DescribeReplicationGroups returns information about all replication
+// groups.
 //
-// See DescribeReplicationGroups for more information on using the DescribeReplicationGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is valid for Redis only.
 //
 //    // Example sending a request using the DescribeReplicationGroupsRequest method.
-//    req, resp := client.DescribeReplicationGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReplicationGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups
-func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicationGroupsInput) (req *aws.Request, output *DescribeReplicationGroupsOutput) {
+func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationGroups,
 		HTTPMethod: "POST",
@@ -2852,56 +1773,8 @@ func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicatio
 		input = &DescribeReplicationGroupsInput{}
 	}
 
-	output = &DescribeReplicationGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReplicationGroups API operation for Amazon ElastiCache.
-//
-// Returns information about a particular replication group. If no identifier
-// is specified, DescribeReplicationGroups returns information about all replication
-// groups.
-//
-// This operation is valid for Redis only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeReplicationGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups
-func (c *ElastiCache) DescribeReplicationGroups(input *DescribeReplicationGroupsInput) (*DescribeReplicationGroupsOutput, error) {
-	req, out := c.DescribeReplicationGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReplicationGroupsWithContext is the same as DescribeReplicationGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReplicationGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReplicationGroupsWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.Option) (*DescribeReplicationGroupsOutput, error) {
-	req, out := c.DescribeReplicationGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReplicationGroupsOutput{})
+	return DescribeReplicationGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeReplicationGroupsPages iterates over the pages of a DescribeReplicationGroups operation,
@@ -2940,10 +1813,10 @@ func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationGroupsRequest(inCpy)
+			req := c.DescribeReplicationGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2956,31 +1829,37 @@ func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context,
 
 const opDescribeReservedCacheNodes = "DescribeReservedCacheNodes"
 
-// DescribeReservedCacheNodesRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedCacheNodes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedCacheNodesRequest is a API request type for the DescribeReservedCacheNodes API operation.
+type DescribeReservedCacheNodesRequest struct {
+	*aws.Request
+	Input *DescribeReservedCacheNodesInput
+}
+
+// Send marshals and sends the DescribeReservedCacheNodes API request.
+func (r *DescribeReservedCacheNodesRequest) Send() (*DescribeReservedCacheNodesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedCacheNodesOutput), nil
+}
+
+// DescribeReservedCacheNodesRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReservedCacheNodes for more information on using the DescribeReservedCacheNodes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about reserved cache nodes for this account, or about
+// a specified reserved cache node.
 //
 //    // Example sending a request using the DescribeReservedCacheNodesRequest method.
-//    req, resp := client.DescribeReservedCacheNodesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedCacheNodesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodes
-func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedCacheNodesInput) (req *aws.Request, output *DescribeReservedCacheNodesOutput) {
+func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedCacheNodesInput) DescribeReservedCacheNodesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedCacheNodes,
 		HTTPMethod: "POST",
@@ -2997,53 +1876,8 @@ func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedC
 		input = &DescribeReservedCacheNodesInput{}
 	}
 
-	output = &DescribeReservedCacheNodesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedCacheNodes API operation for Amazon ElastiCache.
-//
-// Returns information about reserved cache nodes for this account, or about
-// a specified reserved cache node.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeReservedCacheNodes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedCacheNodeNotFoundFault "ReservedCacheNodeNotFound"
-//   The requested reserved cache node was not found.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodes
-func (c *ElastiCache) DescribeReservedCacheNodes(input *DescribeReservedCacheNodesInput) (*DescribeReservedCacheNodesOutput, error) {
-	req, out := c.DescribeReservedCacheNodesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedCacheNodesWithContext is the same as DescribeReservedCacheNodes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedCacheNodes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, opts ...aws.Option) (*DescribeReservedCacheNodesOutput, error) {
-	req, out := c.DescribeReservedCacheNodesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedCacheNodesOutput{})
+	return DescribeReservedCacheNodesRequest{Request: req, Input: input}
 }
 
 // DescribeReservedCacheNodesPages iterates over the pages of a DescribeReservedCacheNodes operation,
@@ -3082,10 +1916,10 @@ func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedCacheNodesRequest(inCpy)
+			req := c.DescribeReservedCacheNodesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3098,31 +1932,36 @@ func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context
 
 const opDescribeReservedCacheNodesOfferings = "DescribeReservedCacheNodesOfferings"
 
-// DescribeReservedCacheNodesOfferingsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedCacheNodesOfferings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedCacheNodesOfferingsRequest is a API request type for the DescribeReservedCacheNodesOfferings API operation.
+type DescribeReservedCacheNodesOfferingsRequest struct {
+	*aws.Request
+	Input *DescribeReservedCacheNodesOfferingsInput
+}
+
+// Send marshals and sends the DescribeReservedCacheNodesOfferings API request.
+func (r *DescribeReservedCacheNodesOfferingsRequest) Send() (*DescribeReservedCacheNodesOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedCacheNodesOfferingsOutput), nil
+}
+
+// DescribeReservedCacheNodesOfferingsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReservedCacheNodesOfferings for more information on using the DescribeReservedCacheNodesOfferings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists available reserved cache node offerings.
 //
 //    // Example sending a request using the DescribeReservedCacheNodesOfferingsRequest method.
-//    req, resp := client.DescribeReservedCacheNodesOfferingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedCacheNodesOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferings
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *DescribeReservedCacheNodesOfferingsInput) (req *aws.Request, output *DescribeReservedCacheNodesOfferingsOutput) {
+func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *DescribeReservedCacheNodesOfferingsInput) DescribeReservedCacheNodesOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedCacheNodesOfferings,
 		HTTPMethod: "POST",
@@ -3139,52 +1978,8 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *Describe
 		input = &DescribeReservedCacheNodesOfferingsInput{}
 	}
 
-	output = &DescribeReservedCacheNodesOfferingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedCacheNodesOfferings API operation for Amazon ElastiCache.
-//
-// Lists available reserved cache node offerings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeReservedCacheNodesOfferings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedCacheNodesOfferingNotFoundFault "ReservedCacheNodesOfferingNotFound"
-//   The requested cache node offering does not exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferings
-func (c *ElastiCache) DescribeReservedCacheNodesOfferings(input *DescribeReservedCacheNodesOfferingsInput) (*DescribeReservedCacheNodesOfferingsOutput, error) {
-	req, out := c.DescribeReservedCacheNodesOfferingsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedCacheNodesOfferingsWithContext is the same as DescribeReservedCacheNodesOfferings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedCacheNodesOfferings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, opts ...aws.Option) (*DescribeReservedCacheNodesOfferingsOutput, error) {
-	req, out := c.DescribeReservedCacheNodesOfferingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedCacheNodesOfferingsOutput{})
+	return DescribeReservedCacheNodesOfferingsRequest{Request: req, Input: input}
 }
 
 // DescribeReservedCacheNodesOfferingsPages iterates over the pages of a DescribeReservedCacheNodesOfferings operation,
@@ -3223,10 +2018,10 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aw
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedCacheNodesOfferingsRequest(inCpy)
+			req := c.DescribeReservedCacheNodesOfferingsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3239,31 +2034,41 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aw
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
-// DescribeSnapshotsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSnapshots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSnapshotsRequest is a API request type for the DescribeSnapshots API operation.
+type DescribeSnapshotsRequest struct {
+	*aws.Request
+	Input *DescribeSnapshotsInput
+}
+
+// Send marshals and sends the DescribeSnapshots API request.
+func (r *DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSnapshotsOutput), nil
+}
+
+// DescribeSnapshotsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about cache cluster or replication group snapshots. By
+// default, DescribeSnapshots lists all of your snapshots; it can optionally
+// describe a single snapshot, or just the snapshots associated with a particular
+// cache cluster.
 //
-// See DescribeSnapshots for more information on using the DescribeSnapshots
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is valid for Redis only.
 //
 //    // Example sending a request using the DescribeSnapshotsRequest method.
-//    req, resp := client.DescribeSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots
-func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *aws.Request, output *DescribeSnapshotsOutput) {
+func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
@@ -3280,60 +2085,8 @@ func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (r
 		input = &DescribeSnapshotsInput{}
 	}
 
-	output = &DescribeSnapshotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSnapshots API operation for Amazon ElastiCache.
-//
-// Returns information about cache cluster or replication group snapshots. By
-// default, DescribeSnapshots lists all of your snapshots; it can optionally
-// describe a single snapshot, or just the snapshots associated with a particular
-// cache cluster.
-//
-// This operation is valid for Redis only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation DescribeSnapshots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots
-func (c *ElastiCache) DescribeSnapshots(input *DescribeSnapshotsInput) (*DescribeSnapshotsOutput, error) {
-	req, out := c.DescribeSnapshotsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSnapshotsWithContext is the same as DescribeSnapshots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSnapshots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeSnapshotsWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...aws.Option) (*DescribeSnapshotsOutput, error) {
-	req, out := c.DescribeSnapshotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSnapshotsOutput{})
+	return DescribeSnapshotsRequest{Request: req, Input: input}
 }
 
 // DescribeSnapshotsPages iterates over the pages of a DescribeSnapshots operation,
@@ -3372,10 +2125,10 @@ func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSnapshotsRequest(inCpy)
+			req := c.DescribeSnapshotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3388,31 +2141,41 @@ func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *
 
 const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 
-// ListAllowedNodeTypeModificationsRequest generates a "aws.Request" representing the
-// client's request for the ListAllowedNodeTypeModifications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAllowedNodeTypeModificationsRequest is a API request type for the ListAllowedNodeTypeModifications API operation.
+type ListAllowedNodeTypeModificationsRequest struct {
+	*aws.Request
+	Input *ListAllowedNodeTypeModificationsInput
+}
+
+// Send marshals and sends the ListAllowedNodeTypeModifications API request.
+func (r *ListAllowedNodeTypeModificationsRequest) Send() (*ListAllowedNodeTypeModificationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAllowedNodeTypeModificationsOutput), nil
+}
+
+// ListAllowedNodeTypeModificationsRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all available node types that you can scale your Redis cluster's or
+// replication group's current node type up to.
 //
-// See ListAllowedNodeTypeModifications for more information on using the ListAllowedNodeTypeModifications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you use the ModifyCacheCluster or ModifyReplicationGroup operations
+// to scale up your cluster or replication group, the value of the CacheNodeType
+// parameter must be one of the node types returned by this operation.
 //
 //    // Example sending a request using the ListAllowedNodeTypeModificationsRequest method.
-//    req, resp := client.ListAllowedNodeTypeModificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAllowedNodeTypeModificationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications
-func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeTypeModificationsInput) (req *aws.Request, output *ListAllowedNodeTypeModificationsOutput) {
+func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest {
 	op := &aws.Operation{
 		Name:       opListAllowedNodeTypeModifications,
 		HTTPMethod: "POST",
@@ -3423,105 +2186,30 @@ func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowed
 		input = &ListAllowedNodeTypeModificationsInput{}
 	}
 
-	output = &ListAllowedNodeTypeModificationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAllowedNodeTypeModifications API operation for Amazon ElastiCache.
-//
-// Lists all available node types that you can scale your Redis cluster's or
-// replication group's current node type up to.
-//
-// When you use the ModifyCacheCluster or ModifyReplicationGroup operations
-// to scale up your cluster or replication group, the value of the CacheNodeType
-// parameter must be one of the node types returned by this operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ListAllowedNodeTypeModifications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications
-func (c *ElastiCache) ListAllowedNodeTypeModifications(input *ListAllowedNodeTypeModificationsInput) (*ListAllowedNodeTypeModificationsOutput, error) {
-	req, out := c.ListAllowedNodeTypeModificationsRequest(input)
-	return out, req.Send()
-}
-
-// ListAllowedNodeTypeModificationsWithContext is the same as ListAllowedNodeTypeModifications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAllowedNodeTypeModifications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ListAllowedNodeTypeModificationsWithContext(ctx aws.Context, input *ListAllowedNodeTypeModificationsInput, opts ...aws.Option) (*ListAllowedNodeTypeModificationsOutput, error) {
-	req, out := c.ListAllowedNodeTypeModificationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAllowedNodeTypeModificationsOutput{})
+	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResource
-func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *TagListMessage) {
-	op := &aws.Operation{
-		Name:       opListTagsForResource,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListTagsForResourceInput{}
-	}
-
-	output = &TagListMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
 }
 
-// ListTagsForResource API operation for Amazon ElastiCache.
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Lists all cost allocation tags currently on the named resource. A cost allocation
 // tag is a key-value pair where the key is case-sensitive and the value is
@@ -3532,72 +2220,63 @@ func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput
 // For more information, see Using Cost Allocation Tags in Amazon ElastiCache
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/BestPractices.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeInvalidARNFault "InvalidARN"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResource
-func (c *ElastiCache) ListTagsForResource(input *ListTagsForResourceInput) (*TagListMessage, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*TagListMessage, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opModifyCacheCluster = "ModifyCacheCluster"
 
-// ModifyCacheClusterRequest generates a "aws.Request" representing the
-// client's request for the ModifyCacheCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyCacheClusterRequest is a API request type for the ModifyCacheCluster API operation.
+type ModifyCacheClusterRequest struct {
+	*aws.Request
+	Input *ModifyCacheClusterInput
+}
+
+// Send marshals and sends the ModifyCacheCluster API request.
+func (r *ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyCacheClusterOutput), nil
+}
+
+// ModifyCacheClusterRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyCacheCluster for more information on using the ModifyCacheCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the settings for a cache cluster. You can use this operation to
+// change one or more cluster configuration parameters by specifying the parameters
+// and the new values.
 //
 //    // Example sending a request using the ModifyCacheClusterRequest method.
-//    req, resp := client.ModifyCacheClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyCacheClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster
-func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) (req *aws.Request, output *ModifyCacheClusterOutput) {
+func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) ModifyCacheClusterRequest {
 	op := &aws.Operation{
 		Name:       opModifyCacheCluster,
 		HTTPMethod: "POST",
@@ -3608,112 +2287,44 @@ func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) 
 		input = &ModifyCacheClusterInput{}
 	}
 
-	output = &ModifyCacheClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyCacheCluster API operation for Amazon ElastiCache.
-//
-// Modifies the settings for a cache cluster. You can use this operation to
-// change one or more cluster configuration parameters by specifying the parameters
-// and the new values.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ModifyCacheCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeInvalidCacheSecurityGroupStateFault "InvalidCacheSecurityGroupState"
-//   The current state of the cache security group does not allow deletion.
-//
-//   * ErrCodeInsufficientCacheClusterCapacityFault "InsufficientCacheClusterCapacity"
-//   The requested cache node type is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes in a single cache cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes per customer.
-//
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster
-func (c *ElastiCache) ModifyCacheCluster(input *ModifyCacheClusterInput) (*ModifyCacheClusterOutput, error) {
-	req, out := c.ModifyCacheClusterRequest(input)
-	return out, req.Send()
-}
-
-// ModifyCacheClusterWithContext is the same as ModifyCacheCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyCacheCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheClusterWithContext(ctx aws.Context, input *ModifyCacheClusterInput, opts ...aws.Option) (*ModifyCacheClusterOutput, error) {
-	req, out := c.ModifyCacheClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyCacheClusterOutput{})
+	return ModifyCacheClusterRequest{Request: req, Input: input}
 }
 
 const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 
-// ModifyCacheParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyCacheParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyCacheParameterGroupRequest is a API request type for the ModifyCacheParameterGroup API operation.
+type ModifyCacheParameterGroupRequest struct {
+	*aws.Request
+	Input *ModifyCacheParameterGroupInput
+}
+
+// Send marshals and sends the ModifyCacheParameterGroup API request.
+func (r *ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetCacheParameterGroupOutput), nil
+}
+
+// ModifyCacheParameterGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyCacheParameterGroup for more information on using the ModifyCacheParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the parameters of a cache parameter group. You can modify up to
+// 20 parameters in a single request by submitting a list parameter name and
+// value pairs.
 //
 //    // Example sending a request using the ModifyCacheParameterGroupRequest method.
-//    req, resp := client.ModifyCacheParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyCacheParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroup
-func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGroupInput) (req *aws.Request, output *CacheParameterGroupNameMessage) {
+func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -3724,88 +2335,42 @@ func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParamet
 		input = &ModifyCacheParameterGroupInput{}
 	}
 
-	output = &CacheParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyCacheParameterGroup API operation for Amazon ElastiCache.
-//
-// Modifies the parameters of a cache parameter group. You can modify up to
-// 20 parameters in a single request by submitting a list parameter name and
-// value pairs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ModifyCacheParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidCacheParameterGroupStateFault "InvalidCacheParameterGroupState"
-//   The current state of the cache parameter group does not allow the requested
-//   operation to occur.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroup
-func (c *ElastiCache) ModifyCacheParameterGroup(input *ModifyCacheParameterGroupInput) (*CacheParameterGroupNameMessage, error) {
-	req, out := c.ModifyCacheParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyCacheParameterGroupWithContext is the same as ModifyCacheParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyCacheParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheParameterGroupWithContext(ctx aws.Context, input *ModifyCacheParameterGroupInput, opts ...aws.Option) (*CacheParameterGroupNameMessage, error) {
-	req, out := c.ModifyCacheParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+	return ModifyCacheParameterGroupRequest{Request: req, Input: input}
 }
 
 const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 
-// ModifyCacheSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyCacheSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyCacheSubnetGroupRequest is a API request type for the ModifyCacheSubnetGroup API operation.
+type ModifyCacheSubnetGroupRequest struct {
+	*aws.Request
+	Input *ModifyCacheSubnetGroupInput
+}
+
+// Send marshals and sends the ModifyCacheSubnetGroup API request.
+func (r *ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyCacheSubnetGroupOutput), nil
+}
+
+// ModifyCacheSubnetGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyCacheSubnetGroup for more information on using the ModifyCacheSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing cache subnet group.
 //
 //    // Example sending a request using the ModifyCacheSubnetGroupRequest method.
-//    req, resp := client.ModifyCacheSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyCacheSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup
-func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInput) (req *aws.Request, output *ModifyCacheSubnetGroupOutput) {
+func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyCacheSubnetGroup,
 		HTTPMethod: "POST",
@@ -3816,86 +2381,48 @@ func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGrou
 		input = &ModifyCacheSubnetGroupInput{}
 	}
 
-	output = &ModifyCacheSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyCacheSubnetGroup API operation for Amazon ElastiCache.
-//
-// Modifies an existing cache subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ModifyCacheSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSubnetGroupNotFoundFault "CacheSubnetGroupNotFoundFault"
-//   The requested cache subnet group name does not refer to an existing cache
-//   subnet group.
-//
-//   * ErrCodeCacheSubnetQuotaExceededFault "CacheSubnetQuotaExceededFault"
-//   The request cannot be processed because it would exceed the allowed number
-//   of subnets in a cache subnet group.
-//
-//   * ErrCodeSubnetInUse "SubnetInUse"
-//   The requested subnet is being used by another cache subnet group.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   An invalid subnet identifier was specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup
-func (c *ElastiCache) ModifyCacheSubnetGroup(input *ModifyCacheSubnetGroupInput) (*ModifyCacheSubnetGroupOutput, error) {
-	req, out := c.ModifyCacheSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyCacheSubnetGroupWithContext is the same as ModifyCacheSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyCacheSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheSubnetGroupWithContext(ctx aws.Context, input *ModifyCacheSubnetGroupInput, opts ...aws.Option) (*ModifyCacheSubnetGroupOutput, error) {
-	req, out := c.ModifyCacheSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyCacheSubnetGroupOutput{})
+	return ModifyCacheSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opModifyReplicationGroup = "ModifyReplicationGroup"
 
-// ModifyReplicationGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyReplicationGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyReplicationGroupRequest is a API request type for the ModifyReplicationGroup API operation.
+type ModifyReplicationGroupRequest struct {
+	*aws.Request
+	Input *ModifyReplicationGroupInput
+}
+
+// Send marshals and sends the ModifyReplicationGroup API request.
+func (r *ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyReplicationGroupOutput), nil
+}
+
+// ModifyReplicationGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the settings for a replication group.
 //
-// See ModifyReplicationGroup for more information on using the ModifyReplicationGroup
-// API call, and error handling.
+// Due to current limitations on Redis (cluster mode disabled), this operation
+// or parameter is not supported on Redis (cluster mode enabled) replication
+// groups.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is valid for Redis only.
 //
 //    // Example sending a request using the ModifyReplicationGroupRequest method.
-//    req, resp := client.ModifyReplicationGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyReplicationGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup
-func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGroupInput) (req *aws.Request, output *ModifyReplicationGroupOutput) {
+func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGroupInput) ModifyReplicationGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationGroup,
 		HTTPMethod: "POST",
@@ -3906,122 +2433,42 @@ func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGrou
 		input = &ModifyReplicationGroupInput{}
 	}
 
-	output = &ModifyReplicationGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyReplicationGroup API operation for Amazon ElastiCache.
-//
-// Modifies the settings for a replication group.
-//
-// Due to current limitations on Redis (cluster mode disabled), this operation
-// or parameter is not supported on Redis (cluster mode enabled) replication
-// groups.
-//
-// This operation is valid for Redis only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ModifyReplicationGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeInvalidReplicationGroupStateFault "InvalidReplicationGroupState"
-//   The requested replication group is not in the available state.
-//
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeInvalidCacheSecurityGroupStateFault "InvalidCacheSecurityGroupState"
-//   The current state of the cache security group does not allow deletion.
-//
-//   * ErrCodeInsufficientCacheClusterCapacityFault "InsufficientCacheClusterCapacity"
-//   The requested cache node type is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeNodeQuotaForClusterExceededFault "NodeQuotaForClusterExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes in a single cache cluster.
-//
-//   * ErrCodeNodeQuotaForCustomerExceededFault "NodeQuotaForCustomerExceeded"
-//   The request cannot be processed because it would exceed the allowed number
-//   of cache nodes per customer.
-//
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   The VPC network is in an invalid state.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup
-func (c *ElastiCache) ModifyReplicationGroup(input *ModifyReplicationGroupInput) (*ModifyReplicationGroupOutput, error) {
-	req, out := c.ModifyReplicationGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyReplicationGroupWithContext is the same as ModifyReplicationGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyReplicationGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ModifyReplicationGroupWithContext(ctx aws.Context, input *ModifyReplicationGroupInput, opts ...aws.Option) (*ModifyReplicationGroupOutput, error) {
-	req, out := c.ModifyReplicationGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyReplicationGroupOutput{})
+	return ModifyReplicationGroupRequest{Request: req, Input: input}
 }
 
 const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering"
 
-// PurchaseReservedCacheNodesOfferingRequest generates a "aws.Request" representing the
-// client's request for the PurchaseReservedCacheNodesOffering operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PurchaseReservedCacheNodesOfferingRequest is a API request type for the PurchaseReservedCacheNodesOffering API operation.
+type PurchaseReservedCacheNodesOfferingRequest struct {
+	*aws.Request
+	Input *PurchaseReservedCacheNodesOfferingInput
+}
+
+// Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
+func (r *PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCacheNodesOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseReservedCacheNodesOfferingOutput), nil
+}
+
+// PurchaseReservedCacheNodesOfferingRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurchaseReservedCacheNodesOffering for more information on using the PurchaseReservedCacheNodesOffering
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Allows you to purchase a reserved cache node offering.
 //
 //    // Example sending a request using the PurchaseReservedCacheNodesOfferingRequest method.
-//    req, resp := client.PurchaseReservedCacheNodesOfferingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PurchaseReservedCacheNodesOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering
-func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReservedCacheNodesOfferingInput) (req *aws.Request, output *PurchaseReservedCacheNodesOfferingOutput) {
+func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedCacheNodesOffering,
 		HTTPMethod: "POST",
@@ -4032,104 +2479,30 @@ func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseR
 		input = &PurchaseReservedCacheNodesOfferingInput{}
 	}
 
-	output = &PurchaseReservedCacheNodesOfferingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PurchaseReservedCacheNodesOffering API operation for Amazon ElastiCache.
-//
-// Allows you to purchase a reserved cache node offering.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation PurchaseReservedCacheNodesOffering for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedCacheNodesOfferingNotFoundFault "ReservedCacheNodesOfferingNotFound"
-//   The requested cache node offering does not exist.
-//
-//   * ErrCodeReservedCacheNodeAlreadyExistsFault "ReservedCacheNodeAlreadyExists"
-//   You already have a reservation with the given identifier.
-//
-//   * ErrCodeReservedCacheNodeQuotaExceededFault "ReservedCacheNodeQuotaExceeded"
-//   The request cannot be processed because it would exceed the user's cache
-//   node quota.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering
-func (c *ElastiCache) PurchaseReservedCacheNodesOffering(input *PurchaseReservedCacheNodesOfferingInput) (*PurchaseReservedCacheNodesOfferingOutput, error) {
-	req, out := c.PurchaseReservedCacheNodesOfferingRequest(input)
-	return out, req.Send()
-}
-
-// PurchaseReservedCacheNodesOfferingWithContext is the same as PurchaseReservedCacheNodesOffering with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurchaseReservedCacheNodesOffering for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) PurchaseReservedCacheNodesOfferingWithContext(ctx aws.Context, input *PurchaseReservedCacheNodesOfferingInput, opts ...aws.Option) (*PurchaseReservedCacheNodesOfferingOutput, error) {
-	req, out := c.PurchaseReservedCacheNodesOfferingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PurchaseReservedCacheNodesOfferingOutput{})
+	return PurchaseReservedCacheNodesOfferingRequest{Request: req, Input: input}
 }
 
 const opRebootCacheCluster = "RebootCacheCluster"
 
-// RebootCacheClusterRequest generates a "aws.Request" representing the
-// client's request for the RebootCacheCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebootCacheCluster for more information on using the RebootCacheCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RebootCacheClusterRequest method.
-//    req, resp := client.RebootCacheClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster
-func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) (req *aws.Request, output *RebootCacheClusterOutput) {
-	op := &aws.Operation{
-		Name:       opRebootCacheCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RebootCacheClusterInput{}
-	}
-
-	output = &RebootCacheClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RebootCacheClusterRequest is a API request type for the RebootCacheCluster API operation.
+type RebootCacheClusterRequest struct {
+	*aws.Request
+	Input *RebootCacheClusterInput
 }
 
-// RebootCacheCluster API operation for Amazon ElastiCache.
+// Send marshals and sends the RebootCacheCluster API request.
+func (r *RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootCacheClusterOutput), nil
+}
+
+// RebootCacheClusterRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Reboots some, or all, of the cache nodes within a provisioned cache cluster.
 // This operation applies any modified cache parameter groups to the cache cluster.
@@ -4142,69 +2515,61 @@ func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) 
 //
 // When the reboot is complete, a cache cluster event is created.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation RebootCacheCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
+//    // Example sending a request using the RebootCacheClusterRequest method.
+//    req := client.RebootCacheClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster
-func (c *ElastiCache) RebootCacheCluster(input *RebootCacheClusterInput) (*RebootCacheClusterOutput, error) {
-	req, out := c.RebootCacheClusterRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) RebootCacheClusterRequest {
+	op := &aws.Operation{
+		Name:       opRebootCacheCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RebootCacheClusterWithContext is the same as RebootCacheCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootCacheCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) RebootCacheClusterWithContext(ctx aws.Context, input *RebootCacheClusterInput, opts ...aws.Option) (*RebootCacheClusterOutput, error) {
-	req, out := c.RebootCacheClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RebootCacheClusterInput{}
+	}
+
+	req := c.newRequest(op, input, &RebootCacheClusterOutput{})
+	return RebootCacheClusterRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the tags identified by the TagKeys list from the named resource.
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResource
-func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *TagListMessage) {
+func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -4215,84 +2580,45 @@ func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourc
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &TagListMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTagsFromResource API operation for Amazon ElastiCache.
-//
-// Removes the tags identified by the TagKeys list from the named resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheClusterNotFoundFault "CacheClusterNotFound"
-//   The requested cache cluster ID does not refer to an existing cache cluster.
-//
-//   * ErrCodeSnapshotNotFoundFault "SnapshotNotFoundFault"
-//   The requested snapshot name does not refer to an existing snapshot.
-//
-//   * ErrCodeInvalidARNFault "InvalidARN"
-//   The requested Amazon Resource Name (ARN) does not refer to an existing resource.
-//
-//   * ErrCodeTagNotFoundFault "TagNotFound"
-//   The requested tag was not found on this resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResource
-func (c *ElastiCache) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*TagListMessage, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*TagListMessage, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 
-// ResetCacheParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ResetCacheParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetCacheParameterGroupRequest is a API request type for the ResetCacheParameterGroup API operation.
+type ResetCacheParameterGroupRequest struct {
+	*aws.Request
+	Input *ResetCacheParameterGroupInput
+}
+
+// Send marshals and sends the ResetCacheParameterGroup API request.
+func (r *ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetCacheParameterGroupOutput), nil
+}
+
+// ResetCacheParameterGroupRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetCacheParameterGroup for more information on using the ResetCacheParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the parameters of a cache parameter group to the engine or system
+// default value. You can reset specific parameters by submitting a list of
+// parameter names. To reset the entire cache parameter group, specify the ResetAllParameters
+// and CacheParameterGroupName parameters.
 //
 //    // Example sending a request using the ResetCacheParameterGroupRequest method.
-//    req, resp := client.ResetCacheParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetCacheParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroup
-func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroupInput) (req *aws.Request, output *CacheParameterGroupNameMessage) {
+func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opResetCacheParameterGroup,
 		HTTPMethod: "POST",
@@ -4303,89 +2629,43 @@ func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameter
 		input = &ResetCacheParameterGroupInput{}
 	}
 
-	output = &CacheParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetCacheParameterGroup API operation for Amazon ElastiCache.
-//
-// Modifies the parameters of a cache parameter group to the engine or system
-// default value. You can reset specific parameters by submitting a list of
-// parameter names. To reset the entire cache parameter group, specify the ResetAllParameters
-// and CacheParameterGroupName parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation ResetCacheParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidCacheParameterGroupStateFault "InvalidCacheParameterGroupState"
-//   The current state of the cache parameter group does not allow the requested
-//   operation to occur.
-//
-//   * ErrCodeCacheParameterGroupNotFoundFault "CacheParameterGroupNotFound"
-//   The requested cache parameter group name does not refer to an existing cache
-//   parameter group.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroup
-func (c *ElastiCache) ResetCacheParameterGroup(input *ResetCacheParameterGroupInput) (*CacheParameterGroupNameMessage, error) {
-	req, out := c.ResetCacheParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ResetCacheParameterGroupWithContext is the same as ResetCacheParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetCacheParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) ResetCacheParameterGroupWithContext(ctx aws.Context, input *ResetCacheParameterGroupInput, opts ...aws.Option) (*CacheParameterGroupNameMessage, error) {
-	req, out := c.ResetCacheParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetCacheParameterGroupOutput{})
+	return ResetCacheParameterGroupRequest{Request: req, Input: input}
 }
 
 const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 
-// RevokeCacheSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the RevokeCacheSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RevokeCacheSecurityGroupIngressRequest is a API request type for the RevokeCacheSecurityGroupIngress API operation.
+type RevokeCacheSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *RevokeCacheSecurityGroupIngressInput
+}
+
+// Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
+func (r *RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeCacheSecurityGroupIngressOutput), nil
+}
+
+// RevokeCacheSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RevokeCacheSecurityGroupIngress for more information on using the RevokeCacheSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes ingress from a cache security group. Use this operation to disallow
+// access from an Amazon EC2 security group that had been previously authorized.
 //
 //    // Example sending a request using the RevokeCacheSecurityGroupIngressRequest method.
-//    req, resp := client.RevokeCacheSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RevokeCacheSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress
-func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecurityGroupIngressInput) (req *aws.Request, output *RevokeCacheSecurityGroupIngressOutput) {
+func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeCacheSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -4396,106 +2676,30 @@ func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheS
 		input = &RevokeCacheSecurityGroupIngressInput{}
 	}
 
-	output = &RevokeCacheSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RevokeCacheSecurityGroupIngress API operation for Amazon ElastiCache.
-//
-// Revokes ingress from a cache security group. Use this operation to disallow
-// access from an Amazon EC2 security group that had been previously authorized.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation RevokeCacheSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCacheSecurityGroupNotFoundFault "CacheSecurityGroupNotFound"
-//   The requested cache security group name does not refer to an existing cache
-//   security group.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   The specified Amazon EC2 security group is not authorized for the specified
-//   cache security group.
-//
-//   * ErrCodeInvalidCacheSecurityGroupStateFault "InvalidCacheSecurityGroupState"
-//   The current state of the cache security group does not allow deletion.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress
-func (c *ElastiCache) RevokeCacheSecurityGroupIngress(input *RevokeCacheSecurityGroupIngressInput) (*RevokeCacheSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeCacheSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
-
-// RevokeCacheSecurityGroupIngressWithContext is the same as RevokeCacheSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RevokeCacheSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) RevokeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeCacheSecurityGroupIngressInput, opts ...aws.Option) (*RevokeCacheSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeCacheSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RevokeCacheSecurityGroupIngressOutput{})
+	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opTestFailover = "TestFailover"
 
-// TestFailoverRequest generates a "aws.Request" representing the
-// client's request for the TestFailover operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TestFailover for more information on using the TestFailover
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TestFailoverRequest method.
-//    req, resp := client.TestFailoverRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover
-func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) (req *aws.Request, output *TestFailoverOutput) {
-	op := &aws.Operation{
-		Name:       opTestFailover,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &TestFailoverInput{}
-	}
-
-	output = &TestFailoverOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// TestFailoverRequest is a API request type for the TestFailover API operation.
+type TestFailoverRequest struct {
+	*aws.Request
+	Input *TestFailoverInput
 }
 
-// TestFailover API operation for Amazon ElastiCache.
+// Send marshals and sends the TestFailover API request.
+func (r *TestFailoverRequest) Send() (*TestFailoverOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestFailoverOutput), nil
+}
+
+// TestFailoverRequest returns a request value for making API operation for
+// Amazon ElastiCache.
 //
 // Represents the input of a TestFailover operation which test automatic failover
 // on a specified node group (called shard in the console) in a replication
@@ -4542,59 +2746,27 @@ func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) (req *aws.Re
 // Also see, Testing Multi-AZ with Automatic Failover (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html#auto-failover-test)
 // in the ElastiCache User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon ElastiCache's
-// API operation TestFailover for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAPICallRateForCustomerExceededFault "APICallRateForCustomerExceeded"
-//   The customer has exceeded the allowed rate of API calls.
-//
-//   * ErrCodeInvalidCacheClusterStateFault "InvalidCacheClusterState"
-//   The requested cache cluster is not in the available state.
-//
-//   * ErrCodeInvalidReplicationGroupStateFault "InvalidReplicationGroupState"
-//   The requested replication group is not in the available state.
-//
-//   * ErrCodeNodeGroupNotFoundFault "NodeGroupNotFoundFault"
-//   The node group specified by the NodeGroupId parameter could not be found.
-//   Please verify that the node group exists and that you spelled the NodeGroupId
-//   value correctly.
-//
-//   * ErrCodeReplicationGroupNotFoundFault "ReplicationGroupNotFoundFault"
-//   The specified replication group does not exist.
-//
-//   * ErrCodeTestFailoverNotAvailableFault "TestFailoverNotAvailableFault"
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValue"
-//   The value for a parameter is invalid.
-//
-//   * ErrCodeInvalidParameterCombinationException "InvalidParameterCombination"
-//   Two or more incompatible parameters were specified.
+//    // Example sending a request using the TestFailoverRequest method.
+//    req := client.TestFailoverRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover
-func (c *ElastiCache) TestFailover(input *TestFailoverInput) (*TestFailoverOutput, error) {
-	req, out := c.TestFailoverRequest(input)
-	return out, req.Send()
-}
+func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) TestFailoverRequest {
+	op := &aws.Operation{
+		Name:       opTestFailover,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TestFailoverWithContext is the same as TestFailover with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestFailover for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) TestFailoverWithContext(ctx aws.Context, input *TestFailoverInput, opts ...aws.Option) (*TestFailoverOutput, error) {
-	req, out := c.TestFailoverRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TestFailoverInput{}
+	}
+
+	req := c.newRequest(op, input, &TestFailoverOutput{})
+	return TestFailoverRequest{Request: req, Input: input}
 }
 
 // Represents the input of an AddTagsToResource operation.
@@ -5451,35 +3623,6 @@ func (s *CacheParameterGroup) SetCacheParameterGroupName(v string) *CacheParamet
 // SetDescription sets the Description field's value.
 func (s *CacheParameterGroup) SetDescription(v string) *CacheParameterGroup {
 	s.Description = &v
-	return s
-}
-
-// Represents the output of one of the following operations:
-//
-//    * ModifyCacheParameterGroup
-//
-//    * ResetCacheParameterGroup
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupNameMessage
-type CacheParameterGroupNameMessage struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the cache parameter group.
-	CacheParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s CacheParameterGroupNameMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s CacheParameterGroupNameMessage) GoString() string {
-	return s.String()
-}
-
-// SetCacheParameterGroupName sets the CacheParameterGroupName field's value.
-func (s *CacheParameterGroupNameMessage) SetCacheParameterGroupName(v string) *CacheParameterGroupNameMessage {
-	s.CacheParameterGroupName = &v
 	return s
 }
 
@@ -10843,6 +8986,32 @@ func (s *RemoveTagsFromResourceInput) SetTagKeys(v []*string) *RemoveTagsFromRes
 	return s
 }
 
+// Represents the output from the AddTagsToResource, ListTagsForResource, and
+// RemoveTagsFromResource operations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResourceOutput
+type RemoveTagsFromResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of cost allocation tags as key-value pairs.
+	TagList []*Tag `locationNameList:"Tag" type:"list"`
+}
+
+// String returns the string representation
+func (s RemoveTagsFromResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RemoveTagsFromResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SetTagList sets the TagList field's value.
+func (s *RemoveTagsFromResourceOutput) SetTagList(v []*Tag) *RemoveTagsFromResourceOutput {
+	s.TagList = v
+	return s
+}
+
 // Contains all of the attributes of a specific Redis replication group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup
 type ReplicationGroup struct {
@@ -11403,6 +9572,35 @@ func (s *ResetCacheParameterGroupInput) SetResetAllParameters(v bool) *ResetCach
 	return s
 }
 
+// Represents the output of one of the following operations:
+//
+//    * ModifyCacheParameterGroup
+//
+//    * ResetCacheParameterGroup
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroupOutput
+type ResetCacheParameterGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the cache parameter group.
+	CacheParameterGroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResetCacheParameterGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResetCacheParameterGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetCacheParameterGroupName sets the CacheParameterGroupName field's value.
+func (s *ResetCacheParameterGroupOutput) SetCacheParameterGroupName(v string) *ResetCacheParameterGroupOutput {
+	s.CacheParameterGroupName = &v
+	return s
+}
+
 // Represents the input of a RevokeCacheSecurityGroupIngress operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngressMessage
 type RevokeCacheSecurityGroupIngressInput struct {
@@ -11932,32 +10130,6 @@ func (s *Tag) SetKey(v string) *Tag {
 // SetValue sets the Value field's value.
 func (s *Tag) SetValue(v string) *Tag {
 	s.Value = &v
-	return s
-}
-
-// Represents the output from the AddTagsToResource, ListTagsForResource, and
-// RemoveTagsFromResource operations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage
-type TagListMessage struct {
-	_ struct{} `type:"structure"`
-
-	// A list of cost allocation tags as key-value pairs.
-	TagList []*Tag `locationNameList:"Tag" type:"list"`
-}
-
-// String returns the string representation
-func (s TagListMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s TagListMessage) GoString() string {
-	return s.String()
-}
-
-// SetTagList sets the TagList field's value.
-func (s *TagListMessage) SetTagList(v []*Tag) *TagListMessage {
-	s.TagList = v
 	return s
 }
 

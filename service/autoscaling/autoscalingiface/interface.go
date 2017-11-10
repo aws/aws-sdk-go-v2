@@ -63,237 +63,133 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type AutoScalingAPI interface {
-	AttachInstances(*autoscaling.AttachInstancesInput) (*autoscaling.AttachInstancesOutput, error)
-	AttachInstancesWithContext(aws.Context, *autoscaling.AttachInstancesInput, ...aws.Option) (*autoscaling.AttachInstancesOutput, error)
-	AttachInstancesRequest(*autoscaling.AttachInstancesInput) (*aws.Request, *autoscaling.AttachInstancesOutput)
+	AttachInstancesRequest(*autoscaling.AttachInstancesInput) autoscaling.AttachInstancesRequest
 
-	AttachLoadBalancerTargetGroups(*autoscaling.AttachLoadBalancerTargetGroupsInput) (*autoscaling.AttachLoadBalancerTargetGroupsOutput, error)
-	AttachLoadBalancerTargetGroupsWithContext(aws.Context, *autoscaling.AttachLoadBalancerTargetGroupsInput, ...aws.Option) (*autoscaling.AttachLoadBalancerTargetGroupsOutput, error)
-	AttachLoadBalancerTargetGroupsRequest(*autoscaling.AttachLoadBalancerTargetGroupsInput) (*aws.Request, *autoscaling.AttachLoadBalancerTargetGroupsOutput)
+	AttachLoadBalancerTargetGroupsRequest(*autoscaling.AttachLoadBalancerTargetGroupsInput) autoscaling.AttachLoadBalancerTargetGroupsRequest
 
-	AttachLoadBalancers(*autoscaling.AttachLoadBalancersInput) (*autoscaling.AttachLoadBalancersOutput, error)
-	AttachLoadBalancersWithContext(aws.Context, *autoscaling.AttachLoadBalancersInput, ...aws.Option) (*autoscaling.AttachLoadBalancersOutput, error)
-	AttachLoadBalancersRequest(*autoscaling.AttachLoadBalancersInput) (*aws.Request, *autoscaling.AttachLoadBalancersOutput)
+	AttachLoadBalancersRequest(*autoscaling.AttachLoadBalancersInput) autoscaling.AttachLoadBalancersRequest
 
-	CompleteLifecycleAction(*autoscaling.CompleteLifecycleActionInput) (*autoscaling.CompleteLifecycleActionOutput, error)
-	CompleteLifecycleActionWithContext(aws.Context, *autoscaling.CompleteLifecycleActionInput, ...aws.Option) (*autoscaling.CompleteLifecycleActionOutput, error)
-	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) (*aws.Request, *autoscaling.CompleteLifecycleActionOutput)
+	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
 
-	CreateAutoScalingGroup(*autoscaling.CreateAutoScalingGroupInput) (*autoscaling.CreateAutoScalingGroupOutput, error)
-	CreateAutoScalingGroupWithContext(aws.Context, *autoscaling.CreateAutoScalingGroupInput, ...aws.Option) (*autoscaling.CreateAutoScalingGroupOutput, error)
-	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) (*aws.Request, *autoscaling.CreateAutoScalingGroupOutput)
+	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest
 
-	CreateLaunchConfiguration(*autoscaling.CreateLaunchConfigurationInput) (*autoscaling.CreateLaunchConfigurationOutput, error)
-	CreateLaunchConfigurationWithContext(aws.Context, *autoscaling.CreateLaunchConfigurationInput, ...aws.Option) (*autoscaling.CreateLaunchConfigurationOutput, error)
-	CreateLaunchConfigurationRequest(*autoscaling.CreateLaunchConfigurationInput) (*aws.Request, *autoscaling.CreateLaunchConfigurationOutput)
+	CreateLaunchConfigurationRequest(*autoscaling.CreateLaunchConfigurationInput) autoscaling.CreateLaunchConfigurationRequest
 
-	CreateOrUpdateTags(*autoscaling.CreateOrUpdateTagsInput) (*autoscaling.CreateOrUpdateTagsOutput, error)
-	CreateOrUpdateTagsWithContext(aws.Context, *autoscaling.CreateOrUpdateTagsInput, ...aws.Option) (*autoscaling.CreateOrUpdateTagsOutput, error)
-	CreateOrUpdateTagsRequest(*autoscaling.CreateOrUpdateTagsInput) (*aws.Request, *autoscaling.CreateOrUpdateTagsOutput)
+	CreateOrUpdateTagsRequest(*autoscaling.CreateOrUpdateTagsInput) autoscaling.CreateOrUpdateTagsRequest
 
-	DeleteAutoScalingGroup(*autoscaling.DeleteAutoScalingGroupInput) (*autoscaling.DeleteAutoScalingGroupOutput, error)
-	DeleteAutoScalingGroupWithContext(aws.Context, *autoscaling.DeleteAutoScalingGroupInput, ...aws.Option) (*autoscaling.DeleteAutoScalingGroupOutput, error)
-	DeleteAutoScalingGroupRequest(*autoscaling.DeleteAutoScalingGroupInput) (*aws.Request, *autoscaling.DeleteAutoScalingGroupOutput)
+	DeleteAutoScalingGroupRequest(*autoscaling.DeleteAutoScalingGroupInput) autoscaling.DeleteAutoScalingGroupRequest
 
-	DeleteLaunchConfiguration(*autoscaling.DeleteLaunchConfigurationInput) (*autoscaling.DeleteLaunchConfigurationOutput, error)
-	DeleteLaunchConfigurationWithContext(aws.Context, *autoscaling.DeleteLaunchConfigurationInput, ...aws.Option) (*autoscaling.DeleteLaunchConfigurationOutput, error)
-	DeleteLaunchConfigurationRequest(*autoscaling.DeleteLaunchConfigurationInput) (*aws.Request, *autoscaling.DeleteLaunchConfigurationOutput)
+	DeleteLaunchConfigurationRequest(*autoscaling.DeleteLaunchConfigurationInput) autoscaling.DeleteLaunchConfigurationRequest
 
-	DeleteLifecycleHook(*autoscaling.DeleteLifecycleHookInput) (*autoscaling.DeleteLifecycleHookOutput, error)
-	DeleteLifecycleHookWithContext(aws.Context, *autoscaling.DeleteLifecycleHookInput, ...aws.Option) (*autoscaling.DeleteLifecycleHookOutput, error)
-	DeleteLifecycleHookRequest(*autoscaling.DeleteLifecycleHookInput) (*aws.Request, *autoscaling.DeleteLifecycleHookOutput)
+	DeleteLifecycleHookRequest(*autoscaling.DeleteLifecycleHookInput) autoscaling.DeleteLifecycleHookRequest
 
-	DeleteNotificationConfiguration(*autoscaling.DeleteNotificationConfigurationInput) (*autoscaling.DeleteNotificationConfigurationOutput, error)
-	DeleteNotificationConfigurationWithContext(aws.Context, *autoscaling.DeleteNotificationConfigurationInput, ...aws.Option) (*autoscaling.DeleteNotificationConfigurationOutput, error)
-	DeleteNotificationConfigurationRequest(*autoscaling.DeleteNotificationConfigurationInput) (*aws.Request, *autoscaling.DeleteNotificationConfigurationOutput)
+	DeleteNotificationConfigurationRequest(*autoscaling.DeleteNotificationConfigurationInput) autoscaling.DeleteNotificationConfigurationRequest
 
-	DeletePolicy(*autoscaling.DeletePolicyInput) (*autoscaling.DeletePolicyOutput, error)
-	DeletePolicyWithContext(aws.Context, *autoscaling.DeletePolicyInput, ...aws.Option) (*autoscaling.DeletePolicyOutput, error)
-	DeletePolicyRequest(*autoscaling.DeletePolicyInput) (*aws.Request, *autoscaling.DeletePolicyOutput)
+	DeletePolicyRequest(*autoscaling.DeletePolicyInput) autoscaling.DeletePolicyRequest
 
-	DeleteScheduledAction(*autoscaling.DeleteScheduledActionInput) (*autoscaling.DeleteScheduledActionOutput, error)
-	DeleteScheduledActionWithContext(aws.Context, *autoscaling.DeleteScheduledActionInput, ...aws.Option) (*autoscaling.DeleteScheduledActionOutput, error)
-	DeleteScheduledActionRequest(*autoscaling.DeleteScheduledActionInput) (*aws.Request, *autoscaling.DeleteScheduledActionOutput)
+	DeleteScheduledActionRequest(*autoscaling.DeleteScheduledActionInput) autoscaling.DeleteScheduledActionRequest
 
-	DeleteTags(*autoscaling.DeleteTagsInput) (*autoscaling.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *autoscaling.DeleteTagsInput, ...aws.Option) (*autoscaling.DeleteTagsOutput, error)
-	DeleteTagsRequest(*autoscaling.DeleteTagsInput) (*aws.Request, *autoscaling.DeleteTagsOutput)
+	DeleteTagsRequest(*autoscaling.DeleteTagsInput) autoscaling.DeleteTagsRequest
 
-	DescribeAccountLimits(*autoscaling.DescribeAccountLimitsInput) (*autoscaling.DescribeAccountLimitsOutput, error)
-	DescribeAccountLimitsWithContext(aws.Context, *autoscaling.DescribeAccountLimitsInput, ...aws.Option) (*autoscaling.DescribeAccountLimitsOutput, error)
-	DescribeAccountLimitsRequest(*autoscaling.DescribeAccountLimitsInput) (*aws.Request, *autoscaling.DescribeAccountLimitsOutput)
+	DescribeAccountLimitsRequest(*autoscaling.DescribeAccountLimitsInput) autoscaling.DescribeAccountLimitsRequest
 
-	DescribeAdjustmentTypes(*autoscaling.DescribeAdjustmentTypesInput) (*autoscaling.DescribeAdjustmentTypesOutput, error)
-	DescribeAdjustmentTypesWithContext(aws.Context, *autoscaling.DescribeAdjustmentTypesInput, ...aws.Option) (*autoscaling.DescribeAdjustmentTypesOutput, error)
-	DescribeAdjustmentTypesRequest(*autoscaling.DescribeAdjustmentTypesInput) (*aws.Request, *autoscaling.DescribeAdjustmentTypesOutput)
+	DescribeAdjustmentTypesRequest(*autoscaling.DescribeAdjustmentTypesInput) autoscaling.DescribeAdjustmentTypesRequest
 
-	DescribeAutoScalingGroups(*autoscaling.DescribeAutoScalingGroupsInput) (*autoscaling.DescribeAutoScalingGroupsOutput, error)
-	DescribeAutoScalingGroupsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.Option) (*autoscaling.DescribeAutoScalingGroupsOutput, error)
-	DescribeAutoScalingGroupsRequest(*autoscaling.DescribeAutoScalingGroupsInput) (*aws.Request, *autoscaling.DescribeAutoScalingGroupsOutput)
+	DescribeAutoScalingGroupsRequest(*autoscaling.DescribeAutoScalingGroupsInput) autoscaling.DescribeAutoScalingGroupsRequest
 
 	DescribeAutoScalingGroupsPages(*autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool) error
 	DescribeAutoScalingGroupsPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool, ...aws.Option) error
 
-	DescribeAutoScalingInstances(*autoscaling.DescribeAutoScalingInstancesInput) (*autoscaling.DescribeAutoScalingInstancesOutput, error)
-	DescribeAutoScalingInstancesWithContext(aws.Context, *autoscaling.DescribeAutoScalingInstancesInput, ...aws.Option) (*autoscaling.DescribeAutoScalingInstancesOutput, error)
-	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) (*aws.Request, *autoscaling.DescribeAutoScalingInstancesOutput)
+	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
 
 	DescribeAutoScalingInstancesPages(*autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool) error
 	DescribeAutoScalingInstancesPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool, ...aws.Option) error
 
-	DescribeAutoScalingNotificationTypes(*autoscaling.DescribeAutoScalingNotificationTypesInput) (*autoscaling.DescribeAutoScalingNotificationTypesOutput, error)
-	DescribeAutoScalingNotificationTypesWithContext(aws.Context, *autoscaling.DescribeAutoScalingNotificationTypesInput, ...aws.Option) (*autoscaling.DescribeAutoScalingNotificationTypesOutput, error)
-	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) (*aws.Request, *autoscaling.DescribeAutoScalingNotificationTypesOutput)
+	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
 
-	DescribeLaunchConfigurations(*autoscaling.DescribeLaunchConfigurationsInput) (*autoscaling.DescribeLaunchConfigurationsOutput, error)
-	DescribeLaunchConfigurationsWithContext(aws.Context, *autoscaling.DescribeLaunchConfigurationsInput, ...aws.Option) (*autoscaling.DescribeLaunchConfigurationsOutput, error)
-	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) (*aws.Request, *autoscaling.DescribeLaunchConfigurationsOutput)
+	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
 
 	DescribeLaunchConfigurationsPages(*autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool) error
 	DescribeLaunchConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool, ...aws.Option) error
 
-	DescribeLifecycleHookTypes(*autoscaling.DescribeLifecycleHookTypesInput) (*autoscaling.DescribeLifecycleHookTypesOutput, error)
-	DescribeLifecycleHookTypesWithContext(aws.Context, *autoscaling.DescribeLifecycleHookTypesInput, ...aws.Option) (*autoscaling.DescribeLifecycleHookTypesOutput, error)
-	DescribeLifecycleHookTypesRequest(*autoscaling.DescribeLifecycleHookTypesInput) (*aws.Request, *autoscaling.DescribeLifecycleHookTypesOutput)
+	DescribeLifecycleHookTypesRequest(*autoscaling.DescribeLifecycleHookTypesInput) autoscaling.DescribeLifecycleHookTypesRequest
 
-	DescribeLifecycleHooks(*autoscaling.DescribeLifecycleHooksInput) (*autoscaling.DescribeLifecycleHooksOutput, error)
-	DescribeLifecycleHooksWithContext(aws.Context, *autoscaling.DescribeLifecycleHooksInput, ...aws.Option) (*autoscaling.DescribeLifecycleHooksOutput, error)
-	DescribeLifecycleHooksRequest(*autoscaling.DescribeLifecycleHooksInput) (*aws.Request, *autoscaling.DescribeLifecycleHooksOutput)
+	DescribeLifecycleHooksRequest(*autoscaling.DescribeLifecycleHooksInput) autoscaling.DescribeLifecycleHooksRequest
 
-	DescribeLoadBalancerTargetGroups(*autoscaling.DescribeLoadBalancerTargetGroupsInput) (*autoscaling.DescribeLoadBalancerTargetGroupsOutput, error)
-	DescribeLoadBalancerTargetGroupsWithContext(aws.Context, *autoscaling.DescribeLoadBalancerTargetGroupsInput, ...aws.Option) (*autoscaling.DescribeLoadBalancerTargetGroupsOutput, error)
-	DescribeLoadBalancerTargetGroupsRequest(*autoscaling.DescribeLoadBalancerTargetGroupsInput) (*aws.Request, *autoscaling.DescribeLoadBalancerTargetGroupsOutput)
+	DescribeLoadBalancerTargetGroupsRequest(*autoscaling.DescribeLoadBalancerTargetGroupsInput) autoscaling.DescribeLoadBalancerTargetGroupsRequest
 
-	DescribeLoadBalancers(*autoscaling.DescribeLoadBalancersInput) (*autoscaling.DescribeLoadBalancersOutput, error)
-	DescribeLoadBalancersWithContext(aws.Context, *autoscaling.DescribeLoadBalancersInput, ...aws.Option) (*autoscaling.DescribeLoadBalancersOutput, error)
-	DescribeLoadBalancersRequest(*autoscaling.DescribeLoadBalancersInput) (*aws.Request, *autoscaling.DescribeLoadBalancersOutput)
+	DescribeLoadBalancersRequest(*autoscaling.DescribeLoadBalancersInput) autoscaling.DescribeLoadBalancersRequest
 
-	DescribeMetricCollectionTypes(*autoscaling.DescribeMetricCollectionTypesInput) (*autoscaling.DescribeMetricCollectionTypesOutput, error)
-	DescribeMetricCollectionTypesWithContext(aws.Context, *autoscaling.DescribeMetricCollectionTypesInput, ...aws.Option) (*autoscaling.DescribeMetricCollectionTypesOutput, error)
-	DescribeMetricCollectionTypesRequest(*autoscaling.DescribeMetricCollectionTypesInput) (*aws.Request, *autoscaling.DescribeMetricCollectionTypesOutput)
+	DescribeMetricCollectionTypesRequest(*autoscaling.DescribeMetricCollectionTypesInput) autoscaling.DescribeMetricCollectionTypesRequest
 
-	DescribeNotificationConfigurations(*autoscaling.DescribeNotificationConfigurationsInput) (*autoscaling.DescribeNotificationConfigurationsOutput, error)
-	DescribeNotificationConfigurationsWithContext(aws.Context, *autoscaling.DescribeNotificationConfigurationsInput, ...aws.Option) (*autoscaling.DescribeNotificationConfigurationsOutput, error)
-	DescribeNotificationConfigurationsRequest(*autoscaling.DescribeNotificationConfigurationsInput) (*aws.Request, *autoscaling.DescribeNotificationConfigurationsOutput)
+	DescribeNotificationConfigurationsRequest(*autoscaling.DescribeNotificationConfigurationsInput) autoscaling.DescribeNotificationConfigurationsRequest
 
 	DescribeNotificationConfigurationsPages(*autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool) error
 	DescribeNotificationConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool, ...aws.Option) error
 
-	DescribePolicies(*autoscaling.DescribePoliciesInput) (*autoscaling.DescribePoliciesOutput, error)
-	DescribePoliciesWithContext(aws.Context, *autoscaling.DescribePoliciesInput, ...aws.Option) (*autoscaling.DescribePoliciesOutput, error)
-	DescribePoliciesRequest(*autoscaling.DescribePoliciesInput) (*aws.Request, *autoscaling.DescribePoliciesOutput)
+	DescribePoliciesRequest(*autoscaling.DescribePoliciesInput) autoscaling.DescribePoliciesRequest
 
 	DescribePoliciesPages(*autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool) error
 	DescribePoliciesPagesWithContext(aws.Context, *autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool, ...aws.Option) error
 
-	DescribeScalingActivities(*autoscaling.DescribeScalingActivitiesInput) (*autoscaling.DescribeScalingActivitiesOutput, error)
-	DescribeScalingActivitiesWithContext(aws.Context, *autoscaling.DescribeScalingActivitiesInput, ...aws.Option) (*autoscaling.DescribeScalingActivitiesOutput, error)
-	DescribeScalingActivitiesRequest(*autoscaling.DescribeScalingActivitiesInput) (*aws.Request, *autoscaling.DescribeScalingActivitiesOutput)
+	DescribeScalingActivitiesRequest(*autoscaling.DescribeScalingActivitiesInput) autoscaling.DescribeScalingActivitiesRequest
 
 	DescribeScalingActivitiesPages(*autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool) error
 	DescribeScalingActivitiesPagesWithContext(aws.Context, *autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
 
-	DescribeScalingProcessTypes(*autoscaling.DescribeScalingProcessTypesInput) (*autoscaling.DescribeScalingProcessTypesOutput, error)
-	DescribeScalingProcessTypesWithContext(aws.Context, *autoscaling.DescribeScalingProcessTypesInput, ...aws.Option) (*autoscaling.DescribeScalingProcessTypesOutput, error)
-	DescribeScalingProcessTypesRequest(*autoscaling.DescribeScalingProcessTypesInput) (*aws.Request, *autoscaling.DescribeScalingProcessTypesOutput)
+	DescribeScalingProcessTypesRequest(*autoscaling.DescribeScalingProcessTypesInput) autoscaling.DescribeScalingProcessTypesRequest
 
-	DescribeScheduledActions(*autoscaling.DescribeScheduledActionsInput) (*autoscaling.DescribeScheduledActionsOutput, error)
-	DescribeScheduledActionsWithContext(aws.Context, *autoscaling.DescribeScheduledActionsInput, ...aws.Option) (*autoscaling.DescribeScheduledActionsOutput, error)
-	DescribeScheduledActionsRequest(*autoscaling.DescribeScheduledActionsInput) (*aws.Request, *autoscaling.DescribeScheduledActionsOutput)
+	DescribeScheduledActionsRequest(*autoscaling.DescribeScheduledActionsInput) autoscaling.DescribeScheduledActionsRequest
 
 	DescribeScheduledActionsPages(*autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool) error
 	DescribeScheduledActionsPagesWithContext(aws.Context, *autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool, ...aws.Option) error
 
-	DescribeTags(*autoscaling.DescribeTagsInput) (*autoscaling.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *autoscaling.DescribeTagsInput, ...aws.Option) (*autoscaling.DescribeTagsOutput, error)
-	DescribeTagsRequest(*autoscaling.DescribeTagsInput) (*aws.Request, *autoscaling.DescribeTagsOutput)
+	DescribeTagsRequest(*autoscaling.DescribeTagsInput) autoscaling.DescribeTagsRequest
 
 	DescribeTagsPages(*autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool) error
 	DescribeTagsPagesWithContext(aws.Context, *autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool, ...aws.Option) error
 
-	DescribeTerminationPolicyTypes(*autoscaling.DescribeTerminationPolicyTypesInput) (*autoscaling.DescribeTerminationPolicyTypesOutput, error)
-	DescribeTerminationPolicyTypesWithContext(aws.Context, *autoscaling.DescribeTerminationPolicyTypesInput, ...aws.Option) (*autoscaling.DescribeTerminationPolicyTypesOutput, error)
-	DescribeTerminationPolicyTypesRequest(*autoscaling.DescribeTerminationPolicyTypesInput) (*aws.Request, *autoscaling.DescribeTerminationPolicyTypesOutput)
+	DescribeTerminationPolicyTypesRequest(*autoscaling.DescribeTerminationPolicyTypesInput) autoscaling.DescribeTerminationPolicyTypesRequest
 
-	DetachInstances(*autoscaling.DetachInstancesInput) (*autoscaling.DetachInstancesOutput, error)
-	DetachInstancesWithContext(aws.Context, *autoscaling.DetachInstancesInput, ...aws.Option) (*autoscaling.DetachInstancesOutput, error)
-	DetachInstancesRequest(*autoscaling.DetachInstancesInput) (*aws.Request, *autoscaling.DetachInstancesOutput)
+	DetachInstancesRequest(*autoscaling.DetachInstancesInput) autoscaling.DetachInstancesRequest
 
-	DetachLoadBalancerTargetGroups(*autoscaling.DetachLoadBalancerTargetGroupsInput) (*autoscaling.DetachLoadBalancerTargetGroupsOutput, error)
-	DetachLoadBalancerTargetGroupsWithContext(aws.Context, *autoscaling.DetachLoadBalancerTargetGroupsInput, ...aws.Option) (*autoscaling.DetachLoadBalancerTargetGroupsOutput, error)
-	DetachLoadBalancerTargetGroupsRequest(*autoscaling.DetachLoadBalancerTargetGroupsInput) (*aws.Request, *autoscaling.DetachLoadBalancerTargetGroupsOutput)
+	DetachLoadBalancerTargetGroupsRequest(*autoscaling.DetachLoadBalancerTargetGroupsInput) autoscaling.DetachLoadBalancerTargetGroupsRequest
 
-	DetachLoadBalancers(*autoscaling.DetachLoadBalancersInput) (*autoscaling.DetachLoadBalancersOutput, error)
-	DetachLoadBalancersWithContext(aws.Context, *autoscaling.DetachLoadBalancersInput, ...aws.Option) (*autoscaling.DetachLoadBalancersOutput, error)
-	DetachLoadBalancersRequest(*autoscaling.DetachLoadBalancersInput) (*aws.Request, *autoscaling.DetachLoadBalancersOutput)
+	DetachLoadBalancersRequest(*autoscaling.DetachLoadBalancersInput) autoscaling.DetachLoadBalancersRequest
 
-	DisableMetricsCollection(*autoscaling.DisableMetricsCollectionInput) (*autoscaling.DisableMetricsCollectionOutput, error)
-	DisableMetricsCollectionWithContext(aws.Context, *autoscaling.DisableMetricsCollectionInput, ...aws.Option) (*autoscaling.DisableMetricsCollectionOutput, error)
-	DisableMetricsCollectionRequest(*autoscaling.DisableMetricsCollectionInput) (*aws.Request, *autoscaling.DisableMetricsCollectionOutput)
+	DisableMetricsCollectionRequest(*autoscaling.DisableMetricsCollectionInput) autoscaling.DisableMetricsCollectionRequest
 
-	EnableMetricsCollection(*autoscaling.EnableMetricsCollectionInput) (*autoscaling.EnableMetricsCollectionOutput, error)
-	EnableMetricsCollectionWithContext(aws.Context, *autoscaling.EnableMetricsCollectionInput, ...aws.Option) (*autoscaling.EnableMetricsCollectionOutput, error)
-	EnableMetricsCollectionRequest(*autoscaling.EnableMetricsCollectionInput) (*aws.Request, *autoscaling.EnableMetricsCollectionOutput)
+	EnableMetricsCollectionRequest(*autoscaling.EnableMetricsCollectionInput) autoscaling.EnableMetricsCollectionRequest
 
-	EnterStandby(*autoscaling.EnterStandbyInput) (*autoscaling.EnterStandbyOutput, error)
-	EnterStandbyWithContext(aws.Context, *autoscaling.EnterStandbyInput, ...aws.Option) (*autoscaling.EnterStandbyOutput, error)
-	EnterStandbyRequest(*autoscaling.EnterStandbyInput) (*aws.Request, *autoscaling.EnterStandbyOutput)
+	EnterStandbyRequest(*autoscaling.EnterStandbyInput) autoscaling.EnterStandbyRequest
 
-	ExecutePolicy(*autoscaling.ExecutePolicyInput) (*autoscaling.ExecutePolicyOutput, error)
-	ExecutePolicyWithContext(aws.Context, *autoscaling.ExecutePolicyInput, ...aws.Option) (*autoscaling.ExecutePolicyOutput, error)
-	ExecutePolicyRequest(*autoscaling.ExecutePolicyInput) (*aws.Request, *autoscaling.ExecutePolicyOutput)
+	ExecutePolicyRequest(*autoscaling.ExecutePolicyInput) autoscaling.ExecutePolicyRequest
 
-	ExitStandby(*autoscaling.ExitStandbyInput) (*autoscaling.ExitStandbyOutput, error)
-	ExitStandbyWithContext(aws.Context, *autoscaling.ExitStandbyInput, ...aws.Option) (*autoscaling.ExitStandbyOutput, error)
-	ExitStandbyRequest(*autoscaling.ExitStandbyInput) (*aws.Request, *autoscaling.ExitStandbyOutput)
+	ExitStandbyRequest(*autoscaling.ExitStandbyInput) autoscaling.ExitStandbyRequest
 
-	PutLifecycleHook(*autoscaling.PutLifecycleHookInput) (*autoscaling.PutLifecycleHookOutput, error)
-	PutLifecycleHookWithContext(aws.Context, *autoscaling.PutLifecycleHookInput, ...aws.Option) (*autoscaling.PutLifecycleHookOutput, error)
-	PutLifecycleHookRequest(*autoscaling.PutLifecycleHookInput) (*aws.Request, *autoscaling.PutLifecycleHookOutput)
+	PutLifecycleHookRequest(*autoscaling.PutLifecycleHookInput) autoscaling.PutLifecycleHookRequest
 
-	PutNotificationConfiguration(*autoscaling.PutNotificationConfigurationInput) (*autoscaling.PutNotificationConfigurationOutput, error)
-	PutNotificationConfigurationWithContext(aws.Context, *autoscaling.PutNotificationConfigurationInput, ...aws.Option) (*autoscaling.PutNotificationConfigurationOutput, error)
-	PutNotificationConfigurationRequest(*autoscaling.PutNotificationConfigurationInput) (*aws.Request, *autoscaling.PutNotificationConfigurationOutput)
+	PutNotificationConfigurationRequest(*autoscaling.PutNotificationConfigurationInput) autoscaling.PutNotificationConfigurationRequest
 
-	PutScalingPolicy(*autoscaling.PutScalingPolicyInput) (*autoscaling.PutScalingPolicyOutput, error)
-	PutScalingPolicyWithContext(aws.Context, *autoscaling.PutScalingPolicyInput, ...aws.Option) (*autoscaling.PutScalingPolicyOutput, error)
-	PutScalingPolicyRequest(*autoscaling.PutScalingPolicyInput) (*aws.Request, *autoscaling.PutScalingPolicyOutput)
+	PutScalingPolicyRequest(*autoscaling.PutScalingPolicyInput) autoscaling.PutScalingPolicyRequest
 
-	PutScheduledUpdateGroupAction(*autoscaling.PutScheduledUpdateGroupActionInput) (*autoscaling.PutScheduledUpdateGroupActionOutput, error)
-	PutScheduledUpdateGroupActionWithContext(aws.Context, *autoscaling.PutScheduledUpdateGroupActionInput, ...aws.Option) (*autoscaling.PutScheduledUpdateGroupActionOutput, error)
-	PutScheduledUpdateGroupActionRequest(*autoscaling.PutScheduledUpdateGroupActionInput) (*aws.Request, *autoscaling.PutScheduledUpdateGroupActionOutput)
+	PutScheduledUpdateGroupActionRequest(*autoscaling.PutScheduledUpdateGroupActionInput) autoscaling.PutScheduledUpdateGroupActionRequest
 
-	RecordLifecycleActionHeartbeat(*autoscaling.RecordLifecycleActionHeartbeatInput) (*autoscaling.RecordLifecycleActionHeartbeatOutput, error)
-	RecordLifecycleActionHeartbeatWithContext(aws.Context, *autoscaling.RecordLifecycleActionHeartbeatInput, ...aws.Option) (*autoscaling.RecordLifecycleActionHeartbeatOutput, error)
-	RecordLifecycleActionHeartbeatRequest(*autoscaling.RecordLifecycleActionHeartbeatInput) (*aws.Request, *autoscaling.RecordLifecycleActionHeartbeatOutput)
+	RecordLifecycleActionHeartbeatRequest(*autoscaling.RecordLifecycleActionHeartbeatInput) autoscaling.RecordLifecycleActionHeartbeatRequest
 
-	ResumeProcesses(*autoscaling.ScalingProcessQuery) (*autoscaling.ResumeProcessesOutput, error)
-	ResumeProcessesWithContext(aws.Context, *autoscaling.ScalingProcessQuery, ...aws.Option) (*autoscaling.ResumeProcessesOutput, error)
-	ResumeProcessesRequest(*autoscaling.ScalingProcessQuery) (*aws.Request, *autoscaling.ResumeProcessesOutput)
+	ResumeProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.ResumeProcessesRequest
 
-	SetDesiredCapacity(*autoscaling.SetDesiredCapacityInput) (*autoscaling.SetDesiredCapacityOutput, error)
-	SetDesiredCapacityWithContext(aws.Context, *autoscaling.SetDesiredCapacityInput, ...aws.Option) (*autoscaling.SetDesiredCapacityOutput, error)
-	SetDesiredCapacityRequest(*autoscaling.SetDesiredCapacityInput) (*aws.Request, *autoscaling.SetDesiredCapacityOutput)
+	SetDesiredCapacityRequest(*autoscaling.SetDesiredCapacityInput) autoscaling.SetDesiredCapacityRequest
 
-	SetInstanceHealth(*autoscaling.SetInstanceHealthInput) (*autoscaling.SetInstanceHealthOutput, error)
-	SetInstanceHealthWithContext(aws.Context, *autoscaling.SetInstanceHealthInput, ...aws.Option) (*autoscaling.SetInstanceHealthOutput, error)
-	SetInstanceHealthRequest(*autoscaling.SetInstanceHealthInput) (*aws.Request, *autoscaling.SetInstanceHealthOutput)
+	SetInstanceHealthRequest(*autoscaling.SetInstanceHealthInput) autoscaling.SetInstanceHealthRequest
 
-	SetInstanceProtection(*autoscaling.SetInstanceProtectionInput) (*autoscaling.SetInstanceProtectionOutput, error)
-	SetInstanceProtectionWithContext(aws.Context, *autoscaling.SetInstanceProtectionInput, ...aws.Option) (*autoscaling.SetInstanceProtectionOutput, error)
-	SetInstanceProtectionRequest(*autoscaling.SetInstanceProtectionInput) (*aws.Request, *autoscaling.SetInstanceProtectionOutput)
+	SetInstanceProtectionRequest(*autoscaling.SetInstanceProtectionInput) autoscaling.SetInstanceProtectionRequest
 
-	SuspendProcesses(*autoscaling.ScalingProcessQuery) (*autoscaling.SuspendProcessesOutput, error)
-	SuspendProcessesWithContext(aws.Context, *autoscaling.ScalingProcessQuery, ...aws.Option) (*autoscaling.SuspendProcessesOutput, error)
-	SuspendProcessesRequest(*autoscaling.ScalingProcessQuery) (*aws.Request, *autoscaling.SuspendProcessesOutput)
+	SuspendProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.SuspendProcessesRequest
 
-	TerminateInstanceInAutoScalingGroup(*autoscaling.TerminateInstanceInAutoScalingGroupInput) (*autoscaling.TerminateInstanceInAutoScalingGroupOutput, error)
-	TerminateInstanceInAutoScalingGroupWithContext(aws.Context, *autoscaling.TerminateInstanceInAutoScalingGroupInput, ...aws.Option) (*autoscaling.TerminateInstanceInAutoScalingGroupOutput, error)
-	TerminateInstanceInAutoScalingGroupRequest(*autoscaling.TerminateInstanceInAutoScalingGroupInput) (*aws.Request, *autoscaling.TerminateInstanceInAutoScalingGroupOutput)
+	TerminateInstanceInAutoScalingGroupRequest(*autoscaling.TerminateInstanceInAutoScalingGroupInput) autoscaling.TerminateInstanceInAutoScalingGroupRequest
 
-	UpdateAutoScalingGroup(*autoscaling.UpdateAutoScalingGroupInput) (*autoscaling.UpdateAutoScalingGroupOutput, error)
-	UpdateAutoScalingGroupWithContext(aws.Context, *autoscaling.UpdateAutoScalingGroupInput, ...aws.Option) (*autoscaling.UpdateAutoScalingGroupOutput, error)
-	UpdateAutoScalingGroupRequest(*autoscaling.UpdateAutoScalingGroupInput) (*aws.Request, *autoscaling.UpdateAutoScalingGroupOutput)
+	UpdateAutoScalingGroupRequest(*autoscaling.UpdateAutoScalingGroupInput) autoscaling.UpdateAutoScalingGroupRequest
 
 	WaitUntilGroupExists(*autoscaling.DescribeAutoScalingGroupsInput) error
 	WaitUntilGroupExistsWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, ...aws.WaiterOption) error

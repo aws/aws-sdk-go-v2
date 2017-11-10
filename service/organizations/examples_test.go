@@ -30,7 +30,7 @@ func parseTime(layout, value string) *time.Time {
 // Bill is the owner of an organization, and he invites Juan's account (222222222222)
 // to join his organization. The following example shows Juan's account accepting the
 // handshake and thus agreeing to the invitation.
-func ExampleOrganizations_AcceptHandshake_shared00() {
+func ExampleOrganizations_AcceptHandshakeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -41,7 +41,8 @@ func ExampleOrganizations_AcceptHandshake_shared00() {
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
-	result, err := svc.AcceptHandshake(input)
+	req := svc.AcceptHandshakeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -83,7 +84,7 @@ func ExampleOrganizations_AcceptHandshake_shared00() {
 //
 // The following example shows how to attach a service control policy (SCP) to an OU:
 //
-func ExampleOrganizations_AttachPolicy_shared00() {
+func ExampleOrganizations_AttachPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -95,7 +96,8 @@ func ExampleOrganizations_AttachPolicy_shared00() {
 		TargetId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.AttachPolicy(input)
+	req := svc.AttachPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -139,7 +141,7 @@ func ExampleOrganizations_AttachPolicy_shared00() {
 //
 // The following example shows how to attach a service control policy (SCP) to an account:
 //
-func ExampleOrganizations_AttachPolicy_shared01() {
+func ExampleOrganizations_AttachPolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -151,7 +153,8 @@ func ExampleOrganizations_AttachPolicy_shared01() {
 		TargetId: aws.String("333333333333"),
 	}
 
-	result, err := svc.AttachPolicy(input)
+	req := svc.AttachPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -197,7 +200,7 @@ func ExampleOrganizations_AttachPolicy_shared01() {
 // changes his mind and decides to cancel the invitation before Susan accepts it. The
 // following example shows Bill's cancellation:
 //
-func ExampleOrganizations_CancelHandshake_shared00() {
+func ExampleOrganizations_CancelHandshakeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -208,7 +211,8 @@ func ExampleOrganizations_CancelHandshake_shared00() {
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
-	result, err := svc.CancelHandshake(input)
+	req := svc.CancelHandshakeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -251,7 +255,7 @@ func ExampleOrganizations_CancelHandshake_shared00() {
 // the roleName parameter is not used. AWS Organizations sends Susan a "Welcome to AWS"
 // email:
 //
-func ExampleOrganizations_CreateAccount_shared00() {
+func ExampleOrganizations_CreateAccountRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -263,7 +267,8 @@ func ExampleOrganizations_CreateAccount_shared00() {
 		Email:       aws.String("susan@example.com"),
 	}
 
-	result, err := svc.CreateAccount(input)
+	req := svc.CreateAccountRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -304,7 +309,7 @@ func ExampleOrganizations_CreateAccount_shared00() {
 // organization. Because he does not specify a feature set, the new organization defaults
 // to all features enabled and service control policies enabled on the root:
 //
-func ExampleOrganizations_CreateOrganization_shared00() {
+func ExampleOrganizations_CreateOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -313,7 +318,8 @@ func ExampleOrganizations_CreateOrganization_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.CreateOrganizationInput{}
 
-	result, err := svc.CreateOrganization(input)
+	req := svc.CreateOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -351,7 +357,7 @@ func ExampleOrganizations_CreateOrganization_shared00() {
 // 111111111111, and configures the organization to support only the consolidated billing
 // feature set:
 //
-func ExampleOrganizations_CreateOrganization_shared01() {
+func ExampleOrganizations_CreateOrganizationRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -362,7 +368,8 @@ func ExampleOrganizations_CreateOrganization_shared01() {
 		FeatureSet: organizations.OrganizationFeatureSetConsolidatedBilling,
 	}
 
-	result, err := svc.CreateOrganization(input)
+	req := svc.CreateOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -399,7 +406,7 @@ func ExampleOrganizations_CreateOrganization_shared01() {
 // The following example shows how to create an OU that is named AccountingOU. The new
 // OU is directly under the root.:
 //
-func ExampleOrganizations_CreateOrganizationalUnit_shared00() {
+func ExampleOrganizations_CreateOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -411,7 +418,8 @@ func ExampleOrganizations_CreateOrganizationalUnit_shared00() {
 		ParentId: aws.String("r-examplerootid111"),
 	}
 
-	result, err := svc.CreateOrganizationalUnit(input)
+	req := svc.CreateOrganizationalUnitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -455,7 +463,7 @@ func ExampleOrganizations_CreateOrganizationalUnit_shared00() {
 // embedded double quotes in the JSON policy are treated as literals in the parameter,
 // which itself is surrounded by double quotes:
 //
-func ExampleOrganizations_CreatePolicy_shared00() {
+func ExampleOrganizations_CreatePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -469,7 +477,8 @@ func ExampleOrganizations_CreatePolicy_shared00() {
 		Type:        organizations.PolicyTypeServiceControlPolicy,
 	}
 
-	result, err := svc.CreatePolicy(input)
+	req := svc.CreatePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -512,7 +521,7 @@ func ExampleOrganizations_CreatePolicy_shared00() {
 // The following example shows Susan declining an invitation to join Bill's organization.
 // The DeclineHandshake operation returns a handshake object, showing that the state
 // is now DECLINED:
-func ExampleOrganizations_DeclineHandshake_shared00() {
+func ExampleOrganizations_DeclineHandshakeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -523,7 +532,8 @@ func ExampleOrganizations_DeclineHandshake_shared00() {
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
-	result, err := svc.DeclineHandshake(input)
+	req := svc.DeclineHandshakeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -562,7 +572,7 @@ func ExampleOrganizations_DeclineHandshake_shared00() {
 // The following example shows how to delete an OU. The example assumes that you previously
 // removed all accounts and other OUs from the OU:
 //
-func ExampleOrganizations_DeleteOrganizationalUnit_shared00() {
+func ExampleOrganizations_DeleteOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -573,7 +583,8 @@ func ExampleOrganizations_DeleteOrganizationalUnit_shared00() {
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.DeleteOrganizationalUnit(input)
+	req := svc.DeleteOrganizationalUnitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -612,7 +623,7 @@ func ExampleOrganizations_DeleteOrganizationalUnit_shared00() {
 // The following example shows how to delete a policy from an organization. The example
 // assumes that you previously detached the policy from all entities:
 //
-func ExampleOrganizations_DeletePolicy_shared00() {
+func ExampleOrganizations_DeletePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -623,7 +634,8 @@ func ExampleOrganizations_DeletePolicy_shared00() {
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}
 
-	result, err := svc.DeletePolicy(input)
+	req := svc.DeletePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -661,7 +673,7 @@ func ExampleOrganizations_DeletePolicy_shared00() {
 //
 // The following example shows a user in the master account (111111111111) asking for
 // details about account 555555555555:
-func ExampleOrganizations_DescribeAccount_shared00() {
+func ExampleOrganizations_DescribeAccountRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -672,7 +684,8 @@ func ExampleOrganizations_DescribeAccount_shared00() {
 		AccountId: aws.String("555555555555"),
 	}
 
-	result, err := svc.DescribeAccount(input)
+	req := svc.DescribeAccountRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -708,7 +721,7 @@ func ExampleOrganizations_DescribeAccount_shared00() {
 // create an account in an organization. This operation can be called only by a principal
 // from the organization's master account. In the example, the specified "createAccountRequestId"
 // comes from the response of the original call to "CreateAccount":
-func ExampleOrganizations_DescribeCreateAccountStatus_shared00() {
+func ExampleOrganizations_DescribeCreateAccountStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -719,7 +732,8 @@ func ExampleOrganizations_DescribeCreateAccountStatus_shared00() {
 		CreateAccountRequestId: aws.String("car-exampleaccountcreationrequestid"),
 	}
 
-	result, err := svc.DescribeCreateAccountStatus(input)
+	req := svc.DescribeCreateAccountStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -754,7 +768,7 @@ func ExampleOrganizations_DescribeCreateAccountStatus_shared00() {
 // The following example shows you how to request details about a handshake. The handshake
 // ID comes either from the original call to "InviteAccountToOrganization", or from
 // a call to "ListHandshakesForAccount" or "ListHandshakesForOrganization":
-func ExampleOrganizations_DescribeHandshake_shared00() {
+func ExampleOrganizations_DescribeHandshakeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -765,7 +779,8 @@ func ExampleOrganizations_DescribeHandshake_shared00() {
 		HandshakeId: aws.String("h-examplehandshakeid111"),
 	}
 
-	result, err := svc.DescribeHandshake(input)
+	req := svc.DescribeHandshakeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -798,7 +813,7 @@ func ExampleOrganizations_DescribeHandshake_shared00() {
 // To get information about an organization
 //
 // The following example shows how to request information about the current user's organization:/n/n
-func ExampleOrganizations_DescribeOrganization_shared00() {
+func ExampleOrganizations_DescribeOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -807,7 +822,8 @@ func ExampleOrganizations_DescribeOrganization_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.DescribeOrganizationInput{}
 
-	result, err := svc.DescribeOrganization(input)
+	req := svc.DescribeOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +854,7 @@ func ExampleOrganizations_DescribeOrganization_shared00() {
 // To get information about an organizational unit
 //
 // The following example shows how to request details about an OU:/n/n
-func ExampleOrganizations_DescribeOrganizationalUnit_shared00() {
+func ExampleOrganizations_DescribeOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -849,7 +865,8 @@ func ExampleOrganizations_DescribeOrganizationalUnit_shared00() {
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.DescribeOrganizationalUnit(input)
+	req := svc.DescribeOrganizationalUnitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -882,7 +899,7 @@ func ExampleOrganizations_DescribeOrganizationalUnit_shared00() {
 // To get information about a policy
 //
 // The following example shows how to request information about a policy:/n/n
-func ExampleOrganizations_DescribePolicy_shared00() {
+func ExampleOrganizations_DescribePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -893,7 +910,8 @@ func ExampleOrganizations_DescribePolicy_shared00() {
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}
 
-	result, err := svc.DescribePolicy(input)
+	req := svc.DescribePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -926,7 +944,7 @@ func ExampleOrganizations_DescribePolicy_shared00() {
 // To detach a policy from a root, OU, or account
 //
 // The following example shows how to detach a policy from an OU:/n/n
-func ExampleOrganizations_DetachPolicy_shared00() {
+func ExampleOrganizations_DetachPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -938,7 +956,8 @@ func ExampleOrganizations_DetachPolicy_shared00() {
 		TargetId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.DetachPolicy(input)
+	req := svc.DetachPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -981,7 +1000,7 @@ func ExampleOrganizations_DetachPolicy_shared00() {
 // The following example shows how to disable the service control policy (SCP) policy
 // type in a root. The response shows that the PolicyTypes response element no longer
 // includes SERVICE_CONTROL_POLICY:/n/n
-func ExampleOrganizations_DisablePolicyType_shared00() {
+func ExampleOrganizations_DisablePolicyTypeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -993,7 +1012,8 @@ func ExampleOrganizations_DisablePolicyType_shared00() {
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
-	result, err := svc.DisablePolicyType(input)
+	req := svc.DisablePolicyTypeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1038,7 +1058,7 @@ func ExampleOrganizations_DisablePolicyType_shared00() {
 // invited member accounts accept the handshake, the organization administrator can
 // finalize the change to enable all features, and those with appropriate permissions
 // can create policies and apply them to roots, OUs, and accounts:/n/n
-func ExampleOrganizations_EnableAllFeatures_shared00() {
+func ExampleOrganizations_EnableAllFeaturesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1047,7 +1067,8 @@ func ExampleOrganizations_EnableAllFeatures_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.EnableAllFeaturesInput{}
 
-	result, err := svc.EnableAllFeatures(input)
+	req := svc.EnableAllFeaturesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1084,7 +1105,7 @@ func ExampleOrganizations_EnableAllFeatures_shared00() {
 // The following example shows how to enable the service control policy (SCP) policy
 // type in a root. The output shows a root object with a PolicyTypes response element
 // showing that SCPs are now enabled:/n/n
-func ExampleOrganizations_EnablePolicyType_shared00() {
+func ExampleOrganizations_EnablePolicyTypeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1096,7 +1117,8 @@ func ExampleOrganizations_EnablePolicyType_shared00() {
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
-	result, err := svc.EnablePolicyType(input)
+	req := svc.EnablePolicyTypeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1138,7 +1160,7 @@ func ExampleOrganizations_EnablePolicyType_shared00() {
 //
 // The following example shows the admin of the master account owned by bill@example.com
 // inviting the account owned by juan@example.com to join an organization.
-func ExampleOrganizations_InviteAccountToOrganization_shared00() {
+func ExampleOrganizations_InviteAccountToOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1153,7 +1175,8 @@ func ExampleOrganizations_InviteAccountToOrganization_shared00() {
 		},
 	}
 
-	result, err := svc.InviteAccountToOrganization(input)
+	req := svc.InviteAccountToOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1192,7 +1215,7 @@ func ExampleOrganizations_InviteAccountToOrganization_shared00() {
 // To leave an organization as a member account
 //
 // TThe following example shows how to remove your member account from an organization:
-func ExampleOrganizations_LeaveOrganization_shared00() {
+func ExampleOrganizations_LeaveOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1201,7 +1224,8 @@ func ExampleOrganizations_LeaveOrganization_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.LeaveOrganizationInput{}
 
-	result, err := svc.LeaveOrganization(input)
+	req := svc.LeaveOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1240,7 +1264,7 @@ func ExampleOrganizations_LeaveOrganization_shared00() {
 // To retrieve a list of all of the accounts in an organization
 //
 // The following example shows you how to request a list of the accounts in an organization:
-func ExampleOrganizations_ListAccounts_shared00() {
+func ExampleOrganizations_ListAccountsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1249,7 +1273,8 @@ func ExampleOrganizations_ListAccounts_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListAccountsInput{}
 
-	result, err := svc.ListAccounts(input)
+	req := svc.ListAccountsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1280,7 +1305,7 @@ func ExampleOrganizations_ListAccounts_shared00() {
 // To retrieve a list of all of the accounts in a root or OU
 //
 // The following example shows how to request a list of the accounts in an OU:/n/n
-func ExampleOrganizations_ListAccountsForParent_shared00() {
+func ExampleOrganizations_ListAccountsForParentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1291,7 +1316,8 @@ func ExampleOrganizations_ListAccountsForParent_shared00() {
 		ParentId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.ListAccountsForParent(input)
+	req := svc.ListAccountsForParentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1325,7 +1351,7 @@ func ExampleOrganizations_ListAccountsForParent_shared00() {
 //
 // The following example shows how to request a list of the child OUs in a parent root
 // or OU:/n/n
-func ExampleOrganizations_ListChildren_shared00() {
+func ExampleOrganizations_ListChildrenRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1337,7 +1363,8 @@ func ExampleOrganizations_ListChildren_shared00() {
 		ParentId:  aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.ListChildren(input)
+	req := svc.ListChildrenRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1371,7 +1398,7 @@ func ExampleOrganizations_ListChildren_shared00() {
 //
 // The following example shows a user requesting a list of only the completed account
 // creation requests made for the current organization:
-func ExampleOrganizations_ListCreateAccountStatus_shared00() {
+func ExampleOrganizations_ListCreateAccountStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1384,7 +1411,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared00() {
 		},
 	}
 
-	result, err := svc.ListCreateAccountStatus(input)
+	req := svc.ListCreateAccountStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1416,7 +1444,7 @@ func ExampleOrganizations_ListCreateAccountStatus_shared00() {
 //
 // The following example shows a user requesting a list of only the in-progress account
 // creation requests made for the current organization:
-func ExampleOrganizations_ListCreateAccountStatus_shared01() {
+func ExampleOrganizations_ListCreateAccountStatusRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1429,7 +1457,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared01() {
 		},
 	}
 
-	result, err := svc.ListCreateAccountStatus(input)
+	req := svc.ListCreateAccountStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1461,7 +1490,7 @@ func ExampleOrganizations_ListCreateAccountStatus_shared01() {
 //
 // The following example shows you how to get a list of handshakes that are associated
 // with the account of the credentials used to call the operation:
-func ExampleOrganizations_ListHandshakesForAccount_shared00() {
+func ExampleOrganizations_ListHandshakesForAccountRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1470,7 +1499,8 @@ func ExampleOrganizations_ListHandshakesForAccount_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListHandshakesForAccountInput{}
 
-	result, err := svc.ListHandshakesForAccount(input)
+	req := svc.ListHandshakesForAccountRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1502,7 +1532,7 @@ func ExampleOrganizations_ListHandshakesForAccount_shared00() {
 //
 // The following example shows you how to get a list of handshakes associated with the
 // current organization:
-func ExampleOrganizations_ListHandshakesForOrganization_shared00() {
+func ExampleOrganizations_ListHandshakesForOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1511,7 +1541,8 @@ func ExampleOrganizations_ListHandshakesForOrganization_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListHandshakesForOrganizationInput{}
 
-	result, err := svc.ListHandshakesForOrganization(input)
+	req := svc.ListHandshakesForOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1544,7 +1575,7 @@ func ExampleOrganizations_ListHandshakesForOrganization_shared00() {
 // To retrieve a list of all of the child OUs in a parent root or OU
 //
 // The following example shows how to get a list of OUs in a specified root:/n/n
-func ExampleOrganizations_ListOrganizationalUnitsForParent_shared00() {
+func ExampleOrganizations_ListOrganizationalUnitsForParentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1555,7 +1586,8 @@ func ExampleOrganizations_ListOrganizationalUnitsForParent_shared00() {
 		ParentId: aws.String("r-examplerootid111"),
 	}
 
-	result, err := svc.ListOrganizationalUnitsForParent(input)
+	req := svc.ListOrganizationalUnitsForParentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1588,7 +1620,7 @@ func ExampleOrganizations_ListOrganizationalUnitsForParent_shared00() {
 // To retrieve a list of all of the parents of a child OU or account
 //
 // The following example shows how to list the root or OUs that contain account 444444444444:/n/n
-func ExampleOrganizations_ListParents_shared00() {
+func ExampleOrganizations_ListParentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1599,7 +1631,8 @@ func ExampleOrganizations_ListParents_shared00() {
 		ChildId: aws.String("444444444444"),
 	}
 
-	result, err := svc.ListParents(input)
+	req := svc.ListParentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1632,7 +1665,7 @@ func ExampleOrganizations_ListParents_shared00() {
 // To retrieve a list policies in the organization
 //
 // The following example shows how to get a list of service control policies (SCPs):/n/n
-func ExampleOrganizations_ListPolicies_shared00() {
+func ExampleOrganizations_ListPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1643,7 +1676,8 @@ func ExampleOrganizations_ListPolicies_shared00() {
 		Filter: organizations.PolicyTypeServiceControlPolicy,
 	}
 
-	result, err := svc.ListPolicies(input)
+	req := svc.ListPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1677,7 +1711,7 @@ func ExampleOrganizations_ListPolicies_shared00() {
 // of the type specified by the Filter parameter, that are directly attached to an account.
 // The returned list does not include policies that apply to the account because of
 // inheritance from its location in an OU hierarchy:/n/n
-func ExampleOrganizations_ListPoliciesForTarget_shared00() {
+func ExampleOrganizations_ListPoliciesForTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1689,7 +1723,8 @@ func ExampleOrganizations_ListPoliciesForTarget_shared00() {
 		TargetId: aws.String("444444444444"),
 	}
 
-	result, err := svc.ListPoliciesForTarget(input)
+	req := svc.ListPoliciesForTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1722,7 +1757,7 @@ func ExampleOrganizations_ListPoliciesForTarget_shared00() {
 // To retrieve a list of roots in the organization
 //
 // The following example shows how to get the list of the roots in the current organization:/n/n
-func ExampleOrganizations_ListRoots_shared00() {
+func ExampleOrganizations_ListRootsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1731,7 +1766,8 @@ func ExampleOrganizations_ListRoots_shared00() {
 	svc := organizations.New(cfg)
 	input := &organizations.ListRootsInput{}
 
-	result, err := svc.ListRoots(input)
+	req := svc.ListRootsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1763,7 +1799,7 @@ func ExampleOrganizations_ListRoots_shared00() {
 //
 // The following example shows how to get the list of roots, OUs, and accounts to which
 // the specified policy is attached:/n/n
-func ExampleOrganizations_ListTargetsForPolicy_shared00() {
+func ExampleOrganizations_ListTargetsForPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1774,7 +1810,8 @@ func ExampleOrganizations_ListTargetsForPolicy_shared00() {
 		PolicyId: aws.String("p-FullAWSAccess"),
 	}
 
-	result, err := svc.ListTargetsForPolicy(input)
+	req := svc.ListTargetsForPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1807,7 +1844,7 @@ func ExampleOrganizations_ListTargetsForPolicy_shared00() {
 // To move an OU or account to another OU or the root
 //
 // The following example shows how to move a member account from the root to an OU:/n/n
-func ExampleOrganizations_MoveAccount_shared00() {
+func ExampleOrganizations_MoveAccountRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1820,7 +1857,8 @@ func ExampleOrganizations_MoveAccount_shared00() {
 		SourceParentId:      aws.String("r-examplerootid111"),
 	}
 
-	result, err := svc.MoveAccount(input)
+	req := svc.MoveAccountRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1861,7 +1899,7 @@ func ExampleOrganizations_MoveAccount_shared00() {
 // To remove an account from an organization as the master account
 //
 // The following example shows you how to remove an account from an organization:
-func ExampleOrganizations_RemoveAccountFromOrganization_shared00() {
+func ExampleOrganizations_RemoveAccountFromOrganizationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1872,7 +1910,8 @@ func ExampleOrganizations_RemoveAccountFromOrganization_shared00() {
 		AccountId: aws.String("333333333333"),
 	}
 
-	result, err := svc.RemoveAccountFromOrganization(input)
+	req := svc.RemoveAccountFromOrganizationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1911,7 +1950,7 @@ func ExampleOrganizations_RemoveAccountFromOrganization_shared00() {
 // To rename an organizational unit
 //
 // The following example shows how to rename an OU. The output confirms the new name:/n/n
-func ExampleOrganizations_UpdateOrganizationalUnit_shared00() {
+func ExampleOrganizations_UpdateOrganizationalUnitRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1923,7 +1962,8 @@ func ExampleOrganizations_UpdateOrganizationalUnit_shared00() {
 		OrganizationalUnitId: aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
-	result, err := svc.UpdateOrganizationalUnit(input)
+	req := svc.UpdateOrganizationalUnitRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1961,7 +2001,7 @@ func ExampleOrganizations_UpdateOrganizationalUnit_shared00() {
 //
 // The following example shows how to rename a policy and give it a new description
 // and new content. The output confirms the new name and description text:/n/n
-func ExampleOrganizations_UpdatePolicy_shared00() {
+func ExampleOrganizations_UpdatePolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1974,7 +2014,8 @@ func ExampleOrganizations_UpdatePolicy_shared00() {
 		PolicyId:    aws.String("p-examplepolicyid111"),
 	}
 
-	result, err := svc.UpdatePolicy(input)
+	req := svc.UpdatePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2017,7 +2058,7 @@ func ExampleOrganizations_UpdatePolicy_shared00() {
 // The following example shows how to replace the JSON text of the SCP from the preceding
 // example with a new JSON policy text string that allows S3 actions instead of EC2
 // actions:/n/n
-func ExampleOrganizations_UpdatePolicy_shared01() {
+func ExampleOrganizations_UpdatePolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2029,7 +2070,8 @@ func ExampleOrganizations_UpdatePolicy_shared01() {
 		PolicyId: aws.String("p-examplepolicyid111"),
 	}
 
-	result, err := svc.UpdatePolicy(input)
+	req := svc.UpdatePolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

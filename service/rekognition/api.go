@@ -9,45 +9,24 @@ import (
 
 const opCompareFaces = "CompareFaces"
 
-// CompareFacesRequest generates a "aws.Request" representing the
-// client's request for the CompareFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CompareFaces for more information on using the CompareFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CompareFacesRequest method.
-//    req, resp := client.CompareFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) (req *aws.Request, output *CompareFacesOutput) {
-	op := &aws.Operation{
-		Name:       opCompareFaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CompareFacesInput{}
-	}
-
-	output = &CompareFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CompareFacesRequest is a API request type for the CompareFaces API operation.
+type CompareFacesRequest struct {
+	*aws.Request
+	Input *CompareFacesInput
 }
 
-// CompareFaces API operation for Amazon Rekognition.
+// Send marshals and sends the CompareFaces API request.
+func (r *CompareFacesRequest) Send() (*CompareFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CompareFacesOutput), nil
+}
+
+// CompareFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Compares a face in the source input image with each face detected in the
 // target input image.
@@ -84,104 +63,47 @@ func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) (req *aws.Re
 // This operation requires permissions to perform the rekognition:CompareFaces
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation CompareFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) CompareFaces(input *CompareFacesInput) (*CompareFacesOutput, error) {
-	req, out := c.CompareFacesRequest(input)
-	return out, req.Send()
-}
-
-// CompareFacesWithContext is the same as CompareFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompareFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) CompareFacesWithContext(ctx aws.Context, input *CompareFacesInput, opts ...aws.Option) (*CompareFacesOutput, error) {
-	req, out := c.CompareFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateCollection = "CreateCollection"
-
-// CreateCollectionRequest generates a "aws.Request" representing the
-// client's request for the CreateCollection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCollection for more information on using the CreateCollection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateCollectionRequest method.
-//    req, resp := client.CreateCollectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CompareFacesRequest method.
+//    req := client.CompareFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) (req *aws.Request, output *CreateCollectionOutput) {
+func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) CompareFacesRequest {
 	op := &aws.Operation{
-		Name:       opCreateCollection,
+		Name:       opCompareFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateCollectionInput{}
+		input = &CompareFacesInput{}
 	}
 
-	output = &CreateCollectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CompareFacesOutput{})
+	return CompareFacesRequest{Request: req, Input: input}
 }
 
-// CreateCollection API operation for Amazon Rekognition.
+const opCreateCollection = "CreateCollection"
+
+// CreateCollectionRequest is a API request type for the CreateCollection API operation.
+type CreateCollectionRequest struct {
+	*aws.Request
+	Input *CreateCollectionInput
+}
+
+// Send marshals and sends the CreateCollection API request.
+func (r *CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCollectionOutput), nil
+}
+
+// CreateCollectionRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Creates a collection in an AWS Region. You can add faces to the collection
 // using the operation.
@@ -198,81 +120,61 @@ func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) (req
 // This operation requires permissions to perform the rekognition:CreateCollection
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation CreateCollection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   A collection with the specified ID already exists.
-//
-func (c *Rekognition) CreateCollection(input *CreateCollectionInput) (*CreateCollectionOutput, error) {
-	req, out := c.CreateCollectionRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CreateCollectionRequest method.
+//    req := client.CreateCollectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) CreateCollectionRequest {
+	op := &aws.Operation{
+		Name:       opCreateCollection,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateCollectionWithContext is the same as CreateCollection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCollection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) CreateCollectionWithContext(ctx aws.Context, input *CreateCollectionInput, opts ...aws.Option) (*CreateCollectionOutput, error) {
-	req, out := c.CreateCollectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateCollectionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateCollectionOutput{})
+	return CreateCollectionRequest{Request: req, Input: input}
 }
 
 const opDeleteCollection = "DeleteCollection"
 
-// DeleteCollectionRequest generates a "aws.Request" representing the
-// client's request for the DeleteCollection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCollectionRequest is a API request type for the DeleteCollection API operation.
+type DeleteCollectionRequest struct {
+	*aws.Request
+	Input *DeleteCollectionInput
+}
+
+// Send marshals and sends the DeleteCollection API request.
+func (r *DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCollectionOutput), nil
+}
+
+// DeleteCollectionRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified collection. Note that this operation removes all faces
+// in the collection. For an example, see example1.
 //
-// See DeleteCollection for more information on using the DeleteCollection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the rekognition:DeleteCollection
+// action.
 //
 //    // Example sending a request using the DeleteCollectionRequest method.
-//    req, resp := client.DeleteCollectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCollectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) (req *aws.Request, output *DeleteCollectionOutput) {
+func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) DeleteCollectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCollection,
 		HTTPMethod: "POST",
@@ -283,94 +185,44 @@ func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) (req
 		input = &DeleteCollectionInput{}
 	}
 
-	output = &DeleteCollectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCollection API operation for Amazon Rekognition.
-//
-// Deletes the specified collection. Note that this operation removes all faces
-// in the collection. For an example, see example1.
-//
-// This operation requires permissions to perform the rekognition:DeleteCollection
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation DeleteCollection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) DeleteCollection(input *DeleteCollectionInput) (*DeleteCollectionOutput, error) {
-	req, out := c.DeleteCollectionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCollectionWithContext is the same as DeleteCollection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCollection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) DeleteCollectionWithContext(ctx aws.Context, input *DeleteCollectionInput, opts ...aws.Option) (*DeleteCollectionOutput, error) {
-	req, out := c.DeleteCollectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteCollectionOutput{})
+	return DeleteCollectionRequest{Request: req, Input: input}
 }
 
 const opDeleteFaces = "DeleteFaces"
 
-// DeleteFacesRequest generates a "aws.Request" representing the
-// client's request for the DeleteFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteFacesRequest is a API request type for the DeleteFaces API operation.
+type DeleteFacesRequest struct {
+	*aws.Request
+	Input *DeleteFacesInput
+}
+
+// Send marshals and sends the DeleteFaces API request.
+func (r *DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFacesOutput), nil
+}
+
+// DeleteFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes faces from a collection. You specify a collection ID and an array
+// of face IDs to remove from the collection.
 //
-// See DeleteFaces for more information on using the DeleteFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the rekognition:DeleteFaces
+// action.
 //
 //    // Example sending a request using the DeleteFacesRequest method.
-//    req, resp := client.DeleteFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) (req *aws.Request, output *DeleteFacesOutput) {
+func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) DeleteFacesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFaces,
 		HTTPMethod: "POST",
@@ -381,110 +233,30 @@ func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) (req *aws.Requ
 		input = &DeleteFacesInput{}
 	}
 
-	output = &DeleteFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteFaces API operation for Amazon Rekognition.
-//
-// Deletes faces from a collection. You specify a collection ID and an array
-// of face IDs to remove from the collection.
-//
-// This operation requires permissions to perform the rekognition:DeleteFaces
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation DeleteFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) DeleteFaces(input *DeleteFacesInput) (*DeleteFacesOutput, error) {
-	req, out := c.DeleteFacesRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFacesWithContext is the same as DeleteFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) DeleteFacesWithContext(ctx aws.Context, input *DeleteFacesInput, opts ...aws.Option) (*DeleteFacesOutput, error) {
-	req, out := c.DeleteFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteFacesOutput{})
+	return DeleteFacesRequest{Request: req, Input: input}
 }
 
 const opDetectFaces = "DetectFaces"
 
-// DetectFacesRequest generates a "aws.Request" representing the
-// client's request for the DetectFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetectFaces for more information on using the DetectFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DetectFacesRequest method.
-//    req, resp := client.DetectFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) (req *aws.Request, output *DetectFacesOutput) {
-	op := &aws.Operation{
-		Name:       opDetectFaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DetectFacesInput{}
-	}
-
-	output = &DetectFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DetectFacesRequest is a API request type for the DetectFaces API operation.
+type DetectFacesRequest struct {
+	*aws.Request
+	Input *DetectFacesInput
 }
 
-// DetectFaces API operation for Amazon Rekognition.
+// Send marshals and sends the DetectFaces API request.
+func (r *DetectFacesRequest) Send() (*DetectFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetectFacesOutput), nil
+}
+
+// DetectFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Detects faces within an image (JPEG or PNG) that is provided as input.
 //
@@ -505,104 +277,47 @@ func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) (req *aws.Requ
 // This operation requires permissions to perform the rekognition:DetectFaces
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation DetectFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) DetectFaces(input *DetectFacesInput) (*DetectFacesOutput, error) {
-	req, out := c.DetectFacesRequest(input)
-	return out, req.Send()
-}
-
-// DetectFacesWithContext is the same as DetectFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetectFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) DetectFacesWithContext(ctx aws.Context, input *DetectFacesInput, opts ...aws.Option) (*DetectFacesOutput, error) {
-	req, out := c.DetectFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDetectLabels = "DetectLabels"
-
-// DetectLabelsRequest generates a "aws.Request" representing the
-// client's request for the DetectLabels operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetectLabels for more information on using the DetectLabels
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DetectLabelsRequest method.
-//    req, resp := client.DetectLabelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DetectFacesRequest method.
+//    req := client.DetectFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) (req *aws.Request, output *DetectLabelsOutput) {
+func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) DetectFacesRequest {
 	op := &aws.Operation{
-		Name:       opDetectLabels,
+		Name:       opDetectFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DetectLabelsInput{}
+		input = &DetectFacesInput{}
 	}
 
-	output = &DetectLabelsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DetectFacesOutput{})
+	return DetectFacesRequest{Request: req, Input: input}
 }
 
-// DetectLabels API operation for Amazon Rekognition.
+const opDetectLabels = "DetectLabels"
+
+// DetectLabelsRequest is a API request type for the DetectLabels API operation.
+type DetectLabelsRequest struct {
+	*aws.Request
+	Input *DetectLabelsInput
+}
+
+// Send marshals and sends the DetectLabels API request.
+func (r *DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetectLabelsOutput), nil
+}
+
+// DetectLabelsRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Detects instances of real-world labels within an image (JPEG or PNG) provided
 // as input. This includes objects like flower, tree, and table; events like
@@ -651,104 +366,47 @@ func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) (req *aws.Re
 // This operation requires permissions to perform the rekognition:DetectLabels
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation DetectLabels for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) DetectLabels(input *DetectLabelsInput) (*DetectLabelsOutput, error) {
-	req, out := c.DetectLabelsRequest(input)
-	return out, req.Send()
-}
-
-// DetectLabelsWithContext is the same as DetectLabels with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetectLabels for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) DetectLabelsWithContext(ctx aws.Context, input *DetectLabelsInput, opts ...aws.Option) (*DetectLabelsOutput, error) {
-	req, out := c.DetectLabelsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDetectModerationLabels = "DetectModerationLabels"
-
-// DetectModerationLabelsRequest generates a "aws.Request" representing the
-// client's request for the DetectModerationLabels operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetectModerationLabels for more information on using the DetectModerationLabels
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DetectModerationLabelsRequest method.
-//    req, resp := client.DetectModerationLabelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DetectLabelsRequest method.
+//    req := client.DetectLabelsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabelsInput) (req *aws.Request, output *DetectModerationLabelsOutput) {
+func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) DetectLabelsRequest {
 	op := &aws.Operation{
-		Name:       opDetectModerationLabels,
+		Name:       opDetectLabels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DetectModerationLabelsInput{}
+		input = &DetectLabelsInput{}
 	}
 
-	output = &DetectModerationLabelsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DetectLabelsOutput{})
+	return DetectLabelsRequest{Request: req, Input: input}
 }
 
-// DetectModerationLabels API operation for Amazon Rekognition.
+const opDetectModerationLabels = "DetectModerationLabels"
+
+// DetectModerationLabelsRequest is a API request type for the DetectModerationLabels API operation.
+type DetectModerationLabelsRequest struct {
+	*aws.Request
+	Input *DetectModerationLabelsInput
+}
+
+// Send marshals and sends the DetectModerationLabels API request.
+func (r *DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetectModerationLabelsOutput), nil
+}
+
+// DetectModerationLabelsRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Detects explicit or suggestive adult content in a specified JPEG or PNG format
 // image. Use DetectModerationLabels to moderate images depending on your requirements.
@@ -759,88 +417,63 @@ func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabel
 // which types of content are appropriate. For information about moderation
 // labels, see image-moderation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation DetectModerationLabels for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) DetectModerationLabels(input *DetectModerationLabelsInput) (*DetectModerationLabelsOutput, error) {
-	req, out := c.DetectModerationLabelsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DetectModerationLabelsRequest method.
+//    req := client.DetectModerationLabelsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabelsInput) DetectModerationLabelsRequest {
+	op := &aws.Operation{
+		Name:       opDetectModerationLabels,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DetectModerationLabelsWithContext is the same as DetectModerationLabels with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetectModerationLabels for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) DetectModerationLabelsWithContext(ctx aws.Context, input *DetectModerationLabelsInput, opts ...aws.Option) (*DetectModerationLabelsOutput, error) {
-	req, out := c.DetectModerationLabelsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DetectModerationLabelsInput{}
+	}
+
+	req := c.newRequest(op, input, &DetectModerationLabelsOutput{})
+	return DetectModerationLabelsRequest{Request: req, Input: input}
 }
 
 const opGetCelebrityInfo = "GetCelebrityInfo"
 
-// GetCelebrityInfoRequest generates a "aws.Request" representing the
-// client's request for the GetCelebrityInfo operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCelebrityInfoRequest is a API request type for the GetCelebrityInfo API operation.
+type GetCelebrityInfoRequest struct {
+	*aws.Request
+	Input *GetCelebrityInfoInput
+}
+
+// Send marshals and sends the GetCelebrityInfo API request.
+func (r *GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCelebrityInfoOutput), nil
+}
+
+// GetCelebrityInfoRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets the name and additional information about a celebrity based on his or
+// her Rekognition ID. The additional information is returned as an array of
+// URLs. If there is no additional information about the celebrity, this list
+// is empty. For more information, see celebrity-recognition.
 //
-// See GetCelebrityInfo for more information on using the GetCelebrityInfo
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the rekognition:GetCelebrityInfo
+// action.
 //
 //    // Example sending a request using the GetCelebrityInfoRequest method.
-//    req, resp := client.GetCelebrityInfoRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCelebrityInfoRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) (req *aws.Request, output *GetCelebrityInfoOutput) {
+func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetCelebrityInfoRequest {
 	op := &aws.Operation{
 		Name:       opGetCelebrityInfo,
 		HTTPMethod: "POST",
@@ -851,112 +484,30 @@ func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) (req
 		input = &GetCelebrityInfoInput{}
 	}
 
-	output = &GetCelebrityInfoOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCelebrityInfo API operation for Amazon Rekognition.
-//
-// Gets the name and additional information about a celebrity based on his or
-// her Rekognition ID. The additional information is returned as an array of
-// URLs. If there is no additional information about the celebrity, this list
-// is empty. For more information, see celebrity-recognition.
-//
-// This operation requires permissions to perform the rekognition:GetCelebrityInfo
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation GetCelebrityInfo for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) GetCelebrityInfo(input *GetCelebrityInfoInput) (*GetCelebrityInfoOutput, error) {
-	req, out := c.GetCelebrityInfoRequest(input)
-	return out, req.Send()
-}
-
-// GetCelebrityInfoWithContext is the same as GetCelebrityInfo with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCelebrityInfo for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetCelebrityInfoWithContext(ctx aws.Context, input *GetCelebrityInfoInput, opts ...aws.Option) (*GetCelebrityInfoOutput, error) {
-	req, out := c.GetCelebrityInfoRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCelebrityInfoOutput{})
+	return GetCelebrityInfoRequest{Request: req, Input: input}
 }
 
 const opIndexFaces = "IndexFaces"
 
-// IndexFacesRequest generates a "aws.Request" representing the
-// client's request for the IndexFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See IndexFaces for more information on using the IndexFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the IndexFacesRequest method.
-//    req, resp := client.IndexFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) (req *aws.Request, output *IndexFacesOutput) {
-	op := &aws.Operation{
-		Name:       opIndexFaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &IndexFacesInput{}
-	}
-
-	output = &IndexFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// IndexFacesRequest is a API request type for the IndexFaces API operation.
+type IndexFacesRequest struct {
+	*aws.Request
+	Input *IndexFacesInput
 }
 
-// IndexFaces API operation for Amazon Rekognition.
+// Send marshals and sends the IndexFaces API request.
+func (r *IndexFacesRequest) Send() (*IndexFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*IndexFacesOutput), nil
+}
+
+// IndexFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Detects faces in the input image and adds them to the specified collection.
 //
@@ -988,91 +539,64 @@ func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) (req *aws.Reques
 // This operation requires permissions to perform the rekognition:IndexFaces
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation IndexFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) IndexFaces(input *IndexFacesInput) (*IndexFacesOutput, error) {
-	req, out := c.IndexFacesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the IndexFacesRequest method.
+//    req := client.IndexFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) IndexFacesRequest {
+	op := &aws.Operation{
+		Name:       opIndexFaces,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// IndexFacesWithContext is the same as IndexFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See IndexFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) IndexFacesWithContext(ctx aws.Context, input *IndexFacesInput, opts ...aws.Option) (*IndexFacesOutput, error) {
-	req, out := c.IndexFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &IndexFacesInput{}
+	}
+
+	req := c.newRequest(op, input, &IndexFacesOutput{})
+	return IndexFacesRequest{Request: req, Input: input}
 }
 
 const opListCollections = "ListCollections"
 
-// ListCollectionsRequest generates a "aws.Request" representing the
-// client's request for the ListCollections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCollectionsRequest is a API request type for the ListCollections API operation.
+type ListCollectionsRequest struct {
+	*aws.Request
+	Input *ListCollectionsInput
+}
+
+// Send marshals and sends the ListCollections API request.
+func (r *ListCollectionsRequest) Send() (*ListCollectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCollectionsOutput), nil
+}
+
+// ListCollectionsRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns list of collection IDs in your account. If the result is truncated,
+// the response also provides a NextToken that you can use in the subsequent
+// request to fetch the next set of collection IDs.
 //
-// See ListCollections for more information on using the ListCollections
-// API call, and error handling.
+// For an example, see example1.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the rekognition:ListCollections
+// action.
 //
 //    // Example sending a request using the ListCollectionsRequest method.
-//    req, resp := client.ListCollectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCollectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) (req *aws.Request, output *ListCollectionsOutput) {
+func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCollectionsRequest {
 	op := &aws.Operation{
 		Name:       opListCollections,
 		HTTPMethod: "POST",
@@ -1089,73 +613,8 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) (req *
 		input = &ListCollectionsInput{}
 	}
 
-	output = &ListCollectionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCollections API operation for Amazon Rekognition.
-//
-// Returns list of collection IDs in your account. If the result is truncated,
-// the response also provides a NextToken that you can use in the subsequent
-// request to fetch the next set of collection IDs.
-//
-// For an example, see example1.
-//
-// This operation requires permissions to perform the rekognition:ListCollections
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation ListCollections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidPaginationTokenException "InvalidPaginationTokenException"
-//   Pagination token in the request is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) ListCollections(input *ListCollectionsInput) (*ListCollectionsOutput, error) {
-	req, out := c.ListCollectionsRequest(input)
-	return out, req.Send()
-}
-
-// ListCollectionsWithContext is the same as ListCollections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCollections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListCollectionsWithContext(ctx aws.Context, input *ListCollectionsInput, opts ...aws.Option) (*ListCollectionsOutput, error) {
-	req, out := c.ListCollectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCollectionsOutput{})
+	return ListCollectionsRequest{Request: req, Input: input}
 }
 
 // ListCollectionsPages iterates over the pages of a ListCollections operation,
@@ -1194,10 +653,10 @@ func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListCollectionsRequest(inCpy)
+			req := c.ListCollectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1210,29 +669,39 @@ func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *Li
 
 const opListFaces = "ListFaces"
 
-// ListFacesRequest generates a "aws.Request" representing the
-// client's request for the ListFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFacesRequest is a API request type for the ListFaces API operation.
+type ListFacesRequest struct {
+	*aws.Request
+	Input *ListFacesInput
+}
+
+// Send marshals and sends the ListFaces API request.
+func (r *ListFacesRequest) Send() (*ListFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFacesOutput), nil
+}
+
+// ListFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns metadata for faces in the specified collection. This metadata includes
+// information such as the bounding box coordinates, the confidence (that the
+// bounding box contains a face), and face ID. For an example, see example3.
 //
-// See ListFaces for more information on using the ListFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions to perform the rekognition:ListFaces
+// action.
 //
 //    // Example sending a request using the ListFacesRequest method.
-//    req, resp := client.ListFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) ListFacesRequest(input *ListFacesInput) (req *aws.Request, output *ListFacesOutput) {
+func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 	op := &aws.Operation{
 		Name:       opListFaces,
 		HTTPMethod: "POST",
@@ -1249,71 +718,8 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) (req *aws.Request,
 		input = &ListFacesInput{}
 	}
 
-	output = &ListFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFaces API operation for Amazon Rekognition.
-//
-// Returns metadata for faces in the specified collection. This metadata includes
-// information such as the bounding box coordinates, the confidence (that the
-// bounding box contains a face), and face ID. For an example, see example3.
-//
-// This operation requires permissions to perform the rekognition:ListFaces
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation ListFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidPaginationTokenException "InvalidPaginationTokenException"
-//   Pagination token in the request is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) ListFaces(input *ListFacesInput) (*ListFacesOutput, error) {
-	req, out := c.ListFacesRequest(input)
-	return out, req.Send()
-}
-
-// ListFacesWithContext is the same as ListFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListFacesWithContext(ctx aws.Context, input *ListFacesInput, opts ...aws.Option) (*ListFacesOutput, error) {
-	req, out := c.ListFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFacesOutput{})
+	return ListFacesRequest{Request: req, Input: input}
 }
 
 // ListFacesPages iterates over the pages of a ListFaces operation,
@@ -1352,10 +758,10 @@ func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFace
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListFacesRequest(inCpy)
+			req := c.ListFacesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1368,45 +774,24 @@ func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFace
 
 const opRecognizeCelebrities = "RecognizeCelebrities"
 
-// RecognizeCelebritiesRequest generates a "aws.Request" representing the
-// client's request for the RecognizeCelebrities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RecognizeCelebrities for more information on using the RecognizeCelebrities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RecognizeCelebritiesRequest method.
-//    req, resp := client.RecognizeCelebritiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) (req *aws.Request, output *RecognizeCelebritiesOutput) {
-	op := &aws.Operation{
-		Name:       opRecognizeCelebrities,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RecognizeCelebritiesInput{}
-	}
-
-	output = &RecognizeCelebritiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RecognizeCelebritiesRequest is a API request type for the RecognizeCelebrities API operation.
+type RecognizeCelebritiesRequest struct {
+	*aws.Request
+	Input *RecognizeCelebritiesInput
 }
 
-// RecognizeCelebrities API operation for Amazon Rekognition.
+// Send marshals and sends the RecognizeCelebrities API request.
+func (r *RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RecognizeCelebritiesOutput), nil
+}
+
+// RecognizeCelebritiesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // Returns an array of celebrities recognized in the input image. The image
 // is passed either as base64-encoded image bytes or as a reference to an image
@@ -1435,107 +820,47 @@ func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInp
 // This operation requires permissions to perform the rekognition:RecognizeCelebrities
 // operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation RecognizeCelebrities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) RecognizeCelebrities(input *RecognizeCelebritiesInput) (*RecognizeCelebritiesOutput, error) {
-	req, out := c.RecognizeCelebritiesRequest(input)
-	return out, req.Send()
-}
-
-// RecognizeCelebritiesWithContext is the same as RecognizeCelebrities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RecognizeCelebrities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) RecognizeCelebritiesWithContext(ctx aws.Context, input *RecognizeCelebritiesInput, opts ...aws.Option) (*RecognizeCelebritiesOutput, error) {
-	req, out := c.RecognizeCelebritiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSearchFaces = "SearchFaces"
-
-// SearchFacesRequest generates a "aws.Request" representing the
-// client's request for the SearchFaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SearchFaces for more information on using the SearchFaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SearchFacesRequest method.
-//    req, resp := client.SearchFacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RecognizeCelebritiesRequest method.
+//    req := client.RecognizeCelebritiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) (req *aws.Request, output *SearchFacesOutput) {
+func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) RecognizeCelebritiesRequest {
 	op := &aws.Operation{
-		Name:       opSearchFaces,
+		Name:       opRecognizeCelebrities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SearchFacesInput{}
+		input = &RecognizeCelebritiesInput{}
 	}
 
-	output = &SearchFacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RecognizeCelebritiesOutput{})
+	return RecognizeCelebritiesRequest{Request: req, Input: input}
 }
 
-// SearchFaces API operation for Amazon Rekognition.
+const opSearchFaces = "SearchFaces"
+
+// SearchFacesRequest is a API request type for the SearchFaces API operation.
+type SearchFacesRequest struct {
+	*aws.Request
+	Input *SearchFacesInput
+}
+
+// Send marshals and sends the SearchFaces API request.
+func (r *SearchFacesRequest) Send() (*SearchFacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchFacesOutput), nil
+}
+
+// SearchFacesRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // For a given input face ID, searches for matching faces in the collection
 // the face belongs to. You get a face ID when you add a face to the collection
@@ -1556,97 +881,47 @@ func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) (req *aws.Requ
 // This operation requires permissions to perform the rekognition:SearchFaces
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation SearchFaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-func (c *Rekognition) SearchFaces(input *SearchFacesInput) (*SearchFacesOutput, error) {
-	req, out := c.SearchFacesRequest(input)
-	return out, req.Send()
-}
-
-// SearchFacesWithContext is the same as SearchFaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SearchFaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) SearchFacesWithContext(ctx aws.Context, input *SearchFacesInput, opts ...aws.Option) (*SearchFacesOutput, error) {
-	req, out := c.SearchFacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSearchFacesByImage = "SearchFacesByImage"
-
-// SearchFacesByImageRequest generates a "aws.Request" representing the
-// client's request for the SearchFacesByImage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SearchFacesByImage for more information on using the SearchFacesByImage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SearchFacesByImageRequest method.
-//    req, resp := client.SearchFacesByImageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SearchFacesRequest method.
+//    req := client.SearchFacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) (req *aws.Request, output *SearchFacesByImageOutput) {
+func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) SearchFacesRequest {
 	op := &aws.Operation{
-		Name:       opSearchFacesByImage,
+		Name:       opSearchFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SearchFacesByImageInput{}
+		input = &SearchFacesInput{}
 	}
 
-	output = &SearchFacesByImageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SearchFacesOutput{})
+	return SearchFacesRequest{Request: req, Input: input}
 }
 
-// SearchFacesByImage API operation for Amazon Rekognition.
+const opSearchFacesByImage = "SearchFacesByImage"
+
+// SearchFacesByImageRequest is a API request type for the SearchFacesByImage API operation.
+type SearchFacesByImageRequest struct {
+	*aws.Request
+	Input *SearchFacesByImageInput
+}
+
+// Send marshals and sends the SearchFacesByImage API request.
+func (r *SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchFacesByImageOutput), nil
+}
+
+// SearchFacesByImageRequest returns a request value for making API operation for
+// Amazon Rekognition.
 //
 // For a given input image, first detects the largest face in the image, and
 // then searches the specified collection for matching faces. The operation
@@ -1672,64 +947,25 @@ func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) 
 // This operation requires permissions to perform the rekognition:SearchFacesByImage
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Rekognition's
-// API operation SearchFacesByImage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidS3ObjectException "InvalidS3ObjectException"
-//   Amazon Rekognition is unable to access the S3 object specified in the request.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Input parameter violated a constraint. Validate your parameter before calling
-//   the API operation again.
-//
-//   * ErrCodeImageTooLargeException "ImageTooLargeException"
-//   The input image size exceeds the allowed limit. For more information, see
-//   limits.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   You are not authorized to perform the action.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Amazon Rekognition experienced a service issue. Try your call again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   Amazon Rekognition is temporarily unable to process the request. Try your
-//   call again.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   The number of requests exceeded your throughput limit. If you want to increase
-//   this limit, contact Amazon Rekognition.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Collection specified in the request is not found.
-//
-//   * ErrCodeInvalidImageFormatException "InvalidImageFormatException"
-//   The provided image format is not supported.
-//
-func (c *Rekognition) SearchFacesByImage(input *SearchFacesByImageInput) (*SearchFacesByImageOutput, error) {
-	req, out := c.SearchFacesByImageRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the SearchFacesByImageRequest method.
+//    req := client.SearchFacesByImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) SearchFacesByImageRequest {
+	op := &aws.Operation{
+		Name:       opSearchFacesByImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SearchFacesByImageWithContext is the same as SearchFacesByImage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SearchFacesByImage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) SearchFacesByImageWithContext(ctx aws.Context, input *SearchFacesByImageInput, opts ...aws.Option) (*SearchFacesByImageOutput, error) {
-	req, out := c.SearchFacesByImageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SearchFacesByImageInput{}
+	}
+
+	req := c.newRequest(op, input, &SearchFacesByImageOutput{})
+	return SearchFacesByImageRequest{Request: req, Input: input}
 }
 
 // Structure containing the estimated age range, in years, for a face.

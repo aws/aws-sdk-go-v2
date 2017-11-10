@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To abort a multipart upload
 //
 // The following example aborts a multipart upload.
-func ExampleS3_AbortMultipartUpload_shared00() {
+func ExampleS3_AbortMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -41,7 +41,8 @@ func ExampleS3_AbortMultipartUpload_shared00() {
 		UploadId: aws.String("xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--"),
 	}
 
-	result, err := svc.AbortMultipartUpload(input)
+	req := svc.AbortMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -64,7 +65,7 @@ func ExampleS3_AbortMultipartUpload_shared00() {
 // To complete multipart upload
 //
 // The following example completes a multipart upload.
-func ExampleS3_CompleteMultipartUpload_shared00() {
+func ExampleS3_CompleteMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -89,7 +90,8 @@ func ExampleS3_CompleteMultipartUpload_shared00() {
 		UploadId: aws.String("7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--"),
 	}
 
-	result, err := svc.CompleteMultipartUpload(input)
+	req := svc.CompleteMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -110,7 +112,7 @@ func ExampleS3_CompleteMultipartUpload_shared00() {
 // To copy an object
 //
 // The following example copies an object from one bucket to another.
-func ExampleS3_CopyObject_shared00() {
+func ExampleS3_CopyObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -123,7 +125,8 @@ func ExampleS3_CopyObject_shared00() {
 		Key:        aws.String("HappyFaceCopyjpg"),
 	}
 
-	result, err := svc.CopyObject(input)
+	req := svc.CopyObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -147,7 +150,7 @@ func ExampleS3_CopyObject_shared00() {
 //
 // The following example creates a bucket. The request specifies an AWS region where
 // to create the bucket.
-func ExampleS3_CreateBucket_shared00() {
+func ExampleS3_CreateBucketRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -161,7 +164,8 @@ func ExampleS3_CreateBucket_shared00() {
 		},
 	}
 
-	result, err := svc.CreateBucket(input)
+	req := svc.CreateBucketRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -186,7 +190,7 @@ func ExampleS3_CreateBucket_shared00() {
 // To create a bucket
 //
 // The following example creates a bucket.
-func ExampleS3_CreateBucket_shared01() {
+func ExampleS3_CreateBucketRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -197,7 +201,8 @@ func ExampleS3_CreateBucket_shared01() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.CreateBucket(input)
+	req := svc.CreateBucketRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -222,7 +227,7 @@ func ExampleS3_CreateBucket_shared01() {
 // To initiate a multipart upload
 //
 // The following example initiates a multipart upload.
-func ExampleS3_CreateMultipartUpload_shared00() {
+func ExampleS3_CreateMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -234,7 +239,8 @@ func ExampleS3_CreateMultipartUpload_shared00() {
 		Key:    aws.String("largeobject"),
 	}
 
-	result, err := svc.CreateMultipartUpload(input)
+	req := svc.CreateMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -255,7 +261,7 @@ func ExampleS3_CreateMultipartUpload_shared00() {
 // To delete a bucket
 //
 // The following example deletes the specified bucket.
-func ExampleS3_DeleteBucket_shared00() {
+func ExampleS3_DeleteBucketRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -266,7 +272,8 @@ func ExampleS3_DeleteBucket_shared00() {
 		Bucket: aws.String("forrandall2"),
 	}
 
-	result, err := svc.DeleteBucket(input)
+	req := svc.DeleteBucketRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -287,7 +294,7 @@ func ExampleS3_DeleteBucket_shared00() {
 // To delete cors configuration on a bucket.
 //
 // The following example deletes CORS configuration on a bucket.
-func ExampleS3_DeleteBucketCors_shared00() {
+func ExampleS3_DeleteBucketCorsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -298,7 +305,8 @@ func ExampleS3_DeleteBucketCors_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.DeleteBucketCors(input)
+	req := svc.DeleteBucketCorsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -319,7 +327,7 @@ func ExampleS3_DeleteBucketCors_shared00() {
 // To delete lifecycle configuration on a bucket.
 //
 // The following example deletes lifecycle configuration on a bucket.
-func ExampleS3_DeleteBucketLifecycle_shared00() {
+func ExampleS3_DeleteBucketLifecycleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -330,7 +338,8 @@ func ExampleS3_DeleteBucketLifecycle_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.DeleteBucketLifecycle(input)
+	req := svc.DeleteBucketLifecycleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -351,7 +360,7 @@ func ExampleS3_DeleteBucketLifecycle_shared00() {
 // To delete bucket policy
 //
 // The following example deletes bucket policy on the specified bucket.
-func ExampleS3_DeleteBucketPolicy_shared00() {
+func ExampleS3_DeleteBucketPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -362,7 +371,8 @@ func ExampleS3_DeleteBucketPolicy_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.DeleteBucketPolicy(input)
+	req := svc.DeleteBucketPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -383,7 +393,7 @@ func ExampleS3_DeleteBucketPolicy_shared00() {
 // To delete bucket replication configuration
 //
 // The following example deletes replication configuration set on bucket.
-func ExampleS3_DeleteBucketReplication_shared00() {
+func ExampleS3_DeleteBucketReplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -394,7 +404,8 @@ func ExampleS3_DeleteBucketReplication_shared00() {
 		Bucket: aws.String("example"),
 	}
 
-	result, err := svc.DeleteBucketReplication(input)
+	req := svc.DeleteBucketReplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -415,7 +426,7 @@ func ExampleS3_DeleteBucketReplication_shared00() {
 // To delete bucket tags
 //
 // The following example deletes bucket tags.
-func ExampleS3_DeleteBucketTagging_shared00() {
+func ExampleS3_DeleteBucketTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -426,7 +437,8 @@ func ExampleS3_DeleteBucketTagging_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.DeleteBucketTagging(input)
+	req := svc.DeleteBucketTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -447,7 +459,7 @@ func ExampleS3_DeleteBucketTagging_shared00() {
 // To delete bucket website configuration
 //
 // The following example deletes bucket website configuration.
-func ExampleS3_DeleteBucketWebsite_shared00() {
+func ExampleS3_DeleteBucketWebsiteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -458,7 +470,8 @@ func ExampleS3_DeleteBucketWebsite_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.DeleteBucketWebsite(input)
+	req := svc.DeleteBucketWebsiteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -479,7 +492,7 @@ func ExampleS3_DeleteBucketWebsite_shared00() {
 // To delete an object (from a non-versioned bucket)
 //
 // The following example deletes an object from a non-versioned bucket.
-func ExampleS3_DeleteObject_shared00() {
+func ExampleS3_DeleteObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -491,7 +504,8 @@ func ExampleS3_DeleteObject_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.DeleteObject(input)
+	req := svc.DeleteObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -512,7 +526,7 @@ func ExampleS3_DeleteObject_shared00() {
 // To delete an object
 //
 // The following example deletes an object from an S3 bucket.
-func ExampleS3_DeleteObject_shared01() {
+func ExampleS3_DeleteObjectRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -524,7 +538,8 @@ func ExampleS3_DeleteObject_shared01() {
 		Key:    aws.String("objectkey.jpg"),
 	}
 
-	result, err := svc.DeleteObject(input)
+	req := svc.DeleteObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -546,7 +561,7 @@ func ExampleS3_DeleteObject_shared01() {
 //
 // The following example removes tag set associated with the specified object version.
 // The request specifies both the object key and object version.
-func ExampleS3_DeleteObjectTagging_shared00() {
+func ExampleS3_DeleteObjectTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -559,7 +574,8 @@ func ExampleS3_DeleteObjectTagging_shared00() {
 		VersionId: aws.String("ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"),
 	}
 
-	result, err := svc.DeleteObjectTagging(input)
+	req := svc.DeleteObjectTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -582,7 +598,7 @@ func ExampleS3_DeleteObjectTagging_shared00() {
 // The following example removes tag set associated with the specified object. If the
 // bucket is versioning enabled, the operation removes tag set from the latest object
 // version.
-func ExampleS3_DeleteObjectTagging_shared01() {
+func ExampleS3_DeleteObjectTaggingRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -594,7 +610,8 @@ func ExampleS3_DeleteObjectTagging_shared01() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.DeleteObjectTagging(input)
+	req := svc.DeleteObjectTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -617,7 +634,7 @@ func ExampleS3_DeleteObjectTagging_shared01() {
 // The following example deletes objects from a bucket. The request specifies object
 // versions. S3 deletes specific object versions and returns the key and versions of
 // deleted objects in the response.
-func ExampleS3_DeleteObjects_shared00() {
+func ExampleS3_DeleteObjectsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -641,7 +658,8 @@ func ExampleS3_DeleteObjects_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteObjects(input)
+	req := svc.DeleteObjectsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -664,7 +682,7 @@ func ExampleS3_DeleteObjects_shared00() {
 // The following example deletes objects from a bucket. The bucket is versioned, and
 // the request does not specify the object version to delete. In this case, all versions
 // remain in the bucket and S3 adds a delete marker.
-func ExampleS3_DeleteObjects_shared01() {
+func ExampleS3_DeleteObjectsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -686,7 +704,8 @@ func ExampleS3_DeleteObjects_shared01() {
 		},
 	}
 
-	result, err := svc.DeleteObjects(input)
+	req := svc.DeleteObjectsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -708,7 +727,7 @@ func ExampleS3_DeleteObjects_shared01() {
 //
 // The following example returns cross-origin resource sharing (CORS) configuration
 // set on a bucket.
-func ExampleS3_GetBucketCors_shared00() {
+func ExampleS3_GetBucketCorsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -719,7 +738,8 @@ func ExampleS3_GetBucketCors_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketCors(input)
+	req := svc.GetBucketCorsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -740,7 +760,7 @@ func ExampleS3_GetBucketCors_shared00() {
 // To get a bucket acl
 //
 // The following example gets ACL on the specified bucket.
-func ExampleS3_GetBucketLifecycle_shared00() {
+func ExampleS3_GetBucketLifecycleRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -751,7 +771,8 @@ func ExampleS3_GetBucketLifecycle_shared00() {
 		Bucket: aws.String("acl1"),
 	}
 
-	result, err := svc.GetBucketLifecycle(input)
+	req := svc.GetBucketLifecycleRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -772,7 +793,7 @@ func ExampleS3_GetBucketLifecycle_shared00() {
 // To get lifecycle configuration on a bucket
 //
 // The following example retrieves lifecycle configuration on set on a bucket.
-func ExampleS3_GetBucketLifecycleConfiguration_shared00() {
+func ExampleS3_GetBucketLifecycleConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -783,7 +804,8 @@ func ExampleS3_GetBucketLifecycleConfiguration_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketLifecycleConfiguration(input)
+	req := svc.GetBucketLifecycleConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -804,7 +826,7 @@ func ExampleS3_GetBucketLifecycleConfiguration_shared00() {
 // To get bucket location
 //
 // The following example returns bucket location.
-func ExampleS3_GetBucketLocation_shared00() {
+func ExampleS3_GetBucketLocationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -815,7 +837,8 @@ func ExampleS3_GetBucketLocation_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketLocation(input)
+	req := svc.GetBucketLocationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -836,18 +859,19 @@ func ExampleS3_GetBucketLocation_shared00() {
 // To get notification configuration set on a bucket
 //
 // The following example returns notification configuration set on a bucket.
-func ExampleS3_GetBucketNotification_shared00() {
+func ExampleS3_GetBucketNotificationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
 	}
 
 	svc := s3.New(cfg)
-	input := &s3.GetBucketNotificationConfigurationRequest{
+	input := &s3.GetBucketNotificationConfigurationInput{
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketNotification(input)
+	req := svc.GetBucketNotificationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -868,18 +892,19 @@ func ExampleS3_GetBucketNotification_shared00() {
 // To get notification configuration set on a bucket
 //
 // The following example returns notification configuration set on a bucket.
-func ExampleS3_GetBucketNotification_shared01() {
+func ExampleS3_GetBucketNotificationRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
 	}
 
 	svc := s3.New(cfg)
-	input := &s3.GetBucketNotificationConfigurationRequest{
+	input := &s3.GetBucketNotificationConfigurationInput{
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketNotification(input)
+	req := svc.GetBucketNotificationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -900,7 +925,7 @@ func ExampleS3_GetBucketNotification_shared01() {
 // To get bucket policy
 //
 // The following example returns bucket policy associated with a bucket.
-func ExampleS3_GetBucketPolicy_shared00() {
+func ExampleS3_GetBucketPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -911,7 +936,8 @@ func ExampleS3_GetBucketPolicy_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketPolicy(input)
+	req := svc.GetBucketPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -932,7 +958,7 @@ func ExampleS3_GetBucketPolicy_shared00() {
 // To get replication configuration set on a bucket
 //
 // The following example returns replication configuration set on a bucket.
-func ExampleS3_GetBucketReplication_shared00() {
+func ExampleS3_GetBucketReplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -943,7 +969,8 @@ func ExampleS3_GetBucketReplication_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketReplication(input)
+	req := svc.GetBucketReplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -964,7 +991,7 @@ func ExampleS3_GetBucketReplication_shared00() {
 // To get bucket versioning configuration
 //
 // The following example retrieves bucket versioning configuration.
-func ExampleS3_GetBucketRequestPayment_shared00() {
+func ExampleS3_GetBucketRequestPaymentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -975,7 +1002,8 @@ func ExampleS3_GetBucketRequestPayment_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketRequestPayment(input)
+	req := svc.GetBucketRequestPaymentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -996,7 +1024,7 @@ func ExampleS3_GetBucketRequestPayment_shared00() {
 // To get tag set associated with a bucket
 //
 // The following example returns tag set associated with a bucket
-func ExampleS3_GetBucketTagging_shared00() {
+func ExampleS3_GetBucketTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1007,7 +1035,8 @@ func ExampleS3_GetBucketTagging_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketTagging(input)
+	req := svc.GetBucketTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1028,7 +1057,7 @@ func ExampleS3_GetBucketTagging_shared00() {
 // To get bucket versioning configuration
 //
 // The following example retrieves bucket versioning configuration.
-func ExampleS3_GetBucketVersioning_shared00() {
+func ExampleS3_GetBucketVersioningRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1039,7 +1068,8 @@ func ExampleS3_GetBucketVersioning_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketVersioning(input)
+	req := svc.GetBucketVersioningRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1060,7 +1090,7 @@ func ExampleS3_GetBucketVersioning_shared00() {
 // To get bucket website configuration
 //
 // The following example retrieves website configuration of a bucket.
-func ExampleS3_GetBucketWebsite_shared00() {
+func ExampleS3_GetBucketWebsiteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1071,7 +1101,8 @@ func ExampleS3_GetBucketWebsite_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.GetBucketWebsite(input)
+	req := svc.GetBucketWebsiteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1092,7 +1123,7 @@ func ExampleS3_GetBucketWebsite_shared00() {
 // To retrieve an object
 //
 // The following example retrieves an object for an S3 bucket.
-func ExampleS3_GetObject_shared00() {
+func ExampleS3_GetObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1104,7 +1135,8 @@ func ExampleS3_GetObject_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.GetObject(input)
+	req := svc.GetObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1128,7 +1160,7 @@ func ExampleS3_GetObject_shared00() {
 //
 // The following example retrieves an object for an S3 bucket. The request specifies
 // the range header to retrieve a specific byte range.
-func ExampleS3_GetObject_shared01() {
+func ExampleS3_GetObjectRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1141,7 +1173,8 @@ func ExampleS3_GetObject_shared01() {
 		Range:  aws.String("bytes=0-9"),
 	}
 
-	result, err := svc.GetObject(input)
+	req := svc.GetObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1164,7 +1197,7 @@ func ExampleS3_GetObject_shared01() {
 // To retrieve object ACL
 //
 // The following example retrieves access control list (ACL) of an object.
-func ExampleS3_GetObjectAcl_shared00() {
+func ExampleS3_GetObjectAclRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1176,7 +1209,8 @@ func ExampleS3_GetObjectAcl_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.GetObjectAcl(input)
+	req := svc.GetObjectAclRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1199,7 +1233,7 @@ func ExampleS3_GetObjectAcl_shared00() {
 // To retrieve tag set of an object
 //
 // The following example retrieves tag set of an object.
-func ExampleS3_GetObjectTagging_shared00() {
+func ExampleS3_GetObjectTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1211,7 +1245,8 @@ func ExampleS3_GetObjectTagging_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.GetObjectTagging(input)
+	req := svc.GetObjectTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1233,7 +1268,7 @@ func ExampleS3_GetObjectTagging_shared00() {
 //
 // The following example retrieves tag set of an object. The request specifies object
 // version.
-func ExampleS3_GetObjectTagging_shared01() {
+func ExampleS3_GetObjectTaggingRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1246,7 +1281,8 @@ func ExampleS3_GetObjectTagging_shared01() {
 		VersionId: aws.String("ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"),
 	}
 
-	result, err := svc.GetObjectTagging(input)
+	req := svc.GetObjectTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1267,7 +1303,7 @@ func ExampleS3_GetObjectTagging_shared01() {
 // To retrieve torrent files for an object
 //
 // The following example retrieves torrent files of an object.
-func ExampleS3_GetObjectTorrent_shared00() {
+func ExampleS3_GetObjectTorrentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1279,7 +1315,8 @@ func ExampleS3_GetObjectTorrent_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.GetObjectTorrent(input)
+	req := svc.GetObjectTorrentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1337,7 @@ func ExampleS3_GetObjectTorrent_shared00() {
 // To determine if bucket exists
 //
 // This operation checks to see if a bucket exists.
-func ExampleS3_HeadBucket_shared00() {
+func ExampleS3_HeadBucketRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1311,7 +1348,8 @@ func ExampleS3_HeadBucket_shared00() {
 		Bucket: aws.String("acl1"),
 	}
 
-	result, err := svc.HeadBucket(input)
+	req := svc.HeadBucketRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1334,7 +1372,7 @@ func ExampleS3_HeadBucket_shared00() {
 // To retrieve metadata of an object without returning the object itself
 //
 // The following example retrieves an object metadata.
-func ExampleS3_HeadObject_shared00() {
+func ExampleS3_HeadObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1346,7 +1384,8 @@ func ExampleS3_HeadObject_shared00() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.HeadObject(input)
+	req := svc.HeadObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1370,7 +1409,7 @@ func ExampleS3_HeadObject_shared00() {
 // The request limits the number of items returned to two. If there are are more than
 // two object version, S3 returns NextToken in the response. You can specify this token
 // value in your next request to fetch next set of object versions.
-func ExampleS3_ListBuckets_shared00() {
+func ExampleS3_ListBucketsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1379,7 +1418,8 @@ func ExampleS3_ListBuckets_shared00() {
 	svc := s3.New(cfg)
 	input := &s3.ListBucketsInput{}
 
-	result, err := svc.ListBuckets(input)
+	req := svc.ListBucketsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1400,7 +1440,7 @@ func ExampleS3_ListBuckets_shared00() {
 // To list in-progress multipart uploads on a bucket
 //
 // The following example lists in-progress multipart uploads on a specific bucket.
-func ExampleS3_ListMultipartUploads_shared00() {
+func ExampleS3_ListMultipartUploadsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1411,7 +1451,8 @@ func ExampleS3_ListMultipartUploads_shared00() {
 		Bucket: aws.String("examplebucket"),
 	}
 
-	result, err := svc.ListMultipartUploads(input)
+	req := svc.ListMultipartUploadsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1433,7 +1474,7 @@ func ExampleS3_ListMultipartUploads_shared00() {
 //
 // The following example specifies the upload-id-marker and key-marker from previous
 // truncated response to retrieve next setup of multipart uploads.
-func ExampleS3_ListMultipartUploads_shared01() {
+func ExampleS3_ListMultipartUploadsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1447,7 +1488,8 @@ func ExampleS3_ListMultipartUploads_shared01() {
 		UploadIdMarker: aws.String("valuefrompreviousresponse"),
 	}
 
-	result, err := svc.ListMultipartUploads(input)
+	req := svc.ListMultipartUploadsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1471,7 +1513,7 @@ func ExampleS3_ListMultipartUploads_shared01() {
 // The request limits the number of items returned to two. If there are are more than
 // two object version, S3 returns NextToken in the response. You can specify this token
 // value in your next request to fetch next set of object versions.
-func ExampleS3_ListObjectVersions_shared00() {
+func ExampleS3_ListObjectVersionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1483,7 +1525,8 @@ func ExampleS3_ListObjectVersions_shared00() {
 		Prefix: aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.ListObjectVersions(input)
+	req := svc.ListObjectVersionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1504,7 +1547,7 @@ func ExampleS3_ListObjectVersions_shared00() {
 // To list objects in a bucket
 //
 // The following example list two objects in a bucket.
-func ExampleS3_ListObjects_shared00() {
+func ExampleS3_ListObjectsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1516,7 +1559,8 @@ func ExampleS3_ListObjects_shared00() {
 		MaxKeys: aws.Int64(2),
 	}
 
-	result, err := svc.ListObjects(input)
+	req := svc.ListObjectsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1540,7 +1584,7 @@ func ExampleS3_ListObjects_shared00() {
 //
 // The following example retrieves object list. The request specifies max keys to limit
 // response to include only 2 object keys.
-func ExampleS3_ListObjectsV2_shared00() {
+func ExampleS3_ListObjectsV2Request_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1552,7 +1596,8 @@ func ExampleS3_ListObjectsV2_shared00() {
 		MaxKeys: aws.Int64(2),
 	}
 
-	result, err := svc.ListObjectsV2(input)
+	req := svc.ListObjectsV2Request(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1575,7 +1620,7 @@ func ExampleS3_ListObjectsV2_shared00() {
 // To list parts of a multipart upload.
 //
 // The following example lists parts uploaded for a specific multipart upload.
-func ExampleS3_ListParts_shared00() {
+func ExampleS3_ListPartsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1588,7 +1633,8 @@ func ExampleS3_ListParts_shared00() {
 		UploadId: aws.String("example7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--"),
 	}
 
-	result, err := svc.ListParts(input)
+	req := svc.ListPartsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1612,7 +1658,7 @@ func ExampleS3_ListParts_shared00() {
 // owner (specified using the owner ID) and write permission to the LogDelivery group.
 // Because this is a replace operation, you must specify all the grants in your request.
 // To incrementally add or remove ACL grants, you might use the console.
-func ExampleS3_PutBucketAcl_shared00() {
+func ExampleS3_PutBucketAclRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1625,7 +1671,8 @@ func ExampleS3_PutBucketAcl_shared00() {
 		GrantWrite:       aws.String("uri=http://acs.amazonaws.com/groups/s3/LogDelivery"),
 	}
 
-	result, err := svc.PutBucketAcl(input)
+	req := svc.PutBucketAclRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1647,7 +1694,7 @@ func ExampleS3_PutBucketAcl_shared00() {
 //
 // The following example enables PUT, POST, and DELETE requests from www.example.com,
 // and enables GET requests from any domain.
-func ExampleS3_PutBucketCors_shared00() {
+func ExampleS3_PutBucketCorsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1691,7 +1738,8 @@ func ExampleS3_PutBucketCors_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketCors(input)
+	req := svc.PutBucketCorsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1713,7 +1761,7 @@ func ExampleS3_PutBucketCors_shared00() {
 //
 // The following example replaces existing lifecycle configuration, if any, on the specified
 // bucket.
-func ExampleS3_PutBucketLifecycleConfiguration_shared00() {
+func ExampleS3_PutBucketLifecycleConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1738,7 +1786,8 @@ func ExampleS3_PutBucketLifecycleConfiguration_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketLifecycleConfiguration(input)
+	req := svc.PutBucketLifecycleConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1761,7 +1810,7 @@ func ExampleS3_PutBucketLifecycleConfiguration_shared00() {
 // The following example sets logging policy on a bucket. For the Log Delivery group
 // to deliver logs to the destination bucket, it needs permission for the READ_ACP action
 // which the policy grants.
-func ExampleS3_PutBucketLogging_shared00() {
+func ExampleS3_PutBucketLoggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1783,7 +1832,8 @@ func ExampleS3_PutBucketLogging_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketLogging(input)
+	req := svc.PutBucketLoggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1805,7 +1855,7 @@ func ExampleS3_PutBucketLogging_shared00() {
 //
 // The following example sets notification configuration on a bucket to publish the
 // object created events to an SNS topic.
-func ExampleS3_PutBucketNotificationConfiguration_shared00() {
+func ExampleS3_PutBucketNotificationConfigurationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1814,7 +1864,7 @@ func ExampleS3_PutBucketNotificationConfiguration_shared00() {
 	svc := s3.New(cfg)
 	input := &s3.PutBucketNotificationConfigurationInput{
 		Bucket: aws.String("examplebucket"),
-		NotificationConfiguration: &s3.NotificationConfiguration{
+		NotificationConfiguration: &s3.GetBucketNotificationConfigurationOutput{
 			TopicConfigurations: []*s3.TopicConfiguration{
 				{
 					Events: []s3.Event{
@@ -1826,7 +1876,8 @@ func ExampleS3_PutBucketNotificationConfiguration_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketNotificationConfiguration(input)
+	req := svc.PutBucketNotificationConfigurationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1847,7 +1898,7 @@ func ExampleS3_PutBucketNotificationConfiguration_shared00() {
 // Set bucket policy
 //
 // The following example sets a permission policy on a bucket.
-func ExampleS3_PutBucketPolicy_shared00() {
+func ExampleS3_PutBucketPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1859,7 +1910,8 @@ func ExampleS3_PutBucketPolicy_shared00() {
 		Policy: aws.String("{\"Version\": \"2012-10-17\", \"Statement\": [{ \"Sid\": \"id-1\",\"Effect\": \"Allow\",\"Principal\": {\"AWS\": \"arn:aws:iam::123456789012:root\"}, \"Action\": [ \"s3:PutObject\",\"s3:PutObjectAcl\"], \"Resource\": [\"arn:aws:s3:::acl3/*\" ] } ]}"),
 	}
 
-	result, err := svc.PutBucketPolicy(input)
+	req := svc.PutBucketPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1880,7 +1932,7 @@ func ExampleS3_PutBucketPolicy_shared00() {
 // Set replication configuration on a bucket
 //
 // The following example sets replication configuration on a bucket.
-func ExampleS3_PutBucketReplication_shared00() {
+func ExampleS3_PutBucketReplicationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1900,7 +1952,8 @@ func ExampleS3_PutBucketReplication_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketReplication(input)
+	req := svc.PutBucketReplicationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1922,7 +1975,7 @@ func ExampleS3_PutBucketReplication_shared00() {
 //
 // The following example sets request payment configuration on a bucket so that person
 // requesting the download is charged.
-func ExampleS3_PutBucketRequestPayment_shared00() {
+func ExampleS3_PutBucketRequestPaymentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1936,7 +1989,8 @@ func ExampleS3_PutBucketRequestPayment_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketRequestPayment(input)
+	req := svc.PutBucketRequestPaymentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1957,7 +2011,7 @@ func ExampleS3_PutBucketRequestPayment_shared00() {
 // Set tags on a bucket
 //
 // The following example sets tags on a bucket. Any existing tags are replaced.
-func ExampleS3_PutBucketTagging_shared00() {
+func ExampleS3_PutBucketTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1980,7 +2034,8 @@ func ExampleS3_PutBucketTagging_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketTagging(input)
+	req := svc.PutBucketTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2002,7 +2057,7 @@ func ExampleS3_PutBucketTagging_shared00() {
 //
 // The following example sets versioning configuration on bucket. The configuration
 // enables versioning on the bucket.
-func ExampleS3_PutBucketVersioning_shared00() {
+func ExampleS3_PutBucketVersioningRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2017,7 +2072,8 @@ func ExampleS3_PutBucketVersioning_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketVersioning(input)
+	req := svc.PutBucketVersioningRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2038,7 +2094,7 @@ func ExampleS3_PutBucketVersioning_shared00() {
 // Set website configuration on a bucket
 //
 // The following example adds website configuration to a bucket.
-func ExampleS3_PutBucketWebsite_shared00() {
+func ExampleS3_PutBucketWebsiteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2057,7 +2113,8 @@ func ExampleS3_PutBucketWebsite_shared00() {
 		},
 	}
 
-	result, err := svc.PutBucketWebsite(input)
+	req := svc.PutBucketWebsiteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2080,7 +2137,7 @@ func ExampleS3_PutBucketWebsite_shared00() {
 // The following example uploads and object. The request specifies the optional server-side
 // encryption option. The request also specifies optional object tags. If the bucket
 // is versioning enabled, S3 returns version ID in response.
-func ExampleS3_PutObject_shared00() {
+func ExampleS3_PutObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2095,7 +2152,8 @@ func ExampleS3_PutObject_shared00() {
 		Tagging:              aws.String("key1=value1&key2=value2"),
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2118,7 +2176,7 @@ func ExampleS3_PutObject_shared00() {
 // The following example uploads and object. The request specifies optional canned ACL
 // (access control list) to all READ access to authenticated users. If the bucket is
 // versioning enabled, S3 returns version ID in response.
-func ExampleS3_PutObject_shared01() {
+func ExampleS3_PutObjectRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2132,7 +2190,8 @@ func ExampleS3_PutObject_shared01() {
 		Key:    aws.String("exampleobject"),
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2155,7 +2214,7 @@ func ExampleS3_PutObject_shared01() {
 // The following example uploads an object to a versioning-enabled bucket. The source
 // file is specified using Windows file syntax. S3 returns VersionId of the newly created
 // object.
-func ExampleS3_PutObject_shared02() {
+func ExampleS3_PutObjectRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2168,7 +2227,8 @@ func ExampleS3_PutObject_shared02() {
 		Key:    aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2190,7 +2250,7 @@ func ExampleS3_PutObject_shared02() {
 //
 // The following example creates an object. If the bucket is versioning enabled, S3
 // returns version ID in response.
-func ExampleS3_PutObject_shared03() {
+func ExampleS3_PutObjectRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2203,7 +2263,8 @@ func ExampleS3_PutObject_shared03() {
 		Key:    aws.String("objectkey"),
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2225,7 +2286,7 @@ func ExampleS3_PutObject_shared03() {
 //
 // The following example uploads an object. The request specifies optional object tags.
 // The bucket is versioned, therefore S3 returns version ID of the newly created object.
-func ExampleS3_PutObject_shared04() {
+func ExampleS3_PutObjectRequest_shared04() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2239,7 +2300,8 @@ func ExampleS3_PutObject_shared04() {
 		Tagging: aws.String("key1=value1&key2=value2"),
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2261,7 +2323,7 @@ func ExampleS3_PutObject_shared04() {
 //
 // The following example creates an object. The request also specifies optional metadata.
 // If the bucket is versioning enabled, S3 returns version ID in response.
-func ExampleS3_PutObject_shared05() {
+func ExampleS3_PutObjectRequest_shared05() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2278,7 +2340,8 @@ func ExampleS3_PutObject_shared05() {
 		},
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2300,7 +2363,7 @@ func ExampleS3_PutObject_shared05() {
 //
 // The following example uploads an object. The request specifies optional request headers
 // to directs S3 to use specific storage class and use server-side encryption.
-func ExampleS3_PutObject_shared06() {
+func ExampleS3_PutObjectRequest_shared06() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2315,7 +2378,8 @@ func ExampleS3_PutObject_shared06() {
 		StorageClass:         s3.StorageClassStandardIa,
 	}
 
-	result, err := svc.PutObject(input)
+	req := svc.PutObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2337,7 +2401,7 @@ func ExampleS3_PutObject_shared06() {
 //
 // The following example adds grants to an object ACL. The first permission grants user1
 // and user2 FULL_CONTROL and the AllUsers group READ permission.
-func ExampleS3_PutObjectAcl_shared00() {
+func ExampleS3_PutObjectAclRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2352,7 +2416,8 @@ func ExampleS3_PutObjectAcl_shared00() {
 		Key:                 aws.String("HappyFace.jpg"),
 	}
 
-	result, err := svc.PutObjectAcl(input)
+	req := svc.PutObjectAclRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2375,7 +2440,7 @@ func ExampleS3_PutObjectAcl_shared00() {
 // To add tags to an existing object
 //
 // The following example adds tags to an existing object.
-func ExampleS3_PutObjectTagging_shared00() {
+func ExampleS3_PutObjectTaggingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2399,7 +2464,8 @@ func ExampleS3_PutObjectTagging_shared00() {
 		},
 	}
 
-	result, err := svc.PutObjectTagging(input)
+	req := svc.PutObjectTaggingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2421,7 +2487,7 @@ func ExampleS3_PutObjectTagging_shared00() {
 //
 // The following example restores for one day an archived copy of an object back into
 // Amazon S3 bucket.
-func ExampleS3_RestoreObject_shared00() {
+func ExampleS3_RestoreObjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2439,7 +2505,8 @@ func ExampleS3_RestoreObject_shared00() {
 		},
 	}
 
-	result, err := svc.RestoreObject(input)
+	req := svc.RestoreObjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2464,7 +2531,7 @@ func ExampleS3_RestoreObject_shared00() {
 // The following example uploads part 1 of a multipart upload. The example specifies
 // a file name for the part data. The Upload ID is same that is returned by the initiate
 // multipart upload.
-func ExampleS3_UploadPart_shared00() {
+func ExampleS3_UploadPartRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2479,7 +2546,8 @@ func ExampleS3_UploadPart_shared00() {
 		UploadId:   aws.String("xadcOB_7YPBOJuoFiQ9cz4P3Pe6FIZwO4f7wN93uHsNBEw97pl5eNwzExg0LAT2dUN91cOmrEQHDsP3WA60CEg--"),
 	}
 
-	result, err := svc.UploadPart(input)
+	req := svc.UploadPartRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2501,7 +2569,7 @@ func ExampleS3_UploadPart_shared00() {
 //
 // The following example uploads a part of a multipart upload by copying a specified
 // byte range from an existing object as data source.
-func ExampleS3_UploadPartCopy_shared00() {
+func ExampleS3_UploadPartCopyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2517,7 +2585,8 @@ func ExampleS3_UploadPartCopy_shared00() {
 		UploadId:        aws.String("exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--"),
 	}
 
-	result, err := svc.UploadPartCopy(input)
+	req := svc.UploadPartCopyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2539,7 +2608,7 @@ func ExampleS3_UploadPartCopy_shared00() {
 //
 // The following example uploads a part of a multipart upload by copying data from an
 // existing object as data source.
-func ExampleS3_UploadPartCopy_shared01() {
+func ExampleS3_UploadPartCopyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2554,7 +2623,8 @@ func ExampleS3_UploadPartCopy_shared01() {
 		UploadId:   aws.String("exampleuoh_10OhKhT7YukE9bjzTPRiuaCotmZM_pFngJFir9OZNrSr5cWa3cq3LZSUsfjI4FI7PkP91We7Nrw--"),
 	}
 
-	result, err := svc.UploadPartCopy(input)
+	req := svc.UploadPartCopyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

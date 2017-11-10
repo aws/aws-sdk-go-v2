@@ -48,10 +48,10 @@ func (c *Glacier) WaitUntilVaultExistsWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVaultRequest(inCpy)
+			req := c.DescribeVaultRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -99,10 +99,10 @@ func (c *Glacier) WaitUntilVaultNotExistsWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVaultRequest(inCpy)
+			req := c.DescribeVaultRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

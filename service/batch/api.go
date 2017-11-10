@@ -11,31 +11,40 @@ import (
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws.Request" representing the
-// client's request for the CancelJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelJobRequest is a API request type for the CancelJob API operation.
+type CancelJobRequest struct {
+	*aws.Request
+	Input *CancelJobInput
+}
+
+// Send marshals and sends the CancelJob API request.
+func (r *CancelJobRequest) Send() (*CancelJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelJobOutput), nil
+}
+
+// CancelJobRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelJob for more information on using the CancelJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels jobs in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING,
+// or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or
+// RUNNING are not cancelled (but the API operation still succeeds, even if
+// no jobs are cancelled); these jobs must be terminated with the TerminateJob
+// operation.
 //
 //    // Example sending a request using the CancelJobRequest method.
-//    req, resp := client.CancelJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob
-func (c *Batch) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+func (c *Batch) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
@@ -46,100 +55,30 @@ func (c *Batch) CancelJobRequest(input *CancelJobInput) (req *aws.Request, outpu
 		input = &CancelJobInput{}
 	}
 
-	output = &CancelJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelJob API operation for AWS Batch.
-//
-// Cancels jobs in an AWS Batch job queue. Jobs that are in the SUBMITTED, PENDING,
-// or RUNNABLE state are cancelled. Jobs that have progressed to STARTING or
-// RUNNING are not cancelled (but the API operation still succeeds, even if
-// no jobs are cancelled); these jobs must be terminated with the TerminateJob
-// operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation CancelJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob
-func (c *Batch) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	return out, req.Send()
-}
-
-// CancelJobWithContext is the same as CancelJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
-	req, out := c.CancelJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelJobOutput{})
+	return CancelJobRequest{Request: req, Input: input}
 }
 
 const opCreateComputeEnvironment = "CreateComputeEnvironment"
 
-// CreateComputeEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the CreateComputeEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateComputeEnvironment for more information on using the CreateComputeEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateComputeEnvironmentRequest method.
-//    req, resp := client.CreateComputeEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironment
-func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentInput) (req *aws.Request, output *CreateComputeEnvironmentOutput) {
-	op := &aws.Operation{
-		Name:       opCreateComputeEnvironment,
-		HTTPMethod: "POST",
-		HTTPPath:   "/v1/createcomputeenvironment",
-	}
-
-	if input == nil {
-		input = &CreateComputeEnvironmentInput{}
-	}
-
-	output = &CreateComputeEnvironmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateComputeEnvironmentRequest is a API request type for the CreateComputeEnvironment API operation.
+type CreateComputeEnvironmentRequest struct {
+	*aws.Request
+	Input *CreateComputeEnvironmentInput
 }
 
-// CreateComputeEnvironment API operation for AWS Batch.
+// Send marshals and sends the CreateComputeEnvironment API request.
+func (r *CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateComputeEnvironmentOutput), nil
+}
+
+// CreateComputeEnvironmentRequest returns a request value for making API operation for
+// AWS Batch.
 //
 // Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED
 // compute environments.
@@ -164,87 +103,49 @@ func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentI
 // more information, see Launching an Amazon ECS Container Instance (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)
 // in the Amazon EC2 Container Service Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation CreateComputeEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
+//    // Example sending a request using the CreateComputeEnvironmentRequest method.
+//    req := client.CreateComputeEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironment
-func (c *Batch) CreateComputeEnvironment(input *CreateComputeEnvironmentInput) (*CreateComputeEnvironmentOutput, error) {
-	req, out := c.CreateComputeEnvironmentRequest(input)
-	return out, req.Send()
-}
+func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest {
+	op := &aws.Operation{
+		Name:       opCreateComputeEnvironment,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/createcomputeenvironment",
+	}
 
-// CreateComputeEnvironmentWithContext is the same as CreateComputeEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateComputeEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) CreateComputeEnvironmentWithContext(ctx aws.Context, input *CreateComputeEnvironmentInput, opts ...aws.Option) (*CreateComputeEnvironmentOutput, error) {
-	req, out := c.CreateComputeEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateComputeEnvironmentInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateComputeEnvironmentOutput{})
+	return CreateComputeEnvironmentRequest{Request: req, Input: input}
 }
 
 const opCreateJobQueue = "CreateJobQueue"
 
-// CreateJobQueueRequest generates a "aws.Request" representing the
-// client's request for the CreateJobQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateJobQueue for more information on using the CreateJobQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateJobQueueRequest method.
-//    req, resp := client.CreateJobQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue
-func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) (req *aws.Request, output *CreateJobQueueOutput) {
-	op := &aws.Operation{
-		Name:       opCreateJobQueue,
-		HTTPMethod: "POST",
-		HTTPPath:   "/v1/createjobqueue",
-	}
-
-	if input == nil {
-		input = &CreateJobQueueInput{}
-	}
-
-	output = &CreateJobQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateJobQueueRequest is a API request type for the CreateJobQueue API operation.
+type CreateJobQueueRequest struct {
+	*aws.Request
+	Input *CreateJobQueueInput
 }
 
-// CreateJobQueue API operation for AWS Batch.
+// Send marshals and sends the CreateJobQueue API request.
+func (r *CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateJobQueueOutput), nil
+}
+
+// CreateJobQueueRequest returns a request value for making API operation for
+// AWS Batch.
 //
 // Creates an AWS Batch job queue. When you create a job queue, you associate
 // one or more compute environments to the queue and assign an order of preference
@@ -256,71 +157,65 @@ func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) (req *aws.Requ
 // queue, the job queue with a higher priority is given preference for scheduling
 // jobs to that compute environment.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation CreateJobQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
+//    // Example sending a request using the CreateJobQueueRequest method.
+//    req := client.CreateJobQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue
-func (c *Batch) CreateJobQueue(input *CreateJobQueueInput) (*CreateJobQueueOutput, error) {
-	req, out := c.CreateJobQueueRequest(input)
-	return out, req.Send()
-}
+func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueueRequest {
+	op := &aws.Operation{
+		Name:       opCreateJobQueue,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/createjobqueue",
+	}
 
-// CreateJobQueueWithContext is the same as CreateJobQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateJobQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) CreateJobQueueWithContext(ctx aws.Context, input *CreateJobQueueInput, opts ...aws.Option) (*CreateJobQueueOutput, error) {
-	req, out := c.CreateJobQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateJobQueueInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateJobQueueOutput{})
+	return CreateJobQueueRequest{Request: req, Input: input}
 }
 
 const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 
-// DeleteComputeEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the DeleteComputeEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteComputeEnvironmentRequest is a API request type for the DeleteComputeEnvironment API operation.
+type DeleteComputeEnvironmentRequest struct {
+	*aws.Request
+	Input *DeleteComputeEnvironmentInput
+}
+
+// Send marshals and sends the DeleteComputeEnvironment API request.
+func (r *DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteComputeEnvironmentOutput), nil
+}
+
+// DeleteComputeEnvironmentRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes an AWS Batch compute environment.
 //
-// See DeleteComputeEnvironment for more information on using the DeleteComputeEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Before you can delete a compute environment, you must set its state to DISABLED
+// with the UpdateComputeEnvironment API operation and disassociate it from
+// any job queues with the UpdateJobQueue API operation.
 //
 //    // Example sending a request using the DeleteComputeEnvironmentRequest method.
-//    req, resp := client.DeleteComputeEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteComputeEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment
-func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentInput) (req *aws.Request, output *DeleteComputeEnvironmentOutput) {
+func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opDeleteComputeEnvironment,
 		HTTPMethod: "POST",
@@ -331,84 +226,47 @@ func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentI
 		input = &DeleteComputeEnvironmentInput{}
 	}
 
-	output = &DeleteComputeEnvironmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteComputeEnvironment API operation for AWS Batch.
-//
-// Deletes an AWS Batch compute environment.
-//
-// Before you can delete a compute environment, you must set its state to DISABLED
-// with the UpdateComputeEnvironment API operation and disassociate it from
-// any job queues with the UpdateJobQueue API operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DeleteComputeEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment
-func (c *Batch) DeleteComputeEnvironment(input *DeleteComputeEnvironmentInput) (*DeleteComputeEnvironmentOutput, error) {
-	req, out := c.DeleteComputeEnvironmentRequest(input)
-	return out, req.Send()
-}
-
-// DeleteComputeEnvironmentWithContext is the same as DeleteComputeEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteComputeEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DeleteComputeEnvironmentWithContext(ctx aws.Context, input *DeleteComputeEnvironmentInput, opts ...aws.Option) (*DeleteComputeEnvironmentOutput, error) {
-	req, out := c.DeleteComputeEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteComputeEnvironmentOutput{})
+	return DeleteComputeEnvironmentRequest{Request: req, Input: input}
 }
 
 const opDeleteJobQueue = "DeleteJobQueue"
 
-// DeleteJobQueueRequest generates a "aws.Request" representing the
-// client's request for the DeleteJobQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteJobQueueRequest is a API request type for the DeleteJobQueue API operation.
+type DeleteJobQueueRequest struct {
+	*aws.Request
+	Input *DeleteJobQueueInput
+}
+
+// Send marshals and sends the DeleteJobQueue API request.
+func (r *DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteJobQueueOutput), nil
+}
+
+// DeleteJobQueueRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified job queue. You must first disable submissions for a
+// queue with the UpdateJobQueue operation. All jobs in the queue are terminated
+// when you delete a job queue.
 //
-// See DeleteJobQueue for more information on using the DeleteJobQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// It is not necessary to disassociate compute environments from a queue before
+// submitting a DeleteJobQueue request.
 //
 //    // Example sending a request using the DeleteJobQueueRequest method.
-//    req, resp := client.DeleteJobQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteJobQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue
-func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) (req *aws.Request, output *DeleteJobQueueOutput) {
+func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueueRequest {
 	op := &aws.Operation{
 		Name:       opDeleteJobQueue,
 		HTTPMethod: "POST",
@@ -419,85 +277,42 @@ func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) (req *aws.Requ
 		input = &DeleteJobQueueInput{}
 	}
 
-	output = &DeleteJobQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteJobQueue API operation for AWS Batch.
-//
-// Deletes the specified job queue. You must first disable submissions for a
-// queue with the UpdateJobQueue operation. All jobs in the queue are terminated
-// when you delete a job queue.
-//
-// It is not necessary to disassociate compute environments from a queue before
-// submitting a DeleteJobQueue request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DeleteJobQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue
-func (c *Batch) DeleteJobQueue(input *DeleteJobQueueInput) (*DeleteJobQueueOutput, error) {
-	req, out := c.DeleteJobQueueRequest(input)
-	return out, req.Send()
-}
-
-// DeleteJobQueueWithContext is the same as DeleteJobQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteJobQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DeleteJobQueueWithContext(ctx aws.Context, input *DeleteJobQueueInput, opts ...aws.Option) (*DeleteJobQueueOutput, error) {
-	req, out := c.DeleteJobQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteJobQueueOutput{})
+	return DeleteJobQueueRequest{Request: req, Input: input}
 }
 
 const opDeregisterJobDefinition = "DeregisterJobDefinition"
 
-// DeregisterJobDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeregisterJobDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterJobDefinitionRequest is a API request type for the DeregisterJobDefinition API operation.
+type DeregisterJobDefinitionRequest struct {
+	*aws.Request
+	Input *DeregisterJobDefinitionInput
+}
+
+// Send marshals and sends the DeregisterJobDefinition API request.
+func (r *DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterJobDefinitionOutput), nil
+}
+
+// DeregisterJobDefinitionRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterJobDefinition for more information on using the DeregisterJobDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deregisters an AWS Batch job definition.
 //
 //    // Example sending a request using the DeregisterJobDefinitionRequest method.
-//    req, resp := client.DeregisterJobDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterJobDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition
-func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInput) (req *aws.Request, output *DeregisterJobDefinitionOutput) {
+func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterJobDefinition,
 		HTTPMethod: "POST",
@@ -508,80 +323,46 @@ func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInp
 		input = &DeregisterJobDefinitionInput{}
 	}
 
-	output = &DeregisterJobDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeregisterJobDefinition API operation for AWS Batch.
-//
-// Deregisters an AWS Batch job definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DeregisterJobDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition
-func (c *Batch) DeregisterJobDefinition(input *DeregisterJobDefinitionInput) (*DeregisterJobDefinitionOutput, error) {
-	req, out := c.DeregisterJobDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterJobDefinitionWithContext is the same as DeregisterJobDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterJobDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DeregisterJobDefinitionWithContext(ctx aws.Context, input *DeregisterJobDefinitionInput, opts ...aws.Option) (*DeregisterJobDefinitionOutput, error) {
-	req, out := c.DeregisterJobDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeregisterJobDefinitionOutput{})
+	return DeregisterJobDefinitionRequest{Request: req, Input: input}
 }
 
 const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 
-// DescribeComputeEnvironmentsRequest generates a "aws.Request" representing the
-// client's request for the DescribeComputeEnvironments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeComputeEnvironmentsRequest is a API request type for the DescribeComputeEnvironments API operation.
+type DescribeComputeEnvironmentsRequest struct {
+	*aws.Request
+	Input *DescribeComputeEnvironmentsInput
+}
+
+// Send marshals and sends the DescribeComputeEnvironments API request.
+func (r *DescribeComputeEnvironmentsRequest) Send() (*DescribeComputeEnvironmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeComputeEnvironmentsOutput), nil
+}
+
+// DescribeComputeEnvironmentsRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes one or more of your compute environments.
 //
-// See DescribeComputeEnvironments for more information on using the DescribeComputeEnvironments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you are using an unmanaged compute environment, you can use the DescribeComputeEnvironment
+// operation to determine the ecsClusterArn that you should launch your Amazon
+// ECS container instances into.
 //
 //    // Example sending a request using the DescribeComputeEnvironmentsRequest method.
-//    req, resp := client.DescribeComputeEnvironmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeComputeEnvironmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments
-func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnvironmentsInput) (req *aws.Request, output *DescribeComputeEnvironmentsOutput) {
+func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeComputeEnvironments,
 		HTTPMethod: "POST",
@@ -592,84 +373,43 @@ func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviron
 		input = &DescribeComputeEnvironmentsInput{}
 	}
 
-	output = &DescribeComputeEnvironmentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeComputeEnvironments API operation for AWS Batch.
-//
-// Describes one or more of your compute environments.
-//
-// If you are using an unmanaged compute environment, you can use the DescribeComputeEnvironment
-// operation to determine the ecsClusterArn that you should launch your Amazon
-// ECS container instances into.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DescribeComputeEnvironments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments
-func (c *Batch) DescribeComputeEnvironments(input *DescribeComputeEnvironmentsInput) (*DescribeComputeEnvironmentsOutput, error) {
-	req, out := c.DescribeComputeEnvironmentsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeComputeEnvironmentsWithContext is the same as DescribeComputeEnvironments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeComputeEnvironments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DescribeComputeEnvironmentsWithContext(ctx aws.Context, input *DescribeComputeEnvironmentsInput, opts ...aws.Option) (*DescribeComputeEnvironmentsOutput, error) {
-	req, out := c.DescribeComputeEnvironmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeComputeEnvironmentsOutput{})
+	return DescribeComputeEnvironmentsRequest{Request: req, Input: input}
 }
 
 const opDescribeJobDefinitions = "DescribeJobDefinitions"
 
-// DescribeJobDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeJobDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeJobDefinitionsRequest is a API request type for the DescribeJobDefinitions API operation.
+type DescribeJobDefinitionsRequest struct {
+	*aws.Request
+	Input *DescribeJobDefinitionsInput
+}
+
+// Send marshals and sends the DescribeJobDefinitions API request.
+func (r *DescribeJobDefinitionsRequest) Send() (*DescribeJobDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobDefinitionsOutput), nil
+}
+
+// DescribeJobDefinitionsRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJobDefinitions for more information on using the DescribeJobDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a list of job definitions. You can specify a status (such as ACTIVE)
+// to only return job definitions that match that status.
 //
 //    // Example sending a request using the DescribeJobDefinitionsRequest method.
-//    req, resp := client.DescribeJobDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeJobDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions
-func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput) (req *aws.Request, output *DescribeJobDefinitionsOutput) {
+func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJobDefinitions,
 		HTTPMethod: "POST",
@@ -680,81 +420,42 @@ func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput
 		input = &DescribeJobDefinitionsInput{}
 	}
 
-	output = &DescribeJobDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeJobDefinitions API operation for AWS Batch.
-//
-// Describes a list of job definitions. You can specify a status (such as ACTIVE)
-// to only return job definitions that match that status.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DescribeJobDefinitions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions
-func (c *Batch) DescribeJobDefinitions(input *DescribeJobDefinitionsInput) (*DescribeJobDefinitionsOutput, error) {
-	req, out := c.DescribeJobDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeJobDefinitionsWithContext is the same as DescribeJobDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJobDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DescribeJobDefinitionsWithContext(ctx aws.Context, input *DescribeJobDefinitionsInput, opts ...aws.Option) (*DescribeJobDefinitionsOutput, error) {
-	req, out := c.DescribeJobDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeJobDefinitionsOutput{})
+	return DescribeJobDefinitionsRequest{Request: req, Input: input}
 }
 
 const opDescribeJobQueues = "DescribeJobQueues"
 
-// DescribeJobQueuesRequest generates a "aws.Request" representing the
-// client's request for the DescribeJobQueues operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeJobQueuesRequest is a API request type for the DescribeJobQueues API operation.
+type DescribeJobQueuesRequest struct {
+	*aws.Request
+	Input *DescribeJobQueuesInput
+}
+
+// Send marshals and sends the DescribeJobQueues API request.
+func (r *DescribeJobQueuesRequest) Send() (*DescribeJobQueuesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobQueuesOutput), nil
+}
+
+// DescribeJobQueuesRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJobQueues for more information on using the DescribeJobQueues
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more of your job queues.
 //
 //    // Example sending a request using the DescribeJobQueuesRequest method.
-//    req, resp := client.DescribeJobQueuesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeJobQueuesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues
-func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) (req *aws.Request, output *DescribeJobQueuesOutput) {
+func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) DescribeJobQueuesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJobQueues,
 		HTTPMethod: "POST",
@@ -765,80 +466,42 @@ func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) (req *aw
 		input = &DescribeJobQueuesInput{}
 	}
 
-	output = &DescribeJobQueuesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeJobQueues API operation for AWS Batch.
-//
-// Describes one or more of your job queues.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DescribeJobQueues for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues
-func (c *Batch) DescribeJobQueues(input *DescribeJobQueuesInput) (*DescribeJobQueuesOutput, error) {
-	req, out := c.DescribeJobQueuesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeJobQueuesWithContext is the same as DescribeJobQueues with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJobQueues for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DescribeJobQueuesWithContext(ctx aws.Context, input *DescribeJobQueuesInput, opts ...aws.Option) (*DescribeJobQueuesOutput, error) {
-	req, out := c.DescribeJobQueuesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeJobQueuesOutput{})
+	return DescribeJobQueuesRequest{Request: req, Input: input}
 }
 
 const opDescribeJobs = "DescribeJobs"
 
-// DescribeJobsRequest generates a "aws.Request" representing the
-// client's request for the DescribeJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeJobsRequest is a API request type for the DescribeJobs API operation.
+type DescribeJobsRequest struct {
+	*aws.Request
+	Input *DescribeJobsInput
+}
+
+// Send marshals and sends the DescribeJobs API request.
+func (r *DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobsOutput), nil
+}
+
+// DescribeJobsRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJobs for more information on using the DescribeJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a list of AWS Batch jobs.
 //
 //    // Example sending a request using the DescribeJobsRequest method.
-//    req, resp := client.DescribeJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs
-func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) (req *aws.Request, output *DescribeJobsOutput) {
+func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeJobs,
 		HTTPMethod: "POST",
@@ -849,80 +512,44 @@ func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) (req *aws.Request,
 		input = &DescribeJobsInput{}
 	}
 
-	output = &DescribeJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeJobs API operation for AWS Batch.
-//
-// Describes a list of AWS Batch jobs.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation DescribeJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs
-func (c *Batch) DescribeJobs(input *DescribeJobsInput) (*DescribeJobsOutput, error) {
-	req, out := c.DescribeJobsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeJobsWithContext is the same as DescribeJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) DescribeJobsWithContext(ctx aws.Context, input *DescribeJobsInput, opts ...aws.Option) (*DescribeJobsOutput, error) {
-	req, out := c.DescribeJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeJobsOutput{})
+	return DescribeJobsRequest{Request: req, Input: input}
 }
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws.Request" representing the
-// client's request for the ListJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListJobsRequest is a API request type for the ListJobs API operation.
+type ListJobsRequest struct {
+	*aws.Request
+	Input *ListJobsInput
+}
+
+// Send marshals and sends the ListJobs API request.
+func (r *ListJobsRequest) Send() (*ListJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsOutput), nil
+}
+
+// ListJobsRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListJobs for more information on using the ListJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of task jobs for a specified job queue. You can filter the
+// results by job status with the jobStatus parameter. If you do not specify
+// a status, only RUNNING jobs are returned.
 //
 //    // Example sending a request using the ListJobsRequest method.
-//    req, resp := client.ListJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs
-func (c *Batch) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+func (c *Batch) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
@@ -933,82 +560,42 @@ func (c *Batch) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output 
 		input = &ListJobsInput{}
 	}
 
-	output = &ListJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListJobs API operation for AWS Batch.
-//
-// Returns a list of task jobs for a specified job queue. You can filter the
-// results by job status with the jobStatus parameter. If you do not specify
-// a status, only RUNNING jobs are returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation ListJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs
-func (c *Batch) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	return out, req.Send()
-}
-
-// ListJobsWithContext is the same as ListJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListJobsOutput{})
+	return ListJobsRequest{Request: req, Input: input}
 }
 
 const opRegisterJobDefinition = "RegisterJobDefinition"
 
-// RegisterJobDefinitionRequest generates a "aws.Request" representing the
-// client's request for the RegisterJobDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterJobDefinitionRequest is a API request type for the RegisterJobDefinition API operation.
+type RegisterJobDefinitionRequest struct {
+	*aws.Request
+	Input *RegisterJobDefinitionInput
+}
+
+// Send marshals and sends the RegisterJobDefinition API request.
+func (r *RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterJobDefinitionOutput), nil
+}
+
+// RegisterJobDefinitionRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterJobDefinition for more information on using the RegisterJobDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers an AWS Batch job definition.
 //
 //    // Example sending a request using the RegisterJobDefinitionRequest method.
-//    req, resp := client.RegisterJobDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterJobDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinition
-func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) (req *aws.Request, output *RegisterJobDefinitionOutput) {
+func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) RegisterJobDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opRegisterJobDefinition,
 		HTTPMethod: "POST",
@@ -1019,80 +606,43 @@ func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) 
 		input = &RegisterJobDefinitionInput{}
 	}
 
-	output = &RegisterJobDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterJobDefinition API operation for AWS Batch.
-//
-// Registers an AWS Batch job definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation RegisterJobDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinition
-func (c *Batch) RegisterJobDefinition(input *RegisterJobDefinitionInput) (*RegisterJobDefinitionOutput, error) {
-	req, out := c.RegisterJobDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// RegisterJobDefinitionWithContext is the same as RegisterJobDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterJobDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) RegisterJobDefinitionWithContext(ctx aws.Context, input *RegisterJobDefinitionInput, opts ...aws.Option) (*RegisterJobDefinitionOutput, error) {
-	req, out := c.RegisterJobDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterJobDefinitionOutput{})
+	return RegisterJobDefinitionRequest{Request: req, Input: input}
 }
 
 const opSubmitJob = "SubmitJob"
 
-// SubmitJobRequest generates a "aws.Request" representing the
-// client's request for the SubmitJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SubmitJobRequest is a API request type for the SubmitJob API operation.
+type SubmitJobRequest struct {
+	*aws.Request
+	Input *SubmitJobInput
+}
+
+// Send marshals and sends the SubmitJob API request.
+func (r *SubmitJobRequest) Send() (*SubmitJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SubmitJobOutput), nil
+}
+
+// SubmitJobRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SubmitJob for more information on using the SubmitJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Submits an AWS Batch job from a job definition. Parameters specified during
+// SubmitJob override parameters defined in the job definition.
 //
 //    // Example sending a request using the SubmitJobRequest method.
-//    req, resp := client.SubmitJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SubmitJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJob
-func (c *Batch) SubmitJobRequest(input *SubmitJobInput) (req *aws.Request, output *SubmitJobOutput) {
+func (c *Batch) SubmitJobRequest(input *SubmitJobInput) SubmitJobRequest {
 	op := &aws.Operation{
 		Name:       opSubmitJob,
 		HTTPMethod: "POST",
@@ -1103,81 +653,44 @@ func (c *Batch) SubmitJobRequest(input *SubmitJobInput) (req *aws.Request, outpu
 		input = &SubmitJobInput{}
 	}
 
-	output = &SubmitJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SubmitJob API operation for AWS Batch.
-//
-// Submits an AWS Batch job from a job definition. Parameters specified during
-// SubmitJob override parameters defined in the job definition.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation SubmitJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJob
-func (c *Batch) SubmitJob(input *SubmitJobInput) (*SubmitJobOutput, error) {
-	req, out := c.SubmitJobRequest(input)
-	return out, req.Send()
-}
-
-// SubmitJobWithContext is the same as SubmitJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SubmitJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) SubmitJobWithContext(ctx aws.Context, input *SubmitJobInput, opts ...aws.Option) (*SubmitJobOutput, error) {
-	req, out := c.SubmitJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SubmitJobOutput{})
+	return SubmitJobRequest{Request: req, Input: input}
 }
 
 const opTerminateJob = "TerminateJob"
 
-// TerminateJobRequest generates a "aws.Request" representing the
-// client's request for the TerminateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TerminateJobRequest is a API request type for the TerminateJob API operation.
+type TerminateJobRequest struct {
+	*aws.Request
+	Input *TerminateJobInput
+}
+
+// Send marshals and sends the TerminateJob API request.
+func (r *TerminateJobRequest) Send() (*TerminateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateJobOutput), nil
+}
+
+// TerminateJobRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateJob for more information on using the TerminateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Terminates jobs in a job queue. Jobs that are in the STARTING or RUNNING
+// state are terminated, which causes them to transition to FAILED. Jobs that
+// have not progressed to the STARTING state are cancelled.
 //
 //    // Example sending a request using the TerminateJobRequest method.
-//    req, resp := client.TerminateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TerminateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJob
-func (c *Batch) TerminateJobRequest(input *TerminateJobInput) (req *aws.Request, output *TerminateJobOutput) {
+func (c *Batch) TerminateJobRequest(input *TerminateJobInput) TerminateJobRequest {
 	op := &aws.Operation{
 		Name:       opTerminateJob,
 		HTTPMethod: "POST",
@@ -1188,82 +701,42 @@ func (c *Batch) TerminateJobRequest(input *TerminateJobInput) (req *aws.Request,
 		input = &TerminateJobInput{}
 	}
 
-	output = &TerminateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TerminateJob API operation for AWS Batch.
-//
-// Terminates jobs in a job queue. Jobs that are in the STARTING or RUNNING
-// state are terminated, which causes them to transition to FAILED. Jobs that
-// have not progressed to the STARTING state are cancelled.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation TerminateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJob
-func (c *Batch) TerminateJob(input *TerminateJobInput) (*TerminateJobOutput, error) {
-	req, out := c.TerminateJobRequest(input)
-	return out, req.Send()
-}
-
-// TerminateJobWithContext is the same as TerminateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) TerminateJobWithContext(ctx aws.Context, input *TerminateJobInput, opts ...aws.Option) (*TerminateJobOutput, error) {
-	req, out := c.TerminateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TerminateJobOutput{})
+	return TerminateJobRequest{Request: req, Input: input}
 }
 
 const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 
-// UpdateComputeEnvironmentRequest generates a "aws.Request" representing the
-// client's request for the UpdateComputeEnvironment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateComputeEnvironmentRequest is a API request type for the UpdateComputeEnvironment API operation.
+type UpdateComputeEnvironmentRequest struct {
+	*aws.Request
+	Input *UpdateComputeEnvironmentInput
+}
+
+// Send marshals and sends the UpdateComputeEnvironment API request.
+func (r *UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateComputeEnvironmentOutput), nil
+}
+
+// UpdateComputeEnvironmentRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateComputeEnvironment for more information on using the UpdateComputeEnvironment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates an AWS Batch compute environment.
 //
 //    // Example sending a request using the UpdateComputeEnvironmentRequest method.
-//    req, resp := client.UpdateComputeEnvironmentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateComputeEnvironmentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment
-func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentInput) (req *aws.Request, output *UpdateComputeEnvironmentOutput) {
+func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateComputeEnvironment,
 		HTTPMethod: "POST",
@@ -1274,80 +747,42 @@ func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentI
 		input = &UpdateComputeEnvironmentInput{}
 	}
 
-	output = &UpdateComputeEnvironmentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateComputeEnvironment API operation for AWS Batch.
-//
-// Updates an AWS Batch compute environment.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation UpdateComputeEnvironment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment
-func (c *Batch) UpdateComputeEnvironment(input *UpdateComputeEnvironmentInput) (*UpdateComputeEnvironmentOutput, error) {
-	req, out := c.UpdateComputeEnvironmentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateComputeEnvironmentWithContext is the same as UpdateComputeEnvironment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateComputeEnvironment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) UpdateComputeEnvironmentWithContext(ctx aws.Context, input *UpdateComputeEnvironmentInput, opts ...aws.Option) (*UpdateComputeEnvironmentOutput, error) {
-	req, out := c.UpdateComputeEnvironmentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateComputeEnvironmentOutput{})
+	return UpdateComputeEnvironmentRequest{Request: req, Input: input}
 }
 
 const opUpdateJobQueue = "UpdateJobQueue"
 
-// UpdateJobQueueRequest generates a "aws.Request" representing the
-// client's request for the UpdateJobQueue operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateJobQueueRequest is a API request type for the UpdateJobQueue API operation.
+type UpdateJobQueueRequest struct {
+	*aws.Request
+	Input *UpdateJobQueueInput
+}
+
+// Send marshals and sends the UpdateJobQueue API request.
+func (r *UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateJobQueueOutput), nil
+}
+
+// UpdateJobQueueRequest returns a request value for making API operation for
+// AWS Batch.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateJobQueue for more information on using the UpdateJobQueue
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a job queue.
 //
 //    // Example sending a request using the UpdateJobQueueRequest method.
-//    req, resp := client.UpdateJobQueueRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateJobQueueRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue
-func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) (req *aws.Request, output *UpdateJobQueueOutput) {
+func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueueRequest {
 	op := &aws.Operation{
 		Name:       opUpdateJobQueue,
 		HTTPMethod: "POST",
@@ -1358,51 +793,8 @@ func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) (req *aws.Requ
 		input = &UpdateJobQueueInput{}
 	}
 
-	output = &UpdateJobQueueOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateJobQueue API operation for AWS Batch.
-//
-// Updates a job queue.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Batch's
-// API operation UpdateJobQueue for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue
-func (c *Batch) UpdateJobQueue(input *UpdateJobQueueInput) (*UpdateJobQueueOutput, error) {
-	req, out := c.UpdateJobQueueRequest(input)
-	return out, req.Send()
-}
-
-// UpdateJobQueueWithContext is the same as UpdateJobQueue with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateJobQueue for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Batch) UpdateJobQueueWithContext(ctx aws.Context, input *UpdateJobQueueInput, opts ...aws.Option) (*UpdateJobQueueOutput, error) {
-	req, out := c.UpdateJobQueueRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateJobQueueOutput{})
+	return UpdateJobQueueRequest{Request: req, Input: input}
 }
 
 // An object representing the details of a container that is part of a job attempt.

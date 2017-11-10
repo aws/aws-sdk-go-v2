@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example deletes images with the tags precise and trusty in a repository called
 // ubuntu in the default registry for an account.
-func ExampleECR_BatchDeleteImage_shared00() {
+func ExampleECR_BatchDeleteImageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -45,7 +45,8 @@ func ExampleECR_BatchDeleteImage_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.BatchDeleteImage(input)
+	req := svc.BatchDeleteImageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -73,7 +74,7 @@ func ExampleECR_BatchDeleteImage_shared00() {
 //
 // This example obtains information for an image with a specified image digest ID from
 // the repository named ubuntu in the current account.
-func ExampleECR_BatchGetImage_shared00() {
+func ExampleECR_BatchGetImageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -89,7 +90,8 @@ func ExampleECR_BatchGetImage_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.BatchGetImage(input)
+	req := svc.BatchGetImageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -117,7 +119,7 @@ func ExampleECR_BatchGetImage_shared00() {
 //
 // This example creates a repository called nginx-web-app inside the project-a namespace
 // in the default registry for an account.
-func ExampleECR_CreateRepository_shared00() {
+func ExampleECR_CreateRepositoryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -128,7 +130,8 @@ func ExampleECR_CreateRepository_shared00() {
 		RepositoryName: aws.String("project-a/nginx-web-app"),
 	}
 
-	result, err := svc.CreateRepository(input)
+	req := svc.CreateRepositoryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -158,7 +161,7 @@ func ExampleECR_CreateRepository_shared00() {
 //
 // This example force deletes a repository named ubuntu in the default registry for
 // an account. The force parameter is required if the repository contains images.
-func ExampleECR_DeleteRepository_shared00() {
+func ExampleECR_DeleteRepositoryRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -170,7 +173,8 @@ func ExampleECR_DeleteRepository_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.DeleteRepository(input)
+	req := svc.DeleteRepositoryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -200,7 +204,7 @@ func ExampleECR_DeleteRepository_shared00() {
 //
 // This example deletes the policy associated with the repository named ubuntu in the
 // current account.
-func ExampleECR_DeleteRepositoryPolicy_shared00() {
+func ExampleECR_DeleteRepositoryPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -211,7 +215,8 @@ func ExampleECR_DeleteRepositoryPolicy_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.DeleteRepositoryPolicy(input)
+	req := svc.DeleteRepositoryPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -241,7 +246,7 @@ func ExampleECR_DeleteRepositoryPolicy_shared00() {
 //
 // The following example obtains a list and description of all repositories in the default
 // registry to which the current user has access.
-func ExampleECR_DescribeRepositories_shared00() {
+func ExampleECR_DescribeRepositoriesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -250,7 +255,8 @@ func ExampleECR_DescribeRepositories_shared00() {
 	svc := ecr.New(cfg)
 	input := &ecr.DescribeRepositoriesInput{}
 
-	result, err := svc.DescribeRepositories(input)
+	req := svc.DescribeRepositoriesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -277,7 +283,7 @@ func ExampleECR_DescribeRepositories_shared00() {
 // To obtain an authorization token
 //
 // This example gets an authorization token for your default registry.
-func ExampleECR_GetAuthorizationToken_shared00() {
+func ExampleECR_GetAuthorizationTokenRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -286,7 +292,8 @@ func ExampleECR_GetAuthorizationToken_shared00() {
 	svc := ecr.New(cfg)
 	input := &ecr.GetAuthorizationTokenInput{}
 
-	result, err := svc.GetAuthorizationToken(input)
+	req := svc.GetAuthorizationTokenRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -311,7 +318,7 @@ func ExampleECR_GetAuthorizationToken_shared00() {
 // To get the current policy for a repository
 //
 // This example obtains the repository policy for the repository named ubuntu.
-func ExampleECR_GetRepositoryPolicy_shared00() {
+func ExampleECR_GetRepositoryPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -322,7 +329,8 @@ func ExampleECR_GetRepositoryPolicy_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.GetRepositoryPolicy(input)
+	req := svc.GetRepositoryPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -352,7 +360,7 @@ func ExampleECR_GetRepositoryPolicy_shared00() {
 //
 // This example lists all of the images in the repository named ubuntu in the default
 // registry in the current account.
-func ExampleECR_ListImages_shared00() {
+func ExampleECR_ListImagesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -363,7 +371,8 @@ func ExampleECR_ListImages_shared00() {
 		RepositoryName: aws.String("ubuntu"),
 	}
 
-	result, err := svc.ListImages(input)
+	req := svc.ListImagesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

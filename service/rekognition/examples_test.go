@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This operation compares the largest face detected in the source image with each face
 // detected in the target image.
-func ExampleRekognition_CompareFaces_shared00() {
+func ExampleRekognition_CompareFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -52,7 +52,8 @@ func ExampleRekognition_CompareFaces_shared00() {
 		},
 	}
 
-	result, err := svc.CompareFaces(input)
+	req := svc.CompareFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -89,7 +90,7 @@ func ExampleRekognition_CompareFaces_shared00() {
 // To create a collection
 //
 // This operation creates a Rekognition collection for storing image data.
-func ExampleRekognition_CreateCollection_shared00() {
+func ExampleRekognition_CreateCollectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -100,7 +101,8 @@ func ExampleRekognition_CreateCollection_shared00() {
 		CollectionId: aws.String("myphotos"),
 	}
 
-	result, err := svc.CreateCollection(input)
+	req := svc.CreateCollectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -133,7 +135,7 @@ func ExampleRekognition_CreateCollection_shared00() {
 // To delete a collection
 //
 // This operation deletes a Rekognition collection.
-func ExampleRekognition_DeleteCollection_shared00() {
+func ExampleRekognition_DeleteCollectionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -144,7 +146,8 @@ func ExampleRekognition_DeleteCollection_shared00() {
 		CollectionId: aws.String("myphotos"),
 	}
 
-	result, err := svc.DeleteCollection(input)
+	req := svc.DeleteCollectionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -177,7 +180,7 @@ func ExampleRekognition_DeleteCollection_shared00() {
 // To delete a face
 //
 // This operation deletes one or more faces from a Rekognition collection.
-func ExampleRekognition_DeleteFaces_shared00() {
+func ExampleRekognition_DeleteFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -191,7 +194,8 @@ func ExampleRekognition_DeleteFaces_shared00() {
 		},
 	}
 
-	result, err := svc.DeleteFaces(input)
+	req := svc.DeleteFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -224,7 +228,7 @@ func ExampleRekognition_DeleteFaces_shared00() {
 // To detect faces in an image
 //
 // This operation detects faces in an image stored in an AWS S3 bucket.
-func ExampleRekognition_DetectFaces_shared00() {
+func ExampleRekognition_DetectFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -240,7 +244,8 @@ func ExampleRekognition_DetectFaces_shared00() {
 		},
 	}
 
-	result, err := svc.DetectFaces(input)
+	req := svc.DetectFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -277,7 +282,7 @@ func ExampleRekognition_DetectFaces_shared00() {
 // To detect labels
 //
 // This operation detects labels in the supplied image
-func ExampleRekognition_DetectLabels_shared00() {
+func ExampleRekognition_DetectLabelsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -295,7 +300,8 @@ func ExampleRekognition_DetectLabels_shared00() {
 		MinConfidence: aws.Float64(70.000000),
 	}
 
-	result, err := svc.DetectLabels(input)
+	req := svc.DetectLabelsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -333,7 +339,7 @@ func ExampleRekognition_DetectLabels_shared00() {
 //
 // This operation detects faces in an image and adds them to the specified Rekognition
 // collection.
-func ExampleRekognition_IndexFaces_shared00() {
+func ExampleRekognition_IndexFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -351,7 +357,8 @@ func ExampleRekognition_IndexFaces_shared00() {
 		},
 	}
 
-	result, err := svc.IndexFaces(input)
+	req := svc.IndexFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -390,7 +397,7 @@ func ExampleRekognition_IndexFaces_shared00() {
 // To list the collections
 //
 // This operation returns a list of Rekognition collections.
-func ExampleRekognition_ListCollections_shared00() {
+func ExampleRekognition_ListCollectionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -399,7 +406,8 @@ func ExampleRekognition_ListCollections_shared00() {
 	svc := rekognition.New(cfg)
 	input := &rekognition.ListCollectionsInput{}
 
-	result, err := svc.ListCollections(input)
+	req := svc.ListCollectionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -434,7 +442,7 @@ func ExampleRekognition_ListCollections_shared00() {
 // To list the faces in a collection
 //
 // This operation lists the faces in a Rekognition collection.
-func ExampleRekognition_ListFaces_shared00() {
+func ExampleRekognition_ListFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -446,7 +454,8 @@ func ExampleRekognition_ListFaces_shared00() {
 		MaxResults:   aws.Int64(20),
 	}
 
-	result, err := svc.ListFaces(input)
+	req := svc.ListFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -482,7 +491,7 @@ func ExampleRekognition_ListFaces_shared00() {
 //
 // This operation searches for matching faces in the collection the supplied face belongs
 // to.
-func ExampleRekognition_SearchFaces_shared00() {
+func ExampleRekognition_SearchFacesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -496,7 +505,8 @@ func ExampleRekognition_SearchFaces_shared00() {
 		MaxFaces:           aws.Int64(10),
 	}
 
-	result, err := svc.SearchFaces(input)
+	req := svc.SearchFacesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -530,7 +540,7 @@ func ExampleRekognition_SearchFaces_shared00() {
 //
 // This operation searches for faces in a Rekognition collection that match the largest
 // face in an S3 bucket stored image.
-func ExampleRekognition_SearchFacesByImage_shared00() {
+func ExampleRekognition_SearchFacesByImageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -549,7 +559,8 @@ func ExampleRekognition_SearchFacesByImage_shared00() {
 		MaxFaces: aws.Int64(5),
 	}
 
-	result, err := svc.SearchFacesByImage(input)
+	req := svc.SearchFacesByImageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

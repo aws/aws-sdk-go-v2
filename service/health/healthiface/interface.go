@@ -63,38 +63,26 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type HealthAPI interface {
-	DescribeAffectedEntities(*health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error)
-	DescribeAffectedEntitiesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, ...aws.Option) (*health.DescribeAffectedEntitiesOutput, error)
-	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) (*aws.Request, *health.DescribeAffectedEntitiesOutput)
+	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
 
 	DescribeAffectedEntitiesPages(*health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool) error
 	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...aws.Option) error
 
-	DescribeEntityAggregates(*health.DescribeEntityAggregatesInput) (*health.DescribeEntityAggregatesOutput, error)
-	DescribeEntityAggregatesWithContext(aws.Context, *health.DescribeEntityAggregatesInput, ...aws.Option) (*health.DescribeEntityAggregatesOutput, error)
-	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) (*aws.Request, *health.DescribeEntityAggregatesOutput)
+	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
 
-	DescribeEventAggregates(*health.DescribeEventAggregatesInput) (*health.DescribeEventAggregatesOutput, error)
-	DescribeEventAggregatesWithContext(aws.Context, *health.DescribeEventAggregatesInput, ...aws.Option) (*health.DescribeEventAggregatesOutput, error)
-	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) (*aws.Request, *health.DescribeEventAggregatesOutput)
+	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
 
 	DescribeEventAggregatesPages(*health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool) error
 	DescribeEventAggregatesPagesWithContext(aws.Context, *health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool, ...aws.Option) error
 
-	DescribeEventDetails(*health.DescribeEventDetailsInput) (*health.DescribeEventDetailsOutput, error)
-	DescribeEventDetailsWithContext(aws.Context, *health.DescribeEventDetailsInput, ...aws.Option) (*health.DescribeEventDetailsOutput, error)
-	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) (*aws.Request, *health.DescribeEventDetailsOutput)
+	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
 
-	DescribeEventTypes(*health.DescribeEventTypesInput) (*health.DescribeEventTypesOutput, error)
-	DescribeEventTypesWithContext(aws.Context, *health.DescribeEventTypesInput, ...aws.Option) (*health.DescribeEventTypesOutput, error)
-	DescribeEventTypesRequest(*health.DescribeEventTypesInput) (*aws.Request, *health.DescribeEventTypesOutput)
+	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
 
 	DescribeEventTypesPages(*health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool) error
 	DescribeEventTypesPagesWithContext(aws.Context, *health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool, ...aws.Option) error
 
-	DescribeEvents(*health.DescribeEventsInput) (*health.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *health.DescribeEventsInput, ...aws.Option) (*health.DescribeEventsOutput, error)
-	DescribeEventsRequest(*health.DescribeEventsInput) (*aws.Request, *health.DescribeEventsOutput)
+	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
 
 	DescribeEventsPages(*health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool) error
 	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...aws.Option) error

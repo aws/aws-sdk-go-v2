@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // The following example associates the VPC with ID vpc-1a2b3c4d with the hosted zone
 // with ID Z3M3LMPEXAMPLE.
-func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
+func ExampleRoute53_AssociateVPCWithHostedZoneRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -45,7 +45,8 @@ func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
 		},
 	}
 
-	result, err := svc.AssociateVPCWithHostedZone(input)
+	req := svc.AssociateVPCWithHostedZoneRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -81,7 +82,7 @@ func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
 //
 // The following example creates a resource record set that routes Internet traffic
 // to a resource with an IP address of 192.0.2.44.
-func ExampleRoute53_ChangeResourceRecordSets_shared00() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -100,7 +101,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared00() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -133,7 +135,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared00() {
 // The following example creates two weighted resource record sets. The resource with
 // a Weight of 100 will get 1/3rd of traffic (100/100+200), and the other resource will
 // get the rest of the traffic for example.com.
-func ExampleRoute53_ChangeResourceRecordSets_shared01() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -155,7 +157,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared01() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -187,7 +190,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared01() {
 //
 // The following example creates an alias resource record set that routes traffic to
 // a CloudFront distribution.
-func ExampleRoute53_ChangeResourceRecordSets_shared02() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -206,7 +209,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared02() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -240,7 +244,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared02() {
 // traffic to ELB load balancers. The resource with a Weight of 100 will get 1/3rd of
 // traffic (100/100+200), and the other resource will get the rest of the traffic for
 // example.com.
-func ExampleRoute53_ChangeResourceRecordSets_shared03() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared03() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -262,7 +266,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared03() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -295,7 +300,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared03() {
 // The following example creates two latency resource record sets that route traffic
 // to EC2 instances. Traffic for example.com is routed either to the Ohio region or
 // the Oregon region, depending on the latency between the user and those regions.
-func ExampleRoute53_ChangeResourceRecordSets_shared04() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared04() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -317,7 +322,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared04() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -350,7 +356,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared04() {
 // The following example creates two latency alias resource record sets that route traffic
 // for example.com to ELB load balancers. Requests are routed either to the Ohio region
 // or the Oregon region, depending on the latency between the user and those regions.
-func ExampleRoute53_ChangeResourceRecordSets_shared05() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared05() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -372,7 +378,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared05() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -406,7 +413,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared05() {
 // that route traffic to EC2 instances. Traffic is generally routed to the primary resource,
 // in the Ohio region. If that resource is unavailable, traffic is routed to the secondary
 // resource, in the Oregon region.
-func ExampleRoute53_ChangeResourceRecordSets_shared06() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared06() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -428,7 +435,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared06() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -462,7 +470,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared06() {
 // sets that route traffic to ELB load balancers. Traffic is generally routed to the
 // primary resource, in the Ohio region. If that resource is unavailable, traffic is
 // routed to the secondary resource, in the Oregon region.
-func ExampleRoute53_ChangeResourceRecordSets_shared07() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared07() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -484,7 +492,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared07() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -518,7 +527,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared07() {
 // addresses to route traffic to resources such as web servers running on EC2 instances.
 // Traffic is routed to one of four IP addresses, for North America (NA), for South
 // America (SA), for Europe (EU), and for all other locations (*).
-func ExampleRoute53_ChangeResourceRecordSets_shared08() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared08() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -546,7 +555,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared08() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -580,7 +590,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared08() {
 // traffic to ELB load balancers. Traffic is routed to one of four IP addresses, for
 // North America (NA), for South America (SA), for Europe (EU), and for all other locations
 // (*).
-func ExampleRoute53_ChangeResourceRecordSets_shared09() {
+func ExampleRoute53_ChangeResourceRecordSetsRequest_shared09() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -608,7 +618,8 @@ func ExampleRoute53_ChangeResourceRecordSets_shared09() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.ChangeResourceRecordSets(input)
+	req := svc.ChangeResourceRecordSetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -640,7 +651,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared09() {
 //
 // The following example adds two tags and removes one tag from the hosted zone with
 // ID Z3M3LMPEXAMPLE.
-func ExampleRoute53_ChangeTagsForResource_shared00() {
+func ExampleRoute53_ChangeTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -665,7 +676,8 @@ func ExampleRoute53_ChangeTagsForResource_shared00() {
 		ResourceType: route53.TagResourceTypeHostedzone,
 	}
 
-	result, err := svc.ChangeTagsForResource(input)
+	req := svc.ChangeTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -696,7 +708,7 @@ func ExampleRoute53_ChangeTagsForResource_shared00() {
 // To get information about a hosted zone
 //
 // The following example gets information about the Z3M3LMPEXAMPLE hosted zone.
-func ExampleRoute53_GetHostedZone_shared00() {
+func ExampleRoute53_GetHostedZoneRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -707,7 +719,8 @@ func ExampleRoute53_GetHostedZone_shared00() {
 		Id: aws.String("Z3M3LMPEXAMPLE"),
 	}
 
-	result, err := svc.GetHostedZone(input)
+	req := svc.GetHostedZoneRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

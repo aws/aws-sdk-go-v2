@@ -14,31 +14,38 @@ import (
 
 const opAddRoleToDBCluster = "AddRoleToDBCluster"
 
-// AddRoleToDBClusterRequest generates a "aws.Request" representing the
-// client's request for the AddRoleToDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddRoleToDBClusterRequest is a API request type for the AddRoleToDBCluster API operation.
+type AddRoleToDBClusterRequest struct {
+	*aws.Request
+	Input *AddRoleToDBClusterInput
+}
+
+// Send marshals and sends the AddRoleToDBCluster API request.
+func (r *AddRoleToDBClusterRequest) Send() (*AddRoleToDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddRoleToDBClusterOutput), nil
+}
+
+// AddRoleToDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddRoleToDBCluster for more information on using the AddRoleToDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Associates an Identity and Access Management (IAM) role from an Aurora DB
+// cluster. For more information, see Authorizing Amazon Aurora to Access Other
+// AWS Services On Your Behalf (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html).
 //
 //    // Example sending a request using the AddRoleToDBClusterRequest method.
-//    req, resp := client.AddRoleToDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddRoleToDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster
-func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) (req *aws.Request, output *AddRoleToDBClusterOutput) {
+func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRoleToDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opAddRoleToDBCluster,
 		HTTPMethod: "POST",
@@ -49,90 +56,44 @@ func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) (req *aw
 		input = &AddRoleToDBClusterInput{}
 	}
 
-	output = &AddRoleToDBClusterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddRoleToDBClusterOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddRoleToDBCluster API operation for Amazon Relational Database Service.
-//
-// Associates an Identity and Access Management (IAM) role from an Aurora DB
-// cluster. For more information, see Authorizing Amazon Aurora to Access Other
-// AWS Services On Your Behalf (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation AddRoleToDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeDBClusterRoleAlreadyExistsFault "DBClusterRoleAlreadyExists"
-//   The specified IAM role Amazon Resource Name (ARN) is already associated with
-//   the specified DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeDBClusterRoleQuotaExceededFault "DBClusterRoleQuotaExceeded"
-//   You have exceeded the maximum number of IAM roles that can be associated
-//   with the specified DB cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster
-func (c *RDS) AddRoleToDBCluster(input *AddRoleToDBClusterInput) (*AddRoleToDBClusterOutput, error) {
-	req, out := c.AddRoleToDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// AddRoleToDBClusterWithContext is the same as AddRoleToDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddRoleToDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) AddRoleToDBClusterWithContext(ctx aws.Context, input *AddRoleToDBClusterInput, opts ...aws.Option) (*AddRoleToDBClusterOutput, error) {
-	req, out := c.AddRoleToDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddRoleToDBClusterRequest{Request: req, Input: input}
 }
 
 const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 
-// AddSourceIdentifierToSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the AddSourceIdentifierToSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddSourceIdentifierToSubscriptionRequest is a API request type for the AddSourceIdentifierToSubscription API operation.
+type AddSourceIdentifierToSubscriptionRequest struct {
+	*aws.Request
+	Input *AddSourceIdentifierToSubscriptionInput
+}
+
+// Send marshals and sends the AddSourceIdentifierToSubscription API request.
+func (r *AddSourceIdentifierToSubscriptionRequest) Send() (*AddSourceIdentifierToSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddSourceIdentifierToSubscriptionOutput), nil
+}
+
+// AddSourceIdentifierToSubscriptionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddSourceIdentifierToSubscription for more information on using the AddSourceIdentifierToSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds a source identifier to an existing RDS event notification subscription.
 //
 //    // Example sending a request using the AddSourceIdentifierToSubscriptionRequest method.
-//    req, resp := client.AddSourceIdentifierToSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddSourceIdentifierToSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription
-func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) (req *aws.Request, output *AddSourceIdentifierToSubscriptionOutput) {
+func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opAddSourceIdentifierToSubscription,
 		HTTPMethod: "POST",
@@ -143,78 +104,47 @@ func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifie
 		input = &AddSourceIdentifierToSubscriptionInput{}
 	}
 
-	output = &AddSourceIdentifierToSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddSourceIdentifierToSubscription API operation for Amazon Relational Database Service.
-//
-// Adds a source identifier to an existing RDS event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation AddSourceIdentifierToSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   The subscription name does not exist.
-//
-//   * ErrCodeSourceNotFoundFault "SourceNotFound"
-//   The requested source could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription
-func (c *RDS) AddSourceIdentifierToSubscription(input *AddSourceIdentifierToSubscriptionInput) (*AddSourceIdentifierToSubscriptionOutput, error) {
-	req, out := c.AddSourceIdentifierToSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// AddSourceIdentifierToSubscriptionWithContext is the same as AddSourceIdentifierToSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddSourceIdentifierToSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) AddSourceIdentifierToSubscriptionWithContext(ctx aws.Context, input *AddSourceIdentifierToSubscriptionInput, opts ...aws.Option) (*AddSourceIdentifierToSubscriptionOutput, error) {
-	req, out := c.AddSourceIdentifierToSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddSourceIdentifierToSubscriptionOutput{})
+	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input}
 }
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
+}
+
+// Send marshals and sends the AddTagsToResource API request.
+func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds metadata tags to an Amazon RDS resource. These tags can also be used
+// with cost allocation reporting to track cost associated with Amazon RDS resources,
+// or used in a Condition statement in an IAM policy for Amazon RDS.
 //
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging Amazon RDS resources, see Tagging Amazon RDS Resources
+// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResource
-func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -225,88 +155,45 @@ func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.
 		input = &AddTagsToResourceInput{}
 	}
 
-	output = &AddTagsToResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddTagsToResource API operation for Amazon Relational Database Service.
-//
-// Adds metadata tags to an Amazon RDS resource. These tags can also be used
-// with cost allocation reporting to track cost associated with Amazon RDS resources,
-// or used in a Condition statement in an IAM policy for Amazon RDS.
-//
-// For an overview on tagging Amazon RDS resources, see Tagging Amazon RDS Resources
-// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResource
-func (c *RDS) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
 
-// ApplyPendingMaintenanceActionRequest generates a "aws.Request" representing the
-// client's request for the ApplyPendingMaintenanceAction operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ApplyPendingMaintenanceActionRequest is a API request type for the ApplyPendingMaintenanceAction API operation.
+type ApplyPendingMaintenanceActionRequest struct {
+	*aws.Request
+	Input *ApplyPendingMaintenanceActionInput
+}
+
+// Send marshals and sends the ApplyPendingMaintenanceAction API request.
+func (r *ApplyPendingMaintenanceActionRequest) Send() (*ApplyPendingMaintenanceActionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApplyPendingMaintenanceActionOutput), nil
+}
+
+// ApplyPendingMaintenanceActionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ApplyPendingMaintenanceAction for more information on using the ApplyPendingMaintenanceAction
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Applies a pending maintenance action to a resource (for example, to a DB
+// instance).
 //
 //    // Example sending a request using the ApplyPendingMaintenanceActionRequest method.
-//    req, resp := client.ApplyPendingMaintenanceActionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ApplyPendingMaintenanceActionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceAction
-func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanceActionInput) (req *aws.Request, output *ApplyPendingMaintenanceActionOutput) {
+func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanceActionInput) ApplyPendingMaintenanceActionRequest {
 	op := &aws.Operation{
 		Name:       opApplyPendingMaintenanceAction,
 		HTTPMethod: "POST",
@@ -317,92 +204,30 @@ func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanc
 		input = &ApplyPendingMaintenanceActionInput{}
 	}
 
-	output = &ApplyPendingMaintenanceActionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ApplyPendingMaintenanceAction API operation for Amazon Relational Database Service.
-//
-// Applies a pending maintenance action to a resource (for example, to a DB
-// instance).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ApplyPendingMaintenanceAction for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The specified resource ID was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceAction
-func (c *RDS) ApplyPendingMaintenanceAction(input *ApplyPendingMaintenanceActionInput) (*ApplyPendingMaintenanceActionOutput, error) {
-	req, out := c.ApplyPendingMaintenanceActionRequest(input)
-	return out, req.Send()
-}
-
-// ApplyPendingMaintenanceActionWithContext is the same as ApplyPendingMaintenanceAction with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ApplyPendingMaintenanceAction for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ApplyPendingMaintenanceActionWithContext(ctx aws.Context, input *ApplyPendingMaintenanceActionInput, opts ...aws.Option) (*ApplyPendingMaintenanceActionOutput, error) {
-	req, out := c.ApplyPendingMaintenanceActionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ApplyPendingMaintenanceActionOutput{})
+	return ApplyPendingMaintenanceActionRequest{Request: req, Input: input}
 }
 
 const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 
-// AuthorizeDBSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the AuthorizeDBSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AuthorizeDBSecurityGroupIngress for more information on using the AuthorizeDBSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AuthorizeDBSecurityGroupIngressRequest method.
-//    req, resp := client.AuthorizeDBSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngress
-func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeDBSecurityGroupIngressOutput) {
-	op := &aws.Operation{
-		Name:       opAuthorizeDBSecurityGroupIngress,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AuthorizeDBSecurityGroupIngressInput{}
-	}
-
-	output = &AuthorizeDBSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AuthorizeDBSecurityGroupIngressRequest is a API request type for the AuthorizeDBSecurityGroupIngress API operation.
+type AuthorizeDBSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *AuthorizeDBSecurityGroupIngressInput
 }
 
-// AuthorizeDBSecurityGroupIngress API operation for Amazon Relational Database Service.
+// Send marshals and sends the AuthorizeDBSecurityGroupIngress API request.
+func (r *AuthorizeDBSecurityGroupIngressRequest) Send() (*AuthorizeDBSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AuthorizeDBSecurityGroupIngressOutput), nil
+}
+
+// AuthorizeDBSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Enables ingress to a DBSecurityGroup using one of two forms of authorization.
 // First, EC2 or VPC security groups can be added to the DBSecurityGroup if
@@ -418,76 +243,61 @@ func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityG
 //
 // For an overview of CIDR ranges, go to the Wikipedia Tutorial (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation AuthorizeDBSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group does not allow deletion.
-//
-//   * ErrCodeAuthorizationAlreadyExistsFault "AuthorizationAlreadyExists"
-//   The specified CIDRIP or EC2 security group is already authorized for the
-//   specified DB security group.
-//
-//   * ErrCodeAuthorizationQuotaExceededFault "AuthorizationQuotaExceeded"
-//   DB security group authorization quota has been reached.
+//    // Example sending a request using the AuthorizeDBSecurityGroupIngressRequest method.
+//    req := client.AuthorizeDBSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngress
-func (c *RDS) AuthorizeDBSecurityGroupIngress(input *AuthorizeDBSecurityGroupIngressInput) (*AuthorizeDBSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeDBSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest {
+	op := &aws.Operation{
+		Name:       opAuthorizeDBSecurityGroupIngress,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AuthorizeDBSecurityGroupIngressWithContext is the same as AuthorizeDBSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AuthorizeDBSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) AuthorizeDBSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeDBSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeDBSecurityGroupIngressOutput, error) {
-	req, out := c.AuthorizeDBSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AuthorizeDBSecurityGroupIngressInput{}
+	}
+
+	req := c.newRequest(op, input, &AuthorizeDBSecurityGroupIngressOutput{})
+	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 
-// CopyDBClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CopyDBClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CopyDBClusterParameterGroupRequest is a API request type for the CopyDBClusterParameterGroup API operation.
+type CopyDBClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *CopyDBClusterParameterGroupInput
+}
+
+// Send marshals and sends the CopyDBClusterParameterGroup API request.
+func (r *CopyDBClusterParameterGroupRequest) Send() (*CopyDBClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyDBClusterParameterGroupOutput), nil
+}
+
+// CopyDBClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyDBClusterParameterGroup for more information on using the CopyDBClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Copies the specified DB cluster parameter group.
 //
 //    // Example sending a request using the CopyDBClusterParameterGroupRequest method.
-//    req, resp := client.CopyDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CopyDBClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroup
-func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGroupInput) (req *aws.Request, output *CopyDBClusterParameterGroupOutput) {
+func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGroupInput) CopyDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCopyDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -498,98 +308,30 @@ func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGr
 		input = &CopyDBClusterParameterGroupInput{}
 	}
 
-	output = &CopyDBClusterParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CopyDBClusterParameterGroup API operation for Amazon Relational Database Service.
-//
-// Copies the specified DB cluster parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CopyDBClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB parameter
-//   groups.
-//
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroup
-func (c *RDS) CopyDBClusterParameterGroup(input *CopyDBClusterParameterGroupInput) (*CopyDBClusterParameterGroupOutput, error) {
-	req, out := c.CopyDBClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// CopyDBClusterParameterGroupWithContext is the same as CopyDBClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyDBClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CopyDBClusterParameterGroupWithContext(ctx aws.Context, input *CopyDBClusterParameterGroupInput, opts ...aws.Option) (*CopyDBClusterParameterGroupOutput, error) {
-	req, out := c.CopyDBClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CopyDBClusterParameterGroupOutput{})
+	return CopyDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 
-// CopyDBClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CopyDBClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyDBClusterSnapshot for more information on using the CopyDBClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CopyDBClusterSnapshotRequest method.
-//    req, resp := client.CopyDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot
-func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) (req *aws.Request, output *CopyDBClusterSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opCopyDBClusterSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CopyDBClusterSnapshotInput{}
-	}
-
-	output = &CopyDBClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CopyDBClusterSnapshotRequest is a API request type for the CopyDBClusterSnapshot API operation.
+type CopyDBClusterSnapshotRequest struct {
+	*aws.Request
+	Input *CopyDBClusterSnapshotInput
 }
 
-// CopyDBClusterSnapshot API operation for Amazon Relational Database Service.
+// Send marshals and sends the CopyDBClusterSnapshot API request.
+func (r *CopyDBClusterSnapshotRequest) Send() (*CopyDBClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyDBClusterSnapshotOutput), nil
+}
+
+// CopyDBClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Copies a snapshot of a DB cluster.
 //
@@ -655,81 +397,61 @@ func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) (r
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CopyDBClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   User already has a DB cluster snapshot with the given identifier.
-//
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
+//    // Example sending a request using the CopyDBClusterSnapshotRequest method.
+//    req := client.CopyDBClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot
-func (c *RDS) CopyDBClusterSnapshot(input *CopyDBClusterSnapshotInput) (*CopyDBClusterSnapshotOutput, error) {
-	req, out := c.CopyDBClusterSnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCopyDBClusterSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CopyDBClusterSnapshotWithContext is the same as CopyDBClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyDBClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CopyDBClusterSnapshotWithContext(ctx aws.Context, input *CopyDBClusterSnapshotInput, opts ...aws.Option) (*CopyDBClusterSnapshotOutput, error) {
-	req, out := c.CopyDBClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CopyDBClusterSnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &CopyDBClusterSnapshotOutput{})
+	return CopyDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opCopyDBParameterGroup = "CopyDBParameterGroup"
 
-// CopyDBParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CopyDBParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CopyDBParameterGroupRequest is a API request type for the CopyDBParameterGroup API operation.
+type CopyDBParameterGroupRequest struct {
+	*aws.Request
+	Input *CopyDBParameterGroupInput
+}
+
+// Send marshals and sends the CopyDBParameterGroup API request.
+func (r *CopyDBParameterGroupRequest) Send() (*CopyDBParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyDBParameterGroupOutput), nil
+}
+
+// CopyDBParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyDBParameterGroup for more information on using the CopyDBParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Copies the specified DB parameter group.
 //
 //    // Example sending a request using the CopyDBParameterGroupRequest method.
-//    req, resp := client.CopyDBParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CopyDBParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroup
-func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) (req *aws.Request, output *CopyDBParameterGroupOutput) {
+func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) CopyDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opCopyDBParameterGroup,
 		HTTPMethod: "POST",
@@ -740,98 +462,30 @@ func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) (req
 		input = &CopyDBParameterGroupInput{}
 	}
 
-	output = &CopyDBParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CopyDBParameterGroup API operation for Amazon Relational Database Service.
-//
-// Copies the specified DB parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CopyDBParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name exists.
-//
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB parameter
-//   groups.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroup
-func (c *RDS) CopyDBParameterGroup(input *CopyDBParameterGroupInput) (*CopyDBParameterGroupOutput, error) {
-	req, out := c.CopyDBParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// CopyDBParameterGroupWithContext is the same as CopyDBParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyDBParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CopyDBParameterGroupWithContext(ctx aws.Context, input *CopyDBParameterGroupInput, opts ...aws.Option) (*CopyDBParameterGroupOutput, error) {
-	req, out := c.CopyDBParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CopyDBParameterGroupOutput{})
+	return CopyDBParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCopyDBSnapshot = "CopyDBSnapshot"
 
-// CopyDBSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CopyDBSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyDBSnapshot for more information on using the CopyDBSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CopyDBSnapshotRequest method.
-//    req, resp := client.CopyDBSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot
-func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) (req *aws.Request, output *CopyDBSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opCopyDBSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CopyDBSnapshotInput{}
-	}
-
-	output = &CopyDBSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CopyDBSnapshotRequest is a API request type for the CopyDBSnapshot API operation.
+type CopyDBSnapshotRequest struct {
+	*aws.Request
+	Input *CopyDBSnapshotInput
 }
 
-// CopyDBSnapshot API operation for Amazon Relational Database Service.
+// Send marshals and sends the CopyDBSnapshot API request.
+func (r *CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyDBSnapshotOutput), nil
+}
+
+// CopyDBSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Copies the specified DB snapshot. The source DB snapshot must be in the "available"
 // state.
@@ -845,78 +499,61 @@ func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) (req *aws.Reques
 // For more information about copying snapshots, see Copying a DB Snapshot (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CopyDBSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
-//   DBSnapshotIdentifier is already used by an existing snapshot.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
+//    // Example sending a request using the CopyDBSnapshotRequest method.
+//    req := client.CopyDBSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot
-func (c *RDS) CopyDBSnapshot(input *CopyDBSnapshotInput) (*CopyDBSnapshotOutput, error) {
-	req, out := c.CopyDBSnapshotRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) CopyDBSnapshotRequest {
+	op := &aws.Operation{
+		Name:       opCopyDBSnapshot,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CopyDBSnapshotWithContext is the same as CopyDBSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyDBSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CopyDBSnapshotWithContext(ctx aws.Context, input *CopyDBSnapshotInput, opts ...aws.Option) (*CopyDBSnapshotOutput, error) {
-	req, out := c.CopyDBSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CopyDBSnapshotInput{}
+	}
+
+	req := c.newRequest(op, input, &CopyDBSnapshotOutput{})
+	return CopyDBSnapshotRequest{Request: req, Input: input}
 }
 
 const opCopyOptionGroup = "CopyOptionGroup"
 
-// CopyOptionGroupRequest generates a "aws.Request" representing the
-// client's request for the CopyOptionGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CopyOptionGroupRequest is a API request type for the CopyOptionGroup API operation.
+type CopyOptionGroupRequest struct {
+	*aws.Request
+	Input *CopyOptionGroupInput
+}
+
+// Send marshals and sends the CopyOptionGroup API request.
+func (r *CopyOptionGroupRequest) Send() (*CopyOptionGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyOptionGroupOutput), nil
+}
+
+// CopyOptionGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CopyOptionGroup for more information on using the CopyOptionGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Copies the specified option group.
 //
 //    // Example sending a request using the CopyOptionGroupRequest method.
-//    req, resp := client.CopyOptionGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CopyOptionGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup
-func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) (req *aws.Request, output *CopyOptionGroupOutput) {
+func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) CopyOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opCopyOptionGroup,
 		HTTPMethod: "POST",
@@ -927,97 +564,30 @@ func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) (req *aws.Requ
 		input = &CopyOptionGroupInput{}
 	}
 
-	output = &CopyOptionGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CopyOptionGroup API operation for Amazon Relational Database Service.
-//
-// Copies the specified option group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CopyOptionGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOptionGroupAlreadyExistsFault "OptionGroupAlreadyExistsFault"
-//   The option group you are trying to create already exists.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeOptionGroupQuotaExceededFault "OptionGroupQuotaExceededFault"
-//   The quota of 20 option groups was exceeded for this AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup
-func (c *RDS) CopyOptionGroup(input *CopyOptionGroupInput) (*CopyOptionGroupOutput, error) {
-	req, out := c.CopyOptionGroupRequest(input)
-	return out, req.Send()
-}
-
-// CopyOptionGroupWithContext is the same as CopyOptionGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CopyOptionGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CopyOptionGroupWithContext(ctx aws.Context, input *CopyOptionGroupInput, opts ...aws.Option) (*CopyOptionGroupOutput, error) {
-	req, out := c.CopyOptionGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CopyOptionGroupOutput{})
+	return CopyOptionGroupRequest{Request: req, Input: input}
 }
 
 const opCreateDBCluster = "CreateDBCluster"
 
-// CreateDBClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBCluster for more information on using the CreateDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDBClusterRequest method.
-//    req, resp := client.CreateDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster
-func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) (req *aws.Request, output *CreateDBClusterOutput) {
-	op := &aws.Operation{
-		Name:       opCreateDBCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateDBClusterInput{}
-	}
-
-	output = &CreateDBClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateDBClusterRequest is a API request type for the CreateDBCluster API operation.
+type CreateDBClusterRequest struct {
+	*aws.Request
+	Input *CreateDBClusterInput
 }
 
-// CreateDBCluster API operation for Amazon Relational Database Service.
+// Send marshals and sends the CreateDBCluster API request.
+func (r *CreateDBClusterRequest) Send() (*CreateDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBClusterOutput), nil
+}
+
+// CreateDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new Amazon Aurora DB cluster.
 //
@@ -1029,132 +599,49 @@ func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) (req *aws.Requ
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   User already has a DB cluster with the given identifier.
-//
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is insufficient storage available for the current action. You may be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
-//
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   User attempted to create a new DB cluster and the user has already reached
-//   the maximum allowed DB cluster quota.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
-//   DBClusterParameterGroupName does not refer to an existing DB Cluster parameter
-//   group.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster
-func (c *RDS) CreateDBCluster(input *CreateDBClusterInput) (*CreateDBClusterOutput, error) {
-	req, out := c.CreateDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBClusterWithContext is the same as CreateDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBClusterWithContext(ctx aws.Context, input *CreateDBClusterInput, opts ...aws.Option) (*CreateDBClusterOutput, error) {
-	req, out := c.CreateDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
-
-// CreateDBClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateDBClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBClusterParameterGroup for more information on using the CreateDBClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDBClusterParameterGroupRequest method.
-//    req, resp := client.CreateDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDBClusterRequest method.
+//    req := client.CreateDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroup
-func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) (req *aws.Request, output *CreateDBClusterParameterGroupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster
+func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) CreateDBClusterRequest {
 	op := &aws.Operation{
-		Name:       opCreateDBClusterParameterGroup,
+		Name:       opCreateDBCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDBClusterParameterGroupInput{}
+		input = &CreateDBClusterInput{}
 	}
 
-	output = &CreateDBClusterParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDBClusterOutput{})
+	return CreateDBClusterRequest{Request: req, Input: input}
 }
 
-// CreateDBClusterParameterGroup API operation for Amazon Relational Database Service.
+const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
+
+// CreateDBClusterParameterGroupRequest is a API request type for the CreateDBClusterParameterGroup API operation.
+type CreateDBClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *CreateDBClusterParameterGroupInput
+}
+
+// Send marshals and sends the CreateDBClusterParameterGroup API request.
+func (r *CreateDBClusterParameterGroupRequest) Send() (*CreateDBClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBClusterParameterGroupOutput), nil
+}
+
+// CreateDBClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new DB cluster parameter group.
 //
@@ -1185,70 +672,63 @@ func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParamet
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB parameter
-//   groups.
-//
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name exists.
+//    // Example sending a request using the CreateDBClusterParameterGroupRequest method.
+//    req := client.CreateDBClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroup
-func (c *RDS) CreateDBClusterParameterGroup(input *CreateDBClusterParameterGroupInput) (*CreateDBClusterParameterGroupOutput, error) {
-	req, out := c.CreateDBClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateDBClusterParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateDBClusterParameterGroupWithContext is the same as CreateDBClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBClusterParameterGroupWithContext(ctx aws.Context, input *CreateDBClusterParameterGroupInput, opts ...aws.Option) (*CreateDBClusterParameterGroupOutput, error) {
-	req, out := c.CreateDBClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateDBClusterParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateDBClusterParameterGroupOutput{})
+	return CreateDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 
-// CreateDBClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateDBClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDBClusterSnapshotRequest is a API request type for the CreateDBClusterSnapshot API operation.
+type CreateDBClusterSnapshotRequest struct {
+	*aws.Request
+	Input *CreateDBClusterSnapshotInput
+}
+
+// Send marshals and sends the CreateDBClusterSnapshot API request.
+func (r *CreateDBClusterSnapshotRequest) Send() (*CreateDBClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBClusterSnapshotOutput), nil
+}
+
+// CreateDBClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBClusterSnapshot for more information on using the CreateDBClusterSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a snapshot of a DB cluster. For more information on Amazon Aurora,
+// see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the CreateDBClusterSnapshotRequest method.
-//    req, resp := client.CreateDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDBClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot
-func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput) (req *aws.Request, output *CreateDBClusterSnapshotOutput) {
+func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput) CreateDBClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBClusterSnapshot,
 		HTTPMethod: "POST",
@@ -1259,89 +739,42 @@ func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput
 		input = &CreateDBClusterSnapshotInput{}
 	}
 
-	output = &CreateDBClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDBClusterSnapshot API operation for Amazon Relational Database Service.
-//
-// Creates a snapshot of a DB cluster. For more information on Amazon Aurora,
-// see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   User already has a DB cluster snapshot with the given identifier.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot
-func (c *RDS) CreateDBClusterSnapshot(input *CreateDBClusterSnapshotInput) (*CreateDBClusterSnapshotOutput, error) {
-	req, out := c.CreateDBClusterSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBClusterSnapshotWithContext is the same as CreateDBClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBClusterSnapshotWithContext(ctx aws.Context, input *CreateDBClusterSnapshotInput, opts ...aws.Option) (*CreateDBClusterSnapshotOutput, error) {
-	req, out := c.CreateDBClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDBClusterSnapshotOutput{})
+	return CreateDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateDBInstance = "CreateDBInstance"
 
-// CreateDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the CreateDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDBInstanceRequest is a API request type for the CreateDBInstance API operation.
+type CreateDBInstanceRequest struct {
+	*aws.Request
+	Input *CreateDBInstanceInput
+}
+
+// Send marshals and sends the CreateDBInstance API request.
+func (r *CreateDBInstanceRequest) Send() (*CreateDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBInstanceOutput), nil
+}
+
+// CreateDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBInstance for more information on using the CreateDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new DB instance.
 //
 //    // Example sending a request using the CreateDBInstanceRequest method.
-//    req, resp := client.CreateDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance
-func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *aws.Request, output *CreateDBInstanceOutput) {
+func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBInstance,
 		HTTPMethod: "POST",
@@ -1352,151 +785,30 @@ func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) (req *aws.Re
 		input = &CreateDBInstanceInput{}
 	}
 
-	output = &CreateDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDBInstance API operation for Amazon Relational Database Service.
-//
-// Creates a new DB instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   User already has a DB instance with the given identifier.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB instances.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeProvisionedIopsNotAvailableInAZFault "ProvisionedIopsNotAvailableInAZFault"
-//   Provisioned IOPS not available in the specified Availability Zone.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   StorageType specified cannot be associated with the DB Instance.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeDomainNotFoundFault "DomainNotFoundFault"
-//   Domain does not refer to an existing Active Directory Domain.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance
-func (c *RDS) CreateDBInstance(input *CreateDBInstanceInput) (*CreateDBInstanceOutput, error) {
-	req, out := c.CreateDBInstanceRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBInstanceWithContext is the same as CreateDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBInstanceWithContext(ctx aws.Context, input *CreateDBInstanceInput, opts ...aws.Option) (*CreateDBInstanceOutput, error) {
-	req, out := c.CreateDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDBInstanceOutput{})
+	return CreateDBInstanceRequest{Request: req, Input: input}
 }
 
 const opCreateDBInstanceReadReplica = "CreateDBInstanceReadReplica"
 
-// CreateDBInstanceReadReplicaRequest generates a "aws.Request" representing the
-// client's request for the CreateDBInstanceReadReplica operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBInstanceReadReplica for more information on using the CreateDBInstanceReadReplica
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDBInstanceReadReplicaRequest method.
-//    req, resp := client.CreateDBInstanceReadReplicaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica
-func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadReplicaInput) (req *aws.Request, output *CreateDBInstanceReadReplicaOutput) {
-	op := &aws.Operation{
-		Name:       opCreateDBInstanceReadReplica,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateDBInstanceReadReplicaInput{}
-	}
-
-	output = &CreateDBInstanceReadReplicaOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateDBInstanceReadReplicaRequest is a API request type for the CreateDBInstanceReadReplica API operation.
+type CreateDBInstanceReadReplicaRequest struct {
+	*aws.Request
+	Input *CreateDBInstanceReadReplicaInput
 }
 
-// CreateDBInstanceReadReplica API operation for Amazon Relational Database Service.
+// Send marshals and sends the CreateDBInstanceReadReplica API request.
+func (r *CreateDBInstanceReadReplicaRequest) Send() (*CreateDBInstanceReadReplicaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBInstanceReadReplicaOutput), nil
+}
+
+// CreateDBInstanceReadReplicaRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new DB instance that acts as a Read Replica for an existing source
 // DB instance. You can create a Read Replica for a DB instance running MySQL,
@@ -1515,140 +827,49 @@ func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadRepl
 // For more information, see Working with PostgreSQL, MySQL, and MariaDB Read
 // Replicas (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBInstanceReadReplica for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   User already has a DB instance with the given identifier.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB instances.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeProvisionedIopsNotAvailableInAZFault "ProvisionedIopsNotAvailableInAZFault"
-//   Provisioned IOPS not available in the specified Availability Zone.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeDBSubnetGroupNotAllowedFault "DBSubnetGroupNotAllowedFault"
-//   Indicates that the DBSubnetGroup should not be specified while creating read
-//   replicas that lie in the same region as the source instance.
-//
-//   * ErrCodeInvalidDBSubnetGroupFault "InvalidDBSubnetGroupFault"
-//   Indicates the DBSubnetGroup does not belong to the same VPC as that of an
-//   existing cross region read replica of the same source instance.
-//
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   StorageType specified cannot be associated with the DB Instance.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica
-func (c *RDS) CreateDBInstanceReadReplica(input *CreateDBInstanceReadReplicaInput) (*CreateDBInstanceReadReplicaOutput, error) {
-	req, out := c.CreateDBInstanceReadReplicaRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBInstanceReadReplicaWithContext is the same as CreateDBInstanceReadReplica with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBInstanceReadReplica for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBInstanceReadReplicaWithContext(ctx aws.Context, input *CreateDBInstanceReadReplicaInput, opts ...aws.Option) (*CreateDBInstanceReadReplicaOutput, error) {
-	req, out := c.CreateDBInstanceReadReplicaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateDBParameterGroup = "CreateDBParameterGroup"
-
-// CreateDBParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateDBParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBParameterGroup for more information on using the CreateDBParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDBParameterGroupRequest method.
-//    req, resp := client.CreateDBParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateDBInstanceReadReplicaRequest method.
+//    req := client.CreateDBInstanceReadReplicaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroup
-func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) (req *aws.Request, output *CreateDBParameterGroupOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica
+func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadReplicaInput) CreateDBInstanceReadReplicaRequest {
 	op := &aws.Operation{
-		Name:       opCreateDBParameterGroup,
+		Name:       opCreateDBInstanceReadReplica,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateDBParameterGroupInput{}
+		input = &CreateDBInstanceReadReplicaInput{}
 	}
 
-	output = &CreateDBParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateDBInstanceReadReplicaOutput{})
+	return CreateDBInstanceReadReplicaRequest{Request: req, Input: input}
 }
 
-// CreateDBParameterGroup API operation for Amazon Relational Database Service.
+const opCreateDBParameterGroup = "CreateDBParameterGroup"
+
+// CreateDBParameterGroupRequest is a API request type for the CreateDBParameterGroup API operation.
+type CreateDBParameterGroupRequest struct {
+	*aws.Request
+	Input *CreateDBParameterGroupInput
+}
+
+// Send marshals and sends the CreateDBParameterGroup API request.
+func (r *CreateDBParameterGroupRequest) Send() (*CreateDBParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBParameterGroupOutput), nil
+}
+
+// CreateDBParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new DB parameter group.
 //
@@ -1672,70 +893,62 @@ func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) 
 // or the DescribeDBParameters command to verify that your DB parameter group
 // has been created or modified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupQuotaExceededFault "DBParameterGroupQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB parameter
-//   groups.
-//
-//   * ErrCodeDBParameterGroupAlreadyExistsFault "DBParameterGroupAlreadyExists"
-//   A DB parameter group with the same name exists.
+//    // Example sending a request using the CreateDBParameterGroupRequest method.
+//    req := client.CreateDBParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroup
-func (c *RDS) CreateDBParameterGroup(input *CreateDBParameterGroupInput) (*CreateDBParameterGroupOutput, error) {
-	req, out := c.CreateDBParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) CreateDBParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateDBParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateDBParameterGroupWithContext is the same as CreateDBParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBParameterGroupWithContext(ctx aws.Context, input *CreateDBParameterGroupInput, opts ...aws.Option) (*CreateDBParameterGroupOutput, error) {
-	req, out := c.CreateDBParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateDBParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateDBParameterGroupOutput{})
+	return CreateDBParameterGroupRequest{Request: req, Input: input}
 }
 
 const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 
-// CreateDBSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateDBSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDBSecurityGroupRequest is a API request type for the CreateDBSecurityGroup API operation.
+type CreateDBSecurityGroupRequest struct {
+	*aws.Request
+	Input *CreateDBSecurityGroupInput
+}
+
+// Send marshals and sends the CreateDBSecurityGroup API request.
+func (r *CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBSecurityGroupOutput), nil
+}
+
+// CreateDBSecurityGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBSecurityGroup for more information on using the CreateDBSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new DB security group. DB security groups control access to a DB
+// instance.
 //
 //    // Example sending a request using the CreateDBSecurityGroupRequest method.
-//    req, resp := client.CreateDBSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDBSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup
-func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) (req *aws.Request, output *CreateDBSecurityGroupOutput) {
+func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBSecurityGroup,
 		HTTPMethod: "POST",
@@ -1746,84 +959,42 @@ func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) (r
 		input = &CreateDBSecurityGroupInput{}
 	}
 
-	output = &CreateDBSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDBSecurityGroup API operation for Amazon Relational Database Service.
-//
-// Creates a new DB security group. DB security groups control access to a DB
-// instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSecurityGroupAlreadyExistsFault "DBSecurityGroupAlreadyExists"
-//   A DB security group with the name specified in DBSecurityGroupName already
-//   exists.
-//
-//   * ErrCodeDBSecurityGroupQuotaExceededFault "QuotaExceeded.DBSecurityGroup"
-//   Request would result in user exceeding the allowed number of DB security
-//   groups.
-//
-//   * ErrCodeDBSecurityGroupNotSupportedFault "DBSecurityGroupNotSupported"
-//   A DB security group is not allowed for this action.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup
-func (c *RDS) CreateDBSecurityGroup(input *CreateDBSecurityGroupInput) (*CreateDBSecurityGroupOutput, error) {
-	req, out := c.CreateDBSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBSecurityGroupWithContext is the same as CreateDBSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBSecurityGroupWithContext(ctx aws.Context, input *CreateDBSecurityGroupInput, opts ...aws.Option) (*CreateDBSecurityGroupOutput, error) {
-	req, out := c.CreateDBSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDBSecurityGroupOutput{})
+	return CreateDBSecurityGroupRequest{Request: req, Input: input}
 }
 
 const opCreateDBSnapshot = "CreateDBSnapshot"
 
-// CreateDBSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateDBSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDBSnapshotRequest is a API request type for the CreateDBSnapshot API operation.
+type CreateDBSnapshotRequest struct {
+	*aws.Request
+	Input *CreateDBSnapshotInput
+}
+
+// Send marshals and sends the CreateDBSnapshot API request.
+func (r *CreateDBSnapshotRequest) Send() (*CreateDBSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBSnapshotOutput), nil
+}
+
+// CreateDBSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBSnapshot for more information on using the CreateDBSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a DBSnapshot. The source DBInstance must be in "available" state.
 //
 //    // Example sending a request using the CreateDBSnapshotRequest method.
-//    req, resp := client.CreateDBSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDBSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot
-func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) (req *aws.Request, output *CreateDBSnapshotOutput) {
+func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) CreateDBSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBSnapshot,
 		HTTPMethod: "POST",
@@ -1834,84 +1005,43 @@ func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) (req *aws.Re
 		input = &CreateDBSnapshotInput{}
 	}
 
-	output = &CreateDBSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDBSnapshot API operation for Amazon Relational Database Service.
-//
-// Creates a DBSnapshot. The source DBInstance must be in "available" state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
-//   DBSnapshotIdentifier is already used by an existing snapshot.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot
-func (c *RDS) CreateDBSnapshot(input *CreateDBSnapshotInput) (*CreateDBSnapshotOutput, error) {
-	req, out := c.CreateDBSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBSnapshotWithContext is the same as CreateDBSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBSnapshotWithContext(ctx aws.Context, input *CreateDBSnapshotInput, opts ...aws.Option) (*CreateDBSnapshotOutput, error) {
-	req, out := c.CreateDBSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDBSnapshotOutput{})
+	return CreateDBSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 
-// CreateDBSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateDBSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDBSubnetGroupRequest is a API request type for the CreateDBSubnetGroup API operation.
+type CreateDBSubnetGroupRequest struct {
+	*aws.Request
+	Input *CreateDBSubnetGroupInput
+}
+
+// Send marshals and sends the CreateDBSubnetGroup API request.
+func (r *CreateDBSubnetGroupRequest) Send() (*CreateDBSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDBSubnetGroupOutput), nil
+}
+
+// CreateDBSubnetGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDBSubnetGroup for more information on using the CreateDBSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new DB subnet group. DB subnet groups must contain at least one
+// subnet in at least two AZs in the AWS Region.
 //
 //    // Example sending a request using the CreateDBSubnetGroupRequest method.
-//    req, resp := client.CreateDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDBSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup
-func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req *aws.Request, output *CreateDBSubnetGroupOutput) {
+func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateDBSubnetGroup,
 		HTTPMethod: "POST",
@@ -1922,107 +1052,30 @@ func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) (req *
 		input = &CreateDBSubnetGroupInput{}
 	}
 
-	output = &CreateDBSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDBSubnetGroup API operation for Amazon Relational Database Service.
-//
-// Creates a new DB subnet group. DB subnet groups must contain at least one
-// subnet in at least two AZs in the AWS Region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateDBSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSubnetGroupAlreadyExistsFault "DBSubnetGroupAlreadyExists"
-//   DBSubnetGroupName is already used by an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupQuotaExceededFault "DBSubnetGroupQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB subnet groups.
-//
-//   * ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
-//   Request would result in user exceeding the allowed number of subnets in a
-//   DB subnet groups.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup
-func (c *RDS) CreateDBSubnetGroup(input *CreateDBSubnetGroupInput) (*CreateDBSubnetGroupOutput, error) {
-	req, out := c.CreateDBSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateDBSubnetGroupWithContext is the same as CreateDBSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDBSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateDBSubnetGroupWithContext(ctx aws.Context, input *CreateDBSubnetGroupInput, opts ...aws.Option) (*CreateDBSubnetGroupOutput, error) {
-	req, out := c.CreateDBSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDBSubnetGroupOutput{})
+	return CreateDBSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the CreateEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEventSubscription for more information on using the CreateEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateEventSubscriptionRequest method.
-//    req, resp := client.CreateEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscription
-func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateEventSubscription,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateEventSubscriptionInput{}
-	}
-
-	output = &CreateEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateEventSubscriptionRequest is a API request type for the CreateEventSubscription API operation.
+type CreateEventSubscriptionRequest struct {
+	*aws.Request
+	Input *CreateEventSubscriptionInput
 }
 
-// CreateEventSubscription API operation for Amazon Relational Database Service.
+// Send marshals and sends the CreateEventSubscription API request.
+func (r *CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateEventSubscriptionOutput), nil
+}
+
+// CreateEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates an RDS event notification subscription. This action requires a topic
 // ARN (Amazon Resource Name) created by either the RDS console, the SNS console,
@@ -2043,84 +1096,61 @@ func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput
 // nor the SourceIdentifier, you will be notified of events generated from all
 // RDS sources belonging to your customer account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEventSubscriptionQuotaExceededFault "EventSubscriptionQuotaExceeded"
-//   You have reached the maximum number of event subscriptions.
-//
-//   * ErrCodeSubscriptionAlreadyExistFault "SubscriptionAlreadyExist"
-//   The supplied subscription name already exists.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
-//   SNS has responded that there is a problem with the SND topic specified.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
-//   You do not have permission to publish to the SNS topic ARN.
-//
-//   * ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
-//   The SNS topic ARN does not exist.
-//
-//   * ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
-//   The supplied category does not exist.
-//
-//   * ErrCodeSourceNotFoundFault "SourceNotFound"
-//   The requested source could not be found.
+//    // Example sending a request using the CreateEventSubscriptionRequest method.
+//    req := client.CreateEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscription
-func (c *RDS) CreateEventSubscription(input *CreateEventSubscriptionInput) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) CreateEventSubscriptionRequest {
+	op := &aws.Operation{
+		Name:       opCreateEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateEventSubscriptionWithContext is the same as CreateEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateEventSubscriptionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+	return CreateEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opCreateOptionGroup = "CreateOptionGroup"
 
-// CreateOptionGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateOptionGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateOptionGroupRequest is a API request type for the CreateOptionGroup API operation.
+type CreateOptionGroupRequest struct {
+	*aws.Request
+	Input *CreateOptionGroupInput
+}
+
+// Send marshals and sends the CreateOptionGroup API request.
+func (r *CreateOptionGroupRequest) Send() (*CreateOptionGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateOptionGroupOutput), nil
+}
+
+// CreateOptionGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateOptionGroup for more information on using the CreateOptionGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new option group. You can create up to 20 option groups.
 //
 //    // Example sending a request using the CreateOptionGroupRequest method.
-//    req, resp := client.CreateOptionGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateOptionGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup
-func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) (req *aws.Request, output *CreateOptionGroupOutput) {
+func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateOptionGroup,
 		HTTPMethod: "POST",
@@ -2131,78 +1161,47 @@ func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) (req *aws.
 		input = &CreateOptionGroupInput{}
 	}
 
-	output = &CreateOptionGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateOptionGroup API operation for Amazon Relational Database Service.
-//
-// Creates a new option group. You can create up to 20 option groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation CreateOptionGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOptionGroupAlreadyExistsFault "OptionGroupAlreadyExistsFault"
-//   The option group you are trying to create already exists.
-//
-//   * ErrCodeOptionGroupQuotaExceededFault "OptionGroupQuotaExceededFault"
-//   The quota of 20 option groups was exceeded for this AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup
-func (c *RDS) CreateOptionGroup(input *CreateOptionGroupInput) (*CreateOptionGroupOutput, error) {
-	req, out := c.CreateOptionGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateOptionGroupWithContext is the same as CreateOptionGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateOptionGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) CreateOptionGroupWithContext(ctx aws.Context, input *CreateOptionGroupInput, opts ...aws.Option) (*CreateOptionGroupOutput, error) {
-	req, out := c.CreateOptionGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateOptionGroupOutput{})
+	return CreateOptionGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteDBCluster = "DeleteDBCluster"
 
-// DeleteDBClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBClusterRequest is a API request type for the DeleteDBCluster API operation.
+type DeleteDBClusterRequest struct {
+	*aws.Request
+	Input *DeleteDBClusterInput
+}
+
+// Send marshals and sends the DeleteDBCluster API request.
+func (r *DeleteDBClusterRequest) Send() (*DeleteDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBClusterOutput), nil
+}
+
+// DeleteDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// The DeleteDBCluster action deletes a previously provisioned DB cluster. When
+// you delete a DB cluster, all automated backups for that DB cluster are deleted
+// and cannot be recovered. Manual DB cluster snapshots of the specified DB
+// cluster are not deleted.
 //
-// See DeleteDBCluster for more information on using the DeleteDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DeleteDBClusterRequest method.
-//    req, resp := client.DeleteDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster
-func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *aws.Request, output *DeleteDBClusterOutput) {
+func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBCluster,
 		HTTPMethod: "POST",
@@ -2213,92 +1212,46 @@ func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) (req *aws.Requ
 		input = &DeleteDBClusterInput{}
 	}
 
-	output = &DeleteDBClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDBCluster API operation for Amazon Relational Database Service.
-//
-// The DeleteDBCluster action deletes a previously provisioned DB cluster. When
-// you delete a DB cluster, all automated backups for that DB cluster are deleted
-// and cannot be recovered. Manual DB cluster snapshots of the specified DB
-// cluster are not deleted.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeDBClusterSnapshotAlreadyExistsFault "DBClusterSnapshotAlreadyExistsFault"
-//   User already has a DB cluster snapshot with the given identifier.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster
-func (c *RDS) DeleteDBCluster(input *DeleteDBClusterInput) (*DeleteDBClusterOutput, error) {
-	req, out := c.DeleteDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBClusterWithContext is the same as DeleteDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBClusterWithContext(ctx aws.Context, input *DeleteDBClusterInput, opts ...aws.Option) (*DeleteDBClusterOutput, error) {
-	req, out := c.DeleteDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDBClusterOutput{})
+	return DeleteDBClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 
-// DeleteDBClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBClusterParameterGroupRequest is a API request type for the DeleteDBClusterParameterGroup API operation.
+type DeleteDBClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *DeleteDBClusterParameterGroupInput
+}
+
+// Send marshals and sends the DeleteDBClusterParameterGroup API request.
+func (r *DeleteDBClusterParameterGroupRequest) Send() (*DeleteDBClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBClusterParameterGroupOutput), nil
+}
+
+// DeleteDBClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specified DB cluster parameter group. The DB cluster parameter
+// group to be deleted cannot be associated with any DB clusters.
 //
-// See DeleteDBClusterParameterGroup for more information on using the DeleteDBClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DeleteDBClusterParameterGroupRequest method.
-//    req, resp := client.DeleteDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroup
-func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) (req *aws.Request, output *DeleteDBClusterParameterGroupOutput) {
+func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBClusterParameterGroup,
 		HTTPMethod: "POST",
@@ -2309,86 +1262,50 @@ func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParamet
 		input = &DeleteDBClusterParameterGroupInput{}
 	}
 
-	output = &DeleteDBClusterParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDBClusterParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDBClusterParameterGroup API operation for Amazon Relational Database Service.
-//
-// Deletes a specified DB cluster parameter group. The DB cluster parameter
-// group to be deleted cannot be associated with any DB clusters.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroup
-func (c *RDS) DeleteDBClusterParameterGroup(input *DeleteDBClusterParameterGroupInput) (*DeleteDBClusterParameterGroupOutput, error) {
-	req, out := c.DeleteDBClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBClusterParameterGroupWithContext is the same as DeleteDBClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBClusterParameterGroupWithContext(ctx aws.Context, input *DeleteDBClusterParameterGroupInput, opts ...aws.Option) (*DeleteDBClusterParameterGroupOutput, error) {
-	req, out := c.DeleteDBClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 
-// DeleteDBClusterSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBClusterSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBClusterSnapshotRequest is a API request type for the DeleteDBClusterSnapshot API operation.
+type DeleteDBClusterSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteDBClusterSnapshotInput
+}
+
+// Send marshals and sends the DeleteDBClusterSnapshot API request.
+func (r *DeleteDBClusterSnapshotRequest) Send() (*DeleteDBClusterSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBClusterSnapshotOutput), nil
+}
+
+// DeleteDBClusterSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
+// operation is terminated.
 //
-// See DeleteDBClusterSnapshot for more information on using the DeleteDBClusterSnapshot
-// API call, and error handling.
+// The DB cluster snapshot must be in the available state to be deleted.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DeleteDBClusterSnapshotRequest method.
-//    req, resp := client.DeleteDBClusterSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBClusterSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot
-func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) (req *aws.Request, output *DeleteDBClusterSnapshotOutput) {
+func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBClusterSnapshot,
 		HTTPMethod: "POST",
@@ -2399,100 +1316,30 @@ func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput
 		input = &DeleteDBClusterSnapshotInput{}
 	}
 
-	output = &DeleteDBClusterSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDBClusterSnapshot API operation for Amazon Relational Database Service.
-//
-// Deletes a DB cluster snapshot. If the snapshot is being copied, the copy
-// operation is terminated.
-//
-// The DB cluster snapshot must be in the available state to be deleted.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBClusterSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot
-func (c *RDS) DeleteDBClusterSnapshot(input *DeleteDBClusterSnapshotInput) (*DeleteDBClusterSnapshotOutput, error) {
-	req, out := c.DeleteDBClusterSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBClusterSnapshotWithContext is the same as DeleteDBClusterSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBClusterSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBClusterSnapshotWithContext(ctx aws.Context, input *DeleteDBClusterSnapshotInput, opts ...aws.Option) (*DeleteDBClusterSnapshotOutput, error) {
-	req, out := c.DeleteDBClusterSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDBClusterSnapshotOutput{})
+	return DeleteDBClusterSnapshotRequest{Request: req, Input: input}
 }
 
 const opDeleteDBInstance = "DeleteDBInstance"
 
-// DeleteDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDBInstance for more information on using the DeleteDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteDBInstanceRequest method.
-//    req, resp := client.DeleteDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance
-func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *aws.Request, output *DeleteDBInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteDBInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteDBInstanceInput{}
-	}
-
-	output = &DeleteDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteDBInstanceRequest is a API request type for the DeleteDBInstance API operation.
+type DeleteDBInstanceRequest struct {
+	*aws.Request
+	Input *DeleteDBInstanceInput
 }
 
-// DeleteDBInstance API operation for Amazon Relational Database Service.
+// Send marshals and sends the DeleteDBInstance API request.
+func (r *DeleteDBInstanceRequest) Send() (*DeleteDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBInstanceOutput), nil
+}
+
+// DeleteDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // The DeleteDBInstance action deletes a previously provisioned DB instance.
 // When you delete a DB instance, all automated backups for that instance are
@@ -2520,78 +1367,62 @@ func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) (req *aws.Re
 // the promotion completes, then call the DeleteDBInstance API action to delete
 // the final instance in the DB cluster.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
-//   DBSnapshotIdentifier is already used by an existing snapshot.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
+//    // Example sending a request using the DeleteDBInstanceRequest method.
+//    req := client.DeleteDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance
-func (c *RDS) DeleteDBInstance(input *DeleteDBInstanceInput) (*DeleteDBInstanceOutput, error) {
-	req, out := c.DeleteDBInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBInstanceRequest {
+	op := &aws.Operation{
+		Name:       opDeleteDBInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteDBInstanceWithContext is the same as DeleteDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBInstanceWithContext(ctx aws.Context, input *DeleteDBInstanceInput, opts ...aws.Option) (*DeleteDBInstanceOutput, error) {
-	req, out := c.DeleteDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteDBInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteDBInstanceOutput{})
+	return DeleteDBInstanceRequest{Request: req, Input: input}
 }
 
 const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 
-// DeleteDBParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBParameterGroupRequest is a API request type for the DeleteDBParameterGroup API operation.
+type DeleteDBParameterGroupRequest struct {
+	*aws.Request
+	Input *DeleteDBParameterGroupInput
+}
+
+// Send marshals and sends the DeleteDBParameterGroup API request.
+func (r *DeleteDBParameterGroupRequest) Send() (*DeleteDBParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBParameterGroupOutput), nil
+}
+
+// DeleteDBParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDBParameterGroup for more information on using the DeleteDBParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted
+// cannot be associated with any DB instances.
 //
 //    // Example sending a request using the DeleteDBParameterGroupRequest method.
-//    req, resp := client.DeleteDBParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroup
-func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) (req *aws.Request, output *DeleteDBParameterGroupOutput) {
+func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBParameterGroup,
 		HTTPMethod: "POST",
@@ -2602,83 +1433,46 @@ func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) 
 		input = &DeleteDBParameterGroupInput{}
 	}
 
-	output = &DeleteDBParameterGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDBParameterGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDBParameterGroup API operation for Amazon Relational Database Service.
-//
-// Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted
-// cannot be associated with any DB instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroup
-func (c *RDS) DeleteDBParameterGroup(input *DeleteDBParameterGroupInput) (*DeleteDBParameterGroupOutput, error) {
-	req, out := c.DeleteDBParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBParameterGroupWithContext is the same as DeleteDBParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBParameterGroupWithContext(ctx aws.Context, input *DeleteDBParameterGroupInput, opts ...aws.Option) (*DeleteDBParameterGroupOutput, error) {
-	req, out := c.DeleteDBParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDBParameterGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 
-// DeleteDBSecurityGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBSecurityGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBSecurityGroupRequest is a API request type for the DeleteDBSecurityGroup API operation.
+type DeleteDBSecurityGroupRequest struct {
+	*aws.Request
+	Input *DeleteDBSecurityGroupInput
+}
+
+// Send marshals and sends the DeleteDBSecurityGroup API request.
+func (r *DeleteDBSecurityGroupRequest) Send() (*DeleteDBSecurityGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBSecurityGroupOutput), nil
+}
+
+// DeleteDBSecurityGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a DB security group.
 //
-// See DeleteDBSecurityGroup for more information on using the DeleteDBSecurityGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The specified DB security group must not be associated with any DB instances.
 //
 //    // Example sending a request using the DeleteDBSecurityGroupRequest method.
-//    req, resp := client.DeleteDBSecurityGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBSecurityGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroup
-func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) (req *aws.Request, output *DeleteDBSecurityGroupOutput) {
+func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBSecurityGroup,
 		HTTPMethod: "POST",
@@ -2689,82 +1483,47 @@ func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) (r
 		input = &DeleteDBSecurityGroupInput{}
 	}
 
-	output = &DeleteDBSecurityGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDBSecurityGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDBSecurityGroup API operation for Amazon Relational Database Service.
-//
-// Deletes a DB security group.
-//
-// The specified DB security group must not be associated with any DB instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBSecurityGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group does not allow deletion.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroup
-func (c *RDS) DeleteDBSecurityGroup(input *DeleteDBSecurityGroupInput) (*DeleteDBSecurityGroupOutput, error) {
-	req, out := c.DeleteDBSecurityGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBSecurityGroupWithContext is the same as DeleteDBSecurityGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBSecurityGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBSecurityGroupWithContext(ctx aws.Context, input *DeleteDBSecurityGroupInput, opts ...aws.Option) (*DeleteDBSecurityGroupOutput, error) {
-	req, out := c.DeleteDBSecurityGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDBSecurityGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteDBSnapshot = "DeleteDBSnapshot"
 
-// DeleteDBSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBSnapshotRequest is a API request type for the DeleteDBSnapshot API operation.
+type DeleteDBSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteDBSnapshotInput
+}
+
+// Send marshals and sends the DeleteDBSnapshot API request.
+func (r *DeleteDBSnapshotRequest) Send() (*DeleteDBSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBSnapshotOutput), nil
+}
+
+// DeleteDBSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a DBSnapshot. If the snapshot is being copied, the copy operation
+// is terminated.
 //
-// See DeleteDBSnapshot for more information on using the DeleteDBSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The DBSnapshot must be in the available state to be deleted.
 //
 //    // Example sending a request using the DeleteDBSnapshotRequest method.
-//    req, resp := client.DeleteDBSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot
-func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) (req *aws.Request, output *DeleteDBSnapshotOutput) {
+func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBSnapshot,
 		HTTPMethod: "POST",
@@ -2775,81 +1534,44 @@ func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) (req *aws.Re
 		input = &DeleteDBSnapshotInput{}
 	}
 
-	output = &DeleteDBSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDBSnapshot API operation for Amazon Relational Database Service.
-//
-// Deletes a DBSnapshot. If the snapshot is being copied, the copy operation
-// is terminated.
-//
-// The DBSnapshot must be in the available state to be deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot
-func (c *RDS) DeleteDBSnapshot(input *DeleteDBSnapshotInput) (*DeleteDBSnapshotOutput, error) {
-	req, out := c.DeleteDBSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBSnapshotWithContext is the same as DeleteDBSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBSnapshotWithContext(ctx aws.Context, input *DeleteDBSnapshotInput, opts ...aws.Option) (*DeleteDBSnapshotOutput, error) {
-	req, out := c.DeleteDBSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDBSnapshotOutput{})
+	return DeleteDBSnapshotRequest{Request: req, Input: input}
 }
 
 const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 
-// DeleteDBSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteDBSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDBSubnetGroupRequest is a API request type for the DeleteDBSubnetGroup API operation.
+type DeleteDBSubnetGroupRequest struct {
+	*aws.Request
+	Input *DeleteDBSubnetGroupInput
+}
+
+// Send marshals and sends the DeleteDBSubnetGroup API request.
+func (r *DeleteDBSubnetGroupRequest) Send() (*DeleteDBSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDBSubnetGroupOutput), nil
+}
+
+// DeleteDBSubnetGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a DB subnet group.
 //
-// See DeleteDBSubnetGroup for more information on using the DeleteDBSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The specified database subnet group must not be associated with any DB instances.
 //
 //    // Example sending a request using the DeleteDBSubnetGroupRequest method.
-//    req, resp := client.DeleteDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDBSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroup
-func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req *aws.Request, output *DeleteDBSubnetGroupOutput) {
+func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) DeleteDBSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDBSubnetGroup,
 		HTTPMethod: "POST",
@@ -2860,85 +1582,44 @@ func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) (req *
 		input = &DeleteDBSubnetGroupInput{}
 	}
 
-	output = &DeleteDBSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDBSubnetGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDBSubnetGroup API operation for Amazon Relational Database Service.
-//
-// Deletes a DB subnet group.
-//
-// The specified database subnet group must not be associated with any DB instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteDBSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidDBSubnetStateFault "InvalidDBSubnetStateFault"
-//   The DB subnet is not in the available state.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroup
-func (c *RDS) DeleteDBSubnetGroup(input *DeleteDBSubnetGroupInput) (*DeleteDBSubnetGroupOutput, error) {
-	req, out := c.DeleteDBSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDBSubnetGroupWithContext is the same as DeleteDBSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDBSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteDBSubnetGroupWithContext(ctx aws.Context, input *DeleteDBSubnetGroupInput, opts ...aws.Option) (*DeleteDBSubnetGroupOutput, error) {
-	req, out := c.DeleteDBSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDBSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the DeleteEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEventSubscriptionRequest is a API request type for the DeleteEventSubscription API operation.
+type DeleteEventSubscriptionRequest struct {
+	*aws.Request
+	Input *DeleteEventSubscriptionInput
+}
+
+// Send marshals and sends the DeleteEventSubscription API request.
+func (r *DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEventSubscriptionOutput), nil
+}
+
+// DeleteEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEventSubscription for more information on using the DeleteEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an RDS event notification subscription.
 //
 //    // Example sending a request using the DeleteEventSubscriptionRequest method.
-//    req, resp := client.DeleteEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscription
-func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
@@ -2949,79 +1630,42 @@ func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput
 		input = &DeleteEventSubscriptionInput{}
 	}
 
-	output = &DeleteEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEventSubscription API operation for Amazon Relational Database Service.
-//
-// Deletes an RDS event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   The subscription name does not exist.
-//
-//   * ErrCodeInvalidEventSubscriptionStateFault "InvalidEventSubscriptionState"
-//   This error can occur if someone else is modifying a subscription. You should
-//   retry the action.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscription
-func (c *RDS) DeleteEventSubscription(input *DeleteEventSubscriptionInput) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEventSubscriptionWithContext is the same as DeleteEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
+	return DeleteEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opDeleteOptionGroup = "DeleteOptionGroup"
 
-// DeleteOptionGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteOptionGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteOptionGroupRequest is a API request type for the DeleteOptionGroup API operation.
+type DeleteOptionGroupRequest struct {
+	*aws.Request
+	Input *DeleteOptionGroupInput
+}
+
+// Send marshals and sends the DeleteOptionGroup API request.
+func (r *DeleteOptionGroupRequest) Send() (*DeleteOptionGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteOptionGroupOutput), nil
+}
+
+// DeleteOptionGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteOptionGroup for more information on using the DeleteOptionGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an existing option group.
 //
 //    // Example sending a request using the DeleteOptionGroupRequest method.
-//    req, resp := client.DeleteOptionGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteOptionGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroup
-func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) (req *aws.Request, output *DeleteOptionGroupOutput) {
+func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteOptionGroup,
 		HTTPMethod: "POST",
@@ -3032,80 +1676,49 @@ func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) (req *aws.
 		input = &DeleteOptionGroupInput{}
 	}
 
-	output = &DeleteOptionGroupOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteOptionGroupOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteOptionGroup API operation for Amazon Relational Database Service.
-//
-// Deletes an existing option group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DeleteOptionGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeInvalidOptionGroupStateFault "InvalidOptionGroupStateFault"
-//   The option group is not in the available state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroup
-func (c *RDS) DeleteOptionGroup(input *DeleteOptionGroupInput) (*DeleteOptionGroupOutput, error) {
-	req, out := c.DeleteOptionGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteOptionGroupWithContext is the same as DeleteOptionGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteOptionGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DeleteOptionGroupWithContext(ctx aws.Context, input *DeleteOptionGroupInput, opts ...aws.Option) (*DeleteOptionGroupOutput, error) {
-	req, out := c.DeleteOptionGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteOptionGroupRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountAttributesRequest is a API request type for the DescribeAccountAttributes API operation.
+type DescribeAccountAttributesRequest struct {
+	*aws.Request
+	Input *DescribeAccountAttributesInput
+}
+
+// Send marshals and sends the DescribeAccountAttributes API request.
+func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountAttributesOutput), nil
+}
+
+// DescribeAccountAttributesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all of the attributes for a customer account. The attributes include
+// Amazon RDS quotas for the account, such as the number of DB instances allowed.
+// The description for a quota includes the quota name, current usage toward
+// that quota, and the quota's maximum value.
 //
-// See DescribeAccountAttributes for more information on using the DescribeAccountAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This command does not take any parameters.
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
-//    req, resp := client.DescribeAccountAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributes
-func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
@@ -3116,75 +1729,42 @@ func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesI
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	output = &DescribeAccountAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountAttributes API operation for Amazon Relational Database Service.
-//
-// Lists all of the attributes for a customer account. The attributes include
-// Amazon RDS quotas for the account, such as the number of DB instances allowed.
-// The description for a quota includes the quota name, current usage toward
-// that quota, and the quota's maximum value.
-//
-// This command does not take any parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeAccountAttributes for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributes
-func (c *RDS) DescribeAccountAttributes(input *DescribeAccountAttributesInput) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountAttributesWithContext is the same as DescribeAccountAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeCertificates = "DescribeCertificates"
 
-// DescribeCertificatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCertificatesRequest is a API request type for the DescribeCertificates API operation.
+type DescribeCertificatesRequest struct {
+	*aws.Request
+	Input *DescribeCertificatesInput
+}
+
+// Send marshals and sends the DescribeCertificates API request.
+func (r *DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCertificatesOutput), nil
+}
+
+// DescribeCertificatesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCertificates for more information on using the DescribeCertificates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the set of CA certificates provided by Amazon RDS for this AWS account.
 //
 //    // Example sending a request using the DescribeCertificatesRequest method.
-//    req, resp := client.DescribeCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates
-func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *aws.Request, output *DescribeCertificatesOutput) {
+func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) DescribeCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
@@ -3195,75 +1775,47 @@ func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req
 		input = &DescribeCertificatesInput{}
 	}
 
-	output = &DescribeCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCertificates API operation for Amazon Relational Database Service.
-//
-// Lists the set of CA certificates provided by Amazon RDS for this AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeCertificates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCertificateNotFoundFault "CertificateNotFound"
-//   CertificateIdentifier does not refer to an existing certificate.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates
-func (c *RDS) DescribeCertificates(input *DescribeCertificatesInput) (*DescribeCertificatesOutput, error) {
-	req, out := c.DescribeCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCertificatesWithContext is the same as DescribeCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...aws.Option) (*DescribeCertificatesOutput, error) {
-	req, out := c.DescribeCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	return DescribeCertificatesRequest{Request: req, Input: input}
 }
 
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 
-// DescribeDBClusterParameterGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBClusterParameterGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBClusterParameterGroupsRequest is a API request type for the DescribeDBClusterParameterGroups API operation.
+type DescribeDBClusterParameterGroupsRequest struct {
+	*aws.Request
+	Input *DescribeDBClusterParameterGroupsInput
+}
+
+// Send marshals and sends the DescribeDBClusterParameterGroups API request.
+func (r *DescribeDBClusterParameterGroupsRequest) Send() (*DescribeDBClusterParameterGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClusterParameterGroupsOutput), nil
+}
+
+// DescribeDBClusterParameterGroupsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName
+// parameter is specified, the list will contain only the description of the
+// specified DB cluster parameter group.
 //
-// See DescribeDBClusterParameterGroups for more information on using the DescribeDBClusterParameterGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DescribeDBClusterParameterGroupsRequest method.
-//    req, resp := client.DescribeDBClusterParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBClusterParameterGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups
-func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) (req *aws.Request, output *DescribeDBClusterParameterGroupsOutput) {
+func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusterParameterGroups,
 		HTTPMethod: "POST",
@@ -3274,80 +1826,46 @@ func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterPa
 		input = &DescribeDBClusterParameterGroupsInput{}
 	}
 
-	output = &DescribeDBClusterParameterGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBClusterParameterGroups API operation for Amazon Relational Database Service.
-//
-// Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName
-// parameter is specified, the list will contain only the description of the
-// specified DB cluster parameter group.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBClusterParameterGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups
-func (c *RDS) DescribeDBClusterParameterGroups(input *DescribeDBClusterParameterGroupsInput) (*DescribeDBClusterParameterGroupsOutput, error) {
-	req, out := c.DescribeDBClusterParameterGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBClusterParameterGroupsWithContext is the same as DescribeDBClusterParameterGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBClusterParameterGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBClusterParameterGroupsWithContext(ctx aws.Context, input *DescribeDBClusterParameterGroupsInput, opts ...aws.Option) (*DescribeDBClusterParameterGroupsOutput, error) {
-	req, out := c.DescribeDBClusterParameterGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBClusterParameterGroupsOutput{})
+	return DescribeDBClusterParameterGroupsRequest{Request: req, Input: input}
 }
 
 const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 
-// DescribeDBClusterParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBClusterParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBClusterParametersRequest is a API request type for the DescribeDBClusterParameters API operation.
+type DescribeDBClusterParametersRequest struct {
+	*aws.Request
+	Input *DescribeDBClusterParametersInput
+}
+
+// Send marshals and sends the DescribeDBClusterParameters API request.
+func (r *DescribeDBClusterParametersRequest) Send() (*DescribeDBClusterParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClusterParametersOutput), nil
+}
+
+// DescribeDBClusterParametersRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the detailed parameter list for a particular DB cluster parameter
+// group.
 //
-// See DescribeDBClusterParameters for more information on using the DescribeDBClusterParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DescribeDBClusterParametersRequest method.
-//    req, resp := client.DescribeDBClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBClusterParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters
-func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParametersInput) (req *aws.Request, output *DescribeDBClusterParametersOutput) {
+func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParametersInput) DescribeDBClusterParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusterParameters,
 		HTTPMethod: "POST",
@@ -3358,95 +1876,30 @@ func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParamet
 		input = &DescribeDBClusterParametersInput{}
 	}
 
-	output = &DescribeDBClusterParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBClusterParameters API operation for Amazon Relational Database Service.
-//
-// Returns the detailed parameter list for a particular DB cluster parameter
-// group.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBClusterParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters
-func (c *RDS) DescribeDBClusterParameters(input *DescribeDBClusterParametersInput) (*DescribeDBClusterParametersOutput, error) {
-	req, out := c.DescribeDBClusterParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBClusterParametersWithContext is the same as DescribeDBClusterParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBClusterParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBClusterParametersWithContext(ctx aws.Context, input *DescribeDBClusterParametersInput, opts ...aws.Option) (*DescribeDBClusterParametersOutput, error) {
-	req, out := c.DescribeDBClusterParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBClusterParametersOutput{})
+	return DescribeDBClusterParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttributes"
 
-// DescribeDBClusterSnapshotAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBClusterSnapshotAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBClusterSnapshotAttributes for more information on using the DescribeDBClusterSnapshotAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeDBClusterSnapshotAttributesRequest method.
-//    req, resp := client.DescribeDBClusterSnapshotAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributes
-func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) (req *aws.Request, output *DescribeDBClusterSnapshotAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeDBClusterSnapshotAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeDBClusterSnapshotAttributesInput{}
-	}
-
-	output = &DescribeDBClusterSnapshotAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeDBClusterSnapshotAttributesRequest is a API request type for the DescribeDBClusterSnapshotAttributes API operation.
+type DescribeDBClusterSnapshotAttributesRequest struct {
+	*aws.Request
+	Input *DescribeDBClusterSnapshotAttributesInput
 }
 
-// DescribeDBClusterSnapshotAttributes API operation for Amazon Relational Database Service.
+// Send marshals and sends the DescribeDBClusterSnapshotAttributes API request.
+func (r *DescribeDBClusterSnapshotAttributesRequest) Send() (*DescribeDBClusterSnapshotAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClusterSnapshotAttributesOutput), nil
+}
+
+// DescribeDBClusterSnapshotAttributesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Returns a list of DB cluster snapshot attribute names and values for a manual
 // DB cluster snapshot.
@@ -3461,66 +1914,65 @@ func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBCluste
 // cluster snapshot, or to make the manual DB cluster snapshot public or private,
 // use the ModifyDBClusterSnapshotAttribute API action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBClusterSnapshotAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
+//    // Example sending a request using the DescribeDBClusterSnapshotAttributesRequest method.
+//    req := client.DescribeDBClusterSnapshotAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributes
-func (c *RDS) DescribeDBClusterSnapshotAttributes(input *DescribeDBClusterSnapshotAttributesInput) (*DescribeDBClusterSnapshotAttributesOutput, error) {
-	req, out := c.DescribeDBClusterSnapshotAttributesRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeDBClusterSnapshotAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeDBClusterSnapshotAttributesWithContext is the same as DescribeDBClusterSnapshotAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBClusterSnapshotAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBClusterSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotAttributesInput, opts ...aws.Option) (*DescribeDBClusterSnapshotAttributesOutput, error) {
-	req, out := c.DescribeDBClusterSnapshotAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeDBClusterSnapshotAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeDBClusterSnapshotAttributesOutput{})
+	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 
-// DescribeDBClusterSnapshotsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBClusterSnapshots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBClusterSnapshotsRequest is a API request type for the DescribeDBClusterSnapshots API operation.
+type DescribeDBClusterSnapshotsRequest struct {
+	*aws.Request
+	Input *DescribeDBClusterSnapshotsInput
+}
+
+// Send marshals and sends the DescribeDBClusterSnapshots API request.
+func (r *DescribeDBClusterSnapshotsRequest) Send() (*DescribeDBClusterSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClusterSnapshotsOutput), nil
+}
+
+// DescribeDBClusterSnapshotsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about DB cluster snapshots. This API action supports
+// pagination.
 //
-// See DescribeDBClusterSnapshots for more information on using the DescribeDBClusterSnapshots
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DescribeDBClusterSnapshotsRequest method.
-//    req, resp := client.DescribeDBClusterSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBClusterSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots
-func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshotsInput) (req *aws.Request, output *DescribeDBClusterSnapshotsOutput) {
+func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshotsInput) DescribeDBClusterSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusterSnapshots,
 		HTTPMethod: "POST",
@@ -3531,79 +1983,46 @@ func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshot
 		input = &DescribeDBClusterSnapshotsInput{}
 	}
 
-	output = &DescribeDBClusterSnapshotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeDBClusterSnapshotsOutput{})
+	return DescribeDBClusterSnapshotsRequest{Request: req, Input: input}
 }
 
-// DescribeDBClusterSnapshots API operation for Amazon Relational Database Service.
+const opDescribeDBClusters = "DescribeDBClusters"
+
+// DescribeDBClustersRequest is a API request type for the DescribeDBClusters API operation.
+type DescribeDBClustersRequest struct {
+	*aws.Request
+	Input *DescribeDBClustersInput
+}
+
+// Send marshals and sends the DescribeDBClusters API request.
+func (r *DescribeDBClustersRequest) Send() (*DescribeDBClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClustersOutput), nil
+}
+
+// DescribeDBClustersRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Returns information about DB cluster snapshots. This API action supports
+// Returns information about provisioned Aurora DB clusters. This API supports
 // pagination.
 //
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBClusterSnapshots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots
-func (c *RDS) DescribeDBClusterSnapshots(input *DescribeDBClusterSnapshotsInput) (*DescribeDBClusterSnapshotsOutput, error) {
-	req, out := c.DescribeDBClusterSnapshotsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBClusterSnapshotsWithContext is the same as DescribeDBClusterSnapshots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBClusterSnapshots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBClusterSnapshotsWithContext(ctx aws.Context, input *DescribeDBClusterSnapshotsInput, opts ...aws.Option) (*DescribeDBClusterSnapshotsOutput, error) {
-	req, out := c.DescribeDBClusterSnapshotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeDBClusters = "DescribeDBClusters"
-
-// DescribeDBClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBClusters for more information on using the DescribeDBClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the DescribeDBClustersRequest method.
-//    req, resp := client.DescribeDBClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters
-func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *aws.Request, output *DescribeDBClustersOutput) {
+func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) DescribeDBClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBClusters,
 		HTTPMethod: "POST",
@@ -3614,79 +2033,42 @@ func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) (req *aw
 		input = &DescribeDBClustersInput{}
 	}
 
-	output = &DescribeDBClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBClusters API operation for Amazon Relational Database Service.
-//
-// Returns information about provisioned Aurora DB clusters. This API supports
-// pagination.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters
-func (c *RDS) DescribeDBClusters(input *DescribeDBClustersInput) (*DescribeDBClustersOutput, error) {
-	req, out := c.DescribeDBClustersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBClustersWithContext is the same as DescribeDBClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBClustersWithContext(ctx aws.Context, input *DescribeDBClustersInput, opts ...aws.Option) (*DescribeDBClustersOutput, error) {
-	req, out := c.DescribeDBClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBClustersOutput{})
+	return DescribeDBClustersRequest{Request: req, Input: input}
 }
 
 const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 
-// DescribeDBEngineVersionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBEngineVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBEngineVersionsRequest is a API request type for the DescribeDBEngineVersions API operation.
+type DescribeDBEngineVersionsRequest struct {
+	*aws.Request
+	Input *DescribeDBEngineVersionsInput
+}
+
+// Send marshals and sends the DescribeDBEngineVersions API request.
+func (r *DescribeDBEngineVersionsRequest) Send() (*DescribeDBEngineVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBEngineVersionsOutput), nil
+}
+
+// DescribeDBEngineVersionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBEngineVersions for more information on using the DescribeDBEngineVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the available DB engines.
 //
 //    // Example sending a request using the DescribeDBEngineVersionsRequest method.
-//    req, resp := client.DescribeDBEngineVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBEngineVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions
-func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) (req *aws.Request, output *DescribeDBEngineVersionsOutput) {
+func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBEngineVersions,
 		HTTPMethod: "POST",
@@ -3703,41 +2085,8 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 		input = &DescribeDBEngineVersionsInput{}
 	}
 
-	output = &DescribeDBEngineVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBEngineVersions API operation for Amazon Relational Database Service.
-//
-// Returns a list of the available DB engines.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBEngineVersions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions
-func (c *RDS) DescribeDBEngineVersions(input *DescribeDBEngineVersionsInput) (*DescribeDBEngineVersionsOutput, error) {
-	req, out := c.DescribeDBEngineVersionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBEngineVersionsWithContext is the same as DescribeDBEngineVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBEngineVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBEngineVersionsWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, opts ...aws.Option) (*DescribeDBEngineVersionsOutput, error) {
-	req, out := c.DescribeDBEngineVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBEngineVersionsOutput{})
+	return DescribeDBEngineVersionsRequest{Request: req, Input: input}
 }
 
 // DescribeDBEngineVersionsPages iterates over the pages of a DescribeDBEngineVersions operation,
@@ -3776,10 +2125,10 @@ func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBEngineVersionsRequest(inCpy)
+			req := c.DescribeDBEngineVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3792,31 +2141,36 @@ func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeDBInstances = "DescribeDBInstances"
 
-// DescribeDBInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBInstancesRequest is a API request type for the DescribeDBInstances API operation.
+type DescribeDBInstancesRequest struct {
+	*aws.Request
+	Input *DescribeDBInstancesInput
+}
+
+// Send marshals and sends the DescribeDBInstances API request.
+func (r *DescribeDBInstancesRequest) Send() (*DescribeDBInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBInstancesOutput), nil
+}
+
+// DescribeDBInstancesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBInstances for more information on using the DescribeDBInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about provisioned RDS instances. This API supports pagination.
 //
 //    // Example sending a request using the DescribeDBInstancesRequest method.
-//    req, resp := client.DescribeDBInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances
-func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *aws.Request, output *DescribeDBInstancesOutput) {
+func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) DescribeDBInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBInstances,
 		HTTPMethod: "POST",
@@ -3833,46 +2187,8 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) (req *
 		input = &DescribeDBInstancesInput{}
 	}
 
-	output = &DescribeDBInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBInstances API operation for Amazon Relational Database Service.
-//
-// Returns information about provisioned RDS instances. This API supports pagination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances
-func (c *RDS) DescribeDBInstances(input *DescribeDBInstancesInput) (*DescribeDBInstancesOutput, error) {
-	req, out := c.DescribeDBInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBInstancesWithContext is the same as DescribeDBInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBInstancesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.Option) (*DescribeDBInstancesOutput, error) {
-	req, out := c.DescribeDBInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBInstancesOutput{})
+	return DescribeDBInstancesRequest{Request: req, Input: input}
 }
 
 // DescribeDBInstancesPages iterates over the pages of a DescribeDBInstances operation,
@@ -3911,10 +2227,10 @@ func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBInstancesRequest(inCpy)
+			req := c.DescribeDBInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3927,31 +2243,36 @@ func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeDBLogFiles = "DescribeDBLogFiles"
 
-// DescribeDBLogFilesRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBLogFiles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBLogFilesRequest is a API request type for the DescribeDBLogFiles API operation.
+type DescribeDBLogFilesRequest struct {
+	*aws.Request
+	Input *DescribeDBLogFilesInput
+}
+
+// Send marshals and sends the DescribeDBLogFiles API request.
+func (r *DescribeDBLogFilesRequest) Send() (*DescribeDBLogFilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBLogFilesOutput), nil
+}
+
+// DescribeDBLogFilesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBLogFiles for more information on using the DescribeDBLogFiles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of DB log files for the DB instance.
 //
 //    // Example sending a request using the DescribeDBLogFilesRequest method.
-//    req, resp := client.DescribeDBLogFilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBLogFilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFiles
-func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *aws.Request, output *DescribeDBLogFilesOutput) {
+func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) DescribeDBLogFilesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBLogFiles,
 		HTTPMethod: "POST",
@@ -3968,46 +2289,8 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) (req *aw
 		input = &DescribeDBLogFilesInput{}
 	}
 
-	output = &DescribeDBLogFilesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBLogFiles API operation for Amazon Relational Database Service.
-//
-// Returns a list of DB log files for the DB instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBLogFiles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFiles
-func (c *RDS) DescribeDBLogFiles(input *DescribeDBLogFilesInput) (*DescribeDBLogFilesOutput, error) {
-	req, out := c.DescribeDBLogFilesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBLogFilesWithContext is the same as DescribeDBLogFiles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBLogFiles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBLogFilesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, opts ...aws.Option) (*DescribeDBLogFilesOutput, error) {
-	req, out := c.DescribeDBLogFilesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBLogFilesOutput{})
+	return DescribeDBLogFilesRequest{Request: req, Input: input}
 }
 
 // DescribeDBLogFilesPages iterates over the pages of a DescribeDBLogFiles operation,
@@ -4046,10 +2329,10 @@ func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *Describ
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBLogFilesRequest(inCpy)
+			req := c.DescribeDBLogFilesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4062,31 +2345,38 @@ func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *Describ
 
 const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 
-// DescribeDBParameterGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBParameterGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBParameterGroupsRequest is a API request type for the DescribeDBParameterGroups API operation.
+type DescribeDBParameterGroupsRequest struct {
+	*aws.Request
+	Input *DescribeDBParameterGroupsInput
+}
+
+// Send marshals and sends the DescribeDBParameterGroups API request.
+func (r *DescribeDBParameterGroupsRequest) Send() (*DescribeDBParameterGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBParameterGroupsOutput), nil
+}
+
+// DescribeDBParameterGroupsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBParameterGroups for more information on using the DescribeDBParameterGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName
+// is specified, the list will contain only the description of the specified
+// DB parameter group.
 //
 //    // Example sending a request using the DescribeDBParameterGroupsRequest method.
-//    req, resp := client.DescribeDBParameterGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBParameterGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroups
-func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsInput) (req *aws.Request, output *DescribeDBParameterGroupsOutput) {
+func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBParameterGroups,
 		HTTPMethod: "POST",
@@ -4103,48 +2393,8 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 		input = &DescribeDBParameterGroupsInput{}
 	}
 
-	output = &DescribeDBParameterGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBParameterGroups API operation for Amazon Relational Database Service.
-//
-// Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName
-// is specified, the list will contain only the description of the specified
-// DB parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBParameterGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroups
-func (c *RDS) DescribeDBParameterGroups(input *DescribeDBParameterGroupsInput) (*DescribeDBParameterGroupsOutput, error) {
-	req, out := c.DescribeDBParameterGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBParameterGroupsWithContext is the same as DescribeDBParameterGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBParameterGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBParameterGroupsWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, opts ...aws.Option) (*DescribeDBParameterGroupsOutput, error) {
-	req, out := c.DescribeDBParameterGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBParameterGroupsOutput{})
+	return DescribeDBParameterGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeDBParameterGroupsPages iterates over the pages of a DescribeDBParameterGroups operation,
@@ -4183,10 +2433,10 @@ func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBParameterGroupsRequest(inCpy)
+			req := c.DescribeDBParameterGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4199,31 +2449,36 @@ func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *
 
 const opDescribeDBParameters = "DescribeDBParameters"
 
-// DescribeDBParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBParametersRequest is a API request type for the DescribeDBParameters API operation.
+type DescribeDBParametersRequest struct {
+	*aws.Request
+	Input *DescribeDBParametersInput
+}
+
+// Send marshals and sends the DescribeDBParameters API request.
+func (r *DescribeDBParametersRequest) Send() (*DescribeDBParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBParametersOutput), nil
+}
+
+// DescribeDBParametersRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBParameters for more information on using the DescribeDBParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the detailed parameter list for a particular DB parameter group.
 //
 //    // Example sending a request using the DescribeDBParametersRequest method.
-//    req, resp := client.DescribeDBParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameters
-func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req *aws.Request, output *DescribeDBParametersOutput) {
+func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) DescribeDBParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBParameters,
 		HTTPMethod: "POST",
@@ -4240,46 +2495,8 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) (req
 		input = &DescribeDBParametersInput{}
 	}
 
-	output = &DescribeDBParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBParameters API operation for Amazon Relational Database Service.
-//
-// Returns the detailed parameter list for a particular DB parameter group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameters
-func (c *RDS) DescribeDBParameters(input *DescribeDBParametersInput) (*DescribeDBParametersOutput, error) {
-	req, out := c.DescribeDBParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBParametersWithContext is the same as DescribeDBParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBParametersWithContext(ctx aws.Context, input *DescribeDBParametersInput, opts ...aws.Option) (*DescribeDBParametersOutput, error) {
-	req, out := c.DescribeDBParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBParametersOutput{})
+	return DescribeDBParametersRequest{Request: req, Input: input}
 }
 
 // DescribeDBParametersPages iterates over the pages of a DescribeDBParameters operation,
@@ -4318,10 +2535,10 @@ func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBParametersRequest(inCpy)
+			req := c.DescribeDBParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4334,31 +2551,38 @@ func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 
-// DescribeDBSecurityGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBSecurityGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBSecurityGroupsRequest is a API request type for the DescribeDBSecurityGroups API operation.
+type DescribeDBSecurityGroupsRequest struct {
+	*aws.Request
+	Input *DescribeDBSecurityGroupsInput
+}
+
+// Send marshals and sends the DescribeDBSecurityGroups API request.
+func (r *DescribeDBSecurityGroupsRequest) Send() (*DescribeDBSecurityGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBSecurityGroupsOutput), nil
+}
+
+// DescribeDBSecurityGroupsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBSecurityGroups for more information on using the DescribeDBSecurityGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName
+// is specified, the list will contain only the descriptions of the specified
+// DB security group.
 //
 //    // Example sending a request using the DescribeDBSecurityGroupsRequest method.
-//    req, resp := client.DescribeDBSecurityGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBSecurityGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroups
-func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInput) (req *aws.Request, output *DescribeDBSecurityGroupsOutput) {
+func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSecurityGroups,
 		HTTPMethod: "POST",
@@ -4375,48 +2599,8 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 		input = &DescribeDBSecurityGroupsInput{}
 	}
 
-	output = &DescribeDBSecurityGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBSecurityGroups API operation for Amazon Relational Database Service.
-//
-// Returns a list of DBSecurityGroup descriptions. If a DBSecurityGroupName
-// is specified, the list will contain only the descriptions of the specified
-// DB security group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBSecurityGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroups
-func (c *RDS) DescribeDBSecurityGroups(input *DescribeDBSecurityGroupsInput) (*DescribeDBSecurityGroupsOutput, error) {
-	req, out := c.DescribeDBSecurityGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBSecurityGroupsWithContext is the same as DescribeDBSecurityGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBSecurityGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSecurityGroupsWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, opts ...aws.Option) (*DescribeDBSecurityGroupsOutput, error) {
-	req, out := c.DescribeDBSecurityGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBSecurityGroupsOutput{})
+	return DescribeDBSecurityGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeDBSecurityGroupsPages iterates over the pages of a DescribeDBSecurityGroups operation,
@@ -4455,10 +2639,10 @@ func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBSecurityGroupsRequest(inCpy)
+			req := c.DescribeDBSecurityGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4471,47 +2655,24 @@ func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 
-// DescribeDBSnapshotAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBSnapshotAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBSnapshotAttributes for more information on using the DescribeDBSnapshotAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeDBSnapshotAttributesRequest method.
-//    req, resp := client.DescribeDBSnapshotAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributes
-func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttributesInput) (req *aws.Request, output *DescribeDBSnapshotAttributesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeDBSnapshotAttributes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeDBSnapshotAttributesInput{}
-	}
-
-	output = &DescribeDBSnapshotAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeDBSnapshotAttributesRequest is a API request type for the DescribeDBSnapshotAttributes API operation.
+type DescribeDBSnapshotAttributesRequest struct {
+	*aws.Request
+	Input *DescribeDBSnapshotAttributesInput
 }
 
-// DescribeDBSnapshotAttributes API operation for Amazon Relational Database Service.
+// Send marshals and sends the DescribeDBSnapshotAttributes API request.
+func (r *DescribeDBSnapshotAttributesRequest) Send() (*DescribeDBSnapshotAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBSnapshotAttributesOutput), nil
+}
+
+// DescribeDBSnapshotAttributesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Returns a list of DB snapshot attribute names and values for a manual DB
 // snapshot.
@@ -4526,66 +2687,61 @@ func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttri
 // snapshot, or to make the manual DB snapshot public or private, use the ModifyDBSnapshotAttribute
 // API action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBSnapshotAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
+//    // Example sending a request using the DescribeDBSnapshotAttributesRequest method.
+//    req := client.DescribeDBSnapshotAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributes
-func (c *RDS) DescribeDBSnapshotAttributes(input *DescribeDBSnapshotAttributesInput) (*DescribeDBSnapshotAttributesOutput, error) {
-	req, out := c.DescribeDBSnapshotAttributesRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeDBSnapshotAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeDBSnapshotAttributesWithContext is the same as DescribeDBSnapshotAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBSnapshotAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotAttributesWithContext(ctx aws.Context, input *DescribeDBSnapshotAttributesInput, opts ...aws.Option) (*DescribeDBSnapshotAttributesOutput, error) {
-	req, out := c.DescribeDBSnapshotAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeDBSnapshotAttributesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeDBSnapshotAttributesOutput{})
+	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeDBSnapshots = "DescribeDBSnapshots"
 
-// DescribeDBSnapshotsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBSnapshots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBSnapshotsRequest is a API request type for the DescribeDBSnapshots API operation.
+type DescribeDBSnapshotsRequest struct {
+	*aws.Request
+	Input *DescribeDBSnapshotsInput
+}
+
+// Send marshals and sends the DescribeDBSnapshots API request.
+func (r *DescribeDBSnapshotsRequest) Send() (*DescribeDBSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBSnapshotsOutput), nil
+}
+
+// DescribeDBSnapshotsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDBSnapshots for more information on using the DescribeDBSnapshots
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about DB snapshots. This API action supports pagination.
 //
 //    // Example sending a request using the DescribeDBSnapshotsRequest method.
-//    req, resp := client.DescribeDBSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots
-func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *aws.Request, output *DescribeDBSnapshotsOutput) {
+func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) DescribeDBSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSnapshots,
 		HTTPMethod: "POST",
@@ -4602,46 +2758,8 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) (req *
 		input = &DescribeDBSnapshotsInput{}
 	}
 
-	output = &DescribeDBSnapshotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBSnapshots API operation for Amazon Relational Database Service.
-//
-// Returns information about DB snapshots. This API action supports pagination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBSnapshots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots
-func (c *RDS) DescribeDBSnapshots(input *DescribeDBSnapshotsInput) (*DescribeDBSnapshotsOutput, error) {
-	req, out := c.DescribeDBSnapshotsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBSnapshotsWithContext is the same as DescribeDBSnapshots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBSnapshots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotsWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, opts ...aws.Option) (*DescribeDBSnapshotsOutput, error) {
-	req, out := c.DescribeDBSnapshotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBSnapshotsOutput{})
+	return DescribeDBSnapshotsRequest{Request: req, Input: input}
 }
 
 // DescribeDBSnapshotsPages iterates over the pages of a DescribeDBSnapshots operation,
@@ -4680,10 +2798,10 @@ func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *Descri
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBSnapshotsRequest(inCpy)
+			req := c.DescribeDBSnapshotsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4696,31 +2814,39 @@ func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 
-// DescribeDBSubnetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDBSubnetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDBSubnetGroupsRequest is a API request type for the DescribeDBSubnetGroups API operation.
+type DescribeDBSubnetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeDBSubnetGroupsInput
+}
+
+// Send marshals and sends the DescribeDBSubnetGroups API request.
+func (r *DescribeDBSubnetGroupsRequest) Send() (*DescribeDBSubnetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBSubnetGroupsOutput), nil
+}
+
+// DescribeDBSubnetGroupsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified,
+// the list will contain only the descriptions of the specified DBSubnetGroup.
 //
-// See DescribeDBSubnetGroups for more information on using the DescribeDBSubnetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview of CIDR ranges, go to the Wikipedia Tutorial (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
 //
 //    // Example sending a request using the DescribeDBSubnetGroupsRequest method.
-//    req, resp := client.DescribeDBSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDBSubnetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups
-func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) (req *aws.Request, output *DescribeDBSubnetGroupsOutput) {
+func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDBSubnetGroups,
 		HTTPMethod: "POST",
@@ -4737,49 +2863,8 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 		input = &DescribeDBSubnetGroupsInput{}
 	}
 
-	output = &DescribeDBSubnetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDBSubnetGroups API operation for Amazon Relational Database Service.
-//
-// Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified,
-// the list will contain only the descriptions of the specified DBSubnetGroup.
-//
-// For an overview of CIDR ranges, go to the Wikipedia Tutorial (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeDBSubnetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups
-func (c *RDS) DescribeDBSubnetGroups(input *DescribeDBSubnetGroupsInput) (*DescribeDBSubnetGroupsOutput, error) {
-	req, out := c.DescribeDBSubnetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDBSubnetGroupsWithContext is the same as DescribeDBSubnetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDBSubnetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSubnetGroupsWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, opts ...aws.Option) (*DescribeDBSubnetGroupsOutput, error) {
-	req, out := c.DescribeDBSubnetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDBSubnetGroupsOutput{})
+	return DescribeDBSubnetGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeDBSubnetGroupsPages iterates over the pages of a DescribeDBSubnetGroups operation,
@@ -4818,10 +2903,10 @@ func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *Des
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeDBSubnetGroupsRequest(inCpy)
+			req := c.DescribeDBSubnetGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4834,31 +2919,40 @@ func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterParameters"
 
-// DescribeEngineDefaultClusterParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeEngineDefaultClusterParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEngineDefaultClusterParametersRequest is a API request type for the DescribeEngineDefaultClusterParameters API operation.
+type DescribeEngineDefaultClusterParametersRequest struct {
+	*aws.Request
+	Input *DescribeEngineDefaultClusterParametersInput
+}
+
+// Send marshals and sends the DescribeEngineDefaultClusterParameters API request.
+func (r *DescribeEngineDefaultClusterParametersRequest) Send() (*DescribeEngineDefaultClusterParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEngineDefaultClusterParametersOutput), nil
+}
+
+// DescribeEngineDefaultClusterParametersRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the default engine and system parameter information for the cluster
+// database engine.
 //
-// See DescribeEngineDefaultClusterParameters for more information on using the DescribeEngineDefaultClusterParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DescribeEngineDefaultClusterParametersRequest method.
-//    req, resp := client.DescribeEngineDefaultClusterParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEngineDefaultClusterParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParameters
-func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngineDefaultClusterParametersInput) (req *aws.Request, output *DescribeEngineDefaultClusterParametersOutput) {
+func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngineDefaultClusterParametersInput) DescribeEngineDefaultClusterParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultClusterParameters,
 		HTTPMethod: "POST",
@@ -4869,74 +2963,43 @@ func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngin
 		input = &DescribeEngineDefaultClusterParametersInput{}
 	}
 
-	output = &DescribeEngineDefaultClusterParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEngineDefaultClusterParameters API operation for Amazon Relational Database Service.
-//
-// Returns the default engine and system parameter information for the cluster
-// database engine.
-//
-// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeEngineDefaultClusterParameters for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParameters
-func (c *RDS) DescribeEngineDefaultClusterParameters(input *DescribeEngineDefaultClusterParametersInput) (*DescribeEngineDefaultClusterParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultClusterParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEngineDefaultClusterParametersWithContext is the same as DescribeEngineDefaultClusterParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEngineDefaultClusterParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultClusterParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultClusterParametersInput, opts ...aws.Option) (*DescribeEngineDefaultClusterParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultClusterParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEngineDefaultClusterParametersOutput{})
+	return DescribeEngineDefaultClusterParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 
-// DescribeEngineDefaultParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeEngineDefaultParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEngineDefaultParametersRequest is a API request type for the DescribeEngineDefaultParameters API operation.
+type DescribeEngineDefaultParametersRequest struct {
+	*aws.Request
+	Input *DescribeEngineDefaultParametersInput
+}
+
+// Send marshals and sends the DescribeEngineDefaultParameters API request.
+func (r *DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEngineDefaultParametersOutput), nil
+}
+
+// DescribeEngineDefaultParametersRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEngineDefaultParameters for more information on using the DescribeEngineDefaultParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the default engine and system parameter information for the specified
+// database engine.
 //
 //    // Example sending a request using the DescribeEngineDefaultParametersRequest method.
-//    req, resp := client.DescribeEngineDefaultParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEngineDefaultParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParameters
-func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *aws.Request, output *DescribeEngineDefaultParametersOutput) {
+func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultParameters,
 		HTTPMethod: "POST",
@@ -4953,42 +3016,8 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 		input = &DescribeEngineDefaultParametersInput{}
 	}
 
-	output = &DescribeEngineDefaultParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEngineDefaultParameters API operation for Amazon Relational Database Service.
-//
-// Returns the default engine and system parameter information for the specified
-// database engine.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeEngineDefaultParameters for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParameters
-func (c *RDS) DescribeEngineDefaultParameters(input *DescribeEngineDefaultParametersInput) (*DescribeEngineDefaultParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEngineDefaultParametersWithContext is the same as DescribeEngineDefaultParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEngineDefaultParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...aws.Option) (*DescribeEngineDefaultParametersOutput, error) {
-	req, out := c.DescribeEngineDefaultParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEngineDefaultParametersOutput{})
+	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
 }
 
 // DescribeEngineDefaultParametersPages iterates over the pages of a DescribeEngineDefaultParameters operation,
@@ -5027,10 +3056,10 @@ func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEngineDefaultParametersRequest(inCpy)
+			req := c.DescribeEngineDefaultParametersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5043,31 +3072,39 @@ func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, i
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventCategories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventCategoriesRequest is a API request type for the DescribeEventCategories API operation.
+type DescribeEventCategoriesRequest struct {
+	*aws.Request
+	Input *DescribeEventCategoriesInput
+}
+
+// Send marshals and sends the DescribeEventCategories API request.
+func (r *DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventCategoriesOutput), nil
+}
+
+// DescribeEventCategoriesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventCategories for more information on using the DescribeEventCategories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Displays a list of categories for all event source types, or, if specified,
+// for a specified source type. You can see a list of the event categories and
+// source types in the  Events (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
+// topic in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
-//    req, resp := client.DescribeEventCategoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventCategoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories
-func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
@@ -5078,73 +3115,46 @@ func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput
 		input = &DescribeEventCategoriesInput{}
 	}
 
-	output = &DescribeEventCategoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventCategories API operation for Amazon Relational Database Service.
-//
-// Displays a list of categories for all event source types, or, if specified,
-// for a specified source type. You can see a list of the event categories and
-// source types in the  Events (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html)
-// topic in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeEventCategories for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories
-func (c *RDS) DescribeEventCategories(input *DescribeEventCategoriesInput) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventCategoriesWithContext is the same as DescribeEventCategories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventCategories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	return DescribeEventCategoriesRequest{Request: req, Input: input}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventSubscriptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventSubscriptionsRequest is a API request type for the DescribeEventSubscriptions API operation.
+type DescribeEventSubscriptionsRequest struct {
+	*aws.Request
+	Input *DescribeEventSubscriptionsInput
+}
+
+// Send marshals and sends the DescribeEventSubscriptions API request.
+func (r *DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventSubscriptionsOutput), nil
+}
+
+// DescribeEventSubscriptionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all the subscription descriptions for a customer account. The description
+// for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
+// SourceID, CreationTime, and Status.
 //
-// See DescribeEventSubscriptions for more information on using the DescribeEventSubscriptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you specify a SubscriptionName, lists the description for that subscription.
 //
 //    // Example sending a request using the DescribeEventSubscriptionsRequest method.
-//    req, resp := client.DescribeEventSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventSubscriptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptions
-func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
@@ -5161,50 +3171,8 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 		input = &DescribeEventSubscriptionsInput{}
 	}
 
-	output = &DescribeEventSubscriptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventSubscriptions API operation for Amazon Relational Database Service.
-//
-// Lists all the subscription descriptions for a customer account. The description
-// for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
-// SourceID, CreationTime, and Status.
-//
-// If you specify a SubscriptionName, lists the description for that subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeEventSubscriptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   The subscription name does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptions
-func (c *RDS) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventSubscriptionsWithContext is the same as DescribeEventSubscriptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventSubscriptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
 }
 
 // DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
@@ -5243,10 +3211,10 @@ func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventSubscriptionsRequest(inCpy)
+			req := c.DescribeEventSubscriptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5259,31 +3227,40 @@ func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns events related to DB instances, DB security groups, DB snapshots,
+// and DB parameter groups for the past 14 days. Events specific to a particular
+// DB instance, DB security group, database snapshot, or DB parameter group
+// can be obtained by providing the name as a parameter. By default, the past
+// hour of events are returned.
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEvents
-func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -5300,45 +3277,8 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Reques
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for Amazon Relational Database Service.
-//
-// Returns events related to DB instances, DB security groups, DB snapshots,
-// and DB parameter groups for the past 14 days. Events specific to a particular
-// DB instance, DB security group, database snapshot, or DB parameter group
-// can be obtained by providing the name as a parameter. By default, the past
-// hour of events are returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeEvents for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEvents
-func (c *RDS) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -5377,10 +3317,10 @@ func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEve
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5393,31 +3333,36 @@ func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEve
 
 const opDescribeOptionGroupOptions = "DescribeOptionGroupOptions"
 
-// DescribeOptionGroupOptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeOptionGroupOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeOptionGroupOptionsRequest is a API request type for the DescribeOptionGroupOptions API operation.
+type DescribeOptionGroupOptionsRequest struct {
+	*aws.Request
+	Input *DescribeOptionGroupOptionsInput
+}
+
+// Send marshals and sends the DescribeOptionGroupOptions API request.
+func (r *DescribeOptionGroupOptionsRequest) Send() (*DescribeOptionGroupOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeOptionGroupOptionsOutput), nil
+}
+
+// DescribeOptionGroupOptionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeOptionGroupOptions for more information on using the DescribeOptionGroupOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes all available options.
 //
 //    // Example sending a request using the DescribeOptionGroupOptionsRequest method.
-//    req, resp := client.DescribeOptionGroupOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeOptionGroupOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions
-func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOptionsInput) (req *aws.Request, output *DescribeOptionGroupOptionsOutput) {
+func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOptionsInput) DescribeOptionGroupOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOptionGroupOptions,
 		HTTPMethod: "POST",
@@ -5434,41 +3379,8 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 		input = &DescribeOptionGroupOptionsInput{}
 	}
 
-	output = &DescribeOptionGroupOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeOptionGroupOptions API operation for Amazon Relational Database Service.
-//
-// Describes all available options.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeOptionGroupOptions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions
-func (c *RDS) DescribeOptionGroupOptions(input *DescribeOptionGroupOptionsInput) (*DescribeOptionGroupOptionsOutput, error) {
-	req, out := c.DescribeOptionGroupOptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeOptionGroupOptionsWithContext is the same as DescribeOptionGroupOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeOptionGroupOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupOptionsWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, opts ...aws.Option) (*DescribeOptionGroupOptionsOutput, error) {
-	req, out := c.DescribeOptionGroupOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeOptionGroupOptionsOutput{})
+	return DescribeOptionGroupOptionsRequest{Request: req, Input: input}
 }
 
 // DescribeOptionGroupOptionsPages iterates over the pages of a DescribeOptionGroupOptions operation,
@@ -5507,10 +3419,10 @@ func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeOptionGroupOptionsRequest(inCpy)
+			req := c.DescribeOptionGroupOptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5523,31 +3435,36 @@ func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input 
 
 const opDescribeOptionGroups = "DescribeOptionGroups"
 
-// DescribeOptionGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeOptionGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeOptionGroupsRequest is a API request type for the DescribeOptionGroups API operation.
+type DescribeOptionGroupsRequest struct {
+	*aws.Request
+	Input *DescribeOptionGroupsInput
+}
+
+// Send marshals and sends the DescribeOptionGroups API request.
+func (r *DescribeOptionGroupsRequest) Send() (*DescribeOptionGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeOptionGroupsOutput), nil
+}
+
+// DescribeOptionGroupsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeOptionGroups for more information on using the DescribeOptionGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the available option groups.
 //
 //    // Example sending a request using the DescribeOptionGroupsRequest method.
-//    req, resp := client.DescribeOptionGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeOptionGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups
-func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req *aws.Request, output *DescribeOptionGroupsOutput) {
+func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) DescribeOptionGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOptionGroups,
 		HTTPMethod: "POST",
@@ -5564,46 +3481,8 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) (req
 		input = &DescribeOptionGroupsInput{}
 	}
 
-	output = &DescribeOptionGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeOptionGroups API operation for Amazon Relational Database Service.
-//
-// Describes the available option groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeOptionGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups
-func (c *RDS) DescribeOptionGroups(input *DescribeOptionGroupsInput) (*DescribeOptionGroupsOutput, error) {
-	req, out := c.DescribeOptionGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeOptionGroupsWithContext is the same as DescribeOptionGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeOptionGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupsWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, opts ...aws.Option) (*DescribeOptionGroupsOutput, error) {
-	req, out := c.DescribeOptionGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeOptionGroupsOutput{})
+	return DescribeOptionGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeOptionGroupsPages iterates over the pages of a DescribeOptionGroups operation,
@@ -5642,10 +3521,10 @@ func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *Descr
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeOptionGroupsRequest(inCpy)
+			req := c.DescribeOptionGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5658,31 +3537,36 @@ func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions"
 
-// DescribeOrderableDBInstanceOptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeOrderableDBInstanceOptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeOrderableDBInstanceOptionsRequest is a API request type for the DescribeOrderableDBInstanceOptions API operation.
+type DescribeOrderableDBInstanceOptionsRequest struct {
+	*aws.Request
+	Input *DescribeOrderableDBInstanceOptionsInput
+}
+
+// Send marshals and sends the DescribeOrderableDBInstanceOptions API request.
+func (r *DescribeOrderableDBInstanceOptionsRequest) Send() (*DescribeOrderableDBInstanceOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeOrderableDBInstanceOptionsOutput), nil
+}
+
+// DescribeOrderableDBInstanceOptionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeOrderableDBInstanceOptions for more information on using the DescribeOrderableDBInstanceOptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of orderable DB instance options for the specified engine.
 //
 //    // Example sending a request using the DescribeOrderableDBInstanceOptionsRequest method.
-//    req, resp := client.DescribeOrderableDBInstanceOptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeOrderableDBInstanceOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions
-func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) (req *aws.Request, output *DescribeOrderableDBInstanceOptionsOutput) {
+func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableDBInstanceOptions,
 		HTTPMethod: "POST",
@@ -5699,41 +3583,8 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 		input = &DescribeOrderableDBInstanceOptionsInput{}
 	}
 
-	output = &DescribeOrderableDBInstanceOptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeOrderableDBInstanceOptions API operation for Amazon Relational Database Service.
-//
-// Returns a list of orderable DB instance options for the specified engine.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeOrderableDBInstanceOptions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions
-func (c *RDS) DescribeOrderableDBInstanceOptions(input *DescribeOrderableDBInstanceOptionsInput) (*DescribeOrderableDBInstanceOptionsOutput, error) {
-	req, out := c.DescribeOrderableDBInstanceOptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeOrderableDBInstanceOptionsWithContext is the same as DescribeOrderableDBInstanceOptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeOrderableDBInstanceOptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOrderableDBInstanceOptionsWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, opts ...aws.Option) (*DescribeOrderableDBInstanceOptionsOutput, error) {
-	req, out := c.DescribeOrderableDBInstanceOptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeOrderableDBInstanceOptionsOutput{})
+	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input}
 }
 
 // DescribeOrderableDBInstanceOptionsPages iterates over the pages of a DescribeOrderableDBInstanceOptions operation,
@@ -5772,10 +3623,10 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeOrderableDBInstanceOptionsRequest(inCpy)
+			req := c.DescribeOrderableDBInstanceOptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5788,31 +3639,37 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context
 
 const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 
-// DescribePendingMaintenanceActionsRequest generates a "aws.Request" representing the
-// client's request for the DescribePendingMaintenanceActions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePendingMaintenanceActionsRequest is a API request type for the DescribePendingMaintenanceActions API operation.
+type DescribePendingMaintenanceActionsRequest struct {
+	*aws.Request
+	Input *DescribePendingMaintenanceActionsInput
+}
+
+// Send marshals and sends the DescribePendingMaintenanceActions API request.
+func (r *DescribePendingMaintenanceActionsRequest) Send() (*DescribePendingMaintenanceActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePendingMaintenanceActionsOutput), nil
+}
+
+// DescribePendingMaintenanceActionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribePendingMaintenanceActions for more information on using the DescribePendingMaintenanceActions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of resources (for example, DB instances) that have at least
+// one pending maintenance action.
 //
 //    // Example sending a request using the DescribePendingMaintenanceActionsRequest method.
-//    req, resp := client.DescribePendingMaintenanceActionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePendingMaintenanceActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActions
-func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) (req *aws.Request, output *DescribePendingMaintenanceActionsOutput) {
+func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePendingMaintenanceActions,
 		HTTPMethod: "POST",
@@ -5823,76 +3680,43 @@ func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMai
 		input = &DescribePendingMaintenanceActionsInput{}
 	}
 
-	output = &DescribePendingMaintenanceActionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePendingMaintenanceActions API operation for Amazon Relational Database Service.
-//
-// Returns a list of resources (for example, DB instances) that have at least
-// one pending maintenance action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribePendingMaintenanceActions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The specified resource ID was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActions
-func (c *RDS) DescribePendingMaintenanceActions(input *DescribePendingMaintenanceActionsInput) (*DescribePendingMaintenanceActionsOutput, error) {
-	req, out := c.DescribePendingMaintenanceActionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribePendingMaintenanceActionsWithContext is the same as DescribePendingMaintenanceActions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePendingMaintenanceActions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribePendingMaintenanceActionsWithContext(ctx aws.Context, input *DescribePendingMaintenanceActionsInput, opts ...aws.Option) (*DescribePendingMaintenanceActionsOutput, error) {
-	req, out := c.DescribePendingMaintenanceActionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePendingMaintenanceActionsOutput{})
+	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input}
 }
 
 const opDescribeReservedDBInstances = "DescribeReservedDBInstances"
 
-// DescribeReservedDBInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedDBInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedDBInstancesRequest is a API request type for the DescribeReservedDBInstances API operation.
+type DescribeReservedDBInstancesRequest struct {
+	*aws.Request
+	Input *DescribeReservedDBInstancesInput
+}
+
+// Send marshals and sends the DescribeReservedDBInstances API request.
+func (r *DescribeReservedDBInstancesRequest) Send() (*DescribeReservedDBInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedDBInstancesOutput), nil
+}
+
+// DescribeReservedDBInstancesRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReservedDBInstances for more information on using the DescribeReservedDBInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about reserved DB instances for this account, or about
+// a specified reserved DB instance.
 //
 //    // Example sending a request using the DescribeReservedDBInstancesRequest method.
-//    req, resp := client.DescribeReservedDBInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedDBInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstances
-func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstancesInput) (req *aws.Request, output *DescribeReservedDBInstancesOutput) {
+func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstancesInput) DescribeReservedDBInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedDBInstances,
 		HTTPMethod: "POST",
@@ -5909,47 +3733,8 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 		input = &DescribeReservedDBInstancesInput{}
 	}
 
-	output = &DescribeReservedDBInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedDBInstances API operation for Amazon Relational Database Service.
-//
-// Returns information about reserved DB instances for this account, or about
-// a specified reserved DB instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeReservedDBInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedDBInstanceNotFoundFault "ReservedDBInstanceNotFound"
-//   The specified reserved DB Instance not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstances
-func (c *RDS) DescribeReservedDBInstances(input *DescribeReservedDBInstancesInput) (*DescribeReservedDBInstancesOutput, error) {
-	req, out := c.DescribeReservedDBInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedDBInstancesWithContext is the same as DescribeReservedDBInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedDBInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, opts ...aws.Option) (*DescribeReservedDBInstancesOutput, error) {
-	req, out := c.DescribeReservedDBInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedDBInstancesOutput{})
+	return DescribeReservedDBInstancesRequest{Request: req, Input: input}
 }
 
 // DescribeReservedDBInstancesPages iterates over the pages of a DescribeReservedDBInstances operation,
@@ -5988,10 +3773,10 @@ func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedDBInstancesRequest(inCpy)
+			req := c.DescribeReservedDBInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6004,31 +3789,36 @@ func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input
 
 const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOfferings"
 
-// DescribeReservedDBInstancesOfferingsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReservedDBInstancesOfferings operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReservedDBInstancesOfferingsRequest is a API request type for the DescribeReservedDBInstancesOfferings API operation.
+type DescribeReservedDBInstancesOfferingsRequest struct {
+	*aws.Request
+	Input *DescribeReservedDBInstancesOfferingsInput
+}
+
+// Send marshals and sends the DescribeReservedDBInstancesOfferings API request.
+func (r *DescribeReservedDBInstancesOfferingsRequest) Send() (*DescribeReservedDBInstancesOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedDBInstancesOfferingsOutput), nil
+}
+
+// DescribeReservedDBInstancesOfferingsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReservedDBInstancesOfferings for more information on using the DescribeReservedDBInstancesOfferings
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists available reserved DB instance offerings.
 //
 //    // Example sending a request using the DescribeReservedDBInstancesOfferingsRequest method.
-//    req, resp := client.DescribeReservedDBInstancesOfferingsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReservedDBInstancesOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferings
-func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReservedDBInstancesOfferingsInput) (req *aws.Request, output *DescribeReservedDBInstancesOfferingsOutput) {
+func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReservedDBInstancesOfferings,
 		HTTPMethod: "POST",
@@ -6045,46 +3835,8 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 		input = &DescribeReservedDBInstancesOfferingsInput{}
 	}
 
-	output = &DescribeReservedDBInstancesOfferingsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReservedDBInstancesOfferings API operation for Amazon Relational Database Service.
-//
-// Lists available reserved DB instance offerings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeReservedDBInstancesOfferings for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedDBInstancesOfferingNotFoundFault "ReservedDBInstancesOfferingNotFound"
-//   Specified offering does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferings
-func (c *RDS) DescribeReservedDBInstancesOfferings(input *DescribeReservedDBInstancesOfferingsInput) (*DescribeReservedDBInstancesOfferingsOutput, error) {
-	req, out := c.DescribeReservedDBInstancesOfferingsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReservedDBInstancesOfferingsWithContext is the same as DescribeReservedDBInstancesOfferings with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReservedDBInstancesOfferings for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesOfferingsWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, opts ...aws.Option) (*DescribeReservedDBInstancesOfferingsOutput, error) {
-	req, out := c.DescribeReservedDBInstancesOfferingsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReservedDBInstancesOfferingsOutput{})
+	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input}
 }
 
 // DescribeReservedDBInstancesOfferingsPages iterates over the pages of a DescribeReservedDBInstancesOfferings operation,
@@ -6123,10 +3875,10 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReservedDBInstancesOfferingsRequest(inCpy)
+			req := c.DescribeReservedDBInstancesOfferingsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6139,31 +3891,38 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Conte
 
 const opDescribeSourceRegions = "DescribeSourceRegions"
 
-// DescribeSourceRegionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeSourceRegions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSourceRegionsRequest is a API request type for the DescribeSourceRegions API operation.
+type DescribeSourceRegionsRequest struct {
+	*aws.Request
+	Input *DescribeSourceRegionsInput
+}
+
+// Send marshals and sends the DescribeSourceRegions API request.
+func (r *DescribeSourceRegionsRequest) Send() (*DescribeSourceRegionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSourceRegionsOutput), nil
+}
+
+// DescribeSourceRegionsRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSourceRegions for more information on using the DescribeSourceRegions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of the source AWS regions where the current AWS Region can
+// create a Read Replica or copy a DB snapshot from. This API action supports
+// pagination.
 //
 //    // Example sending a request using the DescribeSourceRegionsRequest method.
-//    req, resp := client.DescribeSourceRegionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSourceRegionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegions
-func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) (req *aws.Request, output *DescribeSourceRegionsOutput) {
+func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) DescribeSourceRegionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSourceRegions,
 		HTTPMethod: "POST",
@@ -6174,72 +3933,42 @@ func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) (r
 		input = &DescribeSourceRegionsInput{}
 	}
 
-	output = &DescribeSourceRegionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSourceRegions API operation for Amazon Relational Database Service.
-//
-// Returns a list of the source AWS regions where the current AWS Region can
-// create a Read Replica or copy a DB snapshot from. This API action supports
-// pagination.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DescribeSourceRegions for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegions
-func (c *RDS) DescribeSourceRegions(input *DescribeSourceRegionsInput) (*DescribeSourceRegionsOutput, error) {
-	req, out := c.DescribeSourceRegionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSourceRegionsWithContext is the same as DescribeSourceRegions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSourceRegions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeSourceRegionsWithContext(ctx aws.Context, input *DescribeSourceRegionsInput, opts ...aws.Option) (*DescribeSourceRegionsOutput, error) {
-	req, out := c.DescribeSourceRegionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSourceRegionsOutput{})
+	return DescribeSourceRegionsRequest{Request: req, Input: input}
 }
 
 const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 
-// DownloadDBLogFilePortionRequest generates a "aws.Request" representing the
-// client's request for the DownloadDBLogFilePortion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DownloadDBLogFilePortionRequest is a API request type for the DownloadDBLogFilePortion API operation.
+type DownloadDBLogFilePortionRequest struct {
+	*aws.Request
+	Input *DownloadDBLogFilePortionInput
+}
+
+// Send marshals and sends the DownloadDBLogFilePortion API request.
+func (r *DownloadDBLogFilePortionRequest) Send() (*DownloadDBLogFilePortionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DownloadDBLogFilePortionOutput), nil
+}
+
+// DownloadDBLogFilePortionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DownloadDBLogFilePortion for more information on using the DownloadDBLogFilePortion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Downloads all or a portion of the specified log file, up to 1 MB in size.
 //
 //    // Example sending a request using the DownloadDBLogFilePortionRequest method.
-//    req, resp := client.DownloadDBLogFilePortionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DownloadDBLogFilePortionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortion
-func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInput) (req *aws.Request, output *DownloadDBLogFilePortionOutput) {
+func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest {
 	op := &aws.Operation{
 		Name:       opDownloadDBLogFilePortion,
 		HTTPMethod: "POST",
@@ -6256,49 +3985,8 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 		input = &DownloadDBLogFilePortionInput{}
 	}
 
-	output = &DownloadDBLogFilePortionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DownloadDBLogFilePortion API operation for Amazon Relational Database Service.
-//
-// Downloads all or a portion of the specified log file, up to 1 MB in size.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation DownloadDBLogFilePortion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBLogFileNotFoundFault "DBLogFileNotFoundFault"
-//   LogFileName does not refer to an existing DB log file.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortion
-func (c *RDS) DownloadDBLogFilePortion(input *DownloadDBLogFilePortionInput) (*DownloadDBLogFilePortionOutput, error) {
-	req, out := c.DownloadDBLogFilePortionRequest(input)
-	return out, req.Send()
-}
-
-// DownloadDBLogFilePortionWithContext is the same as DownloadDBLogFilePortion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DownloadDBLogFilePortion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DownloadDBLogFilePortionWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, opts ...aws.Option) (*DownloadDBLogFilePortionOutput, error) {
-	req, out := c.DownloadDBLogFilePortionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DownloadDBLogFilePortionOutput{})
+	return DownloadDBLogFilePortionRequest{Request: req, Input: input}
 }
 
 // DownloadDBLogFilePortionPages iterates over the pages of a DownloadDBLogFilePortion operation,
@@ -6337,10 +4025,10 @@ func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DownloadDBLogFilePortionRequest(inCpy)
+			req := c.DownloadDBLogFilePortionRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6353,47 +4041,24 @@ func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *D
 
 const opFailoverDBCluster = "FailoverDBCluster"
 
-// FailoverDBClusterRequest generates a "aws.Request" representing the
-// client's request for the FailoverDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See FailoverDBCluster for more information on using the FailoverDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the FailoverDBClusterRequest method.
-//    req, resp := client.FailoverDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster
-func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *aws.Request, output *FailoverDBClusterOutput) {
-	op := &aws.Operation{
-		Name:       opFailoverDBCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &FailoverDBClusterInput{}
-	}
-
-	output = &FailoverDBClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// FailoverDBClusterRequest is a API request type for the FailoverDBCluster API operation.
+type FailoverDBClusterRequest struct {
+	*aws.Request
+	Input *FailoverDBClusterInput
 }
 
-// FailoverDBCluster API operation for Amazon Relational Database Service.
+// Send marshals and sends the FailoverDBCluster API request.
+func (r *FailoverDBClusterRequest) Send() (*FailoverDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*FailoverDBClusterOutput), nil
+}
+
+// FailoverDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Forces a failover for a DB cluster.
 //
@@ -6410,72 +4075,64 @@ func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) (req *aws.
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation FailoverDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
+//    // Example sending a request using the FailoverDBClusterRequest method.
+//    req := client.FailoverDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster
-func (c *RDS) FailoverDBCluster(input *FailoverDBClusterInput) (*FailoverDBClusterOutput, error) {
-	req, out := c.FailoverDBClusterRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) FailoverDBClusterRequest {
+	op := &aws.Operation{
+		Name:       opFailoverDBCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// FailoverDBClusterWithContext is the same as FailoverDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See FailoverDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) FailoverDBClusterWithContext(ctx aws.Context, input *FailoverDBClusterInput, opts ...aws.Option) (*FailoverDBClusterOutput, error) {
-	req, out := c.FailoverDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &FailoverDBClusterInput{}
+	}
+
+	req := c.newRequest(op, input, &FailoverDBClusterOutput{})
+	return FailoverDBClusterRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all tags on an Amazon RDS resource.
 //
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS
+// Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResource
-func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -6486,84 +4143,46 @@ func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for Amazon Relational Database Service.
-//
-// Lists all tags on an Amazon RDS resource.
-//
-// For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS
-// Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResource
-func (c *RDS) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opModifyDBCluster = "ModifyDBCluster"
 
-// ModifyDBClusterRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyDBClusterRequest is a API request type for the ModifyDBCluster API operation.
+type ModifyDBClusterRequest struct {
+	*aws.Request
+	Input *ModifyDBClusterInput
+}
+
+// Send marshals and sends the ModifyDBCluster API request.
+func (r *ModifyDBClusterRequest) Send() (*ModifyDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBClusterOutput), nil
+}
+
+// ModifyDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBCluster for more information on using the ModifyDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modify a setting for an Amazon Aurora DB cluster. You can change one or more
+// database configuration parameters by specifying these parameters and the
+// new values in the request. For more information on Amazon Aurora, see Aurora
+// on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
 //
 //    // Example sending a request using the ModifyDBClusterRequest method.
-//    req, resp := client.ModifyDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster
-func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *aws.Request, output *ModifyDBClusterOutput) {
+func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) ModifyDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBCluster,
 		HTTPMethod: "POST",
@@ -6574,129 +4193,30 @@ func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) (req *aws.Requ
 		input = &ModifyDBClusterInput{}
 	}
 
-	output = &ModifyDBClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyDBCluster API operation for Amazon Relational Database Service.
-//
-// Modify a setting for an Amazon Aurora DB cluster. You can change one or more
-// database configuration parameters by specifying these parameters and the
-// new values in the request. For more information on Amazon Aurora, see Aurora
-// on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
-// in the Amazon RDS User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
-//   DBClusterParameterGroupName does not refer to an existing DB Cluster parameter
-//   group.
-//
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group does not allow deletion.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   User already has a DB cluster with the given identifier.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster
-func (c *RDS) ModifyDBCluster(input *ModifyDBClusterInput) (*ModifyDBClusterOutput, error) {
-	req, out := c.ModifyDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDBClusterWithContext is the same as ModifyDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBClusterWithContext(ctx aws.Context, input *ModifyDBClusterInput, opts ...aws.Option) (*ModifyDBClusterOutput, error) {
-	req, out := c.ModifyDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyDBClusterOutput{})
+	return ModifyDBClusterRequest{Request: req, Input: input}
 }
 
 const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 
-// ModifyDBClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBClusterParameterGroup for more information on using the ModifyDBClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyDBClusterParameterGroupRequest method.
-//    req, resp := client.ModifyDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroup
-func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) (req *aws.Request, output *DBClusterParameterGroupNameMessage) {
-	op := &aws.Operation{
-		Name:       opModifyDBClusterParameterGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyDBClusterParameterGroupInput{}
-	}
-
-	output = &DBClusterParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// ModifyDBClusterParameterGroupRequest is a API request type for the ModifyDBClusterParameterGroup API operation.
+type ModifyDBClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *ModifyDBClusterParameterGroupInput
 }
 
-// ModifyDBClusterParameterGroup API operation for Amazon Relational Database Service.
+// Send marshals and sends the ModifyDBClusterParameterGroup API request.
+func (r *ModifyDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetDBClusterParameterGroupOutput), nil
+}
+
+// ModifyDBClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Modifies the parameters of a DB cluster parameter group. To modify more than
 // one parameter, submit a list of the following: ParameterName, ParameterValue,
@@ -6720,87 +4240,49 @@ func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParamet
 // or the DescribeDBClusterParameters command to verify that your DB cluster
 // parameter group has been created or modified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroup
-func (c *RDS) ModifyDBClusterParameterGroup(input *ModifyDBClusterParameterGroupInput) (*DBClusterParameterGroupNameMessage, error) {
-	req, out := c.ModifyDBClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDBClusterParameterGroupWithContext is the same as ModifyDBClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBClusterParameterGroupWithContext(ctx aws.Context, input *ModifyDBClusterParameterGroupInput, opts ...aws.Option) (*DBClusterParameterGroupNameMessage, error) {
-	req, out := c.ModifyDBClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
-
-// ModifyDBClusterSnapshotAttributeRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBClusterSnapshotAttribute operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBClusterSnapshotAttribute for more information on using the ModifyDBClusterSnapshotAttribute
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyDBClusterSnapshotAttributeRequest method.
-//    req, resp := client.ModifyDBClusterSnapshotAttributeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ModifyDBClusterParameterGroupRequest method.
+//    req := client.ModifyDBClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttribute
-func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) (req *aws.Request, output *ModifyDBClusterSnapshotAttributeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroup
+func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest {
 	op := &aws.Operation{
-		Name:       opModifyDBClusterSnapshotAttribute,
+		Name:       opModifyDBClusterParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &ModifyDBClusterSnapshotAttributeInput{}
+		input = &ModifyDBClusterParameterGroupInput{}
 	}
 
-	output = &ModifyDBClusterSnapshotAttributeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
-// ModifyDBClusterSnapshotAttribute API operation for Amazon Relational Database Service.
+const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
+
+// ModifyDBClusterSnapshotAttributeRequest is a API request type for the ModifyDBClusterSnapshotAttribute API operation.
+type ModifyDBClusterSnapshotAttributeRequest struct {
+	*aws.Request
+	Input *ModifyDBClusterSnapshotAttributeInput
+}
+
+// Send marshals and sends the ModifyDBClusterSnapshotAttribute API request.
+func (r *ModifyDBClusterSnapshotAttributeRequest) Send() (*ModifyDBClusterSnapshotAttributeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBClusterSnapshotAttributeOutput), nil
+}
+
+// ModifyDBClusterSnapshotAttributeRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Adds an attribute and values to, or removes an attribute and values from,
 // a manual DB cluster snapshot.
@@ -6820,73 +4302,63 @@ func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnap
 // snapshot, or whether a manual DB cluster snapshot public or private, use
 // the DescribeDBClusterSnapshotAttributes API action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBClusterSnapshotAttribute for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-//   * ErrCodeSharedSnapshotQuotaExceededFault "SharedSnapshotQuotaExceeded"
-//   You have exceeded the maximum number of accounts that you can share a manual
-//   DB snapshot with.
+//    // Example sending a request using the ModifyDBClusterSnapshotAttributeRequest method.
+//    req := client.ModifyDBClusterSnapshotAttributeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttribute
-func (c *RDS) ModifyDBClusterSnapshotAttribute(input *ModifyDBClusterSnapshotAttributeInput) (*ModifyDBClusterSnapshotAttributeOutput, error) {
-	req, out := c.ModifyDBClusterSnapshotAttributeRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest {
+	op := &aws.Operation{
+		Name:       opModifyDBClusterSnapshotAttribute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ModifyDBClusterSnapshotAttributeWithContext is the same as ModifyDBClusterSnapshotAttribute with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBClusterSnapshotAttribute for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBClusterSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBClusterSnapshotAttributeInput, opts ...aws.Option) (*ModifyDBClusterSnapshotAttributeOutput, error) {
-	req, out := c.ModifyDBClusterSnapshotAttributeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyDBClusterSnapshotAttributeInput{}
+	}
+
+	req := c.newRequest(op, input, &ModifyDBClusterSnapshotAttributeOutput{})
+	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input}
 }
 
 const opModifyDBInstance = "ModifyDBInstance"
 
-// ModifyDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyDBInstanceRequest is a API request type for the ModifyDBInstance API operation.
+type ModifyDBInstanceRequest struct {
+	*aws.Request
+	Input *ModifyDBInstanceInput
+}
+
+// Send marshals and sends the ModifyDBInstance API request.
+func (r *ModifyDBInstanceRequest) Send() (*ModifyDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBInstanceOutput), nil
+}
+
+// ModifyDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBInstance for more information on using the ModifyDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies settings for a DB instance. You can change one or more database
+// configuration parameters by specifying these parameters and the new values
+// in the request.
 //
 //    // Example sending a request using the ModifyDBInstanceRequest method.
-//    req, resp := client.ModifyDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance
-func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *aws.Request, output *ModifyDBInstanceOutput) {
+func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) ModifyDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBInstance,
 		HTTPMethod: "POST",
@@ -6897,145 +4369,30 @@ func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) (req *aws.Re
 		input = &ModifyDBInstanceInput{}
 	}
 
-	output = &ModifyDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyDBInstance API operation for Amazon Relational Database Service.
-//
-// Modifies settings for a DB instance. You can change one or more database
-// configuration parameters by specifying these parameters and the new values
-// in the request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group does not allow deletion.
-//
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   User already has a DB instance with the given identifier.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeProvisionedIopsNotAvailableInAZFault "ProvisionedIopsNotAvailableInAZFault"
-//   Provisioned IOPS not available in the specified Availability Zone.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeDBUpgradeDependencyFailureFault "DBUpgradeDependencyFailure"
-//   The DB upgrade failed because a resource the DB depends on could not be modified.
-//
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   StorageType specified cannot be associated with the DB Instance.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeCertificateNotFoundFault "CertificateNotFound"
-//   CertificateIdentifier does not refer to an existing certificate.
-//
-//   * ErrCodeDomainNotFoundFault "DomainNotFoundFault"
-//   Domain does not refer to an existing Active Directory Domain.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance
-func (c *RDS) ModifyDBInstance(input *ModifyDBInstanceInput) (*ModifyDBInstanceOutput, error) {
-	req, out := c.ModifyDBInstanceRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDBInstanceWithContext is the same as ModifyDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBInstanceWithContext(ctx aws.Context, input *ModifyDBInstanceInput, opts ...aws.Option) (*ModifyDBInstanceOutput, error) {
-	req, out := c.ModifyDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyDBInstanceOutput{})
+	return ModifyDBInstanceRequest{Request: req, Input: input}
 }
 
 const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 
-// ModifyDBParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBParameterGroup for more information on using the ModifyDBParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyDBParameterGroupRequest method.
-//    req, resp := client.ModifyDBParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroup
-func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) (req *aws.Request, output *DBParameterGroupNameMessage) {
-	op := &aws.Operation{
-		Name:       opModifyDBParameterGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyDBParameterGroupInput{}
-	}
-
-	output = &DBParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// ModifyDBParameterGroupRequest is a API request type for the ModifyDBParameterGroup API operation.
+type ModifyDBParameterGroupRequest struct {
+	*aws.Request
+	Input *ModifyDBParameterGroupInput
 }
 
-// ModifyDBParameterGroup API operation for Amazon Relational Database Service.
+// Send marshals and sends the ModifyDBParameterGroup API request.
+func (r *ModifyDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetDBParameterGroupOutput), nil
+}
+
+// ModifyDBParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Modifies the parameters of a DB parameter group. To modify more than one
 // parameter, submit a list of the following: ParameterName, ParameterValue,
@@ -7056,71 +4413,64 @@ func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) 
 // or the DescribeDBParameters command to verify that your DB parameter group
 // has been created or modified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
+//    // Example sending a request using the ModifyDBParameterGroupRequest method.
+//    req := client.ModifyDBParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroup
-func (c *RDS) ModifyDBParameterGroup(input *ModifyDBParameterGroupInput) (*DBParameterGroupNameMessage, error) {
-	req, out := c.ModifyDBParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opModifyDBParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ModifyDBParameterGroupWithContext is the same as ModifyDBParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBParameterGroupWithContext(ctx aws.Context, input *ModifyDBParameterGroupInput, opts ...aws.Option) (*DBParameterGroupNameMessage, error) {
-	req, out := c.ModifyDBParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyDBParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &ResetDBParameterGroupOutput{})
+	return ModifyDBParameterGroupRequest{Request: req, Input: input}
 }
 
 const opModifyDBSnapshot = "ModifyDBSnapshot"
 
-// ModifyDBSnapshotRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyDBSnapshotRequest is a API request type for the ModifyDBSnapshot API operation.
+type ModifyDBSnapshotRequest struct {
+	*aws.Request
+	Input *ModifyDBSnapshotInput
+}
+
+// Send marshals and sends the ModifyDBSnapshot API request.
+func (r *ModifyDBSnapshotRequest) Send() (*ModifyDBSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBSnapshotOutput), nil
+}
+
+// ModifyDBSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a manual DB snapshot, which can be encrypted or not encrypted, with
+// a new engine version.
 //
-// See ModifyDBSnapshot for more information on using the ModifyDBSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
 //
 //    // Example sending a request using the ModifyDBSnapshotRequest method.
-//    req, resp := client.ModifyDBSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyDBSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot
-func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) (req *aws.Request, output *ModifyDBSnapshotOutput) {
+func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBSnapshot,
 		HTTPMethod: "POST",
@@ -7131,94 +4481,30 @@ func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) (req *aws.Re
 		input = &ModifyDBSnapshotInput{}
 	}
 
-	output = &ModifyDBSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyDBSnapshot API operation for Amazon Relational Database Service.
-//
-// Updates a manual DB snapshot, which can be encrypted or not encrypted, with
-// a new engine version.
-//
-// Amazon RDS supports upgrading DB snapshots for MySQL and Oracle.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot
-func (c *RDS) ModifyDBSnapshot(input *ModifyDBSnapshotInput) (*ModifyDBSnapshotOutput, error) {
-	req, out := c.ModifyDBSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDBSnapshotWithContext is the same as ModifyDBSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBSnapshotWithContext(ctx aws.Context, input *ModifyDBSnapshotInput, opts ...aws.Option) (*ModifyDBSnapshotOutput, error) {
-	req, out := c.ModifyDBSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyDBSnapshotOutput{})
+	return ModifyDBSnapshotRequest{Request: req, Input: input}
 }
 
 const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
 
-// ModifyDBSnapshotAttributeRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBSnapshotAttribute operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBSnapshotAttribute for more information on using the ModifyDBSnapshotAttribute
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyDBSnapshotAttributeRequest method.
-//    req, resp := client.ModifyDBSnapshotAttributeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttribute
-func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeInput) (req *aws.Request, output *ModifyDBSnapshotAttributeOutput) {
-	op := &aws.Operation{
-		Name:       opModifyDBSnapshotAttribute,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyDBSnapshotAttributeInput{}
-	}
-
-	output = &ModifyDBSnapshotAttributeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ModifyDBSnapshotAttributeRequest is a API request type for the ModifyDBSnapshotAttribute API operation.
+type ModifyDBSnapshotAttributeRequest struct {
+	*aws.Request
+	Input *ModifyDBSnapshotAttributeInput
 }
 
-// ModifyDBSnapshotAttribute API operation for Amazon Relational Database Service.
+// Send marshals and sends the ModifyDBSnapshotAttribute API request.
+func (r *ModifyDBSnapshotAttributeRequest) Send() (*ModifyDBSnapshotAttributeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBSnapshotAttributeOutput), nil
+}
+
+// ModifyDBSnapshotAttributeRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Adds an attribute and values to, or removes an attribute and values from,
 // a manual DB snapshot.
@@ -7238,73 +4524,62 @@ func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeI
 // or whether a manual DB snapshot public or private, use the DescribeDBSnapshotAttributes
 // API action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBSnapshotAttribute for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeSharedSnapshotQuotaExceededFault "SharedSnapshotQuotaExceeded"
-//   You have exceeded the maximum number of accounts that you can share a manual
-//   DB snapshot with.
+//    // Example sending a request using the ModifyDBSnapshotAttributeRequest method.
+//    req := client.ModifyDBSnapshotAttributeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttribute
-func (c *RDS) ModifyDBSnapshotAttribute(input *ModifyDBSnapshotAttributeInput) (*ModifyDBSnapshotAttributeOutput, error) {
-	req, out := c.ModifyDBSnapshotAttributeRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeInput) ModifyDBSnapshotAttributeRequest {
+	op := &aws.Operation{
+		Name:       opModifyDBSnapshotAttribute,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ModifyDBSnapshotAttributeWithContext is the same as ModifyDBSnapshotAttribute with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBSnapshotAttribute for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBSnapshotAttributeWithContext(ctx aws.Context, input *ModifyDBSnapshotAttributeInput, opts ...aws.Option) (*ModifyDBSnapshotAttributeOutput, error) {
-	req, out := c.ModifyDBSnapshotAttributeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyDBSnapshotAttributeInput{}
+	}
+
+	req := c.newRequest(op, input, &ModifyDBSnapshotAttributeOutput{})
+	return ModifyDBSnapshotAttributeRequest{Request: req, Input: input}
 }
 
 const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 
-// ModifyDBSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyDBSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyDBSubnetGroupRequest is a API request type for the ModifyDBSubnetGroup API operation.
+type ModifyDBSubnetGroupRequest struct {
+	*aws.Request
+	Input *ModifyDBSubnetGroupInput
+}
+
+// Send marshals and sends the ModifyDBSubnetGroup API request.
+func (r *ModifyDBSubnetGroupRequest) Send() (*ModifyDBSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyDBSubnetGroupOutput), nil
+}
+
+// ModifyDBSubnetGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyDBSubnetGroup for more information on using the ModifyDBSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing DB subnet group. DB subnet groups must contain at least
+// one subnet in at least two AZs in the AWS Region.
 //
 //    // Example sending a request using the ModifyDBSubnetGroupRequest method.
-//    req, resp := client.ModifyDBSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyDBSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup
-func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req *aws.Request, output *ModifyDBSubnetGroupOutput) {
+func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) ModifyDBSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyDBSubnetGroup,
 		HTTPMethod: "POST",
@@ -7315,107 +4590,30 @@ func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) (req *
 		input = &ModifyDBSubnetGroupInput{}
 	}
 
-	output = &ModifyDBSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyDBSubnetGroup API operation for Amazon Relational Database Service.
-//
-// Modifies an existing DB subnet group. DB subnet groups must contain at least
-// one subnet in at least two AZs in the AWS Region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyDBSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetQuotaExceededFault "DBSubnetQuotaExceededFault"
-//   Request would result in user exceeding the allowed number of subnets in a
-//   DB subnet groups.
-//
-//   * ErrCodeSubnetAlreadyInUse "SubnetAlreadyInUse"
-//   The DB subnet is already in use in the Availability Zone.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup
-func (c *RDS) ModifyDBSubnetGroup(input *ModifyDBSubnetGroupInput) (*ModifyDBSubnetGroupOutput, error) {
-	req, out := c.ModifyDBSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyDBSubnetGroupWithContext is the same as ModifyDBSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyDBSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyDBSubnetGroupWithContext(ctx aws.Context, input *ModifyDBSubnetGroupInput, opts ...aws.Option) (*ModifyDBSubnetGroupOutput, error) {
-	req, out := c.ModifyDBSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyDBSubnetGroupOutput{})
+	return ModifyDBSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the ModifyEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyEventSubscription for more information on using the ModifyEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyEventSubscriptionRequest method.
-//    req, resp := client.ModifyEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscription
-func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
-	op := &aws.Operation{
-		Name:       opModifyEventSubscription,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ModifyEventSubscriptionInput{}
-	}
-
-	output = &ModifyEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ModifyEventSubscriptionRequest is a API request type for the ModifyEventSubscription API operation.
+type ModifyEventSubscriptionRequest struct {
+	*aws.Request
+	Input *ModifyEventSubscriptionInput
 }
 
-// ModifyEventSubscription API operation for Amazon Relational Database Service.
+// Send marshals and sends the ModifyEventSubscription API request.
+func (r *ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyEventSubscriptionOutput), nil
+}
+
+// ModifyEventSubscriptionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Modifies an existing RDS event notification subscription. Note that you cannot
 // modify the source identifiers using this call; to change source identifiers
@@ -7427,81 +4625,61 @@ func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput
 // topic in the Amazon RDS User Guide or by using the DescribeEventCategories
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeEventSubscriptionQuotaExceededFault "EventSubscriptionQuotaExceeded"
-//   You have reached the maximum number of event subscriptions.
-//
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   The subscription name does not exist.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopic"
-//   SNS has responded that there is a problem with the SND topic specified.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorization"
-//   You do not have permission to publish to the SNS topic ARN.
-//
-//   * ErrCodeSNSTopicArnNotFoundFault "SNSTopicArnNotFound"
-//   The SNS topic ARN does not exist.
-//
-//   * ErrCodeSubscriptionCategoryNotFoundFault "SubscriptionCategoryNotFound"
-//   The supplied category does not exist.
+//    // Example sending a request using the ModifyEventSubscriptionRequest method.
+//    req := client.ModifyEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscription
-func (c *RDS) ModifyEventSubscription(input *ModifyEventSubscriptionInput) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest {
+	op := &aws.Operation{
+		Name:       opModifyEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ModifyEventSubscriptionWithContext is the same as ModifyEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyEventSubscriptionInput{}
+	}
+
+	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	return ModifyEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opModifyOptionGroup = "ModifyOptionGroup"
 
-// ModifyOptionGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyOptionGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyOptionGroupRequest is a API request type for the ModifyOptionGroup API operation.
+type ModifyOptionGroupRequest struct {
+	*aws.Request
+	Input *ModifyOptionGroupInput
+}
+
+// Send marshals and sends the ModifyOptionGroup API request.
+func (r *ModifyOptionGroupRequest) Send() (*ModifyOptionGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyOptionGroupOutput), nil
+}
+
+// ModifyOptionGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyOptionGroup for more information on using the ModifyOptionGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing option group.
 //
 //    // Example sending a request using the ModifyOptionGroupRequest method.
-//    req, resp := client.ModifyOptionGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyOptionGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup
-func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) (req *aws.Request, output *ModifyOptionGroupOutput) {
+func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) ModifyOptionGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyOptionGroup,
 		HTTPMethod: "POST",
@@ -7512,78 +4690,47 @@ func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) (req *aws.
 		input = &ModifyOptionGroupInput{}
 	}
 
-	output = &ModifyOptionGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyOptionGroup API operation for Amazon Relational Database Service.
-//
-// Modifies an existing option group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ModifyOptionGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidOptionGroupStateFault "InvalidOptionGroupStateFault"
-//   The option group is not in the available state.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup
-func (c *RDS) ModifyOptionGroup(input *ModifyOptionGroupInput) (*ModifyOptionGroupOutput, error) {
-	req, out := c.ModifyOptionGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyOptionGroupWithContext is the same as ModifyOptionGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyOptionGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ModifyOptionGroupWithContext(ctx aws.Context, input *ModifyOptionGroupInput, opts ...aws.Option) (*ModifyOptionGroupOutput, error) {
-	req, out := c.ModifyOptionGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyOptionGroupOutput{})
+	return ModifyOptionGroupRequest{Request: req, Input: input}
 }
 
 const opPromoteReadReplica = "PromoteReadReplica"
 
-// PromoteReadReplicaRequest generates a "aws.Request" representing the
-// client's request for the PromoteReadReplica operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PromoteReadReplicaRequest is a API request type for the PromoteReadReplica API operation.
+type PromoteReadReplicaRequest struct {
+	*aws.Request
+	Input *PromoteReadReplicaInput
+}
+
+// Send marshals and sends the PromoteReadReplica API request.
+func (r *PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PromoteReadReplicaOutput), nil
+}
+
+// PromoteReadReplicaRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Promotes a Read Replica DB instance to a standalone DB instance.
 //
-// See PromoteReadReplica for more information on using the PromoteReadReplica
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// We recommend that you enable automated backups on your Read Replica before
+// promoting the Read Replica. This ensures that no backup is taken during the
+// promotion process. Once the instance is promoted to a primary instance, backups
+// are taken based on your backup settings.
 //
 //    // Example sending a request using the PromoteReadReplicaRequest method.
-//    req, resp := client.PromoteReadReplicaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PromoteReadReplicaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica
-func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) (req *aws.Request, output *PromoteReadReplicaOutput) {
+func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) PromoteReadReplicaRequest {
 	op := &aws.Operation{
 		Name:       opPromoteReadReplica,
 		HTTPMethod: "POST",
@@ -7594,83 +4741,42 @@ func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) (req *aw
 		input = &PromoteReadReplicaInput{}
 	}
 
-	output = &PromoteReadReplicaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PromoteReadReplica API operation for Amazon Relational Database Service.
-//
-// Promotes a Read Replica DB instance to a standalone DB instance.
-//
-// We recommend that you enable automated backups on your Read Replica before
-// promoting the Read Replica. This ensures that no backup is taken during the
-// promotion process. Once the instance is promoted to a primary instance, backups
-// are taken based on your backup settings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation PromoteReadReplica for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica
-func (c *RDS) PromoteReadReplica(input *PromoteReadReplicaInput) (*PromoteReadReplicaOutput, error) {
-	req, out := c.PromoteReadReplicaRequest(input)
-	return out, req.Send()
-}
-
-// PromoteReadReplicaWithContext is the same as PromoteReadReplica with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PromoteReadReplica for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) PromoteReadReplicaWithContext(ctx aws.Context, input *PromoteReadReplicaInput, opts ...aws.Option) (*PromoteReadReplicaOutput, error) {
-	req, out := c.PromoteReadReplicaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PromoteReadReplicaOutput{})
+	return PromoteReadReplicaRequest{Request: req, Input: input}
 }
 
 const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 
-// PromoteReadReplicaDBClusterRequest generates a "aws.Request" representing the
-// client's request for the PromoteReadReplicaDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PromoteReadReplicaDBClusterRequest is a API request type for the PromoteReadReplicaDBCluster API operation.
+type PromoteReadReplicaDBClusterRequest struct {
+	*aws.Request
+	Input *PromoteReadReplicaDBClusterInput
+}
+
+// Send marshals and sends the PromoteReadReplicaDBCluster API request.
+func (r *PromoteReadReplicaDBClusterRequest) Send() (*PromoteReadReplicaDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PromoteReadReplicaDBClusterOutput), nil
+}
+
+// PromoteReadReplicaDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PromoteReadReplicaDBCluster for more information on using the PromoteReadReplicaDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Promotes a Read Replica DB cluster to a standalone DB cluster.
 //
 //    // Example sending a request using the PromoteReadReplicaDBClusterRequest method.
-//    req, resp := client.PromoteReadReplicaDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PromoteReadReplicaDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster
-func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClusterInput) (req *aws.Request, output *PromoteReadReplicaDBClusterOutput) {
+func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opPromoteReadReplicaDBCluster,
 		HTTPMethod: "POST",
@@ -7681,78 +4787,42 @@ func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClus
 		input = &PromoteReadReplicaDBClusterInput{}
 	}
 
-	output = &PromoteReadReplicaDBClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PromoteReadReplicaDBCluster API operation for Amazon Relational Database Service.
-//
-// Promotes a Read Replica DB cluster to a standalone DB cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation PromoteReadReplicaDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster
-func (c *RDS) PromoteReadReplicaDBCluster(input *PromoteReadReplicaDBClusterInput) (*PromoteReadReplicaDBClusterOutput, error) {
-	req, out := c.PromoteReadReplicaDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// PromoteReadReplicaDBClusterWithContext is the same as PromoteReadReplicaDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PromoteReadReplicaDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) PromoteReadReplicaDBClusterWithContext(ctx aws.Context, input *PromoteReadReplicaDBClusterInput, opts ...aws.Option) (*PromoteReadReplicaDBClusterOutput, error) {
-	req, out := c.PromoteReadReplicaDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PromoteReadReplicaDBClusterOutput{})
+	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input}
 }
 
 const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOffering"
 
-// PurchaseReservedDBInstancesOfferingRequest generates a "aws.Request" representing the
-// client's request for the PurchaseReservedDBInstancesOffering operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PurchaseReservedDBInstancesOfferingRequest is a API request type for the PurchaseReservedDBInstancesOffering API operation.
+type PurchaseReservedDBInstancesOfferingRequest struct {
+	*aws.Request
+	Input *PurchaseReservedDBInstancesOfferingInput
+}
+
+// Send marshals and sends the PurchaseReservedDBInstancesOffering API request.
+func (r *PurchaseReservedDBInstancesOfferingRequest) Send() (*PurchaseReservedDBInstancesOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseReservedDBInstancesOfferingOutput), nil
+}
+
+// PurchaseReservedDBInstancesOfferingRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurchaseReservedDBInstancesOffering for more information on using the PurchaseReservedDBInstancesOffering
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Purchases a reserved DB instance offering.
 //
 //    // Example sending a request using the PurchaseReservedDBInstancesOfferingRequest method.
-//    req, resp := client.PurchaseReservedDBInstancesOfferingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PurchaseReservedDBInstancesOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering
-func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReservedDBInstancesOfferingInput) (req *aws.Request, output *PurchaseReservedDBInstancesOfferingOutput) {
+func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseReservedDBInstancesOffering,
 		HTTPMethod: "POST",
@@ -7763,97 +4833,30 @@ func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReserved
 		input = &PurchaseReservedDBInstancesOfferingInput{}
 	}
 
-	output = &PurchaseReservedDBInstancesOfferingOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PurchaseReservedDBInstancesOffering API operation for Amazon Relational Database Service.
-//
-// Purchases a reserved DB instance offering.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation PurchaseReservedDBInstancesOffering for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeReservedDBInstancesOfferingNotFoundFault "ReservedDBInstancesOfferingNotFound"
-//   Specified offering does not exist.
-//
-//   * ErrCodeReservedDBInstanceAlreadyExistsFault "ReservedDBInstanceAlreadyExists"
-//   User already has a reservation with the given identifier.
-//
-//   * ErrCodeReservedDBInstanceQuotaExceededFault "ReservedDBInstanceQuotaExceeded"
-//   Request would exceed the user's DB Instance quota.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering
-func (c *RDS) PurchaseReservedDBInstancesOffering(input *PurchaseReservedDBInstancesOfferingInput) (*PurchaseReservedDBInstancesOfferingOutput, error) {
-	req, out := c.PurchaseReservedDBInstancesOfferingRequest(input)
-	return out, req.Send()
-}
-
-// PurchaseReservedDBInstancesOfferingWithContext is the same as PurchaseReservedDBInstancesOffering with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurchaseReservedDBInstancesOffering for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) PurchaseReservedDBInstancesOfferingWithContext(ctx aws.Context, input *PurchaseReservedDBInstancesOfferingInput, opts ...aws.Option) (*PurchaseReservedDBInstancesOfferingOutput, error) {
-	req, out := c.PurchaseReservedDBInstancesOfferingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PurchaseReservedDBInstancesOfferingOutput{})
+	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input}
 }
 
 const opRebootDBInstance = "RebootDBInstance"
 
-// RebootDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the RebootDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebootDBInstance for more information on using the RebootDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RebootDBInstanceRequest method.
-//    req, resp := client.RebootDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance
-func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *aws.Request, output *RebootDBInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opRebootDBInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RebootDBInstanceInput{}
-	}
-
-	output = &RebootDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RebootDBInstanceRequest is a API request type for the RebootDBInstance API operation.
+type RebootDBInstanceRequest struct {
+	*aws.Request
+	Input *RebootDBInstanceInput
 }
 
-// RebootDBInstance API operation for Amazon Relational Database Service.
+// Send marshals and sends the RebootDBInstance API request.
+func (r *RebootDBInstanceRequest) Send() (*RebootDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootDBInstanceOutput), nil
+}
+
+// RebootDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Rebooting a DB instance restarts the database engine service. A reboot also
 // applies to the DB instance any modifications to the associated DB parameter
@@ -7873,69 +4876,63 @@ func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) (req *aws.Re
 // reduce database activities as much as possible during the reboot process
 // to reduce rollback activity for in-transit transactions.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RebootDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
+//    // Example sending a request using the RebootDBInstanceRequest method.
+//    req := client.RebootDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance
-func (c *RDS) RebootDBInstance(input *RebootDBInstanceInput) (*RebootDBInstanceOutput, error) {
-	req, out := c.RebootDBInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBInstanceRequest {
+	op := &aws.Operation{
+		Name:       opRebootDBInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RebootDBInstanceWithContext is the same as RebootDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RebootDBInstanceWithContext(ctx aws.Context, input *RebootDBInstanceInput, opts ...aws.Option) (*RebootDBInstanceOutput, error) {
-	req, out := c.RebootDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RebootDBInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &RebootDBInstanceOutput{})
+	return RebootDBInstanceRequest{Request: req, Input: input}
 }
 
 const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
 
-// RemoveRoleFromDBClusterRequest generates a "aws.Request" representing the
-// client's request for the RemoveRoleFromDBCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveRoleFromDBClusterRequest is a API request type for the RemoveRoleFromDBCluster API operation.
+type RemoveRoleFromDBClusterRequest struct {
+	*aws.Request
+	Input *RemoveRoleFromDBClusterInput
+}
+
+// Send marshals and sends the RemoveRoleFromDBCluster API request.
+func (r *RemoveRoleFromDBClusterRequest) Send() (*RemoveRoleFromDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveRoleFromDBClusterOutput), nil
+}
+
+// RemoveRoleFromDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveRoleFromDBCluster for more information on using the RemoveRoleFromDBCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disassociates an Identity and Access Management (IAM) role from an Aurora
+// DB cluster. For more information, see Authorizing Amazon Aurora to Access
+// Other AWS Services On Your Behalf (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html).
 //
 //    // Example sending a request using the RemoveRoleFromDBClusterRequest method.
-//    req, resp := client.RemoveRoleFromDBClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveRoleFromDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBCluster
-func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput) (req *aws.Request, output *RemoveRoleFromDBClusterOutput) {
+func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput) RemoveRoleFromDBClusterRequest {
 	op := &aws.Operation{
 		Name:       opRemoveRoleFromDBCluster,
 		HTTPMethod: "POST",
@@ -7946,86 +4943,44 @@ func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput
 		input = &RemoveRoleFromDBClusterInput{}
 	}
 
-	output = &RemoveRoleFromDBClusterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveRoleFromDBClusterOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveRoleFromDBCluster API operation for Amazon Relational Database Service.
-//
-// Disassociates an Identity and Access Management (IAM) role from an Aurora
-// DB cluster. For more information, see Authorizing Amazon Aurora to Access
-// Other AWS Services On Your Behalf (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RemoveRoleFromDBCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeDBClusterRoleNotFoundFault "DBClusterRoleNotFound"
-//   The specified IAM role Amazon Resource Name (ARN) is not associated with
-//   the specified DB cluster.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBCluster
-func (c *RDS) RemoveRoleFromDBCluster(input *RemoveRoleFromDBClusterInput) (*RemoveRoleFromDBClusterOutput, error) {
-	req, out := c.RemoveRoleFromDBClusterRequest(input)
-	return out, req.Send()
-}
-
-// RemoveRoleFromDBClusterWithContext is the same as RemoveRoleFromDBCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveRoleFromDBCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RemoveRoleFromDBClusterWithContext(ctx aws.Context, input *RemoveRoleFromDBClusterInput, opts ...aws.Option) (*RemoveRoleFromDBClusterOutput, error) {
-	req, out := c.RemoveRoleFromDBClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveRoleFromDBClusterRequest{Request: req, Input: input}
 }
 
 const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubscription"
 
-// RemoveSourceIdentifierFromSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the RemoveSourceIdentifierFromSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveSourceIdentifierFromSubscriptionRequest is a API request type for the RemoveSourceIdentifierFromSubscription API operation.
+type RemoveSourceIdentifierFromSubscriptionRequest struct {
+	*aws.Request
+	Input *RemoveSourceIdentifierFromSubscriptionInput
+}
+
+// Send marshals and sends the RemoveSourceIdentifierFromSubscription API request.
+func (r *RemoveSourceIdentifierFromSubscriptionRequest) Send() (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveSourceIdentifierFromSubscriptionOutput), nil
+}
+
+// RemoveSourceIdentifierFromSubscriptionRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveSourceIdentifierFromSubscription for more information on using the RemoveSourceIdentifierFromSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes a source identifier from an existing RDS event notification subscription.
 //
 //    // Example sending a request using the RemoveSourceIdentifierFromSubscriptionRequest method.
-//    req, resp := client.RemoveSourceIdentifierFromSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveSourceIdentifierFromSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscription
-func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) (req *aws.Request, output *RemoveSourceIdentifierFromSubscriptionOutput) {
+func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opRemoveSourceIdentifierFromSubscription,
 		HTTPMethod: "POST",
@@ -8036,78 +4991,45 @@ func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceI
 		input = &RemoveSourceIdentifierFromSubscriptionInput{}
 	}
 
-	output = &RemoveSourceIdentifierFromSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveSourceIdentifierFromSubscription API operation for Amazon Relational Database Service.
-//
-// Removes a source identifier from an existing RDS event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RemoveSourceIdentifierFromSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeSubscriptionNotFoundFault "SubscriptionNotFound"
-//   The subscription name does not exist.
-//
-//   * ErrCodeSourceNotFoundFault "SourceNotFound"
-//   The requested source could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscription
-func (c *RDS) RemoveSourceIdentifierFromSubscription(input *RemoveSourceIdentifierFromSubscriptionInput) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
-	req, out := c.RemoveSourceIdentifierFromSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// RemoveSourceIdentifierFromSubscriptionWithContext is the same as RemoveSourceIdentifierFromSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveSourceIdentifierFromSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RemoveSourceIdentifierFromSubscriptionWithContext(ctx aws.Context, input *RemoveSourceIdentifierFromSubscriptionInput, opts ...aws.Option) (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
-	req, out := c.RemoveSourceIdentifierFromSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveSourceIdentifierFromSubscriptionOutput{})
+	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes metadata tags from an Amazon RDS resource.
 //
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS
+// Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResource
-func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -8118,102 +5040,32 @@ func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &RemoveTagsFromResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
 	req.Handlers.Unmarshal.Remove(query.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveTagsFromResource API operation for Amazon Relational Database Service.
-//
-// Removes metadata tags from an Amazon RDS resource.
-//
-// For an overview on tagging an Amazon RDS resource, see Tagging Amazon RDS
-// Resources (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResource
-func (c *RDS) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 
-// ResetDBClusterParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ResetDBClusterParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetDBClusterParameterGroup for more information on using the ResetDBClusterParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ResetDBClusterParameterGroupRequest method.
-//    req, resp := client.ResetDBClusterParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup
-func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) (req *aws.Request, output *DBClusterParameterGroupNameMessage) {
-	op := &aws.Operation{
-		Name:       opResetDBClusterParameterGroup,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ResetDBClusterParameterGroupInput{}
-	}
-
-	output = &DBClusterParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
+// ResetDBClusterParameterGroupRequest is a API request type for the ResetDBClusterParameterGroup API operation.
+type ResetDBClusterParameterGroupRequest struct {
+	*aws.Request
+	Input *ResetDBClusterParameterGroupInput
 }
 
-// ResetDBClusterParameterGroup API operation for Amazon Relational Database Service.
+// Send marshals and sends the ResetDBClusterParameterGroup API request.
+func (r *ResetDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetDBClusterParameterGroupOutput), nil
+}
+
+// ResetDBClusterParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Modifies the parameters of a DB cluster parameter group to the default value.
 // To reset specific parameters submit a list of the following: ParameterName
@@ -8229,71 +5081,67 @@ func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameter
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ResetDBClusterParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
+//    // Example sending a request using the ResetDBClusterParameterGroupRequest method.
+//    req := client.ResetDBClusterParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup
-func (c *RDS) ResetDBClusterParameterGroup(input *ResetDBClusterParameterGroupInput) (*DBClusterParameterGroupNameMessage, error) {
-	req, out := c.ResetDBClusterParameterGroupRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest {
+	op := &aws.Operation{
+		Name:       opResetDBClusterParameterGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ResetDBClusterParameterGroupWithContext is the same as ResetDBClusterParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetDBClusterParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ResetDBClusterParameterGroupWithContext(ctx aws.Context, input *ResetDBClusterParameterGroupInput, opts ...aws.Option) (*DBClusterParameterGroupNameMessage, error) {
-	req, out := c.ResetDBClusterParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ResetDBClusterParameterGroupInput{}
+	}
+
+	req := c.newRequest(op, input, &ResetDBClusterParameterGroupOutput{})
+	return ResetDBClusterParameterGroupRequest{Request: req, Input: input}
 }
 
 const opResetDBParameterGroup = "ResetDBParameterGroup"
 
-// ResetDBParameterGroupRequest generates a "aws.Request" representing the
-// client's request for the ResetDBParameterGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResetDBParameterGroupRequest is a API request type for the ResetDBParameterGroup API operation.
+type ResetDBParameterGroupRequest struct {
+	*aws.Request
+	Input *ResetDBParameterGroupInput
+}
+
+// Send marshals and sends the ResetDBParameterGroup API request.
+func (r *ResetDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetDBParameterGroupOutput), nil
+}
+
+// ResetDBParameterGroupRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetDBParameterGroup for more information on using the ResetDBParameterGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the parameters of a DB parameter group to the engine/system default
+// value. To reset specific parameters, provide a list of the following: ParameterName
+// and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup
+// name and ResetAllParameters parameters. When resetting the entire group,
+// dynamic parameters are updated immediately and static parameters are set
+// to pending-reboot to take effect on the next DB instance restart or RebootDBInstance
+// request.
 //
 //    // Example sending a request using the ResetDBParameterGroupRequest method.
-//    req, resp := client.ResetDBParameterGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResetDBParameterGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroup
-func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) (req *aws.Request, output *DBParameterGroupNameMessage) {
+func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) ResetDBParameterGroupRequest {
 	op := &aws.Operation{
 		Name:       opResetDBParameterGroup,
 		HTTPMethod: "POST",
@@ -8304,86 +5152,45 @@ func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) (r
 		input = &ResetDBParameterGroupInput{}
 	}
 
-	output = &DBParameterGroupNameMessage{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResetDBParameterGroup API operation for Amazon Relational Database Service.
-//
-// Modifies the parameters of a DB parameter group to the engine/system default
-// value. To reset specific parameters, provide a list of the following: ParameterName
-// and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup
-// name and ResetAllParameters parameters. When resetting the entire group,
-// dynamic parameters are updated immediately and static parameters are set
-// to pending-reboot to take effect on the next DB instance restart or RebootDBInstance
-// request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation ResetDBParameterGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDBParameterGroupStateFault "InvalidDBParameterGroupState"
-//   The DB parameter group is in use or is in an invalid state. If you are attempting
-//   to delete the parameter group, you cannot delete it when the parameter group
-//   is in this state.
-//
-//   * ErrCodeDBParameterGroupNotFoundFault "DBParameterGroupNotFound"
-//   DBParameterGroupName does not refer to an existing DB parameter group.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroup
-func (c *RDS) ResetDBParameterGroup(input *ResetDBParameterGroupInput) (*DBParameterGroupNameMessage, error) {
-	req, out := c.ResetDBParameterGroupRequest(input)
-	return out, req.Send()
-}
-
-// ResetDBParameterGroupWithContext is the same as ResetDBParameterGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetDBParameterGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) ResetDBParameterGroupWithContext(ctx aws.Context, input *ResetDBParameterGroupInput, opts ...aws.Option) (*DBParameterGroupNameMessage, error) {
-	req, out := c.ResetDBParameterGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResetDBParameterGroupOutput{})
+	return ResetDBParameterGroupRequest{Request: req, Input: input}
 }
 
 const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
 
-// RestoreDBClusterFromS3Request generates a "aws.Request" representing the
-// client's request for the RestoreDBClusterFromS3 operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RestoreDBClusterFromS3Request is a API request type for the RestoreDBClusterFromS3 API operation.
+type RestoreDBClusterFromS3Request struct {
+	*aws.Request
+	Input *RestoreDBClusterFromS3Input
+}
+
+// Send marshals and sends the RestoreDBClusterFromS3 API request.
+func (r *RestoreDBClusterFromS3Request) Send() (*RestoreDBClusterFromS3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreDBClusterFromS3Output), nil
+}
+
+// RestoreDBClusterFromS3Request returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreDBClusterFromS3 for more information on using the RestoreDBClusterFromS3
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket.
+// Amazon RDS must be authorized to access the Amazon S3 bucket and the data
+// must be created using the Percona XtraBackup utility as described in Migrating
+// Data from MySQL by Using an Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3).
 //
 //    // Example sending a request using the RestoreDBClusterFromS3Request method.
-//    req, resp := client.RestoreDBClusterFromS3Request(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RestoreDBClusterFromS3Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3
-func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) (req *aws.Request, output *RestoreDBClusterFromS3Output) {
+func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) RestoreDBClusterFromS3Request {
 	op := &aws.Operation{
 		Name:       opRestoreDBClusterFromS3,
 		HTTPMethod: "POST",
@@ -8394,139 +5201,30 @@ func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) 
 		input = &RestoreDBClusterFromS3Input{}
 	}
 
-	output = &RestoreDBClusterFromS3Output{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RestoreDBClusterFromS3 API operation for Amazon Relational Database Service.
-//
-// Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket.
-// Amazon RDS must be authorized to access the Amazon S3 bucket and the data
-// must be created using the Percona XtraBackup utility as described in Migrating
-// Data from MySQL by Using an Amazon S3 Bucket (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RestoreDBClusterFromS3 for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   User already has a DB cluster with the given identifier.
-//
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   User attempted to create a new DB cluster and the user has already reached
-//   the maximum allowed DB cluster quota.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidDBSubnetGroupStateFault "InvalidDBSubnetGroupStateFault"
-//   The DB subnet group cannot be deleted because it is in use.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidS3BucketFault "InvalidS3BucketFault"
-//   The specified Amazon S3 bucket name could not be found or Amazon RDS is not
-//   authorized to access the specified Amazon S3 bucket. Verify the SourceS3BucketName
-//   and S3IngestionRoleArn values and try again.
-//
-//   * ErrCodeDBClusterParameterGroupNotFoundFault "DBClusterParameterGroupNotFound"
-//   DBClusterParameterGroupName does not refer to an existing DB Cluster parameter
-//   group.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is insufficient storage available for the current action. You may be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3
-func (c *RDS) RestoreDBClusterFromS3(input *RestoreDBClusterFromS3Input) (*RestoreDBClusterFromS3Output, error) {
-	req, out := c.RestoreDBClusterFromS3Request(input)
-	return out, req.Send()
-}
-
-// RestoreDBClusterFromS3WithContext is the same as RestoreDBClusterFromS3 with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreDBClusterFromS3 for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RestoreDBClusterFromS3WithContext(ctx aws.Context, input *RestoreDBClusterFromS3Input, opts ...aws.Option) (*RestoreDBClusterFromS3Output, error) {
-	req, out := c.RestoreDBClusterFromS3Request(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RestoreDBClusterFromS3Output{})
+	return RestoreDBClusterFromS3Request{Request: req, Input: input}
 }
 
 const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 
-// RestoreDBClusterFromSnapshotRequest generates a "aws.Request" representing the
-// client's request for the RestoreDBClusterFromSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreDBClusterFromSnapshot for more information on using the RestoreDBClusterFromSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreDBClusterFromSnapshotRequest method.
-//    req, resp := client.RestoreDBClusterFromSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot
-func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSnapshotInput) (req *aws.Request, output *RestoreDBClusterFromSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opRestoreDBClusterFromSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RestoreDBClusterFromSnapshotInput{}
-	}
-
-	output = &RestoreDBClusterFromSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RestoreDBClusterFromSnapshotRequest is a API request type for the RestoreDBClusterFromSnapshot API operation.
+type RestoreDBClusterFromSnapshotRequest struct {
+	*aws.Request
+	Input *RestoreDBClusterFromSnapshotInput
 }
 
-// RestoreDBClusterFromSnapshot API operation for Amazon Relational Database Service.
+// Send marshals and sends the RestoreDBClusterFromSnapshot API request.
+func (r *RestoreDBClusterFromSnapshotRequest) Send() (*RestoreDBClusterFromSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreDBClusterFromSnapshotOutput), nil
+}
+
+// RestoreDBClusterFromSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
 //
@@ -8541,137 +5239,49 @@ func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSna
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RestoreDBClusterFromSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   User already has a DB cluster with the given identifier.
-//
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   User attempted to create a new DB cluster and the user has already reached
-//   the maximum allowed DB cluster quota.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-//   * ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
-//   The DB cluster does not have enough capacity for the current operation.
-//
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is insufficient storage available for the current action. You may be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
-//
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   Cannot restore from vpc backup to non-vpc DB instance.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot
-func (c *RDS) RestoreDBClusterFromSnapshot(input *RestoreDBClusterFromSnapshotInput) (*RestoreDBClusterFromSnapshotOutput, error) {
-	req, out := c.RestoreDBClusterFromSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// RestoreDBClusterFromSnapshotWithContext is the same as RestoreDBClusterFromSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreDBClusterFromSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RestoreDBClusterFromSnapshotWithContext(ctx aws.Context, input *RestoreDBClusterFromSnapshotInput, opts ...aws.Option) (*RestoreDBClusterFromSnapshotOutput, error) {
-	req, out := c.RestoreDBClusterFromSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
-
-// RestoreDBClusterToPointInTimeRequest generates a "aws.Request" representing the
-// client's request for the RestoreDBClusterToPointInTime operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreDBClusterToPointInTime for more information on using the RestoreDBClusterToPointInTime
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreDBClusterToPointInTimeRequest method.
-//    req, resp := client.RestoreDBClusterToPointInTimeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RestoreDBClusterFromSnapshotRequest method.
+//    req := client.RestoreDBClusterFromSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime
-func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPointInTimeInput) (req *aws.Request, output *RestoreDBClusterToPointInTimeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot
+func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSnapshotInput) RestoreDBClusterFromSnapshotRequest {
 	op := &aws.Operation{
-		Name:       opRestoreDBClusterToPointInTime,
+		Name:       opRestoreDBClusterFromSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RestoreDBClusterToPointInTimeInput{}
+		input = &RestoreDBClusterFromSnapshotInput{}
 	}
 
-	output = &RestoreDBClusterToPointInTimeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RestoreDBClusterFromSnapshotOutput{})
+	return RestoreDBClusterFromSnapshotRequest{Request: req, Input: input}
 }
 
-// RestoreDBClusterToPointInTime API operation for Amazon Relational Database Service.
+const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
+
+// RestoreDBClusterToPointInTimeRequest is a API request type for the RestoreDBClusterToPointInTime API operation.
+type RestoreDBClusterToPointInTimeRequest struct {
+	*aws.Request
+	Input *RestoreDBClusterToPointInTimeInput
+}
+
+// Send marshals and sends the RestoreDBClusterToPointInTime API request.
+func (r *RestoreDBClusterToPointInTimeRequest) Send() (*RestoreDBClusterToPointInTimeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreDBClusterToPointInTimeOutput), nil
+}
+
+// RestoreDBClusterToPointInTimeRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Restores a DB cluster to an arbitrary point in time. Users can restore to
 // any point in time before LatestRestorableTime for up to BackupRetentionPeriod
@@ -8689,133 +5299,49 @@ func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPoin
 // For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
 // in the Amazon RDS User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RestoreDBClusterToPointInTime for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBClusterAlreadyExistsFault "DBClusterAlreadyExistsFault"
-//   User already has a DB cluster with the given identifier.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeDBClusterQuotaExceededFault "DBClusterQuotaExceededFault"
-//   User attempted to create a new DB cluster and the user has already reached
-//   the maximum allowed DB cluster quota.
-//
-//   * ErrCodeDBClusterSnapshotNotFoundFault "DBClusterSnapshotNotFoundFault"
-//   DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeInsufficientDBClusterCapacityFault "InsufficientDBClusterCapacityFault"
-//   The DB cluster does not have enough capacity for the current operation.
-//
-//   * ErrCodeInsufficientStorageClusterCapacityFault "InsufficientStorageClusterCapacity"
-//   There is insufficient storage available for the current action. You may be
-//   able to resolve this error by updating your subnet group to use different
-//   Availability Zones that have more storage available.
-//
-//   * ErrCodeInvalidDBClusterSnapshotStateFault "InvalidDBClusterSnapshotStateFault"
-//   The supplied value is not a valid DB cluster snapshot state.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   Cannot restore from vpc backup to non-vpc DB instance.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime
-func (c *RDS) RestoreDBClusterToPointInTime(input *RestoreDBClusterToPointInTimeInput) (*RestoreDBClusterToPointInTimeOutput, error) {
-	req, out := c.RestoreDBClusterToPointInTimeRequest(input)
-	return out, req.Send()
-}
-
-// RestoreDBClusterToPointInTimeWithContext is the same as RestoreDBClusterToPointInTime with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreDBClusterToPointInTime for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RestoreDBClusterToPointInTimeWithContext(ctx aws.Context, input *RestoreDBClusterToPointInTimeInput, opts ...aws.Option) (*RestoreDBClusterToPointInTimeOutput, error) {
-	req, out := c.RestoreDBClusterToPointInTimeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
-
-// RestoreDBInstanceFromDBSnapshotRequest generates a "aws.Request" representing the
-// client's request for the RestoreDBInstanceFromDBSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreDBInstanceFromDBSnapshot for more information on using the RestoreDBInstanceFromDBSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreDBInstanceFromDBSnapshotRequest method.
-//    req, resp := client.RestoreDBInstanceFromDBSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RestoreDBClusterToPointInTimeRequest method.
+//    req := client.RestoreDBClusterToPointInTimeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot
-func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFromDBSnapshotInput) (req *aws.Request, output *RestoreDBInstanceFromDBSnapshotOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime
+func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPointInTimeInput) RestoreDBClusterToPointInTimeRequest {
 	op := &aws.Operation{
-		Name:       opRestoreDBInstanceFromDBSnapshot,
+		Name:       opRestoreDBClusterToPointInTime,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RestoreDBInstanceFromDBSnapshotInput{}
+		input = &RestoreDBClusterToPointInTimeInput{}
 	}
 
-	output = &RestoreDBInstanceFromDBSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RestoreDBClusterToPointInTimeOutput{})
+	return RestoreDBClusterToPointInTimeRequest{Request: req, Input: input}
 }
 
-// RestoreDBInstanceFromDBSnapshot API operation for Amazon Relational Database Service.
+const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
+
+// RestoreDBInstanceFromDBSnapshotRequest is a API request type for the RestoreDBInstanceFromDBSnapshot API operation.
+type RestoreDBInstanceFromDBSnapshotRequest struct {
+	*aws.Request
+	Input *RestoreDBInstanceFromDBSnapshotInput
+}
+
+// Send marshals and sends the RestoreDBInstanceFromDBSnapshot API request.
+func (r *RestoreDBInstanceFromDBSnapshotRequest) Send() (*RestoreDBInstanceFromDBSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreDBInstanceFromDBSnapshotOutput), nil
+}
+
+// RestoreDBInstanceFromDBSnapshotRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Creates a new DB instance from a DB snapshot. The target database is created
 // from the source database restore point with the most of original configuration
@@ -8837,142 +5363,49 @@ func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFro
 // If you are restoring from a shared manual DB snapshot, the DBSnapshotIdentifier
 // must be the ARN of the shared DB snapshot.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RestoreDBInstanceFromDBSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   User already has a DB instance with the given identifier.
-//
-//   * ErrCodeDBSnapshotNotFoundFault "DBSnapshotNotFound"
-//   DBSnapshotIdentifier does not refer to an existing DB snapshot.
-//
-//   * ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB instances.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeInvalidDBSnapshotStateFault "InvalidDBSnapshotState"
-//   The state of the DB snapshot does not allow deletion.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   Cannot restore from vpc backup to non-vpc DB instance.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeProvisionedIopsNotAvailableInAZFault "ProvisionedIopsNotAvailableInAZFault"
-//   Provisioned IOPS not available in the specified Availability Zone.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   StorageType specified cannot be associated with the DB Instance.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeDomainNotFoundFault "DomainNotFoundFault"
-//   Domain does not refer to an existing Active Directory Domain.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot
-func (c *RDS) RestoreDBInstanceFromDBSnapshot(input *RestoreDBInstanceFromDBSnapshotInput) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
-	req, out := c.RestoreDBInstanceFromDBSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// RestoreDBInstanceFromDBSnapshotWithContext is the same as RestoreDBInstanceFromDBSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreDBInstanceFromDBSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RestoreDBInstanceFromDBSnapshotWithContext(ctx aws.Context, input *RestoreDBInstanceFromDBSnapshotInput, opts ...aws.Option) (*RestoreDBInstanceFromDBSnapshotOutput, error) {
-	req, out := c.RestoreDBInstanceFromDBSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
-
-// RestoreDBInstanceToPointInTimeRequest generates a "aws.Request" representing the
-// client's request for the RestoreDBInstanceToPointInTime operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RestoreDBInstanceToPointInTime for more information on using the RestoreDBInstanceToPointInTime
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RestoreDBInstanceToPointInTimeRequest method.
-//    req, resp := client.RestoreDBInstanceToPointInTimeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RestoreDBInstanceFromDBSnapshotRequest method.
+//    req := client.RestoreDBInstanceFromDBSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime
-func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPointInTimeInput) (req *aws.Request, output *RestoreDBInstanceToPointInTimeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot
+func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFromDBSnapshotInput) RestoreDBInstanceFromDBSnapshotRequest {
 	op := &aws.Operation{
-		Name:       opRestoreDBInstanceToPointInTime,
+		Name:       opRestoreDBInstanceFromDBSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RestoreDBInstanceToPointInTimeInput{}
+		input = &RestoreDBInstanceFromDBSnapshotInput{}
 	}
 
-	output = &RestoreDBInstanceToPointInTimeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RestoreDBInstanceFromDBSnapshotOutput{})
+	return RestoreDBInstanceFromDBSnapshotRequest{Request: req, Input: input}
 }
 
-// RestoreDBInstanceToPointInTime API operation for Amazon Relational Database Service.
+const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
+
+// RestoreDBInstanceToPointInTimeRequest is a API request type for the RestoreDBInstanceToPointInTime API operation.
+type RestoreDBInstanceToPointInTimeRequest struct {
+	*aws.Request
+	Input *RestoreDBInstanceToPointInTimeInput
+}
+
+// Send marshals and sends the RestoreDBInstanceToPointInTime API request.
+func (r *RestoreDBInstanceToPointInTimeRequest) Send() (*RestoreDBInstanceToPointInTimeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreDBInstanceToPointInTimeOutput), nil
+}
+
+// RestoreDBInstanceToPointInTimeRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
 // Restores a DB instance to an arbitrary point in time. You can restore to
 // any point in time before the time identified by the LatestRestorableTime
@@ -8987,130 +5420,64 @@ func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPo
 // with mirroring; in this case, the instance becomes a mirrored deployment
 // and not a single-AZ deployment.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RestoreDBInstanceToPointInTime for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceAlreadyExistsFault "DBInstanceAlreadyExists"
-//   User already has a DB instance with the given identifier.
-//
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeInstanceQuotaExceededFault "InstanceQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB instances.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodePointInTimeRestoreNotEnabledFault "PointInTimeRestoreNotEnabled"
-//   SourceDBInstanceIdentifier refers to a DB instance with BackupRetentionPeriod
-//   equal to 0.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceeded"
-//   Request would result in user exceeding the allowed amount of storage available
-//   across all DB instances.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeInvalidRestoreFault "InvalidRestoreFault"
-//   Cannot restore from vpc backup to non-vpc DB instance.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeProvisionedIopsNotAvailableInAZFault "ProvisionedIopsNotAvailableInAZFault"
-//   Provisioned IOPS not available in the specified Availability Zone.
-//
-//   * ErrCodeOptionGroupNotFoundFault "OptionGroupNotFoundFault"
-//   The specified option group could not be found.
-//
-//   * ErrCodeStorageTypeNotSupportedFault "StorageTypeNotSupported"
-//   StorageType specified cannot be associated with the DB Instance.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeDomainNotFoundFault "DomainNotFoundFault"
-//   Domain does not refer to an existing Active Directory Domain.
+//    // Example sending a request using the RestoreDBInstanceToPointInTimeRequest method.
+//    req := client.RestoreDBInstanceToPointInTimeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime
-func (c *RDS) RestoreDBInstanceToPointInTime(input *RestoreDBInstanceToPointInTimeInput) (*RestoreDBInstanceToPointInTimeOutput, error) {
-	req, out := c.RestoreDBInstanceToPointInTimeRequest(input)
-	return out, req.Send()
-}
+func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPointInTimeInput) RestoreDBInstanceToPointInTimeRequest {
+	op := &aws.Operation{
+		Name:       opRestoreDBInstanceToPointInTime,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RestoreDBInstanceToPointInTimeWithContext is the same as RestoreDBInstanceToPointInTime with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RestoreDBInstanceToPointInTime for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RestoreDBInstanceToPointInTimeWithContext(ctx aws.Context, input *RestoreDBInstanceToPointInTimeInput, opts ...aws.Option) (*RestoreDBInstanceToPointInTimeOutput, error) {
-	req, out := c.RestoreDBInstanceToPointInTimeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RestoreDBInstanceToPointInTimeInput{}
+	}
+
+	req := c.newRequest(op, input, &RestoreDBInstanceToPointInTimeOutput{})
+	return RestoreDBInstanceToPointInTimeRequest{Request: req, Input: input}
 }
 
 const opRevokeDBSecurityGroupIngress = "RevokeDBSecurityGroupIngress"
 
-// RevokeDBSecurityGroupIngressRequest generates a "aws.Request" representing the
-// client's request for the RevokeDBSecurityGroupIngress operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RevokeDBSecurityGroupIngressRequest is a API request type for the RevokeDBSecurityGroupIngress API operation.
+type RevokeDBSecurityGroupIngressRequest struct {
+	*aws.Request
+	Input *RevokeDBSecurityGroupIngressInput
+}
+
+// Send marshals and sends the RevokeDBSecurityGroupIngress API request.
+func (r *RevokeDBSecurityGroupIngressRequest) Send() (*RevokeDBSecurityGroupIngressOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeDBSecurityGroupIngressOutput), nil
+}
+
+// RevokeDBSecurityGroupIngressRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RevokeDBSecurityGroupIngress for more information on using the RevokeDBSecurityGroupIngress
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Revokes ingress from a DBSecurityGroup for previously authorized IP ranges
+// or EC2 or VPC Security Groups. Required parameters for this API are one of
+// CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
+// EC2SecurityGroupName or EC2SecurityGroupId).
 //
 //    // Example sending a request using the RevokeDBSecurityGroupIngressRequest method.
-//    req, resp := client.RevokeDBSecurityGroupIngressRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RevokeDBSecurityGroupIngressRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngress
-func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIngressInput) (req *aws.Request, output *RevokeDBSecurityGroupIngressOutput) {
+func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIngressInput) RevokeDBSecurityGroupIngressRequest {
 	op := &aws.Operation{
 		Name:       opRevokeDBSecurityGroupIngress,
 		HTTPMethod: "POST",
@@ -9121,88 +5488,44 @@ func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIn
 		input = &RevokeDBSecurityGroupIngressInput{}
 	}
 
-	output = &RevokeDBSecurityGroupIngressOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RevokeDBSecurityGroupIngress API operation for Amazon Relational Database Service.
-//
-// Revokes ingress from a DBSecurityGroup for previously authorized IP ranges
-// or EC2 or VPC Security Groups. Required parameters for this API are one of
-// CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
-// EC2SecurityGroupName or EC2SecurityGroupId).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation RevokeDBSecurityGroupIngress for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBSecurityGroupNotFoundFault "DBSecurityGroupNotFound"
-//   DBSecurityGroupName does not refer to an existing DB security group.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeInvalidDBSecurityGroupStateFault "InvalidDBSecurityGroupState"
-//   The state of the DB security group does not allow deletion.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngress
-func (c *RDS) RevokeDBSecurityGroupIngress(input *RevokeDBSecurityGroupIngressInput) (*RevokeDBSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeDBSecurityGroupIngressRequest(input)
-	return out, req.Send()
-}
-
-// RevokeDBSecurityGroupIngressWithContext is the same as RevokeDBSecurityGroupIngress with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RevokeDBSecurityGroupIngress for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) RevokeDBSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeDBSecurityGroupIngressInput, opts ...aws.Option) (*RevokeDBSecurityGroupIngressOutput, error) {
-	req, out := c.RevokeDBSecurityGroupIngressRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RevokeDBSecurityGroupIngressOutput{})
+	return RevokeDBSecurityGroupIngressRequest{Request: req, Input: input}
 }
 
 const opStartDBInstance = "StartDBInstance"
 
-// StartDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the StartDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartDBInstanceRequest is a API request type for the StartDBInstance API operation.
+type StartDBInstanceRequest struct {
+	*aws.Request
+	Input *StartDBInstanceInput
+}
+
+// Send marshals and sends the StartDBInstance API request.
+func (r *StartDBInstanceRequest) Send() (*StartDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartDBInstanceOutput), nil
+}
+
+// StartDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartDBInstance for more information on using the StartDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts a DB instance that was stopped using the AWS console, the stop-db-instance
+// AWS CLI command, or the StopDBInstance action. For more information, see
+// Stopping and Starting a DB instance in the AWS RDS user guide.
 //
 //    // Example sending a request using the StartDBInstanceRequest method.
-//    req, resp := client.StartDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance
-func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) (req *aws.Request, output *StartDBInstanceOutput) {
+func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartDBInstance,
 		HTTPMethod: "POST",
@@ -9213,115 +5536,46 @@ func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) (req *aws.Requ
 		input = &StartDBInstanceInput{}
 	}
 
-	output = &StartDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartDBInstance API operation for Amazon Relational Database Service.
-//
-// Starts a DB instance that was stopped using the AWS console, the stop-db-instance
-// AWS CLI command, or the StopDBInstance action. For more information, see
-// Stopping and Starting a DB instance in the AWS RDS user guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation StartDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeInsufficientDBInstanceCapacityFault "InsufficientDBInstanceCapacity"
-//   Specified DB instance class is not available in the specified Availability
-//   Zone.
-//
-//   * ErrCodeDBSubnetGroupNotFoundFault "DBSubnetGroupNotFoundFault"
-//   DBSubnetGroupName does not refer to an existing DB subnet group.
-//
-//   * ErrCodeDBSubnetGroupDoesNotCoverEnoughAZs "DBSubnetGroupDoesNotCoverEnoughAZs"
-//   Subnets in the DB subnet group should cover at least two Availability Zones
-//   unless there is only one Availability Zone.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The requested subnet is invalid, or multiple subnets were requested that
-//   are not all in a common VPC.
-//
-//   * ErrCodeInvalidVPCNetworkStateFault "InvalidVPCNetworkStateFault"
-//   DB subnet group does not cover all Availability Zones after it is created
-//   because users' change.
-//
-//   * ErrCodeDBClusterNotFoundFault "DBClusterNotFoundFault"
-//   DBClusterIdentifier does not refer to an existing DB cluster.
-//
-//   * ErrCodeAuthorizationNotFoundFault "AuthorizationNotFound"
-//   Specified CIDRIP or EC2 security group is not authorized for the specified
-//   DB security group.
-//
-//   RDS may not also be authorized via IAM to perform necessary actions on your
-//   behalf.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   Error accessing KMS key.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance
-func (c *RDS) StartDBInstance(input *StartDBInstanceInput) (*StartDBInstanceOutput, error) {
-	req, out := c.StartDBInstanceRequest(input)
-	return out, req.Send()
-}
-
-// StartDBInstanceWithContext is the same as StartDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) StartDBInstanceWithContext(ctx aws.Context, input *StartDBInstanceInput, opts ...aws.Option) (*StartDBInstanceOutput, error) {
-	req, out := c.StartDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartDBInstanceOutput{})
+	return StartDBInstanceRequest{Request: req, Input: input}
 }
 
 const opStopDBInstance = "StopDBInstance"
 
-// StopDBInstanceRequest generates a "aws.Request" representing the
-// client's request for the StopDBInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopDBInstanceRequest is a API request type for the StopDBInstance API operation.
+type StopDBInstanceRequest struct {
+	*aws.Request
+	Input *StopDBInstanceInput
+}
+
+// Send marshals and sends the StopDBInstance API request.
+func (r *StopDBInstanceRequest) Send() (*StopDBInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopDBInstanceOutput), nil
+}
+
+// StopDBInstanceRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopDBInstance for more information on using the StopDBInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops a DB instance. When you stop a DB instance, Amazon RDS retains the
+// DB instance's metadata, including its endpoint, DB parameter group, and option
+// group membership. Amazon RDS also retains the transaction logs so you can
+// do a point-in-time restore if necessary. For more information, see Stopping
+// and Starting a DB instance in the AWS RDS user guide.
 //
 //    // Example sending a request using the StopDBInstanceRequest method.
-//    req, resp := client.StopDBInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopDBInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance
-func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) (req *aws.Request, output *StopDBInstanceOutput) {
+func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopDBInstance,
 		HTTPMethod: "POST",
@@ -9332,62 +5586,8 @@ func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) (req *aws.Reques
 		input = &StopDBInstanceInput{}
 	}
 
-	output = &StopDBInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopDBInstance API operation for Amazon Relational Database Service.
-//
-// Stops a DB instance. When you stop a DB instance, Amazon RDS retains the
-// DB instance's metadata, including its endpoint, DB parameter group, and option
-// group membership. Amazon RDS also retains the transaction logs so you can
-// do a point-in-time restore if necessary. For more information, see Stopping
-// and Starting a DB instance in the AWS RDS user guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Relational Database Service's
-// API operation StopDBInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDBInstanceNotFoundFault "DBInstanceNotFound"
-//   DBInstanceIdentifier does not refer to an existing DB instance.
-//
-//   * ErrCodeInvalidDBInstanceStateFault "InvalidDBInstanceState"
-//   The specified DB instance is not in the available state.
-//
-//   * ErrCodeDBSnapshotAlreadyExistsFault "DBSnapshotAlreadyExists"
-//   DBSnapshotIdentifier is already used by an existing snapshot.
-//
-//   * ErrCodeSnapshotQuotaExceededFault "SnapshotQuotaExceeded"
-//   Request would result in user exceeding the allowed number of DB snapshots.
-//
-//   * ErrCodeInvalidDBClusterStateFault "InvalidDBClusterStateFault"
-//   The DB cluster is not in a valid state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance
-func (c *RDS) StopDBInstance(input *StopDBInstanceInput) (*StopDBInstanceOutput, error) {
-	req, out := c.StopDBInstanceRequest(input)
-	return out, req.Send()
-}
-
-// StopDBInstanceWithContext is the same as StopDBInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopDBInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) StopDBInstanceWithContext(ctx aws.Context, input *StopDBInstanceInput, opts ...aws.Option) (*StopDBInstanceOutput, error) {
-	req, out := c.StopDBInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopDBInstanceOutput{})
+	return StopDBInstanceRequest{Request: req, Input: input}
 }
 
 // Describes a quota for an AWS account, for example, the number of DB instances
@@ -14367,40 +10567,6 @@ func (s *DBClusterParameterGroup) SetDescription(v string) *DBClusterParameterGr
 	return s
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupNameMessage
-type DBClusterParameterGroupNameMessage struct {
-	_ struct{} `type:"structure"`
-
-	// The name of the DB cluster parameter group.
-	//
-	// Constraints:
-	//
-	//    * Must be 1 to 255 alphanumeric characters
-	//
-	//    * First character must be a letter
-	//
-	//    * Cannot end with a hyphen or contain two consecutive hyphens
-	//
-	// This value is stored as a lowercase string.
-	DBClusterParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DBClusterParameterGroupNameMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s DBClusterParameterGroupNameMessage) GoString() string {
-	return s.String()
-}
-
-// SetDBClusterParameterGroupName sets the DBClusterParameterGroupName field's value.
-func (s *DBClusterParameterGroupNameMessage) SetDBClusterParameterGroupName(v string) *DBClusterParameterGroupNameMessage {
-	s.DBClusterParameterGroupName = &v
-	return s
-}
-
 // Describes an AWS Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole
@@ -15511,32 +11677,6 @@ func (s *DBParameterGroup) SetDBParameterGroupName(v string) *DBParameterGroup {
 // SetDescription sets the Description field's value.
 func (s *DBParameterGroup) SetDescription(v string) *DBParameterGroup {
 	s.Description = &v
-	return s
-}
-
-// Contains the result of a successful invocation of the ModifyDBParameterGroup
-// or ResetDBParameterGroup action.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupNameMessage
-type DBParameterGroupNameMessage struct {
-	_ struct{} `type:"structure"`
-
-	// Provides the name of the DB parameter group.
-	DBParameterGroupName *string `type:"string"`
-}
-
-// String returns the string representation
-func (s DBParameterGroupNameMessage) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s DBParameterGroupNameMessage) GoString() string {
-	return s.String()
-}
-
-// SetDBParameterGroupName sets the DBParameterGroupName field's value.
-func (s *DBParameterGroupNameMessage) SetDBParameterGroupName(v string) *DBParameterGroupNameMessage {
-	s.DBParameterGroupName = &v
 	return s
 }
 
@@ -25552,6 +21692,40 @@ func (s *ResetDBClusterParameterGroupInput) SetResetAllParameters(v bool) *Reset
 	return s
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroupOutput
+type ResetDBClusterParameterGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the DB cluster parameter group.
+	//
+	// Constraints:
+	//
+	//    * Must be 1 to 255 alphanumeric characters
+	//
+	//    * First character must be a letter
+	//
+	//    * Cannot end with a hyphen or contain two consecutive hyphens
+	//
+	// This value is stored as a lowercase string.
+	DBClusterParameterGroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResetDBClusterParameterGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResetDBClusterParameterGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetDBClusterParameterGroupName sets the DBClusterParameterGroupName field's value.
+func (s *ResetDBClusterParameterGroupOutput) SetDBClusterParameterGroupName(v string) *ResetDBClusterParameterGroupOutput {
+	s.DBClusterParameterGroupName = &v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroupMessage
 type ResetDBParameterGroupInput struct {
 	_ struct{} `type:"structure"`
@@ -25641,6 +21815,32 @@ func (s *ResetDBParameterGroupInput) SetParameters(v []*Parameter) *ResetDBParam
 // SetResetAllParameters sets the ResetAllParameters field's value.
 func (s *ResetDBParameterGroupInput) SetResetAllParameters(v bool) *ResetDBParameterGroupInput {
 	s.ResetAllParameters = &v
+	return s
+}
+
+// Contains the result of a successful invocation of the ModifyDBParameterGroup
+// or ResetDBParameterGroup action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroupOutput
+type ResetDBParameterGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Provides the name of the DB parameter group.
+	DBParameterGroupName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResetDBParameterGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResetDBParameterGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SetDBParameterGroupName sets the DBParameterGroupName field's value.
+func (s *ResetDBParameterGroupOutput) SetDBParameterGroupName(v string) *ResetDBParameterGroupOutput {
+	s.DBParameterGroupName = &v
 	return s
 }
 

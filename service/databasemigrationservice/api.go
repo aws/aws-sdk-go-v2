@@ -12,31 +12,39 @@ import (
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
+}
+
+// Send marshals and sends the AddTagsToResource API request.
+func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds metadata tags to a DMS resource, including replication instance, endpoint,
+// security group, and migration task. These tags can also be used with cost
+// allocation reporting to track cost associated with DMS resources, or used
+// in a Condition statement in an IAM policy for DMS.
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResource
-func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
@@ -47,78 +55,42 @@ func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToReso
 		input = &AddTagsToResourceInput{}
 	}
 
-	output = &AddTagsToResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddTagsToResource API operation for AWS Database Migration Service.
-//
-// Adds metadata tags to a DMS resource, including replication instance, endpoint,
-// security group, and migration task. These tags can also be used with cost
-// allocation reporting to track cost associated with DMS resources, or used
-// in a Condition statement in an IAM policy for DMS.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResource
-func (c *DatabaseMigrationService) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opCreateEndpoint = "CreateEndpoint"
 
-// CreateEndpointRequest generates a "aws.Request" representing the
-// client's request for the CreateEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateEndpointRequest is a API request type for the CreateEndpoint API operation.
+type CreateEndpointRequest struct {
+	*aws.Request
+	Input *CreateEndpointInput
+}
+
+// Send marshals and sends the CreateEndpoint API request.
+func (r *CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateEndpointOutput), nil
+}
+
+// CreateEndpointRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEndpoint for more information on using the CreateEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an endpoint using the provided settings.
 //
 //    // Example sending a request using the CreateEndpointRequest method.
-//    req, resp := client.CreateEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint
-func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointInput) (req *aws.Request, output *CreateEndpointOutput) {
+func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointInput) CreateEndpointRequest {
 	op := &aws.Operation{
 		Name:       opCreateEndpoint,
 		HTTPMethod: "POST",
@@ -129,107 +101,30 @@ func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointIn
 		input = &CreateEndpointInput{}
 	}
 
-	output = &CreateEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateEndpoint API operation for AWS Database Migration Service.
-//
-// Creates an endpoint using the provided settings.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation CreateEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint
-func (c *DatabaseMigrationService) CreateEndpoint(input *CreateEndpointInput) (*CreateEndpointOutput, error) {
-	req, out := c.CreateEndpointRequest(input)
-	return out, req.Send()
-}
-
-// CreateEndpointWithContext is the same as CreateEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateEndpointWithContext(ctx aws.Context, input *CreateEndpointInput, opts ...aws.Option) (*CreateEndpointOutput, error) {
-	req, out := c.CreateEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateEndpointOutput{})
+	return CreateEndpointRequest{Request: req, Input: input}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the CreateEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateEventSubscription for more information on using the CreateEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateEventSubscriptionRequest method.
-//    req, resp := client.CreateEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscription
-func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateEventSubscription,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateEventSubscriptionInput{}
-	}
-
-	output = &CreateEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateEventSubscriptionRequest is a API request type for the CreateEventSubscription API operation.
+type CreateEventSubscriptionRequest struct {
+	*aws.Request
+	Input *CreateEventSubscriptionInput
 }
 
-// CreateEventSubscription API operation for AWS Database Migration Service.
+// Send marshals and sends the CreateEventSubscription API request.
+func (r *CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateEventSubscriptionOutput), nil
+}
+
+// CreateEventSubscriptionRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
 // Creates an AWS DMS event notification subscription.
 //
@@ -249,78 +144,61 @@ func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateE
 //  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html) in the
 // AWS Database MIgration Service User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation CreateEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopicFault"
-//   The SNS topic is invalid.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorizationFault"
-//   You are not authorized for the SNS subscription.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
+//    // Example sending a request using the CreateEventSubscriptionRequest method.
+//    req := client.CreateEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscription
-func (c *DatabaseMigrationService) CreateEventSubscription(input *CreateEventSubscriptionInput) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	return out, req.Send()
-}
+func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) CreateEventSubscriptionRequest {
+	op := &aws.Operation{
+		Name:       opCreateEventSubscription,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateEventSubscriptionWithContext is the same as CreateEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
-	req, out := c.CreateEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateEventSubscriptionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateEventSubscriptionOutput{})
+	return CreateEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opCreateReplicationInstance = "CreateReplicationInstance"
 
-// CreateReplicationInstanceRequest generates a "aws.Request" representing the
-// client's request for the CreateReplicationInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateReplicationInstanceRequest is a API request type for the CreateReplicationInstance API operation.
+type CreateReplicationInstanceRequest struct {
+	*aws.Request
+	Input *CreateReplicationInstanceInput
+}
+
+// Send marshals and sends the CreateReplicationInstance API request.
+func (r *CreateReplicationInstanceRequest) Send() (*CreateReplicationInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReplicationInstanceOutput), nil
+}
+
+// CreateReplicationInstanceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReplicationInstance for more information on using the CreateReplicationInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates the replication instance using the specified parameters.
 //
 //    // Example sending a request using the CreateReplicationInstanceRequest method.
-//    req, resp := client.CreateReplicationInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateReplicationInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance
-func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *CreateReplicationInstanceInput) (req *aws.Request, output *CreateReplicationInstanceOutput) {
+func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *CreateReplicationInstanceInput) CreateReplicationInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateReplicationInstance,
 		HTTPMethod: "POST",
@@ -331,104 +209,42 @@ func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *Creat
 		input = &CreateReplicationInstanceInput{}
 	}
 
-	output = &CreateReplicationInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateReplicationInstance API operation for AWS Database Migration Service.
-//
-// Creates the replication instance using the specified parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation CreateReplicationInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeInsufficientResourceCapacityFault "InsufficientResourceCapacityFault"
-//   There are not enough resources allocated to the database migration.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceededFault"
-//   The storage quota has been exceeded.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeReplicationSubnetGroupDoesNotCoverEnoughAZs "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
-//   The replication subnet group does not cover enough Availability Zones (AZs).
-//   Edit the replication subnet group and add more AZs.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The subnet provided is invalid.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance
-func (c *DatabaseMigrationService) CreateReplicationInstance(input *CreateReplicationInstanceInput) (*CreateReplicationInstanceOutput, error) {
-	req, out := c.CreateReplicationInstanceRequest(input)
-	return out, req.Send()
-}
-
-// CreateReplicationInstanceWithContext is the same as CreateReplicationInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReplicationInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationInstanceWithContext(ctx aws.Context, input *CreateReplicationInstanceInput, opts ...aws.Option) (*CreateReplicationInstanceOutput, error) {
-	req, out := c.CreateReplicationInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateReplicationInstanceOutput{})
+	return CreateReplicationInstanceRequest{Request: req, Input: input}
 }
 
 const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 
-// CreateReplicationSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the CreateReplicationSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateReplicationSubnetGroupRequest is a API request type for the CreateReplicationSubnetGroup API operation.
+type CreateReplicationSubnetGroupRequest struct {
+	*aws.Request
+	Input *CreateReplicationSubnetGroupInput
+}
+
+// Send marshals and sends the CreateReplicationSubnetGroup API request.
+func (r *CreateReplicationSubnetGroupRequest) Send() (*CreateReplicationSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReplicationSubnetGroupOutput), nil
+}
+
+// CreateReplicationSubnetGroupRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReplicationSubnetGroup for more information on using the CreateReplicationSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a replication subnet group given a list of the subnet IDs in a VPC.
 //
 //    // Example sending a request using the CreateReplicationSubnetGroupRequest method.
-//    req, resp := client.CreateReplicationSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateReplicationSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup
-func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *CreateReplicationSubnetGroupInput) (req *aws.Request, output *CreateReplicationSubnetGroupOutput) {
+func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opCreateReplicationSubnetGroup,
 		HTTPMethod: "POST",
@@ -439,91 +255,42 @@ func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *Cr
 		input = &CreateReplicationSubnetGroupInput{}
 	}
 
-	output = &CreateReplicationSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateReplicationSubnetGroup API operation for AWS Database Migration Service.
-//
-// Creates a replication subnet group given a list of the subnet IDs in a VPC.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation CreateReplicationSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeReplicationSubnetGroupDoesNotCoverEnoughAZs "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
-//   The replication subnet group does not cover enough Availability Zones (AZs).
-//   Edit the replication subnet group and add more AZs.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The subnet provided is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup
-func (c *DatabaseMigrationService) CreateReplicationSubnetGroup(input *CreateReplicationSubnetGroupInput) (*CreateReplicationSubnetGroupOutput, error) {
-	req, out := c.CreateReplicationSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// CreateReplicationSubnetGroupWithContext is the same as CreateReplicationSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReplicationSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationSubnetGroupWithContext(ctx aws.Context, input *CreateReplicationSubnetGroupInput, opts ...aws.Option) (*CreateReplicationSubnetGroupOutput, error) {
-	req, out := c.CreateReplicationSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateReplicationSubnetGroupOutput{})
+	return CreateReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opCreateReplicationTask = "CreateReplicationTask"
 
-// CreateReplicationTaskRequest generates a "aws.Request" representing the
-// client's request for the CreateReplicationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateReplicationTaskRequest is a API request type for the CreateReplicationTask API operation.
+type CreateReplicationTaskRequest struct {
+	*aws.Request
+	Input *CreateReplicationTaskInput
+}
+
+// Send marshals and sends the CreateReplicationTask API request.
+func (r *CreateReplicationTaskRequest) Send() (*CreateReplicationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReplicationTaskOutput), nil
+}
+
+// CreateReplicationTaskRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReplicationTask for more information on using the CreateReplicationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a replication task using the specified parameters.
 //
 //    // Example sending a request using the CreateReplicationTaskRequest method.
-//    req, resp := client.CreateReplicationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateReplicationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask
-func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateReplicationTaskInput) (req *aws.Request, output *CreateReplicationTaskOutput) {
+func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateReplicationTaskInput) CreateReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opCreateReplicationTask,
 		HTTPMethod: "POST",
@@ -534,91 +301,42 @@ func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateRep
 		input = &CreateReplicationTaskInput{}
 	}
 
-	output = &CreateReplicationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateReplicationTask API operation for AWS Database Migration Service.
-//
-// Creates a replication task using the specified parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation CreateReplicationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask
-func (c *DatabaseMigrationService) CreateReplicationTask(input *CreateReplicationTaskInput) (*CreateReplicationTaskOutput, error) {
-	req, out := c.CreateReplicationTaskRequest(input)
-	return out, req.Send()
-}
-
-// CreateReplicationTaskWithContext is the same as CreateReplicationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReplicationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationTaskWithContext(ctx aws.Context, input *CreateReplicationTaskInput, opts ...aws.Option) (*CreateReplicationTaskOutput, error) {
-	req, out := c.CreateReplicationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateReplicationTaskOutput{})
+	return CreateReplicationTaskRequest{Request: req, Input: input}
 }
 
 const opDeleteCertificate = "DeleteCertificate"
 
-// DeleteCertificateRequest generates a "aws.Request" representing the
-// client's request for the DeleteCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCertificateRequest is a API request type for the DeleteCertificate API operation.
+type DeleteCertificateRequest struct {
+	*aws.Request
+	Input *DeleteCertificateInput
+}
+
+// Send marshals and sends the DeleteCertificate API request.
+func (r *DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCertificateOutput), nil
+}
+
+// DeleteCertificateRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCertificate for more information on using the DeleteCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified certificate.
 //
 //    // Example sending a request using the DeleteCertificateRequest method.
-//    req, resp := client.DeleteCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate
-func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.Request, output *DeleteCertificateOutput) {
+func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCertificateRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCertificate,
 		HTTPMethod: "POST",
@@ -629,79 +347,45 @@ func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertifi
 		input = &DeleteCertificateInput{}
 	}
 
-	output = &DeleteCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCertificate API operation for AWS Database Migration Service.
-//
-// Deletes the specified certificate.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate
-func (c *DatabaseMigrationService) DeleteCertificate(input *DeleteCertificateInput) (*DeleteCertificateOutput, error) {
-	req, out := c.DeleteCertificateRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCertificateWithContext is the same as DeleteCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...aws.Option) (*DeleteCertificateOutput, error) {
-	req, out := c.DeleteCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteCertificateOutput{})
+	return DeleteCertificateRequest{Request: req, Input: input}
 }
 
 const opDeleteEndpoint = "DeleteEndpoint"
 
-// DeleteEndpointRequest generates a "aws.Request" representing the
-// client's request for the DeleteEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEndpointRequest is a API request type for the DeleteEndpoint API operation.
+type DeleteEndpointRequest struct {
+	*aws.Request
+	Input *DeleteEndpointInput
+}
+
+// Send marshals and sends the DeleteEndpoint API request.
+func (r *DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEndpointOutput), nil
+}
+
+// DeleteEndpointRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified endpoint.
 //
-// See DeleteEndpoint for more information on using the DeleteEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// All tasks associated with the endpoint must be deleted before you can delete
+// the endpoint.
 //
 //    // Example sending a request using the DeleteEndpointRequest method.
-//    req, resp := client.DeleteEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint
-func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointInput) (req *aws.Request, output *DeleteEndpointOutput) {
+func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEndpoint,
 		HTTPMethod: "POST",
@@ -712,82 +396,42 @@ func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointIn
 		input = &DeleteEndpointInput{}
 	}
 
-	output = &DeleteEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEndpoint API operation for AWS Database Migration Service.
-//
-// Deletes the specified endpoint.
-//
-// All tasks associated with the endpoint must be deleted before you can delete
-// the endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint
-func (c *DatabaseMigrationService) DeleteEndpoint(input *DeleteEndpointInput) (*DeleteEndpointOutput, error) {
-	req, out := c.DeleteEndpointRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEndpointWithContext is the same as DeleteEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...aws.Option) (*DeleteEndpointOutput, error) {
-	req, out := c.DeleteEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEndpointOutput{})
+	return DeleteEndpointRequest{Request: req, Input: input}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the DeleteEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEventSubscriptionRequest is a API request type for the DeleteEventSubscription API operation.
+type DeleteEventSubscriptionRequest struct {
+	*aws.Request
+	Input *DeleteEventSubscriptionInput
+}
+
+// Send marshals and sends the DeleteEventSubscription API request.
+func (r *DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEventSubscriptionOutput), nil
+}
+
+// DeleteEventSubscriptionRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEventSubscription for more information on using the DeleteEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an AWS DMS event subscription.
 //
 //    // Example sending a request using the DeleteEventSubscriptionRequest method.
-//    req, resp := client.DeleteEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscription
-func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
@@ -798,79 +442,45 @@ func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteE
 		input = &DeleteEventSubscriptionInput{}
 	}
 
-	output = &DeleteEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEventSubscription API operation for AWS Database Migration Service.
-//
-// Deletes an AWS DMS event subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscription
-func (c *DatabaseMigrationService) DeleteEventSubscription(input *DeleteEventSubscriptionInput) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEventSubscriptionWithContext is the same as DeleteEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
-	req, out := c.DeleteEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEventSubscriptionOutput{})
+	return DeleteEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opDeleteReplicationInstance = "DeleteReplicationInstance"
 
-// DeleteReplicationInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeleteReplicationInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteReplicationInstanceRequest is a API request type for the DeleteReplicationInstance API operation.
+type DeleteReplicationInstanceRequest struct {
+	*aws.Request
+	Input *DeleteReplicationInstanceInput
+}
+
+// Send marshals and sends the DeleteReplicationInstance API request.
+func (r *DeleteReplicationInstanceRequest) Send() (*DeleteReplicationInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReplicationInstanceOutput), nil
+}
+
+// DeleteReplicationInstanceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified replication instance.
 //
-// See DeleteReplicationInstance for more information on using the DeleteReplicationInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You must delete any migration tasks that are associated with the replication
+// instance before you can delete it.
 //
 //    // Example sending a request using the DeleteReplicationInstanceRequest method.
-//    req, resp := client.DeleteReplicationInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteReplicationInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance
-func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *DeleteReplicationInstanceInput) (req *aws.Request, output *DeleteReplicationInstanceOutput) {
+func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationInstance,
 		HTTPMethod: "POST",
@@ -881,82 +491,42 @@ func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *Delet
 		input = &DeleteReplicationInstanceInput{}
 	}
 
-	output = &DeleteReplicationInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteReplicationInstance API operation for AWS Database Migration Service.
-//
-// Deletes the specified replication instance.
-//
-// You must delete any migration tasks that are associated with the replication
-// instance before you can delete it.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteReplicationInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance
-func (c *DatabaseMigrationService) DeleteReplicationInstance(input *DeleteReplicationInstanceInput) (*DeleteReplicationInstanceOutput, error) {
-	req, out := c.DeleteReplicationInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteReplicationInstanceWithContext is the same as DeleteReplicationInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReplicationInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationInstanceWithContext(ctx aws.Context, input *DeleteReplicationInstanceInput, opts ...aws.Option) (*DeleteReplicationInstanceOutput, error) {
-	req, out := c.DeleteReplicationInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteReplicationInstanceOutput{})
+	return DeleteReplicationInstanceRequest{Request: req, Input: input}
 }
 
 const opDeleteReplicationSubnetGroup = "DeleteReplicationSubnetGroup"
 
-// DeleteReplicationSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the DeleteReplicationSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteReplicationSubnetGroupRequest is a API request type for the DeleteReplicationSubnetGroup API operation.
+type DeleteReplicationSubnetGroupRequest struct {
+	*aws.Request
+	Input *DeleteReplicationSubnetGroupInput
+}
+
+// Send marshals and sends the DeleteReplicationSubnetGroup API request.
+func (r *DeleteReplicationSubnetGroupRequest) Send() (*DeleteReplicationSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReplicationSubnetGroupOutput), nil
+}
+
+// DeleteReplicationSubnetGroupRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReplicationSubnetGroup for more information on using the DeleteReplicationSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a subnet group.
 //
 //    // Example sending a request using the DeleteReplicationSubnetGroupRequest method.
-//    req, resp := client.DeleteReplicationSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteReplicationSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroup
-func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *DeleteReplicationSubnetGroupInput) (req *aws.Request, output *DeleteReplicationSubnetGroupOutput) {
+func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *DeleteReplicationSubnetGroupInput) DeleteReplicationSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationSubnetGroup,
 		HTTPMethod: "POST",
@@ -967,79 +537,42 @@ func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *De
 		input = &DeleteReplicationSubnetGroupInput{}
 	}
 
-	output = &DeleteReplicationSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteReplicationSubnetGroup API operation for AWS Database Migration Service.
-//
-// Deletes a subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteReplicationSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroup
-func (c *DatabaseMigrationService) DeleteReplicationSubnetGroup(input *DeleteReplicationSubnetGroupInput) (*DeleteReplicationSubnetGroupOutput, error) {
-	req, out := c.DeleteReplicationSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// DeleteReplicationSubnetGroupWithContext is the same as DeleteReplicationSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReplicationSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupWithContext(ctx aws.Context, input *DeleteReplicationSubnetGroupInput, opts ...aws.Option) (*DeleteReplicationSubnetGroupOutput, error) {
-	req, out := c.DeleteReplicationSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteReplicationSubnetGroupOutput{})
+	return DeleteReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opDeleteReplicationTask = "DeleteReplicationTask"
 
-// DeleteReplicationTaskRequest generates a "aws.Request" representing the
-// client's request for the DeleteReplicationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteReplicationTaskRequest is a API request type for the DeleteReplicationTask API operation.
+type DeleteReplicationTaskRequest struct {
+	*aws.Request
+	Input *DeleteReplicationTaskInput
+}
+
+// Send marshals and sends the DeleteReplicationTask API request.
+func (r *DeleteReplicationTaskRequest) Send() (*DeleteReplicationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReplicationTaskOutput), nil
+}
+
+// DeleteReplicationTaskRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReplicationTask for more information on using the DeleteReplicationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified replication task.
 //
 //    // Example sending a request using the DeleteReplicationTaskRequest method.
-//    req, resp := client.DeleteReplicationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteReplicationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask
-func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteReplicationTaskInput) (req *aws.Request, output *DeleteReplicationTaskOutput) {
+func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteReplicationTaskInput) DeleteReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opDeleteReplicationTask,
 		HTTPMethod: "POST",
@@ -1050,79 +583,47 @@ func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteRep
 		input = &DeleteReplicationTaskInput{}
 	}
 
-	output = &DeleteReplicationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteReplicationTask API operation for AWS Database Migration Service.
-//
-// Deletes the specified replication task.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DeleteReplicationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask
-func (c *DatabaseMigrationService) DeleteReplicationTask(input *DeleteReplicationTaskInput) (*DeleteReplicationTaskOutput, error) {
-	req, out := c.DeleteReplicationTaskRequest(input)
-	return out, req.Send()
-}
-
-// DeleteReplicationTaskWithContext is the same as DeleteReplicationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReplicationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationTaskWithContext(ctx aws.Context, input *DeleteReplicationTaskInput, opts ...aws.Option) (*DeleteReplicationTaskOutput, error) {
-	req, out := c.DeleteReplicationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteReplicationTaskOutput{})
+	return DeleteReplicationTaskRequest{Request: req, Input: input}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws.Request" representing the
-// client's request for the DescribeAccountAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAccountAttributesRequest is a API request type for the DescribeAccountAttributes API operation.
+type DescribeAccountAttributesRequest struct {
+	*aws.Request
+	Input *DescribeAccountAttributesInput
+}
+
+// Send marshals and sends the DescribeAccountAttributes API request.
+func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountAttributesOutput), nil
+}
+
+// DescribeAccountAttributesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all of the AWS DMS attributes for a customer account. The attributes
+// include AWS DMS quotas for the account, such as the number of replication
+// instances allowed. The description for a quota includes the quota name, current
+// usage toward that quota, and the quota's maximum value.
 //
-// See DescribeAccountAttributes for more information on using the DescribeAccountAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This command does not take any parameters.
 //
 //    // Example sending a request using the DescribeAccountAttributesRequest method.
-//    req, resp := client.DescribeAccountAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAccountAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributes
-func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
@@ -1133,75 +634,42 @@ func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *Descr
 		input = &DescribeAccountAttributesInput{}
 	}
 
-	output = &DescribeAccountAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAccountAttributes API operation for AWS Database Migration Service.
-//
-// Lists all of the AWS DMS attributes for a customer account. The attributes
-// include AWS DMS quotas for the account, such as the number of replication
-// instances allowed. The description for a quota includes the quota name, current
-// usage toward that quota, and the quota's maximum value.
-//
-// This command does not take any parameters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeAccountAttributes for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributes
-func (c *DatabaseMigrationService) DescribeAccountAttributes(input *DescribeAccountAttributesInput) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAccountAttributesWithContext is the same as DescribeAccountAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAccountAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
-	req, out := c.DescribeAccountAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAccountAttributesOutput{})
+	return DescribeAccountAttributesRequest{Request: req, Input: input}
 }
 
 const opDescribeCertificates = "DescribeCertificates"
 
-// DescribeCertificatesRequest generates a "aws.Request" representing the
-// client's request for the DescribeCertificates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCertificatesRequest is a API request type for the DescribeCertificates API operation.
+type DescribeCertificatesRequest struct {
+	*aws.Request
+	Input *DescribeCertificatesInput
+}
+
+// Send marshals and sends the DescribeCertificates API request.
+func (r *DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCertificatesOutput), nil
+}
+
+// DescribeCertificatesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCertificates for more information on using the DescribeCertificates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides a description of the certificate.
 //
 //    // Example sending a request using the DescribeCertificatesRequest method.
-//    req, resp := client.DescribeCertificatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCertificatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates
-func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *aws.Request, output *DescribeCertificatesOutput) {
+func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCertificatesInput) DescribeCertificatesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
@@ -1218,46 +686,8 @@ func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCe
 		input = &DescribeCertificatesInput{}
 	}
 
-	output = &DescribeCertificatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCertificates API operation for AWS Database Migration Service.
-//
-// Provides a description of the certificate.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeCertificates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates
-func (c *DatabaseMigrationService) DescribeCertificates(input *DescribeCertificatesInput) (*DescribeCertificatesOutput, error) {
-	req, out := c.DescribeCertificatesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCertificatesWithContext is the same as DescribeCertificates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCertificates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...aws.Option) (*DescribeCertificatesOutput, error) {
-	req, out := c.DescribeCertificatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCertificatesOutput{})
+	return DescribeCertificatesRequest{Request: req, Input: input}
 }
 
 // DescribeCertificatesPages iterates over the pages of a DescribeCertificates operation,
@@ -1296,10 +726,10 @@ func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCertificatesRequest(inCpy)
+			req := c.DescribeCertificatesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1312,31 +742,37 @@ func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.
 
 const opDescribeConnections = "DescribeConnections"
 
-// DescribeConnectionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeConnections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConnectionsRequest is a API request type for the DescribeConnections API operation.
+type DescribeConnectionsRequest struct {
+	*aws.Request
+	Input *DescribeConnectionsInput
+}
+
+// Send marshals and sends the DescribeConnections API request.
+func (r *DescribeConnectionsRequest) Send() (*DescribeConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConnectionsOutput), nil
+}
+
+// DescribeConnectionsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConnections for more information on using the DescribeConnections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the status of the connections that have been made between the replication
+// instance and an endpoint. Connections are created when you test an endpoint.
 //
 //    // Example sending a request using the DescribeConnectionsRequest method.
-//    req, resp := client.DescribeConnectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConnectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections
-func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *aws.Request, output *DescribeConnectionsOutput) {
+func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeConnectionsInput) DescribeConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
@@ -1353,47 +789,8 @@ func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeCon
 		input = &DescribeConnectionsInput{}
 	}
 
-	output = &DescribeConnectionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConnections API operation for AWS Database Migration Service.
-//
-// Describes the status of the connections that have been made between the replication
-// instance and an endpoint. Connections are created when you test an endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeConnections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections
-func (c *DatabaseMigrationService) DescribeConnections(input *DescribeConnectionsInput) (*DescribeConnectionsOutput, error) {
-	req, out := c.DescribeConnectionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConnectionsWithContext is the same as DescribeConnections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConnections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...aws.Option) (*DescribeConnectionsOutput, error) {
-	req, out := c.DescribeConnectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConnectionsOutput{})
+	return DescribeConnectionsRequest{Request: req, Input: input}
 }
 
 // DescribeConnectionsPages iterates over the pages of a DescribeConnections operation,
@@ -1432,10 +829,10 @@ func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.C
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeConnectionsRequest(inCpy)
+			req := c.DescribeConnectionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1448,31 +845,36 @@ func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.C
 
 const opDescribeEndpointTypes = "DescribeEndpointTypes"
 
-// DescribeEndpointTypesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEndpointTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEndpointTypesRequest is a API request type for the DescribeEndpointTypes API operation.
+type DescribeEndpointTypesRequest struct {
+	*aws.Request
+	Input *DescribeEndpointTypesInput
+}
+
+// Send marshals and sends the DescribeEndpointTypes API request.
+func (r *DescribeEndpointTypesRequest) Send() (*DescribeEndpointTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEndpointTypesOutput), nil
+}
+
+// DescribeEndpointTypesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEndpointTypes for more information on using the DescribeEndpointTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the type of endpoints available.
 //
 //    // Example sending a request using the DescribeEndpointTypesRequest method.
-//    req, resp := client.DescribeEndpointTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEndpointTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes
-func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput) (req *aws.Request, output *DescribeEndpointTypesOutput) {
+func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput) DescribeEndpointTypesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpointTypes,
 		HTTPMethod: "POST",
@@ -1489,41 +891,8 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeE
 		input = &DescribeEndpointTypesInput{}
 	}
 
-	output = &DescribeEndpointTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEndpointTypes API operation for AWS Database Migration Service.
-//
-// Returns information about the type of endpoints available.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeEndpointTypes for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes
-func (c *DatabaseMigrationService) DescribeEndpointTypes(input *DescribeEndpointTypesInput) (*DescribeEndpointTypesOutput, error) {
-	req, out := c.DescribeEndpointTypesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEndpointTypesWithContext is the same as DescribeEndpointTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEndpointTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointTypesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, opts ...aws.Option) (*DescribeEndpointTypesOutput, error) {
-	req, out := c.DescribeEndpointTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEndpointTypesOutput{})
+	return DescribeEndpointTypesRequest{Request: req, Input: input}
 }
 
 // DescribeEndpointTypesPages iterates over the pages of a DescribeEndpointTypes operation,
@@ -1562,10 +931,10 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEndpointTypesRequest(inCpy)
+			req := c.DescribeEndpointTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1578,31 +947,36 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws
 
 const opDescribeEndpoints = "DescribeEndpoints"
 
-// DescribeEndpointsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEndpoints operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEndpointsRequest is a API request type for the DescribeEndpoints API operation.
+type DescribeEndpointsRequest struct {
+	*aws.Request
+	Input *DescribeEndpointsInput
+}
+
+// Send marshals and sends the DescribeEndpoints API request.
+func (r *DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEndpointsOutput), nil
+}
+
+// DescribeEndpointsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEndpoints for more information on using the DescribeEndpoints
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the endpoints for your account in the current region.
 //
 //    // Example sending a request using the DescribeEndpointsRequest method.
-//    req, resp := client.DescribeEndpointsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEndpointsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints
-func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpointsInput) (req *aws.Request, output *DescribeEndpointsOutput) {
+func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpointsInput) DescribeEndpointsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEndpoints,
 		HTTPMethod: "POST",
@@ -1619,46 +993,8 @@ func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpo
 		input = &DescribeEndpointsInput{}
 	}
 
-	output = &DescribeEndpointsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEndpoints API operation for AWS Database Migration Service.
-//
-// Returns information about the endpoints for your account in the current region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeEndpoints for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints
-func (c *DatabaseMigrationService) DescribeEndpoints(input *DescribeEndpointsInput) (*DescribeEndpointsOutput, error) {
-	req, out := c.DescribeEndpointsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEndpointsWithContext is the same as DescribeEndpoints with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEndpoints for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointsWithContext(ctx aws.Context, input *DescribeEndpointsInput, opts ...aws.Option) (*DescribeEndpointsOutput, error) {
-	req, out := c.DescribeEndpointsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEndpointsOutput{})
+	return DescribeEndpointsRequest{Request: req, Input: input}
 }
 
 // DescribeEndpointsPages iterates over the pages of a DescribeEndpoints operation,
@@ -1697,10 +1033,10 @@ func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Con
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEndpointsRequest(inCpy)
+			req := c.DescribeEndpointsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1713,31 +1049,39 @@ func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Con
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventCategories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventCategoriesRequest is a API request type for the DescribeEventCategories API operation.
+type DescribeEventCategoriesRequest struct {
+	*aws.Request
+	Input *DescribeEventCategoriesInput
+}
+
+// Send marshals and sends the DescribeEventCategories API request.
+func (r *DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventCategoriesOutput), nil
+}
+
+// DescribeEventCategoriesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEventCategories for more information on using the DescribeEventCategories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists categories for all event source types, or, if specified, for a specified
+// source type. You can see a list of the event categories and source types
+// in  Working with Events and Notifications  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html)
+// in the AWS Database Migration Service User Guide.
 //
 //    // Example sending a request using the DescribeEventCategoriesRequest method.
-//    req, resp := client.DescribeEventCategoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventCategoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategories
-func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) DescribeEventCategoriesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
@@ -1748,73 +1092,47 @@ func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *Describ
 		input = &DescribeEventCategoriesInput{}
 	}
 
-	output = &DescribeEventCategoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventCategories API operation for AWS Database Migration Service.
-//
-// Lists categories for all event source types, or, if specified, for a specified
-// source type. You can see a list of the event categories and source types
-// in  Working with Events and Notifications  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html)
-// in the AWS Database Migration Service User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeEventCategories for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategories
-func (c *DatabaseMigrationService) DescribeEventCategories(input *DescribeEventCategoriesInput) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventCategoriesWithContext is the same as DescribeEventCategories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventCategories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
-	req, out := c.DescribeEventCategoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventCategoriesOutput{})
+	return DescribeEventCategoriesRequest{Request: req, Input: input}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEventSubscriptions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventSubscriptionsRequest is a API request type for the DescribeEventSubscriptions API operation.
+type DescribeEventSubscriptionsRequest struct {
+	*aws.Request
+	Input *DescribeEventSubscriptionsInput
+}
+
+// Send marshals and sends the DescribeEventSubscriptions API request.
+func (r *DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventSubscriptionsOutput), nil
+}
+
+// DescribeEventSubscriptionsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists all the event subscriptions for a customer account. The description
+// of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
+// SourceID, CreationTime, and Status.
 //
-// See DescribeEventSubscriptions for more information on using the DescribeEventSubscriptions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you specify SubscriptionName, this action lists the description for that
+// subscription.
 //
 //    // Example sending a request using the DescribeEventSubscriptionsRequest method.
-//    req, resp := client.DescribeEventSubscriptionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventSubscriptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptions
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
@@ -1831,51 +1149,8 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *Desc
 		input = &DescribeEventSubscriptionsInput{}
 	}
 
-	output = &DescribeEventSubscriptionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEventSubscriptions API operation for AWS Database Migration Service.
-//
-// Lists all the event subscriptions for a customer account. The description
-// of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType,
-// SourceID, CreationTime, and Status.
-//
-// If you specify SubscriptionName, this action lists the description for that
-// subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeEventSubscriptions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptions
-func (c *DatabaseMigrationService) DescribeEventSubscriptions(input *DescribeEventSubscriptionsInput) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventSubscriptionsWithContext is the same as DescribeEventSubscriptions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEventSubscriptions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
-	req, out := c.DescribeEventSubscriptionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventSubscriptionsOutput{})
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
 }
 
 // DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
@@ -1914,10 +1189,10 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ct
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventSubscriptionsRequest(inCpy)
+			req := c.DescribeEventSubscriptionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1930,31 +1205,38 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ct
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws.Request" representing the
-// client's request for the DescribeEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEventsRequest is a API request type for the DescribeEvents API operation.
+type DescribeEventsRequest struct {
+	*aws.Request
+	Input *DescribeEventsInput
+}
+
+// Send marshals and sends the DescribeEvents API request.
+func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEventsOutput), nil
+}
+
+// DescribeEventsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeEvents for more information on using the DescribeEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists events for a given source identifier and source type. You can also
+// specify a start and end time. For more information on AWS DMS events, see
+//  Working with Events and Notifications  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html).
 //
 //    // Example sending a request using the DescribeEventsRequest method.
-//    req, resp := client.DescribeEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEvents
-func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
@@ -1971,43 +1253,8 @@ func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsIn
 		input = &DescribeEventsInput{}
 	}
 
-	output = &DescribeEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEvents API operation for AWS Database Migration Service.
-//
-// Lists events for a given source identifier and source type. You can also
-// specify a start and end time. For more information on AWS DMS events, see
-//  Working with Events and Notifications  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeEvents for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEvents
-func (c *DatabaseMigrationService) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEventsWithContext is the same as DescribeEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
-	req, out := c.DescribeEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEventsOutput{})
+	return DescribeEventsRequest{Request: req, Input: input}
 }
 
 // DescribeEventsPages iterates over the pages of a DescribeEvents operation,
@@ -2046,10 +1293,10 @@ func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEventsRequest(inCpy)
+			req := c.DescribeEventsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2062,31 +1309,37 @@ func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Contex
 
 const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationInstances"
 
-// DescribeOrderableReplicationInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeOrderableReplicationInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeOrderableReplicationInstancesRequest is a API request type for the DescribeOrderableReplicationInstances API operation.
+type DescribeOrderableReplicationInstancesRequest struct {
+	*aws.Request
+	Input *DescribeOrderableReplicationInstancesInput
+}
+
+// Send marshals and sends the DescribeOrderableReplicationInstances API request.
+func (r *DescribeOrderableReplicationInstancesRequest) Send() (*DescribeOrderableReplicationInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeOrderableReplicationInstancesOutput), nil
+}
+
+// DescribeOrderableReplicationInstancesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeOrderableReplicationInstances for more information on using the DescribeOrderableReplicationInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the replication instance types that can be created
+// in the specified region.
 //
 //    // Example sending a request using the DescribeOrderableReplicationInstancesRequest method.
-//    req, resp := client.DescribeOrderableReplicationInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeOrderableReplicationInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(input *DescribeOrderableReplicationInstancesInput) (req *aws.Request, output *DescribeOrderableReplicationInstancesOutput) {
+func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(input *DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeOrderableReplicationInstances,
 		HTTPMethod: "POST",
@@ -2103,42 +1356,8 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(
 		input = &DescribeOrderableReplicationInstancesInput{}
 	}
 
-	output = &DescribeOrderableReplicationInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeOrderableReplicationInstances API operation for AWS Database Migration Service.
-//
-// Returns information about the replication instance types that can be created
-// in the specified region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeOrderableReplicationInstances for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstances(input *DescribeOrderableReplicationInstancesInput) (*DescribeOrderableReplicationInstancesOutput, error) {
-	req, out := c.DescribeOrderableReplicationInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeOrderableReplicationInstancesWithContext is the same as DescribeOrderableReplicationInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeOrderableReplicationInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, opts ...aws.Option) (*DescribeOrderableReplicationInstancesOutput, error) {
-	req, out := c.DescribeOrderableReplicationInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeOrderableReplicationInstancesOutput{})
+	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input}
 }
 
 // DescribeOrderableReplicationInstancesPages iterates over the pages of a DescribeOrderableReplicationInstances operation,
@@ -2177,10 +1396,10 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWit
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeOrderableReplicationInstancesRequest(inCpy)
+			req := c.DescribeOrderableReplicationInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2193,31 +1412,36 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWit
 
 const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 
-// DescribeRefreshSchemasStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeRefreshSchemasStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeRefreshSchemasStatusRequest is a API request type for the DescribeRefreshSchemasStatus API operation.
+type DescribeRefreshSchemasStatusRequest struct {
+	*aws.Request
+	Input *DescribeRefreshSchemasStatusInput
+}
+
+// Send marshals and sends the DescribeRefreshSchemasStatus API request.
+func (r *DescribeRefreshSchemasStatusRequest) Send() (*DescribeRefreshSchemasStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRefreshSchemasStatusOutput), nil
+}
+
+// DescribeRefreshSchemasStatusRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRefreshSchemasStatus for more information on using the DescribeRefreshSchemasStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the status of the RefreshSchemas operation.
 //
 //    // Example sending a request using the DescribeRefreshSchemasStatusRequest method.
-//    req, resp := client.DescribeRefreshSchemasStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeRefreshSchemasStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatus
-func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchemasStatusInput) (req *aws.Request, output *DescribeRefreshSchemasStatusOutput) {
+func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeRefreshSchemasStatus,
 		HTTPMethod: "POST",
@@ -2228,79 +1452,43 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *De
 		input = &DescribeRefreshSchemasStatusInput{}
 	}
 
-	output = &DescribeRefreshSchemasStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeRefreshSchemasStatus API operation for AWS Database Migration Service.
-//
-// Returns the status of the RefreshSchemas operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeRefreshSchemasStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatus
-func (c *DatabaseMigrationService) DescribeRefreshSchemasStatus(input *DescribeRefreshSchemasStatusInput) (*DescribeRefreshSchemasStatusOutput, error) {
-	req, out := c.DescribeRefreshSchemasStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRefreshSchemasStatusWithContext is the same as DescribeRefreshSchemasStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRefreshSchemasStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusWithContext(ctx aws.Context, input *DescribeRefreshSchemasStatusInput, opts ...aws.Option) (*DescribeRefreshSchemasStatusOutput, error) {
-	req, out := c.DescribeRefreshSchemasStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeRefreshSchemasStatusOutput{})
+	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeReplicationInstances = "DescribeReplicationInstances"
 
-// DescribeReplicationInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeReplicationInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReplicationInstancesRequest is a API request type for the DescribeReplicationInstances API operation.
+type DescribeReplicationInstancesRequest struct {
+	*aws.Request
+	Input *DescribeReplicationInstancesInput
+}
+
+// Send marshals and sends the DescribeReplicationInstances API request.
+func (r *DescribeReplicationInstancesRequest) Send() (*DescribeReplicationInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReplicationInstancesOutput), nil
+}
+
+// DescribeReplicationInstancesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReplicationInstances for more information on using the DescribeReplicationInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about replication instances for your account in the current
+// region.
 //
 //    // Example sending a request using the DescribeReplicationInstancesRequest method.
-//    req, resp := client.DescribeReplicationInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReplicationInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances
-func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *DescribeReplicationInstancesInput) (req *aws.Request, output *DescribeReplicationInstancesOutput) {
+func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationInstances,
 		HTTPMethod: "POST",
@@ -2317,47 +1505,8 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *De
 		input = &DescribeReplicationInstancesInput{}
 	}
 
-	output = &DescribeReplicationInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReplicationInstances API operation for AWS Database Migration Service.
-//
-// Returns information about replication instances for your account in the current
-// region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeReplicationInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances
-func (c *DatabaseMigrationService) DescribeReplicationInstances(input *DescribeReplicationInstancesInput) (*DescribeReplicationInstancesOutput, error) {
-	req, out := c.DescribeReplicationInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReplicationInstancesWithContext is the same as DescribeReplicationInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReplicationInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationInstancesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, opts ...aws.Option) (*DescribeReplicationInstancesOutput, error) {
-	req, out := c.DescribeReplicationInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReplicationInstancesOutput{})
+	return DescribeReplicationInstancesRequest{Request: req, Input: input}
 }
 
 // DescribeReplicationInstancesPages iterates over the pages of a DescribeReplicationInstances operation,
@@ -2396,10 +1545,10 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationInstancesRequest(inCpy)
+			req := c.DescribeReplicationInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2412,31 +1561,36 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(
 
 const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 
-// DescribeReplicationSubnetGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeReplicationSubnetGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReplicationSubnetGroupsRequest is a API request type for the DescribeReplicationSubnetGroups API operation.
+type DescribeReplicationSubnetGroupsRequest struct {
+	*aws.Request
+	Input *DescribeReplicationSubnetGroupsInput
+}
+
+// Send marshals and sends the DescribeReplicationSubnetGroups API request.
+func (r *DescribeReplicationSubnetGroupsRequest) Send() (*DescribeReplicationSubnetGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReplicationSubnetGroupsOutput), nil
+}
+
+// DescribeReplicationSubnetGroupsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReplicationSubnetGroups for more information on using the DescribeReplicationSubnetGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the replication subnet groups.
 //
 //    // Example sending a request using the DescribeReplicationSubnetGroupsRequest method.
-//    req, resp := client.DescribeReplicationSubnetGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReplicationSubnetGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicationSubnetGroupsInput) (req *aws.Request, output *DescribeReplicationSubnetGroupsOutput) {
+func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationSubnetGroups,
 		HTTPMethod: "POST",
@@ -2453,46 +1607,8 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input 
 		input = &DescribeReplicationSubnetGroupsInput{}
 	}
 
-	output = &DescribeReplicationSubnetGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReplicationSubnetGroups API operation for AWS Database Migration Service.
-//
-// Returns information about the replication subnet groups.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeReplicationSubnetGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroups(input *DescribeReplicationSubnetGroupsInput) (*DescribeReplicationSubnetGroupsOutput, error) {
-	req, out := c.DescribeReplicationSubnetGroupsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReplicationSubnetGroupsWithContext is the same as DescribeReplicationSubnetGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReplicationSubnetGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, opts ...aws.Option) (*DescribeReplicationSubnetGroupsOutput, error) {
-	req, out := c.DescribeReplicationSubnetGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReplicationSubnetGroupsOutput{})
+	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input}
 }
 
 // DescribeReplicationSubnetGroupsPages iterates over the pages of a DescribeReplicationSubnetGroups operation,
@@ -2531,10 +1647,10 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithConte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationSubnetGroupsRequest(inCpy)
+			req := c.DescribeReplicationSubnetGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2547,31 +1663,37 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithConte
 
 const opDescribeReplicationTasks = "DescribeReplicationTasks"
 
-// DescribeReplicationTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeReplicationTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeReplicationTasksRequest is a API request type for the DescribeReplicationTasks API operation.
+type DescribeReplicationTasksRequest struct {
+	*aws.Request
+	Input *DescribeReplicationTasksInput
+}
+
+// Send marshals and sends the DescribeReplicationTasks API request.
+func (r *DescribeReplicationTasksRequest) Send() (*DescribeReplicationTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReplicationTasksOutput), nil
+}
+
+// DescribeReplicationTasksRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeReplicationTasks for more information on using the DescribeReplicationTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about replication tasks for your account in the current
+// region.
 //
 //    // Example sending a request using the DescribeReplicationTasksRequest method.
-//    req, resp := client.DescribeReplicationTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeReplicationTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks
-func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *DescribeReplicationTasksInput) (req *aws.Request, output *DescribeReplicationTasksOutput) {
+func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *DescribeReplicationTasksInput) DescribeReplicationTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeReplicationTasks,
 		HTTPMethod: "POST",
@@ -2588,47 +1710,8 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *Descri
 		input = &DescribeReplicationTasksInput{}
 	}
 
-	output = &DescribeReplicationTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeReplicationTasks API operation for AWS Database Migration Service.
-//
-// Returns information about replication tasks for your account in the current
-// region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeReplicationTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks
-func (c *DatabaseMigrationService) DescribeReplicationTasks(input *DescribeReplicationTasksInput) (*DescribeReplicationTasksOutput, error) {
-	req, out := c.DescribeReplicationTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeReplicationTasksWithContext is the same as DescribeReplicationTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeReplicationTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTasksWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.Option) (*DescribeReplicationTasksOutput, error) {
-	req, out := c.DescribeReplicationTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeReplicationTasksOutput{})
+	return DescribeReplicationTasksRequest{Request: req, Input: input}
 }
 
 // DescribeReplicationTasksPages iterates over the pages of a DescribeReplicationTasks operation,
@@ -2667,10 +1750,10 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationTasksRequest(inCpy)
+			req := c.DescribeReplicationTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2683,31 +1766,36 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx 
 
 const opDescribeSchemas = "DescribeSchemas"
 
-// DescribeSchemasRequest generates a "aws.Request" representing the
-// client's request for the DescribeSchemas operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSchemasRequest is a API request type for the DescribeSchemas API operation.
+type DescribeSchemasRequest struct {
+	*aws.Request
+	Input *DescribeSchemasInput
+}
+
+// Send marshals and sends the DescribeSchemas API request.
+func (r *DescribeSchemasRequest) Send() (*DescribeSchemasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSchemasOutput), nil
+}
+
+// DescribeSchemasRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSchemas for more information on using the DescribeSchemas
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about the schema for the specified endpoint.
 //
 //    // Example sending a request using the DescribeSchemasRequest method.
-//    req, resp := client.DescribeSchemasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSchemasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemas
-func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemasInput) (req *aws.Request, output *DescribeSchemasOutput) {
+func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemasInput) DescribeSchemasRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSchemas,
 		HTTPMethod: "POST",
@@ -2724,50 +1812,8 @@ func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemas
 		input = &DescribeSchemasInput{}
 	}
 
-	output = &DescribeSchemasOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSchemas API operation for AWS Database Migration Service.
-//
-// Returns information about the schema for the specified endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeSchemas for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemas
-func (c *DatabaseMigrationService) DescribeSchemas(input *DescribeSchemasInput) (*DescribeSchemasOutput, error) {
-	req, out := c.DescribeSchemasRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSchemasWithContext is the same as DescribeSchemas with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSchemas for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeSchemasWithContext(ctx aws.Context, input *DescribeSchemasInput, opts ...aws.Option) (*DescribeSchemasOutput, error) {
-	req, out := c.DescribeSchemasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSchemasOutput{})
+	return DescribeSchemasRequest{Request: req, Input: input}
 }
 
 // DescribeSchemasPages iterates over the pages of a DescribeSchemas operation,
@@ -2806,10 +1852,10 @@ func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeSchemasRequest(inCpy)
+			req := c.DescribeSchemasRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2822,31 +1868,37 @@ func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Conte
 
 const opDescribeTableStatistics = "DescribeTableStatistics"
 
-// DescribeTableStatisticsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTableStatistics operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTableStatisticsRequest is a API request type for the DescribeTableStatistics API operation.
+type DescribeTableStatisticsRequest struct {
+	*aws.Request
+	Input *DescribeTableStatisticsInput
+}
+
+// Send marshals and sends the DescribeTableStatistics API request.
+func (r *DescribeTableStatisticsRequest) Send() (*DescribeTableStatisticsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTableStatisticsOutput), nil
+}
+
+// DescribeTableStatisticsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTableStatistics for more information on using the DescribeTableStatistics
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns table statistics on the database migration task, including table
+// name, rows inserted, rows updated, and rows deleted.
 //
 //    // Example sending a request using the DescribeTableStatisticsRequest method.
-//    req, resp := client.DescribeTableStatisticsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTableStatisticsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics
-func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *DescribeTableStatisticsInput) (req *aws.Request, output *DescribeTableStatisticsOutput) {
+func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *DescribeTableStatisticsInput) DescribeTableStatisticsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTableStatistics,
 		HTTPMethod: "POST",
@@ -2863,51 +1915,8 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *Describ
 		input = &DescribeTableStatisticsInput{}
 	}
 
-	output = &DescribeTableStatisticsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTableStatistics API operation for AWS Database Migration Service.
-//
-// Returns table statistics on the database migration task, including table
-// name, rows inserted, rows updated, and rows deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation DescribeTableStatistics for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics
-func (c *DatabaseMigrationService) DescribeTableStatistics(input *DescribeTableStatisticsInput) (*DescribeTableStatisticsOutput, error) {
-	req, out := c.DescribeTableStatisticsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTableStatisticsWithContext is the same as DescribeTableStatistics with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTableStatistics for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeTableStatisticsWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, opts ...aws.Option) (*DescribeTableStatisticsOutput, error) {
-	req, out := c.DescribeTableStatisticsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTableStatisticsOutput{})
+	return DescribeTableStatisticsRequest{Request: req, Input: input}
 }
 
 // DescribeTableStatisticsPages iterates over the pages of a DescribeTableStatistics operation,
@@ -2946,10 +1955,10 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx a
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTableStatisticsRequest(inCpy)
+			req := c.DescribeTableStatisticsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2962,31 +1971,36 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx a
 
 const opImportCertificate = "ImportCertificate"
 
-// ImportCertificateRequest generates a "aws.Request" representing the
-// client's request for the ImportCertificate operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ImportCertificateRequest is a API request type for the ImportCertificate API operation.
+type ImportCertificateRequest struct {
+	*aws.Request
+	Input *ImportCertificateInput
+}
+
+// Send marshals and sends the ImportCertificate API request.
+func (r *ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportCertificateOutput), nil
+}
+
+// ImportCertificateRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportCertificate for more information on using the ImportCertificate
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Uploads the specified certificate.
 //
 //    // Example sending a request using the ImportCertificateRequest method.
-//    req, resp := client.ImportCertificateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ImportCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificate
-func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertificateInput) (req *aws.Request, output *ImportCertificateOutput) {
+func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertificateInput) ImportCertificateRequest {
 	op := &aws.Operation{
 		Name:       opImportCertificate,
 		HTTPMethod: "POST",
@@ -2997,78 +2011,42 @@ func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertifi
 		input = &ImportCertificateInput{}
 	}
 
-	output = &ImportCertificateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ImportCertificate API operation for AWS Database Migration Service.
-//
-// Uploads the specified certificate.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ImportCertificate for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeInvalidCertificateFault "InvalidCertificateFault"
-//   The certificate was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificate
-func (c *DatabaseMigrationService) ImportCertificate(input *ImportCertificateInput) (*ImportCertificateOutput, error) {
-	req, out := c.ImportCertificateRequest(input)
-	return out, req.Send()
-}
-
-// ImportCertificateWithContext is the same as ImportCertificate with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportCertificate for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...aws.Option) (*ImportCertificateOutput, error) {
-	req, out := c.ImportCertificateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ImportCertificateOutput{})
+	return ImportCertificateRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all tags for an AWS DMS resource.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResource
-func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -3079,75 +2057,42 @@ func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsFor
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for AWS Database Migration Service.
-//
-// Lists all tags for an AWS DMS resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResource
-func (c *DatabaseMigrationService) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opModifyEndpoint = "ModifyEndpoint"
 
-// ModifyEndpointRequest generates a "aws.Request" representing the
-// client's request for the ModifyEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyEndpointRequest is a API request type for the ModifyEndpoint API operation.
+type ModifyEndpointRequest struct {
+	*aws.Request
+	Input *ModifyEndpointInput
+}
+
+// Send marshals and sends the ModifyEndpoint API request.
+func (r *ModifyEndpointRequest) Send() (*ModifyEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyEndpointOutput), nil
+}
+
+// ModifyEndpointRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyEndpoint for more information on using the ModifyEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the specified endpoint.
 //
 //    // Example sending a request using the ModifyEndpointRequest method.
-//    req, resp := client.ModifyEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint
-func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointInput) (req *aws.Request, output *ModifyEndpointOutput) {
+func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointInput) ModifyEndpointRequest {
 	op := &aws.Operation{
 		Name:       opModifyEndpoint,
 		HTTPMethod: "POST",
@@ -3158,88 +2103,42 @@ func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointIn
 		input = &ModifyEndpointInput{}
 	}
 
-	output = &ModifyEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyEndpoint API operation for AWS Database Migration Service.
-//
-// Modifies the specified endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ModifyEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint
-func (c *DatabaseMigrationService) ModifyEndpoint(input *ModifyEndpointInput) (*ModifyEndpointOutput, error) {
-	req, out := c.ModifyEndpointRequest(input)
-	return out, req.Send()
-}
-
-// ModifyEndpointWithContext is the same as ModifyEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyEndpointWithContext(ctx aws.Context, input *ModifyEndpointInput, opts ...aws.Option) (*ModifyEndpointOutput, error) {
-	req, out := c.ModifyEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyEndpointOutput{})
+	return ModifyEndpointRequest{Request: req, Input: input}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
-// client's request for the ModifyEventSubscription operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyEventSubscriptionRequest is a API request type for the ModifyEventSubscription API operation.
+type ModifyEventSubscriptionRequest struct {
+	*aws.Request
+	Input *ModifyEventSubscriptionInput
+}
+
+// Send marshals and sends the ModifyEventSubscription API request.
+func (r *ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyEventSubscriptionOutput), nil
+}
+
+// ModifyEventSubscriptionRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyEventSubscription for more information on using the ModifyEventSubscription
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies an existing AWS DMS event notification subscription.
 //
 //    // Example sending a request using the ModifyEventSubscriptionRequest method.
-//    req, resp := client.ModifyEventSubscriptionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyEventSubscriptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscription
-func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
+func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest {
 	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
@@ -3250,84 +2149,46 @@ func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyE
 		input = &ModifyEventSubscriptionInput{}
 	}
 
-	output = &ModifyEventSubscriptionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyEventSubscription API operation for AWS Database Migration Service.
-//
-// Modifies an existing AWS DMS event notification subscription.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ModifyEventSubscription for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeSNSInvalidTopicFault "SNSInvalidTopicFault"
-//   The SNS topic is invalid.
-//
-//   * ErrCodeSNSNoAuthorizationFault "SNSNoAuthorizationFault"
-//   You are not authorized for the SNS subscription.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscription
-func (c *DatabaseMigrationService) ModifyEventSubscription(input *ModifyEventSubscriptionInput) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	return out, req.Send()
-}
-
-// ModifyEventSubscriptionWithContext is the same as ModifyEventSubscription with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyEventSubscription for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
-	req, out := c.ModifyEventSubscriptionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyEventSubscriptionOutput{})
+	return ModifyEventSubscriptionRequest{Request: req, Input: input}
 }
 
 const opModifyReplicationInstance = "ModifyReplicationInstance"
 
-// ModifyReplicationInstanceRequest generates a "aws.Request" representing the
-// client's request for the ModifyReplicationInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyReplicationInstanceRequest is a API request type for the ModifyReplicationInstance API operation.
+type ModifyReplicationInstanceRequest struct {
+	*aws.Request
+	Input *ModifyReplicationInstanceInput
+}
+
+// Send marshals and sends the ModifyReplicationInstance API request.
+func (r *ModifyReplicationInstanceRequest) Send() (*ModifyReplicationInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyReplicationInstanceOutput), nil
+}
+
+// ModifyReplicationInstanceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the replication instance to apply new settings. You can change one
+// or more parameters by specifying these parameters and the new values in the
+// request.
 //
-// See ModifyReplicationInstance for more information on using the ModifyReplicationInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Some settings are applied during the maintenance window.
 //
 //    // Example sending a request using the ModifyReplicationInstanceRequest method.
-//    req, resp := client.ModifyReplicationInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyReplicationInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance
-func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *ModifyReplicationInstanceInput) (req *aws.Request, output *ModifyReplicationInstanceOutput) {
+func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *ModifyReplicationInstanceInput) ModifyReplicationInstanceRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationInstance,
 		HTTPMethod: "POST",
@@ -3338,95 +2199,42 @@ func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *Modif
 		input = &ModifyReplicationInstanceInput{}
 	}
 
-	output = &ModifyReplicationInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyReplicationInstance API operation for AWS Database Migration Service.
-//
-// Modifies the replication instance to apply new settings. You can change one
-// or more parameters by specifying these parameters and the new values in the
-// request.
-//
-// Some settings are applied during the maintenance window.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ModifyReplicationInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInsufficientResourceCapacityFault "InsufficientResourceCapacityFault"
-//   There are not enough resources allocated to the database migration.
-//
-//   * ErrCodeStorageQuotaExceededFault "StorageQuotaExceededFault"
-//   The storage quota has been exceeded.
-//
-//   * ErrCodeUpgradeDependencyFailureFault "UpgradeDependencyFailureFault"
-//   An upgrade dependency is preventing the database migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance
-func (c *DatabaseMigrationService) ModifyReplicationInstance(input *ModifyReplicationInstanceInput) (*ModifyReplicationInstanceOutput, error) {
-	req, out := c.ModifyReplicationInstanceRequest(input)
-	return out, req.Send()
-}
-
-// ModifyReplicationInstanceWithContext is the same as ModifyReplicationInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyReplicationInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationInstanceWithContext(ctx aws.Context, input *ModifyReplicationInstanceInput, opts ...aws.Option) (*ModifyReplicationInstanceOutput, error) {
-	req, out := c.ModifyReplicationInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyReplicationInstanceOutput{})
+	return ModifyReplicationInstanceRequest{Request: req, Input: input}
 }
 
 const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 
-// ModifyReplicationSubnetGroupRequest generates a "aws.Request" representing the
-// client's request for the ModifyReplicationSubnetGroup operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyReplicationSubnetGroupRequest is a API request type for the ModifyReplicationSubnetGroup API operation.
+type ModifyReplicationSubnetGroupRequest struct {
+	*aws.Request
+	Input *ModifyReplicationSubnetGroupInput
+}
+
+// Send marshals and sends the ModifyReplicationSubnetGroup API request.
+func (r *ModifyReplicationSubnetGroupRequest) Send() (*ModifyReplicationSubnetGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyReplicationSubnetGroupOutput), nil
+}
+
+// ModifyReplicationSubnetGroupRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyReplicationSubnetGroup for more information on using the ModifyReplicationSubnetGroup
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the settings for the specified replication subnet group.
 //
 //    // Example sending a request using the ModifyReplicationSubnetGroupRequest method.
-//    req, resp := client.ModifyReplicationSubnetGroupRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyReplicationSubnetGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup
-func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSubnetGroupInput) (req *aws.Request, output *ModifyReplicationSubnetGroupOutput) {
+func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationSubnetGroup,
 		HTTPMethod: "POST",
@@ -3437,91 +2245,48 @@ func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *Mo
 		input = &ModifyReplicationSubnetGroupInput{}
 	}
 
-	output = &ModifyReplicationSubnetGroupOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyReplicationSubnetGroup API operation for AWS Database Migration Service.
-//
-// Modifies the settings for the specified replication subnet group.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ModifyReplicationSubnetGroup for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDeniedFault "AccessDeniedFault"
-//   AWS DMS was denied access to the endpoint.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-//   * ErrCodeSubnetAlreadyInUse "SubnetAlreadyInUse"
-//   The specified subnet is already in use.
-//
-//   * ErrCodeReplicationSubnetGroupDoesNotCoverEnoughAZs "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
-//   The replication subnet group does not cover enough Availability Zones (AZs).
-//   Edit the replication subnet group and add more AZs.
-//
-//   * ErrCodeInvalidSubnet "InvalidSubnet"
-//   The subnet provided is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup
-func (c *DatabaseMigrationService) ModifyReplicationSubnetGroup(input *ModifyReplicationSubnetGroupInput) (*ModifyReplicationSubnetGroupOutput, error) {
-	req, out := c.ModifyReplicationSubnetGroupRequest(input)
-	return out, req.Send()
-}
-
-// ModifyReplicationSubnetGroupWithContext is the same as ModifyReplicationSubnetGroup with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyReplicationSubnetGroup for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupWithContext(ctx aws.Context, input *ModifyReplicationSubnetGroupInput, opts ...aws.Option) (*ModifyReplicationSubnetGroupOutput, error) {
-	req, out := c.ModifyReplicationSubnetGroupRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyReplicationSubnetGroupOutput{})
+	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input}
 }
 
 const opModifyReplicationTask = "ModifyReplicationTask"
 
-// ModifyReplicationTaskRequest generates a "aws.Request" representing the
-// client's request for the ModifyReplicationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ModifyReplicationTaskRequest is a API request type for the ModifyReplicationTask API operation.
+type ModifyReplicationTaskRequest struct {
+	*aws.Request
+	Input *ModifyReplicationTaskInput
+}
+
+// Send marshals and sends the ModifyReplicationTask API request.
+func (r *ModifyReplicationTaskRequest) Send() (*ModifyReplicationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyReplicationTaskOutput), nil
+}
+
+// ModifyReplicationTaskRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Modifies the specified replication task.
 //
-// See ModifyReplicationTask for more information on using the ModifyReplicationTask
-// API call, and error handling.
+// You can't modify the task endpoints. The task must be stopped before you
+// can modify it.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about AWS DMS tasks, see the AWS DMS user guide at
+// Working with Migration Tasks  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
 //
 //    // Example sending a request using the ModifyReplicationTaskRequest method.
-//    req, resp := client.ModifyReplicationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ModifyReplicationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask
-func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyReplicationTaskInput) (req *aws.Request, output *ModifyReplicationTaskOutput) {
+func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyReplicationTaskInput) ModifyReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opModifyReplicationTask,
 		HTTPMethod: "POST",
@@ -3532,91 +2297,44 @@ func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyRep
 		input = &ModifyReplicationTaskInput{}
 	}
 
-	output = &ModifyReplicationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ModifyReplicationTask API operation for AWS Database Migration Service.
-//
-// Modifies the specified replication task.
-//
-// You can't modify the task endpoints. The task must be stopped before you
-// can modify it.
-//
-// For more information about AWS DMS tasks, see the AWS DMS user guide at
-// Working with Migration Tasks  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ModifyReplicationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeResourceAlreadyExistsFault "ResourceAlreadyExistsFault"
-//   The resource you are attempting to create already exists.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask
-func (c *DatabaseMigrationService) ModifyReplicationTask(input *ModifyReplicationTaskInput) (*ModifyReplicationTaskOutput, error) {
-	req, out := c.ModifyReplicationTaskRequest(input)
-	return out, req.Send()
-}
-
-// ModifyReplicationTaskWithContext is the same as ModifyReplicationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyReplicationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationTaskWithContext(ctx aws.Context, input *ModifyReplicationTaskInput, opts ...aws.Option) (*ModifyReplicationTaskOutput, error) {
-	req, out := c.ModifyReplicationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ModifyReplicationTaskOutput{})
+	return ModifyReplicationTaskRequest{Request: req, Input: input}
 }
 
 const opRefreshSchemas = "RefreshSchemas"
 
-// RefreshSchemasRequest generates a "aws.Request" representing the
-// client's request for the RefreshSchemas operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RefreshSchemasRequest is a API request type for the RefreshSchemas API operation.
+type RefreshSchemasRequest struct {
+	*aws.Request
+	Input *RefreshSchemasInput
+}
+
+// Send marshals and sends the RefreshSchemas API request.
+func (r *RefreshSchemasRequest) Send() (*RefreshSchemasOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RefreshSchemasOutput), nil
+}
+
+// RefreshSchemasRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RefreshSchemas for more information on using the RefreshSchemas
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Populates the schema for the specified endpoint. This is an asynchronous
+// operation and can take several minutes. You can check the status of this
+// operation by calling the DescribeRefreshSchemasStatus operation.
 //
 //    // Example sending a request using the RefreshSchemasRequest method.
-//    req, resp := client.RefreshSchemasRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RefreshSchemasRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemas
-func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasInput) (req *aws.Request, output *RefreshSchemasOutput) {
+func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasInput) RefreshSchemasRequest {
 	op := &aws.Operation{
 		Name:       opRefreshSchemas,
 		HTTPMethod: "POST",
@@ -3627,87 +2345,42 @@ func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasIn
 		input = &RefreshSchemasInput{}
 	}
 
-	output = &RefreshSchemasOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RefreshSchemas API operation for AWS Database Migration Service.
-//
-// Populates the schema for the specified endpoint. This is an asynchronous
-// operation and can take several minutes. You can check the status of this
-// operation by calling the DescribeRefreshSchemasStatus operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation RefreshSchemas for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemas
-func (c *DatabaseMigrationService) RefreshSchemas(input *RefreshSchemasInput) (*RefreshSchemasOutput, error) {
-	req, out := c.RefreshSchemasRequest(input)
-	return out, req.Send()
-}
-
-// RefreshSchemasWithContext is the same as RefreshSchemas with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RefreshSchemas for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) RefreshSchemasWithContext(ctx aws.Context, input *RefreshSchemasInput, opts ...aws.Option) (*RefreshSchemasOutput, error) {
-	req, out := c.RefreshSchemasRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RefreshSchemasOutput{})
+	return RefreshSchemasRequest{Request: req, Input: input}
 }
 
 const opReloadTables = "ReloadTables"
 
-// ReloadTablesRequest generates a "aws.Request" representing the
-// client's request for the ReloadTables operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReloadTablesRequest is a API request type for the ReloadTables API operation.
+type ReloadTablesRequest struct {
+	*aws.Request
+	Input *ReloadTablesInput
+}
+
+// Send marshals and sends the ReloadTables API request.
+func (r *ReloadTablesRequest) Send() (*ReloadTablesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReloadTablesOutput), nil
+}
+
+// ReloadTablesRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReloadTables for more information on using the ReloadTables
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Reloads the target database table with the source data.
 //
 //    // Example sending a request using the ReloadTablesRequest method.
-//    req, resp := client.ReloadTablesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReloadTablesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTables
-func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput) (req *aws.Request, output *ReloadTablesOutput) {
+func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput) ReloadTablesRequest {
 	op := &aws.Operation{
 		Name:       opReloadTables,
 		HTTPMethod: "POST",
@@ -3718,79 +2391,42 @@ func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput)
 		input = &ReloadTablesInput{}
 	}
 
-	output = &ReloadTablesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReloadTables API operation for AWS Database Migration Service.
-//
-// Reloads the target database table with the source data.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation ReloadTables for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTables
-func (c *DatabaseMigrationService) ReloadTables(input *ReloadTablesInput) (*ReloadTablesOutput, error) {
-	req, out := c.ReloadTablesRequest(input)
-	return out, req.Send()
-}
-
-// ReloadTablesWithContext is the same as ReloadTables with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReloadTables for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) ReloadTablesWithContext(ctx aws.Context, input *ReloadTablesInput, opts ...aws.Option) (*ReloadTablesOutput, error) {
-	req, out := c.ReloadTablesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReloadTablesOutput{})
+	return ReloadTablesRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes metadata tags from a DMS resource.
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResource
-func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -3801,75 +2437,45 @@ func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTa
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &RemoveTagsFromResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTagsFromResource API operation for AWS Database Migration Service.
-//
-// Removes metadata tags from a DMS resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResource
-func (c *DatabaseMigrationService) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 const opStartReplicationTask = "StartReplicationTask"
 
-// StartReplicationTaskRequest generates a "aws.Request" representing the
-// client's request for the StartReplicationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartReplicationTaskRequest is a API request type for the StartReplicationTask API operation.
+type StartReplicationTaskRequest struct {
+	*aws.Request
+	Input *StartReplicationTaskInput
+}
+
+// Send marshals and sends the StartReplicationTask API request.
+func (r *StartReplicationTaskRequest) Send() (*StartReplicationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartReplicationTaskOutput), nil
+}
+
+// StartReplicationTaskRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Starts the replication task.
 //
-// See StartReplicationTask for more information on using the StartReplicationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about AWS DMS tasks, see the AWS DMS user guide at
+// Working with Migration Tasks  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
 //
 //    // Example sending a request using the StartReplicationTaskRequest method.
-//    req, resp := client.StartReplicationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartReplicationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask
-func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartReplicationTaskInput) (req *aws.Request, output *StartReplicationTaskOutput) {
+func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartReplicationTaskInput) StartReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartReplicationTask,
 		HTTPMethod: "POST",
@@ -3880,82 +2486,42 @@ func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartRepli
 		input = &StartReplicationTaskInput{}
 	}
 
-	output = &StartReplicationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartReplicationTask API operation for AWS Database Migration Service.
-//
-// Starts the replication task.
-//
-// For more information about AWS DMS tasks, see the AWS DMS user guide at
-// Working with Migration Tasks  (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation StartReplicationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask
-func (c *DatabaseMigrationService) StartReplicationTask(input *StartReplicationTaskInput) (*StartReplicationTaskOutput, error) {
-	req, out := c.StartReplicationTaskRequest(input)
-	return out, req.Send()
-}
-
-// StartReplicationTaskWithContext is the same as StartReplicationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartReplicationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) StartReplicationTaskWithContext(ctx aws.Context, input *StartReplicationTaskInput, opts ...aws.Option) (*StartReplicationTaskOutput, error) {
-	req, out := c.StartReplicationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartReplicationTaskOutput{})
+	return StartReplicationTaskRequest{Request: req, Input: input}
 }
 
 const opStopReplicationTask = "StopReplicationTask"
 
-// StopReplicationTaskRequest generates a "aws.Request" representing the
-// client's request for the StopReplicationTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopReplicationTaskRequest is a API request type for the StopReplicationTask API operation.
+type StopReplicationTaskRequest struct {
+	*aws.Request
+	Input *StopReplicationTaskInput
+}
+
+// Send marshals and sends the StopReplicationTask API request.
+func (r *StopReplicationTaskRequest) Send() (*StopReplicationTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopReplicationTaskOutput), nil
+}
+
+// StopReplicationTaskRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopReplicationTask for more information on using the StopReplicationTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops the replication task.
 //
 //    // Example sending a request using the StopReplicationTaskRequest method.
-//    req, resp := client.StopReplicationTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopReplicationTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask
-func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplicationTaskInput) (req *aws.Request, output *StopReplicationTaskOutput) {
+func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplicationTaskInput) StopReplicationTaskRequest {
 	op := &aws.Operation{
 		Name:       opStopReplicationTask,
 		HTTPMethod: "POST",
@@ -3966,79 +2532,42 @@ func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplica
 		input = &StopReplicationTaskInput{}
 	}
 
-	output = &StopReplicationTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopReplicationTask API operation for AWS Database Migration Service.
-//
-// Stops the replication task.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation StopReplicationTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask
-func (c *DatabaseMigrationService) StopReplicationTask(input *StopReplicationTaskInput) (*StopReplicationTaskOutput, error) {
-	req, out := c.StopReplicationTaskRequest(input)
-	return out, req.Send()
-}
-
-// StopReplicationTaskWithContext is the same as StopReplicationTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopReplicationTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) StopReplicationTaskWithContext(ctx aws.Context, input *StopReplicationTaskInput, opts ...aws.Option) (*StopReplicationTaskOutput, error) {
-	req, out := c.StopReplicationTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopReplicationTaskOutput{})
+	return StopReplicationTaskRequest{Request: req, Input: input}
 }
 
 const opTestConnection = "TestConnection"
 
-// TestConnectionRequest generates a "aws.Request" representing the
-// client's request for the TestConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestConnectionRequest is a API request type for the TestConnection API operation.
+type TestConnectionRequest struct {
+	*aws.Request
+	Input *TestConnectionInput
+}
+
+// Send marshals and sends the TestConnection API request.
+func (r *TestConnectionRequest) Send() (*TestConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestConnectionOutput), nil
+}
+
+// TestConnectionRequest returns a request value for making API operation for
+// AWS Database Migration Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TestConnection for more information on using the TestConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Tests the connection between the replication instance and the endpoint.
 //
 //    // Example sending a request using the TestConnectionRequest method.
-//    req, resp := client.TestConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnection
-func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionInput) (req *aws.Request, output *TestConnectionOutput) {
+func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionInput) TestConnectionRequest {
 	op := &aws.Operation{
 		Name:       opTestConnection,
 		HTTPMethod: "POST",
@@ -4049,56 +2578,8 @@ func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionIn
 		input = &TestConnectionInput{}
 	}
 
-	output = &TestConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestConnection API operation for AWS Database Migration Service.
-//
-// Tests the connection between the replication instance and the endpoint.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Database Migration Service's
-// API operation TestConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundFault "ResourceNotFoundFault"
-//   The resource could not be found.
-//
-//   * ErrCodeInvalidResourceStateFault "InvalidResourceStateFault"
-//   The resource is in a state that prevents it from being used for database
-//   migration.
-//
-//   * ErrCodeKMSKeyNotAccessibleFault "KMSKeyNotAccessibleFault"
-//   AWS DMS cannot access the KMS key.
-//
-//   * ErrCodeResourceQuotaExceededFault "ResourceQuotaExceededFault"
-//   The quota for this resource quota has been exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnection
-func (c *DatabaseMigrationService) TestConnection(input *TestConnectionInput) (*TestConnectionOutput, error) {
-	req, out := c.TestConnectionRequest(input)
-	return out, req.Send()
-}
-
-// TestConnectionWithContext is the same as TestConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) TestConnectionWithContext(ctx aws.Context, input *TestConnectionInput, opts ...aws.Option) (*TestConnectionOutput, error) {
-	req, out := c.TestConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestConnectionOutput{})
+	return TestConnectionRequest{Request: req, Input: input}
 }
 
 // Describes a quota for an AWS account, for example, the number of replication

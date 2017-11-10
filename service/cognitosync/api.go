@@ -14,31 +14,42 @@ import (
 
 const opBulkPublish = "BulkPublish"
 
-// BulkPublishRequest generates a "aws.Request" representing the
-// client's request for the BulkPublish operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BulkPublishRequest is a API request type for the BulkPublish API operation.
+type BulkPublishRequest struct {
+	*aws.Request
+	Input *BulkPublishInput
+}
+
+// Send marshals and sends the BulkPublish API request.
+func (r *BulkPublishRequest) Send() (*BulkPublishOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BulkPublishOutput), nil
+}
+
+// BulkPublishRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Initiates a bulk publish of all existing datasets for an Identity Pool to
+// the configured stream. Customers are limited to one successful bulk publish
+// per 24 hours. Bulk publish is an asynchronous request, customers can see
+// the status of the request via the GetBulkPublishDetails operation.
 //
-// See BulkPublish for more information on using the BulkPublish
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the BulkPublishRequest method.
-//    req, resp := client.BulkPublishRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BulkPublishRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish
-func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) (req *aws.Request, output *BulkPublishOutput) {
+func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) BulkPublishRequest {
 	op := &aws.Operation{
 		Name:       opBulkPublish,
 		HTTPMethod: "POST",
@@ -49,98 +60,48 @@ func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) (req *aws.Requ
 		input = &BulkPublishInput{}
 	}
 
-	output = &BulkPublishOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BulkPublish API operation for Amazon Cognito Sync.
-//
-// Initiates a bulk publish of all existing datasets for an Identity Pool to
-// the configured stream. Customers are limited to one successful bulk publish
-// per 24 hours. Bulk publish is an asynchronous request, customers can see
-// the status of the request via the GetBulkPublishDetails operation.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation BulkPublish for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeDuplicateRequestException "DuplicateRequestException"
-//   An exception thrown when there is an IN_PROGRESS bulk publish operation for
-//   the given identity pool.
-//
-//   * ErrCodeAlreadyStreamedException "AlreadyStreamedException"
-//   An exception thrown when a bulk publish operation is requested less than
-//   24 hours after a previous bulk publish operation completed successfully.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish
-func (c *CognitoSync) BulkPublish(input *BulkPublishInput) (*BulkPublishOutput, error) {
-	req, out := c.BulkPublishRequest(input)
-	return out, req.Send()
-}
-
-// BulkPublishWithContext is the same as BulkPublish with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BulkPublish for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) BulkPublishWithContext(ctx aws.Context, input *BulkPublishInput, opts ...aws.Option) (*BulkPublishOutput, error) {
-	req, out := c.BulkPublishRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BulkPublishOutput{})
+	return BulkPublishRequest{Request: req, Input: input}
 }
 
 const opDeleteDataset = "DeleteDataset"
 
-// DeleteDatasetRequest generates a "aws.Request" representing the
-// client's request for the DeleteDataset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDatasetRequest is a API request type for the DeleteDataset API operation.
+type DeleteDatasetRequest struct {
+	*aws.Request
+	Input *DeleteDatasetInput
+}
+
+// Send marshals and sends the DeleteDataset API request.
+func (r *DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDatasetOutput), nil
+}
+
+// DeleteDatasetRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specific dataset. The dataset will be deleted permanently, and
+// the action can't be undone. Datasets that this dataset was merged with will
+// no longer report the merge. Any subsequent operation on this dataset will
+// result in a ResourceNotFoundException.
 //
-// See DeleteDataset for more information on using the DeleteDataset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials.
 //
 //    // Example sending a request using the DeleteDatasetRequest method.
-//    req, resp := client.DeleteDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDatasetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset
-func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) (req *aws.Request, output *DeleteDatasetOutput) {
+func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDataset,
 		HTTPMethod: "DELETE",
@@ -151,97 +112,48 @@ func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) (req *aws.
 		input = &DeleteDatasetInput{}
 	}
 
-	output = &DeleteDatasetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDataset API operation for Amazon Cognito Sync.
-//
-// Deletes the specific dataset. The dataset will be deleted permanently, and
-// the action can't be undone. Datasets that this dataset was merged with will
-// no longer report the merge. Any subsequent operation on this dataset will
-// result in a ResourceNotFoundException.
-//
-// This API can be called with temporary user credentials provided by Cognito
-// Identity or with developer credentials.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation DeleteDataset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   Thrown if an update can't be applied because the resource was changed by
-//   another call and this would result in a conflict.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset
-func (c *CognitoSync) DeleteDataset(input *DeleteDatasetInput) (*DeleteDatasetOutput, error) {
-	req, out := c.DeleteDatasetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDatasetWithContext is the same as DeleteDataset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDataset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) DeleteDatasetWithContext(ctx aws.Context, input *DeleteDatasetInput, opts ...aws.Option) (*DeleteDatasetOutput, error) {
-	req, out := c.DeleteDatasetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDatasetOutput{})
+	return DeleteDatasetRequest{Request: req, Input: input}
 }
 
 const opDescribeDataset = "DescribeDataset"
 
-// DescribeDatasetRequest generates a "aws.Request" representing the
-// client's request for the DescribeDataset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDatasetRequest is a API request type for the DescribeDataset API operation.
+type DescribeDatasetRequest struct {
+	*aws.Request
+	Input *DescribeDatasetInput
+}
+
+// Send marshals and sends the DescribeDataset API request.
+func (r *DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDatasetOutput), nil
+}
+
+// DescribeDatasetRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets meta data about a dataset by identity and dataset name. With Amazon
+// Cognito Sync, each identity has access only to its own data. Thus, the credentials
+// used to make this API call need to have access to the identity data.
 //
-// See DescribeDataset for more information on using the DescribeDataset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials. You should use Cognito Identity credentials
+// to make this API call.
 //
 //    // Example sending a request using the DescribeDatasetRequest method.
-//    req, resp := client.DescribeDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDatasetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset
-func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) (req *aws.Request, output *DescribeDatasetOutput) {
+func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) DescribeDatasetRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDataset,
 		HTTPMethod: "GET",
@@ -252,93 +164,46 @@ func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) (req *
 		input = &DescribeDatasetInput{}
 	}
 
-	output = &DescribeDatasetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDataset API operation for Amazon Cognito Sync.
-//
-// Gets meta data about a dataset by identity and dataset name. With Amazon
-// Cognito Sync, each identity has access only to its own data. Thus, the credentials
-// used to make this API call need to have access to the identity data.
-//
-// This API can be called with temporary user credentials provided by Cognito
-// Identity or with developer credentials. You should use Cognito Identity credentials
-// to make this API call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation DescribeDataset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset
-func (c *CognitoSync) DescribeDataset(input *DescribeDatasetInput) (*DescribeDatasetOutput, error) {
-	req, out := c.DescribeDatasetRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDatasetWithContext is the same as DescribeDataset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDataset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) DescribeDatasetWithContext(ctx aws.Context, input *DescribeDatasetInput, opts ...aws.Option) (*DescribeDatasetOutput, error) {
-	req, out := c.DescribeDatasetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDatasetOutput{})
+	return DescribeDatasetRequest{Request: req, Input: input}
 }
 
 const opDescribeIdentityPoolUsage = "DescribeIdentityPoolUsage"
 
-// DescribeIdentityPoolUsageRequest generates a "aws.Request" representing the
-// client's request for the DescribeIdentityPoolUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeIdentityPoolUsageRequest is a API request type for the DescribeIdentityPoolUsage API operation.
+type DescribeIdentityPoolUsageRequest struct {
+	*aws.Request
+	Input *DescribeIdentityPoolUsageInput
+}
+
+// Send marshals and sends the DescribeIdentityPoolUsage API request.
+func (r *DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeIdentityPoolUsageOutput), nil
+}
+
+// DescribeIdentityPoolUsageRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets usage details (for example, data storage) about a particular identity
+// pool.
 //
-// See DescribeIdentityPoolUsage for more information on using the DescribeIdentityPoolUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the DescribeIdentityPoolUsageRequest method.
-//    req, resp := client.DescribeIdentityPoolUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeIdentityPoolUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage
-func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPoolUsageInput) (req *aws.Request, output *DescribeIdentityPoolUsageOutput) {
+func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPoolUsageInput) DescribeIdentityPoolUsageRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentityPoolUsage,
 		HTTPMethod: "GET",
@@ -349,91 +214,46 @@ func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPo
 		input = &DescribeIdentityPoolUsageInput{}
 	}
 
-	output = &DescribeIdentityPoolUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeIdentityPoolUsage API operation for Amazon Cognito Sync.
-//
-// Gets usage details (for example, data storage) about a particular identity
-// pool.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation DescribeIdentityPoolUsage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage
-func (c *CognitoSync) DescribeIdentityPoolUsage(input *DescribeIdentityPoolUsageInput) (*DescribeIdentityPoolUsageOutput, error) {
-	req, out := c.DescribeIdentityPoolUsageRequest(input)
-	return out, req.Send()
-}
-
-// DescribeIdentityPoolUsageWithContext is the same as DescribeIdentityPoolUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeIdentityPoolUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) DescribeIdentityPoolUsageWithContext(ctx aws.Context, input *DescribeIdentityPoolUsageInput, opts ...aws.Option) (*DescribeIdentityPoolUsageOutput, error) {
-	req, out := c.DescribeIdentityPoolUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeIdentityPoolUsageOutput{})
+	return DescribeIdentityPoolUsageRequest{Request: req, Input: input}
 }
 
 const opDescribeIdentityUsage = "DescribeIdentityUsage"
 
-// DescribeIdentityUsageRequest generates a "aws.Request" representing the
-// client's request for the DescribeIdentityUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeIdentityUsageRequest is a API request type for the DescribeIdentityUsage API operation.
+type DescribeIdentityUsageRequest struct {
+	*aws.Request
+	Input *DescribeIdentityUsageInput
+}
+
+// Send marshals and sends the DescribeIdentityUsage API request.
+func (r *DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeIdentityUsageOutput), nil
+}
+
+// DescribeIdentityUsageRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets usage information for an identity, including number of datasets and
+// data usage.
 //
-// See DescribeIdentityUsage for more information on using the DescribeIdentityUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials.
 //
 //    // Example sending a request using the DescribeIdentityUsageRequest method.
-//    req, resp := client.DescribeIdentityUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeIdentityUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage
-func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageInput) (req *aws.Request, output *DescribeIdentityUsageOutput) {
+func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageInput) DescribeIdentityUsageRequest {
 	op := &aws.Operation{
 		Name:       opDescribeIdentityUsage,
 		HTTPMethod: "GET",
@@ -444,91 +264,45 @@ func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageI
 		input = &DescribeIdentityUsageInput{}
 	}
 
-	output = &DescribeIdentityUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeIdentityUsage API operation for Amazon Cognito Sync.
-//
-// Gets usage information for an identity, including number of datasets and
-// data usage.
-//
-// This API can be called with temporary user credentials provided by Cognito
-// Identity or with developer credentials.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation DescribeIdentityUsage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage
-func (c *CognitoSync) DescribeIdentityUsage(input *DescribeIdentityUsageInput) (*DescribeIdentityUsageOutput, error) {
-	req, out := c.DescribeIdentityUsageRequest(input)
-	return out, req.Send()
-}
-
-// DescribeIdentityUsageWithContext is the same as DescribeIdentityUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeIdentityUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) DescribeIdentityUsageWithContext(ctx aws.Context, input *DescribeIdentityUsageInput, opts ...aws.Option) (*DescribeIdentityUsageOutput, error) {
-	req, out := c.DescribeIdentityUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeIdentityUsageOutput{})
+	return DescribeIdentityUsageRequest{Request: req, Input: input}
 }
 
 const opGetBulkPublishDetails = "GetBulkPublishDetails"
 
-// GetBulkPublishDetailsRequest generates a "aws.Request" representing the
-// client's request for the GetBulkPublishDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBulkPublishDetailsRequest is a API request type for the GetBulkPublishDetails API operation.
+type GetBulkPublishDetailsRequest struct {
+	*aws.Request
+	Input *GetBulkPublishDetailsInput
+}
+
+// Send marshals and sends the GetBulkPublishDetails API request.
+func (r *GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBulkPublishDetailsOutput), nil
+}
+
+// GetBulkPublishDetailsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Get the status of the last BulkPublish operation for an identity pool.
 //
-// See GetBulkPublishDetails for more information on using the GetBulkPublishDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the GetBulkPublishDetailsRequest method.
-//    req, resp := client.GetBulkPublishDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBulkPublishDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails
-func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsInput) (req *aws.Request, output *GetBulkPublishDetailsOutput) {
+func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsInput) GetBulkPublishDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetBulkPublishDetails,
 		HTTPMethod: "POST",
@@ -539,87 +313,46 @@ func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsI
 		input = &GetBulkPublishDetailsInput{}
 	}
 
-	output = &GetBulkPublishDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBulkPublishDetails API operation for Amazon Cognito Sync.
-//
-// Get the status of the last BulkPublish operation for an identity pool.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation GetBulkPublishDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails
-func (c *CognitoSync) GetBulkPublishDetails(input *GetBulkPublishDetailsInput) (*GetBulkPublishDetailsOutput, error) {
-	req, out := c.GetBulkPublishDetailsRequest(input)
-	return out, req.Send()
-}
-
-// GetBulkPublishDetailsWithContext is the same as GetBulkPublishDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBulkPublishDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) GetBulkPublishDetailsWithContext(ctx aws.Context, input *GetBulkPublishDetailsInput, opts ...aws.Option) (*GetBulkPublishDetailsOutput, error) {
-	req, out := c.GetBulkPublishDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBulkPublishDetailsOutput{})
+	return GetBulkPublishDetailsRequest{Request: req, Input: input}
 }
 
 const opGetCognitoEvents = "GetCognitoEvents"
 
-// GetCognitoEventsRequest generates a "aws.Request" representing the
-// client's request for the GetCognitoEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCognitoEventsRequest is a API request type for the GetCognitoEvents API operation.
+type GetCognitoEventsRequest struct {
+	*aws.Request
+	Input *GetCognitoEventsInput
+}
+
+// Send marshals and sends the GetCognitoEvents API request.
+func (r *GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCognitoEventsOutput), nil
+}
+
+// GetCognitoEventsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets the events and the corresponding Lambda functions associated with an
+// identity pool.
 //
-// See GetCognitoEvents for more information on using the GetCognitoEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the GetCognitoEventsRequest method.
-//    req, resp := client.GetCognitoEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCognitoEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents
-func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) (req *aws.Request, output *GetCognitoEventsOutput) {
+func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetCognitoEventsRequest {
 	op := &aws.Operation{
 		Name:       opGetCognitoEvents,
 		HTTPMethod: "GET",
@@ -630,91 +363,45 @@ func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) (req
 		input = &GetCognitoEventsInput{}
 	}
 
-	output = &GetCognitoEventsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCognitoEvents API operation for Amazon Cognito Sync.
-//
-// Gets the events and the corresponding Lambda functions associated with an
-// identity pool.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation GetCognitoEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents
-func (c *CognitoSync) GetCognitoEvents(input *GetCognitoEventsInput) (*GetCognitoEventsOutput, error) {
-	req, out := c.GetCognitoEventsRequest(input)
-	return out, req.Send()
-}
-
-// GetCognitoEventsWithContext is the same as GetCognitoEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCognitoEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) GetCognitoEventsWithContext(ctx aws.Context, input *GetCognitoEventsInput, opts ...aws.Option) (*GetCognitoEventsOutput, error) {
-	req, out := c.GetCognitoEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCognitoEventsOutput{})
+	return GetCognitoEventsRequest{Request: req, Input: input}
 }
 
 const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
 
-// GetIdentityPoolConfigurationRequest generates a "aws.Request" representing the
-// client's request for the GetIdentityPoolConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetIdentityPoolConfigurationRequest is a API request type for the GetIdentityPoolConfiguration API operation.
+type GetIdentityPoolConfigurationRequest struct {
+	*aws.Request
+	Input *GetIdentityPoolConfigurationInput
+}
+
+// Send marshals and sends the GetIdentityPoolConfiguration API request.
+func (r *GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetIdentityPoolConfigurationOutput), nil
+}
+
+// GetIdentityPoolConfigurationRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets the configuration settings of an identity pool.
 //
-// See GetIdentityPoolConfiguration for more information on using the GetIdentityPoolConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the GetIdentityPoolConfigurationRequest method.
-//    req, resp := client.GetIdentityPoolConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetIdentityPoolConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration
-func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfigurationInput) (req *aws.Request, output *GetIdentityPoolConfigurationOutput) {
+func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opGetIdentityPoolConfiguration,
 		HTTPMethod: "GET",
@@ -725,90 +412,48 @@ func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPool
 		input = &GetIdentityPoolConfigurationInput{}
 	}
 
-	output = &GetIdentityPoolConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetIdentityPoolConfiguration API operation for Amazon Cognito Sync.
-//
-// Gets the configuration settings of an identity pool.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation GetIdentityPoolConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration
-func (c *CognitoSync) GetIdentityPoolConfiguration(input *GetIdentityPoolConfigurationInput) (*GetIdentityPoolConfigurationOutput, error) {
-	req, out := c.GetIdentityPoolConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// GetIdentityPoolConfigurationWithContext is the same as GetIdentityPoolConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetIdentityPoolConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) GetIdentityPoolConfigurationWithContext(ctx aws.Context, input *GetIdentityPoolConfigurationInput, opts ...aws.Option) (*GetIdentityPoolConfigurationOutput, error) {
-	req, out := c.GetIdentityPoolConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetIdentityPoolConfigurationOutput{})
+	return GetIdentityPoolConfigurationRequest{Request: req, Input: input}
 }
 
 const opListDatasets = "ListDatasets"
 
-// ListDatasetsRequest generates a "aws.Request" representing the
-// client's request for the ListDatasets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDatasetsRequest is a API request type for the ListDatasets API operation.
+type ListDatasetsRequest struct {
+	*aws.Request
+	Input *ListDatasetsInput
+}
+
+// Send marshals and sends the ListDatasets API request.
+func (r *ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDatasetsOutput), nil
+}
+
+// ListDatasetsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists datasets for an identity. With Amazon Cognito Sync, each identity has
+// access only to its own data. Thus, the credentials used to make this API
+// call need to have access to the identity data.
 //
-// See ListDatasets for more information on using the ListDatasets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// ListDatasets can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials. You should use the Cognito Identity
+// credentials to make this API call.
 //
 //    // Example sending a request using the ListDatasetsRequest method.
-//    req, resp := client.ListDatasetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDatasetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets
-func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) (req *aws.Request, output *ListDatasetsOutput) {
+func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) ListDatasetsRequest {
 	op := &aws.Operation{
 		Name:       opListDatasets,
 		HTTPMethod: "GET",
@@ -819,90 +464,46 @@ func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) (req *aws.Re
 		input = &ListDatasetsInput{}
 	}
 
-	output = &ListDatasetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDatasets API operation for Amazon Cognito Sync.
-//
-// Lists datasets for an identity. With Amazon Cognito Sync, each identity has
-// access only to its own data. Thus, the credentials used to make this API
-// call need to have access to the identity data.
-//
-// ListDatasets can be called with temporary user credentials provided by Cognito
-// Identity or with developer credentials. You should use the Cognito Identity
-// credentials to make this API call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation ListDatasets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets
-func (c *CognitoSync) ListDatasets(input *ListDatasetsInput) (*ListDatasetsOutput, error) {
-	req, out := c.ListDatasetsRequest(input)
-	return out, req.Send()
-}
-
-// ListDatasetsWithContext is the same as ListDatasets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDatasets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) ListDatasetsWithContext(ctx aws.Context, input *ListDatasetsInput, opts ...aws.Option) (*ListDatasetsOutput, error) {
-	req, out := c.ListDatasetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDatasetsOutput{})
+	return ListDatasetsRequest{Request: req, Input: input}
 }
 
 const opListIdentityPoolUsage = "ListIdentityPoolUsage"
 
-// ListIdentityPoolUsageRequest generates a "aws.Request" representing the
-// client's request for the ListIdentityPoolUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListIdentityPoolUsageRequest is a API request type for the ListIdentityPoolUsage API operation.
+type ListIdentityPoolUsageRequest struct {
+	*aws.Request
+	Input *ListIdentityPoolUsageInput
+}
+
+// Send marshals and sends the ListIdentityPoolUsage API request.
+func (r *ListIdentityPoolUsageRequest) Send() (*ListIdentityPoolUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListIdentityPoolUsageOutput), nil
+}
+
+// ListIdentityPoolUsageRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of identity pools registered with Cognito.
 //
-// See ListIdentityPoolUsage for more information on using the ListIdentityPoolUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// ListIdentityPoolUsage can only be called with developer credentials. You
+// cannot make this API call with the temporary user credentials provided by
+// Cognito Identity.
 //
 //    // Example sending a request using the ListIdentityPoolUsageRequest method.
-//    req, resp := client.ListIdentityPoolUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListIdentityPoolUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage
-func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput) (req *aws.Request, output *ListIdentityPoolUsageOutput) {
+func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest {
 	op := &aws.Operation{
 		Name:       opListIdentityPoolUsage,
 		HTTPMethod: "GET",
@@ -913,104 +514,30 @@ func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageI
 		input = &ListIdentityPoolUsageInput{}
 	}
 
-	output = &ListIdentityPoolUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListIdentityPoolUsage API operation for Amazon Cognito Sync.
-//
-// Gets a list of identity pools registered with Cognito.
-//
-// ListIdentityPoolUsage can only be called with developer credentials. You
-// cannot make this API call with the temporary user credentials provided by
-// Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation ListIdentityPoolUsage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage
-func (c *CognitoSync) ListIdentityPoolUsage(input *ListIdentityPoolUsageInput) (*ListIdentityPoolUsageOutput, error) {
-	req, out := c.ListIdentityPoolUsageRequest(input)
-	return out, req.Send()
-}
-
-// ListIdentityPoolUsageWithContext is the same as ListIdentityPoolUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListIdentityPoolUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) ListIdentityPoolUsageWithContext(ctx aws.Context, input *ListIdentityPoolUsageInput, opts ...aws.Option) (*ListIdentityPoolUsageOutput, error) {
-	req, out := c.ListIdentityPoolUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListIdentityPoolUsageOutput{})
+	return ListIdentityPoolUsageRequest{Request: req, Input: input}
 }
 
 const opListRecords = "ListRecords"
 
-// ListRecordsRequest generates a "aws.Request" representing the
-// client's request for the ListRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListRecords for more information on using the ListRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListRecordsRequest method.
-//    req, resp := client.ListRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords
-func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) (req *aws.Request, output *ListRecordsOutput) {
-	op := &aws.Operation{
-		Name:       opListRecords,
-		HTTPMethod: "GET",
-		HTTPPath:   "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records",
-	}
-
-	if input == nil {
-		input = &ListRecordsInput{}
-	}
-
-	output = &ListRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListRecordsRequest is a API request type for the ListRecords API operation.
+type ListRecordsRequest struct {
+	*aws.Request
+	Input *ListRecordsInput
 }
 
-// ListRecords API operation for Amazon Cognito Sync.
+// Send marshals and sends the ListRecords API request.
+func (r *ListRecordsRequest) Send() (*ListRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListRecordsOutput), nil
+}
+
+// ListRecordsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
 // Gets paginated records, optionally changed after a particular sync count
 // for a dataset and identity. With Amazon Cognito Sync, each identity has access
@@ -1021,75 +548,64 @@ func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) (req *aws.Requ
 // Identity or with developer credentials. You should use Cognito Identity credentials
 // to make this API call.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation ListRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//    // Example sending a request using the ListRecordsRequest method.
+//    req := client.ListRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords
-func (c *CognitoSync) ListRecords(input *ListRecordsInput) (*ListRecordsOutput, error) {
-	req, out := c.ListRecordsRequest(input)
-	return out, req.Send()
-}
+func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) ListRecordsRequest {
+	op := &aws.Operation{
+		Name:       opListRecords,
+		HTTPMethod: "GET",
+		HTTPPath:   "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}/records",
+	}
 
-// ListRecordsWithContext is the same as ListRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) ListRecordsWithContext(ctx aws.Context, input *ListRecordsInput, opts ...aws.Option) (*ListRecordsOutput, error) {
-	req, out := c.ListRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListRecordsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListRecordsOutput{})
+	return ListRecordsRequest{Request: req, Input: input}
 }
 
 const opRegisterDevice = "RegisterDevice"
 
-// RegisterDeviceRequest generates a "aws.Request" representing the
-// client's request for the RegisterDevice operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterDeviceRequest is a API request type for the RegisterDevice API operation.
+type RegisterDeviceRequest struct {
+	*aws.Request
+	Input *RegisterDeviceInput
+}
+
+// Send marshals and sends the RegisterDevice API request.
+func (r *RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterDeviceOutput), nil
+}
+
+// RegisterDeviceRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Registers a device to receive push sync notifications.
 //
-// See RegisterDevice for more information on using the RegisterDevice
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with temporary credentials provided by Cognito
+// Identity. You cannot call this API with developer credentials.
 //
 //    // Example sending a request using the RegisterDeviceRequest method.
-//    req, resp := client.RegisterDeviceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterDeviceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice
-func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) (req *aws.Request, output *RegisterDeviceOutput) {
+func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) RegisterDeviceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterDevice,
 		HTTPMethod: "POST",
@@ -1100,92 +616,48 @@ func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) (req *aw
 		input = &RegisterDeviceInput{}
 	}
 
-	output = &RegisterDeviceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterDevice API operation for Amazon Cognito Sync.
-//
-// Registers a device to receive push sync notifications.
-//
-// This API can only be called with temporary credentials provided by Cognito
-// Identity. You cannot call this API with developer credentials.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation RegisterDevice for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice
-func (c *CognitoSync) RegisterDevice(input *RegisterDeviceInput) (*RegisterDeviceOutput, error) {
-	req, out := c.RegisterDeviceRequest(input)
-	return out, req.Send()
-}
-
-// RegisterDeviceWithContext is the same as RegisterDevice with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterDevice for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) RegisterDeviceWithContext(ctx aws.Context, input *RegisterDeviceInput, opts ...aws.Option) (*RegisterDeviceOutput, error) {
-	req, out := c.RegisterDeviceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterDeviceOutput{})
+	return RegisterDeviceRequest{Request: req, Input: input}
 }
 
 const opSetCognitoEvents = "SetCognitoEvents"
 
-// SetCognitoEventsRequest generates a "aws.Request" representing the
-// client's request for the SetCognitoEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetCognitoEventsRequest is a API request type for the SetCognitoEvents API operation.
+type SetCognitoEventsRequest struct {
+	*aws.Request
+	Input *SetCognitoEventsInput
+}
+
+// Send marshals and sends the SetCognitoEvents API request.
+func (r *SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetCognitoEventsOutput), nil
+}
+
+// SetCognitoEventsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets the AWS Lambda function for a given event type for an identity pool.
+// This request only updates the key/value pair specified. Other key/values
+// pairs are not updated. To remove a key value pair, pass a empty value for
+// the particular key.
 //
-// See SetCognitoEvents for more information on using the SetCognitoEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the SetCognitoEventsRequest method.
-//    req, resp := client.SetCognitoEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetCognitoEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents
-func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) (req *aws.Request, output *SetCognitoEventsOutput) {
+func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) SetCognitoEventsRequest {
 	op := &aws.Operation{
 		Name:       opSetCognitoEvents,
 		HTTPMethod: "POST",
@@ -1196,95 +668,47 @@ func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) (req
 		input = &SetCognitoEventsInput{}
 	}
 
-	output = &SetCognitoEventsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetCognitoEventsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetCognitoEvents API operation for Amazon Cognito Sync.
-//
-// Sets the AWS Lambda function for a given event type for an identity pool.
-// This request only updates the key/value pair specified. Other key/values
-// pairs are not updated. To remove a key value pair, pass a empty value for
-// the particular key.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation SetCognitoEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents
-func (c *CognitoSync) SetCognitoEvents(input *SetCognitoEventsInput) (*SetCognitoEventsOutput, error) {
-	req, out := c.SetCognitoEventsRequest(input)
-	return out, req.Send()
-}
-
-// SetCognitoEventsWithContext is the same as SetCognitoEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetCognitoEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) SetCognitoEventsWithContext(ctx aws.Context, input *SetCognitoEventsInput, opts ...aws.Option) (*SetCognitoEventsOutput, error) {
-	req, out := c.SetCognitoEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetCognitoEventsRequest{Request: req, Input: input}
 }
 
 const opSetIdentityPoolConfiguration = "SetIdentityPoolConfiguration"
 
-// SetIdentityPoolConfigurationRequest generates a "aws.Request" representing the
-// client's request for the SetIdentityPoolConfiguration operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetIdentityPoolConfigurationRequest is a API request type for the SetIdentityPoolConfiguration API operation.
+type SetIdentityPoolConfigurationRequest struct {
+	*aws.Request
+	Input *SetIdentityPoolConfigurationInput
+}
+
+// Send marshals and sends the SetIdentityPoolConfiguration API request.
+func (r *SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetIdentityPoolConfigurationOutput), nil
+}
+
+// SetIdentityPoolConfigurationRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Sets the necessary configuration for push sync.
 //
-// See SetIdentityPoolConfiguration for more information on using the SetIdentityPoolConfiguration
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 //
 //    // Example sending a request using the SetIdentityPoolConfigurationRequest method.
-//    req, resp := client.SetIdentityPoolConfigurationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetIdentityPoolConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration
-func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPoolConfigurationInput) (req *aws.Request, output *SetIdentityPoolConfigurationOutput) {
+func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPoolConfigurationInput) SetIdentityPoolConfigurationRequest {
 	op := &aws.Operation{
 		Name:       opSetIdentityPoolConfiguration,
 		HTTPMethod: "POST",
@@ -1295,93 +719,46 @@ func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPool
 		input = &SetIdentityPoolConfigurationInput{}
 	}
 
-	output = &SetIdentityPoolConfigurationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetIdentityPoolConfiguration API operation for Amazon Cognito Sync.
-//
-// Sets the necessary configuration for push sync.
-//
-// This API can only be called with developer credentials. You cannot call this
-// API with the temporary user credentials provided by Cognito Identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation SetIdentityPoolConfiguration for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-//   * ErrCodeConcurrentModificationException "ConcurrentModificationException"
-//   Thrown if there are parallel requests to modify a resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration
-func (c *CognitoSync) SetIdentityPoolConfiguration(input *SetIdentityPoolConfigurationInput) (*SetIdentityPoolConfigurationOutput, error) {
-	req, out := c.SetIdentityPoolConfigurationRequest(input)
-	return out, req.Send()
-}
-
-// SetIdentityPoolConfigurationWithContext is the same as SetIdentityPoolConfiguration with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetIdentityPoolConfiguration for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) SetIdentityPoolConfigurationWithContext(ctx aws.Context, input *SetIdentityPoolConfigurationInput, opts ...aws.Option) (*SetIdentityPoolConfigurationOutput, error) {
-	req, out := c.SetIdentityPoolConfigurationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetIdentityPoolConfigurationOutput{})
+	return SetIdentityPoolConfigurationRequest{Request: req, Input: input}
 }
 
 const opSubscribeToDataset = "SubscribeToDataset"
 
-// SubscribeToDatasetRequest generates a "aws.Request" representing the
-// client's request for the SubscribeToDataset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SubscribeToDatasetRequest is a API request type for the SubscribeToDataset API operation.
+type SubscribeToDatasetRequest struct {
+	*aws.Request
+	Input *SubscribeToDatasetInput
+}
+
+// Send marshals and sends the SubscribeToDataset API request.
+func (r *SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SubscribeToDatasetOutput), nil
+}
+
+// SubscribeToDatasetRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Subscribes to receive notifications when a dataset is modified by another
+// device.
 //
-// See SubscribeToDataset for more information on using the SubscribeToDataset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This API can only be called with temporary credentials provided by Cognito
+// Identity. You cannot call this API with developer credentials.
 //
 //    // Example sending a request using the SubscribeToDatasetRequest method.
-//    req, resp := client.SubscribeToDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SubscribeToDatasetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset
-func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) (req *aws.Request, output *SubscribeToDatasetOutput) {
+func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) SubscribeToDatasetRequest {
 	op := &aws.Operation{
 		Name:       opSubscribeToDataset,
 		HTTPMethod: "POST",
@@ -1392,93 +769,46 @@ func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) 
 		input = &SubscribeToDatasetInput{}
 	}
 
-	output = &SubscribeToDatasetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SubscribeToDatasetOutput{})
+	return SubscribeToDatasetRequest{Request: req, Input: input}
 }
 
-// SubscribeToDataset API operation for Amazon Cognito Sync.
+const opUnsubscribeFromDataset = "UnsubscribeFromDataset"
+
+// UnsubscribeFromDatasetRequest is a API request type for the UnsubscribeFromDataset API operation.
+type UnsubscribeFromDatasetRequest struct {
+	*aws.Request
+	Input *UnsubscribeFromDatasetInput
+}
+
+// Send marshals and sends the UnsubscribeFromDataset API request.
+func (r *UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UnsubscribeFromDatasetOutput), nil
+}
+
+// UnsubscribeFromDatasetRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
-// Subscribes to receive notifications when a dataset is modified by another
+// Unsubscribes from receiving notifications when a dataset is modified by another
 // device.
 //
 // This API can only be called with temporary credentials provided by Cognito
 // Identity. You cannot call this API with developer credentials.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation SubscribeToDataset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset
-func (c *CognitoSync) SubscribeToDataset(input *SubscribeToDatasetInput) (*SubscribeToDatasetOutput, error) {
-	req, out := c.SubscribeToDatasetRequest(input)
-	return out, req.Send()
-}
-
-// SubscribeToDatasetWithContext is the same as SubscribeToDataset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SubscribeToDataset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) SubscribeToDatasetWithContext(ctx aws.Context, input *SubscribeToDatasetInput, opts ...aws.Option) (*SubscribeToDatasetOutput, error) {
-	req, out := c.SubscribeToDatasetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUnsubscribeFromDataset = "UnsubscribeFromDataset"
-
-// UnsubscribeFromDatasetRequest generates a "aws.Request" representing the
-// client's request for the UnsubscribeFromDataset operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UnsubscribeFromDataset for more information on using the UnsubscribeFromDataset
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the UnsubscribeFromDatasetRequest method.
-//    req, resp := client.UnsubscribeFromDatasetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UnsubscribeFromDatasetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset
-func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatasetInput) (req *aws.Request, output *UnsubscribeFromDatasetOutput) {
+func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatasetInput) UnsubscribeFromDatasetRequest {
 	op := &aws.Operation{
 		Name:       opUnsubscribeFromDataset,
 		HTTPMethod: "DELETE",
@@ -1489,109 +819,30 @@ func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatase
 		input = &UnsubscribeFromDatasetInput{}
 	}
 
-	output = &UnsubscribeFromDatasetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UnsubscribeFromDataset API operation for Amazon Cognito Sync.
-//
-// Unsubscribes from receiving notifications when a dataset is modified by another
-// device.
-//
-// This API can only be called with temporary credentials provided by Cognito
-// Identity. You cannot call this API with developer credentials.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation UnsubscribeFromDataset for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
-//
-//   * ErrCodeInvalidConfigurationException "InvalidConfigurationException"
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset
-func (c *CognitoSync) UnsubscribeFromDataset(input *UnsubscribeFromDatasetInput) (*UnsubscribeFromDatasetOutput, error) {
-	req, out := c.UnsubscribeFromDatasetRequest(input)
-	return out, req.Send()
-}
-
-// UnsubscribeFromDatasetWithContext is the same as UnsubscribeFromDataset with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UnsubscribeFromDataset for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) UnsubscribeFromDatasetWithContext(ctx aws.Context, input *UnsubscribeFromDatasetInput, opts ...aws.Option) (*UnsubscribeFromDatasetOutput, error) {
-	req, out := c.UnsubscribeFromDatasetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UnsubscribeFromDatasetOutput{})
+	return UnsubscribeFromDatasetRequest{Request: req, Input: input}
 }
 
 const opUpdateRecords = "UpdateRecords"
 
-// UpdateRecordsRequest generates a "aws.Request" representing the
-// client's request for the UpdateRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateRecords for more information on using the UpdateRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateRecordsRequest method.
-//    req, resp := client.UpdateRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords
-func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) (req *aws.Request, output *UpdateRecordsOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateRecords,
-		HTTPMethod: "POST",
-		HTTPPath:   "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
-	}
-
-	if input == nil {
-		input = &UpdateRecordsInput{}
-	}
-
-	output = &UpdateRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateRecordsRequest is a API request type for the UpdateRecords API operation.
+type UpdateRecordsRequest struct {
+	*aws.Request
+	Input *UpdateRecordsInput
 }
 
-// UpdateRecords API operation for Amazon Cognito Sync.
+// Send marshals and sends the UpdateRecords API request.
+func (r *UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRecordsOutput), nil
+}
+
+// UpdateRecordsRequest returns a request value for making API operation for
+// Amazon Cognito Sync.
 //
 // Posts updates to records and adds and deletes records for a dataset and user.
 //
@@ -1610,62 +861,27 @@ func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) (req *aws.
 // This API can be called with temporary user credentials provided by Cognito
 // Identity or with developer credentials.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Cognito Sync's
-// API operation UpdateRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   Thrown when a request parameter does not comply with the associated constraints.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Thrown when the limit on the number of objects or operations has been exceeded.
-//
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Thrown when a user is not authorized to access the requested resource.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Thrown if the resource doesn't exist.
-//
-//   * ErrCodeResourceConflictException "ResourceConflictException"
-//   Thrown if an update can't be applied because the resource was changed by
-//   another call and this would result in a conflict.
-//
-//   * ErrCodeInvalidLambdaFunctionOutputException "InvalidLambdaFunctionOutputException"
-//   The AWS Lambda function returned invalid output or an exception.
-//
-//   * ErrCodeLambdaThrottledException "LambdaThrottledException"
-//   AWS Lambda throttled your account, please contact AWS Support
-//
-//   * ErrCodeTooManyRequestsException "TooManyRequestsException"
-//   Thrown if the request is throttled.
-//
-//   * ErrCodeInternalErrorException "InternalErrorException"
-//   Indicates an internal service error.
+//    // Example sending a request using the UpdateRecordsRequest method.
+//    req := client.UpdateRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords
-func (c *CognitoSync) UpdateRecords(input *UpdateRecordsInput) (*UpdateRecordsOutput, error) {
-	req, out := c.UpdateRecordsRequest(input)
-	return out, req.Send()
-}
+func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateRecordsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRecords,
+		HTTPMethod: "POST",
+		HTTPPath:   "/identitypools/{IdentityPoolId}/identities/{IdentityId}/datasets/{DatasetName}",
+	}
 
-// UpdateRecordsWithContext is the same as UpdateRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CognitoSync) UpdateRecordsWithContext(ctx aws.Context, input *UpdateRecordsInput, opts ...aws.Option) (*UpdateRecordsOutput, error) {
-	req, out := c.UpdateRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateRecordsInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateRecordsOutput{})
+	return UpdateRecordsRequest{Request: req, Input: input}
 }
 
 // The input for the BulkPublish operation.

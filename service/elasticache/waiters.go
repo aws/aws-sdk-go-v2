@@ -63,10 +63,10 @@ func (c *ElastiCache) WaitUntilCacheClusterAvailableWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheClustersRequest(inCpy)
+			req := c.DescribeCacheClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -144,10 +144,10 @@ func (c *ElastiCache) WaitUntilCacheClusterDeletedWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeCacheClustersRequest(inCpy)
+			req := c.DescribeCacheClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -195,10 +195,10 @@ func (c *ElastiCache) WaitUntilReplicationGroupAvailableWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationGroupsRequest(inCpy)
+			req := c.DescribeReplicationGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -251,10 +251,10 @@ func (c *ElastiCache) WaitUntilReplicationGroupDeletedWithContext(ctx aws.Contex
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeReplicationGroupsRequest(inCpy)
+			req := c.DescribeReplicationGroupsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

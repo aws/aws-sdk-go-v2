@@ -26,11 +26,11 @@ func TestCopySnapshotPresignedURL(t *testing.T) {
 			}
 		}()
 		// Doesn't panic on nil input
-		req, _ := svc.CopySnapshotRequest(nil)
+		req := svc.CopySnapshotRequest(nil)
 		req.Sign()
 	}()
 
-	req, _ := svc.CopySnapshotRequest(&ec2.CopySnapshotInput{
+	req := svc.CopySnapshotRequest(&ec2.CopySnapshotInput{
 		SourceRegion:     aws.String("us-west-1"),
 		SourceSnapshotId: aws.String("snap-id"),
 	})

@@ -63,150 +63,82 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ELBV2API interface {
-	AddListenerCertificates(*elbv2.AddListenerCertificatesInput) (*elbv2.AddListenerCertificatesOutput, error)
-	AddListenerCertificatesWithContext(aws.Context, *elbv2.AddListenerCertificatesInput, ...aws.Option) (*elbv2.AddListenerCertificatesOutput, error)
-	AddListenerCertificatesRequest(*elbv2.AddListenerCertificatesInput) (*aws.Request, *elbv2.AddListenerCertificatesOutput)
+	AddListenerCertificatesRequest(*elbv2.AddListenerCertificatesInput) elbv2.AddListenerCertificatesRequest
 
-	AddTags(*elbv2.AddTagsInput) (*elbv2.AddTagsOutput, error)
-	AddTagsWithContext(aws.Context, *elbv2.AddTagsInput, ...aws.Option) (*elbv2.AddTagsOutput, error)
-	AddTagsRequest(*elbv2.AddTagsInput) (*aws.Request, *elbv2.AddTagsOutput)
+	AddTagsRequest(*elbv2.AddTagsInput) elbv2.AddTagsRequest
 
-	CreateListener(*elbv2.CreateListenerInput) (*elbv2.CreateListenerOutput, error)
-	CreateListenerWithContext(aws.Context, *elbv2.CreateListenerInput, ...aws.Option) (*elbv2.CreateListenerOutput, error)
-	CreateListenerRequest(*elbv2.CreateListenerInput) (*aws.Request, *elbv2.CreateListenerOutput)
+	CreateListenerRequest(*elbv2.CreateListenerInput) elbv2.CreateListenerRequest
 
-	CreateLoadBalancer(*elbv2.CreateLoadBalancerInput) (*elbv2.CreateLoadBalancerOutput, error)
-	CreateLoadBalancerWithContext(aws.Context, *elbv2.CreateLoadBalancerInput, ...aws.Option) (*elbv2.CreateLoadBalancerOutput, error)
-	CreateLoadBalancerRequest(*elbv2.CreateLoadBalancerInput) (*aws.Request, *elbv2.CreateLoadBalancerOutput)
+	CreateLoadBalancerRequest(*elbv2.CreateLoadBalancerInput) elbv2.CreateLoadBalancerRequest
 
-	CreateRule(*elbv2.CreateRuleInput) (*elbv2.CreateRuleOutput, error)
-	CreateRuleWithContext(aws.Context, *elbv2.CreateRuleInput, ...aws.Option) (*elbv2.CreateRuleOutput, error)
-	CreateRuleRequest(*elbv2.CreateRuleInput) (*aws.Request, *elbv2.CreateRuleOutput)
+	CreateRuleRequest(*elbv2.CreateRuleInput) elbv2.CreateRuleRequest
 
-	CreateTargetGroup(*elbv2.CreateTargetGroupInput) (*elbv2.CreateTargetGroupOutput, error)
-	CreateTargetGroupWithContext(aws.Context, *elbv2.CreateTargetGroupInput, ...aws.Option) (*elbv2.CreateTargetGroupOutput, error)
-	CreateTargetGroupRequest(*elbv2.CreateTargetGroupInput) (*aws.Request, *elbv2.CreateTargetGroupOutput)
+	CreateTargetGroupRequest(*elbv2.CreateTargetGroupInput) elbv2.CreateTargetGroupRequest
 
-	DeleteListener(*elbv2.DeleteListenerInput) (*elbv2.DeleteListenerOutput, error)
-	DeleteListenerWithContext(aws.Context, *elbv2.DeleteListenerInput, ...aws.Option) (*elbv2.DeleteListenerOutput, error)
-	DeleteListenerRequest(*elbv2.DeleteListenerInput) (*aws.Request, *elbv2.DeleteListenerOutput)
+	DeleteListenerRequest(*elbv2.DeleteListenerInput) elbv2.DeleteListenerRequest
 
-	DeleteLoadBalancer(*elbv2.DeleteLoadBalancerInput) (*elbv2.DeleteLoadBalancerOutput, error)
-	DeleteLoadBalancerWithContext(aws.Context, *elbv2.DeleteLoadBalancerInput, ...aws.Option) (*elbv2.DeleteLoadBalancerOutput, error)
-	DeleteLoadBalancerRequest(*elbv2.DeleteLoadBalancerInput) (*aws.Request, *elbv2.DeleteLoadBalancerOutput)
+	DeleteLoadBalancerRequest(*elbv2.DeleteLoadBalancerInput) elbv2.DeleteLoadBalancerRequest
 
-	DeleteRule(*elbv2.DeleteRuleInput) (*elbv2.DeleteRuleOutput, error)
-	DeleteRuleWithContext(aws.Context, *elbv2.DeleteRuleInput, ...aws.Option) (*elbv2.DeleteRuleOutput, error)
-	DeleteRuleRequest(*elbv2.DeleteRuleInput) (*aws.Request, *elbv2.DeleteRuleOutput)
+	DeleteRuleRequest(*elbv2.DeleteRuleInput) elbv2.DeleteRuleRequest
 
-	DeleteTargetGroup(*elbv2.DeleteTargetGroupInput) (*elbv2.DeleteTargetGroupOutput, error)
-	DeleteTargetGroupWithContext(aws.Context, *elbv2.DeleteTargetGroupInput, ...aws.Option) (*elbv2.DeleteTargetGroupOutput, error)
-	DeleteTargetGroupRequest(*elbv2.DeleteTargetGroupInput) (*aws.Request, *elbv2.DeleteTargetGroupOutput)
+	DeleteTargetGroupRequest(*elbv2.DeleteTargetGroupInput) elbv2.DeleteTargetGroupRequest
 
-	DeregisterTargets(*elbv2.DeregisterTargetsInput) (*elbv2.DeregisterTargetsOutput, error)
-	DeregisterTargetsWithContext(aws.Context, *elbv2.DeregisterTargetsInput, ...aws.Option) (*elbv2.DeregisterTargetsOutput, error)
-	DeregisterTargetsRequest(*elbv2.DeregisterTargetsInput) (*aws.Request, *elbv2.DeregisterTargetsOutput)
+	DeregisterTargetsRequest(*elbv2.DeregisterTargetsInput) elbv2.DeregisterTargetsRequest
 
-	DescribeAccountLimits(*elbv2.DescribeAccountLimitsInput) (*elbv2.DescribeAccountLimitsOutput, error)
-	DescribeAccountLimitsWithContext(aws.Context, *elbv2.DescribeAccountLimitsInput, ...aws.Option) (*elbv2.DescribeAccountLimitsOutput, error)
-	DescribeAccountLimitsRequest(*elbv2.DescribeAccountLimitsInput) (*aws.Request, *elbv2.DescribeAccountLimitsOutput)
+	DescribeAccountLimitsRequest(*elbv2.DescribeAccountLimitsInput) elbv2.DescribeAccountLimitsRequest
 
-	DescribeListenerCertificates(*elbv2.DescribeListenerCertificatesInput) (*elbv2.DescribeListenerCertificatesOutput, error)
-	DescribeListenerCertificatesWithContext(aws.Context, *elbv2.DescribeListenerCertificatesInput, ...aws.Option) (*elbv2.DescribeListenerCertificatesOutput, error)
-	DescribeListenerCertificatesRequest(*elbv2.DescribeListenerCertificatesInput) (*aws.Request, *elbv2.DescribeListenerCertificatesOutput)
+	DescribeListenerCertificatesRequest(*elbv2.DescribeListenerCertificatesInput) elbv2.DescribeListenerCertificatesRequest
 
-	DescribeListeners(*elbv2.DescribeListenersInput) (*elbv2.DescribeListenersOutput, error)
-	DescribeListenersWithContext(aws.Context, *elbv2.DescribeListenersInput, ...aws.Option) (*elbv2.DescribeListenersOutput, error)
-	DescribeListenersRequest(*elbv2.DescribeListenersInput) (*aws.Request, *elbv2.DescribeListenersOutput)
+	DescribeListenersRequest(*elbv2.DescribeListenersInput) elbv2.DescribeListenersRequest
 
 	DescribeListenersPages(*elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool) error
 	DescribeListenersPagesWithContext(aws.Context, *elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool, ...aws.Option) error
 
-	DescribeLoadBalancerAttributes(*elbv2.DescribeLoadBalancerAttributesInput) (*elbv2.DescribeLoadBalancerAttributesOutput, error)
-	DescribeLoadBalancerAttributesWithContext(aws.Context, *elbv2.DescribeLoadBalancerAttributesInput, ...aws.Option) (*elbv2.DescribeLoadBalancerAttributesOutput, error)
-	DescribeLoadBalancerAttributesRequest(*elbv2.DescribeLoadBalancerAttributesInput) (*aws.Request, *elbv2.DescribeLoadBalancerAttributesOutput)
+	DescribeLoadBalancerAttributesRequest(*elbv2.DescribeLoadBalancerAttributesInput) elbv2.DescribeLoadBalancerAttributesRequest
 
-	DescribeLoadBalancers(*elbv2.DescribeLoadBalancersInput) (*elbv2.DescribeLoadBalancersOutput, error)
-	DescribeLoadBalancersWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.Option) (*elbv2.DescribeLoadBalancersOutput, error)
-	DescribeLoadBalancersRequest(*elbv2.DescribeLoadBalancersInput) (*aws.Request, *elbv2.DescribeLoadBalancersOutput)
+	DescribeLoadBalancersRequest(*elbv2.DescribeLoadBalancersInput) elbv2.DescribeLoadBalancersRequest
 
 	DescribeLoadBalancersPages(*elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool) error
 	DescribeLoadBalancersPagesWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool, ...aws.Option) error
 
-	DescribeRules(*elbv2.DescribeRulesInput) (*elbv2.DescribeRulesOutput, error)
-	DescribeRulesWithContext(aws.Context, *elbv2.DescribeRulesInput, ...aws.Option) (*elbv2.DescribeRulesOutput, error)
-	DescribeRulesRequest(*elbv2.DescribeRulesInput) (*aws.Request, *elbv2.DescribeRulesOutput)
+	DescribeRulesRequest(*elbv2.DescribeRulesInput) elbv2.DescribeRulesRequest
 
-	DescribeSSLPolicies(*elbv2.DescribeSSLPoliciesInput) (*elbv2.DescribeSSLPoliciesOutput, error)
-	DescribeSSLPoliciesWithContext(aws.Context, *elbv2.DescribeSSLPoliciesInput, ...aws.Option) (*elbv2.DescribeSSLPoliciesOutput, error)
-	DescribeSSLPoliciesRequest(*elbv2.DescribeSSLPoliciesInput) (*aws.Request, *elbv2.DescribeSSLPoliciesOutput)
+	DescribeSSLPoliciesRequest(*elbv2.DescribeSSLPoliciesInput) elbv2.DescribeSSLPoliciesRequest
 
-	DescribeTags(*elbv2.DescribeTagsInput) (*elbv2.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *elbv2.DescribeTagsInput, ...aws.Option) (*elbv2.DescribeTagsOutput, error)
-	DescribeTagsRequest(*elbv2.DescribeTagsInput) (*aws.Request, *elbv2.DescribeTagsOutput)
+	DescribeTagsRequest(*elbv2.DescribeTagsInput) elbv2.DescribeTagsRequest
 
-	DescribeTargetGroupAttributes(*elbv2.DescribeTargetGroupAttributesInput) (*elbv2.DescribeTargetGroupAttributesOutput, error)
-	DescribeTargetGroupAttributesWithContext(aws.Context, *elbv2.DescribeTargetGroupAttributesInput, ...aws.Option) (*elbv2.DescribeTargetGroupAttributesOutput, error)
-	DescribeTargetGroupAttributesRequest(*elbv2.DescribeTargetGroupAttributesInput) (*aws.Request, *elbv2.DescribeTargetGroupAttributesOutput)
+	DescribeTargetGroupAttributesRequest(*elbv2.DescribeTargetGroupAttributesInput) elbv2.DescribeTargetGroupAttributesRequest
 
-	DescribeTargetGroups(*elbv2.DescribeTargetGroupsInput) (*elbv2.DescribeTargetGroupsOutput, error)
-	DescribeTargetGroupsWithContext(aws.Context, *elbv2.DescribeTargetGroupsInput, ...aws.Option) (*elbv2.DescribeTargetGroupsOutput, error)
-	DescribeTargetGroupsRequest(*elbv2.DescribeTargetGroupsInput) (*aws.Request, *elbv2.DescribeTargetGroupsOutput)
+	DescribeTargetGroupsRequest(*elbv2.DescribeTargetGroupsInput) elbv2.DescribeTargetGroupsRequest
 
 	DescribeTargetGroupsPages(*elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool) error
 	DescribeTargetGroupsPagesWithContext(aws.Context, *elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool, ...aws.Option) error
 
-	DescribeTargetHealth(*elbv2.DescribeTargetHealthInput) (*elbv2.DescribeTargetHealthOutput, error)
-	DescribeTargetHealthWithContext(aws.Context, *elbv2.DescribeTargetHealthInput, ...aws.Option) (*elbv2.DescribeTargetHealthOutput, error)
-	DescribeTargetHealthRequest(*elbv2.DescribeTargetHealthInput) (*aws.Request, *elbv2.DescribeTargetHealthOutput)
+	DescribeTargetHealthRequest(*elbv2.DescribeTargetHealthInput) elbv2.DescribeTargetHealthRequest
 
-	ModifyListener(*elbv2.ModifyListenerInput) (*elbv2.ModifyListenerOutput, error)
-	ModifyListenerWithContext(aws.Context, *elbv2.ModifyListenerInput, ...aws.Option) (*elbv2.ModifyListenerOutput, error)
-	ModifyListenerRequest(*elbv2.ModifyListenerInput) (*aws.Request, *elbv2.ModifyListenerOutput)
+	ModifyListenerRequest(*elbv2.ModifyListenerInput) elbv2.ModifyListenerRequest
 
-	ModifyLoadBalancerAttributes(*elbv2.ModifyLoadBalancerAttributesInput) (*elbv2.ModifyLoadBalancerAttributesOutput, error)
-	ModifyLoadBalancerAttributesWithContext(aws.Context, *elbv2.ModifyLoadBalancerAttributesInput, ...aws.Option) (*elbv2.ModifyLoadBalancerAttributesOutput, error)
-	ModifyLoadBalancerAttributesRequest(*elbv2.ModifyLoadBalancerAttributesInput) (*aws.Request, *elbv2.ModifyLoadBalancerAttributesOutput)
+	ModifyLoadBalancerAttributesRequest(*elbv2.ModifyLoadBalancerAttributesInput) elbv2.ModifyLoadBalancerAttributesRequest
 
-	ModifyRule(*elbv2.ModifyRuleInput) (*elbv2.ModifyRuleOutput, error)
-	ModifyRuleWithContext(aws.Context, *elbv2.ModifyRuleInput, ...aws.Option) (*elbv2.ModifyRuleOutput, error)
-	ModifyRuleRequest(*elbv2.ModifyRuleInput) (*aws.Request, *elbv2.ModifyRuleOutput)
+	ModifyRuleRequest(*elbv2.ModifyRuleInput) elbv2.ModifyRuleRequest
 
-	ModifyTargetGroup(*elbv2.ModifyTargetGroupInput) (*elbv2.ModifyTargetGroupOutput, error)
-	ModifyTargetGroupWithContext(aws.Context, *elbv2.ModifyTargetGroupInput, ...aws.Option) (*elbv2.ModifyTargetGroupOutput, error)
-	ModifyTargetGroupRequest(*elbv2.ModifyTargetGroupInput) (*aws.Request, *elbv2.ModifyTargetGroupOutput)
+	ModifyTargetGroupRequest(*elbv2.ModifyTargetGroupInput) elbv2.ModifyTargetGroupRequest
 
-	ModifyTargetGroupAttributes(*elbv2.ModifyTargetGroupAttributesInput) (*elbv2.ModifyTargetGroupAttributesOutput, error)
-	ModifyTargetGroupAttributesWithContext(aws.Context, *elbv2.ModifyTargetGroupAttributesInput, ...aws.Option) (*elbv2.ModifyTargetGroupAttributesOutput, error)
-	ModifyTargetGroupAttributesRequest(*elbv2.ModifyTargetGroupAttributesInput) (*aws.Request, *elbv2.ModifyTargetGroupAttributesOutput)
+	ModifyTargetGroupAttributesRequest(*elbv2.ModifyTargetGroupAttributesInput) elbv2.ModifyTargetGroupAttributesRequest
 
-	RegisterTargets(*elbv2.RegisterTargetsInput) (*elbv2.RegisterTargetsOutput, error)
-	RegisterTargetsWithContext(aws.Context, *elbv2.RegisterTargetsInput, ...aws.Option) (*elbv2.RegisterTargetsOutput, error)
-	RegisterTargetsRequest(*elbv2.RegisterTargetsInput) (*aws.Request, *elbv2.RegisterTargetsOutput)
+	RegisterTargetsRequest(*elbv2.RegisterTargetsInput) elbv2.RegisterTargetsRequest
 
-	RemoveListenerCertificates(*elbv2.RemoveListenerCertificatesInput) (*elbv2.RemoveListenerCertificatesOutput, error)
-	RemoveListenerCertificatesWithContext(aws.Context, *elbv2.RemoveListenerCertificatesInput, ...aws.Option) (*elbv2.RemoveListenerCertificatesOutput, error)
-	RemoveListenerCertificatesRequest(*elbv2.RemoveListenerCertificatesInput) (*aws.Request, *elbv2.RemoveListenerCertificatesOutput)
+	RemoveListenerCertificatesRequest(*elbv2.RemoveListenerCertificatesInput) elbv2.RemoveListenerCertificatesRequest
 
-	RemoveTags(*elbv2.RemoveTagsInput) (*elbv2.RemoveTagsOutput, error)
-	RemoveTagsWithContext(aws.Context, *elbv2.RemoveTagsInput, ...aws.Option) (*elbv2.RemoveTagsOutput, error)
-	RemoveTagsRequest(*elbv2.RemoveTagsInput) (*aws.Request, *elbv2.RemoveTagsOutput)
+	RemoveTagsRequest(*elbv2.RemoveTagsInput) elbv2.RemoveTagsRequest
 
-	SetIpAddressType(*elbv2.SetIpAddressTypeInput) (*elbv2.SetIpAddressTypeOutput, error)
-	SetIpAddressTypeWithContext(aws.Context, *elbv2.SetIpAddressTypeInput, ...aws.Option) (*elbv2.SetIpAddressTypeOutput, error)
-	SetIpAddressTypeRequest(*elbv2.SetIpAddressTypeInput) (*aws.Request, *elbv2.SetIpAddressTypeOutput)
+	SetIpAddressTypeRequest(*elbv2.SetIpAddressTypeInput) elbv2.SetIpAddressTypeRequest
 
-	SetRulePriorities(*elbv2.SetRulePrioritiesInput) (*elbv2.SetRulePrioritiesOutput, error)
-	SetRulePrioritiesWithContext(aws.Context, *elbv2.SetRulePrioritiesInput, ...aws.Option) (*elbv2.SetRulePrioritiesOutput, error)
-	SetRulePrioritiesRequest(*elbv2.SetRulePrioritiesInput) (*aws.Request, *elbv2.SetRulePrioritiesOutput)
+	SetRulePrioritiesRequest(*elbv2.SetRulePrioritiesInput) elbv2.SetRulePrioritiesRequest
 
-	SetSecurityGroups(*elbv2.SetSecurityGroupsInput) (*elbv2.SetSecurityGroupsOutput, error)
-	SetSecurityGroupsWithContext(aws.Context, *elbv2.SetSecurityGroupsInput, ...aws.Option) (*elbv2.SetSecurityGroupsOutput, error)
-	SetSecurityGroupsRequest(*elbv2.SetSecurityGroupsInput) (*aws.Request, *elbv2.SetSecurityGroupsOutput)
+	SetSecurityGroupsRequest(*elbv2.SetSecurityGroupsInput) elbv2.SetSecurityGroupsRequest
 
-	SetSubnets(*elbv2.SetSubnetsInput) (*elbv2.SetSubnetsOutput, error)
-	SetSubnetsWithContext(aws.Context, *elbv2.SetSubnetsInput, ...aws.Option) (*elbv2.SetSubnetsOutput, error)
-	SetSubnetsRequest(*elbv2.SetSubnetsInput) (*aws.Request, *elbv2.SetSubnetsOutput)
+	SetSubnetsRequest(*elbv2.SetSubnetsInput) elbv2.SetSubnetsRequest
 
 	WaitUntilLoadBalancerAvailable(*elbv2.DescribeLoadBalancersInput) error
 	WaitUntilLoadBalancerAvailableWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, ...aws.WaiterOption) error

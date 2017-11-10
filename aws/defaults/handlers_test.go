@@ -351,12 +351,12 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
-	_, err := svc.GetObject(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
 
-	if err != nil {
+	if _, err := req.Send(); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
@@ -369,14 +369,14 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
-	req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+	req := svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
 
 	req.HTTPRequest.Header.Set("Content-Length", "-1")
 
-	if req.Error != nil {
+	if _, err := req.Send(); err != nil {
 		t.Errorf("expect no error, got %v", req.Error)
 	}
 }
@@ -389,13 +389,13 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 	cfg.S3ForcePathStyle = true
 
 	svc := s3.New(cfg)
-	_, err := svc.PutObject(&s3.PutObjectInput{
+	req := svc.PutObjectRequest(&s3.PutObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 		Body:   bytes.NewReader(make([]byte, 1024)),
 	})
 
-	if err != nil {
+	if _, err := req.Send(); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }

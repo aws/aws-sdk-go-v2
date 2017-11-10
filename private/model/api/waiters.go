@@ -149,10 +149,10 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.{{ .OperationName }}Request(inCpy)
+			req := c.{{ .OperationName }}Request(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

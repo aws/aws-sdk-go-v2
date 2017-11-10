@@ -13,47 +13,24 @@ import (
 
 const opAbortMultipartUpload = "AbortMultipartUpload"
 
-// AbortMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the AbortMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AbortMultipartUpload for more information on using the AbortMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AbortMultipartUploadRequest method.
-//    req, resp := client.AbortMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *aws.Request, output *AbortMultipartUploadOutput) {
-	op := &aws.Operation{
-		Name:       opAbortMultipartUpload,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
-	}
-
-	if input == nil {
-		input = &AbortMultipartUploadInput{}
-	}
-
-	output = &AbortMultipartUploadOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AbortMultipartUploadRequest is a API request type for the AbortMultipartUpload API operation.
+type AbortMultipartUploadRequest struct {
+	*aws.Request
+	Input *AbortMultipartUploadInput
 }
 
-// AbortMultipartUpload API operation for Amazon Glacier.
+// Send marshals and sends the AbortMultipartUpload API request.
+func (r *AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AbortMultipartUploadOutput), nil
+}
+
+// AbortMultipartUploadRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation aborts a multipart upload identified by the upload ID.
 //
@@ -76,91 +53,49 @@ func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) 
 // and Abort Multipart Upload (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation AbortMultipartUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) AbortMultipartUpload(input *AbortMultipartUploadInput) (*AbortMultipartUploadOutput, error) {
-	req, out := c.AbortMultipartUploadRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the AbortMultipartUploadRequest method.
+//    req := client.AbortMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) AbortMultipartUploadRequest {
+	op := &aws.Operation{
+		Name:       opAbortMultipartUpload,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+	}
 
-// AbortMultipartUploadWithContext is the same as AbortMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AbortMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...aws.Option) (*AbortMultipartUploadOutput, error) {
-	req, out := c.AbortMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AbortMultipartUploadInput{}
+	}
+
+	req := c.newRequest(op, input, &AbortMultipartUploadOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AbortMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opAbortVaultLock = "AbortVaultLock"
 
-// AbortVaultLockRequest generates a "aws.Request" representing the
-// client's request for the AbortVaultLock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AbortVaultLock for more information on using the AbortVaultLock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AbortVaultLockRequest method.
-//    req, resp := client.AbortVaultLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) (req *aws.Request, output *AbortVaultLockOutput) {
-	op := &aws.Operation{
-		Name:       opAbortVaultLock,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
-	}
-
-	if input == nil {
-		input = &AbortVaultLockInput{}
-	}
-
-	output = &AbortVaultLockOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AbortVaultLockRequest is a API request type for the AbortVaultLock API operation.
+type AbortVaultLockRequest struct {
+	*aws.Request
+	Input *AbortVaultLockInput
 }
 
-// AbortVaultLock API operation for Amazon Glacier.
+// Send marshals and sends the AbortVaultLock API request.
+func (r *AbortVaultLockRequest) Send() (*AbortVaultLockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AbortVaultLockOutput), nil
+}
+
+// AbortVaultLockRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation aborts the vault locking process if the vault lock is not
 // in the Locked state. If the vault lock is in the Locked state when this operation
@@ -179,73 +114,64 @@ func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) (req *aws.Re
 // multiple times, if the vault lock is in the InProgress state or if there
 // is no policy associated with the vault.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation AbortVaultLock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) AbortVaultLock(input *AbortVaultLockInput) (*AbortVaultLockOutput, error) {
-	req, out := c.AbortVaultLockRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the AbortVaultLockRequest method.
+//    req := client.AbortVaultLockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLockRequest {
+	op := &aws.Operation{
+		Name:       opAbortVaultLock,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
+	}
 
-// AbortVaultLockWithContext is the same as AbortVaultLock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AbortVaultLock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) AbortVaultLockWithContext(ctx aws.Context, input *AbortVaultLockInput, opts ...aws.Option) (*AbortVaultLockOutput, error) {
-	req, out := c.AbortVaultLockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AbortVaultLockInput{}
+	}
+
+	req := c.newRequest(op, input, &AbortVaultLockOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AbortVaultLockRequest{Request: req, Input: input}
 }
 
 const opAddTagsToVault = "AddTagsToVault"
 
-// AddTagsToVaultRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsToVaultRequest is a API request type for the AddTagsToVault API operation.
+type AddTagsToVaultRequest struct {
+	*aws.Request
+	Input *AddTagsToVaultInput
+}
+
+// Send marshals and sends the AddTagsToVault API request.
+func (r *AddTagsToVaultRequest) Send() (*AddTagsToVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToVaultOutput), nil
+}
+
+// AddTagsToVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToVault for more information on using the AddTagsToVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation adds the specified tags to a vault. Each tag is composed of
+// a key and a value. Each vault can have up to 10 tags. If your request would
+// cause the tag limit for the vault to be exceeded, the operation throws the
+// LimitExceededException error. If a tag already exists on the vault under
+// a specified key, the existing key value will be overwritten. For more information
+// about tags, see Tagging Amazon Glacier Resources (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
 //
 //    // Example sending a request using the AddTagsToVaultRequest method.
-//    req, resp := client.AddTagsToVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsToVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) (req *aws.Request, output *AddTagsToVaultOutput) {
+func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVaultRequest {
 	op := &aws.Operation{
 		Name:       opAddTagsToVault,
 		HTTPMethod: "POST",
@@ -256,108 +182,32 @@ func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) (req *aws.Re
 		input = &AddTagsToVaultInput{}
 	}
 
-	output = &AddTagsToVaultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsToVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddTagsToVault API operation for Amazon Glacier.
-//
-// This operation adds the specified tags to a vault. Each tag is composed of
-// a key and a value. Each vault can have up to 10 tags. If your request would
-// cause the tag limit for the vault to be exceeded, the operation throws the
-// LimitExceededException error. If a tag already exists on the vault under
-// a specified key, the existing key value will be overwritten. For more information
-// about tags, see Tagging Amazon Glacier Resources (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation AddTagsToVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Returned if the request results in a vault or account limit being exceeded.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) AddTagsToVault(input *AddTagsToVaultInput) (*AddTagsToVaultOutput, error) {
-	req, out := c.AddTagsToVaultRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsToVaultWithContext is the same as AddTagsToVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) AddTagsToVaultWithContext(ctx aws.Context, input *AddTagsToVaultInput, opts ...aws.Option) (*AddTagsToVaultOutput, error) {
-	req, out := c.AddTagsToVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddTagsToVaultRequest{Request: req, Input: input}
 }
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
 
-// CompleteMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the CompleteMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CompleteMultipartUpload for more information on using the CompleteMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CompleteMultipartUploadRequest method.
-//    req, resp := client.CompleteMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *aws.Request, output *ArchiveCreationOutput) {
-	op := &aws.Operation{
-		Name:       opCompleteMultipartUpload,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
-	}
-
-	if input == nil {
-		input = &CompleteMultipartUploadInput{}
-	}
-
-	output = &ArchiveCreationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CompleteMultipartUploadRequest is a API request type for the CompleteMultipartUpload API operation.
+type CompleteMultipartUploadRequest struct {
+	*aws.Request
+	Input *CompleteMultipartUploadInput
 }
 
-// CompleteMultipartUpload API operation for Amazon Glacier.
+// Send marshals and sends the CompleteMultipartUpload API request.
+func (r *CompleteMultipartUploadRequest) Send() (*UploadArchiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadArchiveOutput), nil
+}
+
+// CompleteMultipartUploadRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // You call this operation to inform Amazon Glacier that all the archive parts
 // have been uploaded and that Amazon Glacier can now assemble the archive from
@@ -404,91 +254,47 @@ func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadI
 // and Complete Multipart Upload (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation CompleteMultipartUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) CompleteMultipartUpload(input *CompleteMultipartUploadInput) (*ArchiveCreationOutput, error) {
-	req, out := c.CompleteMultipartUploadRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CompleteMultipartUploadRequest method.
+//    req := client.CompleteMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) CompleteMultipartUploadRequest {
+	op := &aws.Operation{
+		Name:       opCompleteMultipartUpload,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+	}
 
-// CompleteMultipartUploadWithContext is the same as CompleteMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompleteMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...aws.Option) (*ArchiveCreationOutput, error) {
-	req, out := c.CompleteMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CompleteMultipartUploadInput{}
+	}
+
+	req := c.newRequest(op, input, &UploadArchiveOutput{})
+	return CompleteMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opCompleteVaultLock = "CompleteVaultLock"
 
-// CompleteVaultLockRequest generates a "aws.Request" representing the
-// client's request for the CompleteVaultLock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CompleteVaultLock for more information on using the CompleteVaultLock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CompleteVaultLockRequest method.
-//    req, resp := client.CompleteVaultLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) (req *aws.Request, output *CompleteVaultLockOutput) {
-	op := &aws.Operation{
-		Name:       opCompleteVaultLock,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}",
-	}
-
-	if input == nil {
-		input = &CompleteVaultLockInput{}
-	}
-
-	output = &CompleteVaultLockOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// CompleteVaultLockRequest is a API request type for the CompleteVaultLock API operation.
+type CompleteVaultLockRequest struct {
+	*aws.Request
+	Input *CompleteVaultLockInput
 }
 
-// CompleteVaultLock API operation for Amazon Glacier.
+// Send marshals and sends the CompleteVaultLock API request.
+func (r *CompleteVaultLockRequest) Send() (*CompleteVaultLockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CompleteVaultLockOutput), nil
+}
+
+// CompleteVaultLockRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation completes the vault locking process by transitioning the vault
 // lock from the InProgress state to the Locked state, which causes the vault
@@ -506,89 +312,49 @@ func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) (req *
 // an invalid lock ID is passed in the request when the vault lock is in the
 // InProgress state, the operation throws an InvalidParameter error.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation CompleteVaultLock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) CompleteVaultLock(input *CompleteVaultLockInput) (*CompleteVaultLockOutput, error) {
-	req, out := c.CompleteVaultLockRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CompleteVaultLockRequest method.
+//    req := client.CompleteVaultLockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) CompleteVaultLockRequest {
+	op := &aws.Operation{
+		Name:       opCompleteVaultLock,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}",
+	}
 
-// CompleteVaultLockWithContext is the same as CompleteVaultLock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CompleteVaultLock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) CompleteVaultLockWithContext(ctx aws.Context, input *CompleteVaultLockInput, opts ...aws.Option) (*CompleteVaultLockOutput, error) {
-	req, out := c.CompleteVaultLockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CompleteVaultLockInput{}
+	}
+
+	req := c.newRequest(op, input, &CompleteVaultLockOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return CompleteVaultLockRequest{Request: req, Input: input}
 }
 
 const opCreateVault = "CreateVault"
 
-// CreateVaultRequest generates a "aws.Request" representing the
-// client's request for the CreateVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateVault for more information on using the CreateVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateVaultRequest method.
-//    req, resp := client.CreateVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) (req *aws.Request, output *CreateVaultOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVault,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}",
-	}
-
-	if input == nil {
-		input = &CreateVaultInput{}
-	}
-
-	output = &CreateVaultOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateVaultRequest is a API request type for the CreateVault API operation.
+type CreateVaultRequest struct {
+	*aws.Request
+	Input *CreateVaultInput
 }
 
-// CreateVault API operation for Amazon Glacier.
+// Send marshals and sends the CreateVault API request.
+func (r *CreateVaultRequest) Send() (*CreateVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVaultOutput), nil
+}
+
+// CreateVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation creates a new vault with the specified name. The name of the
 // vault must be unique within a region for an AWS account. You can create up
@@ -615,90 +381,47 @@ func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) (req *aws.Request,
 // and Create Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation CreateVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Returned if the request results in a vault or account limit being exceeded.
-//
-func (c *Glacier) CreateVault(input *CreateVaultInput) (*CreateVaultOutput, error) {
-	req, out := c.CreateVaultRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the CreateVaultRequest method.
+//    req := client.CreateVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest {
+	op := &aws.Operation{
+		Name:       opCreateVault,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}",
+	}
 
-// CreateVaultWithContext is the same as CreateVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) CreateVaultWithContext(ctx aws.Context, input *CreateVaultInput, opts ...aws.Option) (*CreateVaultOutput, error) {
-	req, out := c.CreateVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateVaultInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateVaultOutput{})
+	return CreateVaultRequest{Request: req, Input: input}
 }
 
 const opDeleteArchive = "DeleteArchive"
 
-// DeleteArchiveRequest generates a "aws.Request" representing the
-// client's request for the DeleteArchive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteArchive for more information on using the DeleteArchive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteArchiveRequest method.
-//    req, resp := client.DeleteArchiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) (req *aws.Request, output *DeleteArchiveOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteArchive,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives/{archiveId}",
-	}
-
-	if input == nil {
-		input = &DeleteArchiveInput{}
-	}
-
-	output = &DeleteArchiveOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteArchiveRequest is a API request type for the DeleteArchive API operation.
+type DeleteArchiveRequest struct {
+	*aws.Request
+	Input *DeleteArchiveInput
 }
 
-// DeleteArchive API operation for Amazon Glacier.
+// Send marshals and sends the DeleteArchive API request.
+func (r *DeleteArchiveRequest) Send() (*DeleteArchiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteArchiveOutput), nil
+}
+
+// DeleteArchiveRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation deletes an archive from a vault. Subsequent requests to initiate
 // a retrieval of this archive will fail. Archive retrievals that are in progress
@@ -726,91 +449,49 @@ func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) (req *aws.Requ
 // and Delete Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DeleteArchive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DeleteArchive(input *DeleteArchiveInput) (*DeleteArchiveOutput, error) {
-	req, out := c.DeleteArchiveRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DeleteArchiveRequest method.
+//    req := client.DeleteArchiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveRequest {
+	op := &aws.Operation{
+		Name:       opDeleteArchive,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives/{archiveId}",
+	}
 
-// DeleteArchiveWithContext is the same as DeleteArchive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteArchive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DeleteArchiveWithContext(ctx aws.Context, input *DeleteArchiveInput, opts ...aws.Option) (*DeleteArchiveOutput, error) {
-	req, out := c.DeleteArchiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteArchiveInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteArchiveOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteArchiveRequest{Request: req, Input: input}
 }
 
 const opDeleteVault = "DeleteVault"
 
-// DeleteVaultRequest generates a "aws.Request" representing the
-// client's request for the DeleteVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVault for more information on using the DeleteVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVaultRequest method.
-//    req, resp := client.DeleteVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) (req *aws.Request, output *DeleteVaultOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVault,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}",
-	}
-
-	if input == nil {
-		input = &DeleteVaultInput{}
-	}
-
-	output = &DeleteVaultOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteVaultRequest is a API request type for the DeleteVault API operation.
+type DeleteVaultRequest struct {
+	*aws.Request
+	Input *DeleteVaultInput
 }
 
-// DeleteVault API operation for Amazon Glacier.
+// Send marshals and sends the DeleteVault API request.
+func (r *DeleteVaultRequest) Send() (*DeleteVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVaultOutput), nil
+}
+
+// DeleteVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation deletes a vault. Amazon Glacier will delete a vault only if
 // there are no archives in the vault as of the last inventory and there have
@@ -836,91 +517,49 @@ func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) (req *aws.Request,
 // and Delete Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DeleteVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DeleteVault(input *DeleteVaultInput) (*DeleteVaultOutput, error) {
-	req, out := c.DeleteVaultRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DeleteVaultRequest method.
+//    req := client.DeleteVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) DeleteVaultRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVault,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}",
+	}
 
-// DeleteVaultWithContext is the same as DeleteVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DeleteVaultWithContext(ctx aws.Context, input *DeleteVaultInput, opts ...aws.Option) (*DeleteVaultOutput, error) {
-	req, out := c.DeleteVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteVaultInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteVaultOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteVaultRequest{Request: req, Input: input}
 }
 
 const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 
-// DeleteVaultAccessPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteVaultAccessPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVaultAccessPolicy for more information on using the DeleteVaultAccessPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVaultAccessPolicyRequest method.
-//    req, resp := client.DeleteVaultAccessPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyInput) (req *aws.Request, output *DeleteVaultAccessPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVaultAccessPolicy,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/access-policy",
-	}
-
-	if input == nil {
-		input = &DeleteVaultAccessPolicyInput{}
-	}
-
-	output = &DeleteVaultAccessPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteVaultAccessPolicyRequest is a API request type for the DeleteVaultAccessPolicy API operation.
+type DeleteVaultAccessPolicyRequest struct {
+	*aws.Request
+	Input *DeleteVaultAccessPolicyInput
 }
 
-// DeleteVaultAccessPolicy API operation for Amazon Glacier.
+// Send marshals and sends the DeleteVaultAccessPolicy API request.
+func (r *DeleteVaultAccessPolicyRequest) Send() (*DeleteVaultAccessPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVaultAccessPolicyOutput), nil
+}
+
+// DeleteVaultAccessPolicyRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation deletes the access policy associated with the specified vault.
 // The operation is eventually consistent; that is, it might take some time
@@ -933,91 +572,49 @@ func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyI
 // vault access policies, see Amazon Glacier Access Control with Vault Access
 // Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DeleteVaultAccessPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DeleteVaultAccessPolicy(input *DeleteVaultAccessPolicyInput) (*DeleteVaultAccessPolicyOutput, error) {
-	req, out := c.DeleteVaultAccessPolicyRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DeleteVaultAccessPolicyRequest method.
+//    req := client.DeleteVaultAccessPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVaultAccessPolicy,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/access-policy",
+	}
 
-// DeleteVaultAccessPolicyWithContext is the same as DeleteVaultAccessPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVaultAccessPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DeleteVaultAccessPolicyWithContext(ctx aws.Context, input *DeleteVaultAccessPolicyInput, opts ...aws.Option) (*DeleteVaultAccessPolicyOutput, error) {
-	req, out := c.DeleteVaultAccessPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteVaultAccessPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteVaultAccessPolicyOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteVaultNotifications = "DeleteVaultNotifications"
 
-// DeleteVaultNotificationsRequest generates a "aws.Request" representing the
-// client's request for the DeleteVaultNotifications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVaultNotifications for more information on using the DeleteVaultNotifications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVaultNotificationsRequest method.
-//    req, resp := client.DeleteVaultNotificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotificationsInput) (req *aws.Request, output *DeleteVaultNotificationsOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVaultNotifications,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
-	}
-
-	if input == nil {
-		input = &DeleteVaultNotificationsInput{}
-	}
-
-	output = &DeleteVaultNotificationsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteVaultNotificationsRequest is a API request type for the DeleteVaultNotifications API operation.
+type DeleteVaultNotificationsRequest struct {
+	*aws.Request
+	Input *DeleteVaultNotificationsInput
 }
 
-// DeleteVaultNotifications API operation for Amazon Glacier.
+// Send marshals and sends the DeleteVaultNotifications API request.
+func (r *DeleteVaultNotificationsRequest) Send() (*DeleteVaultNotificationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVaultNotificationsOutput), nil
+}
+
+// DeleteVaultNotificationsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation deletes the notification configuration set for a vault. The
 // operation is eventually consistent; that is, it might take some time for
@@ -1035,89 +632,49 @@ func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotification
 // and Delete Vault Notification Configuration  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DeleteVaultNotifications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DeleteVaultNotifications(input *DeleteVaultNotificationsInput) (*DeleteVaultNotificationsOutput, error) {
-	req, out := c.DeleteVaultNotificationsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DeleteVaultNotificationsRequest method.
+//    req := client.DeleteVaultNotificationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVaultNotifications,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
+	}
 
-// DeleteVaultNotificationsWithContext is the same as DeleteVaultNotifications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVaultNotifications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DeleteVaultNotificationsWithContext(ctx aws.Context, input *DeleteVaultNotificationsInput, opts ...aws.Option) (*DeleteVaultNotificationsOutput, error) {
-	req, out := c.DeleteVaultNotificationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteVaultNotificationsInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteVaultNotificationsOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteVaultNotificationsRequest{Request: req, Input: input}
 }
 
 const opDescribeJob = "DescribeJob"
 
-// DescribeJobRequest generates a "aws.Request" representing the
-// client's request for the DescribeJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeJob for more information on using the DescribeJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeJobRequest method.
-//    req, resp := client.DescribeJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request, output *JobDescription) {
-	op := &aws.Operation{
-		Name:       opDescribeJob,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}",
-	}
-
-	if input == nil {
-		input = &DescribeJobInput{}
-	}
-
-	output = &JobDescription{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeJobRequest is a API request type for the DescribeJob API operation.
+type DescribeJobRequest struct {
+	*aws.Request
+	Input *DescribeJobInput
 }
 
-// DescribeJob API operation for Amazon Glacier.
+// Send marshals and sends the DescribeJob API request.
+func (r *DescribeJobRequest) Send() (*DescribeJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeJobOutput), nil
+}
+
+// DescribeJobRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation returns information about a job you previously initiated,
 // including the job initiation date, the user who initiated the job, the job
@@ -1142,89 +699,47 @@ func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request,
 // in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DescribeJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DescribeJob(input *DescribeJobInput) (*JobDescription, error) {
-	req, out := c.DescribeJobRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DescribeJobRequest method.
+//    req := client.DescribeJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest {
+	op := &aws.Operation{
+		Name:       opDescribeJob,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}",
+	}
 
-// DescribeJobWithContext is the same as DescribeJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...aws.Option) (*JobDescription, error) {
-	req, out := c.DescribeJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeJobInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeJobOutput{})
+	return DescribeJobRequest{Request: req, Input: input}
 }
 
 const opDescribeVault = "DescribeVault"
 
-// DescribeVaultRequest generates a "aws.Request" representing the
-// client's request for the DescribeVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVault for more information on using the DescribeVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVaultRequest method.
-//    req, resp := client.DescribeVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) (req *aws.Request, output *DescribeVaultOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVault,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}",
-	}
-
-	if input == nil {
-		input = &DescribeVaultInput{}
-	}
-
-	output = &DescribeVaultOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeVaultRequest is a API request type for the DescribeVault API operation.
+type DescribeVaultRequest struct {
+	*aws.Request
+	Input *DescribeVaultInput
 }
 
-// DescribeVault API operation for Amazon Glacier.
+// Send marshals and sends the DescribeVault API request.
+func (r *DescribeVaultRequest) Send() (*DescribeVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVaultOutput), nil
+}
+
+// DescribeVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation returns information about a vault, including the vault's Amazon
 // Resource Name (ARN), the date the vault was created, the number of archives
@@ -1247,73 +762,59 @@ func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) (req *aws.Requ
 // and Describe Vault  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation DescribeVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) DescribeVault(input *DescribeVaultInput) (*DescribeVaultOutput, error) {
-	req, out := c.DescribeVaultRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DescribeVaultRequest method.
+//    req := client.DescribeVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultRequest {
+	op := &aws.Operation{
+		Name:       opDescribeVault,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}",
+	}
 
-// DescribeVaultWithContext is the same as DescribeVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) DescribeVaultWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.Option) (*DescribeVaultOutput, error) {
-	req, out := c.DescribeVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeVaultInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeVaultOutput{})
+	return DescribeVaultRequest{Request: req, Input: input}
 }
 
 const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 
-// GetDataRetrievalPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetDataRetrievalPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDataRetrievalPolicyRequest is a API request type for the GetDataRetrievalPolicy API operation.
+type GetDataRetrievalPolicyRequest struct {
+	*aws.Request
+	Input *GetDataRetrievalPolicyInput
+}
+
+// Send marshals and sends the GetDataRetrievalPolicy API request.
+func (r *GetDataRetrievalPolicyRequest) Send() (*GetDataRetrievalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDataRetrievalPolicyOutput), nil
+}
+
+// GetDataRetrievalPolicyRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDataRetrievalPolicy for more information on using the GetDataRetrievalPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation returns the current data retrieval policy for the account
+// and region specified in the GET request. For more information about data
+// retrieval policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
 //
 //    // Example sending a request using the GetDataRetrievalPolicyRequest method.
-//    req, resp := client.GetDataRetrievalPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDataRetrievalPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInput) (req *aws.Request, output *GetDataRetrievalPolicyOutput) {
+func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetDataRetrievalPolicy,
 		HTTPMethod: "GET",
@@ -1324,96 +825,30 @@ func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInp
 		input = &GetDataRetrievalPolicyInput{}
 	}
 
-	output = &GetDataRetrievalPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDataRetrievalPolicy API operation for Amazon Glacier.
-//
-// This operation returns the current data retrieval policy for the account
-// and region specified in the GET request. For more information about data
-// retrieval policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation GetDataRetrievalPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) GetDataRetrievalPolicy(input *GetDataRetrievalPolicyInput) (*GetDataRetrievalPolicyOutput, error) {
-	req, out := c.GetDataRetrievalPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetDataRetrievalPolicyWithContext is the same as GetDataRetrievalPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDataRetrievalPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) GetDataRetrievalPolicyWithContext(ctx aws.Context, input *GetDataRetrievalPolicyInput, opts ...aws.Option) (*GetDataRetrievalPolicyOutput, error) {
-	req, out := c.GetDataRetrievalPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDataRetrievalPolicyOutput{})
+	return GetDataRetrievalPolicyRequest{Request: req, Input: input}
 }
 
 const opGetJobOutput = "GetJobOutput"
 
-// GetJobOutputRequest generates a "aws.Request" representing the
-// client's request for the GetJobOutput operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetJobOutput for more information on using the GetJobOutput
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetJobOutputRequest method.
-//    req, resp := client.GetJobOutputRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) (req *aws.Request, output *GetJobOutputOutput) {
-	op := &aws.Operation{
-		Name:       opGetJobOutput,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output",
-	}
-
-	if input == nil {
-		input = &GetJobOutputInput{}
-	}
-
-	output = &GetJobOutputOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetJobOutputRequest is a API request type for the GetJobOutput API operation.
+type GetJobOutputRequest struct {
+	*aws.Request
+	Input *GetJobOutputInput
 }
 
-// GetJobOutput API operation for Amazon Glacier.
+// Send marshals and sends the GetJobOutput API request.
+func (r *GetJobOutputRequest) Send() (*GetJobOutputOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetJobOutputOutput), nil
+}
+
+// GetJobOutputRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation downloads the output of the job you initiated using InitiateJob.
 // Depending on the job type you specified when you initiated the job, the output
@@ -1460,73 +895,62 @@ func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) (req *aws.Reques
 // Downloading an Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html),
 // and Get Job Output  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html)
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation GetJobOutput for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) GetJobOutput(input *GetJobOutputInput) (*GetJobOutputOutput, error) {
-	req, out := c.GetJobOutputRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the GetJobOutputRequest method.
+//    req := client.GetJobOutputRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) GetJobOutputRequest {
+	op := &aws.Operation{
+		Name:       opGetJobOutput,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output",
+	}
 
-// GetJobOutputWithContext is the same as GetJobOutput with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetJobOutput for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) GetJobOutputWithContext(ctx aws.Context, input *GetJobOutputInput, opts ...aws.Option) (*GetJobOutputOutput, error) {
-	req, out := c.GetJobOutputRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetJobOutputInput{}
+	}
+
+	req := c.newRequest(op, input, &GetJobOutputOutput{})
+	return GetJobOutputRequest{Request: req, Input: input}
 }
 
 const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
 
-// GetVaultAccessPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetVaultAccessPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetVaultAccessPolicyRequest is a API request type for the GetVaultAccessPolicy API operation.
+type GetVaultAccessPolicyRequest struct {
+	*aws.Request
+	Input *GetVaultAccessPolicyInput
+}
+
+// Send marshals and sends the GetVaultAccessPolicy API request.
+func (r *GetVaultAccessPolicyRequest) Send() (*GetVaultAccessPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVaultAccessPolicyOutput), nil
+}
+
+// GetVaultAccessPolicyRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetVaultAccessPolicy for more information on using the GetVaultAccessPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation retrieves the access-policy subresource set on the vault;
+// for more information on setting this subresource, see Set Vault Access Policy
+// (PUT access-policy) (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
+// If there is no access policy set on the vault, the operation returns a 404
+// Not found error. For more information about vault access policies, see Amazon
+// Glacier Access Control with Vault Access Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
 //
 //    // Example sending a request using the GetVaultAccessPolicyRequest method.
-//    req, resp := client.GetVaultAccessPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetVaultAccessPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) (req *aws.Request, output *GetVaultAccessPolicyOutput) {
+func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) GetVaultAccessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetVaultAccessPolicy,
 		HTTPMethod: "GET",
@@ -1537,103 +961,30 @@ func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) 
 		input = &GetVaultAccessPolicyInput{}
 	}
 
-	output = &GetVaultAccessPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetVaultAccessPolicy API operation for Amazon Glacier.
-//
-// This operation retrieves the access-policy subresource set on the vault;
-// for more information on setting this subresource, see Set Vault Access Policy
-// (PUT access-policy) (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html).
-// If there is no access policy set on the vault, the operation returns a 404
-// Not found error. For more information about vault access policies, see Amazon
-// Glacier Access Control with Vault Access Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation GetVaultAccessPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) GetVaultAccessPolicy(input *GetVaultAccessPolicyInput) (*GetVaultAccessPolicyOutput, error) {
-	req, out := c.GetVaultAccessPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetVaultAccessPolicyWithContext is the same as GetVaultAccessPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetVaultAccessPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) GetVaultAccessPolicyWithContext(ctx aws.Context, input *GetVaultAccessPolicyInput, opts ...aws.Option) (*GetVaultAccessPolicyOutput, error) {
-	req, out := c.GetVaultAccessPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetVaultAccessPolicyOutput{})
+	return GetVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
 const opGetVaultLock = "GetVaultLock"
 
-// GetVaultLockRequest generates a "aws.Request" representing the
-// client's request for the GetVaultLock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetVaultLock for more information on using the GetVaultLock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetVaultLockRequest method.
-//    req, resp := client.GetVaultLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) (req *aws.Request, output *GetVaultLockOutput) {
-	op := &aws.Operation{
-		Name:       opGetVaultLock,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
-	}
-
-	if input == nil {
-		input = &GetVaultLockInput{}
-	}
-
-	output = &GetVaultLockOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetVaultLockRequest is a API request type for the GetVaultLock API operation.
+type GetVaultLockRequest struct {
+	*aws.Request
+	Input *GetVaultLockInput
 }
 
-// GetVaultLock API operation for Amazon Glacier.
+// Send marshals and sends the GetVaultLock API request.
+func (r *GetVaultLockRequest) Send() (*GetVaultLockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVaultLockOutput), nil
+}
+
+// GetVaultLockRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation retrieves the following attributes from the lock-policy subresource
 // set on the specified vault:
@@ -1656,89 +1007,47 @@ func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) (req *aws.Reques
 // a 404 Not found error. For more information about vault lock policies, Amazon
 // Glacier Access Control with Vault Lock Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation GetVaultLock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) GetVaultLock(input *GetVaultLockInput) (*GetVaultLockOutput, error) {
-	req, out := c.GetVaultLockRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the GetVaultLockRequest method.
+//    req := client.GetVaultLockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockRequest {
+	op := &aws.Operation{
+		Name:       opGetVaultLock,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
+	}
 
-// GetVaultLockWithContext is the same as GetVaultLock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetVaultLock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) GetVaultLockWithContext(ctx aws.Context, input *GetVaultLockInput, opts ...aws.Option) (*GetVaultLockOutput, error) {
-	req, out := c.GetVaultLockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetVaultLockInput{}
+	}
+
+	req := c.newRequest(op, input, &GetVaultLockOutput{})
+	return GetVaultLockRequest{Request: req, Input: input}
 }
 
 const opGetVaultNotifications = "GetVaultNotifications"
 
-// GetVaultNotificationsRequest generates a "aws.Request" representing the
-// client's request for the GetVaultNotifications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetVaultNotifications for more information on using the GetVaultNotifications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetVaultNotificationsRequest method.
-//    req, resp := client.GetVaultNotificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput) (req *aws.Request, output *GetVaultNotificationsOutput) {
-	op := &aws.Operation{
-		Name:       opGetVaultNotifications,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
-	}
-
-	if input == nil {
-		input = &GetVaultNotificationsInput{}
-	}
-
-	output = &GetVaultNotificationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetVaultNotificationsRequest is a API request type for the GetVaultNotifications API operation.
+type GetVaultNotificationsRequest struct {
+	*aws.Request
+	Input *GetVaultNotificationsInput
 }
 
-// GetVaultNotifications API operation for Amazon Glacier.
+// Send marshals and sends the GetVaultNotifications API request.
+func (r *GetVaultNotificationsRequest) Send() (*GetVaultNotificationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVaultNotificationsOutput), nil
+}
+
+// GetVaultNotificationsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation retrieves the notification-configuration subresource of the
 // specified vault.
@@ -1760,89 +1069,47 @@ func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput
 // and Get Vault Notification Configuration  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation GetVaultNotifications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) GetVaultNotifications(input *GetVaultNotificationsInput) (*GetVaultNotificationsOutput, error) {
-	req, out := c.GetVaultNotificationsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the GetVaultNotificationsRequest method.
+//    req := client.GetVaultNotificationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput) GetVaultNotificationsRequest {
+	op := &aws.Operation{
+		Name:       opGetVaultNotifications,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
+	}
 
-// GetVaultNotificationsWithContext is the same as GetVaultNotifications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetVaultNotifications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) GetVaultNotificationsWithContext(ctx aws.Context, input *GetVaultNotificationsInput, opts ...aws.Option) (*GetVaultNotificationsOutput, error) {
-	req, out := c.GetVaultNotificationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetVaultNotificationsInput{}
+	}
+
+	req := c.newRequest(op, input, &GetVaultNotificationsOutput{})
+	return GetVaultNotificationsRequest{Request: req, Input: input}
 }
 
 const opInitiateJob = "InitiateJob"
 
-// InitiateJobRequest generates a "aws.Request" representing the
-// client's request for the InitiateJob operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See InitiateJob for more information on using the InitiateJob
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the InitiateJobRequest method.
-//    req, resp := client.InitiateJobRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) (req *aws.Request, output *InitiateJobOutput) {
-	op := &aws.Operation{
-		Name:       opInitiateJob,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
-	}
-
-	if input == nil {
-		input = &InitiateJobInput{}
-	}
-
-	output = &InitiateJobOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// InitiateJobRequest is a API request type for the InitiateJob API operation.
+type InitiateJobRequest struct {
+	*aws.Request
+	Input *InitiateJobInput
 }
 
-// InitiateJob API operation for Amazon Glacier.
+// Send marshals and sends the InitiateJob API request.
+func (r *InitiateJobRequest) Send() (*InitiateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InitiateJobOutput), nil
+}
+
+// InitiateJobRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation initiates a job of the specified type. In this release, you
 // can initiate a job to retrieve either an archive or a vault inventory (a
@@ -1981,98 +1248,47 @@ func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) (req *aws.Request,
 // For more information about expedited and bulk retrievals, see Retrieving
 // Amazon Glacier Archives (http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive-two-steps.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation InitiateJob for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodePolicyEnforcedException "PolicyEnforcedException"
-//   Returned if a retrieval job would exceed the current data policy's retrieval
-//   rate limit. For more information about data retrieval policies,
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeInsufficientCapacityException "InsufficientCapacityException"
-//   Returned if there is insufficient capacity to process this expedited request.
-//   This error only applies to expedited retrievals and not to standard or bulk
-//   retrievals.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) InitiateJob(input *InitiateJobInput) (*InitiateJobOutput, error) {
-	req, out := c.InitiateJobRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the InitiateJobRequest method.
+//    req := client.InitiateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest {
+	op := &aws.Operation{
+		Name:       opInitiateJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
+	}
 
-// InitiateJobWithContext is the same as InitiateJob with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InitiateJob for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) InitiateJobWithContext(ctx aws.Context, input *InitiateJobInput, opts ...aws.Option) (*InitiateJobOutput, error) {
-	req, out := c.InitiateJobRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &InitiateJobInput{}
+	}
+
+	req := c.newRequest(op, input, &InitiateJobOutput{})
+	return InitiateJobRequest{Request: req, Input: input}
 }
 
 const opInitiateMultipartUpload = "InitiateMultipartUpload"
 
-// InitiateMultipartUploadRequest generates a "aws.Request" representing the
-// client's request for the InitiateMultipartUpload operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See InitiateMultipartUpload for more information on using the InitiateMultipartUpload
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the InitiateMultipartUploadRequest method.
-//    req, resp := client.InitiateMultipartUploadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadInput) (req *aws.Request, output *InitiateMultipartUploadOutput) {
-	op := &aws.Operation{
-		Name:       opInitiateMultipartUpload,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
-	}
-
-	if input == nil {
-		input = &InitiateMultipartUploadInput{}
-	}
-
-	output = &InitiateMultipartUploadOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// InitiateMultipartUploadRequest is a API request type for the InitiateMultipartUpload API operation.
+type InitiateMultipartUploadRequest struct {
+	*aws.Request
+	Input *InitiateMultipartUploadInput
 }
 
-// InitiateMultipartUpload API operation for Amazon Glacier.
+// Send marshals and sends the InitiateMultipartUpload API request.
+func (r *InitiateMultipartUploadRequest) Send() (*InitiateMultipartUploadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InitiateMultipartUploadOutput), nil
+}
+
+// InitiateMultipartUploadRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation initiates a multipart upload. Amazon Glacier creates a multipart
 // upload resource and returns its ID in the response. The multipart upload
@@ -2110,89 +1326,47 @@ func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadI
 // and Initiate Multipart Upload (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation InitiateMultipartUpload for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) InitiateMultipartUpload(input *InitiateMultipartUploadInput) (*InitiateMultipartUploadOutput, error) {
-	req, out := c.InitiateMultipartUploadRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the InitiateMultipartUploadRequest method.
+//    req := client.InitiateMultipartUploadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadInput) InitiateMultipartUploadRequest {
+	op := &aws.Operation{
+		Name:       opInitiateMultipartUpload,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
+	}
 
-// InitiateMultipartUploadWithContext is the same as InitiateMultipartUpload with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InitiateMultipartUpload for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) InitiateMultipartUploadWithContext(ctx aws.Context, input *InitiateMultipartUploadInput, opts ...aws.Option) (*InitiateMultipartUploadOutput, error) {
-	req, out := c.InitiateMultipartUploadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &InitiateMultipartUploadInput{}
+	}
+
+	req := c.newRequest(op, input, &InitiateMultipartUploadOutput{})
+	return InitiateMultipartUploadRequest{Request: req, Input: input}
 }
 
 const opInitiateVaultLock = "InitiateVaultLock"
 
-// InitiateVaultLockRequest generates a "aws.Request" representing the
-// client's request for the InitiateVaultLock operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See InitiateVaultLock for more information on using the InitiateVaultLock
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the InitiateVaultLockRequest method.
-//    req, resp := client.InitiateVaultLockRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) (req *aws.Request, output *InitiateVaultLockOutput) {
-	op := &aws.Operation{
-		Name:       opInitiateVaultLock,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
-	}
-
-	if input == nil {
-		input = &InitiateVaultLockInput{}
-	}
-
-	output = &InitiateVaultLockOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// InitiateVaultLockRequest is a API request type for the InitiateVaultLock API operation.
+type InitiateVaultLockRequest struct {
+	*aws.Request
+	Input *InitiateVaultLockInput
 }
 
-// InitiateVaultLock API operation for Amazon Glacier.
+// Send marshals and sends the InitiateVaultLock API request.
+func (r *InitiateVaultLockRequest) Send() (*InitiateVaultLockOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*InitiateVaultLockOutput), nil
+}
+
+// InitiateVaultLockRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation initiates the vault locking process by doing the following:
 //
@@ -2224,95 +1398,47 @@ func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) (req *
 // is in the InProgress state you must call AbortVaultLock before you can initiate
 // a new vault lock policy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation InitiateVaultLock for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) InitiateVaultLock(input *InitiateVaultLockInput) (*InitiateVaultLockOutput, error) {
-	req, out := c.InitiateVaultLockRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the InitiateVaultLockRequest method.
+//    req := client.InitiateVaultLockRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) InitiateVaultLockRequest {
+	op := &aws.Operation{
+		Name:       opInitiateVaultLock,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/lock-policy",
+	}
 
-// InitiateVaultLockWithContext is the same as InitiateVaultLock with the addition of
-// the ability to pass a context and additional request options.
-//
-// See InitiateVaultLock for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) InitiateVaultLockWithContext(ctx aws.Context, input *InitiateVaultLockInput, opts ...aws.Option) (*InitiateVaultLockOutput, error) {
-	req, out := c.InitiateVaultLockRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &InitiateVaultLockInput{}
+	}
+
+	req := c.newRequest(op, input, &InitiateVaultLockOutput{})
+	return InitiateVaultLockRequest{Request: req, Input: input}
 }
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws.Request" representing the
-// client's request for the ListJobs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListJobs for more information on using the ListJobs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListJobsRequest method.
-//    req, resp := client.ListJobsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
-	op := &aws.Operation{
-		Name:       opListJobs,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListJobsInput{}
-	}
-
-	output = &ListJobsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListJobsRequest is a API request type for the ListJobs API operation.
+type ListJobsRequest struct {
+	*aws.Request
+	Input *ListJobsInput
 }
 
-// ListJobs API operation for Amazon Glacier.
+// Send marshals and sends the ListJobs API request.
+func (r *ListJobsRequest) Send() (*ListJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListJobsOutput), nil
+}
+
+// ListJobsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation lists jobs for a vault, including jobs that are in-progress
 // and jobs that have recently finished.
@@ -2355,46 +1481,31 @@ func (c *Glacier) ListJobsRequest(input *ListJobsInput) (req *aws.Request, outpu
 //
 // For the underlying REST API, see List Jobs (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListJobs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListJobsRequest method.
+//    req := client.ListJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
+	op := &aws.Operation{
+		Name:       opListJobs,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/jobs",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
 
-// ListJobsWithContext is the same as ListJobs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListJobs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
-	req, out := c.ListJobsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListJobsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListJobsOutput{})
+	return ListJobsRequest{Request: req, Input: input}
 }
 
 // ListJobsPages iterates over the pages of a ListJobs operation,
@@ -2433,10 +1544,10 @@ func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListJobsRequest(inCpy)
+			req := c.ListJobsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2449,51 +1560,24 @@ func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput
 
 const opListMultipartUploads = "ListMultipartUploads"
 
-// ListMultipartUploadsRequest generates a "aws.Request" representing the
-// client's request for the ListMultipartUploads operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListMultipartUploads for more information on using the ListMultipartUploads
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListMultipartUploadsRequest method.
-//    req, resp := client.ListMultipartUploadsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *aws.Request, output *ListMultipartUploadsOutput) {
-	op := &aws.Operation{
-		Name:       opListMultipartUploads,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListMultipartUploadsInput{}
-	}
-
-	output = &ListMultipartUploadsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListMultipartUploadsRequest is a API request type for the ListMultipartUploads API operation.
+type ListMultipartUploadsRequest struct {
+	*aws.Request
+	Input *ListMultipartUploadsInput
 }
 
-// ListMultipartUploads API operation for Amazon Glacier.
+// Send marshals and sends the ListMultipartUploads API request.
+func (r *ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMultipartUploadsOutput), nil
+}
+
+// ListMultipartUploadsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation lists in-progress multipart uploads for the specified vault.
 // An in-progress multipart upload is a multipart upload that has been initiated
@@ -2526,46 +1610,31 @@ func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) 
 // and List Multipart Uploads  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListMultipartUploads for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListMultipartUploads(input *ListMultipartUploadsInput) (*ListMultipartUploadsOutput, error) {
-	req, out := c.ListMultipartUploadsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListMultipartUploadsRequest method.
+//    req := client.ListMultipartUploadsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListMultipartUploadsRequest {
+	op := &aws.Operation{
+		Name:       opListMultipartUploads,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
 
-// ListMultipartUploadsWithContext is the same as ListMultipartUploads with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListMultipartUploads for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...aws.Option) (*ListMultipartUploadsOutput, error) {
-	req, out := c.ListMultipartUploadsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListMultipartUploadsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListMultipartUploadsOutput{})
+	return ListMultipartUploadsRequest{Request: req, Input: input}
 }
 
 // ListMultipartUploadsPages iterates over the pages of a ListMultipartUploads operation,
@@ -2604,10 +1673,10 @@ func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListMultipartUploadsRequest(inCpy)
+			req := c.ListMultipartUploadsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2620,51 +1689,24 @@ func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *L
 
 const opListParts = "ListParts"
 
-// ListPartsRequest generates a "aws.Request" representing the
-// client's request for the ListParts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListParts for more information on using the ListParts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListPartsRequest method.
-//    req, resp := client.ListPartsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) ListPartsRequest(input *ListPartsInput) (req *aws.Request, output *ListPartsOutput) {
-	op := &aws.Operation{
-		Name:       opListParts,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListPartsInput{}
-	}
-
-	output = &ListPartsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListPartsRequest is a API request type for the ListParts API operation.
+type ListPartsRequest struct {
+	*aws.Request
+	Input *ListPartsInput
 }
 
-// ListParts API operation for Amazon Glacier.
+// Send marshals and sends the ListParts API request.
+func (r *ListPartsRequest) Send() (*ListPartsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPartsOutput), nil
+}
+
+// ListPartsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation lists the parts of an archive that have been uploaded in a
 // specific multipart upload. You can make this request at any time during an
@@ -2691,46 +1733,31 @@ func (c *Glacier) ListPartsRequest(input *ListPartsInput) (req *aws.Request, out
 // and List Parts (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListParts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListParts(input *ListPartsInput) (*ListPartsOutput, error) {
-	req, out := c.ListPartsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListPartsRequest method.
+//    req := client.ListPartsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
+	op := &aws.Operation{
+		Name:       opListParts,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
 
-// ListPartsWithContext is the same as ListParts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListParts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...aws.Option) (*ListPartsOutput, error) {
-	req, out := c.ListPartsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListPartsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListPartsOutput{})
+	return ListPartsRequest{Request: req, Input: input}
 }
 
 // ListPartsPages iterates over the pages of a ListParts operation,
@@ -2769,10 +1796,10 @@ func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPartsRequest(inCpy)
+			req := c.ListPartsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2785,29 +1812,34 @@ func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInp
 
 const opListProvisionedCapacity = "ListProvisionedCapacity"
 
-// ListProvisionedCapacityRequest generates a "aws.Request" representing the
-// client's request for the ListProvisionedCapacity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProvisionedCapacityRequest is a API request type for the ListProvisionedCapacity API operation.
+type ListProvisionedCapacityRequest struct {
+	*aws.Request
+	Input *ListProvisionedCapacityInput
+}
+
+// Send marshals and sends the ListProvisionedCapacity API request.
+func (r *ListProvisionedCapacityRequest) Send() (*ListProvisionedCapacityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProvisionedCapacityOutput), nil
+}
+
+// ListProvisionedCapacityRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProvisionedCapacity for more information on using the ListProvisionedCapacity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation lists the provisioned capacity for the specified AWS account.
 //
 //    // Example sending a request using the ListProvisionedCapacityRequest method.
-//    req, resp := client.ListProvisionedCapacityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProvisionedCapacityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityInput) (req *aws.Request, output *ListProvisionedCapacityOutput) {
+func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityInput) ListProvisionedCapacityRequest {
 	op := &aws.Operation{
 		Name:       opListProvisionedCapacity,
 		HTTPMethod: "GET",
@@ -2818,78 +1850,42 @@ func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityI
 		input = &ListProvisionedCapacityInput{}
 	}
 
-	output = &ListProvisionedCapacityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProvisionedCapacity API operation for Amazon Glacier.
-//
-// This operation lists the provisioned capacity for the specified AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListProvisionedCapacity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListProvisionedCapacity(input *ListProvisionedCapacityInput) (*ListProvisionedCapacityOutput, error) {
-	req, out := c.ListProvisionedCapacityRequest(input)
-	return out, req.Send()
-}
-
-// ListProvisionedCapacityWithContext is the same as ListProvisionedCapacity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProvisionedCapacity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListProvisionedCapacityWithContext(ctx aws.Context, input *ListProvisionedCapacityInput, opts ...aws.Option) (*ListProvisionedCapacityOutput, error) {
-	req, out := c.ListProvisionedCapacityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProvisionedCapacityOutput{})
+	return ListProvisionedCapacityRequest{Request: req, Input: input}
 }
 
 const opListTagsForVault = "ListTagsForVault"
 
-// ListTagsForVaultRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForVaultRequest is a API request type for the ListTagsForVault API operation.
+type ListTagsForVaultRequest struct {
+	*aws.Request
+	Input *ListTagsForVaultInput
+}
+
+// Send marshals and sends the ListTagsForVault API request.
+func (r *ListTagsForVaultRequest) Send() (*ListTagsForVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForVaultOutput), nil
+}
+
+// ListTagsForVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForVault for more information on using the ListTagsForVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation lists all the tags attached to a vault. The operation returns
+// an empty map if there are no tags. For more information about tags, see Tagging
+// Amazon Glacier Resources (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
 //
 //    // Example sending a request using the ListTagsForVaultRequest method.
-//    req, resp := client.ListTagsForVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) (req *aws.Request, output *ListTagsForVaultOutput) {
+func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) ListTagsForVaultRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForVault,
 		HTTPMethod: "GET",
@@ -2900,106 +1896,30 @@ func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) (req *aw
 		input = &ListTagsForVaultInput{}
 	}
 
-	output = &ListTagsForVaultOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForVault API operation for Amazon Glacier.
-//
-// This operation lists all the tags attached to a vault. The operation returns
-// an empty map if there are no tags. For more information about tags, see Tagging
-// Amazon Glacier Resources (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListTagsForVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListTagsForVault(input *ListTagsForVaultInput) (*ListTagsForVaultOutput, error) {
-	req, out := c.ListTagsForVaultRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForVaultWithContext is the same as ListTagsForVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListTagsForVaultWithContext(ctx aws.Context, input *ListTagsForVaultInput, opts ...aws.Option) (*ListTagsForVaultOutput, error) {
-	req, out := c.ListTagsForVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForVaultOutput{})
+	return ListTagsForVaultRequest{Request: req, Input: input}
 }
 
 const opListVaults = "ListVaults"
 
-// ListVaultsRequest generates a "aws.Request" representing the
-// client's request for the ListVaults operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListVaults for more information on using the ListVaults
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListVaultsRequest method.
-//    req, resp := client.ListVaultsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) (req *aws.Request, output *ListVaultsOutput) {
-	op := &aws.Operation{
-		Name:       opListVaults,
-		HTTPMethod: "GET",
-		HTTPPath:   "/{accountId}/vaults",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"marker"},
-			OutputTokens:    []string{"Marker"},
-			LimitToken:      "limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListVaultsInput{}
-	}
-
-	output = &ListVaultsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListVaultsRequest is a API request type for the ListVaults API operation.
+type ListVaultsRequest struct {
+	*aws.Request
+	Input *ListVaultsInput
 }
 
-// ListVaults API operation for Amazon Glacier.
+// Send marshals and sends the ListVaults API request.
+func (r *ListVaultsRequest) Send() (*ListVaultsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVaultsOutput), nil
+}
+
+// ListVaultsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation lists all vaults owned by the calling user's account. The
 // list returned in the response is ASCII-sorted by vault name.
@@ -3023,46 +1943,31 @@ func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) (req *aws.Request, o
 // and List Vaults  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation ListVaults for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) ListVaults(input *ListVaultsInput) (*ListVaultsOutput, error) {
-	req, out := c.ListVaultsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListVaultsRequest method.
+//    req := client.ListVaultsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
+	op := &aws.Operation{
+		Name:       opListVaults,
+		HTTPMethod: "GET",
+		HTTPPath:   "/{accountId}/vaults",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "limit",
+			TruncationToken: "",
+		},
+	}
 
-// ListVaultsWithContext is the same as ListVaults with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVaults for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListVaultsWithContext(ctx aws.Context, input *ListVaultsInput, opts ...aws.Option) (*ListVaultsOutput, error) {
-	req, out := c.ListVaultsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListVaultsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListVaultsOutput{})
+	return ListVaultsRequest{Request: req, Input: input}
 }
 
 // ListVaultsPages iterates over the pages of a ListVaults operation,
@@ -3101,10 +2006,10 @@ func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListVaultsRequest(inCpy)
+			req := c.ListVaultsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3117,29 +2022,34 @@ func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsI
 
 const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 
-// PurchaseProvisionedCapacityRequest generates a "aws.Request" representing the
-// client's request for the PurchaseProvisionedCapacity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PurchaseProvisionedCapacityRequest is a API request type for the PurchaseProvisionedCapacity API operation.
+type PurchaseProvisionedCapacityRequest struct {
+	*aws.Request
+	Input *PurchaseProvisionedCapacityInput
+}
+
+// Send marshals and sends the PurchaseProvisionedCapacity API request.
+func (r *PurchaseProvisionedCapacityRequest) Send() (*PurchaseProvisionedCapacityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseProvisionedCapacityOutput), nil
+}
+
+// PurchaseProvisionedCapacityRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PurchaseProvisionedCapacity for more information on using the PurchaseProvisionedCapacity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation purchases a provisioned capacity unit for an AWS account.
 //
 //    // Example sending a request using the PurchaseProvisionedCapacityRequest method.
-//    req, resp := client.PurchaseProvisionedCapacityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PurchaseProvisionedCapacityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCapacityInput) (req *aws.Request, output *PurchaseProvisionedCapacityOutput) {
+func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest {
 	op := &aws.Operation{
 		Name:       opPurchaseProvisionedCapacity,
 		HTTPMethod: "POST",
@@ -3150,81 +2060,44 @@ func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedC
 		input = &PurchaseProvisionedCapacityInput{}
 	}
 
-	output = &PurchaseProvisionedCapacityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PurchaseProvisionedCapacity API operation for Amazon Glacier.
-//
-// This operation purchases a provisioned capacity unit for an AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation PurchaseProvisionedCapacity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Returned if the request results in a vault or account limit being exceeded.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) PurchaseProvisionedCapacity(input *PurchaseProvisionedCapacityInput) (*PurchaseProvisionedCapacityOutput, error) {
-	req, out := c.PurchaseProvisionedCapacityRequest(input)
-	return out, req.Send()
-}
-
-// PurchaseProvisionedCapacityWithContext is the same as PurchaseProvisionedCapacity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PurchaseProvisionedCapacity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) PurchaseProvisionedCapacityWithContext(ctx aws.Context, input *PurchaseProvisionedCapacityInput, opts ...aws.Option) (*PurchaseProvisionedCapacityOutput, error) {
-	req, out := c.PurchaseProvisionedCapacityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PurchaseProvisionedCapacityOutput{})
+	return PurchaseProvisionedCapacityRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromVault = "RemoveTagsFromVault"
 
-// RemoveTagsFromVaultRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromVault operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromVaultRequest is a API request type for the RemoveTagsFromVault API operation.
+type RemoveTagsFromVaultRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromVaultInput
+}
+
+// Send marshals and sends the RemoveTagsFromVault API request.
+func (r *RemoveTagsFromVaultRequest) Send() (*RemoveTagsFromVaultOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromVaultOutput), nil
+}
+
+// RemoveTagsFromVaultRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromVault for more information on using the RemoveTagsFromVault
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation removes one or more tags from the set of tags attached to
+// a vault. For more information about tags, see Tagging Amazon Glacier Resources
+// (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html). This
+// operation is idempotent. The operation will be successful, even if there
+// are no tags attached to the vault.
 //
 //    // Example sending a request using the RemoveTagsFromVaultRequest method.
-//    req, resp := client.RemoveTagsFromVaultRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromVaultRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) (req *aws.Request, output *RemoveTagsFromVaultOutput) {
+func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromVault,
 		HTTPMethod: "POST",
@@ -3235,88 +2108,48 @@ func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) (r
 		input = &RemoveTagsFromVaultInput{}
 	}
 
-	output = &RemoveTagsFromVaultOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveTagsFromVaultOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveTagsFromVault API operation for Amazon Glacier.
-//
-// This operation removes one or more tags from the set of tags attached to
-// a vault. For more information about tags, see Tagging Amazon Glacier Resources
-// (http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html). This
-// operation is idempotent. The operation will be successful, even if there
-// are no tags attached to the vault.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation RemoveTagsFromVault for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) RemoveTagsFromVault(input *RemoveTagsFromVaultInput) (*RemoveTagsFromVaultOutput, error) {
-	req, out := c.RemoveTagsFromVaultRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromVaultWithContext is the same as RemoveTagsFromVault with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromVault for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) RemoveTagsFromVaultWithContext(ctx aws.Context, input *RemoveTagsFromVaultInput, opts ...aws.Option) (*RemoveTagsFromVaultOutput, error) {
-	req, out := c.RemoveTagsFromVaultRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveTagsFromVaultRequest{Request: req, Input: input}
 }
 
 const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
 
-// SetDataRetrievalPolicyRequest generates a "aws.Request" representing the
-// client's request for the SetDataRetrievalPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetDataRetrievalPolicyRequest is a API request type for the SetDataRetrievalPolicy API operation.
+type SetDataRetrievalPolicyRequest struct {
+	*aws.Request
+	Input *SetDataRetrievalPolicyInput
+}
+
+// Send marshals and sends the SetDataRetrievalPolicy API request.
+func (r *SetDataRetrievalPolicyRequest) Send() (*SetDataRetrievalPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetDataRetrievalPolicyOutput), nil
+}
+
+// SetDataRetrievalPolicyRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This operation sets and then enacts a data retrieval policy in the region
+// specified in the PUT request. You can set one policy per region for an AWS
+// account. The policy is enacted within a few minutes of a successful PUT operation.
 //
-// See SetDataRetrievalPolicy for more information on using the SetDataRetrievalPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The set policy operation does not affect retrieval jobs that were in progress
+// before the policy was enacted. For more information about data retrieval
+// policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
 //
 //    // Example sending a request using the SetDataRetrievalPolicyRequest method.
-//    req, resp := client.SetDataRetrievalPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetDataRetrievalPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInput) (req *aws.Request, output *SetDataRetrievalPolicyOutput) {
+func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInput) SetDataRetrievalPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetDataRetrievalPolicy,
 		HTTPMethod: "PUT",
@@ -3327,86 +2160,48 @@ func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInp
 		input = &SetDataRetrievalPolicyInput{}
 	}
 
-	output = &SetDataRetrievalPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetDataRetrievalPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetDataRetrievalPolicy API operation for Amazon Glacier.
-//
-// This operation sets and then enacts a data retrieval policy in the region
-// specified in the PUT request. You can set one policy per region for an AWS
-// account. The policy is enacted within a few minutes of a successful PUT operation.
-//
-// The set policy operation does not affect retrieval jobs that were in progress
-// before the policy was enacted. For more information about data retrieval
-// policies, see Amazon Glacier Data Retrieval Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation SetDataRetrievalPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) SetDataRetrievalPolicy(input *SetDataRetrievalPolicyInput) (*SetDataRetrievalPolicyOutput, error) {
-	req, out := c.SetDataRetrievalPolicyRequest(input)
-	return out, req.Send()
-}
-
-// SetDataRetrievalPolicyWithContext is the same as SetDataRetrievalPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetDataRetrievalPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) SetDataRetrievalPolicyWithContext(ctx aws.Context, input *SetDataRetrievalPolicyInput, opts ...aws.Option) (*SetDataRetrievalPolicyOutput, error) {
-	req, out := c.SetDataRetrievalPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetDataRetrievalPolicyRequest{Request: req, Input: input}
 }
 
 const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 
-// SetVaultAccessPolicyRequest generates a "aws.Request" representing the
-// client's request for the SetVaultAccessPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetVaultAccessPolicyRequest is a API request type for the SetVaultAccessPolicy API operation.
+type SetVaultAccessPolicyRequest struct {
+	*aws.Request
+	Input *SetVaultAccessPolicyInput
+}
+
+// Send marshals and sends the SetVaultAccessPolicy API request.
+func (r *SetVaultAccessPolicyRequest) Send() (*SetVaultAccessPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetVaultAccessPolicyOutput), nil
+}
+
+// SetVaultAccessPolicyRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetVaultAccessPolicy for more information on using the SetVaultAccessPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation configures an access policy for a vault and will overwrite
+// an existing policy. To configure a vault access policy, send a PUT request
+// to the access-policy subresource of the vault. An access policy is specific
+// to a vault and is also called a vault subresource. You can set one access
+// policy per vault and the policy can be up to 20 KB in size. For more information
+// about vault access policies, see Amazon Glacier Access Control with Vault
+// Access Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
 //
 //    // Example sending a request using the SetVaultAccessPolicyRequest method.
-//    req, resp := client.SetVaultAccessPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetVaultAccessPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) (req *aws.Request, output *SetVaultAccessPolicyOutput) {
+func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest {
 	op := &aws.Operation{
 		Name:       opSetVaultAccessPolicy,
 		HTTPMethod: "PUT",
@@ -3417,108 +2212,32 @@ func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) 
 		input = &SetVaultAccessPolicyInput{}
 	}
 
-	output = &SetVaultAccessPolicyOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetVaultAccessPolicyOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetVaultAccessPolicy API operation for Amazon Glacier.
-//
-// This operation configures an access policy for a vault and will overwrite
-// an existing policy. To configure a vault access policy, send a PUT request
-// to the access-policy subresource of the vault. An access policy is specific
-// to a vault and is also called a vault subresource. You can set one access
-// policy per vault and the policy can be up to 20 KB in size. For more information
-// about vault access policies, see Amazon Glacier Access Control with Vault
-// Access Policies (http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation SetVaultAccessPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) SetVaultAccessPolicy(input *SetVaultAccessPolicyInput) (*SetVaultAccessPolicyOutput, error) {
-	req, out := c.SetVaultAccessPolicyRequest(input)
-	return out, req.Send()
-}
-
-// SetVaultAccessPolicyWithContext is the same as SetVaultAccessPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetVaultAccessPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) SetVaultAccessPolicyWithContext(ctx aws.Context, input *SetVaultAccessPolicyInput, opts ...aws.Option) (*SetVaultAccessPolicyOutput, error) {
-	req, out := c.SetVaultAccessPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetVaultAccessPolicyRequest{Request: req, Input: input}
 }
 
 const opSetVaultNotifications = "SetVaultNotifications"
 
-// SetVaultNotificationsRequest generates a "aws.Request" representing the
-// client's request for the SetVaultNotifications operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetVaultNotifications for more information on using the SetVaultNotifications
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetVaultNotificationsRequest method.
-//    req, resp := client.SetVaultNotificationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput) (req *aws.Request, output *SetVaultNotificationsOutput) {
-	op := &aws.Operation{
-		Name:       opSetVaultNotifications,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
-	}
-
-	if input == nil {
-		input = &SetVaultNotificationsInput{}
-	}
-
-	output = &SetVaultNotificationsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// SetVaultNotificationsRequest is a API request type for the SetVaultNotifications API operation.
+type SetVaultNotificationsRequest struct {
+	*aws.Request
+	Input *SetVaultNotificationsInput
 }
 
-// SetVaultNotifications API operation for Amazon Glacier.
+// Send marshals and sends the SetVaultNotifications API request.
+func (r *SetVaultNotificationsRequest) Send() (*SetVaultNotificationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetVaultNotificationsOutput), nil
+}
+
+// SetVaultNotificationsRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation configures notifications that will be sent when specific events
 // happen to a vault. By default, you don't get any notifications.
@@ -3553,89 +2272,49 @@ func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput
 // and Set Vault Notification Configuration  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation SetVaultNotifications for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) SetVaultNotifications(input *SetVaultNotificationsInput) (*SetVaultNotificationsOutput, error) {
-	req, out := c.SetVaultNotificationsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the SetVaultNotificationsRequest method.
+//    req := client.SetVaultNotificationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput) SetVaultNotificationsRequest {
+	op := &aws.Operation{
+		Name:       opSetVaultNotifications,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/notification-configuration",
+	}
 
-// SetVaultNotificationsWithContext is the same as SetVaultNotifications with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetVaultNotifications for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) SetVaultNotificationsWithContext(ctx aws.Context, input *SetVaultNotificationsInput, opts ...aws.Option) (*SetVaultNotificationsOutput, error) {
-	req, out := c.SetVaultNotificationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetVaultNotificationsInput{}
+	}
+
+	req := c.newRequest(op, input, &SetVaultNotificationsOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetVaultNotificationsRequest{Request: req, Input: input}
 }
 
 const opUploadArchive = "UploadArchive"
 
-// UploadArchiveRequest generates a "aws.Request" representing the
-// client's request for the UploadArchive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadArchive for more information on using the UploadArchive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UploadArchiveRequest method.
-//    req, resp := client.UploadArchiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) (req *aws.Request, output *ArchiveCreationOutput) {
-	op := &aws.Operation{
-		Name:       opUploadArchive,
-		HTTPMethod: "POST",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives",
-	}
-
-	if input == nil {
-		input = &UploadArchiveInput{}
-	}
-
-	output = &ArchiveCreationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UploadArchiveRequest is a API request type for the UploadArchive API operation.
+type UploadArchiveRequest struct {
+	*aws.Request
+	Input *UploadArchiveInput
 }
 
-// UploadArchive API operation for Amazon Glacier.
+// Send marshals and sends the UploadArchive API request.
+func (r *UploadArchiveRequest) Send() (*UploadArchiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadArchiveOutput), nil
+}
+
+// UploadArchiveRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation adds an archive to a vault. This is a synchronous operation,
 // and for a successful upload, your data is durably persisted. Amazon Glacier
@@ -3674,93 +2353,47 @@ func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) (req *aws.Requ
 // and Upload Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation UploadArchive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeRequestTimeoutException "RequestTimeoutException"
-//   Returned if, when uploading an archive, Amazon Glacier times out while receiving
-//   the upload.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) UploadArchive(input *UploadArchiveInput) (*ArchiveCreationOutput, error) {
-	req, out := c.UploadArchiveRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the UploadArchiveRequest method.
+//    req := client.UploadArchiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveRequest {
+	op := &aws.Operation{
+		Name:       opUploadArchive,
+		HTTPMethod: "POST",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/archives",
+	}
 
-// UploadArchiveWithContext is the same as UploadArchive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadArchive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) UploadArchiveWithContext(ctx aws.Context, input *UploadArchiveInput, opts ...aws.Option) (*ArchiveCreationOutput, error) {
-	req, out := c.UploadArchiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UploadArchiveInput{}
+	}
+
+	req := c.newRequest(op, input, &UploadArchiveOutput{})
+	return UploadArchiveRequest{Request: req, Input: input}
 }
 
 const opUploadMultipartPart = "UploadMultipartPart"
 
-// UploadMultipartPartRequest generates a "aws.Request" representing the
-// client's request for the UploadMultipartPart operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UploadMultipartPart for more information on using the UploadMultipartPart
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UploadMultipartPartRequest method.
-//    req, resp := client.UploadMultipartPartRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) (req *aws.Request, output *UploadMultipartPartOutput) {
-	op := &aws.Operation{
-		Name:       opUploadMultipartPart,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
-	}
-
-	if input == nil {
-		input = &UploadMultipartPartInput{}
-	}
-
-	output = &UploadMultipartPartOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UploadMultipartPartRequest is a API request type for the UploadMultipartPart API operation.
+type UploadMultipartPartRequest struct {
+	*aws.Request
+	Input *UploadMultipartPartInput
 }
 
-// UploadMultipartPart API operation for Amazon Glacier.
+// Send marshals and sends the UploadMultipartPart API request.
+func (r *UploadMultipartPartRequest) Send() (*UploadMultipartPartOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UploadMultipartPartOutput), nil
+}
+
+// UploadMultipartPartRequest returns a request value for making API operation for
+// Amazon Glacier.
 //
 // This operation uploads a part of an archive. You can upload archive parts
 // in any order. You can also upload them in parallel. You can upload up to
@@ -3809,50 +2442,25 @@ func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) (r
 // and Upload Part  (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html)
 // in the Amazon Glacier Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Glacier's
-// API operation UploadMultipartPart for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Returned if the specified resource (such as a vault, upload ID, or job ID)
-//   doesn't exist.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   Returned if a parameter of the request is incorrectly specified.
-//
-//   * ErrCodeMissingParameterValueException "MissingParameterValueException"
-//   Returned if a required header or parameter is missing from the request.
-//
-//   * ErrCodeRequestTimeoutException "RequestTimeoutException"
-//   Returned if, when uploading an archive, Amazon Glacier times out while receiving
-//   the upload.
-//
-//   * ErrCodeServiceUnavailableException "ServiceUnavailableException"
-//   Returned if the service cannot complete the request.
-//
-func (c *Glacier) UploadMultipartPart(input *UploadMultipartPartInput) (*UploadMultipartPartOutput, error) {
-	req, out := c.UploadMultipartPartRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the UploadMultipartPartRequest method.
+//    req := client.UploadMultipartPartRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) UploadMultipartPartRequest {
+	op := &aws.Operation{
+		Name:       opUploadMultipartPart,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}",
+	}
 
-// UploadMultipartPartWithContext is the same as UploadMultipartPart with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UploadMultipartPart for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) UploadMultipartPartWithContext(ctx aws.Context, input *UploadMultipartPartInput, opts ...aws.Option) (*UploadMultipartPartOutput, error) {
-	req, out := c.UploadMultipartPartRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UploadMultipartPartInput{}
+	}
+
+	req := c.newRequest(op, input, &UploadMultipartPartOutput{})
+	return UploadMultipartPartRequest{Request: req, Input: input}
 }
 
 // Provides options to abort a multipart upload identified by the upload ID.
@@ -4102,51 +2710,6 @@ func (s AddTagsToVaultOutput) String() string {
 // GoString returns the string representation
 func (s AddTagsToVaultOutput) GoString() string {
 	return s.String()
-}
-
-// Contains the Amazon Glacier response to your request.
-//
-// For information about the underlying REST API, see Upload Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
-// For conceptual information, see Working with Archives in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
-type ArchiveCreationOutput struct {
-	_ struct{} `type:"structure"`
-
-	// The ID of the archive. This value is also included as part of the location.
-	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
-
-	// The checksum of the archive computed by Amazon Glacier.
-	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
-
-	// The relative URI path of the newly added archive resource.
-	Location *string `location:"header" locationName:"Location" type:"string"`
-}
-
-// String returns the string representation
-func (s ArchiveCreationOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s ArchiveCreationOutput) GoString() string {
-	return s.String()
-}
-
-// SetArchiveId sets the ArchiveId field's value.
-func (s *ArchiveCreationOutput) SetArchiveId(v string) *ArchiveCreationOutput {
-	s.ArchiveId = &v
-	return s
-}
-
-// SetChecksum sets the Checksum field's value.
-func (s *ArchiveCreationOutput) SetChecksum(v string) *ArchiveCreationOutput {
-	s.Checksum = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *ArchiveCreationOutput) SetLocation(v string) *ArchiveCreationOutput {
-	s.Location = &v
-	return s
 }
 
 // Provides options to complete a multipart upload operation. This informs Amazon
@@ -4865,6 +3428,212 @@ func (s *DescribeJobInput) SetJobId(v string) *DescribeJobInput {
 // SetVaultName sets the VaultName field's value.
 func (s *DescribeJobInput) SetVaultName(v string) *DescribeJobInput {
 	s.VaultName = &v
+	return s
+}
+
+// Describes an Amazon Glacier job.
+type DescribeJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
+	Action ActionCode `type:"string"`
+
+	// For an ArchiveRetrieval job, this is the archive ID requested for download.
+	// Otherwise, this field is null.
+	ArchiveId *string `type:"string"`
+
+	// The SHA256 tree hash of the entire archive for an archive retrieval. For
+	// inventory retrieval jobs, this field is null.
+	ArchiveSHA256TreeHash *string `type:"string"`
+
+	// For an ArchiveRetrieval job, this is the size in bytes of the archive being
+	// requested for download. For the InventoryRetrieval job, the value is null.
+	ArchiveSizeInBytes *int64 `type:"long"`
+
+	// The job status. When a job is completed, you get the job's output.
+	Completed *bool `type:"boolean"`
+
+	// The UTC time that the archive retrieval request completed. While the job
+	// is in progress, the value will be null.
+	CompletionDate *string `type:"string"`
+
+	// The UTC date when the job was created. A string representation of ISO 8601
+	// date format, for example, "2012-03-20T17:03:43.221Z".
+	CreationDate *string `type:"string"`
+
+	// Parameters used for range inventory retrieval.
+	InventoryRetrievalParameters *InventoryRetrievalJobDescription `type:"structure"`
+
+	// For an InventoryRetrieval job, this is the size in bytes of the inventory
+	// requested for download. For the ArchiveRetrieval job, the value is null.
+	InventorySizeInBytes *int64 `type:"long"`
+
+	// The job description you provided when you initiated the job.
+	JobDescription *string `type:"string"`
+
+	// An opaque string that identifies an Amazon Glacier job.
+	JobId *string `type:"string"`
+
+	// The retrieved byte range for archive retrieval jobs in the form "StartByteValue-EndByteValue"
+	// If no range was specified in the archive retrieval, then the whole archive
+	// is retrieved and StartByteValue equals 0 and EndByteValue equals the size
+	// of the archive minus 1. For inventory retrieval jobs this field is null.
+	RetrievalByteRange *string `type:"string"`
+
+	// For an ArchiveRetrieval job, it is the checksum of the archive. Otherwise,
+	// the value is null.
+	//
+	// The SHA256 tree hash value for the requested range of an archive. If the
+	// Initiate a Job request for an archive specified a tree-hash aligned range,
+	// then this field returns a value.
+	//
+	// For the specific case when the whole archive is retrieved, this value is
+	// the same as the ArchiveSHA256TreeHash value.
+	//
+	// This field is null in the following situations:
+	//
+	//    * Archive retrieval jobs that specify a range that is not tree-hash aligned.
+	//
+	//    * Archival jobs that specify a range that is equal to the whole archive
+	//    and the job status is InProgress.
+	//
+	//    * Inventory jobs.
+	SHA256TreeHash *string `type:"string"`
+
+	// An Amazon Simple Notification Service (Amazon SNS) topic that receives notification.
+	SNSTopic *string `type:"string"`
+
+	// The status code can be InProgress, Succeeded, or Failed, and indicates the
+	// status of the job.
+	StatusCode StatusCode `type:"string"`
+
+	// A friendly message that describes the job status.
+	StatusMessage *string `type:"string"`
+
+	// The retrieval option to use for the archive retrieval. Valid values are Expedited,
+	// Standard, or Bulk. Standard is the default.
+	Tier *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the vault from which the archive retrieval
+	// was requested.
+	VaultARN *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeJobOutput) GoString() string {
+	return s.String()
+}
+
+// SetAction sets the Action field's value.
+func (s *DescribeJobOutput) SetAction(v ActionCode) *DescribeJobOutput {
+	s.Action = v
+	return s
+}
+
+// SetArchiveId sets the ArchiveId field's value.
+func (s *DescribeJobOutput) SetArchiveId(v string) *DescribeJobOutput {
+	s.ArchiveId = &v
+	return s
+}
+
+// SetArchiveSHA256TreeHash sets the ArchiveSHA256TreeHash field's value.
+func (s *DescribeJobOutput) SetArchiveSHA256TreeHash(v string) *DescribeJobOutput {
+	s.ArchiveSHA256TreeHash = &v
+	return s
+}
+
+// SetArchiveSizeInBytes sets the ArchiveSizeInBytes field's value.
+func (s *DescribeJobOutput) SetArchiveSizeInBytes(v int64) *DescribeJobOutput {
+	s.ArchiveSizeInBytes = &v
+	return s
+}
+
+// SetCompleted sets the Completed field's value.
+func (s *DescribeJobOutput) SetCompleted(v bool) *DescribeJobOutput {
+	s.Completed = &v
+	return s
+}
+
+// SetCompletionDate sets the CompletionDate field's value.
+func (s *DescribeJobOutput) SetCompletionDate(v string) *DescribeJobOutput {
+	s.CompletionDate = &v
+	return s
+}
+
+// SetCreationDate sets the CreationDate field's value.
+func (s *DescribeJobOutput) SetCreationDate(v string) *DescribeJobOutput {
+	s.CreationDate = &v
+	return s
+}
+
+// SetInventoryRetrievalParameters sets the InventoryRetrievalParameters field's value.
+func (s *DescribeJobOutput) SetInventoryRetrievalParameters(v *InventoryRetrievalJobDescription) *DescribeJobOutput {
+	s.InventoryRetrievalParameters = v
+	return s
+}
+
+// SetInventorySizeInBytes sets the InventorySizeInBytes field's value.
+func (s *DescribeJobOutput) SetInventorySizeInBytes(v int64) *DescribeJobOutput {
+	s.InventorySizeInBytes = &v
+	return s
+}
+
+// SetJobDescription sets the JobDescription field's value.
+func (s *DescribeJobOutput) SetJobDescription(v string) *DescribeJobOutput {
+	s.JobDescription = &v
+	return s
+}
+
+// SetJobId sets the JobId field's value.
+func (s *DescribeJobOutput) SetJobId(v string) *DescribeJobOutput {
+	s.JobId = &v
+	return s
+}
+
+// SetRetrievalByteRange sets the RetrievalByteRange field's value.
+func (s *DescribeJobOutput) SetRetrievalByteRange(v string) *DescribeJobOutput {
+	s.RetrievalByteRange = &v
+	return s
+}
+
+// SetSHA256TreeHash sets the SHA256TreeHash field's value.
+func (s *DescribeJobOutput) SetSHA256TreeHash(v string) *DescribeJobOutput {
+	s.SHA256TreeHash = &v
+	return s
+}
+
+// SetSNSTopic sets the SNSTopic field's value.
+func (s *DescribeJobOutput) SetSNSTopic(v string) *DescribeJobOutput {
+	s.SNSTopic = &v
+	return s
+}
+
+// SetStatusCode sets the StatusCode field's value.
+func (s *DescribeJobOutput) SetStatusCode(v StatusCode) *DescribeJobOutput {
+	s.StatusCode = v
+	return s
+}
+
+// SetStatusMessage sets the StatusMessage field's value.
+func (s *DescribeJobOutput) SetStatusMessage(v string) *DescribeJobOutput {
+	s.StatusMessage = &v
+	return s
+}
+
+// SetTier sets the Tier field's value.
+func (s *DescribeJobOutput) SetTier(v string) *DescribeJobOutput {
+	s.Tier = &v
+	return s
+}
+
+// SetVaultARN sets the VaultARN field's value.
+func (s *DescribeJobOutput) SetVaultARN(v string) *DescribeJobOutput {
+	s.VaultARN = &v
 	return s
 }
 
@@ -6004,212 +4773,6 @@ func (s *InventoryRetrievalJobInput) SetStartDate(v string) *InventoryRetrievalJ
 	return s
 }
 
-// Describes an Amazon Glacier job.
-type JobDescription struct {
-	_ struct{} `type:"structure"`
-
-	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
-	Action ActionCode `type:"string"`
-
-	// For an ArchiveRetrieval job, this is the archive ID requested for download.
-	// Otherwise, this field is null.
-	ArchiveId *string `type:"string"`
-
-	// The SHA256 tree hash of the entire archive for an archive retrieval. For
-	// inventory retrieval jobs, this field is null.
-	ArchiveSHA256TreeHash *string `type:"string"`
-
-	// For an ArchiveRetrieval job, this is the size in bytes of the archive being
-	// requested for download. For the InventoryRetrieval job, the value is null.
-	ArchiveSizeInBytes *int64 `type:"long"`
-
-	// The job status. When a job is completed, you get the job's output.
-	Completed *bool `type:"boolean"`
-
-	// The UTC time that the archive retrieval request completed. While the job
-	// is in progress, the value will be null.
-	CompletionDate *string `type:"string"`
-
-	// The UTC date when the job was created. A string representation of ISO 8601
-	// date format, for example, "2012-03-20T17:03:43.221Z".
-	CreationDate *string `type:"string"`
-
-	// Parameters used for range inventory retrieval.
-	InventoryRetrievalParameters *InventoryRetrievalJobDescription `type:"structure"`
-
-	// For an InventoryRetrieval job, this is the size in bytes of the inventory
-	// requested for download. For the ArchiveRetrieval job, the value is null.
-	InventorySizeInBytes *int64 `type:"long"`
-
-	// The job description you provided when you initiated the job.
-	JobDescription *string `type:"string"`
-
-	// An opaque string that identifies an Amazon Glacier job.
-	JobId *string `type:"string"`
-
-	// The retrieved byte range for archive retrieval jobs in the form "StartByteValue-EndByteValue"
-	// If no range was specified in the archive retrieval, then the whole archive
-	// is retrieved and StartByteValue equals 0 and EndByteValue equals the size
-	// of the archive minus 1. For inventory retrieval jobs this field is null.
-	RetrievalByteRange *string `type:"string"`
-
-	// For an ArchiveRetrieval job, it is the checksum of the archive. Otherwise,
-	// the value is null.
-	//
-	// The SHA256 tree hash value for the requested range of an archive. If the
-	// Initiate a Job request for an archive specified a tree-hash aligned range,
-	// then this field returns a value.
-	//
-	// For the specific case when the whole archive is retrieved, this value is
-	// the same as the ArchiveSHA256TreeHash value.
-	//
-	// This field is null in the following situations:
-	//
-	//    * Archive retrieval jobs that specify a range that is not tree-hash aligned.
-	//
-	//    * Archival jobs that specify a range that is equal to the whole archive
-	//    and the job status is InProgress.
-	//
-	//    * Inventory jobs.
-	SHA256TreeHash *string `type:"string"`
-
-	// An Amazon Simple Notification Service (Amazon SNS) topic that receives notification.
-	SNSTopic *string `type:"string"`
-
-	// The status code can be InProgress, Succeeded, or Failed, and indicates the
-	// status of the job.
-	StatusCode StatusCode `type:"string"`
-
-	// A friendly message that describes the job status.
-	StatusMessage *string `type:"string"`
-
-	// The retrieval option to use for the archive retrieval. Valid values are Expedited,
-	// Standard, or Bulk. Standard is the default.
-	Tier *string `type:"string"`
-
-	// The Amazon Resource Name (ARN) of the vault from which the archive retrieval
-	// was requested.
-	VaultARN *string `type:"string"`
-}
-
-// String returns the string representation
-func (s JobDescription) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s JobDescription) GoString() string {
-	return s.String()
-}
-
-// SetAction sets the Action field's value.
-func (s *JobDescription) SetAction(v ActionCode) *JobDescription {
-	s.Action = v
-	return s
-}
-
-// SetArchiveId sets the ArchiveId field's value.
-func (s *JobDescription) SetArchiveId(v string) *JobDescription {
-	s.ArchiveId = &v
-	return s
-}
-
-// SetArchiveSHA256TreeHash sets the ArchiveSHA256TreeHash field's value.
-func (s *JobDescription) SetArchiveSHA256TreeHash(v string) *JobDescription {
-	s.ArchiveSHA256TreeHash = &v
-	return s
-}
-
-// SetArchiveSizeInBytes sets the ArchiveSizeInBytes field's value.
-func (s *JobDescription) SetArchiveSizeInBytes(v int64) *JobDescription {
-	s.ArchiveSizeInBytes = &v
-	return s
-}
-
-// SetCompleted sets the Completed field's value.
-func (s *JobDescription) SetCompleted(v bool) *JobDescription {
-	s.Completed = &v
-	return s
-}
-
-// SetCompletionDate sets the CompletionDate field's value.
-func (s *JobDescription) SetCompletionDate(v string) *JobDescription {
-	s.CompletionDate = &v
-	return s
-}
-
-// SetCreationDate sets the CreationDate field's value.
-func (s *JobDescription) SetCreationDate(v string) *JobDescription {
-	s.CreationDate = &v
-	return s
-}
-
-// SetInventoryRetrievalParameters sets the InventoryRetrievalParameters field's value.
-func (s *JobDescription) SetInventoryRetrievalParameters(v *InventoryRetrievalJobDescription) *JobDescription {
-	s.InventoryRetrievalParameters = v
-	return s
-}
-
-// SetInventorySizeInBytes sets the InventorySizeInBytes field's value.
-func (s *JobDescription) SetInventorySizeInBytes(v int64) *JobDescription {
-	s.InventorySizeInBytes = &v
-	return s
-}
-
-// SetJobDescription sets the JobDescription field's value.
-func (s *JobDescription) SetJobDescription(v string) *JobDescription {
-	s.JobDescription = &v
-	return s
-}
-
-// SetJobId sets the JobId field's value.
-func (s *JobDescription) SetJobId(v string) *JobDescription {
-	s.JobId = &v
-	return s
-}
-
-// SetRetrievalByteRange sets the RetrievalByteRange field's value.
-func (s *JobDescription) SetRetrievalByteRange(v string) *JobDescription {
-	s.RetrievalByteRange = &v
-	return s
-}
-
-// SetSHA256TreeHash sets the SHA256TreeHash field's value.
-func (s *JobDescription) SetSHA256TreeHash(v string) *JobDescription {
-	s.SHA256TreeHash = &v
-	return s
-}
-
-// SetSNSTopic sets the SNSTopic field's value.
-func (s *JobDescription) SetSNSTopic(v string) *JobDescription {
-	s.SNSTopic = &v
-	return s
-}
-
-// SetStatusCode sets the StatusCode field's value.
-func (s *JobDescription) SetStatusCode(v StatusCode) *JobDescription {
-	s.StatusCode = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *JobDescription) SetStatusMessage(v string) *JobDescription {
-	s.StatusMessage = &v
-	return s
-}
-
-// SetTier sets the Tier field's value.
-func (s *JobDescription) SetTier(v string) *JobDescription {
-	s.Tier = &v
-	return s
-}
-
-// SetVaultARN sets the VaultARN field's value.
-func (s *JobDescription) SetVaultARN(v string) *JobDescription {
-	s.VaultARN = &v
-	return s
-}
-
 // Provides options for defining a job.
 type JobParameters struct {
 	_ struct{} `type:"structure"`
@@ -6423,7 +4986,7 @@ type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of job objects. Each job object contains metadata describing the job.
-	JobList []*JobDescription `type:"list"`
+	JobList []*DescribeJobOutput `type:"list"`
 
 	// An opaque string used for pagination that specifies the job at which the
 	// listing of jobs should begin. You get the marker value from a previous List
@@ -6443,7 +5006,7 @@ func (s ListJobsOutput) GoString() string {
 }
 
 // SetJobList sets the JobList field's value.
-func (s *ListJobsOutput) SetJobList(v []*JobDescription) *ListJobsOutput {
+func (s *ListJobsOutput) SetJobList(v []*DescribeJobOutput) *ListJobsOutput {
 	s.JobList = v
 	return s
 }
@@ -7547,6 +6110,51 @@ func (s *UploadArchiveInput) SetChecksum(v string) *UploadArchiveInput {
 // SetVaultName sets the VaultName field's value.
 func (s *UploadArchiveInput) SetVaultName(v string) *UploadArchiveInput {
 	s.VaultName = &v
+	return s
+}
+
+// Contains the Amazon Glacier response to your request.
+//
+// For information about the underlying REST API, see Upload Archive (http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html).
+// For conceptual information, see Working with Archives in Amazon Glacier (http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
+type UploadArchiveOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the archive. This value is also included as part of the location.
+	ArchiveId *string `location:"header" locationName:"x-amz-archive-id" type:"string"`
+
+	// The checksum of the archive computed by Amazon Glacier.
+	Checksum *string `location:"header" locationName:"x-amz-sha256-tree-hash" type:"string"`
+
+	// The relative URI path of the newly added archive resource.
+	Location *string `location:"header" locationName:"Location" type:"string"`
+}
+
+// String returns the string representation
+func (s UploadArchiveOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UploadArchiveOutput) GoString() string {
+	return s.String()
+}
+
+// SetArchiveId sets the ArchiveId field's value.
+func (s *UploadArchiveOutput) SetArchiveId(v string) *UploadArchiveOutput {
+	s.ArchiveId = &v
+	return s
+}
+
+// SetChecksum sets the Checksum field's value.
+func (s *UploadArchiveOutput) SetChecksum(v string) *UploadArchiveOutput {
+	s.Checksum = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *UploadArchiveOutput) SetLocation(v string) *UploadArchiveOutput {
+	s.Location = &v
 	return s
 }
 

@@ -143,8 +143,8 @@ func NewDeleteListIterator(svc s3iface.S3API, input *s3.ListObjectsInput, opts .
 					tmp := *input
 					inCpy = &tmp
 				}
-				req, _ := svc.ListObjectsRequest(inCpy)
-				return req, nil
+				req := svc.ListObjectsRequest(inCpy)
+				return req.Request, nil
 			},
 		},
 	}
@@ -354,7 +354,8 @@ func initDeleteObjectsInput(o *s3.DeleteObjectInput) *s3.DeleteObjectsInput {
 func deleteBatch(d *BatchDelete, input *s3.DeleteObjectsInput, objects []BatchDeleteObject) []Error {
 	errs := []Error{}
 
-	if result, err := d.Client.DeleteObjects(input); err != nil {
+	req := d.Client.DeleteObjectsRequest(input)
+	if result, err := req.Send(); err != nil {
 		for i := 0; i < len(input.Delete.Objects); i++ {
 			errs = append(errs, newError(err, input.Bucket, input.Delete.Objects[i].Key))
 		}

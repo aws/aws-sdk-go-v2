@@ -42,11 +42,12 @@ func TestUnmarshalStandardError(t *testing.T) {
 
 	r := makeClientWithResponse(errorResponse)
 
-	_, err := r.CreateHostedZone(&route53.CreateHostedZoneInput{
+	req := r.CreateHostedZoneRequest(&route53.CreateHostedZoneInput{
 		CallerReference: aws.String("test"),
 		Name:            aws.String("test_zone"),
 	})
 
+	_, err := req.Send()
 	if err == nil {
 		t.Error("expected error, but received none")
 	}
@@ -75,7 +76,7 @@ but it already exists
 
 	r := makeClientWithResponse(errorResponse)
 
-	req := &route53.ChangeResourceRecordSetsInput{
+	params := &route53.ChangeResourceRecordSetsInput{
 		HostedZoneId: aws.String("zoneId"),
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
@@ -96,7 +97,8 @@ but it already exists
 		},
 	}
 
-	_, err := r.ChangeResourceRecordSets(req)
+	req := r.ChangeResourceRecordSetsRequest(params)
+	_, err := req.Send()
 	if err == nil {
 		t.Error("expected error, but received none")
 	}

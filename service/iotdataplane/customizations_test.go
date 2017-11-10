@@ -14,7 +14,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
 
 	svc := iotdataplane.New(cfg)
-	req, _ := svc.GetThingShadowRequest(nil)
+	req := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
 	if e, a := "", req.Metadata.Endpoint; e != a {
@@ -35,7 +35,7 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 
 	svc := iotdataplane.New(cfg)
 
-	req, _ := svc.GetThingShadowRequest(nil)
+	req := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
 	if e, a := "", req.Metadata.Endpoint; e != a {
@@ -55,7 +55,7 @@ func TestRequireEndpointUsed(t *testing.T) {
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 
 	svc := iotdataplane.New(cfg)
-	req, _ := svc.GetThingShadowRequest(nil)
+	req := svc.GetThingShadowRequest(nil)
 	err := req.Build()
 
 	if e, a := "https://endpoint", req.Metadata.Endpoint; e != a {

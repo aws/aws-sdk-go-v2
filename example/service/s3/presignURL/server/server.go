@@ -131,7 +131,7 @@ func listenAndServe(addr, bucket string, svc s3iface.S3API) error {
 		case "PUT":
 			// For creating PutObject presigned URLs
 			fmt.Println("Received request to presign PutObject for,", key)
-			sdkReq, _ := svc.PutObjectRequest(&s3.PutObjectInput{
+			sdkReq := svc.PutObjectRequest(&s3.PutObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    aws.String(key),
 
@@ -142,7 +142,7 @@ func listenAndServe(addr, bucket string, svc s3iface.S3API) error {
 		case "GET":
 			// For creating GetObject presigned URLs
 			fmt.Println("Received request to presign GetObject for,", key)
-			sdkReq, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+			sdkReq := svc.GetObjectRequest(&s3.GetObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    aws.String(key),
 			})

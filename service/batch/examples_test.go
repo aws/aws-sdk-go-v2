@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To cancel a job
 //
 // This example cancels a job with the specified job ID.
-func ExampleBatch_CancelJob_shared00() {
+func ExampleBatch_CancelJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleBatch_CancelJob_shared00() {
 		Reason: aws.String("Cancelling job."),
 	}
 
-	result, err := svc.CancelJob(input)
+	req := svc.CancelJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -66,7 +67,7 @@ func ExampleBatch_CancelJob_shared00() {
 //
 // This example creates a managed compute environment with specific C4 instance types
 // that are launched on demand. The compute environment is called C4OnDemand.
-func ExampleBatch_CreateComputeEnvironment_shared00() {
+func ExampleBatch_CreateComputeEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -106,7 +107,8 @@ func ExampleBatch_CreateComputeEnvironment_shared00() {
 		Type:        batch.CETypeManaged,
 	}
 
-	result, err := svc.CreateComputeEnvironment(input)
+	req := svc.CreateComputeEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -133,7 +135,7 @@ func ExampleBatch_CreateComputeEnvironment_shared00() {
 // This example creates a managed compute environment with the M4 instance type that
 // is launched when the Spot bid price is at or below 20% of the On-Demand price for
 // the instance type. The compute environment is called M4Spot.
-func ExampleBatch_CreateComputeEnvironment_shared01() {
+func ExampleBatch_CreateComputeEnvironmentRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -171,7 +173,8 @@ func ExampleBatch_CreateComputeEnvironment_shared01() {
 		Type:        batch.CETypeManaged,
 	}
 
-	result, err := svc.CreateComputeEnvironment(input)
+	req := svc.CreateComputeEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -197,7 +200,7 @@ func ExampleBatch_CreateComputeEnvironment_shared01() {
 //
 // This example creates a job queue called LowPriority that uses the M4Spot compute
 // environment.
-func ExampleBatch_CreateJobQueue_shared00() {
+func ExampleBatch_CreateJobQueueRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -216,7 +219,8 @@ func ExampleBatch_CreateJobQueue_shared00() {
 		State:        batch.JQStateEnabled,
 	}
 
-	result, err := svc.CreateJobQueue(input)
+	req := svc.CreateJobQueueRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -243,7 +247,7 @@ func ExampleBatch_CreateJobQueue_shared00() {
 // This example creates a job queue called HighPriority that uses the C4OnDemand compute
 // environment with an order of 1 and the M4Spot compute environment with an order of
 // 2.
-func ExampleBatch_CreateJobQueue_shared01() {
+func ExampleBatch_CreateJobQueueRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -266,7 +270,8 @@ func ExampleBatch_CreateJobQueue_shared01() {
 		State:        batch.JQStateEnabled,
 	}
 
-	result, err := svc.CreateJobQueue(input)
+	req := svc.CreateJobQueueRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -291,7 +296,7 @@ func ExampleBatch_CreateJobQueue_shared01() {
 // To delete a compute environment
 //
 // This example deletes the P2OnDemand compute environment.
-func ExampleBatch_DeleteComputeEnvironment_shared00() {
+func ExampleBatch_DeleteComputeEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -302,7 +307,8 @@ func ExampleBatch_DeleteComputeEnvironment_shared00() {
 		ComputeEnvironment: aws.String("P2OnDemand"),
 	}
 
-	result, err := svc.DeleteComputeEnvironment(input)
+	req := svc.DeleteComputeEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -327,7 +333,7 @@ func ExampleBatch_DeleteComputeEnvironment_shared00() {
 // To delete a job queue
 //
 // This example deletes the GPGPU job queue.
-func ExampleBatch_DeleteJobQueue_shared00() {
+func ExampleBatch_DeleteJobQueueRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -338,7 +344,8 @@ func ExampleBatch_DeleteJobQueue_shared00() {
 		JobQueue: aws.String("GPGPU"),
 	}
 
-	result, err := svc.DeleteJobQueue(input)
+	req := svc.DeleteJobQueueRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -363,7 +370,7 @@ func ExampleBatch_DeleteJobQueue_shared00() {
 // To deregister a job definition
 //
 // This example deregisters a job definition called sleep10.
-func ExampleBatch_DeregisterJobDefinition_shared00() {
+func ExampleBatch_DeregisterJobDefinitionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -374,7 +381,8 @@ func ExampleBatch_DeregisterJobDefinition_shared00() {
 		JobDefinition: aws.String("sleep10"),
 	}
 
-	result, err := svc.DeregisterJobDefinition(input)
+	req := svc.DeregisterJobDefinitionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -399,7 +407,7 @@ func ExampleBatch_DeregisterJobDefinition_shared00() {
 // To describe a compute environment
 //
 // This example describes the P2OnDemand compute environment.
-func ExampleBatch_DescribeComputeEnvironments_shared00() {
+func ExampleBatch_DescribeComputeEnvironmentsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -412,7 +420,8 @@ func ExampleBatch_DescribeComputeEnvironments_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeComputeEnvironments(input)
+	req := svc.DescribeComputeEnvironmentsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -437,7 +446,7 @@ func ExampleBatch_DescribeComputeEnvironments_shared00() {
 // To describe active job definitions
 //
 // This example describes all of your active job definitions.
-func ExampleBatch_DescribeJobDefinitions_shared00() {
+func ExampleBatch_DescribeJobDefinitionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -448,7 +457,8 @@ func ExampleBatch_DescribeJobDefinitions_shared00() {
 		Status: aws.String("ACTIVE"),
 	}
 
-	result, err := svc.DescribeJobDefinitions(input)
+	req := svc.DescribeJobDefinitionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -473,7 +483,7 @@ func ExampleBatch_DescribeJobDefinitions_shared00() {
 // To describe a job queue
 //
 // This example describes the HighPriority job queue.
-func ExampleBatch_DescribeJobQueues_shared00() {
+func ExampleBatch_DescribeJobQueuesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -486,7 +496,8 @@ func ExampleBatch_DescribeJobQueues_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeJobQueues(input)
+	req := svc.DescribeJobQueuesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -511,7 +522,7 @@ func ExampleBatch_DescribeJobQueues_shared00() {
 // To describe a specific job
 //
 // This example describes a job with the specified job ID.
-func ExampleBatch_DescribeJobs_shared00() {
+func ExampleBatch_DescribeJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -524,7 +535,8 @@ func ExampleBatch_DescribeJobs_shared00() {
 		},
 	}
 
-	result, err := svc.DescribeJobs(input)
+	req := svc.DescribeJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -549,7 +561,7 @@ func ExampleBatch_DescribeJobs_shared00() {
 // To list running jobs
 //
 // This example lists the running jobs in the HighPriority job queue.
-func ExampleBatch_ListJobs_shared00() {
+func ExampleBatch_ListJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -560,7 +572,8 @@ func ExampleBatch_ListJobs_shared00() {
 		JobQueue: aws.String("HighPriority"),
 	}
 
-	result, err := svc.ListJobs(input)
+	req := svc.ListJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -586,7 +599,7 @@ func ExampleBatch_ListJobs_shared00() {
 //
 // This example lists jobs in the HighPriority job queue that are in the SUBMITTED job
 // status.
-func ExampleBatch_ListJobs_shared01() {
+func ExampleBatch_ListJobsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -598,7 +611,8 @@ func ExampleBatch_ListJobs_shared01() {
 		JobStatus: batch.JobStatusSubmitted,
 	}
 
-	result, err := svc.ListJobs(input)
+	req := svc.ListJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -623,7 +637,7 @@ func ExampleBatch_ListJobs_shared01() {
 // To register a job definition
 //
 // This example registers a job definition for a simple container job.
-func ExampleBatch_RegisterJobDefinition_shared00() {
+func ExampleBatch_RegisterJobDefinitionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -644,7 +658,8 @@ func ExampleBatch_RegisterJobDefinition_shared00() {
 		Type:              batch.JobDefinitionTypeContainer,
 	}
 
-	result, err := svc.RegisterJobDefinition(input)
+	req := svc.RegisterJobDefinitionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -670,7 +685,7 @@ func ExampleBatch_RegisterJobDefinition_shared00() {
 //
 // This example submits a simple container job called example to the HighPriority job
 // queue.
-func ExampleBatch_SubmitJob_shared00() {
+func ExampleBatch_SubmitJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -683,7 +698,8 @@ func ExampleBatch_SubmitJob_shared00() {
 		JobQueue:      aws.String("HighPriority"),
 	}
 
-	result, err := svc.SubmitJob(input)
+	req := svc.SubmitJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -708,7 +724,7 @@ func ExampleBatch_SubmitJob_shared00() {
 // To terminate a job
 //
 // This example terminates a job with the specified job ID.
-func ExampleBatch_TerminateJob_shared00() {
+func ExampleBatch_TerminateJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -720,7 +736,8 @@ func ExampleBatch_TerminateJob_shared00() {
 		Reason: aws.String("Terminating job."),
 	}
 
-	result, err := svc.TerminateJob(input)
+	req := svc.TerminateJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -745,7 +762,7 @@ func ExampleBatch_TerminateJob_shared00() {
 // To update a compute environment
 //
 // This example disables the P2OnDemand compute environment so it can be deleted.
-func ExampleBatch_UpdateComputeEnvironment_shared00() {
+func ExampleBatch_UpdateComputeEnvironmentRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -757,7 +774,8 @@ func ExampleBatch_UpdateComputeEnvironment_shared00() {
 		State:              batch.CEStateDisabled,
 	}
 
-	result, err := svc.UpdateComputeEnvironment(input)
+	req := svc.UpdateComputeEnvironmentRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -782,7 +800,7 @@ func ExampleBatch_UpdateComputeEnvironment_shared00() {
 // To update a job queue
 //
 // This example disables a job queue so that it can be deleted.
-func ExampleBatch_UpdateJobQueue_shared00() {
+func ExampleBatch_UpdateJobQueueRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -794,7 +812,8 @@ func ExampleBatch_UpdateJobQueue_shared00() {
 		State:    batch.JQStateDisabled,
 	}
 
-	result, err := svc.UpdateJobQueue(input)
+	req := svc.UpdateJobQueueRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

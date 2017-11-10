@@ -14,29 +14,36 @@ import (
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws.Request" representing the
-// client's request for the AddTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddTagsRequest is a API request type for the AddTags API operation.
+type AddTagsRequest struct {
+	*aws.Request
+	Input *AddTagsInput
+}
+
+// Send marshals and sends the AddTags API request.
+func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsOutput), nil
+}
+
+// AddTagsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTags for more information on using the AddTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive
+// key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging
+// Amazon Elasticsearch Service Domains for more information. (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging)
 //
 //    // Example sending a request using the AddTagsRequest method.
-//    req, resp := client.AddTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
@@ -47,89 +54,44 @@ func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) (req *aws.Req
 		input = &AddTagsInput{}
 	}
 
-	output = &AddTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AddTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// AddTags API operation for Amazon Elasticsearch Service.
-//
-// Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive
-// key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging
-// Amazon Elasticsearch Service Domains for more information. (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging)
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation AddTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An exception for trying to create more than allowed resources or sub-resources.
-//   Gives http status code of 409.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-func (c *ElasticsearchService) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	return out, req.Send()
-}
-
-// AddTagsWithContext is the same as AddTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
-	req, out := c.AddTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return AddTagsRequest{Request: req, Input: input}
 }
 
 const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 
-// CreateElasticsearchDomainRequest generates a "aws.Request" representing the
-// client's request for the CreateElasticsearchDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateElasticsearchDomainRequest is a API request type for the CreateElasticsearchDomain API operation.
+type CreateElasticsearchDomainRequest struct {
+	*aws.Request
+	Input *CreateElasticsearchDomainInput
+}
+
+// Send marshals and sends the CreateElasticsearchDomain API request.
+func (r *CreateElasticsearchDomainRequest) Send() (*CreateElasticsearchDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateElasticsearchDomainOutput), nil
+}
+
+// CreateElasticsearchDomainRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateElasticsearchDomain for more information on using the CreateElasticsearchDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch
+// Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
+// in the Amazon Elasticsearch Service Developer Guide.
 //
 //    // Example sending a request using the CreateElasticsearchDomainRequest method.
-//    req, resp := client.CreateElasticsearchDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateElasticsearchDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateElasticsearchDomainInput) (req *aws.Request, output *CreateElasticsearchDomainOutput) {
+func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateElasticsearchDomainInput) CreateElasticsearchDomainRequest {
 	op := &aws.Operation{
 		Name:       opCreateElasticsearchDomain,
 		HTTPMethod: "POST",
@@ -140,99 +102,41 @@ func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateEla
 		input = &CreateElasticsearchDomainInput{}
 	}
 
-	output = &CreateElasticsearchDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateElasticsearchDomain API operation for Amazon Elasticsearch Service.
-//
-// Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch
-// Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
-// in the Amazon Elasticsearch Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation CreateElasticsearchDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeDisabledOperationException "DisabledOperationException"
-//   An error occured because the client wanted to access a not supported operation.
-//   Gives http status code of 409.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeInvalidTypeException "InvalidTypeException"
-//   An exception for trying to create or access sub-resource that is either invalid
-//   or not supported. Gives http status code of 409.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An exception for trying to create more than allowed resources or sub-resources.
-//   Gives http status code of 409.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   An exception for creating a resource that already exists. Gives http status
-//   code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) CreateElasticsearchDomain(input *CreateElasticsearchDomainInput) (*CreateElasticsearchDomainOutput, error) {
-	req, out := c.CreateElasticsearchDomainRequest(input)
-	return out, req.Send()
-}
-
-// CreateElasticsearchDomainWithContext is the same as CreateElasticsearchDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateElasticsearchDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) CreateElasticsearchDomainWithContext(ctx aws.Context, input *CreateElasticsearchDomainInput, opts ...aws.Option) (*CreateElasticsearchDomainOutput, error) {
-	req, out := c.CreateElasticsearchDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateElasticsearchDomainOutput{})
+	return CreateElasticsearchDomainRequest{Request: req, Input: input}
 }
 
 const opDeleteElasticsearchDomain = "DeleteElasticsearchDomain"
 
-// DeleteElasticsearchDomainRequest generates a "aws.Request" representing the
-// client's request for the DeleteElasticsearchDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteElasticsearchDomainRequest is a API request type for the DeleteElasticsearchDomain API operation.
+type DeleteElasticsearchDomainRequest struct {
+	*aws.Request
+	Input *DeleteElasticsearchDomainInput
+}
+
+// Send marshals and sends the DeleteElasticsearchDomain API request.
+func (r *DeleteElasticsearchDomainRequest) Send() (*DeleteElasticsearchDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteElasticsearchDomainOutput), nil
+}
+
+// DeleteElasticsearchDomainRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteElasticsearchDomain for more information on using the DeleteElasticsearchDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Permanently deletes the specified Elasticsearch domain and all of its data.
+// Once a domain is deleted, it cannot be recovered.
 //
 //    // Example sending a request using the DeleteElasticsearchDomainRequest method.
-//    req, resp := client.DeleteElasticsearchDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteElasticsearchDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteElasticsearchDomainInput) (req *aws.Request, output *DeleteElasticsearchDomainOutput) {
+func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteElasticsearchDomainInput) DeleteElasticsearchDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteElasticsearchDomain,
 		HTTPMethod: "DELETE",
@@ -243,86 +147,41 @@ func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteEla
 		input = &DeleteElasticsearchDomainInput{}
 	}
 
-	output = &DeleteElasticsearchDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteElasticsearchDomain API operation for Amazon Elasticsearch Service.
-//
-// Permanently deletes the specified Elasticsearch domain and all of its data.
-// Once a domain is deleted, it cannot be recovered.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation DeleteElasticsearchDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) DeleteElasticsearchDomain(input *DeleteElasticsearchDomainInput) (*DeleteElasticsearchDomainOutput, error) {
-	req, out := c.DeleteElasticsearchDomainRequest(input)
-	return out, req.Send()
-}
-
-// DeleteElasticsearchDomainWithContext is the same as DeleteElasticsearchDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteElasticsearchDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) DeleteElasticsearchDomainWithContext(ctx aws.Context, input *DeleteElasticsearchDomainInput, opts ...aws.Option) (*DeleteElasticsearchDomainOutput, error) {
-	req, out := c.DeleteElasticsearchDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteElasticsearchDomainOutput{})
+	return DeleteElasticsearchDomainRequest{Request: req, Input: input}
 }
 
 const opDescribeElasticsearchDomain = "DescribeElasticsearchDomain"
 
-// DescribeElasticsearchDomainRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticsearchDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeElasticsearchDomainRequest is a API request type for the DescribeElasticsearchDomain API operation.
+type DescribeElasticsearchDomainRequest struct {
+	*aws.Request
+	Input *DescribeElasticsearchDomainInput
+}
+
+// Send marshals and sends the DescribeElasticsearchDomain API request.
+func (r *DescribeElasticsearchDomainRequest) Send() (*DescribeElasticsearchDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticsearchDomainOutput), nil
+}
+
+// DescribeElasticsearchDomainRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticsearchDomain for more information on using the DescribeElasticsearchDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns domain configuration information about the specified Elasticsearch
+// domain, including the domain ID, domain endpoint, and domain ARN.
 //
 //    // Example sending a request using the DescribeElasticsearchDomainRequest method.
-//    req, resp := client.DescribeElasticsearchDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeElasticsearchDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *DescribeElasticsearchDomainInput) (req *aws.Request, output *DescribeElasticsearchDomainOutput) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *DescribeElasticsearchDomainInput) DescribeElasticsearchDomainRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomain,
 		HTTPMethod: "GET",
@@ -333,86 +192,42 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *Describ
 		input = &DescribeElasticsearchDomainInput{}
 	}
 
-	output = &DescribeElasticsearchDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeElasticsearchDomain API operation for Amazon Elasticsearch Service.
-//
-// Returns domain configuration information about the specified Elasticsearch
-// domain, including the domain ID, domain endpoint, and domain ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation DescribeElasticsearchDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) DescribeElasticsearchDomain(input *DescribeElasticsearchDomainInput) (*DescribeElasticsearchDomainOutput, error) {
-	req, out := c.DescribeElasticsearchDomainRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticsearchDomainWithContext is the same as DescribeElasticsearchDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticsearchDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainWithContext(ctx aws.Context, input *DescribeElasticsearchDomainInput, opts ...aws.Option) (*DescribeElasticsearchDomainOutput, error) {
-	req, out := c.DescribeElasticsearchDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeElasticsearchDomainOutput{})
+	return DescribeElasticsearchDomainRequest{Request: req, Input: input}
 }
 
 const opDescribeElasticsearchDomainConfig = "DescribeElasticsearchDomainConfig"
 
-// DescribeElasticsearchDomainConfigRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticsearchDomainConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeElasticsearchDomainConfigRequest is a API request type for the DescribeElasticsearchDomainConfig API operation.
+type DescribeElasticsearchDomainConfigRequest struct {
+	*aws.Request
+	Input *DescribeElasticsearchDomainConfigInput
+}
+
+// Send marshals and sends the DescribeElasticsearchDomainConfig API request.
+func (r *DescribeElasticsearchDomainConfigRequest) Send() (*DescribeElasticsearchDomainConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticsearchDomainConfigOutput), nil
+}
+
+// DescribeElasticsearchDomainConfigRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticsearchDomainConfig for more information on using the DescribeElasticsearchDomainConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Provides cluster configuration information about the specified Elasticsearch
+// domain, such as the state, creation date, update version, and update date
+// for cluster options.
 //
 //    // Example sending a request using the DescribeElasticsearchDomainConfigRequest method.
-//    req, resp := client.DescribeElasticsearchDomainConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeElasticsearchDomainConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *DescribeElasticsearchDomainConfigInput) (req *aws.Request, output *DescribeElasticsearchDomainConfigOutput) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *DescribeElasticsearchDomainConfigInput) DescribeElasticsearchDomainConfigRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomainConfig,
 		HTTPMethod: "GET",
@@ -423,87 +238,41 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *D
 		input = &DescribeElasticsearchDomainConfigInput{}
 	}
 
-	output = &DescribeElasticsearchDomainConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeElasticsearchDomainConfig API operation for Amazon Elasticsearch Service.
-//
-// Provides cluster configuration information about the specified Elasticsearch
-// domain, such as the state, creation date, update version, and update date
-// for cluster options.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation DescribeElasticsearchDomainConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) DescribeElasticsearchDomainConfig(input *DescribeElasticsearchDomainConfigInput) (*DescribeElasticsearchDomainConfigOutput, error) {
-	req, out := c.DescribeElasticsearchDomainConfigRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticsearchDomainConfigWithContext is the same as DescribeElasticsearchDomainConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticsearchDomainConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainConfigWithContext(ctx aws.Context, input *DescribeElasticsearchDomainConfigInput, opts ...aws.Option) (*DescribeElasticsearchDomainConfigOutput, error) {
-	req, out := c.DescribeElasticsearchDomainConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeElasticsearchDomainConfigOutput{})
+	return DescribeElasticsearchDomainConfigRequest{Request: req, Input: input}
 }
 
 const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 
-// DescribeElasticsearchDomainsRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticsearchDomains operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeElasticsearchDomainsRequest is a API request type for the DescribeElasticsearchDomains API operation.
+type DescribeElasticsearchDomainsRequest struct {
+	*aws.Request
+	Input *DescribeElasticsearchDomainsInput
+}
+
+// Send marshals and sends the DescribeElasticsearchDomains API request.
+func (r *DescribeElasticsearchDomainsRequest) Send() (*DescribeElasticsearchDomainsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticsearchDomainsOutput), nil
+}
+
+// DescribeElasticsearchDomainsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticsearchDomains for more information on using the DescribeElasticsearchDomains
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns domain configuration information about the specified Elasticsearch
+// domains, including the domain ID, domain endpoint, and domain ARN.
 //
 //    // Example sending a request using the DescribeElasticsearchDomainsRequest method.
-//    req, resp := client.DescribeElasticsearchDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeElasticsearchDomainsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearchDomainsInput) (req *aws.Request, output *DescribeElasticsearchDomainsOutput) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomains,
 		HTTPMethod: "POST",
@@ -514,82 +283,42 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *Descri
 		input = &DescribeElasticsearchDomainsInput{}
 	}
 
-	output = &DescribeElasticsearchDomainsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeElasticsearchDomains API operation for Amazon Elasticsearch Service.
-//
-// Returns domain configuration information about the specified Elasticsearch
-// domains, including the domain ID, domain endpoint, and domain ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation DescribeElasticsearchDomains for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) DescribeElasticsearchDomains(input *DescribeElasticsearchDomainsInput) (*DescribeElasticsearchDomainsOutput, error) {
-	req, out := c.DescribeElasticsearchDomainsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticsearchDomainsWithContext is the same as DescribeElasticsearchDomains with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticsearchDomains for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainsWithContext(ctx aws.Context, input *DescribeElasticsearchDomainsInput, opts ...aws.Option) (*DescribeElasticsearchDomainsOutput, error) {
-	req, out := c.DescribeElasticsearchDomainsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeElasticsearchDomainsOutput{})
+	return DescribeElasticsearchDomainsRequest{Request: req, Input: input}
 }
 
 const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstanceTypeLimits"
 
-// DescribeElasticsearchInstanceTypeLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticsearchInstanceTypeLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeElasticsearchInstanceTypeLimitsRequest is a API request type for the DescribeElasticsearchInstanceTypeLimits API operation.
+type DescribeElasticsearchInstanceTypeLimitsRequest struct {
+	*aws.Request
+	Input *DescribeElasticsearchInstanceTypeLimitsInput
+}
+
+// Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
+func (r *DescribeElasticsearchInstanceTypeLimitsRequest) Send() (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticsearchInstanceTypeLimitsOutput), nil
+}
+
+// DescribeElasticsearchInstanceTypeLimitsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticsearchInstanceTypeLimits for more information on using the DescribeElasticsearchInstanceTypeLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion.
+// When modifying existing Domain, specify the DomainName to know what Limits
+// are supported for modifying.
 //
 //    // Example sending a request using the DescribeElasticsearchInstanceTypeLimitsRequest method.
-//    req, resp := client.DescribeElasticsearchInstanceTypeLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeElasticsearchInstanceTypeLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeElasticsearchInstanceTypeLimitsInput) (req *aws.Request, output *DescribeElasticsearchInstanceTypeLimitsOutput) {
+func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeElasticsearchInstanceTypeLimits,
 		HTTPMethod: "GET",
@@ -600,95 +329,41 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(in
 		input = &DescribeElasticsearchInstanceTypeLimitsInput{}
 	}
 
-	output = &DescribeElasticsearchInstanceTypeLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeElasticsearchInstanceTypeLimits API operation for Amazon Elasticsearch Service.
-//
-// Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion.
-// When modifying existing Domain, specify the DomainName to know what Limits
-// are supported for modifying.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation DescribeElasticsearchInstanceTypeLimits for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeInvalidTypeException "InvalidTypeException"
-//   An exception for trying to create or access sub-resource that is either invalid
-//   or not supported. Gives http status code of 409.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An exception for trying to create more than allowed resources or sub-resources.
-//   Gives http status code of 409.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimits(input *DescribeElasticsearchInstanceTypeLimitsInput) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
-	req, out := c.DescribeElasticsearchInstanceTypeLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticsearchInstanceTypeLimitsWithContext is the same as DescribeElasticsearchInstanceTypeLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticsearchInstanceTypeLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsWithContext(ctx aws.Context, input *DescribeElasticsearchInstanceTypeLimitsInput, opts ...aws.Option) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
-	req, out := c.DescribeElasticsearchInstanceTypeLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeElasticsearchInstanceTypeLimitsOutput{})
+	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input}
 }
 
 const opListDomainNames = "ListDomainNames"
 
-// ListDomainNamesRequest generates a "aws.Request" representing the
-// client's request for the ListDomainNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDomainNamesRequest is a API request type for the ListDomainNames API operation.
+type ListDomainNamesRequest struct {
+	*aws.Request
+	Input *ListDomainNamesInput
+}
+
+// Send marshals and sends the ListDomainNames API request.
+func (r *ListDomainNamesRequest) Send() (*ListDomainNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDomainNamesOutput), nil
+}
+
+// ListDomainNamesRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDomainNames for more information on using the ListDomainNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the name of all Elasticsearch domains owned by the current user's
+// account.
 //
 //    // Example sending a request using the ListDomainNamesRequest method.
-//    req, resp := client.ListDomainNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDomainNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInput) (req *aws.Request, output *ListDomainNamesOutput) {
+func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInput) ListDomainNamesRequest {
 	op := &aws.Operation{
 		Name:       opListDomainNames,
 		HTTPMethod: "GET",
@@ -699,77 +374,40 @@ func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInpu
 		input = &ListDomainNamesInput{}
 	}
 
-	output = &ListDomainNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDomainNames API operation for Amazon Elasticsearch Service.
-//
-// Returns the name of all Elasticsearch domains owned by the current user's
-// account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation ListDomainNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) ListDomainNames(input *ListDomainNamesInput) (*ListDomainNamesOutput, error) {
-	req, out := c.ListDomainNamesRequest(input)
-	return out, req.Send()
-}
-
-// ListDomainNamesWithContext is the same as ListDomainNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDomainNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...aws.Option) (*ListDomainNamesOutput, error) {
-	req, out := c.ListDomainNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDomainNamesOutput{})
+	return ListDomainNamesRequest{Request: req, Input: input}
 }
 
 const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 
-// ListElasticsearchInstanceTypesRequest generates a "aws.Request" representing the
-// client's request for the ListElasticsearchInstanceTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListElasticsearchInstanceTypesRequest is a API request type for the ListElasticsearchInstanceTypes API operation.
+type ListElasticsearchInstanceTypesRequest struct {
+	*aws.Request
+	Input *ListElasticsearchInstanceTypesInput
+}
+
+// Send marshals and sends the ListElasticsearchInstanceTypes API request.
+func (r *ListElasticsearchInstanceTypesRequest) Send() (*ListElasticsearchInstanceTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListElasticsearchInstanceTypesOutput), nil
+}
+
+// ListElasticsearchInstanceTypesRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListElasticsearchInstanceTypes for more information on using the ListElasticsearchInstanceTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all Elasticsearch instance types that are supported for given ElasticsearchVersion
 //
 //    // Example sending a request using the ListElasticsearchInstanceTypesRequest method.
-//    req, resp := client.ListElasticsearchInstanceTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListElasticsearchInstanceTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchInstanceTypesInput) (req *aws.Request, output *ListElasticsearchInstanceTypesOutput) {
+func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest {
 	op := &aws.Operation{
 		Name:       opListElasticsearchInstanceTypes,
 		HTTPMethod: "GET",
@@ -786,58 +424,8 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 		input = &ListElasticsearchInstanceTypesInput{}
 	}
 
-	output = &ListElasticsearchInstanceTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListElasticsearchInstanceTypes API operation for Amazon Elasticsearch Service.
-//
-// List all Elasticsearch instance types that are supported for given ElasticsearchVersion
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation ListElasticsearchInstanceTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) ListElasticsearchInstanceTypes(input *ListElasticsearchInstanceTypesInput) (*ListElasticsearchInstanceTypesOutput, error) {
-	req, out := c.ListElasticsearchInstanceTypesRequest(input)
-	return out, req.Send()
-}
-
-// ListElasticsearchInstanceTypesWithContext is the same as ListElasticsearchInstanceTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListElasticsearchInstanceTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, opts ...aws.Option) (*ListElasticsearchInstanceTypesOutput, error) {
-	req, out := c.ListElasticsearchInstanceTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListElasticsearchInstanceTypesOutput{})
+	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input}
 }
 
 // ListElasticsearchInstanceTypesPages iterates over the pages of a ListElasticsearchInstanceTypes operation,
@@ -876,10 +464,10 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ct
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListElasticsearchInstanceTypesRequest(inCpy)
+			req := c.ListElasticsearchInstanceTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -892,29 +480,34 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ct
 
 const opListElasticsearchVersions = "ListElasticsearchVersions"
 
-// ListElasticsearchVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListElasticsearchVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListElasticsearchVersionsRequest is a API request type for the ListElasticsearchVersions API operation.
+type ListElasticsearchVersionsRequest struct {
+	*aws.Request
+	Input *ListElasticsearchVersionsInput
+}
+
+// Send marshals and sends the ListElasticsearchVersions API request.
+func (r *ListElasticsearchVersionsRequest) Send() (*ListElasticsearchVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListElasticsearchVersionsOutput), nil
+}
+
+// ListElasticsearchVersionsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListElasticsearchVersions for more information on using the ListElasticsearchVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List all supported Elasticsearch versions
 //
 //    // Example sending a request using the ListElasticsearchVersionsRequest method.
-//    req, resp := client.ListElasticsearchVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListElasticsearchVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElasticsearchVersionsInput) (req *aws.Request, output *ListElasticsearchVersionsOutput) {
+func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListElasticsearchVersions,
 		HTTPMethod: "GET",
@@ -931,58 +524,8 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 		input = &ListElasticsearchVersionsInput{}
 	}
 
-	output = &ListElasticsearchVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListElasticsearchVersions API operation for Amazon Elasticsearch Service.
-//
-// List all supported Elasticsearch versions
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation ListElasticsearchVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) ListElasticsearchVersions(input *ListElasticsearchVersionsInput) (*ListElasticsearchVersionsOutput, error) {
-	req, out := c.ListElasticsearchVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListElasticsearchVersionsWithContext is the same as ListElasticsearchVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListElasticsearchVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchVersionsWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, opts ...aws.Option) (*ListElasticsearchVersionsOutput, error) {
-	req, out := c.ListElasticsearchVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListElasticsearchVersionsOutput{})
+	return ListElasticsearchVersionsRequest{Request: req, Input: input}
 }
 
 // ListElasticsearchVersionsPages iterates over the pages of a ListElasticsearchVersions operation,
@@ -1021,10 +564,10 @@ func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListElasticsearchVersionsRequest(inCpy)
+			req := c.ListElasticsearchVersionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1037,29 +580,34 @@ func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all tags for the given Elasticsearch domain.
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "GET",
@@ -1070,85 +618,40 @@ func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) (req *aws.R
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for Amazon Elasticsearch Service.
-//
-// Returns all tags for the given Elasticsearch domain.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-func (c *ElasticsearchService) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws.Request" representing the
-// client's request for the RemoveTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsRequest is a API request type for the RemoveTags API operation.
+type RemoveTagsRequest struct {
+	*aws.Request
+	Input *RemoveTagsInput
+}
+
+// Send marshals and sends the RemoveTags API request.
+func (r *RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsOutput), nil
+}
+
+// RemoveTagsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTags for more information on using the RemoveTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the specified set of tags from the specified Elasticsearch domain.
 //
 //    // Example sending a request using the RemoveTagsRequest method.
-//    req, resp := client.RemoveTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
@@ -1159,83 +662,43 @@ func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) (req *a
 		input = &RemoveTagsInput{}
 	}
 
-	output = &RemoveTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RemoveTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RemoveTags API operation for Amazon Elasticsearch Service.
-//
-// Removes the specified set of tags from the specified Elasticsearch domain.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation RemoveTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-func (c *ElasticsearchService) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsWithContext is the same as RemoveTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
-	req, out := c.RemoveTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RemoveTagsRequest{Request: req, Input: input}
 }
 
 const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 
-// UpdateElasticsearchDomainConfigRequest generates a "aws.Request" representing the
-// client's request for the UpdateElasticsearchDomainConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateElasticsearchDomainConfigRequest is a API request type for the UpdateElasticsearchDomainConfig API operation.
+type UpdateElasticsearchDomainConfigRequest struct {
+	*aws.Request
+	Input *UpdateElasticsearchDomainConfigInput
+}
+
+// Send marshals and sends the UpdateElasticsearchDomainConfig API request.
+func (r *UpdateElasticsearchDomainConfigRequest) Send() (*UpdateElasticsearchDomainConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateElasticsearchDomainConfigOutput), nil
+}
+
+// UpdateElasticsearchDomainConfigRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateElasticsearchDomainConfig for more information on using the UpdateElasticsearchDomainConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Modifies the cluster configuration of the specified Elasticsearch domain,
+// setting as setting the instance type and the number of instances.
 //
 //    // Example sending a request using the UpdateElasticsearchDomainConfigRequest method.
-//    req, resp := client.UpdateElasticsearchDomainConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateElasticsearchDomainConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *UpdateElasticsearchDomainConfigInput) (req *aws.Request, output *UpdateElasticsearchDomainConfigOutput) {
+func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *UpdateElasticsearchDomainConfigInput) UpdateElasticsearchDomainConfigRequest {
 	op := &aws.Operation{
 		Name:       opUpdateElasticsearchDomainConfig,
 		HTTPMethod: "POST",
@@ -1246,67 +709,8 @@ func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *Upd
 		input = &UpdateElasticsearchDomainConfigInput{}
 	}
 
-	output = &UpdateElasticsearchDomainConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateElasticsearchDomainConfig API operation for Amazon Elasticsearch Service.
-//
-// Modifies the cluster configuration of the specified Elasticsearch domain,
-// setting as setting the instance type and the number of instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elasticsearch Service's
-// API operation UpdateElasticsearchDomainConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBaseException "BaseException"
-//   An error occurred while processing the request.
-//
-//   * ErrCodeInternalException "InternalException"
-//   The request processing has failed because of an unknown error, exception
-//   or failure (the failure is internal to the service) . Gives http status code
-//   of 500.
-//
-//   * ErrCodeInvalidTypeException "InvalidTypeException"
-//   An exception for trying to create or access sub-resource that is either invalid
-//   or not supported. Gives http status code of 409.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   An exception for trying to create more than allowed resources or sub-resources.
-//   Gives http status code of 409.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   An exception for accessing or deleting a resource that does not exist. Gives
-//   http status code of 400.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   An exception for missing / invalid input fields. Gives http status code of
-//   400.
-//
-func (c *ElasticsearchService) UpdateElasticsearchDomainConfig(input *UpdateElasticsearchDomainConfigInput) (*UpdateElasticsearchDomainConfigOutput, error) {
-	req, out := c.UpdateElasticsearchDomainConfigRequest(input)
-	return out, req.Send()
-}
-
-// UpdateElasticsearchDomainConfigWithContext is the same as UpdateElasticsearchDomainConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateElasticsearchDomainConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) UpdateElasticsearchDomainConfigWithContext(ctx aws.Context, input *UpdateElasticsearchDomainConfigInput, opts ...aws.Option) (*UpdateElasticsearchDomainConfigOutput, error) {
-	req, out := c.UpdateElasticsearchDomainConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateElasticsearchDomainConfigOutput{})
+	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input}
 }
 
 // The configured access rules for the domain's document and search endpoints,

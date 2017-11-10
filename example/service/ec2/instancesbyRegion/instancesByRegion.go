@@ -60,7 +60,8 @@ func main() {
 			},
 		}
 
-		result, err := ec2Svc.DescribeInstances(params)
+		req := ec2Svc.DescribeInstancesRequest(params)
+		result, err := req.Send()
 		if err != nil {
 			exitErrorf("failed to describe instances, %v", err)
 		} else {
@@ -88,7 +89,8 @@ func fetchRegion() ([]string, error) {
 	}
 
 	svc := ec2.New(cfg)
-	awsRegions, err := svc.DescribeRegions(&ec2.DescribeRegionsInput{})
+	req := svc.DescribeRegionsRequest(&ec2.DescribeRegionsInput{})
+	awsRegions, err := req.Send()
 	if err != nil {
 		return nil, err
 	}

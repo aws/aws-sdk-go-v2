@@ -13,49 +13,24 @@ import (
 
 const opAssignInstance = "AssignInstance"
 
-// AssignInstanceRequest generates a "aws.Request" representing the
-// client's request for the AssignInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssignInstance for more information on using the AssignInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssignInstanceRequest method.
-//    req, resp := client.AssignInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstance
-func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) (req *aws.Request, output *AssignInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opAssignInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssignInstanceInput{}
-	}
-
-	output = &AssignInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// AssignInstanceRequest is a API request type for the AssignInstance API operation.
+type AssignInstanceRequest struct {
+	*aws.Request
+	Input *AssignInstanceInput
 }
 
-// AssignInstance API operation for AWS OpsWorks.
+// Send marshals and sends the AssignInstance API request.
+func (r *AssignInstanceRequest) Send() (*AssignInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssignInstanceOutput), nil
+}
+
+// AssignInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Assign a registered instance to a layer.
 //
@@ -71,87 +46,51 @@ func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) (req *aws.R
 // policy that explicitly grants permissions. For more information on user permissions,
 // see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation AssignInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstance
-func (c *OpsWorks) AssignInstance(input *AssignInstanceInput) (*AssignInstanceOutput, error) {
-	req, out := c.AssignInstanceRequest(input)
-	return out, req.Send()
-}
-
-// AssignInstanceWithContext is the same as AssignInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssignInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) AssignInstanceWithContext(ctx aws.Context, input *AssignInstanceInput, opts ...aws.Option) (*AssignInstanceOutput, error) {
-	req, out := c.AssignInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssignVolume = "AssignVolume"
-
-// AssignVolumeRequest generates a "aws.Request" representing the
-// client's request for the AssignVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssignVolume for more information on using the AssignVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssignVolumeRequest method.
-//    req, resp := client.AssignVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssignInstanceRequest method.
+//    req := client.AssignInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolume
-func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) (req *aws.Request, output *AssignVolumeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstance
+func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) AssignInstanceRequest {
 	op := &aws.Operation{
-		Name:       opAssignVolume,
+		Name:       opAssignInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssignVolumeInput{}
+		input = &AssignInstanceInput{}
 	}
 
-	output = &AssignVolumeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AssignInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AssignInstanceRequest{Request: req, Input: input}
 }
 
-// AssignVolume API operation for AWS OpsWorks.
+const opAssignVolume = "AssignVolume"
+
+// AssignVolumeRequest is a API request type for the AssignVolume API operation.
+type AssignVolumeRequest struct {
+	*aws.Request
+	Input *AssignVolumeInput
+}
+
+// Send marshals and sends the AssignVolume API request.
+func (r *AssignVolumeRequest) Send() (*AssignVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssignVolumeOutput), nil
+}
+
+// AssignVolumeRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Assigns one of the stack's registered Amazon EBS volumes to a specified instance.
 // The volume must first be registered with the stack by calling RegisterVolume.
@@ -164,87 +103,51 @@ func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) (req *aws.Reque
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation AssignVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolume
-func (c *OpsWorks) AssignVolume(input *AssignVolumeInput) (*AssignVolumeOutput, error) {
-	req, out := c.AssignVolumeRequest(input)
-	return out, req.Send()
-}
-
-// AssignVolumeWithContext is the same as AssignVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssignVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) AssignVolumeWithContext(ctx aws.Context, input *AssignVolumeInput, opts ...aws.Option) (*AssignVolumeOutput, error) {
-	req, out := c.AssignVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssociateElasticIp = "AssociateElasticIp"
-
-// AssociateElasticIpRequest generates a "aws.Request" representing the
-// client's request for the AssociateElasticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateElasticIp for more information on using the AssociateElasticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateElasticIpRequest method.
-//    req, resp := client.AssociateElasticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssignVolumeRequest method.
+//    req := client.AssignVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIp
-func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) (req *aws.Request, output *AssociateElasticIpOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolume
+func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) AssignVolumeRequest {
 	op := &aws.Operation{
-		Name:       opAssociateElasticIp,
+		Name:       opAssignVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssociateElasticIpInput{}
+		input = &AssignVolumeInput{}
 	}
 
-	output = &AssociateElasticIpOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AssignVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AssignVolumeRequest{Request: req, Input: input}
 }
 
-// AssociateElasticIp API operation for AWS OpsWorks.
+const opAssociateElasticIp = "AssociateElasticIp"
+
+// AssociateElasticIpRequest is a API request type for the AssociateElasticIp API operation.
+type AssociateElasticIpRequest struct {
+	*aws.Request
+	Input *AssociateElasticIpInput
+}
+
+// Send marshals and sends the AssociateElasticIp API request.
+func (r *AssociateElasticIpRequest) Send() (*AssociateElasticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateElasticIpOutput), nil
+}
+
+// AssociateElasticIpRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Associates one of the stack's registered Elastic IP addresses with a specified
 // instance. The address must first be registered with the stack by calling
@@ -255,87 +158,51 @@ func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) (re
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation AssociateElasticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIp
-func (c *OpsWorks) AssociateElasticIp(input *AssociateElasticIpInput) (*AssociateElasticIpOutput, error) {
-	req, out := c.AssociateElasticIpRequest(input)
-	return out, req.Send()
-}
-
-// AssociateElasticIpWithContext is the same as AssociateElasticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateElasticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) AssociateElasticIpWithContext(ctx aws.Context, input *AssociateElasticIpInput, opts ...aws.Option) (*AssociateElasticIpOutput, error) {
-	req, out := c.AssociateElasticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
-
-// AttachElasticLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the AttachElasticLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachElasticLoadBalancer for more information on using the AttachElasticLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AttachElasticLoadBalancerRequest method.
-//    req, resp := client.AttachElasticLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AssociateElasticIpRequest method.
+//    req := client.AssociateElasticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancer
-func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalancerInput) (req *aws.Request, output *AttachElasticLoadBalancerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIp
+func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) AssociateElasticIpRequest {
 	op := &aws.Operation{
-		Name:       opAttachElasticLoadBalancer,
+		Name:       opAssociateElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AttachElasticLoadBalancerInput{}
+		input = &AssociateElasticIpInput{}
 	}
 
-	output = &AttachElasticLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &AssociateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return AssociateElasticIpRequest{Request: req, Input: input}
 }
 
-// AttachElasticLoadBalancer API operation for AWS OpsWorks.
+const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
+
+// AttachElasticLoadBalancerRequest is a API request type for the AttachElasticLoadBalancer API operation.
+type AttachElasticLoadBalancerRequest struct {
+	*aws.Request
+	Input *AttachElasticLoadBalancerInput
+}
+
+// Send marshals and sends the AttachElasticLoadBalancer API request.
+func (r *AttachElasticLoadBalancerRequest) Send() (*AttachElasticLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachElasticLoadBalancerOutput), nil
+}
+
+// AttachElasticLoadBalancerRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Attaches an Elastic Load Balancing load balancer to a specified layer. AWS
 // OpsWorks Stacks does not support Application Load Balancer. You can only
@@ -351,69 +218,69 @@ func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBala
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation AttachElasticLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the AttachElasticLoadBalancerRequest method.
+//    req := client.AttachElasticLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancer
-func (c *OpsWorks) AttachElasticLoadBalancer(input *AttachElasticLoadBalancerInput) (*AttachElasticLoadBalancerOutput, error) {
-	req, out := c.AttachElasticLoadBalancerRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalancerInput) AttachElasticLoadBalancerRequest {
+	op := &aws.Operation{
+		Name:       opAttachElasticLoadBalancer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AttachElasticLoadBalancerWithContext is the same as AttachElasticLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachElasticLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) AttachElasticLoadBalancerWithContext(ctx aws.Context, input *AttachElasticLoadBalancerInput, opts ...aws.Option) (*AttachElasticLoadBalancerOutput, error) {
-	req, out := c.AttachElasticLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AttachElasticLoadBalancerInput{}
+	}
+
+	req := c.newRequest(op, input, &AttachElasticLoadBalancerOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return AttachElasticLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opCloneStack = "CloneStack"
 
-// CloneStackRequest generates a "aws.Request" representing the
-// client's request for the CloneStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CloneStackRequest is a API request type for the CloneStack API operation.
+type CloneStackRequest struct {
+	*aws.Request
+	Input *CloneStackInput
+}
+
+// Send marshals and sends the CloneStack API request.
+func (r *CloneStackRequest) Send() (*CloneStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CloneStackOutput), nil
+}
+
+// CloneStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a clone of a specified stack. For more information, see Clone a Stack
+// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html).
+// By default, all parameters are set to the values used by the parent stack.
 //
-// See CloneStack for more information on using the CloneStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information on user permissions,
+// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the CloneStackRequest method.
-//    req, resp := client.CloneStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CloneStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStack
-func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) (req *aws.Request, output *CloneStackOutput) {
+func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) CloneStackRequest {
 	op := &aws.Operation{
 		Name:       opCloneStack,
 		HTTPMethod: "POST",
@@ -424,84 +291,48 @@ func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) (req *aws.Request, 
 		input = &CloneStackInput{}
 	}
 
-	output = &CloneStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CloneStack API operation for AWS OpsWorks.
-//
-// Creates a clone of a specified stack. For more information, see Clone a Stack
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html).
-// By default, all parameters are set to the values used by the parent stack.
-//
-// Required Permissions: To use this action, an IAM user must have an attached
-// policy that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CloneStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStack
-func (c *OpsWorks) CloneStack(input *CloneStackInput) (*CloneStackOutput, error) {
-	req, out := c.CloneStackRequest(input)
-	return out, req.Send()
-}
-
-// CloneStackWithContext is the same as CloneStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CloneStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CloneStackWithContext(ctx aws.Context, input *CloneStackInput, opts ...aws.Option) (*CloneStackOutput, error) {
-	req, out := c.CloneStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CloneStackOutput{})
+	return CloneStackRequest{Request: req, Input: input}
 }
 
 const opCreateApp = "CreateApp"
 
-// CreateAppRequest generates a "aws.Request" representing the
-// client's request for the CreateApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateAppRequest is a API request type for the CreateApp API operation.
+type CreateAppRequest struct {
+	*aws.Request
+	Input *CreateAppInput
+}
+
+// Send marshals and sends the CreateApp API request.
+func (r *CreateAppRequest) Send() (*CreateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAppOutput), nil
+}
+
+// CreateAppRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates an app for a specified stack. For more information, see Creating
+// Apps (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html).
 //
-// See CreateApp for more information on using the CreateApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the CreateAppRequest method.
-//    req, resp := client.CreateAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateApp
-func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) (req *aws.Request, output *CreateAppOutput) {
+func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
@@ -512,100 +343,30 @@ func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) (req *aws.Request, ou
 		input = &CreateAppInput{}
 	}
 
-	output = &CreateAppOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateApp API operation for AWS OpsWorks.
-//
-// Creates an app for a specified stack. For more information, see Creating
-// Apps (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateApp
-func (c *OpsWorks) CreateApp(input *CreateAppInput) (*CreateAppOutput, error) {
-	req, out := c.CreateAppRequest(input)
-	return out, req.Send()
-}
-
-// CreateAppWithContext is the same as CreateApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...aws.Option) (*CreateAppOutput, error) {
-	req, out := c.CreateAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateAppOutput{})
+	return CreateAppRequest{Request: req, Input: input}
 }
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws.Request" representing the
-// client's request for the CreateDeployment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDeployment for more information on using the CreateDeployment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateDeploymentRequest method.
-//    req, resp := client.CreateDeploymentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeployment
-func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
-	op := &aws.Operation{
-		Name:       opCreateDeployment,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateDeploymentInput{}
-	}
-
-	output = &CreateDeploymentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateDeploymentRequest is a API request type for the CreateDeployment API operation.
+type CreateDeploymentRequest struct {
+	*aws.Request
+	Input *CreateDeploymentInput
 }
 
-// CreateDeployment API operation for AWS OpsWorks.
+// Send marshals and sends the CreateDeployment API request.
+func (r *CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDeploymentOutput), nil
+}
+
+// CreateDeploymentRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Runs deployment or stack commands. For more information, see Deploying Apps
 // (http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
@@ -616,69 +377,67 @@ func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) (req *a
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateDeployment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the CreateDeploymentRequest method.
+//    req := client.CreateDeploymentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeployment
-func (c *OpsWorks) CreateDeployment(input *CreateDeploymentInput) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) CreateDeploymentRequest {
+	op := &aws.Operation{
+		Name:       opCreateDeployment,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateDeploymentWithContext is the same as CreateDeployment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDeployment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
-	req, out := c.CreateDeploymentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateDeploymentInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateDeploymentOutput{})
+	return CreateDeploymentRequest{Request: req, Input: input}
 }
 
 const opCreateInstance = "CreateInstance"
 
-// CreateInstanceRequest generates a "aws.Request" representing the
-// client's request for the CreateInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInstanceRequest is a API request type for the CreateInstance API operation.
+type CreateInstanceRequest struct {
+	*aws.Request
+	Input *CreateInstanceInput
+}
+
+// Send marshals and sends the CreateInstance API request.
+func (r *CreateInstanceRequest) Send() (*CreateInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstanceOutput), nil
+}
+
+// CreateInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates an instance in a specified stack. For more information, see Adding
+// an Instance to a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
 //
-// See CreateInstance for more information on using the CreateInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the CreateInstanceRequest method.
-//    req, resp := client.CreateInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstance
-func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) (req *aws.Request, output *CreateInstanceOutput) {
+func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) CreateInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstance,
 		HTTPMethod: "POST",
@@ -689,100 +448,30 @@ func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) (req *aws.R
 		input = &CreateInstanceInput{}
 	}
 
-	output = &CreateInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInstance API operation for AWS OpsWorks.
-//
-// Creates an instance in a specified stack. For more information, see Adding
-// an Instance to a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstance
-func (c *OpsWorks) CreateInstance(input *CreateInstanceInput) (*CreateInstanceOutput, error) {
-	req, out := c.CreateInstanceRequest(input)
-	return out, req.Send()
-}
-
-// CreateInstanceWithContext is the same as CreateInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateInstanceWithContext(ctx aws.Context, input *CreateInstanceInput, opts ...aws.Option) (*CreateInstanceOutput, error) {
-	req, out := c.CreateInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInstanceOutput{})
+	return CreateInstanceRequest{Request: req, Input: input}
 }
 
 const opCreateLayer = "CreateLayer"
 
-// CreateLayerRequest generates a "aws.Request" representing the
-// client's request for the CreateLayer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLayer for more information on using the CreateLayer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLayerRequest method.
-//    req, resp := client.CreateLayerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayer
-func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) (req *aws.Request, output *CreateLayerOutput) {
-	op := &aws.Operation{
-		Name:       opCreateLayer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateLayerInput{}
-	}
-
-	output = &CreateLayerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateLayerRequest is a API request type for the CreateLayer API operation.
+type CreateLayerRequest struct {
+	*aws.Request
+	Input *CreateLayerInput
 }
 
-// CreateLayer API operation for AWS OpsWorks.
+// Send marshals and sends the CreateLayer API request.
+func (r *CreateLayerRequest) Send() (*CreateLayerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateLayerOutput), nil
+}
+
+// CreateLayerRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Creates a layer. For more information, see How to Create a Layer (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html).
 //
@@ -798,69 +487,65 @@ func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) (req *aws.Request
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateLayer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the CreateLayerRequest method.
+//    req := client.CreateLayerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayer
-func (c *OpsWorks) CreateLayer(input *CreateLayerInput) (*CreateLayerOutput, error) {
-	req, out := c.CreateLayerRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) CreateLayerRequest {
+	op := &aws.Operation{
+		Name:       opCreateLayer,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateLayerWithContext is the same as CreateLayer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLayer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateLayerWithContext(ctx aws.Context, input *CreateLayerInput, opts ...aws.Option) (*CreateLayerOutput, error) {
-	req, out := c.CreateLayerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateLayerInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateLayerOutput{})
+	return CreateLayerRequest{Request: req, Input: input}
 }
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws.Request" representing the
-// client's request for the CreateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStackRequest is a API request type for the CreateStack API operation.
+type CreateStackRequest struct {
+	*aws.Request
+	Input *CreateStackInput
+}
+
+// Send marshals and sends the CreateStack API request.
+func (r *CreateStackRequest) Send() (*CreateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStackOutput), nil
+}
+
+// CreateStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a new stack. For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html).
 //
-// See CreateStack for more information on using the CreateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information on user permissions,
+// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the CreateStackRequest method.
-//    req, resp := client.CreateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStack
-func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) CreateStackRequest {
 	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
@@ -871,79 +556,46 @@ func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) (req *aws.Request
 		input = &CreateStackInput{}
 	}
 
-	output = &CreateStackOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateStackOutput{})
+	return CreateStackRequest{Request: req, Input: input}
 }
 
-// CreateStack API operation for AWS OpsWorks.
+const opCreateUserProfile = "CreateUserProfile"
+
+// CreateUserProfileRequest is a API request type for the CreateUserProfile API operation.
+type CreateUserProfileRequest struct {
+	*aws.Request
+	Input *CreateUserProfileInput
+}
+
+// Send marshals and sends the CreateUserProfile API request.
+func (r *CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateUserProfileOutput), nil
+}
+
+// CreateUserProfileRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Creates a new stack. For more information, see Create a New Stack (http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html).
+// Creates a new user profile.
 //
 // Required Permissions: To use this action, an IAM user must have an attached
 // policy that explicitly grants permissions. For more information on user permissions,
 // see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStack
-func (c *OpsWorks) CreateStack(input *CreateStackInput) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	return out, req.Send()
-}
-
-// CreateStackWithContext is the same as CreateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
-	req, out := c.CreateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateUserProfile = "CreateUserProfile"
-
-// CreateUserProfileRequest generates a "aws.Request" representing the
-// client's request for the CreateUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateUserProfile for more information on using the CreateUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the CreateUserProfileRequest method.
-//    req, resp := client.CreateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfile
-func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) (req *aws.Request, output *CreateUserProfileOutput) {
+func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) CreateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateUserProfile,
 		HTTPMethod: "POST",
@@ -954,79 +606,47 @@ func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) (req 
 		input = &CreateUserProfileInput{}
 	}
 
-	output = &CreateUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateUserProfile API operation for AWS OpsWorks.
-//
-// Creates a new user profile.
-//
-// Required Permissions: To use this action, an IAM user must have an attached
-// policy that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation CreateUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfile
-func (c *OpsWorks) CreateUserProfile(input *CreateUserProfileInput) (*CreateUserProfileOutput, error) {
-	req, out := c.CreateUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// CreateUserProfileWithContext is the same as CreateUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...aws.Option) (*CreateUserProfileOutput, error) {
-	req, out := c.CreateUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateUserProfileOutput{})
+	return CreateUserProfileRequest{Request: req, Input: input}
 }
 
 const opDeleteApp = "DeleteApp"
 
-// DeleteAppRequest generates a "aws.Request" representing the
-// client's request for the DeleteApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAppRequest is a API request type for the DeleteApp API operation.
+type DeleteAppRequest struct {
+	*aws.Request
+	Input *DeleteAppInput
+}
+
+// Send marshals and sends the DeleteApp API request.
+func (r *DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAppOutput), nil
+}
+
+// DeleteAppRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a specified app.
 //
-// See DeleteApp for more information on using the DeleteApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DeleteAppRequest method.
-//    req, resp := client.DeleteAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteApp
-func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, output *DeleteAppOutput) {
+func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "POST",
@@ -1037,103 +657,32 @@ func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, ou
 		input = &DeleteAppInput{}
 	}
 
-	output = &DeleteAppOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteAppOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteApp API operation for AWS OpsWorks.
-//
-// Deletes a specified app.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeleteApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteApp
-func (c *OpsWorks) DeleteApp(input *DeleteAppInput) (*DeleteAppOutput, error) {
-	req, out := c.DeleteAppRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAppWithContext is the same as DeleteApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...aws.Option) (*DeleteAppOutput, error) {
-	req, out := c.DeleteAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteAppRequest{Request: req, Input: input}
 }
 
 const opDeleteInstance = "DeleteInstance"
 
-// DeleteInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeleteInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteInstance for more information on using the DeleteInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteInstanceRequest method.
-//    req, resp := client.DeleteInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstance
-func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.Request, output *DeleteInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteInstanceInput{}
-	}
-
-	output = &DeleteInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteInstanceRequest is a API request type for the DeleteInstance API operation.
+type DeleteInstanceRequest struct {
+	*aws.Request
+	Input *DeleteInstanceInput
 }
 
-// DeleteInstance API operation for AWS OpsWorks.
+// Send marshals and sends the DeleteInstance API request.
+func (r *DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInstanceOutput), nil
+}
+
+// DeleteInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Deletes a specified instance, which terminates the associated Amazon EC2
 // instance. You must stop an instance before you can delete it.
@@ -1145,87 +694,51 @@ func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.R
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeleteInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstance
-func (c *OpsWorks) DeleteInstance(input *DeleteInstanceInput) (*DeleteInstanceOutput, error) {
-	req, out := c.DeleteInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteInstanceWithContext is the same as DeleteInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...aws.Option) (*DeleteInstanceOutput, error) {
-	req, out := c.DeleteInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteLayer = "DeleteLayer"
-
-// DeleteLayerRequest generates a "aws.Request" representing the
-// client's request for the DeleteLayer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLayer for more information on using the DeleteLayer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteLayerRequest method.
-//    req, resp := client.DeleteLayerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteInstanceRequest method.
+//    req := client.DeleteInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayer
-func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) (req *aws.Request, output *DeleteLayerOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstance
+func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanceRequest {
 	op := &aws.Operation{
-		Name:       opDeleteLayer,
+		Name:       opDeleteInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteLayerInput{}
+		input = &DeleteInstanceInput{}
 	}
 
-	output = &DeleteLayerOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeleteInstanceRequest{Request: req, Input: input}
 }
 
-// DeleteLayer API operation for AWS OpsWorks.
+const opDeleteLayer = "DeleteLayer"
+
+// DeleteLayerRequest is a API request type for the DeleteLayer API operation.
+type DeleteLayerRequest struct {
+	*aws.Request
+	Input *DeleteLayerInput
+}
+
+// Send marshals and sends the DeleteLayer API request.
+func (r *DeleteLayerRequest) Send() (*DeleteLayerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteLayerOutput), nil
+}
+
+// DeleteLayerRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Deletes a specified layer. You must first stop and then delete all associated
 // instances or unassign registered instances. For more information, see How
@@ -1236,87 +749,51 @@ func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) (req *aws.Request
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeleteLayer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayer
-func (c *OpsWorks) DeleteLayer(input *DeleteLayerInput) (*DeleteLayerOutput, error) {
-	req, out := c.DeleteLayerRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLayerWithContext is the same as DeleteLayer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLayer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeleteLayerWithContext(ctx aws.Context, input *DeleteLayerInput, opts ...aws.Option) (*DeleteLayerOutput, error) {
-	req, out := c.DeleteLayerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteStack = "DeleteStack"
-
-// DeleteStackRequest generates a "aws.Request" representing the
-// client's request for the DeleteStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStack for more information on using the DeleteStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteStackRequest method.
-//    req, resp := client.DeleteStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteLayerRequest method.
+//    req := client.DeleteLayerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStack
-func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayer
+func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) DeleteLayerRequest {
 	op := &aws.Operation{
-		Name:       opDeleteStack,
+		Name:       opDeleteLayer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteStackInput{}
+		input = &DeleteLayerInput{}
 	}
 
-	output = &DeleteStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeleteLayerRequest{Request: req, Input: input}
 }
 
-// DeleteStack API operation for AWS OpsWorks.
+const opDeleteStack = "DeleteStack"
+
+// DeleteStackRequest is a API request type for the DeleteStack API operation.
+type DeleteStackRequest struct {
+	*aws.Request
+	Input *DeleteStackInput
+}
+
+// Send marshals and sends the DeleteStack API request.
+func (r *DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStackOutput), nil
+}
+
+// DeleteStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Deletes a specified stack. You must first delete all instances, layers, and
 // apps or deregister registered instances. For more information, see Shut Down
@@ -1327,69 +804,67 @@ func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeleteStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DeleteStackRequest method.
+//    req := client.DeleteStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStack
-func (c *OpsWorks) DeleteStack(input *DeleteStackInput) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) DeleteStackRequest {
+	op := &aws.Operation{
+		Name:       opDeleteStack,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteStackWithContext is the same as DeleteStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
-	req, out := c.DeleteStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteStackInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteStackOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteStackRequest{Request: req, Input: input}
 }
 
 const opDeleteUserProfile = "DeleteUserProfile"
 
-// DeleteUserProfileRequest generates a "aws.Request" representing the
-// client's request for the DeleteUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteUserProfileRequest is a API request type for the DeleteUserProfile API operation.
+type DeleteUserProfileRequest struct {
+	*aws.Request
+	Input *DeleteUserProfileInput
+}
+
+// Send marshals and sends the DeleteUserProfile API request.
+func (r *DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteUserProfileOutput), nil
+}
+
+// DeleteUserProfileRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a user profile.
 //
-// See DeleteUserProfile for more information on using the DeleteUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information on user permissions,
+// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DeleteUserProfileRequest method.
-//    req, resp := client.DeleteUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfile
-func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *aws.Request, output *DeleteUserProfileOutput) {
+func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) DeleteUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteUserProfile,
 		HTTPMethod: "POST",
@@ -1400,84 +875,50 @@ func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req 
 		input = &DeleteUserProfileInput{}
 	}
 
-	output = &DeleteUserProfileOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteUserProfile API operation for AWS OpsWorks.
-//
-// Deletes a user profile.
-//
-// Required Permissions: To use this action, an IAM user must have an attached
-// policy that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeleteUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfile
-func (c *OpsWorks) DeleteUserProfile(input *DeleteUserProfileInput) (*DeleteUserProfileOutput, error) {
-	req, out := c.DeleteUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// DeleteUserProfileWithContext is the same as DeleteUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...aws.Option) (*DeleteUserProfileOutput, error) {
-	req, out := c.DeleteUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteUserProfileRequest{Request: req, Input: input}
 }
 
 const opDeregisterEcsCluster = "DeregisterEcsCluster"
 
-// DeregisterEcsClusterRequest generates a "aws.Request" representing the
-// client's request for the DeregisterEcsCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterEcsClusterRequest is a API request type for the DeregisterEcsCluster API operation.
+type DeregisterEcsClusterRequest struct {
+	*aws.Request
+	Input *DeregisterEcsClusterInput
+}
+
+// Send marshals and sends the DeregisterEcsCluster API request.
+func (r *DeregisterEcsClusterRequest) Send() (*DeregisterEcsClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterEcsClusterOutput), nil
+}
+
+// DeregisterEcsClusterRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deregisters a specified Amazon ECS cluster from a stack. For more information,
+// see  Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete).
 //
-// See DeregisterEcsCluster for more information on using the DeregisterEcsCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+// (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DeregisterEcsClusterRequest method.
-//    req, resp := client.DeregisterEcsClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterEcsClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsCluster
-func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) (req *aws.Request, output *DeregisterEcsClusterOutput) {
+func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) DeregisterEcsClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterEcsCluster,
 		HTTPMethod: "POST",
@@ -1488,86 +929,50 @@ func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput)
 		input = &DeregisterEcsClusterInput{}
 	}
 
-	output = &DeregisterEcsClusterOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeregisterEcsClusterOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeregisterEcsCluster API operation for AWS OpsWorks.
-//
-// Deregisters a specified Amazon ECS cluster from a stack. For more information,
-// see  Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeregisterEcsCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsCluster
-func (c *OpsWorks) DeregisterEcsCluster(input *DeregisterEcsClusterInput) (*DeregisterEcsClusterOutput, error) {
-	req, out := c.DeregisterEcsClusterRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterEcsClusterWithContext is the same as DeregisterEcsCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterEcsCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeregisterEcsClusterWithContext(ctx aws.Context, input *DeregisterEcsClusterInput, opts ...aws.Option) (*DeregisterEcsClusterOutput, error) {
-	req, out := c.DeregisterEcsClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeregisterEcsClusterRequest{Request: req, Input: input}
 }
 
 const opDeregisterElasticIp = "DeregisterElasticIp"
 
-// DeregisterElasticIpRequest generates a "aws.Request" representing the
-// client's request for the DeregisterElasticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterElasticIpRequest is a API request type for the DeregisterElasticIp API operation.
+type DeregisterElasticIpRequest struct {
+	*aws.Request
+	Input *DeregisterElasticIpInput
+}
+
+// Send marshals and sends the DeregisterElasticIp API request.
+func (r *DeregisterElasticIpRequest) Send() (*DeregisterElasticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterElasticIpOutput), nil
+}
+
+// DeregisterElasticIpRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deregisters a specified Elastic IP address. The address can then be registered
+// by another stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
 //
-// See DeregisterElasticIp for more information on using the DeregisterElasticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DeregisterElasticIpRequest method.
-//    req, resp := client.DeregisterElasticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterElasticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIp
-func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) (req *aws.Request, output *DeregisterElasticIpOutput) {
+func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) DeregisterElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterElasticIp,
 		HTTPMethod: "POST",
@@ -1578,104 +983,32 @@ func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) (
 		input = &DeregisterElasticIpInput{}
 	}
 
-	output = &DeregisterElasticIpOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeregisterElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeregisterElasticIp API operation for AWS OpsWorks.
-//
-// Deregisters a specified Elastic IP address. The address can then be registered
-// by another stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeregisterElasticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIp
-func (c *OpsWorks) DeregisterElasticIp(input *DeregisterElasticIpInput) (*DeregisterElasticIpOutput, error) {
-	req, out := c.DeregisterElasticIpRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterElasticIpWithContext is the same as DeregisterElasticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterElasticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeregisterElasticIpWithContext(ctx aws.Context, input *DeregisterElasticIpInput, opts ...aws.Option) (*DeregisterElasticIpOutput, error) {
-	req, out := c.DeregisterElasticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeregisterElasticIpRequest{Request: req, Input: input}
 }
 
 const opDeregisterInstance = "DeregisterInstance"
 
-// DeregisterInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeregisterInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterInstance for more information on using the DeregisterInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeregisterInstanceRequest method.
-//    req, resp := client.DeregisterInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstance
-func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) (req *aws.Request, output *DeregisterInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opDeregisterInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeregisterInstanceInput{}
-	}
-
-	output = &DeregisterInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeregisterInstanceRequest is a API request type for the DeregisterInstance API operation.
+type DeregisterInstanceRequest struct {
+	*aws.Request
+	Input *DeregisterInstanceInput
 }
 
-// DeregisterInstance API operation for AWS OpsWorks.
+// Send marshals and sends the DeregisterInstance API request.
+func (r *DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterInstanceOutput), nil
+}
+
+// DeregisterInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Deregister a registered Amazon EC2 or on-premises instance. This action removes
 // the instance from the stack and returns it to your control. This action can
@@ -1686,69 +1019,68 @@ func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) (re
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeregisterInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DeregisterInstanceRequest method.
+//    req := client.DeregisterInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstance
-func (c *OpsWorks) DeregisterInstance(input *DeregisterInstanceInput) (*DeregisterInstanceOutput, error) {
-	req, out := c.DeregisterInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) DeregisterInstanceRequest {
+	op := &aws.Operation{
+		Name:       opDeregisterInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeregisterInstanceWithContext is the same as DeregisterInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeregisterInstanceWithContext(ctx aws.Context, input *DeregisterInstanceInput, opts ...aws.Option) (*DeregisterInstanceOutput, error) {
-	req, out := c.DeregisterInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeregisterInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &DeregisterInstanceOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeregisterInstanceRequest{Request: req, Input: input}
 }
 
 const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 
-// DeregisterRdsDbInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeregisterRdsDbInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeregisterRdsDbInstanceRequest is a API request type for the DeregisterRdsDbInstance API operation.
+type DeregisterRdsDbInstanceRequest struct {
+	*aws.Request
+	Input *DeregisterRdsDbInstanceInput
+}
+
+// Send marshals and sends the DeregisterRdsDbInstance API request.
+func (r *DeregisterRdsDbInstanceRequest) Send() (*DeregisterRdsDbInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterRdsDbInstanceOutput), nil
+}
+
+// DeregisterRdsDbInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deregisters an Amazon RDS instance.
 //
-// See DeregisterRdsDbInstance for more information on using the DeregisterRdsDbInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DeregisterRdsDbInstanceRequest method.
-//    req, resp := client.DeregisterRdsDbInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterRdsDbInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstance
-func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceInput) (req *aws.Request, output *DeregisterRdsDbInstanceOutput) {
+func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceInput) DeregisterRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterRdsDbInstance,
 		HTTPMethod: "POST",
@@ -1759,85 +1091,50 @@ func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstance
 		input = &DeregisterRdsDbInstanceInput{}
 	}
 
-	output = &DeregisterRdsDbInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeregisterRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeregisterRdsDbInstanceRequest{Request: req, Input: input}
 }
 
-// DeregisterRdsDbInstance API operation for AWS OpsWorks.
+const opDeregisterVolume = "DeregisterVolume"
+
+// DeregisterVolumeRequest is a API request type for the DeregisterVolume API operation.
+type DeregisterVolumeRequest struct {
+	*aws.Request
+	Input *DeregisterVolumeInput
+}
+
+// Send marshals and sends the DeregisterVolume API request.
+func (r *DeregisterVolumeRequest) Send() (*DeregisterVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterVolumeOutput), nil
+}
+
+// DeregisterVolumeRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Deregisters an Amazon RDS instance.
+// Deregisters an Amazon EBS volume. The volume can then be registered by another
+// stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeregisterRdsDbInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstance
-func (c *OpsWorks) DeregisterRdsDbInstance(input *DeregisterRdsDbInstanceInput) (*DeregisterRdsDbInstanceOutput, error) {
-	req, out := c.DeregisterRdsDbInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterRdsDbInstanceWithContext is the same as DeregisterRdsDbInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterRdsDbInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeregisterRdsDbInstanceWithContext(ctx aws.Context, input *DeregisterRdsDbInstanceInput, opts ...aws.Option) (*DeregisterRdsDbInstanceOutput, error) {
-	req, out := c.DeregisterRdsDbInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeregisterVolume = "DeregisterVolume"
-
-// DeregisterVolumeRequest generates a "aws.Request" representing the
-// client's request for the DeregisterVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterVolume for more information on using the DeregisterVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the DeregisterVolumeRequest method.
-//    req, resp := client.DeregisterVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeregisterVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolume
-func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) (req *aws.Request, output *DeregisterVolumeOutput) {
+func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) DeregisterVolumeRequest {
 	op := &aws.Operation{
 		Name:       opDeregisterVolume,
 		HTTPMethod: "POST",
@@ -1848,86 +1145,46 @@ func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) (req *a
 		input = &DeregisterVolumeInput{}
 	}
 
-	output = &DeregisterVolumeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeregisterVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeregisterVolume API operation for AWS OpsWorks.
-//
-// Deregisters an Amazon EBS volume. The volume can then be registered by another
-// stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DeregisterVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolume
-func (c *OpsWorks) DeregisterVolume(input *DeregisterVolumeInput) (*DeregisterVolumeOutput, error) {
-	req, out := c.DeregisterVolumeRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterVolumeWithContext is the same as DeregisterVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DeregisterVolumeWithContext(ctx aws.Context, input *DeregisterVolumeInput, opts ...aws.Option) (*DeregisterVolumeOutput, error) {
-	req, out := c.DeregisterVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeregisterVolumeRequest{Request: req, Input: input}
 }
 
 const opDescribeAgentVersions = "DescribeAgentVersions"
 
-// DescribeAgentVersionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeAgentVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeAgentVersionsRequest is a API request type for the DescribeAgentVersions API operation.
+type DescribeAgentVersionsRequest struct {
+	*aws.Request
+	Input *DescribeAgentVersionsInput
+}
+
+// Send marshals and sends the DescribeAgentVersions API request.
+func (r *DescribeAgentVersionsRequest) Send() (*DescribeAgentVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAgentVersionsOutput), nil
+}
+
+// DescribeAgentVersionsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeAgentVersions for more information on using the DescribeAgentVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the available AWS OpsWorks Stacks agent versions. You must specify
+// a stack ID or a configuration manager. DescribeAgentVersions returns a list
+// of available agent versions for the specified stack or configuration manager.
 //
 //    // Example sending a request using the DescribeAgentVersionsRequest method.
-//    req, resp := client.DescribeAgentVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeAgentVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersions
-func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput) (req *aws.Request, output *DescribeAgentVersionsOutput) {
+func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput) DescribeAgentVersionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeAgentVersions,
 		HTTPMethod: "POST",
@@ -1938,96 +1195,30 @@ func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInpu
 		input = &DescribeAgentVersionsInput{}
 	}
 
-	output = &DescribeAgentVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeAgentVersions API operation for AWS OpsWorks.
-//
-// Describes the available AWS OpsWorks Stacks agent versions. You must specify
-// a stack ID or a configuration manager. DescribeAgentVersions returns a list
-// of available agent versions for the specified stack or configuration manager.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeAgentVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersions
-func (c *OpsWorks) DescribeAgentVersions(input *DescribeAgentVersionsInput) (*DescribeAgentVersionsOutput, error) {
-	req, out := c.DescribeAgentVersionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAgentVersionsWithContext is the same as DescribeAgentVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeAgentVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeAgentVersionsWithContext(ctx aws.Context, input *DescribeAgentVersionsInput, opts ...aws.Option) (*DescribeAgentVersionsOutput, error) {
-	req, out := c.DescribeAgentVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeAgentVersionsOutput{})
+	return DescribeAgentVersionsRequest{Request: req, Input: input}
 }
 
 const opDescribeApps = "DescribeApps"
 
-// DescribeAppsRequest generates a "aws.Request" representing the
-// client's request for the DescribeApps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeApps for more information on using the DescribeApps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeAppsRequest method.
-//    req, resp := client.DescribeAppsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps
-func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) (req *aws.Request, output *DescribeAppsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeApps,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeAppsInput{}
-	}
-
-	output = &DescribeAppsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeAppsRequest is a API request type for the DescribeApps API operation.
+type DescribeAppsRequest struct {
+	*aws.Request
+	Input *DescribeAppsInput
 }
 
-// DescribeApps API operation for AWS OpsWorks.
+// Send marshals and sends the DescribeApps API request.
+func (r *DescribeAppsRequest) Send() (*DescribeAppsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAppsOutput), nil
+}
+
+// DescribeAppsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Requests a description of a specified set of apps.
 //
@@ -2038,85 +1229,49 @@ func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) (req *aws.Reque
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeApps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps
-func (c *OpsWorks) DescribeApps(input *DescribeAppsInput) (*DescribeAppsOutput, error) {
-	req, out := c.DescribeAppsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeAppsWithContext is the same as DescribeApps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeApps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeAppsWithContext(ctx aws.Context, input *DescribeAppsInput, opts ...aws.Option) (*DescribeAppsOutput, error) {
-	req, out := c.DescribeAppsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeCommands = "DescribeCommands"
-
-// DescribeCommandsRequest generates a "aws.Request" representing the
-// client's request for the DescribeCommands operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeCommands for more information on using the DescribeCommands
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeCommandsRequest method.
-//    req, resp := client.DescribeCommandsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeAppsRequest method.
+//    req := client.DescribeAppsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommands
-func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) (req *aws.Request, output *DescribeCommandsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps
+func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) DescribeAppsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeCommands,
+		Name:       opDescribeApps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeCommandsInput{}
+		input = &DescribeAppsInput{}
 	}
 
-	output = &DescribeCommandsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeAppsOutput{})
+	return DescribeAppsRequest{Request: req, Input: input}
 }
 
-// DescribeCommands API operation for AWS OpsWorks.
+const opDescribeCommands = "DescribeCommands"
+
+// DescribeCommandsRequest is a API request type for the DescribeCommands API operation.
+type DescribeCommandsRequest struct {
+	*aws.Request
+	Input *DescribeCommandsInput
+}
+
+// Send marshals and sends the DescribeCommands API request.
+func (r *DescribeCommandsRequest) Send() (*DescribeCommandsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCommandsOutput), nil
+}
+
+// DescribeCommandsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes the results of specified commands.
 //
@@ -2127,85 +1282,49 @@ func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) (req *a
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeCommands for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommands
-func (c *OpsWorks) DescribeCommands(input *DescribeCommandsInput) (*DescribeCommandsOutput, error) {
-	req, out := c.DescribeCommandsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCommandsWithContext is the same as DescribeCommands with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCommands for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeCommandsWithContext(ctx aws.Context, input *DescribeCommandsInput, opts ...aws.Option) (*DescribeCommandsOutput, error) {
-	req, out := c.DescribeCommandsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeDeployments = "DescribeDeployments"
-
-// DescribeDeploymentsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDeployments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDeployments for more information on using the DescribeDeployments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeDeploymentsRequest method.
-//    req, resp := client.DescribeDeploymentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeCommandsRequest method.
+//    req := client.DescribeCommandsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeployments
-func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) (req *aws.Request, output *DescribeDeploymentsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommands
+func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) DescribeCommandsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeDeployments,
+		Name:       opDescribeCommands,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeDeploymentsInput{}
+		input = &DescribeCommandsInput{}
 	}
 
-	output = &DescribeDeploymentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeCommandsOutput{})
+	return DescribeCommandsRequest{Request: req, Input: input}
 }
 
-// DescribeDeployments API operation for AWS OpsWorks.
+const opDescribeDeployments = "DescribeDeployments"
+
+// DescribeDeploymentsRequest is a API request type for the DescribeDeployments API operation.
+type DescribeDeploymentsRequest struct {
+	*aws.Request
+	Input *DescribeDeploymentsInput
+}
+
+// Send marshals and sends the DescribeDeployments API request.
+func (r *DescribeDeploymentsRequest) Send() (*DescribeDeploymentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDeploymentsOutput), nil
+}
+
+// DescribeDeploymentsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Requests a description of a specified set of deployments.
 //
@@ -2216,69 +1335,71 @@ func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) (
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeDeployments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DescribeDeploymentsRequest method.
+//    req := client.DescribeDeploymentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeployments
-func (c *OpsWorks) DescribeDeployments(input *DescribeDeploymentsInput) (*DescribeDeploymentsOutput, error) {
-	req, out := c.DescribeDeploymentsRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) DescribeDeploymentsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeDeployments,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeDeploymentsWithContext is the same as DescribeDeployments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDeployments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeDeploymentsWithContext(ctx aws.Context, input *DescribeDeploymentsInput, opts ...aws.Option) (*DescribeDeploymentsOutput, error) {
-	req, out := c.DescribeDeploymentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeDeploymentsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeDeploymentsOutput{})
+	return DescribeDeploymentsRequest{Request: req, Input: input}
 }
 
 const opDescribeEcsClusters = "DescribeEcsClusters"
 
-// DescribeEcsClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeEcsClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeEcsClustersRequest is a API request type for the DescribeEcsClusters API operation.
+type DescribeEcsClustersRequest struct {
+	*aws.Request
+	Input *DescribeEcsClustersInput
+}
+
+// Send marshals and sends the DescribeEcsClusters API request.
+func (r *DescribeEcsClustersRequest) Send() (*DescribeEcsClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeEcsClustersOutput), nil
+}
+
+// DescribeEcsClustersRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes Amazon ECS clusters that are registered with a stack. If you specify
+// only a stack ID, you can use the MaxResults and NextToken parameters to paginate
+// the response. However, AWS OpsWorks Stacks currently supports only one cluster
+// per layer, so the result set has a maximum of one element.
 //
-// See DescribeEcsClusters for more information on using the DescribeEcsClusters
-// API call, and error handling.
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack or an attached policy that explicitly
+// grants permission. For more information on user permissions, see Managing
+// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This call accepts only one resource-identifying parameter.
 //
 //    // Example sending a request using the DescribeEcsClustersRequest method.
-//    req, resp := client.DescribeEcsClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeEcsClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClusters
-func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) (req *aws.Request, output *DescribeEcsClustersOutput) {
+func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) DescribeEcsClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeEcsClusters,
 		HTTPMethod: "POST",
@@ -2295,59 +1416,8 @@ func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) (
 		input = &DescribeEcsClustersInput{}
 	}
 
-	output = &DescribeEcsClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeEcsClusters API operation for AWS OpsWorks.
-//
-// Describes Amazon ECS clusters that are registered with a stack. If you specify
-// only a stack ID, you can use the MaxResults and NextToken parameters to paginate
-// the response. However, AWS OpsWorks Stacks currently supports only one cluster
-// per layer, so the result set has a maximum of one element.
-//
-// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
-// or Manage permissions level for the stack or an attached policy that explicitly
-// grants permission. For more information on user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// This call accepts only one resource-identifying parameter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeEcsClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClusters
-func (c *OpsWorks) DescribeEcsClusters(input *DescribeEcsClustersInput) (*DescribeEcsClustersOutput, error) {
-	req, out := c.DescribeEcsClustersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeEcsClustersWithContext is the same as DescribeEcsClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeEcsClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeEcsClustersWithContext(ctx aws.Context, input *DescribeEcsClustersInput, opts ...aws.Option) (*DescribeEcsClustersOutput, error) {
-	req, out := c.DescribeEcsClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeEcsClustersOutput{})
+	return DescribeEcsClustersRequest{Request: req, Input: input}
 }
 
 // DescribeEcsClustersPages iterates over the pages of a DescribeEcsClusters operation,
@@ -2386,10 +1456,10 @@ func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeEcsClustersRequest(inCpy)
+			req := c.DescribeEcsClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2402,47 +1472,24 @@ func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeElasticIps = "DescribeElasticIps"
 
-// DescribeElasticIpsRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticIps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticIps for more information on using the DescribeElasticIps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeElasticIpsRequest method.
-//    req, resp := client.DescribeElasticIpsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps
-func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) (req *aws.Request, output *DescribeElasticIpsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeElasticIps,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeElasticIpsInput{}
-	}
-
-	output = &DescribeElasticIpsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeElasticIpsRequest is a API request type for the DescribeElasticIps API operation.
+type DescribeElasticIpsRequest struct {
+	*aws.Request
+	Input *DescribeElasticIpsInput
 }
 
-// DescribeElasticIps API operation for AWS OpsWorks.
+// Send marshals and sends the DescribeElasticIps API request.
+func (r *DescribeElasticIpsRequest) Send() (*DescribeElasticIpsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticIpsOutput), nil
+}
+
+// DescribeElasticIpsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes Elastic IP addresses (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html).
 //
@@ -2453,85 +1500,49 @@ func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) (re
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeElasticIps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps
-func (c *OpsWorks) DescribeElasticIps(input *DescribeElasticIpsInput) (*DescribeElasticIpsOutput, error) {
-	req, out := c.DescribeElasticIpsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticIpsWithContext is the same as DescribeElasticIps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticIps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeElasticIpsWithContext(ctx aws.Context, input *DescribeElasticIpsInput, opts ...aws.Option) (*DescribeElasticIpsOutput, error) {
-	req, out := c.DescribeElasticIpsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
-
-// DescribeElasticLoadBalancersRequest generates a "aws.Request" representing the
-// client's request for the DescribeElasticLoadBalancers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeElasticLoadBalancers for more information on using the DescribeElasticLoadBalancers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeElasticLoadBalancersRequest method.
-//    req, resp := client.DescribeElasticLoadBalancersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeElasticIpsRequest method.
+//    req := client.DescribeElasticIpsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers
-func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadBalancersInput) (req *aws.Request, output *DescribeElasticLoadBalancersOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps
+func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) DescribeElasticIpsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeElasticLoadBalancers,
+		Name:       opDescribeElasticIps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeElasticLoadBalancersInput{}
+		input = &DescribeElasticIpsInput{}
 	}
 
-	output = &DescribeElasticLoadBalancersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeElasticIpsOutput{})
+	return DescribeElasticIpsRequest{Request: req, Input: input}
 }
 
-// DescribeElasticLoadBalancers API operation for AWS OpsWorks.
+const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
+
+// DescribeElasticLoadBalancersRequest is a API request type for the DescribeElasticLoadBalancers API operation.
+type DescribeElasticLoadBalancersRequest struct {
+	*aws.Request
+	Input *DescribeElasticLoadBalancersInput
+}
+
+// Send marshals and sends the DescribeElasticLoadBalancers API request.
+func (r *DescribeElasticLoadBalancersRequest) Send() (*DescribeElasticLoadBalancersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeElasticLoadBalancersOutput), nil
+}
+
+// DescribeElasticLoadBalancersRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes a stack's Elastic Load Balancing instances.
 //
@@ -2542,85 +1553,49 @@ func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoa
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeElasticLoadBalancers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers
-func (c *OpsWorks) DescribeElasticLoadBalancers(input *DescribeElasticLoadBalancersInput) (*DescribeElasticLoadBalancersOutput, error) {
-	req, out := c.DescribeElasticLoadBalancersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeElasticLoadBalancersWithContext is the same as DescribeElasticLoadBalancers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeElasticLoadBalancers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeElasticLoadBalancersWithContext(ctx aws.Context, input *DescribeElasticLoadBalancersInput, opts ...aws.Option) (*DescribeElasticLoadBalancersOutput, error) {
-	req, out := c.DescribeElasticLoadBalancersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeInstances = "DescribeInstances"
-
-// DescribeInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeInstances for more information on using the DescribeInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeInstancesRequest method.
-//    req, resp := client.DescribeInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeElasticLoadBalancersRequest method.
+//    req := client.DescribeElasticLoadBalancersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances
-func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) (req *aws.Request, output *DescribeInstancesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers
+func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadBalancersInput) DescribeElasticLoadBalancersRequest {
 	op := &aws.Operation{
-		Name:       opDescribeInstances,
+		Name:       opDescribeElasticLoadBalancers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeInstancesInput{}
+		input = &DescribeElasticLoadBalancersInput{}
 	}
 
-	output = &DescribeInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeElasticLoadBalancersOutput{})
+	return DescribeElasticLoadBalancersRequest{Request: req, Input: input}
 }
 
-// DescribeInstances API operation for AWS OpsWorks.
+const opDescribeInstances = "DescribeInstances"
+
+// DescribeInstancesRequest is a API request type for the DescribeInstances API operation.
+type DescribeInstancesRequest struct {
+	*aws.Request
+	Input *DescribeInstancesInput
+}
+
+// Send marshals and sends the DescribeInstances API request.
+func (r *DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInstancesOutput), nil
+}
+
+// DescribeInstancesRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Requests a description of a set of instances.
 //
@@ -2631,85 +1606,49 @@ func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) (req 
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances
-func (c *OpsWorks) DescribeInstances(input *DescribeInstancesInput) (*DescribeInstancesOutput, error) {
-	req, out := c.DescribeInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInstancesWithContext is the same as DescribeInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.Option) (*DescribeInstancesOutput, error) {
-	req, out := c.DescribeInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeLayers = "DescribeLayers"
-
-// DescribeLayersRequest generates a "aws.Request" representing the
-// client's request for the DescribeLayers operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLayers for more information on using the DescribeLayers
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLayersRequest method.
-//    req, resp := client.DescribeLayersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeInstancesRequest method.
+//    req := client.DescribeInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayers
-func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) (req *aws.Request, output *DescribeLayersOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances
+func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeInstancesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeLayers,
+		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeLayersInput{}
+		input = &DescribeInstancesInput{}
 	}
 
-	output = &DescribeLayersOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeInstancesOutput{})
+	return DescribeInstancesRequest{Request: req, Input: input}
 }
 
-// DescribeLayers API operation for AWS OpsWorks.
+const opDescribeLayers = "DescribeLayers"
+
+// DescribeLayersRequest is a API request type for the DescribeLayers API operation.
+type DescribeLayersRequest struct {
+	*aws.Request
+	Input *DescribeLayersInput
+}
+
+// Send marshals and sends the DescribeLayers API request.
+func (r *DescribeLayersRequest) Send() (*DescribeLayersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLayersOutput), nil
+}
+
+// DescribeLayersRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Requests a description of one or more layers in a specified stack.
 //
@@ -2720,85 +1659,49 @@ func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) (req *aws.R
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeLayers for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayers
-func (c *OpsWorks) DescribeLayers(input *DescribeLayersInput) (*DescribeLayersOutput, error) {
-	req, out := c.DescribeLayersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLayersWithContext is the same as DescribeLayers with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLayers for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeLayersWithContext(ctx aws.Context, input *DescribeLayersInput, opts ...aws.Option) (*DescribeLayersOutput, error) {
-	req, out := c.DescribeLayersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
-
-// DescribeLoadBasedAutoScalingRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoadBasedAutoScaling operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoadBasedAutoScaling for more information on using the DescribeLoadBasedAutoScaling
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLoadBasedAutoScalingRequest method.
-//    req, resp := client.DescribeLoadBasedAutoScalingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeLayersRequest method.
+//    req := client.DescribeLayersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScaling
-func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAutoScalingInput) (req *aws.Request, output *DescribeLoadBasedAutoScalingOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayers
+func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) DescribeLayersRequest {
 	op := &aws.Operation{
-		Name:       opDescribeLoadBasedAutoScaling,
+		Name:       opDescribeLayers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeLoadBasedAutoScalingInput{}
+		input = &DescribeLayersInput{}
 	}
 
-	output = &DescribeLoadBasedAutoScalingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeLayersOutput{})
+	return DescribeLayersRequest{Request: req, Input: input}
 }
 
-// DescribeLoadBasedAutoScaling API operation for AWS OpsWorks.
+const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
+
+// DescribeLoadBasedAutoScalingRequest is a API request type for the DescribeLoadBasedAutoScaling API operation.
+type DescribeLoadBasedAutoScalingRequest struct {
+	*aws.Request
+	Input *DescribeLoadBasedAutoScalingInput
+}
+
+// Send marshals and sends the DescribeLoadBasedAutoScaling API request.
+func (r *DescribeLoadBasedAutoScalingRequest) Send() (*DescribeLoadBasedAutoScalingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoadBasedAutoScalingOutput), nil
+}
+
+// DescribeLoadBasedAutoScalingRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes load-based auto scaling configurations for specified layers.
 //
@@ -2809,69 +1712,65 @@ func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedA
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeLoadBasedAutoScaling for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DescribeLoadBasedAutoScalingRequest method.
+//    req := client.DescribeLoadBasedAutoScalingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScaling
-func (c *OpsWorks) DescribeLoadBasedAutoScaling(input *DescribeLoadBasedAutoScalingInput) (*DescribeLoadBasedAutoScalingOutput, error) {
-	req, out := c.DescribeLoadBasedAutoScalingRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAutoScalingInput) DescribeLoadBasedAutoScalingRequest {
+	op := &aws.Operation{
+		Name:       opDescribeLoadBasedAutoScaling,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeLoadBasedAutoScalingWithContext is the same as DescribeLoadBasedAutoScaling with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoadBasedAutoScaling for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeLoadBasedAutoScalingWithContext(ctx aws.Context, input *DescribeLoadBasedAutoScalingInput, opts ...aws.Option) (*DescribeLoadBasedAutoScalingOutput, error) {
-	req, out := c.DescribeLoadBasedAutoScalingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeLoadBasedAutoScalingInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeLoadBasedAutoScalingOutput{})
+	return DescribeLoadBasedAutoScalingRequest{Request: req, Input: input}
 }
 
 const opDescribeMyUserProfile = "DescribeMyUserProfile"
 
-// DescribeMyUserProfileRequest generates a "aws.Request" representing the
-// client's request for the DescribeMyUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMyUserProfileRequest is a API request type for the DescribeMyUserProfile API operation.
+type DescribeMyUserProfileRequest struct {
+	*aws.Request
+	Input *DescribeMyUserProfileInput
+}
+
+// Send marshals and sends the DescribeMyUserProfile API request.
+func (r *DescribeMyUserProfileRequest) Send() (*DescribeMyUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMyUserProfileOutput), nil
+}
+
+// DescribeMyUserProfileRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes a user's SSH information.
 //
-// See DescribeMyUserProfile for more information on using the DescribeMyUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have self-management
+// enabled or an attached policy that explicitly grants permissions. For more
+// information on user permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DescribeMyUserProfileRequest method.
-//    req, resp := client.DescribeMyUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMyUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfile
-func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput) (req *aws.Request, output *DescribeMyUserProfileOutput) {
+func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput) DescribeMyUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMyUserProfile,
 		HTTPMethod: "POST",
@@ -2882,74 +1781,47 @@ func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInpu
 		input = &DescribeMyUserProfileInput{}
 	}
 
-	output = &DescribeMyUserProfileOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMyUserProfile API operation for AWS OpsWorks.
-//
-// Describes a user's SSH information.
-//
-// Required Permissions: To use this action, an IAM user must have self-management
-// enabled or an attached policy that explicitly grants permissions. For more
-// information on user permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeMyUserProfile for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfile
-func (c *OpsWorks) DescribeMyUserProfile(input *DescribeMyUserProfileInput) (*DescribeMyUserProfileOutput, error) {
-	req, out := c.DescribeMyUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMyUserProfileWithContext is the same as DescribeMyUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMyUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeMyUserProfileWithContext(ctx aws.Context, input *DescribeMyUserProfileInput, opts ...aws.Option) (*DescribeMyUserProfileOutput, error) {
-	req, out := c.DescribeMyUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMyUserProfileOutput{})
+	return DescribeMyUserProfileRequest{Request: req, Input: input}
 }
 
 const opDescribePermissions = "DescribePermissions"
 
-// DescribePermissionsRequest generates a "aws.Request" representing the
-// client's request for the DescribePermissions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribePermissionsRequest is a API request type for the DescribePermissions API operation.
+type DescribePermissionsRequest struct {
+	*aws.Request
+	Input *DescribePermissionsInput
+}
+
+// Send marshals and sends the DescribePermissions API request.
+func (r *DescribePermissionsRequest) Send() (*DescribePermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribePermissionsOutput), nil
+}
+
+// DescribePermissionsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the permissions for a specified stack.
 //
-// See DescribePermissions for more information on using the DescribePermissions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DescribePermissionsRequest method.
-//    req, resp := client.DescribePermissionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribePermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissions
-func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) (req *aws.Request, output *DescribePermissionsOutput) {
+func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) DescribePermissionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribePermissions,
 		HTTPMethod: "POST",
@@ -2960,99 +1832,30 @@ func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) (
 		input = &DescribePermissionsInput{}
 	}
 
-	output = &DescribePermissionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribePermissions API operation for AWS OpsWorks.
-//
-// Describes the permissions for a specified stack.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribePermissions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissions
-func (c *OpsWorks) DescribePermissions(input *DescribePermissionsInput) (*DescribePermissionsOutput, error) {
-	req, out := c.DescribePermissionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribePermissionsWithContext is the same as DescribePermissions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribePermissions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribePermissionsWithContext(ctx aws.Context, input *DescribePermissionsInput, opts ...aws.Option) (*DescribePermissionsOutput, error) {
-	req, out := c.DescribePermissionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribePermissionsOutput{})
+	return DescribePermissionsRequest{Request: req, Input: input}
 }
 
 const opDescribeRaidArrays = "DescribeRaidArrays"
 
-// DescribeRaidArraysRequest generates a "aws.Request" representing the
-// client's request for the DescribeRaidArrays operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRaidArrays for more information on using the DescribeRaidArrays
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeRaidArraysRequest method.
-//    req, resp := client.DescribeRaidArraysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArrays
-func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) (req *aws.Request, output *DescribeRaidArraysOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeRaidArrays,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeRaidArraysInput{}
-	}
-
-	output = &DescribeRaidArraysOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeRaidArraysRequest is a API request type for the DescribeRaidArrays API operation.
+type DescribeRaidArraysRequest struct {
+	*aws.Request
+	Input *DescribeRaidArraysInput
 }
 
-// DescribeRaidArrays API operation for AWS OpsWorks.
+// Send marshals and sends the DescribeRaidArrays API request.
+func (r *DescribeRaidArraysRequest) Send() (*DescribeRaidArraysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRaidArraysOutput), nil
+}
+
+// DescribeRaidArraysRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describe an instance's RAID arrays.
 //
@@ -3063,85 +1866,49 @@ func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) (re
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeRaidArrays for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArrays
-func (c *OpsWorks) DescribeRaidArrays(input *DescribeRaidArraysInput) (*DescribeRaidArraysOutput, error) {
-	req, out := c.DescribeRaidArraysRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRaidArraysWithContext is the same as DescribeRaidArrays with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRaidArrays for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeRaidArraysWithContext(ctx aws.Context, input *DescribeRaidArraysInput, opts ...aws.Option) (*DescribeRaidArraysOutput, error) {
-	req, out := c.DescribeRaidArraysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
-
-// DescribeRdsDbInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeRdsDbInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeRdsDbInstances for more information on using the DescribeRdsDbInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeRdsDbInstancesRequest method.
-//    req, resp := client.DescribeRdsDbInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeRaidArraysRequest method.
+//    req := client.DescribeRaidArraysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances
-func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInput) (req *aws.Request, output *DescribeRdsDbInstancesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArrays
+func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) DescribeRaidArraysRequest {
 	op := &aws.Operation{
-		Name:       opDescribeRdsDbInstances,
+		Name:       opDescribeRaidArrays,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeRdsDbInstancesInput{}
+		input = &DescribeRaidArraysInput{}
 	}
 
-	output = &DescribeRdsDbInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeRaidArraysOutput{})
+	return DescribeRaidArraysRequest{Request: req, Input: input}
 }
 
-// DescribeRdsDbInstances API operation for AWS OpsWorks.
+const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
+
+// DescribeRdsDbInstancesRequest is a API request type for the DescribeRdsDbInstances API operation.
+type DescribeRdsDbInstancesRequest struct {
+	*aws.Request
+	Input *DescribeRdsDbInstancesInput
+}
+
+// Send marshals and sends the DescribeRdsDbInstances API request.
+func (r *DescribeRdsDbInstancesRequest) Send() (*DescribeRdsDbInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRdsDbInstancesOutput), nil
+}
+
+// DescribeRdsDbInstancesRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes Amazon RDS instances.
 //
@@ -3152,85 +1919,49 @@ func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesIn
 //
 // This call accepts only one resource-identifying parameter.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeRdsDbInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances
-func (c *OpsWorks) DescribeRdsDbInstances(input *DescribeRdsDbInstancesInput) (*DescribeRdsDbInstancesOutput, error) {
-	req, out := c.DescribeRdsDbInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeRdsDbInstancesWithContext is the same as DescribeRdsDbInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeRdsDbInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeRdsDbInstancesWithContext(ctx aws.Context, input *DescribeRdsDbInstancesInput, opts ...aws.Option) (*DescribeRdsDbInstancesOutput, error) {
-	req, out := c.DescribeRdsDbInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeServiceErrors = "DescribeServiceErrors"
-
-// DescribeServiceErrorsRequest generates a "aws.Request" representing the
-// client's request for the DescribeServiceErrors operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeServiceErrors for more information on using the DescribeServiceErrors
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeServiceErrorsRequest method.
-//    req, resp := client.DescribeServiceErrorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeRdsDbInstancesRequest method.
+//    req := client.DescribeRdsDbInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrors
-func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput) (req *aws.Request, output *DescribeServiceErrorsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances
+func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInput) DescribeRdsDbInstancesRequest {
 	op := &aws.Operation{
-		Name:       opDescribeServiceErrors,
+		Name:       opDescribeRdsDbInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeServiceErrorsInput{}
+		input = &DescribeRdsDbInstancesInput{}
 	}
 
-	output = &DescribeServiceErrorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeRdsDbInstancesOutput{})
+	return DescribeRdsDbInstancesRequest{Request: req, Input: input}
 }
 
-// DescribeServiceErrors API operation for AWS OpsWorks.
+const opDescribeServiceErrors = "DescribeServiceErrors"
+
+// DescribeServiceErrorsRequest is a API request type for the DescribeServiceErrors API operation.
+type DescribeServiceErrorsRequest struct {
+	*aws.Request
+	Input *DescribeServiceErrorsInput
+}
+
+// Send marshals and sends the DescribeServiceErrors API request.
+func (r *DescribeServiceErrorsRequest) Send() (*DescribeServiceErrorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeServiceErrorsOutput), nil
+}
+
+// DescribeServiceErrorsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes AWS OpsWorks Stacks service errors.
 //
@@ -3241,69 +1972,66 @@ func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInpu
 //
 // This call accepts only one resource-identifying parameter.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeServiceErrors for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DescribeServiceErrorsRequest method.
+//    req := client.DescribeServiceErrorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrors
-func (c *OpsWorks) DescribeServiceErrors(input *DescribeServiceErrorsInput) (*DescribeServiceErrorsOutput, error) {
-	req, out := c.DescribeServiceErrorsRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput) DescribeServiceErrorsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeServiceErrors,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeServiceErrorsWithContext is the same as DescribeServiceErrors with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeServiceErrors for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeServiceErrorsWithContext(ctx aws.Context, input *DescribeServiceErrorsInput, opts ...aws.Option) (*DescribeServiceErrorsOutput, error) {
-	req, out := c.DescribeServiceErrorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeServiceErrorsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeServiceErrorsOutput{})
+	return DescribeServiceErrorsRequest{Request: req, Input: input}
 }
 
 const opDescribeStackProvisioningParameters = "DescribeStackProvisioningParameters"
 
-// DescribeStackProvisioningParametersRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackProvisioningParameters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackProvisioningParametersRequest is a API request type for the DescribeStackProvisioningParameters API operation.
+type DescribeStackProvisioningParametersRequest struct {
+	*aws.Request
+	Input *DescribeStackProvisioningParametersInput
+}
+
+// Send marshals and sends the DescribeStackProvisioningParameters API request.
+func (r *DescribeStackProvisioningParametersRequest) Send() (*DescribeStackProvisioningParametersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackProvisioningParametersOutput), nil
+}
+
+// DescribeStackProvisioningParametersRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Requests a description of a stack's provisioning parameters.
 //
-// See DescribeStackProvisioningParameters for more information on using the DescribeStackProvisioningParameters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack or an attached policy that explicitly
+// grants permissions. For more information on user permissions, see Managing
+// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DescribeStackProvisioningParametersRequest method.
-//    req, resp := client.DescribeStackProvisioningParametersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackProvisioningParametersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParameters
-func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeStackProvisioningParametersInput) (req *aws.Request, output *DescribeStackProvisioningParametersOutput) {
+func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeStackProvisioningParametersInput) DescribeStackProvisioningParametersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackProvisioningParameters,
 		HTTPMethod: "POST",
@@ -3314,83 +2042,48 @@ func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeSta
 		input = &DescribeStackProvisioningParametersInput{}
 	}
 
-	output = &DescribeStackProvisioningParametersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStackProvisioningParameters API operation for AWS OpsWorks.
-//
-// Requests a description of a stack's provisioning parameters.
-//
-// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
-// or Manage permissions level for the stack or an attached policy that explicitly
-// grants permissions. For more information on user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeStackProvisioningParameters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParameters
-func (c *OpsWorks) DescribeStackProvisioningParameters(input *DescribeStackProvisioningParametersInput) (*DescribeStackProvisioningParametersOutput, error) {
-	req, out := c.DescribeStackProvisioningParametersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackProvisioningParametersWithContext is the same as DescribeStackProvisioningParameters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackProvisioningParameters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeStackProvisioningParametersWithContext(ctx aws.Context, input *DescribeStackProvisioningParametersInput, opts ...aws.Option) (*DescribeStackProvisioningParametersOutput, error) {
-	req, out := c.DescribeStackProvisioningParametersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStackProvisioningParametersOutput{})
+	return DescribeStackProvisioningParametersRequest{Request: req, Input: input}
 }
 
 const opDescribeStackSummary = "DescribeStackSummary"
 
-// DescribeStackSummaryRequest generates a "aws.Request" representing the
-// client's request for the DescribeStackSummary operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStackSummaryRequest is a API request type for the DescribeStackSummary API operation.
+type DescribeStackSummaryRequest struct {
+	*aws.Request
+	Input *DescribeStackSummaryInput
+}
+
+// Send marshals and sends the DescribeStackSummary API request.
+func (r *DescribeStackSummaryRequest) Send() (*DescribeStackSummaryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStackSummaryOutput), nil
+}
+
+// DescribeStackSummaryRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the number of layers and apps in a specified stack, and the number
+// of instances in each state, such as running_setup or online.
 //
-// See DescribeStackSummary for more information on using the DescribeStackSummary
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information on user permissions, see Managing
+// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DescribeStackSummaryRequest method.
-//    req, resp := client.DescribeStackSummaryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStackSummaryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummary
-func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) (req *aws.Request, output *DescribeStackSummaryOutput) {
+func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) DescribeStackSummaryRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStackSummary,
 		HTTPMethod: "POST",
@@ -3401,84 +2094,47 @@ func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput)
 		input = &DescribeStackSummaryInput{}
 	}
 
-	output = &DescribeStackSummaryOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeStackSummaryOutput{})
+	return DescribeStackSummaryRequest{Request: req, Input: input}
 }
 
-// DescribeStackSummary API operation for AWS OpsWorks.
+const opDescribeStacks = "DescribeStacks"
+
+// DescribeStacksRequest is a API request type for the DescribeStacks API operation.
+type DescribeStacksRequest struct {
+	*aws.Request
+	Input *DescribeStacksInput
+}
+
+// Send marshals and sends the DescribeStacks API request.
+func (r *DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStacksOutput), nil
+}
+
+// DescribeStacksRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Describes the number of layers and apps in a specified stack, and the number
-// of instances in each state, such as running_setup or online.
+// Requests a description of one or more stacks.
 //
 // Required Permissions: To use this action, an IAM user must have a Show, Deploy,
 // or Manage permissions level for the stack, or an attached policy that explicitly
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeStackSummary for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummary
-func (c *OpsWorks) DescribeStackSummary(input *DescribeStackSummaryInput) (*DescribeStackSummaryOutput, error) {
-	req, out := c.DescribeStackSummaryRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStackSummaryWithContext is the same as DescribeStackSummary with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStackSummary for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeStackSummaryWithContext(ctx aws.Context, input *DescribeStackSummaryInput, opts ...aws.Option) (*DescribeStackSummaryOutput, error) {
-	req, out := c.DescribeStackSummaryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeStacks = "DescribeStacks"
-
-// DescribeStacksRequest generates a "aws.Request" representing the
-// client's request for the DescribeStacks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStacks for more information on using the DescribeStacks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the DescribeStacksRequest method.
-//    req, resp := client.DescribeStacksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStacksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacks
-func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) DescribeStacksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
@@ -3489,99 +2145,30 @@ func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.R
 		input = &DescribeStacksInput{}
 	}
 
-	output = &DescribeStacksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStacks API operation for AWS OpsWorks.
-//
-// Requests a description of one or more stacks.
-//
-// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
-// or Manage permissions level for the stack, or an attached policy that explicitly
-// grants permissions. For more information on user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeStacks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacks
-func (c *OpsWorks) DescribeStacks(input *DescribeStacksInput) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStacksWithContext is the same as DescribeStacks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStacks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
-	req, out := c.DescribeStacksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStacksOutput{})
+	return DescribeStacksRequest{Request: req, Input: input}
 }
 
 const opDescribeTimeBasedAutoScaling = "DescribeTimeBasedAutoScaling"
 
-// DescribeTimeBasedAutoScalingRequest generates a "aws.Request" representing the
-// client's request for the DescribeTimeBasedAutoScaling operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTimeBasedAutoScaling for more information on using the DescribeTimeBasedAutoScaling
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeTimeBasedAutoScalingRequest method.
-//    req, resp := client.DescribeTimeBasedAutoScalingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScaling
-func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAutoScalingInput) (req *aws.Request, output *DescribeTimeBasedAutoScalingOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeTimeBasedAutoScaling,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeTimeBasedAutoScalingInput{}
-	}
-
-	output = &DescribeTimeBasedAutoScalingOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeTimeBasedAutoScalingRequest is a API request type for the DescribeTimeBasedAutoScaling API operation.
+type DescribeTimeBasedAutoScalingRequest struct {
+	*aws.Request
+	Input *DescribeTimeBasedAutoScalingInput
 }
 
-// DescribeTimeBasedAutoScaling API operation for AWS OpsWorks.
+// Send marshals and sends the DescribeTimeBasedAutoScaling API request.
+func (r *DescribeTimeBasedAutoScalingRequest) Send() (*DescribeTimeBasedAutoScalingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTimeBasedAutoScalingOutput), nil
+}
+
+// DescribeTimeBasedAutoScalingRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes time-based auto scaling configurations for specified instances.
 //
@@ -3592,69 +2179,65 @@ func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedA
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeTimeBasedAutoScaling for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DescribeTimeBasedAutoScalingRequest method.
+//    req := client.DescribeTimeBasedAutoScalingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScaling
-func (c *OpsWorks) DescribeTimeBasedAutoScaling(input *DescribeTimeBasedAutoScalingInput) (*DescribeTimeBasedAutoScalingOutput, error) {
-	req, out := c.DescribeTimeBasedAutoScalingRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAutoScalingInput) DescribeTimeBasedAutoScalingRequest {
+	op := &aws.Operation{
+		Name:       opDescribeTimeBasedAutoScaling,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeTimeBasedAutoScalingWithContext is the same as DescribeTimeBasedAutoScaling with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTimeBasedAutoScaling for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeTimeBasedAutoScalingWithContext(ctx aws.Context, input *DescribeTimeBasedAutoScalingInput, opts ...aws.Option) (*DescribeTimeBasedAutoScalingOutput, error) {
-	req, out := c.DescribeTimeBasedAutoScalingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeTimeBasedAutoScalingInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeTimeBasedAutoScalingOutput{})
+	return DescribeTimeBasedAutoScalingRequest{Request: req, Input: input}
 }
 
 const opDescribeUserProfiles = "DescribeUserProfiles"
 
-// DescribeUserProfilesRequest generates a "aws.Request" representing the
-// client's request for the DescribeUserProfiles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeUserProfilesRequest is a API request type for the DescribeUserProfiles API operation.
+type DescribeUserProfilesRequest struct {
+	*aws.Request
+	Input *DescribeUserProfilesInput
+}
+
+// Send marshals and sends the DescribeUserProfiles API request.
+func (r *DescribeUserProfilesRequest) Send() (*DescribeUserProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUserProfilesOutput), nil
+}
+
+// DescribeUserProfilesRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describe specified users.
 //
-// See DescribeUserProfiles for more information on using the DescribeUserProfiles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information on user permissions,
+// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DescribeUserProfilesRequest method.
-//    req, resp := client.DescribeUserProfilesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeUserProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfiles
-func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput) (req *aws.Request, output *DescribeUserProfilesOutput) {
+func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput) DescribeUserProfilesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUserProfiles,
 		HTTPMethod: "POST",
@@ -3665,98 +2248,30 @@ func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput)
 		input = &DescribeUserProfilesInput{}
 	}
 
-	output = &DescribeUserProfilesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeUserProfiles API operation for AWS OpsWorks.
-//
-// Describe specified users.
-//
-// Required Permissions: To use this action, an IAM user must have an attached
-// policy that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeUserProfiles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfiles
-func (c *OpsWorks) DescribeUserProfiles(input *DescribeUserProfilesInput) (*DescribeUserProfilesOutput, error) {
-	req, out := c.DescribeUserProfilesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeUserProfilesWithContext is the same as DescribeUserProfiles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeUserProfiles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeUserProfilesWithContext(ctx aws.Context, input *DescribeUserProfilesInput, opts ...aws.Option) (*DescribeUserProfilesOutput, error) {
-	req, out := c.DescribeUserProfilesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeUserProfilesOutput{})
+	return DescribeUserProfilesRequest{Request: req, Input: input}
 }
 
 const opDescribeVolumes = "DescribeVolumes"
 
-// DescribeVolumesRequest generates a "aws.Request" representing the
-// client's request for the DescribeVolumes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVolumes for more information on using the DescribeVolumes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVolumesRequest method.
-//    req, resp := client.DescribeVolumesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumes
-func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) (req *aws.Request, output *DescribeVolumesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVolumes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVolumesInput{}
-	}
-
-	output = &DescribeVolumesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeVolumesRequest is a API request type for the DescribeVolumes API operation.
+type DescribeVolumesRequest struct {
+	*aws.Request
+	Input *DescribeVolumesInput
 }
 
-// DescribeVolumes API operation for AWS OpsWorks.
+// Send marshals and sends the DescribeVolumes API request.
+func (r *DescribeVolumesRequest) Send() (*DescribeVolumesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVolumesOutput), nil
+}
+
+// DescribeVolumesRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Describes an instance's Amazon EBS volumes.
 //
@@ -3767,69 +2282,66 @@ func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) (req *aws
 // grants permissions. For more information on user permissions, see Managing
 // User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DescribeVolumes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DescribeVolumesRequest method.
+//    req := client.DescribeVolumesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumes
-func (c *OpsWorks) DescribeVolumes(input *DescribeVolumesInput) (*DescribeVolumesOutput, error) {
-	req, out := c.DescribeVolumesRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVolumesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeVolumes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeVolumesWithContext is the same as DescribeVolumes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVolumes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeVolumesWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.Option) (*DescribeVolumesOutput, error) {
-	req, out := c.DescribeVolumesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeVolumesInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeVolumesOutput{})
+	return DescribeVolumesRequest{Request: req, Input: input}
 }
 
 const opDetachElasticLoadBalancer = "DetachElasticLoadBalancer"
 
-// DetachElasticLoadBalancerRequest generates a "aws.Request" representing the
-// client's request for the DetachElasticLoadBalancer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachElasticLoadBalancerRequest is a API request type for the DetachElasticLoadBalancer API operation.
+type DetachElasticLoadBalancerRequest struct {
+	*aws.Request
+	Input *DetachElasticLoadBalancerInput
+}
+
+// Send marshals and sends the DetachElasticLoadBalancer API request.
+func (r *DetachElasticLoadBalancerRequest) Send() (*DetachElasticLoadBalancerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachElasticLoadBalancerOutput), nil
+}
+
+// DetachElasticLoadBalancerRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Detaches a specified Elastic Load Balancing instance from its layer.
 //
-// See DetachElasticLoadBalancer for more information on using the DetachElasticLoadBalancer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the DetachElasticLoadBalancerRequest method.
-//    req, resp := client.DetachElasticLoadBalancerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachElasticLoadBalancerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancer
-func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalancerInput) (req *aws.Request, output *DetachElasticLoadBalancerOutput) {
+func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalancerInput) DetachElasticLoadBalancerRequest {
 	op := &aws.Operation{
 		Name:       opDetachElasticLoadBalancer,
 		HTTPMethod: "POST",
@@ -3840,100 +2352,32 @@ func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBala
 		input = &DetachElasticLoadBalancerInput{}
 	}
 
-	output = &DetachElasticLoadBalancerOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DetachElasticLoadBalancerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DetachElasticLoadBalancer API operation for AWS OpsWorks.
-//
-// Detaches a specified Elastic Load Balancing instance from its layer.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DetachElasticLoadBalancer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancer
-func (c *OpsWorks) DetachElasticLoadBalancer(input *DetachElasticLoadBalancerInput) (*DetachElasticLoadBalancerOutput, error) {
-	req, out := c.DetachElasticLoadBalancerRequest(input)
-	return out, req.Send()
-}
-
-// DetachElasticLoadBalancerWithContext is the same as DetachElasticLoadBalancer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachElasticLoadBalancer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DetachElasticLoadBalancerWithContext(ctx aws.Context, input *DetachElasticLoadBalancerInput, opts ...aws.Option) (*DetachElasticLoadBalancerOutput, error) {
-	req, out := c.DetachElasticLoadBalancerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DetachElasticLoadBalancerRequest{Request: req, Input: input}
 }
 
 const opDisassociateElasticIp = "DisassociateElasticIp"
 
-// DisassociateElasticIpRequest generates a "aws.Request" representing the
-// client's request for the DisassociateElasticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateElasticIp for more information on using the DisassociateElasticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisassociateElasticIpRequest method.
-//    req, resp := client.DisassociateElasticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIp
-func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInput) (req *aws.Request, output *DisassociateElasticIpOutput) {
-	op := &aws.Operation{
-		Name:       opDisassociateElasticIp,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DisassociateElasticIpInput{}
-	}
-
-	output = &DisassociateElasticIpOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DisassociateElasticIpRequest is a API request type for the DisassociateElasticIp API operation.
+type DisassociateElasticIpRequest struct {
+	*aws.Request
+	Input *DisassociateElasticIpInput
 }
 
-// DisassociateElasticIp API operation for AWS OpsWorks.
+// Send marshals and sends the DisassociateElasticIp API request.
+func (r *DisassociateElasticIpRequest) Send() (*DisassociateElasticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateElasticIpOutput), nil
+}
+
+// DisassociateElasticIpRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Disassociates an Elastic IP address from its instance. The address remains
 // registered with the stack. For more information, see Resource Management
@@ -3944,69 +2388,69 @@ func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInpu
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation DisassociateElasticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the DisassociateElasticIpRequest method.
+//    req := client.DisassociateElasticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIp
-func (c *OpsWorks) DisassociateElasticIp(input *DisassociateElasticIpInput) (*DisassociateElasticIpOutput, error) {
-	req, out := c.DisassociateElasticIpRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInput) DisassociateElasticIpRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateElasticIp,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DisassociateElasticIpWithContext is the same as DisassociateElasticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateElasticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DisassociateElasticIpWithContext(ctx aws.Context, input *DisassociateElasticIpInput, opts ...aws.Option) (*DisassociateElasticIpOutput, error) {
-	req, out := c.DisassociateElasticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DisassociateElasticIpInput{}
+	}
+
+	req := c.newRequest(op, input, &DisassociateElasticIpOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DisassociateElasticIpRequest{Request: req, Input: input}
 }
 
 const opGetHostnameSuggestion = "GetHostnameSuggestion"
 
-// GetHostnameSuggestionRequest generates a "aws.Request" representing the
-// client's request for the GetHostnameSuggestion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHostnameSuggestionRequest is a API request type for the GetHostnameSuggestion API operation.
+type GetHostnameSuggestionRequest struct {
+	*aws.Request
+	Input *GetHostnameSuggestionInput
+}
+
+// Send marshals and sends the GetHostnameSuggestion API request.
+func (r *GetHostnameSuggestionRequest) Send() (*GetHostnameSuggestionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHostnameSuggestionOutput), nil
+}
+
+// GetHostnameSuggestionRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a generated host name for the specified layer, based on the current
+// host name theme.
 //
-// See GetHostnameSuggestion for more information on using the GetHostnameSuggestion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the GetHostnameSuggestionRequest method.
-//    req, resp := client.GetHostnameSuggestionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHostnameSuggestionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestion
-func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput) (req *aws.Request, output *GetHostnameSuggestionOutput) {
+func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput) GetHostnameSuggestionRequest {
 	op := &aws.Operation{
 		Name:       opGetHostnameSuggestion,
 		HTTPMethod: "POST",
@@ -4017,84 +2461,44 @@ func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInpu
 		input = &GetHostnameSuggestionInput{}
 	}
 
-	output = &GetHostnameSuggestionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHostnameSuggestion API operation for AWS OpsWorks.
-//
-// Gets a generated host name for the specified layer, based on the current
-// host name theme.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation GetHostnameSuggestion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestion
-func (c *OpsWorks) GetHostnameSuggestion(input *GetHostnameSuggestionInput) (*GetHostnameSuggestionOutput, error) {
-	req, out := c.GetHostnameSuggestionRequest(input)
-	return out, req.Send()
-}
-
-// GetHostnameSuggestionWithContext is the same as GetHostnameSuggestion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHostnameSuggestion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) GetHostnameSuggestionWithContext(ctx aws.Context, input *GetHostnameSuggestionInput, opts ...aws.Option) (*GetHostnameSuggestionOutput, error) {
-	req, out := c.GetHostnameSuggestionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHostnameSuggestionOutput{})
+	return GetHostnameSuggestionRequest{Request: req, Input: input}
 }
 
 const opGrantAccess = "GrantAccess"
 
-// GrantAccessRequest generates a "aws.Request" representing the
-// client's request for the GrantAccess operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GrantAccessRequest is a API request type for the GrantAccess API operation.
+type GrantAccessRequest struct {
+	*aws.Request
+	Input *GrantAccessInput
+}
+
+// Send marshals and sends the GrantAccess API request.
+func (r *GrantAccessRequest) Send() (*GrantAccessOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GrantAccessOutput), nil
+}
+
+// GrantAccessRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This action can be used only with Windows stacks.
 //
-// See GrantAccess for more information on using the GrantAccess
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Grants RDP access to a Windows instance for a specified time period.
 //
 //    // Example sending a request using the GrantAccessRequest method.
-//    req, resp := client.GrantAccessRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GrantAccessRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccess
-func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) (req *aws.Request, output *GrantAccessOutput) {
+func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) GrantAccessRequest {
 	op := &aws.Operation{
 		Name:       opGrantAccess,
 		HTTPMethod: "POST",
@@ -4105,80 +2509,42 @@ func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) (req *aws.Request
 		input = &GrantAccessInput{}
 	}
 
-	output = &GrantAccessOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GrantAccess API operation for AWS OpsWorks.
-//
-// This action can be used only with Windows stacks.
-//
-// Grants RDP access to a Windows instance for a specified time period.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation GrantAccess for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccess
-func (c *OpsWorks) GrantAccess(input *GrantAccessInput) (*GrantAccessOutput, error) {
-	req, out := c.GrantAccessRequest(input)
-	return out, req.Send()
-}
-
-// GrantAccessWithContext is the same as GrantAccess with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GrantAccess for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) GrantAccessWithContext(ctx aws.Context, input *GrantAccessInput, opts ...aws.Option) (*GrantAccessOutput, error) {
-	req, out := c.GrantAccessRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GrantAccessOutput{})
+	return GrantAccessRequest{Request: req, Input: input}
 }
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws.Request" representing the
-// client's request for the ListTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsRequest is a API request type for the ListTags API operation.
+type ListTagsRequest struct {
+	*aws.Request
+	Input *ListTagsInput
+}
+
+// Send marshals and sends the ListTags API request.
+func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOutput), nil
+}
+
+// ListTagsRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTags for more information on using the ListTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of tags that are applied to the specified stack or layer.
 //
 //    // Example sending a request using the ListTagsRequest method.
-//    req, resp := client.ListTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTags
-func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
@@ -4189,78 +2555,48 @@ func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) (req *aws.Request, outp
 		input = &ListTagsInput{}
 	}
 
-	output = &ListTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTags API operation for AWS OpsWorks.
-//
-// Returns a list of tags that are applied to the specified stack or layer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation ListTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTags
-func (c *OpsWorks) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsWithContext is the same as ListTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
-	req, out := c.ListTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOutput{})
+	return ListTagsRequest{Request: req, Input: input}
 }
 
 const opRebootInstance = "RebootInstance"
 
-// RebootInstanceRequest generates a "aws.Request" representing the
-// client's request for the RebootInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebootInstanceRequest is a API request type for the RebootInstance API operation.
+type RebootInstanceRequest struct {
+	*aws.Request
+	Input *RebootInstanceInput
+}
+
+// Send marshals and sends the RebootInstance API request.
+func (r *RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootInstanceOutput), nil
+}
+
+// RebootInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Reboots a specified instance. For more information, see Starting, Stopping,
+// and Rebooting Instances (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html).
 //
-// See RebootInstance for more information on using the RebootInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the RebootInstanceRequest method.
-//    req, resp := client.RebootInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebootInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstance
-func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.Request, output *RebootInstanceOutput) {
+func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRebootInstance,
 		HTTPMethod: "POST",
@@ -4271,102 +2607,32 @@ func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.R
 		input = &RebootInstanceInput{}
 	}
 
-	output = &RebootInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RebootInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RebootInstance API operation for AWS OpsWorks.
-//
-// Reboots a specified instance. For more information, see Starting, Stopping,
-// and Rebooting Instances (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RebootInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstance
-func (c *OpsWorks) RebootInstance(input *RebootInstanceInput) (*RebootInstanceOutput, error) {
-	req, out := c.RebootInstanceRequest(input)
-	return out, req.Send()
-}
-
-// RebootInstanceWithContext is the same as RebootInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...aws.Option) (*RebootInstanceOutput, error) {
-	req, out := c.RebootInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RebootInstanceRequest{Request: req, Input: input}
 }
 
 const opRegisterEcsCluster = "RegisterEcsCluster"
 
-// RegisterEcsClusterRequest generates a "aws.Request" representing the
-// client's request for the RegisterEcsCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterEcsCluster for more information on using the RegisterEcsCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterEcsClusterRequest method.
-//    req, resp := client.RegisterEcsClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsCluster
-func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) (req *aws.Request, output *RegisterEcsClusterOutput) {
-	op := &aws.Operation{
-		Name:       opRegisterEcsCluster,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RegisterEcsClusterInput{}
-	}
-
-	output = &RegisterEcsClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RegisterEcsClusterRequest is a API request type for the RegisterEcsCluster API operation.
+type RegisterEcsClusterRequest struct {
+	*aws.Request
+	Input *RegisterEcsClusterInput
 }
 
-// RegisterEcsCluster API operation for AWS OpsWorks.
+// Send marshals and sends the RegisterEcsCluster API request.
+func (r *RegisterEcsClusterRequest) Send() (*RegisterEcsClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterEcsClusterOutput), nil
+}
+
+// RegisterEcsClusterRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Registers a specified Amazon ECS cluster with a stack. You can register only
 // one cluster with a stack. A cluster can be registered with only one stack.
@@ -4377,85 +2643,49 @@ func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) (re
 // permissions. For more information on user permissions, see  Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RegisterEcsCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsCluster
-func (c *OpsWorks) RegisterEcsCluster(input *RegisterEcsClusterInput) (*RegisterEcsClusterOutput, error) {
-	req, out := c.RegisterEcsClusterRequest(input)
-	return out, req.Send()
-}
-
-// RegisterEcsClusterWithContext is the same as RegisterEcsCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterEcsCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RegisterEcsClusterWithContext(ctx aws.Context, input *RegisterEcsClusterInput, opts ...aws.Option) (*RegisterEcsClusterOutput, error) {
-	req, out := c.RegisterEcsClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterElasticIp = "RegisterElasticIp"
-
-// RegisterElasticIpRequest generates a "aws.Request" representing the
-// client's request for the RegisterElasticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterElasticIp for more information on using the RegisterElasticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterElasticIpRequest method.
-//    req, resp := client.RegisterElasticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterEcsClusterRequest method.
+//    req := client.RegisterEcsClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIp
-func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) (req *aws.Request, output *RegisterElasticIpOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsCluster
+func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) RegisterEcsClusterRequest {
 	op := &aws.Operation{
-		Name:       opRegisterElasticIp,
+		Name:       opRegisterEcsCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterElasticIpInput{}
+		input = &RegisterEcsClusterInput{}
 	}
 
-	output = &RegisterElasticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RegisterEcsClusterOutput{})
+	return RegisterEcsClusterRequest{Request: req, Input: input}
 }
 
-// RegisterElasticIp API operation for AWS OpsWorks.
+const opRegisterElasticIp = "RegisterElasticIp"
+
+// RegisterElasticIpRequest is a API request type for the RegisterElasticIp API operation.
+type RegisterElasticIpRequest struct {
+	*aws.Request
+	Input *RegisterElasticIpInput
+}
+
+// Send marshals and sends the RegisterElasticIp API request.
+func (r *RegisterElasticIpRequest) Send() (*RegisterElasticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterElasticIpOutput), nil
+}
+
+// RegisterElasticIpRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Registers an Elastic IP address with a specified stack. An address can be
 // registered with only one stack at a time. If the address is already registered,
@@ -4467,85 +2697,49 @@ func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) (req 
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RegisterElasticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIp
-func (c *OpsWorks) RegisterElasticIp(input *RegisterElasticIpInput) (*RegisterElasticIpOutput, error) {
-	req, out := c.RegisterElasticIpRequest(input)
-	return out, req.Send()
-}
-
-// RegisterElasticIpWithContext is the same as RegisterElasticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterElasticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RegisterElasticIpWithContext(ctx aws.Context, input *RegisterElasticIpInput, opts ...aws.Option) (*RegisterElasticIpOutput, error) {
-	req, out := c.RegisterElasticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterInstance = "RegisterInstance"
-
-// RegisterInstanceRequest generates a "aws.Request" representing the
-// client's request for the RegisterInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterInstance for more information on using the RegisterInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterInstanceRequest method.
-//    req, resp := client.RegisterInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterElasticIpRequest method.
+//    req := client.RegisterElasticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstance
-func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) (req *aws.Request, output *RegisterInstanceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIp
+func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) RegisterElasticIpRequest {
 	op := &aws.Operation{
-		Name:       opRegisterInstance,
+		Name:       opRegisterElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterInstanceInput{}
+		input = &RegisterElasticIpInput{}
 	}
 
-	output = &RegisterInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RegisterElasticIpOutput{})
+	return RegisterElasticIpRequest{Request: req, Input: input}
 }
 
-// RegisterInstance API operation for AWS OpsWorks.
+const opRegisterInstance = "RegisterInstance"
+
+// RegisterInstanceRequest is a API request type for the RegisterInstance API operation.
+type RegisterInstanceRequest struct {
+	*aws.Request
+	Input *RegisterInstanceInput
+}
+
+// Send marshals and sends the RegisterInstance API request.
+func (r *RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterInstanceOutput), nil
+}
+
+// RegisterInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Registers instances that were created outside of AWS OpsWorks Stacks with
 // a specified stack.
@@ -4568,69 +2762,66 @@ func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) (req *a
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RegisterInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the RegisterInstanceRequest method.
+//    req := client.RegisterInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstance
-func (c *OpsWorks) RegisterInstance(input *RegisterInstanceInput) (*RegisterInstanceOutput, error) {
-	req, out := c.RegisterInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) RegisterInstanceRequest {
+	op := &aws.Operation{
+		Name:       opRegisterInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RegisterInstanceWithContext is the same as RegisterInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RegisterInstanceWithContext(ctx aws.Context, input *RegisterInstanceInput, opts ...aws.Option) (*RegisterInstanceOutput, error) {
-	req, out := c.RegisterInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RegisterInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &RegisterInstanceOutput{})
+	return RegisterInstanceRequest{Request: req, Input: input}
 }
 
 const opRegisterRdsDbInstance = "RegisterRdsDbInstance"
 
-// RegisterRdsDbInstanceRequest generates a "aws.Request" representing the
-// client's request for the RegisterRdsDbInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterRdsDbInstanceRequest is a API request type for the RegisterRdsDbInstance API operation.
+type RegisterRdsDbInstanceRequest struct {
+	*aws.Request
+	Input *RegisterRdsDbInstanceInput
+}
+
+// Send marshals and sends the RegisterRdsDbInstance API request.
+func (r *RegisterRdsDbInstanceRequest) Send() (*RegisterRdsDbInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterRdsDbInstanceOutput), nil
+}
+
+// RegisterRdsDbInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Registers an Amazon RDS instance with a stack.
 //
-// See RegisterRdsDbInstance for more information on using the RegisterRdsDbInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the RegisterRdsDbInstanceRequest method.
-//    req, resp := client.RegisterRdsDbInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterRdsDbInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstance
-func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput) (req *aws.Request, output *RegisterRdsDbInstanceOutput) {
+func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput) RegisterRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterRdsDbInstance,
 		HTTPMethod: "POST",
@@ -4641,101 +2832,32 @@ func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInpu
 		input = &RegisterRdsDbInstanceInput{}
 	}
 
-	output = &RegisterRdsDbInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// RegisterRdsDbInstance API operation for AWS OpsWorks.
-//
-// Registers an Amazon RDS instance with a stack.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RegisterRdsDbInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstance
-func (c *OpsWorks) RegisterRdsDbInstance(input *RegisterRdsDbInstanceInput) (*RegisterRdsDbInstanceOutput, error) {
-	req, out := c.RegisterRdsDbInstanceRequest(input)
-	return out, req.Send()
-}
-
-// RegisterRdsDbInstanceWithContext is the same as RegisterRdsDbInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterRdsDbInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RegisterRdsDbInstanceWithContext(ctx aws.Context, input *RegisterRdsDbInstanceInput, opts ...aws.Option) (*RegisterRdsDbInstanceOutput, error) {
-	req, out := c.RegisterRdsDbInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return RegisterRdsDbInstanceRequest{Request: req, Input: input}
 }
 
 const opRegisterVolume = "RegisterVolume"
 
-// RegisterVolumeRequest generates a "aws.Request" representing the
-// client's request for the RegisterVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterVolume for more information on using the RegisterVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterVolumeRequest method.
-//    req, resp := client.RegisterVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolume
-func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) (req *aws.Request, output *RegisterVolumeOutput) {
-	op := &aws.Operation{
-		Name:       opRegisterVolume,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RegisterVolumeInput{}
-	}
-
-	output = &RegisterVolumeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RegisterVolumeRequest is a API request type for the RegisterVolume API operation.
+type RegisterVolumeRequest struct {
+	*aws.Request
+	Input *RegisterVolumeInput
 }
 
-// RegisterVolume API operation for AWS OpsWorks.
+// Send marshals and sends the RegisterVolume API request.
+func (r *RegisterVolumeRequest) Send() (*RegisterVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterVolumeOutput), nil
+}
+
+// RegisterVolumeRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Registers an Amazon EBS volume with a specified stack. A volume can be registered
 // with only one stack at a time. If the volume is already registered, you must
@@ -4747,87 +2869,49 @@ func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) (req *aws.R
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation RegisterVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolume
-func (c *OpsWorks) RegisterVolume(input *RegisterVolumeInput) (*RegisterVolumeOutput, error) {
-	req, out := c.RegisterVolumeRequest(input)
-	return out, req.Send()
-}
-
-// RegisterVolumeWithContext is the same as RegisterVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) RegisterVolumeWithContext(ctx aws.Context, input *RegisterVolumeInput, opts ...aws.Option) (*RegisterVolumeOutput, error) {
-	req, out := c.RegisterVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
-
-// SetLoadBasedAutoScalingRequest generates a "aws.Request" representing the
-// client's request for the SetLoadBasedAutoScaling operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetLoadBasedAutoScaling for more information on using the SetLoadBasedAutoScaling
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetLoadBasedAutoScalingRequest method.
-//    req, resp := client.SetLoadBasedAutoScalingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterVolumeRequest method.
+//    req := client.RegisterVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScaling
-func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingInput) (req *aws.Request, output *SetLoadBasedAutoScalingOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolume
+func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) RegisterVolumeRequest {
 	op := &aws.Operation{
-		Name:       opSetLoadBasedAutoScaling,
+		Name:       opRegisterVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SetLoadBasedAutoScalingInput{}
+		input = &RegisterVolumeInput{}
 	}
 
-	output = &SetLoadBasedAutoScalingOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &RegisterVolumeOutput{})
+	return RegisterVolumeRequest{Request: req, Input: input}
 }
 
-// SetLoadBasedAutoScaling API operation for AWS OpsWorks.
+const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
+
+// SetLoadBasedAutoScalingRequest is a API request type for the SetLoadBasedAutoScaling API operation.
+type SetLoadBasedAutoScalingRequest struct {
+	*aws.Request
+	Input *SetLoadBasedAutoScalingInput
+}
+
+// Send marshals and sends the SetLoadBasedAutoScaling API request.
+func (r *SetLoadBasedAutoScalingRequest) Send() (*SetLoadBasedAutoScalingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetLoadBasedAutoScalingOutput), nil
+}
+
+// SetLoadBasedAutoScalingRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Specify the load-based auto scaling configuration for a specified layer.
 // For more information, see Managing Load with Time-based and Load-based Instances
@@ -4843,69 +2927,69 @@ func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScaling
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation SetLoadBasedAutoScaling for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the SetLoadBasedAutoScalingRequest method.
+//    req := client.SetLoadBasedAutoScalingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScaling
-func (c *OpsWorks) SetLoadBasedAutoScaling(input *SetLoadBasedAutoScalingInput) (*SetLoadBasedAutoScalingOutput, error) {
-	req, out := c.SetLoadBasedAutoScalingRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingInput) SetLoadBasedAutoScalingRequest {
+	op := &aws.Operation{
+		Name:       opSetLoadBasedAutoScaling,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetLoadBasedAutoScalingWithContext is the same as SetLoadBasedAutoScaling with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetLoadBasedAutoScaling for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) SetLoadBasedAutoScalingWithContext(ctx aws.Context, input *SetLoadBasedAutoScalingInput, opts ...aws.Option) (*SetLoadBasedAutoScalingOutput, error) {
-	req, out := c.SetLoadBasedAutoScalingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetLoadBasedAutoScalingInput{}
+	}
+
+	req := c.newRequest(op, input, &SetLoadBasedAutoScalingOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetLoadBasedAutoScalingRequest{Request: req, Input: input}
 }
 
 const opSetPermission = "SetPermission"
 
-// SetPermissionRequest generates a "aws.Request" representing the
-// client's request for the SetPermission operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetPermissionRequest is a API request type for the SetPermission API operation.
+type SetPermissionRequest struct {
+	*aws.Request
+	Input *SetPermissionInput
+}
+
+// Send marshals and sends the SetPermission API request.
+func (r *SetPermissionRequest) Send() (*SetPermissionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetPermissionOutput), nil
+}
+
+// SetPermissionRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Specifies a user's permissions. For more information, see Security and Permissions
+// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html).
 //
-// See SetPermission for more information on using the SetPermission
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the SetPermissionRequest method.
-//    req, resp := client.SetPermissionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetPermissionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermission
-func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) (req *aws.Request, output *SetPermissionOutput) {
+func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) SetPermissionRequest {
 	op := &aws.Operation{
 		Name:       opSetPermission,
 		HTTPMethod: "POST",
@@ -4916,104 +3000,32 @@ func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) (req *aws.Req
 		input = &SetPermissionInput{}
 	}
 
-	output = &SetPermissionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &SetPermissionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// SetPermission API operation for AWS OpsWorks.
-//
-// Specifies a user's permissions. For more information, see Security and Permissions
-// (http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation SetPermission for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermission
-func (c *OpsWorks) SetPermission(input *SetPermissionInput) (*SetPermissionOutput, error) {
-	req, out := c.SetPermissionRequest(input)
-	return out, req.Send()
-}
-
-// SetPermissionWithContext is the same as SetPermission with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetPermission for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) SetPermissionWithContext(ctx aws.Context, input *SetPermissionInput, opts ...aws.Option) (*SetPermissionOutput, error) {
-	req, out := c.SetPermissionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return SetPermissionRequest{Request: req, Input: input}
 }
 
 const opSetTimeBasedAutoScaling = "SetTimeBasedAutoScaling"
 
-// SetTimeBasedAutoScalingRequest generates a "aws.Request" representing the
-// client's request for the SetTimeBasedAutoScaling operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetTimeBasedAutoScaling for more information on using the SetTimeBasedAutoScaling
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SetTimeBasedAutoScalingRequest method.
-//    req, resp := client.SetTimeBasedAutoScalingRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScaling
-func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingInput) (req *aws.Request, output *SetTimeBasedAutoScalingOutput) {
-	op := &aws.Operation{
-		Name:       opSetTimeBasedAutoScaling,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &SetTimeBasedAutoScalingInput{}
-	}
-
-	output = &SetTimeBasedAutoScalingOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// SetTimeBasedAutoScalingRequest is a API request type for the SetTimeBasedAutoScaling API operation.
+type SetTimeBasedAutoScalingRequest struct {
+	*aws.Request
+	Input *SetTimeBasedAutoScalingInput
 }
 
-// SetTimeBasedAutoScaling API operation for AWS OpsWorks.
+// Send marshals and sends the SetTimeBasedAutoScaling API request.
+func (r *SetTimeBasedAutoScalingRequest) Send() (*SetTimeBasedAutoScalingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetTimeBasedAutoScalingOutput), nil
+}
+
+// SetTimeBasedAutoScalingRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Specify the time-based auto scaling configuration for a specified instance.
 // For more information, see Managing Load with Time-based and Load-based Instances
@@ -5024,69 +3036,69 @@ func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScaling
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation SetTimeBasedAutoScaling for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the SetTimeBasedAutoScalingRequest method.
+//    req := client.SetTimeBasedAutoScalingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScaling
-func (c *OpsWorks) SetTimeBasedAutoScaling(input *SetTimeBasedAutoScalingInput) (*SetTimeBasedAutoScalingOutput, error) {
-	req, out := c.SetTimeBasedAutoScalingRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingInput) SetTimeBasedAutoScalingRequest {
+	op := &aws.Operation{
+		Name:       opSetTimeBasedAutoScaling,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// SetTimeBasedAutoScalingWithContext is the same as SetTimeBasedAutoScaling with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetTimeBasedAutoScaling for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) SetTimeBasedAutoScalingWithContext(ctx aws.Context, input *SetTimeBasedAutoScalingInput, opts ...aws.Option) (*SetTimeBasedAutoScalingOutput, error) {
-	req, out := c.SetTimeBasedAutoScalingRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &SetTimeBasedAutoScalingInput{}
+	}
+
+	req := c.newRequest(op, input, &SetTimeBasedAutoScalingOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SetTimeBasedAutoScalingRequest{Request: req, Input: input}
 }
 
 const opStartInstance = "StartInstance"
 
-// StartInstanceRequest generates a "aws.Request" representing the
-// client's request for the StartInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartInstanceRequest is a API request type for the StartInstance API operation.
+type StartInstanceRequest struct {
+	*aws.Request
+	Input *StartInstanceInput
+}
+
+// Send marshals and sends the StartInstance API request.
+func (r *StartInstanceRequest) Send() (*StartInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartInstanceOutput), nil
+}
+
+// StartInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Starts a specified instance. For more information, see Starting, Stopping,
+// and Rebooting Instances (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html).
 //
-// See StartInstance for more information on using the StartInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the StartInstanceRequest method.
-//    req, resp := client.StartInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstance
-func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) (req *aws.Request, output *StartInstanceOutput) {
+func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) StartInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
@@ -5097,86 +3109,49 @@ func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) (req *aws.Req
 		input = &StartInstanceInput{}
 	}
 
-	output = &StartInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StartInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return StartInstanceRequest{Request: req, Input: input}
 }
 
-// StartInstance API operation for AWS OpsWorks.
+const opStartStack = "StartStack"
+
+// StartStackRequest is a API request type for the StartStack API operation.
+type StartStackRequest struct {
+	*aws.Request
+	Input *StartStackInput
+}
+
+// Send marshals and sends the StartStack API request.
+func (r *StartStackRequest) Send() (*StartStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartStackOutput), nil
+}
+
+// StartStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Starts a specified instance. For more information, see Starting, Stopping,
-// and Rebooting Instances (http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html).
+// Starts a stack's instances.
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation StartInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstance
-func (c *OpsWorks) StartInstance(input *StartInstanceInput) (*StartInstanceOutput, error) {
-	req, out := c.StartInstanceRequest(input)
-	return out, req.Send()
-}
-
-// StartInstanceWithContext is the same as StartInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...aws.Option) (*StartInstanceOutput, error) {
-	req, out := c.StartInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartStack = "StartStack"
-
-// StartStackRequest generates a "aws.Request" representing the
-// client's request for the StartStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartStack for more information on using the StartStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the StartStackRequest method.
-//    req, resp := client.StartStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStack
-func (c *OpsWorks) StartStackRequest(input *StartStackInput) (req *aws.Request, output *StartStackOutput) {
+func (c *OpsWorks) StartStackRequest(input *StartStackInput) StartStackRequest {
 	op := &aws.Operation{
 		Name:       opStartStack,
 		HTTPMethod: "POST",
@@ -5187,103 +3162,32 @@ func (c *OpsWorks) StartStackRequest(input *StartStackInput) (req *aws.Request, 
 		input = &StartStackInput{}
 	}
 
-	output = &StartStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StartStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// StartStack API operation for AWS OpsWorks.
-//
-// Starts a stack's instances.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation StartStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStack
-func (c *OpsWorks) StartStack(input *StartStackInput) (*StartStackOutput, error) {
-	req, out := c.StartStackRequest(input)
-	return out, req.Send()
-}
-
-// StartStackWithContext is the same as StartStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) StartStackWithContext(ctx aws.Context, input *StartStackInput, opts ...aws.Option) (*StartStackOutput, error) {
-	req, out := c.StartStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return StartStackRequest{Request: req, Input: input}
 }
 
 const opStopInstance = "StopInstance"
 
-// StopInstanceRequest generates a "aws.Request" representing the
-// client's request for the StopInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopInstance for more information on using the StopInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopInstanceRequest method.
-//    req, resp := client.StopInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstance
-func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) (req *aws.Request, output *StopInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opStopInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &StopInstanceInput{}
-	}
-
-	output = &StopInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// StopInstanceRequest is a API request type for the StopInstance API operation.
+type StopInstanceRequest struct {
+	*aws.Request
+	Input *StopInstanceInput
 }
 
-// StopInstance API operation for AWS OpsWorks.
+// Send marshals and sends the StopInstance API request.
+func (r *StopInstanceRequest) Send() (*StopInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopInstanceOutput), nil
+}
+
+// StopInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Stops a specified instance. When you stop a standard instance, the data disappears
 // and must be reinstalled when you restart the instance. You can stop an Amazon
@@ -5295,69 +3199,68 @@ func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) (req *aws.Reque
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation StopInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the StopInstanceRequest method.
+//    req := client.StopInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstance
-func (c *OpsWorks) StopInstance(input *StopInstanceInput) (*StopInstanceOutput, error) {
-	req, out := c.StopInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) StopInstanceRequest {
+	op := &aws.Operation{
+		Name:       opStopInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StopInstanceWithContext is the same as StopInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...aws.Option) (*StopInstanceOutput, error) {
-	req, out := c.StopInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StopInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &StopInstanceOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return StopInstanceRequest{Request: req, Input: input}
 }
 
 const opStopStack = "StopStack"
 
-// StopStackRequest generates a "aws.Request" representing the
-// client's request for the StopStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopStackRequest is a API request type for the StopStack API operation.
+type StopStackRequest struct {
+	*aws.Request
+	Input *StopStackInput
+}
+
+// Send marshals and sends the StopStack API request.
+func (r *StopStackRequest) Send() (*StopStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopStackOutput), nil
+}
+
+// StopStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Stops a specified stack.
 //
-// See StopStack for more information on using the StopStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the StopStackRequest method.
-//    req, resp := client.StopStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStack
-func (c *OpsWorks) StopStackRequest(input *StopStackInput) (req *aws.Request, output *StopStackOutput) {
+func (c *OpsWorks) StopStackRequest(input *StopStackInput) StopStackRequest {
 	op := &aws.Operation{
 		Name:       opStopStack,
 		HTTPMethod: "POST",
@@ -5368,85 +3271,46 @@ func (c *OpsWorks) StopStackRequest(input *StopStackInput) (req *aws.Request, ou
 		input = &StopStackInput{}
 	}
 
-	output = &StopStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StopStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// StopStack API operation for AWS OpsWorks.
-//
-// Stops a specified stack.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation StopStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStack
-func (c *OpsWorks) StopStack(input *StopStackInput) (*StopStackOutput, error) {
-	req, out := c.StopStackRequest(input)
-	return out, req.Send()
-}
-
-// StopStackWithContext is the same as StopStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) StopStackWithContext(ctx aws.Context, input *StopStackInput, opts ...aws.Option) (*StopStackOutput, error) {
-	req, out := c.StopStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return StopStackRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
+// Stacks. For more information about how tagging works, see Tags (http://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
+// in the AWS OpsWorks User Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResource
-func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -5457,100 +3321,32 @@ func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) (req *aws.Request
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// TagResource API operation for AWS OpsWorks.
-//
-// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
-// Stacks. For more information about how tagging works, see Tags (http://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
-// in the AWS OpsWorks User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResource
-func (c *OpsWorks) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUnassignInstance = "UnassignInstance"
 
-// UnassignInstanceRequest generates a "aws.Request" representing the
-// client's request for the UnassignInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UnassignInstance for more information on using the UnassignInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UnassignInstanceRequest method.
-//    req, resp := client.UnassignInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstance
-func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) (req *aws.Request, output *UnassignInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opUnassignInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UnassignInstanceInput{}
-	}
-
-	output = &UnassignInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// UnassignInstanceRequest is a API request type for the UnassignInstance API operation.
+type UnassignInstanceRequest struct {
+	*aws.Request
+	Input *UnassignInstanceInput
 }
 
-// UnassignInstance API operation for AWS OpsWorks.
+// Send marshals and sends the UnassignInstance API request.
+func (r *UnassignInstanceRequest) Send() (*UnassignInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UnassignInstanceOutput), nil
+}
+
+// UnassignInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
 // Unassigns a registered instance from all of it's layers. The instance remains
 // in the stack as an unassigned instance and can be assigned to another layer,
@@ -5562,69 +3358,69 @@ func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) (req *a
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UnassignInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
+//    // Example sending a request using the UnassignInstanceRequest method.
+//    req := client.UnassignInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstance
-func (c *OpsWorks) UnassignInstance(input *UnassignInstanceInput) (*UnassignInstanceOutput, error) {
-	req, out := c.UnassignInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) UnassignInstanceRequest {
+	op := &aws.Operation{
+		Name:       opUnassignInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UnassignInstanceWithContext is the same as UnassignInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UnassignInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UnassignInstanceWithContext(ctx aws.Context, input *UnassignInstanceInput, opts ...aws.Option) (*UnassignInstanceOutput, error) {
-	req, out := c.UnassignInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UnassignInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &UnassignInstanceOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return UnassignInstanceRequest{Request: req, Input: input}
 }
 
 const opUnassignVolume = "UnassignVolume"
 
-// UnassignVolumeRequest generates a "aws.Request" representing the
-// client's request for the UnassignVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UnassignVolumeRequest is a API request type for the UnassignVolume API operation.
+type UnassignVolumeRequest struct {
+	*aws.Request
+	Input *UnassignVolumeInput
+}
+
+// Send marshals and sends the UnassignVolume API request.
+func (r *UnassignVolumeRequest) Send() (*UnassignVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UnassignVolumeOutput), nil
+}
+
+// UnassignVolumeRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Unassigns an assigned Amazon EBS volume. The volume remains registered with
+// the stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
 //
-// See UnassignVolume for more information on using the UnassignVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UnassignVolumeRequest method.
-//    req, resp := client.UnassignVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UnassignVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolume
-func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) (req *aws.Request, output *UnassignVolumeOutput) {
+func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) UnassignVolumeRequest {
 	op := &aws.Operation{
 		Name:       opUnassignVolume,
 		HTTPMethod: "POST",
@@ -5635,86 +3431,44 @@ func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) (req *aws.R
 		input = &UnassignVolumeInput{}
 	}
 
-	output = &UnassignVolumeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UnassignVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UnassignVolume API operation for AWS OpsWorks.
-//
-// Unassigns an assigned Amazon EBS volume. The volume remains registered with
-// the stack. For more information, see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UnassignVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolume
-func (c *OpsWorks) UnassignVolume(input *UnassignVolumeInput) (*UnassignVolumeOutput, error) {
-	req, out := c.UnassignVolumeRequest(input)
-	return out, req.Send()
-}
-
-// UnassignVolumeWithContext is the same as UnassignVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UnassignVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UnassignVolumeWithContext(ctx aws.Context, input *UnassignVolumeInput, opts ...aws.Option) (*UnassignVolumeOutput, error) {
-	req, out := c.UnassignVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UnassignVolumeRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes tags from a specified stack or layer.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResource
-func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -5725,80 +3479,49 @@ func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) (req *aws.Req
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagResource API operation for AWS OpsWorks.
-//
-// Removes tags from a specified stack or layer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResource
-func (c *OpsWorks) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateApp = "UpdateApp"
 
-// UpdateAppRequest generates a "aws.Request" representing the
-// client's request for the UpdateApp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateAppRequest is a API request type for the UpdateApp API operation.
+type UpdateAppRequest struct {
+	*aws.Request
+	Input *UpdateAppInput
+}
+
+// Send marshals and sends the UpdateApp API request.
+func (r *UpdateAppRequest) Send() (*UpdateAppOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAppOutput), nil
+}
+
+// UpdateAppRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a specified app.
 //
-// See UpdateApp for more information on using the UpdateApp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Deploy
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information on user permissions, see Managing
+// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateAppRequest method.
-//    req, resp := client.UpdateAppRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateAppRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateApp
-func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) (req *aws.Request, output *UpdateAppOutput) {
+func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) UpdateAppRequest {
 	op := &aws.Operation{
 		Name:       opUpdateApp,
 		HTTPMethod: "POST",
@@ -5809,85 +3532,50 @@ func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) (req *aws.Request, ou
 		input = &UpdateAppInput{}
 	}
 
-	output = &UpdateAppOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateAppOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateApp API operation for AWS OpsWorks.
-//
-// Updates a specified app.
-//
-// Required Permissions: To use this action, an IAM user must have a Deploy
-// or Manage permissions level for the stack, or an attached policy that explicitly
-// grants permissions. For more information on user permissions, see Managing
-// User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateApp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateApp
-func (c *OpsWorks) UpdateApp(input *UpdateAppInput) (*UpdateAppOutput, error) {
-	req, out := c.UpdateAppRequest(input)
-	return out, req.Send()
-}
-
-// UpdateAppWithContext is the same as UpdateApp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateApp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateAppWithContext(ctx aws.Context, input *UpdateAppInput, opts ...aws.Option) (*UpdateAppOutput, error) {
-	req, out := c.UpdateAppRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateAppRequest{Request: req, Input: input}
 }
 
 const opUpdateElasticIp = "UpdateElasticIp"
 
-// UpdateElasticIpRequest generates a "aws.Request" representing the
-// client's request for the UpdateElasticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateElasticIpRequest is a API request type for the UpdateElasticIp API operation.
+type UpdateElasticIpRequest struct {
+	*aws.Request
+	Input *UpdateElasticIpInput
+}
+
+// Send marshals and sends the UpdateElasticIp API request.
+func (r *UpdateElasticIpRequest) Send() (*UpdateElasticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateElasticIpOutput), nil
+}
+
+// UpdateElasticIpRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a registered Elastic IP address's name. For more information, see
+// Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
 //
-// See UpdateElasticIp for more information on using the UpdateElasticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateElasticIpRequest method.
-//    req, resp := client.UpdateElasticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateElasticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIp
-func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) (req *aws.Request, output *UpdateElasticIpOutput) {
+func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) UpdateElasticIpRequest {
 	op := &aws.Operation{
 		Name:       opUpdateElasticIp,
 		HTTPMethod: "POST",
@@ -5898,86 +3586,49 @@ func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) (req *aws
 		input = &UpdateElasticIpInput{}
 	}
 
-	output = &UpdateElasticIpOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateElasticIpOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateElasticIpRequest{Request: req, Input: input}
 }
 
-// UpdateElasticIp API operation for AWS OpsWorks.
+const opUpdateInstance = "UpdateInstance"
+
+// UpdateInstanceRequest is a API request type for the UpdateInstance API operation.
+type UpdateInstanceRequest struct {
+	*aws.Request
+	Input *UpdateInstanceInput
+}
+
+// Send marshals and sends the UpdateInstance API request.
+func (r *UpdateInstanceRequest) Send() (*UpdateInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateInstanceOutput), nil
+}
+
+// UpdateInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Updates a registered Elastic IP address's name. For more information, see
-// Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
+// Updates a specified instance.
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateElasticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIp
-func (c *OpsWorks) UpdateElasticIp(input *UpdateElasticIpInput) (*UpdateElasticIpOutput, error) {
-	req, out := c.UpdateElasticIpRequest(input)
-	return out, req.Send()
-}
-
-// UpdateElasticIpWithContext is the same as UpdateElasticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateElasticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateElasticIpWithContext(ctx aws.Context, input *UpdateElasticIpInput, opts ...aws.Option) (*UpdateElasticIpOutput, error) {
-	req, out := c.UpdateElasticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateInstance = "UpdateInstance"
-
-// UpdateInstanceRequest generates a "aws.Request" representing the
-// client's request for the UpdateInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateInstance for more information on using the UpdateInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the UpdateInstanceRequest method.
-//    req, resp := client.UpdateInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstance
-func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) (req *aws.Request, output *UpdateInstanceOutput) {
+func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) UpdateInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateInstance,
 		HTTPMethod: "POST",
@@ -5988,85 +3639,49 @@ func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) (req *aws.R
 		input = &UpdateInstanceInput{}
 	}
 
-	output = &UpdateInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateInstanceRequest{Request: req, Input: input}
 }
 
-// UpdateInstance API operation for AWS OpsWorks.
+const opUpdateLayer = "UpdateLayer"
+
+// UpdateLayerRequest is a API request type for the UpdateLayer API operation.
+type UpdateLayerRequest struct {
+	*aws.Request
+	Input *UpdateLayerInput
+}
+
+// Send marshals and sends the UpdateLayer API request.
+func (r *UpdateLayerRequest) Send() (*UpdateLayerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLayerOutput), nil
+}
+
+// UpdateLayerRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Updates a specified instance.
+// Updates a specified layer.
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstance
-func (c *OpsWorks) UpdateInstance(input *UpdateInstanceInput) (*UpdateInstanceOutput, error) {
-	req, out := c.UpdateInstanceRequest(input)
-	return out, req.Send()
-}
-
-// UpdateInstanceWithContext is the same as UpdateInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateInstanceWithContext(ctx aws.Context, input *UpdateInstanceInput, opts ...aws.Option) (*UpdateInstanceOutput, error) {
-	req, out := c.UpdateInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateLayer = "UpdateLayer"
-
-// UpdateLayerRequest generates a "aws.Request" representing the
-// client's request for the UpdateLayer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateLayer for more information on using the UpdateLayer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the UpdateLayerRequest method.
-//    req, resp := client.UpdateLayerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateLayerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayer
-func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) (req *aws.Request, output *UpdateLayerOutput) {
+func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) UpdateLayerRequest {
 	op := &aws.Operation{
 		Name:       opUpdateLayer,
 		HTTPMethod: "POST",
@@ -6077,85 +3692,48 @@ func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) (req *aws.Request
 		input = &UpdateLayerInput{}
 	}
 
-	output = &UpdateLayerOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateLayerOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateLayer API operation for AWS OpsWorks.
-//
-// Updates a specified layer.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateLayer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayer
-func (c *OpsWorks) UpdateLayer(input *UpdateLayerInput) (*UpdateLayerOutput, error) {
-	req, out := c.UpdateLayerRequest(input)
-	return out, req.Send()
-}
-
-// UpdateLayerWithContext is the same as UpdateLayer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateLayer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateLayerWithContext(ctx aws.Context, input *UpdateLayerInput, opts ...aws.Option) (*UpdateLayerOutput, error) {
-	req, out := c.UpdateLayerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateLayerRequest{Request: req, Input: input}
 }
 
 const opUpdateMyUserProfile = "UpdateMyUserProfile"
 
-// UpdateMyUserProfileRequest generates a "aws.Request" representing the
-// client's request for the UpdateMyUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateMyUserProfileRequest is a API request type for the UpdateMyUserProfile API operation.
+type UpdateMyUserProfileRequest struct {
+	*aws.Request
+	Input *UpdateMyUserProfileInput
+}
+
+// Send marshals and sends the UpdateMyUserProfile API request.
+func (r *UpdateMyUserProfileRequest) Send() (*UpdateMyUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMyUserProfileOutput), nil
+}
+
+// UpdateMyUserProfileRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a user's SSH public key.
 //
-// See UpdateMyUserProfile for more information on using the UpdateMyUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have self-management
+// enabled or an attached policy that explicitly grants permissions. For more
+// information on user permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateMyUserProfileRequest method.
-//    req, resp := client.UpdateMyUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateMyUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfile
-func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) (req *aws.Request, output *UpdateMyUserProfileOutput) {
+func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) UpdateMyUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMyUserProfile,
 		HTTPMethod: "POST",
@@ -6166,81 +3744,49 @@ func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) (
 		input = &UpdateMyUserProfileInput{}
 	}
 
-	output = &UpdateMyUserProfileOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateMyUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateMyUserProfile API operation for AWS OpsWorks.
-//
-// Updates a user's SSH public key.
-//
-// Required Permissions: To use this action, an IAM user must have self-management
-// enabled or an attached policy that explicitly grants permissions. For more
-// information on user permissions, see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateMyUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfile
-func (c *OpsWorks) UpdateMyUserProfile(input *UpdateMyUserProfileInput) (*UpdateMyUserProfileOutput, error) {
-	req, out := c.UpdateMyUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMyUserProfileWithContext is the same as UpdateMyUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMyUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateMyUserProfileWithContext(ctx aws.Context, input *UpdateMyUserProfileInput, opts ...aws.Option) (*UpdateMyUserProfileOutput, error) {
-	req, out := c.UpdateMyUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateMyUserProfileRequest{Request: req, Input: input}
 }
 
 const opUpdateRdsDbInstance = "UpdateRdsDbInstance"
 
-// UpdateRdsDbInstanceRequest generates a "aws.Request" representing the
-// client's request for the UpdateRdsDbInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateRdsDbInstanceRequest is a API request type for the UpdateRdsDbInstance API operation.
+type UpdateRdsDbInstanceRequest struct {
+	*aws.Request
+	Input *UpdateRdsDbInstanceInput
+}
+
+// Send marshals and sends the UpdateRdsDbInstance API request.
+func (r *UpdateRdsDbInstanceRequest) Send() (*UpdateRdsDbInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRdsDbInstanceOutput), nil
+}
+
+// UpdateRdsDbInstanceRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates an Amazon RDS instance.
 //
-// See UpdateRdsDbInstance for more information on using the UpdateRdsDbInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateRdsDbInstanceRequest method.
-//    req, resp := client.UpdateRdsDbInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateRdsDbInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstance
-func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) (req *aws.Request, output *UpdateRdsDbInstanceOutput) {
+func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) UpdateRdsDbInstanceRequest {
 	op := &aws.Operation{
 		Name:       opUpdateRdsDbInstance,
 		HTTPMethod: "POST",
@@ -6251,85 +3797,49 @@ func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) (
 		input = &UpdateRdsDbInstanceInput{}
 	}
 
-	output = &UpdateRdsDbInstanceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateRdsDbInstanceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return UpdateRdsDbInstanceRequest{Request: req, Input: input}
 }
 
-// UpdateRdsDbInstance API operation for AWS OpsWorks.
+const opUpdateStack = "UpdateStack"
+
+// UpdateStackRequest is a API request type for the UpdateStack API operation.
+type UpdateStackRequest struct {
+	*aws.Request
+	Input *UpdateStackInput
+}
+
+// Send marshals and sends the UpdateStack API request.
+func (r *UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateStackOutput), nil
+}
+
+// UpdateStackRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Updates an Amazon RDS instance.
+// Updates a specified stack.
 //
 // Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
 // permissions. For more information on user permissions, see Managing User
 // Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateRdsDbInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstance
-func (c *OpsWorks) UpdateRdsDbInstance(input *UpdateRdsDbInstanceInput) (*UpdateRdsDbInstanceOutput, error) {
-	req, out := c.UpdateRdsDbInstanceRequest(input)
-	return out, req.Send()
-}
-
-// UpdateRdsDbInstanceWithContext is the same as UpdateRdsDbInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateRdsDbInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateRdsDbInstanceWithContext(ctx aws.Context, input *UpdateRdsDbInstanceInput, opts ...aws.Option) (*UpdateRdsDbInstanceOutput, error) {
-	req, out := c.UpdateRdsDbInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateStack = "UpdateStack"
-
-// UpdateStackRequest generates a "aws.Request" representing the
-// client's request for the UpdateStack operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateStack for more information on using the UpdateStack
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the UpdateStackRequest method.
-//    req, resp := client.UpdateStackRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateStackRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStack
-func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
+func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) UpdateStackRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStack,
 		HTTPMethod: "POST",
@@ -6340,85 +3850,48 @@ func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request
 		input = &UpdateStackInput{}
 	}
 
-	output = &UpdateStackOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateStackOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateStack API operation for AWS OpsWorks.
-//
-// Updates a specified stack.
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateStack for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStack
-func (c *OpsWorks) UpdateStack(input *UpdateStackInput) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	return out, req.Send()
-}
-
-// UpdateStackWithContext is the same as UpdateStack with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateStack for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
-	req, out := c.UpdateStackRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateStackRequest{Request: req, Input: input}
 }
 
 const opUpdateUserProfile = "UpdateUserProfile"
 
-// UpdateUserProfileRequest generates a "aws.Request" representing the
-// client's request for the UpdateUserProfile operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateUserProfileRequest is a API request type for the UpdateUserProfile API operation.
+type UpdateUserProfileRequest struct {
+	*aws.Request
+	Input *UpdateUserProfileInput
+}
+
+// Send marshals and sends the UpdateUserProfile API request.
+func (r *UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateUserProfileOutput), nil
+}
+
+// UpdateUserProfileRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a specified user profile.
 //
-// See UpdateUserProfile for more information on using the UpdateUserProfile
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information on user permissions,
+// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateUserProfileRequest method.
-//    req, resp := client.UpdateUserProfileRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateUserProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfile
-func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *aws.Request, output *UpdateUserProfileOutput) {
+func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) UpdateUserProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateUserProfile,
 		HTTPMethod: "POST",
@@ -6429,84 +3902,50 @@ func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req 
 		input = &UpdateUserProfileInput{}
 	}
 
-	output = &UpdateUserProfileOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateUserProfileOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateUserProfile API operation for AWS OpsWorks.
-//
-// Updates a specified user profile.
-//
-// Required Permissions: To use this action, an IAM user must have an attached
-// policy that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateUserProfile for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfile
-func (c *OpsWorks) UpdateUserProfile(input *UpdateUserProfileInput) (*UpdateUserProfileOutput, error) {
-	req, out := c.UpdateUserProfileRequest(input)
-	return out, req.Send()
-}
-
-// UpdateUserProfileWithContext is the same as UpdateUserProfile with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateUserProfile for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...aws.Option) (*UpdateUserProfileOutput, error) {
-	req, out := c.UpdateUserProfileRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateUserProfileRequest{Request: req, Input: input}
 }
 
 const opUpdateVolume = "UpdateVolume"
 
-// UpdateVolumeRequest generates a "aws.Request" representing the
-// client's request for the UpdateVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateVolumeRequest is a API request type for the UpdateVolume API operation.
+type UpdateVolumeRequest struct {
+	*aws.Request
+	Input *UpdateVolumeInput
+}
+
+// Send marshals and sends the UpdateVolume API request.
+func (r *UpdateVolumeRequest) Send() (*UpdateVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVolumeOutput), nil
+}
+
+// UpdateVolumeRequest returns a request value for making API operation for
+// AWS OpsWorks.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates an Amazon EBS volume's name or mount point. For more information,
+// see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
 //
-// See UpdateVolume for more information on using the UpdateVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see Managing User
+// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 //
 //    // Example sending a request using the UpdateVolumeRequest method.
-//    req, resp := client.UpdateVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolume
-func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) (req *aws.Request, output *UpdateVolumeOutput) {
+func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) UpdateVolumeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVolume,
 		HTTPMethod: "POST",
@@ -6517,57 +3956,10 @@ func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) (req *aws.Reque
 		input = &UpdateVolumeInput{}
 	}
 
-	output = &UpdateVolumeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UpdateVolumeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UpdateVolume API operation for AWS OpsWorks.
-//
-// Updates an Amazon EBS volume's name or mount point. For more information,
-// see Resource Management (http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html).
-//
-// Required Permissions: To use this action, an IAM user must have a Manage
-// permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS OpsWorks's
-// API operation UpdateVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that a request was not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   Indicates that a resource was not found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolume
-func (c *OpsWorks) UpdateVolume(input *UpdateVolumeInput) (*UpdateVolumeOutput, error) {
-	req, out := c.UpdateVolumeRequest(input)
-	return out, req.Send()
-}
-
-// UpdateVolumeWithContext is the same as UpdateVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) UpdateVolumeWithContext(ctx aws.Context, input *UpdateVolumeInput, opts ...aws.Option) (*UpdateVolumeOutput, error) {
-	req, out := c.UpdateVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UpdateVolumeRequest{Request: req, Input: input}
 }
 
 // Describes an agent version.

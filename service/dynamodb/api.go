@@ -14,53 +14,24 @@ import (
 
 const opBatchGetItem = "BatchGetItem"
 
-// BatchGetItemRequest generates a "aws.Request" representing the
-// client's request for the BatchGetItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetItem for more information on using the BatchGetItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchGetItemRequest method.
-//    req, resp := client.BatchGetItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem
-func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) (req *aws.Request, output *BatchGetItemOutput) {
-	op := &aws.Operation{
-		Name:       opBatchGetItem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"RequestItems"},
-			OutputTokens:    []string{"UnprocessedKeys"},
-			LimitToken:      "",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &BatchGetItemInput{}
-	}
-
-	output = &BatchGetItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// BatchGetItemRequest is a API request type for the BatchGetItem API operation.
+type BatchGetItemRequest struct {
+	*aws.Request
+	Input *BatchGetItemInput
 }
 
-// BatchGetItem API operation for Amazon DynamoDB.
+// Send marshals and sends the BatchGetItem API request.
+func (r *BatchGetItemRequest) Send() (*BatchGetItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetItemOutput), nil
+}
+
+// BatchGetItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The BatchGetItem operation returns the attributes of one or more items from
 // one or more tables. You identify requested items by primary key.
@@ -112,49 +83,33 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) (req *aws.Reque
 // the type of read. For more information, see Capacity Units Calculations (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations)
 // in the Amazon DynamoDB Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation BatchGetItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the BatchGetItemRequest method.
+//    req := client.BatchGetItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem
-func (c *DynamoDB) BatchGetItem(input *BatchGetItemInput) (*BatchGetItemOutput, error) {
-	req, out := c.BatchGetItemRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemRequest {
+	op := &aws.Operation{
+		Name:       opBatchGetItem,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"RequestItems"},
+			OutputTokens:    []string{"UnprocessedKeys"},
+			LimitToken:      "",
+			TruncationToken: "",
+		},
+	}
 
-// BatchGetItemWithContext is the same as BatchGetItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) BatchGetItemWithContext(ctx aws.Context, input *BatchGetItemInput, opts ...aws.Option) (*BatchGetItemOutput, error) {
-	req, out := c.BatchGetItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &BatchGetItemInput{}
+	}
+
+	req := c.newRequest(op, input, &BatchGetItemOutput{})
+	return BatchGetItemRequest{Request: req, Input: input}
 }
 
 // BatchGetItemPages iterates over the pages of a BatchGetItem operation,
@@ -193,10 +148,10 @@ func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGet
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.BatchGetItemRequest(inCpy)
+			req := c.BatchGetItemRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -209,47 +164,24 @@ func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGet
 
 const opBatchWriteItem = "BatchWriteItem"
 
-// BatchWriteItemRequest generates a "aws.Request" representing the
-// client's request for the BatchWriteItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchWriteItem for more information on using the BatchWriteItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchWriteItemRequest method.
-//    req, resp := client.BatchWriteItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem
-func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) (req *aws.Request, output *BatchWriteItemOutput) {
-	op := &aws.Operation{
-		Name:       opBatchWriteItem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &BatchWriteItemInput{}
-	}
-
-	output = &BatchWriteItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// BatchWriteItemRequest is a API request type for the BatchWriteItem API operation.
+type BatchWriteItemRequest struct {
+	*aws.Request
+	Input *BatchWriteItemInput
 }
 
-// BatchWriteItem API operation for Amazon DynamoDB.
+// Send marshals and sends the BatchWriteItem API request.
+func (r *BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchWriteItemOutput), nil
+}
+
+// BatchWriteItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The BatchWriteItem operation puts or deletes multiple items in one or more
 // tables. A single call to BatchWriteItem can write up to 16 MB of data, which
@@ -321,98 +253,49 @@ func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) (req *aws.R
 //
 //    * The total request size exceeds 16 MB.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation BatchWriteItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeItemCollectionSizeLimitExceededException "ItemCollectionSizeLimitExceededException"
-//   An item collection is too large. This exception is only returned for tables
-//   that have one or more local secondary indexes.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem
-func (c *DynamoDB) BatchWriteItem(input *BatchWriteItemInput) (*BatchWriteItemOutput, error) {
-	req, out := c.BatchWriteItemRequest(input)
-	return out, req.Send()
-}
-
-// BatchWriteItemWithContext is the same as BatchWriteItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchWriteItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) BatchWriteItemWithContext(ctx aws.Context, input *BatchWriteItemInput, opts ...aws.Option) (*BatchWriteItemOutput, error) {
-	req, out := c.BatchWriteItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateTable = "CreateTable"
-
-// CreateTableRequest generates a "aws.Request" representing the
-// client's request for the CreateTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTable for more information on using the CreateTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateTableRequest method.
-//    req, resp := client.CreateTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the BatchWriteItemRequest method.
+//    req := client.BatchWriteItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable
-func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) (req *aws.Request, output *CreateTableOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem
+func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) BatchWriteItemRequest {
 	op := &aws.Operation{
-		Name:       opCreateTable,
+		Name:       opBatchWriteItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateTableInput{}
+		input = &BatchWriteItemInput{}
 	}
 
-	output = &CreateTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &BatchWriteItemOutput{})
+	return BatchWriteItemRequest{Request: req, Input: input}
 }
 
-// CreateTable API operation for Amazon DynamoDB.
+const opCreateTable = "CreateTable"
+
+// CreateTableRequest is a API request type for the CreateTable API operation.
+type CreateTableRequest struct {
+	*aws.Request
+	Input *CreateTableInput
+}
+
+// Send marshals and sends the CreateTable API request.
+func (r *CreateTableRequest) Send() (*CreateTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTableOutput), nil
+}
+
+// CreateTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The CreateTable operation adds a new table to your account. In an AWS account,
 // table names must be unique within each region. That is, you can have two
@@ -430,97 +313,49 @@ func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) (req *aws.Request
 //
 // You can use the DescribeTable action to check the table status.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation CreateTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable
-func (c *DynamoDB) CreateTable(input *CreateTableInput) (*CreateTableOutput, error) {
-	req, out := c.CreateTableRequest(input)
-	return out, req.Send()
-}
-
-// CreateTableWithContext is the same as CreateTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...aws.Option) (*CreateTableOutput, error) {
-	req, out := c.CreateTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteItem = "DeleteItem"
-
-// DeleteItemRequest generates a "aws.Request" representing the
-// client's request for the DeleteItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteItem for more information on using the DeleteItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteItemRequest method.
-//    req, resp := client.DeleteItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateTableRequest method.
+//    req := client.CreateTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem
-func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) (req *aws.Request, output *DeleteItemOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable
+func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) CreateTableRequest {
 	op := &aws.Operation{
-		Name:       opDeleteItem,
+		Name:       opCreateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteItemInput{}
+		input = &CreateTableInput{}
 	}
 
-	output = &DeleteItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateTableOutput{})
+	return CreateTableRequest{Request: req, Input: input}
 }
 
-// DeleteItem API operation for Amazon DynamoDB.
+const opDeleteItem = "DeleteItem"
+
+// DeleteItemRequest is a API request type for the DeleteItem API operation.
+type DeleteItemRequest struct {
+	*aws.Request
+	Input *DeleteItemInput
+}
+
+// Send marshals and sends the DeleteItem API request.
+func (r *DeleteItemRequest) Send() (*DeleteItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteItemOutput), nil
+}
+
+// DeleteItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Deletes a single item in a table by primary key. You can perform a conditional
 // delete operation that deletes the item if it exists, or if it has an expected
@@ -537,101 +372,49 @@ func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) (req *aws.Request, 
 // are met. If those conditions are met, DynamoDB performs the delete. Otherwise,
 // the item is not deleted.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation DeleteItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConditionalCheckFailedException "ConditionalCheckFailedException"
-//   A condition specified in the operation could not be evaluated.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeItemCollectionSizeLimitExceededException "ItemCollectionSizeLimitExceededException"
-//   An item collection is too large. This exception is only returned for tables
-//   that have one or more local secondary indexes.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem
-func (c *DynamoDB) DeleteItem(input *DeleteItemInput) (*DeleteItemOutput, error) {
-	req, out := c.DeleteItemRequest(input)
-	return out, req.Send()
-}
-
-// DeleteItemWithContext is the same as DeleteItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) DeleteItemWithContext(ctx aws.Context, input *DeleteItemInput, opts ...aws.Option) (*DeleteItemOutput, error) {
-	req, out := c.DeleteItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteTable = "DeleteTable"
-
-// DeleteTableRequest generates a "aws.Request" representing the
-// client's request for the DeleteTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTable for more information on using the DeleteTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteTableRequest method.
-//    req, resp := client.DeleteTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteItemRequest method.
+//    req := client.DeleteItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable
-func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request, output *DeleteTableOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem
+func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) DeleteItemRequest {
 	op := &aws.Operation{
-		Name:       opDeleteTable,
+		Name:       opDeleteItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteTableInput{}
+		input = &DeleteItemInput{}
 	}
 
-	output = &DeleteTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteItemOutput{})
+	return DeleteItemRequest{Request: req, Input: input}
 }
 
-// DeleteTable API operation for Amazon DynamoDB.
+const opDeleteTable = "DeleteTable"
+
+// DeleteTableRequest is a API request type for the DeleteTable API operation.
+type DeleteTableRequest struct {
+	*aws.Request
+	Input *DeleteTableInput
+}
+
+// Send marshals and sends the DeleteTable API request.
+func (r *DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTableOutput), nil
+}
+
+// DeleteTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The DeleteTable operation deletes a table and all of its items. After a DeleteTable
 // request, the specified table is in the DELETING state until DynamoDB completes
@@ -652,101 +435,49 @@ func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request
 //
 // Use the DescribeTable action to check the status of the table.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation DeleteTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable
-func (c *DynamoDB) DeleteTable(input *DeleteTableInput) (*DeleteTableOutput, error) {
-	req, out := c.DeleteTableRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTableWithContext is the same as DeleteTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...aws.Option) (*DeleteTableOutput, error) {
-	req, out := c.DeleteTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeLimits = "DescribeLimits"
-
-// DescribeLimitsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLimits operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLimits for more information on using the DescribeLimits
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLimitsRequest method.
-//    req, resp := client.DescribeLimitsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteTableRequest method.
+//    req := client.DeleteTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits
-func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.Request, output *DescribeLimitsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable
+func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest {
 	op := &aws.Operation{
-		Name:       opDescribeLimits,
+		Name:       opDeleteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeLimitsInput{}
+		input = &DeleteTableInput{}
 	}
 
-	output = &DescribeLimitsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteTableOutput{})
+	return DeleteTableRequest{Request: req, Input: input}
 }
 
-// DescribeLimits API operation for Amazon DynamoDB.
+const opDescribeLimits = "DescribeLimits"
+
+// DescribeLimitsRequest is a API request type for the DescribeLimits API operation.
+type DescribeLimitsRequest struct {
+	*aws.Request
+	Input *DescribeLimitsInput
+}
+
+// Send marshals and sends the DescribeLimits API request.
+func (r *DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLimitsOutput), nil
+}
+
+// DescribeLimitsRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Returns the current provisioned-capacity limits for your AWS account in a
 // region, both for the region as a whole and for any one DynamoDB table that
@@ -806,82 +537,49 @@ func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.R
 //
 // The DescribeLimits Request element has no content.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation DescribeLimits for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits
-func (c *DynamoDB) DescribeLimits(input *DescribeLimitsInput) (*DescribeLimitsOutput, error) {
-	req, out := c.DescribeLimitsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLimitsWithContext is the same as DescribeLimits with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLimits for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...aws.Option) (*DescribeLimitsOutput, error) {
-	req, out := c.DescribeLimitsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeTable = "DescribeTable"
-
-// DescribeTableRequest generates a "aws.Request" representing the
-// client's request for the DescribeTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTable for more information on using the DescribeTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeTableRequest method.
-//    req, resp := client.DescribeTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeLimitsRequest method.
+//    req := client.DescribeLimitsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable
-func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) (req *aws.Request, output *DescribeTableOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits
+func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimitsRequest {
 	op := &aws.Operation{
-		Name:       opDescribeTable,
+		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeTableInput{}
+		input = &DescribeLimitsInput{}
 	}
 
-	output = &DescribeTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeLimitsOutput{})
+	return DescribeLimitsRequest{Request: req, Input: input}
 }
 
-// DescribeTable API operation for Amazon DynamoDB.
+const opDescribeTable = "DescribeTable"
+
+// DescribeTableRequest is a API request type for the DescribeTable API operation.
+type DescribeTableRequest struct {
+	*aws.Request
+	Input *DescribeTableInput
+}
+
+// Send marshals and sends the DescribeTable API request.
+func (r *DescribeTableRequest) Send() (*DescribeTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTableOutput), nil
+}
+
+// DescribeTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Returns information about the table, including the current status of the
 // table, when it was created, the primary key schema, and any indexes on the
@@ -893,70 +591,61 @@ func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) (req *aws.Req
 // not be available at that moment. Wait for a few seconds, and then try the
 // DescribeTable request again.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation DescribeTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the DescribeTableRequest method.
+//    req := client.DescribeTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable
-func (c *DynamoDB) DescribeTable(input *DescribeTableInput) (*DescribeTableOutput, error) {
-	req, out := c.DescribeTableRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) DescribeTableRequest {
+	op := &aws.Operation{
+		Name:       opDescribeTable,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeTableWithContext is the same as DescribeTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) DescribeTableWithContext(ctx aws.Context, input *DescribeTableInput, opts ...aws.Option) (*DescribeTableOutput, error) {
-	req, out := c.DescribeTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeTableInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeTableOutput{})
+	return DescribeTableRequest{Request: req, Input: input}
 }
 
 const opDescribeTimeToLive = "DescribeTimeToLive"
 
-// DescribeTimeToLiveRequest generates a "aws.Request" representing the
-// client's request for the DescribeTimeToLive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTimeToLiveRequest is a API request type for the DescribeTimeToLive API operation.
+type DescribeTimeToLiveRequest struct {
+	*aws.Request
+	Input *DescribeTimeToLiveInput
+}
+
+// Send marshals and sends the DescribeTimeToLive API request.
+func (r *DescribeTimeToLiveRequest) Send() (*DescribeTimeToLiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTimeToLiveOutput), nil
+}
+
+// DescribeTimeToLiveRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTimeToLive for more information on using the DescribeTimeToLive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gives a description of the Time to Live (TTL) status on the specified table.
 //
 //    // Example sending a request using the DescribeTimeToLiveRequest method.
-//    req, resp := client.DescribeTimeToLiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTimeToLiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLive
-func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) (req *aws.Request, output *DescribeTimeToLiveOutput) {
+func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) DescribeTimeToLiveRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTimeToLive,
 		HTTPMethod: "POST",
@@ -967,95 +656,30 @@ func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) (re
 		input = &DescribeTimeToLiveInput{}
 	}
 
-	output = &DescribeTimeToLiveOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTimeToLive API operation for Amazon DynamoDB.
-//
-// Gives a description of the Time to Live (TTL) status on the specified table.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation DescribeTimeToLive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLive
-func (c *DynamoDB) DescribeTimeToLive(input *DescribeTimeToLiveInput) (*DescribeTimeToLiveOutput, error) {
-	req, out := c.DescribeTimeToLiveRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTimeToLiveWithContext is the same as DescribeTimeToLive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTimeToLive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) DescribeTimeToLiveWithContext(ctx aws.Context, input *DescribeTimeToLiveInput, opts ...aws.Option) (*DescribeTimeToLiveOutput, error) {
-	req, out := c.DescribeTimeToLiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTimeToLiveOutput{})
+	return DescribeTimeToLiveRequest{Request: req, Input: input}
 }
 
 const opGetItem = "GetItem"
 
-// GetItemRequest generates a "aws.Request" representing the
-// client's request for the GetItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetItem for more information on using the GetItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetItemRequest method.
-//    req, resp := client.GetItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem
-func (c *DynamoDB) GetItemRequest(input *GetItemInput) (req *aws.Request, output *GetItemOutput) {
-	op := &aws.Operation{
-		Name:       opGetItem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetItemInput{}
-	}
-
-	output = &GetItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetItemRequest is a API request type for the GetItem API operation.
+type GetItemRequest struct {
+	*aws.Request
+	Input *GetItemInput
 }
 
-// GetItem API operation for Amazon DynamoDB.
+// Send marshals and sends the GetItem API request.
+func (r *GetItemRequest) Send() (*GetItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetItemOutput), nil
+}
+
+// GetItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The GetItem operation returns a set of attributes for the item with the given
 // primary key. If there is no matching item, GetItem does not return any data
@@ -1066,78 +690,63 @@ func (c *DynamoDB) GetItemRequest(input *GetItemInput) (req *aws.Request, output
 // a strongly consistent read might take more time than an eventually consistent
 // read, it always returns the last updated value.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation GetItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the GetItemRequest method.
+//    req := client.GetItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem
-func (c *DynamoDB) GetItem(input *GetItemInput) (*GetItemOutput, error) {
-	req, out := c.GetItemRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) GetItemRequest(input *GetItemInput) GetItemRequest {
+	op := &aws.Operation{
+		Name:       opGetItem,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetItemWithContext is the same as GetItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) GetItemWithContext(ctx aws.Context, input *GetItemInput, opts ...aws.Option) (*GetItemOutput, error) {
-	req, out := c.GetItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetItemInput{}
+	}
+
+	req := c.newRequest(op, input, &GetItemOutput{})
+	return GetItemRequest{Request: req, Input: input}
 }
 
 const opListTables = "ListTables"
 
-// ListTablesRequest generates a "aws.Request" representing the
-// client's request for the ListTables operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTablesRequest is a API request type for the ListTables API operation.
+type ListTablesRequest struct {
+	*aws.Request
+	Input *ListTablesInput
+}
+
+// Send marshals and sends the ListTables API request.
+func (r *ListTablesRequest) Send() (*ListTablesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTablesOutput), nil
+}
+
+// ListTablesRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTables for more information on using the ListTables
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an array of table names associated with the current account and endpoint.
+// The output from ListTables is paginated, with each page returning a maximum
+// of 100 table names.
 //
 //    // Example sending a request using the ListTablesRequest method.
-//    req, resp := client.ListTablesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTablesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables
-func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) (req *aws.Request, output *ListTablesOutput) {
+func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 	op := &aws.Operation{
 		Name:       opListTables,
 		HTTPMethod: "POST",
@@ -1154,48 +763,8 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) (req *aws.Request, 
 		input = &ListTablesInput{}
 	}
 
-	output = &ListTablesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTables API operation for Amazon DynamoDB.
-//
-// Returns an array of table names associated with the current account and endpoint.
-// The output from ListTables is paginated, with each page returning a maximum
-// of 100 table names.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation ListTables for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables
-func (c *DynamoDB) ListTables(input *ListTablesInput) (*ListTablesOutput, error) {
-	req, out := c.ListTablesRequest(input)
-	return out, req.Send()
-}
-
-// ListTablesWithContext is the same as ListTables with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTables for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) ListTablesWithContext(ctx aws.Context, input *ListTablesInput, opts ...aws.Option) (*ListTablesOutput, error) {
-	req, out := c.ListTablesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTablesOutput{})
+	return ListTablesRequest{Request: req, Input: input}
 }
 
 // ListTablesPages iterates over the pages of a ListTables operation,
@@ -1234,10 +803,10 @@ func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTables
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTablesRequest(inCpy)
+			req := c.ListTablesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1250,31 +819,40 @@ func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTables
 
 const opListTagsOfResource = "ListTagsOfResource"
 
-// ListTagsOfResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsOfResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsOfResourceRequest is a API request type for the ListTagsOfResource API operation.
+type ListTagsOfResourceRequest struct {
+	*aws.Request
+	Input *ListTagsOfResourceInput
+}
+
+// Send marshals and sends the ListTagsOfResource API request.
+func (r *ListTagsOfResourceRequest) Send() (*ListTagsOfResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsOfResourceOutput), nil
+}
+
+// ListTagsOfResourceRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource
+// up to 10 times per second, per account.
 //
-// See ListTagsOfResource for more information on using the ListTagsOfResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
+// in the Amazon DynamoDB Developer Guide.
 //
 //    // Example sending a request using the ListTagsOfResourceRequest method.
-//    req, resp := client.ListTagsOfResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsOfResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource
-func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) (req *aws.Request, output *ListTagsOfResourceOutput) {
+func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) ListTagsOfResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsOfResource,
 		HTTPMethod: "POST",
@@ -1285,99 +863,30 @@ func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) (re
 		input = &ListTagsOfResourceInput{}
 	}
 
-	output = &ListTagsOfResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsOfResource API operation for Amazon DynamoDB.
-//
-// List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource
-// up to 10 times per second, per account.
-//
-// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-// in the Amazon DynamoDB Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation ListTagsOfResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource
-func (c *DynamoDB) ListTagsOfResource(input *ListTagsOfResourceInput) (*ListTagsOfResourceOutput, error) {
-	req, out := c.ListTagsOfResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsOfResourceWithContext is the same as ListTagsOfResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsOfResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) ListTagsOfResourceWithContext(ctx aws.Context, input *ListTagsOfResourceInput, opts ...aws.Option) (*ListTagsOfResourceOutput, error) {
-	req, out := c.ListTagsOfResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsOfResourceOutput{})
+	return ListTagsOfResourceRequest{Request: req, Input: input}
 }
 
 const opPutItem = "PutItem"
 
-// PutItemRequest generates a "aws.Request" representing the
-// client's request for the PutItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutItem for more information on using the PutItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutItemRequest method.
-//    req, resp := client.PutItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItem
-func (c *DynamoDB) PutItemRequest(input *PutItemInput) (req *aws.Request, output *PutItemOutput) {
-	op := &aws.Operation{
-		Name:       opPutItem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PutItemInput{}
-	}
-
-	output = &PutItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PutItemRequest is a API request type for the PutItem API operation.
+type PutItemRequest struct {
+	*aws.Request
+	Input *PutItemInput
 }
 
-// PutItem API operation for Amazon DynamoDB.
+// Send marshals and sends the PutItem API request.
+func (r *PutItemRequest) Send() (*PutItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutItemOutput), nil
+}
+
+// PutItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Creates a new item, or replaces an old item with a new item. If an item that
 // has the same primary key as the new item already exists in the specified
@@ -1424,107 +933,49 @@ func (c *DynamoDB) PutItemRequest(input *PutItemInput) (req *aws.Request, output
 // For more information about PutItem, see Working with Items (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html)
 // in the Amazon DynamoDB Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation PutItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConditionalCheckFailedException "ConditionalCheckFailedException"
-//   A condition specified in the operation could not be evaluated.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeItemCollectionSizeLimitExceededException "ItemCollectionSizeLimitExceededException"
-//   An item collection is too large. This exception is only returned for tables
-//   that have one or more local secondary indexes.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the PutItemRequest method.
+//    req := client.PutItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItem
-func (c *DynamoDB) PutItem(input *PutItemInput) (*PutItemOutput, error) {
-	req, out := c.PutItemRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) PutItemRequest(input *PutItemInput) PutItemRequest {
+	op := &aws.Operation{
+		Name:       opPutItem,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutItemWithContext is the same as PutItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) PutItemWithContext(ctx aws.Context, input *PutItemInput, opts ...aws.Option) (*PutItemOutput, error) {
-	req, out := c.PutItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutItemInput{}
+	}
+
+	req := c.newRequest(op, input, &PutItemOutput{})
+	return PutItemRequest{Request: req, Input: input}
 }
 
 const opQuery = "Query"
 
-// QueryRequest generates a "aws.Request" representing the
-// client's request for the Query operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Query for more information on using the Query
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the QueryRequest method.
-//    req, resp := client.QueryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query
-func (c *DynamoDB) QueryRequest(input *QueryInput) (req *aws.Request, output *QueryOutput) {
-	op := &aws.Operation{
-		Name:       opQuery,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"ExclusiveStartKey"},
-			OutputTokens:    []string{"LastEvaluatedKey"},
-			LimitToken:      "Limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &QueryInput{}
-	}
-
-	output = &QueryOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// QueryRequest is a API request type for the Query API operation.
+type QueryRequest struct {
+	*aws.Request
+	Input *QueryInput
 }
 
-// Query API operation for Amazon DynamoDB.
+// Send marshals and sends the Query API request.
+func (r *QueryRequest) Send() (*QueryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*QueryOutput), nil
+}
+
+// QueryRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The Query operation finds items based on primary key values. You can query
 // any table or secondary index that has a composite primary key (a partition
@@ -1575,49 +1026,33 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) (req *aws.Request, output *Qu
 // indexes support eventually consistent reads only, so do not specify ConsistentRead
 // when querying a global secondary index.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation Query for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the QueryRequest method.
+//    req := client.QueryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query
-func (c *DynamoDB) Query(input *QueryInput) (*QueryOutput, error) {
-	req, out := c.QueryRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
+	op := &aws.Operation{
+		Name:       opQuery,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"ExclusiveStartKey"},
+			OutputTokens:    []string{"LastEvaluatedKey"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
 
-// QueryWithContext is the same as Query with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Query for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) QueryWithContext(ctx aws.Context, input *QueryInput, opts ...aws.Option) (*QueryOutput, error) {
-	req, out := c.QueryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &QueryInput{}
+	}
+
+	req := c.newRequest(op, input, &QueryOutput{})
+	return QueryRequest{Request: req, Input: input}
 }
 
 // QueryPages iterates over the pages of a Query operation,
@@ -1656,10 +1091,10 @@ func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.QueryRequest(inCpy)
+			req := c.QueryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1672,53 +1107,24 @@ func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn 
 
 const opScan = "Scan"
 
-// ScanRequest generates a "aws.Request" representing the
-// client's request for the Scan operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See Scan for more information on using the Scan
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ScanRequest method.
-//    req, resp := client.ScanRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan
-func (c *DynamoDB) ScanRequest(input *ScanInput) (req *aws.Request, output *ScanOutput) {
-	op := &aws.Operation{
-		Name:       opScan,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"ExclusiveStartKey"},
-			OutputTokens:    []string{"LastEvaluatedKey"},
-			LimitToken:      "Limit",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ScanInput{}
-	}
-
-	output = &ScanOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ScanRequest is a API request type for the Scan API operation.
+type ScanRequest struct {
+	*aws.Request
+	Input *ScanInput
 }
 
-// Scan API operation for Amazon DynamoDB.
+// Send marshals and sends the Scan API request.
+func (r *ScanRequest) Send() (*ScanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ScanOutput), nil
+}
+
+// ScanRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The Scan operation returns one or more items and item attributes by accessing
 // every item in a table or a secondary index. To have DynamoDB return fewer
@@ -1749,49 +1155,33 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) (req *aws.Request, output *Scan
 // the data, as of the time that the Scan begins, you can set the ConsistentRead
 // parameter to true.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation Scan for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the ScanRequest method.
+//    req := client.ScanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan
-func (c *DynamoDB) Scan(input *ScanInput) (*ScanOutput, error) {
-	req, out := c.ScanRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
+	op := &aws.Operation{
+		Name:       opScan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"ExclusiveStartKey"},
+			OutputTokens:    []string{"LastEvaluatedKey"},
+			LimitToken:      "Limit",
+			TruncationToken: "",
+		},
+	}
 
-// ScanWithContext is the same as Scan with the addition of
-// the ability to pass a context and additional request options.
-//
-// See Scan for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) ScanWithContext(ctx aws.Context, input *ScanInput, opts ...aws.Option) (*ScanOutput, error) {
-	req, out := c.ScanRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ScanInput{}
+	}
+
+	req := c.newRequest(op, input, &ScanOutput{})
+	return ScanRequest{Request: req, Input: input}
 }
 
 // ScanPages iterates over the pages of a Scan operation,
@@ -1830,10 +1220,10 @@ func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn fu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ScanRequest(inCpy)
+			req := c.ScanRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1846,31 +1236,42 @@ func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn fu
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Associate a set of tags with an Amazon DynamoDB resource. You can then activate
+// these user-defined tags so that they appear on the Billing and Cost Management
+// console for cost allocation tracking. You can call TagResource up to 5 times
+// per second, per account.
 //
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
+// in the Amazon DynamoDB Developer Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResource
-func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -1881,102 +1282,48 @@ func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) (req *aws.Request
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// TagResource API operation for Amazon DynamoDB.
-//
-// Associate a set of tags with an Amazon DynamoDB resource. You can then activate
-// these user-defined tags so that they appear on the Billing and Cost Management
-// console for cost allocation tracking. You can call TagResource up to 5 times
-// per second, per account.
-//
-// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-// in the Amazon DynamoDB Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResource
-func (c *DynamoDB) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Removes the association of tags from an Amazon DynamoDB resource. You can
+// call UntagResource up to 5 times per second, per account.
 //
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
+// in the Amazon DynamoDB Developer Guide.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResource
-func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -1987,116 +1334,32 @@ func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) (req *aws.Req
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagResource API operation for Amazon DynamoDB.
-//
-// Removes the association of tags from an Amazon DynamoDB resource. You can
-// call UntagResource up to 5 times per second, per account.
-//
-// For an overview on tagging DynamoDB resources, see Tagging for DynamoDB (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html)
-// in the Amazon DynamoDB Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResource
-func (c *DynamoDB) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateItem = "UpdateItem"
 
-// UpdateItemRequest generates a "aws.Request" representing the
-// client's request for the UpdateItem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateItem for more information on using the UpdateItem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateItemRequest method.
-//    req, resp := client.UpdateItemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem
-func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) (req *aws.Request, output *UpdateItemOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateItem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateItemInput{}
-	}
-
-	output = &UpdateItemOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateItemRequest is a API request type for the UpdateItem API operation.
+type UpdateItemRequest struct {
+	*aws.Request
+	Input *UpdateItemInput
 }
 
-// UpdateItem API operation for Amazon DynamoDB.
+// Send marshals and sends the UpdateItem API request.
+func (r *UpdateItemRequest) Send() (*UpdateItemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateItemOutput), nil
+}
+
+// UpdateItemRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Edits an existing item's attributes, or adds a new item to the table if it
 // does not already exist. You can put, delete, or add attribute values. You
@@ -2107,101 +1370,49 @@ func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) (req *aws.Request, 
 // You can also return the item's attribute values in the same UpdateItem operation
 // using the ReturnValues parameter.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation UpdateItem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConditionalCheckFailedException "ConditionalCheckFailedException"
-//   A condition specified in the operation could not be evaluated.
-//
-//   * ErrCodeProvisionedThroughputExceededException "ProvisionedThroughputExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Programming.Errors.html#Programming.Errors.RetryAndBackoff)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeItemCollectionSizeLimitExceededException "ItemCollectionSizeLimitExceededException"
-//   An item collection is too large. This exception is only returned for tables
-//   that have one or more local secondary indexes.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem
-func (c *DynamoDB) UpdateItem(input *UpdateItemInput) (*UpdateItemOutput, error) {
-	req, out := c.UpdateItemRequest(input)
-	return out, req.Send()
-}
-
-// UpdateItemWithContext is the same as UpdateItem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateItem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) UpdateItemWithContext(ctx aws.Context, input *UpdateItemInput, opts ...aws.Option) (*UpdateItemOutput, error) {
-	req, out := c.UpdateItemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateTable = "UpdateTable"
-
-// UpdateTableRequest generates a "aws.Request" representing the
-// client's request for the UpdateTable operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTable for more information on using the UpdateTable
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateTableRequest method.
-//    req, resp := client.UpdateTableRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateItemRequest method.
+//    req := client.UpdateItemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable
-func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request, output *UpdateTableOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem
+func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) UpdateItemRequest {
 	op := &aws.Operation{
-		Name:       opUpdateTable,
+		Name:       opUpdateItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateTableInput{}
+		input = &UpdateItemInput{}
 	}
 
-	output = &UpdateTableOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateItemOutput{})
+	return UpdateItemRequest{Request: req, Input: input}
 }
 
-// UpdateTable API operation for Amazon DynamoDB.
+const opUpdateTable = "UpdateTable"
+
+// UpdateTableRequest is a API request type for the UpdateTable API operation.
+type UpdateTableRequest struct {
+	*aws.Request
+	Input *UpdateTableInput
+}
+
+// Send marshals and sends the UpdateTable API request.
+func (r *UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTableOutput), nil
+}
+
+// UpdateTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // Modifies the provisioned throughput settings, global secondary indexes, or
 // DynamoDB Streams settings for a given table.
@@ -2222,101 +1433,49 @@ func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request
 // issue another UpdateTable request. When the table returns to the ACTIVE state,
 // the UpdateTable operation is complete.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation UpdateTable for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable
-func (c *DynamoDB) UpdateTable(input *UpdateTableInput) (*UpdateTableOutput, error) {
-	req, out := c.UpdateTableRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTableWithContext is the same as UpdateTable with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTable for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...aws.Option) (*UpdateTableOutput, error) {
-	req, out := c.UpdateTableRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateTimeToLive = "UpdateTimeToLive"
-
-// UpdateTimeToLiveRequest generates a "aws.Request" representing the
-// client's request for the UpdateTimeToLive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTimeToLive for more information on using the UpdateTimeToLive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateTimeToLiveRequest method.
-//    req, resp := client.UpdateTimeToLiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateTableRequest method.
+//    req := client.UpdateTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLive
-func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) (req *aws.Request, output *UpdateTimeToLiveOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable
+func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest {
 	op := &aws.Operation{
-		Name:       opUpdateTimeToLive,
+		Name:       opUpdateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateTimeToLiveInput{}
+		input = &UpdateTableInput{}
 	}
 
-	output = &UpdateTimeToLiveOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateTableOutput{})
+	return UpdateTableRequest{Request: req, Input: input}
 }
 
-// UpdateTimeToLive API operation for Amazon DynamoDB.
+const opUpdateTimeToLive = "UpdateTimeToLive"
+
+// UpdateTimeToLiveRequest is a API request type for the UpdateTimeToLive API operation.
+type UpdateTimeToLiveRequest struct {
+	*aws.Request
+	Input *UpdateTimeToLiveInput
+}
+
+// Send marshals and sends the UpdateTimeToLive API request.
+func (r *UpdateTimeToLiveRequest) Send() (*UpdateTimeToLiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTimeToLiveOutput), nil
+}
+
+// UpdateTimeToLiveRequest returns a request value for making API operation for
+// Amazon DynamoDB.
 //
 // The UpdateTimeToLive method will enable or disable TTL for the specified
 // table. A successful UpdateTimeToLive call returns the current TimeToLiveSpecification;
@@ -2347,56 +1506,27 @@ func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) (req *a
 // For more information, see Time To Live (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)
 // in the Amazon DynamoDB Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB's
-// API operation UpdateTimeToLive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The operation conflicts with the resource's availability. For example, you
-//   attempted to recreate an existing table, or tried to delete a table currently
-//   in the CREATING state.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent table or index. The resource
-//   might not be specified correctly, or its status might not be ACTIVE.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   The number of concurrent table requests (cumulative number of tables in the
-//   CREATING, DELETING or UPDATING state) exceeds the maximum allowed of 10.
-//
-//   Also, for tables with secondary indexes, only one of those tables can be
-//   in the CREATING state at any point in time. Do not attempt to create more
-//   than one such table simultaneously.
-//
-//   The total limit of tables in the ACTIVE state is 250.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
+//    // Example sending a request using the UpdateTimeToLiveRequest method.
+//    req := client.UpdateTimeToLiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLive
-func (c *DynamoDB) UpdateTimeToLive(input *UpdateTimeToLiveInput) (*UpdateTimeToLiveOutput, error) {
-	req, out := c.UpdateTimeToLiveRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateTimeToLiveRequest {
+	op := &aws.Operation{
+		Name:       opUpdateTimeToLive,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateTimeToLiveWithContext is the same as UpdateTimeToLive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTimeToLive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) UpdateTimeToLiveWithContext(ctx aws.Context, input *UpdateTimeToLiveInput, opts ...aws.Option) (*UpdateTimeToLiveOutput, error) {
-	req, out := c.UpdateTimeToLiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateTimeToLiveInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateTimeToLiveOutput{})
+	return UpdateTimeToLiveRequest{Request: req, Input: input}
 }
 
 // Represents an attribute for describing the key schema for the table and indexes.

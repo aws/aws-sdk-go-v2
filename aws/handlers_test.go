@@ -200,8 +200,8 @@ func BenchmarkNewRequest(b *testing.B) {
 	svc := s3.New(unit.Config())
 
 	for i := 0; i < b.N; i++ {
-		r, _ := svc.GetObjectRequest(nil)
-		if r == nil {
+		r := svc.GetObjectRequest(nil)
+		if r.Request == nil {
 			b.Fatal("r should not be nil")
 		}
 	}

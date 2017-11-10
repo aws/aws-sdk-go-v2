@@ -63,47 +63,29 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MobileAPI interface {
-	CreateProject(*mobile.CreateProjectInput) (*mobile.CreateProjectOutput, error)
-	CreateProjectWithContext(aws.Context, *mobile.CreateProjectInput, ...aws.Option) (*mobile.CreateProjectOutput, error)
-	CreateProjectRequest(*mobile.CreateProjectInput) (*aws.Request, *mobile.CreateProjectOutput)
+	CreateProjectRequest(*mobile.CreateProjectInput) mobile.CreateProjectRequest
 
-	DeleteProject(*mobile.DeleteProjectInput) (*mobile.DeleteProjectOutput, error)
-	DeleteProjectWithContext(aws.Context, *mobile.DeleteProjectInput, ...aws.Option) (*mobile.DeleteProjectOutput, error)
-	DeleteProjectRequest(*mobile.DeleteProjectInput) (*aws.Request, *mobile.DeleteProjectOutput)
+	DeleteProjectRequest(*mobile.DeleteProjectInput) mobile.DeleteProjectRequest
 
-	DescribeBundle(*mobile.DescribeBundleInput) (*mobile.DescribeBundleOutput, error)
-	DescribeBundleWithContext(aws.Context, *mobile.DescribeBundleInput, ...aws.Option) (*mobile.DescribeBundleOutput, error)
-	DescribeBundleRequest(*mobile.DescribeBundleInput) (*aws.Request, *mobile.DescribeBundleOutput)
+	DescribeBundleRequest(*mobile.DescribeBundleInput) mobile.DescribeBundleRequest
 
-	DescribeProject(*mobile.DescribeProjectInput) (*mobile.DescribeProjectOutput, error)
-	DescribeProjectWithContext(aws.Context, *mobile.DescribeProjectInput, ...aws.Option) (*mobile.DescribeProjectOutput, error)
-	DescribeProjectRequest(*mobile.DescribeProjectInput) (*aws.Request, *mobile.DescribeProjectOutput)
+	DescribeProjectRequest(*mobile.DescribeProjectInput) mobile.DescribeProjectRequest
 
-	ExportBundle(*mobile.ExportBundleInput) (*mobile.ExportBundleOutput, error)
-	ExportBundleWithContext(aws.Context, *mobile.ExportBundleInput, ...aws.Option) (*mobile.ExportBundleOutput, error)
-	ExportBundleRequest(*mobile.ExportBundleInput) (*aws.Request, *mobile.ExportBundleOutput)
+	ExportBundleRequest(*mobile.ExportBundleInput) mobile.ExportBundleRequest
 
-	ExportProject(*mobile.ExportProjectInput) (*mobile.ExportProjectOutput, error)
-	ExportProjectWithContext(aws.Context, *mobile.ExportProjectInput, ...aws.Option) (*mobile.ExportProjectOutput, error)
-	ExportProjectRequest(*mobile.ExportProjectInput) (*aws.Request, *mobile.ExportProjectOutput)
+	ExportProjectRequest(*mobile.ExportProjectInput) mobile.ExportProjectRequest
 
-	ListBundles(*mobile.ListBundlesInput) (*mobile.ListBundlesOutput, error)
-	ListBundlesWithContext(aws.Context, *mobile.ListBundlesInput, ...aws.Option) (*mobile.ListBundlesOutput, error)
-	ListBundlesRequest(*mobile.ListBundlesInput) (*aws.Request, *mobile.ListBundlesOutput)
+	ListBundlesRequest(*mobile.ListBundlesInput) mobile.ListBundlesRequest
 
 	ListBundlesPages(*mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool) error
 	ListBundlesPagesWithContext(aws.Context, *mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool, ...aws.Option) error
 
-	ListProjects(*mobile.ListProjectsInput) (*mobile.ListProjectsOutput, error)
-	ListProjectsWithContext(aws.Context, *mobile.ListProjectsInput, ...aws.Option) (*mobile.ListProjectsOutput, error)
-	ListProjectsRequest(*mobile.ListProjectsInput) (*aws.Request, *mobile.ListProjectsOutput)
+	ListProjectsRequest(*mobile.ListProjectsInput) mobile.ListProjectsRequest
 
 	ListProjectsPages(*mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool) error
 	ListProjectsPagesWithContext(aws.Context, *mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool, ...aws.Option) error
 
-	UpdateProject(*mobile.UpdateProjectInput) (*mobile.UpdateProjectOutput, error)
-	UpdateProjectWithContext(aws.Context, *mobile.UpdateProjectInput, ...aws.Option) (*mobile.UpdateProjectOutput, error)
-	UpdateProjectRequest(*mobile.UpdateProjectInput) (*aws.Request, *mobile.UpdateProjectOutput)
+	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
 }
 
 var _ MobileAPI = (*mobile.Mobile)(nil)

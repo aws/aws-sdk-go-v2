@@ -9,7 +9,6 @@
 package iotiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/iot"
 )
 
@@ -63,233 +62,119 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type IoTAPI interface {
-	AcceptCertificateTransfer(*iot.AcceptCertificateTransferInput) (*iot.AcceptCertificateTransferOutput, error)
-	AcceptCertificateTransferWithContext(aws.Context, *iot.AcceptCertificateTransferInput, ...aws.Option) (*iot.AcceptCertificateTransferOutput, error)
-	AcceptCertificateTransferRequest(*iot.AcceptCertificateTransferInput) (*aws.Request, *iot.AcceptCertificateTransferOutput)
+	AcceptCertificateTransferRequest(*iot.AcceptCertificateTransferInput) iot.AcceptCertificateTransferRequest
 
-	AttachPrincipalPolicy(*iot.AttachPrincipalPolicyInput) (*iot.AttachPrincipalPolicyOutput, error)
-	AttachPrincipalPolicyWithContext(aws.Context, *iot.AttachPrincipalPolicyInput, ...aws.Option) (*iot.AttachPrincipalPolicyOutput, error)
-	AttachPrincipalPolicyRequest(*iot.AttachPrincipalPolicyInput) (*aws.Request, *iot.AttachPrincipalPolicyOutput)
+	AttachPrincipalPolicyRequest(*iot.AttachPrincipalPolicyInput) iot.AttachPrincipalPolicyRequest
 
-	AttachThingPrincipal(*iot.AttachThingPrincipalInput) (*iot.AttachThingPrincipalOutput, error)
-	AttachThingPrincipalWithContext(aws.Context, *iot.AttachThingPrincipalInput, ...aws.Option) (*iot.AttachThingPrincipalOutput, error)
-	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) (*aws.Request, *iot.AttachThingPrincipalOutput)
+	AttachThingPrincipalRequest(*iot.AttachThingPrincipalInput) iot.AttachThingPrincipalRequest
 
-	CancelCertificateTransfer(*iot.CancelCertificateTransferInput) (*iot.CancelCertificateTransferOutput, error)
-	CancelCertificateTransferWithContext(aws.Context, *iot.CancelCertificateTransferInput, ...aws.Option) (*iot.CancelCertificateTransferOutput, error)
-	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) (*aws.Request, *iot.CancelCertificateTransferOutput)
+	CancelCertificateTransferRequest(*iot.CancelCertificateTransferInput) iot.CancelCertificateTransferRequest
 
-	CreateCertificateFromCsr(*iot.CreateCertificateFromCsrInput) (*iot.CreateCertificateFromCsrOutput, error)
-	CreateCertificateFromCsrWithContext(aws.Context, *iot.CreateCertificateFromCsrInput, ...aws.Option) (*iot.CreateCertificateFromCsrOutput, error)
-	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) (*aws.Request, *iot.CreateCertificateFromCsrOutput)
+	CreateCertificateFromCsrRequest(*iot.CreateCertificateFromCsrInput) iot.CreateCertificateFromCsrRequest
 
-	CreateKeysAndCertificate(*iot.CreateKeysAndCertificateInput) (*iot.CreateKeysAndCertificateOutput, error)
-	CreateKeysAndCertificateWithContext(aws.Context, *iot.CreateKeysAndCertificateInput, ...aws.Option) (*iot.CreateKeysAndCertificateOutput, error)
-	CreateKeysAndCertificateRequest(*iot.CreateKeysAndCertificateInput) (*aws.Request, *iot.CreateKeysAndCertificateOutput)
+	CreateKeysAndCertificateRequest(*iot.CreateKeysAndCertificateInput) iot.CreateKeysAndCertificateRequest
 
-	CreatePolicy(*iot.CreatePolicyInput) (*iot.CreatePolicyOutput, error)
-	CreatePolicyWithContext(aws.Context, *iot.CreatePolicyInput, ...aws.Option) (*iot.CreatePolicyOutput, error)
-	CreatePolicyRequest(*iot.CreatePolicyInput) (*aws.Request, *iot.CreatePolicyOutput)
+	CreatePolicyRequest(*iot.CreatePolicyInput) iot.CreatePolicyRequest
 
-	CreatePolicyVersion(*iot.CreatePolicyVersionInput) (*iot.CreatePolicyVersionOutput, error)
-	CreatePolicyVersionWithContext(aws.Context, *iot.CreatePolicyVersionInput, ...aws.Option) (*iot.CreatePolicyVersionOutput, error)
-	CreatePolicyVersionRequest(*iot.CreatePolicyVersionInput) (*aws.Request, *iot.CreatePolicyVersionOutput)
+	CreatePolicyVersionRequest(*iot.CreatePolicyVersionInput) iot.CreatePolicyVersionRequest
 
-	CreateThing(*iot.CreateThingInput) (*iot.CreateThingOutput, error)
-	CreateThingWithContext(aws.Context, *iot.CreateThingInput, ...aws.Option) (*iot.CreateThingOutput, error)
-	CreateThingRequest(*iot.CreateThingInput) (*aws.Request, *iot.CreateThingOutput)
+	CreateThingRequest(*iot.CreateThingInput) iot.CreateThingRequest
 
-	CreateThingType(*iot.CreateThingTypeInput) (*iot.CreateThingTypeOutput, error)
-	CreateThingTypeWithContext(aws.Context, *iot.CreateThingTypeInput, ...aws.Option) (*iot.CreateThingTypeOutput, error)
-	CreateThingTypeRequest(*iot.CreateThingTypeInput) (*aws.Request, *iot.CreateThingTypeOutput)
+	CreateThingTypeRequest(*iot.CreateThingTypeInput) iot.CreateThingTypeRequest
 
-	CreateTopicRule(*iot.CreateTopicRuleInput) (*iot.CreateTopicRuleOutput, error)
-	CreateTopicRuleWithContext(aws.Context, *iot.CreateTopicRuleInput, ...aws.Option) (*iot.CreateTopicRuleOutput, error)
-	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) (*aws.Request, *iot.CreateTopicRuleOutput)
+	CreateTopicRuleRequest(*iot.CreateTopicRuleInput) iot.CreateTopicRuleRequest
 
-	DeleteCACertificate(*iot.DeleteCACertificateInput) (*iot.DeleteCACertificateOutput, error)
-	DeleteCACertificateWithContext(aws.Context, *iot.DeleteCACertificateInput, ...aws.Option) (*iot.DeleteCACertificateOutput, error)
-	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) (*aws.Request, *iot.DeleteCACertificateOutput)
+	DeleteCACertificateRequest(*iot.DeleteCACertificateInput) iot.DeleteCACertificateRequest
 
-	DeleteCertificate(*iot.DeleteCertificateInput) (*iot.DeleteCertificateOutput, error)
-	DeleteCertificateWithContext(aws.Context, *iot.DeleteCertificateInput, ...aws.Option) (*iot.DeleteCertificateOutput, error)
-	DeleteCertificateRequest(*iot.DeleteCertificateInput) (*aws.Request, *iot.DeleteCertificateOutput)
+	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
 
-	DeletePolicy(*iot.DeletePolicyInput) (*iot.DeletePolicyOutput, error)
-	DeletePolicyWithContext(aws.Context, *iot.DeletePolicyInput, ...aws.Option) (*iot.DeletePolicyOutput, error)
-	DeletePolicyRequest(*iot.DeletePolicyInput) (*aws.Request, *iot.DeletePolicyOutput)
+	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest
 
-	DeletePolicyVersion(*iot.DeletePolicyVersionInput) (*iot.DeletePolicyVersionOutput, error)
-	DeletePolicyVersionWithContext(aws.Context, *iot.DeletePolicyVersionInput, ...aws.Option) (*iot.DeletePolicyVersionOutput, error)
-	DeletePolicyVersionRequest(*iot.DeletePolicyVersionInput) (*aws.Request, *iot.DeletePolicyVersionOutput)
+	DeletePolicyVersionRequest(*iot.DeletePolicyVersionInput) iot.DeletePolicyVersionRequest
 
-	DeleteRegistrationCode(*iot.DeleteRegistrationCodeInput) (*iot.DeleteRegistrationCodeOutput, error)
-	DeleteRegistrationCodeWithContext(aws.Context, *iot.DeleteRegistrationCodeInput, ...aws.Option) (*iot.DeleteRegistrationCodeOutput, error)
-	DeleteRegistrationCodeRequest(*iot.DeleteRegistrationCodeInput) (*aws.Request, *iot.DeleteRegistrationCodeOutput)
+	DeleteRegistrationCodeRequest(*iot.DeleteRegistrationCodeInput) iot.DeleteRegistrationCodeRequest
 
-	DeleteThing(*iot.DeleteThingInput) (*iot.DeleteThingOutput, error)
-	DeleteThingWithContext(aws.Context, *iot.DeleteThingInput, ...aws.Option) (*iot.DeleteThingOutput, error)
-	DeleteThingRequest(*iot.DeleteThingInput) (*aws.Request, *iot.DeleteThingOutput)
+	DeleteThingRequest(*iot.DeleteThingInput) iot.DeleteThingRequest
 
-	DeleteThingType(*iot.DeleteThingTypeInput) (*iot.DeleteThingTypeOutput, error)
-	DeleteThingTypeWithContext(aws.Context, *iot.DeleteThingTypeInput, ...aws.Option) (*iot.DeleteThingTypeOutput, error)
-	DeleteThingTypeRequest(*iot.DeleteThingTypeInput) (*aws.Request, *iot.DeleteThingTypeOutput)
+	DeleteThingTypeRequest(*iot.DeleteThingTypeInput) iot.DeleteThingTypeRequest
 
-	DeleteTopicRule(*iot.DeleteTopicRuleInput) (*iot.DeleteTopicRuleOutput, error)
-	DeleteTopicRuleWithContext(aws.Context, *iot.DeleteTopicRuleInput, ...aws.Option) (*iot.DeleteTopicRuleOutput, error)
-	DeleteTopicRuleRequest(*iot.DeleteTopicRuleInput) (*aws.Request, *iot.DeleteTopicRuleOutput)
+	DeleteTopicRuleRequest(*iot.DeleteTopicRuleInput) iot.DeleteTopicRuleRequest
 
-	DeprecateThingType(*iot.DeprecateThingTypeInput) (*iot.DeprecateThingTypeOutput, error)
-	DeprecateThingTypeWithContext(aws.Context, *iot.DeprecateThingTypeInput, ...aws.Option) (*iot.DeprecateThingTypeOutput, error)
-	DeprecateThingTypeRequest(*iot.DeprecateThingTypeInput) (*aws.Request, *iot.DeprecateThingTypeOutput)
+	DeprecateThingTypeRequest(*iot.DeprecateThingTypeInput) iot.DeprecateThingTypeRequest
 
-	DescribeCACertificate(*iot.DescribeCACertificateInput) (*iot.DescribeCACertificateOutput, error)
-	DescribeCACertificateWithContext(aws.Context, *iot.DescribeCACertificateInput, ...aws.Option) (*iot.DescribeCACertificateOutput, error)
-	DescribeCACertificateRequest(*iot.DescribeCACertificateInput) (*aws.Request, *iot.DescribeCACertificateOutput)
+	DescribeCACertificateRequest(*iot.DescribeCACertificateInput) iot.DescribeCACertificateRequest
 
-	DescribeCertificate(*iot.DescribeCertificateInput) (*iot.DescribeCertificateOutput, error)
-	DescribeCertificateWithContext(aws.Context, *iot.DescribeCertificateInput, ...aws.Option) (*iot.DescribeCertificateOutput, error)
-	DescribeCertificateRequest(*iot.DescribeCertificateInput) (*aws.Request, *iot.DescribeCertificateOutput)
+	DescribeCertificateRequest(*iot.DescribeCertificateInput) iot.DescribeCertificateRequest
 
-	DescribeEndpoint(*iot.DescribeEndpointInput) (*iot.DescribeEndpointOutput, error)
-	DescribeEndpointWithContext(aws.Context, *iot.DescribeEndpointInput, ...aws.Option) (*iot.DescribeEndpointOutput, error)
-	DescribeEndpointRequest(*iot.DescribeEndpointInput) (*aws.Request, *iot.DescribeEndpointOutput)
+	DescribeEndpointRequest(*iot.DescribeEndpointInput) iot.DescribeEndpointRequest
 
-	DescribeThing(*iot.DescribeThingInput) (*iot.DescribeThingOutput, error)
-	DescribeThingWithContext(aws.Context, *iot.DescribeThingInput, ...aws.Option) (*iot.DescribeThingOutput, error)
-	DescribeThingRequest(*iot.DescribeThingInput) (*aws.Request, *iot.DescribeThingOutput)
+	DescribeThingRequest(*iot.DescribeThingInput) iot.DescribeThingRequest
 
-	DescribeThingType(*iot.DescribeThingTypeInput) (*iot.DescribeThingTypeOutput, error)
-	DescribeThingTypeWithContext(aws.Context, *iot.DescribeThingTypeInput, ...aws.Option) (*iot.DescribeThingTypeOutput, error)
-	DescribeThingTypeRequest(*iot.DescribeThingTypeInput) (*aws.Request, *iot.DescribeThingTypeOutput)
+	DescribeThingTypeRequest(*iot.DescribeThingTypeInput) iot.DescribeThingTypeRequest
 
-	DetachPrincipalPolicy(*iot.DetachPrincipalPolicyInput) (*iot.DetachPrincipalPolicyOutput, error)
-	DetachPrincipalPolicyWithContext(aws.Context, *iot.DetachPrincipalPolicyInput, ...aws.Option) (*iot.DetachPrincipalPolicyOutput, error)
-	DetachPrincipalPolicyRequest(*iot.DetachPrincipalPolicyInput) (*aws.Request, *iot.DetachPrincipalPolicyOutput)
+	DetachPrincipalPolicyRequest(*iot.DetachPrincipalPolicyInput) iot.DetachPrincipalPolicyRequest
 
-	DetachThingPrincipal(*iot.DetachThingPrincipalInput) (*iot.DetachThingPrincipalOutput, error)
-	DetachThingPrincipalWithContext(aws.Context, *iot.DetachThingPrincipalInput, ...aws.Option) (*iot.DetachThingPrincipalOutput, error)
-	DetachThingPrincipalRequest(*iot.DetachThingPrincipalInput) (*aws.Request, *iot.DetachThingPrincipalOutput)
+	DetachThingPrincipalRequest(*iot.DetachThingPrincipalInput) iot.DetachThingPrincipalRequest
 
-	DisableTopicRule(*iot.DisableTopicRuleInput) (*iot.DisableTopicRuleOutput, error)
-	DisableTopicRuleWithContext(aws.Context, *iot.DisableTopicRuleInput, ...aws.Option) (*iot.DisableTopicRuleOutput, error)
-	DisableTopicRuleRequest(*iot.DisableTopicRuleInput) (*aws.Request, *iot.DisableTopicRuleOutput)
+	DisableTopicRuleRequest(*iot.DisableTopicRuleInput) iot.DisableTopicRuleRequest
 
-	EnableTopicRule(*iot.EnableTopicRuleInput) (*iot.EnableTopicRuleOutput, error)
-	EnableTopicRuleWithContext(aws.Context, *iot.EnableTopicRuleInput, ...aws.Option) (*iot.EnableTopicRuleOutput, error)
-	EnableTopicRuleRequest(*iot.EnableTopicRuleInput) (*aws.Request, *iot.EnableTopicRuleOutput)
+	EnableTopicRuleRequest(*iot.EnableTopicRuleInput) iot.EnableTopicRuleRequest
 
-	GetLoggingOptions(*iot.GetLoggingOptionsInput) (*iot.GetLoggingOptionsOutput, error)
-	GetLoggingOptionsWithContext(aws.Context, *iot.GetLoggingOptionsInput, ...aws.Option) (*iot.GetLoggingOptionsOutput, error)
-	GetLoggingOptionsRequest(*iot.GetLoggingOptionsInput) (*aws.Request, *iot.GetLoggingOptionsOutput)
+	GetLoggingOptionsRequest(*iot.GetLoggingOptionsInput) iot.GetLoggingOptionsRequest
 
-	GetPolicy(*iot.GetPolicyInput) (*iot.GetPolicyOutput, error)
-	GetPolicyWithContext(aws.Context, *iot.GetPolicyInput, ...aws.Option) (*iot.GetPolicyOutput, error)
-	GetPolicyRequest(*iot.GetPolicyInput) (*aws.Request, *iot.GetPolicyOutput)
+	GetPolicyRequest(*iot.GetPolicyInput) iot.GetPolicyRequest
 
-	GetPolicyVersion(*iot.GetPolicyVersionInput) (*iot.GetPolicyVersionOutput, error)
-	GetPolicyVersionWithContext(aws.Context, *iot.GetPolicyVersionInput, ...aws.Option) (*iot.GetPolicyVersionOutput, error)
-	GetPolicyVersionRequest(*iot.GetPolicyVersionInput) (*aws.Request, *iot.GetPolicyVersionOutput)
+	GetPolicyVersionRequest(*iot.GetPolicyVersionInput) iot.GetPolicyVersionRequest
 
-	GetRegistrationCode(*iot.GetRegistrationCodeInput) (*iot.GetRegistrationCodeOutput, error)
-	GetRegistrationCodeWithContext(aws.Context, *iot.GetRegistrationCodeInput, ...aws.Option) (*iot.GetRegistrationCodeOutput, error)
-	GetRegistrationCodeRequest(*iot.GetRegistrationCodeInput) (*aws.Request, *iot.GetRegistrationCodeOutput)
+	GetRegistrationCodeRequest(*iot.GetRegistrationCodeInput) iot.GetRegistrationCodeRequest
 
-	GetTopicRule(*iot.GetTopicRuleInput) (*iot.GetTopicRuleOutput, error)
-	GetTopicRuleWithContext(aws.Context, *iot.GetTopicRuleInput, ...aws.Option) (*iot.GetTopicRuleOutput, error)
-	GetTopicRuleRequest(*iot.GetTopicRuleInput) (*aws.Request, *iot.GetTopicRuleOutput)
+	GetTopicRuleRequest(*iot.GetTopicRuleInput) iot.GetTopicRuleRequest
 
-	ListCACertificates(*iot.ListCACertificatesInput) (*iot.ListCACertificatesOutput, error)
-	ListCACertificatesWithContext(aws.Context, *iot.ListCACertificatesInput, ...aws.Option) (*iot.ListCACertificatesOutput, error)
-	ListCACertificatesRequest(*iot.ListCACertificatesInput) (*aws.Request, *iot.ListCACertificatesOutput)
+	ListCACertificatesRequest(*iot.ListCACertificatesInput) iot.ListCACertificatesRequest
 
-	ListCertificates(*iot.ListCertificatesInput) (*iot.ListCertificatesOutput, error)
-	ListCertificatesWithContext(aws.Context, *iot.ListCertificatesInput, ...aws.Option) (*iot.ListCertificatesOutput, error)
-	ListCertificatesRequest(*iot.ListCertificatesInput) (*aws.Request, *iot.ListCertificatesOutput)
+	ListCertificatesRequest(*iot.ListCertificatesInput) iot.ListCertificatesRequest
 
-	ListCertificatesByCA(*iot.ListCertificatesByCAInput) (*iot.ListCertificatesByCAOutput, error)
-	ListCertificatesByCAWithContext(aws.Context, *iot.ListCertificatesByCAInput, ...aws.Option) (*iot.ListCertificatesByCAOutput, error)
-	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) (*aws.Request, *iot.ListCertificatesByCAOutput)
+	ListCertificatesByCARequest(*iot.ListCertificatesByCAInput) iot.ListCertificatesByCARequest
 
-	ListOutgoingCertificates(*iot.ListOutgoingCertificatesInput) (*iot.ListOutgoingCertificatesOutput, error)
-	ListOutgoingCertificatesWithContext(aws.Context, *iot.ListOutgoingCertificatesInput, ...aws.Option) (*iot.ListOutgoingCertificatesOutput, error)
-	ListOutgoingCertificatesRequest(*iot.ListOutgoingCertificatesInput) (*aws.Request, *iot.ListOutgoingCertificatesOutput)
+	ListOutgoingCertificatesRequest(*iot.ListOutgoingCertificatesInput) iot.ListOutgoingCertificatesRequest
 
-	ListPolicies(*iot.ListPoliciesInput) (*iot.ListPoliciesOutput, error)
-	ListPoliciesWithContext(aws.Context, *iot.ListPoliciesInput, ...aws.Option) (*iot.ListPoliciesOutput, error)
-	ListPoliciesRequest(*iot.ListPoliciesInput) (*aws.Request, *iot.ListPoliciesOutput)
+	ListPoliciesRequest(*iot.ListPoliciesInput) iot.ListPoliciesRequest
 
-	ListPolicyPrincipals(*iot.ListPolicyPrincipalsInput) (*iot.ListPolicyPrincipalsOutput, error)
-	ListPolicyPrincipalsWithContext(aws.Context, *iot.ListPolicyPrincipalsInput, ...aws.Option) (*iot.ListPolicyPrincipalsOutput, error)
-	ListPolicyPrincipalsRequest(*iot.ListPolicyPrincipalsInput) (*aws.Request, *iot.ListPolicyPrincipalsOutput)
+	ListPolicyPrincipalsRequest(*iot.ListPolicyPrincipalsInput) iot.ListPolicyPrincipalsRequest
 
-	ListPolicyVersions(*iot.ListPolicyVersionsInput) (*iot.ListPolicyVersionsOutput, error)
-	ListPolicyVersionsWithContext(aws.Context, *iot.ListPolicyVersionsInput, ...aws.Option) (*iot.ListPolicyVersionsOutput, error)
-	ListPolicyVersionsRequest(*iot.ListPolicyVersionsInput) (*aws.Request, *iot.ListPolicyVersionsOutput)
+	ListPolicyVersionsRequest(*iot.ListPolicyVersionsInput) iot.ListPolicyVersionsRequest
 
-	ListPrincipalPolicies(*iot.ListPrincipalPoliciesInput) (*iot.ListPrincipalPoliciesOutput, error)
-	ListPrincipalPoliciesWithContext(aws.Context, *iot.ListPrincipalPoliciesInput, ...aws.Option) (*iot.ListPrincipalPoliciesOutput, error)
-	ListPrincipalPoliciesRequest(*iot.ListPrincipalPoliciesInput) (*aws.Request, *iot.ListPrincipalPoliciesOutput)
+	ListPrincipalPoliciesRequest(*iot.ListPrincipalPoliciesInput) iot.ListPrincipalPoliciesRequest
 
-	ListPrincipalThings(*iot.ListPrincipalThingsInput) (*iot.ListPrincipalThingsOutput, error)
-	ListPrincipalThingsWithContext(aws.Context, *iot.ListPrincipalThingsInput, ...aws.Option) (*iot.ListPrincipalThingsOutput, error)
-	ListPrincipalThingsRequest(*iot.ListPrincipalThingsInput) (*aws.Request, *iot.ListPrincipalThingsOutput)
+	ListPrincipalThingsRequest(*iot.ListPrincipalThingsInput) iot.ListPrincipalThingsRequest
 
-	ListThingPrincipals(*iot.ListThingPrincipalsInput) (*iot.ListThingPrincipalsOutput, error)
-	ListThingPrincipalsWithContext(aws.Context, *iot.ListThingPrincipalsInput, ...aws.Option) (*iot.ListThingPrincipalsOutput, error)
-	ListThingPrincipalsRequest(*iot.ListThingPrincipalsInput) (*aws.Request, *iot.ListThingPrincipalsOutput)
+	ListThingPrincipalsRequest(*iot.ListThingPrincipalsInput) iot.ListThingPrincipalsRequest
 
-	ListThingTypes(*iot.ListThingTypesInput) (*iot.ListThingTypesOutput, error)
-	ListThingTypesWithContext(aws.Context, *iot.ListThingTypesInput, ...aws.Option) (*iot.ListThingTypesOutput, error)
-	ListThingTypesRequest(*iot.ListThingTypesInput) (*aws.Request, *iot.ListThingTypesOutput)
+	ListThingTypesRequest(*iot.ListThingTypesInput) iot.ListThingTypesRequest
 
-	ListThings(*iot.ListThingsInput) (*iot.ListThingsOutput, error)
-	ListThingsWithContext(aws.Context, *iot.ListThingsInput, ...aws.Option) (*iot.ListThingsOutput, error)
-	ListThingsRequest(*iot.ListThingsInput) (*aws.Request, *iot.ListThingsOutput)
+	ListThingsRequest(*iot.ListThingsInput) iot.ListThingsRequest
 
-	ListTopicRules(*iot.ListTopicRulesInput) (*iot.ListTopicRulesOutput, error)
-	ListTopicRulesWithContext(aws.Context, *iot.ListTopicRulesInput, ...aws.Option) (*iot.ListTopicRulesOutput, error)
-	ListTopicRulesRequest(*iot.ListTopicRulesInput) (*aws.Request, *iot.ListTopicRulesOutput)
+	ListTopicRulesRequest(*iot.ListTopicRulesInput) iot.ListTopicRulesRequest
 
-	RegisterCACertificate(*iot.RegisterCACertificateInput) (*iot.RegisterCACertificateOutput, error)
-	RegisterCACertificateWithContext(aws.Context, *iot.RegisterCACertificateInput, ...aws.Option) (*iot.RegisterCACertificateOutput, error)
-	RegisterCACertificateRequest(*iot.RegisterCACertificateInput) (*aws.Request, *iot.RegisterCACertificateOutput)
+	RegisterCACertificateRequest(*iot.RegisterCACertificateInput) iot.RegisterCACertificateRequest
 
-	RegisterCertificate(*iot.RegisterCertificateInput) (*iot.RegisterCertificateOutput, error)
-	RegisterCertificateWithContext(aws.Context, *iot.RegisterCertificateInput, ...aws.Option) (*iot.RegisterCertificateOutput, error)
-	RegisterCertificateRequest(*iot.RegisterCertificateInput) (*aws.Request, *iot.RegisterCertificateOutput)
+	RegisterCertificateRequest(*iot.RegisterCertificateInput) iot.RegisterCertificateRequest
 
-	RejectCertificateTransfer(*iot.RejectCertificateTransferInput) (*iot.RejectCertificateTransferOutput, error)
-	RejectCertificateTransferWithContext(aws.Context, *iot.RejectCertificateTransferInput, ...aws.Option) (*iot.RejectCertificateTransferOutput, error)
-	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) (*aws.Request, *iot.RejectCertificateTransferOutput)
+	RejectCertificateTransferRequest(*iot.RejectCertificateTransferInput) iot.RejectCertificateTransferRequest
 
-	ReplaceTopicRule(*iot.ReplaceTopicRuleInput) (*iot.ReplaceTopicRuleOutput, error)
-	ReplaceTopicRuleWithContext(aws.Context, *iot.ReplaceTopicRuleInput, ...aws.Option) (*iot.ReplaceTopicRuleOutput, error)
-	ReplaceTopicRuleRequest(*iot.ReplaceTopicRuleInput) (*aws.Request, *iot.ReplaceTopicRuleOutput)
+	ReplaceTopicRuleRequest(*iot.ReplaceTopicRuleInput) iot.ReplaceTopicRuleRequest
 
-	SetDefaultPolicyVersion(*iot.SetDefaultPolicyVersionInput) (*iot.SetDefaultPolicyVersionOutput, error)
-	SetDefaultPolicyVersionWithContext(aws.Context, *iot.SetDefaultPolicyVersionInput, ...aws.Option) (*iot.SetDefaultPolicyVersionOutput, error)
-	SetDefaultPolicyVersionRequest(*iot.SetDefaultPolicyVersionInput) (*aws.Request, *iot.SetDefaultPolicyVersionOutput)
+	SetDefaultPolicyVersionRequest(*iot.SetDefaultPolicyVersionInput) iot.SetDefaultPolicyVersionRequest
 
-	SetLoggingOptions(*iot.SetLoggingOptionsInput) (*iot.SetLoggingOptionsOutput, error)
-	SetLoggingOptionsWithContext(aws.Context, *iot.SetLoggingOptionsInput, ...aws.Option) (*iot.SetLoggingOptionsOutput, error)
-	SetLoggingOptionsRequest(*iot.SetLoggingOptionsInput) (*aws.Request, *iot.SetLoggingOptionsOutput)
+	SetLoggingOptionsRequest(*iot.SetLoggingOptionsInput) iot.SetLoggingOptionsRequest
 
-	TransferCertificate(*iot.TransferCertificateInput) (*iot.TransferCertificateOutput, error)
-	TransferCertificateWithContext(aws.Context, *iot.TransferCertificateInput, ...aws.Option) (*iot.TransferCertificateOutput, error)
-	TransferCertificateRequest(*iot.TransferCertificateInput) (*aws.Request, *iot.TransferCertificateOutput)
+	TransferCertificateRequest(*iot.TransferCertificateInput) iot.TransferCertificateRequest
 
-	UpdateCACertificate(*iot.UpdateCACertificateInput) (*iot.UpdateCACertificateOutput, error)
-	UpdateCACertificateWithContext(aws.Context, *iot.UpdateCACertificateInput, ...aws.Option) (*iot.UpdateCACertificateOutput, error)
-	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) (*aws.Request, *iot.UpdateCACertificateOutput)
+	UpdateCACertificateRequest(*iot.UpdateCACertificateInput) iot.UpdateCACertificateRequest
 
-	UpdateCertificate(*iot.UpdateCertificateInput) (*iot.UpdateCertificateOutput, error)
-	UpdateCertificateWithContext(aws.Context, *iot.UpdateCertificateInput, ...aws.Option) (*iot.UpdateCertificateOutput, error)
-	UpdateCertificateRequest(*iot.UpdateCertificateInput) (*aws.Request, *iot.UpdateCertificateOutput)
+	UpdateCertificateRequest(*iot.UpdateCertificateInput) iot.UpdateCertificateRequest
 
-	UpdateThing(*iot.UpdateThingInput) (*iot.UpdateThingOutput, error)
-	UpdateThingWithContext(aws.Context, *iot.UpdateThingInput, ...aws.Option) (*iot.UpdateThingOutput, error)
-	UpdateThingRequest(*iot.UpdateThingInput) (*aws.Request, *iot.UpdateThingOutput)
+	UpdateThingRequest(*iot.UpdateThingInput) iot.UpdateThingRequest
 }
 
 var _ IoTAPI = (*iot.IoT)(nil)

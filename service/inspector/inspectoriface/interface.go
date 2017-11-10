@@ -63,161 +63,95 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type InspectorAPI interface {
-	AddAttributesToFindings(*inspector.AddAttributesToFindingsInput) (*inspector.AddAttributesToFindingsOutput, error)
-	AddAttributesToFindingsWithContext(aws.Context, *inspector.AddAttributesToFindingsInput, ...aws.Option) (*inspector.AddAttributesToFindingsOutput, error)
-	AddAttributesToFindingsRequest(*inspector.AddAttributesToFindingsInput) (*aws.Request, *inspector.AddAttributesToFindingsOutput)
+	AddAttributesToFindingsRequest(*inspector.AddAttributesToFindingsInput) inspector.AddAttributesToFindingsRequest
 
-	CreateAssessmentTarget(*inspector.CreateAssessmentTargetInput) (*inspector.CreateAssessmentTargetOutput, error)
-	CreateAssessmentTargetWithContext(aws.Context, *inspector.CreateAssessmentTargetInput, ...aws.Option) (*inspector.CreateAssessmentTargetOutput, error)
-	CreateAssessmentTargetRequest(*inspector.CreateAssessmentTargetInput) (*aws.Request, *inspector.CreateAssessmentTargetOutput)
+	CreateAssessmentTargetRequest(*inspector.CreateAssessmentTargetInput) inspector.CreateAssessmentTargetRequest
 
-	CreateAssessmentTemplate(*inspector.CreateAssessmentTemplateInput) (*inspector.CreateAssessmentTemplateOutput, error)
-	CreateAssessmentTemplateWithContext(aws.Context, *inspector.CreateAssessmentTemplateInput, ...aws.Option) (*inspector.CreateAssessmentTemplateOutput, error)
-	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) (*aws.Request, *inspector.CreateAssessmentTemplateOutput)
+	CreateAssessmentTemplateRequest(*inspector.CreateAssessmentTemplateInput) inspector.CreateAssessmentTemplateRequest
 
-	CreateResourceGroup(*inspector.CreateResourceGroupInput) (*inspector.CreateResourceGroupOutput, error)
-	CreateResourceGroupWithContext(aws.Context, *inspector.CreateResourceGroupInput, ...aws.Option) (*inspector.CreateResourceGroupOutput, error)
-	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) (*aws.Request, *inspector.CreateResourceGroupOutput)
+	CreateResourceGroupRequest(*inspector.CreateResourceGroupInput) inspector.CreateResourceGroupRequest
 
-	DeleteAssessmentRun(*inspector.DeleteAssessmentRunInput) (*inspector.DeleteAssessmentRunOutput, error)
-	DeleteAssessmentRunWithContext(aws.Context, *inspector.DeleteAssessmentRunInput, ...aws.Option) (*inspector.DeleteAssessmentRunOutput, error)
-	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) (*aws.Request, *inspector.DeleteAssessmentRunOutput)
+	DeleteAssessmentRunRequest(*inspector.DeleteAssessmentRunInput) inspector.DeleteAssessmentRunRequest
 
-	DeleteAssessmentTarget(*inspector.DeleteAssessmentTargetInput) (*inspector.DeleteAssessmentTargetOutput, error)
-	DeleteAssessmentTargetWithContext(aws.Context, *inspector.DeleteAssessmentTargetInput, ...aws.Option) (*inspector.DeleteAssessmentTargetOutput, error)
-	DeleteAssessmentTargetRequest(*inspector.DeleteAssessmentTargetInput) (*aws.Request, *inspector.DeleteAssessmentTargetOutput)
+	DeleteAssessmentTargetRequest(*inspector.DeleteAssessmentTargetInput) inspector.DeleteAssessmentTargetRequest
 
-	DeleteAssessmentTemplate(*inspector.DeleteAssessmentTemplateInput) (*inspector.DeleteAssessmentTemplateOutput, error)
-	DeleteAssessmentTemplateWithContext(aws.Context, *inspector.DeleteAssessmentTemplateInput, ...aws.Option) (*inspector.DeleteAssessmentTemplateOutput, error)
-	DeleteAssessmentTemplateRequest(*inspector.DeleteAssessmentTemplateInput) (*aws.Request, *inspector.DeleteAssessmentTemplateOutput)
+	DeleteAssessmentTemplateRequest(*inspector.DeleteAssessmentTemplateInput) inspector.DeleteAssessmentTemplateRequest
 
-	DescribeAssessmentRuns(*inspector.DescribeAssessmentRunsInput) (*inspector.DescribeAssessmentRunsOutput, error)
-	DescribeAssessmentRunsWithContext(aws.Context, *inspector.DescribeAssessmentRunsInput, ...aws.Option) (*inspector.DescribeAssessmentRunsOutput, error)
-	DescribeAssessmentRunsRequest(*inspector.DescribeAssessmentRunsInput) (*aws.Request, *inspector.DescribeAssessmentRunsOutput)
+	DescribeAssessmentRunsRequest(*inspector.DescribeAssessmentRunsInput) inspector.DescribeAssessmentRunsRequest
 
-	DescribeAssessmentTargets(*inspector.DescribeAssessmentTargetsInput) (*inspector.DescribeAssessmentTargetsOutput, error)
-	DescribeAssessmentTargetsWithContext(aws.Context, *inspector.DescribeAssessmentTargetsInput, ...aws.Option) (*inspector.DescribeAssessmentTargetsOutput, error)
-	DescribeAssessmentTargetsRequest(*inspector.DescribeAssessmentTargetsInput) (*aws.Request, *inspector.DescribeAssessmentTargetsOutput)
+	DescribeAssessmentTargetsRequest(*inspector.DescribeAssessmentTargetsInput) inspector.DescribeAssessmentTargetsRequest
 
-	DescribeAssessmentTemplates(*inspector.DescribeAssessmentTemplatesInput) (*inspector.DescribeAssessmentTemplatesOutput, error)
-	DescribeAssessmentTemplatesWithContext(aws.Context, *inspector.DescribeAssessmentTemplatesInput, ...aws.Option) (*inspector.DescribeAssessmentTemplatesOutput, error)
-	DescribeAssessmentTemplatesRequest(*inspector.DescribeAssessmentTemplatesInput) (*aws.Request, *inspector.DescribeAssessmentTemplatesOutput)
+	DescribeAssessmentTemplatesRequest(*inspector.DescribeAssessmentTemplatesInput) inspector.DescribeAssessmentTemplatesRequest
 
-	DescribeCrossAccountAccessRole(*inspector.DescribeCrossAccountAccessRoleInput) (*inspector.DescribeCrossAccountAccessRoleOutput, error)
-	DescribeCrossAccountAccessRoleWithContext(aws.Context, *inspector.DescribeCrossAccountAccessRoleInput, ...aws.Option) (*inspector.DescribeCrossAccountAccessRoleOutput, error)
-	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) (*aws.Request, *inspector.DescribeCrossAccountAccessRoleOutput)
+	DescribeCrossAccountAccessRoleRequest(*inspector.DescribeCrossAccountAccessRoleInput) inspector.DescribeCrossAccountAccessRoleRequest
 
-	DescribeFindings(*inspector.DescribeFindingsInput) (*inspector.DescribeFindingsOutput, error)
-	DescribeFindingsWithContext(aws.Context, *inspector.DescribeFindingsInput, ...aws.Option) (*inspector.DescribeFindingsOutput, error)
-	DescribeFindingsRequest(*inspector.DescribeFindingsInput) (*aws.Request, *inspector.DescribeFindingsOutput)
+	DescribeFindingsRequest(*inspector.DescribeFindingsInput) inspector.DescribeFindingsRequest
 
-	DescribeResourceGroups(*inspector.DescribeResourceGroupsInput) (*inspector.DescribeResourceGroupsOutput, error)
-	DescribeResourceGroupsWithContext(aws.Context, *inspector.DescribeResourceGroupsInput, ...aws.Option) (*inspector.DescribeResourceGroupsOutput, error)
-	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) (*aws.Request, *inspector.DescribeResourceGroupsOutput)
+	DescribeResourceGroupsRequest(*inspector.DescribeResourceGroupsInput) inspector.DescribeResourceGroupsRequest
 
-	DescribeRulesPackages(*inspector.DescribeRulesPackagesInput) (*inspector.DescribeRulesPackagesOutput, error)
-	DescribeRulesPackagesWithContext(aws.Context, *inspector.DescribeRulesPackagesInput, ...aws.Option) (*inspector.DescribeRulesPackagesOutput, error)
-	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) (*aws.Request, *inspector.DescribeRulesPackagesOutput)
+	DescribeRulesPackagesRequest(*inspector.DescribeRulesPackagesInput) inspector.DescribeRulesPackagesRequest
 
-	GetAssessmentReport(*inspector.GetAssessmentReportInput) (*inspector.GetAssessmentReportOutput, error)
-	GetAssessmentReportWithContext(aws.Context, *inspector.GetAssessmentReportInput, ...aws.Option) (*inspector.GetAssessmentReportOutput, error)
-	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) (*aws.Request, *inspector.GetAssessmentReportOutput)
+	GetAssessmentReportRequest(*inspector.GetAssessmentReportInput) inspector.GetAssessmentReportRequest
 
-	GetTelemetryMetadata(*inspector.GetTelemetryMetadataInput) (*inspector.GetTelemetryMetadataOutput, error)
-	GetTelemetryMetadataWithContext(aws.Context, *inspector.GetTelemetryMetadataInput, ...aws.Option) (*inspector.GetTelemetryMetadataOutput, error)
-	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) (*aws.Request, *inspector.GetTelemetryMetadataOutput)
+	GetTelemetryMetadataRequest(*inspector.GetTelemetryMetadataInput) inspector.GetTelemetryMetadataRequest
 
-	ListAssessmentRunAgents(*inspector.ListAssessmentRunAgentsInput) (*inspector.ListAssessmentRunAgentsOutput, error)
-	ListAssessmentRunAgentsWithContext(aws.Context, *inspector.ListAssessmentRunAgentsInput, ...aws.Option) (*inspector.ListAssessmentRunAgentsOutput, error)
-	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) (*aws.Request, *inspector.ListAssessmentRunAgentsOutput)
+	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
 
 	ListAssessmentRunAgentsPages(*inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool) error
 	ListAssessmentRunAgentsPagesWithContext(aws.Context, *inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool, ...aws.Option) error
 
-	ListAssessmentRuns(*inspector.ListAssessmentRunsInput) (*inspector.ListAssessmentRunsOutput, error)
-	ListAssessmentRunsWithContext(aws.Context, *inspector.ListAssessmentRunsInput, ...aws.Option) (*inspector.ListAssessmentRunsOutput, error)
-	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) (*aws.Request, *inspector.ListAssessmentRunsOutput)
+	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
 
 	ListAssessmentRunsPages(*inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool) error
 	ListAssessmentRunsPagesWithContext(aws.Context, *inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool, ...aws.Option) error
 
-	ListAssessmentTargets(*inspector.ListAssessmentTargetsInput) (*inspector.ListAssessmentTargetsOutput, error)
-	ListAssessmentTargetsWithContext(aws.Context, *inspector.ListAssessmentTargetsInput, ...aws.Option) (*inspector.ListAssessmentTargetsOutput, error)
-	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) (*aws.Request, *inspector.ListAssessmentTargetsOutput)
+	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
 
 	ListAssessmentTargetsPages(*inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool) error
 	ListAssessmentTargetsPagesWithContext(aws.Context, *inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool, ...aws.Option) error
 
-	ListAssessmentTemplates(*inspector.ListAssessmentTemplatesInput) (*inspector.ListAssessmentTemplatesOutput, error)
-	ListAssessmentTemplatesWithContext(aws.Context, *inspector.ListAssessmentTemplatesInput, ...aws.Option) (*inspector.ListAssessmentTemplatesOutput, error)
-	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) (*aws.Request, *inspector.ListAssessmentTemplatesOutput)
+	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
 
 	ListAssessmentTemplatesPages(*inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool) error
 	ListAssessmentTemplatesPagesWithContext(aws.Context, *inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool, ...aws.Option) error
 
-	ListEventSubscriptions(*inspector.ListEventSubscriptionsInput) (*inspector.ListEventSubscriptionsOutput, error)
-	ListEventSubscriptionsWithContext(aws.Context, *inspector.ListEventSubscriptionsInput, ...aws.Option) (*inspector.ListEventSubscriptionsOutput, error)
-	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) (*aws.Request, *inspector.ListEventSubscriptionsOutput)
+	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
 
 	ListEventSubscriptionsPages(*inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool) error
 	ListEventSubscriptionsPagesWithContext(aws.Context, *inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool, ...aws.Option) error
 
-	ListFindings(*inspector.ListFindingsInput) (*inspector.ListFindingsOutput, error)
-	ListFindingsWithContext(aws.Context, *inspector.ListFindingsInput, ...aws.Option) (*inspector.ListFindingsOutput, error)
-	ListFindingsRequest(*inspector.ListFindingsInput) (*aws.Request, *inspector.ListFindingsOutput)
+	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
 
 	ListFindingsPages(*inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool) error
 	ListFindingsPagesWithContext(aws.Context, *inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool, ...aws.Option) error
 
-	ListRulesPackages(*inspector.ListRulesPackagesInput) (*inspector.ListRulesPackagesOutput, error)
-	ListRulesPackagesWithContext(aws.Context, *inspector.ListRulesPackagesInput, ...aws.Option) (*inspector.ListRulesPackagesOutput, error)
-	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) (*aws.Request, *inspector.ListRulesPackagesOutput)
+	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
 
 	ListRulesPackagesPages(*inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool) error
 	ListRulesPackagesPagesWithContext(aws.Context, *inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool, ...aws.Option) error
 
-	ListTagsForResource(*inspector.ListTagsForResourceInput) (*inspector.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *inspector.ListTagsForResourceInput, ...aws.Option) (*inspector.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) (*aws.Request, *inspector.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
 
-	PreviewAgents(*inspector.PreviewAgentsInput) (*inspector.PreviewAgentsOutput, error)
-	PreviewAgentsWithContext(aws.Context, *inspector.PreviewAgentsInput, ...aws.Option) (*inspector.PreviewAgentsOutput, error)
-	PreviewAgentsRequest(*inspector.PreviewAgentsInput) (*aws.Request, *inspector.PreviewAgentsOutput)
+	PreviewAgentsRequest(*inspector.PreviewAgentsInput) inspector.PreviewAgentsRequest
 
 	PreviewAgentsPages(*inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool) error
 	PreviewAgentsPagesWithContext(aws.Context, *inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool, ...aws.Option) error
 
-	RegisterCrossAccountAccessRole(*inspector.RegisterCrossAccountAccessRoleInput) (*inspector.RegisterCrossAccountAccessRoleOutput, error)
-	RegisterCrossAccountAccessRoleWithContext(aws.Context, *inspector.RegisterCrossAccountAccessRoleInput, ...aws.Option) (*inspector.RegisterCrossAccountAccessRoleOutput, error)
-	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) (*aws.Request, *inspector.RegisterCrossAccountAccessRoleOutput)
+	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
 
-	RemoveAttributesFromFindings(*inspector.RemoveAttributesFromFindingsInput) (*inspector.RemoveAttributesFromFindingsOutput, error)
-	RemoveAttributesFromFindingsWithContext(aws.Context, *inspector.RemoveAttributesFromFindingsInput, ...aws.Option) (*inspector.RemoveAttributesFromFindingsOutput, error)
-	RemoveAttributesFromFindingsRequest(*inspector.RemoveAttributesFromFindingsInput) (*aws.Request, *inspector.RemoveAttributesFromFindingsOutput)
+	RemoveAttributesFromFindingsRequest(*inspector.RemoveAttributesFromFindingsInput) inspector.RemoveAttributesFromFindingsRequest
 
-	SetTagsForResource(*inspector.SetTagsForResourceInput) (*inspector.SetTagsForResourceOutput, error)
-	SetTagsForResourceWithContext(aws.Context, *inspector.SetTagsForResourceInput, ...aws.Option) (*inspector.SetTagsForResourceOutput, error)
-	SetTagsForResourceRequest(*inspector.SetTagsForResourceInput) (*aws.Request, *inspector.SetTagsForResourceOutput)
+	SetTagsForResourceRequest(*inspector.SetTagsForResourceInput) inspector.SetTagsForResourceRequest
 
-	StartAssessmentRun(*inspector.StartAssessmentRunInput) (*inspector.StartAssessmentRunOutput, error)
-	StartAssessmentRunWithContext(aws.Context, *inspector.StartAssessmentRunInput, ...aws.Option) (*inspector.StartAssessmentRunOutput, error)
-	StartAssessmentRunRequest(*inspector.StartAssessmentRunInput) (*aws.Request, *inspector.StartAssessmentRunOutput)
+	StartAssessmentRunRequest(*inspector.StartAssessmentRunInput) inspector.StartAssessmentRunRequest
 
-	StopAssessmentRun(*inspector.StopAssessmentRunInput) (*inspector.StopAssessmentRunOutput, error)
-	StopAssessmentRunWithContext(aws.Context, *inspector.StopAssessmentRunInput, ...aws.Option) (*inspector.StopAssessmentRunOutput, error)
-	StopAssessmentRunRequest(*inspector.StopAssessmentRunInput) (*aws.Request, *inspector.StopAssessmentRunOutput)
+	StopAssessmentRunRequest(*inspector.StopAssessmentRunInput) inspector.StopAssessmentRunRequest
 
-	SubscribeToEvent(*inspector.SubscribeToEventInput) (*inspector.SubscribeToEventOutput, error)
-	SubscribeToEventWithContext(aws.Context, *inspector.SubscribeToEventInput, ...aws.Option) (*inspector.SubscribeToEventOutput, error)
-	SubscribeToEventRequest(*inspector.SubscribeToEventInput) (*aws.Request, *inspector.SubscribeToEventOutput)
+	SubscribeToEventRequest(*inspector.SubscribeToEventInput) inspector.SubscribeToEventRequest
 
-	UnsubscribeFromEvent(*inspector.UnsubscribeFromEventInput) (*inspector.UnsubscribeFromEventOutput, error)
-	UnsubscribeFromEventWithContext(aws.Context, *inspector.UnsubscribeFromEventInput, ...aws.Option) (*inspector.UnsubscribeFromEventOutput, error)
-	UnsubscribeFromEventRequest(*inspector.UnsubscribeFromEventInput) (*aws.Request, *inspector.UnsubscribeFromEventOutput)
+	UnsubscribeFromEventRequest(*inspector.UnsubscribeFromEventInput) inspector.UnsubscribeFromEventRequest
 
-	UpdateAssessmentTarget(*inspector.UpdateAssessmentTargetInput) (*inspector.UpdateAssessmentTargetOutput, error)
-	UpdateAssessmentTargetWithContext(aws.Context, *inspector.UpdateAssessmentTargetInput, ...aws.Option) (*inspector.UpdateAssessmentTargetOutput, error)
-	UpdateAssessmentTargetRequest(*inspector.UpdateAssessmentTargetInput) (*aws.Request, *inspector.UpdateAssessmentTargetOutput)
+	UpdateAssessmentTargetRequest(*inspector.UpdateAssessmentTargetInput) inspector.UpdateAssessmentTargetRequest
 }
 
 var _ InspectorAPI = (*inspector.Inspector)(nil)

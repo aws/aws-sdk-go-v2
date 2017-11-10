@@ -271,11 +271,11 @@ func BenchmarkValidateAny(b *testing.B) {
 		input.Records = append(input.Records, record)
 	}
 
-	req, _ := kinesis.New(unit.Config()).PutRecordsRequest(input)
+	req := kinesis.New(unit.Config()).PutRecordsRequest(input)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		defaults.ValidateParametersHandler.Fn(req)
+		defaults.ValidateParametersHandler.Fn(req.Request)
 		if err := req.Error; err != nil {
 			b.Fatalf("validation failed: %v", err)
 		}

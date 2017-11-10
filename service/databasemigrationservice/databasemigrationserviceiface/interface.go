@@ -63,201 +63,121 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type DatabaseMigrationServiceAPI interface {
-	AddTagsToResource(*databasemigrationservice.AddTagsToResourceInput) (*databasemigrationservice.AddTagsToResourceOutput, error)
-	AddTagsToResourceWithContext(aws.Context, *databasemigrationservice.AddTagsToResourceInput, ...aws.Option) (*databasemigrationservice.AddTagsToResourceOutput, error)
-	AddTagsToResourceRequest(*databasemigrationservice.AddTagsToResourceInput) (*aws.Request, *databasemigrationservice.AddTagsToResourceOutput)
+	AddTagsToResourceRequest(*databasemigrationservice.AddTagsToResourceInput) databasemigrationservice.AddTagsToResourceRequest
 
-	CreateEndpoint(*databasemigrationservice.CreateEndpointInput) (*databasemigrationservice.CreateEndpointOutput, error)
-	CreateEndpointWithContext(aws.Context, *databasemigrationservice.CreateEndpointInput, ...aws.Option) (*databasemigrationservice.CreateEndpointOutput, error)
-	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) (*aws.Request, *databasemigrationservice.CreateEndpointOutput)
+	CreateEndpointRequest(*databasemigrationservice.CreateEndpointInput) databasemigrationservice.CreateEndpointRequest
 
-	CreateEventSubscription(*databasemigrationservice.CreateEventSubscriptionInput) (*databasemigrationservice.CreateEventSubscriptionOutput, error)
-	CreateEventSubscriptionWithContext(aws.Context, *databasemigrationservice.CreateEventSubscriptionInput, ...aws.Option) (*databasemigrationservice.CreateEventSubscriptionOutput, error)
-	CreateEventSubscriptionRequest(*databasemigrationservice.CreateEventSubscriptionInput) (*aws.Request, *databasemigrationservice.CreateEventSubscriptionOutput)
+	CreateEventSubscriptionRequest(*databasemigrationservice.CreateEventSubscriptionInput) databasemigrationservice.CreateEventSubscriptionRequest
 
-	CreateReplicationInstance(*databasemigrationservice.CreateReplicationInstanceInput) (*databasemigrationservice.CreateReplicationInstanceOutput, error)
-	CreateReplicationInstanceWithContext(aws.Context, *databasemigrationservice.CreateReplicationInstanceInput, ...aws.Option) (*databasemigrationservice.CreateReplicationInstanceOutput, error)
-	CreateReplicationInstanceRequest(*databasemigrationservice.CreateReplicationInstanceInput) (*aws.Request, *databasemigrationservice.CreateReplicationInstanceOutput)
+	CreateReplicationInstanceRequest(*databasemigrationservice.CreateReplicationInstanceInput) databasemigrationservice.CreateReplicationInstanceRequest
 
-	CreateReplicationSubnetGroup(*databasemigrationservice.CreateReplicationSubnetGroupInput) (*databasemigrationservice.CreateReplicationSubnetGroupOutput, error)
-	CreateReplicationSubnetGroupWithContext(aws.Context, *databasemigrationservice.CreateReplicationSubnetGroupInput, ...aws.Option) (*databasemigrationservice.CreateReplicationSubnetGroupOutput, error)
-	CreateReplicationSubnetGroupRequest(*databasemigrationservice.CreateReplicationSubnetGroupInput) (*aws.Request, *databasemigrationservice.CreateReplicationSubnetGroupOutput)
+	CreateReplicationSubnetGroupRequest(*databasemigrationservice.CreateReplicationSubnetGroupInput) databasemigrationservice.CreateReplicationSubnetGroupRequest
 
-	CreateReplicationTask(*databasemigrationservice.CreateReplicationTaskInput) (*databasemigrationservice.CreateReplicationTaskOutput, error)
-	CreateReplicationTaskWithContext(aws.Context, *databasemigrationservice.CreateReplicationTaskInput, ...aws.Option) (*databasemigrationservice.CreateReplicationTaskOutput, error)
-	CreateReplicationTaskRequest(*databasemigrationservice.CreateReplicationTaskInput) (*aws.Request, *databasemigrationservice.CreateReplicationTaskOutput)
+	CreateReplicationTaskRequest(*databasemigrationservice.CreateReplicationTaskInput) databasemigrationservice.CreateReplicationTaskRequest
 
-	DeleteCertificate(*databasemigrationservice.DeleteCertificateInput) (*databasemigrationservice.DeleteCertificateOutput, error)
-	DeleteCertificateWithContext(aws.Context, *databasemigrationservice.DeleteCertificateInput, ...aws.Option) (*databasemigrationservice.DeleteCertificateOutput, error)
-	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) (*aws.Request, *databasemigrationservice.DeleteCertificateOutput)
+	DeleteCertificateRequest(*databasemigrationservice.DeleteCertificateInput) databasemigrationservice.DeleteCertificateRequest
 
-	DeleteEndpoint(*databasemigrationservice.DeleteEndpointInput) (*databasemigrationservice.DeleteEndpointOutput, error)
-	DeleteEndpointWithContext(aws.Context, *databasemigrationservice.DeleteEndpointInput, ...aws.Option) (*databasemigrationservice.DeleteEndpointOutput, error)
-	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) (*aws.Request, *databasemigrationservice.DeleteEndpointOutput)
+	DeleteEndpointRequest(*databasemigrationservice.DeleteEndpointInput) databasemigrationservice.DeleteEndpointRequest
 
-	DeleteEventSubscription(*databasemigrationservice.DeleteEventSubscriptionInput) (*databasemigrationservice.DeleteEventSubscriptionOutput, error)
-	DeleteEventSubscriptionWithContext(aws.Context, *databasemigrationservice.DeleteEventSubscriptionInput, ...aws.Option) (*databasemigrationservice.DeleteEventSubscriptionOutput, error)
-	DeleteEventSubscriptionRequest(*databasemigrationservice.DeleteEventSubscriptionInput) (*aws.Request, *databasemigrationservice.DeleteEventSubscriptionOutput)
+	DeleteEventSubscriptionRequest(*databasemigrationservice.DeleteEventSubscriptionInput) databasemigrationservice.DeleteEventSubscriptionRequest
 
-	DeleteReplicationInstance(*databasemigrationservice.DeleteReplicationInstanceInput) (*databasemigrationservice.DeleteReplicationInstanceOutput, error)
-	DeleteReplicationInstanceWithContext(aws.Context, *databasemigrationservice.DeleteReplicationInstanceInput, ...aws.Option) (*databasemigrationservice.DeleteReplicationInstanceOutput, error)
-	DeleteReplicationInstanceRequest(*databasemigrationservice.DeleteReplicationInstanceInput) (*aws.Request, *databasemigrationservice.DeleteReplicationInstanceOutput)
+	DeleteReplicationInstanceRequest(*databasemigrationservice.DeleteReplicationInstanceInput) databasemigrationservice.DeleteReplicationInstanceRequest
 
-	DeleteReplicationSubnetGroup(*databasemigrationservice.DeleteReplicationSubnetGroupInput) (*databasemigrationservice.DeleteReplicationSubnetGroupOutput, error)
-	DeleteReplicationSubnetGroupWithContext(aws.Context, *databasemigrationservice.DeleteReplicationSubnetGroupInput, ...aws.Option) (*databasemigrationservice.DeleteReplicationSubnetGroupOutput, error)
-	DeleteReplicationSubnetGroupRequest(*databasemigrationservice.DeleteReplicationSubnetGroupInput) (*aws.Request, *databasemigrationservice.DeleteReplicationSubnetGroupOutput)
+	DeleteReplicationSubnetGroupRequest(*databasemigrationservice.DeleteReplicationSubnetGroupInput) databasemigrationservice.DeleteReplicationSubnetGroupRequest
 
-	DeleteReplicationTask(*databasemigrationservice.DeleteReplicationTaskInput) (*databasemigrationservice.DeleteReplicationTaskOutput, error)
-	DeleteReplicationTaskWithContext(aws.Context, *databasemigrationservice.DeleteReplicationTaskInput, ...aws.Option) (*databasemigrationservice.DeleteReplicationTaskOutput, error)
-	DeleteReplicationTaskRequest(*databasemigrationservice.DeleteReplicationTaskInput) (*aws.Request, *databasemigrationservice.DeleteReplicationTaskOutput)
+	DeleteReplicationTaskRequest(*databasemigrationservice.DeleteReplicationTaskInput) databasemigrationservice.DeleteReplicationTaskRequest
 
-	DescribeAccountAttributes(*databasemigrationservice.DescribeAccountAttributesInput) (*databasemigrationservice.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesWithContext(aws.Context, *databasemigrationservice.DescribeAccountAttributesInput, ...aws.Option) (*databasemigrationservice.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesRequest(*databasemigrationservice.DescribeAccountAttributesInput) (*aws.Request, *databasemigrationservice.DescribeAccountAttributesOutput)
+	DescribeAccountAttributesRequest(*databasemigrationservice.DescribeAccountAttributesInput) databasemigrationservice.DescribeAccountAttributesRequest
 
-	DescribeCertificates(*databasemigrationservice.DescribeCertificatesInput) (*databasemigrationservice.DescribeCertificatesOutput, error)
-	DescribeCertificatesWithContext(aws.Context, *databasemigrationservice.DescribeCertificatesInput, ...aws.Option) (*databasemigrationservice.DescribeCertificatesOutput, error)
-	DescribeCertificatesRequest(*databasemigrationservice.DescribeCertificatesInput) (*aws.Request, *databasemigrationservice.DescribeCertificatesOutput)
+	DescribeCertificatesRequest(*databasemigrationservice.DescribeCertificatesInput) databasemigrationservice.DescribeCertificatesRequest
 
 	DescribeCertificatesPages(*databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool) error
 	DescribeCertificatesPagesWithContext(aws.Context, *databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool, ...aws.Option) error
 
-	DescribeConnections(*databasemigrationservice.DescribeConnectionsInput) (*databasemigrationservice.DescribeConnectionsOutput, error)
-	DescribeConnectionsWithContext(aws.Context, *databasemigrationservice.DescribeConnectionsInput, ...aws.Option) (*databasemigrationservice.DescribeConnectionsOutput, error)
-	DescribeConnectionsRequest(*databasemigrationservice.DescribeConnectionsInput) (*aws.Request, *databasemigrationservice.DescribeConnectionsOutput)
+	DescribeConnectionsRequest(*databasemigrationservice.DescribeConnectionsInput) databasemigrationservice.DescribeConnectionsRequest
 
 	DescribeConnectionsPages(*databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool) error
 	DescribeConnectionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool, ...aws.Option) error
 
-	DescribeEndpointTypes(*databasemigrationservice.DescribeEndpointTypesInput) (*databasemigrationservice.DescribeEndpointTypesOutput, error)
-	DescribeEndpointTypesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointTypesInput, ...aws.Option) (*databasemigrationservice.DescribeEndpointTypesOutput, error)
-	DescribeEndpointTypesRequest(*databasemigrationservice.DescribeEndpointTypesInput) (*aws.Request, *databasemigrationservice.DescribeEndpointTypesOutput)
+	DescribeEndpointTypesRequest(*databasemigrationservice.DescribeEndpointTypesInput) databasemigrationservice.DescribeEndpointTypesRequest
 
 	DescribeEndpointTypesPages(*databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool) error
 	DescribeEndpointTypesPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool, ...aws.Option) error
 
-	DescribeEndpoints(*databasemigrationservice.DescribeEndpointsInput) (*databasemigrationservice.DescribeEndpointsOutput, error)
-	DescribeEndpointsWithContext(aws.Context, *databasemigrationservice.DescribeEndpointsInput, ...aws.Option) (*databasemigrationservice.DescribeEndpointsOutput, error)
-	DescribeEndpointsRequest(*databasemigrationservice.DescribeEndpointsInput) (*aws.Request, *databasemigrationservice.DescribeEndpointsOutput)
+	DescribeEndpointsRequest(*databasemigrationservice.DescribeEndpointsInput) databasemigrationservice.DescribeEndpointsRequest
 
 	DescribeEndpointsPages(*databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool) error
 	DescribeEndpointsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool, ...aws.Option) error
 
-	DescribeEventCategories(*databasemigrationservice.DescribeEventCategoriesInput) (*databasemigrationservice.DescribeEventCategoriesOutput, error)
-	DescribeEventCategoriesWithContext(aws.Context, *databasemigrationservice.DescribeEventCategoriesInput, ...aws.Option) (*databasemigrationservice.DescribeEventCategoriesOutput, error)
-	DescribeEventCategoriesRequest(*databasemigrationservice.DescribeEventCategoriesInput) (*aws.Request, *databasemigrationservice.DescribeEventCategoriesOutput)
+	DescribeEventCategoriesRequest(*databasemigrationservice.DescribeEventCategoriesInput) databasemigrationservice.DescribeEventCategoriesRequest
 
-	DescribeEventSubscriptions(*databasemigrationservice.DescribeEventSubscriptionsInput) (*databasemigrationservice.DescribeEventSubscriptionsOutput, error)
-	DescribeEventSubscriptionsWithContext(aws.Context, *databasemigrationservice.DescribeEventSubscriptionsInput, ...aws.Option) (*databasemigrationservice.DescribeEventSubscriptionsOutput, error)
-	DescribeEventSubscriptionsRequest(*databasemigrationservice.DescribeEventSubscriptionsInput) (*aws.Request, *databasemigrationservice.DescribeEventSubscriptionsOutput)
+	DescribeEventSubscriptionsRequest(*databasemigrationservice.DescribeEventSubscriptionsInput) databasemigrationservice.DescribeEventSubscriptionsRequest
 
 	DescribeEventSubscriptionsPages(*databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool) error
 	DescribeEventSubscriptionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
 
-	DescribeEvents(*databasemigrationservice.DescribeEventsInput) (*databasemigrationservice.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *databasemigrationservice.DescribeEventsInput, ...aws.Option) (*databasemigrationservice.DescribeEventsOutput, error)
-	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) (*aws.Request, *databasemigrationservice.DescribeEventsOutput)
+	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
 
 	DescribeEventsPages(*databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool) error
 	DescribeEventsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
-	DescribeOrderableReplicationInstances(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) (*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, error)
-	DescribeOrderableReplicationInstancesWithContext(aws.Context, *databasemigrationservice.DescribeOrderableReplicationInstancesInput, ...aws.Option) (*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, error)
-	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) (*aws.Request, *databasemigrationservice.DescribeOrderableReplicationInstancesOutput)
+	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
 
 	DescribeOrderableReplicationInstancesPages(*databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool) error
 	DescribeOrderableReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool, ...aws.Option) error
 
-	DescribeRefreshSchemasStatus(*databasemigrationservice.DescribeRefreshSchemasStatusInput) (*databasemigrationservice.DescribeRefreshSchemasStatusOutput, error)
-	DescribeRefreshSchemasStatusWithContext(aws.Context, *databasemigrationservice.DescribeRefreshSchemasStatusInput, ...aws.Option) (*databasemigrationservice.DescribeRefreshSchemasStatusOutput, error)
-	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) (*aws.Request, *databasemigrationservice.DescribeRefreshSchemasStatusOutput)
+	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
 
-	DescribeReplicationInstances(*databasemigrationservice.DescribeReplicationInstancesInput) (*databasemigrationservice.DescribeReplicationInstancesOutput, error)
-	DescribeReplicationInstancesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationInstancesInput, ...aws.Option) (*databasemigrationservice.DescribeReplicationInstancesOutput, error)
-	DescribeReplicationInstancesRequest(*databasemigrationservice.DescribeReplicationInstancesInput) (*aws.Request, *databasemigrationservice.DescribeReplicationInstancesOutput)
+	DescribeReplicationInstancesRequest(*databasemigrationservice.DescribeReplicationInstancesInput) databasemigrationservice.DescribeReplicationInstancesRequest
 
 	DescribeReplicationInstancesPages(*databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool) error
 	DescribeReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool, ...aws.Option) error
 
-	DescribeReplicationSubnetGroups(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) (*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, error)
-	DescribeReplicationSubnetGroupsWithContext(aws.Context, *databasemigrationservice.DescribeReplicationSubnetGroupsInput, ...aws.Option) (*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, error)
-	DescribeReplicationSubnetGroupsRequest(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) (*aws.Request, *databasemigrationservice.DescribeReplicationSubnetGroupsOutput)
+	DescribeReplicationSubnetGroupsRequest(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) databasemigrationservice.DescribeReplicationSubnetGroupsRequest
 
 	DescribeReplicationSubnetGroupsPages(*databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool) error
 	DescribeReplicationSubnetGroupsPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool, ...aws.Option) error
 
-	DescribeReplicationTasks(*databasemigrationservice.DescribeReplicationTasksInput) (*databasemigrationservice.DescribeReplicationTasksOutput, error)
-	DescribeReplicationTasksWithContext(aws.Context, *databasemigrationservice.DescribeReplicationTasksInput, ...aws.Option) (*databasemigrationservice.DescribeReplicationTasksOutput, error)
-	DescribeReplicationTasksRequest(*databasemigrationservice.DescribeReplicationTasksInput) (*aws.Request, *databasemigrationservice.DescribeReplicationTasksOutput)
+	DescribeReplicationTasksRequest(*databasemigrationservice.DescribeReplicationTasksInput) databasemigrationservice.DescribeReplicationTasksRequest
 
 	DescribeReplicationTasksPages(*databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool) error
 	DescribeReplicationTasksPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool, ...aws.Option) error
 
-	DescribeSchemas(*databasemigrationservice.DescribeSchemasInput) (*databasemigrationservice.DescribeSchemasOutput, error)
-	DescribeSchemasWithContext(aws.Context, *databasemigrationservice.DescribeSchemasInput, ...aws.Option) (*databasemigrationservice.DescribeSchemasOutput, error)
-	DescribeSchemasRequest(*databasemigrationservice.DescribeSchemasInput) (*aws.Request, *databasemigrationservice.DescribeSchemasOutput)
+	DescribeSchemasRequest(*databasemigrationservice.DescribeSchemasInput) databasemigrationservice.DescribeSchemasRequest
 
 	DescribeSchemasPages(*databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool) error
 	DescribeSchemasPagesWithContext(aws.Context, *databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool, ...aws.Option) error
 
-	DescribeTableStatistics(*databasemigrationservice.DescribeTableStatisticsInput) (*databasemigrationservice.DescribeTableStatisticsOutput, error)
-	DescribeTableStatisticsWithContext(aws.Context, *databasemigrationservice.DescribeTableStatisticsInput, ...aws.Option) (*databasemigrationservice.DescribeTableStatisticsOutput, error)
-	DescribeTableStatisticsRequest(*databasemigrationservice.DescribeTableStatisticsInput) (*aws.Request, *databasemigrationservice.DescribeTableStatisticsOutput)
+	DescribeTableStatisticsRequest(*databasemigrationservice.DescribeTableStatisticsInput) databasemigrationservice.DescribeTableStatisticsRequest
 
 	DescribeTableStatisticsPages(*databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool) error
 	DescribeTableStatisticsPagesWithContext(aws.Context, *databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool, ...aws.Option) error
 
-	ImportCertificate(*databasemigrationservice.ImportCertificateInput) (*databasemigrationservice.ImportCertificateOutput, error)
-	ImportCertificateWithContext(aws.Context, *databasemigrationservice.ImportCertificateInput, ...aws.Option) (*databasemigrationservice.ImportCertificateOutput, error)
-	ImportCertificateRequest(*databasemigrationservice.ImportCertificateInput) (*aws.Request, *databasemigrationservice.ImportCertificateOutput)
+	ImportCertificateRequest(*databasemigrationservice.ImportCertificateInput) databasemigrationservice.ImportCertificateRequest
 
-	ListTagsForResource(*databasemigrationservice.ListTagsForResourceInput) (*databasemigrationservice.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *databasemigrationservice.ListTagsForResourceInput, ...aws.Option) (*databasemigrationservice.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*databasemigrationservice.ListTagsForResourceInput) (*aws.Request, *databasemigrationservice.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*databasemigrationservice.ListTagsForResourceInput) databasemigrationservice.ListTagsForResourceRequest
 
-	ModifyEndpoint(*databasemigrationservice.ModifyEndpointInput) (*databasemigrationservice.ModifyEndpointOutput, error)
-	ModifyEndpointWithContext(aws.Context, *databasemigrationservice.ModifyEndpointInput, ...aws.Option) (*databasemigrationservice.ModifyEndpointOutput, error)
-	ModifyEndpointRequest(*databasemigrationservice.ModifyEndpointInput) (*aws.Request, *databasemigrationservice.ModifyEndpointOutput)
+	ModifyEndpointRequest(*databasemigrationservice.ModifyEndpointInput) databasemigrationservice.ModifyEndpointRequest
 
-	ModifyEventSubscription(*databasemigrationservice.ModifyEventSubscriptionInput) (*databasemigrationservice.ModifyEventSubscriptionOutput, error)
-	ModifyEventSubscriptionWithContext(aws.Context, *databasemigrationservice.ModifyEventSubscriptionInput, ...aws.Option) (*databasemigrationservice.ModifyEventSubscriptionOutput, error)
-	ModifyEventSubscriptionRequest(*databasemigrationservice.ModifyEventSubscriptionInput) (*aws.Request, *databasemigrationservice.ModifyEventSubscriptionOutput)
+	ModifyEventSubscriptionRequest(*databasemigrationservice.ModifyEventSubscriptionInput) databasemigrationservice.ModifyEventSubscriptionRequest
 
-	ModifyReplicationInstance(*databasemigrationservice.ModifyReplicationInstanceInput) (*databasemigrationservice.ModifyReplicationInstanceOutput, error)
-	ModifyReplicationInstanceWithContext(aws.Context, *databasemigrationservice.ModifyReplicationInstanceInput, ...aws.Option) (*databasemigrationservice.ModifyReplicationInstanceOutput, error)
-	ModifyReplicationInstanceRequest(*databasemigrationservice.ModifyReplicationInstanceInput) (*aws.Request, *databasemigrationservice.ModifyReplicationInstanceOutput)
+	ModifyReplicationInstanceRequest(*databasemigrationservice.ModifyReplicationInstanceInput) databasemigrationservice.ModifyReplicationInstanceRequest
 
-	ModifyReplicationSubnetGroup(*databasemigrationservice.ModifyReplicationSubnetGroupInput) (*databasemigrationservice.ModifyReplicationSubnetGroupOutput, error)
-	ModifyReplicationSubnetGroupWithContext(aws.Context, *databasemigrationservice.ModifyReplicationSubnetGroupInput, ...aws.Option) (*databasemigrationservice.ModifyReplicationSubnetGroupOutput, error)
-	ModifyReplicationSubnetGroupRequest(*databasemigrationservice.ModifyReplicationSubnetGroupInput) (*aws.Request, *databasemigrationservice.ModifyReplicationSubnetGroupOutput)
+	ModifyReplicationSubnetGroupRequest(*databasemigrationservice.ModifyReplicationSubnetGroupInput) databasemigrationservice.ModifyReplicationSubnetGroupRequest
 
-	ModifyReplicationTask(*databasemigrationservice.ModifyReplicationTaskInput) (*databasemigrationservice.ModifyReplicationTaskOutput, error)
-	ModifyReplicationTaskWithContext(aws.Context, *databasemigrationservice.ModifyReplicationTaskInput, ...aws.Option) (*databasemigrationservice.ModifyReplicationTaskOutput, error)
-	ModifyReplicationTaskRequest(*databasemigrationservice.ModifyReplicationTaskInput) (*aws.Request, *databasemigrationservice.ModifyReplicationTaskOutput)
+	ModifyReplicationTaskRequest(*databasemigrationservice.ModifyReplicationTaskInput) databasemigrationservice.ModifyReplicationTaskRequest
 
-	RefreshSchemas(*databasemigrationservice.RefreshSchemasInput) (*databasemigrationservice.RefreshSchemasOutput, error)
-	RefreshSchemasWithContext(aws.Context, *databasemigrationservice.RefreshSchemasInput, ...aws.Option) (*databasemigrationservice.RefreshSchemasOutput, error)
-	RefreshSchemasRequest(*databasemigrationservice.RefreshSchemasInput) (*aws.Request, *databasemigrationservice.RefreshSchemasOutput)
+	RefreshSchemasRequest(*databasemigrationservice.RefreshSchemasInput) databasemigrationservice.RefreshSchemasRequest
 
-	ReloadTables(*databasemigrationservice.ReloadTablesInput) (*databasemigrationservice.ReloadTablesOutput, error)
-	ReloadTablesWithContext(aws.Context, *databasemigrationservice.ReloadTablesInput, ...aws.Option) (*databasemigrationservice.ReloadTablesOutput, error)
-	ReloadTablesRequest(*databasemigrationservice.ReloadTablesInput) (*aws.Request, *databasemigrationservice.ReloadTablesOutput)
+	ReloadTablesRequest(*databasemigrationservice.ReloadTablesInput) databasemigrationservice.ReloadTablesRequest
 
-	RemoveTagsFromResource(*databasemigrationservice.RemoveTagsFromResourceInput) (*databasemigrationservice.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceWithContext(aws.Context, *databasemigrationservice.RemoveTagsFromResourceInput, ...aws.Option) (*databasemigrationservice.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceRequest(*databasemigrationservice.RemoveTagsFromResourceInput) (*aws.Request, *databasemigrationservice.RemoveTagsFromResourceOutput)
+	RemoveTagsFromResourceRequest(*databasemigrationservice.RemoveTagsFromResourceInput) databasemigrationservice.RemoveTagsFromResourceRequest
 
-	StartReplicationTask(*databasemigrationservice.StartReplicationTaskInput) (*databasemigrationservice.StartReplicationTaskOutput, error)
-	StartReplicationTaskWithContext(aws.Context, *databasemigrationservice.StartReplicationTaskInput, ...aws.Option) (*databasemigrationservice.StartReplicationTaskOutput, error)
-	StartReplicationTaskRequest(*databasemigrationservice.StartReplicationTaskInput) (*aws.Request, *databasemigrationservice.StartReplicationTaskOutput)
+	StartReplicationTaskRequest(*databasemigrationservice.StartReplicationTaskInput) databasemigrationservice.StartReplicationTaskRequest
 
-	StopReplicationTask(*databasemigrationservice.StopReplicationTaskInput) (*databasemigrationservice.StopReplicationTaskOutput, error)
-	StopReplicationTaskWithContext(aws.Context, *databasemigrationservice.StopReplicationTaskInput, ...aws.Option) (*databasemigrationservice.StopReplicationTaskOutput, error)
-	StopReplicationTaskRequest(*databasemigrationservice.StopReplicationTaskInput) (*aws.Request, *databasemigrationservice.StopReplicationTaskOutput)
+	StopReplicationTaskRequest(*databasemigrationservice.StopReplicationTaskInput) databasemigrationservice.StopReplicationTaskRequest
 
-	TestConnection(*databasemigrationservice.TestConnectionInput) (*databasemigrationservice.TestConnectionOutput, error)
-	TestConnectionWithContext(aws.Context, *databasemigrationservice.TestConnectionInput, ...aws.Option) (*databasemigrationservice.TestConnectionOutput, error)
-	TestConnectionRequest(*databasemigrationservice.TestConnectionInput) (*aws.Request, *databasemigrationservice.TestConnectionOutput)
+	TestConnectionRequest(*databasemigrationservice.TestConnectionInput) databasemigrationservice.TestConnectionRequest
 }
 
 var _ DatabaseMigrationServiceAPI = (*databasemigrationservice.DatabaseMigrationService)(nil)

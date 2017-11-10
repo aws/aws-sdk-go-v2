@@ -63,64 +63,36 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CloudTrailAPI interface {
-	AddTags(*cloudtrail.AddTagsInput) (*cloudtrail.AddTagsOutput, error)
-	AddTagsWithContext(aws.Context, *cloudtrail.AddTagsInput, ...aws.Option) (*cloudtrail.AddTagsOutput, error)
-	AddTagsRequest(*cloudtrail.AddTagsInput) (*aws.Request, *cloudtrail.AddTagsOutput)
+	AddTagsRequest(*cloudtrail.AddTagsInput) cloudtrail.AddTagsRequest
 
-	CreateTrail(*cloudtrail.CreateTrailInput) (*cloudtrail.CreateTrailOutput, error)
-	CreateTrailWithContext(aws.Context, *cloudtrail.CreateTrailInput, ...aws.Option) (*cloudtrail.CreateTrailOutput, error)
-	CreateTrailRequest(*cloudtrail.CreateTrailInput) (*aws.Request, *cloudtrail.CreateTrailOutput)
+	CreateTrailRequest(*cloudtrail.CreateTrailInput) cloudtrail.CreateTrailRequest
 
-	DeleteTrail(*cloudtrail.DeleteTrailInput) (*cloudtrail.DeleteTrailOutput, error)
-	DeleteTrailWithContext(aws.Context, *cloudtrail.DeleteTrailInput, ...aws.Option) (*cloudtrail.DeleteTrailOutput, error)
-	DeleteTrailRequest(*cloudtrail.DeleteTrailInput) (*aws.Request, *cloudtrail.DeleteTrailOutput)
+	DeleteTrailRequest(*cloudtrail.DeleteTrailInput) cloudtrail.DeleteTrailRequest
 
-	DescribeTrails(*cloudtrail.DescribeTrailsInput) (*cloudtrail.DescribeTrailsOutput, error)
-	DescribeTrailsWithContext(aws.Context, *cloudtrail.DescribeTrailsInput, ...aws.Option) (*cloudtrail.DescribeTrailsOutput, error)
-	DescribeTrailsRequest(*cloudtrail.DescribeTrailsInput) (*aws.Request, *cloudtrail.DescribeTrailsOutput)
+	DescribeTrailsRequest(*cloudtrail.DescribeTrailsInput) cloudtrail.DescribeTrailsRequest
 
-	GetEventSelectors(*cloudtrail.GetEventSelectorsInput) (*cloudtrail.GetEventSelectorsOutput, error)
-	GetEventSelectorsWithContext(aws.Context, *cloudtrail.GetEventSelectorsInput, ...aws.Option) (*cloudtrail.GetEventSelectorsOutput, error)
-	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) (*aws.Request, *cloudtrail.GetEventSelectorsOutput)
+	GetEventSelectorsRequest(*cloudtrail.GetEventSelectorsInput) cloudtrail.GetEventSelectorsRequest
 
-	GetTrailStatus(*cloudtrail.GetTrailStatusInput) (*cloudtrail.GetTrailStatusOutput, error)
-	GetTrailStatusWithContext(aws.Context, *cloudtrail.GetTrailStatusInput, ...aws.Option) (*cloudtrail.GetTrailStatusOutput, error)
-	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) (*aws.Request, *cloudtrail.GetTrailStatusOutput)
+	GetTrailStatusRequest(*cloudtrail.GetTrailStatusInput) cloudtrail.GetTrailStatusRequest
 
-	ListPublicKeys(*cloudtrail.ListPublicKeysInput) (*cloudtrail.ListPublicKeysOutput, error)
-	ListPublicKeysWithContext(aws.Context, *cloudtrail.ListPublicKeysInput, ...aws.Option) (*cloudtrail.ListPublicKeysOutput, error)
-	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) (*aws.Request, *cloudtrail.ListPublicKeysOutput)
+	ListPublicKeysRequest(*cloudtrail.ListPublicKeysInput) cloudtrail.ListPublicKeysRequest
 
-	ListTags(*cloudtrail.ListTagsInput) (*cloudtrail.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *cloudtrail.ListTagsInput, ...aws.Option) (*cloudtrail.ListTagsOutput, error)
-	ListTagsRequest(*cloudtrail.ListTagsInput) (*aws.Request, *cloudtrail.ListTagsOutput)
+	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
 
-	LookupEvents(*cloudtrail.LookupEventsInput) (*cloudtrail.LookupEventsOutput, error)
-	LookupEventsWithContext(aws.Context, *cloudtrail.LookupEventsInput, ...aws.Option) (*cloudtrail.LookupEventsOutput, error)
-	LookupEventsRequest(*cloudtrail.LookupEventsInput) (*aws.Request, *cloudtrail.LookupEventsOutput)
+	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
 
 	LookupEventsPages(*cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool) error
 	LookupEventsPagesWithContext(aws.Context, *cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool, ...aws.Option) error
 
-	PutEventSelectors(*cloudtrail.PutEventSelectorsInput) (*cloudtrail.PutEventSelectorsOutput, error)
-	PutEventSelectorsWithContext(aws.Context, *cloudtrail.PutEventSelectorsInput, ...aws.Option) (*cloudtrail.PutEventSelectorsOutput, error)
-	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) (*aws.Request, *cloudtrail.PutEventSelectorsOutput)
+	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
 
-	RemoveTags(*cloudtrail.RemoveTagsInput) (*cloudtrail.RemoveTagsOutput, error)
-	RemoveTagsWithContext(aws.Context, *cloudtrail.RemoveTagsInput, ...aws.Option) (*cloudtrail.RemoveTagsOutput, error)
-	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) (*aws.Request, *cloudtrail.RemoveTagsOutput)
+	RemoveTagsRequest(*cloudtrail.RemoveTagsInput) cloudtrail.RemoveTagsRequest
 
-	StartLogging(*cloudtrail.StartLoggingInput) (*cloudtrail.StartLoggingOutput, error)
-	StartLoggingWithContext(aws.Context, *cloudtrail.StartLoggingInput, ...aws.Option) (*cloudtrail.StartLoggingOutput, error)
-	StartLoggingRequest(*cloudtrail.StartLoggingInput) (*aws.Request, *cloudtrail.StartLoggingOutput)
+	StartLoggingRequest(*cloudtrail.StartLoggingInput) cloudtrail.StartLoggingRequest
 
-	StopLogging(*cloudtrail.StopLoggingInput) (*cloudtrail.StopLoggingOutput, error)
-	StopLoggingWithContext(aws.Context, *cloudtrail.StopLoggingInput, ...aws.Option) (*cloudtrail.StopLoggingOutput, error)
-	StopLoggingRequest(*cloudtrail.StopLoggingInput) (*aws.Request, *cloudtrail.StopLoggingOutput)
+	StopLoggingRequest(*cloudtrail.StopLoggingInput) cloudtrail.StopLoggingRequest
 
-	UpdateTrail(*cloudtrail.UpdateTrailInput) (*cloudtrail.UpdateTrailOutput, error)
-	UpdateTrailWithContext(aws.Context, *cloudtrail.UpdateTrailInput, ...aws.Option) (*cloudtrail.UpdateTrailOutput, error)
-	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) (*aws.Request, *cloudtrail.UpdateTrailOutput)
+	UpdateTrailRequest(*cloudtrail.UpdateTrailInput) cloudtrail.UpdateTrailRequest
 }
 
 var _ CloudTrailAPI = (*cloudtrail.CloudTrail)(nil)

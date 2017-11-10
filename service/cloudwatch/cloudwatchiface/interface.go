@@ -63,74 +63,44 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type CloudWatchAPI interface {
-	DeleteAlarms(*cloudwatch.DeleteAlarmsInput) (*cloudwatch.DeleteAlarmsOutput, error)
-	DeleteAlarmsWithContext(aws.Context, *cloudwatch.DeleteAlarmsInput, ...aws.Option) (*cloudwatch.DeleteAlarmsOutput, error)
-	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) (*aws.Request, *cloudwatch.DeleteAlarmsOutput)
+	DeleteAlarmsRequest(*cloudwatch.DeleteAlarmsInput) cloudwatch.DeleteAlarmsRequest
 
-	DeleteDashboards(*cloudwatch.DeleteDashboardsInput) (*cloudwatch.DeleteDashboardsOutput, error)
-	DeleteDashboardsWithContext(aws.Context, *cloudwatch.DeleteDashboardsInput, ...aws.Option) (*cloudwatch.DeleteDashboardsOutput, error)
-	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) (*aws.Request, *cloudwatch.DeleteDashboardsOutput)
+	DeleteDashboardsRequest(*cloudwatch.DeleteDashboardsInput) cloudwatch.DeleteDashboardsRequest
 
-	DescribeAlarmHistory(*cloudwatch.DescribeAlarmHistoryInput) (*cloudwatch.DescribeAlarmHistoryOutput, error)
-	DescribeAlarmHistoryWithContext(aws.Context, *cloudwatch.DescribeAlarmHistoryInput, ...aws.Option) (*cloudwatch.DescribeAlarmHistoryOutput, error)
-	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) (*aws.Request, *cloudwatch.DescribeAlarmHistoryOutput)
+	DescribeAlarmHistoryRequest(*cloudwatch.DescribeAlarmHistoryInput) cloudwatch.DescribeAlarmHistoryRequest
 
 	DescribeAlarmHistoryPages(*cloudwatch.DescribeAlarmHistoryInput, func(*cloudwatch.DescribeAlarmHistoryOutput, bool) bool) error
 	DescribeAlarmHistoryPagesWithContext(aws.Context, *cloudwatch.DescribeAlarmHistoryInput, func(*cloudwatch.DescribeAlarmHistoryOutput, bool) bool, ...aws.Option) error
 
-	DescribeAlarms(*cloudwatch.DescribeAlarmsInput) (*cloudwatch.DescribeAlarmsOutput, error)
-	DescribeAlarmsWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, ...aws.Option) (*cloudwatch.DescribeAlarmsOutput, error)
-	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) (*aws.Request, *cloudwatch.DescribeAlarmsOutput)
+	DescribeAlarmsRequest(*cloudwatch.DescribeAlarmsInput) cloudwatch.DescribeAlarmsRequest
 
 	DescribeAlarmsPages(*cloudwatch.DescribeAlarmsInput, func(*cloudwatch.DescribeAlarmsOutput, bool) bool) error
 	DescribeAlarmsPagesWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, func(*cloudwatch.DescribeAlarmsOutput, bool) bool, ...aws.Option) error
 
-	DescribeAlarmsForMetric(*cloudwatch.DescribeAlarmsForMetricInput) (*cloudwatch.DescribeAlarmsForMetricOutput, error)
-	DescribeAlarmsForMetricWithContext(aws.Context, *cloudwatch.DescribeAlarmsForMetricInput, ...aws.Option) (*cloudwatch.DescribeAlarmsForMetricOutput, error)
-	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) (*aws.Request, *cloudwatch.DescribeAlarmsForMetricOutput)
+	DescribeAlarmsForMetricRequest(*cloudwatch.DescribeAlarmsForMetricInput) cloudwatch.DescribeAlarmsForMetricRequest
 
-	DisableAlarmActions(*cloudwatch.DisableAlarmActionsInput) (*cloudwatch.DisableAlarmActionsOutput, error)
-	DisableAlarmActionsWithContext(aws.Context, *cloudwatch.DisableAlarmActionsInput, ...aws.Option) (*cloudwatch.DisableAlarmActionsOutput, error)
-	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) (*aws.Request, *cloudwatch.DisableAlarmActionsOutput)
+	DisableAlarmActionsRequest(*cloudwatch.DisableAlarmActionsInput) cloudwatch.DisableAlarmActionsRequest
 
-	EnableAlarmActions(*cloudwatch.EnableAlarmActionsInput) (*cloudwatch.EnableAlarmActionsOutput, error)
-	EnableAlarmActionsWithContext(aws.Context, *cloudwatch.EnableAlarmActionsInput, ...aws.Option) (*cloudwatch.EnableAlarmActionsOutput, error)
-	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) (*aws.Request, *cloudwatch.EnableAlarmActionsOutput)
+	EnableAlarmActionsRequest(*cloudwatch.EnableAlarmActionsInput) cloudwatch.EnableAlarmActionsRequest
 
-	GetDashboard(*cloudwatch.GetDashboardInput) (*cloudwatch.GetDashboardOutput, error)
-	GetDashboardWithContext(aws.Context, *cloudwatch.GetDashboardInput, ...aws.Option) (*cloudwatch.GetDashboardOutput, error)
-	GetDashboardRequest(*cloudwatch.GetDashboardInput) (*aws.Request, *cloudwatch.GetDashboardOutput)
+	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
 
-	GetMetricStatistics(*cloudwatch.GetMetricStatisticsInput) (*cloudwatch.GetMetricStatisticsOutput, error)
-	GetMetricStatisticsWithContext(aws.Context, *cloudwatch.GetMetricStatisticsInput, ...aws.Option) (*cloudwatch.GetMetricStatisticsOutput, error)
-	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) (*aws.Request, *cloudwatch.GetMetricStatisticsOutput)
+	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
 
-	ListDashboards(*cloudwatch.ListDashboardsInput) (*cloudwatch.ListDashboardsOutput, error)
-	ListDashboardsWithContext(aws.Context, *cloudwatch.ListDashboardsInput, ...aws.Option) (*cloudwatch.ListDashboardsOutput, error)
-	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) (*aws.Request, *cloudwatch.ListDashboardsOutput)
+	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) cloudwatch.ListDashboardsRequest
 
-	ListMetrics(*cloudwatch.ListMetricsInput) (*cloudwatch.ListMetricsOutput, error)
-	ListMetricsWithContext(aws.Context, *cloudwatch.ListMetricsInput, ...aws.Option) (*cloudwatch.ListMetricsOutput, error)
-	ListMetricsRequest(*cloudwatch.ListMetricsInput) (*aws.Request, *cloudwatch.ListMetricsOutput)
+	ListMetricsRequest(*cloudwatch.ListMetricsInput) cloudwatch.ListMetricsRequest
 
 	ListMetricsPages(*cloudwatch.ListMetricsInput, func(*cloudwatch.ListMetricsOutput, bool) bool) error
 	ListMetricsPagesWithContext(aws.Context, *cloudwatch.ListMetricsInput, func(*cloudwatch.ListMetricsOutput, bool) bool, ...aws.Option) error
 
-	PutDashboard(*cloudwatch.PutDashboardInput) (*cloudwatch.PutDashboardOutput, error)
-	PutDashboardWithContext(aws.Context, *cloudwatch.PutDashboardInput, ...aws.Option) (*cloudwatch.PutDashboardOutput, error)
-	PutDashboardRequest(*cloudwatch.PutDashboardInput) (*aws.Request, *cloudwatch.PutDashboardOutput)
+	PutDashboardRequest(*cloudwatch.PutDashboardInput) cloudwatch.PutDashboardRequest
 
-	PutMetricAlarm(*cloudwatch.PutMetricAlarmInput) (*cloudwatch.PutMetricAlarmOutput, error)
-	PutMetricAlarmWithContext(aws.Context, *cloudwatch.PutMetricAlarmInput, ...aws.Option) (*cloudwatch.PutMetricAlarmOutput, error)
-	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) (*aws.Request, *cloudwatch.PutMetricAlarmOutput)
+	PutMetricAlarmRequest(*cloudwatch.PutMetricAlarmInput) cloudwatch.PutMetricAlarmRequest
 
-	PutMetricData(*cloudwatch.PutMetricDataInput) (*cloudwatch.PutMetricDataOutput, error)
-	PutMetricDataWithContext(aws.Context, *cloudwatch.PutMetricDataInput, ...aws.Option) (*cloudwatch.PutMetricDataOutput, error)
-	PutMetricDataRequest(*cloudwatch.PutMetricDataInput) (*aws.Request, *cloudwatch.PutMetricDataOutput)
+	PutMetricDataRequest(*cloudwatch.PutMetricDataInput) cloudwatch.PutMetricDataRequest
 
-	SetAlarmState(*cloudwatch.SetAlarmStateInput) (*cloudwatch.SetAlarmStateOutput, error)
-	SetAlarmStateWithContext(aws.Context, *cloudwatch.SetAlarmStateInput, ...aws.Option) (*cloudwatch.SetAlarmStateOutput, error)
-	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) (*aws.Request, *cloudwatch.SetAlarmStateOutput)
+	SetAlarmStateRequest(*cloudwatch.SetAlarmStateInput) cloudwatch.SetAlarmStateRequest
 
 	WaitUntilAlarmExists(*cloudwatch.DescribeAlarmsInput) error
 	WaitUntilAlarmExistsWithContext(aws.Context, *cloudwatch.DescribeAlarmsInput, ...aws.WaiterOption) error

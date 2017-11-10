@@ -31,7 +31,8 @@ func mockCRCResponse(svc *dynamodb.DynamoDB, status int, body, crc string) (req 
 	header := http.Header{}
 	header.Set("x-amz-crc32", crc)
 
-	req, _ = svc.ListTablesRequest(nil)
+	listReq := svc.ListTablesRequest(nil)
+	req = listReq.Request
 	req.Handlers.Send.PushBack(func(*request.Request) {
 		req.HTTPResponse = &http.Response{
 			ContentLength: int64(len(body)),

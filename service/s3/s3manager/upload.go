@@ -562,17 +562,18 @@ func (u *uploader) singlePart(buf io.ReadSeeker) (*UploadOutput, error) {
 
 	// Need to use request form because URL generated in request is
 	// used in return.
-	req, out := u.cfg.S3.PutObjectRequest(params)
+	req := u.cfg.S3.PutObjectRequest(params)
 	req.SetContext(u.ctx)
 	req.ApplyOptions(u.cfg.RequestOptions...)
-	if err := req.Send(); err != nil {
+	resp, err := req.Send()
+	if err != nil {
 		return nil, err
 	}
 
 	url := req.HTTPRequest.URL.String()
 	return &UploadOutput{
 		Location:  url,
-		VersionID: out.VersionId,
+		VersionID: resp.VersionId,
 	}, nil
 }
 
@@ -607,7 +608,10 @@ func (u *multiuploader) upload(firstBuf io.ReadSeeker) (*UploadOutput, error) {
 	awsutil.Copy(params, u.in)
 
 	// Create the multipart
-	resp, err := u.cfg.S3.CreateMultipartUploadWithContext(u.ctx, params, u.cfg.RequestOptions...)
+	req := u.cfg.S3.CreateMultipartUploadRequest(params)
+	req.SetContext(u.ctx)
+	req.ApplyOptions(u.cfg.RequestOptions...)
+	resp, err := req.Send()
 	if err != nil {
 		return nil, err
 	}
@@ -715,7 +719,10 @@ func (u *multiuploader) send(c chunk) error {
 		SSECustomerKey:       u.in.SSECustomerKey,
 		PartNumber:           &c.num,
 	}
-	resp, err := u.cfg.S3.UploadPartWithContext(u.ctx, params, u.cfg.RequestOptions...)
+	req := u.cfg.S3.UploadPartRequest(params)
+	req.SetContext(u.ctx)
+	req.ApplyOptions(u.cfg.RequestOptions...)
+	resp, err := req.Send()
 	if err != nil {
 		return err
 	}
@@ -757,8 +764,10 @@ func (u *multiuploader) fail() {
 		Key:      u.in.Key,
 		UploadId: &u.uploadID,
 	}
-	_, err := u.cfg.S3.AbortMultipartUploadWithContext(u.ctx, params, u.cfg.RequestOptions...)
-	if err != nil {
+	req := u.cfg.S3.AbortMultipartUploadRequest(params)
+	req.SetContext(u.ctx)
+	req.ApplyOptions(u.cfg.RequestOptions...)
+	if _, err := req.Send(); err != nil {
 		logMessage(u.cfg.S3, aws.LogDebug, fmt.Sprintf("failed to abort multipart upload, %v", err))
 	}
 }
@@ -779,7 +788,10 @@ func (u *multiuploader) complete() *s3.CompleteMultipartUploadOutput {
 		UploadId:        &u.uploadID,
 		MultipartUpload: &s3.CompletedMultipartUpload{Parts: u.parts},
 	}
-	resp, err := u.cfg.S3.CompleteMultipartUploadWithContext(u.ctx, params, u.cfg.RequestOptions...)
+	req := u.cfg.S3.CompleteMultipartUploadRequest(params)
+	req.SetContext(u.ctx)
+	req.ApplyOptions(u.cfg.RequestOptions...)
+	resp, err := req.Send()
 	if err != nil {
 		u.seterr(err)
 		u.fail()

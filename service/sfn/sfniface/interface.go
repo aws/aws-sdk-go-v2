@@ -63,85 +63,51 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SFNAPI interface {
-	CreateActivity(*sfn.CreateActivityInput) (*sfn.CreateActivityOutput, error)
-	CreateActivityWithContext(aws.Context, *sfn.CreateActivityInput, ...aws.Option) (*sfn.CreateActivityOutput, error)
-	CreateActivityRequest(*sfn.CreateActivityInput) (*aws.Request, *sfn.CreateActivityOutput)
+	CreateActivityRequest(*sfn.CreateActivityInput) sfn.CreateActivityRequest
 
-	CreateStateMachine(*sfn.CreateStateMachineInput) (*sfn.CreateStateMachineOutput, error)
-	CreateStateMachineWithContext(aws.Context, *sfn.CreateStateMachineInput, ...aws.Option) (*sfn.CreateStateMachineOutput, error)
-	CreateStateMachineRequest(*sfn.CreateStateMachineInput) (*aws.Request, *sfn.CreateStateMachineOutput)
+	CreateStateMachineRequest(*sfn.CreateStateMachineInput) sfn.CreateStateMachineRequest
 
-	DeleteActivity(*sfn.DeleteActivityInput) (*sfn.DeleteActivityOutput, error)
-	DeleteActivityWithContext(aws.Context, *sfn.DeleteActivityInput, ...aws.Option) (*sfn.DeleteActivityOutput, error)
-	DeleteActivityRequest(*sfn.DeleteActivityInput) (*aws.Request, *sfn.DeleteActivityOutput)
+	DeleteActivityRequest(*sfn.DeleteActivityInput) sfn.DeleteActivityRequest
 
-	DeleteStateMachine(*sfn.DeleteStateMachineInput) (*sfn.DeleteStateMachineOutput, error)
-	DeleteStateMachineWithContext(aws.Context, *sfn.DeleteStateMachineInput, ...aws.Option) (*sfn.DeleteStateMachineOutput, error)
-	DeleteStateMachineRequest(*sfn.DeleteStateMachineInput) (*aws.Request, *sfn.DeleteStateMachineOutput)
+	DeleteStateMachineRequest(*sfn.DeleteStateMachineInput) sfn.DeleteStateMachineRequest
 
-	DescribeActivity(*sfn.DescribeActivityInput) (*sfn.DescribeActivityOutput, error)
-	DescribeActivityWithContext(aws.Context, *sfn.DescribeActivityInput, ...aws.Option) (*sfn.DescribeActivityOutput, error)
-	DescribeActivityRequest(*sfn.DescribeActivityInput) (*aws.Request, *sfn.DescribeActivityOutput)
+	DescribeActivityRequest(*sfn.DescribeActivityInput) sfn.DescribeActivityRequest
 
-	DescribeExecution(*sfn.DescribeExecutionInput) (*sfn.DescribeExecutionOutput, error)
-	DescribeExecutionWithContext(aws.Context, *sfn.DescribeExecutionInput, ...aws.Option) (*sfn.DescribeExecutionOutput, error)
-	DescribeExecutionRequest(*sfn.DescribeExecutionInput) (*aws.Request, *sfn.DescribeExecutionOutput)
+	DescribeExecutionRequest(*sfn.DescribeExecutionInput) sfn.DescribeExecutionRequest
 
-	DescribeStateMachine(*sfn.DescribeStateMachineInput) (*sfn.DescribeStateMachineOutput, error)
-	DescribeStateMachineWithContext(aws.Context, *sfn.DescribeStateMachineInput, ...aws.Option) (*sfn.DescribeStateMachineOutput, error)
-	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) (*aws.Request, *sfn.DescribeStateMachineOutput)
+	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
 
-	GetActivityTask(*sfn.GetActivityTaskInput) (*sfn.GetActivityTaskOutput, error)
-	GetActivityTaskWithContext(aws.Context, *sfn.GetActivityTaskInput, ...aws.Option) (*sfn.GetActivityTaskOutput, error)
-	GetActivityTaskRequest(*sfn.GetActivityTaskInput) (*aws.Request, *sfn.GetActivityTaskOutput)
+	GetActivityTaskRequest(*sfn.GetActivityTaskInput) sfn.GetActivityTaskRequest
 
-	GetExecutionHistory(*sfn.GetExecutionHistoryInput) (*sfn.GetExecutionHistoryOutput, error)
-	GetExecutionHistoryWithContext(aws.Context, *sfn.GetExecutionHistoryInput, ...aws.Option) (*sfn.GetExecutionHistoryOutput, error)
-	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) (*aws.Request, *sfn.GetExecutionHistoryOutput)
+	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
 
 	GetExecutionHistoryPages(*sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool) error
 	GetExecutionHistoryPagesWithContext(aws.Context, *sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool, ...aws.Option) error
 
-	ListActivities(*sfn.ListActivitiesInput) (*sfn.ListActivitiesOutput, error)
-	ListActivitiesWithContext(aws.Context, *sfn.ListActivitiesInput, ...aws.Option) (*sfn.ListActivitiesOutput, error)
-	ListActivitiesRequest(*sfn.ListActivitiesInput) (*aws.Request, *sfn.ListActivitiesOutput)
+	ListActivitiesRequest(*sfn.ListActivitiesInput) sfn.ListActivitiesRequest
 
 	ListActivitiesPages(*sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool) error
 	ListActivitiesPagesWithContext(aws.Context, *sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool, ...aws.Option) error
 
-	ListExecutions(*sfn.ListExecutionsInput) (*sfn.ListExecutionsOutput, error)
-	ListExecutionsWithContext(aws.Context, *sfn.ListExecutionsInput, ...aws.Option) (*sfn.ListExecutionsOutput, error)
-	ListExecutionsRequest(*sfn.ListExecutionsInput) (*aws.Request, *sfn.ListExecutionsOutput)
+	ListExecutionsRequest(*sfn.ListExecutionsInput) sfn.ListExecutionsRequest
 
 	ListExecutionsPages(*sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool) error
 	ListExecutionsPagesWithContext(aws.Context, *sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool, ...aws.Option) error
 
-	ListStateMachines(*sfn.ListStateMachinesInput) (*sfn.ListStateMachinesOutput, error)
-	ListStateMachinesWithContext(aws.Context, *sfn.ListStateMachinesInput, ...aws.Option) (*sfn.ListStateMachinesOutput, error)
-	ListStateMachinesRequest(*sfn.ListStateMachinesInput) (*aws.Request, *sfn.ListStateMachinesOutput)
+	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
 
 	ListStateMachinesPages(*sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool) error
 	ListStateMachinesPagesWithContext(aws.Context, *sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool, ...aws.Option) error
 
-	SendTaskFailure(*sfn.SendTaskFailureInput) (*sfn.SendTaskFailureOutput, error)
-	SendTaskFailureWithContext(aws.Context, *sfn.SendTaskFailureInput, ...aws.Option) (*sfn.SendTaskFailureOutput, error)
-	SendTaskFailureRequest(*sfn.SendTaskFailureInput) (*aws.Request, *sfn.SendTaskFailureOutput)
+	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
 
-	SendTaskHeartbeat(*sfn.SendTaskHeartbeatInput) (*sfn.SendTaskHeartbeatOutput, error)
-	SendTaskHeartbeatWithContext(aws.Context, *sfn.SendTaskHeartbeatInput, ...aws.Option) (*sfn.SendTaskHeartbeatOutput, error)
-	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) (*aws.Request, *sfn.SendTaskHeartbeatOutput)
+	SendTaskHeartbeatRequest(*sfn.SendTaskHeartbeatInput) sfn.SendTaskHeartbeatRequest
 
-	SendTaskSuccess(*sfn.SendTaskSuccessInput) (*sfn.SendTaskSuccessOutput, error)
-	SendTaskSuccessWithContext(aws.Context, *sfn.SendTaskSuccessInput, ...aws.Option) (*sfn.SendTaskSuccessOutput, error)
-	SendTaskSuccessRequest(*sfn.SendTaskSuccessInput) (*aws.Request, *sfn.SendTaskSuccessOutput)
+	SendTaskSuccessRequest(*sfn.SendTaskSuccessInput) sfn.SendTaskSuccessRequest
 
-	StartExecution(*sfn.StartExecutionInput) (*sfn.StartExecutionOutput, error)
-	StartExecutionWithContext(aws.Context, *sfn.StartExecutionInput, ...aws.Option) (*sfn.StartExecutionOutput, error)
-	StartExecutionRequest(*sfn.StartExecutionInput) (*aws.Request, *sfn.StartExecutionOutput)
+	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
 
-	StopExecution(*sfn.StopExecutionInput) (*sfn.StopExecutionOutput, error)
-	StopExecutionWithContext(aws.Context, *sfn.StopExecutionInput, ...aws.Option) (*sfn.StopExecutionOutput, error)
-	StopExecutionRequest(*sfn.StopExecutionInput) (*aws.Request, *sfn.StopExecutionOutput)
+	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
 }
 
 var _ SFNAPI = (*sfn.SFN)(nil)

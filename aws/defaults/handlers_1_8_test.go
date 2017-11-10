@@ -24,7 +24,7 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 
 	svc := s3.New(cfg)
 
-	req, _ := svc.HeadObjectRequest(&s3.HeadObjectInput{
+	req := svc.HeadObjectRequest(&s3.HeadObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
@@ -33,7 +33,7 @@ func TestSendHandler_HEADNoBody(t *testing.T) {
 		t.Fatalf("expect %T request body, got %T", e, a)
 	}
 
-	err := req.Send()
+	_, err := req.Send()
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

@@ -63,61 +63,39 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SMSAPI interface {
-	CreateReplicationJob(*sms.CreateReplicationJobInput) (*sms.CreateReplicationJobOutput, error)
-	CreateReplicationJobWithContext(aws.Context, *sms.CreateReplicationJobInput, ...aws.Option) (*sms.CreateReplicationJobOutput, error)
-	CreateReplicationJobRequest(*sms.CreateReplicationJobInput) (*aws.Request, *sms.CreateReplicationJobOutput)
+	CreateReplicationJobRequest(*sms.CreateReplicationJobInput) sms.CreateReplicationJobRequest
 
-	DeleteReplicationJob(*sms.DeleteReplicationJobInput) (*sms.DeleteReplicationJobOutput, error)
-	DeleteReplicationJobWithContext(aws.Context, *sms.DeleteReplicationJobInput, ...aws.Option) (*sms.DeleteReplicationJobOutput, error)
-	DeleteReplicationJobRequest(*sms.DeleteReplicationJobInput) (*aws.Request, *sms.DeleteReplicationJobOutput)
+	DeleteReplicationJobRequest(*sms.DeleteReplicationJobInput) sms.DeleteReplicationJobRequest
 
-	DeleteServerCatalog(*sms.DeleteServerCatalogInput) (*sms.DeleteServerCatalogOutput, error)
-	DeleteServerCatalogWithContext(aws.Context, *sms.DeleteServerCatalogInput, ...aws.Option) (*sms.DeleteServerCatalogOutput, error)
-	DeleteServerCatalogRequest(*sms.DeleteServerCatalogInput) (*aws.Request, *sms.DeleteServerCatalogOutput)
+	DeleteServerCatalogRequest(*sms.DeleteServerCatalogInput) sms.DeleteServerCatalogRequest
 
-	DisassociateConnector(*sms.DisassociateConnectorInput) (*sms.DisassociateConnectorOutput, error)
-	DisassociateConnectorWithContext(aws.Context, *sms.DisassociateConnectorInput, ...aws.Option) (*sms.DisassociateConnectorOutput, error)
-	DisassociateConnectorRequest(*sms.DisassociateConnectorInput) (*aws.Request, *sms.DisassociateConnectorOutput)
+	DisassociateConnectorRequest(*sms.DisassociateConnectorInput) sms.DisassociateConnectorRequest
 
-	GetConnectors(*sms.GetConnectorsInput) (*sms.GetConnectorsOutput, error)
-	GetConnectorsWithContext(aws.Context, *sms.GetConnectorsInput, ...aws.Option) (*sms.GetConnectorsOutput, error)
-	GetConnectorsRequest(*sms.GetConnectorsInput) (*aws.Request, *sms.GetConnectorsOutput)
+	GetConnectorsRequest(*sms.GetConnectorsInput) sms.GetConnectorsRequest
 
 	GetConnectorsPages(*sms.GetConnectorsInput, func(*sms.GetConnectorsOutput, bool) bool) error
 	GetConnectorsPagesWithContext(aws.Context, *sms.GetConnectorsInput, func(*sms.GetConnectorsOutput, bool) bool, ...aws.Option) error
 
-	GetReplicationJobs(*sms.GetReplicationJobsInput) (*sms.GetReplicationJobsOutput, error)
-	GetReplicationJobsWithContext(aws.Context, *sms.GetReplicationJobsInput, ...aws.Option) (*sms.GetReplicationJobsOutput, error)
-	GetReplicationJobsRequest(*sms.GetReplicationJobsInput) (*aws.Request, *sms.GetReplicationJobsOutput)
+	GetReplicationJobsRequest(*sms.GetReplicationJobsInput) sms.GetReplicationJobsRequest
 
 	GetReplicationJobsPages(*sms.GetReplicationJobsInput, func(*sms.GetReplicationJobsOutput, bool) bool) error
 	GetReplicationJobsPagesWithContext(aws.Context, *sms.GetReplicationJobsInput, func(*sms.GetReplicationJobsOutput, bool) bool, ...aws.Option) error
 
-	GetReplicationRuns(*sms.GetReplicationRunsInput) (*sms.GetReplicationRunsOutput, error)
-	GetReplicationRunsWithContext(aws.Context, *sms.GetReplicationRunsInput, ...aws.Option) (*sms.GetReplicationRunsOutput, error)
-	GetReplicationRunsRequest(*sms.GetReplicationRunsInput) (*aws.Request, *sms.GetReplicationRunsOutput)
+	GetReplicationRunsRequest(*sms.GetReplicationRunsInput) sms.GetReplicationRunsRequest
 
 	GetReplicationRunsPages(*sms.GetReplicationRunsInput, func(*sms.GetReplicationRunsOutput, bool) bool) error
 	GetReplicationRunsPagesWithContext(aws.Context, *sms.GetReplicationRunsInput, func(*sms.GetReplicationRunsOutput, bool) bool, ...aws.Option) error
 
-	GetServers(*sms.GetServersInput) (*sms.GetServersOutput, error)
-	GetServersWithContext(aws.Context, *sms.GetServersInput, ...aws.Option) (*sms.GetServersOutput, error)
-	GetServersRequest(*sms.GetServersInput) (*aws.Request, *sms.GetServersOutput)
+	GetServersRequest(*sms.GetServersInput) sms.GetServersRequest
 
 	GetServersPages(*sms.GetServersInput, func(*sms.GetServersOutput, bool) bool) error
 	GetServersPagesWithContext(aws.Context, *sms.GetServersInput, func(*sms.GetServersOutput, bool) bool, ...aws.Option) error
 
-	ImportServerCatalog(*sms.ImportServerCatalogInput) (*sms.ImportServerCatalogOutput, error)
-	ImportServerCatalogWithContext(aws.Context, *sms.ImportServerCatalogInput, ...aws.Option) (*sms.ImportServerCatalogOutput, error)
-	ImportServerCatalogRequest(*sms.ImportServerCatalogInput) (*aws.Request, *sms.ImportServerCatalogOutput)
+	ImportServerCatalogRequest(*sms.ImportServerCatalogInput) sms.ImportServerCatalogRequest
 
-	StartOnDemandReplicationRun(*sms.StartOnDemandReplicationRunInput) (*sms.StartOnDemandReplicationRunOutput, error)
-	StartOnDemandReplicationRunWithContext(aws.Context, *sms.StartOnDemandReplicationRunInput, ...aws.Option) (*sms.StartOnDemandReplicationRunOutput, error)
-	StartOnDemandReplicationRunRequest(*sms.StartOnDemandReplicationRunInput) (*aws.Request, *sms.StartOnDemandReplicationRunOutput)
+	StartOnDemandReplicationRunRequest(*sms.StartOnDemandReplicationRunInput) sms.StartOnDemandReplicationRunRequest
 
-	UpdateReplicationJob(*sms.UpdateReplicationJobInput) (*sms.UpdateReplicationJobOutput, error)
-	UpdateReplicationJobWithContext(aws.Context, *sms.UpdateReplicationJobInput, ...aws.Option) (*sms.UpdateReplicationJobOutput, error)
-	UpdateReplicationJobRequest(*sms.UpdateReplicationJobInput) (*aws.Request, *sms.UpdateReplicationJobOutput)
+	UpdateReplicationJobRequest(*sms.UpdateReplicationJobInput) sms.UpdateReplicationJobRequest
 }
 
 var _ SMSAPI = (*sms.SMS)(nil)

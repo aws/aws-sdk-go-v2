@@ -48,10 +48,10 @@ func (c *IAM) WaitUntilInstanceProfileExistsWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetInstanceProfileRequest(inCpy)
+			req := c.GetInstanceProfileRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -99,10 +99,10 @@ func (c *IAM) WaitUntilUserExistsWithContext(ctx aws.Context, input *GetUserInpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetUserRequest(inCpy)
+			req := c.GetUserRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

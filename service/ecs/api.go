@@ -12,31 +12,38 @@ import (
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws.Request" representing the
-// client's request for the CreateCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateClusterRequest is a API request type for the CreateCluster API operation.
+type CreateClusterRequest struct {
+	*aws.Request
+	Input *CreateClusterInput
+}
+
+// Send marshals and sends the CreateCluster API request.
+func (r *CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateClusterOutput), nil
+}
+
+// CreateClusterRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCluster for more information on using the CreateCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new Amazon ECS cluster. By default, your account receives a default
+// cluster when you launch your first container instance. However, you can create
+// your own cluster with a unique name with the CreateCluster action.
 //
 //    // Example sending a request using the CreateClusterRequest method.
-//    req, resp := client.CreateClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
-func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+func (c *ECS) CreateClusterRequest(input *CreateClusterInput) CreateClusterRequest {
 	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
@@ -47,102 +54,30 @@ func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request,
 		input = &CreateClusterInput{}
 	}
 
-	output = &CreateClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCluster API operation for Amazon EC2 Container Service.
-//
-// Creates a new Amazon ECS cluster. By default, your account receives a default
-// cluster when you launch your first container instance. However, you can create
-// your own cluster with a unique name with the CreateCluster action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation CreateCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
-func (c *ECS) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	return out, req.Send()
-}
-
-// CreateClusterWithContext is the same as CreateCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
-	req, out := c.CreateClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateClusterOutput{})
+	return CreateClusterRequest{Request: req, Input: input}
 }
 
 const opCreateService = "CreateService"
 
-// CreateServiceRequest generates a "aws.Request" representing the
-// client's request for the CreateService operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateService for more information on using the CreateService
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateServiceRequest method.
-//    req, resp := client.CreateServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
-func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *aws.Request, output *CreateServiceOutput) {
-	op := &aws.Operation{
-		Name:       opCreateService,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateServiceInput{}
-	}
-
-	output = &CreateServiceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateServiceRequest is a API request type for the CreateService API operation.
+type CreateServiceRequest struct {
+	*aws.Request
+	Input *CreateServiceInput
 }
 
-// CreateService API operation for Amazon EC2 Container Service.
+// Send marshals and sends the CreateService API request.
+func (r *CreateServiceRequest) Send() (*CreateServiceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateServiceOutput), nil
+}
+
+// CreateServiceRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Runs and maintains a desired number of tasks from a specified task definition.
 // If the number of tasks running in a service drops below desiredCount, Amazon
@@ -204,79 +139,61 @@ func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *aws.Request,
 //    Zone (based on the previous steps), favoring container instances with
 //    the fewest number of running tasks for this service.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation CreateService for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
+//    // Example sending a request using the CreateServiceRequest method.
+//    req := client.CreateServiceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
-func (c *ECS) CreateService(input *CreateServiceInput) (*CreateServiceOutput, error) {
-	req, out := c.CreateServiceRequest(input)
-	return out, req.Send()
-}
+func (c *ECS) CreateServiceRequest(input *CreateServiceInput) CreateServiceRequest {
+	op := &aws.Operation{
+		Name:       opCreateService,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateServiceWithContext is the same as CreateService with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateService for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) CreateServiceWithContext(ctx aws.Context, input *CreateServiceInput, opts ...aws.Option) (*CreateServiceOutput, error) {
-	req, out := c.CreateServiceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateServiceInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateServiceOutput{})
+	return CreateServiceRequest{Request: req, Input: input}
 }
 
 const opDeleteAttributes = "DeleteAttributes"
 
-// DeleteAttributesRequest generates a "aws.Request" representing the
-// client's request for the DeleteAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteAttributesRequest is a API request type for the DeleteAttributes API operation.
+type DeleteAttributesRequest struct {
+	*aws.Request
+	Input *DeleteAttributesInput
+}
+
+// Send marshals and sends the DeleteAttributes API request.
+func (r *DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAttributesOutput), nil
+}
+
+// DeleteAttributesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteAttributes for more information on using the DeleteAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes one or more custom attributes from an Amazon ECS resource.
 //
 //    // Example sending a request using the DeleteAttributesRequest method.
-//    req, resp := client.DeleteAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
-func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *aws.Request, output *DeleteAttributesOutput) {
+func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttributesRequest {
 	op := &aws.Operation{
 		Name:       opDeleteAttributes,
 		HTTPMethod: "POST",
@@ -287,85 +204,44 @@ func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *aws.Re
 		input = &DeleteAttributesInput{}
 	}
 
-	output = &DeleteAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteAttributes API operation for Amazon EC2 Container Service.
-//
-// Deletes one or more custom attributes from an Amazon ECS resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DeleteAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeTargetNotFoundException "TargetNotFoundException"
-//   The specified target could not be found. You can view your available container
-//   instances with ListContainerInstances. Amazon ECS container instances are
-//   cluster-specific and region-specific.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
-func (c *ECS) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttributesOutput, error) {
-	req, out := c.DeleteAttributesRequest(input)
-	return out, req.Send()
-}
-
-// DeleteAttributesWithContext is the same as DeleteAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...aws.Option) (*DeleteAttributesOutput, error) {
-	req, out := c.DeleteAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteAttributesOutput{})
+	return DeleteAttributesRequest{Request: req, Input: input}
 }
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws.Request" representing the
-// client's request for the DeleteCluster operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteClusterRequest is a API request type for the DeleteCluster API operation.
+type DeleteClusterRequest struct {
+	*aws.Request
+	Input *DeleteClusterInput
+}
+
+// Send marshals and sends the DeleteCluster API request.
+func (r *DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteClusterOutput), nil
+}
+
+// DeleteClusterRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCluster for more information on using the DeleteCluster
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified cluster. You must deregister all container instances
+// from this cluster before you may delete it. You can list the container instances
+// in a cluster with ListContainerInstances and deregister them with DeregisterContainerInstance.
 //
 //    // Example sending a request using the DeleteClusterRequest method.
-//    req, resp := client.DeleteClusterRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
-func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
@@ -376,116 +252,30 @@ func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request,
 		input = &DeleteClusterInput{}
 	}
 
-	output = &DeleteClusterOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteCluster API operation for Amazon EC2 Container Service.
-//
-// Deletes the specified cluster. You must deregister all container instances
-// from this cluster before you may delete it. You can list the container instances
-// in a cluster with ListContainerInstances and deregister them with DeregisterContainerInstance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DeleteCluster for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeClusterContainsContainerInstancesException "ClusterContainsContainerInstancesException"
-//   You cannot delete a cluster that has registered container instances. You
-//   must first deregister the container instances before you can delete the cluster.
-//   For more information, see DeregisterContainerInstance.
-//
-//   * ErrCodeClusterContainsServicesException "ClusterContainsServicesException"
-//   You cannot delete a cluster that contains services. You must first update
-//   the service to reduce its desired task count to 0 and then delete the service.
-//   For more information, see UpdateService and DeleteService.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
-func (c *ECS) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	return out, req.Send()
-}
-
-// DeleteClusterWithContext is the same as DeleteCluster with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCluster for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
-	req, out := c.DeleteClusterRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteClusterOutput{})
+	return DeleteClusterRequest{Request: req, Input: input}
 }
 
 const opDeleteService = "DeleteService"
 
-// DeleteServiceRequest generates a "aws.Request" representing the
-// client's request for the DeleteService operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteService for more information on using the DeleteService
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteServiceRequest method.
-//    req, resp := client.DeleteServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
-func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *aws.Request, output *DeleteServiceOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteService,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteServiceInput{}
-	}
-
-	output = &DeleteServiceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteServiceRequest is a API request type for the DeleteService API operation.
+type DeleteServiceRequest struct {
+	*aws.Request
+	Input *DeleteServiceInput
 }
 
-// DeleteService API operation for Amazon EC2 Container Service.
+// Send marshals and sends the DeleteService API request.
+func (r *DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServiceOutput), nil
+}
+
+// DeleteServiceRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Deletes a specified service within a cluster. You can delete a service if
 // you have no running tasks in it and the desired task count is zero. If the
@@ -502,99 +292,49 @@ func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *aws.Request,
 // up and purged from Amazon ECS record keeping, and DescribeServices API operations
 // on those services will return a ServiceNotFoundException error.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DeleteService for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeServiceNotFoundException "ServiceNotFoundException"
-//   The specified service could not be found. You can view your available services
-//   with ListServices. Amazon ECS services are cluster-specific and region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
-func (c *ECS) DeleteService(input *DeleteServiceInput) (*DeleteServiceOutput, error) {
-	req, out := c.DeleteServiceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteServiceWithContext is the same as DeleteService with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteService for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DeleteServiceWithContext(ctx aws.Context, input *DeleteServiceInput, opts ...aws.Option) (*DeleteServiceOutput, error) {
-	req, out := c.DeleteServiceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeregisterContainerInstance = "DeregisterContainerInstance"
-
-// DeregisterContainerInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeregisterContainerInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterContainerInstance for more information on using the DeregisterContainerInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeregisterContainerInstanceRequest method.
-//    req, resp := client.DeregisterContainerInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteServiceRequest method.
+//    req := client.DeleteServiceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
-func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInstanceInput) (req *aws.Request, output *DeregisterContainerInstanceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
+func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceRequest {
 	op := &aws.Operation{
-		Name:       opDeregisterContainerInstance,
+		Name:       opDeleteService,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeregisterContainerInstanceInput{}
+		input = &DeleteServiceInput{}
 	}
 
-	output = &DeregisterContainerInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteServiceOutput{})
+	return DeleteServiceRequest{Request: req, Input: input}
 }
 
-// DeregisterContainerInstance API operation for Amazon EC2 Container Service.
+const opDeregisterContainerInstance = "DeregisterContainerInstance"
+
+// DeregisterContainerInstanceRequest is a API request type for the DeregisterContainerInstance API operation.
+type DeregisterContainerInstanceRequest struct {
+	*aws.Request
+	Input *DeregisterContainerInstanceInput
+}
+
+// Send marshals and sends the DeregisterContainerInstance API request.
+func (r *DeregisterContainerInstanceRequest) Send() (*DeregisterContainerInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterContainerInstanceOutput), nil
+}
+
+// DeregisterContainerInstanceRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Deregisters an Amazon ECS container instance from the specified cluster.
 // This instance is no longer available to run tasks.
@@ -612,95 +352,49 @@ func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInsta
 // the instance from your cluster (stopped container instances or instances
 // with disconnected agents are not automatically deregistered when terminated).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DeregisterContainerInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
-func (c *ECS) DeregisterContainerInstance(input *DeregisterContainerInstanceInput) (*DeregisterContainerInstanceOutput, error) {
-	req, out := c.DeregisterContainerInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeregisterContainerInstanceWithContext is the same as DeregisterContainerInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterContainerInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DeregisterContainerInstanceWithContext(ctx aws.Context, input *DeregisterContainerInstanceInput, opts ...aws.Option) (*DeregisterContainerInstanceOutput, error) {
-	req, out := c.DeregisterContainerInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
-
-// DeregisterTaskDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DeregisterTaskDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeregisterTaskDefinition for more information on using the DeregisterTaskDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeregisterTaskDefinitionRequest method.
-//    req, resp := client.DeregisterTaskDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeregisterContainerInstanceRequest method.
+//    req := client.DeregisterContainerInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
-func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) (req *aws.Request, output *DeregisterTaskDefinitionOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
+func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInstanceInput) DeregisterContainerInstanceRequest {
 	op := &aws.Operation{
-		Name:       opDeregisterTaskDefinition,
+		Name:       opDeregisterContainerInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeregisterTaskDefinitionInput{}
+		input = &DeregisterContainerInstanceInput{}
 	}
 
-	output = &DeregisterTaskDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeregisterContainerInstanceOutput{})
+	return DeregisterContainerInstanceRequest{Request: req, Input: input}
 }
 
-// DeregisterTaskDefinition API operation for Amazon EC2 Container Service.
+const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
+
+// DeregisterTaskDefinitionRequest is a API request type for the DeregisterTaskDefinition API operation.
+type DeregisterTaskDefinitionRequest struct {
+	*aws.Request
+	Input *DeregisterTaskDefinitionInput
+}
+
+// Send marshals and sends the DeregisterTaskDefinition API request.
+func (r *DeregisterTaskDefinitionRequest) Send() (*DeregisterTaskDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterTaskDefinitionOutput), nil
+}
+
+// DeregisterTaskDefinitionRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Deregisters the specified task definition by family and revision. Upon deregistration,
 // the task definition is marked as INACTIVE. Existing tasks and services that
@@ -718,75 +412,61 @@ func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInp
 // so you should not rely on INACTIVE task definitions persisting beyond the
 // life cycle of any associated tasks and services.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DeregisterTaskDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
+//    // Example sending a request using the DeregisterTaskDefinitionRequest method.
+//    req := client.DeregisterTaskDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
-func (c *ECS) DeregisterTaskDefinition(input *DeregisterTaskDefinitionInput) (*DeregisterTaskDefinitionOutput, error) {
-	req, out := c.DeregisterTaskDefinitionRequest(input)
-	return out, req.Send()
-}
+func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opDeregisterTaskDefinition,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeregisterTaskDefinitionWithContext is the same as DeregisterTaskDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeregisterTaskDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DeregisterTaskDefinitionWithContext(ctx aws.Context, input *DeregisterTaskDefinitionInput, opts ...aws.Option) (*DeregisterTaskDefinitionOutput, error) {
-	req, out := c.DeregisterTaskDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeregisterTaskDefinitionInput{}
+	}
+
+	req := c.newRequest(op, input, &DeregisterTaskDefinitionOutput{})
+	return DeregisterTaskDefinitionRequest{Request: req, Input: input}
 }
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws.Request" representing the
-// client's request for the DescribeClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeClustersRequest is a API request type for the DescribeClusters API operation.
+type DescribeClustersRequest struct {
+	*aws.Request
+	Input *DescribeClustersInput
+}
+
+// Send marshals and sends the DescribeClusters API request.
+func (r *DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeClustersOutput), nil
+}
+
+// DescribeClustersRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeClusters for more information on using the DescribeClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes one or more of your clusters.
 //
 //    // Example sending a request using the DescribeClustersRequest method.
-//    req, resp := client.DescribeClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
-func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) DescribeClustersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
@@ -797,84 +477,43 @@ func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Re
 		input = &DescribeClustersInput{}
 	}
 
-	output = &DescribeClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeClusters API operation for Amazon EC2 Container Service.
-//
-// Describes one or more of your clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DescribeClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
-func (c *ECS) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeClustersWithContext is the same as DescribeClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
-	req, out := c.DescribeClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeClustersOutput{})
+	return DescribeClustersRequest{Request: req, Input: input}
 }
 
 const opDescribeContainerInstances = "DescribeContainerInstances"
 
-// DescribeContainerInstancesRequest generates a "aws.Request" representing the
-// client's request for the DescribeContainerInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeContainerInstancesRequest is a API request type for the DescribeContainerInstances API operation.
+type DescribeContainerInstancesRequest struct {
+	*aws.Request
+	Input *DescribeContainerInstancesInput
+}
+
+// Send marshals and sends the DescribeContainerInstances API request.
+func (r *DescribeContainerInstancesRequest) Send() (*DescribeContainerInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeContainerInstancesOutput), nil
+}
+
+// DescribeContainerInstancesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeContainerInstances for more information on using the DescribeContainerInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes Amazon EC2 Container Service container instances. Returns metadata
+// about registered and remaining resources on each container instance requested.
 //
 //    // Example sending a request using the DescribeContainerInstancesRequest method.
-//    req, resp := client.DescribeContainerInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeContainerInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
-func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) (req *aws.Request, output *DescribeContainerInstancesOutput) {
+func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) DescribeContainerInstancesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeContainerInstances,
 		HTTPMethod: "POST",
@@ -885,89 +524,42 @@ func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstance
 		input = &DescribeContainerInstancesInput{}
 	}
 
-	output = &DescribeContainerInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeContainerInstances API operation for Amazon EC2 Container Service.
-//
-// Describes Amazon EC2 Container Service container instances. Returns metadata
-// about registered and remaining resources on each container instance requested.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DescribeContainerInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
-func (c *ECS) DescribeContainerInstances(input *DescribeContainerInstancesInput) (*DescribeContainerInstancesOutput, error) {
-	req, out := c.DescribeContainerInstancesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeContainerInstancesWithContext is the same as DescribeContainerInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeContainerInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DescribeContainerInstancesWithContext(ctx aws.Context, input *DescribeContainerInstancesInput, opts ...aws.Option) (*DescribeContainerInstancesOutput, error) {
-	req, out := c.DescribeContainerInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeContainerInstancesOutput{})
+	return DescribeContainerInstancesRequest{Request: req, Input: input}
 }
 
 const opDescribeServices = "DescribeServices"
 
-// DescribeServicesRequest generates a "aws.Request" representing the
-// client's request for the DescribeServices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeServicesRequest is a API request type for the DescribeServices API operation.
+type DescribeServicesRequest struct {
+	*aws.Request
+	Input *DescribeServicesInput
+}
+
+// Send marshals and sends the DescribeServices API request.
+func (r *DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeServicesOutput), nil
+}
+
+// DescribeServicesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeServices for more information on using the DescribeServices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the specified services running in your cluster.
 //
 //    // Example sending a request using the DescribeServicesRequest method.
-//    req, resp := client.DescribeServicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeServicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
-func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *aws.Request, output *DescribeServicesOutput) {
+func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) DescribeServicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeServices,
 		HTTPMethod: "POST",
@@ -978,88 +570,47 @@ func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *aws.Re
 		input = &DescribeServicesInput{}
 	}
 
-	output = &DescribeServicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeServices API operation for Amazon EC2 Container Service.
-//
-// Describes the specified services running in your cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DescribeServices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
-func (c *ECS) DescribeServices(input *DescribeServicesInput) (*DescribeServicesOutput, error) {
-	req, out := c.DescribeServicesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeServicesWithContext is the same as DescribeServices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeServices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...aws.Option) (*DescribeServicesOutput, error) {
-	req, out := c.DescribeServicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeServicesOutput{})
+	return DescribeServicesRequest{Request: req, Input: input}
 }
 
 const opDescribeTaskDefinition = "DescribeTaskDefinition"
 
-// DescribeTaskDefinitionRequest generates a "aws.Request" representing the
-// client's request for the DescribeTaskDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTaskDefinitionRequest is a API request type for the DescribeTaskDefinition API operation.
+type DescribeTaskDefinitionRequest struct {
+	*aws.Request
+	Input *DescribeTaskDefinitionInput
+}
+
+// Send marshals and sends the DescribeTaskDefinition API request.
+func (r *DescribeTaskDefinitionRequest) Send() (*DescribeTaskDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTaskDefinitionOutput), nil
+}
+
+// DescribeTaskDefinitionRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes a task definition. You can specify a family and revision to find
+// information about a specific task definition, or you can simply specify the
+// family to find the latest ACTIVE revision in that family.
 //
-// See DescribeTaskDefinition for more information on using the DescribeTaskDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can only describe INACTIVE task definitions while an active task or service
+// references them.
 //
 //    // Example sending a request using the DescribeTaskDefinitionRequest method.
-//    req, resp := client.DescribeTaskDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTaskDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
-func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) (req *aws.Request, output *DescribeTaskDefinitionOutput) {
+func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTaskDefinition,
 		HTTPMethod: "POST",
@@ -1070,89 +621,42 @@ func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) 
 		input = &DescribeTaskDefinitionInput{}
 	}
 
-	output = &DescribeTaskDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTaskDefinition API operation for Amazon EC2 Container Service.
-//
-// Describes a task definition. You can specify a family and revision to find
-// information about a specific task definition, or you can simply specify the
-// family to find the latest ACTIVE revision in that family.
-//
-// You can only describe INACTIVE task definitions while an active task or service
-// references them.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DescribeTaskDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
-func (c *ECS) DescribeTaskDefinition(input *DescribeTaskDefinitionInput) (*DescribeTaskDefinitionOutput, error) {
-	req, out := c.DescribeTaskDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTaskDefinitionWithContext is the same as DescribeTaskDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTaskDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DescribeTaskDefinitionWithContext(ctx aws.Context, input *DescribeTaskDefinitionInput, opts ...aws.Option) (*DescribeTaskDefinitionOutput, error) {
-	req, out := c.DescribeTaskDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTaskDefinitionOutput{})
+	return DescribeTaskDefinitionRequest{Request: req, Input: input}
 }
 
 const opDescribeTasks = "DescribeTasks"
 
-// DescribeTasksRequest generates a "aws.Request" representing the
-// client's request for the DescribeTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTasksRequest is a API request type for the DescribeTasks API operation.
+type DescribeTasksRequest struct {
+	*aws.Request
+	Input *DescribeTasksInput
+}
+
+// Send marshals and sends the DescribeTasks API request.
+func (r *DescribeTasksRequest) Send() (*DescribeTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTasksOutput), nil
+}
+
+// DescribeTasksRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTasks for more information on using the DescribeTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes a specified task or tasks.
 //
 //    // Example sending a request using the DescribeTasksRequest method.
-//    req, resp := client.DescribeTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
-func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *aws.Request, output *DescribeTasksOutput) {
+func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTasks,
 		HTTPMethod: "POST",
@@ -1163,88 +667,46 @@ func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *aws.Request,
 		input = &DescribeTasksInput{}
 	}
 
-	output = &DescribeTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTasks API operation for Amazon EC2 Container Service.
-//
-// Describes a specified task or tasks.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DescribeTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
-func (c *ECS) DescribeTasks(input *DescribeTasksInput) (*DescribeTasksOutput, error) {
-	req, out := c.DescribeTasksRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTasksWithContext is the same as DescribeTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DescribeTasksWithContext(ctx aws.Context, input *DescribeTasksInput, opts ...aws.Option) (*DescribeTasksOutput, error) {
-	req, out := c.DescribeTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTasksOutput{})
+	return DescribeTasksRequest{Request: req, Input: input}
 }
 
 const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 
-// DiscoverPollEndpointRequest generates a "aws.Request" representing the
-// client's request for the DiscoverPollEndpoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DiscoverPollEndpointRequest is a API request type for the DiscoverPollEndpoint API operation.
+type DiscoverPollEndpointRequest struct {
+	*aws.Request
+	Input *DiscoverPollEndpointInput
+}
+
+// Send marshals and sends the DiscoverPollEndpoint API request.
+func (r *DiscoverPollEndpointRequest) Send() (*DiscoverPollEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DiscoverPollEndpointOutput), nil
+}
+
+// DiscoverPollEndpointRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This action is only used by the Amazon EC2 Container Service agent, and it
+// is not intended for use outside of the agent.
 //
-// See DiscoverPollEndpoint for more information on using the DiscoverPollEndpoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an endpoint for the Amazon EC2 Container Service agent to poll for
+// updates.
 //
 //    // Example sending a request using the DiscoverPollEndpointRequest method.
-//    req, resp := client.DiscoverPollEndpointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DiscoverPollEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
-func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req *aws.Request, output *DiscoverPollEndpointOutput) {
+func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) DiscoverPollEndpointRequest {
 	op := &aws.Operation{
 		Name:       opDiscoverPollEndpoint,
 		HTTPMethod: "POST",
@@ -1255,84 +717,48 @@ func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req
 		input = &DiscoverPollEndpointInput{}
 	}
 
-	output = &DiscoverPollEndpointOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DiscoverPollEndpoint API operation for Amazon EC2 Container Service.
-//
-// This action is only used by the Amazon EC2 Container Service agent, and it
-// is not intended for use outside of the agent.
-//
-// Returns an endpoint for the Amazon EC2 Container Service agent to poll for
-// updates.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation DiscoverPollEndpoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
-func (c *ECS) DiscoverPollEndpoint(input *DiscoverPollEndpointInput) (*DiscoverPollEndpointOutput, error) {
-	req, out := c.DiscoverPollEndpointRequest(input)
-	return out, req.Send()
-}
-
-// DiscoverPollEndpointWithContext is the same as DiscoverPollEndpoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DiscoverPollEndpoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) DiscoverPollEndpointWithContext(ctx aws.Context, input *DiscoverPollEndpointInput, opts ...aws.Option) (*DiscoverPollEndpointOutput, error) {
-	req, out := c.DiscoverPollEndpointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DiscoverPollEndpointOutput{})
+	return DiscoverPollEndpointRequest{Request: req, Input: input}
 }
 
 const opListAttributes = "ListAttributes"
 
-// ListAttributesRequest generates a "aws.Request" representing the
-// client's request for the ListAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttributesRequest is a API request type for the ListAttributes API operation.
+type ListAttributesRequest struct {
+	*aws.Request
+	Input *ListAttributesInput
+}
+
+// Send marshals and sends the ListAttributes API request.
+func (r *ListAttributesRequest) Send() (*ListAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttributesOutput), nil
+}
+
+// ListAttributesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAttributes for more information on using the ListAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the attributes for Amazon ECS resources within a specified target type
+// and cluster. When you specify a target type and cluster, ListAttributes returns
+// a list of attribute objects, one for each attribute on each resource. You
+// can filter the list of results to a single attribute name to only return
+// results that have that name. You can also filter the results by attribute
+// name and value, for example, to see which container instances in a cluster
+// are running a Linux AMI (ecs.os-type=linux).
 //
 //    // Example sending a request using the ListAttributesRequest method.
-//    req, resp := client.ListAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
-func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *aws.Request, output *ListAttributesOutput) {
+func (c *ECS) ListAttributesRequest(input *ListAttributesInput) ListAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListAttributes,
 		HTTPMethod: "POST",
@@ -1343,86 +769,42 @@ func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *aws.Reques
 		input = &ListAttributesInput{}
 	}
 
-	output = &ListAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttributes API operation for Amazon EC2 Container Service.
-//
-// Lists the attributes for Amazon ECS resources within a specified target type
-// and cluster. When you specify a target type and cluster, ListAttributes returns
-// a list of attribute objects, one for each attribute on each resource. You
-// can filter the list of results to a single attribute name to only return
-// results that have that name. You can also filter the results by attribute
-// name and value, for example, to see which container instances in a cluster
-// are running a Linux AMI (ecs.os-type=linux).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
-func (c *ECS) ListAttributes(input *ListAttributesInput) (*ListAttributesOutput, error) {
-	req, out := c.ListAttributesRequest(input)
-	return out, req.Send()
-}
-
-// ListAttributesWithContext is the same as ListAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListAttributesWithContext(ctx aws.Context, input *ListAttributesInput, opts ...aws.Option) (*ListAttributesOutput, error) {
-	req, out := c.ListAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttributesOutput{})
+	return ListAttributesRequest{Request: req, Input: input}
 }
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws.Request" representing the
-// client's request for the ListClusters operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListClustersRequest is a API request type for the ListClusters API operation.
+type ListClustersRequest struct {
+	*aws.Request
+	Input *ListClustersInput
+}
+
+// Send marshals and sends the ListClusters API request.
+func (r *ListClustersRequest) Send() (*ListClustersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListClustersOutput), nil
+}
+
+// ListClustersRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListClusters for more information on using the ListClusters
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of existing clusters.
 //
 //    // Example sending a request using the ListClustersRequest method.
-//    req, resp := client.ListClustersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListClustersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
-func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+func (c *ECS) ListClustersRequest(input *ListClustersInput) ListClustersRequest {
 	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
@@ -1439,55 +821,8 @@ func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *aws.Request, o
 		input = &ListClustersInput{}
 	}
 
-	output = &ListClustersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListClusters API operation for Amazon EC2 Container Service.
-//
-// Returns a list of existing clusters.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListClusters for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
-func (c *ECS) ListClusters(input *ListClustersInput) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	return out, req.Send()
-}
-
-// ListClustersWithContext is the same as ListClusters with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListClusters for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
-	req, out := c.ListClustersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListClustersOutput{})
+	return ListClustersRequest{Request: req, Input: input}
 }
 
 // ListClustersPages iterates over the pages of a ListClusters operation,
@@ -1526,10 +861,10 @@ func (c *ECS) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListClustersRequest(inCpy)
+			req := c.ListClustersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1542,31 +877,40 @@ func (c *ECS) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 
 const opListContainerInstances = "ListContainerInstances"
 
-// ListContainerInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListContainerInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListContainerInstancesRequest is a API request type for the ListContainerInstances API operation.
+type ListContainerInstancesRequest struct {
+	*aws.Request
+	Input *ListContainerInstancesInput
+}
+
+// Send marshals and sends the ListContainerInstances API request.
+func (r *ListContainerInstancesRequest) Send() (*ListContainerInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListContainerInstancesOutput), nil
+}
+
+// ListContainerInstancesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListContainerInstances for more information on using the ListContainerInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of container instances in a specified cluster. You can filter
+// the results of a ListContainerInstances operation with cluster query language
+// statements inside the filter parameter. For more information, see Cluster
+// Query Language (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
+// in the Amazon EC2 Container Service Developer Guide.
 //
 //    // Example sending a request using the ListContainerInstancesRequest method.
-//    req, resp := client.ListContainerInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListContainerInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
-func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) (req *aws.Request, output *ListContainerInstancesOutput) {
+func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) ListContainerInstancesRequest {
 	op := &aws.Operation{
 		Name:       opListContainerInstances,
 		HTTPMethod: "POST",
@@ -1583,63 +927,8 @@ func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) 
 		input = &ListContainerInstancesInput{}
 	}
 
-	output = &ListContainerInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListContainerInstances API operation for Amazon EC2 Container Service.
-//
-// Returns a list of container instances in a specified cluster. You can filter
-// the results of a ListContainerInstances operation with cluster query language
-// statements inside the filter parameter. For more information, see Cluster
-// Query Language (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
-// in the Amazon EC2 Container Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListContainerInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
-func (c *ECS) ListContainerInstances(input *ListContainerInstancesInput) (*ListContainerInstancesOutput, error) {
-	req, out := c.ListContainerInstancesRequest(input)
-	return out, req.Send()
-}
-
-// ListContainerInstancesWithContext is the same as ListContainerInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListContainerInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListContainerInstancesWithContext(ctx aws.Context, input *ListContainerInstancesInput, opts ...aws.Option) (*ListContainerInstancesOutput, error) {
-	req, out := c.ListContainerInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListContainerInstancesOutput{})
+	return ListContainerInstancesRequest{Request: req, Input: input}
 }
 
 // ListContainerInstancesPages iterates over the pages of a ListContainerInstances operation,
@@ -1678,10 +967,10 @@ func (c *ECS) ListContainerInstancesPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListContainerInstancesRequest(inCpy)
+			req := c.ListContainerInstancesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1694,31 +983,36 @@ func (c *ECS) ListContainerInstancesPagesWithContext(ctx aws.Context, input *Lis
 
 const opListServices = "ListServices"
 
-// ListServicesRequest generates a "aws.Request" representing the
-// client's request for the ListServices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListServicesRequest is a API request type for the ListServices API operation.
+type ListServicesRequest struct {
+	*aws.Request
+	Input *ListServicesInput
+}
+
+// Send marshals and sends the ListServices API request.
+func (r *ListServicesRequest) Send() (*ListServicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListServicesOutput), nil
+}
+
+// ListServicesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListServices for more information on using the ListServices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the services that are running in a specified cluster.
 //
 //    // Example sending a request using the ListServicesRequest method.
-//    req, resp := client.ListServicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListServicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
-func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *aws.Request, output *ListServicesOutput) {
+func (c *ECS) ListServicesRequest(input *ListServicesInput) ListServicesRequest {
 	op := &aws.Operation{
 		Name:       opListServices,
 		HTTPMethod: "POST",
@@ -1735,59 +1029,8 @@ func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *aws.Request, o
 		input = &ListServicesInput{}
 	}
 
-	output = &ListServicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListServices API operation for Amazon EC2 Container Service.
-//
-// Lists the services that are running in a specified cluster.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListServices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
-func (c *ECS) ListServices(input *ListServicesInput) (*ListServicesOutput, error) {
-	req, out := c.ListServicesRequest(input)
-	return out, req.Send()
-}
-
-// ListServicesWithContext is the same as ListServices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListServices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListServicesWithContext(ctx aws.Context, input *ListServicesInput, opts ...aws.Option) (*ListServicesOutput, error) {
-	req, out := c.ListServicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListServicesOutput{})
+	return ListServicesRequest{Request: req, Input: input}
 }
 
 // ListServicesPages iterates over the pages of a ListServices operation,
@@ -1826,10 +1069,10 @@ func (c *ECS) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListServicesRequest(inCpy)
+			req := c.ListServicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1842,31 +1085,42 @@ func (c *ECS) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesI
 
 const opListTaskDefinitionFamilies = "ListTaskDefinitionFamilies"
 
-// ListTaskDefinitionFamiliesRequest generates a "aws.Request" representing the
-// client's request for the ListTaskDefinitionFamilies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTaskDefinitionFamiliesRequest is a API request type for the ListTaskDefinitionFamilies API operation.
+type ListTaskDefinitionFamiliesRequest struct {
+	*aws.Request
+	Input *ListTaskDefinitionFamiliesInput
+}
+
+// Send marshals and sends the ListTaskDefinitionFamilies API request.
+func (r *ListTaskDefinitionFamiliesRequest) Send() (*ListTaskDefinitionFamiliesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTaskDefinitionFamiliesOutput), nil
+}
+
+// ListTaskDefinitionFamiliesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of task definition families that are registered to your account
+// (which may include task definition families that no longer have any ACTIVE
+// task definition revisions).
 //
-// See ListTaskDefinitionFamilies for more information on using the ListTaskDefinitionFamilies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can filter out task definition families that do not contain any ACTIVE
+// task definition revisions by setting the status parameter to ACTIVE. You
+// can also filter the results with the familyPrefix parameter.
 //
 //    // Example sending a request using the ListTaskDefinitionFamiliesRequest method.
-//    req, resp := client.ListTaskDefinitionFamiliesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTaskDefinitionFamiliesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
-func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamiliesInput) (req *aws.Request, output *ListTaskDefinitionFamiliesOutput) {
+func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamiliesInput) ListTaskDefinitionFamiliesRequest {
 	op := &aws.Operation{
 		Name:       opListTaskDefinitionFamilies,
 		HTTPMethod: "POST",
@@ -1883,61 +1137,8 @@ func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamilie
 		input = &ListTaskDefinitionFamiliesInput{}
 	}
 
-	output = &ListTaskDefinitionFamiliesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTaskDefinitionFamilies API operation for Amazon EC2 Container Service.
-//
-// Returns a list of task definition families that are registered to your account
-// (which may include task definition families that no longer have any ACTIVE
-// task definition revisions).
-//
-// You can filter out task definition families that do not contain any ACTIVE
-// task definition revisions by setting the status parameter to ACTIVE. You
-// can also filter the results with the familyPrefix parameter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListTaskDefinitionFamilies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
-func (c *ECS) ListTaskDefinitionFamilies(input *ListTaskDefinitionFamiliesInput) (*ListTaskDefinitionFamiliesOutput, error) {
-	req, out := c.ListTaskDefinitionFamiliesRequest(input)
-	return out, req.Send()
-}
-
-// ListTaskDefinitionFamiliesWithContext is the same as ListTaskDefinitionFamilies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTaskDefinitionFamilies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionFamiliesWithContext(ctx aws.Context, input *ListTaskDefinitionFamiliesInput, opts ...aws.Option) (*ListTaskDefinitionFamiliesOutput, error) {
-	req, out := c.ListTaskDefinitionFamiliesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTaskDefinitionFamiliesOutput{})
+	return ListTaskDefinitionFamiliesRequest{Request: req, Input: input}
 }
 
 // ListTaskDefinitionFamiliesPages iterates over the pages of a ListTaskDefinitionFamilies operation,
@@ -1976,10 +1177,10 @@ func (c *ECS) ListTaskDefinitionFamiliesPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTaskDefinitionFamiliesRequest(inCpy)
+			req := c.ListTaskDefinitionFamiliesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1992,31 +1193,38 @@ func (c *ECS) ListTaskDefinitionFamiliesPagesWithContext(ctx aws.Context, input 
 
 const opListTaskDefinitions = "ListTaskDefinitions"
 
-// ListTaskDefinitionsRequest generates a "aws.Request" representing the
-// client's request for the ListTaskDefinitions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTaskDefinitionsRequest is a API request type for the ListTaskDefinitions API operation.
+type ListTaskDefinitionsRequest struct {
+	*aws.Request
+	Input *ListTaskDefinitionsInput
+}
+
+// Send marshals and sends the ListTaskDefinitions API request.
+func (r *ListTaskDefinitionsRequest) Send() (*ListTaskDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTaskDefinitionsOutput), nil
+}
+
+// ListTaskDefinitionsRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTaskDefinitions for more information on using the ListTaskDefinitions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of task definitions that are registered to your account. You
+// can filter the results by family name with the familyPrefix parameter or
+// by status with the status parameter.
 //
 //    // Example sending a request using the ListTaskDefinitionsRequest method.
-//    req, resp := client.ListTaskDefinitionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTaskDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
-func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *aws.Request, output *ListTaskDefinitionsOutput) {
+func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) ListTaskDefinitionsRequest {
 	op := &aws.Operation{
 		Name:       opListTaskDefinitions,
 		HTTPMethod: "POST",
@@ -2033,57 +1241,8 @@ func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *
 		input = &ListTaskDefinitionsInput{}
 	}
 
-	output = &ListTaskDefinitionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTaskDefinitions API operation for Amazon EC2 Container Service.
-//
-// Returns a list of task definitions that are registered to your account. You
-// can filter the results by family name with the familyPrefix parameter or
-// by status with the status parameter.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListTaskDefinitions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
-func (c *ECS) ListTaskDefinitions(input *ListTaskDefinitionsInput) (*ListTaskDefinitionsOutput, error) {
-	req, out := c.ListTaskDefinitionsRequest(input)
-	return out, req.Send()
-}
-
-// ListTaskDefinitionsWithContext is the same as ListTaskDefinitions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTaskDefinitions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionsWithContext(ctx aws.Context, input *ListTaskDefinitionsInput, opts ...aws.Option) (*ListTaskDefinitionsOutput, error) {
-	req, out := c.ListTaskDefinitionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTaskDefinitionsOutput{})
+	return ListTaskDefinitionsRequest{Request: req, Input: input}
 }
 
 // ListTaskDefinitionsPages iterates over the pages of a ListTaskDefinitions operation,
@@ -2122,10 +1281,10 @@ func (c *ECS) ListTaskDefinitionsPagesWithContext(ctx aws.Context, input *ListTa
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTaskDefinitionsRequest(inCpy)
+			req := c.ListTaskDefinitionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2138,31 +1297,41 @@ func (c *ECS) ListTaskDefinitionsPagesWithContext(ctx aws.Context, input *ListTa
 
 const opListTasks = "ListTasks"
 
-// ListTasksRequest generates a "aws.Request" representing the
-// client's request for the ListTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTasksRequest is a API request type for the ListTasks API operation.
+type ListTasksRequest struct {
+	*aws.Request
+	Input *ListTasksInput
+}
+
+// Send marshals and sends the ListTasks API request.
+func (r *ListTasksRequest) Send() (*ListTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTasksOutput), nil
+}
+
+// ListTasksRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of tasks for a specified cluster. You can filter the results
+// by family name, by a particular container instance, or by the desired status
+// of the task with the family, containerInstance, and desiredStatus parameters.
 //
-// See ListTasks for more information on using the ListTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Recently-stopped tasks might appear in the returned results. Currently, stopped
+// tasks appear in the returned results for at least one hour.
 //
 //    // Example sending a request using the ListTasksRequest method.
-//    req, resp := client.ListTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
-func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *aws.Request, output *ListTasksOutput) {
+func (c *ECS) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 	op := &aws.Operation{
 		Name:       opListTasks,
 		HTTPMethod: "POST",
@@ -2179,68 +1348,8 @@ func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *aws.Request, output 
 		input = &ListTasksInput{}
 	}
 
-	output = &ListTasksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTasks API operation for Amazon EC2 Container Service.
-//
-// Returns a list of tasks for a specified cluster. You can filter the results
-// by family name, by a particular container instance, or by the desired status
-// of the task with the family, containerInstance, and desiredStatus parameters.
-//
-// Recently-stopped tasks might appear in the returned results. Currently, stopped
-// tasks appear in the returned results for at least one hour.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation ListTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeServiceNotFoundException "ServiceNotFoundException"
-//   The specified service could not be found. You can view your available services
-//   with ListServices. Amazon ECS services are cluster-specific and region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
-func (c *ECS) ListTasks(input *ListTasksInput) (*ListTasksOutput, error) {
-	req, out := c.ListTasksRequest(input)
-	return out, req.Send()
-}
-
-// ListTasksWithContext is the same as ListTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) ListTasksWithContext(ctx aws.Context, input *ListTasksInput, opts ...aws.Option) (*ListTasksOutput, error) {
-	req, out := c.ListTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTasksOutput{})
+	return ListTasksRequest{Request: req, Input: input}
 }
 
 // ListTasksPages iterates over the pages of a ListTasks operation,
@@ -2279,10 +1388,10 @@ func (c *ECS) ListTasksPagesWithContext(ctx aws.Context, input *ListTasksInput, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTasksRequest(inCpy)
+			req := c.ListTasksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2295,31 +1404,40 @@ func (c *ECS) ListTasksPagesWithContext(ctx aws.Context, input *ListTasksInput, 
 
 const opPutAttributes = "PutAttributes"
 
-// PutAttributesRequest generates a "aws.Request" representing the
-// client's request for the PutAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutAttributesRequest is a API request type for the PutAttributes API operation.
+type PutAttributesRequest struct {
+	*aws.Request
+	Input *PutAttributesInput
+}
+
+// Send marshals and sends the PutAttributes API request.
+func (r *PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutAttributesOutput), nil
+}
+
+// PutAttributesRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutAttributes for more information on using the PutAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create or update an attribute on an Amazon ECS resource. If the attribute
+// does not exist, it is created. If the attribute exists, its value is replaced
+// with the specified value. To delete an attribute, use DeleteAttributes. For
+// more information, see Attributes (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
+// in the Amazon EC2 Container Service Developer Guide.
 //
 //    // Example sending a request using the PutAttributesRequest method.
-//    req, resp := client.PutAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
-func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *aws.Request, output *PutAttributesOutput) {
+func (c *ECS) PutAttributesRequest(input *PutAttributesInput) PutAttributesRequest {
 	op := &aws.Operation{
 		Name:       opPutAttributes,
 		HTTPMethod: "POST",
@@ -2330,94 +1448,46 @@ func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *aws.Request,
 		input = &PutAttributesInput{}
 	}
 
-	output = &PutAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutAttributes API operation for Amazon EC2 Container Service.
-//
-// Create or update an attribute on an Amazon ECS resource. If the attribute
-// does not exist, it is created. If the attribute exists, its value is replaced
-// with the specified value. To delete an attribute, use DeleteAttributes. For
-// more information, see Attributes (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes)
-// in the Amazon EC2 Container Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation PutAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeTargetNotFoundException "TargetNotFoundException"
-//   The specified target could not be found. You can view your available container
-//   instances with ListContainerInstances. Amazon ECS container instances are
-//   cluster-specific and region-specific.
-//
-//   * ErrCodeAttributeLimitExceededException "AttributeLimitExceededException"
-//   You can apply up to 10 custom attributes per resource. You can view the attributes
-//   of a resource with ListAttributes. You can remove existing attributes on
-//   a resource with DeleteAttributes.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
-func (c *ECS) PutAttributes(input *PutAttributesInput) (*PutAttributesOutput, error) {
-	req, out := c.PutAttributesRequest(input)
-	return out, req.Send()
-}
-
-// PutAttributesWithContext is the same as PutAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...aws.Option) (*PutAttributesOutput, error) {
-	req, out := c.PutAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutAttributesOutput{})
+	return PutAttributesRequest{Request: req, Input: input}
 }
 
 const opRegisterContainerInstance = "RegisterContainerInstance"
 
-// RegisterContainerInstanceRequest generates a "aws.Request" representing the
-// client's request for the RegisterContainerInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RegisterContainerInstanceRequest is a API request type for the RegisterContainerInstance API operation.
+type RegisterContainerInstanceRequest struct {
+	*aws.Request
+	Input *RegisterContainerInstanceInput
+}
+
+// Send marshals and sends the RegisterContainerInstance API request.
+func (r *RegisterContainerInstanceRequest) Send() (*RegisterContainerInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterContainerInstanceOutput), nil
+}
+
+// RegisterContainerInstanceRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This action is only used by the Amazon EC2 Container Service agent, and it
+// is not intended for use outside of the agent.
 //
-// See RegisterContainerInstance for more information on using the RegisterContainerInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Registers an EC2 instance into the specified cluster. This instance becomes
+// available to place containers on.
 //
 //    // Example sending a request using the RegisterContainerInstanceRequest method.
-//    req, resp := client.RegisterContainerInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RegisterContainerInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
-func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceInput) (req *aws.Request, output *RegisterContainerInstanceOutput) {
+func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceInput) RegisterContainerInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRegisterContainerInstance,
 		HTTPMethod: "POST",
@@ -2428,100 +1498,30 @@ func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceI
 		input = &RegisterContainerInstanceInput{}
 	}
 
-	output = &RegisterContainerInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RegisterContainerInstance API operation for Amazon EC2 Container Service.
-//
-// This action is only used by the Amazon EC2 Container Service agent, and it
-// is not intended for use outside of the agent.
-//
-// Registers an EC2 instance into the specified cluster. This instance becomes
-// available to place containers on.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation RegisterContainerInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
-func (c *ECS) RegisterContainerInstance(input *RegisterContainerInstanceInput) (*RegisterContainerInstanceOutput, error) {
-	req, out := c.RegisterContainerInstanceRequest(input)
-	return out, req.Send()
-}
-
-// RegisterContainerInstanceWithContext is the same as RegisterContainerInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterContainerInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) RegisterContainerInstanceWithContext(ctx aws.Context, input *RegisterContainerInstanceInput, opts ...aws.Option) (*RegisterContainerInstanceOutput, error) {
-	req, out := c.RegisterContainerInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RegisterContainerInstanceOutput{})
+	return RegisterContainerInstanceRequest{Request: req, Input: input}
 }
 
 const opRegisterTaskDefinition = "RegisterTaskDefinition"
 
-// RegisterTaskDefinitionRequest generates a "aws.Request" representing the
-// client's request for the RegisterTaskDefinition operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterTaskDefinition for more information on using the RegisterTaskDefinition
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterTaskDefinitionRequest method.
-//    req, resp := client.RegisterTaskDefinitionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
-func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) (req *aws.Request, output *RegisterTaskDefinitionOutput) {
-	op := &aws.Operation{
-		Name:       opRegisterTaskDefinition,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RegisterTaskDefinitionInput{}
-	}
-
-	output = &RegisterTaskDefinitionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RegisterTaskDefinitionRequest is a API request type for the RegisterTaskDefinition API operation.
+type RegisterTaskDefinitionRequest struct {
+	*aws.Request
+	Input *RegisterTaskDefinitionInput
 }
 
-// RegisterTaskDefinition API operation for Amazon EC2 Container Service.
+// Send marshals and sends the RegisterTaskDefinition API request.
+func (r *RegisterTaskDefinitionRequest) Send() (*RegisterTaskDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterTaskDefinitionOutput), nil
+}
+
+// RegisterTaskDefinitionRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Registers a new task definition from the supplied family and containerDefinitions.
 // Optionally, you can add data volumes to your containers with the volumes
@@ -2541,91 +1541,49 @@ func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) 
 // to those described in Network settings (https://docs.docker.com/engine/reference/run/#/network-settings)
 // in the Docker run reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation RegisterTaskDefinition for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
-func (c *ECS) RegisterTaskDefinition(input *RegisterTaskDefinitionInput) (*RegisterTaskDefinitionOutput, error) {
-	req, out := c.RegisterTaskDefinitionRequest(input)
-	return out, req.Send()
-}
-
-// RegisterTaskDefinitionWithContext is the same as RegisterTaskDefinition with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterTaskDefinition for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) RegisterTaskDefinitionWithContext(ctx aws.Context, input *RegisterTaskDefinitionInput, opts ...aws.Option) (*RegisterTaskDefinitionOutput, error) {
-	req, out := c.RegisterTaskDefinitionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRunTask = "RunTask"
-
-// RunTaskRequest generates a "aws.Request" representing the
-// client's request for the RunTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RunTask for more information on using the RunTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RunTaskRequest method.
-//    req, resp := client.RunTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterTaskDefinitionRequest method.
+//    req := client.RegisterTaskDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
-func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *aws.Request, output *RunTaskOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
+func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) RegisterTaskDefinitionRequest {
 	op := &aws.Operation{
-		Name:       opRunTask,
+		Name:       opRegisterTaskDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RunTaskInput{}
+		input = &RegisterTaskDefinitionInput{}
 	}
 
-	output = &RunTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RegisterTaskDefinitionOutput{})
+	return RegisterTaskDefinitionRequest{Request: req, Input: input}
 }
 
-// RunTask API operation for Amazon EC2 Container Service.
+const opRunTask = "RunTask"
+
+// RunTaskRequest is a API request type for the RunTask API operation.
+type RunTaskRequest struct {
+	*aws.Request
+	Input *RunTaskInput
+}
+
+// Send marshals and sends the RunTask API request.
+func (r *RunTaskRequest) Send() (*RunTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RunTaskOutput), nil
+}
+
+// RunTaskRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Starts a new task using the specified task definition.
 //
@@ -2637,79 +1595,66 @@ func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *aws.Request, output *Run
 // Alternatively, you can use StartTask to use your own scheduler or place tasks
 // manually on specific container instances.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation RunTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
+//    // Example sending a request using the RunTaskRequest method.
+//    req := client.RunTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
-func (c *ECS) RunTask(input *RunTaskInput) (*RunTaskOutput, error) {
-	req, out := c.RunTaskRequest(input)
-	return out, req.Send()
-}
+func (c *ECS) RunTaskRequest(input *RunTaskInput) RunTaskRequest {
+	op := &aws.Operation{
+		Name:       opRunTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RunTaskWithContext is the same as RunTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RunTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) RunTaskWithContext(ctx aws.Context, input *RunTaskInput, opts ...aws.Option) (*RunTaskOutput, error) {
-	req, out := c.RunTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RunTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &RunTaskOutput{})
+	return RunTaskRequest{Request: req, Input: input}
 }
 
 const opStartTask = "StartTask"
 
-// StartTaskRequest generates a "aws.Request" representing the
-// client's request for the StartTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartTaskRequest is a API request type for the StartTask API operation.
+type StartTaskRequest struct {
+	*aws.Request
+	Input *StartTaskInput
+}
+
+// Send marshals and sends the StartTask API request.
+func (r *StartTaskRequest) Send() (*StartTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartTaskOutput), nil
+}
+
+// StartTaskRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Starts a new task from the specified task definition on the specified container
+// instance or instances.
 //
-// See StartTask for more information on using the StartTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Alternatively, you can use RunTask to place tasks for you. For more information,
+// see Scheduling Tasks (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
+// in the Amazon EC2 Container Service Developer Guide.
 //
 //    // Example sending a request using the StartTaskRequest method.
-//    req, resp := client.StartTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
-func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *aws.Request, output *StartTaskOutput) {
+func (c *ECS) StartTaskRequest(input *StartTaskInput) StartTaskRequest {
 	op := &aws.Operation{
 		Name:       opStartTask,
 		HTTPMethod: "POST",
@@ -2720,109 +1665,30 @@ func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *aws.Request, output 
 		input = &StartTaskInput{}
 	}
 
-	output = &StartTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartTask API operation for Amazon EC2 Container Service.
-//
-// Starts a new task from the specified task definition on the specified container
-// instance or instances.
-//
-// Alternatively, you can use RunTask to place tasks for you. For more information,
-// see Scheduling Tasks (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)
-// in the Amazon EC2 Container Service Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation StartTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
-func (c *ECS) StartTask(input *StartTaskInput) (*StartTaskOutput, error) {
-	req, out := c.StartTaskRequest(input)
-	return out, req.Send()
-}
-
-// StartTaskWithContext is the same as StartTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) StartTaskWithContext(ctx aws.Context, input *StartTaskInput, opts ...aws.Option) (*StartTaskOutput, error) {
-	req, out := c.StartTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartTaskOutput{})
+	return StartTaskRequest{Request: req, Input: input}
 }
 
 const opStopTask = "StopTask"
 
-// StopTaskRequest generates a "aws.Request" representing the
-// client's request for the StopTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopTask for more information on using the StopTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StopTaskRequest method.
-//    req, resp := client.StopTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
-func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *aws.Request, output *StopTaskOutput) {
-	op := &aws.Operation{
-		Name:       opStopTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &StopTaskInput{}
-	}
-
-	output = &StopTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// StopTaskRequest is a API request type for the StopTask API operation.
+type StopTaskRequest struct {
+	*aws.Request
+	Input *StopTaskInput
 }
 
-// StopTask API operation for Amazon EC2 Container Service.
+// Send marshals and sends the StopTask API request.
+func (r *StopTaskRequest) Send() (*StopTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopTaskOutput), nil
+}
+
+// StopTaskRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Stops a running task.
 //
@@ -2837,79 +1703,64 @@ func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *aws.Request, output *S
 // see Amazon ECS Container Agent Configuration (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
 // in the Amazon EC2 Container Service Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation StopTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
+//    // Example sending a request using the StopTaskRequest method.
+//    req := client.StopTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
-func (c *ECS) StopTask(input *StopTaskInput) (*StopTaskOutput, error) {
-	req, out := c.StopTaskRequest(input)
-	return out, req.Send()
-}
+func (c *ECS) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
+	op := &aws.Operation{
+		Name:       opStopTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StopTaskWithContext is the same as StopTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) StopTaskWithContext(ctx aws.Context, input *StopTaskInput, opts ...aws.Option) (*StopTaskOutput, error) {
-	req, out := c.StopTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StopTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &StopTaskOutput{})
+	return StopTaskRequest{Request: req, Input: input}
 }
 
 const opSubmitContainerStateChange = "SubmitContainerStateChange"
 
-// SubmitContainerStateChangeRequest generates a "aws.Request" representing the
-// client's request for the SubmitContainerStateChange operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SubmitContainerStateChangeRequest is a API request type for the SubmitContainerStateChange API operation.
+type SubmitContainerStateChangeRequest struct {
+	*aws.Request
+	Input *SubmitContainerStateChangeInput
+}
+
+// Send marshals and sends the SubmitContainerStateChange API request.
+func (r *SubmitContainerStateChangeRequest) Send() (*SubmitContainerStateChangeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SubmitContainerStateChangeOutput), nil
+}
+
+// SubmitContainerStateChangeRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This action is only used by the Amazon EC2 Container Service agent, and it
+// is not intended for use outside of the agent.
 //
-// See SubmitContainerStateChange for more information on using the SubmitContainerStateChange
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sent to acknowledge that a container changed states.
 //
 //    // Example sending a request using the SubmitContainerStateChangeRequest method.
-//    req, resp := client.SubmitContainerStateChangeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SubmitContainerStateChangeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
-func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) (req *aws.Request, output *SubmitContainerStateChangeOutput) {
+func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest {
 	op := &aws.Operation{
 		Name:       opSubmitContainerStateChange,
 		HTTPMethod: "POST",
@@ -2920,83 +1771,45 @@ func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChang
 		input = &SubmitContainerStateChangeInput{}
 	}
 
-	output = &SubmitContainerStateChangeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SubmitContainerStateChange API operation for Amazon EC2 Container Service.
-//
-// This action is only used by the Amazon EC2 Container Service agent, and it
-// is not intended for use outside of the agent.
-//
-// Sent to acknowledge that a container changed states.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation SubmitContainerStateChange for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
-func (c *ECS) SubmitContainerStateChange(input *SubmitContainerStateChangeInput) (*SubmitContainerStateChangeOutput, error) {
-	req, out := c.SubmitContainerStateChangeRequest(input)
-	return out, req.Send()
-}
-
-// SubmitContainerStateChangeWithContext is the same as SubmitContainerStateChange with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SubmitContainerStateChange for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) SubmitContainerStateChangeWithContext(ctx aws.Context, input *SubmitContainerStateChangeInput, opts ...aws.Option) (*SubmitContainerStateChangeOutput, error) {
-	req, out := c.SubmitContainerStateChangeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SubmitContainerStateChangeOutput{})
+	return SubmitContainerStateChangeRequest{Request: req, Input: input}
 }
 
 const opSubmitTaskStateChange = "SubmitTaskStateChange"
 
-// SubmitTaskStateChangeRequest generates a "aws.Request" representing the
-// client's request for the SubmitTaskStateChange operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SubmitTaskStateChangeRequest is a API request type for the SubmitTaskStateChange API operation.
+type SubmitTaskStateChangeRequest struct {
+	*aws.Request
+	Input *SubmitTaskStateChangeInput
+}
+
+// Send marshals and sends the SubmitTaskStateChange API request.
+func (r *SubmitTaskStateChangeRequest) Send() (*SubmitTaskStateChangeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SubmitTaskStateChangeOutput), nil
+}
+
+// SubmitTaskStateChangeRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// This action is only used by the Amazon EC2 Container Service agent, and it
+// is not intended for use outside of the agent.
 //
-// See SubmitTaskStateChange for more information on using the SubmitTaskStateChange
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sent to acknowledge that a task changed states.
 //
 //    // Example sending a request using the SubmitTaskStateChangeRequest method.
-//    req, resp := client.SubmitTaskStateChangeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SubmitTaskStateChangeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
-func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (req *aws.Request, output *SubmitTaskStateChangeOutput) {
+func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest {
 	op := &aws.Operation{
 		Name:       opSubmitTaskStateChange,
 		HTTPMethod: "POST",
@@ -3007,99 +1820,30 @@ func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (r
 		input = &SubmitTaskStateChangeInput{}
 	}
 
-	output = &SubmitTaskStateChangeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SubmitTaskStateChange API operation for Amazon EC2 Container Service.
-//
-// This action is only used by the Amazon EC2 Container Service agent, and it
-// is not intended for use outside of the agent.
-//
-// Sent to acknowledge that a task changed states.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation SubmitTaskStateChange for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
-func (c *ECS) SubmitTaskStateChange(input *SubmitTaskStateChangeInput) (*SubmitTaskStateChangeOutput, error) {
-	req, out := c.SubmitTaskStateChangeRequest(input)
-	return out, req.Send()
-}
-
-// SubmitTaskStateChangeWithContext is the same as SubmitTaskStateChange with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SubmitTaskStateChange for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) SubmitTaskStateChangeWithContext(ctx aws.Context, input *SubmitTaskStateChangeInput, opts ...aws.Option) (*SubmitTaskStateChangeOutput, error) {
-	req, out := c.SubmitTaskStateChangeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SubmitTaskStateChangeOutput{})
+	return SubmitTaskStateChangeRequest{Request: req, Input: input}
 }
 
 const opUpdateContainerAgent = "UpdateContainerAgent"
 
-// UpdateContainerAgentRequest generates a "aws.Request" representing the
-// client's request for the UpdateContainerAgent operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateContainerAgent for more information on using the UpdateContainerAgent
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateContainerAgentRequest method.
-//    req, resp := client.UpdateContainerAgentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
-func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req *aws.Request, output *UpdateContainerAgentOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateContainerAgent,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateContainerAgentInput{}
-	}
-
-	output = &UpdateContainerAgentOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateContainerAgentRequest is a API request type for the UpdateContainerAgent API operation.
+type UpdateContainerAgentRequest struct {
+	*aws.Request
+	Input *UpdateContainerAgentInput
 }
 
-// UpdateContainerAgent API operation for Amazon EC2 Container Service.
+// Send marshals and sends the UpdateContainerAgent API request.
+func (r *UpdateContainerAgentRequest) Send() (*UpdateContainerAgentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateContainerAgentOutput), nil
+}
+
+// UpdateContainerAgentRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Updates the Amazon ECS container agent on a specified container instance.
 // Updating the Amazon ECS container agent does not interrupt running tasks
@@ -3113,113 +1857,49 @@ func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req
 // Amazon ECS Container Agent (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent)
 // in the Amazon EC2 Container Service Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation UpdateContainerAgent for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeUpdateInProgressException "UpdateInProgressException"
-//   There is already a current Amazon ECS container agent update in progress
-//   on the specified container instance. If the container agent becomes disconnected
-//   while it is in a transitional stage, such as PENDING or STAGING, the update
-//   process can get stuck in that state. However, when the agent reconnects,
-//   it resumes where it stopped previously.
-//
-//   * ErrCodeNoUpdateAvailableException "NoUpdateAvailableException"
-//   There is no update available for this Amazon ECS container agent. This could
-//   be because the agent is already running the latest version, or it is so old
-//   that there is no update path to the current version.
-//
-//   * ErrCodeMissingVersionException "MissingVersionException"
-//   Amazon ECS is unable to determine the current version of the Amazon ECS container
-//   agent on the container instance and does not have enough information to proceed
-//   with an update. This could be because the agent running on the container
-//   instance is an older or custom version that does not use our version information.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
-func (c *ECS) UpdateContainerAgent(input *UpdateContainerAgentInput) (*UpdateContainerAgentOutput, error) {
-	req, out := c.UpdateContainerAgentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateContainerAgentWithContext is the same as UpdateContainerAgent with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateContainerAgent for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) UpdateContainerAgentWithContext(ctx aws.Context, input *UpdateContainerAgentInput, opts ...aws.Option) (*UpdateContainerAgentOutput, error) {
-	req, out := c.UpdateContainerAgentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
-
-// UpdateContainerInstancesStateRequest generates a "aws.Request" representing the
-// client's request for the UpdateContainerInstancesState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateContainerInstancesState for more information on using the UpdateContainerInstancesState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateContainerInstancesStateRequest method.
-//    req, resp := client.UpdateContainerInstancesStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateContainerAgentRequest method.
+//    req := client.UpdateContainerAgentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
-func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) (req *aws.Request, output *UpdateContainerInstancesStateOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
+func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) UpdateContainerAgentRequest {
 	op := &aws.Operation{
-		Name:       opUpdateContainerInstancesState,
+		Name:       opUpdateContainerAgent,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateContainerInstancesStateInput{}
+		input = &UpdateContainerAgentInput{}
 	}
 
-	output = &UpdateContainerInstancesStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateContainerAgentOutput{})
+	return UpdateContainerAgentRequest{Request: req, Input: input}
 }
 
-// UpdateContainerInstancesState API operation for Amazon EC2 Container Service.
+const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
+
+// UpdateContainerInstancesStateRequest is a API request type for the UpdateContainerInstancesState API operation.
+type UpdateContainerInstancesStateRequest struct {
+	*aws.Request
+	Input *UpdateContainerInstancesStateInput
+}
+
+// Send marshals and sends the UpdateContainerInstancesState API request.
+func (r *UpdateContainerInstancesStateRequest) Send() (*UpdateContainerInstancesStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateContainerInstancesStateOutput), nil
+}
+
+// UpdateContainerInstancesStateRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Modifies the status of an Amazon ECS container instance.
 //
@@ -3266,95 +1946,49 @@ func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstanc
 // When you set a container instance to ACTIVE, the Amazon ECS scheduler can
 // begin scheduling tasks on the instance again.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation UpdateContainerInstancesState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
-func (c *ECS) UpdateContainerInstancesState(input *UpdateContainerInstancesStateInput) (*UpdateContainerInstancesStateOutput, error) {
-	req, out := c.UpdateContainerInstancesStateRequest(input)
-	return out, req.Send()
-}
-
-// UpdateContainerInstancesStateWithContext is the same as UpdateContainerInstancesState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateContainerInstancesState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) UpdateContainerInstancesStateWithContext(ctx aws.Context, input *UpdateContainerInstancesStateInput, opts ...aws.Option) (*UpdateContainerInstancesStateOutput, error) {
-	req, out := c.UpdateContainerInstancesStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateService = "UpdateService"
-
-// UpdateServiceRequest generates a "aws.Request" representing the
-// client's request for the UpdateService operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateService for more information on using the UpdateService
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateServiceRequest method.
-//    req, resp := client.UpdateServiceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateContainerInstancesStateRequest method.
+//    req := client.UpdateContainerInstancesStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
-func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *aws.Request, output *UpdateServiceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
+func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest {
 	op := &aws.Operation{
-		Name:       opUpdateService,
+		Name:       opUpdateContainerInstancesState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateServiceInput{}
+		input = &UpdateContainerInstancesStateInput{}
 	}
 
-	output = &UpdateServiceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateContainerInstancesStateOutput{})
+	return UpdateContainerInstancesStateRequest{Request: req, Input: input}
 }
 
-// UpdateService API operation for Amazon EC2 Container Service.
+const opUpdateService = "UpdateService"
+
+// UpdateServiceRequest is a API request type for the UpdateService API operation.
+type UpdateServiceRequest struct {
+	*aws.Request
+	Input *UpdateServiceInput
+}
+
+// Send marshals and sends the UpdateService API request.
+func (r *UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateServiceOutput), nil
+}
+
+// UpdateServiceRequest returns a request value for making API operation for
+// Amazon EC2 Container Service.
 //
 // Modifies the desired count, deployment configuration, or task definition
 // used in a service.
@@ -3424,59 +2058,27 @@ func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *aws.Request,
 //    (based on the previous steps), favoring container instances with the largest
 //    number of running tasks for this service.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon EC2 Container Service's
-// API operation UpdateService for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   These errors are usually caused by a server issue.
-//
-//   * ErrCodeClientException "ClientException"
-//   These errors are usually caused by a client action, such as using an action
-//   or resource on behalf of a user that doesn't have permission to use the action
-//   or resource, or specifying an identifier that is not valid.
-//
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   The specified parameter is invalid. Review the available parameters for the
-//   API request.
-//
-//   * ErrCodeClusterNotFoundException "ClusterNotFoundException"
-//   The specified cluster could not be found. You can view your available clusters
-//   with ListClusters. Amazon ECS clusters are region-specific.
-//
-//   * ErrCodeServiceNotFoundException "ServiceNotFoundException"
-//   The specified service could not be found. You can view your available services
-//   with ListServices. Amazon ECS services are cluster-specific and region-specific.
-//
-//   * ErrCodeServiceNotActiveException "ServiceNotActiveException"
-//   The specified service is not active. You cannot update a service that is
-//   not active. If you have previously deleted a service, you can re-create it
-//   with CreateService.
+//    // Example sending a request using the UpdateServiceRequest method.
+//    req := client.UpdateServiceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
-func (c *ECS) UpdateService(input *UpdateServiceInput) (*UpdateServiceOutput, error) {
-	req, out := c.UpdateServiceRequest(input)
-	return out, req.Send()
-}
+func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceRequest {
+	op := &aws.Operation{
+		Name:       opUpdateService,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateServiceWithContext is the same as UpdateService with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateService for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECS) UpdateServiceWithContext(ctx aws.Context, input *UpdateServiceInput, opts ...aws.Option) (*UpdateServiceOutput, error) {
-	req, out := c.UpdateServiceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateServiceInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateServiceOutput{})
+	return UpdateServiceRequest{Request: req, Input: input}
 }
 
 // An attribute is a name-value pair associated with an Amazon ECS object. Attributes

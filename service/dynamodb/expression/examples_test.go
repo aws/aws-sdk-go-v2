@@ -48,7 +48,8 @@ func ExampleBuilder_WithProjection() {
 		TableName:                 aws.String("Music"),
 	}
 
-	result, err := svc.Query(input)
+	req := svc.QueryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -110,7 +111,8 @@ func ExampleBuilder_WithKeyCondition() {
 		TableName:                 aws.String("Music"),
 	}
 
-	result, err := svc.Query(input)
+	req := svc.QueryRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -174,7 +176,8 @@ func ExampleBuilder_WithFilter() {
 		TableName:                 aws.String("Music"),
 	}
 
-	result, err := svc.Scan(input)
+	req := svc.ScanRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -243,7 +246,8 @@ func ExampleBuilder_WithUpdate() {
 		UpdateExpression: expr.Update(),
 	}
 
-	result, err := svc.UpdateItem(input)
+	req := svc.UpdateItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -311,7 +315,8 @@ func ExampleBuilder_WithCondition() {
 		TableName:                 aws.String("Music"),
 	}
 
-	result, err := svc.DeleteItem(input)
+	req := svc.DeleteItemRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

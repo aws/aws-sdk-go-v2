@@ -12,47 +12,24 @@ import (
 
 const opBatchMeterUsage = "BatchMeterUsage"
 
-// BatchMeterUsageRequest generates a "aws.Request" representing the
-// client's request for the BatchMeterUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchMeterUsage for more information on using the BatchMeterUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the BatchMeterUsageRequest method.
-//    req, resp := client.BatchMeterUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage
-func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput) (req *aws.Request, output *BatchMeterUsageOutput) {
-	op := &aws.Operation{
-		Name:       opBatchMeterUsage,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &BatchMeterUsageInput{}
-	}
-
-	output = &BatchMeterUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// BatchMeterUsageRequest is a API request type for the BatchMeterUsage API operation.
+type BatchMeterUsageRequest struct {
+	*aws.Request
+	Input *BatchMeterUsageInput
 }
 
-// BatchMeterUsage API operation for AWSMarketplace Metering.
+// Send marshals and sends the BatchMeterUsage API request.
+func (r *BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchMeterUsageOutput), nil
+}
+
+// BatchMeterUsageRequest returns a request value for making API operation for
+// AWSMarketplace Metering.
 //
 // BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace
 // to post metering records for a set of customers.
@@ -65,84 +42,65 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 //
 // BatchMeterUsage can process up to 25 UsageRecords at a time.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWSMarketplace Metering's
-// API operation BatchMeterUsage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
-//
-//   * ErrCodeInvalidProductCodeException "InvalidProductCodeException"
-//   The product code passed does not match the product code used for publishing
-//   the product.
-//
-//   * ErrCodeInvalidUsageDimensionException "InvalidUsageDimensionException"
-//   The usage dimension does not match one of the UsageDimensions associated
-//   with products.
-//
-//   * ErrCodeInvalidCustomerIdentifierException "InvalidCustomerIdentifierException"
-//   You have metered usage for a CustomerIdentifier that does not exist.
-//
-//   * ErrCodeTimestampOutOfBoundsException "TimestampOutOfBoundsException"
-//   The timestamp value passed in the meterUsage() is out of allowed range.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the MeterUsage API are throttled.
+//    // Example sending a request using the BatchMeterUsageRequest method.
+//    req := client.BatchMeterUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage
-func (c *MarketplaceMetering) BatchMeterUsage(input *BatchMeterUsageInput) (*BatchMeterUsageOutput, error) {
-	req, out := c.BatchMeterUsageRequest(input)
-	return out, req.Send()
-}
+func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput) BatchMeterUsageRequest {
+	op := &aws.Operation{
+		Name:       opBatchMeterUsage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// BatchMeterUsageWithContext is the same as BatchMeterUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchMeterUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceMetering) BatchMeterUsageWithContext(ctx aws.Context, input *BatchMeterUsageInput, opts ...aws.Option) (*BatchMeterUsageOutput, error) {
-	req, out := c.BatchMeterUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &BatchMeterUsageInput{}
+	}
+
+	req := c.newRequest(op, input, &BatchMeterUsageOutput{})
+	return BatchMeterUsageRequest{Request: req, Input: input}
 }
 
 const opMeterUsage = "MeterUsage"
 
-// MeterUsageRequest generates a "aws.Request" representing the
-// client's request for the MeterUsage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// MeterUsageRequest is a API request type for the MeterUsage API operation.
+type MeterUsageRequest struct {
+	*aws.Request
+	Input *MeterUsageInput
+}
+
+// Send marshals and sends the MeterUsage API request.
+func (r *MeterUsageRequest) Send() (*MeterUsageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*MeterUsageOutput), nil
+}
+
+// MeterUsageRequest returns a request value for making API operation for
+// AWSMarketplace Metering.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// API to emit metering records. For identical requests, the API is idempotent.
+// It simply returns the metering record ID.
 //
-// See MeterUsage for more information on using the MeterUsage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// MeterUsage is authenticated on the buyer's AWS account, generally when running
+// from an EC2 instance on the AWS Marketplace.
 //
 //    // Example sending a request using the MeterUsageRequest method.
-//    req, resp := client.MeterUsageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.MeterUsageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage
-func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *aws.Request, output *MeterUsageOutput) {
+func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) MeterUsageRequest {
 	op := &aws.Operation{
 		Name:       opMeterUsage,
 		HTTPMethod: "POST",
@@ -153,103 +111,45 @@ func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *aw
 		input = &MeterUsageInput{}
 	}
 
-	output = &MeterUsageOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// MeterUsage API operation for AWSMarketplace Metering.
-//
-// API to emit metering records. For identical requests, the API is idempotent.
-// It simply returns the metering record ID.
-//
-// MeterUsage is authenticated on the buyer's AWS account, generally when running
-// from an EC2 instance on the AWS Marketplace.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWSMarketplace Metering's
-// API operation MeterUsage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
-//
-//   * ErrCodeInvalidProductCodeException "InvalidProductCodeException"
-//   The product code passed does not match the product code used for publishing
-//   the product.
-//
-//   * ErrCodeInvalidUsageDimensionException "InvalidUsageDimensionException"
-//   The usage dimension does not match one of the UsageDimensions associated
-//   with products.
-//
-//   * ErrCodeInvalidEndpointRegionException "InvalidEndpointRegionException"
-//   The endpoint being called is in a region different from your EC2 instance.
-//   The region of the Metering service endpoint and the region of the EC2 instance
-//   must match.
-//
-//   * ErrCodeTimestampOutOfBoundsException "TimestampOutOfBoundsException"
-//   The timestamp value passed in the meterUsage() is out of allowed range.
-//
-//   * ErrCodeDuplicateRequestException "DuplicateRequestException"
-//   A metering record has already been emitted by the same EC2 instance for the
-//   given {usageDimension, timestamp} with a different usageQuantity.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the MeterUsage API are throttled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage
-func (c *MarketplaceMetering) MeterUsage(input *MeterUsageInput) (*MeterUsageOutput, error) {
-	req, out := c.MeterUsageRequest(input)
-	return out, req.Send()
-}
-
-// MeterUsageWithContext is the same as MeterUsage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See MeterUsage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceMetering) MeterUsageWithContext(ctx aws.Context, input *MeterUsageInput, opts ...aws.Option) (*MeterUsageOutput, error) {
-	req, out := c.MeterUsageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &MeterUsageOutput{})
+	return MeterUsageRequest{Request: req, Input: input}
 }
 
 const opResolveCustomer = "ResolveCustomer"
 
-// ResolveCustomerRequest generates a "aws.Request" representing the
-// client's request for the ResolveCustomer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ResolveCustomerRequest is a API request type for the ResolveCustomer API operation.
+type ResolveCustomerRequest struct {
+	*aws.Request
+	Input *ResolveCustomerInput
+}
+
+// Send marshals and sends the ResolveCustomer API request.
+func (r *ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResolveCustomerOutput), nil
+}
+
+// ResolveCustomerRequest returns a request value for making API operation for
+// AWSMarketplace Metering.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResolveCustomer for more information on using the ResolveCustomer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// ResolveCustomer is called by a SaaS application during the registration process.
+// When a buyer visits your website during the registration process, the buyer
+// submits a registration token through their browser. The registration token
+// is resolved through this API to obtain a CustomerIdentifier and product code.
 //
 //    // Example sending a request using the ResolveCustomerRequest method.
-//    req, resp := client.ResolveCustomerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ResolveCustomerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
-func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput) (req *aws.Request, output *ResolveCustomerOutput) {
+func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput) ResolveCustomerRequest {
 	op := &aws.Operation{
 		Name:       opResolveCustomer,
 		HTTPMethod: "POST",
@@ -260,62 +160,8 @@ func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput
 		input = &ResolveCustomerInput{}
 	}
 
-	output = &ResolveCustomerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ResolveCustomer API operation for AWSMarketplace Metering.
-//
-// ResolveCustomer is called by a SaaS application during the registration process.
-// When a buyer visits your website during the registration process, the buyer
-// submits a registration token through their browser. The registration token
-// is resolved through this API to obtain a CustomerIdentifier and product code.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWSMarketplace Metering's
-// API operation ResolveCustomer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidTokenException "InvalidTokenException"
-//
-//   * ErrCodeExpiredTokenException "ExpiredTokenException"
-//   The submitted registration token has expired. This can happen if the buyer's
-//   browser takes too long to redirect to your page, the buyer has resubmitted
-//   the registration token, or your application has held on to the registration
-//   token for too long. Your SaaS registration website should redeem this token
-//   as soon as it is submitted by the buyer's browser.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The calls to the MeterUsage API are throttled.
-//
-//   * ErrCodeInternalServiceErrorException "InternalServiceErrorException"
-//   An internal error has occurred. Retry your request. If the problem persists,
-//   post a message with details on the AWS forums.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
-func (c *MarketplaceMetering) ResolveCustomer(input *ResolveCustomerInput) (*ResolveCustomerOutput, error) {
-	req, out := c.ResolveCustomerRequest(input)
-	return out, req.Send()
-}
-
-// ResolveCustomerWithContext is the same as ResolveCustomer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResolveCustomer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceMetering) ResolveCustomerWithContext(ctx aws.Context, input *ResolveCustomerInput, opts ...aws.Option) (*ResolveCustomerOutput, error) {
-	req, out := c.ResolveCustomerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ResolveCustomerOutput{})
+	return ResolveCustomerRequest{Request: req, Input: input}
 }
 
 // A BatchMeterUsageRequest contains UsageRecords, which indicate quantities

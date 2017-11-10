@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This operation cancels a cluster job. You can only cancel a cluster job while it's
 // in the AwaitingQuorum status.
-func ExampleSnowball_CancelCluster_shared00() {
+func ExampleSnowball_CancelClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleSnowball_CancelCluster_shared00() {
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.CancelCluster(input)
+	req := svc.CancelClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -68,7 +69,7 @@ func ExampleSnowball_CancelCluster_shared00() {
 //
 // This operation cancels a job. You can only cancel a job before its JobState value
 // changes to PreparingAppliance.
-func ExampleSnowball_CancelJob_shared00() {
+func ExampleSnowball_CancelJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -79,7 +80,8 @@ func ExampleSnowball_CancelJob_shared00() {
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.CancelJob(input)
+	req := svc.CancelJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -108,7 +110,7 @@ func ExampleSnowball_CancelJob_shared00() {
 // This operation creates an address for a job. Addresses are validated at the time
 // of creation. The address you provide must be located within the serviceable area
 // of your region. If the address is invalid or unsupported, then an exception is thrown.
-func ExampleSnowball_CreateAddress_shared00() {
+func ExampleSnowball_CreateAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -128,7 +130,8 @@ func ExampleSnowball_CreateAddress_shared00() {
 		},
 	}
 
-	result, err := svc.CreateAddress(input)
+	req := svc.CreateAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -155,7 +158,7 @@ func ExampleSnowball_CreateAddress_shared00() {
 // Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob
 // action separately to create the jobs for each of these nodes. The cluster does not
 // ship until these five node jobs have been created.
-func ExampleSnowball_CreateCluster_shared00() {
+func ExampleSnowball_CreateClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -182,7 +185,8 @@ func ExampleSnowball_CreateCluster_shared00() {
 		SnowballType:   snowball.TypeEdge,
 	}
 
-	result, err := svc.CreateCluster(input)
+	req := svc.CreateClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -213,7 +217,7 @@ func ExampleSnowball_CreateCluster_shared00() {
 // to create a job for Snowball. If you're creating a job for a node in a cluster, you
 // only need to provide the clusterId value; the other job attributes are inherited
 // from the cluster.
-func ExampleSnowball_CreateJob_shared00() {
+func ExampleSnowball_CreateJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -241,7 +245,8 @@ func ExampleSnowball_CreateJob_shared00() {
 		SnowballType:               snowball.TypeStandard,
 	}
 
-	result, err := svc.CreateJob(input)
+	req := svc.CreateJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -270,7 +275,7 @@ func ExampleSnowball_CreateJob_shared00() {
 // To describe an address for a job
 //
 // This operation describes an address for a job.
-func ExampleSnowball_DescribeAddress_shared00() {
+func ExampleSnowball_DescribeAddressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -281,7 +286,8 @@ func ExampleSnowball_DescribeAddress_shared00() {
 		AddressId: aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 	}
 
-	result, err := svc.DescribeAddress(input)
+	req := svc.DescribeAddressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -306,7 +312,7 @@ func ExampleSnowball_DescribeAddress_shared00() {
 // This operation describes all the addresses that you've created for AWS Snowball.
 // Calling this API in one of the US regions will return addresses from the list of
 // all addresses associated with this account in all US regions.
-func ExampleSnowball_DescribeAddresses_shared00() {
+func ExampleSnowball_DescribeAddressesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -315,7 +321,8 @@ func ExampleSnowball_DescribeAddresses_shared00() {
 	svc := snowball.New(cfg)
 	input := &snowball.DescribeAddressesInput{}
 
-	result, err := svc.DescribeAddresses(input)
+	req := svc.DescribeAddressesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -341,7 +348,7 @@ func ExampleSnowball_DescribeAddresses_shared00() {
 //
 // Returns information about a specific cluster including shipping information, cluster
 // status, and other important metadata.
-func ExampleSnowball_DescribeCluster_shared00() {
+func ExampleSnowball_DescribeClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -352,7 +359,8 @@ func ExampleSnowball_DescribeCluster_shared00() {
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.DescribeCluster(input)
+	req := svc.DescribeClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -375,7 +383,7 @@ func ExampleSnowball_DescribeCluster_shared00() {
 // To describe a job you've created for AWS Snowball
 //
 // This operation describes a job you've created for AWS Snowball.
-func ExampleSnowball_DescribeJob_shared00() {
+func ExampleSnowball_DescribeJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -386,7 +394,8 @@ func ExampleSnowball_DescribeJob_shared00() {
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.DescribeJob(input)
+	req := svc.DescribeJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -425,7 +434,7 @@ func ExampleSnowball_DescribeJob_shared00() {
 //
 // The credentials of a given job, including its manifest file and unlock code, expire
 // 90 days after the job is created.
-func ExampleSnowball_GetJobManifest_shared00() {
+func ExampleSnowball_GetJobManifestRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -436,7 +445,8 @@ func ExampleSnowball_GetJobManifest_shared00() {
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.GetJobManifest(input)
+	req := svc.GetJobManifestRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -472,7 +482,7 @@ func ExampleSnowball_GetJobManifest_shared00() {
 // the same location as the manifest file for that job. Saving these separately helps
 // prevent unauthorized parties from gaining access to the Snowball associated with
 // that job.
-func ExampleSnowball_GetJobUnlockCode_shared00() {
+func ExampleSnowball_GetJobUnlockCodeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -483,7 +493,8 @@ func ExampleSnowball_GetJobUnlockCode_shared00() {
 		JobId: aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.GetJobUnlockCode(input)
+	req := svc.GetJobUnlockCodeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -512,7 +523,7 @@ func ExampleSnowball_GetJobUnlockCode_shared00() {
 //
 // The default service limit for the number of Snowballs that you can have at one time
 // is 1. If you want to increase your service limit, contact AWS Support.
-func ExampleSnowball_GetSnowballUsage_shared00() {
+func ExampleSnowball_GetSnowballUsageRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -521,7 +532,8 @@ func ExampleSnowball_GetSnowballUsage_shared00() {
 	svc := snowball.New(cfg)
 	input := &snowball.GetSnowballUsageInput{}
 
-	result, err := svc.GetSnowballUsage(input)
+	req := svc.GetSnowballUsageRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -544,7 +556,7 @@ func ExampleSnowball_GetSnowballUsage_shared00() {
 // Returns an array of JobListEntry objects of the specified length. Each JobListEntry
 // object is for a job in the specified cluster and contains a job's state, a job's
 // ID, and other information.
-func ExampleSnowball_ListClusterJobs_shared00() {
+func ExampleSnowball_ListClusterJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -555,7 +567,8 @@ func ExampleSnowball_ListClusterJobs_shared00() {
 		ClusterId: aws.String("CID123e4567-e89b-12d3-a456-426655440000"),
 	}
 
-	result, err := svc.ListClusterJobs(input)
+	req := svc.ListClusterJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -581,7 +594,7 @@ func ExampleSnowball_ListClusterJobs_shared00() {
 //
 // Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry
 // object contains a cluster's state, a cluster's ID, and other important status information.
-func ExampleSnowball_ListClusters_shared00() {
+func ExampleSnowball_ListClustersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -590,7 +603,8 @@ func ExampleSnowball_ListClusters_shared00() {
 	svc := snowball.New(cfg)
 	input := &snowball.ListClustersInput{}
 
-	result, err := svc.ListClusters(input)
+	req := svc.ListClustersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -617,7 +631,7 @@ func ExampleSnowball_ListClusters_shared00() {
 // job is a job part, in the case of export jobs. Calling this API action in one of
 // the US regions will return jobs from the list of all jobs associated with this account
 // in all US regions.
-func ExampleSnowball_ListJobs_shared00() {
+func ExampleSnowball_ListJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -626,7 +640,8 @@ func ExampleSnowball_ListJobs_shared00() {
 	svc := snowball.New(cfg)
 	input := &snowball.ListJobsInput{}
 
-	result, err := svc.ListJobs(input)
+	req := svc.ListJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -651,7 +666,7 @@ func ExampleSnowball_ListJobs_shared00() {
 // This action allows you to update certain parameters for a cluster. Once the cluster
 // changes to a different state, usually within 60 minutes of it being created, this
 // action is no longer available.
-func ExampleSnowball_UpdateCluster_shared00() {
+func ExampleSnowball_UpdateClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -664,7 +679,8 @@ func ExampleSnowball_UpdateCluster_shared00() {
 		Description: aws.String("Updated the address to send this to image processing - RJ"),
 	}
 
-	result, err := svc.UpdateCluster(input)
+	req := svc.UpdateClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -695,7 +711,7 @@ func ExampleSnowball_UpdateCluster_shared00() {
 // This action allows you to update certain parameters for a job. Once the job changes
 // to a different job state, usually within 60 minutes of the job being created, this
 // action is no longer available.
-func ExampleSnowball_UpdateJob_shared00() {
+func ExampleSnowball_UpdateJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -710,7 +726,8 @@ func ExampleSnowball_UpdateJob_shared00() {
 		SnowballCapacityPreference: snowball.CapacityT100,
 	}
 
-	result, err := svc.UpdateJob(input)
+	req := svc.UpdateJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

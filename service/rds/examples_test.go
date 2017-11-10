@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To add a source identifier to an event notification subscription
 //
 // This example add a source identifier to an event notification subscription.
-func ExampleRDS_AddSourceIdentifierToSubscription_shared00() {
+func ExampleRDS_AddSourceIdentifierToSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -40,7 +40,8 @@ func ExampleRDS_AddSourceIdentifierToSubscription_shared00() {
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
 
-	result, err := svc.AddSourceIdentifierToSubscription(input)
+	req := svc.AddSourceIdentifierToSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -65,7 +66,7 @@ func ExampleRDS_AddSourceIdentifierToSubscription_shared00() {
 // To add tags to a resource
 //
 // This example adds a tag to an option group.
-func ExampleRDS_AddTagsToResource_shared00() {
+func ExampleRDS_AddTagsToResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -82,7 +83,8 @@ func ExampleRDS_AddTagsToResource_shared00() {
 		},
 	}
 
-	result, err := svc.AddTagsToResource(input)
+	req := svc.AddTagsToResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -109,7 +111,7 @@ func ExampleRDS_AddTagsToResource_shared00() {
 // To apply a pending maintenance action
 //
 // This example immediately applies a pending system update to a DB instance.
-func ExampleRDS_ApplyPendingMaintenanceAction_shared00() {
+func ExampleRDS_ApplyPendingMaintenanceActionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -122,7 +124,8 @@ func ExampleRDS_ApplyPendingMaintenanceAction_shared00() {
 		ResourceIdentifier: aws.String("arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance"),
 	}
 
-	result, err := svc.ApplyPendingMaintenanceAction(input)
+	req := svc.ApplyPendingMaintenanceActionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -146,7 +149,7 @@ func ExampleRDS_ApplyPendingMaintenanceAction_shared00() {
 //
 // This example authorizes access to the specified security group by the specified CIDR
 // block.
-func ExampleRDS_AuthorizeDBSecurityGroupIngress_shared00() {
+func ExampleRDS_AuthorizeDBSecurityGroupIngressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -158,7 +161,8 @@ func ExampleRDS_AuthorizeDBSecurityGroupIngress_shared00() {
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}
 
-	result, err := svc.AuthorizeDBSecurityGroupIngress(input)
+	req := svc.AuthorizeDBSecurityGroupIngressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -187,7 +191,7 @@ func ExampleRDS_AuthorizeDBSecurityGroupIngress_shared00() {
 // To copy a DB cluster parameter group
 //
 // This example copies a DB cluster parameter group.
-func ExampleRDS_CopyDBClusterParameterGroup_shared00() {
+func ExampleRDS_CopyDBClusterParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -200,7 +204,8 @@ func ExampleRDS_CopyDBClusterParameterGroup_shared00() {
 		TargetDBClusterParameterGroupIdentifier:  aws.String("mydbclusterparametergroup-copy"),
 	}
 
-	result, err := svc.CopyDBClusterParameterGroup(input)
+	req := svc.CopyDBClusterParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -228,7 +233,7 @@ func ExampleRDS_CopyDBClusterParameterGroup_shared00() {
 //
 // The following example copies an automated snapshot of a DB cluster to a new DB cluster
 // snapshot.
-func ExampleRDS_CopyDBClusterSnapshot_shared00() {
+func ExampleRDS_CopyDBClusterSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -240,7 +245,8 @@ func ExampleRDS_CopyDBClusterSnapshot_shared00() {
 		TargetDBClusterSnapshotIdentifier: aws.String("cluster-snapshot-copy-1"),
 	}
 
-	result, err := svc.CopyDBClusterSnapshot(input)
+	req := svc.CopyDBClusterSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -273,7 +279,7 @@ func ExampleRDS_CopyDBClusterSnapshot_shared00() {
 // To copy a DB parameter group
 //
 // This example copies a DB parameter group.
-func ExampleRDS_CopyDBParameterGroup_shared00() {
+func ExampleRDS_CopyDBParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -286,7 +292,8 @@ func ExampleRDS_CopyDBParameterGroup_shared00() {
 		TargetDBParameterGroupIdentifier:  aws.String("mymysqlparametergroup-copy"),
 	}
 
-	result, err := svc.CopyDBParameterGroup(input)
+	req := svc.CopyDBParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -313,7 +320,7 @@ func ExampleRDS_CopyDBParameterGroup_shared00() {
 // To copy a DB snapshot
 //
 // This example copies a DB snapshot.
-func ExampleRDS_CopyDBSnapshot_shared00() {
+func ExampleRDS_CopyDBSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -325,7 +332,8 @@ func ExampleRDS_CopyDBSnapshot_shared00() {
 		TargetDBSnapshotIdentifier: aws.String("mydbsnapshot-copy"),
 	}
 
-	result, err := svc.CopyDBSnapshot(input)
+	req := svc.CopyDBSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -356,7 +364,7 @@ func ExampleRDS_CopyDBSnapshot_shared00() {
 // To copy an option group
 //
 // This example copies an option group.
-func ExampleRDS_CopyOptionGroup_shared00() {
+func ExampleRDS_CopyOptionGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -369,7 +377,8 @@ func ExampleRDS_CopyOptionGroup_shared00() {
 		TargetOptionGroupIdentifier:  aws.String("mymysqloptiongroup-copy"),
 	}
 
-	result, err := svc.CopyOptionGroup(input)
+	req := svc.CopyOptionGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -396,7 +405,7 @@ func ExampleRDS_CopyOptionGroup_shared00() {
 // To create a DB cluster
 //
 // This example creates a DB cluster.
-func ExampleRDS_CreateDBCluster_shared00() {
+func ExampleRDS_CreateDBClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -419,7 +428,8 @@ func ExampleRDS_CreateDBCluster_shared00() {
 		StorageEncrypted:            aws.Bool(true),
 	}
 
-	result, err := svc.CreateDBCluster(input)
+	req := svc.CreateDBClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -470,7 +480,7 @@ func ExampleRDS_CreateDBCluster_shared00() {
 // To create a DB cluster parameter group
 //
 // This example creates a DB cluster parameter group.
-func ExampleRDS_CreateDBClusterParameterGroup_shared00() {
+func ExampleRDS_CreateDBClusterParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -483,7 +493,8 @@ func ExampleRDS_CreateDBClusterParameterGroup_shared00() {
 		Description:                 aws.String("My DB cluster parameter group"),
 	}
 
-	result, err := svc.CreateDBClusterParameterGroup(input)
+	req := svc.CreateDBClusterParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -508,7 +519,7 @@ func ExampleRDS_CreateDBClusterParameterGroup_shared00() {
 // To create a DB cluster snapshot
 //
 // This example creates a DB cluster snapshot.
-func ExampleRDS_CreateDBClusterSnapshot_shared00() {
+func ExampleRDS_CreateDBClusterSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -520,7 +531,8 @@ func ExampleRDS_CreateDBClusterSnapshot_shared00() {
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
 
-	result, err := svc.CreateDBClusterSnapshot(input)
+	req := svc.CreateDBClusterSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -551,7 +563,7 @@ func ExampleRDS_CreateDBClusterSnapshot_shared00() {
 // To create a DB instance.
 //
 // This example creates a DB instance.
-func ExampleRDS_CreateDBInstance_shared00() {
+func ExampleRDS_CreateDBInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -567,7 +579,8 @@ func ExampleRDS_CreateDBInstance_shared00() {
 		MasterUsername:       aws.String("MyUser"),
 	}
 
-	result, err := svc.CreateDBInstance(input)
+	req := svc.CreateDBInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -624,7 +637,7 @@ func ExampleRDS_CreateDBInstance_shared00() {
 // To create a DB instance read replica.
 //
 // This example creates a DB instance read replica.
-func ExampleRDS_CreateDBInstanceReadReplica_shared00() {
+func ExampleRDS_CreateDBInstanceReadReplicaRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -647,7 +660,8 @@ func ExampleRDS_CreateDBInstanceReadReplica_shared00() {
 		},
 	}
 
-	result, err := svc.CreateDBInstanceReadReplica(input)
+	req := svc.CreateDBInstanceReadReplicaRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -704,7 +718,7 @@ func ExampleRDS_CreateDBInstanceReadReplica_shared00() {
 // To create a DB parameter group.
 //
 // This example creates a DB parameter group.
-func ExampleRDS_CreateDBParameterGroup_shared00() {
+func ExampleRDS_CreateDBParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -717,7 +731,8 @@ func ExampleRDS_CreateDBParameterGroup_shared00() {
 		Description:            aws.String("My MySQL parameter group"),
 	}
 
-	result, err := svc.CreateDBParameterGroup(input)
+	req := svc.CreateDBParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -742,7 +757,7 @@ func ExampleRDS_CreateDBParameterGroup_shared00() {
 // To create a DB security group.
 //
 // This example creates a DB security group.
-func ExampleRDS_CreateDBSecurityGroup_shared00() {
+func ExampleRDS_CreateDBSecurityGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -754,7 +769,8 @@ func ExampleRDS_CreateDBSecurityGroup_shared00() {
 		DBSecurityGroupName:        aws.String("mydbsecuritygroup"),
 	}
 
-	result, err := svc.CreateDBSecurityGroup(input)
+	req := svc.CreateDBSecurityGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -781,7 +797,7 @@ func ExampleRDS_CreateDBSecurityGroup_shared00() {
 // To create a DB snapshot.
 //
 // This example creates a DB snapshot.
-func ExampleRDS_CreateDBSnapshot_shared00() {
+func ExampleRDS_CreateDBSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -793,7 +809,8 @@ func ExampleRDS_CreateDBSnapshot_shared00() {
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
 
-	result, err := svc.CreateDBSnapshot(input)
+	req := svc.CreateDBSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -822,7 +839,7 @@ func ExampleRDS_CreateDBSnapshot_shared00() {
 // To create a DB subnet group.
 //
 // This example creates a DB subnet group.
-func ExampleRDS_CreateDBSubnetGroup_shared00() {
+func ExampleRDS_CreateDBSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -838,7 +855,8 @@ func ExampleRDS_CreateDBSubnetGroup_shared00() {
 		},
 	}
 
-	result, err := svc.CreateDBSubnetGroup(input)
+	req := svc.CreateDBSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -869,7 +887,7 @@ func ExampleRDS_CreateDBSubnetGroup_shared00() {
 // To create an event notification subscription
 //
 // This example creates an event notification subscription.
-func ExampleRDS_CreateEventSubscription_shared00() {
+func ExampleRDS_CreateEventSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -889,7 +907,8 @@ func ExampleRDS_CreateEventSubscription_shared00() {
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
 
-	result, err := svc.CreateEventSubscription(input)
+	req := svc.CreateEventSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -924,7 +943,7 @@ func ExampleRDS_CreateEventSubscription_shared00() {
 // To create an option group
 //
 // This example creates an option group.
-func ExampleRDS_CreateOptionGroup_shared00() {
+func ExampleRDS_CreateOptionGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -938,7 +957,8 @@ func ExampleRDS_CreateOptionGroup_shared00() {
 		OptionGroupName:        aws.String("mymysqloptiongroup"),
 	}
 
-	result, err := svc.CreateOptionGroup(input)
+	req := svc.CreateOptionGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -963,7 +983,7 @@ func ExampleRDS_CreateOptionGroup_shared00() {
 // To delete a DB cluster.
 //
 // This example deletes the specified DB cluster.
-func ExampleRDS_DeleteDBCluster_shared00() {
+func ExampleRDS_DeleteDBClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -975,7 +995,8 @@ func ExampleRDS_DeleteDBCluster_shared00() {
 		SkipFinalSnapshot:   aws.Bool(true),
 	}
 
-	result, err := svc.DeleteDBCluster(input)
+	req := svc.DeleteDBClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1006,7 +1027,7 @@ func ExampleRDS_DeleteDBCluster_shared00() {
 // To delete a DB cluster parameter group.
 //
 // This example deletes the specified DB cluster parameter group.
-func ExampleRDS_DeleteDBClusterParameterGroup_shared00() {
+func ExampleRDS_DeleteDBClusterParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1017,7 +1038,8 @@ func ExampleRDS_DeleteDBClusterParameterGroup_shared00() {
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 	}
 
-	result, err := svc.DeleteDBClusterParameterGroup(input)
+	req := svc.DeleteDBClusterParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1042,7 +1064,7 @@ func ExampleRDS_DeleteDBClusterParameterGroup_shared00() {
 // To delete a DB cluster snapshot.
 //
 // This example deletes the specified DB cluster snapshot.
-func ExampleRDS_DeleteDBClusterSnapshot_shared00() {
+func ExampleRDS_DeleteDBClusterSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1053,7 +1075,8 @@ func ExampleRDS_DeleteDBClusterSnapshot_shared00() {
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
 
-	result, err := svc.DeleteDBClusterSnapshot(input)
+	req := svc.DeleteDBClusterSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1078,7 +1101,7 @@ func ExampleRDS_DeleteDBClusterSnapshot_shared00() {
 // To delete a DB instance.
 //
 // This example deletes the specified DB instance.
-func ExampleRDS_DeleteDBInstance_shared00() {
+func ExampleRDS_DeleteDBInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1090,7 +1113,8 @@ func ExampleRDS_DeleteDBInstance_shared00() {
 		SkipFinalSnapshot:    aws.Bool(true),
 	}
 
-	result, err := svc.DeleteDBInstance(input)
+	req := svc.DeleteDBInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1121,7 +1145,7 @@ func ExampleRDS_DeleteDBInstance_shared00() {
 // To delete a DB parameter group
 //
 // The following example deletes a DB parameter group.
-func ExampleRDS_DeleteDBParameterGroup_shared00() {
+func ExampleRDS_DeleteDBParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1132,7 +1156,8 @@ func ExampleRDS_DeleteDBParameterGroup_shared00() {
 		DBParameterGroupName: aws.String("mydbparamgroup3"),
 	}
 
-	result, err := svc.DeleteDBParameterGroup(input)
+	req := svc.DeleteDBParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1157,7 +1182,7 @@ func ExampleRDS_DeleteDBParameterGroup_shared00() {
 // To delete a DB security group
 //
 // The following example deletes a DB security group.
-func ExampleRDS_DeleteDBSecurityGroup_shared00() {
+func ExampleRDS_DeleteDBSecurityGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1168,7 +1193,8 @@ func ExampleRDS_DeleteDBSecurityGroup_shared00() {
 		DBSecurityGroupName: aws.String("mysecgroup"),
 	}
 
-	result, err := svc.DeleteDBSecurityGroup(input)
+	req := svc.DeleteDBSecurityGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1193,7 +1219,7 @@ func ExampleRDS_DeleteDBSecurityGroup_shared00() {
 // To delete a DB cluster snapshot.
 //
 // This example deletes the specified DB snapshot.
-func ExampleRDS_DeleteDBSnapshot_shared00() {
+func ExampleRDS_DeleteDBSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1204,7 +1230,8 @@ func ExampleRDS_DeleteDBSnapshot_shared00() {
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
 
-	result, err := svc.DeleteDBSnapshot(input)
+	req := svc.DeleteDBSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1229,7 +1256,7 @@ func ExampleRDS_DeleteDBSnapshot_shared00() {
 // To delete a DB subnet group.
 //
 // This example deletes the specified DB subnetgroup.
-func ExampleRDS_DeleteDBSubnetGroup_shared00() {
+func ExampleRDS_DeleteDBSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1240,7 +1267,8 @@ func ExampleRDS_DeleteDBSubnetGroup_shared00() {
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
 	}
 
-	result, err := svc.DeleteDBSubnetGroup(input)
+	req := svc.DeleteDBSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1267,7 +1295,7 @@ func ExampleRDS_DeleteDBSubnetGroup_shared00() {
 // To delete a DB event subscription.
 //
 // This example deletes the specified DB event subscription.
-func ExampleRDS_DeleteEventSubscription_shared00() {
+func ExampleRDS_DeleteEventSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1278,7 +1306,8 @@ func ExampleRDS_DeleteEventSubscription_shared00() {
 		SubscriptionName: aws.String("myeventsubscription"),
 	}
 
-	result, err := svc.DeleteEventSubscription(input)
+	req := svc.DeleteEventSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1303,7 +1332,7 @@ func ExampleRDS_DeleteEventSubscription_shared00() {
 // To delete an option group.
 //
 // This example deletes the specified option group.
-func ExampleRDS_DeleteOptionGroup_shared00() {
+func ExampleRDS_DeleteOptionGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1314,7 +1343,8 @@ func ExampleRDS_DeleteOptionGroup_shared00() {
 		OptionGroupName: aws.String("mydboptiongroup"),
 	}
 
-	result, err := svc.DeleteOptionGroup(input)
+	req := svc.DeleteOptionGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1339,7 +1369,7 @@ func ExampleRDS_DeleteOptionGroup_shared00() {
 // To list account attributes
 //
 // This example lists account attributes.
-func ExampleRDS_DescribeAccountAttributes_shared00() {
+func ExampleRDS_DescribeAccountAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1348,7 +1378,8 @@ func ExampleRDS_DescribeAccountAttributes_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.DescribeAccountAttributesInput{}
 
-	result, err := svc.DescribeAccountAttributes(input)
+	req := svc.DescribeAccountAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1369,7 +1400,7 @@ func ExampleRDS_DescribeAccountAttributes_shared00() {
 // To list certificates
 //
 // This example lists up to 20 certificates for the specified certificate identifier.
-func ExampleRDS_DescribeCertificates_shared00() {
+func ExampleRDS_DescribeCertificatesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1381,7 +1412,8 @@ func ExampleRDS_DescribeCertificates_shared00() {
 		MaxRecords:            aws.Int64(20),
 	}
 
-	result, err := svc.DescribeCertificates(input)
+	req := svc.DescribeCertificatesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1404,7 +1436,7 @@ func ExampleRDS_DescribeCertificates_shared00() {
 // To list DB cluster parameter group settings
 //
 // This example lists settings for the specified DB cluster parameter group.
-func ExampleRDS_DescribeDBClusterParameterGroups_shared00() {
+func ExampleRDS_DescribeDBClusterParameterGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1415,7 +1447,8 @@ func ExampleRDS_DescribeDBClusterParameterGroups_shared00() {
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 	}
 
-	result, err := svc.DescribeDBClusterParameterGroups(input)
+	req := svc.DescribeDBClusterParameterGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1438,7 +1471,7 @@ func ExampleRDS_DescribeDBClusterParameterGroups_shared00() {
 // To list DB cluster parameters
 //
 // This example lists system parameters for the specified DB cluster parameter group.
-func ExampleRDS_DescribeDBClusterParameters_shared00() {
+func ExampleRDS_DescribeDBClusterParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1450,7 +1483,8 @@ func ExampleRDS_DescribeDBClusterParameters_shared00() {
 		Source: aws.String("system"),
 	}
 
-	result, err := svc.DescribeDBClusterParameters(input)
+	req := svc.DescribeDBClusterParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1473,7 +1507,7 @@ func ExampleRDS_DescribeDBClusterParameters_shared00() {
 // To list DB cluster snapshot attributes
 //
 // This example lists attributes for the specified DB cluster snapshot.
-func ExampleRDS_DescribeDBClusterSnapshotAttributes_shared00() {
+func ExampleRDS_DescribeDBClusterSnapshotAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1484,7 +1518,8 @@ func ExampleRDS_DescribeDBClusterSnapshotAttributes_shared00() {
 		DBClusterSnapshotIdentifier: aws.String("mydbclustersnapshot"),
 	}
 
-	result, err := svc.DescribeDBClusterSnapshotAttributes(input)
+	req := svc.DescribeDBClusterSnapshotAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1507,7 +1542,7 @@ func ExampleRDS_DescribeDBClusterSnapshotAttributes_shared00() {
 // To list DB cluster snapshots
 //
 // This example lists settings for the specified, manually-created cluster snapshot.
-func ExampleRDS_DescribeDBClusterSnapshots_shared00() {
+func ExampleRDS_DescribeDBClusterSnapshotsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1519,7 +1554,8 @@ func ExampleRDS_DescribeDBClusterSnapshots_shared00() {
 		SnapshotType:                aws.String("manual"),
 	}
 
-	result, err := svc.DescribeDBClusterSnapshots(input)
+	req := svc.DescribeDBClusterSnapshotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1542,7 +1578,7 @@ func ExampleRDS_DescribeDBClusterSnapshots_shared00() {
 // To list DB clusters
 //
 // This example lists settings for the specified DB cluster.
-func ExampleRDS_DescribeDBClusters_shared00() {
+func ExampleRDS_DescribeDBClustersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1553,7 +1589,8 @@ func ExampleRDS_DescribeDBClusters_shared00() {
 		DBClusterIdentifier: aws.String("mynewdbcluster"),
 	}
 
-	result, err := svc.DescribeDBClusters(input)
+	req := svc.DescribeDBClustersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1576,7 +1613,7 @@ func ExampleRDS_DescribeDBClusters_shared00() {
 // To list DB engine version settings
 //
 // This example lists settings for the specified DB engine version.
-func ExampleRDS_DescribeDBEngineVersions_shared00() {
+func ExampleRDS_DescribeDBEngineVersionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1591,7 +1628,8 @@ func ExampleRDS_DescribeDBEngineVersions_shared00() {
 		ListSupportedCharacterSets: aws.Bool(true),
 	}
 
-	result, err := svc.DescribeDBEngineVersions(input)
+	req := svc.DescribeDBEngineVersionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1612,7 +1650,7 @@ func ExampleRDS_DescribeDBEngineVersions_shared00() {
 // To list DB instance settings
 //
 // This example lists settings for the specified DB instance.
-func ExampleRDS_DescribeDBInstances_shared00() {
+func ExampleRDS_DescribeDBInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1623,7 +1661,8 @@ func ExampleRDS_DescribeDBInstances_shared00() {
 		DBInstanceIdentifier: aws.String("mymysqlinstance"),
 	}
 
-	result, err := svc.DescribeDBInstances(input)
+	req := svc.DescribeDBInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1647,7 +1686,7 @@ func ExampleRDS_DescribeDBInstances_shared00() {
 //
 // This example lists matching log file names for the specified DB instance, file name
 // pattern, last write date in POSIX time with milleseconds, and minimum file size.
-func ExampleRDS_DescribeDBLogFiles_shared00() {
+func ExampleRDS_DescribeDBLogFilesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1661,7 +1700,8 @@ func ExampleRDS_DescribeDBLogFiles_shared00() {
 		FilenameContains:     aws.String("error"),
 	}
 
-	result, err := svc.DescribeDBLogFiles(input)
+	req := svc.DescribeDBLogFilesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1684,7 +1724,7 @@ func ExampleRDS_DescribeDBLogFiles_shared00() {
 // To list information about DB parameter groups
 //
 // This example lists information about the specified DB parameter group.
-func ExampleRDS_DescribeDBParameterGroups_shared00() {
+func ExampleRDS_DescribeDBParameterGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1695,7 +1735,8 @@ func ExampleRDS_DescribeDBParameterGroups_shared00() {
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
 	}
 
-	result, err := svc.DescribeDBParameterGroups(input)
+	req := svc.DescribeDBParameterGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1719,7 +1760,7 @@ func ExampleRDS_DescribeDBParameterGroups_shared00() {
 //
 // This example lists information for up to the first 20 system parameters for the specified
 // DB parameter group.
-func ExampleRDS_DescribeDBParameters_shared00() {
+func ExampleRDS_DescribeDBParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1732,7 +1773,8 @@ func ExampleRDS_DescribeDBParameters_shared00() {
 		Source:               aws.String("system"),
 	}
 
-	result, err := svc.DescribeDBParameters(input)
+	req := svc.DescribeDBParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1755,7 +1797,7 @@ func ExampleRDS_DescribeDBParameters_shared00() {
 // To list DB security group settings
 //
 // This example lists settings for the specified security group.
-func ExampleRDS_DescribeDBSecurityGroups_shared00() {
+func ExampleRDS_DescribeDBSecurityGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1766,7 +1808,8 @@ func ExampleRDS_DescribeDBSecurityGroups_shared00() {
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}
 
-	result, err := svc.DescribeDBSecurityGroups(input)
+	req := svc.DescribeDBSecurityGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1789,7 +1832,7 @@ func ExampleRDS_DescribeDBSecurityGroups_shared00() {
 // To list DB snapshot attributes
 //
 // This example lists attributes for the specified DB snapshot.
-func ExampleRDS_DescribeDBSnapshotAttributes_shared00() {
+func ExampleRDS_DescribeDBSnapshotAttributesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1800,7 +1843,8 @@ func ExampleRDS_DescribeDBSnapshotAttributes_shared00() {
 		DBSnapshotIdentifier: aws.String("mydbsnapshot"),
 	}
 
-	result, err := svc.DescribeDBSnapshotAttributes(input)
+	req := svc.DescribeDBSnapshotAttributesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1823,7 +1867,7 @@ func ExampleRDS_DescribeDBSnapshotAttributes_shared00() {
 // To list DB snapshot attributes
 //
 // This example lists all manually-created, shared snapshots for the specified DB instance.
-func ExampleRDS_DescribeDBSnapshots_shared00() {
+func ExampleRDS_DescribeDBSnapshotsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1837,7 +1881,8 @@ func ExampleRDS_DescribeDBSnapshots_shared00() {
 		SnapshotType:         aws.String("manual"),
 	}
 
-	result, err := svc.DescribeDBSnapshots(input)
+	req := svc.DescribeDBSnapshotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1860,7 +1905,7 @@ func ExampleRDS_DescribeDBSnapshots_shared00() {
 // To list information about DB subnet groups
 //
 // This example lists information about the specified DB subnet group.
-func ExampleRDS_DescribeDBSubnetGroups_shared00() {
+func ExampleRDS_DescribeDBSubnetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1871,7 +1916,8 @@ func ExampleRDS_DescribeDBSubnetGroups_shared00() {
 		DBSubnetGroupName: aws.String("mydbsubnetgroup"),
 	}
 
-	result, err := svc.DescribeDBSubnetGroups(input)
+	req := svc.DescribeDBSubnetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1894,7 +1940,7 @@ func ExampleRDS_DescribeDBSubnetGroups_shared00() {
 // To list default parameters for a DB cluster engine
 //
 // This example lists default parameters for the specified DB cluster engine.
-func ExampleRDS_DescribeEngineDefaultClusterParameters_shared00() {
+func ExampleRDS_DescribeEngineDefaultClusterParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1905,7 +1951,8 @@ func ExampleRDS_DescribeEngineDefaultClusterParameters_shared00() {
 		DBParameterGroupFamily: aws.String("aurora5.6"),
 	}
 
-	result, err := svc.DescribeEngineDefaultClusterParameters(input)
+	req := svc.DescribeEngineDefaultClusterParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1926,7 +1973,7 @@ func ExampleRDS_DescribeEngineDefaultClusterParameters_shared00() {
 // To list default parameters for a DB engine
 //
 // This example lists default parameters for the specified DB engine.
-func ExampleRDS_DescribeEngineDefaultParameters_shared00() {
+func ExampleRDS_DescribeEngineDefaultParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1937,7 +1984,8 @@ func ExampleRDS_DescribeEngineDefaultParameters_shared00() {
 		DBParameterGroupFamily: aws.String("mysql5.6"),
 	}
 
-	result, err := svc.DescribeEngineDefaultParameters(input)
+	req := svc.DescribeEngineDefaultParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1958,7 +2006,7 @@ func ExampleRDS_DescribeEngineDefaultParameters_shared00() {
 // To list event categories.
 //
 // This example lists all DB instance event categories.
-func ExampleRDS_DescribeEventCategories_shared00() {
+func ExampleRDS_DescribeEventCategoriesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1969,7 +2017,8 @@ func ExampleRDS_DescribeEventCategories_shared00() {
 		SourceType: aws.String("db-instance"),
 	}
 
-	result, err := svc.DescribeEventCategories(input)
+	req := svc.DescribeEventCategoriesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1990,7 +2039,7 @@ func ExampleRDS_DescribeEventCategories_shared00() {
 // To list information about DB event notification subscriptions
 //
 // This example lists information for the specified DB event notification subscription.
-func ExampleRDS_DescribeEventSubscriptions_shared00() {
+func ExampleRDS_DescribeEventSubscriptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2001,7 +2050,8 @@ func ExampleRDS_DescribeEventSubscriptions_shared00() {
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
 
-	result, err := svc.DescribeEventSubscriptions(input)
+	req := svc.DescribeEventSubscriptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2025,7 +2075,7 @@ func ExampleRDS_DescribeEventSubscriptions_shared00() {
 //
 // This example lists information for all backup-related events for the specified DB
 // instance for the past 7 days (7 days * 24 hours * 60 minutes = 10,080 minutes).
-func ExampleRDS_DescribeEvents_shared00() {
+func ExampleRDS_DescribeEventsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2041,7 +2091,8 @@ func ExampleRDS_DescribeEvents_shared00() {
 		SourceType:       rds.SourceTypeDbInstance,
 	}
 
-	result, err := svc.DescribeEvents(input)
+	req := svc.DescribeEventsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2063,7 +2114,7 @@ func ExampleRDS_DescribeEvents_shared00() {
 //
 // This example lists information for all option group options for the specified DB
 // engine.
-func ExampleRDS_DescribeOptionGroupOptions_shared00() {
+func ExampleRDS_DescribeOptionGroupOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2075,7 +2126,8 @@ func ExampleRDS_DescribeOptionGroupOptions_shared00() {
 		MajorEngineVersion: aws.String("5.6"),
 	}
 
-	result, err := svc.DescribeOptionGroupOptions(input)
+	req := svc.DescribeOptionGroupOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2096,7 +2148,7 @@ func ExampleRDS_DescribeOptionGroupOptions_shared00() {
 // To list information about DB option groups
 //
 // This example lists information for all option groups for the specified DB engine.
-func ExampleRDS_DescribeOptionGroups_shared00() {
+func ExampleRDS_DescribeOptionGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2108,7 +2160,8 @@ func ExampleRDS_DescribeOptionGroups_shared00() {
 		MajorEngineVersion: aws.String("5.6"),
 	}
 
-	result, err := svc.DescribeOptionGroups(input)
+	req := svc.DescribeOptionGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2132,7 +2185,7 @@ func ExampleRDS_DescribeOptionGroups_shared00() {
 //
 // This example lists information for all orderable DB instance options for the specified
 // DB engine, engine version, DB instance class, license model, and VPC settings.
-func ExampleRDS_DescribeOrderableDBInstanceOptions_shared00() {
+func ExampleRDS_DescribeOrderableDBInstanceOptionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2147,7 +2200,8 @@ func ExampleRDS_DescribeOrderableDBInstanceOptions_shared00() {
 		Vpc:             aws.Bool(true),
 	}
 
-	result, err := svc.DescribeOrderableDBInstanceOptions(input)
+	req := svc.DescribeOrderableDBInstanceOptionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2169,7 +2223,7 @@ func ExampleRDS_DescribeOrderableDBInstanceOptions_shared00() {
 //
 // This example lists information for all pending maintenance actions for the specified
 // DB instance.
-func ExampleRDS_DescribePendingMaintenanceActions_shared00() {
+func ExampleRDS_DescribePendingMaintenanceActionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2180,7 +2234,8 @@ func ExampleRDS_DescribePendingMaintenanceActions_shared00() {
 		ResourceIdentifier: aws.String("arn:aws:rds:us-east-1:992648334831:db:mymysqlinstance"),
 	}
 
-	result, err := svc.DescribePendingMaintenanceActions(input)
+	req := svc.DescribePendingMaintenanceActionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2204,7 +2259,7 @@ func ExampleRDS_DescribePendingMaintenanceActions_shared00() {
 //
 // This example lists information for all reserved DB instances for the specified DB
 // instance class, duration, product, offering type, and availability zone settings.
-func ExampleRDS_DescribeReservedDBInstances_shared00() {
+func ExampleRDS_DescribeReservedDBInstancesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2219,7 +2274,8 @@ func ExampleRDS_DescribeReservedDBInstances_shared00() {
 		ProductDescription: aws.String("mysql"),
 	}
 
-	result, err := svc.DescribeReservedDBInstances(input)
+	req := svc.DescribeReservedDBInstancesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2243,7 +2299,7 @@ func ExampleRDS_DescribeReservedDBInstances_shared00() {
 //
 // This example lists information for all reserved DB instance offerings for the specified
 // DB instance class, duration, product, offering type, and availability zone settings.
-func ExampleRDS_DescribeReservedDBInstancesOfferings_shared00() {
+func ExampleRDS_DescribeReservedDBInstancesOfferingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2258,7 +2314,8 @@ func ExampleRDS_DescribeReservedDBInstancesOfferings_shared00() {
 		ProductDescription: aws.String("mysql"),
 	}
 
-	result, err := svc.DescribeReservedDBInstancesOfferings(input)
+	req := svc.DescribeReservedDBInstancesOfferingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2281,7 +2338,7 @@ func ExampleRDS_DescribeReservedDBInstancesOfferings_shared00() {
 // To describe source regions
 //
 // To list the AWS regions where a Read Replica can be created.
-func ExampleRDS_DescribeSourceRegions_shared00() {
+func ExampleRDS_DescribeSourceRegionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2290,7 +2347,8 @@ func ExampleRDS_DescribeSourceRegions_shared00() {
 	svc := rds.New(cfg)
 	input := &rds.DescribeSourceRegionsInput{}
 
-	result, err := svc.DescribeSourceRegions(input)
+	req := svc.DescribeSourceRegionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2311,7 +2369,7 @@ func ExampleRDS_DescribeSourceRegions_shared00() {
 // To list information about DB log files
 //
 // This example lists information for the specified log file for the specified DB instance.
-func ExampleRDS_DownloadDBLogFilePortion_shared00() {
+func ExampleRDS_DownloadDBLogFilePortionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2323,7 +2381,8 @@ func ExampleRDS_DownloadDBLogFilePortion_shared00() {
 		LogFileName:          aws.String("mysqlUpgrade"),
 	}
 
-	result, err := svc.DownloadDBLogFilePortion(input)
+	req := svc.DownloadDBLogFilePortionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2349,7 +2408,7 @@ func ExampleRDS_DownloadDBLogFilePortion_shared00() {
 //
 // This example performs a failover for the specified DB cluster to the specified DB
 // instance.
-func ExampleRDS_FailoverDBCluster_shared00() {
+func ExampleRDS_FailoverDBClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2361,7 +2420,8 @@ func ExampleRDS_FailoverDBCluster_shared00() {
 		TargetDBInstanceIdentifier: aws.String("myaurorareplica"),
 	}
 
-	result, err := svc.FailoverDBCluster(input)
+	req := svc.FailoverDBClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2389,7 +2449,7 @@ func ExampleRDS_FailoverDBCluster_shared00() {
 //
 // This example lists information about all tags associated with the specified DB option
 // group.
-func ExampleRDS_ListTagsForResource_shared00() {
+func ExampleRDS_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2400,7 +2460,8 @@ func ExampleRDS_ListTagsForResource_shared00() {
 		ResourceName: aws.String("arn:aws:rds:us-east-1:992648334831:og:mymysqloptiongroup"),
 	}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2427,7 +2488,7 @@ func ExampleRDS_ListTagsForResource_shared00() {
 // To change DB cluster settings
 //
 // This example changes the specified settings for the specified DB cluster.
-func ExampleRDS_ModifyDBCluster_shared00() {
+func ExampleRDS_ModifyDBClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2443,7 +2504,8 @@ func ExampleRDS_ModifyDBCluster_shared00() {
 		PreferredMaintenanceWindow: aws.String("Tue:05:00-Tue:05:30"),
 	}
 
-	result, err := svc.ModifyDBCluster(input)
+	req := svc.ModifyDBClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2487,7 +2549,7 @@ func ExampleRDS_ModifyDBCluster_shared00() {
 //
 // This example immediately changes the specified setting for the specified DB cluster
 // parameter group.
-func ExampleRDS_ModifyDBClusterParameterGroup_shared00() {
+func ExampleRDS_ModifyDBClusterParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2505,7 +2567,8 @@ func ExampleRDS_ModifyDBClusterParameterGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyDBClusterParameterGroup(input)
+	req := svc.ModifyDBClusterParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2531,7 +2594,7 @@ func ExampleRDS_ModifyDBClusterParameterGroup_shared00() {
 //
 // The following example gives two AWS accounts access to a manual DB cluster snapshot
 // and ensures that the DB cluster snapshot is private by removing the value "all".
-func ExampleRDS_ModifyDBClusterSnapshotAttribute_shared00() {
+func ExampleRDS_ModifyDBClusterSnapshotAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2550,7 +2613,8 @@ func ExampleRDS_ModifyDBClusterSnapshotAttribute_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyDBClusterSnapshotAttribute(input)
+	req := svc.ModifyDBClusterSnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2577,7 +2641,7 @@ func ExampleRDS_ModifyDBClusterSnapshotAttribute_shared00() {
 // To change DB instance settings
 //
 // This example immediately changes the specified settings for the specified DB instance.
-func ExampleRDS_ModifyDBInstance_shared00() {
+func ExampleRDS_ModifyDBInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2595,7 +2659,8 @@ func ExampleRDS_ModifyDBInstance_shared00() {
 		PreferredMaintenanceWindow: aws.String("Tue:05:00-Tue:05:30"),
 	}
 
-	result, err := svc.ModifyDBInstance(input)
+	req := svc.ModifyDBInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2649,7 +2714,7 @@ func ExampleRDS_ModifyDBInstance_shared00() {
 //
 // This example immediately changes the specified setting for the specified DB parameter
 // group.
-func ExampleRDS_ModifyDBParameterGroup_shared00() {
+func ExampleRDS_ModifyDBParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2667,7 +2732,8 @@ func ExampleRDS_ModifyDBParameterGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyDBParameterGroup(input)
+	req := svc.ModifyDBParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2692,7 +2758,7 @@ func ExampleRDS_ModifyDBParameterGroup_shared00() {
 // To change DB snapshot attributes
 //
 // This example adds the specified attribute for the specified DB snapshot.
-func ExampleRDS_ModifyDBSnapshotAttribute_shared00() {
+func ExampleRDS_ModifyDBSnapshotAttributeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2707,7 +2773,8 @@ func ExampleRDS_ModifyDBSnapshotAttribute_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyDBSnapshotAttribute(input)
+	req := svc.ModifyDBSnapshotAttributeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2734,7 +2801,7 @@ func ExampleRDS_ModifyDBSnapshotAttribute_shared00() {
 // To change DB subnet group settings
 //
 // This example changes the specified setting for the specified DB subnet group.
-func ExampleRDS_ModifyDBSubnetGroup_shared00() {
+func ExampleRDS_ModifyDBSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2749,7 +2816,8 @@ func ExampleRDS_ModifyDBSubnetGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyDBSubnetGroup(input)
+	req := svc.ModifyDBSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2780,7 +2848,7 @@ func ExampleRDS_ModifyDBSubnetGroup_shared00() {
 // To change event notification subscription settings
 //
 // This example changes the specified setting for the specified event notification subscription.
-func ExampleRDS_ModifyEventSubscription_shared00() {
+func ExampleRDS_ModifyEventSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2797,7 +2865,8 @@ func ExampleRDS_ModifyEventSubscription_shared00() {
 		SubscriptionName: aws.String("mymysqleventsubscription"),
 	}
 
-	result, err := svc.ModifyEventSubscription(input)
+	req := svc.ModifyEventSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2830,7 +2899,7 @@ func ExampleRDS_ModifyEventSubscription_shared00() {
 // To modify an option group
 //
 // The following example adds an option to an option group.
-func ExampleRDS_ModifyOptionGroup_shared00() {
+func ExampleRDS_ModifyOptionGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2850,7 +2919,8 @@ func ExampleRDS_ModifyOptionGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyOptionGroup(input)
+	req := svc.ModifyOptionGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2876,7 +2946,7 @@ func ExampleRDS_ModifyOptionGroup_shared00() {
 //
 // This example promotes the specified read replica and sets its backup retention period
 // and preferred backup window.
-func ExampleRDS_PromoteReadReplica_shared00() {
+func ExampleRDS_PromoteReadReplicaRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2889,7 +2959,8 @@ func ExampleRDS_PromoteReadReplica_shared00() {
 		PreferredBackupWindow: aws.String("03:30-04:00"),
 	}
 
-	result, err := svc.PromoteReadReplica(input)
+	req := svc.PromoteReadReplicaRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2915,7 +2986,7 @@ func ExampleRDS_PromoteReadReplica_shared00() {
 //
 // This example purchases a reserved DB instance offering that matches the specified
 // settings.
-func ExampleRDS_PurchaseReservedDBInstancesOffering_shared00() {
+func ExampleRDS_PurchaseReservedDBInstancesOfferingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2927,7 +2998,8 @@ func ExampleRDS_PurchaseReservedDBInstancesOffering_shared00() {
 		ReservedDBInstancesOfferingId: aws.String("fb29428a-646d-4390-850e-5fe89926e727"),
 	}
 
-	result, err := svc.PurchaseReservedDBInstancesOffering(input)
+	req := svc.PurchaseReservedDBInstancesOfferingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2954,7 +3026,7 @@ func ExampleRDS_PurchaseReservedDBInstancesOffering_shared00() {
 // To reboot a DB instance
 //
 // This example reboots the specified DB instance without forcing a failover.
-func ExampleRDS_RebootDBInstance_shared00() {
+func ExampleRDS_RebootDBInstanceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2966,7 +3038,8 @@ func ExampleRDS_RebootDBInstance_shared00() {
 		ForceFailover:        aws.Bool(false),
 	}
 
-	result, err := svc.RebootDBInstance(input)
+	req := svc.RebootDBInstanceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2992,7 +3065,7 @@ func ExampleRDS_RebootDBInstance_shared00() {
 //
 // This example removes the specified source identifier from the specified DB event
 // subscription.
-func ExampleRDS_RemoveSourceIdentifierFromSubscription_shared00() {
+func ExampleRDS_RemoveSourceIdentifierFromSubscriptionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3004,7 +3077,8 @@ func ExampleRDS_RemoveSourceIdentifierFromSubscription_shared00() {
 		SubscriptionName: aws.String("myeventsubscription"),
 	}
 
-	result, err := svc.RemoveSourceIdentifierFromSubscription(input)
+	req := svc.RemoveSourceIdentifierFromSubscriptionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3029,7 +3103,7 @@ func ExampleRDS_RemoveSourceIdentifierFromSubscription_shared00() {
 // To remove tags from a resource
 //
 // This example removes the specified tag associated with the specified DB option group.
-func ExampleRDS_RemoveTagsFromResource_shared00() {
+func ExampleRDS_RemoveTagsFromResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3043,7 +3117,8 @@ func ExampleRDS_RemoveTagsFromResource_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveTagsFromResource(input)
+	req := svc.RemoveTagsFromResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3071,7 +3146,7 @@ func ExampleRDS_RemoveTagsFromResource_shared00() {
 //
 // This example resets all parameters for the specified DB cluster parameter group to
 // their default values.
-func ExampleRDS_ResetDBClusterParameterGroup_shared00() {
+func ExampleRDS_ResetDBClusterParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3083,7 +3158,8 @@ func ExampleRDS_ResetDBClusterParameterGroup_shared00() {
 		ResetAllParameters:          aws.Bool(true),
 	}
 
-	result, err := svc.ResetDBClusterParameterGroup(input)
+	req := svc.ResetDBClusterParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3109,7 +3185,7 @@ func ExampleRDS_ResetDBClusterParameterGroup_shared00() {
 //
 // This example resets all parameters for the specified DB parameter group to their
 // default values.
-func ExampleRDS_ResetDBParameterGroup_shared00() {
+func ExampleRDS_ResetDBParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3121,7 +3197,8 @@ func ExampleRDS_ResetDBParameterGroup_shared00() {
 		ResetAllParameters:   aws.Bool(true),
 	}
 
-	result, err := svc.ResetDBParameterGroup(input)
+	req := svc.ResetDBParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3146,7 +3223,7 @@ func ExampleRDS_ResetDBParameterGroup_shared00() {
 // To restore an Amazon Aurora DB cluster from a DB cluster snapshot
 //
 // The following example restores an Amazon Aurora DB cluster from a DB cluster snapshot.
-func ExampleRDS_RestoreDBClusterFromSnapshot_shared00() {
+func ExampleRDS_RestoreDBClusterFromSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3159,7 +3236,8 @@ func ExampleRDS_RestoreDBClusterFromSnapshot_shared00() {
 		SnapshotIdentifier:  aws.String("sample-cluster-snapshot1"),
 	}
 
-	result, err := svc.RestoreDBClusterFromSnapshot(input)
+	req := svc.RestoreDBClusterFromSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3211,7 +3289,7 @@ func ExampleRDS_RestoreDBClusterFromSnapshot_shared00() {
 //
 // The following example restores a DB cluster to a new DB cluster at a point in time
 // from the source DB cluster.
-func ExampleRDS_RestoreDBClusterToPointInTime_shared00() {
+func ExampleRDS_RestoreDBClusterToPointInTimeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3224,7 +3302,8 @@ func ExampleRDS_RestoreDBClusterToPointInTime_shared00() {
 		SourceDBClusterIdentifier: aws.String("sample-cluster1"),
 	}
 
-	result, err := svc.RestoreDBClusterToPointInTime(input)
+	req := svc.RestoreDBClusterToPointInTimeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3277,7 +3356,7 @@ func ExampleRDS_RestoreDBClusterToPointInTime_shared00() {
 // To restore a DB instance from a DB snapshot.
 //
 // The following example restores a DB instance from a DB snapshot.
-func ExampleRDS_RestoreDBInstanceFromDBSnapshot_shared00() {
+func ExampleRDS_RestoreDBInstanceFromDBSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3289,7 +3368,8 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshot_shared00() {
 		DBSnapshotIdentifier: aws.String("rds:mysqldb-2014-04-22-08-15"),
 	}
 
-	result, err := svc.RestoreDBInstanceFromDBSnapshot(input)
+	req := svc.RestoreDBInstanceFromDBSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3347,7 +3427,7 @@ func ExampleRDS_RestoreDBInstanceFromDBSnapshot_shared00() {
 //
 // The following example restores a DB instance to a new DB instance at a point in time
 // from the source DB instance.
-func ExampleRDS_RestoreDBInstanceToPointInTime_shared00() {
+func ExampleRDS_RestoreDBInstanceToPointInTimeRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3360,7 +3440,8 @@ func ExampleRDS_RestoreDBInstanceToPointInTime_shared00() {
 		TargetDBInstanceIdentifier: aws.String("mysql-sample-restored"),
 	}
 
-	result, err := svc.RestoreDBInstanceToPointInTime(input)
+	req := svc.RestoreDBInstanceToPointInTimeRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -3420,7 +3501,7 @@ func ExampleRDS_RestoreDBInstanceToPointInTime_shared00() {
 //
 // This example revokes ingress for the specified CIDR block associated with the specified
 // DB security group.
-func ExampleRDS_RevokeDBSecurityGroupIngress_shared00() {
+func ExampleRDS_RevokeDBSecurityGroupIngressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -3432,7 +3513,8 @@ func ExampleRDS_RevokeDBSecurityGroupIngress_shared00() {
 		DBSecurityGroupName: aws.String("mydbsecuritygroup"),
 	}
 
-	result, err := svc.RevokeDBSecurityGroupIngress(input)
+	req := svc.RevokeDBSecurityGroupIngressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -27,7 +27,7 @@ func parseTime(layout, value string) *time.Time {
 
 //
 
-func ExampleCloudFront_CreateCloudFrontOriginAccessIdentity_shared00() {
+func ExampleCloudFront_CreateCloudFrontOriginAccessIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -36,7 +36,8 @@ func ExampleCloudFront_CreateCloudFrontOriginAccessIdentity_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.CreateCloudFrontOriginAccessIdentityInput{}
 
-	result, err := svc.CreateCloudFrontOriginAccessIdentity(input)
+	req := svc.CreateCloudFrontOriginAccessIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -66,7 +67,7 @@ func ExampleCloudFront_CreateCloudFrontOriginAccessIdentity_shared00() {
 
 //
 
-func ExampleCloudFront_CreateDistribution_shared00() {
+func ExampleCloudFront_CreateDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -75,7 +76,8 @@ func ExampleCloudFront_CreateDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.CreateDistributionInput{}
 
-	result, err := svc.CreateDistribution(input)
+	req := svc.CreateDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -175,7 +177,7 @@ func ExampleCloudFront_CreateDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_CreateDistributionWithTags_shared00() {
+func ExampleCloudFront_CreateDistributionWithTagsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -184,7 +186,8 @@ func ExampleCloudFront_CreateDistributionWithTags_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.CreateDistributionWithTagsInput{}
 
-	result, err := svc.CreateDistributionWithTags(input)
+	req := svc.CreateDistributionWithTagsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -286,7 +289,7 @@ func ExampleCloudFront_CreateDistributionWithTags_shared00() {
 
 //
 
-func ExampleCloudFront_CreateInvalidation_shared00() {
+func ExampleCloudFront_CreateInvalidationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -295,7 +298,8 @@ func ExampleCloudFront_CreateInvalidation_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.CreateInvalidationInput{}
 
-	result, err := svc.CreateInvalidation(input)
+	req := svc.CreateInvalidationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -329,7 +333,7 @@ func ExampleCloudFront_CreateInvalidation_shared00() {
 
 //
 
-func ExampleCloudFront_CreateStreamingDistribution_shared00() {
+func ExampleCloudFront_CreateStreamingDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -338,7 +342,8 @@ func ExampleCloudFront_CreateStreamingDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.CreateStreamingDistributionInput{}
 
-	result, err := svc.CreateStreamingDistribution(input)
+	req := svc.CreateStreamingDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -382,7 +387,7 @@ func ExampleCloudFront_CreateStreamingDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_DeleteCloudFrontOriginAccessIdentity_shared00() {
+func ExampleCloudFront_DeleteCloudFrontOriginAccessIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -391,7 +396,8 @@ func ExampleCloudFront_DeleteCloudFrontOriginAccessIdentity_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.DeleteCloudFrontOriginAccessIdentityInput{}
 
-	result, err := svc.DeleteCloudFrontOriginAccessIdentity(input)
+	req := svc.DeleteCloudFrontOriginAccessIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -421,7 +427,7 @@ func ExampleCloudFront_DeleteCloudFrontOriginAccessIdentity_shared00() {
 
 //
 
-func ExampleCloudFront_DeleteDistribution_shared00() {
+func ExampleCloudFront_DeleteDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -430,7 +436,8 @@ func ExampleCloudFront_DeleteDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.DeleteDistributionInput{}
 
-	result, err := svc.DeleteDistribution(input)
+	req := svc.DeleteDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -460,7 +467,7 @@ func ExampleCloudFront_DeleteDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_DeleteStreamingDistribution_shared00() {
+func ExampleCloudFront_DeleteStreamingDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -469,7 +476,8 @@ func ExampleCloudFront_DeleteStreamingDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.DeleteStreamingDistributionInput{}
 
-	result, err := svc.DeleteStreamingDistribution(input)
+	req := svc.DeleteStreamingDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -499,7 +507,7 @@ func ExampleCloudFront_DeleteStreamingDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_GetCloudFrontOriginAccessIdentity_shared00() {
+func ExampleCloudFront_GetCloudFrontOriginAccessIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -508,7 +516,8 @@ func ExampleCloudFront_GetCloudFrontOriginAccessIdentity_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetCloudFrontOriginAccessIdentityInput{}
 
-	result, err := svc.GetCloudFrontOriginAccessIdentity(input)
+	req := svc.GetCloudFrontOriginAccessIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -532,7 +541,7 @@ func ExampleCloudFront_GetCloudFrontOriginAccessIdentity_shared00() {
 
 //
 
-func ExampleCloudFront_GetCloudFrontOriginAccessIdentityConfig_shared00() {
+func ExampleCloudFront_GetCloudFrontOriginAccessIdentityConfigRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -541,7 +550,8 @@ func ExampleCloudFront_GetCloudFrontOriginAccessIdentityConfig_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetCloudFrontOriginAccessIdentityConfigInput{}
 
-	result, err := svc.GetCloudFrontOriginAccessIdentityConfig(input)
+	req := svc.GetCloudFrontOriginAccessIdentityConfigRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -565,7 +575,7 @@ func ExampleCloudFront_GetCloudFrontOriginAccessIdentityConfig_shared00() {
 
 //
 
-func ExampleCloudFront_GetDistribution_shared00() {
+func ExampleCloudFront_GetDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -574,7 +584,8 @@ func ExampleCloudFront_GetDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetDistributionInput{}
 
-	result, err := svc.GetDistribution(input)
+	req := svc.GetDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -598,7 +609,7 @@ func ExampleCloudFront_GetDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_GetDistributionConfig_shared00() {
+func ExampleCloudFront_GetDistributionConfigRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -607,7 +618,8 @@ func ExampleCloudFront_GetDistributionConfig_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetDistributionConfigInput{}
 
-	result, err := svc.GetDistributionConfig(input)
+	req := svc.GetDistributionConfigRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -631,7 +643,7 @@ func ExampleCloudFront_GetDistributionConfig_shared00() {
 
 //
 
-func ExampleCloudFront_GetInvalidation_shared00() {
+func ExampleCloudFront_GetInvalidationRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -640,7 +652,8 @@ func ExampleCloudFront_GetInvalidation_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetInvalidationInput{}
 
-	result, err := svc.GetInvalidation(input)
+	req := svc.GetInvalidationRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -666,7 +679,7 @@ func ExampleCloudFront_GetInvalidation_shared00() {
 
 //
 
-func ExampleCloudFront_GetStreamingDistribution_shared00() {
+func ExampleCloudFront_GetStreamingDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -675,7 +688,8 @@ func ExampleCloudFront_GetStreamingDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetStreamingDistributionInput{}
 
-	result, err := svc.GetStreamingDistribution(input)
+	req := svc.GetStreamingDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -699,7 +713,7 @@ func ExampleCloudFront_GetStreamingDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_GetStreamingDistributionConfig_shared00() {
+func ExampleCloudFront_GetStreamingDistributionConfigRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -708,7 +722,8 @@ func ExampleCloudFront_GetStreamingDistributionConfig_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.GetStreamingDistributionConfigInput{}
 
-	result, err := svc.GetStreamingDistributionConfig(input)
+	req := svc.GetStreamingDistributionConfigRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -732,7 +747,7 @@ func ExampleCloudFront_GetStreamingDistributionConfig_shared00() {
 
 //
 
-func ExampleCloudFront_ListCloudFrontOriginAccessIdentities_shared00() {
+func ExampleCloudFront_ListCloudFrontOriginAccessIdentitiesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -741,7 +756,8 @@ func ExampleCloudFront_ListCloudFrontOriginAccessIdentities_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListCloudFrontOriginAccessIdentitiesInput{}
 
-	result, err := svc.ListCloudFrontOriginAccessIdentities(input)
+	req := svc.ListCloudFrontOriginAccessIdentitiesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -763,7 +779,7 @@ func ExampleCloudFront_ListCloudFrontOriginAccessIdentities_shared00() {
 
 //
 
-func ExampleCloudFront_ListDistributions_shared00() {
+func ExampleCloudFront_ListDistributionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -772,7 +788,8 @@ func ExampleCloudFront_ListDistributions_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListDistributionsInput{}
 
-	result, err := svc.ListDistributions(input)
+	req := svc.ListDistributionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -794,7 +811,7 @@ func ExampleCloudFront_ListDistributions_shared00() {
 
 //
 
-func ExampleCloudFront_ListDistributionsByWebACLId_shared00() {
+func ExampleCloudFront_ListDistributionsByWebACLIdRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -803,7 +820,8 @@ func ExampleCloudFront_ListDistributionsByWebACLId_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListDistributionsByWebACLIdInput{}
 
-	result, err := svc.ListDistributionsByWebACLId(input)
+	req := svc.ListDistributionsByWebACLIdRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -827,7 +845,7 @@ func ExampleCloudFront_ListDistributionsByWebACLId_shared00() {
 
 //
 
-func ExampleCloudFront_ListInvalidations_shared00() {
+func ExampleCloudFront_ListInvalidationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -836,7 +854,8 @@ func ExampleCloudFront_ListInvalidations_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListInvalidationsInput{}
 
-	result, err := svc.ListInvalidations(input)
+	req := svc.ListInvalidationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -862,7 +881,7 @@ func ExampleCloudFront_ListInvalidations_shared00() {
 
 //
 
-func ExampleCloudFront_ListStreamingDistributions_shared00() {
+func ExampleCloudFront_ListStreamingDistributionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -871,7 +890,8 @@ func ExampleCloudFront_ListStreamingDistributions_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListStreamingDistributionsInput{}
 
-	result, err := svc.ListStreamingDistributions(input)
+	req := svc.ListStreamingDistributionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -893,7 +913,7 @@ func ExampleCloudFront_ListStreamingDistributions_shared00() {
 
 //
 
-func ExampleCloudFront_ListTagsForResource_shared00() {
+func ExampleCloudFront_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -902,7 +922,8 @@ func ExampleCloudFront_ListTagsForResource_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.ListTagsForResourceInput{}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -930,7 +951,7 @@ func ExampleCloudFront_ListTagsForResource_shared00() {
 
 //
 
-func ExampleCloudFront_TagResource_shared00() {
+func ExampleCloudFront_TagResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -939,7 +960,8 @@ func ExampleCloudFront_TagResource_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.TagResourceInput{}
 
-	result, err := svc.TagResource(input)
+	req := svc.TagResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -967,7 +989,7 @@ func ExampleCloudFront_TagResource_shared00() {
 
 //
 
-func ExampleCloudFront_UntagResource_shared00() {
+func ExampleCloudFront_UntagResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -976,7 +998,8 @@ func ExampleCloudFront_UntagResource_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.UntagResourceInput{}
 
-	result, err := svc.UntagResource(input)
+	req := svc.UntagResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1004,7 +1027,7 @@ func ExampleCloudFront_UntagResource_shared00() {
 
 //
 
-func ExampleCloudFront_UpdateCloudFrontOriginAccessIdentity_shared00() {
+func ExampleCloudFront_UpdateCloudFrontOriginAccessIdentityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1013,7 +1036,8 @@ func ExampleCloudFront_UpdateCloudFrontOriginAccessIdentity_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.UpdateCloudFrontOriginAccessIdentityInput{}
 
-	result, err := svc.UpdateCloudFrontOriginAccessIdentity(input)
+	req := svc.UpdateCloudFrontOriginAccessIdentityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1049,7 +1073,7 @@ func ExampleCloudFront_UpdateCloudFrontOriginAccessIdentity_shared00() {
 
 //
 
-func ExampleCloudFront_UpdateDistribution_shared00() {
+func ExampleCloudFront_UpdateDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1058,7 +1082,8 @@ func ExampleCloudFront_UpdateDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.UpdateDistributionInput{}
 
-	result, err := svc.UpdateDistribution(input)
+	req := svc.UpdateDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1158,7 +1183,7 @@ func ExampleCloudFront_UpdateDistribution_shared00() {
 
 //
 
-func ExampleCloudFront_UpdateStreamingDistribution_shared00() {
+func ExampleCloudFront_UpdateStreamingDistributionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1167,7 +1192,8 @@ func ExampleCloudFront_UpdateStreamingDistribution_shared00() {
 	svc := cloudfront.New(cfg)
 	input := &cloudfront.UpdateStreamingDistributionInput{}
 
-	result, err := svc.UpdateStreamingDistribution(input)
+	req := svc.UpdateStreamingDistributionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

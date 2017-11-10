@@ -12,47 +12,24 @@ import (
 
 const opDescribeStream = "DescribeStream"
 
-// DescribeStreamRequest generates a "aws.Request" representing the
-// client's request for the DescribeStream operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStream for more information on using the DescribeStream
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeStreamRequest method.
-//    req, resp := client.DescribeStreamRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
-func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Request, output *DescribeStreamOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeStreamInput{}
-	}
-
-	output = &DescribeStreamOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeStreamRequest is a API request type for the DescribeStream API operation.
+type DescribeStreamRequest struct {
+	*aws.Request
+	Input *DescribeStreamInput
 }
 
-// DescribeStream API operation for Amazon DynamoDB Streams.
+// Send marshals and sends the DescribeStream API request.
+func (r *DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStreamOutput), nil
+}
+
+// DescribeStreamRequest returns a request value for making API operation for
+// Amazon DynamoDB Streams.
 //
 // Returns information about a stream, including the current status of the stream,
 // its Amazon Resource Name (ARN), the composition of its shards, and its corresponding
@@ -66,85 +43,49 @@ func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req
 // StartingSequenceNumber and EndingSequenceNumber are present, then that shard
 // is closed and can no longer receive more data.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Streams's
-// API operation DescribeStream for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
-func (c *DynamoDBStreams) DescribeStream(input *DescribeStreamInput) (*DescribeStreamOutput, error) {
-	req, out := c.DescribeStreamRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStreamWithContext is the same as DescribeStream with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStream for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDBStreams) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.Option) (*DescribeStreamOutput, error) {
-	req, out := c.DescribeStreamRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opGetRecords = "GetRecords"
-
-// GetRecordsRequest generates a "aws.Request" representing the
-// client's request for the GetRecords operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRecords for more information on using the GetRecords
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetRecordsRequest method.
-//    req, resp := client.GetRecordsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeStreamRequest method.
+//    req := client.DescribeStreamRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords
-func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, output *GetRecordsOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
+func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRequest {
 	op := &aws.Operation{
-		Name:       opGetRecords,
+		Name:       opDescribeStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &GetRecordsInput{}
+		input = &DescribeStreamInput{}
 	}
 
-	output = &GetRecordsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeStreamOutput{})
+	return DescribeStreamRequest{Request: req, Input: input}
 }
 
-// GetRecords API operation for Amazon DynamoDB Streams.
+const opGetRecords = "GetRecords"
+
+// GetRecordsRequest is a API request type for the GetRecords API operation.
+type GetRecordsRequest struct {
+	*aws.Request
+	Input *GetRecordsInput
+}
+
+// Send marshals and sends the GetRecords API request.
+func (r *GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRecordsOutput), nil
+}
+
+// GetRecordsRequest returns a request value for making API operation for
+// Amazon DynamoDB Streams.
 //
 // Retrieves the stream records from a given shard.
 //
@@ -158,96 +99,65 @@ func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *aws.Re
 // GetRecords can retrieve a maximum of 1 MB of data or 1000 stream records,
 // whichever comes first.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Streams's
-// API operation GetRecords for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Your request rate is too high. The AWS SDKs for DynamoDB automatically retry
-//   requests that receive this exception. Your request is eventually successful,
-//   unless your retry queue is too large to finish. Reduce the frequency of requests
-//   and use exponential backoff. For more information, go to Error Retries and
-//   Exponential Backoff (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries)
-//   in the Amazon DynamoDB Developer Guide.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeExpiredIteratorException "ExpiredIteratorException"
-//   The shard iterator has expired and can no longer be used to retrieve stream
-//   records. A shard iterator expires 15 minutes after it is retrieved using
-//   the GetShardIterator action.
-//
-//   * ErrCodeTrimmedDataAccessException "TrimmedDataAccessException"
-//   The operation attempted to read past the oldest stream record in a shard.
-//
-//   In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
-//   whose age exceeds this limit are subject to removal (trimming) from the stream.
-//   You might receive a TrimmedDataAccessException if:
-//
-//      * You request a shard iterator with a sequence number older than the trim
-//      point (24 hours).
-//
-//      * You obtain a shard iterator, but before you use the iterator in a GetRecords
-//      request, a stream record in the shard exceeds the 24 hour period and is
-//      trimmed. This causes the iterator to access a record that no longer exists.
+//    // Example sending a request using the GetRecordsRequest method.
+//    req := client.GetRecordsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords
-func (c *DynamoDBStreams) GetRecords(input *GetRecordsInput) (*GetRecordsOutput, error) {
-	req, out := c.GetRecordsRequest(input)
-	return out, req.Send()
-}
+func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) GetRecordsRequest {
+	op := &aws.Operation{
+		Name:       opGetRecords,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetRecordsWithContext is the same as GetRecords with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRecords for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDBStreams) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...aws.Option) (*GetRecordsOutput, error) {
-	req, out := c.GetRecordsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetRecordsInput{}
+	}
+
+	req := c.newRequest(op, input, &GetRecordsOutput{})
+	return GetRecordsRequest{Request: req, Input: input}
 }
 
 const opGetShardIterator = "GetShardIterator"
 
-// GetShardIteratorRequest generates a "aws.Request" representing the
-// client's request for the GetShardIterator operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetShardIteratorRequest is a API request type for the GetShardIterator API operation.
+type GetShardIteratorRequest struct {
+	*aws.Request
+	Input *GetShardIteratorInput
+}
+
+// Send marshals and sends the GetShardIterator API request.
+func (r *GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetShardIteratorOutput), nil
+}
+
+// GetShardIteratorRequest returns a request value for making API operation for
+// Amazon DynamoDB Streams.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a shard iterator. A shard iterator provides information about how
+// to retrieve the stream records from within a shard. Use the shard iterator
+// in a subsequent GetRecords request to read the stream records from the shard.
 //
-// See GetShardIterator for more information on using the GetShardIterator
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A shard iterator expires 15 minutes after it is returned to the requester.
 //
 //    // Example sending a request using the GetShardIteratorRequest method.
-//    req, resp := client.GetShardIteratorRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetShardIteratorRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator
-func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aws.Request, output *GetShardIteratorOutput) {
+func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) GetShardIteratorRequest {
 	op := &aws.Operation{
 		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
@@ -258,96 +168,46 @@ func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) 
 		input = &GetShardIteratorInput{}
 	}
 
-	output = &GetShardIteratorOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetShardIterator API operation for Amazon DynamoDB Streams.
-//
-// Returns a shard iterator. A shard iterator provides information about how
-// to retrieve the stream records from within a shard. Use the shard iterator
-// in a subsequent GetRecords request to read the stream records from the shard.
-//
-// A shard iterator expires 15 minutes after it is returned to the requester.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Streams's
-// API operation GetShardIterator for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-//   * ErrCodeTrimmedDataAccessException "TrimmedDataAccessException"
-//   The operation attempted to read past the oldest stream record in a shard.
-//
-//   In DynamoDB Streams, there is a 24 hour limit on data retention. Stream records
-//   whose age exceeds this limit are subject to removal (trimming) from the stream.
-//   You might receive a TrimmedDataAccessException if:
-//
-//      * You request a shard iterator with a sequence number older than the trim
-//      point (24 hours).
-//
-//      * You obtain a shard iterator, but before you use the iterator in a GetRecords
-//      request, a stream record in the shard exceeds the 24 hour period and is
-//      trimmed. This causes the iterator to access a record that no longer exists.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator
-func (c *DynamoDBStreams) GetShardIterator(input *GetShardIteratorInput) (*GetShardIteratorOutput, error) {
-	req, out := c.GetShardIteratorRequest(input)
-	return out, req.Send()
-}
-
-// GetShardIteratorWithContext is the same as GetShardIterator with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetShardIterator for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDBStreams) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...aws.Option) (*GetShardIteratorOutput, error) {
-	req, out := c.GetShardIteratorRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetShardIteratorOutput{})
+	return GetShardIteratorRequest{Request: req, Input: input}
 }
 
 const opListStreams = "ListStreams"
 
-// ListStreamsRequest generates a "aws.Request" representing the
-// client's request for the ListStreams operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStreamsRequest is a API request type for the ListStreams API operation.
+type ListStreamsRequest struct {
+	*aws.Request
+	Input *ListStreamsInput
+}
+
+// Send marshals and sends the ListStreams API request.
+func (r *ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStreamsOutput), nil
+}
+
+// ListStreamsRequest returns a request value for making API operation for
+// Amazon DynamoDB Streams.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns an array of stream ARNs associated with the current account and endpoint.
+// If the TableName parameter is present, then ListStreams will return only
+// the streams ARNs for that table.
 //
-// See ListStreams for more information on using the ListStreams
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can call ListStreams at a maximum rate of 5 times per second.
 //
 //    // Example sending a request using the ListStreamsRequest method.
-//    req, resp := client.ListStreamsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStreamsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
-func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request, output *ListStreamsOutput) {
+func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
 	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
@@ -358,53 +218,8 @@ func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *aws.
 		input = &ListStreamsInput{}
 	}
 
-	output = &ListStreamsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStreams API operation for Amazon DynamoDB Streams.
-//
-// Returns an array of stream ARNs associated with the current account and endpoint.
-// If the TableName parameter is present, then ListStreams will return only
-// the streams ARNs for that table.
-//
-// You can call ListStreams at a maximum rate of 5 times per second.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon DynamoDB Streams's
-// API operation ListStreams for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The operation tried to access a nonexistent stream.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An error occurred on the server side.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
-func (c *DynamoDBStreams) ListStreams(input *ListStreamsInput) (*ListStreamsOutput, error) {
-	req, out := c.ListStreamsRequest(input)
-	return out, req.Send()
-}
-
-// ListStreamsWithContext is the same as ListStreams with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStreams for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDBStreams) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...aws.Option) (*ListStreamsOutput, error) {
-	req, out := c.ListStreamsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStreamsOutput{})
+	return ListStreamsRequest{Request: req, Input: input}
 }
 
 // Represents the input of a DescribeStream operation.

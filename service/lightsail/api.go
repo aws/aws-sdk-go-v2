@@ -11,31 +11,36 @@ import (
 
 const opAllocateStaticIp = "AllocateStaticIp"
 
-// AllocateStaticIpRequest generates a "aws.Request" representing the
-// client's request for the AllocateStaticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AllocateStaticIpRequest is a API request type for the AllocateStaticIp API operation.
+type AllocateStaticIpRequest struct {
+	*aws.Request
+	Input *AllocateStaticIpInput
+}
+
+// Send marshals and sends the AllocateStaticIp API request.
+func (r *AllocateStaticIpRequest) Send() (*AllocateStaticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AllocateStaticIpOutput), nil
+}
+
+// AllocateStaticIpRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AllocateStaticIp for more information on using the AllocateStaticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Allocates a static IP address.
 //
 //    // Example sending a request using the AllocateStaticIpRequest method.
-//    req, resp := client.AllocateStaticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AllocateStaticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIp
-func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) (req *aws.Request, output *AllocateStaticIpOutput) {
+func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) AllocateStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opAllocateStaticIp,
 		HTTPMethod: "POST",
@@ -46,100 +51,42 @@ func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) (req *
 		input = &AllocateStaticIpInput{}
 	}
 
-	output = &AllocateStaticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AllocateStaticIp API operation for Amazon Lightsail.
-//
-// Allocates a static IP address.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation AllocateStaticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIp
-func (c *Lightsail) AllocateStaticIp(input *AllocateStaticIpInput) (*AllocateStaticIpOutput, error) {
-	req, out := c.AllocateStaticIpRequest(input)
-	return out, req.Send()
-}
-
-// AllocateStaticIpWithContext is the same as AllocateStaticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AllocateStaticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) AllocateStaticIpWithContext(ctx aws.Context, input *AllocateStaticIpInput, opts ...aws.Option) (*AllocateStaticIpOutput, error) {
-	req, out := c.AllocateStaticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AllocateStaticIpOutput{})
+	return AllocateStaticIpRequest{Request: req, Input: input}
 }
 
 const opAttachStaticIp = "AttachStaticIp"
 
-// AttachStaticIpRequest generates a "aws.Request" representing the
-// client's request for the AttachStaticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachStaticIpRequest is a API request type for the AttachStaticIp API operation.
+type AttachStaticIpRequest struct {
+	*aws.Request
+	Input *AttachStaticIpInput
+}
+
+// Send marshals and sends the AttachStaticIp API request.
+func (r *AttachStaticIpRequest) Send() (*AttachStaticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachStaticIpOutput), nil
+}
+
+// AttachStaticIpRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachStaticIp for more information on using the AttachStaticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attaches a static IP address to a specific Amazon Lightsail instance.
 //
 //    // Example sending a request using the AttachStaticIpRequest method.
-//    req, resp := client.AttachStaticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachStaticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIp
-func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) (req *aws.Request, output *AttachStaticIpOutput) {
+func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opAttachStaticIp,
 		HTTPMethod: "POST",
@@ -150,100 +97,42 @@ func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) (req *aws.
 		input = &AttachStaticIpInput{}
 	}
 
-	output = &AttachStaticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachStaticIp API operation for Amazon Lightsail.
-//
-// Attaches a static IP address to a specific Amazon Lightsail instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation AttachStaticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIp
-func (c *Lightsail) AttachStaticIp(input *AttachStaticIpInput) (*AttachStaticIpOutput, error) {
-	req, out := c.AttachStaticIpRequest(input)
-	return out, req.Send()
-}
-
-// AttachStaticIpWithContext is the same as AttachStaticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachStaticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) AttachStaticIpWithContext(ctx aws.Context, input *AttachStaticIpInput, opts ...aws.Option) (*AttachStaticIpOutput, error) {
-	req, out := c.AttachStaticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachStaticIpOutput{})
+	return AttachStaticIpRequest{Request: req, Input: input}
 }
 
 const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 
-// CloseInstancePublicPortsRequest generates a "aws.Request" representing the
-// client's request for the CloseInstancePublicPorts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CloseInstancePublicPortsRequest is a API request type for the CloseInstancePublicPorts API operation.
+type CloseInstancePublicPortsRequest struct {
+	*aws.Request
+	Input *CloseInstancePublicPortsInput
+}
+
+// Send marshals and sends the CloseInstancePublicPorts API request.
+func (r *CloseInstancePublicPortsRequest) Send() (*CloseInstancePublicPortsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CloseInstancePublicPortsOutput), nil
+}
+
+// CloseInstancePublicPortsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CloseInstancePublicPorts for more information on using the CloseInstancePublicPorts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Closes the public ports on a specific Amazon Lightsail instance.
 //
 //    // Example sending a request using the CloseInstancePublicPortsRequest method.
-//    req, resp := client.CloseInstancePublicPortsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CloseInstancePublicPortsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPorts
-func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPortsInput) (req *aws.Request, output *CloseInstancePublicPortsOutput) {
+func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opCloseInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -254,100 +143,42 @@ func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPo
 		input = &CloseInstancePublicPortsInput{}
 	}
 
-	output = &CloseInstancePublicPortsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CloseInstancePublicPorts API operation for Amazon Lightsail.
-//
-// Closes the public ports on a specific Amazon Lightsail instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CloseInstancePublicPorts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPorts
-func (c *Lightsail) CloseInstancePublicPorts(input *CloseInstancePublicPortsInput) (*CloseInstancePublicPortsOutput, error) {
-	req, out := c.CloseInstancePublicPortsRequest(input)
-	return out, req.Send()
-}
-
-// CloseInstancePublicPortsWithContext is the same as CloseInstancePublicPorts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CloseInstancePublicPorts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CloseInstancePublicPortsWithContext(ctx aws.Context, input *CloseInstancePublicPortsInput, opts ...aws.Option) (*CloseInstancePublicPortsOutput, error) {
-	req, out := c.CloseInstancePublicPortsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CloseInstancePublicPortsOutput{})
+	return CloseInstancePublicPortsRequest{Request: req, Input: input}
 }
 
 const opCreateDomain = "CreateDomain"
 
-// CreateDomainRequest generates a "aws.Request" representing the
-// client's request for the CreateDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDomainRequest is a API request type for the CreateDomain API operation.
+type CreateDomainRequest struct {
+	*aws.Request
+	Input *CreateDomainInput
+}
+
+// Send marshals and sends the CreateDomain API request.
+func (r *CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDomainOutput), nil
+}
+
+// CreateDomainRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDomain for more information on using the CreateDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a domain resource for the specified domain (e.g., example.com).
 //
 //    // Example sending a request using the CreateDomainRequest method.
-//    req, resp := client.CreateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomain
-func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) CreateDomainRequest {
 	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
@@ -358,100 +189,43 @@ func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) (req *aws.Requ
 		input = &CreateDomainInput{}
 	}
 
-	output = &CreateDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDomain API operation for Amazon Lightsail.
-//
-// Creates a domain resource for the specified domain (e.g., example.com).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomain
-func (c *Lightsail) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	return out, req.Send()
-}
-
-// CreateDomainWithContext is the same as CreateDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
-	req, out := c.CreateDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDomainOutput{})
+	return CreateDomainRequest{Request: req, Input: input}
 }
 
 const opCreateDomainEntry = "CreateDomainEntry"
 
-// CreateDomainEntryRequest generates a "aws.Request" representing the
-// client's request for the CreateDomainEntry operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDomainEntryRequest is a API request type for the CreateDomainEntry API operation.
+type CreateDomainEntryRequest struct {
+	*aws.Request
+	Input *CreateDomainEntryInput
+}
+
+// Send marshals and sends the CreateDomainEntry API request.
+func (r *CreateDomainEntryRequest) Send() (*CreateDomainEntryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDomainEntryOutput), nil
+}
+
+// CreateDomainEntryRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDomainEntry for more information on using the CreateDomainEntry
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates one of the following entry records associated with the domain: A
+// record, CNAME record, TXT record, or MX record.
 //
 //    // Example sending a request using the CreateDomainEntryRequest method.
-//    req, resp := client.CreateDomainEntryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDomainEntryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntry
-func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) (req *aws.Request, output *CreateDomainEntryOutput) {
+func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) CreateDomainEntryRequest {
 	op := &aws.Operation{
 		Name:       opCreateDomainEntry,
 		HTTPMethod: "POST",
@@ -462,101 +236,43 @@ func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) (req
 		input = &CreateDomainEntryInput{}
 	}
 
-	output = &CreateDomainEntryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDomainEntry API operation for Amazon Lightsail.
-//
-// Creates one of the following entry records associated with the domain: A
-// record, CNAME record, TXT record, or MX record.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateDomainEntry for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntry
-func (c *Lightsail) CreateDomainEntry(input *CreateDomainEntryInput) (*CreateDomainEntryOutput, error) {
-	req, out := c.CreateDomainEntryRequest(input)
-	return out, req.Send()
-}
-
-// CreateDomainEntryWithContext is the same as CreateDomainEntry with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDomainEntry for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateDomainEntryWithContext(ctx aws.Context, input *CreateDomainEntryInput, opts ...aws.Option) (*CreateDomainEntryOutput, error) {
-	req, out := c.CreateDomainEntryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDomainEntryOutput{})
+	return CreateDomainEntryRequest{Request: req, Input: input}
 }
 
 const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 
-// CreateInstanceSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateInstanceSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInstanceSnapshotRequest is a API request type for the CreateInstanceSnapshot API operation.
+type CreateInstanceSnapshotRequest struct {
+	*aws.Request
+	Input *CreateInstanceSnapshotInput
+}
+
+// Send marshals and sends the CreateInstanceSnapshot API request.
+func (r *CreateInstanceSnapshotRequest) Send() (*CreateInstanceSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstanceSnapshotOutput), nil
+}
+
+// CreateInstanceSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateInstanceSnapshot for more information on using the CreateInstanceSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a snapshot of a specific virtual private server, or instance. You
+// can use a snapshot to create a new instance that is based on that snapshot.
 //
 //    // Example sending a request using the CreateInstanceSnapshotRequest method.
-//    req, resp := client.CreateInstanceSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInstanceSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshot
-func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInput) (req *aws.Request, output *CreateInstanceSnapshotOutput) {
+func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstanceSnapshot,
 		HTTPMethod: "POST",
@@ -567,101 +283,42 @@ func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotI
 		input = &CreateInstanceSnapshotInput{}
 	}
 
-	output = &CreateInstanceSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInstanceSnapshot API operation for Amazon Lightsail.
-//
-// Creates a snapshot of a specific virtual private server, or instance. You
-// can use a snapshot to create a new instance that is based on that snapshot.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateInstanceSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshot
-func (c *Lightsail) CreateInstanceSnapshot(input *CreateInstanceSnapshotInput) (*CreateInstanceSnapshotOutput, error) {
-	req, out := c.CreateInstanceSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateInstanceSnapshotWithContext is the same as CreateInstanceSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInstanceSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateInstanceSnapshotWithContext(ctx aws.Context, input *CreateInstanceSnapshotInput, opts ...aws.Option) (*CreateInstanceSnapshotOutput, error) {
-	req, out := c.CreateInstanceSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInstanceSnapshotOutput{})
+	return CreateInstanceSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateInstances = "CreateInstances"
 
-// CreateInstancesRequest generates a "aws.Request" representing the
-// client's request for the CreateInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInstancesRequest is a API request type for the CreateInstances API operation.
+type CreateInstancesRequest struct {
+	*aws.Request
+	Input *CreateInstancesInput
+}
+
+// Send marshals and sends the CreateInstances API request.
+func (r *CreateInstancesRequest) Send() (*CreateInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstancesOutput), nil
+}
+
+// CreateInstancesRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateInstances for more information on using the CreateInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates one or more Amazon Lightsail virtual private servers, or instances.
 //
 //    // Example sending a request using the CreateInstancesRequest method.
-//    req, resp := client.CreateInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstances
-func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) (req *aws.Request, output *CreateInstancesOutput) {
+func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) CreateInstancesRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstances,
 		HTTPMethod: "POST",
@@ -672,100 +329,43 @@ func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) (req *aw
 		input = &CreateInstancesInput{}
 	}
 
-	output = &CreateInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInstances API operation for Amazon Lightsail.
-//
-// Creates one or more Amazon Lightsail virtual private servers, or instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstances
-func (c *Lightsail) CreateInstances(input *CreateInstancesInput) (*CreateInstancesOutput, error) {
-	req, out := c.CreateInstancesRequest(input)
-	return out, req.Send()
-}
-
-// CreateInstancesWithContext is the same as CreateInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateInstancesWithContext(ctx aws.Context, input *CreateInstancesInput, opts ...aws.Option) (*CreateInstancesOutput, error) {
-	req, out := c.CreateInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInstancesOutput{})
+	return CreateInstancesRequest{Request: req, Input: input}
 }
 
 const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 
-// CreateInstancesFromSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateInstancesFromSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInstancesFromSnapshotRequest is a API request type for the CreateInstancesFromSnapshot API operation.
+type CreateInstancesFromSnapshotRequest struct {
+	*aws.Request
+	Input *CreateInstancesFromSnapshotInput
+}
+
+// Send marshals and sends the CreateInstancesFromSnapshot API request.
+func (r *CreateInstancesFromSnapshotRequest) Send() (*CreateInstancesFromSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstancesFromSnapshotOutput), nil
+}
+
+// CreateInstancesFromSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateInstancesFromSnapshot for more information on using the CreateInstancesFromSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Uses a specific snapshot as a blueprint for creating one or more new instances
+// that are based on that identical configuration.
 //
 //    // Example sending a request using the CreateInstancesFromSnapshotRequest method.
-//    req, resp := client.CreateInstancesFromSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInstancesFromSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshot
-func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSnapshotInput) (req *aws.Request, output *CreateInstancesFromSnapshotOutput) {
+func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opCreateInstancesFromSnapshot,
 		HTTPMethod: "POST",
@@ -776,101 +376,42 @@ func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFro
 		input = &CreateInstancesFromSnapshotInput{}
 	}
 
-	output = &CreateInstancesFromSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInstancesFromSnapshot API operation for Amazon Lightsail.
-//
-// Uses a specific snapshot as a blueprint for creating one or more new instances
-// that are based on that identical configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateInstancesFromSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshot
-func (c *Lightsail) CreateInstancesFromSnapshot(input *CreateInstancesFromSnapshotInput) (*CreateInstancesFromSnapshotOutput, error) {
-	req, out := c.CreateInstancesFromSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateInstancesFromSnapshotWithContext is the same as CreateInstancesFromSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInstancesFromSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateInstancesFromSnapshotWithContext(ctx aws.Context, input *CreateInstancesFromSnapshotInput, opts ...aws.Option) (*CreateInstancesFromSnapshotOutput, error) {
-	req, out := c.CreateInstancesFromSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInstancesFromSnapshotOutput{})
+	return CreateInstancesFromSnapshotRequest{Request: req, Input: input}
 }
 
 const opCreateKeyPair = "CreateKeyPair"
 
-// CreateKeyPairRequest generates a "aws.Request" representing the
-// client's request for the CreateKeyPair operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateKeyPairRequest is a API request type for the CreateKeyPair API operation.
+type CreateKeyPairRequest struct {
+	*aws.Request
+	Input *CreateKeyPairInput
+}
+
+// Send marshals and sends the CreateKeyPair API request.
+func (r *CreateKeyPairRequest) Send() (*CreateKeyPairOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateKeyPairOutput), nil
+}
+
+// CreateKeyPairRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateKeyPair for more information on using the CreateKeyPair
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates sn SSH key pair.
 //
 //    // Example sending a request using the CreateKeyPairRequest method.
-//    req, resp := client.CreateKeyPairRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateKeyPairRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPair
-func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) (req *aws.Request, output *CreateKeyPairOutput) {
+func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opCreateKeyPair,
 		HTTPMethod: "POST",
@@ -881,100 +422,42 @@ func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) (req *aws.Re
 		input = &CreateKeyPairInput{}
 	}
 
-	output = &CreateKeyPairOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateKeyPair API operation for Amazon Lightsail.
-//
-// Creates sn SSH key pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation CreateKeyPair for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPair
-func (c *Lightsail) CreateKeyPair(input *CreateKeyPairInput) (*CreateKeyPairOutput, error) {
-	req, out := c.CreateKeyPairRequest(input)
-	return out, req.Send()
-}
-
-// CreateKeyPairWithContext is the same as CreateKeyPair with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateKeyPair for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) CreateKeyPairWithContext(ctx aws.Context, input *CreateKeyPairInput, opts ...aws.Option) (*CreateKeyPairOutput, error) {
-	req, out := c.CreateKeyPairRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateKeyPairOutput{})
+	return CreateKeyPairRequest{Request: req, Input: input}
 }
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws.Request" representing the
-// client's request for the DeleteDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDomainRequest is a API request type for the DeleteDomain API operation.
+type DeleteDomainRequest struct {
+	*aws.Request
+	Input *DeleteDomainInput
+}
+
+// Send marshals and sends the DeleteDomain API request.
+func (r *DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDomainOutput), nil
+}
+
+// DeleteDomainRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDomain for more information on using the DeleteDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified domain recordset and all of its domain records.
 //
 //    // Example sending a request using the DeleteDomainRequest method.
-//    req, resp := client.DeleteDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomain
-func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
@@ -985,100 +468,42 @@ func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Requ
 		input = &DeleteDomainInput{}
 	}
 
-	output = &DeleteDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDomain API operation for Amazon Lightsail.
-//
-// Deletes the specified domain recordset and all of its domain records.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DeleteDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomain
-func (c *Lightsail) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDomainWithContext is the same as DeleteDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
-	req, out := c.DeleteDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDomainOutput{})
+	return DeleteDomainRequest{Request: req, Input: input}
 }
 
 const opDeleteDomainEntry = "DeleteDomainEntry"
 
-// DeleteDomainEntryRequest generates a "aws.Request" representing the
-// client's request for the DeleteDomainEntry operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDomainEntryRequest is a API request type for the DeleteDomainEntry API operation.
+type DeleteDomainEntryRequest struct {
+	*aws.Request
+	Input *DeleteDomainEntryInput
+}
+
+// Send marshals and sends the DeleteDomainEntry API request.
+func (r *DeleteDomainEntryRequest) Send() (*DeleteDomainEntryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDomainEntryOutput), nil
+}
+
+// DeleteDomainEntryRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDomainEntry for more information on using the DeleteDomainEntry
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specific domain entry.
 //
 //    // Example sending a request using the DeleteDomainEntryRequest method.
-//    req, resp := client.DeleteDomainEntryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDomainEntryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntry
-func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) (req *aws.Request, output *DeleteDomainEntryOutput) {
+func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) DeleteDomainEntryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDomainEntry,
 		HTTPMethod: "POST",
@@ -1089,100 +514,42 @@ func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) (req
 		input = &DeleteDomainEntryInput{}
 	}
 
-	output = &DeleteDomainEntryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDomainEntry API operation for Amazon Lightsail.
-//
-// Deletes a specific domain entry.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DeleteDomainEntry for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntry
-func (c *Lightsail) DeleteDomainEntry(input *DeleteDomainEntryInput) (*DeleteDomainEntryOutput, error) {
-	req, out := c.DeleteDomainEntryRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDomainEntryWithContext is the same as DeleteDomainEntry with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDomainEntry for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DeleteDomainEntryWithContext(ctx aws.Context, input *DeleteDomainEntryInput, opts ...aws.Option) (*DeleteDomainEntryOutput, error) {
-	req, out := c.DeleteDomainEntryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDomainEntryOutput{})
+	return DeleteDomainEntryRequest{Request: req, Input: input}
 }
 
 const opDeleteInstance = "DeleteInstance"
 
-// DeleteInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeleteInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteInstanceRequest is a API request type for the DeleteInstance API operation.
+type DeleteInstanceRequest struct {
+	*aws.Request
+	Input *DeleteInstanceInput
+}
+
+// Send marshals and sends the DeleteInstance API request.
+func (r *DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInstanceOutput), nil
+}
+
+// DeleteInstanceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteInstance for more information on using the DeleteInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specific Amazon Lightsail virtual private server, or instance.
 //
 //    // Example sending a request using the DeleteInstanceRequest method.
-//    req, resp := client.DeleteInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstance
-func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.Request, output *DeleteInstanceOutput) {
+func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInstance,
 		HTTPMethod: "POST",
@@ -1193,100 +560,42 @@ func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.
 		input = &DeleteInstanceInput{}
 	}
 
-	output = &DeleteInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteInstance API operation for Amazon Lightsail.
-//
-// Deletes a specific Amazon Lightsail virtual private server, or instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DeleteInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstance
-func (c *Lightsail) DeleteInstance(input *DeleteInstanceInput) (*DeleteInstanceOutput, error) {
-	req, out := c.DeleteInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteInstanceWithContext is the same as DeleteInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...aws.Option) (*DeleteInstanceOutput, error) {
-	req, out := c.DeleteInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteInstanceOutput{})
+	return DeleteInstanceRequest{Request: req, Input: input}
 }
 
 const opDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
 
-// DeleteInstanceSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeleteInstanceSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteInstanceSnapshotRequest is a API request type for the DeleteInstanceSnapshot API operation.
+type DeleteInstanceSnapshotRequest struct {
+	*aws.Request
+	Input *DeleteInstanceSnapshotInput
+}
+
+// Send marshals and sends the DeleteInstanceSnapshot API request.
+func (r *DeleteInstanceSnapshotRequest) Send() (*DeleteInstanceSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInstanceSnapshotOutput), nil
+}
+
+// DeleteInstanceSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteInstanceSnapshot for more information on using the DeleteInstanceSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specific snapshot of a virtual private server (or instance).
 //
 //    // Example sending a request using the DeleteInstanceSnapshotRequest method.
-//    req, resp := client.DeleteInstanceSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteInstanceSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshot
-func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotInput) (req *aws.Request, output *DeleteInstanceSnapshotOutput) {
+func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotInput) DeleteInstanceSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInstanceSnapshot,
 		HTTPMethod: "POST",
@@ -1297,100 +606,42 @@ func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotI
 		input = &DeleteInstanceSnapshotInput{}
 	}
 
-	output = &DeleteInstanceSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteInstanceSnapshot API operation for Amazon Lightsail.
-//
-// Deletes a specific snapshot of a virtual private server (or instance).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DeleteInstanceSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshot
-func (c *Lightsail) DeleteInstanceSnapshot(input *DeleteInstanceSnapshotInput) (*DeleteInstanceSnapshotOutput, error) {
-	req, out := c.DeleteInstanceSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// DeleteInstanceSnapshotWithContext is the same as DeleteInstanceSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteInstanceSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DeleteInstanceSnapshotWithContext(ctx aws.Context, input *DeleteInstanceSnapshotInput, opts ...aws.Option) (*DeleteInstanceSnapshotOutput, error) {
-	req, out := c.DeleteInstanceSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteInstanceSnapshotOutput{})
+	return DeleteInstanceSnapshotRequest{Request: req, Input: input}
 }
 
 const opDeleteKeyPair = "DeleteKeyPair"
 
-// DeleteKeyPairRequest generates a "aws.Request" representing the
-// client's request for the DeleteKeyPair operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteKeyPairRequest is a API request type for the DeleteKeyPair API operation.
+type DeleteKeyPairRequest struct {
+	*aws.Request
+	Input *DeleteKeyPairInput
+}
+
+// Send marshals and sends the DeleteKeyPair API request.
+func (r *DeleteKeyPairRequest) Send() (*DeleteKeyPairOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteKeyPairOutput), nil
+}
+
+// DeleteKeyPairRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteKeyPair for more information on using the DeleteKeyPair
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specific SSH key pair.
 //
 //    // Example sending a request using the DeleteKeyPairRequest method.
-//    req, resp := client.DeleteKeyPairRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteKeyPairRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPair
-func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *aws.Request, output *DeleteKeyPairOutput) {
+func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opDeleteKeyPair,
 		HTTPMethod: "POST",
@@ -1401,100 +652,42 @@ func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) (req *aws.Re
 		input = &DeleteKeyPairInput{}
 	}
 
-	output = &DeleteKeyPairOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteKeyPair API operation for Amazon Lightsail.
-//
-// Deletes a specific SSH key pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DeleteKeyPair for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPair
-func (c *Lightsail) DeleteKeyPair(input *DeleteKeyPairInput) (*DeleteKeyPairOutput, error) {
-	req, out := c.DeleteKeyPairRequest(input)
-	return out, req.Send()
-}
-
-// DeleteKeyPairWithContext is the same as DeleteKeyPair with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteKeyPair for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DeleteKeyPairWithContext(ctx aws.Context, input *DeleteKeyPairInput, opts ...aws.Option) (*DeleteKeyPairOutput, error) {
-	req, out := c.DeleteKeyPairRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteKeyPairOutput{})
+	return DeleteKeyPairRequest{Request: req, Input: input}
 }
 
 const opDetachStaticIp = "DetachStaticIp"
 
-// DetachStaticIpRequest generates a "aws.Request" representing the
-// client's request for the DetachStaticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachStaticIpRequest is a API request type for the DetachStaticIp API operation.
+type DetachStaticIpRequest struct {
+	*aws.Request
+	Input *DetachStaticIpInput
+}
+
+// Send marshals and sends the DetachStaticIp API request.
+func (r *DetachStaticIpRequest) Send() (*DetachStaticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachStaticIpOutput), nil
+}
+
+// DetachStaticIpRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachStaticIp for more information on using the DetachStaticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches a static IP from the Amazon Lightsail instance to which it is attached.
 //
 //    // Example sending a request using the DetachStaticIpRequest method.
-//    req, resp := client.DetachStaticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachStaticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIp
-func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) (req *aws.Request, output *DetachStaticIpOutput) {
+func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opDetachStaticIp,
 		HTTPMethod: "POST",
@@ -1505,100 +698,42 @@ func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) (req *aws.
 		input = &DetachStaticIpInput{}
 	}
 
-	output = &DetachStaticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachStaticIp API operation for Amazon Lightsail.
-//
-// Detaches a static IP from the Amazon Lightsail instance to which it is attached.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DetachStaticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIp
-func (c *Lightsail) DetachStaticIp(input *DetachStaticIpInput) (*DetachStaticIpOutput, error) {
-	req, out := c.DetachStaticIpRequest(input)
-	return out, req.Send()
-}
-
-// DetachStaticIpWithContext is the same as DetachStaticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachStaticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DetachStaticIpWithContext(ctx aws.Context, input *DetachStaticIpInput, opts ...aws.Option) (*DetachStaticIpOutput, error) {
-	req, out := c.DetachStaticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachStaticIpOutput{})
+	return DetachStaticIpRequest{Request: req, Input: input}
 }
 
 const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 
-// DownloadDefaultKeyPairRequest generates a "aws.Request" representing the
-// client's request for the DownloadDefaultKeyPair operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DownloadDefaultKeyPairRequest is a API request type for the DownloadDefaultKeyPair API operation.
+type DownloadDefaultKeyPairRequest struct {
+	*aws.Request
+	Input *DownloadDefaultKeyPairInput
+}
+
+// Send marshals and sends the DownloadDefaultKeyPair API request.
+func (r *DownloadDefaultKeyPairRequest) Send() (*DownloadDefaultKeyPairOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DownloadDefaultKeyPairOutput), nil
+}
+
+// DownloadDefaultKeyPairRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DownloadDefaultKeyPair for more information on using the DownloadDefaultKeyPair
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Downloads the default SSH key pair from the user's account.
 //
 //    // Example sending a request using the DownloadDefaultKeyPairRequest method.
-//    req, resp := client.DownloadDefaultKeyPairRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DownloadDefaultKeyPairRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair
-func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInput) (req *aws.Request, output *DownloadDefaultKeyPairOutput) {
+func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opDownloadDefaultKeyPair,
 		HTTPMethod: "POST",
@@ -1609,100 +744,42 @@ func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairI
 		input = &DownloadDefaultKeyPairInput{}
 	}
 
-	output = &DownloadDefaultKeyPairOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DownloadDefaultKeyPair API operation for Amazon Lightsail.
-//
-// Downloads the default SSH key pair from the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation DownloadDefaultKeyPair for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair
-func (c *Lightsail) DownloadDefaultKeyPair(input *DownloadDefaultKeyPairInput) (*DownloadDefaultKeyPairOutput, error) {
-	req, out := c.DownloadDefaultKeyPairRequest(input)
-	return out, req.Send()
-}
-
-// DownloadDefaultKeyPairWithContext is the same as DownloadDefaultKeyPair with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DownloadDefaultKeyPair for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) DownloadDefaultKeyPairWithContext(ctx aws.Context, input *DownloadDefaultKeyPairInput, opts ...aws.Option) (*DownloadDefaultKeyPairOutput, error) {
-	req, out := c.DownloadDefaultKeyPairRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DownloadDefaultKeyPairOutput{})
+	return DownloadDefaultKeyPairRequest{Request: req, Input: input}
 }
 
 const opGetActiveNames = "GetActiveNames"
 
-// GetActiveNamesRequest generates a "aws.Request" representing the
-// client's request for the GetActiveNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetActiveNamesRequest is a API request type for the GetActiveNames API operation.
+type GetActiveNamesRequest struct {
+	*aws.Request
+	Input *GetActiveNamesInput
+}
+
+// Send marshals and sends the GetActiveNames API request.
+func (r *GetActiveNamesRequest) Send() (*GetActiveNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetActiveNamesOutput), nil
+}
+
+// GetActiveNamesRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetActiveNames for more information on using the GetActiveNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the names of all active (not deleted) resources.
 //
 //    // Example sending a request using the GetActiveNamesRequest method.
-//    req, resp := client.GetActiveNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetActiveNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNames
-func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) (req *aws.Request, output *GetActiveNamesOutput) {
+func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveNamesRequest {
 	op := &aws.Operation{
 		Name:       opGetActiveNames,
 		HTTPMethod: "POST",
@@ -1713,100 +790,45 @@ func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) (req *aws.
 		input = &GetActiveNamesInput{}
 	}
 
-	output = &GetActiveNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetActiveNames API operation for Amazon Lightsail.
-//
-// Returns the names of all active (not deleted) resources.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetActiveNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNames
-func (c *Lightsail) GetActiveNames(input *GetActiveNamesInput) (*GetActiveNamesOutput, error) {
-	req, out := c.GetActiveNamesRequest(input)
-	return out, req.Send()
-}
-
-// GetActiveNamesWithContext is the same as GetActiveNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetActiveNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetActiveNamesWithContext(ctx aws.Context, input *GetActiveNamesInput, opts ...aws.Option) (*GetActiveNamesOutput, error) {
-	req, out := c.GetActiveNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetActiveNamesOutput{})
+	return GetActiveNamesRequest{Request: req, Input: input}
 }
 
 const opGetBlueprints = "GetBlueprints"
 
-// GetBlueprintsRequest generates a "aws.Request" representing the
-// client's request for the GetBlueprints operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBlueprintsRequest is a API request type for the GetBlueprints API operation.
+type GetBlueprintsRequest struct {
+	*aws.Request
+	Input *GetBlueprintsInput
+}
+
+// Send marshals and sends the GetBlueprints API request.
+func (r *GetBlueprintsRequest) Send() (*GetBlueprintsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBlueprintsOutput), nil
+}
+
+// GetBlueprintsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBlueprints for more information on using the GetBlueprints
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the list of available instance images, or blueprints. You can use
+// a blueprint to create a new virtual private server already running a specific
+// operating system, as well as a preinstalled app or development stack. The
+// software each instance is running depends on the blueprint image you choose.
 //
 //    // Example sending a request using the GetBlueprintsRequest method.
-//    req, resp := client.GetBlueprintsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBlueprintsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints
-func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) (req *aws.Request, output *GetBlueprintsOutput) {
+func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprintsRequest {
 	op := &aws.Operation{
 		Name:       opGetBlueprints,
 		HTTPMethod: "POST",
@@ -1817,103 +839,43 @@ func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) (req *aws.Re
 		input = &GetBlueprintsInput{}
 	}
 
-	output = &GetBlueprintsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBlueprints API operation for Amazon Lightsail.
-//
-// Returns the list of available instance images, or blueprints. You can use
-// a blueprint to create a new virtual private server already running a specific
-// operating system, as well as a preinstalled app or development stack. The
-// software each instance is running depends on the blueprint image you choose.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetBlueprints for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints
-func (c *Lightsail) GetBlueprints(input *GetBlueprintsInput) (*GetBlueprintsOutput, error) {
-	req, out := c.GetBlueprintsRequest(input)
-	return out, req.Send()
-}
-
-// GetBlueprintsWithContext is the same as GetBlueprints with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBlueprints for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetBlueprintsWithContext(ctx aws.Context, input *GetBlueprintsInput, opts ...aws.Option) (*GetBlueprintsOutput, error) {
-	req, out := c.GetBlueprintsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBlueprintsOutput{})
+	return GetBlueprintsRequest{Request: req, Input: input}
 }
 
 const opGetBundles = "GetBundles"
 
-// GetBundlesRequest generates a "aws.Request" representing the
-// client's request for the GetBundles operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetBundlesRequest is a API request type for the GetBundles API operation.
+type GetBundlesRequest struct {
+	*aws.Request
+	Input *GetBundlesInput
+}
+
+// Send marshals and sends the GetBundles API request.
+func (r *GetBundlesRequest) Send() (*GetBundlesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetBundlesOutput), nil
+}
+
+// GetBundlesRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetBundles for more information on using the GetBundles
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the list of bundles that are available for purchase. A bundle describes
+// the specs for your virtual private server (or instance).
 //
 //    // Example sending a request using the GetBundlesRequest method.
-//    req, resp := client.GetBundlesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetBundlesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles
-func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) (req *aws.Request, output *GetBundlesOutput) {
+func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest {
 	op := &aws.Operation{
 		Name:       opGetBundles,
 		HTTPMethod: "POST",
@@ -1924,101 +886,42 @@ func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) (req *aws.Request,
 		input = &GetBundlesInput{}
 	}
 
-	output = &GetBundlesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetBundles API operation for Amazon Lightsail.
-//
-// Returns the list of bundles that are available for purchase. A bundle describes
-// the specs for your virtual private server (or instance).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetBundles for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles
-func (c *Lightsail) GetBundles(input *GetBundlesInput) (*GetBundlesOutput, error) {
-	req, out := c.GetBundlesRequest(input)
-	return out, req.Send()
-}
-
-// GetBundlesWithContext is the same as GetBundles with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetBundles for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetBundlesWithContext(ctx aws.Context, input *GetBundlesInput, opts ...aws.Option) (*GetBundlesOutput, error) {
-	req, out := c.GetBundlesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetBundlesOutput{})
+	return GetBundlesRequest{Request: req, Input: input}
 }
 
 const opGetDomain = "GetDomain"
 
-// GetDomainRequest generates a "aws.Request" representing the
-// client's request for the GetDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDomainRequest is a API request type for the GetDomain API operation.
+type GetDomainRequest struct {
+	*aws.Request
+	Input *GetDomainInput
+}
+
+// Send marshals and sends the GetDomain API request.
+func (r *GetDomainRequest) Send() (*GetDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDomainOutput), nil
+}
+
+// GetDomainRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDomain for more information on using the GetDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific domain recordset.
 //
 //    // Example sending a request using the GetDomainRequest method.
-//    req, resp := client.GetDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomain
-func (c *Lightsail) GetDomainRequest(input *GetDomainInput) (req *aws.Request, output *GetDomainOutput) {
+func (c *Lightsail) GetDomainRequest(input *GetDomainInput) GetDomainRequest {
 	op := &aws.Operation{
 		Name:       opGetDomain,
 		HTTPMethod: "POST",
@@ -2029,100 +932,42 @@ func (c *Lightsail) GetDomainRequest(input *GetDomainInput) (req *aws.Request, o
 		input = &GetDomainInput{}
 	}
 
-	output = &GetDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDomain API operation for Amazon Lightsail.
-//
-// Returns information about a specific domain recordset.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomain
-func (c *Lightsail) GetDomain(input *GetDomainInput) (*GetDomainOutput, error) {
-	req, out := c.GetDomainRequest(input)
-	return out, req.Send()
-}
-
-// GetDomainWithContext is the same as GetDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetDomainWithContext(ctx aws.Context, input *GetDomainInput, opts ...aws.Option) (*GetDomainOutput, error) {
-	req, out := c.GetDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDomainOutput{})
+	return GetDomainRequest{Request: req, Input: input}
 }
 
 const opGetDomains = "GetDomains"
 
-// GetDomainsRequest generates a "aws.Request" representing the
-// client's request for the GetDomains operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDomainsRequest is a API request type for the GetDomains API operation.
+type GetDomainsRequest struct {
+	*aws.Request
+	Input *GetDomainsInput
+}
+
+// Send marshals and sends the GetDomains API request.
+func (r *GetDomainsRequest) Send() (*GetDomainsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDomainsOutput), nil
+}
+
+// GetDomainsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDomains for more information on using the GetDomains
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all domains in the user's account.
 //
 //    // Example sending a request using the GetDomainsRequest method.
-//    req, resp := client.GetDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDomainsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains
-func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) (req *aws.Request, output *GetDomainsOutput) {
+func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest {
 	op := &aws.Operation{
 		Name:       opGetDomains,
 		HTTPMethod: "POST",
@@ -2133,100 +978,43 @@ func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) (req *aws.Request,
 		input = &GetDomainsInput{}
 	}
 
-	output = &GetDomainsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDomains API operation for Amazon Lightsail.
-//
-// Returns a list of all domains in the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetDomains for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains
-func (c *Lightsail) GetDomains(input *GetDomainsInput) (*GetDomainsOutput, error) {
-	req, out := c.GetDomainsRequest(input)
-	return out, req.Send()
-}
-
-// GetDomainsWithContext is the same as GetDomains with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDomains for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetDomainsWithContext(ctx aws.Context, input *GetDomainsInput, opts ...aws.Option) (*GetDomainsOutput, error) {
-	req, out := c.GetDomainsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDomainsOutput{})
+	return GetDomainsRequest{Request: req, Input: input}
 }
 
 const opGetInstance = "GetInstance"
 
-// GetInstanceRequest generates a "aws.Request" representing the
-// client's request for the GetInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceRequest is a API request type for the GetInstance API operation.
+type GetInstanceRequest struct {
+	*aws.Request
+	Input *GetInstanceInput
+}
+
+// Send marshals and sends the GetInstance API request.
+func (r *GetInstanceRequest) Send() (*GetInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceOutput), nil
+}
+
+// GetInstanceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstance for more information on using the GetInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific Amazon Lightsail instance, which is
+// a virtual private server.
 //
 //    // Example sending a request using the GetInstanceRequest method.
-//    req, resp := client.GetInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance
-func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) (req *aws.Request, output *GetInstanceOutput) {
+func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) GetInstanceRequest {
 	op := &aws.Operation{
 		Name:       opGetInstance,
 		HTTPMethod: "POST",
@@ -2237,101 +1025,43 @@ func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) (req *aws.Reques
 		input = &GetInstanceInput{}
 	}
 
-	output = &GetInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstance API operation for Amazon Lightsail.
-//
-// Returns information about a specific Amazon Lightsail instance, which is
-// a virtual private server.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance
-func (c *Lightsail) GetInstance(input *GetInstanceInput) (*GetInstanceOutput, error) {
-	req, out := c.GetInstanceRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceWithContext is the same as GetInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceWithContext(ctx aws.Context, input *GetInstanceInput, opts ...aws.Option) (*GetInstanceOutput, error) {
-	req, out := c.GetInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceOutput{})
+	return GetInstanceRequest{Request: req, Input: input}
 }
 
 const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 
-// GetInstanceAccessDetailsRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceAccessDetails operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceAccessDetailsRequest is a API request type for the GetInstanceAccessDetails API operation.
+type GetInstanceAccessDetailsRequest struct {
+	*aws.Request
+	Input *GetInstanceAccessDetailsInput
+}
+
+// Send marshals and sends the GetInstanceAccessDetails API request.
+func (r *GetInstanceAccessDetailsRequest) Send() (*GetInstanceAccessDetailsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceAccessDetailsOutput), nil
+}
+
+// GetInstanceAccessDetailsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceAccessDetails for more information on using the GetInstanceAccessDetails
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns temporary SSH keys you can use to connect to a specific virtual private
+// server, or instance.
 //
 //    // Example sending a request using the GetInstanceAccessDetailsRequest method.
-//    req, resp := client.GetInstanceAccessDetailsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceAccessDetailsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetails
-func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetailsInput) (req *aws.Request, output *GetInstanceAccessDetailsOutput) {
+func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceAccessDetails,
 		HTTPMethod: "POST",
@@ -2342,101 +1072,43 @@ func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDeta
 		input = &GetInstanceAccessDetailsInput{}
 	}
 
-	output = &GetInstanceAccessDetailsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceAccessDetails API operation for Amazon Lightsail.
-//
-// Returns temporary SSH keys you can use to connect to a specific virtual private
-// server, or instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstanceAccessDetails for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetails
-func (c *Lightsail) GetInstanceAccessDetails(input *GetInstanceAccessDetailsInput) (*GetInstanceAccessDetailsOutput, error) {
-	req, out := c.GetInstanceAccessDetailsRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceAccessDetailsWithContext is the same as GetInstanceAccessDetails with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceAccessDetails for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceAccessDetailsWithContext(ctx aws.Context, input *GetInstanceAccessDetailsInput, opts ...aws.Option) (*GetInstanceAccessDetailsOutput, error) {
-	req, out := c.GetInstanceAccessDetailsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceAccessDetailsOutput{})
+	return GetInstanceAccessDetailsRequest{Request: req, Input: input}
 }
 
 const opGetInstanceMetricData = "GetInstanceMetricData"
 
-// GetInstanceMetricDataRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceMetricData operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceMetricDataRequest is a API request type for the GetInstanceMetricData API operation.
+type GetInstanceMetricDataRequest struct {
+	*aws.Request
+	Input *GetInstanceMetricDataInput
+}
+
+// Send marshals and sends the GetInstanceMetricData API request.
+func (r *GetInstanceMetricDataRequest) Send() (*GetInstanceMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceMetricDataOutput), nil
+}
+
+// GetInstanceMetricDataRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceMetricData for more information on using the GetInstanceMetricData
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the data points for the specified Amazon Lightsail instance metric,
+// given an instance name.
 //
 //    // Example sending a request using the GetInstanceMetricDataRequest method.
-//    req, resp := client.GetInstanceMetricDataRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricData
-func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput) (req *aws.Request, output *GetInstanceMetricDataOutput) {
+func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInput) GetInstanceMetricDataRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceMetricData,
 		HTTPMethod: "POST",
@@ -2447,101 +1119,42 @@ func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInp
 		input = &GetInstanceMetricDataInput{}
 	}
 
-	output = &GetInstanceMetricDataOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceMetricData API operation for Amazon Lightsail.
-//
-// Returns the data points for the specified Amazon Lightsail instance metric,
-// given an instance name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstanceMetricData for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricData
-func (c *Lightsail) GetInstanceMetricData(input *GetInstanceMetricDataInput) (*GetInstanceMetricDataOutput, error) {
-	req, out := c.GetInstanceMetricDataRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceMetricDataWithContext is the same as GetInstanceMetricData with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceMetricData for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceMetricDataWithContext(ctx aws.Context, input *GetInstanceMetricDataInput, opts ...aws.Option) (*GetInstanceMetricDataOutput, error) {
-	req, out := c.GetInstanceMetricDataRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceMetricDataOutput{})
+	return GetInstanceMetricDataRequest{Request: req, Input: input}
 }
 
 const opGetInstancePortStates = "GetInstancePortStates"
 
-// GetInstancePortStatesRequest generates a "aws.Request" representing the
-// client's request for the GetInstancePortStates operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstancePortStatesRequest is a API request type for the GetInstancePortStates API operation.
+type GetInstancePortStatesRequest struct {
+	*aws.Request
+	Input *GetInstancePortStatesInput
+}
+
+// Send marshals and sends the GetInstancePortStates API request.
+func (r *GetInstancePortStatesRequest) Send() (*GetInstancePortStatesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstancePortStatesOutput), nil
+}
+
+// GetInstancePortStatesRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstancePortStates for more information on using the GetInstancePortStates
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the port states for a specific virtual private server, or instance.
 //
 //    // Example sending a request using the GetInstancePortStatesRequest method.
-//    req, resp := client.GetInstancePortStatesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstancePortStatesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStates
-func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInput) (req *aws.Request, output *GetInstancePortStatesOutput) {
+func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInput) GetInstancePortStatesRequest {
 	op := &aws.Operation{
 		Name:       opGetInstancePortStates,
 		HTTPMethod: "POST",
@@ -2552,100 +1165,42 @@ func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInp
 		input = &GetInstancePortStatesInput{}
 	}
 
-	output = &GetInstancePortStatesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstancePortStates API operation for Amazon Lightsail.
-//
-// Returns the port states for a specific virtual private server, or instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstancePortStates for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStates
-func (c *Lightsail) GetInstancePortStates(input *GetInstancePortStatesInput) (*GetInstancePortStatesOutput, error) {
-	req, out := c.GetInstancePortStatesRequest(input)
-	return out, req.Send()
-}
-
-// GetInstancePortStatesWithContext is the same as GetInstancePortStates with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstancePortStates for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstancePortStatesWithContext(ctx aws.Context, input *GetInstancePortStatesInput, opts ...aws.Option) (*GetInstancePortStatesOutput, error) {
-	req, out := c.GetInstancePortStatesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstancePortStatesOutput{})
+	return GetInstancePortStatesRequest{Request: req, Input: input}
 }
 
 const opGetInstanceSnapshot = "GetInstanceSnapshot"
 
-// GetInstanceSnapshotRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceSnapshotRequest is a API request type for the GetInstanceSnapshot API operation.
+type GetInstanceSnapshotRequest struct {
+	*aws.Request
+	Input *GetInstanceSnapshotInput
+}
+
+// Send marshals and sends the GetInstanceSnapshot API request.
+func (r *GetInstanceSnapshotRequest) Send() (*GetInstanceSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceSnapshotOutput), nil
+}
+
+// GetInstanceSnapshotRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceSnapshot for more information on using the GetInstanceSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific instance snapshot.
 //
 //    // Example sending a request using the GetInstanceSnapshotRequest method.
-//    req, resp := client.GetInstanceSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshot
-func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) (req *aws.Request, output *GetInstanceSnapshotOutput) {
+func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) GetInstanceSnapshotRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceSnapshot,
 		HTTPMethod: "POST",
@@ -2656,100 +1211,42 @@ func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) 
 		input = &GetInstanceSnapshotInput{}
 	}
 
-	output = &GetInstanceSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceSnapshot API operation for Amazon Lightsail.
-//
-// Returns information about a specific instance snapshot.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstanceSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshot
-func (c *Lightsail) GetInstanceSnapshot(input *GetInstanceSnapshotInput) (*GetInstanceSnapshotOutput, error) {
-	req, out := c.GetInstanceSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceSnapshotWithContext is the same as GetInstanceSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceSnapshotWithContext(ctx aws.Context, input *GetInstanceSnapshotInput, opts ...aws.Option) (*GetInstanceSnapshotOutput, error) {
-	req, out := c.GetInstanceSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceSnapshotOutput{})
+	return GetInstanceSnapshotRequest{Request: req, Input: input}
 }
 
 const opGetInstanceSnapshots = "GetInstanceSnapshots"
 
-// GetInstanceSnapshotsRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceSnapshots operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceSnapshotsRequest is a API request type for the GetInstanceSnapshots API operation.
+type GetInstanceSnapshotsRequest struct {
+	*aws.Request
+	Input *GetInstanceSnapshotsInput
+}
+
+// Send marshals and sends the GetInstanceSnapshots API request.
+func (r *GetInstanceSnapshotsRequest) Send() (*GetInstanceSnapshotsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceSnapshotsOutput), nil
+}
+
+// GetInstanceSnapshotsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceSnapshots for more information on using the GetInstanceSnapshots
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all instance snapshots for the user's account.
 //
 //    // Example sending a request using the GetInstanceSnapshotsRequest method.
-//    req, resp := client.GetInstanceSnapshotsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceSnapshotsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshots
-func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput) (req *aws.Request, output *GetInstanceSnapshotsOutput) {
+func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput) GetInstanceSnapshotsRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceSnapshots,
 		HTTPMethod: "POST",
@@ -2760,100 +1257,42 @@ func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput
 		input = &GetInstanceSnapshotsInput{}
 	}
 
-	output = &GetInstanceSnapshotsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceSnapshots API operation for Amazon Lightsail.
-//
-// Returns all instance snapshots for the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstanceSnapshots for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshots
-func (c *Lightsail) GetInstanceSnapshots(input *GetInstanceSnapshotsInput) (*GetInstanceSnapshotsOutput, error) {
-	req, out := c.GetInstanceSnapshotsRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceSnapshotsWithContext is the same as GetInstanceSnapshots with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceSnapshots for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceSnapshotsWithContext(ctx aws.Context, input *GetInstanceSnapshotsInput, opts ...aws.Option) (*GetInstanceSnapshotsOutput, error) {
-	req, out := c.GetInstanceSnapshotsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceSnapshotsOutput{})
+	return GetInstanceSnapshotsRequest{Request: req, Input: input}
 }
 
 const opGetInstanceState = "GetInstanceState"
 
-// GetInstanceStateRequest generates a "aws.Request" representing the
-// client's request for the GetInstanceState operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstanceStateRequest is a API request type for the GetInstanceState API operation.
+type GetInstanceStateRequest struct {
+	*aws.Request
+	Input *GetInstanceStateInput
+}
+
+// Send marshals and sends the GetInstanceState API request.
+func (r *GetInstanceStateRequest) Send() (*GetInstanceStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceStateOutput), nil
+}
+
+// GetInstanceStateRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstanceState for more information on using the GetInstanceState
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the state of a specific instance. Works on one instance at a time.
 //
 //    // Example sending a request using the GetInstanceStateRequest method.
-//    req, resp := client.GetInstanceStateRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstanceStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceState
-func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) (req *aws.Request, output *GetInstanceStateOutput) {
+func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) GetInstanceStateRequest {
 	op := &aws.Operation{
 		Name:       opGetInstanceState,
 		HTTPMethod: "POST",
@@ -2864,100 +1303,43 @@ func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) (req *
 		input = &GetInstanceStateInput{}
 	}
 
-	output = &GetInstanceStateOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstanceState API operation for Amazon Lightsail.
-//
-// Returns the state of a specific instance. Works on one instance at a time.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstanceState for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceState
-func (c *Lightsail) GetInstanceState(input *GetInstanceStateInput) (*GetInstanceStateOutput, error) {
-	req, out := c.GetInstanceStateRequest(input)
-	return out, req.Send()
-}
-
-// GetInstanceStateWithContext is the same as GetInstanceState with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstanceState for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstanceStateWithContext(ctx aws.Context, input *GetInstanceStateInput, opts ...aws.Option) (*GetInstanceStateOutput, error) {
-	req, out := c.GetInstanceStateRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstanceStateOutput{})
+	return GetInstanceStateRequest{Request: req, Input: input}
 }
 
 const opGetInstances = "GetInstances"
 
-// GetInstancesRequest generates a "aws.Request" representing the
-// client's request for the GetInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInstancesRequest is a API request type for the GetInstances API operation.
+type GetInstancesRequest struct {
+	*aws.Request
+	Input *GetInstancesInput
+}
+
+// Send marshals and sends the GetInstances API request.
+func (r *GetInstancesRequest) Send() (*GetInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstancesOutput), nil
+}
+
+// GetInstancesRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInstances for more information on using the GetInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about all Amazon Lightsail virtual private servers, or
+// instances.
 //
 //    // Example sending a request using the GetInstancesRequest method.
-//    req, resp := client.GetInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances
-func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) (req *aws.Request, output *GetInstancesOutput) {
+func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) GetInstancesRequest {
 	op := &aws.Operation{
 		Name:       opGetInstances,
 		HTTPMethod: "POST",
@@ -2968,101 +1350,42 @@ func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) (req *aws.Requ
 		input = &GetInstancesInput{}
 	}
 
-	output = &GetInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInstances API operation for Amazon Lightsail.
-//
-// Returns information about all Amazon Lightsail virtual private servers, or
-// instances.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances
-func (c *Lightsail) GetInstances(input *GetInstancesInput) (*GetInstancesOutput, error) {
-	req, out := c.GetInstancesRequest(input)
-	return out, req.Send()
-}
-
-// GetInstancesWithContext is the same as GetInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetInstancesWithContext(ctx aws.Context, input *GetInstancesInput, opts ...aws.Option) (*GetInstancesOutput, error) {
-	req, out := c.GetInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInstancesOutput{})
+	return GetInstancesRequest{Request: req, Input: input}
 }
 
 const opGetKeyPair = "GetKeyPair"
 
-// GetKeyPairRequest generates a "aws.Request" representing the
-// client's request for the GetKeyPair operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetKeyPairRequest is a API request type for the GetKeyPair API operation.
+type GetKeyPairRequest struct {
+	*aws.Request
+	Input *GetKeyPairInput
+}
+
+// Send marshals and sends the GetKeyPair API request.
+func (r *GetKeyPairRequest) Send() (*GetKeyPairOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetKeyPairOutput), nil
+}
+
+// GetKeyPairRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetKeyPair for more information on using the GetKeyPair
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific key pair.
 //
 //    // Example sending a request using the GetKeyPairRequest method.
-//    req, resp := client.GetKeyPairRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetKeyPairRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair
-func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) (req *aws.Request, output *GetKeyPairOutput) {
+func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyPair,
 		HTTPMethod: "POST",
@@ -3073,100 +1396,42 @@ func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) (req *aws.Request,
 		input = &GetKeyPairInput{}
 	}
 
-	output = &GetKeyPairOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetKeyPair API operation for Amazon Lightsail.
-//
-// Returns information about a specific key pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetKeyPair for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair
-func (c *Lightsail) GetKeyPair(input *GetKeyPairInput) (*GetKeyPairOutput, error) {
-	req, out := c.GetKeyPairRequest(input)
-	return out, req.Send()
-}
-
-// GetKeyPairWithContext is the same as GetKeyPair with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetKeyPair for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetKeyPairWithContext(ctx aws.Context, input *GetKeyPairInput, opts ...aws.Option) (*GetKeyPairOutput, error) {
-	req, out := c.GetKeyPairRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetKeyPairOutput{})
+	return GetKeyPairRequest{Request: req, Input: input}
 }
 
 const opGetKeyPairs = "GetKeyPairs"
 
-// GetKeyPairsRequest generates a "aws.Request" representing the
-// client's request for the GetKeyPairs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetKeyPairsRequest is a API request type for the GetKeyPairs API operation.
+type GetKeyPairsRequest struct {
+	*aws.Request
+	Input *GetKeyPairsInput
+}
+
+// Send marshals and sends the GetKeyPairs API request.
+func (r *GetKeyPairsRequest) Send() (*GetKeyPairsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetKeyPairsOutput), nil
+}
+
+// GetKeyPairsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetKeyPairs for more information on using the GetKeyPairs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about all key pairs in the user's account.
 //
 //    // Example sending a request using the GetKeyPairsRequest method.
-//    req, resp := client.GetKeyPairsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetKeyPairsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairs
-func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) (req *aws.Request, output *GetKeyPairsOutput) {
+func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) GetKeyPairsRequest {
 	op := &aws.Operation{
 		Name:       opGetKeyPairs,
 		HTTPMethod: "POST",
@@ -3177,100 +1442,44 @@ func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) (req *aws.Reques
 		input = &GetKeyPairsInput{}
 	}
 
-	output = &GetKeyPairsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetKeyPairs API operation for Amazon Lightsail.
-//
-// Returns information about all key pairs in the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetKeyPairs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairs
-func (c *Lightsail) GetKeyPairs(input *GetKeyPairsInput) (*GetKeyPairsOutput, error) {
-	req, out := c.GetKeyPairsRequest(input)
-	return out, req.Send()
-}
-
-// GetKeyPairsWithContext is the same as GetKeyPairs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetKeyPairs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetKeyPairsWithContext(ctx aws.Context, input *GetKeyPairsInput, opts ...aws.Option) (*GetKeyPairsOutput, error) {
-	req, out := c.GetKeyPairsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetKeyPairsOutput{})
+	return GetKeyPairsRequest{Request: req, Input: input}
 }
 
 const opGetOperation = "GetOperation"
 
-// GetOperationRequest generates a "aws.Request" representing the
-// client's request for the GetOperation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOperationRequest is a API request type for the GetOperation API operation.
+type GetOperationRequest struct {
+	*aws.Request
+	Input *GetOperationInput
+}
+
+// Send marshals and sends the GetOperation API request.
+func (r *GetOperationRequest) Send() (*GetOperationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOperationOutput), nil
+}
+
+// GetOperationRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetOperation for more information on using the GetOperation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific operation. Operations include events
+// such as when you create an instance, allocate a static IP, attach a static
+// IP, and so on.
 //
 //    // Example sending a request using the GetOperationRequest method.
-//    req, resp := client.GetOperationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOperationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperation
-func (c *Lightsail) GetOperationRequest(input *GetOperationInput) (req *aws.Request, output *GetOperationOutput) {
+func (c *Lightsail) GetOperationRequest(input *GetOperationInput) GetOperationRequest {
 	op := &aws.Operation{
 		Name:       opGetOperation,
 		HTTPMethod: "POST",
@@ -3281,102 +1490,46 @@ func (c *Lightsail) GetOperationRequest(input *GetOperationInput) (req *aws.Requ
 		input = &GetOperationInput{}
 	}
 
-	output = &GetOperationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOperation API operation for Amazon Lightsail.
-//
-// Returns information about a specific operation. Operations include events
-// such as when you create an instance, allocate a static IP, attach a static
-// IP, and so on.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetOperation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperation
-func (c *Lightsail) GetOperation(input *GetOperationInput) (*GetOperationOutput, error) {
-	req, out := c.GetOperationRequest(input)
-	return out, req.Send()
-}
-
-// GetOperationWithContext is the same as GetOperation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOperation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetOperationWithContext(ctx aws.Context, input *GetOperationInput, opts ...aws.Option) (*GetOperationOutput, error) {
-	req, out := c.GetOperationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOperationOutput{})
+	return GetOperationRequest{Request: req, Input: input}
 }
 
 const opGetOperations = "GetOperations"
 
-// GetOperationsRequest generates a "aws.Request" representing the
-// client's request for the GetOperations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOperationsRequest is a API request type for the GetOperations API operation.
+type GetOperationsRequest struct {
+	*aws.Request
+	Input *GetOperationsInput
+}
+
+// Send marshals and sends the GetOperations API request.
+func (r *GetOperationsRequest) Send() (*GetOperationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOperationsOutput), nil
+}
+
+// GetOperationsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about all operations.
 //
-// See GetOperations for more information on using the GetOperations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Results are returned from oldest to newest, up to a maximum of 200. Results
+// can be paged by making each subsequent call to GetOperations use the maximum
+// (last) statusChangedAt value from the previous request.
 //
 //    // Example sending a request using the GetOperationsRequest method.
-//    req, resp := client.GetOperationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOperationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperations
-func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) (req *aws.Request, output *GetOperationsOutput) {
+func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) GetOperationsRequest {
 	op := &aws.Operation{
 		Name:       opGetOperations,
 		HTTPMethod: "POST",
@@ -3387,104 +1540,42 @@ func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) (req *aws.Re
 		input = &GetOperationsInput{}
 	}
 
-	output = &GetOperationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOperations API operation for Amazon Lightsail.
-//
-// Returns information about all operations.
-//
-// Results are returned from oldest to newest, up to a maximum of 200. Results
-// can be paged by making each subsequent call to GetOperations use the maximum
-// (last) statusChangedAt value from the previous request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetOperations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperations
-func (c *Lightsail) GetOperations(input *GetOperationsInput) (*GetOperationsOutput, error) {
-	req, out := c.GetOperationsRequest(input)
-	return out, req.Send()
-}
-
-// GetOperationsWithContext is the same as GetOperations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOperations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetOperationsWithContext(ctx aws.Context, input *GetOperationsInput, opts ...aws.Option) (*GetOperationsOutput, error) {
-	req, out := c.GetOperationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOperationsOutput{})
+	return GetOperationsRequest{Request: req, Input: input}
 }
 
 const opGetOperationsForResource = "GetOperationsForResource"
 
-// GetOperationsForResourceRequest generates a "aws.Request" representing the
-// client's request for the GetOperationsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetOperationsForResourceRequest is a API request type for the GetOperationsForResource API operation.
+type GetOperationsForResourceRequest struct {
+	*aws.Request
+	Input *GetOperationsForResourceInput
+}
+
+// Send marshals and sends the GetOperationsForResource API request.
+func (r *GetOperationsForResourceRequest) Send() (*GetOperationsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetOperationsForResourceOutput), nil
+}
+
+// GetOperationsForResourceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetOperationsForResource for more information on using the GetOperationsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets operations for a specific resource (e.g., an instance or a static IP).
 //
 //    // Example sending a request using the GetOperationsForResourceRequest method.
-//    req, resp := client.GetOperationsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetOperationsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource
-func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResourceInput) (req *aws.Request, output *GetOperationsForResourceOutput) {
+func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResourceInput) GetOperationsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opGetOperationsForResource,
 		HTTPMethod: "POST",
@@ -3495,100 +1586,43 @@ func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResou
 		input = &GetOperationsForResourceInput{}
 	}
 
-	output = &GetOperationsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetOperationsForResource API operation for Amazon Lightsail.
-//
-// Gets operations for a specific resource (e.g., an instance or a static IP).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetOperationsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource
-func (c *Lightsail) GetOperationsForResource(input *GetOperationsForResourceInput) (*GetOperationsForResourceOutput, error) {
-	req, out := c.GetOperationsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// GetOperationsForResourceWithContext is the same as GetOperationsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetOperationsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetOperationsForResourceWithContext(ctx aws.Context, input *GetOperationsForResourceInput, opts ...aws.Option) (*GetOperationsForResourceOutput, error) {
-	req, out := c.GetOperationsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetOperationsForResourceOutput{})
+	return GetOperationsForResourceRequest{Request: req, Input: input}
 }
 
 const opGetRegions = "GetRegions"
 
-// GetRegionsRequest generates a "aws.Request" representing the
-// client's request for the GetRegions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetRegionsRequest is a API request type for the GetRegions API operation.
+type GetRegionsRequest struct {
+	*aws.Request
+	Input *GetRegionsInput
+}
+
+// Send marshals and sends the GetRegions API request.
+func (r *GetRegionsRequest) Send() (*GetRegionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetRegionsOutput), nil
+}
+
+// GetRegionsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetRegions for more information on using the GetRegions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a list of all valid regions for Amazon Lightsail. Use the include
+// availability zones parameter to also return the availability zones in a region.
 //
 //    // Example sending a request using the GetRegionsRequest method.
-//    req, resp := client.GetRegionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetRegionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegions
-func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) (req *aws.Request, output *GetRegionsOutput) {
+func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) GetRegionsRequest {
 	op := &aws.Operation{
 		Name:       opGetRegions,
 		HTTPMethod: "POST",
@@ -3599,101 +1633,42 @@ func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) (req *aws.Request,
 		input = &GetRegionsInput{}
 	}
 
-	output = &GetRegionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetRegions API operation for Amazon Lightsail.
-//
-// Returns a list of all valid regions for Amazon Lightsail. Use the include
-// availability zones parameter to also return the availability zones in a region.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetRegions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegions
-func (c *Lightsail) GetRegions(input *GetRegionsInput) (*GetRegionsOutput, error) {
-	req, out := c.GetRegionsRequest(input)
-	return out, req.Send()
-}
-
-// GetRegionsWithContext is the same as GetRegions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetRegions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetRegionsWithContext(ctx aws.Context, input *GetRegionsInput, opts ...aws.Option) (*GetRegionsOutput, error) {
-	req, out := c.GetRegionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetRegionsOutput{})
+	return GetRegionsRequest{Request: req, Input: input}
 }
 
 const opGetStaticIp = "GetStaticIp"
 
-// GetStaticIpRequest generates a "aws.Request" representing the
-// client's request for the GetStaticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetStaticIpRequest is a API request type for the GetStaticIp API operation.
+type GetStaticIpRequest struct {
+	*aws.Request
+	Input *GetStaticIpInput
+}
+
+// Send marshals and sends the GetStaticIp API request.
+func (r *GetStaticIpRequest) Send() (*GetStaticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStaticIpOutput), nil
+}
+
+// GetStaticIpRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetStaticIp for more information on using the GetStaticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about a specific static IP.
 //
 //    // Example sending a request using the GetStaticIpRequest method.
-//    req, resp := client.GetStaticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetStaticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIp
-func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) (req *aws.Request, output *GetStaticIpOutput) {
+func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opGetStaticIp,
 		HTTPMethod: "POST",
@@ -3704,100 +1679,42 @@ func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) (req *aws.Reques
 		input = &GetStaticIpInput{}
 	}
 
-	output = &GetStaticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetStaticIp API operation for Amazon Lightsail.
-//
-// Returns information about a specific static IP.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetStaticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIp
-func (c *Lightsail) GetStaticIp(input *GetStaticIpInput) (*GetStaticIpOutput, error) {
-	req, out := c.GetStaticIpRequest(input)
-	return out, req.Send()
-}
-
-// GetStaticIpWithContext is the same as GetStaticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetStaticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetStaticIpWithContext(ctx aws.Context, input *GetStaticIpInput, opts ...aws.Option) (*GetStaticIpOutput, error) {
-	req, out := c.GetStaticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetStaticIpOutput{})
+	return GetStaticIpRequest{Request: req, Input: input}
 }
 
 const opGetStaticIps = "GetStaticIps"
 
-// GetStaticIpsRequest generates a "aws.Request" representing the
-// client's request for the GetStaticIps operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetStaticIpsRequest is a API request type for the GetStaticIps API operation.
+type GetStaticIpsRequest struct {
+	*aws.Request
+	Input *GetStaticIpsInput
+}
+
+// Send marshals and sends the GetStaticIps API request.
+func (r *GetStaticIpsRequest) Send() (*GetStaticIpsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStaticIpsOutput), nil
+}
+
+// GetStaticIpsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetStaticIps for more information on using the GetStaticIps
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns information about all static IPs in the user's account.
 //
 //    // Example sending a request using the GetStaticIpsRequest method.
-//    req, resp := client.GetStaticIpsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetStaticIpsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIps
-func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) (req *aws.Request, output *GetStaticIpsOutput) {
+func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) GetStaticIpsRequest {
 	op := &aws.Operation{
 		Name:       opGetStaticIps,
 		HTTPMethod: "POST",
@@ -3808,100 +1725,42 @@ func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) (req *aws.Requ
 		input = &GetStaticIpsInput{}
 	}
 
-	output = &GetStaticIpsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetStaticIps API operation for Amazon Lightsail.
-//
-// Returns information about all static IPs in the user's account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation GetStaticIps for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIps
-func (c *Lightsail) GetStaticIps(input *GetStaticIpsInput) (*GetStaticIpsOutput, error) {
-	req, out := c.GetStaticIpsRequest(input)
-	return out, req.Send()
-}
-
-// GetStaticIpsWithContext is the same as GetStaticIps with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetStaticIps for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) GetStaticIpsWithContext(ctx aws.Context, input *GetStaticIpsInput, opts ...aws.Option) (*GetStaticIpsOutput, error) {
-	req, out := c.GetStaticIpsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetStaticIpsOutput{})
+	return GetStaticIpsRequest{Request: req, Input: input}
 }
 
 const opImportKeyPair = "ImportKeyPair"
 
-// ImportKeyPairRequest generates a "aws.Request" representing the
-// client's request for the ImportKeyPair operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ImportKeyPairRequest is a API request type for the ImportKeyPair API operation.
+type ImportKeyPairRequest struct {
+	*aws.Request
+	Input *ImportKeyPairInput
+}
+
+// Send marshals and sends the ImportKeyPair API request.
+func (r *ImportKeyPairRequest) Send() (*ImportKeyPairOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ImportKeyPairOutput), nil
+}
+
+// ImportKeyPairRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ImportKeyPair for more information on using the ImportKeyPair
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Imports a public SSH key from a specific key pair.
 //
 //    // Example sending a request using the ImportKeyPairRequest method.
-//    req, resp := client.ImportKeyPairRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ImportKeyPairRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPair
-func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) (req *aws.Request, output *ImportKeyPairOutput) {
+func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairRequest {
 	op := &aws.Operation{
 		Name:       opImportKeyPair,
 		HTTPMethod: "POST",
@@ -3912,100 +1771,42 @@ func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) (req *aws.Re
 		input = &ImportKeyPairInput{}
 	}
 
-	output = &ImportKeyPairOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ImportKeyPair API operation for Amazon Lightsail.
-//
-// Imports a public SSH key from a specific key pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation ImportKeyPair for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPair
-func (c *Lightsail) ImportKeyPair(input *ImportKeyPairInput) (*ImportKeyPairOutput, error) {
-	req, out := c.ImportKeyPairRequest(input)
-	return out, req.Send()
-}
-
-// ImportKeyPairWithContext is the same as ImportKeyPair with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ImportKeyPair for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) ImportKeyPairWithContext(ctx aws.Context, input *ImportKeyPairInput, opts ...aws.Option) (*ImportKeyPairOutput, error) {
-	req, out := c.ImportKeyPairRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ImportKeyPairOutput{})
+	return ImportKeyPairRequest{Request: req, Input: input}
 }
 
 const opIsVpcPeered = "IsVpcPeered"
 
-// IsVpcPeeredRequest generates a "aws.Request" representing the
-// client's request for the IsVpcPeered operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// IsVpcPeeredRequest is a API request type for the IsVpcPeered API operation.
+type IsVpcPeeredRequest struct {
+	*aws.Request
+	Input *IsVpcPeeredInput
+}
+
+// Send marshals and sends the IsVpcPeered API request.
+func (r *IsVpcPeeredRequest) Send() (*IsVpcPeeredOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*IsVpcPeeredOutput), nil
+}
+
+// IsVpcPeeredRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See IsVpcPeered for more information on using the IsVpcPeered
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a Boolean value indicating whether your Lightsail VPC is peered.
 //
 //    // Example sending a request using the IsVpcPeeredRequest method.
-//    req, resp := client.IsVpcPeeredRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.IsVpcPeeredRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeered
-func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) (req *aws.Request, output *IsVpcPeeredOutput) {
+func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredRequest {
 	op := &aws.Operation{
 		Name:       opIsVpcPeered,
 		HTTPMethod: "POST",
@@ -4016,100 +1817,42 @@ func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) (req *aws.Reques
 		input = &IsVpcPeeredInput{}
 	}
 
-	output = &IsVpcPeeredOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// IsVpcPeered API operation for Amazon Lightsail.
-//
-// Returns a Boolean value indicating whether your Lightsail VPC is peered.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation IsVpcPeered for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeered
-func (c *Lightsail) IsVpcPeered(input *IsVpcPeeredInput) (*IsVpcPeeredOutput, error) {
-	req, out := c.IsVpcPeeredRequest(input)
-	return out, req.Send()
-}
-
-// IsVpcPeeredWithContext is the same as IsVpcPeered with the addition of
-// the ability to pass a context and additional request options.
-//
-// See IsVpcPeered for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) IsVpcPeeredWithContext(ctx aws.Context, input *IsVpcPeeredInput, opts ...aws.Option) (*IsVpcPeeredOutput, error) {
-	req, out := c.IsVpcPeeredRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &IsVpcPeeredOutput{})
+	return IsVpcPeeredRequest{Request: req, Input: input}
 }
 
 const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 
-// OpenInstancePublicPortsRequest generates a "aws.Request" representing the
-// client's request for the OpenInstancePublicPorts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// OpenInstancePublicPortsRequest is a API request type for the OpenInstancePublicPorts API operation.
+type OpenInstancePublicPortsRequest struct {
+	*aws.Request
+	Input *OpenInstancePublicPortsInput
+}
+
+// Send marshals and sends the OpenInstancePublicPorts API request.
+func (r *OpenInstancePublicPortsRequest) Send() (*OpenInstancePublicPortsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OpenInstancePublicPortsOutput), nil
+}
+
+// OpenInstancePublicPortsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See OpenInstancePublicPorts for more information on using the OpenInstancePublicPorts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds public ports to an Amazon Lightsail instance.
 //
 //    // Example sending a request using the OpenInstancePublicPortsRequest method.
-//    req, resp := client.OpenInstancePublicPortsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.OpenInstancePublicPortsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPorts
-func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsInput) (req *aws.Request, output *OpenInstancePublicPortsOutput) {
+func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opOpenInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -4120,100 +1863,42 @@ func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPort
 		input = &OpenInstancePublicPortsInput{}
 	}
 
-	output = &OpenInstancePublicPortsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// OpenInstancePublicPorts API operation for Amazon Lightsail.
-//
-// Adds public ports to an Amazon Lightsail instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation OpenInstancePublicPorts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPorts
-func (c *Lightsail) OpenInstancePublicPorts(input *OpenInstancePublicPortsInput) (*OpenInstancePublicPortsOutput, error) {
-	req, out := c.OpenInstancePublicPortsRequest(input)
-	return out, req.Send()
-}
-
-// OpenInstancePublicPortsWithContext is the same as OpenInstancePublicPorts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See OpenInstancePublicPorts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) OpenInstancePublicPortsWithContext(ctx aws.Context, input *OpenInstancePublicPortsInput, opts ...aws.Option) (*OpenInstancePublicPortsOutput, error) {
-	req, out := c.OpenInstancePublicPortsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &OpenInstancePublicPortsOutput{})
+	return OpenInstancePublicPortsRequest{Request: req, Input: input}
 }
 
 const opPeerVpc = "PeerVpc"
 
-// PeerVpcRequest generates a "aws.Request" representing the
-// client's request for the PeerVpc operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PeerVpcRequest is a API request type for the PeerVpc API operation.
+type PeerVpcRequest struct {
+	*aws.Request
+	Input *PeerVpcInput
+}
+
+// Send marshals and sends the PeerVpc API request.
+func (r *PeerVpcRequest) Send() (*PeerVpcOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PeerVpcOutput), nil
+}
+
+// PeerVpcRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PeerVpc for more information on using the PeerVpc
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Tries to peer the Lightsail VPC with the user's default VPC.
 //
 //    // Example sending a request using the PeerVpcRequest method.
-//    req, resp := client.PeerVpcRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PeerVpcRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpc
-func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) (req *aws.Request, output *PeerVpcOutput) {
+func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
 	op := &aws.Operation{
 		Name:       opPeerVpc,
 		HTTPMethod: "POST",
@@ -4224,100 +1909,43 @@ func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) (req *aws.Request, outpu
 		input = &PeerVpcInput{}
 	}
 
-	output = &PeerVpcOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PeerVpc API operation for Amazon Lightsail.
-//
-// Tries to peer the Lightsail VPC with the user's default VPC.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation PeerVpc for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpc
-func (c *Lightsail) PeerVpc(input *PeerVpcInput) (*PeerVpcOutput, error) {
-	req, out := c.PeerVpcRequest(input)
-	return out, req.Send()
-}
-
-// PeerVpcWithContext is the same as PeerVpc with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PeerVpc for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) PeerVpcWithContext(ctx aws.Context, input *PeerVpcInput, opts ...aws.Option) (*PeerVpcOutput, error) {
-	req, out := c.PeerVpcRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PeerVpcOutput{})
+	return PeerVpcRequest{Request: req, Input: input}
 }
 
 const opPutInstancePublicPorts = "PutInstancePublicPorts"
 
-// PutInstancePublicPortsRequest generates a "aws.Request" representing the
-// client's request for the PutInstancePublicPorts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutInstancePublicPortsRequest is a API request type for the PutInstancePublicPorts API operation.
+type PutInstancePublicPortsRequest struct {
+	*aws.Request
+	Input *PutInstancePublicPortsInput
+}
+
+// Send marshals and sends the PutInstancePublicPorts API request.
+func (r *PutInstancePublicPortsRequest) Send() (*PutInstancePublicPortsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutInstancePublicPortsOutput), nil
+}
+
+// PutInstancePublicPortsRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutInstancePublicPorts for more information on using the PutInstancePublicPorts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the specified open ports for an Amazon Lightsail instance, and closes
+// all ports for every protocol not included in the current request.
 //
 //    // Example sending a request using the PutInstancePublicPortsRequest method.
-//    req, resp := client.PutInstancePublicPortsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutInstancePublicPortsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPorts
-func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInput) (req *aws.Request, output *PutInstancePublicPortsOutput) {
+func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsInput) PutInstancePublicPortsRequest {
 	op := &aws.Operation{
 		Name:       opPutInstancePublicPorts,
 		HTTPMethod: "POST",
@@ -4328,101 +1956,45 @@ func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsI
 		input = &PutInstancePublicPortsInput{}
 	}
 
-	output = &PutInstancePublicPortsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutInstancePublicPorts API operation for Amazon Lightsail.
-//
-// Sets the specified open ports for an Amazon Lightsail instance, and closes
-// all ports for every protocol not included in the current request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation PutInstancePublicPorts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPorts
-func (c *Lightsail) PutInstancePublicPorts(input *PutInstancePublicPortsInput) (*PutInstancePublicPortsOutput, error) {
-	req, out := c.PutInstancePublicPortsRequest(input)
-	return out, req.Send()
-}
-
-// PutInstancePublicPortsWithContext is the same as PutInstancePublicPorts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutInstancePublicPorts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) PutInstancePublicPortsWithContext(ctx aws.Context, input *PutInstancePublicPortsInput, opts ...aws.Option) (*PutInstancePublicPortsOutput, error) {
-	req, out := c.PutInstancePublicPortsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutInstancePublicPortsOutput{})
+	return PutInstancePublicPortsRequest{Request: req, Input: input}
 }
 
 const opRebootInstance = "RebootInstance"
 
-// RebootInstanceRequest generates a "aws.Request" representing the
-// client's request for the RebootInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RebootInstanceRequest is a API request type for the RebootInstance API operation.
+type RebootInstanceRequest struct {
+	*aws.Request
+	Input *RebootInstanceInput
+}
+
+// Send marshals and sends the RebootInstance API request.
+func (r *RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootInstanceOutput), nil
+}
+
+// RebootInstanceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RebootInstance for more information on using the RebootInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Restarts a specific instance. When your Amazon Lightsail instance is finished
+// rebooting, Lightsail assigns a new public IP address. To use the same IP
+// address after restarting, create a static IP address and attach it to the
+// instance.
 //
 //    // Example sending a request using the RebootInstanceRequest method.
-//    req, resp := client.RebootInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RebootInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstance
-func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.Request, output *RebootInstanceOutput) {
+func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) RebootInstanceRequest {
 	op := &aws.Operation{
 		Name:       opRebootInstance,
 		HTTPMethod: "POST",
@@ -4433,103 +2005,42 @@ func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.
 		input = &RebootInstanceInput{}
 	}
 
-	output = &RebootInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RebootInstance API operation for Amazon Lightsail.
-//
-// Restarts a specific instance. When your Amazon Lightsail instance is finished
-// rebooting, Lightsail assigns a new public IP address. To use the same IP
-// address after restarting, create a static IP address and attach it to the
-// instance.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation RebootInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstance
-func (c *Lightsail) RebootInstance(input *RebootInstanceInput) (*RebootInstanceOutput, error) {
-	req, out := c.RebootInstanceRequest(input)
-	return out, req.Send()
-}
-
-// RebootInstanceWithContext is the same as RebootInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RebootInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...aws.Option) (*RebootInstanceOutput, error) {
-	req, out := c.RebootInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RebootInstanceOutput{})
+	return RebootInstanceRequest{Request: req, Input: input}
 }
 
 const opReleaseStaticIp = "ReleaseStaticIp"
 
-// ReleaseStaticIpRequest generates a "aws.Request" representing the
-// client's request for the ReleaseStaticIp operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ReleaseStaticIpRequest is a API request type for the ReleaseStaticIp API operation.
+type ReleaseStaticIpRequest struct {
+	*aws.Request
+	Input *ReleaseStaticIpInput
+}
+
+// Send marshals and sends the ReleaseStaticIp API request.
+func (r *ReleaseStaticIpRequest) Send() (*ReleaseStaticIpOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ReleaseStaticIpOutput), nil
+}
+
+// ReleaseStaticIpRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ReleaseStaticIp for more information on using the ReleaseStaticIp
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a specific static IP from your account.
 //
 //    // Example sending a request using the ReleaseStaticIpRequest method.
-//    req, resp := client.ReleaseStaticIpRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ReleaseStaticIpRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIp
-func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) (req *aws.Request, output *ReleaseStaticIpOutput) {
+func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseStaticIpRequest {
 	op := &aws.Operation{
 		Name:       opReleaseStaticIp,
 		HTTPMethod: "POST",
@@ -4540,100 +2051,43 @@ func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) (req *aw
 		input = &ReleaseStaticIpInput{}
 	}
 
-	output = &ReleaseStaticIpOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ReleaseStaticIp API operation for Amazon Lightsail.
-//
-// Deletes a specific static IP from your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation ReleaseStaticIp for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIp
-func (c *Lightsail) ReleaseStaticIp(input *ReleaseStaticIpInput) (*ReleaseStaticIpOutput, error) {
-	req, out := c.ReleaseStaticIpRequest(input)
-	return out, req.Send()
-}
-
-// ReleaseStaticIpWithContext is the same as ReleaseStaticIp with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ReleaseStaticIp for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) ReleaseStaticIpWithContext(ctx aws.Context, input *ReleaseStaticIpInput, opts ...aws.Option) (*ReleaseStaticIpOutput, error) {
-	req, out := c.ReleaseStaticIpRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ReleaseStaticIpOutput{})
+	return ReleaseStaticIpRequest{Request: req, Input: input}
 }
 
 const opStartInstance = "StartInstance"
 
-// StartInstanceRequest generates a "aws.Request" representing the
-// client's request for the StartInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartInstanceRequest is a API request type for the StartInstance API operation.
+type StartInstanceRequest struct {
+	*aws.Request
+	Input *StartInstanceInput
+}
+
+// Send marshals and sends the StartInstance API request.
+func (r *StartInstanceRequest) Send() (*StartInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartInstanceOutput), nil
+}
+
+// StartInstanceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartInstance for more information on using the StartInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts a specific Amazon Lightsail instance from a stopped state. To restart
+// an instance, use the reboot instance operation.
 //
 //    // Example sending a request using the StartInstanceRequest method.
-//    req, resp := client.StartInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstance
-func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) (req *aws.Request, output *StartInstanceOutput) {
+func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) StartInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
@@ -4644,101 +2098,42 @@ func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) (req *aws.Re
 		input = &StartInstanceInput{}
 	}
 
-	output = &StartInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartInstance API operation for Amazon Lightsail.
-//
-// Starts a specific Amazon Lightsail instance from a stopped state. To restart
-// an instance, use the reboot instance operation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation StartInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstance
-func (c *Lightsail) StartInstance(input *StartInstanceInput) (*StartInstanceOutput, error) {
-	req, out := c.StartInstanceRequest(input)
-	return out, req.Send()
-}
-
-// StartInstanceWithContext is the same as StartInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...aws.Option) (*StartInstanceOutput, error) {
-	req, out := c.StartInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartInstanceOutput{})
+	return StartInstanceRequest{Request: req, Input: input}
 }
 
 const opStopInstance = "StopInstance"
 
-// StopInstanceRequest generates a "aws.Request" representing the
-// client's request for the StopInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopInstanceRequest is a API request type for the StopInstance API operation.
+type StopInstanceRequest struct {
+	*aws.Request
+	Input *StopInstanceInput
+}
+
+// Send marshals and sends the StopInstance API request.
+func (r *StopInstanceRequest) Send() (*StopInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopInstanceOutput), nil
+}
+
+// StopInstanceRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopInstance for more information on using the StopInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops a specific Amazon Lightsail instance that is currently running.
 //
 //    // Example sending a request using the StopInstanceRequest method.
-//    req, resp := client.StopInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstance
-func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) (req *aws.Request, output *StopInstanceOutput) {
+func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) StopInstanceRequest {
 	op := &aws.Operation{
 		Name:       opStopInstance,
 		HTTPMethod: "POST",
@@ -4749,100 +2144,42 @@ func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) (req *aws.Requ
 		input = &StopInstanceInput{}
 	}
 
-	output = &StopInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopInstance API operation for Amazon Lightsail.
-//
-// Stops a specific Amazon Lightsail instance that is currently running.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation StopInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstance
-func (c *Lightsail) StopInstance(input *StopInstanceInput) (*StopInstanceOutput, error) {
-	req, out := c.StopInstanceRequest(input)
-	return out, req.Send()
-}
-
-// StopInstanceWithContext is the same as StopInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...aws.Option) (*StopInstanceOutput, error) {
-	req, out := c.StopInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopInstanceOutput{})
+	return StopInstanceRequest{Request: req, Input: input}
 }
 
 const opUnpeerVpc = "UnpeerVpc"
 
-// UnpeerVpcRequest generates a "aws.Request" representing the
-// client's request for the UnpeerVpc operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UnpeerVpcRequest is a API request type for the UnpeerVpc API operation.
+type UnpeerVpcRequest struct {
+	*aws.Request
+	Input *UnpeerVpcInput
+}
+
+// Send marshals and sends the UnpeerVpc API request.
+func (r *UnpeerVpcRequest) Send() (*UnpeerVpcOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UnpeerVpcOutput), nil
+}
+
+// UnpeerVpcRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UnpeerVpc for more information on using the UnpeerVpc
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attempts to unpeer the Lightsail VPC from the user's default VPC.
 //
 //    // Example sending a request using the UnpeerVpcRequest method.
-//    req, resp := client.UnpeerVpcRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UnpeerVpcRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpc
-func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) (req *aws.Request, output *UnpeerVpcOutput) {
+func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 	op := &aws.Operation{
 		Name:       opUnpeerVpc,
 		HTTPMethod: "POST",
@@ -4853,100 +2190,42 @@ func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) (req *aws.Request, o
 		input = &UnpeerVpcInput{}
 	}
 
-	output = &UnpeerVpcOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UnpeerVpc API operation for Amazon Lightsail.
-//
-// Attempts to unpeer the Lightsail VPC from the user's default VPC.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation UnpeerVpc for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpc
-func (c *Lightsail) UnpeerVpc(input *UnpeerVpcInput) (*UnpeerVpcOutput, error) {
-	req, out := c.UnpeerVpcRequest(input)
-	return out, req.Send()
-}
-
-// UnpeerVpcWithContext is the same as UnpeerVpc with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UnpeerVpc for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) UnpeerVpcWithContext(ctx aws.Context, input *UnpeerVpcInput, opts ...aws.Option) (*UnpeerVpcOutput, error) {
-	req, out := c.UnpeerVpcRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UnpeerVpcOutput{})
+	return UnpeerVpcRequest{Request: req, Input: input}
 }
 
 const opUpdateDomainEntry = "UpdateDomainEntry"
 
-// UpdateDomainEntryRequest generates a "aws.Request" representing the
-// client's request for the UpdateDomainEntry operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateDomainEntryRequest is a API request type for the UpdateDomainEntry API operation.
+type UpdateDomainEntryRequest struct {
+	*aws.Request
+	Input *UpdateDomainEntryInput
+}
+
+// Send marshals and sends the UpdateDomainEntry API request.
+func (r *UpdateDomainEntryRequest) Send() (*UpdateDomainEntryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDomainEntryOutput), nil
+}
+
+// UpdateDomainEntryRequest returns a request value for making API operation for
+// Amazon Lightsail.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDomainEntry for more information on using the UpdateDomainEntry
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a domain recordset after it is created.
 //
 //    // Example sending a request using the UpdateDomainEntryRequest method.
-//    req, resp := client.UpdateDomainEntryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateDomainEntryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntry
-func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) (req *aws.Request, output *UpdateDomainEntryOutput) {
+func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) UpdateDomainEntryRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDomainEntry,
 		HTTPMethod: "POST",
@@ -4957,71 +2236,8 @@ func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) (req
 		input = &UpdateDomainEntryInput{}
 	}
 
-	output = &UpdateDomainEntryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateDomainEntry API operation for Amazon Lightsail.
-//
-// Updates a domain recordset after it is created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Lightsail's
-// API operation UpdateDomainEntry for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServiceException "ServiceException"
-//   A general service exception.
-//
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   Lightsail throws this exception when user input does not conform to the validation
-//   rules of an input field.
-//
-//   Domain-related APIs are only available in the N. Virginia (us-east-1) Region.
-//   Please set your Region configuration to us-east-1 to create, view, or edit
-//   these resources.
-//
-//   * ErrCodeNotFoundException "NotFoundException"
-//   Lightsail throws this exception when it cannot find a resource.
-//
-//   * ErrCodeOperationFailureException "OperationFailureException"
-//   Lightsail throws this exception when an operation fails to execute.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Lightsail throws this exception when the user cannot be authenticated or
-//   uses invalid credentials to access a resource.
-//
-//   * ErrCodeAccountSetupInProgressException "AccountSetupInProgressException"
-//   Lightsail throws this exception when an account is still in the setup in
-//   progress state.
-//
-//   * ErrCodeUnauthenticatedException "UnauthenticatedException"
-//   Lightsail throws this exception when the user has not been authenticated.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntry
-func (c *Lightsail) UpdateDomainEntry(input *UpdateDomainEntryInput) (*UpdateDomainEntryOutput, error) {
-	req, out := c.UpdateDomainEntryRequest(input)
-	return out, req.Send()
-}
-
-// UpdateDomainEntryWithContext is the same as UpdateDomainEntry with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDomainEntry for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lightsail) UpdateDomainEntryWithContext(ctx aws.Context, input *UpdateDomainEntryInput, opts ...aws.Option) (*UpdateDomainEntryOutput, error) {
-	req, out := c.UpdateDomainEntryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateDomainEntryOutput{})
+	return UpdateDomainEntryRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpRequest

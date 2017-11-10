@@ -63,168 +63,88 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type DirectoryServiceAPI interface {
-	AddIpRoutes(*directoryservice.AddIpRoutesInput) (*directoryservice.AddIpRoutesOutput, error)
-	AddIpRoutesWithContext(aws.Context, *directoryservice.AddIpRoutesInput, ...aws.Option) (*directoryservice.AddIpRoutesOutput, error)
-	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) (*aws.Request, *directoryservice.AddIpRoutesOutput)
+	AddIpRoutesRequest(*directoryservice.AddIpRoutesInput) directoryservice.AddIpRoutesRequest
 
-	AddTagsToResource(*directoryservice.AddTagsToResourceInput) (*directoryservice.AddTagsToResourceOutput, error)
-	AddTagsToResourceWithContext(aws.Context, *directoryservice.AddTagsToResourceInput, ...aws.Option) (*directoryservice.AddTagsToResourceOutput, error)
-	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) (*aws.Request, *directoryservice.AddTagsToResourceOutput)
+	AddTagsToResourceRequest(*directoryservice.AddTagsToResourceInput) directoryservice.AddTagsToResourceRequest
 
-	CancelSchemaExtension(*directoryservice.CancelSchemaExtensionInput) (*directoryservice.CancelSchemaExtensionOutput, error)
-	CancelSchemaExtensionWithContext(aws.Context, *directoryservice.CancelSchemaExtensionInput, ...aws.Option) (*directoryservice.CancelSchemaExtensionOutput, error)
-	CancelSchemaExtensionRequest(*directoryservice.CancelSchemaExtensionInput) (*aws.Request, *directoryservice.CancelSchemaExtensionOutput)
+	CancelSchemaExtensionRequest(*directoryservice.CancelSchemaExtensionInput) directoryservice.CancelSchemaExtensionRequest
 
-	ConnectDirectory(*directoryservice.ConnectDirectoryInput) (*directoryservice.ConnectDirectoryOutput, error)
-	ConnectDirectoryWithContext(aws.Context, *directoryservice.ConnectDirectoryInput, ...aws.Option) (*directoryservice.ConnectDirectoryOutput, error)
-	ConnectDirectoryRequest(*directoryservice.ConnectDirectoryInput) (*aws.Request, *directoryservice.ConnectDirectoryOutput)
+	ConnectDirectoryRequest(*directoryservice.ConnectDirectoryInput) directoryservice.ConnectDirectoryRequest
 
-	CreateAlias(*directoryservice.CreateAliasInput) (*directoryservice.CreateAliasOutput, error)
-	CreateAliasWithContext(aws.Context, *directoryservice.CreateAliasInput, ...aws.Option) (*directoryservice.CreateAliasOutput, error)
-	CreateAliasRequest(*directoryservice.CreateAliasInput) (*aws.Request, *directoryservice.CreateAliasOutput)
+	CreateAliasRequest(*directoryservice.CreateAliasInput) directoryservice.CreateAliasRequest
 
-	CreateComputer(*directoryservice.CreateComputerInput) (*directoryservice.CreateComputerOutput, error)
-	CreateComputerWithContext(aws.Context, *directoryservice.CreateComputerInput, ...aws.Option) (*directoryservice.CreateComputerOutput, error)
-	CreateComputerRequest(*directoryservice.CreateComputerInput) (*aws.Request, *directoryservice.CreateComputerOutput)
+	CreateComputerRequest(*directoryservice.CreateComputerInput) directoryservice.CreateComputerRequest
 
-	CreateConditionalForwarder(*directoryservice.CreateConditionalForwarderInput) (*directoryservice.CreateConditionalForwarderOutput, error)
-	CreateConditionalForwarderWithContext(aws.Context, *directoryservice.CreateConditionalForwarderInput, ...aws.Option) (*directoryservice.CreateConditionalForwarderOutput, error)
-	CreateConditionalForwarderRequest(*directoryservice.CreateConditionalForwarderInput) (*aws.Request, *directoryservice.CreateConditionalForwarderOutput)
+	CreateConditionalForwarderRequest(*directoryservice.CreateConditionalForwarderInput) directoryservice.CreateConditionalForwarderRequest
 
-	CreateDirectory(*directoryservice.CreateDirectoryInput) (*directoryservice.CreateDirectoryOutput, error)
-	CreateDirectoryWithContext(aws.Context, *directoryservice.CreateDirectoryInput, ...aws.Option) (*directoryservice.CreateDirectoryOutput, error)
-	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) (*aws.Request, *directoryservice.CreateDirectoryOutput)
+	CreateDirectoryRequest(*directoryservice.CreateDirectoryInput) directoryservice.CreateDirectoryRequest
 
-	CreateMicrosoftAD(*directoryservice.CreateMicrosoftADInput) (*directoryservice.CreateMicrosoftADOutput, error)
-	CreateMicrosoftADWithContext(aws.Context, *directoryservice.CreateMicrosoftADInput, ...aws.Option) (*directoryservice.CreateMicrosoftADOutput, error)
-	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) (*aws.Request, *directoryservice.CreateMicrosoftADOutput)
+	CreateMicrosoftADRequest(*directoryservice.CreateMicrosoftADInput) directoryservice.CreateMicrosoftADRequest
 
-	CreateSnapshot(*directoryservice.CreateSnapshotInput) (*directoryservice.CreateSnapshotOutput, error)
-	CreateSnapshotWithContext(aws.Context, *directoryservice.CreateSnapshotInput, ...aws.Option) (*directoryservice.CreateSnapshotOutput, error)
-	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) (*aws.Request, *directoryservice.CreateSnapshotOutput)
+	CreateSnapshotRequest(*directoryservice.CreateSnapshotInput) directoryservice.CreateSnapshotRequest
 
-	CreateTrust(*directoryservice.CreateTrustInput) (*directoryservice.CreateTrustOutput, error)
-	CreateTrustWithContext(aws.Context, *directoryservice.CreateTrustInput, ...aws.Option) (*directoryservice.CreateTrustOutput, error)
-	CreateTrustRequest(*directoryservice.CreateTrustInput) (*aws.Request, *directoryservice.CreateTrustOutput)
+	CreateTrustRequest(*directoryservice.CreateTrustInput) directoryservice.CreateTrustRequest
 
-	DeleteConditionalForwarder(*directoryservice.DeleteConditionalForwarderInput) (*directoryservice.DeleteConditionalForwarderOutput, error)
-	DeleteConditionalForwarderWithContext(aws.Context, *directoryservice.DeleteConditionalForwarderInput, ...aws.Option) (*directoryservice.DeleteConditionalForwarderOutput, error)
-	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) (*aws.Request, *directoryservice.DeleteConditionalForwarderOutput)
+	DeleteConditionalForwarderRequest(*directoryservice.DeleteConditionalForwarderInput) directoryservice.DeleteConditionalForwarderRequest
 
-	DeleteDirectory(*directoryservice.DeleteDirectoryInput) (*directoryservice.DeleteDirectoryOutput, error)
-	DeleteDirectoryWithContext(aws.Context, *directoryservice.DeleteDirectoryInput, ...aws.Option) (*directoryservice.DeleteDirectoryOutput, error)
-	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) (*aws.Request, *directoryservice.DeleteDirectoryOutput)
+	DeleteDirectoryRequest(*directoryservice.DeleteDirectoryInput) directoryservice.DeleteDirectoryRequest
 
-	DeleteSnapshot(*directoryservice.DeleteSnapshotInput) (*directoryservice.DeleteSnapshotOutput, error)
-	DeleteSnapshotWithContext(aws.Context, *directoryservice.DeleteSnapshotInput, ...aws.Option) (*directoryservice.DeleteSnapshotOutput, error)
-	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) (*aws.Request, *directoryservice.DeleteSnapshotOutput)
+	DeleteSnapshotRequest(*directoryservice.DeleteSnapshotInput) directoryservice.DeleteSnapshotRequest
 
-	DeleteTrust(*directoryservice.DeleteTrustInput) (*directoryservice.DeleteTrustOutput, error)
-	DeleteTrustWithContext(aws.Context, *directoryservice.DeleteTrustInput, ...aws.Option) (*directoryservice.DeleteTrustOutput, error)
-	DeleteTrustRequest(*directoryservice.DeleteTrustInput) (*aws.Request, *directoryservice.DeleteTrustOutput)
+	DeleteTrustRequest(*directoryservice.DeleteTrustInput) directoryservice.DeleteTrustRequest
 
-	DeregisterEventTopic(*directoryservice.DeregisterEventTopicInput) (*directoryservice.DeregisterEventTopicOutput, error)
-	DeregisterEventTopicWithContext(aws.Context, *directoryservice.DeregisterEventTopicInput, ...aws.Option) (*directoryservice.DeregisterEventTopicOutput, error)
-	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) (*aws.Request, *directoryservice.DeregisterEventTopicOutput)
+	DeregisterEventTopicRequest(*directoryservice.DeregisterEventTopicInput) directoryservice.DeregisterEventTopicRequest
 
-	DescribeConditionalForwarders(*directoryservice.DescribeConditionalForwardersInput) (*directoryservice.DescribeConditionalForwardersOutput, error)
-	DescribeConditionalForwardersWithContext(aws.Context, *directoryservice.DescribeConditionalForwardersInput, ...aws.Option) (*directoryservice.DescribeConditionalForwardersOutput, error)
-	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) (*aws.Request, *directoryservice.DescribeConditionalForwardersOutput)
+	DescribeConditionalForwardersRequest(*directoryservice.DescribeConditionalForwardersInput) directoryservice.DescribeConditionalForwardersRequest
 
-	DescribeDirectories(*directoryservice.DescribeDirectoriesInput) (*directoryservice.DescribeDirectoriesOutput, error)
-	DescribeDirectoriesWithContext(aws.Context, *directoryservice.DescribeDirectoriesInput, ...aws.Option) (*directoryservice.DescribeDirectoriesOutput, error)
-	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) (*aws.Request, *directoryservice.DescribeDirectoriesOutput)
+	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
 
-	DescribeDomainControllers(*directoryservice.DescribeDomainControllersInput) (*directoryservice.DescribeDomainControllersOutput, error)
-	DescribeDomainControllersWithContext(aws.Context, *directoryservice.DescribeDomainControllersInput, ...aws.Option) (*directoryservice.DescribeDomainControllersOutput, error)
-	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) (*aws.Request, *directoryservice.DescribeDomainControllersOutput)
+	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
 
 	DescribeDomainControllersPages(*directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool) error
 	DescribeDomainControllersPagesWithContext(aws.Context, *directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool, ...aws.Option) error
 
-	DescribeEventTopics(*directoryservice.DescribeEventTopicsInput) (*directoryservice.DescribeEventTopicsOutput, error)
-	DescribeEventTopicsWithContext(aws.Context, *directoryservice.DescribeEventTopicsInput, ...aws.Option) (*directoryservice.DescribeEventTopicsOutput, error)
-	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) (*aws.Request, *directoryservice.DescribeEventTopicsOutput)
+	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
 
-	DescribeSnapshots(*directoryservice.DescribeSnapshotsInput) (*directoryservice.DescribeSnapshotsOutput, error)
-	DescribeSnapshotsWithContext(aws.Context, *directoryservice.DescribeSnapshotsInput, ...aws.Option) (*directoryservice.DescribeSnapshotsOutput, error)
-	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) (*aws.Request, *directoryservice.DescribeSnapshotsOutput)
+	DescribeSnapshotsRequest(*directoryservice.DescribeSnapshotsInput) directoryservice.DescribeSnapshotsRequest
 
-	DescribeTrusts(*directoryservice.DescribeTrustsInput) (*directoryservice.DescribeTrustsOutput, error)
-	DescribeTrustsWithContext(aws.Context, *directoryservice.DescribeTrustsInput, ...aws.Option) (*directoryservice.DescribeTrustsOutput, error)
-	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) (*aws.Request, *directoryservice.DescribeTrustsOutput)
+	DescribeTrustsRequest(*directoryservice.DescribeTrustsInput) directoryservice.DescribeTrustsRequest
 
-	DisableRadius(*directoryservice.DisableRadiusInput) (*directoryservice.DisableRadiusOutput, error)
-	DisableRadiusWithContext(aws.Context, *directoryservice.DisableRadiusInput, ...aws.Option) (*directoryservice.DisableRadiusOutput, error)
-	DisableRadiusRequest(*directoryservice.DisableRadiusInput) (*aws.Request, *directoryservice.DisableRadiusOutput)
+	DisableRadiusRequest(*directoryservice.DisableRadiusInput) directoryservice.DisableRadiusRequest
 
-	DisableSso(*directoryservice.DisableSsoInput) (*directoryservice.DisableSsoOutput, error)
-	DisableSsoWithContext(aws.Context, *directoryservice.DisableSsoInput, ...aws.Option) (*directoryservice.DisableSsoOutput, error)
-	DisableSsoRequest(*directoryservice.DisableSsoInput) (*aws.Request, *directoryservice.DisableSsoOutput)
+	DisableSsoRequest(*directoryservice.DisableSsoInput) directoryservice.DisableSsoRequest
 
-	EnableRadius(*directoryservice.EnableRadiusInput) (*directoryservice.EnableRadiusOutput, error)
-	EnableRadiusWithContext(aws.Context, *directoryservice.EnableRadiusInput, ...aws.Option) (*directoryservice.EnableRadiusOutput, error)
-	EnableRadiusRequest(*directoryservice.EnableRadiusInput) (*aws.Request, *directoryservice.EnableRadiusOutput)
+	EnableRadiusRequest(*directoryservice.EnableRadiusInput) directoryservice.EnableRadiusRequest
 
-	EnableSso(*directoryservice.EnableSsoInput) (*directoryservice.EnableSsoOutput, error)
-	EnableSsoWithContext(aws.Context, *directoryservice.EnableSsoInput, ...aws.Option) (*directoryservice.EnableSsoOutput, error)
-	EnableSsoRequest(*directoryservice.EnableSsoInput) (*aws.Request, *directoryservice.EnableSsoOutput)
+	EnableSsoRequest(*directoryservice.EnableSsoInput) directoryservice.EnableSsoRequest
 
-	GetDirectoryLimits(*directoryservice.GetDirectoryLimitsInput) (*directoryservice.GetDirectoryLimitsOutput, error)
-	GetDirectoryLimitsWithContext(aws.Context, *directoryservice.GetDirectoryLimitsInput, ...aws.Option) (*directoryservice.GetDirectoryLimitsOutput, error)
-	GetDirectoryLimitsRequest(*directoryservice.GetDirectoryLimitsInput) (*aws.Request, *directoryservice.GetDirectoryLimitsOutput)
+	GetDirectoryLimitsRequest(*directoryservice.GetDirectoryLimitsInput) directoryservice.GetDirectoryLimitsRequest
 
-	GetSnapshotLimits(*directoryservice.GetSnapshotLimitsInput) (*directoryservice.GetSnapshotLimitsOutput, error)
-	GetSnapshotLimitsWithContext(aws.Context, *directoryservice.GetSnapshotLimitsInput, ...aws.Option) (*directoryservice.GetSnapshotLimitsOutput, error)
-	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) (*aws.Request, *directoryservice.GetSnapshotLimitsOutput)
+	GetSnapshotLimitsRequest(*directoryservice.GetSnapshotLimitsInput) directoryservice.GetSnapshotLimitsRequest
 
-	ListIpRoutes(*directoryservice.ListIpRoutesInput) (*directoryservice.ListIpRoutesOutput, error)
-	ListIpRoutesWithContext(aws.Context, *directoryservice.ListIpRoutesInput, ...aws.Option) (*directoryservice.ListIpRoutesOutput, error)
-	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) (*aws.Request, *directoryservice.ListIpRoutesOutput)
+	ListIpRoutesRequest(*directoryservice.ListIpRoutesInput) directoryservice.ListIpRoutesRequest
 
-	ListSchemaExtensions(*directoryservice.ListSchemaExtensionsInput) (*directoryservice.ListSchemaExtensionsOutput, error)
-	ListSchemaExtensionsWithContext(aws.Context, *directoryservice.ListSchemaExtensionsInput, ...aws.Option) (*directoryservice.ListSchemaExtensionsOutput, error)
-	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) (*aws.Request, *directoryservice.ListSchemaExtensionsOutput)
+	ListSchemaExtensionsRequest(*directoryservice.ListSchemaExtensionsInput) directoryservice.ListSchemaExtensionsRequest
 
-	ListTagsForResource(*directoryservice.ListTagsForResourceInput) (*directoryservice.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *directoryservice.ListTagsForResourceInput, ...aws.Option) (*directoryservice.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) (*aws.Request, *directoryservice.ListTagsForResourceOutput)
+	ListTagsForResourceRequest(*directoryservice.ListTagsForResourceInput) directoryservice.ListTagsForResourceRequest
 
-	RegisterEventTopic(*directoryservice.RegisterEventTopicInput) (*directoryservice.RegisterEventTopicOutput, error)
-	RegisterEventTopicWithContext(aws.Context, *directoryservice.RegisterEventTopicInput, ...aws.Option) (*directoryservice.RegisterEventTopicOutput, error)
-	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) (*aws.Request, *directoryservice.RegisterEventTopicOutput)
+	RegisterEventTopicRequest(*directoryservice.RegisterEventTopicInput) directoryservice.RegisterEventTopicRequest
 
-	RemoveIpRoutes(*directoryservice.RemoveIpRoutesInput) (*directoryservice.RemoveIpRoutesOutput, error)
-	RemoveIpRoutesWithContext(aws.Context, *directoryservice.RemoveIpRoutesInput, ...aws.Option) (*directoryservice.RemoveIpRoutesOutput, error)
-	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) (*aws.Request, *directoryservice.RemoveIpRoutesOutput)
+	RemoveIpRoutesRequest(*directoryservice.RemoveIpRoutesInput) directoryservice.RemoveIpRoutesRequest
 
-	RemoveTagsFromResource(*directoryservice.RemoveTagsFromResourceInput) (*directoryservice.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceWithContext(aws.Context, *directoryservice.RemoveTagsFromResourceInput, ...aws.Option) (*directoryservice.RemoveTagsFromResourceOutput, error)
-	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) (*aws.Request, *directoryservice.RemoveTagsFromResourceOutput)
+	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
 
-	RestoreFromSnapshot(*directoryservice.RestoreFromSnapshotInput) (*directoryservice.RestoreFromSnapshotOutput, error)
-	RestoreFromSnapshotWithContext(aws.Context, *directoryservice.RestoreFromSnapshotInput, ...aws.Option) (*directoryservice.RestoreFromSnapshotOutput, error)
-	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) (*aws.Request, *directoryservice.RestoreFromSnapshotOutput)
+	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
 
-	StartSchemaExtension(*directoryservice.StartSchemaExtensionInput) (*directoryservice.StartSchemaExtensionOutput, error)
-	StartSchemaExtensionWithContext(aws.Context, *directoryservice.StartSchemaExtensionInput, ...aws.Option) (*directoryservice.StartSchemaExtensionOutput, error)
-	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) (*aws.Request, *directoryservice.StartSchemaExtensionOutput)
+	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest
 
-	UpdateConditionalForwarder(*directoryservice.UpdateConditionalForwarderInput) (*directoryservice.UpdateConditionalForwarderOutput, error)
-	UpdateConditionalForwarderWithContext(aws.Context, *directoryservice.UpdateConditionalForwarderInput, ...aws.Option) (*directoryservice.UpdateConditionalForwarderOutput, error)
-	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) (*aws.Request, *directoryservice.UpdateConditionalForwarderOutput)
+	UpdateConditionalForwarderRequest(*directoryservice.UpdateConditionalForwarderInput) directoryservice.UpdateConditionalForwarderRequest
 
-	UpdateNumberOfDomainControllers(*directoryservice.UpdateNumberOfDomainControllersInput) (*directoryservice.UpdateNumberOfDomainControllersOutput, error)
-	UpdateNumberOfDomainControllersWithContext(aws.Context, *directoryservice.UpdateNumberOfDomainControllersInput, ...aws.Option) (*directoryservice.UpdateNumberOfDomainControllersOutput, error)
-	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) (*aws.Request, *directoryservice.UpdateNumberOfDomainControllersOutput)
+	UpdateNumberOfDomainControllersRequest(*directoryservice.UpdateNumberOfDomainControllersInput) directoryservice.UpdateNumberOfDomainControllersRequest
 
-	UpdateRadius(*directoryservice.UpdateRadiusInput) (*directoryservice.UpdateRadiusOutput, error)
-	UpdateRadiusWithContext(aws.Context, *directoryservice.UpdateRadiusInput, ...aws.Option) (*directoryservice.UpdateRadiusOutput, error)
-	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) (*aws.Request, *directoryservice.UpdateRadiusOutput)
+	UpdateRadiusRequest(*directoryservice.UpdateRadiusInput) directoryservice.UpdateRadiusRequest
 
-	VerifyTrust(*directoryservice.VerifyTrustInput) (*directoryservice.VerifyTrustOutput, error)
-	VerifyTrustWithContext(aws.Context, *directoryservice.VerifyTrustInput, ...aws.Option) (*directoryservice.VerifyTrustOutput, error)
-	VerifyTrustRequest(*directoryservice.VerifyTrustInput) (*aws.Request, *directoryservice.VerifyTrustOutput)
+	VerifyTrustRequest(*directoryservice.VerifyTrustInput) directoryservice.VerifyTrustRequest
 }
 
 var _ DirectoryServiceAPI = (*directoryservice.DirectoryService)(nil)

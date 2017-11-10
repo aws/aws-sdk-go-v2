@@ -14,31 +14,42 @@ import (
 
 const opDeleteConfigRule = "DeleteConfigRule"
 
-// DeleteConfigRuleRequest generates a "aws.Request" representing the
-// client's request for the DeleteConfigRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteConfigRuleRequest is a API request type for the DeleteConfigRule API operation.
+type DeleteConfigRuleRequest struct {
+	*aws.Request
+	Input *DeleteConfigRuleInput
+}
+
+// Send marshals and sends the DeleteConfigRule API request.
+func (r *DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConfigRuleOutput), nil
+}
+
+// DeleteConfigRuleRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified AWS Config rule and all of its evaluation results.
 //
-// See DeleteConfigRule for more information on using the DeleteConfigRule
-// API call, and error handling.
+// AWS Config sets the state of a rule to DELETING until the deletion is complete.
+// You cannot update a rule while it is in this state. If you make a PutConfigRule
+// or DeleteConfigRule request for the rule, you will receive a ResourceInUseException.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can check the state of a rule by using the DescribeConfigRules request.
 //
 //    // Example sending a request using the DeleteConfigRuleRequest method.
-//    req, resp := client.DeleteConfigRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteConfigRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule
-func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) (req *aws.Request, output *DeleteConfigRuleOutput) {
+func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) DeleteConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConfigRule,
 		HTTPMethod: "POST",
@@ -49,106 +60,32 @@ func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) (r
 		input = &DeleteConfigRuleInput{}
 	}
 
-	output = &DeleteConfigRuleOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteConfigRule API operation for AWS Config.
-//
-// Deletes the specified AWS Config rule and all of its evaluation results.
-//
-// AWS Config sets the state of a rule to DELETING until the deletion is complete.
-// You cannot update a rule while it is in this state. If you make a PutConfigRule
-// or DeleteConfigRule request for the rule, you will receive a ResourceInUseException.
-//
-// You can check the state of a rule by using the DescribeConfigRules request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DeleteConfigRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The rule is currently being deleted or the rule is deleting your evaluation
-//   results. Try your request again later.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule
-func (c *ConfigService) DeleteConfigRule(input *DeleteConfigRuleInput) (*DeleteConfigRuleOutput, error) {
-	req, out := c.DeleteConfigRuleRequest(input)
-	return out, req.Send()
-}
-
-// DeleteConfigRuleWithContext is the same as DeleteConfigRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConfigRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DeleteConfigRuleWithContext(ctx aws.Context, input *DeleteConfigRuleInput, opts ...aws.Option) (*DeleteConfigRuleOutput, error) {
-	req, out := c.DeleteConfigRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteConfigRuleRequest{Request: req, Input: input}
 }
 
 const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 
-// DeleteConfigurationRecorderRequest generates a "aws.Request" representing the
-// client's request for the DeleteConfigurationRecorder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteConfigurationRecorder for more information on using the DeleteConfigurationRecorder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteConfigurationRecorderRequest method.
-//    req, resp := client.DeleteConfigurationRecorderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorder
-func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRecorderInput) (req *aws.Request, output *DeleteConfigurationRecorderOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteConfigurationRecorder,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteConfigurationRecorderInput{}
-	}
-
-	output = &DeleteConfigurationRecorderOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteConfigurationRecorderRequest is a API request type for the DeleteConfigurationRecorder API operation.
+type DeleteConfigurationRecorderRequest struct {
+	*aws.Request
+	Input *DeleteConfigurationRecorderInput
 }
 
-// DeleteConfigurationRecorder API operation for AWS Config.
+// Send marshals and sends the DeleteConfigurationRecorder API request.
+func (r *DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteConfigurationRecorderOutput), nil
+}
+
+// DeleteConfigurationRecorderRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Deletes the configuration recorder.
 //
@@ -161,66 +98,66 @@ func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigur
 // access this information in the AWS Config console until you create a new
 // configuration recorder.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DeleteConfigurationRecorder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigurationRecorderException "NoSuchConfigurationRecorderException"
-//   You have specified a configuration recorder that does not exist.
+//    // Example sending a request using the DeleteConfigurationRecorderRequest method.
+//    req := client.DeleteConfigurationRecorderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorder
-func (c *ConfigService) DeleteConfigurationRecorder(input *DeleteConfigurationRecorderInput) (*DeleteConfigurationRecorderOutput, error) {
-	req, out := c.DeleteConfigurationRecorderRequest(input)
-	return out, req.Send()
-}
+func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest {
+	op := &aws.Operation{
+		Name:       opDeleteConfigurationRecorder,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteConfigurationRecorderWithContext is the same as DeleteConfigurationRecorder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConfigurationRecorder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DeleteConfigurationRecorderWithContext(ctx aws.Context, input *DeleteConfigurationRecorderInput, opts ...aws.Option) (*DeleteConfigurationRecorderOutput, error) {
-	req, out := c.DeleteConfigurationRecorderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteConfigurationRecorderInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteConfigurationRecorderOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteConfigurationRecorderRequest{Request: req, Input: input}
 }
 
 const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 
-// DeleteDeliveryChannelRequest generates a "aws.Request" representing the
-// client's request for the DeleteDeliveryChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDeliveryChannelRequest is a API request type for the DeleteDeliveryChannel API operation.
+type DeleteDeliveryChannelRequest struct {
+	*aws.Request
+	Input *DeleteDeliveryChannelInput
+}
+
+// Send marshals and sends the DeleteDeliveryChannel API request.
+func (r *DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDeliveryChannelOutput), nil
+}
+
+// DeleteDeliveryChannelRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the delivery channel.
 //
-// See DeleteDeliveryChannel for more information on using the DeleteDeliveryChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Before you can delete the delivery channel, you must stop the configuration
+// recorder by using the StopConfigurationRecorder action.
 //
 //    // Example sending a request using the DeleteDeliveryChannelRequest method.
-//    req, resp := client.DeleteDeliveryChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDeliveryChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannel
-func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput) (req *aws.Request, output *DeleteDeliveryChannelOutput) {
+func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDeliveryChannel,
 		HTTPMethod: "POST",
@@ -231,84 +168,47 @@ func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChanne
 		input = &DeleteDeliveryChannelInput{}
 	}
 
-	output = &DeleteDeliveryChannelOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDeliveryChannelOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDeliveryChannel API operation for AWS Config.
-//
-// Deletes the delivery channel.
-//
-// Before you can delete the delivery channel, you must stop the configuration
-// recorder by using the StopConfigurationRecorder action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DeleteDeliveryChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDeliveryChannelException "NoSuchDeliveryChannelException"
-//   You have specified a delivery channel that does not exist.
-//
-//   * ErrCodeLastDeliveryChannelDeleteFailedException "LastDeliveryChannelDeleteFailedException"
-//   You cannot delete the delivery channel you specified because the configuration
-//   recorder is running.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannel
-func (c *ConfigService) DeleteDeliveryChannel(input *DeleteDeliveryChannelInput) (*DeleteDeliveryChannelOutput, error) {
-	req, out := c.DeleteDeliveryChannelRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDeliveryChannelWithContext is the same as DeleteDeliveryChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDeliveryChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DeleteDeliveryChannelWithContext(ctx aws.Context, input *DeleteDeliveryChannelInput, opts ...aws.Option) (*DeleteDeliveryChannelOutput, error) {
-	req, out := c.DeleteDeliveryChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDeliveryChannelRequest{Request: req, Input: input}
 }
 
 const opDeleteEvaluationResults = "DeleteEvaluationResults"
 
-// DeleteEvaluationResultsRequest generates a "aws.Request" representing the
-// client's request for the DeleteEvaluationResults operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteEvaluationResultsRequest is a API request type for the DeleteEvaluationResults API operation.
+type DeleteEvaluationResultsRequest struct {
+	*aws.Request
+	Input *DeleteEvaluationResultsInput
+}
+
+// Send marshals and sends the DeleteEvaluationResults API request.
+func (r *DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEvaluationResultsOutput), nil
+}
+
+// DeleteEvaluationResultsRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteEvaluationResults for more information on using the DeleteEvaluationResults
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the evaluation results for the specified Config rule. You can specify
+// one Config rule per request. After you delete the evaluation results, you
+// can call the StartConfigRulesEvaluation API to start evaluating your AWS
+// resources against the rule.
 //
 //    // Example sending a request using the DeleteEvaluationResultsRequest method.
-//    req, resp := client.DeleteEvaluationResultsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteEvaluationResultsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults
-func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsInput) (req *aws.Request, output *DeleteEvaluationResultsOutput) {
+func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteEvaluationResults,
 		HTTPMethod: "POST",
@@ -319,99 +219,30 @@ func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationRe
 		input = &DeleteEvaluationResultsInput{}
 	}
 
-	output = &DeleteEvaluationResultsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteEvaluationResults API operation for AWS Config.
-//
-// Deletes the evaluation results for the specified Config rule. You can specify
-// one Config rule per request. After you delete the evaluation results, you
-// can call the StartConfigRulesEvaluation API to start evaluating your AWS
-// resources against the rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DeleteEvaluationResults for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The rule is currently being deleted or the rule is deleting your evaluation
-//   results. Try your request again later.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults
-func (c *ConfigService) DeleteEvaluationResults(input *DeleteEvaluationResultsInput) (*DeleteEvaluationResultsOutput, error) {
-	req, out := c.DeleteEvaluationResultsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteEvaluationResultsWithContext is the same as DeleteEvaluationResults with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteEvaluationResults for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DeleteEvaluationResultsWithContext(ctx aws.Context, input *DeleteEvaluationResultsInput, opts ...aws.Option) (*DeleteEvaluationResultsOutput, error) {
-	req, out := c.DeleteEvaluationResultsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteEvaluationResultsOutput{})
+	return DeleteEvaluationResultsRequest{Request: req, Input: input}
 }
 
 const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 
-// DeliverConfigSnapshotRequest generates a "aws.Request" representing the
-// client's request for the DeliverConfigSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeliverConfigSnapshot for more information on using the DeliverConfigSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeliverConfigSnapshotRequest method.
-//    req, resp := client.DeliverConfigSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot
-func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput) (req *aws.Request, output *DeliverConfigSnapshotOutput) {
-	op := &aws.Operation{
-		Name:       opDeliverConfigSnapshot,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeliverConfigSnapshotInput{}
-	}
-
-	output = &DeliverConfigSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeliverConfigSnapshotRequest is a API request type for the DeliverConfigSnapshot API operation.
+type DeliverConfigSnapshotRequest struct {
+	*aws.Request
+	Input *DeliverConfigSnapshotInput
 }
 
-// DeliverConfigSnapshot API operation for AWS Config.
+// Send marshals and sends the DeliverConfigSnapshot API request.
+func (r *DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeliverConfigSnapshotOutput), nil
+}
+
+// DeliverConfigSnapshotRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Schedules delivery of a configuration snapshot to the Amazon S3 bucket in
 // the specified delivery channel. After the delivery has started, AWS Config
@@ -424,89 +255,49 @@ func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapsho
 //
 //    * Notification of delivery failure, if the delivery failed to complete.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DeliverConfigSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDeliveryChannelException "NoSuchDeliveryChannelException"
-//   You have specified a delivery channel that does not exist.
-//
-//   * ErrCodeNoAvailableConfigurationRecorderException "NoAvailableConfigurationRecorderException"
-//   There are no configuration recorders available to provide the role needed
-//   to describe your resources. Create a configuration recorder.
-//
-//   * ErrCodeNoRunningConfigurationRecorderException "NoRunningConfigurationRecorderException"
-//   There is no configuration recorder running.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot
-func (c *ConfigService) DeliverConfigSnapshot(input *DeliverConfigSnapshotInput) (*DeliverConfigSnapshotOutput, error) {
-	req, out := c.DeliverConfigSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// DeliverConfigSnapshotWithContext is the same as DeliverConfigSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeliverConfigSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DeliverConfigSnapshotWithContext(ctx aws.Context, input *DeliverConfigSnapshotInput, opts ...aws.Option) (*DeliverConfigSnapshotOutput, error) {
-	req, out := c.DeliverConfigSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
-
-// DescribeComplianceByConfigRuleRequest generates a "aws.Request" representing the
-// client's request for the DescribeComplianceByConfigRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeComplianceByConfigRule for more information on using the DescribeComplianceByConfigRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeComplianceByConfigRuleRequest method.
-//    req, resp := client.DescribeComplianceByConfigRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeliverConfigSnapshotRequest method.
+//    req := client.DeliverConfigSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule
-func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeComplianceByConfigRuleInput) (req *aws.Request, output *DescribeComplianceByConfigRuleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot
+func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest {
 	op := &aws.Operation{
-		Name:       opDescribeComplianceByConfigRule,
+		Name:       opDeliverConfigSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeComplianceByConfigRuleInput{}
+		input = &DeliverConfigSnapshotInput{}
 	}
 
-	output = &DescribeComplianceByConfigRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeliverConfigSnapshotOutput{})
+	return DeliverConfigSnapshotRequest{Request: req, Input: input}
 }
 
-// DescribeComplianceByConfigRule API operation for AWS Config.
+const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
+
+// DescribeComplianceByConfigRuleRequest is a API request type for the DescribeComplianceByConfigRule API operation.
+type DescribeComplianceByConfigRuleRequest struct {
+	*aws.Request
+	Input *DescribeComplianceByConfigRuleInput
+}
+
+// Send marshals and sends the DescribeComplianceByConfigRule API request.
+func (r *DescribeComplianceByConfigRuleRequest) Send() (*DescribeComplianceByConfigRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeComplianceByConfigRuleOutput), nil
+}
+
+// DescribeComplianceByConfigRuleRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Indicates whether the specified AWS Config rules are compliant. If a rule
 // is noncompliant, this action returns the number of AWS resources that do
@@ -532,91 +323,49 @@ func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeCom
 //    results. This can occur if the resources were deleted or removed from
 //    the rule's scope.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeComplianceByConfigRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule
-func (c *ConfigService) DescribeComplianceByConfigRule(input *DescribeComplianceByConfigRuleInput) (*DescribeComplianceByConfigRuleOutput, error) {
-	req, out := c.DescribeComplianceByConfigRuleRequest(input)
-	return out, req.Send()
-}
-
-// DescribeComplianceByConfigRuleWithContext is the same as DescribeComplianceByConfigRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeComplianceByConfigRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeComplianceByConfigRuleWithContext(ctx aws.Context, input *DescribeComplianceByConfigRuleInput, opts ...aws.Option) (*DescribeComplianceByConfigRuleOutput, error) {
-	req, out := c.DescribeComplianceByConfigRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeComplianceByResource = "DescribeComplianceByResource"
-
-// DescribeComplianceByResourceRequest generates a "aws.Request" representing the
-// client's request for the DescribeComplianceByResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeComplianceByResource for more information on using the DescribeComplianceByResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeComplianceByResourceRequest method.
-//    req, resp := client.DescribeComplianceByResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeComplianceByConfigRuleRequest method.
+//    req := client.DescribeComplianceByConfigRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResource
-func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeComplianceByResourceInput) (req *aws.Request, output *DescribeComplianceByResourceOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule
+func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest {
 	op := &aws.Operation{
-		Name:       opDescribeComplianceByResource,
+		Name:       opDescribeComplianceByConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeComplianceByResourceInput{}
+		input = &DescribeComplianceByConfigRuleInput{}
 	}
 
-	output = &DescribeComplianceByResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeComplianceByConfigRuleOutput{})
+	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input}
 }
 
-// DescribeComplianceByResource API operation for AWS Config.
+const opDescribeComplianceByResource = "DescribeComplianceByResource"
+
+// DescribeComplianceByResourceRequest is a API request type for the DescribeComplianceByResource API operation.
+type DescribeComplianceByResourceRequest struct {
+	*aws.Request
+	Input *DescribeComplianceByResourceInput
+}
+
+// Send marshals and sends the DescribeComplianceByResource API request.
+func (r *DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeComplianceByResourceOutput), nil
+}
+
+// DescribeComplianceByResourceRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Indicates whether the specified AWS resources are compliant. If a resource
 // is noncompliant, this action returns the number of AWS Config rules that
@@ -644,71 +393,64 @@ func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeCompl
 //    results. This can occur if the resources were deleted or removed from
 //    the rule's scope.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeComplianceByResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
+//    // Example sending a request using the DescribeComplianceByResourceRequest method.
+//    req := client.DescribeComplianceByResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResource
-func (c *ConfigService) DescribeComplianceByResource(input *DescribeComplianceByResourceInput) (*DescribeComplianceByResourceOutput, error) {
-	req, out := c.DescribeComplianceByResourceRequest(input)
-	return out, req.Send()
-}
+func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest {
+	op := &aws.Operation{
+		Name:       opDescribeComplianceByResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeComplianceByResourceWithContext is the same as DescribeComplianceByResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeComplianceByResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeComplianceByResourceWithContext(ctx aws.Context, input *DescribeComplianceByResourceInput, opts ...aws.Option) (*DescribeComplianceByResourceOutput, error) {
-	req, out := c.DescribeComplianceByResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeComplianceByResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeComplianceByResourceOutput{})
+	return DescribeComplianceByResourceRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus"
 
-// DescribeConfigRuleEvaluationStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigRuleEvaluationStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConfigRuleEvaluationStatusRequest is a API request type for the DescribeConfigRuleEvaluationStatus API operation.
+type DescribeConfigRuleEvaluationStatusRequest struct {
+	*aws.Request
+	Input *DescribeConfigRuleEvaluationStatusInput
+}
+
+// Send marshals and sends the DescribeConfigRuleEvaluationStatus API request.
+func (r *DescribeConfigRuleEvaluationStatusRequest) Send() (*DescribeConfigRuleEvaluationStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigRuleEvaluationStatusOutput), nil
+}
+
+// DescribeConfigRuleEvaluationStatusRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConfigRuleEvaluationStatus for more information on using the DescribeConfigRuleEvaluationStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns status information for each of your AWS managed Config rules. The
+// status includes information such as the last time AWS Config invoked the
+// rule, the last time AWS Config failed to invoke the rule, and the related
+// error for the last failure.
 //
 //    // Example sending a request using the DescribeConfigRuleEvaluationStatusRequest method.
-//    req, resp := client.DescribeConfigRuleEvaluationStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConfigRuleEvaluationStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus
-func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfigRuleEvaluationStatusInput) (req *aws.Request, output *DescribeConfigRuleEvaluationStatusOutput) {
+func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigRuleEvaluationStatus,
 		HTTPMethod: "POST",
@@ -719,87 +461,42 @@ func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *Describ
 		input = &DescribeConfigRuleEvaluationStatusInput{}
 	}
 
-	output = &DescribeConfigRuleEvaluationStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConfigRuleEvaluationStatus API operation for AWS Config.
-//
-// Returns status information for each of your AWS managed Config rules. The
-// status includes information such as the last time AWS Config invoked the
-// rule, the last time AWS Config failed to invoke the rule, and the related
-// error for the last failure.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeConfigRuleEvaluationStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus
-func (c *ConfigService) DescribeConfigRuleEvaluationStatus(input *DescribeConfigRuleEvaluationStatusInput) (*DescribeConfigRuleEvaluationStatusOutput, error) {
-	req, out := c.DescribeConfigRuleEvaluationStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConfigRuleEvaluationStatusWithContext is the same as DescribeConfigRuleEvaluationStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigRuleEvaluationStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeConfigRuleEvaluationStatusWithContext(ctx aws.Context, input *DescribeConfigRuleEvaluationStatusInput, opts ...aws.Option) (*DescribeConfigRuleEvaluationStatusOutput, error) {
-	req, out := c.DescribeConfigRuleEvaluationStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConfigRuleEvaluationStatusOutput{})
+	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigRules = "DescribeConfigRules"
 
-// DescribeConfigRulesRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigRules operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConfigRulesRequest is a API request type for the DescribeConfigRules API operation.
+type DescribeConfigRulesRequest struct {
+	*aws.Request
+	Input *DescribeConfigRulesInput
+}
+
+// Send marshals and sends the DescribeConfigRules API request.
+func (r *DescribeConfigRulesRequest) Send() (*DescribeConfigRulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigRulesOutput), nil
+}
+
+// DescribeConfigRulesRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeConfigRules for more information on using the DescribeConfigRules
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns details about your AWS Config rules.
 //
 //    // Example sending a request using the DescribeConfigRulesRequest method.
-//    req, resp := client.DescribeConfigRulesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConfigRulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules
-func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) (req *aws.Request, output *DescribeConfigRulesOutput) {
+func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) DescribeConfigRulesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigRules,
 		HTTPMethod: "POST",
@@ -810,80 +507,47 @@ func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInp
 		input = &DescribeConfigRulesInput{}
 	}
 
-	output = &DescribeConfigRulesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConfigRules API operation for AWS Config.
-//
-// Returns details about your AWS Config rules.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeConfigRules for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules
-func (c *ConfigService) DescribeConfigRules(input *DescribeConfigRulesInput) (*DescribeConfigRulesOutput, error) {
-	req, out := c.DescribeConfigRulesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConfigRulesWithContext is the same as DescribeConfigRules with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigRules for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeConfigRulesWithContext(ctx aws.Context, input *DescribeConfigRulesInput, opts ...aws.Option) (*DescribeConfigRulesOutput, error) {
-	req, out := c.DescribeConfigRulesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConfigRulesOutput{})
+	return DescribeConfigRulesRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStatus"
 
-// DescribeConfigurationRecorderStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigurationRecorderStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConfigurationRecorderStatusRequest is a API request type for the DescribeConfigurationRecorderStatus API operation.
+type DescribeConfigurationRecorderStatusRequest struct {
+	*aws.Request
+	Input *DescribeConfigurationRecorderStatusInput
+}
+
+// Send marshals and sends the DescribeConfigurationRecorderStatus API request.
+func (r *DescribeConfigurationRecorderStatusRequest) Send() (*DescribeConfigurationRecorderStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigurationRecorderStatusOutput), nil
+}
+
+// DescribeConfigurationRecorderStatusRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the current status of the specified configuration recorder. If a
+// configuration recorder is not specified, this action returns the status of
+// all configuration recorder associated with the account.
 //
-// See DescribeConfigurationRecorderStatus for more information on using the DescribeConfigurationRecorderStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Currently, you can specify only one configuration recorder per region in
+// your account.
 //
 //    // Example sending a request using the DescribeConfigurationRecorderStatusRequest method.
-//    req, resp := client.DescribeConfigurationRecorderStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConfigurationRecorderStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus
-func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *DescribeConfigurationRecorderStatusInput) (req *aws.Request, output *DescribeConfigurationRecorderStatusOutput) {
+func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorderStatus,
 		HTTPMethod: "POST",
@@ -894,80 +558,47 @@ func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *Descri
 		input = &DescribeConfigurationRecorderStatusInput{}
 	}
 
-	output = &DescribeConfigurationRecorderStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConfigurationRecorderStatus API operation for AWS Config.
-//
-// Returns the current status of the specified configuration recorder. If a
-// configuration recorder is not specified, this action returns the status of
-// all configuration recorder associated with the account.
-//
-// Currently, you can specify only one configuration recorder per region in
-// your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeConfigurationRecorderStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigurationRecorderException "NoSuchConfigurationRecorderException"
-//   You have specified a configuration recorder that does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus
-func (c *ConfigService) DescribeConfigurationRecorderStatus(input *DescribeConfigurationRecorderStatusInput) (*DescribeConfigurationRecorderStatusOutput, error) {
-	req, out := c.DescribeConfigurationRecorderStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConfigurationRecorderStatusWithContext is the same as DescribeConfigurationRecorderStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigurationRecorderStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeConfigurationRecorderStatusWithContext(ctx aws.Context, input *DescribeConfigurationRecorderStatusInput, opts ...aws.Option) (*DescribeConfigurationRecorderStatusOutput, error) {
-	req, out := c.DescribeConfigurationRecorderStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConfigurationRecorderStatusOutput{})
+	return DescribeConfigurationRecorderStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 
-// DescribeConfigurationRecordersRequest generates a "aws.Request" representing the
-// client's request for the DescribeConfigurationRecorders operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConfigurationRecordersRequest is a API request type for the DescribeConfigurationRecorders API operation.
+type DescribeConfigurationRecordersRequest struct {
+	*aws.Request
+	Input *DescribeConfigurationRecordersInput
+}
+
+// Send marshals and sends the DescribeConfigurationRecorders API request.
+func (r *DescribeConfigurationRecordersRequest) Send() (*DescribeConfigurationRecordersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConfigurationRecordersOutput), nil
+}
+
+// DescribeConfigurationRecordersRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the details for the specified configuration recorders. If the configuration
+// recorder is not specified, this action returns the details for all configuration
+// recorders associated with the account.
 //
-// See DescribeConfigurationRecorders for more information on using the DescribeConfigurationRecorders
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Currently, you can specify only one configuration recorder per region in
+// your account.
 //
 //    // Example sending a request using the DescribeConfigurationRecordersRequest method.
-//    req, resp := client.DescribeConfigurationRecordersRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConfigurationRecordersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders
-func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeConfigurationRecordersInput) (req *aws.Request, output *DescribeConfigurationRecordersOutput) {
+func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorders,
 		HTTPMethod: "POST",
@@ -978,80 +609,46 @@ func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeCon
 		input = &DescribeConfigurationRecordersInput{}
 	}
 
-	output = &DescribeConfigurationRecordersOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConfigurationRecorders API operation for AWS Config.
-//
-// Returns the details for the specified configuration recorders. If the configuration
-// recorder is not specified, this action returns the details for all configuration
-// recorders associated with the account.
-//
-// Currently, you can specify only one configuration recorder per region in
-// your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeConfigurationRecorders for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigurationRecorderException "NoSuchConfigurationRecorderException"
-//   You have specified a configuration recorder that does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders
-func (c *ConfigService) DescribeConfigurationRecorders(input *DescribeConfigurationRecordersInput) (*DescribeConfigurationRecordersOutput, error) {
-	req, out := c.DescribeConfigurationRecordersRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConfigurationRecordersWithContext is the same as DescribeConfigurationRecorders with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConfigurationRecorders for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeConfigurationRecordersWithContext(ctx aws.Context, input *DescribeConfigurationRecordersInput, opts ...aws.Option) (*DescribeConfigurationRecordersOutput, error) {
-	req, out := c.DescribeConfigurationRecordersRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConfigurationRecordersOutput{})
+	return DescribeConfigurationRecordersRequest{Request: req, Input: input}
 }
 
 const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 
-// DescribeDeliveryChannelStatusRequest generates a "aws.Request" representing the
-// client's request for the DescribeDeliveryChannelStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDeliveryChannelStatusRequest is a API request type for the DescribeDeliveryChannelStatus API operation.
+type DescribeDeliveryChannelStatusRequest struct {
+	*aws.Request
+	Input *DescribeDeliveryChannelStatusInput
+}
+
+// Send marshals and sends the DescribeDeliveryChannelStatus API request.
+func (r *DescribeDeliveryChannelStatusRequest) Send() (*DescribeDeliveryChannelStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDeliveryChannelStatusOutput), nil
+}
+
+// DescribeDeliveryChannelStatusRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the current status of the specified delivery channel. If a delivery
+// channel is not specified, this action returns the current status of all delivery
+// channels associated with the account.
 //
-// See DescribeDeliveryChannelStatus for more information on using the DescribeDeliveryChannelStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Currently, you can specify only one delivery channel per region in your account.
 //
 //    // Example sending a request using the DescribeDeliveryChannelStatusRequest method.
-//    req, resp := client.DescribeDeliveryChannelStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDeliveryChannelStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatus
-func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryChannelStatusInput) (req *aws.Request, output *DescribeDeliveryChannelStatusOutput) {
+func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannelStatus,
 		HTTPMethod: "POST",
@@ -1062,79 +659,46 @@ func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeli
 		input = &DescribeDeliveryChannelStatusInput{}
 	}
 
-	output = &DescribeDeliveryChannelStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDeliveryChannelStatus API operation for AWS Config.
-//
-// Returns the current status of the specified delivery channel. If a delivery
-// channel is not specified, this action returns the current status of all delivery
-// channels associated with the account.
-//
-// Currently, you can specify only one delivery channel per region in your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeDeliveryChannelStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDeliveryChannelException "NoSuchDeliveryChannelException"
-//   You have specified a delivery channel that does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatus
-func (c *ConfigService) DescribeDeliveryChannelStatus(input *DescribeDeliveryChannelStatusInput) (*DescribeDeliveryChannelStatusOutput, error) {
-	req, out := c.DescribeDeliveryChannelStatusRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDeliveryChannelStatusWithContext is the same as DescribeDeliveryChannelStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDeliveryChannelStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeDeliveryChannelStatusWithContext(ctx aws.Context, input *DescribeDeliveryChannelStatusInput, opts ...aws.Option) (*DescribeDeliveryChannelStatusOutput, error) {
-	req, out := c.DescribeDeliveryChannelStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDeliveryChannelStatusOutput{})
+	return DescribeDeliveryChannelStatusRequest{Request: req, Input: input}
 }
 
 const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 
-// DescribeDeliveryChannelsRequest generates a "aws.Request" representing the
-// client's request for the DescribeDeliveryChannels operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeDeliveryChannelsRequest is a API request type for the DescribeDeliveryChannels API operation.
+type DescribeDeliveryChannelsRequest struct {
+	*aws.Request
+	Input *DescribeDeliveryChannelsInput
+}
+
+// Send marshals and sends the DescribeDeliveryChannels API request.
+func (r *DescribeDeliveryChannelsRequest) Send() (*DescribeDeliveryChannelsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDeliveryChannelsOutput), nil
+}
+
+// DescribeDeliveryChannelsRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns details about the specified delivery channel. If a delivery channel
+// is not specified, this action returns the details of all delivery channels
+// associated with the account.
 //
-// See DescribeDeliveryChannels for more information on using the DescribeDeliveryChannels
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Currently, you can specify only one delivery channel per region in your account.
 //
 //    // Example sending a request using the DescribeDeliveryChannelsRequest method.
-//    req, resp := client.DescribeDeliveryChannelsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeDeliveryChannelsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels
-func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannelsInput) (req *aws.Request, output *DescribeDeliveryChannelsOutput) {
+func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannels,
 		HTTPMethod: "POST",
@@ -1145,79 +709,44 @@ func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryC
 		input = &DescribeDeliveryChannelsInput{}
 	}
 
-	output = &DescribeDeliveryChannelsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeDeliveryChannels API operation for AWS Config.
-//
-// Returns details about the specified delivery channel. If a delivery channel
-// is not specified, this action returns the details of all delivery channels
-// associated with the account.
-//
-// Currently, you can specify only one delivery channel per region in your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation DescribeDeliveryChannels for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDeliveryChannelException "NoSuchDeliveryChannelException"
-//   You have specified a delivery channel that does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels
-func (c *ConfigService) DescribeDeliveryChannels(input *DescribeDeliveryChannelsInput) (*DescribeDeliveryChannelsOutput, error) {
-	req, out := c.DescribeDeliveryChannelsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDeliveryChannelsWithContext is the same as DescribeDeliveryChannels with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDeliveryChannels for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) DescribeDeliveryChannelsWithContext(ctx aws.Context, input *DescribeDeliveryChannelsInput, opts ...aws.Option) (*DescribeDeliveryChannelsOutput, error) {
-	req, out := c.DescribeDeliveryChannelsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeDeliveryChannelsOutput{})
+	return DescribeDeliveryChannelsRequest{Request: req, Input: input}
 }
 
 const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
 
-// GetComplianceDetailsByConfigRuleRequest generates a "aws.Request" representing the
-// client's request for the GetComplianceDetailsByConfigRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetComplianceDetailsByConfigRuleRequest is a API request type for the GetComplianceDetailsByConfigRule API operation.
+type GetComplianceDetailsByConfigRuleRequest struct {
+	*aws.Request
+	Input *GetComplianceDetailsByConfigRuleInput
+}
+
+// Send marshals and sends the GetComplianceDetailsByConfigRule API request.
+func (r *GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsByConfigRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetComplianceDetailsByConfigRuleOutput), nil
+}
+
+// GetComplianceDetailsByConfigRuleRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetComplianceDetailsByConfigRule for more information on using the GetComplianceDetailsByConfigRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the evaluation results for the specified AWS Config rule. The results
+// indicate which AWS resources were evaluated by the rule, when each resource
+// was last evaluated, and whether each resource complies with the rule.
 //
 //    // Example sending a request using the GetComplianceDetailsByConfigRuleRequest method.
-//    req, resp := client.GetComplianceDetailsByConfigRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetComplianceDetailsByConfigRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRule
-func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetComplianceDetailsByConfigRuleInput) (req *aws.Request, output *GetComplianceDetailsByConfigRuleOutput) {
+func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetComplianceDetailsByConfigRuleInput) GetComplianceDetailsByConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceDetailsByConfigRule,
 		HTTPMethod: "POST",
@@ -1228,86 +757,44 @@ func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetCompli
 		input = &GetComplianceDetailsByConfigRuleInput{}
 	}
 
-	output = &GetComplianceDetailsByConfigRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetComplianceDetailsByConfigRule API operation for AWS Config.
-//
-// Returns the evaluation results for the specified AWS Config rule. The results
-// indicate which AWS resources were evaluated by the rule, when each resource
-// was last evaluated, and whether each resource complies with the rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetComplianceDetailsByConfigRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRule
-func (c *ConfigService) GetComplianceDetailsByConfigRule(input *GetComplianceDetailsByConfigRuleInput) (*GetComplianceDetailsByConfigRuleOutput, error) {
-	req, out := c.GetComplianceDetailsByConfigRuleRequest(input)
-	return out, req.Send()
-}
-
-// GetComplianceDetailsByConfigRuleWithContext is the same as GetComplianceDetailsByConfigRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetComplianceDetailsByConfigRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetComplianceDetailsByConfigRuleWithContext(ctx aws.Context, input *GetComplianceDetailsByConfigRuleInput, opts ...aws.Option) (*GetComplianceDetailsByConfigRuleOutput, error) {
-	req, out := c.GetComplianceDetailsByConfigRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetComplianceDetailsByConfigRuleOutput{})
+	return GetComplianceDetailsByConfigRuleRequest{Request: req, Input: input}
 }
 
 const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 
-// GetComplianceDetailsByResourceRequest generates a "aws.Request" representing the
-// client's request for the GetComplianceDetailsByResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetComplianceDetailsByResourceRequest is a API request type for the GetComplianceDetailsByResource API operation.
+type GetComplianceDetailsByResourceRequest struct {
+	*aws.Request
+	Input *GetComplianceDetailsByResourceInput
+}
+
+// Send marshals and sends the GetComplianceDetailsByResource API request.
+func (r *GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetComplianceDetailsByResourceOutput), nil
+}
+
+// GetComplianceDetailsByResourceRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetComplianceDetailsByResource for more information on using the GetComplianceDetailsByResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the evaluation results for the specified AWS resource. The results
+// indicate which AWS Config rules were used to evaluate the resource, when
+// each rule was last used, and whether the resource complies with each rule.
 //
 //    // Example sending a request using the GetComplianceDetailsByResourceRequest method.
-//    req, resp := client.GetComplianceDetailsByResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetComplianceDetailsByResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResource
-func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplianceDetailsByResourceInput) (req *aws.Request, output *GetComplianceDetailsByResourceOutput) {
+func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceDetailsByResource,
 		HTTPMethod: "POST",
@@ -1318,78 +805,43 @@ func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplian
 		input = &GetComplianceDetailsByResourceInput{}
 	}
 
-	output = &GetComplianceDetailsByResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetComplianceDetailsByResource API operation for AWS Config.
-//
-// Returns the evaluation results for the specified AWS resource. The results
-// indicate which AWS Config rules were used to evaluate the resource, when
-// each rule was last used, and whether the resource complies with each rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetComplianceDetailsByResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResource
-func (c *ConfigService) GetComplianceDetailsByResource(input *GetComplianceDetailsByResourceInput) (*GetComplianceDetailsByResourceOutput, error) {
-	req, out := c.GetComplianceDetailsByResourceRequest(input)
-	return out, req.Send()
-}
-
-// GetComplianceDetailsByResourceWithContext is the same as GetComplianceDetailsByResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetComplianceDetailsByResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetComplianceDetailsByResourceWithContext(ctx aws.Context, input *GetComplianceDetailsByResourceInput, opts ...aws.Option) (*GetComplianceDetailsByResourceOutput, error) {
-	req, out := c.GetComplianceDetailsByResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetComplianceDetailsByResourceOutput{})
+	return GetComplianceDetailsByResourceRequest{Request: req, Input: input}
 }
 
 const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 
-// GetComplianceSummaryByConfigRuleRequest generates a "aws.Request" representing the
-// client's request for the GetComplianceSummaryByConfigRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetComplianceSummaryByConfigRuleRequest is a API request type for the GetComplianceSummaryByConfigRule API operation.
+type GetComplianceSummaryByConfigRuleRequest struct {
+	*aws.Request
+	Input *GetComplianceSummaryByConfigRuleInput
+}
+
+// Send marshals and sends the GetComplianceSummaryByConfigRule API request.
+func (r *GetComplianceSummaryByConfigRuleRequest) Send() (*GetComplianceSummaryByConfigRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetComplianceSummaryByConfigRuleOutput), nil
+}
+
+// GetComplianceSummaryByConfigRuleRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetComplianceSummaryByConfigRule for more information on using the GetComplianceSummaryByConfigRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the number of AWS Config rules that are compliant and noncompliant,
+// up to a maximum of 25 for each.
 //
 //    // Example sending a request using the GetComplianceSummaryByConfigRuleRequest method.
-//    req, resp := client.GetComplianceSummaryByConfigRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetComplianceSummaryByConfigRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRule
-func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSummaryByConfigRuleInput) (req *aws.Request, output *GetComplianceSummaryByConfigRuleOutput) {
+func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByConfigRule,
 		HTTPMethod: "POST",
@@ -1400,71 +852,44 @@ func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetCompli
 		input = &GetComplianceSummaryByConfigRuleInput{}
 	}
 
-	output = &GetComplianceSummaryByConfigRuleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetComplianceSummaryByConfigRule API operation for AWS Config.
-//
-// Returns the number of AWS Config rules that are compliant and noncompliant,
-// up to a maximum of 25 for each.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetComplianceSummaryByConfigRule for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRule
-func (c *ConfigService) GetComplianceSummaryByConfigRule(input *GetComplianceSummaryByConfigRuleInput) (*GetComplianceSummaryByConfigRuleOutput, error) {
-	req, out := c.GetComplianceSummaryByConfigRuleRequest(input)
-	return out, req.Send()
-}
-
-// GetComplianceSummaryByConfigRuleWithContext is the same as GetComplianceSummaryByConfigRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetComplianceSummaryByConfigRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetComplianceSummaryByConfigRuleWithContext(ctx aws.Context, input *GetComplianceSummaryByConfigRuleInput, opts ...aws.Option) (*GetComplianceSummaryByConfigRuleOutput, error) {
-	req, out := c.GetComplianceSummaryByConfigRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetComplianceSummaryByConfigRuleOutput{})
+	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input}
 }
 
 const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType"
 
-// GetComplianceSummaryByResourceTypeRequest generates a "aws.Request" representing the
-// client's request for the GetComplianceSummaryByResourceType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetComplianceSummaryByResourceTypeRequest is a API request type for the GetComplianceSummaryByResourceType API operation.
+type GetComplianceSummaryByResourceTypeRequest struct {
+	*aws.Request
+	Input *GetComplianceSummaryByResourceTypeInput
+}
+
+// Send marshals and sends the GetComplianceSummaryByResourceType API request.
+func (r *GetComplianceSummaryByResourceTypeRequest) Send() (*GetComplianceSummaryByResourceTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetComplianceSummaryByResourceTypeOutput), nil
+}
+
+// GetComplianceSummaryByResourceTypeRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetComplianceSummaryByResourceType for more information on using the GetComplianceSummaryByResourceType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the number of resources that are compliant and the number that are
+// noncompliant. You can specify one or more resource types to get these numbers
+// for each resource type. The maximum number returned is 100.
 //
 //    // Example sending a request using the GetComplianceSummaryByResourceTypeRequest method.
-//    req, resp := client.GetComplianceSummaryByResourceTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetComplianceSummaryByResourceTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceType
-func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceSummaryByResourceTypeInput) (req *aws.Request, output *GetComplianceSummaryByResourceTypeOutput) {
+func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest {
 	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByResourceType,
 		HTTPMethod: "POST",
@@ -1475,94 +900,30 @@ func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComp
 		input = &GetComplianceSummaryByResourceTypeInput{}
 	}
 
-	output = &GetComplianceSummaryByResourceTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetComplianceSummaryByResourceType API operation for AWS Config.
-//
-// Returns the number of resources that are compliant and the number that are
-// noncompliant. You can specify one or more resource types to get these numbers
-// for each resource type. The maximum number returned is 100.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetComplianceSummaryByResourceType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceType
-func (c *ConfigService) GetComplianceSummaryByResourceType(input *GetComplianceSummaryByResourceTypeInput) (*GetComplianceSummaryByResourceTypeOutput, error) {
-	req, out := c.GetComplianceSummaryByResourceTypeRequest(input)
-	return out, req.Send()
-}
-
-// GetComplianceSummaryByResourceTypeWithContext is the same as GetComplianceSummaryByResourceType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetComplianceSummaryByResourceType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetComplianceSummaryByResourceTypeWithContext(ctx aws.Context, input *GetComplianceSummaryByResourceTypeInput, opts ...aws.Option) (*GetComplianceSummaryByResourceTypeOutput, error) {
-	req, out := c.GetComplianceSummaryByResourceTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetComplianceSummaryByResourceTypeOutput{})
+	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input}
 }
 
 const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 
-// GetDiscoveredResourceCountsRequest generates a "aws.Request" representing the
-// client's request for the GetDiscoveredResourceCounts operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDiscoveredResourceCounts for more information on using the GetDiscoveredResourceCounts
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetDiscoveredResourceCountsRequest method.
-//    req, resp := client.GetDiscoveredResourceCountsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCounts
-func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredResourceCountsInput) (req *aws.Request, output *GetDiscoveredResourceCountsOutput) {
-	op := &aws.Operation{
-		Name:       opGetDiscoveredResourceCounts,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetDiscoveredResourceCountsInput{}
-	}
-
-	output = &GetDiscoveredResourceCountsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetDiscoveredResourceCountsRequest is a API request type for the GetDiscoveredResourceCounts API operation.
+type GetDiscoveredResourceCountsRequest struct {
+	*aws.Request
+	Input *GetDiscoveredResourceCountsInput
 }
 
-// GetDiscoveredResourceCounts API operation for AWS Config.
+// Send marshals and sends the GetDiscoveredResourceCounts API request.
+func (r *GetDiscoveredResourceCountsRequest) Send() (*GetDiscoveredResourceCountsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDiscoveredResourceCountsOutput), nil
+}
+
+// GetDiscoveredResourceCountsRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Returns the resource types, the number of each resource type, and the total
 // number of resources that AWS Config is recording in this region for your
@@ -1599,73 +960,72 @@ func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredR
 // It may take a few minutes for AWS Config to record and count your resources.
 // Wait a few minutes and then retry the GetDiscoveredResourceCounts action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetDiscoveredResourceCounts for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The requested action is not valid.
-//
-//   * ErrCodeInvalidLimitException "InvalidLimitException"
-//   The specified limit is outside the allowable range.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
+//    // Example sending a request using the GetDiscoveredResourceCountsRequest method.
+//    req := client.GetDiscoveredResourceCountsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCounts
-func (c *ConfigService) GetDiscoveredResourceCounts(input *GetDiscoveredResourceCountsInput) (*GetDiscoveredResourceCountsOutput, error) {
-	req, out := c.GetDiscoveredResourceCountsRequest(input)
-	return out, req.Send()
-}
+func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredResourceCountsInput) GetDiscoveredResourceCountsRequest {
+	op := &aws.Operation{
+		Name:       opGetDiscoveredResourceCounts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// GetDiscoveredResourceCountsWithContext is the same as GetDiscoveredResourceCounts with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDiscoveredResourceCounts for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetDiscoveredResourceCountsWithContext(ctx aws.Context, input *GetDiscoveredResourceCountsInput, opts ...aws.Option) (*GetDiscoveredResourceCountsOutput, error) {
-	req, out := c.GetDiscoveredResourceCountsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetDiscoveredResourceCountsInput{}
+	}
+
+	req := c.newRequest(op, input, &GetDiscoveredResourceCountsOutput{})
+	return GetDiscoveredResourceCountsRequest{Request: req, Input: input}
 }
 
 const opGetResourceConfigHistory = "GetResourceConfigHistory"
 
-// GetResourceConfigHistoryRequest generates a "aws.Request" representing the
-// client's request for the GetResourceConfigHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetResourceConfigHistoryRequest is a API request type for the GetResourceConfigHistory API operation.
+type GetResourceConfigHistoryRequest struct {
+	*aws.Request
+	Input *GetResourceConfigHistoryInput
+}
+
+// Send marshals and sends the GetResourceConfigHistory API request.
+func (r *GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourceConfigHistoryOutput), nil
+}
+
+// GetResourceConfigHistoryRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of configuration items for the specified resource. The list
+// contains details about each state of the resource during the specified time
+// interval.
 //
-// See GetResourceConfigHistory for more information on using the GetResourceConfigHistory
-// API call, and error handling.
+// The response is paginated. By default, AWS Config returns a limit of 10 configuration
+// items per page. You can customize this number with the limit parameter. The
+// response includes a nextToken string. To get the next page of results, run
+// the request again and specify the string for the nextToken parameter.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Each call to the API is limited to span a duration of seven days. It is likely
+// that the number of records returned is smaller than the specified limit.
+// In such cases, you can make another call, using the nextToken.
 //
 //    // Example sending a request using the GetResourceConfigHistoryRequest method.
-//    req, resp := client.GetResourceConfigHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetResourceConfigHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistory
-func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfigHistoryInput) (req *aws.Request, output *GetResourceConfigHistoryOutput) {
+func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest {
 	op := &aws.Operation{
 		Name:       opGetResourceConfigHistory,
 		HTTPMethod: "POST",
@@ -1682,75 +1042,8 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 		input = &GetResourceConfigHistoryInput{}
 	}
 
-	output = &GetResourceConfigHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetResourceConfigHistory API operation for AWS Config.
-//
-// Returns a list of configuration items for the specified resource. The list
-// contains details about each state of the resource during the specified time
-// interval.
-//
-// The response is paginated. By default, AWS Config returns a limit of 10 configuration
-// items per page. You can customize this number with the limit parameter. The
-// response includes a nextToken string. To get the next page of results, run
-// the request again and specify the string for the nextToken parameter.
-//
-// Each call to the API is limited to span a duration of seven days. It is likely
-// that the number of records returned is smaller than the specified limit.
-// In such cases, you can make another call, using the nextToken.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation GetResourceConfigHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The requested action is not valid.
-//
-//   * ErrCodeInvalidTimeRangeException "InvalidTimeRangeException"
-//   The specified time range is not valid. The earlier time is not chronologically
-//   before the later time.
-//
-//   * ErrCodeInvalidLimitException "InvalidLimitException"
-//   The specified limit is outside the allowable range.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-//   * ErrCodeNoAvailableConfigurationRecorderException "NoAvailableConfigurationRecorderException"
-//   There are no configuration recorders available to provide the role needed
-//   to describe your resources. Create a configuration recorder.
-//
-//   * ErrCodeResourceNotDiscoveredException "ResourceNotDiscoveredException"
-//   You have specified a resource that is either unknown or has not been discovered.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistory
-func (c *ConfigService) GetResourceConfigHistory(input *GetResourceConfigHistoryInput) (*GetResourceConfigHistoryOutput, error) {
-	req, out := c.GetResourceConfigHistoryRequest(input)
-	return out, req.Send()
-}
-
-// GetResourceConfigHistoryWithContext is the same as GetResourceConfigHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetResourceConfigHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetResourceConfigHistoryWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, opts ...aws.Option) (*GetResourceConfigHistoryOutput, error) {
-	req, out := c.GetResourceConfigHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetResourceConfigHistoryOutput{})
+	return GetResourceConfigHistoryRequest{Request: req, Input: input}
 }
 
 // GetResourceConfigHistoryPages iterates over the pages of a GetResourceConfigHistory operation,
@@ -1789,10 +1082,10 @@ func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetResourceConfigHistoryRequest(inCpy)
+			req := c.GetResourceConfigHistoryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1805,47 +1098,24 @@ func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context
 
 const opListDiscoveredResources = "ListDiscoveredResources"
 
-// ListDiscoveredResourcesRequest generates a "aws.Request" representing the
-// client's request for the ListDiscoveredResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDiscoveredResources for more information on using the ListDiscoveredResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListDiscoveredResourcesRequest method.
-//    req, resp := client.ListDiscoveredResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources
-func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *aws.Request, output *ListDiscoveredResourcesOutput) {
-	op := &aws.Operation{
-		Name:       opListDiscoveredResources,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListDiscoveredResourcesInput{}
-	}
-
-	output = &ListDiscoveredResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListDiscoveredResourcesRequest is a API request type for the ListDiscoveredResources API operation.
+type ListDiscoveredResourcesRequest struct {
+	*aws.Request
+	Input *ListDiscoveredResourcesInput
 }
 
-// ListDiscoveredResources API operation for AWS Config.
+// Send marshals and sends the ListDiscoveredResources API request.
+func (r *ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDiscoveredResourcesOutput), nil
+}
+
+// ListDiscoveredResourcesRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Accepts a resource type and returns a list of resource identifiers for the
 // resources of that type. A resource identifier includes the resource type,
@@ -1862,95 +1132,49 @@ func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredReso
 // response includes a nextToken string. To get the next page of results, run
 // the request again and specify the string for the nextToken parameter.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation ListDiscoveredResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeValidationException "ValidationException"
-//   The requested action is not valid.
-//
-//   * ErrCodeInvalidLimitException "InvalidLimitException"
-//   The specified limit is outside the allowable range.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   The specified next token is invalid. Specify the NextToken string that was
-//   returned in the previous response to get the next page of results.
-//
-//   * ErrCodeNoAvailableConfigurationRecorderException "NoAvailableConfigurationRecorderException"
-//   There are no configuration recorders available to provide the role needed
-//   to describe your resources. Create a configuration recorder.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources
-func (c *ConfigService) ListDiscoveredResources(input *ListDiscoveredResourcesInput) (*ListDiscoveredResourcesOutput, error) {
-	req, out := c.ListDiscoveredResourcesRequest(input)
-	return out, req.Send()
-}
-
-// ListDiscoveredResourcesWithContext is the same as ListDiscoveredResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDiscoveredResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...aws.Option) (*ListDiscoveredResourcesOutput, error) {
-	req, out := c.ListDiscoveredResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutConfigRule = "PutConfigRule"
-
-// PutConfigRuleRequest generates a "aws.Request" representing the
-// client's request for the PutConfigRule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutConfigRule for more information on using the PutConfigRule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutConfigRuleRequest method.
-//    req, resp := client.PutConfigRuleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ListDiscoveredResourcesRequest method.
+//    req := client.ListDiscoveredResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule
-func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) (req *aws.Request, output *PutConfigRuleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources
+func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest {
 	op := &aws.Operation{
-		Name:       opPutConfigRule,
+		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutConfigRuleInput{}
+		input = &ListDiscoveredResourcesInput{}
 	}
 
-	output = &PutConfigRuleOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &ListDiscoveredResourcesOutput{})
+	return ListDiscoveredResourcesRequest{Request: req, Input: input}
 }
 
-// PutConfigRule API operation for AWS Config.
+const opPutConfigRule = "PutConfigRule"
+
+// PutConfigRuleRequest is a API request type for the PutConfigRule API operation.
+type PutConfigRuleRequest struct {
+	*aws.Request
+	Input *PutConfigRuleInput
+}
+
+// Send marshals and sends the PutConfigRule API request.
+func (r *PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutConfigRuleOutput), nil
+}
+
+// PutConfigRuleRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Adds or updates an AWS Config rule for evaluating whether your AWS resources
 // comply with your desired configurations.
@@ -1988,107 +1212,51 @@ func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) (req *aw
 // AWS Resource Configurations with AWS Config (http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
 // in the AWS Config Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation PutConfigRule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeMaxNumberOfConfigRulesExceededException "MaxNumberOfConfigRulesExceededException"
-//   Failed to add the AWS Config rule because the account already contains the
-//   maximum number of 50 rules. Consider deleting any deactivated rules before
-//   adding new rules.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The rule is currently being deleted or the rule is deleting your evaluation
-//   results. Try your request again later.
-//
-//   * ErrCodeInsufficientPermissionsException "InsufficientPermissionsException"
-//   Indicates one of the following errors:
-//
-//      * The rule cannot be created because the IAM role assigned to AWS Config
-//      lacks permissions to perform the config:Put* action.
-//
-//      * The AWS Lambda function cannot be invoked. Check the function ARN, and
-//      check the function's permissions.
-//
-//   * ErrCodeNoAvailableConfigurationRecorderException "NoAvailableConfigurationRecorderException"
-//   There are no configuration recorders available to provide the role needed
-//   to describe your resources. Create a configuration recorder.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule
-func (c *ConfigService) PutConfigRule(input *PutConfigRuleInput) (*PutConfigRuleOutput, error) {
-	req, out := c.PutConfigRuleRequest(input)
-	return out, req.Send()
-}
-
-// PutConfigRuleWithContext is the same as PutConfigRule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutConfigRule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) PutConfigRuleWithContext(ctx aws.Context, input *PutConfigRuleInput, opts ...aws.Option) (*PutConfigRuleOutput, error) {
-	req, out := c.PutConfigRuleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutConfigurationRecorder = "PutConfigurationRecorder"
-
-// PutConfigurationRecorderRequest generates a "aws.Request" representing the
-// client's request for the PutConfigurationRecorder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutConfigurationRecorder for more information on using the PutConfigurationRecorder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutConfigurationRecorderRequest method.
-//    req, resp := client.PutConfigurationRecorderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutConfigRuleRequest method.
+//    req := client.PutConfigRuleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder
-func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationRecorderInput) (req *aws.Request, output *PutConfigurationRecorderOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule
+func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfigRuleRequest {
 	op := &aws.Operation{
-		Name:       opPutConfigurationRecorder,
+		Name:       opPutConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutConfigurationRecorderInput{}
+		input = &PutConfigRuleInput{}
 	}
 
-	output = &PutConfigurationRecorderOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutConfigRuleOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutConfigRuleRequest{Request: req, Input: input}
 }
 
-// PutConfigurationRecorder API operation for AWS Config.
+const opPutConfigurationRecorder = "PutConfigurationRecorder"
+
+// PutConfigurationRecorderRequest is a API request type for the PutConfigurationRecorder API operation.
+type PutConfigurationRecorderRequest struct {
+	*aws.Request
+	Input *PutConfigurationRecorderInput
+}
+
+// Send marshals and sends the PutConfigurationRecorder API request.
+func (r *PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutConfigurationRecorderOutput), nil
+}
+
+// PutConfigurationRecorderRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Creates a new configuration recorder to record the selected resource configurations.
 //
@@ -2102,94 +1270,51 @@ func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationR
 // If ConfigurationRecorder does not have the recordingGroup parameter specified,
 // the default is to record all supported resource types.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation PutConfigurationRecorder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMaxNumberOfConfigurationRecordersExceededException "MaxNumberOfConfigurationRecordersExceededException"
-//   You have reached the limit on the number of recorders you can create.
-//
-//   * ErrCodeInvalidConfigurationRecorderNameException "InvalidConfigurationRecorderNameException"
-//   You have provided a configuration recorder name that is not valid.
-//
-//   * ErrCodeInvalidRoleException "InvalidRoleException"
-//   You have provided a null or empty role ARN.
-//
-//   * ErrCodeInvalidRecordingGroupException "InvalidRecordingGroupException"
-//   AWS Config throws an exception if the recording group does not contain a
-//   valid list of resource types. Invalid values could also be incorrectly formatted.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder
-func (c *ConfigService) PutConfigurationRecorder(input *PutConfigurationRecorderInput) (*PutConfigurationRecorderOutput, error) {
-	req, out := c.PutConfigurationRecorderRequest(input)
-	return out, req.Send()
-}
-
-// PutConfigurationRecorderWithContext is the same as PutConfigurationRecorder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutConfigurationRecorder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) PutConfigurationRecorderWithContext(ctx aws.Context, input *PutConfigurationRecorderInput, opts ...aws.Option) (*PutConfigurationRecorderOutput, error) {
-	req, out := c.PutConfigurationRecorderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opPutDeliveryChannel = "PutDeliveryChannel"
-
-// PutDeliveryChannelRequest generates a "aws.Request" representing the
-// client's request for the PutDeliveryChannel operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutDeliveryChannel for more information on using the PutDeliveryChannel
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PutDeliveryChannelRequest method.
-//    req, resp := client.PutDeliveryChannelRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the PutConfigurationRecorderRequest method.
+//    req := client.PutConfigurationRecorderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannel
-func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) (req *aws.Request, output *PutDeliveryChannelOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder
+func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationRecorderInput) PutConfigurationRecorderRequest {
 	op := &aws.Operation{
-		Name:       opPutDeliveryChannel,
+		Name:       opPutConfigurationRecorder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &PutDeliveryChannelInput{}
+		input = &PutConfigurationRecorderInput{}
 	}
 
-	output = &PutDeliveryChannelOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return PutConfigurationRecorderRequest{Request: req, Input: input}
 }
 
-// PutDeliveryChannel API operation for AWS Config.
+const opPutDeliveryChannel = "PutDeliveryChannel"
+
+// PutDeliveryChannelRequest is a API request type for the PutDeliveryChannel API operation.
+type PutDeliveryChannelRequest struct {
+	*aws.Request
+	Input *PutDeliveryChannelInput
+}
+
+// Send marshals and sends the PutDeliveryChannel API request.
+func (r *PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutDeliveryChannelOutput), nil
+}
+
+// PutDeliveryChannelRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Creates a delivery channel object to deliver configuration information to
 // an Amazon S3 bucket and Amazon SNS topic.
@@ -2206,85 +1331,65 @@ func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput
 //
 // You can have only one delivery channel per region in your account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation PutDeliveryChannel for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeMaxNumberOfDeliveryChannelsExceededException "MaxNumberOfDeliveryChannelsExceededException"
-//   You have reached the limit on the number of delivery channels you can create.
-//
-//   * ErrCodeNoAvailableConfigurationRecorderException "NoAvailableConfigurationRecorderException"
-//   There are no configuration recorders available to provide the role needed
-//   to describe your resources. Create a configuration recorder.
-//
-//   * ErrCodeInvalidDeliveryChannelNameException "InvalidDeliveryChannelNameException"
-//   The specified delivery channel name is not valid.
-//
-//   * ErrCodeNoSuchBucketException "NoSuchBucketException"
-//   The specified Amazon S3 bucket does not exist.
-//
-//   * ErrCodeInvalidS3KeyPrefixException "InvalidS3KeyPrefixException"
-//   The specified Amazon S3 key prefix is not valid.
-//
-//   * ErrCodeInvalidSNSTopicARNException "InvalidSNSTopicARNException"
-//   The specified Amazon SNS topic does not exist.
-//
-//   * ErrCodeInsufficientDeliveryPolicyException "InsufficientDeliveryPolicyException"
-//   Your Amazon S3 bucket policy does not permit AWS Config to write to it.
+//    // Example sending a request using the PutDeliveryChannelRequest method.
+//    req := client.PutDeliveryChannelRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannel
-func (c *ConfigService) PutDeliveryChannel(input *PutDeliveryChannelInput) (*PutDeliveryChannelOutput, error) {
-	req, out := c.PutDeliveryChannelRequest(input)
-	return out, req.Send()
-}
+func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) PutDeliveryChannelRequest {
+	op := &aws.Operation{
+		Name:       opPutDeliveryChannel,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PutDeliveryChannelWithContext is the same as PutDeliveryChannel with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutDeliveryChannel for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) PutDeliveryChannelWithContext(ctx aws.Context, input *PutDeliveryChannelInput, opts ...aws.Option) (*PutDeliveryChannelOutput, error) {
-	req, out := c.PutDeliveryChannelRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PutDeliveryChannelInput{}
+	}
+
+	req := c.newRequest(op, input, &PutDeliveryChannelOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return PutDeliveryChannelRequest{Request: req, Input: input}
 }
 
 const opPutEvaluations = "PutEvaluations"
 
-// PutEvaluationsRequest generates a "aws.Request" representing the
-// client's request for the PutEvaluations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutEvaluationsRequest is a API request type for the PutEvaluations API operation.
+type PutEvaluationsRequest struct {
+	*aws.Request
+	Input *PutEvaluationsInput
+}
+
+// Send marshals and sends the PutEvaluations API request.
+func (r *PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEvaluationsOutput), nil
+}
+
+// PutEvaluationsRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutEvaluations for more information on using the PutEvaluations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Used by an AWS Lambda function to deliver evaluation results to AWS Config.
+// This action is required in every AWS Lambda function that is invoked by an
+// AWS Config rule.
 //
 //    // Example sending a request using the PutEvaluationsRequest method.
-//    req, resp := client.PutEvaluationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutEvaluationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations
-func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) (req *aws.Request, output *PutEvaluationsOutput) {
+func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) PutEvaluationsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvaluations,
 		HTTPMethod: "POST",
@@ -2295,101 +1400,30 @@ func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) (req *
 		input = &PutEvaluationsInput{}
 	}
 
-	output = &PutEvaluationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutEvaluations API operation for AWS Config.
-//
-// Used by an AWS Lambda function to deliver evaluation results to AWS Config.
-// This action is required in every AWS Lambda function that is invoked by an
-// AWS Config rule.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation PutEvaluations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
-//
-//   * ErrCodeInvalidResultTokenException "InvalidResultTokenException"
-//   The specified ResultToken is invalid.
-//
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations
-func (c *ConfigService) PutEvaluations(input *PutEvaluationsInput) (*PutEvaluationsOutput, error) {
-	req, out := c.PutEvaluationsRequest(input)
-	return out, req.Send()
-}
-
-// PutEvaluationsWithContext is the same as PutEvaluations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutEvaluations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) PutEvaluationsWithContext(ctx aws.Context, input *PutEvaluationsInput, opts ...aws.Option) (*PutEvaluationsOutput, error) {
-	req, out := c.PutEvaluationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutEvaluationsOutput{})
+	return PutEvaluationsRequest{Request: req, Input: input}
 }
 
 const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 
-// StartConfigRulesEvaluationRequest generates a "aws.Request" representing the
-// client's request for the StartConfigRulesEvaluation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartConfigRulesEvaluation for more information on using the StartConfigRulesEvaluation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartConfigRulesEvaluationRequest method.
-//    req, resp := client.StartConfigRulesEvaluationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluation
-func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvaluationInput) (req *aws.Request, output *StartConfigRulesEvaluationOutput) {
-	op := &aws.Operation{
-		Name:       opStartConfigRulesEvaluation,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &StartConfigRulesEvaluationInput{}
-	}
-
-	output = &StartConfigRulesEvaluationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// StartConfigRulesEvaluationRequest is a API request type for the StartConfigRulesEvaluation API operation.
+type StartConfigRulesEvaluationRequest struct {
+	*aws.Request
+	Input *StartConfigRulesEvaluationInput
 }
 
-// StartConfigRulesEvaluation API operation for AWS Config.
+// Send marshals and sends the StartConfigRulesEvaluation API request.
+func (r *StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartConfigRulesEvaluationOutput), nil
+}
+
+// StartConfigRulesEvaluationRequest returns a request value for making API operation for
+// AWS Config.
 //
 // Runs an on-demand evaluation for the specified Config rules against the last
 // known configuration state of the resources. Use StartConfigRulesEvaluation
@@ -2422,79 +1456,65 @@ func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRule
 //
 // Your custom rule will still run periodic evaluations every 24 hours.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation StartConfigRulesEvaluation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigRuleException "NoSuchConfigRuleException"
-//   One or more AWS Config rules in the request are invalid. Verify that the
-//   rule names are correct and try again.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   This exception is thrown if an evaluation is in progress or if you call the
-//   StartConfigRulesEvaluation API more than once per minute.
-//
-//   * ErrCodeResourceInUseException "ResourceInUseException"
-//   The rule is currently being deleted or the rule is deleting your evaluation
-//   results. Try your request again later.
-//
-//   * ErrCodeInvalidParameterValueException "InvalidParameterValueException"
-//   One or more of the specified parameters are invalid. Verify that your parameters
-//   are valid and try again.
+//    // Example sending a request using the StartConfigRulesEvaluationRequest method.
+//    req := client.StartConfigRulesEvaluationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluation
-func (c *ConfigService) StartConfigRulesEvaluation(input *StartConfigRulesEvaluationInput) (*StartConfigRulesEvaluationOutput, error) {
-	req, out := c.StartConfigRulesEvaluationRequest(input)
-	return out, req.Send()
-}
+func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest {
+	op := &aws.Operation{
+		Name:       opStartConfigRulesEvaluation,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StartConfigRulesEvaluationWithContext is the same as StartConfigRulesEvaluation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartConfigRulesEvaluation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) StartConfigRulesEvaluationWithContext(ctx aws.Context, input *StartConfigRulesEvaluationInput, opts ...aws.Option) (*StartConfigRulesEvaluationOutput, error) {
-	req, out := c.StartConfigRulesEvaluationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StartConfigRulesEvaluationInput{}
+	}
+
+	req := c.newRequest(op, input, &StartConfigRulesEvaluationOutput{})
+	return StartConfigRulesEvaluationRequest{Request: req, Input: input}
 }
 
 const opStartConfigurationRecorder = "StartConfigurationRecorder"
 
-// StartConfigurationRecorderRequest generates a "aws.Request" representing the
-// client's request for the StartConfigurationRecorder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartConfigurationRecorderRequest is a API request type for the StartConfigurationRecorder API operation.
+type StartConfigurationRecorderRequest struct {
+	*aws.Request
+	Input *StartConfigurationRecorderInput
+}
+
+// Send marshals and sends the StartConfigurationRecorder API request.
+func (r *StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartConfigurationRecorderOutput), nil
+}
+
+// StartConfigurationRecorderRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Starts recording configurations of the AWS resources you have selected to
+// record in your AWS account.
 //
-// See StartConfigurationRecorder for more information on using the StartConfigurationRecorder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You must have created at least one delivery channel to successfully start
+// the configuration recorder.
 //
 //    // Example sending a request using the StartConfigurationRecorderRequest method.
-//    req, resp := client.StartConfigurationRecorderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartConfigurationRecorderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorder
-func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurationRecorderInput) (req *aws.Request, output *StartConfigurationRecorderOutput) {
+func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurationRecorderInput) StartConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opStartConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -2505,84 +1525,45 @@ func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurat
 		input = &StartConfigurationRecorderInput{}
 	}
 
-	output = &StartConfigurationRecorderOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StartConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// StartConfigurationRecorder API operation for AWS Config.
-//
-// Starts recording configurations of the AWS resources you have selected to
-// record in your AWS account.
-//
-// You must have created at least one delivery channel to successfully start
-// the configuration recorder.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation StartConfigurationRecorder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigurationRecorderException "NoSuchConfigurationRecorderException"
-//   You have specified a configuration recorder that does not exist.
-//
-//   * ErrCodeNoAvailableDeliveryChannelException "NoAvailableDeliveryChannelException"
-//   There is no delivery channel available to record configurations.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorder
-func (c *ConfigService) StartConfigurationRecorder(input *StartConfigurationRecorderInput) (*StartConfigurationRecorderOutput, error) {
-	req, out := c.StartConfigurationRecorderRequest(input)
-	return out, req.Send()
-}
-
-// StartConfigurationRecorderWithContext is the same as StartConfigurationRecorder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartConfigurationRecorder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) StartConfigurationRecorderWithContext(ctx aws.Context, input *StartConfigurationRecorderInput, opts ...aws.Option) (*StartConfigurationRecorderOutput, error) {
-	req, out := c.StartConfigurationRecorderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return StartConfigurationRecorderRequest{Request: req, Input: input}
 }
 
 const opStopConfigurationRecorder = "StopConfigurationRecorder"
 
-// StopConfigurationRecorderRequest generates a "aws.Request" representing the
-// client's request for the StopConfigurationRecorder operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopConfigurationRecorderRequest is a API request type for the StopConfigurationRecorder API operation.
+type StopConfigurationRecorderRequest struct {
+	*aws.Request
+	Input *StopConfigurationRecorderInput
+}
+
+// Send marshals and sends the StopConfigurationRecorder API request.
+func (r *StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopConfigurationRecorderOutput), nil
+}
+
+// StopConfigurationRecorderRequest returns a request value for making API operation for
+// AWS Config.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopConfigurationRecorder for more information on using the StopConfigurationRecorder
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Stops recording configurations of the AWS resources you have selected to
+// record in your AWS account.
 //
 //    // Example sending a request using the StopConfigurationRecorderRequest method.
-//    req, resp := client.StopConfigurationRecorderRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopConfigurationRecorderRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorder
-func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfigurationRecorderInput) (req *aws.Request, output *StopConfigurationRecorderOutput) {
+func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfigurationRecorderInput) StopConfigurationRecorderRequest {
 	op := &aws.Operation{
 		Name:       opStopConfigurationRecorder,
 		HTTPMethod: "POST",
@@ -2593,49 +1574,10 @@ func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfiguratio
 		input = &StopConfigurationRecorderInput{}
 	}
 
-	output = &StopConfigurationRecorderOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &StopConfigurationRecorderOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// StopConfigurationRecorder API operation for AWS Config.
-//
-// Stops recording configurations of the AWS resources you have selected to
-// record in your AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Config's
-// API operation StopConfigurationRecorder for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchConfigurationRecorderException "NoSuchConfigurationRecorderException"
-//   You have specified a configuration recorder that does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorder
-func (c *ConfigService) StopConfigurationRecorder(input *StopConfigurationRecorderInput) (*StopConfigurationRecorderOutput, error) {
-	req, out := c.StopConfigurationRecorderRequest(input)
-	return out, req.Send()
-}
-
-// StopConfigurationRecorderWithContext is the same as StopConfigurationRecorder with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopConfigurationRecorder for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) StopConfigurationRecorderWithContext(ctx aws.Context, input *StopConfigurationRecorderInput, opts ...aws.Option) (*StopConfigurationRecorderOutput, error) {
-	req, out := c.StopConfigurationRecorderRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return StopConfigurationRecorderRequest{Request: req, Input: input}
 }
 
 // Indicates whether an AWS resource or AWS Config rule is compliant and provides

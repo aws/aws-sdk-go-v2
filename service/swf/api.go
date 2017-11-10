@@ -14,45 +14,24 @@ import (
 
 const opCountClosedWorkflowExecutions = "CountClosedWorkflowExecutions"
 
-// CountClosedWorkflowExecutionsRequest generates a "aws.Request" representing the
-// client's request for the CountClosedWorkflowExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CountClosedWorkflowExecutions for more information on using the CountClosedWorkflowExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CountClosedWorkflowExecutionsRequest method.
-//    req, resp := client.CountClosedWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionCount) {
-	op := &aws.Operation{
-		Name:       opCountClosedWorkflowExecutions,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CountClosedWorkflowExecutionsInput{}
-	}
-
-	output = &WorkflowExecutionCount{}
-	req = c.newRequest(op, input, output)
-	return
+// CountClosedWorkflowExecutionsRequest is a API request type for the CountClosedWorkflowExecutions API operation.
+type CountClosedWorkflowExecutionsRequest struct {
+	*aws.Request
+	Input *CountClosedWorkflowExecutionsInput
 }
 
-// CountClosedWorkflowExecutions API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the CountClosedWorkflowExecutions API request.
+func (r *CountClosedWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CountOpenWorkflowExecutionsOutput), nil
+}
+
+// CountClosedWorkflowExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the number of closed workflow executions within the given domain
 // that meet the specified filtering criteria.
@@ -86,85 +65,47 @@ func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExe
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation CountClosedWorkflowExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) CountClosedWorkflowExecutions(input *CountClosedWorkflowExecutionsInput) (*WorkflowExecutionCount, error) {
-	req, out := c.CountClosedWorkflowExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// CountClosedWorkflowExecutionsWithContext is the same as CountClosedWorkflowExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CountClosedWorkflowExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) CountClosedWorkflowExecutionsWithContext(ctx aws.Context, input *CountClosedWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionCount, error) {
-	req, out := c.CountClosedWorkflowExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
-
-// CountOpenWorkflowExecutionsRequest generates a "aws.Request" representing the
-// client's request for the CountOpenWorkflowExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CountOpenWorkflowExecutions for more information on using the CountOpenWorkflowExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CountOpenWorkflowExecutionsRequest method.
-//    req, resp := client.CountOpenWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CountClosedWorkflowExecutionsRequest method.
+//    req := client.CountClosedWorkflowExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionCount) {
+func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExecutionsInput) CountClosedWorkflowExecutionsRequest {
 	op := &aws.Operation{
-		Name:       opCountOpenWorkflowExecutions,
+		Name:       opCountClosedWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CountOpenWorkflowExecutionsInput{}
+		input = &CountClosedWorkflowExecutionsInput{}
 	}
 
-	output = &WorkflowExecutionCount{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CountOpenWorkflowExecutionsOutput{})
+	return CountClosedWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
-// CountOpenWorkflowExecutions API operation for Amazon Simple Workflow Service.
+const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
+
+// CountOpenWorkflowExecutionsRequest is a API request type for the CountOpenWorkflowExecutions API operation.
+type CountOpenWorkflowExecutionsRequest struct {
+	*aws.Request
+	Input *CountOpenWorkflowExecutionsInput
+}
+
+// Send marshals and sends the CountOpenWorkflowExecutions API request.
+func (r *CountOpenWorkflowExecutionsRequest) Send() (*CountOpenWorkflowExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CountOpenWorkflowExecutionsOutput), nil
+}
+
+// CountOpenWorkflowExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the number of open workflow executions within the given domain that
 // meet the specified filtering criteria.
@@ -198,85 +139,47 @@ func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecuti
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation CountOpenWorkflowExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) CountOpenWorkflowExecutions(input *CountOpenWorkflowExecutionsInput) (*WorkflowExecutionCount, error) {
-	req, out := c.CountOpenWorkflowExecutionsRequest(input)
-	return out, req.Send()
-}
-
-// CountOpenWorkflowExecutionsWithContext is the same as CountOpenWorkflowExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CountOpenWorkflowExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) CountOpenWorkflowExecutionsWithContext(ctx aws.Context, input *CountOpenWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionCount, error) {
-	req, out := c.CountOpenWorkflowExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCountPendingActivityTasks = "CountPendingActivityTasks"
-
-// CountPendingActivityTasksRequest generates a "aws.Request" representing the
-// client's request for the CountPendingActivityTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CountPendingActivityTasks for more information on using the CountPendingActivityTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CountPendingActivityTasksRequest method.
-//    req, resp := client.CountPendingActivityTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CountOpenWorkflowExecutionsRequest method.
+//    req := client.CountOpenWorkflowExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) (req *aws.Request, output *PendingTaskCount) {
+func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecutionsInput) CountOpenWorkflowExecutionsRequest {
 	op := &aws.Operation{
-		Name:       opCountPendingActivityTasks,
+		Name:       opCountOpenWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CountPendingActivityTasksInput{}
+		input = &CountOpenWorkflowExecutionsInput{}
 	}
 
-	output = &PendingTaskCount{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CountOpenWorkflowExecutionsOutput{})
+	return CountOpenWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
-// CountPendingActivityTasks API operation for Amazon Simple Workflow Service.
+const opCountPendingActivityTasks = "CountPendingActivityTasks"
+
+// CountPendingActivityTasksRequest is a API request type for the CountPendingActivityTasks API operation.
+type CountPendingActivityTasksRequest struct {
+	*aws.Request
+	Input *CountPendingActivityTasksInput
+}
+
+// Send marshals and sends the CountPendingActivityTasks API request.
+func (r *CountPendingActivityTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CountPendingDecisionTasksOutput), nil
+}
+
+// CountPendingActivityTasksRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the estimated number of activity tasks in the specified task list.
 // The count returned is an approximation and isn't guaranteed to be exact.
@@ -304,85 +207,47 @@ func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksI
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation CountPendingActivityTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) CountPendingActivityTasks(input *CountPendingActivityTasksInput) (*PendingTaskCount, error) {
-	req, out := c.CountPendingActivityTasksRequest(input)
-	return out, req.Send()
-}
-
-// CountPendingActivityTasksWithContext is the same as CountPendingActivityTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CountPendingActivityTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) CountPendingActivityTasksWithContext(ctx aws.Context, input *CountPendingActivityTasksInput, opts ...aws.Option) (*PendingTaskCount, error) {
-	req, out := c.CountPendingActivityTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
-
-// CountPendingDecisionTasksRequest generates a "aws.Request" representing the
-// client's request for the CountPendingDecisionTasks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CountPendingDecisionTasks for more information on using the CountPendingDecisionTasks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CountPendingDecisionTasksRequest method.
-//    req, resp := client.CountPendingDecisionTasksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CountPendingActivityTasksRequest method.
+//    req := client.CountPendingActivityTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) (req *aws.Request, output *PendingTaskCount) {
+func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) CountPendingActivityTasksRequest {
 	op := &aws.Operation{
-		Name:       opCountPendingDecisionTasks,
+		Name:       opCountPendingActivityTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CountPendingDecisionTasksInput{}
+		input = &CountPendingActivityTasksInput{}
 	}
 
-	output = &PendingTaskCount{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+	return CountPendingActivityTasksRequest{Request: req, Input: input}
 }
 
-// CountPendingDecisionTasks API operation for Amazon Simple Workflow Service.
+const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
+
+// CountPendingDecisionTasksRequest is a API request type for the CountPendingDecisionTasks API operation.
+type CountPendingDecisionTasksRequest struct {
+	*aws.Request
+	Input *CountPendingDecisionTasksInput
+}
+
+// Send marshals and sends the CountPendingDecisionTasks API request.
+func (r *CountPendingDecisionTasksRequest) Send() (*CountPendingDecisionTasksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CountPendingDecisionTasksOutput), nil
+}
+
+// CountPendingDecisionTasksRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the estimated number of decision tasks in the specified task list.
 // The count returned is an approximation and isn't guaranteed to be exact.
@@ -410,87 +275,47 @@ func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksI
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation CountPendingDecisionTasks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) CountPendingDecisionTasks(input *CountPendingDecisionTasksInput) (*PendingTaskCount, error) {
-	req, out := c.CountPendingDecisionTasksRequest(input)
-	return out, req.Send()
-}
-
-// CountPendingDecisionTasksWithContext is the same as CountPendingDecisionTasks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CountPendingDecisionTasks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) CountPendingDecisionTasksWithContext(ctx aws.Context, input *CountPendingDecisionTasksInput, opts ...aws.Option) (*PendingTaskCount, error) {
-	req, out := c.CountPendingDecisionTasksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeprecateActivityType = "DeprecateActivityType"
-
-// DeprecateActivityTypeRequest generates a "aws.Request" representing the
-// client's request for the DeprecateActivityType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeprecateActivityType for more information on using the DeprecateActivityType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeprecateActivityTypeRequest method.
-//    req, resp := client.DeprecateActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CountPendingDecisionTasksRequest method.
+//    req := client.CountPendingDecisionTasksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (req *aws.Request, output *DeprecateActivityTypeOutput) {
+func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest {
 	op := &aws.Operation{
-		Name:       opDeprecateActivityType,
+		Name:       opCountPendingDecisionTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeprecateActivityTypeInput{}
+		input = &CountPendingDecisionTasksInput{}
 	}
 
-	output = &DeprecateActivityTypeOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &CountPendingDecisionTasksOutput{})
+	return CountPendingDecisionTasksRequest{Request: req, Input: input}
 }
 
-// DeprecateActivityType API operation for Amazon Simple Workflow Service.
+const opDeprecateActivityType = "DeprecateActivityType"
+
+// DeprecateActivityTypeRequest is a API request type for the DeprecateActivityType API operation.
+type DeprecateActivityTypeRequest struct {
+	*aws.Request
+	Input *DeprecateActivityTypeInput
+}
+
+// Send marshals and sends the DeprecateActivityType API request.
+func (r *DeprecateActivityTypeRequest) Send() (*DeprecateActivityTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeprecateActivityTypeOutput), nil
+}
+
+// DeprecateActivityTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Deprecates the specified activity type. After an activity type has been deprecated,
 // you cannot create new tasks of that activity type. Tasks of this type that
@@ -523,90 +348,49 @@ func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (r
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DeprecateActivityType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DeprecateActivityType(input *DeprecateActivityTypeInput) (*DeprecateActivityTypeOutput, error) {
-	req, out := c.DeprecateActivityTypeRequest(input)
-	return out, req.Send()
-}
-
-// DeprecateActivityTypeWithContext is the same as DeprecateActivityType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeprecateActivityType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DeprecateActivityTypeWithContext(ctx aws.Context, input *DeprecateActivityTypeInput, opts ...aws.Option) (*DeprecateActivityTypeOutput, error) {
-	req, out := c.DeprecateActivityTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeprecateDomain = "DeprecateDomain"
-
-// DeprecateDomainRequest generates a "aws.Request" representing the
-// client's request for the DeprecateDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeprecateDomain for more information on using the DeprecateDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeprecateDomainRequest method.
-//    req, resp := client.DeprecateDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeprecateActivityTypeRequest method.
+//    req := client.DeprecateActivityTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *aws.Request, output *DeprecateDomainOutput) {
+func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) DeprecateActivityTypeRequest {
 	op := &aws.Operation{
-		Name:       opDeprecateDomain,
+		Name:       opDeprecateActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeprecateDomainInput{}
+		input = &DeprecateActivityTypeInput{}
 	}
 
-	output = &DeprecateDomainOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeprecateActivityTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeprecateActivityTypeRequest{Request: req, Input: input}
 }
 
-// DeprecateDomain API operation for Amazon Simple Workflow Service.
+const opDeprecateDomain = "DeprecateDomain"
+
+// DeprecateDomainRequest is a API request type for the DeprecateDomain API operation.
+type DeprecateDomainRequest struct {
+	*aws.Request
+	Input *DeprecateDomainInput
+}
+
+// Send marshals and sends the DeprecateDomain API request.
+func (r *DeprecateDomainRequest) Send() (*DeprecateDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeprecateDomainOutput), nil
+}
+
+// DeprecateDomainRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Deprecates the specified domain. After a domain has been deprecated it cannot
 // be used to create new workflow executions or register new types. However,
@@ -637,90 +421,49 @@ func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *aws.Requ
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DeprecateDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeDomainDeprecatedFault "DomainDeprecatedFault"
-//   Returned when the specified domain has been deprecated.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DeprecateDomain(input *DeprecateDomainInput) (*DeprecateDomainOutput, error) {
-	req, out := c.DeprecateDomainRequest(input)
-	return out, req.Send()
-}
-
-// DeprecateDomainWithContext is the same as DeprecateDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeprecateDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DeprecateDomainWithContext(ctx aws.Context, input *DeprecateDomainInput, opts ...aws.Option) (*DeprecateDomainOutput, error) {
-	req, out := c.DeprecateDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeprecateWorkflowType = "DeprecateWorkflowType"
-
-// DeprecateWorkflowTypeRequest generates a "aws.Request" representing the
-// client's request for the DeprecateWorkflowType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeprecateWorkflowType for more information on using the DeprecateWorkflowType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeprecateWorkflowTypeRequest method.
-//    req, resp := client.DeprecateWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeprecateDomainRequest method.
+//    req := client.DeprecateDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (req *aws.Request, output *DeprecateWorkflowTypeOutput) {
+func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) DeprecateDomainRequest {
 	op := &aws.Operation{
-		Name:       opDeprecateWorkflowType,
+		Name:       opDeprecateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeprecateWorkflowTypeInput{}
+		input = &DeprecateDomainInput{}
 	}
 
-	output = &DeprecateWorkflowTypeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeprecateDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return DeprecateDomainRequest{Request: req, Input: input}
 }
 
-// DeprecateWorkflowType API operation for Amazon Simple Workflow Service.
+const opDeprecateWorkflowType = "DeprecateWorkflowType"
+
+// DeprecateWorkflowTypeRequest is a API request type for the DeprecateWorkflowType API operation.
+type DeprecateWorkflowTypeRequest struct {
+	*aws.Request
+	Input *DeprecateWorkflowTypeInput
+}
+
+// Send marshals and sends the DeprecateWorkflowType API request.
+func (r *DeprecateWorkflowTypeRequest) Send() (*DeprecateWorkflowTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeprecateWorkflowTypeOutput), nil
+}
+
+// DeprecateWorkflowTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Deprecates the specified workflow type. After a workflow type has been deprecated,
 // you cannot create new executions of that type. Executions that were started
@@ -754,88 +497,49 @@ func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (r
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DeprecateWorkflowType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DeprecateWorkflowType(input *DeprecateWorkflowTypeInput) (*DeprecateWorkflowTypeOutput, error) {
-	req, out := c.DeprecateWorkflowTypeRequest(input)
-	return out, req.Send()
-}
-
-// DeprecateWorkflowTypeWithContext is the same as DeprecateWorkflowType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeprecateWorkflowType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DeprecateWorkflowTypeWithContext(ctx aws.Context, input *DeprecateWorkflowTypeInput, opts ...aws.Option) (*DeprecateWorkflowTypeOutput, error) {
-	req, out := c.DeprecateWorkflowTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeActivityType = "DescribeActivityType"
-
-// DescribeActivityTypeRequest generates a "aws.Request" representing the
-// client's request for the DescribeActivityType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeActivityType for more information on using the DescribeActivityType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeActivityTypeRequest method.
-//    req, resp := client.DescribeActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeprecateWorkflowTypeRequest method.
+//    req := client.DeprecateWorkflowTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req *aws.Request, output *DescribeActivityTypeOutput) {
+func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) DeprecateWorkflowTypeRequest {
 	op := &aws.Operation{
-		Name:       opDescribeActivityType,
+		Name:       opDeprecateWorkflowType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeActivityTypeInput{}
+		input = &DeprecateWorkflowTypeInput{}
 	}
 
-	output = &DescribeActivityTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeprecateWorkflowTypeOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeprecateWorkflowTypeRequest{Request: req, Input: input}
 }
 
-// DescribeActivityType API operation for Amazon Simple Workflow Service.
+const opDescribeActivityType = "DescribeActivityType"
+
+// DescribeActivityTypeRequest is a API request type for the DescribeActivityType API operation.
+type DescribeActivityTypeRequest struct {
+	*aws.Request
+	Input *DescribeActivityTypeInput
+}
+
+// Send marshals and sends the DescribeActivityType API request.
+func (r *DescribeActivityTypeRequest) Send() (*DescribeActivityTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeActivityTypeOutput), nil
+}
+
+// DescribeActivityTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about the specified activity type. This includes configuration
 // settings provided when the type was registered and other general information
@@ -865,85 +569,47 @@ func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DescribeActivityType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DescribeActivityType(input *DescribeActivityTypeInput) (*DescribeActivityTypeOutput, error) {
-	req, out := c.DescribeActivityTypeRequest(input)
-	return out, req.Send()
-}
-
-// DescribeActivityTypeWithContext is the same as DescribeActivityType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeActivityType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DescribeActivityTypeWithContext(ctx aws.Context, input *DescribeActivityTypeInput, opts ...aws.Option) (*DescribeActivityTypeOutput, error) {
-	req, out := c.DescribeActivityTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeDomain = "DescribeDomain"
-
-// DescribeDomainRequest generates a "aws.Request" representing the
-// client's request for the DescribeDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeDomain for more information on using the DescribeDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeDomainRequest method.
-//    req, resp := client.DescribeDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeActivityTypeRequest method.
+//    req := client.DescribeActivityTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *aws.Request, output *DescribeDomainOutput) {
+func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) DescribeActivityTypeRequest {
 	op := &aws.Operation{
-		Name:       opDescribeDomain,
+		Name:       opDescribeActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeDomainInput{}
+		input = &DescribeActivityTypeInput{}
 	}
 
-	output = &DescribeDomainOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeActivityTypeOutput{})
+	return DescribeActivityTypeRequest{Request: req, Input: input}
 }
 
-// DescribeDomain API operation for Amazon Simple Workflow Service.
+const opDescribeDomain = "DescribeDomain"
+
+// DescribeDomainRequest is a API request type for the DescribeDomain API operation.
+type DescribeDomainRequest struct {
+	*aws.Request
+	Input *DescribeDomainInput
+}
+
+// Send marshals and sends the DescribeDomain API request.
+func (r *DescribeDomainRequest) Send() (*DescribeDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDomainOutput), nil
+}
+
+// DescribeDomainRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about the specified domain, including description and
 // status.
@@ -967,85 +633,47 @@ func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *aws.Reques
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DescribeDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DescribeDomain(input *DescribeDomainInput) (*DescribeDomainOutput, error) {
-	req, out := c.DescribeDomainRequest(input)
-	return out, req.Send()
-}
-
-// DescribeDomainWithContext is the same as DescribeDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DescribeDomainWithContext(ctx aws.Context, input *DescribeDomainInput, opts ...aws.Option) (*DescribeDomainOutput, error) {
-	req, out := c.DescribeDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
-
-// DescribeWorkflowExecutionRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkflowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeWorkflowExecution for more information on using the DescribeWorkflowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeWorkflowExecutionRequest method.
-//    req, resp := client.DescribeWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeDomainRequest method.
+//    req := client.DescribeDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) (req *aws.Request, output *DescribeWorkflowExecutionOutput) {
+func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomainRequest {
 	op := &aws.Operation{
-		Name:       opDescribeWorkflowExecution,
+		Name:       opDescribeDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeWorkflowExecutionInput{}
+		input = &DescribeDomainInput{}
 	}
 
-	output = &DescribeWorkflowExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeDomainOutput{})
+	return DescribeDomainRequest{Request: req, Input: input}
 }
 
-// DescribeWorkflowExecution API operation for Amazon Simple Workflow Service.
+const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
+
+// DescribeWorkflowExecutionRequest is a API request type for the DescribeWorkflowExecution API operation.
+type DescribeWorkflowExecutionRequest struct {
+	*aws.Request
+	Input *DescribeWorkflowExecutionInput
+}
+
+// Send marshals and sends the DescribeWorkflowExecution API request.
+func (r *DescribeWorkflowExecutionRequest) Send() (*DescribeWorkflowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkflowExecutionOutput), nil
+}
+
+// DescribeWorkflowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about the specified workflow execution including its
 // type and some statistics.
@@ -1072,85 +700,47 @@ func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionI
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DescribeWorkflowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DescribeWorkflowExecution(input *DescribeWorkflowExecutionInput) (*DescribeWorkflowExecutionOutput, error) {
-	req, out := c.DescribeWorkflowExecutionRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkflowExecutionWithContext is the same as DescribeWorkflowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkflowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DescribeWorkflowExecutionWithContext(ctx aws.Context, input *DescribeWorkflowExecutionInput, opts ...aws.Option) (*DescribeWorkflowExecutionOutput, error) {
-	req, out := c.DescribeWorkflowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDescribeWorkflowType = "DescribeWorkflowType"
-
-// DescribeWorkflowTypeRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkflowType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeWorkflowType for more information on using the DescribeWorkflowType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeWorkflowTypeRequest method.
-//    req, resp := client.DescribeWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeWorkflowExecutionRequest method.
+//    req := client.DescribeWorkflowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req *aws.Request, output *DescribeWorkflowTypeOutput) {
+func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest {
 	op := &aws.Operation{
-		Name:       opDescribeWorkflowType,
+		Name:       opDescribeWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DescribeWorkflowTypeInput{}
+		input = &DescribeWorkflowExecutionInput{}
 	}
 
-	output = &DescribeWorkflowTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeWorkflowExecutionOutput{})
+	return DescribeWorkflowExecutionRequest{Request: req, Input: input}
 }
 
-// DescribeWorkflowType API operation for Amazon Simple Workflow Service.
+const opDescribeWorkflowType = "DescribeWorkflowType"
+
+// DescribeWorkflowTypeRequest is a API request type for the DescribeWorkflowType API operation.
+type DescribeWorkflowTypeRequest struct {
+	*aws.Request
+	Input *DescribeWorkflowTypeInput
+}
+
+// Send marshals and sends the DescribeWorkflowType API request.
+func (r *DescribeWorkflowTypeRequest) Send() (*DescribeWorkflowTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkflowTypeOutput), nil
+}
+
+// DescribeWorkflowTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about the specified workflow type. This includes configuration
 // settings specified when the type was registered and other information such
@@ -1180,91 +770,47 @@ func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation DescribeWorkflowType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) DescribeWorkflowType(input *DescribeWorkflowTypeInput) (*DescribeWorkflowTypeOutput, error) {
-	req, out := c.DescribeWorkflowTypeRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the DescribeWorkflowTypeRequest method.
+//    req := client.DescribeWorkflowTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) DescribeWorkflowTypeRequest {
+	op := &aws.Operation{
+		Name:       opDescribeWorkflowType,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeWorkflowTypeWithContext is the same as DescribeWorkflowType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkflowType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) DescribeWorkflowTypeWithContext(ctx aws.Context, input *DescribeWorkflowTypeInput, opts ...aws.Option) (*DescribeWorkflowTypeOutput, error) {
-	req, out := c.DescribeWorkflowTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeWorkflowTypeInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeWorkflowTypeOutput{})
+	return DescribeWorkflowTypeRequest{Request: req, Input: input}
 }
 
 const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 
-// GetWorkflowExecutionHistoryRequest generates a "aws.Request" representing the
-// client's request for the GetWorkflowExecutionHistory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetWorkflowExecutionHistory for more information on using the GetWorkflowExecutionHistory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetWorkflowExecutionHistoryRequest method.
-//    req, resp := client.GetWorkflowExecutionHistoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) (req *aws.Request, output *GetWorkflowExecutionHistoryOutput) {
-	op := &aws.Operation{
-		Name:       opGetWorkflowExecutionHistory,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &GetWorkflowExecutionHistoryInput{}
-	}
-
-	output = &GetWorkflowExecutionHistoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetWorkflowExecutionHistoryRequest is a API request type for the GetWorkflowExecutionHistory API operation.
+type GetWorkflowExecutionHistoryRequest struct {
+	*aws.Request
+	Input *GetWorkflowExecutionHistoryInput
 }
 
-// GetWorkflowExecutionHistory API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the GetWorkflowExecutionHistory API request.
+func (r *GetWorkflowExecutionHistoryRequest) Send() (*GetWorkflowExecutionHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetWorkflowExecutionHistoryOutput), nil
+}
+
+// GetWorkflowExecutionHistoryRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the history of the specified workflow execution. The results may
 // be split into multiple pages. To retrieve subsequent pages, make the call
@@ -1292,42 +838,31 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation GetWorkflowExecutionHistory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) GetWorkflowExecutionHistory(input *GetWorkflowExecutionHistoryInput) (*GetWorkflowExecutionHistoryOutput, error) {
-	req, out := c.GetWorkflowExecutionHistoryRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the GetWorkflowExecutionHistoryRequest method.
+//    req := client.GetWorkflowExecutionHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest {
+	op := &aws.Operation{
+		Name:       opGetWorkflowExecutionHistory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// GetWorkflowExecutionHistoryWithContext is the same as GetWorkflowExecutionHistory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetWorkflowExecutionHistory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) GetWorkflowExecutionHistoryWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, opts ...aws.Option) (*GetWorkflowExecutionHistoryOutput, error) {
-	req, out := c.GetWorkflowExecutionHistoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetWorkflowExecutionHistoryInput{}
+	}
+
+	req := c.newRequest(op, input, &GetWorkflowExecutionHistoryOutput{})
+	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input}
 }
 
 // GetWorkflowExecutionHistoryPages iterates over the pages of a GetWorkflowExecutionHistory operation,
@@ -1366,10 +901,10 @@ func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetWorkflowExecutionHistoryRequest(inCpy)
+			req := c.GetWorkflowExecutionHistoryRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1382,51 +917,24 @@ func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input
 
 const opListActivityTypes = "ListActivityTypes"
 
-// ListActivityTypesRequest generates a "aws.Request" representing the
-// client's request for the ListActivityTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListActivityTypes for more information on using the ListActivityTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListActivityTypesRequest method.
-//    req, resp := client.ListActivityTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *aws.Request, output *ListActivityTypesOutput) {
-	op := &aws.Operation{
-		Name:       opListActivityTypes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListActivityTypesInput{}
-	}
-
-	output = &ListActivityTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListActivityTypesRequest is a API request type for the ListActivityTypes API operation.
+type ListActivityTypesRequest struct {
+	*aws.Request
+	Input *ListActivityTypesInput
 }
 
-// ListActivityTypes API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the ListActivityTypes API request.
+func (r *ListActivityTypesRequest) Send() (*ListActivityTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListActivityTypesOutput), nil
+}
+
+// ListActivityTypesRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about all activities registered in the specified domain
 // that match the specified name and registration status. The result includes
@@ -1453,42 +961,31 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *aws.
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation ListActivityTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-func (c *SWF) ListActivityTypes(input *ListActivityTypesInput) (*ListActivityTypesOutput, error) {
-	req, out := c.ListActivityTypesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListActivityTypesRequest method.
+//    req := client.ListActivityTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivityTypesRequest {
+	op := &aws.Operation{
+		Name:       opListActivityTypes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// ListActivityTypesWithContext is the same as ListActivityTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListActivityTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListActivityTypesWithContext(ctx aws.Context, input *ListActivityTypesInput, opts ...aws.Option) (*ListActivityTypesOutput, error) {
-	req, out := c.ListActivityTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListActivityTypesInput{}
+	}
+
+	req := c.newRequest(op, input, &ListActivityTypesOutput{})
+	return ListActivityTypesRequest{Request: req, Input: input}
 }
 
 // ListActivityTypesPages iterates over the pages of a ListActivityTypes operation,
@@ -1527,10 +1024,10 @@ func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActi
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListActivityTypesRequest(inCpy)
+			req := c.ListActivityTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1543,51 +1040,24 @@ func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActi
 
 const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 
-// ListClosedWorkflowExecutionsRequest generates a "aws.Request" representing the
-// client's request for the ListClosedWorkflowExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListClosedWorkflowExecutions for more information on using the ListClosedWorkflowExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListClosedWorkflowExecutionsRequest method.
-//    req, resp := client.ListClosedWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionInfos) {
-	op := &aws.Operation{
-		Name:       opListClosedWorkflowExecutions,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListClosedWorkflowExecutionsInput{}
-	}
-
-	output = &WorkflowExecutionInfos{}
-	req = c.newRequest(op, input, output)
-	return
+// ListClosedWorkflowExecutionsRequest is a API request type for the ListClosedWorkflowExecutions API operation.
+type ListClosedWorkflowExecutionsRequest struct {
+	*aws.Request
+	Input *ListClosedWorkflowExecutionsInput
 }
 
-// ListClosedWorkflowExecutions API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the ListClosedWorkflowExecutions API request.
+func (r *ListClosedWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOpenWorkflowExecutionsOutput), nil
+}
+
+// ListClosedWorkflowExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns a list of closed workflow executions in the specified domain that
 // meet the filtering criteria. The results may be split into multiple pages.
@@ -1623,42 +1093,31 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation ListClosedWorkflowExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) ListClosedWorkflowExecutions(input *ListClosedWorkflowExecutionsInput) (*WorkflowExecutionInfos, error) {
-	req, out := c.ListClosedWorkflowExecutionsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListClosedWorkflowExecutionsRequest method.
+//    req := client.ListClosedWorkflowExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest {
+	op := &aws.Operation{
+		Name:       opListClosedWorkflowExecutions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// ListClosedWorkflowExecutionsWithContext is the same as ListClosedWorkflowExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListClosedWorkflowExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListClosedWorkflowExecutionsWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionInfos, error) {
-	req, out := c.ListClosedWorkflowExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListClosedWorkflowExecutionsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
 // ListClosedWorkflowExecutionsPages iterates over the pages of a ListClosedWorkflowExecutions operation,
@@ -1672,13 +1131,13 @@ func (c *SWF) ListClosedWorkflowExecutionsWithContext(ctx aws.Context, input *Li
 //    // Example iterating over at most 3 pages of a ListClosedWorkflowExecutions operation.
 //    pageNum := 0
 //    err := client.ListClosedWorkflowExecutionsPages(params,
-//        func(page *WorkflowExecutionInfos, lastPage bool) bool {
+//        func(page *ListOpenWorkflowExecutionsOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool) error {
+func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool) error {
 	return c.ListClosedWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -1689,7 +1148,7 @@ func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecuti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...aws.Option) error {
+func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListClosedWorkflowExecutionsInput
@@ -1697,67 +1156,40 @@ func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListClosedWorkflowExecutionsRequest(inCpy)
+			req := c.ListClosedWorkflowExecutionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
 	cont := true
 	for p.Next() && cont {
-		cont = fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage())
+		cont = fn(p.Page().(*ListOpenWorkflowExecutionsOutput), !p.HasNextPage())
 	}
 	return p.Err()
 }
 
 const opListDomains = "ListDomains"
 
-// ListDomainsRequest generates a "aws.Request" representing the
-// client's request for the ListDomains operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDomains for more information on using the ListDomains
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListDomainsRequest method.
-//    req, resp := client.ListDomainsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, output *ListDomainsOutput) {
-	op := &aws.Operation{
-		Name:       opListDomains,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListDomainsInput{}
-	}
-
-	output = &ListDomainsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListDomainsRequest is a API request type for the ListDomains API operation.
+type ListDomainsRequest struct {
+	*aws.Request
+	Input *ListDomainsInput
 }
 
-// ListDomains API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the ListDomains API request.
+func (r *ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDomainsOutput), nil
+}
+
+// ListDomainsRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns the list of domains registered in the account. The results may be
 // split into multiple pages. To retrieve subsequent pages, make the call again
@@ -1786,37 +1218,31 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, out
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation ListDomains for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
-	req, out := c.ListDomainsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListDomainsRequest method.
+//    req := client.ListDomainsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
+	op := &aws.Operation{
+		Name:       opListDomains,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// ListDomainsWithContext is the same as ListDomains with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDomains for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...aws.Option) (*ListDomainsOutput, error) {
-	req, out := c.ListDomainsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListDomainsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListDomainsOutput{})
+	return ListDomainsRequest{Request: req, Input: input}
 }
 
 // ListDomainsPages iterates over the pages of a ListDomains operation,
@@ -1855,10 +1281,10 @@ func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDomainsRequest(inCpy)
+			req := c.ListDomainsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1871,51 +1297,24 @@ func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInp
 
 const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 
-// ListOpenWorkflowExecutionsRequest generates a "aws.Request" representing the
-// client's request for the ListOpenWorkflowExecutions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOpenWorkflowExecutions for more information on using the ListOpenWorkflowExecutions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListOpenWorkflowExecutionsRequest method.
-//    req, resp := client.ListOpenWorkflowExecutionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionInfos) {
-	op := &aws.Operation{
-		Name:       opListOpenWorkflowExecutions,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListOpenWorkflowExecutionsInput{}
-	}
-
-	output = &WorkflowExecutionInfos{}
-	req = c.newRequest(op, input, output)
-	return
+// ListOpenWorkflowExecutionsRequest is a API request type for the ListOpenWorkflowExecutions API operation.
+type ListOpenWorkflowExecutionsRequest struct {
+	*aws.Request
+	Input *ListOpenWorkflowExecutionsInput
 }
 
-// ListOpenWorkflowExecutions API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the ListOpenWorkflowExecutions API request.
+func (r *ListOpenWorkflowExecutionsRequest) Send() (*ListOpenWorkflowExecutionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOpenWorkflowExecutionsOutput), nil
+}
+
+// ListOpenWorkflowExecutionsRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns a list of open workflow executions in the specified domain that meet
 // the filtering criteria. The results may be split into multiple pages. To
@@ -1951,42 +1350,31 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation ListOpenWorkflowExecutions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) ListOpenWorkflowExecutions(input *ListOpenWorkflowExecutionsInput) (*WorkflowExecutionInfos, error) {
-	req, out := c.ListOpenWorkflowExecutionsRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListOpenWorkflowExecutionsRequest method.
+//    req := client.ListOpenWorkflowExecutionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest {
+	op := &aws.Operation{
+		Name:       opListOpenWorkflowExecutions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// ListOpenWorkflowExecutionsWithContext is the same as ListOpenWorkflowExecutions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOpenWorkflowExecutions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListOpenWorkflowExecutionsWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionInfos, error) {
-	req, out := c.ListOpenWorkflowExecutionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListOpenWorkflowExecutionsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListOpenWorkflowExecutionsOutput{})
+	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input}
 }
 
 // ListOpenWorkflowExecutionsPages iterates over the pages of a ListOpenWorkflowExecutions operation,
@@ -2000,13 +1388,13 @@ func (c *SWF) ListOpenWorkflowExecutionsWithContext(ctx aws.Context, input *List
 //    // Example iterating over at most 3 pages of a ListOpenWorkflowExecutions operation.
 //    pageNum := 0
 //    err := client.ListOpenWorkflowExecutionsPages(params,
-//        func(page *WorkflowExecutionInfos, lastPage bool) bool {
+//        func(page *ListOpenWorkflowExecutionsOutput, lastPage bool) bool {
 //            pageNum++
 //            fmt.Println(page)
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool) error {
+func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool) error {
 	return c.ListOpenWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
 }
 
@@ -2017,7 +1405,7 @@ func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...aws.Option) error {
+func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool, opts ...aws.Option) error {
 	p := aws.Pagination{
 		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOpenWorkflowExecutionsInput
@@ -2025,67 +1413,40 @@ func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListOpenWorkflowExecutionsRequest(inCpy)
+			req := c.ListOpenWorkflowExecutionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
 	cont := true
 	for p.Next() && cont {
-		cont = fn(p.Page().(*WorkflowExecutionInfos), !p.HasNextPage())
+		cont = fn(p.Page().(*ListOpenWorkflowExecutionsOutput), !p.HasNextPage())
 	}
 	return p.Err()
 }
 
 const opListWorkflowTypes = "ListWorkflowTypes"
 
-// ListWorkflowTypesRequest generates a "aws.Request" representing the
-// client's request for the ListWorkflowTypes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListWorkflowTypes for more information on using the ListWorkflowTypes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListWorkflowTypesRequest method.
-//    req, resp := client.ListWorkflowTypesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *aws.Request, output *ListWorkflowTypesOutput) {
-	op := &aws.Operation{
-		Name:       opListWorkflowTypes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &ListWorkflowTypesInput{}
-	}
-
-	output = &ListWorkflowTypesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListWorkflowTypesRequest is a API request type for the ListWorkflowTypes API operation.
+type ListWorkflowTypesRequest struct {
+	*aws.Request
+	Input *ListWorkflowTypesInput
 }
 
-// ListWorkflowTypes API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the ListWorkflowTypes API request.
+func (r *ListWorkflowTypesRequest) Send() (*ListWorkflowTypesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListWorkflowTypesOutput), nil
+}
+
+// ListWorkflowTypesRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Returns information about workflow types in the specified domain. The results
 // may be split into multiple pages that can be retrieved by making the call
@@ -2110,42 +1471,31 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *aws.
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation ListWorkflowTypes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-func (c *SWF) ListWorkflowTypes(input *ListWorkflowTypesInput) (*ListWorkflowTypesOutput, error) {
-	req, out := c.ListWorkflowTypesRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the ListWorkflowTypesRequest method.
+//    req := client.ListWorkflowTypesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkflowTypesRequest {
+	op := &aws.Operation{
+		Name:       opListWorkflowTypes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// ListWorkflowTypesWithContext is the same as ListWorkflowTypes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListWorkflowTypes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListWorkflowTypesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, opts ...aws.Option) (*ListWorkflowTypesOutput, error) {
-	req, out := c.ListWorkflowTypesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListWorkflowTypesInput{}
+	}
+
+	req := c.newRequest(op, input, &ListWorkflowTypesOutput{})
+	return ListWorkflowTypesRequest{Request: req, Input: input}
 }
 
 // ListWorkflowTypesPages iterates over the pages of a ListWorkflowTypes operation,
@@ -2184,10 +1534,10 @@ func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWork
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListWorkflowTypesRequest(inCpy)
+			req := c.ListWorkflowTypesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2200,45 +1550,24 @@ func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWork
 
 const opPollForActivityTask = "PollForActivityTask"
 
-// PollForActivityTaskRequest generates a "aws.Request" representing the
-// client's request for the PollForActivityTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PollForActivityTask for more information on using the PollForActivityTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PollForActivityTaskRequest method.
-//    req, resp := client.PollForActivityTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *aws.Request, output *PollForActivityTaskOutput) {
-	op := &aws.Operation{
-		Name:       opPollForActivityTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &PollForActivityTaskInput{}
-	}
-
-	output = &PollForActivityTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PollForActivityTaskRequest is a API request type for the PollForActivityTask API operation.
+type PollForActivityTaskRequest struct {
+	*aws.Request
+	Input *PollForActivityTaskInput
 }
 
-// PollForActivityTask API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the PollForActivityTask API request.
+func (r *PollForActivityTaskRequest) Send() (*PollForActivityTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PollForActivityTaskOutput), nil
+}
+
+// PollForActivityTaskRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by workers to get an ActivityTask from the specified activity taskList.
 // This initiates a long poll, where the service holds the HTTP connection open
@@ -2273,96 +1602,47 @@ func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation PollForActivityTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-func (c *SWF) PollForActivityTask(input *PollForActivityTaskInput) (*PollForActivityTaskOutput, error) {
-	req, out := c.PollForActivityTaskRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the PollForActivityTaskRequest method.
+//    req := client.PollForActivityTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) PollForActivityTaskRequest {
+	op := &aws.Operation{
+		Name:       opPollForActivityTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// PollForActivityTaskWithContext is the same as PollForActivityTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PollForActivityTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) PollForActivityTaskWithContext(ctx aws.Context, input *PollForActivityTaskInput, opts ...aws.Option) (*PollForActivityTaskOutput, error) {
-	req, out := c.PollForActivityTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PollForActivityTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &PollForActivityTaskOutput{})
+	return PollForActivityTaskRequest{Request: req, Input: input}
 }
 
 const opPollForDecisionTask = "PollForDecisionTask"
 
-// PollForDecisionTaskRequest generates a "aws.Request" representing the
-// client's request for the PollForDecisionTask operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PollForDecisionTask for more information on using the PollForDecisionTask
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the PollForDecisionTaskRequest method.
-//    req, resp := client.PollForDecisionTaskRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *aws.Request, output *PollForDecisionTaskOutput) {
-	op := &aws.Operation{
-		Name:       opPollForDecisionTask,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"nextPageToken"},
-			OutputTokens:    []string{"nextPageToken"},
-			LimitToken:      "maximumPageSize",
-			TruncationToken: "",
-		},
-	}
-
-	if input == nil {
-		input = &PollForDecisionTaskInput{}
-	}
-
-	output = &PollForDecisionTaskOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// PollForDecisionTaskRequest is a API request type for the PollForDecisionTask API operation.
+type PollForDecisionTaskRequest struct {
+	*aws.Request
+	Input *PollForDecisionTaskInput
 }
 
-// PollForDecisionTask API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the PollForDecisionTask API request.
+func (r *PollForDecisionTaskRequest) Send() (*PollForDecisionTaskOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PollForDecisionTaskOutput), nil
+}
+
+// PollForDecisionTaskRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by deciders to get a DecisionTask from the specified decision taskList.
 // A decision task may be returned for any open workflow execution that is using
@@ -2407,47 +1687,31 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation PollForDecisionTask for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-func (c *SWF) PollForDecisionTask(input *PollForDecisionTaskInput) (*PollForDecisionTaskOutput, error) {
-	req, out := c.PollForDecisionTaskRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the PollForDecisionTaskRequest method.
+//    req := client.PollForDecisionTaskRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollForDecisionTaskRequest {
+	op := &aws.Operation{
+		Name:       opPollForDecisionTask,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextPageToken"},
+			OutputTokens:    []string{"nextPageToken"},
+			LimitToken:      "maximumPageSize",
+			TruncationToken: "",
+		},
+	}
 
-// PollForDecisionTaskWithContext is the same as PollForDecisionTask with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PollForDecisionTask for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) PollForDecisionTaskWithContext(ctx aws.Context, input *PollForDecisionTaskInput, opts ...aws.Option) (*PollForDecisionTaskOutput, error) {
-	req, out := c.PollForDecisionTaskRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &PollForDecisionTaskInput{}
+	}
+
+	req := c.newRequest(op, input, &PollForDecisionTaskOutput{})
+	return PollForDecisionTaskRequest{Request: req, Input: input}
 }
 
 // PollForDecisionTaskPages iterates over the pages of a PollForDecisionTask operation,
@@ -2486,10 +1750,10 @@ func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollFo
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.PollForDecisionTaskRequest(inCpy)
+			req := c.PollForDecisionTaskRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2502,45 +1766,24 @@ func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollFo
 
 const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"
 
-// RecordActivityTaskHeartbeatRequest generates a "aws.Request" representing the
-// client's request for the RecordActivityTaskHeartbeat operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RecordActivityTaskHeartbeat for more information on using the RecordActivityTaskHeartbeat
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RecordActivityTaskHeartbeatRequest method.
-//    req, resp := client.RecordActivityTaskHeartbeatRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartbeatInput) (req *aws.Request, output *RecordActivityTaskHeartbeatOutput) {
-	op := &aws.Operation{
-		Name:       opRecordActivityTaskHeartbeat,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &RecordActivityTaskHeartbeatInput{}
-	}
-
-	output = &RecordActivityTaskHeartbeatOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// RecordActivityTaskHeartbeatRequest is a API request type for the RecordActivityTaskHeartbeat API operation.
+type RecordActivityTaskHeartbeatRequest struct {
+	*aws.Request
+	Input *RecordActivityTaskHeartbeatInput
 }
 
-// RecordActivityTaskHeartbeat API operation for Amazon Simple Workflow Service.
+// Send marshals and sends the RecordActivityTaskHeartbeat API request.
+func (r *RecordActivityTaskHeartbeatRequest) Send() (*RecordActivityTaskHeartbeatOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RecordActivityTaskHeartbeatOutput), nil
+}
+
+// RecordActivityTaskHeartbeatRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by activity workers to report to the service that the ActivityTask represented
 // by the specified taskToken is still making progress. The worker can also
@@ -2588,87 +1831,47 @@ func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartb
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RecordActivityTaskHeartbeat for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RecordActivityTaskHeartbeat(input *RecordActivityTaskHeartbeatInput) (*RecordActivityTaskHeartbeatOutput, error) {
-	req, out := c.RecordActivityTaskHeartbeatRequest(input)
-	return out, req.Send()
-}
-
-// RecordActivityTaskHeartbeatWithContext is the same as RecordActivityTaskHeartbeat with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RecordActivityTaskHeartbeat for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RecordActivityTaskHeartbeatWithContext(ctx aws.Context, input *RecordActivityTaskHeartbeatInput, opts ...aws.Option) (*RecordActivityTaskHeartbeatOutput, error) {
-	req, out := c.RecordActivityTaskHeartbeatRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterActivityType = "RegisterActivityType"
-
-// RegisterActivityTypeRequest generates a "aws.Request" representing the
-// client's request for the RegisterActivityType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterActivityType for more information on using the RegisterActivityType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterActivityTypeRequest method.
-//    req, resp := client.RegisterActivityTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RecordActivityTaskHeartbeatRequest method.
+//    req := client.RecordActivityTaskHeartbeatRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req *aws.Request, output *RegisterActivityTypeOutput) {
+func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartbeatInput) RecordActivityTaskHeartbeatRequest {
 	op := &aws.Operation{
-		Name:       opRegisterActivityType,
+		Name:       opRecordActivityTaskHeartbeat,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterActivityTypeInput{}
+		input = &RecordActivityTaskHeartbeatInput{}
 	}
 
-	output = &RegisterActivityTypeOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &RecordActivityTaskHeartbeatOutput{})
+	return RecordActivityTaskHeartbeatRequest{Request: req, Input: input}
 }
 
-// RegisterActivityType API operation for Amazon Simple Workflow Service.
+const opRegisterActivityType = "RegisterActivityType"
+
+// RegisterActivityTypeRequest is a API request type for the RegisterActivityType API operation.
+type RegisterActivityTypeRequest struct {
+	*aws.Request
+	Input *RegisterActivityTypeInput
+}
+
+// Send marshals and sends the RegisterActivityType API request.
+func (r *RegisterActivityTypeRequest) Send() (*RegisterActivityTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterActivityTypeOutput), nil
+}
+
+// RegisterActivityTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Registers a new activity type along with its configuration settings in the
 // specified domain.
@@ -2703,98 +1906,49 @@ func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RegisterActivityType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTypeAlreadyExistsFault "TypeAlreadyExistsFault"
-//   Returned if the type already exists in the specified domain. You get this
-//   fault even if the existing type is in deprecated status. You can specify
-//   another version if the intent is to create a new distinct version of the
-//   type.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RegisterActivityType(input *RegisterActivityTypeInput) (*RegisterActivityTypeOutput, error) {
-	req, out := c.RegisterActivityTypeRequest(input)
-	return out, req.Send()
-}
-
-// RegisterActivityTypeWithContext is the same as RegisterActivityType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterActivityType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RegisterActivityTypeWithContext(ctx aws.Context, input *RegisterActivityTypeInput, opts ...aws.Option) (*RegisterActivityTypeOutput, error) {
-	req, out := c.RegisterActivityTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterDomain = "RegisterDomain"
-
-// RegisterDomainRequest generates a "aws.Request" representing the
-// client's request for the RegisterDomain operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterDomain for more information on using the RegisterDomain
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterDomainRequest method.
-//    req, resp := client.RegisterDomainRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterActivityTypeRequest method.
+//    req := client.RegisterActivityTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *aws.Request, output *RegisterDomainOutput) {
+func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) RegisterActivityTypeRequest {
 	op := &aws.Operation{
-		Name:       opRegisterDomain,
+		Name:       opRegisterActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterDomainInput{}
+		input = &RegisterActivityTypeInput{}
 	}
 
-	output = &RegisterDomainOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterActivityTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RegisterActivityTypeRequest{Request: req, Input: input}
 }
 
-// RegisterDomain API operation for Amazon Simple Workflow Service.
+const opRegisterDomain = "RegisterDomain"
+
+// RegisterDomainRequest is a API request type for the RegisterDomain API operation.
+type RegisterDomainRequest struct {
+	*aws.Request
+	Input *RegisterDomainInput
+}
+
+// Send marshals and sends the RegisterDomain API request.
+func (r *RegisterDomainRequest) Send() (*RegisterDomainOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterDomainOutput), nil
+}
+
+// RegisterDomainRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Registers a new domain.
 //
@@ -2818,91 +1972,49 @@ func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *aws.Reques
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RegisterDomain for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDomainAlreadyExistsFault "DomainAlreadyExistsFault"
-//   Returned if the specified domain already exists. You get this fault even
-//   if the existing domain is in deprecated status.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RegisterDomain(input *RegisterDomainInput) (*RegisterDomainOutput, error) {
-	req, out := c.RegisterDomainRequest(input)
-	return out, req.Send()
-}
-
-// RegisterDomainWithContext is the same as RegisterDomain with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterDomain for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainInput, opts ...aws.Option) (*RegisterDomainOutput, error) {
-	req, out := c.RegisterDomainRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRegisterWorkflowType = "RegisterWorkflowType"
-
-// RegisterWorkflowTypeRequest generates a "aws.Request" representing the
-// client's request for the RegisterWorkflowType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RegisterWorkflowType for more information on using the RegisterWorkflowType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RegisterWorkflowTypeRequest method.
-//    req, resp := client.RegisterWorkflowTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterDomainRequest method.
+//    req := client.RegisterDomainRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req *aws.Request, output *RegisterWorkflowTypeOutput) {
+func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) RegisterDomainRequest {
 	op := &aws.Operation{
-		Name:       opRegisterWorkflowType,
+		Name:       opRegisterDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RegisterWorkflowTypeInput{}
+		input = &RegisterDomainInput{}
 	}
 
-	output = &RegisterWorkflowTypeOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterDomainOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RegisterDomainRequest{Request: req, Input: input}
 }
 
-// RegisterWorkflowType API operation for Amazon Simple Workflow Service.
+const opRegisterWorkflowType = "RegisterWorkflowType"
+
+// RegisterWorkflowTypeRequest is a API request type for the RegisterWorkflowType API operation.
+type RegisterWorkflowTypeRequest struct {
+	*aws.Request
+	Input *RegisterWorkflowTypeInput
+}
+
+// Send marshals and sends the RegisterWorkflowType API request.
+func (r *RegisterWorkflowTypeRequest) Send() (*RegisterWorkflowTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterWorkflowTypeOutput), nil
+}
+
+// RegisterWorkflowTypeRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Registers a new workflow type and its configuration settings in the specified
 // domain.
@@ -2940,98 +2052,49 @@ func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RegisterWorkflowType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTypeAlreadyExistsFault "TypeAlreadyExistsFault"
-//   Returned if the type already exists in the specified domain. You get this
-//   fault even if the existing type is in deprecated status. You can specify
-//   another version if the intent is to create a new distinct version of the
-//   type.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RegisterWorkflowType(input *RegisterWorkflowTypeInput) (*RegisterWorkflowTypeOutput, error) {
-	req, out := c.RegisterWorkflowTypeRequest(input)
-	return out, req.Send()
-}
-
-// RegisterWorkflowTypeWithContext is the same as RegisterWorkflowType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RegisterWorkflowType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RegisterWorkflowTypeWithContext(ctx aws.Context, input *RegisterWorkflowTypeInput, opts ...aws.Option) (*RegisterWorkflowTypeOutput, error) {
-	req, out := c.RegisterWorkflowTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
-
-// RequestCancelWorkflowExecutionRequest generates a "aws.Request" representing the
-// client's request for the RequestCancelWorkflowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RequestCancelWorkflowExecution for more information on using the RequestCancelWorkflowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RequestCancelWorkflowExecutionRequest method.
-//    req, resp := client.RequestCancelWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RegisterWorkflowTypeRequest method.
+//    req := client.RegisterWorkflowTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) (req *aws.Request, output *RequestCancelWorkflowExecutionOutput) {
+func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) RegisterWorkflowTypeRequest {
 	op := &aws.Operation{
-		Name:       opRequestCancelWorkflowExecution,
+		Name:       opRegisterWorkflowType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RequestCancelWorkflowExecutionInput{}
+		input = &RegisterWorkflowTypeInput{}
 	}
 
-	output = &RequestCancelWorkflowExecutionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RegisterWorkflowTypeOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RegisterWorkflowTypeRequest{Request: req, Input: input}
 }
 
-// RequestCancelWorkflowExecution API operation for Amazon Simple Workflow Service.
+const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
+
+// RequestCancelWorkflowExecutionRequest is a API request type for the RequestCancelWorkflowExecution API operation.
+type RequestCancelWorkflowExecutionRequest struct {
+	*aws.Request
+	Input *RequestCancelWorkflowExecutionInput
+}
+
+// Send marshals and sends the RequestCancelWorkflowExecution API request.
+func (r *RequestCancelWorkflowExecutionRequest) Send() (*RequestCancelWorkflowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RequestCancelWorkflowExecutionOutput), nil
+}
+
+// RequestCancelWorkflowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Records a WorkflowExecutionCancelRequested event in the currently running
 // workflow execution identified by the given domain, workflowId, and runId.
@@ -3065,87 +2128,49 @@ func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflow
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RequestCancelWorkflowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RequestCancelWorkflowExecution(input *RequestCancelWorkflowExecutionInput) (*RequestCancelWorkflowExecutionOutput, error) {
-	req, out := c.RequestCancelWorkflowExecutionRequest(input)
-	return out, req.Send()
-}
-
-// RequestCancelWorkflowExecutionWithContext is the same as RequestCancelWorkflowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RequestCancelWorkflowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RequestCancelWorkflowExecutionWithContext(ctx aws.Context, input *RequestCancelWorkflowExecutionInput, opts ...aws.Option) (*RequestCancelWorkflowExecutionOutput, error) {
-	req, out := c.RequestCancelWorkflowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
-
-// RespondActivityTaskCanceledRequest generates a "aws.Request" representing the
-// client's request for the RespondActivityTaskCanceled operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RespondActivityTaskCanceled for more information on using the RespondActivityTaskCanceled
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RespondActivityTaskCanceledRequest method.
-//    req, resp := client.RespondActivityTaskCanceledRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RequestCancelWorkflowExecutionRequest method.
+//    req := client.RequestCancelWorkflowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCanceledInput) (req *aws.Request, output *RespondActivityTaskCanceledOutput) {
+func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest {
 	op := &aws.Operation{
-		Name:       opRespondActivityTaskCanceled,
+		Name:       opRequestCancelWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RespondActivityTaskCanceledInput{}
+		input = &RequestCancelWorkflowExecutionInput{}
 	}
 
-	output = &RespondActivityTaskCanceledOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RequestCancelWorkflowExecutionOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input}
 }
 
-// RespondActivityTaskCanceled API operation for Amazon Simple Workflow Service.
+const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
+
+// RespondActivityTaskCanceledRequest is a API request type for the RespondActivityTaskCanceled API operation.
+type RespondActivityTaskCanceledRequest struct {
+	*aws.Request
+	Input *RespondActivityTaskCanceledInput
+}
+
+// Send marshals and sends the RespondActivityTaskCanceled API request.
+func (r *RespondActivityTaskCanceledRequest) Send() (*RespondActivityTaskCanceledOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RespondActivityTaskCanceledOutput), nil
+}
+
+// RespondActivityTaskCanceledRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by workers to tell the service that the ActivityTask identified by the
 // taskToken was successfully canceled. Additional details can be provided using
@@ -3182,87 +2207,49 @@ func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCance
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RespondActivityTaskCanceled for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RespondActivityTaskCanceled(input *RespondActivityTaskCanceledInput) (*RespondActivityTaskCanceledOutput, error) {
-	req, out := c.RespondActivityTaskCanceledRequest(input)
-	return out, req.Send()
-}
-
-// RespondActivityTaskCanceledWithContext is the same as RespondActivityTaskCanceled with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RespondActivityTaskCanceled for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RespondActivityTaskCanceledWithContext(ctx aws.Context, input *RespondActivityTaskCanceledInput, opts ...aws.Option) (*RespondActivityTaskCanceledOutput, error) {
-	req, out := c.RespondActivityTaskCanceledRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
-
-// RespondActivityTaskCompletedRequest generates a "aws.Request" representing the
-// client's request for the RespondActivityTaskCompleted operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RespondActivityTaskCompleted for more information on using the RespondActivityTaskCompleted
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RespondActivityTaskCompletedRequest method.
-//    req, resp := client.RespondActivityTaskCompletedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RespondActivityTaskCanceledRequest method.
+//    req := client.RespondActivityTaskCanceledRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskCompletedInput) (req *aws.Request, output *RespondActivityTaskCompletedOutput) {
+func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCanceledInput) RespondActivityTaskCanceledRequest {
 	op := &aws.Operation{
-		Name:       opRespondActivityTaskCompleted,
+		Name:       opRespondActivityTaskCanceled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RespondActivityTaskCompletedInput{}
+		input = &RespondActivityTaskCanceledInput{}
 	}
 
-	output = &RespondActivityTaskCompletedOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RespondActivityTaskCanceledOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RespondActivityTaskCanceledRequest{Request: req, Input: input}
 }
 
-// RespondActivityTaskCompleted API operation for Amazon Simple Workflow Service.
+const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
+
+// RespondActivityTaskCompletedRequest is a API request type for the RespondActivityTaskCompleted API operation.
+type RespondActivityTaskCompletedRequest struct {
+	*aws.Request
+	Input *RespondActivityTaskCompletedInput
+}
+
+// Send marshals and sends the RespondActivityTaskCompleted API request.
+func (r *RespondActivityTaskCompletedRequest) Send() (*RespondActivityTaskCompletedOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RespondActivityTaskCompletedOutput), nil
+}
+
+// RespondActivityTaskCompletedRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by workers to tell the service that the ActivityTask identified by the
 // taskToken completed successfully with a result (if provided). The result
@@ -3298,87 +2285,49 @@ func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskComp
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RespondActivityTaskCompleted for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RespondActivityTaskCompleted(input *RespondActivityTaskCompletedInput) (*RespondActivityTaskCompletedOutput, error) {
-	req, out := c.RespondActivityTaskCompletedRequest(input)
-	return out, req.Send()
-}
-
-// RespondActivityTaskCompletedWithContext is the same as RespondActivityTaskCompleted with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RespondActivityTaskCompleted for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RespondActivityTaskCompletedWithContext(ctx aws.Context, input *RespondActivityTaskCompletedInput, opts ...aws.Option) (*RespondActivityTaskCompletedOutput, error) {
-	req, out := c.RespondActivityTaskCompletedRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
-
-// RespondActivityTaskFailedRequest generates a "aws.Request" representing the
-// client's request for the RespondActivityTaskFailed operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RespondActivityTaskFailed for more information on using the RespondActivityTaskFailed
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RespondActivityTaskFailedRequest method.
-//    req, resp := client.RespondActivityTaskFailedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RespondActivityTaskCompletedRequest method.
+//    req := client.RespondActivityTaskCompletedRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedInput) (req *aws.Request, output *RespondActivityTaskFailedOutput) {
+func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskCompletedInput) RespondActivityTaskCompletedRequest {
 	op := &aws.Operation{
-		Name:       opRespondActivityTaskFailed,
+		Name:       opRespondActivityTaskCompleted,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RespondActivityTaskFailedInput{}
+		input = &RespondActivityTaskCompletedInput{}
 	}
 
-	output = &RespondActivityTaskFailedOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RespondActivityTaskCompletedOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RespondActivityTaskCompletedRequest{Request: req, Input: input}
 }
 
-// RespondActivityTaskFailed API operation for Amazon Simple Workflow Service.
+const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
+
+// RespondActivityTaskFailedRequest is a API request type for the RespondActivityTaskFailed API operation.
+type RespondActivityTaskFailedRequest struct {
+	*aws.Request
+	Input *RespondActivityTaskFailedInput
+}
+
+// Send marshals and sends the RespondActivityTaskFailed API request.
+func (r *RespondActivityTaskFailedRequest) Send() (*RespondActivityTaskFailedOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RespondActivityTaskFailedOutput), nil
+}
+
+// RespondActivityTaskFailedRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by workers to tell the service that the ActivityTask identified by the
 // taskToken has failed with reason (if specified). The reason and details appear
@@ -3409,87 +2358,49 @@ func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedI
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RespondActivityTaskFailed for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RespondActivityTaskFailed(input *RespondActivityTaskFailedInput) (*RespondActivityTaskFailedOutput, error) {
-	req, out := c.RespondActivityTaskFailedRequest(input)
-	return out, req.Send()
-}
-
-// RespondActivityTaskFailedWithContext is the same as RespondActivityTaskFailed with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RespondActivityTaskFailed for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RespondActivityTaskFailedWithContext(ctx aws.Context, input *RespondActivityTaskFailedInput, opts ...aws.Option) (*RespondActivityTaskFailedOutput, error) {
-	req, out := c.RespondActivityTaskFailedRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
-
-// RespondDecisionTaskCompletedRequest generates a "aws.Request" representing the
-// client's request for the RespondDecisionTaskCompleted operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RespondDecisionTaskCompleted for more information on using the RespondDecisionTaskCompleted
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RespondDecisionTaskCompletedRequest method.
-//    req, resp := client.RespondDecisionTaskCompletedRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RespondActivityTaskFailedRequest method.
+//    req := client.RespondActivityTaskFailedRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskCompletedInput) (req *aws.Request, output *RespondDecisionTaskCompletedOutput) {
+func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedInput) RespondActivityTaskFailedRequest {
 	op := &aws.Operation{
-		Name:       opRespondDecisionTaskCompleted,
+		Name:       opRespondActivityTaskFailed,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RespondDecisionTaskCompletedInput{}
+		input = &RespondActivityTaskFailedInput{}
 	}
 
-	output = &RespondDecisionTaskCompletedOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RespondActivityTaskFailedOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RespondActivityTaskFailedRequest{Request: req, Input: input}
 }
 
-// RespondDecisionTaskCompleted API operation for Amazon Simple Workflow Service.
+const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
+
+// RespondDecisionTaskCompletedRequest is a API request type for the RespondDecisionTaskCompleted API operation.
+type RespondDecisionTaskCompletedRequest struct {
+	*aws.Request
+	Input *RespondDecisionTaskCompletedInput
+}
+
+// Send marshals and sends the RespondDecisionTaskCompleted API request.
+func (r *RespondDecisionTaskCompletedRequest) Send() (*RespondDecisionTaskCompletedOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RespondDecisionTaskCompletedOutput), nil
+}
+
+// RespondDecisionTaskCompletedRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Used by deciders to tell the service that the DecisionTask identified by
 // the taskToken has successfully completed. The decisions argument specifies
@@ -3509,87 +2420,49 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 // Access to Amazon SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation RespondDecisionTaskCompleted for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) RespondDecisionTaskCompleted(input *RespondDecisionTaskCompletedInput) (*RespondDecisionTaskCompletedOutput, error) {
-	req, out := c.RespondDecisionTaskCompletedRequest(input)
-	return out, req.Send()
-}
-
-// RespondDecisionTaskCompletedWithContext is the same as RespondDecisionTaskCompleted with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RespondDecisionTaskCompleted for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) RespondDecisionTaskCompletedWithContext(ctx aws.Context, input *RespondDecisionTaskCompletedInput, opts ...aws.Option) (*RespondDecisionTaskCompletedOutput, error) {
-	req, out := c.RespondDecisionTaskCompletedRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opSignalWorkflowExecution = "SignalWorkflowExecution"
-
-// SignalWorkflowExecutionRequest generates a "aws.Request" representing the
-// client's request for the SignalWorkflowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SignalWorkflowExecution for more information on using the SignalWorkflowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the SignalWorkflowExecutionRequest method.
-//    req, resp := client.SignalWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RespondDecisionTaskCompletedRequest method.
+//    req := client.RespondDecisionTaskCompletedRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) (req *aws.Request, output *SignalWorkflowExecutionOutput) {
+func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskCompletedInput) RespondDecisionTaskCompletedRequest {
 	op := &aws.Operation{
-		Name:       opSignalWorkflowExecution,
+		Name:       opRespondDecisionTaskCompleted,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &SignalWorkflowExecutionInput{}
+		input = &RespondDecisionTaskCompletedInput{}
 	}
 
-	output = &SignalWorkflowExecutionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &RespondDecisionTaskCompletedOutput{})
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	return RespondDecisionTaskCompletedRequest{Request: req, Input: input}
 }
 
-// SignalWorkflowExecution API operation for Amazon Simple Workflow Service.
+const opSignalWorkflowExecution = "SignalWorkflowExecution"
+
+// SignalWorkflowExecutionRequest is a API request type for the SignalWorkflowExecution API operation.
+type SignalWorkflowExecutionRequest struct {
+	*aws.Request
+	Input *SignalWorkflowExecutionInput
+}
+
+// Send marshals and sends the SignalWorkflowExecution API request.
+func (r *SignalWorkflowExecutionRequest) Send() (*SignalWorkflowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SignalWorkflowExecutionOutput), nil
+}
+
+// SignalWorkflowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Records a WorkflowExecutionSignaled event in the workflow execution history
 // and creates a decision task for the workflow execution identified by the
@@ -3621,85 +2494,49 @@ func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation SignalWorkflowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) SignalWorkflowExecution(input *SignalWorkflowExecutionInput) (*SignalWorkflowExecutionOutput, error) {
-	req, out := c.SignalWorkflowExecutionRequest(input)
-	return out, req.Send()
-}
-
-// SignalWorkflowExecutionWithContext is the same as SignalWorkflowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SignalWorkflowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) SignalWorkflowExecutionWithContext(ctx aws.Context, input *SignalWorkflowExecutionInput, opts ...aws.Option) (*SignalWorkflowExecutionOutput, error) {
-	req, out := c.SignalWorkflowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartWorkflowExecution = "StartWorkflowExecution"
-
-// StartWorkflowExecutionRequest generates a "aws.Request" representing the
-// client's request for the StartWorkflowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartWorkflowExecution for more information on using the StartWorkflowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartWorkflowExecutionRequest method.
-//    req, resp := client.StartWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the SignalWorkflowExecutionRequest method.
+//    req := client.SignalWorkflowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) (req *aws.Request, output *StartWorkflowExecutionOutput) {
+func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest {
 	op := &aws.Operation{
-		Name:       opStartWorkflowExecution,
+		Name:       opSignalWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartWorkflowExecutionInput{}
+		input = &SignalWorkflowExecutionInput{}
 	}
 
-	output = &StartWorkflowExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &SignalWorkflowExecutionOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return SignalWorkflowExecutionRequest{Request: req, Input: input}
 }
 
-// StartWorkflowExecution API operation for Amazon Simple Workflow Service.
+const opStartWorkflowExecution = "StartWorkflowExecution"
+
+// StartWorkflowExecutionRequest is a API request type for the StartWorkflowExecution API operation.
+type StartWorkflowExecutionRequest struct {
+	*aws.Request
+	Input *StartWorkflowExecutionInput
+}
+
+// Send marshals and sends the StartWorkflowExecution API request.
+func (r *StartWorkflowExecutionRequest) Send() (*StartWorkflowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartWorkflowExecutionOutput), nil
+}
+
+// StartWorkflowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Starts an execution of the workflow type in the specified domain using the
 // provided workflowId and input data.
@@ -3742,112 +2579,47 @@ func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) 
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation StartWorkflowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeTypeDeprecatedFault "TypeDeprecatedFault"
-//   Returned when the specified activity or workflow type was already deprecated.
-//
-//   * ErrCodeWorkflowExecutionAlreadyStartedFault "WorkflowExecutionAlreadyStartedFault"
-//   Returned by StartWorkflowExecution when an open execution with the same workflowId
-//   is already running in the specified domain.
-//
-//   * ErrCodeLimitExceededFault "LimitExceededFault"
-//   Returned by any operation if a system imposed limitation has been reached.
-//   To address this fault you should either clean up unused resources or increase
-//   the limit by contacting AWS.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-//   * ErrCodeDefaultUndefinedFault "DefaultUndefinedFault"
-//   The StartWorkflowExecution API action was called without the required parameters
-//   set.
-//
-//   Some workflow execution parameters, such as the decision taskList, must be
-//   set to start the execution. However, these parameters might have been set
-//   as defaults when the workflow type was registered. In this case, you can
-//   omit these parameters from the StartWorkflowExecution call and Amazon SWF
-//   uses the values defined in the workflow type.
-//
-//   If these parameters aren't set and no default parameters were defined in
-//   the workflow type, this error is displayed.
-//
-func (c *SWF) StartWorkflowExecution(input *StartWorkflowExecutionInput) (*StartWorkflowExecutionOutput, error) {
-	req, out := c.StartWorkflowExecutionRequest(input)
-	return out, req.Send()
-}
-
-// StartWorkflowExecutionWithContext is the same as StartWorkflowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartWorkflowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) StartWorkflowExecutionWithContext(ctx aws.Context, input *StartWorkflowExecutionInput, opts ...aws.Option) (*StartWorkflowExecutionOutput, error) {
-	req, out := c.StartWorkflowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
-
-// TerminateWorkflowExecutionRequest generates a "aws.Request" representing the
-// client's request for the TerminateWorkflowExecution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TerminateWorkflowExecution for more information on using the TerminateWorkflowExecution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TerminateWorkflowExecutionRequest method.
-//    req, resp := client.TerminateWorkflowExecutionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartWorkflowExecutionRequest method.
+//    req := client.StartWorkflowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutionInput) (req *aws.Request, output *TerminateWorkflowExecutionOutput) {
+func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) StartWorkflowExecutionRequest {
 	op := &aws.Operation{
-		Name:       opTerminateWorkflowExecution,
+		Name:       opStartWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &TerminateWorkflowExecutionInput{}
+		input = &StartWorkflowExecutionInput{}
 	}
 
-	output = &TerminateWorkflowExecutionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+	req := c.newRequest(op, input, &StartWorkflowExecutionOutput{})
+	return StartWorkflowExecutionRequest{Request: req, Input: input}
 }
 
-// TerminateWorkflowExecution API operation for Amazon Simple Workflow Service.
+const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
+
+// TerminateWorkflowExecutionRequest is a API request type for the TerminateWorkflowExecution API operation.
+type TerminateWorkflowExecutionRequest struct {
+	*aws.Request
+	Input *TerminateWorkflowExecutionInput
+}
+
+// Send marshals and sends the TerminateWorkflowExecution API request.
+func (r *TerminateWorkflowExecutionRequest) Send() (*TerminateWorkflowExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TerminateWorkflowExecutionOutput), nil
+}
+
+// TerminateWorkflowExecutionRequest returns a request value for making API operation for
+// Amazon Simple Workflow Service.
 //
 // Records a WorkflowExecutionTerminated event and forces closure of the workflow
 // execution identified by the given domain, runId, and workflowId. The child
@@ -3884,42 +2656,27 @@ func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutio
 // SWF Workflows (http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
 // in the Amazon SWF Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Simple Workflow Service's
-// API operation TerminateWorkflowExecution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeUnknownResourceFault "UnknownResourceFault"
-//   Returned when the named resource cannot be found with in the scope of this
-//   operation (region or domain). This could happen if the named resource was
-//   never created or is no longer available for this operation.
-//
-//   * ErrCodeOperationNotPermittedFault "OperationNotPermittedFault"
-//   Returned when the caller doesn't have sufficient permissions to invoke the
-//   action.
-//
-func (c *SWF) TerminateWorkflowExecution(input *TerminateWorkflowExecutionInput) (*TerminateWorkflowExecutionOutput, error) {
-	req, out := c.TerminateWorkflowExecutionRequest(input)
-	return out, req.Send()
-}
+//    // Example sending a request using the TerminateWorkflowExecutionRequest method.
+//    req := client.TerminateWorkflowExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutionInput) TerminateWorkflowExecutionRequest {
+	op := &aws.Operation{
+		Name:       opTerminateWorkflowExecution,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// TerminateWorkflowExecutionWithContext is the same as TerminateWorkflowExecution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TerminateWorkflowExecution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) TerminateWorkflowExecutionWithContext(ctx aws.Context, input *TerminateWorkflowExecutionInput, opts ...aws.Option) (*TerminateWorkflowExecutionOutput, error) {
-	req, out := c.TerminateWorkflowExecutionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &TerminateWorkflowExecutionInput{}
+	}
+
+	req := c.newRequest(op, input, &TerminateWorkflowExecutionOutput{})
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return TerminateWorkflowExecutionRequest{Request: req, Input: input}
 }
 
 // Provides the details of the ActivityTaskCancelRequested event.
@@ -5872,6 +4629,43 @@ func (s *CountOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) 
 	return s
 }
 
+// Contains the count of workflow executions returned from CountOpenWorkflowExecutions
+// or CountClosedWorkflowExecutions
+type CountOpenWorkflowExecutionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of workflow executions.
+	//
+	// Count is a required field
+	Count *int64 `locationName:"count" type:"integer" required:"true"`
+
+	// If set to true, indicates that the actual count was more than the maximum
+	// supported by this API and the count returned is the truncated value.
+	Truncated *bool `locationName:"truncated" type:"boolean"`
+}
+
+// String returns the string representation
+func (s CountOpenWorkflowExecutionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CountOpenWorkflowExecutionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetCount sets the Count field's value.
+func (s *CountOpenWorkflowExecutionsOutput) SetCount(v int64) *CountOpenWorkflowExecutionsOutput {
+	s.Count = &v
+	return s
+}
+
+// SetTruncated sets the Truncated field's value.
+func (s *CountOpenWorkflowExecutionsOutput) SetTruncated(v bool) *CountOpenWorkflowExecutionsOutput {
+	s.Truncated = &v
+	return s
+}
+
 type CountPendingActivityTasksInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5993,6 +4787,42 @@ func (s *CountPendingDecisionTasksInput) SetDomain(v string) *CountPendingDecisi
 // SetTaskList sets the TaskList field's value.
 func (s *CountPendingDecisionTasksInput) SetTaskList(v *TaskList) *CountPendingDecisionTasksInput {
 	s.TaskList = v
+	return s
+}
+
+// Contains the count of tasks in a task list.
+type CountPendingDecisionTasksOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of tasks in the task list.
+	//
+	// Count is a required field
+	Count *int64 `locationName:"count" type:"integer" required:"true"`
+
+	// If set to true, indicates that the actual count was more than the maximum
+	// supported by this API and the count returned is the truncated value.
+	Truncated *bool `locationName:"truncated" type:"boolean"`
+}
+
+// String returns the string representation
+func (s CountPendingDecisionTasksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CountPendingDecisionTasksOutput) GoString() string {
+	return s.String()
+}
+
+// SetCount sets the Count field's value.
+func (s *CountPendingDecisionTasksOutput) SetCount(v int64) *CountPendingDecisionTasksOutput {
+	s.Count = &v
+	return s
+}
+
+// SetTruncated sets the Truncated field's value.
+func (s *CountPendingDecisionTasksOutput) SetTruncated(v bool) *CountPendingDecisionTasksOutput {
+	s.Truncated = &v
 	return s
 }
 
@@ -9313,6 +8143,46 @@ func (s *ListOpenWorkflowExecutionsInput) SetTypeFilter(v *WorkflowTypeFilter) *
 	return s
 }
 
+// Contains a paginated list of information about workflow executions.
+type ListOpenWorkflowExecutionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The list of workflow information structures.
+	//
+	// ExecutionInfos is a required field
+	ExecutionInfos []*WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
+
+	// If a NextPageToken was returned by a previous call, there are more results
+	// available. To retrieve the next page of results, make the call again using
+	// the returned token in nextPageToken. Keep all other arguments unchanged.
+	//
+	// The configured maximumPageSize determines how many results can be returned
+	// in a single call.
+	NextPageToken *string `locationName:"nextPageToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListOpenWorkflowExecutionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListOpenWorkflowExecutionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetExecutionInfos sets the ExecutionInfos field's value.
+func (s *ListOpenWorkflowExecutionsOutput) SetExecutionInfos(v []*WorkflowExecutionInfo) *ListOpenWorkflowExecutionsOutput {
+	s.ExecutionInfos = v
+	return s
+}
+
+// SetNextPageToken sets the NextPageToken field's value.
+func (s *ListOpenWorkflowExecutionsOutput) SetNextPageToken(v string) *ListOpenWorkflowExecutionsOutput {
+	s.NextPageToken = &v
+	return s
+}
+
 type ListWorkflowTypesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -9507,42 +8377,6 @@ func (s *MarkerRecordedEventAttributes) SetDetails(v string) *MarkerRecordedEven
 // SetMarkerName sets the MarkerName field's value.
 func (s *MarkerRecordedEventAttributes) SetMarkerName(v string) *MarkerRecordedEventAttributes {
 	s.MarkerName = &v
-	return s
-}
-
-// Contains the count of tasks in a task list.
-type PendingTaskCount struct {
-	_ struct{} `type:"structure"`
-
-	// The number of tasks in the task list.
-	//
-	// Count is a required field
-	Count *int64 `locationName:"count" type:"integer" required:"true"`
-
-	// If set to true, indicates that the actual count was more than the maximum
-	// supported by this API and the count returned is the truncated value.
-	Truncated *bool `locationName:"truncated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s PendingTaskCount) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s PendingTaskCount) GoString() string {
-	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *PendingTaskCount) SetCount(v int64) *PendingTaskCount {
-	s.Count = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *PendingTaskCount) SetTruncated(v bool) *PendingTaskCount {
-	s.Truncated = &v
 	return s
 }
 
@@ -14026,43 +12860,6 @@ func (s *WorkflowExecutionContinuedAsNewEventAttributes) SetWorkflowType(v *Work
 	return s
 }
 
-// Contains the count of workflow executions returned from CountOpenWorkflowExecutions
-// or CountClosedWorkflowExecutions
-type WorkflowExecutionCount struct {
-	_ struct{} `type:"structure"`
-
-	// The number of workflow executions.
-	//
-	// Count is a required field
-	Count *int64 `locationName:"count" type:"integer" required:"true"`
-
-	// If set to true, indicates that the actual count was more than the maximum
-	// supported by this API and the count returned is the truncated value.
-	Truncated *bool `locationName:"truncated" type:"boolean"`
-}
-
-// String returns the string representation
-func (s WorkflowExecutionCount) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s WorkflowExecutionCount) GoString() string {
-	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *WorkflowExecutionCount) SetCount(v int64) *WorkflowExecutionCount {
-	s.Count = &v
-	return s
-}
-
-// SetTruncated sets the Truncated field's value.
-func (s *WorkflowExecutionCount) SetTruncated(v bool) *WorkflowExecutionCount {
-	s.Truncated = &v
-	return s
-}
-
 // Provides the details of the WorkflowExecutionFailed event.
 type WorkflowExecutionFailedEventAttributes struct {
 	_ struct{} `type:"structure"`
@@ -14275,46 +13072,6 @@ func (s *WorkflowExecutionInfo) SetTagList(v []*string) *WorkflowExecutionInfo {
 // SetWorkflowType sets the WorkflowType field's value.
 func (s *WorkflowExecutionInfo) SetWorkflowType(v *WorkflowType) *WorkflowExecutionInfo {
 	s.WorkflowType = v
-	return s
-}
-
-// Contains a paginated list of information about workflow executions.
-type WorkflowExecutionInfos struct {
-	_ struct{} `type:"structure"`
-
-	// The list of workflow information structures.
-	//
-	// ExecutionInfos is a required field
-	ExecutionInfos []*WorkflowExecutionInfo `locationName:"executionInfos" type:"list" required:"true"`
-
-	// If a NextPageToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using
-	// the returned token in nextPageToken. Keep all other arguments unchanged.
-	//
-	// The configured maximumPageSize determines how many results can be returned
-	// in a single call.
-	NextPageToken *string `locationName:"nextPageToken" type:"string"`
-}
-
-// String returns the string representation
-func (s WorkflowExecutionInfos) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s WorkflowExecutionInfos) GoString() string {
-	return s.String()
-}
-
-// SetExecutionInfos sets the ExecutionInfos field's value.
-func (s *WorkflowExecutionInfos) SetExecutionInfos(v []*WorkflowExecutionInfo) *WorkflowExecutionInfos {
-	s.ExecutionInfos = v
-	return s
-}
-
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *WorkflowExecutionInfos) SetNextPageToken(v string) *WorkflowExecutionInfos {
-	s.NextPageToken = &v
 	return s
 }
 

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // AddTagsToResource
 //
 // Adds up to 10 tags, key/value pairs, to a cluster or snapshot resource.
-func ExampleElastiCache_AddTagsToResource_shared00() {
+func ExampleElastiCache_AddTagsToResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -49,7 +49,8 @@ func ExampleElastiCache_AddTagsToResource_shared00() {
 		},
 	}
 
-	result, err := svc.AddTagsToResource(input)
+	req := svc.AddTagsToResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -80,7 +81,7 @@ func ExampleElastiCache_AddTagsToResource_shared00() {
 // Allows network ingress to a cache security group. Applications using ElastiCache
 // must be running on Amazon EC2. Amazon EC2 security groups are used as the authorization
 // mechanism.
-func ExampleElastiCache_AuthorizeCacheSecurityGroupIngress_shared00() {
+func ExampleElastiCache_AuthorizeCacheSecurityGroupIngressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -93,7 +94,8 @@ func ExampleElastiCache_AuthorizeCacheSecurityGroupIngress_shared00() {
 		EC2SecurityGroupOwnerId: aws.String("1234567890"),
 	}
 
-	result, err := svc.AuthorizeCacheSecurityGroupIngress(input)
+	req := svc.AuthorizeCacheSecurityGroupIngressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -124,7 +126,7 @@ func ExampleElastiCache_AuthorizeCacheSecurityGroupIngress_shared00() {
 // CopySnapshot
 //
 // Copies a snapshot to a specified name.
-func ExampleElastiCache_CopySnapshot_shared00() {
+func ExampleElastiCache_CopySnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -137,7 +139,8 @@ func ExampleElastiCache_CopySnapshot_shared00() {
 		TargetSnapshotName: aws.String("my-snapshot-copy"),
 	}
 
-	result, err := svc.CopySnapshot(input)
+	req := svc.CopySnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -170,7 +173,7 @@ func ExampleElastiCache_CopySnapshot_shared00() {
 // CreateCacheCluster
 //
 // Creates a Memcached cluster with 2 nodes.
-func ExampleElastiCache_CreateCacheCluster_shared00() {
+func ExampleElastiCache_CreateCacheClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -188,7 +191,8 @@ func ExampleElastiCache_CreateCacheCluster_shared00() {
 		Port:                 aws.Int64(11211),
 	}
 
-	result, err := svc.CreateCacheCluster(input)
+	req := svc.CreateCacheClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -237,7 +241,7 @@ func ExampleElastiCache_CreateCacheCluster_shared00() {
 // CreateCacheCluster
 //
 // Creates a Redis cluster with 1 node.
-func ExampleElastiCache_CreateCacheCluster_shared01() {
+func ExampleElastiCache_CreateCacheClusterRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -257,7 +261,8 @@ func ExampleElastiCache_CreateCacheCluster_shared01() {
 		SnapshotRetentionLimit:    aws.Int64(7),
 	}
 
-	result, err := svc.CreateCacheCluster(input)
+	req := svc.CreateCacheClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -306,7 +311,7 @@ func ExampleElastiCache_CreateCacheCluster_shared01() {
 // CreateCacheParameterGroup
 //
 // Creates the Amazon ElastiCache parameter group custom-redis2-8.
-func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
+func ExampleElastiCache_CreateCacheParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -319,7 +324,8 @@ func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
 		Description:               aws.String("Custom Redis 2.8 parameter group."),
 	}
 
-	result, err := svc.CreateCacheParameterGroup(input)
+	req := svc.CreateCacheParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -351,7 +357,7 @@ func ExampleElastiCache_CreateCacheParameterGroup_shared00() {
 //
 // Creates an ElastiCache security group. ElastiCache security groups are only for clusters
 // not running in an AWS VPC.
-func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
+func ExampleElastiCache_CreateCacheSecurityGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -363,7 +369,8 @@ func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
 		Description:            aws.String("Example ElastiCache security group."),
 	}
 
-	result, err := svc.CreateCacheSecurityGroup(input)
+	req := svc.CreateCacheSecurityGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -392,7 +399,7 @@ func ExampleElastiCache_CreateCacheSecurityGroup_shared00() {
 // CreateCacheSubnet
 //
 // Creates a new cache subnet group.
-func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
+func ExampleElastiCache_CreateCacheSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -409,7 +416,8 @@ func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
 		},
 	}
 
-	result, err := svc.CreateCacheSubnetGroup(input)
+	req := svc.CreateCacheSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -438,7 +446,7 @@ func ExampleElastiCache_CreateCacheSubnetGroup_shared00() {
 // CreateCacheReplicationGroup
 //
 // Creates a Redis replication group with 3 nodes.
-func ExampleElastiCache_CreateReplicationGroup_shared00() {
+func ExampleElastiCache_CreateReplicationGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -456,7 +464,8 @@ func ExampleElastiCache_CreateReplicationGroup_shared00() {
 		SnapshotRetentionLimit:      aws.Int64(30),
 	}
 
-	result, err := svc.CreateReplicationGroup(input)
+	req := svc.CreateReplicationGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -508,7 +517,7 @@ func ExampleElastiCache_CreateReplicationGroup_shared00() {
 //
 // Creates a Redis (cluster mode enabled) replication group with two shards. One shard
 // has one read replica node and the other shard has two read replicas.
-func ExampleElastiCache_CreateReplicationGroup_shared01() {
+func ExampleElastiCache_CreateReplicationGroupRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -546,7 +555,8 @@ func ExampleElastiCache_CreateReplicationGroup_shared01() {
 		SnapshotRetentionLimit:      aws.Int64(8),
 	}
 
-	result, err := svc.CreateReplicationGroup(input)
+	req := svc.CreateReplicationGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -597,7 +607,7 @@ func ExampleElastiCache_CreateReplicationGroup_shared01() {
 // CreateSnapshot - NonClustered Redis, no read-replicas
 //
 // Creates a snapshot of a non-clustered Redis cluster that has only one node.
-func ExampleElastiCache_CreateSnapshot_shared00() {
+func ExampleElastiCache_CreateSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -609,7 +619,8 @@ func ExampleElastiCache_CreateSnapshot_shared00() {
 		SnapshotName:   aws.String("snapshot-1"),
 	}
 
-	result, err := svc.CreateSnapshot(input)
+	req := svc.CreateSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -649,7 +660,7 @@ func ExampleElastiCache_CreateSnapshot_shared00() {
 //
 // Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary
 // and two read-replicas. CacheClusterId must be a specific node in the cluster.
-func ExampleElastiCache_CreateSnapshot_shared01() {
+func ExampleElastiCache_CreateSnapshotRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -661,7 +672,8 @@ func ExampleElastiCache_CreateSnapshot_shared01() {
 		SnapshotName:   aws.String("snapshot-2"),
 	}
 
-	result, err := svc.CreateSnapshot(input)
+	req := svc.CreateSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -701,7 +713,7 @@ func ExampleElastiCache_CreateSnapshot_shared01() {
 //
 // Creates a snapshot of a clustered Redis cluster that has 2 shards, each with a primary
 // and 4 read-replicas.
-func ExampleElastiCache_CreateSnapshot_shared02() {
+func ExampleElastiCache_CreateSnapshotRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -713,7 +725,8 @@ func ExampleElastiCache_CreateSnapshot_shared02() {
 		SnapshotName:       aws.String("snapshot-2x5"),
 	}
 
-	result, err := svc.CreateSnapshot(input)
+	req := svc.CreateSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -752,7 +765,7 @@ func ExampleElastiCache_CreateSnapshot_shared02() {
 // DeleteCacheCluster
 //
 // Deletes an Amazon ElastiCache cluster.
-func ExampleElastiCache_DeleteCacheCluster_shared00() {
+func ExampleElastiCache_DeleteCacheClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -763,7 +776,8 @@ func ExampleElastiCache_DeleteCacheCluster_shared00() {
 		CacheClusterId: aws.String("my-memcached"),
 	}
 
-	result, err := svc.DeleteCacheCluster(input)
+	req := svc.DeleteCacheClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -798,7 +812,7 @@ func ExampleElastiCache_DeleteCacheCluster_shared00() {
 // DeleteCacheParameterGroup
 //
 // Deletes the Amazon ElastiCache parameter group custom-mem1-4.
-func ExampleElastiCache_DeleteCacheParameterGroup_shared00() {
+func ExampleElastiCache_DeleteCacheParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -809,7 +823,8 @@ func ExampleElastiCache_DeleteCacheParameterGroup_shared00() {
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
 	}
 
-	result, err := svc.DeleteCacheParameterGroup(input)
+	req := svc.DeleteCacheParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -838,7 +853,7 @@ func ExampleElastiCache_DeleteCacheParameterGroup_shared00() {
 // DeleteCacheSecurityGroup
 //
 // Deletes a cache security group.
-func ExampleElastiCache_DeleteCacheSecurityGroup_shared00() {
+func ExampleElastiCache_DeleteCacheSecurityGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -849,7 +864,8 @@ func ExampleElastiCache_DeleteCacheSecurityGroup_shared00() {
 		CacheSecurityGroupName: aws.String("my-sec-group"),
 	}
 
-	result, err := svc.DeleteCacheSecurityGroup(input)
+	req := svc.DeleteCacheSecurityGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -878,7 +894,7 @@ func ExampleElastiCache_DeleteCacheSecurityGroup_shared00() {
 // DeleteCacheSubnetGroup
 //
 // Deletes the Amazon ElastiCache subnet group my-subnet-group.
-func ExampleElastiCache_DeleteCacheSubnetGroup_shared00() {
+func ExampleElastiCache_DeleteCacheSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -889,7 +905,8 @@ func ExampleElastiCache_DeleteCacheSubnetGroup_shared00() {
 		CacheSubnetGroupName: aws.String("my-subnet-group"),
 	}
 
-	result, err := svc.DeleteCacheSubnetGroup(input)
+	req := svc.DeleteCacheSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -914,7 +931,7 @@ func ExampleElastiCache_DeleteCacheSubnetGroup_shared00() {
 // DeleteReplicationGroup
 //
 // Deletes the Amazon ElastiCache replication group my-redis-rg.
-func ExampleElastiCache_DeleteReplicationGroup_shared00() {
+func ExampleElastiCache_DeleteReplicationGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -926,7 +943,8 @@ func ExampleElastiCache_DeleteReplicationGroup_shared00() {
 		RetainPrimaryCluster: aws.Bool(false),
 	}
 
-	result, err := svc.DeleteReplicationGroup(input)
+	req := svc.DeleteReplicationGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -961,7 +979,7 @@ func ExampleElastiCache_DeleteReplicationGroup_shared00() {
 // DeleteSnapshot
 //
 // Deletes the Redis snapshot snapshot-20160822.
-func ExampleElastiCache_DeleteSnapshot_shared00() {
+func ExampleElastiCache_DeleteSnapshotRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -972,7 +990,8 @@ func ExampleElastiCache_DeleteSnapshot_shared00() {
 		SnapshotName: aws.String("snapshot-20161212"),
 	}
 
-	result, err := svc.DeleteSnapshot(input)
+	req := svc.DeleteSnapshotRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1001,7 +1020,7 @@ func ExampleElastiCache_DeleteSnapshot_shared00() {
 // DescribeCacheClusters
 //
 // Lists the details for up to 50 cache clusters.
-func ExampleElastiCache_DescribeCacheClusters_shared00() {
+func ExampleElastiCache_DescribeCacheClustersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1012,7 +1031,8 @@ func ExampleElastiCache_DescribeCacheClusters_shared00() {
 		CacheClusterId: aws.String("my-mem-cluster"),
 	}
 
-	result, err := svc.DescribeCacheClusters(input)
+	req := svc.DescribeCacheClustersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1039,7 +1059,7 @@ func ExampleElastiCache_DescribeCacheClusters_shared00() {
 // DescribeCacheClusters
 //
 // Lists the details for the cache cluster my-mem-cluster.
-func ExampleElastiCache_DescribeCacheClusters_shared01() {
+func ExampleElastiCache_DescribeCacheClustersRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1051,7 +1071,8 @@ func ExampleElastiCache_DescribeCacheClusters_shared01() {
 		ShowCacheNodeInfo: aws.Bool(true),
 	}
 
-	result, err := svc.DescribeCacheClusters(input)
+	req := svc.DescribeCacheClustersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1078,7 +1099,7 @@ func ExampleElastiCache_DescribeCacheClusters_shared01() {
 // DescribeCacheEngineVersions
 //
 // Lists the details for up to 25 Memcached and Redis cache engine versions.
-func ExampleElastiCache_DescribeCacheEngineVersions_shared00() {
+func ExampleElastiCache_DescribeCacheEngineVersionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1087,7 +1108,8 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.DescribeCacheEngineVersionsInput{}
 
-	result, err := svc.DescribeCacheEngineVersions(input)
+	req := svc.DescribeCacheEngineVersionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1108,7 +1130,7 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared00() {
 // DescribeCacheEngineVersions
 //
 // Lists the details for up to 50 Redis cache engine versions.
-func ExampleElastiCache_DescribeCacheEngineVersions_shared01() {
+func ExampleElastiCache_DescribeCacheEngineVersionsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1121,7 +1143,8 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared01() {
 		MaxRecords:  aws.Int64(50),
 	}
 
-	result, err := svc.DescribeCacheEngineVersions(input)
+	req := svc.DescribeCacheEngineVersionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1143,7 +1166,7 @@ func ExampleElastiCache_DescribeCacheEngineVersions_shared01() {
 //
 // Returns a list of cache parameter group descriptions. If a cache parameter group
 // name is specified, the list contains only the descriptions for that group.
-func ExampleElastiCache_DescribeCacheParameterGroups_shared00() {
+func ExampleElastiCache_DescribeCacheParameterGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1154,7 +1177,8 @@ func ExampleElastiCache_DescribeCacheParameterGroups_shared00() {
 		CacheParameterGroupName: aws.String("custom-mem1-4"),
 	}
 
-	result, err := svc.DescribeCacheParameterGroups(input)
+	req := svc.DescribeCacheParameterGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1181,7 +1205,7 @@ func ExampleElastiCache_DescribeCacheParameterGroups_shared00() {
 // DescribeCacheParameters
 //
 // Lists up to 100 user parameter values for the parameter group custom.redis2.8.
-func ExampleElastiCache_DescribeCacheParameters_shared00() {
+func ExampleElastiCache_DescribeCacheParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1194,7 +1218,8 @@ func ExampleElastiCache_DescribeCacheParameters_shared00() {
 		Source:                  aws.String("user"),
 	}
 
-	result, err := svc.DescribeCacheParameters(input)
+	req := svc.DescribeCacheParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1222,7 +1247,7 @@ func ExampleElastiCache_DescribeCacheParameters_shared00() {
 //
 // Returns a list of cache security group descriptions. If a cache security group name
 // is specified, the list contains only the description of that group.
-func ExampleElastiCache_DescribeCacheSecurityGroups_shared00() {
+func ExampleElastiCache_DescribeCacheSecurityGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1233,7 +1258,8 @@ func ExampleElastiCache_DescribeCacheSecurityGroups_shared00() {
 		CacheSecurityGroupName: aws.String("my-sec-group"),
 	}
 
-	result, err := svc.DescribeCacheSecurityGroups(input)
+	req := svc.DescribeCacheSecurityGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1260,7 +1286,7 @@ func ExampleElastiCache_DescribeCacheSecurityGroups_shared00() {
 // DescribeCacheSubnetGroups
 //
 // Describes up to 25 cache subnet groups.
-func ExampleElastiCache_DescribeCacheSubnetGroups_shared00() {
+func ExampleElastiCache_DescribeCacheSubnetGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1271,7 +1297,8 @@ func ExampleElastiCache_DescribeCacheSubnetGroups_shared00() {
 		MaxRecords: aws.Int64(25),
 	}
 
-	result, err := svc.DescribeCacheSubnetGroups(input)
+	req := svc.DescribeCacheSubnetGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1295,7 +1322,7 @@ func ExampleElastiCache_DescribeCacheSubnetGroups_shared00() {
 //
 // Returns the default engine and system parameter information for the specified cache
 // engine.
-func ExampleElastiCache_DescribeEngineDefaultParameters_shared00() {
+func ExampleElastiCache_DescribeEngineDefaultParametersRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1307,7 +1334,8 @@ func ExampleElastiCache_DescribeEngineDefaultParameters_shared00() {
 		MaxRecords:                aws.Int64(25),
 	}
 
-	result, err := svc.DescribeEngineDefaultParameters(input)
+	req := svc.DescribeEngineDefaultParametersRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1332,7 +1360,7 @@ func ExampleElastiCache_DescribeEngineDefaultParameters_shared00() {
 // DescribeEvents
 //
 // Describes all the cache-cluster events for the past 120 minutes.
-func ExampleElastiCache_DescribeEvents_shared00() {
+func ExampleElastiCache_DescribeEventsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1344,7 +1372,8 @@ func ExampleElastiCache_DescribeEvents_shared00() {
 		SourceType: elasticache.SourceTypeCacheCluster,
 	}
 
-	result, err := svc.DescribeEvents(input)
+	req := svc.DescribeEventsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1369,7 +1398,7 @@ func ExampleElastiCache_DescribeEvents_shared00() {
 // DescribeEvents
 //
 // Describes all the replication-group events from 3:00P to 5:00P on November 11, 2016.
-func ExampleElastiCache_DescribeEvents_shared01() {
+func ExampleElastiCache_DescribeEventsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1380,7 +1409,8 @@ func ExampleElastiCache_DescribeEvents_shared01() {
 		StartTime: parseTime("2006-01-02T15:04:05Z", "2016-12-22T15:00:00.000Z"),
 	}
 
-	result, err := svc.DescribeEvents(input)
+	req := svc.DescribeEventsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1405,7 +1435,7 @@ func ExampleElastiCache_DescribeEvents_shared01() {
 // DescribeReplicationGroups
 //
 // Returns information about the replication group myreplgroup.
-func ExampleElastiCache_DescribeReplicationGroups_shared00() {
+func ExampleElastiCache_DescribeReplicationGroupsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1414,7 +1444,8 @@ func ExampleElastiCache_DescribeReplicationGroups_shared00() {
 	svc := elasticache.New(cfg)
 	input := &elasticache.DescribeReplicationGroupsInput{}
 
-	result, err := svc.DescribeReplicationGroups(input)
+	req := svc.DescribeReplicationGroupsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1443,7 +1474,7 @@ func ExampleElastiCache_DescribeReplicationGroups_shared00() {
 // Returns information about reserved cache nodes for this account, or about a specified
 // reserved cache node. If the account has no reserved cache nodes, the operation returns
 // an empty list, as shown here.
-func ExampleElastiCache_DescribeReservedCacheNodes_shared00() {
+func ExampleElastiCache_DescribeReservedCacheNodesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1454,7 +1485,8 @@ func ExampleElastiCache_DescribeReservedCacheNodes_shared00() {
 		MaxRecords: aws.Int64(25),
 	}
 
-	result, err := svc.DescribeReservedCacheNodes(input)
+	req := svc.DescribeReservedCacheNodesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1481,7 +1513,7 @@ func ExampleElastiCache_DescribeReservedCacheNodes_shared00() {
 // DescribeReseredCacheNodeOfferings
 //
 // Lists available reserved cache node offerings.
-func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared00() {
+func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1492,7 +1524,8 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared00() {
 		MaxRecords: aws.Int64(20),
 	}
 
-	result, err := svc.DescribeReservedCacheNodesOfferings(input)
+	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1520,7 +1553,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared00() {
 //
 // Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year
 // commitment.
-func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared01() {
+func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1535,7 +1568,8 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared01() {
 		ReservedCacheNodesOfferingId: aws.String(""),
 	}
 
-	result, err := svc.DescribeReservedCacheNodesOfferings(input)
+	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1562,7 +1596,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared01() {
 // DescribeReseredCacheNodeOfferings
 //
 // Lists available reserved cache node offerings.
-func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared02() {
+func ExampleElastiCache_DescribeReservedCacheNodesOfferingsRequest_shared02() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1579,7 +1613,8 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared02() {
 		ReservedCacheNodesOfferingId: aws.String("438012d3-4052-4cc7-b2e3-8d3372e0e706"),
 	}
 
-	result, err := svc.DescribeReservedCacheNodesOfferings(input)
+	req := svc.DescribeReservedCacheNodesOfferingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1606,7 +1641,7 @@ func ExampleElastiCache_DescribeReservedCacheNodesOfferings_shared02() {
 // DescribeSnapshots
 //
 // Returns information about the snapshot mysnapshot. By default.
-func ExampleElastiCache_DescribeSnapshots_shared00() {
+func ExampleElastiCache_DescribeSnapshotsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1617,7 +1652,8 @@ func ExampleElastiCache_DescribeSnapshots_shared00() {
 		SnapshotName: aws.String("snapshot-20161212"),
 	}
 
-	result, err := svc.DescribeSnapshots(input)
+	req := svc.DescribeSnapshotsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1647,7 +1683,7 @@ func ExampleElastiCache_DescribeSnapshots_shared00() {
 //
 // Lists all available node types that you can scale your Redis cluster's or replication
 // group's current node type up to.
-func ExampleElastiCache_ListAllowedNodeTypeModifications_shared00() {
+func ExampleElastiCache_ListAllowedNodeTypeModificationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1658,7 +1694,8 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared00() {
 		ReplicationGroupId: aws.String("myreplgroup"),
 	}
 
-	result, err := svc.ListAllowedNodeTypeModifications(input)
+	req := svc.ListAllowedNodeTypeModificationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1688,7 +1725,7 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared00() {
 //
 // Lists all available node types that you can scale your Redis cluster's or replication
 // group's current node type up to.
-func ExampleElastiCache_ListAllowedNodeTypeModifications_shared01() {
+func ExampleElastiCache_ListAllowedNodeTypeModificationsRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1699,7 +1736,8 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared01() {
 		CacheClusterId: aws.String("mycluster"),
 	}
 
-	result, err := svc.ListAllowedNodeTypeModifications(input)
+	req := svc.ListAllowedNodeTypeModificationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1730,7 +1768,7 @@ func ExampleElastiCache_ListAllowedNodeTypeModifications_shared01() {
 // Lists all cost allocation tags currently on the named resource. A cost allocation
 // tag is a key-value pair where the key is case-sensitive and the value is optional.
 // You can use cost allocation tags to categorize and track your AWS costs.
-func ExampleElastiCache_ListTagsForResource_shared00() {
+func ExampleElastiCache_ListTagsForResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1741,7 +1779,8 @@ func ExampleElastiCache_ListTagsForResource_shared00() {
 		ResourceName: aws.String("arn:aws:elasticache:us-west-2:<my-account-id>:cluster:mycluster"),
 	}
 
-	result, err := svc.ListTagsForResource(input)
+	req := svc.ListTagsForResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1768,7 +1807,7 @@ func ExampleElastiCache_ListTagsForResource_shared00() {
 // ModifyCacheCluster
 //
 // Copies a snapshot to a specified name.
-func ExampleElastiCache_ModifyCacheCluster_shared00() {
+func ExampleElastiCache_ModifyCacheClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1781,7 +1820,8 @@ func ExampleElastiCache_ModifyCacheCluster_shared00() {
 		SnapshotRetentionLimit: aws.Int64(14),
 	}
 
-	result, err := svc.ModifyCacheCluster(input)
+	req := svc.ModifyCacheClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1825,7 +1865,7 @@ func ExampleElastiCache_ModifyCacheCluster_shared00() {
 //
 // Modifies one or more parameter values in the specified parameter group. You cannot
 // modify any default parameter group.
-func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
+func ExampleElastiCache_ModifyCacheParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1846,7 +1886,8 @@ func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyCacheParameterGroup(input)
+	req := svc.ModifyCacheParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1875,7 +1916,7 @@ func ExampleElastiCache_ModifyCacheParameterGroup_shared00() {
 // ModifyCacheSubnetGroup
 //
 // Modifies an existing ElastiCache subnet group.
-func ExampleElastiCache_ModifyCacheSubnetGroup_shared00() {
+func ExampleElastiCache_ModifyCacheSubnetGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1889,7 +1930,8 @@ func ExampleElastiCache_ModifyCacheSubnetGroup_shared00() {
 		},
 	}
 
-	result, err := svc.ModifyCacheSubnetGroup(input)
+	req := svc.ModifyCacheSubnetGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1918,7 +1960,7 @@ func ExampleElastiCache_ModifyCacheSubnetGroup_shared00() {
 // ModifyReplicationGroup
 //
 
-func ExampleElastiCache_ModifyReplicationGroup_shared00() {
+func ExampleElastiCache_ModifyReplicationGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1933,7 +1975,8 @@ func ExampleElastiCache_ModifyReplicationGroup_shared00() {
 		SnapshottingClusterId:       aws.String("my-redis-rg-001"),
 	}
 
-	result, err := svc.ModifyReplicationGroup(input)
+	req := svc.ModifyReplicationGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1980,7 +2023,7 @@ func ExampleElastiCache_ModifyReplicationGroup_shared00() {
 // PurchaseReservedCacheNodesOfferings
 //
 // Allows you to purchase a reserved cache node offering.
-func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
+func ExampleElastiCache_PurchaseReservedCacheNodesOfferingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1991,7 +2034,8 @@ func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
 		ReservedCacheNodesOfferingId: aws.String("1ef01f5b-94ff-433f-a530-61a56bfc8e7a"),
 	}
 
-	result, err := svc.PurchaseReservedCacheNodesOffering(input)
+	req := svc.PurchaseReservedCacheNodesOfferingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2022,7 +2066,7 @@ func ExampleElastiCache_PurchaseReservedCacheNodesOffering_shared00() {
 // RebootCacheCluster
 //
 // Reboots the specified nodes in the names cluster.
-func ExampleElastiCache_RebootCacheCluster_shared00() {
+func ExampleElastiCache_RebootCacheClusterRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2037,7 +2081,8 @@ func ExampleElastiCache_RebootCacheCluster_shared00() {
 		},
 	}
 
-	result, err := svc.RebootCacheCluster(input)
+	req := svc.RebootCacheClusterRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2063,7 +2108,7 @@ func ExampleElastiCache_RebootCacheCluster_shared00() {
 //
 // Removes tags identified by a list of tag keys from the list of tags on the specified
 // resource.
-func ExampleElastiCache_RemoveTagsFromResource_shared00() {
+func ExampleElastiCache_RemoveTagsFromResourceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2079,7 +2124,8 @@ func ExampleElastiCache_RemoveTagsFromResource_shared00() {
 		},
 	}
 
-	result, err := svc.RemoveTagsFromResource(input)
+	req := svc.RemoveTagsFromResourceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2109,7 +2155,7 @@ func ExampleElastiCache_RemoveTagsFromResource_shared00() {
 //
 // Modifies the parameters of a cache parameter group to the engine or system default
 // value.
-func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
+func ExampleElastiCache_ResetCacheParameterGroupRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2121,7 +2167,8 @@ func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
 		ResetAllParameters:      aws.Bool(true),
 	}
 
-	result, err := svc.ResetCacheParameterGroup(input)
+	req := svc.ResetCacheParameterGroupRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -2151,7 +2198,7 @@ func ExampleElastiCache_ResetCacheParameterGroup_shared00() {
 //
 // Returns a list of cache security group descriptions. If a cache security group name
 // is specified, the list contains only the description of that group.
-func ExampleElastiCache_RevokeCacheSecurityGroupIngress_shared00() {
+func ExampleElastiCache_RevokeCacheSecurityGroupIngressRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -2164,7 +2211,8 @@ func ExampleElastiCache_RevokeCacheSecurityGroupIngress_shared00() {
 		EC2SecurityGroupOwnerId: aws.String("1234567890"),
 	}
 
-	result, err := svc.RevokeCacheSecurityGroupIngress(input)
+	req := svc.RevokeCacheSecurityGroupIngressRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

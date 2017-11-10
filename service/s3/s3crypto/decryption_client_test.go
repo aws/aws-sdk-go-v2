@@ -43,7 +43,8 @@ func TestGetObjectGCM(t *testing.T) {
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
 	}
-	req, out := c.GetObjectRequest(input)
+	req := c.GetObjectRequest(input)
+	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
 	req.Handlers.Send.PushBack(func(r *request.Request) {
 		iv, err := hex.DecodeString("0d18e06c7c725ac9e362e1ce")
@@ -71,7 +72,7 @@ func TestGetObjectGCM(t *testing.T) {
 		out.Metadata = make(map[string]*string)
 		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
 	})
-	err := req.Send()
+	_, err := req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -112,7 +113,8 @@ func TestGetObjectCBC(t *testing.T) {
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
 	}
-	req, out := c.GetObjectRequest(input)
+	req := c.GetObjectRequest(input)
+	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
 	req.Handlers.Send.PushBack(func(r *request.Request) {
 		iv, err := hex.DecodeString("9dea7621945988f96491083849b068df")
@@ -138,7 +140,7 @@ func TestGetObjectCBC(t *testing.T) {
 		out.Metadata = make(map[string]*string)
 		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
 	})
-	err := req.Send()
+	_, err := req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -179,7 +181,8 @@ func TestGetObjectCBC2(t *testing.T) {
 		Key:    aws.String("test"),
 		Bucket: aws.String("test"),
 	}
-	req, out := c.GetObjectRequest(input)
+	req := c.GetObjectRequest(input)
+	out := req.Data.(*s3.GetObjectOutput)
 	req.Handlers.Send.Clear()
 	req.Handlers.Send.PushBack(func(r *request.Request) {
 		b, err := hex.DecodeString("fd0c71ecb7ed16a9bf42ea5f75501d416df608f190890c3b4d8897f24744cd7f9ea4a0b212e60634302450e1c5378f047ff753ccefe365d411c36339bf22e301fae4c3a6226719a4b93dc74c1af79d0296659b5d56c0892315f2c7cc30190220db1eaafae3920d6d9c65d0aa366499afc17af493454e141c6e0fbdeb6a990cb4")
@@ -202,7 +205,7 @@ func TestGetObjectCBC2(t *testing.T) {
 		out.Metadata = make(map[string]*string)
 		out.Metadata["x-amz-wrap-alg"] = aws.String(s3crypto.KMSWrap)
 	})
-	err := req.Send()
+	_, err := req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}

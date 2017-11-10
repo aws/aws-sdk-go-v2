@@ -43,10 +43,10 @@ func (c *CloudFront) WaitUntilDistributionDeployedWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetDistributionRequest(inCpy)
+			req := c.GetDistributionRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -89,10 +89,10 @@ func (c *CloudFront) WaitUntilInvalidationCompletedWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetInvalidationRequest(inCpy)
+			req := c.GetInvalidationRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -135,10 +135,10 @@ func (c *CloudFront) WaitUntilStreamingDistributionDeployedWithContext(ctx aws.C
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetStreamingDistributionRequest(inCpy)
+			req := c.GetStreamingDistributionRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

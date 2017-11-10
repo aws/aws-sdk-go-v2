@@ -9,7 +9,6 @@
 package lightsailiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail"
 )
 
@@ -63,197 +62,101 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type LightsailAPI interface {
-	AllocateStaticIp(*lightsail.AllocateStaticIpInput) (*lightsail.AllocateStaticIpOutput, error)
-	AllocateStaticIpWithContext(aws.Context, *lightsail.AllocateStaticIpInput, ...aws.Option) (*lightsail.AllocateStaticIpOutput, error)
-	AllocateStaticIpRequest(*lightsail.AllocateStaticIpInput) (*aws.Request, *lightsail.AllocateStaticIpOutput)
+	AllocateStaticIpRequest(*lightsail.AllocateStaticIpInput) lightsail.AllocateStaticIpRequest
 
-	AttachStaticIp(*lightsail.AttachStaticIpInput) (*lightsail.AttachStaticIpOutput, error)
-	AttachStaticIpWithContext(aws.Context, *lightsail.AttachStaticIpInput, ...aws.Option) (*lightsail.AttachStaticIpOutput, error)
-	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) (*aws.Request, *lightsail.AttachStaticIpOutput)
+	AttachStaticIpRequest(*lightsail.AttachStaticIpInput) lightsail.AttachStaticIpRequest
 
-	CloseInstancePublicPorts(*lightsail.CloseInstancePublicPortsInput) (*lightsail.CloseInstancePublicPortsOutput, error)
-	CloseInstancePublicPortsWithContext(aws.Context, *lightsail.CloseInstancePublicPortsInput, ...aws.Option) (*lightsail.CloseInstancePublicPortsOutput, error)
-	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) (*aws.Request, *lightsail.CloseInstancePublicPortsOutput)
+	CloseInstancePublicPortsRequest(*lightsail.CloseInstancePublicPortsInput) lightsail.CloseInstancePublicPortsRequest
 
-	CreateDomain(*lightsail.CreateDomainInput) (*lightsail.CreateDomainOutput, error)
-	CreateDomainWithContext(aws.Context, *lightsail.CreateDomainInput, ...aws.Option) (*lightsail.CreateDomainOutput, error)
-	CreateDomainRequest(*lightsail.CreateDomainInput) (*aws.Request, *lightsail.CreateDomainOutput)
+	CreateDomainRequest(*lightsail.CreateDomainInput) lightsail.CreateDomainRequest
 
-	CreateDomainEntry(*lightsail.CreateDomainEntryInput) (*lightsail.CreateDomainEntryOutput, error)
-	CreateDomainEntryWithContext(aws.Context, *lightsail.CreateDomainEntryInput, ...aws.Option) (*lightsail.CreateDomainEntryOutput, error)
-	CreateDomainEntryRequest(*lightsail.CreateDomainEntryInput) (*aws.Request, *lightsail.CreateDomainEntryOutput)
+	CreateDomainEntryRequest(*lightsail.CreateDomainEntryInput) lightsail.CreateDomainEntryRequest
 
-	CreateInstanceSnapshot(*lightsail.CreateInstanceSnapshotInput) (*lightsail.CreateInstanceSnapshotOutput, error)
-	CreateInstanceSnapshotWithContext(aws.Context, *lightsail.CreateInstanceSnapshotInput, ...aws.Option) (*lightsail.CreateInstanceSnapshotOutput, error)
-	CreateInstanceSnapshotRequest(*lightsail.CreateInstanceSnapshotInput) (*aws.Request, *lightsail.CreateInstanceSnapshotOutput)
+	CreateInstanceSnapshotRequest(*lightsail.CreateInstanceSnapshotInput) lightsail.CreateInstanceSnapshotRequest
 
-	CreateInstances(*lightsail.CreateInstancesInput) (*lightsail.CreateInstancesOutput, error)
-	CreateInstancesWithContext(aws.Context, *lightsail.CreateInstancesInput, ...aws.Option) (*lightsail.CreateInstancesOutput, error)
-	CreateInstancesRequest(*lightsail.CreateInstancesInput) (*aws.Request, *lightsail.CreateInstancesOutput)
+	CreateInstancesRequest(*lightsail.CreateInstancesInput) lightsail.CreateInstancesRequest
 
-	CreateInstancesFromSnapshot(*lightsail.CreateInstancesFromSnapshotInput) (*lightsail.CreateInstancesFromSnapshotOutput, error)
-	CreateInstancesFromSnapshotWithContext(aws.Context, *lightsail.CreateInstancesFromSnapshotInput, ...aws.Option) (*lightsail.CreateInstancesFromSnapshotOutput, error)
-	CreateInstancesFromSnapshotRequest(*lightsail.CreateInstancesFromSnapshotInput) (*aws.Request, *lightsail.CreateInstancesFromSnapshotOutput)
+	CreateInstancesFromSnapshotRequest(*lightsail.CreateInstancesFromSnapshotInput) lightsail.CreateInstancesFromSnapshotRequest
 
-	CreateKeyPair(*lightsail.CreateKeyPairInput) (*lightsail.CreateKeyPairOutput, error)
-	CreateKeyPairWithContext(aws.Context, *lightsail.CreateKeyPairInput, ...aws.Option) (*lightsail.CreateKeyPairOutput, error)
-	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) (*aws.Request, *lightsail.CreateKeyPairOutput)
+	CreateKeyPairRequest(*lightsail.CreateKeyPairInput) lightsail.CreateKeyPairRequest
 
-	DeleteDomain(*lightsail.DeleteDomainInput) (*lightsail.DeleteDomainOutput, error)
-	DeleteDomainWithContext(aws.Context, *lightsail.DeleteDomainInput, ...aws.Option) (*lightsail.DeleteDomainOutput, error)
-	DeleteDomainRequest(*lightsail.DeleteDomainInput) (*aws.Request, *lightsail.DeleteDomainOutput)
+	DeleteDomainRequest(*lightsail.DeleteDomainInput) lightsail.DeleteDomainRequest
 
-	DeleteDomainEntry(*lightsail.DeleteDomainEntryInput) (*lightsail.DeleteDomainEntryOutput, error)
-	DeleteDomainEntryWithContext(aws.Context, *lightsail.DeleteDomainEntryInput, ...aws.Option) (*lightsail.DeleteDomainEntryOutput, error)
-	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) (*aws.Request, *lightsail.DeleteDomainEntryOutput)
+	DeleteDomainEntryRequest(*lightsail.DeleteDomainEntryInput) lightsail.DeleteDomainEntryRequest
 
-	DeleteInstance(*lightsail.DeleteInstanceInput) (*lightsail.DeleteInstanceOutput, error)
-	DeleteInstanceWithContext(aws.Context, *lightsail.DeleteInstanceInput, ...aws.Option) (*lightsail.DeleteInstanceOutput, error)
-	DeleteInstanceRequest(*lightsail.DeleteInstanceInput) (*aws.Request, *lightsail.DeleteInstanceOutput)
+	DeleteInstanceRequest(*lightsail.DeleteInstanceInput) lightsail.DeleteInstanceRequest
 
-	DeleteInstanceSnapshot(*lightsail.DeleteInstanceSnapshotInput) (*lightsail.DeleteInstanceSnapshotOutput, error)
-	DeleteInstanceSnapshotWithContext(aws.Context, *lightsail.DeleteInstanceSnapshotInput, ...aws.Option) (*lightsail.DeleteInstanceSnapshotOutput, error)
-	DeleteInstanceSnapshotRequest(*lightsail.DeleteInstanceSnapshotInput) (*aws.Request, *lightsail.DeleteInstanceSnapshotOutput)
+	DeleteInstanceSnapshotRequest(*lightsail.DeleteInstanceSnapshotInput) lightsail.DeleteInstanceSnapshotRequest
 
-	DeleteKeyPair(*lightsail.DeleteKeyPairInput) (*lightsail.DeleteKeyPairOutput, error)
-	DeleteKeyPairWithContext(aws.Context, *lightsail.DeleteKeyPairInput, ...aws.Option) (*lightsail.DeleteKeyPairOutput, error)
-	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) (*aws.Request, *lightsail.DeleteKeyPairOutput)
+	DeleteKeyPairRequest(*lightsail.DeleteKeyPairInput) lightsail.DeleteKeyPairRequest
 
-	DetachStaticIp(*lightsail.DetachStaticIpInput) (*lightsail.DetachStaticIpOutput, error)
-	DetachStaticIpWithContext(aws.Context, *lightsail.DetachStaticIpInput, ...aws.Option) (*lightsail.DetachStaticIpOutput, error)
-	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) (*aws.Request, *lightsail.DetachStaticIpOutput)
+	DetachStaticIpRequest(*lightsail.DetachStaticIpInput) lightsail.DetachStaticIpRequest
 
-	DownloadDefaultKeyPair(*lightsail.DownloadDefaultKeyPairInput) (*lightsail.DownloadDefaultKeyPairOutput, error)
-	DownloadDefaultKeyPairWithContext(aws.Context, *lightsail.DownloadDefaultKeyPairInput, ...aws.Option) (*lightsail.DownloadDefaultKeyPairOutput, error)
-	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) (*aws.Request, *lightsail.DownloadDefaultKeyPairOutput)
+	DownloadDefaultKeyPairRequest(*lightsail.DownloadDefaultKeyPairInput) lightsail.DownloadDefaultKeyPairRequest
 
-	GetActiveNames(*lightsail.GetActiveNamesInput) (*lightsail.GetActiveNamesOutput, error)
-	GetActiveNamesWithContext(aws.Context, *lightsail.GetActiveNamesInput, ...aws.Option) (*lightsail.GetActiveNamesOutput, error)
-	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) (*aws.Request, *lightsail.GetActiveNamesOutput)
+	GetActiveNamesRequest(*lightsail.GetActiveNamesInput) lightsail.GetActiveNamesRequest
 
-	GetBlueprints(*lightsail.GetBlueprintsInput) (*lightsail.GetBlueprintsOutput, error)
-	GetBlueprintsWithContext(aws.Context, *lightsail.GetBlueprintsInput, ...aws.Option) (*lightsail.GetBlueprintsOutput, error)
-	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) (*aws.Request, *lightsail.GetBlueprintsOutput)
+	GetBlueprintsRequest(*lightsail.GetBlueprintsInput) lightsail.GetBlueprintsRequest
 
-	GetBundles(*lightsail.GetBundlesInput) (*lightsail.GetBundlesOutput, error)
-	GetBundlesWithContext(aws.Context, *lightsail.GetBundlesInput, ...aws.Option) (*lightsail.GetBundlesOutput, error)
-	GetBundlesRequest(*lightsail.GetBundlesInput) (*aws.Request, *lightsail.GetBundlesOutput)
+	GetBundlesRequest(*lightsail.GetBundlesInput) lightsail.GetBundlesRequest
 
-	GetDomain(*lightsail.GetDomainInput) (*lightsail.GetDomainOutput, error)
-	GetDomainWithContext(aws.Context, *lightsail.GetDomainInput, ...aws.Option) (*lightsail.GetDomainOutput, error)
-	GetDomainRequest(*lightsail.GetDomainInput) (*aws.Request, *lightsail.GetDomainOutput)
+	GetDomainRequest(*lightsail.GetDomainInput) lightsail.GetDomainRequest
 
-	GetDomains(*lightsail.GetDomainsInput) (*lightsail.GetDomainsOutput, error)
-	GetDomainsWithContext(aws.Context, *lightsail.GetDomainsInput, ...aws.Option) (*lightsail.GetDomainsOutput, error)
-	GetDomainsRequest(*lightsail.GetDomainsInput) (*aws.Request, *lightsail.GetDomainsOutput)
+	GetDomainsRequest(*lightsail.GetDomainsInput) lightsail.GetDomainsRequest
 
-	GetInstance(*lightsail.GetInstanceInput) (*lightsail.GetInstanceOutput, error)
-	GetInstanceWithContext(aws.Context, *lightsail.GetInstanceInput, ...aws.Option) (*lightsail.GetInstanceOutput, error)
-	GetInstanceRequest(*lightsail.GetInstanceInput) (*aws.Request, *lightsail.GetInstanceOutput)
+	GetInstanceRequest(*lightsail.GetInstanceInput) lightsail.GetInstanceRequest
 
-	GetInstanceAccessDetails(*lightsail.GetInstanceAccessDetailsInput) (*lightsail.GetInstanceAccessDetailsOutput, error)
-	GetInstanceAccessDetailsWithContext(aws.Context, *lightsail.GetInstanceAccessDetailsInput, ...aws.Option) (*lightsail.GetInstanceAccessDetailsOutput, error)
-	GetInstanceAccessDetailsRequest(*lightsail.GetInstanceAccessDetailsInput) (*aws.Request, *lightsail.GetInstanceAccessDetailsOutput)
+	GetInstanceAccessDetailsRequest(*lightsail.GetInstanceAccessDetailsInput) lightsail.GetInstanceAccessDetailsRequest
 
-	GetInstanceMetricData(*lightsail.GetInstanceMetricDataInput) (*lightsail.GetInstanceMetricDataOutput, error)
-	GetInstanceMetricDataWithContext(aws.Context, *lightsail.GetInstanceMetricDataInput, ...aws.Option) (*lightsail.GetInstanceMetricDataOutput, error)
-	GetInstanceMetricDataRequest(*lightsail.GetInstanceMetricDataInput) (*aws.Request, *lightsail.GetInstanceMetricDataOutput)
+	GetInstanceMetricDataRequest(*lightsail.GetInstanceMetricDataInput) lightsail.GetInstanceMetricDataRequest
 
-	GetInstancePortStates(*lightsail.GetInstancePortStatesInput) (*lightsail.GetInstancePortStatesOutput, error)
-	GetInstancePortStatesWithContext(aws.Context, *lightsail.GetInstancePortStatesInput, ...aws.Option) (*lightsail.GetInstancePortStatesOutput, error)
-	GetInstancePortStatesRequest(*lightsail.GetInstancePortStatesInput) (*aws.Request, *lightsail.GetInstancePortStatesOutput)
+	GetInstancePortStatesRequest(*lightsail.GetInstancePortStatesInput) lightsail.GetInstancePortStatesRequest
 
-	GetInstanceSnapshot(*lightsail.GetInstanceSnapshotInput) (*lightsail.GetInstanceSnapshotOutput, error)
-	GetInstanceSnapshotWithContext(aws.Context, *lightsail.GetInstanceSnapshotInput, ...aws.Option) (*lightsail.GetInstanceSnapshotOutput, error)
-	GetInstanceSnapshotRequest(*lightsail.GetInstanceSnapshotInput) (*aws.Request, *lightsail.GetInstanceSnapshotOutput)
+	GetInstanceSnapshotRequest(*lightsail.GetInstanceSnapshotInput) lightsail.GetInstanceSnapshotRequest
 
-	GetInstanceSnapshots(*lightsail.GetInstanceSnapshotsInput) (*lightsail.GetInstanceSnapshotsOutput, error)
-	GetInstanceSnapshotsWithContext(aws.Context, *lightsail.GetInstanceSnapshotsInput, ...aws.Option) (*lightsail.GetInstanceSnapshotsOutput, error)
-	GetInstanceSnapshotsRequest(*lightsail.GetInstanceSnapshotsInput) (*aws.Request, *lightsail.GetInstanceSnapshotsOutput)
+	GetInstanceSnapshotsRequest(*lightsail.GetInstanceSnapshotsInput) lightsail.GetInstanceSnapshotsRequest
 
-	GetInstanceState(*lightsail.GetInstanceStateInput) (*lightsail.GetInstanceStateOutput, error)
-	GetInstanceStateWithContext(aws.Context, *lightsail.GetInstanceStateInput, ...aws.Option) (*lightsail.GetInstanceStateOutput, error)
-	GetInstanceStateRequest(*lightsail.GetInstanceStateInput) (*aws.Request, *lightsail.GetInstanceStateOutput)
+	GetInstanceStateRequest(*lightsail.GetInstanceStateInput) lightsail.GetInstanceStateRequest
 
-	GetInstances(*lightsail.GetInstancesInput) (*lightsail.GetInstancesOutput, error)
-	GetInstancesWithContext(aws.Context, *lightsail.GetInstancesInput, ...aws.Option) (*lightsail.GetInstancesOutput, error)
-	GetInstancesRequest(*lightsail.GetInstancesInput) (*aws.Request, *lightsail.GetInstancesOutput)
+	GetInstancesRequest(*lightsail.GetInstancesInput) lightsail.GetInstancesRequest
 
-	GetKeyPair(*lightsail.GetKeyPairInput) (*lightsail.GetKeyPairOutput, error)
-	GetKeyPairWithContext(aws.Context, *lightsail.GetKeyPairInput, ...aws.Option) (*lightsail.GetKeyPairOutput, error)
-	GetKeyPairRequest(*lightsail.GetKeyPairInput) (*aws.Request, *lightsail.GetKeyPairOutput)
+	GetKeyPairRequest(*lightsail.GetKeyPairInput) lightsail.GetKeyPairRequest
 
-	GetKeyPairs(*lightsail.GetKeyPairsInput) (*lightsail.GetKeyPairsOutput, error)
-	GetKeyPairsWithContext(aws.Context, *lightsail.GetKeyPairsInput, ...aws.Option) (*lightsail.GetKeyPairsOutput, error)
-	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) (*aws.Request, *lightsail.GetKeyPairsOutput)
+	GetKeyPairsRequest(*lightsail.GetKeyPairsInput) lightsail.GetKeyPairsRequest
 
-	GetOperation(*lightsail.GetOperationInput) (*lightsail.GetOperationOutput, error)
-	GetOperationWithContext(aws.Context, *lightsail.GetOperationInput, ...aws.Option) (*lightsail.GetOperationOutput, error)
-	GetOperationRequest(*lightsail.GetOperationInput) (*aws.Request, *lightsail.GetOperationOutput)
+	GetOperationRequest(*lightsail.GetOperationInput) lightsail.GetOperationRequest
 
-	GetOperations(*lightsail.GetOperationsInput) (*lightsail.GetOperationsOutput, error)
-	GetOperationsWithContext(aws.Context, *lightsail.GetOperationsInput, ...aws.Option) (*lightsail.GetOperationsOutput, error)
-	GetOperationsRequest(*lightsail.GetOperationsInput) (*aws.Request, *lightsail.GetOperationsOutput)
+	GetOperationsRequest(*lightsail.GetOperationsInput) lightsail.GetOperationsRequest
 
-	GetOperationsForResource(*lightsail.GetOperationsForResourceInput) (*lightsail.GetOperationsForResourceOutput, error)
-	GetOperationsForResourceWithContext(aws.Context, *lightsail.GetOperationsForResourceInput, ...aws.Option) (*lightsail.GetOperationsForResourceOutput, error)
-	GetOperationsForResourceRequest(*lightsail.GetOperationsForResourceInput) (*aws.Request, *lightsail.GetOperationsForResourceOutput)
+	GetOperationsForResourceRequest(*lightsail.GetOperationsForResourceInput) lightsail.GetOperationsForResourceRequest
 
-	GetRegions(*lightsail.GetRegionsInput) (*lightsail.GetRegionsOutput, error)
-	GetRegionsWithContext(aws.Context, *lightsail.GetRegionsInput, ...aws.Option) (*lightsail.GetRegionsOutput, error)
-	GetRegionsRequest(*lightsail.GetRegionsInput) (*aws.Request, *lightsail.GetRegionsOutput)
+	GetRegionsRequest(*lightsail.GetRegionsInput) lightsail.GetRegionsRequest
 
-	GetStaticIp(*lightsail.GetStaticIpInput) (*lightsail.GetStaticIpOutput, error)
-	GetStaticIpWithContext(aws.Context, *lightsail.GetStaticIpInput, ...aws.Option) (*lightsail.GetStaticIpOutput, error)
-	GetStaticIpRequest(*lightsail.GetStaticIpInput) (*aws.Request, *lightsail.GetStaticIpOutput)
+	GetStaticIpRequest(*lightsail.GetStaticIpInput) lightsail.GetStaticIpRequest
 
-	GetStaticIps(*lightsail.GetStaticIpsInput) (*lightsail.GetStaticIpsOutput, error)
-	GetStaticIpsWithContext(aws.Context, *lightsail.GetStaticIpsInput, ...aws.Option) (*lightsail.GetStaticIpsOutput, error)
-	GetStaticIpsRequest(*lightsail.GetStaticIpsInput) (*aws.Request, *lightsail.GetStaticIpsOutput)
+	GetStaticIpsRequest(*lightsail.GetStaticIpsInput) lightsail.GetStaticIpsRequest
 
-	ImportKeyPair(*lightsail.ImportKeyPairInput) (*lightsail.ImportKeyPairOutput, error)
-	ImportKeyPairWithContext(aws.Context, *lightsail.ImportKeyPairInput, ...aws.Option) (*lightsail.ImportKeyPairOutput, error)
-	ImportKeyPairRequest(*lightsail.ImportKeyPairInput) (*aws.Request, *lightsail.ImportKeyPairOutput)
+	ImportKeyPairRequest(*lightsail.ImportKeyPairInput) lightsail.ImportKeyPairRequest
 
-	IsVpcPeered(*lightsail.IsVpcPeeredInput) (*lightsail.IsVpcPeeredOutput, error)
-	IsVpcPeeredWithContext(aws.Context, *lightsail.IsVpcPeeredInput, ...aws.Option) (*lightsail.IsVpcPeeredOutput, error)
-	IsVpcPeeredRequest(*lightsail.IsVpcPeeredInput) (*aws.Request, *lightsail.IsVpcPeeredOutput)
+	IsVpcPeeredRequest(*lightsail.IsVpcPeeredInput) lightsail.IsVpcPeeredRequest
 
-	OpenInstancePublicPorts(*lightsail.OpenInstancePublicPortsInput) (*lightsail.OpenInstancePublicPortsOutput, error)
-	OpenInstancePublicPortsWithContext(aws.Context, *lightsail.OpenInstancePublicPortsInput, ...aws.Option) (*lightsail.OpenInstancePublicPortsOutput, error)
-	OpenInstancePublicPortsRequest(*lightsail.OpenInstancePublicPortsInput) (*aws.Request, *lightsail.OpenInstancePublicPortsOutput)
+	OpenInstancePublicPortsRequest(*lightsail.OpenInstancePublicPortsInput) lightsail.OpenInstancePublicPortsRequest
 
-	PeerVpc(*lightsail.PeerVpcInput) (*lightsail.PeerVpcOutput, error)
-	PeerVpcWithContext(aws.Context, *lightsail.PeerVpcInput, ...aws.Option) (*lightsail.PeerVpcOutput, error)
-	PeerVpcRequest(*lightsail.PeerVpcInput) (*aws.Request, *lightsail.PeerVpcOutput)
+	PeerVpcRequest(*lightsail.PeerVpcInput) lightsail.PeerVpcRequest
 
-	PutInstancePublicPorts(*lightsail.PutInstancePublicPortsInput) (*lightsail.PutInstancePublicPortsOutput, error)
-	PutInstancePublicPortsWithContext(aws.Context, *lightsail.PutInstancePublicPortsInput, ...aws.Option) (*lightsail.PutInstancePublicPortsOutput, error)
-	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) (*aws.Request, *lightsail.PutInstancePublicPortsOutput)
+	PutInstancePublicPortsRequest(*lightsail.PutInstancePublicPortsInput) lightsail.PutInstancePublicPortsRequest
 
-	RebootInstance(*lightsail.RebootInstanceInput) (*lightsail.RebootInstanceOutput, error)
-	RebootInstanceWithContext(aws.Context, *lightsail.RebootInstanceInput, ...aws.Option) (*lightsail.RebootInstanceOutput, error)
-	RebootInstanceRequest(*lightsail.RebootInstanceInput) (*aws.Request, *lightsail.RebootInstanceOutput)
+	RebootInstanceRequest(*lightsail.RebootInstanceInput) lightsail.RebootInstanceRequest
 
-	ReleaseStaticIp(*lightsail.ReleaseStaticIpInput) (*lightsail.ReleaseStaticIpOutput, error)
-	ReleaseStaticIpWithContext(aws.Context, *lightsail.ReleaseStaticIpInput, ...aws.Option) (*lightsail.ReleaseStaticIpOutput, error)
-	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) (*aws.Request, *lightsail.ReleaseStaticIpOutput)
+	ReleaseStaticIpRequest(*lightsail.ReleaseStaticIpInput) lightsail.ReleaseStaticIpRequest
 
-	StartInstance(*lightsail.StartInstanceInput) (*lightsail.StartInstanceOutput, error)
-	StartInstanceWithContext(aws.Context, *lightsail.StartInstanceInput, ...aws.Option) (*lightsail.StartInstanceOutput, error)
-	StartInstanceRequest(*lightsail.StartInstanceInput) (*aws.Request, *lightsail.StartInstanceOutput)
+	StartInstanceRequest(*lightsail.StartInstanceInput) lightsail.StartInstanceRequest
 
-	StopInstance(*lightsail.StopInstanceInput) (*lightsail.StopInstanceOutput, error)
-	StopInstanceWithContext(aws.Context, *lightsail.StopInstanceInput, ...aws.Option) (*lightsail.StopInstanceOutput, error)
-	StopInstanceRequest(*lightsail.StopInstanceInput) (*aws.Request, *lightsail.StopInstanceOutput)
+	StopInstanceRequest(*lightsail.StopInstanceInput) lightsail.StopInstanceRequest
 
-	UnpeerVpc(*lightsail.UnpeerVpcInput) (*lightsail.UnpeerVpcOutput, error)
-	UnpeerVpcWithContext(aws.Context, *lightsail.UnpeerVpcInput, ...aws.Option) (*lightsail.UnpeerVpcOutput, error)
-	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) (*aws.Request, *lightsail.UnpeerVpcOutput)
+	UnpeerVpcRequest(*lightsail.UnpeerVpcInput) lightsail.UnpeerVpcRequest
 
-	UpdateDomainEntry(*lightsail.UpdateDomainEntryInput) (*lightsail.UpdateDomainEntryOutput, error)
-	UpdateDomainEntryWithContext(aws.Context, *lightsail.UpdateDomainEntryInput, ...aws.Option) (*lightsail.UpdateDomainEntryOutput, error)
-	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) (*aws.Request, *lightsail.UpdateDomainEntryOutput)
+	UpdateDomainEntryRequest(*lightsail.UpdateDomainEntryInput) lightsail.UpdateDomainEntryRequest
 }
 
 var _ LightsailAPI = (*lightsail.Lightsail)(nil)

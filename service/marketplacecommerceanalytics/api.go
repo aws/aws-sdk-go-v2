@@ -11,47 +11,24 @@ import (
 
 const opGenerateDataSet = "GenerateDataSet"
 
-// GenerateDataSetRequest generates a "aws.Request" representing the
-// client's request for the GenerateDataSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GenerateDataSet for more information on using the GenerateDataSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GenerateDataSetRequest method.
-//    req, resp := client.GenerateDataSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet
-func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDataSetInput) (req *aws.Request, output *GenerateDataSetOutput) {
-	op := &aws.Operation{
-		Name:       opGenerateDataSet,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GenerateDataSetInput{}
-	}
-
-	output = &GenerateDataSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GenerateDataSetRequest is a API request type for the GenerateDataSet API operation.
+type GenerateDataSetRequest struct {
+	*aws.Request
+	Input *GenerateDataSetInput
 }
 
-// GenerateDataSet API operation for AWS Marketplace Commerce Analytics.
+// Send marshals and sends the GenerateDataSet API request.
+func (r *GenerateDataSetRequest) Send() (*GenerateDataSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GenerateDataSetOutput), nil
+}
+
+// GenerateDataSetRequest returns a request value for making API operation for
+// AWS Marketplace Commerce Analytics.
 //
 // Given a data set type and data set publication date, asynchronously publishes
 // the requested data set to the specified S3 bucket and notifies the specified
@@ -64,82 +41,49 @@ func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDat
 // policy providing Allow permissions for the following actions: s3:PutObject,
 // s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Marketplace Commerce Analytics's
-// API operation GenerateDataSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeException "Exception"
-//   This exception is thrown when an internal service error occurs.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet
-func (c *MarketplaceCommerceAnalytics) GenerateDataSet(input *GenerateDataSetInput) (*GenerateDataSetOutput, error) {
-	req, out := c.GenerateDataSetRequest(input)
-	return out, req.Send()
-}
-
-// GenerateDataSetWithContext is the same as GenerateDataSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GenerateDataSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceCommerceAnalytics) GenerateDataSetWithContext(ctx aws.Context, input *GenerateDataSetInput, opts ...aws.Option) (*GenerateDataSetOutput, error) {
-	req, out := c.GenerateDataSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartSupportDataExport = "StartSupportDataExport"
-
-// StartSupportDataExportRequest generates a "aws.Request" representing the
-// client's request for the StartSupportDataExport operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartSupportDataExport for more information on using the StartSupportDataExport
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartSupportDataExportRequest method.
-//    req, resp := client.StartSupportDataExportRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the GenerateDataSetRequest method.
+//    req := client.GenerateDataSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExport
-func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *StartSupportDataExportInput) (req *aws.Request, output *StartSupportDataExportOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet
+func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDataSetInput) GenerateDataSetRequest {
 	op := &aws.Operation{
-		Name:       opStartSupportDataExport,
+		Name:       opGenerateDataSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartSupportDataExportInput{}
+		input = &GenerateDataSetInput{}
 	}
 
-	output = &StartSupportDataExportOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &GenerateDataSetOutput{})
+	return GenerateDataSetRequest{Request: req, Input: input}
 }
 
-// StartSupportDataExport API operation for AWS Marketplace Commerce Analytics.
+const opStartSupportDataExport = "StartSupportDataExport"
+
+// StartSupportDataExportRequest is a API request type for the StartSupportDataExport API operation.
+type StartSupportDataExportRequest struct {
+	*aws.Request
+	Input *StartSupportDataExportInput
+}
+
+// Send marshals and sends the StartSupportDataExport API request.
+func (r *StartSupportDataExportRequest) Send() (*StartSupportDataExportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartSupportDataExportOutput), nil
+}
+
+// StartSupportDataExportRequest returns a request value for making API operation for
+// AWS Marketplace Commerce Analytics.
 //
 // Given a data set type and a from date, asynchronously publishes the requested
 // customer support data to the specified S3 bucket and notifies the specified
@@ -153,37 +97,27 @@ func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *Star
 // actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
 // iam:GetRolePolicy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Marketplace Commerce Analytics's
-// API operation StartSupportDataExport for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeException "Exception"
-//   This exception is thrown when an internal service error occurs.
+//    // Example sending a request using the StartSupportDataExportRequest method.
+//    req := client.StartSupportDataExportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExport
-func (c *MarketplaceCommerceAnalytics) StartSupportDataExport(input *StartSupportDataExportInput) (*StartSupportDataExportOutput, error) {
-	req, out := c.StartSupportDataExportRequest(input)
-	return out, req.Send()
-}
+func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *StartSupportDataExportInput) StartSupportDataExportRequest {
+	op := &aws.Operation{
+		Name:       opStartSupportDataExport,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// StartSupportDataExportWithContext is the same as StartSupportDataExport with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartSupportDataExport for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MarketplaceCommerceAnalytics) StartSupportDataExportWithContext(ctx aws.Context, input *StartSupportDataExportInput, opts ...aws.Option) (*StartSupportDataExportOutput, error) {
-	req, out := c.StartSupportDataExportRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &StartSupportDataExportInput{}
+	}
+
+	req := c.newRequest(op, input, &StartSupportDataExportOutput{})
+	return StartSupportDataExportRequest{Request: req, Input: input}
 }
 
 // Container for the parameters to the GenerateDataSet operation.

@@ -11,31 +11,41 @@ import (
 
 const opGetResources = "GetResources"
 
-// GetResourcesRequest generates a "aws.Request" representing the
-// client's request for the GetResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetResourcesRequest is a API request type for the GetResources API operation.
+type GetResourcesRequest struct {
+	*aws.Request
+	Input *GetResourcesInput
+}
+
+// Send marshals and sends the GetResources API request.
+func (r *GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourcesOutput), nil
+}
+
+// GetResourcesRequest returns a request value for making API operation for
+// AWS Resource Groups Tagging API.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetResources for more information on using the GetResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all the tagged resources that are associated with the specified tags
+// (keys and values) located in the specified region for the AWS account. The
+// tags and the resource types that you specify in the request are known as
+// filters. The response includes all tags that are associated with the requested
+// resources. If no filter is provided, this action returns a paginated resource
+// list with the associated tags.
 //
 //    // Example sending a request using the GetResourcesRequest method.
-//    req, resp := client.GetResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResources
-func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput) (req *aws.Request, output *GetResourcesOutput) {
+func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput) GetResourcesRequest {
 	op := &aws.Operation{
 		Name:       opGetResources,
 		HTTPMethod: "POST",
@@ -52,63 +62,8 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput)
 		input = &GetResourcesInput{}
 	}
 
-	output = &GetResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetResources API operation for AWS Resource Groups Tagging API.
-//
-// Returns all the tagged resources that are associated with the specified tags
-// (keys and values) located in the specified region for the AWS account. The
-// tags and the resource types that you specify in the request are known as
-// filters. The response includes all tags that are associated with the requested
-// resources. If no filter is provided, this action returns a paginated resource
-// list with the associated tags.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Resource Groups Tagging API's
-// API operation GetResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is missing or a malformed string or invalid or out-of-range value
-//   was supplied for the request parameter.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request was denied to limit the frequency of submitted requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The request processing failed because of an unknown error, exception, or
-//   failure. You can retry the request.
-//
-//   * ErrCodePaginationTokenExpiredException "PaginationTokenExpiredException"
-//   A PaginationToken is valid for a maximum of 15 minutes. Your request was
-//   denied because the specified PaginationToken has expired.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResources
-func (c *ResourceGroupsTaggingAPI) GetResources(input *GetResourcesInput) (*GetResourcesOutput, error) {
-	req, out := c.GetResourcesRequest(input)
-	return out, req.Send()
-}
-
-// GetResourcesWithContext is the same as GetResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetResourcesWithContext(ctx aws.Context, input *GetResourcesInput, opts ...aws.Option) (*GetResourcesOutput, error) {
-	req, out := c.GetResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetResourcesOutput{})
+	return GetResourcesRequest{Request: req, Input: input}
 }
 
 // GetResourcesPages iterates over the pages of a GetResources operation,
@@ -147,10 +102,10 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetResourcesRequest(inCpy)
+			req := c.GetResourcesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -163,31 +118,36 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context,
 
 const opGetTagKeys = "GetTagKeys"
 
-// GetTagKeysRequest generates a "aws.Request" representing the
-// client's request for the GetTagKeys operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTagKeysRequest is a API request type for the GetTagKeys API operation.
+type GetTagKeysRequest struct {
+	*aws.Request
+	Input *GetTagKeysInput
+}
+
+// Send marshals and sends the GetTagKeys API request.
+func (r *GetTagKeysRequest) Send() (*GetTagKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTagKeysOutput), nil
+}
+
+// GetTagKeysRequest returns a request value for making API operation for
+// AWS Resource Groups Tagging API.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTagKeys for more information on using the GetTagKeys
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all tag keys in the specified region for the AWS account.
 //
 //    // Example sending a request using the GetTagKeysRequest method.
-//    req, resp := client.GetTagKeysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTagKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeys
-func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) (req *aws.Request, output *GetTagKeysOutput) {
+func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) GetTagKeysRequest {
 	op := &aws.Operation{
 		Name:       opGetTagKeys,
 		HTTPMethod: "POST",
@@ -204,58 +164,8 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) (re
 		input = &GetTagKeysInput{}
 	}
 
-	output = &GetTagKeysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTagKeys API operation for AWS Resource Groups Tagging API.
-//
-// Returns all tag keys in the specified region for the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Resource Groups Tagging API's
-// API operation GetTagKeys for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is missing or a malformed string or invalid or out-of-range value
-//   was supplied for the request parameter.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request was denied to limit the frequency of submitted requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The request processing failed because of an unknown error, exception, or
-//   failure. You can retry the request.
-//
-//   * ErrCodePaginationTokenExpiredException "PaginationTokenExpiredException"
-//   A PaginationToken is valid for a maximum of 15 minutes. Your request was
-//   denied because the specified PaginationToken has expired.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeys
-func (c *ResourceGroupsTaggingAPI) GetTagKeys(input *GetTagKeysInput) (*GetTagKeysOutput, error) {
-	req, out := c.GetTagKeysRequest(input)
-	return out, req.Send()
-}
-
-// GetTagKeysWithContext is the same as GetTagKeys with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTagKeys for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagKeysWithContext(ctx aws.Context, input *GetTagKeysInput, opts ...aws.Option) (*GetTagKeysOutput, error) {
-	req, out := c.GetTagKeysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTagKeysOutput{})
+	return GetTagKeysRequest{Request: req, Input: input}
 }
 
 // GetTagKeysPages iterates over the pages of a GetTagKeys operation,
@@ -294,10 +204,10 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetTagKeysRequest(inCpy)
+			req := c.GetTagKeysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -310,31 +220,37 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, i
 
 const opGetTagValues = "GetTagValues"
 
-// GetTagValuesRequest generates a "aws.Request" representing the
-// client's request for the GetTagValues operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTagValuesRequest is a API request type for the GetTagValues API operation.
+type GetTagValuesRequest struct {
+	*aws.Request
+	Input *GetTagValuesInput
+}
+
+// Send marshals and sends the GetTagValues API request.
+func (r *GetTagValuesRequest) Send() (*GetTagValuesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTagValuesOutput), nil
+}
+
+// GetTagValuesRequest returns a request value for making API operation for
+// AWS Resource Groups Tagging API.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTagValues for more information on using the GetTagValues
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all tag values for the specified key in the specified region for
+// the AWS account.
 //
 //    // Example sending a request using the GetTagValuesRequest method.
-//    req, resp := client.GetTagValuesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTagValuesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValues
-func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput) (req *aws.Request, output *GetTagValuesOutput) {
+func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput) GetTagValuesRequest {
 	op := &aws.Operation{
 		Name:       opGetTagValues,
 		HTTPMethod: "POST",
@@ -351,59 +267,8 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput)
 		input = &GetTagValuesInput{}
 	}
 
-	output = &GetTagValuesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTagValues API operation for AWS Resource Groups Tagging API.
-//
-// Returns all tag values for the specified key in the specified region for
-// the AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Resource Groups Tagging API's
-// API operation GetTagValues for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is missing or a malformed string or invalid or out-of-range value
-//   was supplied for the request parameter.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request was denied to limit the frequency of submitted requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The request processing failed because of an unknown error, exception, or
-//   failure. You can retry the request.
-//
-//   * ErrCodePaginationTokenExpiredException "PaginationTokenExpiredException"
-//   A PaginationToken is valid for a maximum of 15 minutes. Your request was
-//   denied because the specified PaginationToken has expired.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValues
-func (c *ResourceGroupsTaggingAPI) GetTagValues(input *GetTagValuesInput) (*GetTagValuesOutput, error) {
-	req, out := c.GetTagValuesRequest(input)
-	return out, req.Send()
-}
-
-// GetTagValuesWithContext is the same as GetTagValues with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTagValues for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagValuesWithContext(ctx aws.Context, input *GetTagValuesInput, opts ...aws.Option) (*GetTagValuesOutput, error) {
-	req, out := c.GetTagValuesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTagValuesOutput{})
+	return GetTagValuesRequest{Request: req, Input: input}
 }
 
 // GetTagValuesPages iterates over the pages of a GetTagValues operation,
@@ -442,10 +307,10 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.GetTagValuesRequest(inCpy)
+			req := c.GetTagValuesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -458,47 +323,24 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context,
 
 const opTagResources = "TagResources"
 
-// TagResourcesRequest generates a "aws.Request" representing the
-// client's request for the TagResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResources for more information on using the TagResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the TagResourcesRequest method.
-//    req, resp := client.TagResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResources
-func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput) (req *aws.Request, output *TagResourcesOutput) {
-	op := &aws.Operation{
-		Name:       opTagResources,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &TagResourcesInput{}
-	}
-
-	output = &TagResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// TagResourcesRequest is a API request type for the TagResources API operation.
+type TagResourcesRequest struct {
+	*aws.Request
+	Input *TagResourcesInput
 }
 
-// TagResources API operation for AWS Resource Groups Tagging API.
+// Send marshals and sends the TagResources API request.
+func (r *TagResourcesRequest) Send() (*TagResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourcesOutput), nil
+}
+
+// TagResourcesRequest returns a request value for making API operation for
+// AWS Resource Groups Tagging API.
 //
 // Applies one or more tags to the specified resources. Note the following:
 //
@@ -518,90 +360,49 @@ func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput)
 //    tags. For more information, see Obtaining Permissions for Tagging (http://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/obtaining-permissions-for-tagging.html)
 //    in the AWS Resource Groups and Tag Editor User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Resource Groups Tagging API's
-// API operation TagResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is missing or a malformed string or invalid or out-of-range value
-//   was supplied for the request parameter.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request was denied to limit the frequency of submitted requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The request processing failed because of an unknown error, exception, or
-//   failure. You can retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResources
-func (c *ResourceGroupsTaggingAPI) TagResources(input *TagResourcesInput) (*TagResourcesOutput, error) {
-	req, out := c.TagResourcesRequest(input)
-	return out, req.Send()
-}
-
-// TagResourcesWithContext is the same as TagResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) TagResourcesWithContext(ctx aws.Context, input *TagResourcesInput, opts ...aws.Option) (*TagResourcesOutput, error) {
-	req, out := c.TagResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUntagResources = "UntagResources"
-
-// UntagResourcesRequest generates a "aws.Request" representing the
-// client's request for the UntagResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResources for more information on using the UntagResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UntagResourcesRequest method.
-//    req, resp := client.UntagResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the TagResourcesRequest method.
+//    req := client.TagResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResources
-func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesInput) (req *aws.Request, output *UntagResourcesOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResources
+func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput) TagResourcesRequest {
 	op := &aws.Operation{
-		Name:       opUntagResources,
+		Name:       opTagResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UntagResourcesInput{}
+		input = &TagResourcesInput{}
 	}
 
-	output = &UntagResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &TagResourcesOutput{})
+	return TagResourcesRequest{Request: req, Input: input}
 }
 
-// UntagResources API operation for AWS Resource Groups Tagging API.
+const opUntagResources = "UntagResources"
+
+// UntagResourcesRequest is a API request type for the UntagResources API operation.
+type UntagResourcesRequest struct {
+	*aws.Request
+	Input *UntagResourcesInput
+}
+
+// Send marshals and sends the UntagResources API request.
+func (r *UntagResourcesRequest) Send() (*UntagResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourcesOutput), nil
+}
+
+// UntagResourcesRequest returns a request value for making API operation for
+// AWS Resource Groups Tagging API.
 //
 // Removes the specified tags from the specified resources. When you specify
 // a tag key, the action removes both that key and its associated value. The
@@ -616,45 +417,27 @@ func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesIn
 //    * You can only tag resources that are located in the specified region
 //    for the AWS account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Resource Groups Tagging API's
-// API operation UntagResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidParameterException "InvalidParameterException"
-//   A parameter is missing or a malformed string or invalid or out-of-range value
-//   was supplied for the request parameter.
-//
-//   * ErrCodeThrottledException "ThrottledException"
-//   The request was denied to limit the frequency of submitted requests.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   The request processing failed because of an unknown error, exception, or
-//   failure. You can retry the request.
+//    // Example sending a request using the UntagResourcesRequest method.
+//    req := client.UntagResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResources
-func (c *ResourceGroupsTaggingAPI) UntagResources(input *UntagResourcesInput) (*UntagResourcesOutput, error) {
-	req, out := c.UntagResourcesRequest(input)
-	return out, req.Send()
-}
+func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesInput) UntagResourcesRequest {
+	op := &aws.Operation{
+		Name:       opUntagResources,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UntagResourcesWithContext is the same as UntagResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) UntagResourcesWithContext(ctx aws.Context, input *UntagResourcesInput, opts ...aws.Option) (*UntagResourcesOutput, error) {
-	req, out := c.UntagResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UntagResourcesInput{}
+	}
+
+	req := c.newRequest(op, input, &UntagResourcesOutput{})
+	return UntagResourcesRequest{Request: req, Input: input}
 }
 
 // Details of the common errors that all actions return.

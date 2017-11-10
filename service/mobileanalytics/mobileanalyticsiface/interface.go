@@ -9,7 +9,6 @@
 package mobileanalyticsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
 )
 
@@ -63,9 +62,7 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MobileAnalyticsAPI interface {
-	PutEvents(*mobileanalytics.PutEventsInput) (*mobileanalytics.PutEventsOutput, error)
-	PutEventsWithContext(aws.Context, *mobileanalytics.PutEventsInput, ...aws.Option) (*mobileanalytics.PutEventsOutput, error)
-	PutEventsRequest(*mobileanalytics.PutEventsInput) (*aws.Request, *mobileanalytics.PutEventsOutput)
+	PutEventsRequest(*mobileanalytics.PutEventsInput) mobileanalytics.PutEventsRequest
 }
 
 var _ MobileAnalyticsAPI = (*mobileanalytics.MobileAnalytics)(nil)

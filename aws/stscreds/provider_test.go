@@ -13,20 +13,35 @@ type stubSTS struct {
 	TestInput func(*sts.AssumeRoleInput)
 }
 
-func (s *stubSTS) AssumeRole(input *sts.AssumeRoleInput) (*sts.AssumeRoleOutput, error) {
+func (s *stubSTS) AssumeRoleRequest(input *sts.AssumeRoleInput) sts.AssumeRoleRequest {
 	if s.TestInput != nil {
 		s.TestInput(input)
 	}
 	expiry := time.Now().Add(60 * time.Minute)
-	return &sts.AssumeRoleOutput{
-		Credentials: &sts.Credentials{
-			// Just reflect the role arn to the provider.
-			AccessKeyId:     input.RoleArn,
-			SecretAccessKey: aws.String("assumedSecretAccessKey"),
-			SessionToken:    aws.String("assumedSessionToken"),
-			Expiration:      &expiry,
+
+	req := sts.AssumeRoleRequest{
+		Input: input,
+		Request: &aws.Request{
+			Handlers: func() aws.Handlers {
+				h := aws.Handlers{}
+
+				h.Send.PushBack(func(r *aws.Request) {
+					r.Data = &sts.AssumeRoleOutput{
+						Credentials: &sts.Credentials{
+							// Just reflect the role arn to the provider.
+							AccessKeyId:     input.RoleArn,
+							SecretAccessKey: aws.String("assumedSecretAccessKey"),
+							SessionToken:    aws.String("assumedSessionToken"),
+							Expiration:      &expiry,
+						},
+					}
+				})
+				return h
+			}(),
 		},
-	}, nil
+	}
+
+	return req
 }
 
 func TestAssumeRoleProvider(t *testing.T) {

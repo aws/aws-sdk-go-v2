@@ -63,48 +63,28 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type SimpleDBAPI interface {
-	BatchDeleteAttributes(*simpledb.BatchDeleteAttributesInput) (*simpledb.BatchDeleteAttributesOutput, error)
-	BatchDeleteAttributesWithContext(aws.Context, *simpledb.BatchDeleteAttributesInput, ...aws.Option) (*simpledb.BatchDeleteAttributesOutput, error)
-	BatchDeleteAttributesRequest(*simpledb.BatchDeleteAttributesInput) (*aws.Request, *simpledb.BatchDeleteAttributesOutput)
+	BatchDeleteAttributesRequest(*simpledb.BatchDeleteAttributesInput) simpledb.BatchDeleteAttributesRequest
 
-	BatchPutAttributes(*simpledb.BatchPutAttributesInput) (*simpledb.BatchPutAttributesOutput, error)
-	BatchPutAttributesWithContext(aws.Context, *simpledb.BatchPutAttributesInput, ...aws.Option) (*simpledb.BatchPutAttributesOutput, error)
-	BatchPutAttributesRequest(*simpledb.BatchPutAttributesInput) (*aws.Request, *simpledb.BatchPutAttributesOutput)
+	BatchPutAttributesRequest(*simpledb.BatchPutAttributesInput) simpledb.BatchPutAttributesRequest
 
-	CreateDomain(*simpledb.CreateDomainInput) (*simpledb.CreateDomainOutput, error)
-	CreateDomainWithContext(aws.Context, *simpledb.CreateDomainInput, ...aws.Option) (*simpledb.CreateDomainOutput, error)
-	CreateDomainRequest(*simpledb.CreateDomainInput) (*aws.Request, *simpledb.CreateDomainOutput)
+	CreateDomainRequest(*simpledb.CreateDomainInput) simpledb.CreateDomainRequest
 
-	DeleteAttributes(*simpledb.DeleteAttributesInput) (*simpledb.DeleteAttributesOutput, error)
-	DeleteAttributesWithContext(aws.Context, *simpledb.DeleteAttributesInput, ...aws.Option) (*simpledb.DeleteAttributesOutput, error)
-	DeleteAttributesRequest(*simpledb.DeleteAttributesInput) (*aws.Request, *simpledb.DeleteAttributesOutput)
+	DeleteAttributesRequest(*simpledb.DeleteAttributesInput) simpledb.DeleteAttributesRequest
 
-	DeleteDomain(*simpledb.DeleteDomainInput) (*simpledb.DeleteDomainOutput, error)
-	DeleteDomainWithContext(aws.Context, *simpledb.DeleteDomainInput, ...aws.Option) (*simpledb.DeleteDomainOutput, error)
-	DeleteDomainRequest(*simpledb.DeleteDomainInput) (*aws.Request, *simpledb.DeleteDomainOutput)
+	DeleteDomainRequest(*simpledb.DeleteDomainInput) simpledb.DeleteDomainRequest
 
-	DomainMetadata(*simpledb.DomainMetadataInput) (*simpledb.DomainMetadataOutput, error)
-	DomainMetadataWithContext(aws.Context, *simpledb.DomainMetadataInput, ...aws.Option) (*simpledb.DomainMetadataOutput, error)
-	DomainMetadataRequest(*simpledb.DomainMetadataInput) (*aws.Request, *simpledb.DomainMetadataOutput)
+	DomainMetadataRequest(*simpledb.DomainMetadataInput) simpledb.DomainMetadataRequest
 
-	GetAttributes(*simpledb.GetAttributesInput) (*simpledb.GetAttributesOutput, error)
-	GetAttributesWithContext(aws.Context, *simpledb.GetAttributesInput, ...aws.Option) (*simpledb.GetAttributesOutput, error)
-	GetAttributesRequest(*simpledb.GetAttributesInput) (*aws.Request, *simpledb.GetAttributesOutput)
+	GetAttributesRequest(*simpledb.GetAttributesInput) simpledb.GetAttributesRequest
 
-	ListDomains(*simpledb.ListDomainsInput) (*simpledb.ListDomainsOutput, error)
-	ListDomainsWithContext(aws.Context, *simpledb.ListDomainsInput, ...aws.Option) (*simpledb.ListDomainsOutput, error)
-	ListDomainsRequest(*simpledb.ListDomainsInput) (*aws.Request, *simpledb.ListDomainsOutput)
+	ListDomainsRequest(*simpledb.ListDomainsInput) simpledb.ListDomainsRequest
 
 	ListDomainsPages(*simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool) error
 	ListDomainsPagesWithContext(aws.Context, *simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool, ...aws.Option) error
 
-	PutAttributes(*simpledb.PutAttributesInput) (*simpledb.PutAttributesOutput, error)
-	PutAttributesWithContext(aws.Context, *simpledb.PutAttributesInput, ...aws.Option) (*simpledb.PutAttributesOutput, error)
-	PutAttributesRequest(*simpledb.PutAttributesInput) (*aws.Request, *simpledb.PutAttributesOutput)
+	PutAttributesRequest(*simpledb.PutAttributesInput) simpledb.PutAttributesRequest
 
-	Select(*simpledb.SelectInput) (*simpledb.SelectOutput, error)
-	SelectWithContext(aws.Context, *simpledb.SelectInput, ...aws.Option) (*simpledb.SelectOutput, error)
-	SelectRequest(*simpledb.SelectInput) (*aws.Request, *simpledb.SelectOutput)
+	SelectRequest(*simpledb.SelectInput) simpledb.SelectRequest
 
 	SelectPages(*simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool) error
 	SelectPagesWithContext(aws.Context, *simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool, ...aws.Option) error

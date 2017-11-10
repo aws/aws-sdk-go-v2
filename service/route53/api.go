@@ -12,47 +12,24 @@ import (
 
 const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 
-// AssociateVPCWithHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the AssociateVPCWithHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateVPCWithHostedZone for more information on using the AssociateVPCWithHostedZone
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateVPCWithHostedZoneRequest method.
-//    req, resp := client.AssociateVPCWithHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZone
-func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHostedZoneInput) (req *aws.Request, output *AssociateVPCWithHostedZoneOutput) {
-	op := &aws.Operation{
-		Name:       opAssociateVPCWithHostedZone,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}/associatevpc",
-	}
-
-	if input == nil {
-		input = &AssociateVPCWithHostedZoneInput{}
-	}
-
-	output = &AssociateVPCWithHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AssociateVPCWithHostedZoneRequest is a API request type for the AssociateVPCWithHostedZone API operation.
+type AssociateVPCWithHostedZoneRequest struct {
+	*aws.Request
+	Input *AssociateVPCWithHostedZoneInput
 }
 
-// AssociateVPCWithHostedZone API operation for Amazon Route 53.
+// Send marshals and sends the AssociateVPCWithHostedZone API request.
+func (r *AssociateVPCWithHostedZoneRequest) Send() (*AssociateVPCWithHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateVPCWithHostedZoneOutput), nil
+}
+
+// AssociateVPCWithHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Associates an Amazon VPC with a private hosted zone.
 //
@@ -65,117 +42,49 @@ func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHoste
 // CreateVPCAssociationAuthorization request. Then the account that created
 // the VPC must submit an AssociateVPCWithHostedZone request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation AssociateVPCWithHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeNotAuthorizedException "NotAuthorizedException"
-//   Associating the specified VPC with the specified hosted zone has not been
-//   authorized.
-//
-//   * ErrCodeInvalidVPCId "InvalidVPCId"
-//   The VPC ID that you specified either isn't a valid ID or the current account
-//   is not authorized to access this VPC.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodePublicZoneVPCAssociation "PublicZoneVPCAssociation"
-//   You're trying to associate a VPC with a public hosted zone. Amazon Route
-//   53 doesn't support associating a VPC with a public hosted zone.
-//
-//   * ErrCodeConflictingDomainExists "ConflictingDomainExists"
-//   The cause of this error depends on whether you're trying to create a public
-//   or a private hosted zone:
-//
-//      * Public hosted zone: Two hosted zones that have the same name or that
-//      have a parent/child relationship (example.com and test.example.com) can't
-//      have any common name servers. You tried to create a hosted zone that has
-//      the same name as an existing hosted zone or that's the parent or child
-//      of an existing hosted zone, and you specified a delegation set that shares
-//      one or more name servers with the existing hosted zone.
-//
-//      * Private hosted zone: You specified an Amazon VPC that you're already
-//      using for another hosted zone, and the domain that you specified for one
-//      of the hosted zones is a subdomain of the domain that you specified for
-//      the other hosted zone. For example, you can't use the same Amazon VPC
-//      for the hosted zones for example.com and test.example.com.
-//
-//   * ErrCodeLimitsExceeded "LimitsExceeded"
-//   The limits specified for a resource have been exceeded.
+//    // Example sending a request using the AssociateVPCWithHostedZoneRequest method.
+//    req := client.AssociateVPCWithHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZone
-func (c *Route53) AssociateVPCWithHostedZone(input *AssociateVPCWithHostedZoneInput) (*AssociateVPCWithHostedZoneOutput, error) {
-	req, out := c.AssociateVPCWithHostedZoneRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest {
+	op := &aws.Operation{
+		Name:       opAssociateVPCWithHostedZone,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}/associatevpc",
+	}
 
-// AssociateVPCWithHostedZoneWithContext is the same as AssociateVPCWithHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateVPCWithHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) AssociateVPCWithHostedZoneWithContext(ctx aws.Context, input *AssociateVPCWithHostedZoneInput, opts ...aws.Option) (*AssociateVPCWithHostedZoneOutput, error) {
-	req, out := c.AssociateVPCWithHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AssociateVPCWithHostedZoneInput{}
+	}
+
+	req := c.newRequest(op, input, &AssociateVPCWithHostedZoneOutput{})
+	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input}
 }
 
 const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 
-// ChangeResourceRecordSetsRequest generates a "aws.Request" representing the
-// client's request for the ChangeResourceRecordSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ChangeResourceRecordSets for more information on using the ChangeResourceRecordSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ChangeResourceRecordSetsRequest method.
-//    req, resp := client.ChangeResourceRecordSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets
-func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSetsInput) (req *aws.Request, output *ChangeResourceRecordSetsOutput) {
-	op := &aws.Operation{
-		Name:       opChangeResourceRecordSets,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset/",
-	}
-
-	if input == nil {
-		input = &ChangeResourceRecordSetsInput{}
-	}
-
-	output = &ChangeResourceRecordSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ChangeResourceRecordSetsRequest is a API request type for the ChangeResourceRecordSets API operation.
+type ChangeResourceRecordSetsRequest struct {
+	*aws.Request
+	Input *ChangeResourceRecordSetsInput
 }
 
-// ChangeResourceRecordSets API operation for Amazon Route 53.
+// Send marshals and sends the ChangeResourceRecordSets API request.
+func (r *ChangeResourceRecordSetsRequest) Send() (*ChangeResourceRecordSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ChangeResourceRecordSetsOutput), nil
+}
+
+// ChangeResourceRecordSetsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates, changes, or deletes a resource record set, which contains authoritative
 // DNS information for a specified domain name or subdomain name. For example,
@@ -257,84 +166,65 @@ func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSet
 // Limits (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html)
 // in the Amazon Route 53 Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ChangeResourceRecordSets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeInvalidChangeBatch "InvalidChangeBatch"
-//   This exception contains a list of messages that might contain one or more
-//   error messages. Each error message indicates one error in the change batch.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
+//    // Example sending a request using the ChangeResourceRecordSetsRequest method.
+//    req := client.ChangeResourceRecordSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets
-func (c *Route53) ChangeResourceRecordSets(input *ChangeResourceRecordSetsInput) (*ChangeResourceRecordSetsOutput, error) {
-	req, out := c.ChangeResourceRecordSetsRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest {
+	op := &aws.Operation{
+		Name:       opChangeResourceRecordSets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset/",
+	}
 
-// ChangeResourceRecordSetsWithContext is the same as ChangeResourceRecordSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ChangeResourceRecordSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ChangeResourceRecordSetsWithContext(ctx aws.Context, input *ChangeResourceRecordSetsInput, opts ...aws.Option) (*ChangeResourceRecordSetsOutput, error) {
-	req, out := c.ChangeResourceRecordSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ChangeResourceRecordSetsInput{}
+	}
+
+	req := c.newRequest(op, input, &ChangeResourceRecordSetsOutput{})
+	return ChangeResourceRecordSetsRequest{Request: req, Input: input}
 }
 
 const opChangeTagsForResource = "ChangeTagsForResource"
 
-// ChangeTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ChangeTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ChangeTagsForResourceRequest is a API request type for the ChangeTagsForResource API operation.
+type ChangeTagsForResourceRequest struct {
+	*aws.Request
+	Input *ChangeTagsForResourceInput
+}
+
+// Send marshals and sends the ChangeTagsForResource API request.
+func (r *ChangeTagsForResourceRequest) Send() (*ChangeTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ChangeTagsForResourceOutput), nil
+}
+
+// ChangeTagsForResourceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds, edits, or deletes tags for a health check or a hosted zone.
 //
-// See ChangeTagsForResource for more information on using the ChangeTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about using tags for cost allocation, see Using Cost Allocation
+// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using the ChangeTagsForResourceRequest method.
-//    req, resp := client.ChangeTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ChangeTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResource
-func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput) (req *aws.Request, output *ChangeTagsForResourceOutput) {
+func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput) ChangeTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opChangeTagsForResource,
 		HTTPMethod: "POST",
@@ -345,112 +235,30 @@ func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput
 		input = &ChangeTagsForResourceInput{}
 	}
 
-	output = &ChangeTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ChangeTagsForResource API operation for Amazon Route 53.
-//
-// Adds, edits, or deletes tags for a health check or a hosted zone.
-//
-// For information about using tags for cost allocation, see Using Cost Allocation
-// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ChangeTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The limit on the number of requests per second was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResource
-func (c *Route53) ChangeTagsForResource(input *ChangeTagsForResourceInput) (*ChangeTagsForResourceOutput, error) {
-	req, out := c.ChangeTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ChangeTagsForResourceWithContext is the same as ChangeTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ChangeTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ChangeTagsForResourceWithContext(ctx aws.Context, input *ChangeTagsForResourceInput, opts ...aws.Option) (*ChangeTagsForResourceOutput, error) {
-	req, out := c.ChangeTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ChangeTagsForResourceOutput{})
+	return ChangeTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opCreateHealthCheck = "CreateHealthCheck"
 
-// CreateHealthCheckRequest generates a "aws.Request" representing the
-// client's request for the CreateHealthCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHealthCheck for more information on using the CreateHealthCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHealthCheckRequest method.
-//    req, resp := client.CreateHealthCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheck
-func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) (req *aws.Request, output *CreateHealthCheckOutput) {
-	op := &aws.Operation{
-		Name:       opCreateHealthCheck,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/healthcheck",
-	}
-
-	if input == nil {
-		input = &CreateHealthCheckInput{}
-	}
-
-	output = &CreateHealthCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateHealthCheckRequest is a API request type for the CreateHealthCheck API operation.
+type CreateHealthCheckRequest struct {
+	*aws.Request
+	Input *CreateHealthCheckInput
 }
 
-// CreateHealthCheck API operation for Amazon Route 53.
+// Send marshals and sends the CreateHealthCheck API request.
+func (r *CreateHealthCheckRequest) Send() (*CreateHealthCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHealthCheckOutput), nil
+}
+
+// CreateHealthCheckRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates a new health check.
 //
@@ -485,98 +293,49 @@ func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) (req *
 //    For information about creating CloudWatch metrics and alarms by using
 //    the CloudWatch console, see the Amazon CloudWatch User Guide (http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/WhatIsCloudWatch.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateHealthCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeTooManyHealthChecks "TooManyHealthChecks"
-//   You have reached the maximum number of active health checks for an AWS account.
-//   The default limit is 100. To request a higher limit, create a case (http://aws.amazon.com/route53-request)
-//   with the AWS Support Center.
-//
-//   * ErrCodeHealthCheckAlreadyExists "HealthCheckAlreadyExists"
-//   The health check you're attempting to create already exists. Amazon Route
-//   53 returns this error when you submit a request that has the following values:
-//
-//      * The same value for CallerReference as an existing health check, and
-//      one or more values that differ from the existing health check that has
-//      the same caller reference.
-//
-//      * The same value for CallerReference as a health check that you created
-//      and later deleted, regardless of the other settings in the request.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the CreateHealthCheckRequest method.
+//    req := client.CreateHealthCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheck
-func (c *Route53) CreateHealthCheck(input *CreateHealthCheckInput) (*CreateHealthCheckOutput, error) {
-	req, out := c.CreateHealthCheckRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) CreateHealthCheckRequest {
+	op := &aws.Operation{
+		Name:       opCreateHealthCheck,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/healthcheck",
+	}
 
-// CreateHealthCheckWithContext is the same as CreateHealthCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHealthCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateHealthCheckWithContext(ctx aws.Context, input *CreateHealthCheckInput, opts ...aws.Option) (*CreateHealthCheckOutput, error) {
-	req, out := c.CreateHealthCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHealthCheckInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHealthCheckOutput{})
+	return CreateHealthCheckRequest{Request: req, Input: input}
 }
 
 const opCreateHostedZone = "CreateHostedZone"
 
-// CreateHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the CreateHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateHostedZone for more information on using the CreateHostedZone
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateHostedZoneRequest method.
-//    req, resp := client.CreateHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZone
-func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) (req *aws.Request, output *CreateHostedZoneOutput) {
-	op := &aws.Operation{
-		Name:       opCreateHostedZone,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/hostedzone",
-	}
-
-	if input == nil {
-		input = &CreateHostedZoneInput{}
-	}
-
-	output = &CreateHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateHostedZoneRequest is a API request type for the CreateHostedZone API operation.
+type CreateHostedZoneRequest struct {
+	*aws.Request
+	Input *CreateHostedZoneInput
 }
 
-// CreateHostedZone API operation for Amazon Route 53.
+// Send marshals and sends the CreateHostedZone API request.
+func (r *CreateHostedZoneRequest) Send() (*CreateHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateHostedZoneOutput), nil
+}
+
+// CreateHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates a new public hosted zone, which you use to specify how the Domain
 // Name System (DNS) routes traffic on the Internet for a domain, such as example.com,
@@ -614,129 +373,49 @@ func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) (req *aw
 // on all Amazon Route 53 DNS servers. When the NS and SOA records are available,
 // the status of the zone changes to INSYNC.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidDomainName "InvalidDomainName"
-//   The specified domain name is not valid.
-//
-//   * ErrCodeHostedZoneAlreadyExists "HostedZoneAlreadyExists"
-//   The hosted zone you're trying to create already exists. Amazon Route 53 returns
-//   this error when a hosted zone has already been created with the specified
-//   CallerReference.
-//
-//   * ErrCodeTooManyHostedZones "TooManyHostedZones"
-//   This hosted zone can't be created because the hosted zone limit is exceeded.
-//   To request a limit increase, go to the Amazon Route 53 Contact Us (http://aws.amazon.com/route53-request/)
-//   page.
-//
-//   * ErrCodeInvalidVPCId "InvalidVPCId"
-//   The VPC ID that you specified either isn't a valid ID or the current account
-//   is not authorized to access this VPC.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeDelegationSetNotAvailable "DelegationSetNotAvailable"
-//   You can create a hosted zone that has the same name as an existing hosted
-//   zone (example.com is common), but there is a limit to the number of hosted
-//   zones that have the same name. If you get this error, Amazon Route 53 has
-//   reached that limit. If you own the domain name and Amazon Route 53 generates
-//   this error, contact Customer Support.
-//
-//   * ErrCodeConflictingDomainExists "ConflictingDomainExists"
-//   The cause of this error depends on whether you're trying to create a public
-//   or a private hosted zone:
-//
-//      * Public hosted zone: Two hosted zones that have the same name or that
-//      have a parent/child relationship (example.com and test.example.com) can't
-//      have any common name servers. You tried to create a hosted zone that has
-//      the same name as an existing hosted zone or that's the parent or child
-//      of an existing hosted zone, and you specified a delegation set that shares
-//      one or more name servers with the existing hosted zone.
-//
-//      * Private hosted zone: You specified an Amazon VPC that you're already
-//      using for another hosted zone, and the domain that you specified for one
-//      of the hosted zones is a subdomain of the domain that you specified for
-//      the other hosted zone. For example, you can't use the same Amazon VPC
-//      for the hosted zones for example.com and test.example.com.
-//
-//   * ErrCodeNoSuchDelegationSet "NoSuchDelegationSet"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeDelegationSetNotReusable "DelegationSetNotReusable"
-//   A reusable delegation set with the specified ID does not exist.
+//    // Example sending a request using the CreateHostedZoneRequest method.
+//    req := client.CreateHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZone
-func (c *Route53) CreateHostedZone(input *CreateHostedZoneInput) (*CreateHostedZoneOutput, error) {
-	req, out := c.CreateHostedZoneRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHostedZoneRequest {
+	op := &aws.Operation{
+		Name:       opCreateHostedZone,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/hostedzone",
+	}
 
-// CreateHostedZoneWithContext is the same as CreateHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateHostedZoneWithContext(ctx aws.Context, input *CreateHostedZoneInput, opts ...aws.Option) (*CreateHostedZoneOutput, error) {
-	req, out := c.CreateHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateHostedZoneInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateHostedZoneOutput{})
+	return CreateHostedZoneRequest{Request: req, Input: input}
 }
 
 const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 
-// CreateQueryLoggingConfigRequest generates a "aws.Request" representing the
-// client's request for the CreateQueryLoggingConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateQueryLoggingConfig for more information on using the CreateQueryLoggingConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateQueryLoggingConfigRequest method.
-//    req, resp := client.CreateQueryLoggingConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfig
-func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfigInput) (req *aws.Request, output *CreateQueryLoggingConfigOutput) {
-	op := &aws.Operation{
-		Name:       opCreateQueryLoggingConfig,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/queryloggingconfig",
-	}
-
-	if input == nil {
-		input = &CreateQueryLoggingConfigInput{}
-	}
-
-	output = &CreateQueryLoggingConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateQueryLoggingConfigRequest is a API request type for the CreateQueryLoggingConfig API operation.
+type CreateQueryLoggingConfigRequest struct {
+	*aws.Request
+	Input *CreateQueryLoggingConfigInput
 }
 
-// CreateQueryLoggingConfig API operation for Amazon Route 53.
+// Send marshals and sends the CreateQueryLoggingConfig API request.
+func (r *CreateQueryLoggingConfigRequest) Send() (*CreateQueryLoggingConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateQueryLoggingConfigOutput), nil
+}
+
+// CreateQueryLoggingConfigRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates a configuration for DNS query logging. After you create a query logging
 // configuration, Amazon Route 53 begins to publish log data to an Amazon CloudWatch
@@ -836,108 +515,49 @@ func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfi
 // to CloudWatch Logs, delete the query logging configuration. For more information,
 // see DeleteQueryLoggingConfig.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateQueryLoggingConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeNoSuchCloudWatchLogsLogGroup "NoSuchCloudWatchLogsLogGroup"
-//   There is no CloudWatch Logs log group with the specified ARN.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeQueryLoggingConfigAlreadyExists "QueryLoggingConfigAlreadyExists"
-//   You can create only one query logging configuration for a hosted zone, and
-//   a query logging configuration already exists for this hosted zone.
-//
-//   * ErrCodeInsufficientCloudWatchLogsResourcePolicy "InsufficientCloudWatchLogsResourcePolicy"
-//   Amazon Route 53 doesn't have the permissions required to create log streams
-//   and send query logs to log streams. Possible causes include the following:
-//
-//      * There is no resource policy that specifies the log group ARN in the
-//      value for Resource.
-//
-//      * The resource policy that includes the log group ARN in the value for
-//      Resource doesn't have the necessary permissions.
-//
-//      * The resource policy hasn't finished propagating yet.
+//    // Example sending a request using the CreateQueryLoggingConfigRequest method.
+//    req := client.CreateQueryLoggingConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateQueryLoggingConfig
-func (c *Route53) CreateQueryLoggingConfig(input *CreateQueryLoggingConfigInput) (*CreateQueryLoggingConfigOutput, error) {
-	req, out := c.CreateQueryLoggingConfigRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest {
+	op := &aws.Operation{
+		Name:       opCreateQueryLoggingConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/queryloggingconfig",
+	}
 
-// CreateQueryLoggingConfigWithContext is the same as CreateQueryLoggingConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateQueryLoggingConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateQueryLoggingConfigWithContext(ctx aws.Context, input *CreateQueryLoggingConfigInput, opts ...aws.Option) (*CreateQueryLoggingConfigOutput, error) {
-	req, out := c.CreateQueryLoggingConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateQueryLoggingConfigInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateQueryLoggingConfigOutput{})
+	return CreateQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
 const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 
-// CreateReusableDelegationSetRequest generates a "aws.Request" representing the
-// client's request for the CreateReusableDelegationSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateReusableDelegationSet for more information on using the CreateReusableDelegationSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateReusableDelegationSetRequest method.
-//    req, resp := client.CreateReusableDelegationSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSet
-func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelegationSetInput) (req *aws.Request, output *CreateReusableDelegationSetOutput) {
-	op := &aws.Operation{
-		Name:       opCreateReusableDelegationSet,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/delegationset",
-	}
-
-	if input == nil {
-		input = &CreateReusableDelegationSetInput{}
-	}
-
-	output = &CreateReusableDelegationSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateReusableDelegationSetRequest is a API request type for the CreateReusableDelegationSet API operation.
+type CreateReusableDelegationSetRequest struct {
+	*aws.Request
+	Input *CreateReusableDelegationSetInput
 }
 
-// CreateReusableDelegationSet API operation for Amazon Route 53.
+// Send marshals and sends the CreateReusableDelegationSet API request.
+func (r *CreateReusableDelegationSetRequest) Send() (*CreateReusableDelegationSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateReusableDelegationSetOutput), nil
+}
+
+// CreateReusableDelegationSetRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates a delegation set (a group of four name servers) that can be reused
 // by multiple hosted zones. If a hosted zoned ID is specified, CreateReusableDelegationSet
@@ -948,89 +568,63 @@ func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelega
 // For information on how to use a reusable delegation set to configure white
 // label name servers, see Configuring White Label Name Servers (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/white-label-name-servers.html).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateReusableDelegationSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDelegationSetAlreadyCreated "DelegationSetAlreadyCreated"
-//   A delegation set with the same owner and caller reference combination has
-//   already been created.
-//
-//   * ErrCodeLimitsExceeded "LimitsExceeded"
-//   The limits specified for a resource have been exceeded.
-//
-//   * ErrCodeHostedZoneNotFound "HostedZoneNotFound"
-//   The specified HostedZone can't be found.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   Parameter name is invalid.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeDelegationSetNotAvailable "DelegationSetNotAvailable"
-//   You can create a hosted zone that has the same name as an existing hosted
-//   zone (example.com is common), but there is a limit to the number of hosted
-//   zones that have the same name. If you get this error, Amazon Route 53 has
-//   reached that limit. If you own the domain name and Amazon Route 53 generates
-//   this error, contact Customer Support.
-//
-//   * ErrCodeDelegationSetAlreadyReusable "DelegationSetAlreadyReusable"
-//   The specified delegation set has already been marked as reusable.
+//    // Example sending a request using the CreateReusableDelegationSetRequest method.
+//    req := client.CreateReusableDelegationSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSet
-func (c *Route53) CreateReusableDelegationSet(input *CreateReusableDelegationSetInput) (*CreateReusableDelegationSetOutput, error) {
-	req, out := c.CreateReusableDelegationSetRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest {
+	op := &aws.Operation{
+		Name:       opCreateReusableDelegationSet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/delegationset",
+	}
 
-// CreateReusableDelegationSetWithContext is the same as CreateReusableDelegationSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateReusableDelegationSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateReusableDelegationSetWithContext(ctx aws.Context, input *CreateReusableDelegationSetInput, opts ...aws.Option) (*CreateReusableDelegationSetOutput, error) {
-	req, out := c.CreateReusableDelegationSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateReusableDelegationSetInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateReusableDelegationSetOutput{})
+	return CreateReusableDelegationSetRequest{Request: req, Input: input}
 }
 
 const opCreateTrafficPolicy = "CreateTrafficPolicy"
 
-// CreateTrafficPolicyRequest generates a "aws.Request" representing the
-// client's request for the CreateTrafficPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTrafficPolicyRequest is a API request type for the CreateTrafficPolicy API operation.
+type CreateTrafficPolicyRequest struct {
+	*aws.Request
+	Input *CreateTrafficPolicyInput
+}
+
+// Send marshals and sends the CreateTrafficPolicy API request.
+func (r *CreateTrafficPolicyRequest) Send() (*CreateTrafficPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTrafficPolicyOutput), nil
+}
+
+// CreateTrafficPolicyRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTrafficPolicy for more information on using the CreateTrafficPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a traffic policy, which you use to create multiple DNS resource record
+// sets for one domain name (such as example.com) or one subdomain name (such
+// as www.example.com).
 //
 //    // Example sending a request using the CreateTrafficPolicyRequest method.
-//    req, resp := client.CreateTrafficPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTrafficPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicy
-func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) (req *aws.Request, output *CreateTrafficPolicyOutput) {
+func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) CreateTrafficPolicyRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficPolicy,
 		HTTPMethod: "POST",
@@ -1041,89 +635,47 @@ func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) (r
 		input = &CreateTrafficPolicyInput{}
 	}
 
-	output = &CreateTrafficPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTrafficPolicy API operation for Amazon Route 53.
-//
-// Creates a traffic policy, which you use to create multiple DNS resource record
-// sets for one domain name (such as example.com) or one subdomain name (such
-// as www.example.com).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateTrafficPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeTooManyTrafficPolicies "TooManyTrafficPolicies"
-//   You've created the maximum number of traffic policies that can be created
-//   for the current AWS account. You can request an increase to the limit on
-//   the Contact Us (http://aws.amazon.com/route53-request/) page.
-//
-//   * ErrCodeTrafficPolicyAlreadyExists "TrafficPolicyAlreadyExists"
-//   A traffic policy that has the same value for Name already exists.
-//
-//   * ErrCodeInvalidTrafficPolicyDocument "InvalidTrafficPolicyDocument"
-//   The format of the traffic policy document that you specified in the Document
-//   element is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicy
-func (c *Route53) CreateTrafficPolicy(input *CreateTrafficPolicyInput) (*CreateTrafficPolicyOutput, error) {
-	req, out := c.CreateTrafficPolicyRequest(input)
-	return out, req.Send()
-}
-
-// CreateTrafficPolicyWithContext is the same as CreateTrafficPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTrafficPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyWithContext(ctx aws.Context, input *CreateTrafficPolicyInput, opts ...aws.Option) (*CreateTrafficPolicyOutput, error) {
-	req, out := c.CreateTrafficPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTrafficPolicyOutput{})
+	return CreateTrafficPolicyRequest{Request: req, Input: input}
 }
 
 const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 
-// CreateTrafficPolicyInstanceRequest generates a "aws.Request" representing the
-// client's request for the CreateTrafficPolicyInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTrafficPolicyInstanceRequest is a API request type for the CreateTrafficPolicyInstance API operation.
+type CreateTrafficPolicyInstanceRequest struct {
+	*aws.Request
+	Input *CreateTrafficPolicyInstanceInput
+}
+
+// Send marshals and sends the CreateTrafficPolicyInstance API request.
+func (r *CreateTrafficPolicyInstanceRequest) Send() (*CreateTrafficPolicyInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTrafficPolicyInstanceOutput), nil
+}
+
+// CreateTrafficPolicyInstanceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTrafficPolicyInstance for more information on using the CreateTrafficPolicyInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates resource record sets in a specified hosted zone based on the settings
+// in a specified traffic policy version. In addition, CreateTrafficPolicyInstance
+// associates the resource record sets with a specified domain name (such as
+// example.com) or subdomain name (such as www.example.com). Amazon Route 53
+// responds to DNS queries for the domain or subdomain name by using the resource
+// record sets that CreateTrafficPolicyInstance created.
 //
 //    // Example sending a request using the CreateTrafficPolicyInstanceRequest method.
-//    req, resp := client.CreateTrafficPolicyInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTrafficPolicyInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance
-func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyInstanceInput) (req *aws.Request, output *CreateTrafficPolicyInstanceOutput) {
+func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest {
 	op := &aws.Operation{
 		Name:       opCreateTrafficPolicyInstance,
 		HTTPMethod: "POST",
@@ -1134,110 +686,30 @@ func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyI
 		input = &CreateTrafficPolicyInstanceInput{}
 	}
 
-	output = &CreateTrafficPolicyInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTrafficPolicyInstance API operation for Amazon Route 53.
-//
-// Creates resource record sets in a specified hosted zone based on the settings
-// in a specified traffic policy version. In addition, CreateTrafficPolicyInstance
-// associates the resource record sets with a specified domain name (such as
-// example.com) or subdomain name (such as www.example.com). Amazon Route 53
-// responds to DNS queries for the domain or subdomain name by using the resource
-// record sets that CreateTrafficPolicyInstance created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateTrafficPolicyInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeTooManyTrafficPolicyInstances "TooManyTrafficPolicyInstances"
-//   You've created the maximum number of traffic policy instances that can be
-//   created for the current AWS account. You can request an increase to the limit
-//   on the Contact Us (http://aws.amazon.com/route53-request/) page.
-//
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeTrafficPolicyInstanceAlreadyExists "TrafficPolicyInstanceAlreadyExists"
-//   There is already a traffic policy instance with the specified ID.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance
-func (c *Route53) CreateTrafficPolicyInstance(input *CreateTrafficPolicyInstanceInput) (*CreateTrafficPolicyInstanceOutput, error) {
-	req, out := c.CreateTrafficPolicyInstanceRequest(input)
-	return out, req.Send()
-}
-
-// CreateTrafficPolicyInstanceWithContext is the same as CreateTrafficPolicyInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTrafficPolicyInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyInstanceWithContext(ctx aws.Context, input *CreateTrafficPolicyInstanceInput, opts ...aws.Option) (*CreateTrafficPolicyInstanceOutput, error) {
-	req, out := c.CreateTrafficPolicyInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTrafficPolicyInstanceOutput{})
+	return CreateTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
 const opCreateTrafficPolicyVersion = "CreateTrafficPolicyVersion"
 
-// CreateTrafficPolicyVersionRequest generates a "aws.Request" representing the
-// client's request for the CreateTrafficPolicyVersion operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTrafficPolicyVersion for more information on using the CreateTrafficPolicyVersion
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateTrafficPolicyVersionRequest method.
-//    req, resp := client.CreateTrafficPolicyVersionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersion
-func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVersionInput) (req *aws.Request, output *CreateTrafficPolicyVersionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateTrafficPolicyVersion,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}",
-	}
-
-	if input == nil {
-		input = &CreateTrafficPolicyVersionInput{}
-	}
-
-	output = &CreateTrafficPolicyVersionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateTrafficPolicyVersionRequest is a API request type for the CreateTrafficPolicyVersion API operation.
+type CreateTrafficPolicyVersionRequest struct {
+	*aws.Request
+	Input *CreateTrafficPolicyVersionInput
 }
 
-// CreateTrafficPolicyVersion API operation for Amazon Route 53.
+// Send marshals and sends the CreateTrafficPolicyVersion API request.
+func (r *CreateTrafficPolicyVersionRequest) Send() (*CreateTrafficPolicyVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTrafficPolicyVersionOutput), nil
+}
+
+// CreateTrafficPolicyVersionRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Creates a new version of an existing traffic policy. When you create a new
 // version of a traffic policy, you specify the ID of the traffic policy that
@@ -1248,93 +720,49 @@ func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVe
 // the limit and need to create another version, you'll need to start a new
 // traffic policy.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateTrafficPolicyVersion for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-//   * ErrCodeInvalidTrafficPolicyDocument "InvalidTrafficPolicyDocument"
-//   The format of the traffic policy document that you specified in the Document
-//   element is invalid.
+//    // Example sending a request using the CreateTrafficPolicyVersionRequest method.
+//    req := client.CreateTrafficPolicyVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersion
-func (c *Route53) CreateTrafficPolicyVersion(input *CreateTrafficPolicyVersionInput) (*CreateTrafficPolicyVersionOutput, error) {
-	req, out := c.CreateTrafficPolicyVersionRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVersionInput) CreateTrafficPolicyVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreateTrafficPolicyVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/trafficpolicy/{Id}",
+	}
 
-// CreateTrafficPolicyVersionWithContext is the same as CreateTrafficPolicyVersion with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTrafficPolicyVersion for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateTrafficPolicyVersionWithContext(ctx aws.Context, input *CreateTrafficPolicyVersionInput, opts ...aws.Option) (*CreateTrafficPolicyVersionOutput, error) {
-	req, out := c.CreateTrafficPolicyVersionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateTrafficPolicyVersionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateTrafficPolicyVersionOutput{})
+	return CreateTrafficPolicyVersionRequest{Request: req, Input: input}
 }
 
 const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 
-// CreateVPCAssociationAuthorizationRequest generates a "aws.Request" representing the
-// client's request for the CreateVPCAssociationAuthorization operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateVPCAssociationAuthorization for more information on using the CreateVPCAssociationAuthorization
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateVPCAssociationAuthorizationRequest method.
-//    req, resp := client.CreateVPCAssociationAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization
-func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssociationAuthorizationInput) (req *aws.Request, output *CreateVPCAssociationAuthorizationOutput) {
-	op := &aws.Operation{
-		Name:       opCreateVPCAssociationAuthorization,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}/authorizevpcassociation",
-	}
-
-	if input == nil {
-		input = &CreateVPCAssociationAuthorizationInput{}
-	}
-
-	output = &CreateVPCAssociationAuthorizationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateVPCAssociationAuthorizationRequest is a API request type for the CreateVPCAssociationAuthorization API operation.
+type CreateVPCAssociationAuthorizationRequest struct {
+	*aws.Request
+	Input *CreateVPCAssociationAuthorizationInput
 }
 
-// CreateVPCAssociationAuthorization API operation for Amazon Route 53.
+// Send marshals and sends the CreateVPCAssociationAuthorization API request.
+func (r *CreateVPCAssociationAuthorizationRequest) Send() (*CreateVPCAssociationAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVPCAssociationAuthorizationOutput), nil
+}
+
+// CreateVPCAssociationAuthorizationRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Authorizes the AWS account that created a specified VPC to submit an AssociateVPCWithHostedZone
 // request to associate the VPC with a specified hosted zone that was created
@@ -1347,100 +775,49 @@ func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoc
 // with a hosted zone that you created by using a different account, you must
 // submit one authorization request for each VPC.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation CreateVPCAssociationAuthorization for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-//   * ErrCodeTooManyVPCAssociationAuthorizations "TooManyVPCAssociationAuthorizations"
-//   You've created the maximum number of authorizations that can be created for
-//   the specified hosted zone. To authorize another VPC to be associated with
-//   the hosted zone, submit a DeleteVPCAssociationAuthorization request to remove
-//   an existing authorization. To get a list of existing authorizations, submit
-//   a ListVPCAssociationAuthorizations request.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidVPCId "InvalidVPCId"
-//   The VPC ID that you specified either isn't a valid ID or the current account
-//   is not authorized to access this VPC.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the CreateVPCAssociationAuthorizationRequest method.
+//    req := client.CreateVPCAssociationAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization
-func (c *Route53) CreateVPCAssociationAuthorization(input *CreateVPCAssociationAuthorizationInput) (*CreateVPCAssociationAuthorizationOutput, error) {
-	req, out := c.CreateVPCAssociationAuthorizationRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest {
+	op := &aws.Operation{
+		Name:       opCreateVPCAssociationAuthorization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}/authorizevpcassociation",
+	}
 
-// CreateVPCAssociationAuthorizationWithContext is the same as CreateVPCAssociationAuthorization with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateVPCAssociationAuthorization for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) CreateVPCAssociationAuthorizationWithContext(ctx aws.Context, input *CreateVPCAssociationAuthorizationInput, opts ...aws.Option) (*CreateVPCAssociationAuthorizationOutput, error) {
-	req, out := c.CreateVPCAssociationAuthorizationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateVPCAssociationAuthorizationInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateVPCAssociationAuthorizationOutput{})
+	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input}
 }
 
 const opDeleteHealthCheck = "DeleteHealthCheck"
 
-// DeleteHealthCheckRequest generates a "aws.Request" representing the
-// client's request for the DeleteHealthCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHealthCheck for more information on using the DeleteHealthCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteHealthCheckRequest method.
-//    req, resp := client.DeleteHealthCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck
-func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) (req *aws.Request, output *DeleteHealthCheckOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteHealthCheck,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}",
-	}
-
-	if input == nil {
-		input = &DeleteHealthCheckInput{}
-	}
-
-	output = &DeleteHealthCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteHealthCheckRequest is a API request type for the DeleteHealthCheck API operation.
+type DeleteHealthCheckRequest struct {
+	*aws.Request
+	Input *DeleteHealthCheckInput
 }
 
-// DeleteHealthCheck API operation for Amazon Route 53.
+// Send marshals and sends the DeleteHealthCheck API request.
+func (r *DeleteHealthCheckRequest) Send() (*DeleteHealthCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHealthCheckOutput), nil
+}
+
+// DeleteHealthCheckRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Deletes a health check.
 //
@@ -1452,89 +829,49 @@ func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) (req *
 // For more information, see Replacing and Deleting Health Checks (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html)
 // in the Amazon Route 53 Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteHealthCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeHealthCheckInUse "HealthCheckInUse"
-//   This error code is not in use.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the DeleteHealthCheckRequest method.
+//    req := client.DeleteHealthCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck
-func (c *Route53) DeleteHealthCheck(input *DeleteHealthCheckInput) (*DeleteHealthCheckOutput, error) {
-	req, out := c.DeleteHealthCheckRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) DeleteHealthCheckRequest {
+	op := &aws.Operation{
+		Name:       opDeleteHealthCheck,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2013-04-01/healthcheck/{HealthCheckId}",
+	}
 
-// DeleteHealthCheckWithContext is the same as DeleteHealthCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHealthCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteHealthCheckWithContext(ctx aws.Context, input *DeleteHealthCheckInput, opts ...aws.Option) (*DeleteHealthCheckOutput, error) {
-	req, out := c.DeleteHealthCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteHealthCheckInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteHealthCheckOutput{})
+	return DeleteHealthCheckRequest{Request: req, Input: input}
 }
 
 const opDeleteHostedZone = "DeleteHostedZone"
 
-// DeleteHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the DeleteHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteHostedZone for more information on using the DeleteHostedZone
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteHostedZoneRequest method.
-//    req, resp := client.DeleteHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZone
-func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) (req *aws.Request, output *DeleteHostedZoneOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteHostedZone,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}",
-	}
-
-	if input == nil {
-		input = &DeleteHostedZoneInput{}
-	}
-
-	output = &DeleteHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteHostedZoneRequest is a API request type for the DeleteHostedZone API operation.
+type DeleteHostedZoneRequest struct {
+	*aws.Request
+	Input *DeleteHostedZoneInput
 }
 
-// DeleteHostedZone API operation for Amazon Route 53.
+// Send marshals and sends the DeleteHostedZone API request.
+func (r *DeleteHostedZoneRequest) Send() (*DeleteHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteHostedZoneOutput), nil
+}
+
+// DeleteHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Deletes a hosted zone.
 //
@@ -1567,82 +904,65 @@ func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) (req *aw
 //    * Use the ListHostedZones action to get a list of the hosted zones associated
 //    with the current AWS account.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeHostedZoneNotEmpty "HostedZoneNotEmpty"
-//   The hosted zone contains resource records that are not SOA or NS records.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeInvalidDomainName "InvalidDomainName"
-//   The specified domain name is not valid.
+//    // Example sending a request using the DeleteHostedZoneRequest method.
+//    req := client.DeleteHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZone
-func (c *Route53) DeleteHostedZone(input *DeleteHostedZoneInput) (*DeleteHostedZoneOutput, error) {
-	req, out := c.DeleteHostedZoneRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHostedZoneRequest {
+	op := &aws.Operation{
+		Name:       opDeleteHostedZone,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}",
+	}
 
-// DeleteHostedZoneWithContext is the same as DeleteHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteHostedZoneWithContext(ctx aws.Context, input *DeleteHostedZoneInput, opts ...aws.Option) (*DeleteHostedZoneOutput, error) {
-	req, out := c.DeleteHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteHostedZoneInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteHostedZoneOutput{})
+	return DeleteHostedZoneRequest{Request: req, Input: input}
 }
 
 const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 
-// DeleteQueryLoggingConfigRequest generates a "aws.Request" representing the
-// client's request for the DeleteQueryLoggingConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteQueryLoggingConfigRequest is a API request type for the DeleteQueryLoggingConfig API operation.
+type DeleteQueryLoggingConfigRequest struct {
+	*aws.Request
+	Input *DeleteQueryLoggingConfigInput
+}
+
+// Send marshals and sends the DeleteQueryLoggingConfig API request.
+func (r *DeleteQueryLoggingConfigRequest) Send() (*DeleteQueryLoggingConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteQueryLoggingConfigOutput), nil
+}
+
+// DeleteQueryLoggingConfigRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a configuration for DNS query logging. If you delete a configuration,
+// Amazon Route 53 stops sending query logs to CloudWatch Logs. Amazon Route
+// 53 doesn't delete any logs that are already in CloudWatch Logs.
 //
-// See DeleteQueryLoggingConfig for more information on using the DeleteQueryLoggingConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about DNS query logs, see CreateQueryLoggingConfig.
 //
 //    // Example sending a request using the DeleteQueryLoggingConfigRequest method.
-//    req, resp := client.DeleteQueryLoggingConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteQueryLoggingConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfig
-func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfigInput) (req *aws.Request, output *DeleteQueryLoggingConfigOutput) {
+func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest {
 	op := &aws.Operation{
 		Name:       opDeleteQueryLoggingConfig,
 		HTTPMethod: "DELETE",
@@ -1653,102 +973,30 @@ func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfi
 		input = &DeleteQueryLoggingConfigInput{}
 	}
 
-	output = &DeleteQueryLoggingConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteQueryLoggingConfig API operation for Amazon Route 53.
-//
-// Deletes a configuration for DNS query logging. If you delete a configuration,
-// Amazon Route 53 stops sending query logs to CloudWatch Logs. Amazon Route
-// 53 doesn't delete any logs that are already in CloudWatch Logs.
-//
-// For more information about DNS query logs, see CreateQueryLoggingConfig.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteQueryLoggingConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-//   * ErrCodeNoSuchQueryLoggingConfig "NoSuchQueryLoggingConfig"
-//   There is no DNS query logging configuration with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteQueryLoggingConfig
-func (c *Route53) DeleteQueryLoggingConfig(input *DeleteQueryLoggingConfigInput) (*DeleteQueryLoggingConfigOutput, error) {
-	req, out := c.DeleteQueryLoggingConfigRequest(input)
-	return out, req.Send()
-}
-
-// DeleteQueryLoggingConfigWithContext is the same as DeleteQueryLoggingConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteQueryLoggingConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteQueryLoggingConfigWithContext(ctx aws.Context, input *DeleteQueryLoggingConfigInput, opts ...aws.Option) (*DeleteQueryLoggingConfigOutput, error) {
-	req, out := c.DeleteQueryLoggingConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteQueryLoggingConfigOutput{})
+	return DeleteQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
 const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 
-// DeleteReusableDelegationSetRequest generates a "aws.Request" representing the
-// client's request for the DeleteReusableDelegationSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteReusableDelegationSet for more information on using the DeleteReusableDelegationSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteReusableDelegationSetRequest method.
-//    req, resp := client.DeleteReusableDelegationSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet
-func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegationSetInput) (req *aws.Request, output *DeleteReusableDelegationSetOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteReusableDelegationSet,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2013-04-01/delegationset/{Id}",
-	}
-
-	if input == nil {
-		input = &DeleteReusableDelegationSetInput{}
-	}
-
-	output = &DeleteReusableDelegationSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteReusableDelegationSetRequest is a API request type for the DeleteReusableDelegationSet API operation.
+type DeleteReusableDelegationSetRequest struct {
+	*aws.Request
+	Input *DeleteReusableDelegationSetInput
 }
 
-// DeleteReusableDelegationSet API operation for Amazon Route 53.
+// Send marshals and sends the DeleteReusableDelegationSet API request.
+func (r *DeleteReusableDelegationSetRequest) Send() (*DeleteReusableDelegationSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteReusableDelegationSetOutput), nil
+}
+
+// DeleteReusableDelegationSetRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Deletes a reusable delegation set.
 //
@@ -1759,76 +1007,61 @@ func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelega
 // zones, submit a GetReusableDelegationSet request and specify the ID of the
 // reusable delegation set that you want to delete.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteReusableDelegationSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDelegationSet "NoSuchDelegationSet"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeDelegationSetInUse "DelegationSetInUse"
-//   The specified delegation contains associated hosted zones which must be deleted
-//   before the reusable delegation set can be deleted.
-//
-//   * ErrCodeDelegationSetNotReusable "DelegationSetNotReusable"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the DeleteReusableDelegationSetRequest method.
+//    req := client.DeleteReusableDelegationSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet
-func (c *Route53) DeleteReusableDelegationSet(input *DeleteReusableDelegationSetInput) (*DeleteReusableDelegationSetOutput, error) {
-	req, out := c.DeleteReusableDelegationSetRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest {
+	op := &aws.Operation{
+		Name:       opDeleteReusableDelegationSet,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2013-04-01/delegationset/{Id}",
+	}
 
-// DeleteReusableDelegationSetWithContext is the same as DeleteReusableDelegationSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteReusableDelegationSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteReusableDelegationSetWithContext(ctx aws.Context, input *DeleteReusableDelegationSetInput, opts ...aws.Option) (*DeleteReusableDelegationSetOutput, error) {
-	req, out := c.DeleteReusableDelegationSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteReusableDelegationSetInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteReusableDelegationSetOutput{})
+	return DeleteReusableDelegationSetRequest{Request: req, Input: input}
 }
 
 const opDeleteTrafficPolicy = "DeleteTrafficPolicy"
 
-// DeleteTrafficPolicyRequest generates a "aws.Request" representing the
-// client's request for the DeleteTrafficPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTrafficPolicyRequest is a API request type for the DeleteTrafficPolicy API operation.
+type DeleteTrafficPolicyRequest struct {
+	*aws.Request
+	Input *DeleteTrafficPolicyInput
+}
+
+// Send marshals and sends the DeleteTrafficPolicy API request.
+func (r *DeleteTrafficPolicyRequest) Send() (*DeleteTrafficPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTrafficPolicyOutput), nil
+}
+
+// DeleteTrafficPolicyRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTrafficPolicy for more information on using the DeleteTrafficPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a traffic policy.
 //
 //    // Example sending a request using the DeleteTrafficPolicyRequest method.
-//    req, resp := client.DeleteTrafficPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTrafficPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicy
-func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) (req *aws.Request, output *DeleteTrafficPolicyOutput) {
+func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) DeleteTrafficPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficPolicy,
 		HTTPMethod: "DELETE",
@@ -1839,86 +1072,46 @@ func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) (r
 		input = &DeleteTrafficPolicyInput{}
 	}
 
-	output = &DeleteTrafficPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTrafficPolicy API operation for Amazon Route 53.
-//
-// Deletes a traffic policy.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteTrafficPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeTrafficPolicyInUse "TrafficPolicyInUse"
-//   One or more traffic policy instances were created by using the specified
-//   traffic policy.
-//
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicy
-func (c *Route53) DeleteTrafficPolicy(input *DeleteTrafficPolicyInput) (*DeleteTrafficPolicyOutput, error) {
-	req, out := c.DeleteTrafficPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTrafficPolicyWithContext is the same as DeleteTrafficPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTrafficPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteTrafficPolicyWithContext(ctx aws.Context, input *DeleteTrafficPolicyInput, opts ...aws.Option) (*DeleteTrafficPolicyOutput, error) {
-	req, out := c.DeleteTrafficPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTrafficPolicyOutput{})
+	return DeleteTrafficPolicyRequest{Request: req, Input: input}
 }
 
 const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 
-// DeleteTrafficPolicyInstanceRequest generates a "aws.Request" representing the
-// client's request for the DeleteTrafficPolicyInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTrafficPolicyInstanceRequest is a API request type for the DeleteTrafficPolicyInstance API operation.
+type DeleteTrafficPolicyInstanceRequest struct {
+	*aws.Request
+	Input *DeleteTrafficPolicyInstanceInput
+}
+
+// Send marshals and sends the DeleteTrafficPolicyInstance API request.
+func (r *DeleteTrafficPolicyInstanceRequest) Send() (*DeleteTrafficPolicyInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTrafficPolicyInstanceOutput), nil
+}
+
+// DeleteTrafficPolicyInstanceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes a traffic policy instance and all of the resource record sets that
+// Amazon Route 53 created when you created the instance.
 //
-// See DeleteTrafficPolicyInstance for more information on using the DeleteTrafficPolicyInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// In the Amazon Route 53 console, traffic policy instances are known as policy
+// records.
 //
 //    // Example sending a request using the DeleteTrafficPolicyInstanceRequest method.
-//    req, resp := client.DeleteTrafficPolicyInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTrafficPolicyInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstance
-func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyInstanceInput) (req *aws.Request, output *DeleteTrafficPolicyInstanceOutput) {
+func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTrafficPolicyInstance,
 		HTTPMethod: "DELETE",
@@ -1929,105 +1122,30 @@ func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyI
 		input = &DeleteTrafficPolicyInstanceInput{}
 	}
 
-	output = &DeleteTrafficPolicyInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTrafficPolicyInstance API operation for Amazon Route 53.
-//
-// Deletes a traffic policy instance and all of the resource record sets that
-// Amazon Route 53 created when you created the instance.
-//
-// In the Amazon Route 53 console, traffic policy instances are known as policy
-// records.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteTrafficPolicyInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstance
-func (c *Route53) DeleteTrafficPolicyInstance(input *DeleteTrafficPolicyInstanceInput) (*DeleteTrafficPolicyInstanceOutput, error) {
-	req, out := c.DeleteTrafficPolicyInstanceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTrafficPolicyInstanceWithContext is the same as DeleteTrafficPolicyInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTrafficPolicyInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteTrafficPolicyInstanceWithContext(ctx aws.Context, input *DeleteTrafficPolicyInstanceInput, opts ...aws.Option) (*DeleteTrafficPolicyInstanceOutput, error) {
-	req, out := c.DeleteTrafficPolicyInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTrafficPolicyInstanceOutput{})
+	return DeleteTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
 const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 
-// DeleteVPCAssociationAuthorizationRequest generates a "aws.Request" representing the
-// client's request for the DeleteVPCAssociationAuthorization operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVPCAssociationAuthorization for more information on using the DeleteVPCAssociationAuthorization
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVPCAssociationAuthorizationRequest method.
-//    req, resp := client.DeleteVPCAssociationAuthorizationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorization
-func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssociationAuthorizationInput) (req *aws.Request, output *DeleteVPCAssociationAuthorizationOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVPCAssociationAuthorization,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}/deauthorizevpcassociation",
-	}
-
-	if input == nil {
-		input = &DeleteVPCAssociationAuthorizationInput{}
-	}
-
-	output = &DeleteVPCAssociationAuthorizationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteVPCAssociationAuthorizationRequest is a API request type for the DeleteVPCAssociationAuthorization API operation.
+type DeleteVPCAssociationAuthorizationRequest struct {
+	*aws.Request
+	Input *DeleteVPCAssociationAuthorizationInput
 }
 
-// DeleteVPCAssociationAuthorization API operation for Amazon Route 53.
+// Send marshals and sends the DeleteVPCAssociationAuthorization API request.
+func (r *DeleteVPCAssociationAuthorizationRequest) Send() (*DeleteVPCAssociationAuthorizationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVPCAssociationAuthorizationOutput), nil
+}
+
+// DeleteVPCAssociationAuthorizationRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Removes authorization to submit an AssociateVPCWithHostedZone request to
 // associate a specified VPC with a hosted zone that was created by a different
@@ -2040,81 +1158,67 @@ func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoc
 // won't disassociate the VPC from the hosted zone. If you want to delete an
 // existing association, use DisassociateVPCFromHostedZone.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DeleteVPCAssociationAuthorization for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-//   * ErrCodeVPCAssociationAuthorizationNotFound "VPCAssociationAuthorizationNotFound"
-//   The VPC that you specified is not authorized to be associated with the hosted
-//   zone.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidVPCId "InvalidVPCId"
-//   The VPC ID that you specified either isn't a valid ID or the current account
-//   is not authorized to access this VPC.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the DeleteVPCAssociationAuthorizationRequest method.
+//    req := client.DeleteVPCAssociationAuthorizationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorization
-func (c *Route53) DeleteVPCAssociationAuthorization(input *DeleteVPCAssociationAuthorizationInput) (*DeleteVPCAssociationAuthorizationOutput, error) {
-	req, out := c.DeleteVPCAssociationAuthorizationRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVPCAssociationAuthorization,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}/deauthorizevpcassociation",
+	}
 
-// DeleteVPCAssociationAuthorizationWithContext is the same as DeleteVPCAssociationAuthorization with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVPCAssociationAuthorization for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DeleteVPCAssociationAuthorizationWithContext(ctx aws.Context, input *DeleteVPCAssociationAuthorizationInput, opts ...aws.Option) (*DeleteVPCAssociationAuthorizationOutput, error) {
-	req, out := c.DeleteVPCAssociationAuthorizationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteVPCAssociationAuthorizationInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteVPCAssociationAuthorizationOutput{})
+	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input}
 }
 
 const opDisassociateVPCFromHostedZone = "DisassociateVPCFromHostedZone"
 
-// DisassociateVPCFromHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the DisassociateVPCFromHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisassociateVPCFromHostedZoneRequest is a API request type for the DisassociateVPCFromHostedZone API operation.
+type DisassociateVPCFromHostedZoneRequest struct {
+	*aws.Request
+	Input *DisassociateVPCFromHostedZoneInput
+}
+
+// Send marshals and sends the DisassociateVPCFromHostedZone API request.
+func (r *DisassociateVPCFromHostedZoneRequest) Send() (*DisassociateVPCFromHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateVPCFromHostedZoneOutput), nil
+}
+
+// DisassociateVPCFromHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Disassociates a VPC from a Amazon Route 53 private hosted zone.
 //
-// See DisassociateVPCFromHostedZone for more information on using the DisassociateVPCFromHostedZone
-// API call, and error handling.
+// You can't disassociate the last VPC from a private hosted zone.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can't disassociate a VPC from a private hosted zone when only one VPC
+// is associated with the hosted zone. You also can't convert a private hosted
+// zone into a public hosted zone.
 //
 //    // Example sending a request using the DisassociateVPCFromHostedZoneRequest method.
-//    req, resp := client.DisassociateVPCFromHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisassociateVPCFromHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZone
-func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFromHostedZoneInput) (req *aws.Request, output *DisassociateVPCFromHostedZoneOutput) {
+func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFromHostedZoneInput) DisassociateVPCFromHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opDisassociateVPCFromHostedZone,
 		HTTPMethod: "POST",
@@ -2125,112 +1229,30 @@ func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFro
 		input = &DisassociateVPCFromHostedZoneInput{}
 	}
 
-	output = &DisassociateVPCFromHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisassociateVPCFromHostedZone API operation for Amazon Route 53.
-//
-// Disassociates a VPC from a Amazon Route 53 private hosted zone.
-//
-// You can't disassociate the last VPC from a private hosted zone.
-//
-// You can't disassociate a VPC from a private hosted zone when only one VPC
-// is associated with the hosted zone. You also can't convert a private hosted
-// zone into a public hosted zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation DisassociateVPCFromHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidVPCId "InvalidVPCId"
-//   The VPC ID that you specified either isn't a valid ID or the current account
-//   is not authorized to access this VPC.
-//
-//   * ErrCodeVPCAssociationNotFound "VPCAssociationNotFound"
-//   The specified VPC and hosted zone are not currently associated.
-//
-//   * ErrCodeLastVPCAssociation "LastVPCAssociation"
-//   The VPC that you're trying to disassociate from the private hosted zone is
-//   the last VPC that is associated with the hosted zone. Amazon Route 53 doesn't
-//   support disassociating the last VPC from a hosted zone.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZone
-func (c *Route53) DisassociateVPCFromHostedZone(input *DisassociateVPCFromHostedZoneInput) (*DisassociateVPCFromHostedZoneOutput, error) {
-	req, out := c.DisassociateVPCFromHostedZoneRequest(input)
-	return out, req.Send()
-}
-
-// DisassociateVPCFromHostedZoneWithContext is the same as DisassociateVPCFromHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateVPCFromHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) DisassociateVPCFromHostedZoneWithContext(ctx aws.Context, input *DisassociateVPCFromHostedZoneInput, opts ...aws.Option) (*DisassociateVPCFromHostedZoneOutput, error) {
-	req, out := c.DisassociateVPCFromHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateVPCFromHostedZoneOutput{})
+	return DisassociateVPCFromHostedZoneRequest{Request: req, Input: input}
 }
 
 const opGetChange = "GetChange"
 
-// GetChangeRequest generates a "aws.Request" representing the
-// client's request for the GetChange operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetChange for more information on using the GetChange
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetChangeRequest method.
-//    req, resp := client.GetChangeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange
-func (c *Route53) GetChangeRequest(input *GetChangeInput) (req *aws.Request, output *GetChangeOutput) {
-	op := &aws.Operation{
-		Name:       opGetChange,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/change/{Id}",
-	}
-
-	if input == nil {
-		input = &GetChangeInput{}
-	}
-
-	output = &GetChangeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetChangeRequest is a API request type for the GetChange API operation.
+type GetChangeRequest struct {
+	*aws.Request
+	Input *GetChangeInput
 }
 
-// GetChange API operation for Amazon Route 53.
+// Send marshals and sends the GetChange API request.
+func (r *GetChangeRequest) Send() (*GetChangeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetChangeOutput), nil
+}
+
+// GetChangeRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Returns the current status of a change batch request. The status is one of
 // the following values:
@@ -2242,69 +1264,64 @@ func (c *Route53) GetChangeRequest(input *GetChangeInput) (req *aws.Request, out
 //    * INSYNC indicates that the changes have propagated to all Amazon Route
 //    53 DNS servers.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetChange for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchChange "NoSuchChange"
-//   A change with the specified change ID does not exist.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the GetChangeRequest method.
+//    req := client.GetChangeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange
-func (c *Route53) GetChange(input *GetChangeInput) (*GetChangeOutput, error) {
-	req, out := c.GetChangeRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
+	op := &aws.Operation{
+		Name:       opGetChange,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/change/{Id}",
+	}
 
-// GetChangeWithContext is the same as GetChange with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetChange for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetChangeWithContext(ctx aws.Context, input *GetChangeInput, opts ...aws.Option) (*GetChangeOutput, error) {
-	req, out := c.GetChangeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetChangeInput{}
+	}
+
+	req := c.newRequest(op, input, &GetChangeOutput{})
+	return GetChangeRequest{Request: req, Input: input}
 }
 
 const opGetCheckerIpRanges = "GetCheckerIpRanges"
 
-// GetCheckerIpRangesRequest generates a "aws.Request" representing the
-// client's request for the GetCheckerIpRanges operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCheckerIpRangesRequest is a API request type for the GetCheckerIpRanges API operation.
+type GetCheckerIpRangesRequest struct {
+	*aws.Request
+	Input *GetCheckerIpRangesInput
+}
+
+// Send marshals and sends the GetCheckerIpRanges API request.
+func (r *GetCheckerIpRangesRequest) Send() (*GetCheckerIpRangesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCheckerIpRangesOutput), nil
+}
+
+// GetCheckerIpRangesRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCheckerIpRanges for more information on using the GetCheckerIpRanges
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json,
+// which includes IP address ranges for all AWS services. For more information,
+// see IP Address Ranges of Amazon Route 53 Servers (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html)
+// in the Amazon Route 53 Developer Guide.
 //
 //    // Example sending a request using the GetCheckerIpRangesRequest method.
-//    req, resp := client.GetCheckerIpRangesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCheckerIpRangesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRanges
-func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) (req *aws.Request, output *GetCheckerIpRangesOutput) {
+func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetCheckerIpRangesRequest {
 	op := &aws.Operation{
 		Name:       opGetCheckerIpRanges,
 		HTTPMethod: "GET",
@@ -2315,89 +1332,30 @@ func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) (req
 		input = &GetCheckerIpRangesInput{}
 	}
 
-	output = &GetCheckerIpRangesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCheckerIpRanges API operation for Amazon Route 53.
-//
-// GetCheckerIpRanges still works, but we recommend that you download ip-ranges.json,
-// which includes IP address ranges for all AWS services. For more information,
-// see IP Address Ranges of Amazon Route 53 Servers (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html)
-// in the Amazon Route 53 Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetCheckerIpRanges for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRanges
-func (c *Route53) GetCheckerIpRanges(input *GetCheckerIpRangesInput) (*GetCheckerIpRangesOutput, error) {
-	req, out := c.GetCheckerIpRangesRequest(input)
-	return out, req.Send()
-}
-
-// GetCheckerIpRangesWithContext is the same as GetCheckerIpRanges with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCheckerIpRanges for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetCheckerIpRangesWithContext(ctx aws.Context, input *GetCheckerIpRangesInput, opts ...aws.Option) (*GetCheckerIpRangesOutput, error) {
-	req, out := c.GetCheckerIpRangesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCheckerIpRangesOutput{})
+	return GetCheckerIpRangesRequest{Request: req, Input: input}
 }
 
 const opGetGeoLocation = "GetGeoLocation"
 
-// GetGeoLocationRequest generates a "aws.Request" representing the
-// client's request for the GetGeoLocation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetGeoLocation for more information on using the GetGeoLocation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetGeoLocationRequest method.
-//    req, resp := client.GetGeoLocationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation
-func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) (req *aws.Request, output *GetGeoLocationOutput) {
-	op := &aws.Operation{
-		Name:       opGetGeoLocation,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/geolocation",
-	}
-
-	if input == nil {
-		input = &GetGeoLocationInput{}
-	}
-
-	output = &GetGeoLocationOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetGeoLocationRequest is a API request type for the GetGeoLocation API operation.
+type GetGeoLocationRequest struct {
+	*aws.Request
+	Input *GetGeoLocationInput
 }
 
-// GetGeoLocation API operation for Amazon Route 53.
+// Send marshals and sends the GetGeoLocation API request.
+func (r *GetGeoLocationRequest) Send() (*GetGeoLocationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetGeoLocationOutput), nil
+}
+
+// GetGeoLocationRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Gets information about whether a specified geographic location is supported
 // for Amazon Route 53 geolocation resource record sets.
@@ -2418,69 +1376,61 @@ func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) (req *aws.Re
 // GET /2013-04-01/geolocation?CountryCode=two-character country code&SubdivisionCode=subdivision
 // code
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetGeoLocation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchGeoLocation "NoSuchGeoLocation"
-//   Amazon Route 53 doesn't support the specified geolocation.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the GetGeoLocationRequest method.
+//    req := client.GetGeoLocationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation
-func (c *Route53) GetGeoLocation(input *GetGeoLocationInput) (*GetGeoLocationOutput, error) {
-	req, out := c.GetGeoLocationRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocationRequest {
+	op := &aws.Operation{
+		Name:       opGetGeoLocation,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/geolocation",
+	}
 
-// GetGeoLocationWithContext is the same as GetGeoLocation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetGeoLocation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetGeoLocationWithContext(ctx aws.Context, input *GetGeoLocationInput, opts ...aws.Option) (*GetGeoLocationOutput, error) {
-	req, out := c.GetGeoLocationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetGeoLocationInput{}
+	}
+
+	req := c.newRequest(op, input, &GetGeoLocationOutput{})
+	return GetGeoLocationRequest{Request: req, Input: input}
 }
 
 const opGetHealthCheck = "GetHealthCheck"
 
-// GetHealthCheckRequest generates a "aws.Request" representing the
-// client's request for the GetHealthCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHealthCheckRequest is a API request type for the GetHealthCheck API operation.
+type GetHealthCheckRequest struct {
+	*aws.Request
+	Input *GetHealthCheckInput
+}
+
+// Send marshals and sends the GetHealthCheck API request.
+func (r *GetHealthCheckRequest) Send() (*GetHealthCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHealthCheckOutput), nil
+}
+
+// GetHealthCheckRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHealthCheck for more information on using the GetHealthCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a specified health check.
 //
 //    // Example sending a request using the GetHealthCheckRequest method.
-//    req, resp := client.GetHealthCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHealthCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheck
-func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) (req *aws.Request, output *GetHealthCheckOutput) {
+func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) GetHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheck,
 		HTTPMethod: "GET",
@@ -2491,83 +1441,43 @@ func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) (req *aws.Re
 		input = &GetHealthCheckInput{}
 	}
 
-	output = &GetHealthCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHealthCheck API operation for Amazon Route 53.
-//
-// Gets information about a specified health check.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHealthCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeIncompatibleVersion "IncompatibleVersion"
-//   The resource you're trying to access is unsupported on this Amazon Route
-//   53 endpoint.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheck
-func (c *Route53) GetHealthCheck(input *GetHealthCheckInput) (*GetHealthCheckOutput, error) {
-	req, out := c.GetHealthCheckRequest(input)
-	return out, req.Send()
-}
-
-// GetHealthCheckWithContext is the same as GetHealthCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHealthCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHealthCheckWithContext(ctx aws.Context, input *GetHealthCheckInput, opts ...aws.Option) (*GetHealthCheckOutput, error) {
-	req, out := c.GetHealthCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHealthCheckOutput{})
+	return GetHealthCheckRequest{Request: req, Input: input}
 }
 
 const opGetHealthCheckCount = "GetHealthCheckCount"
 
-// GetHealthCheckCountRequest generates a "aws.Request" representing the
-// client's request for the GetHealthCheckCount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHealthCheckCountRequest is a API request type for the GetHealthCheckCount API operation.
+type GetHealthCheckCountRequest struct {
+	*aws.Request
+	Input *GetHealthCheckCountInput
+}
+
+// Send marshals and sends the GetHealthCheckCount API request.
+func (r *GetHealthCheckCountRequest) Send() (*GetHealthCheckCountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHealthCheckCountOutput), nil
+}
+
+// GetHealthCheckCountRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHealthCheckCount for more information on using the GetHealthCheckCount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the number of health checks that are associated with the current
+// AWS account.
 //
 //    // Example sending a request using the GetHealthCheckCountRequest method.
-//    req, resp := client.GetHealthCheckCountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHealthCheckCountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCount
-func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) (req *aws.Request, output *GetHealthCheckCountOutput) {
+func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) GetHealthCheckCountRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheckCount,
 		HTTPMethod: "GET",
@@ -2578,71 +1488,42 @@ func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) (r
 		input = &GetHealthCheckCountInput{}
 	}
 
-	output = &GetHealthCheckCountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHealthCheckCount API operation for Amazon Route 53.
-//
-// Retrieves the number of health checks that are associated with the current
-// AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHealthCheckCount for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCount
-func (c *Route53) GetHealthCheckCount(input *GetHealthCheckCountInput) (*GetHealthCheckCountOutput, error) {
-	req, out := c.GetHealthCheckCountRequest(input)
-	return out, req.Send()
-}
-
-// GetHealthCheckCountWithContext is the same as GetHealthCheckCount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHealthCheckCount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHealthCheckCountWithContext(ctx aws.Context, input *GetHealthCheckCountInput, opts ...aws.Option) (*GetHealthCheckCountOutput, error) {
-	req, out := c.GetHealthCheckCountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHealthCheckCountOutput{})
+	return GetHealthCheckCountRequest{Request: req, Input: input}
 }
 
 const opGetHealthCheckLastFailureReason = "GetHealthCheckLastFailureReason"
 
-// GetHealthCheckLastFailureReasonRequest generates a "aws.Request" representing the
-// client's request for the GetHealthCheckLastFailureReason operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHealthCheckLastFailureReasonRequest is a API request type for the GetHealthCheckLastFailureReason API operation.
+type GetHealthCheckLastFailureReasonRequest struct {
+	*aws.Request
+	Input *GetHealthCheckLastFailureReasonInput
+}
+
+// Send marshals and sends the GetHealthCheckLastFailureReason API request.
+func (r *GetHealthCheckLastFailureReasonRequest) Send() (*GetHealthCheckLastFailureReasonOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHealthCheckLastFailureReasonOutput), nil
+}
+
+// GetHealthCheckLastFailureReasonRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHealthCheckLastFailureReason for more information on using the GetHealthCheckLastFailureReason
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the reason that a specified health check failed most recently.
 //
 //    // Example sending a request using the GetHealthCheckLastFailureReasonRequest method.
-//    req, resp := client.GetHealthCheckLastFailureReasonRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHealthCheckLastFailureReasonRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReason
-func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLastFailureReasonInput) (req *aws.Request, output *GetHealthCheckLastFailureReasonOutput) {
+func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLastFailureReasonInput) GetHealthCheckLastFailureReasonRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheckLastFailureReason,
 		HTTPMethod: "GET",
@@ -2653,79 +1534,42 @@ func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLa
 		input = &GetHealthCheckLastFailureReasonInput{}
 	}
 
-	output = &GetHealthCheckLastFailureReasonOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHealthCheckLastFailureReason API operation for Amazon Route 53.
-//
-// Gets the reason that a specified health check failed most recently.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHealthCheckLastFailureReason for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReason
-func (c *Route53) GetHealthCheckLastFailureReason(input *GetHealthCheckLastFailureReasonInput) (*GetHealthCheckLastFailureReasonOutput, error) {
-	req, out := c.GetHealthCheckLastFailureReasonRequest(input)
-	return out, req.Send()
-}
-
-// GetHealthCheckLastFailureReasonWithContext is the same as GetHealthCheckLastFailureReason with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHealthCheckLastFailureReason for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHealthCheckLastFailureReasonWithContext(ctx aws.Context, input *GetHealthCheckLastFailureReasonInput, opts ...aws.Option) (*GetHealthCheckLastFailureReasonOutput, error) {
-	req, out := c.GetHealthCheckLastFailureReasonRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHealthCheckLastFailureReasonOutput{})
+	return GetHealthCheckLastFailureReasonRequest{Request: req, Input: input}
 }
 
 const opGetHealthCheckStatus = "GetHealthCheckStatus"
 
-// GetHealthCheckStatusRequest generates a "aws.Request" representing the
-// client's request for the GetHealthCheckStatus operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHealthCheckStatusRequest is a API request type for the GetHealthCheckStatus API operation.
+type GetHealthCheckStatusRequest struct {
+	*aws.Request
+	Input *GetHealthCheckStatusInput
+}
+
+// Send marshals and sends the GetHealthCheckStatus API request.
+func (r *GetHealthCheckStatusRequest) Send() (*GetHealthCheckStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHealthCheckStatusOutput), nil
+}
+
+// GetHealthCheckStatusRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHealthCheckStatus for more information on using the GetHealthCheckStatus
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets status of a specified health check.
 //
 //    // Example sending a request using the GetHealthCheckStatusRequest method.
-//    req, resp := client.GetHealthCheckStatusRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHealthCheckStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatus
-func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) (req *aws.Request, output *GetHealthCheckStatusOutput) {
+func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) GetHealthCheckStatusRequest {
 	op := &aws.Operation{
 		Name:       opGetHealthCheckStatus,
 		HTTPMethod: "GET",
@@ -2736,79 +1580,43 @@ func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) 
 		input = &GetHealthCheckStatusInput{}
 	}
 
-	output = &GetHealthCheckStatusOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHealthCheckStatus API operation for Amazon Route 53.
-//
-// Gets status of a specified health check.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHealthCheckStatus for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatus
-func (c *Route53) GetHealthCheckStatus(input *GetHealthCheckStatusInput) (*GetHealthCheckStatusOutput, error) {
-	req, out := c.GetHealthCheckStatusRequest(input)
-	return out, req.Send()
-}
-
-// GetHealthCheckStatusWithContext is the same as GetHealthCheckStatus with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHealthCheckStatus for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHealthCheckStatusWithContext(ctx aws.Context, input *GetHealthCheckStatusInput, opts ...aws.Option) (*GetHealthCheckStatusOutput, error) {
-	req, out := c.GetHealthCheckStatusRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHealthCheckStatusOutput{})
+	return GetHealthCheckStatusRequest{Request: req, Input: input}
 }
 
 const opGetHostedZone = "GetHostedZone"
 
-// GetHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the GetHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHostedZoneRequest is a API request type for the GetHostedZone API operation.
+type GetHostedZoneRequest struct {
+	*aws.Request
+	Input *GetHostedZoneInput
+}
+
+// Send marshals and sends the GetHostedZone API request.
+func (r *GetHostedZoneRequest) Send() (*GetHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHostedZoneOutput), nil
+}
+
+// GetHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHostedZone for more information on using the GetHostedZone
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a specified hosted zone including the four name servers
+// assigned to the hosted zone.
 //
 //    // Example sending a request using the GetHostedZoneRequest method.
-//    req, resp := client.GetHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone
-func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) (req *aws.Request, output *GetHostedZoneOutput) {
+func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneRequest {
 	op := &aws.Operation{
 		Name:       opGetHostedZone,
 		HTTPMethod: "GET",
@@ -2819,79 +1627,43 @@ func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) (req *aws.Requ
 		input = &GetHostedZoneInput{}
 	}
 
-	output = &GetHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHostedZone API operation for Amazon Route 53.
-//
-// Gets information about a specified hosted zone including the four name servers
-// assigned to the hosted zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone
-func (c *Route53) GetHostedZone(input *GetHostedZoneInput) (*GetHostedZoneOutput, error) {
-	req, out := c.GetHostedZoneRequest(input)
-	return out, req.Send()
-}
-
-// GetHostedZoneWithContext is the same as GetHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHostedZoneWithContext(ctx aws.Context, input *GetHostedZoneInput, opts ...aws.Option) (*GetHostedZoneOutput, error) {
-	req, out := c.GetHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHostedZoneOutput{})
+	return GetHostedZoneRequest{Request: req, Input: input}
 }
 
 const opGetHostedZoneCount = "GetHostedZoneCount"
 
-// GetHostedZoneCountRequest generates a "aws.Request" representing the
-// client's request for the GetHostedZoneCount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetHostedZoneCountRequest is a API request type for the GetHostedZoneCount API operation.
+type GetHostedZoneCountRequest struct {
+	*aws.Request
+	Input *GetHostedZoneCountInput
+}
+
+// Send marshals and sends the GetHostedZoneCount API request.
+func (r *GetHostedZoneCountRequest) Send() (*GetHostedZoneCountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetHostedZoneCountOutput), nil
+}
+
+// GetHostedZoneCountRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetHostedZoneCount for more information on using the GetHostedZoneCount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the number of hosted zones that are associated with the current
+// AWS account.
 //
 //    // Example sending a request using the GetHostedZoneCountRequest method.
-//    req, resp := client.GetHostedZoneCountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetHostedZoneCountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCount
-func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) (req *aws.Request, output *GetHostedZoneCountOutput) {
+func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetHostedZoneCountRequest {
 	op := &aws.Operation{
 		Name:       opGetHostedZoneCount,
 		HTTPMethod: "GET",
@@ -2902,76 +1674,45 @@ func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) (req
 		input = &GetHostedZoneCountInput{}
 	}
 
-	output = &GetHostedZoneCountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetHostedZoneCount API operation for Amazon Route 53.
-//
-// Retrieves the number of hosted zones that are associated with the current
-// AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetHostedZoneCount for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCount
-func (c *Route53) GetHostedZoneCount(input *GetHostedZoneCountInput) (*GetHostedZoneCountOutput, error) {
-	req, out := c.GetHostedZoneCountRequest(input)
-	return out, req.Send()
-}
-
-// GetHostedZoneCountWithContext is the same as GetHostedZoneCount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetHostedZoneCount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetHostedZoneCountWithContext(ctx aws.Context, input *GetHostedZoneCountInput, opts ...aws.Option) (*GetHostedZoneCountOutput, error) {
-	req, out := c.GetHostedZoneCountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetHostedZoneCountOutput{})
+	return GetHostedZoneCountRequest{Request: req, Input: input}
 }
 
 const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 
-// GetQueryLoggingConfigRequest generates a "aws.Request" representing the
-// client's request for the GetQueryLoggingConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetQueryLoggingConfigRequest is a API request type for the GetQueryLoggingConfig API operation.
+type GetQueryLoggingConfigRequest struct {
+	*aws.Request
+	Input *GetQueryLoggingConfigInput
+}
+
+// Send marshals and sends the GetQueryLoggingConfig API request.
+func (r *GetQueryLoggingConfigRequest) Send() (*GetQueryLoggingConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetQueryLoggingConfigOutput), nil
+}
+
+// GetQueryLoggingConfigRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about a specified configuration for DNS query logging.
 //
-// See GetQueryLoggingConfig for more information on using the GetQueryLoggingConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about DNS query logs, see CreateQueryLoggingConfig and
+// Logging DNS Queries (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html).
 //
 //    // Example sending a request using the GetQueryLoggingConfigRequest method.
-//    req, resp := client.GetQueryLoggingConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetQueryLoggingConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfig
-func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput) (req *aws.Request, output *GetQueryLoggingConfigOutput) {
+func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetQueryLoggingConfig,
 		HTTPMethod: "GET",
@@ -2982,81 +1723,43 @@ func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput
 		input = &GetQueryLoggingConfigInput{}
 	}
 
-	output = &GetQueryLoggingConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetQueryLoggingConfig API operation for Amazon Route 53.
-//
-// Gets information about a specified configuration for DNS query logging.
-//
-// For more information about DNS query logs, see CreateQueryLoggingConfig and
-// Logging DNS Queries (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetQueryLoggingConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchQueryLoggingConfig "NoSuchQueryLoggingConfig"
-//   There is no DNS query logging configuration with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetQueryLoggingConfig
-func (c *Route53) GetQueryLoggingConfig(input *GetQueryLoggingConfigInput) (*GetQueryLoggingConfigOutput, error) {
-	req, out := c.GetQueryLoggingConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetQueryLoggingConfigWithContext is the same as GetQueryLoggingConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetQueryLoggingConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetQueryLoggingConfigWithContext(ctx aws.Context, input *GetQueryLoggingConfigInput, opts ...aws.Option) (*GetQueryLoggingConfigOutput, error) {
-	req, out := c.GetQueryLoggingConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetQueryLoggingConfigOutput{})
+	return GetQueryLoggingConfigRequest{Request: req, Input: input}
 }
 
 const opGetReusableDelegationSet = "GetReusableDelegationSet"
 
-// GetReusableDelegationSetRequest generates a "aws.Request" representing the
-// client's request for the GetReusableDelegationSet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetReusableDelegationSetRequest is a API request type for the GetReusableDelegationSet API operation.
+type GetReusableDelegationSetRequest struct {
+	*aws.Request
+	Input *GetReusableDelegationSetInput
+}
+
+// Send marshals and sends the GetReusableDelegationSet API request.
+func (r *GetReusableDelegationSetRequest) Send() (*GetReusableDelegationSetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetReusableDelegationSetOutput), nil
+}
+
+// GetReusableDelegationSetRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetReusableDelegationSet for more information on using the GetReusableDelegationSet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves information about a specified reusable delegation set, including
+// the four name servers that are assigned to the delegation set.
 //
 //    // Example sending a request using the GetReusableDelegationSetRequest method.
-//    req, resp := client.GetReusableDelegationSetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetReusableDelegationSetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSet
-func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSetInput) (req *aws.Request, output *GetReusableDelegationSetOutput) {
+func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSetInput) GetReusableDelegationSetRequest {
 	op := &aws.Operation{
 		Name:       opGetReusableDelegationSet,
 		HTTPMethod: "GET",
@@ -3067,82 +1770,42 @@ func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSe
 		input = &GetReusableDelegationSetInput{}
 	}
 
-	output = &GetReusableDelegationSetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetReusableDelegationSet API operation for Amazon Route 53.
-//
-// Retrieves information about a specified reusable delegation set, including
-// the four name servers that are assigned to the delegation set.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetReusableDelegationSet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDelegationSet "NoSuchDelegationSet"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeDelegationSetNotReusable "DelegationSetNotReusable"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSet
-func (c *Route53) GetReusableDelegationSet(input *GetReusableDelegationSetInput) (*GetReusableDelegationSetOutput, error) {
-	req, out := c.GetReusableDelegationSetRequest(input)
-	return out, req.Send()
-}
-
-// GetReusableDelegationSetWithContext is the same as GetReusableDelegationSet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetReusableDelegationSet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetReusableDelegationSetWithContext(ctx aws.Context, input *GetReusableDelegationSetInput, opts ...aws.Option) (*GetReusableDelegationSetOutput, error) {
-	req, out := c.GetReusableDelegationSetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetReusableDelegationSetOutput{})
+	return GetReusableDelegationSetRequest{Request: req, Input: input}
 }
 
 const opGetTrafficPolicy = "GetTrafficPolicy"
 
-// GetTrafficPolicyRequest generates a "aws.Request" representing the
-// client's request for the GetTrafficPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTrafficPolicyRequest is a API request type for the GetTrafficPolicy API operation.
+type GetTrafficPolicyRequest struct {
+	*aws.Request
+	Input *GetTrafficPolicyInput
+}
+
+// Send marshals and sends the GetTrafficPolicy API request.
+func (r *GetTrafficPolicyRequest) Send() (*GetTrafficPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTrafficPolicyOutput), nil
+}
+
+// GetTrafficPolicyRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTrafficPolicy for more information on using the GetTrafficPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a specific traffic policy version.
 //
 //    // Example sending a request using the GetTrafficPolicyRequest method.
-//    req, resp := client.GetTrafficPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTrafficPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicy
-func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) (req *aws.Request, output *GetTrafficPolicyOutput) {
+func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTrafficPolicyRequest {
 	op := &aws.Operation{
 		Name:       opGetTrafficPolicy,
 		HTTPMethod: "GET",
@@ -3153,94 +1816,30 @@ func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) (req *aw
 		input = &GetTrafficPolicyInput{}
 	}
 
-	output = &GetTrafficPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTrafficPolicy API operation for Amazon Route 53.
-//
-// Gets information about a specific traffic policy version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetTrafficPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicy
-func (c *Route53) GetTrafficPolicy(input *GetTrafficPolicyInput) (*GetTrafficPolicyOutput, error) {
-	req, out := c.GetTrafficPolicyRequest(input)
-	return out, req.Send()
-}
-
-// GetTrafficPolicyWithContext is the same as GetTrafficPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTrafficPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyWithContext(ctx aws.Context, input *GetTrafficPolicyInput, opts ...aws.Option) (*GetTrafficPolicyOutput, error) {
-	req, out := c.GetTrafficPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTrafficPolicyOutput{})
+	return GetTrafficPolicyRequest{Request: req, Input: input}
 }
 
 const opGetTrafficPolicyInstance = "GetTrafficPolicyInstance"
 
-// GetTrafficPolicyInstanceRequest generates a "aws.Request" representing the
-// client's request for the GetTrafficPolicyInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTrafficPolicyInstance for more information on using the GetTrafficPolicyInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the GetTrafficPolicyInstanceRequest method.
-//    req, resp := client.GetTrafficPolicyInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance
-func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanceInput) (req *aws.Request, output *GetTrafficPolicyInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opGetTrafficPolicyInstance,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
-	}
-
-	if input == nil {
-		input = &GetTrafficPolicyInstanceInput{}
-	}
-
-	output = &GetTrafficPolicyInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// GetTrafficPolicyInstanceRequest is a API request type for the GetTrafficPolicyInstance API operation.
+type GetTrafficPolicyInstanceRequest struct {
+	*aws.Request
+	Input *GetTrafficPolicyInstanceInput
 }
 
-// GetTrafficPolicyInstance API operation for Amazon Route 53.
+// Send marshals and sends the GetTrafficPolicyInstance API request.
+func (r *GetTrafficPolicyInstanceRequest) Send() (*GetTrafficPolicyInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTrafficPolicyInstanceOutput), nil
+}
+
+// GetTrafficPolicyInstanceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Gets information about a specified traffic policy instance.
 //
@@ -3252,69 +1851,62 @@ func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanc
 // In the Amazon Route 53 console, traffic policy instances are known as policy
 // records.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetTrafficPolicyInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the GetTrafficPolicyInstanceRequest method.
+//    req := client.GetTrafficPolicyInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance
-func (c *Route53) GetTrafficPolicyInstance(input *GetTrafficPolicyInstanceInput) (*GetTrafficPolicyInstanceOutput, error) {
-	req, out := c.GetTrafficPolicyInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanceInput) GetTrafficPolicyInstanceRequest {
+	op := &aws.Operation{
+		Name:       opGetTrafficPolicyInstance,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
+	}
 
-// GetTrafficPolicyInstanceWithContext is the same as GetTrafficPolicyInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTrafficPolicyInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyInstanceWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceInput, opts ...aws.Option) (*GetTrafficPolicyInstanceOutput, error) {
-	req, out := c.GetTrafficPolicyInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &GetTrafficPolicyInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &GetTrafficPolicyInstanceOutput{})
+	return GetTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
 const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 
-// GetTrafficPolicyInstanceCountRequest generates a "aws.Request" representing the
-// client's request for the GetTrafficPolicyInstanceCount operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTrafficPolicyInstanceCountRequest is a API request type for the GetTrafficPolicyInstanceCount API operation.
+type GetTrafficPolicyInstanceCountRequest struct {
+	*aws.Request
+	Input *GetTrafficPolicyInstanceCountInput
+}
+
+// Send marshals and sends the GetTrafficPolicyInstanceCount API request.
+func (r *GetTrafficPolicyInstanceCountRequest) Send() (*GetTrafficPolicyInstanceCountOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTrafficPolicyInstanceCountOutput), nil
+}
+
+// GetTrafficPolicyInstanceCountRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTrafficPolicyInstanceCount for more information on using the GetTrafficPolicyInstanceCount
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the number of traffic policy instances that are associated with the
+// current AWS account.
 //
 //    // Example sending a request using the GetTrafficPolicyInstanceCountRequest method.
-//    req, resp := client.GetTrafficPolicyInstanceCountRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTrafficPolicyInstanceCountRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCount
-func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyInstanceCountInput) (req *aws.Request, output *GetTrafficPolicyInstanceCountOutput) {
+func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest {
 	op := &aws.Operation{
 		Name:       opGetTrafficPolicyInstanceCount,
 		HTTPMethod: "GET",
@@ -3325,71 +1917,47 @@ func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIn
 		input = &GetTrafficPolicyInstanceCountInput{}
 	}
 
-	output = &GetTrafficPolicyInstanceCountOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTrafficPolicyInstanceCount API operation for Amazon Route 53.
-//
-// Gets the number of traffic policy instances that are associated with the
-// current AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation GetTrafficPolicyInstanceCount for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCount
-func (c *Route53) GetTrafficPolicyInstanceCount(input *GetTrafficPolicyInstanceCountInput) (*GetTrafficPolicyInstanceCountOutput, error) {
-	req, out := c.GetTrafficPolicyInstanceCountRequest(input)
-	return out, req.Send()
-}
-
-// GetTrafficPolicyInstanceCountWithContext is the same as GetTrafficPolicyInstanceCount with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTrafficPolicyInstanceCount for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) GetTrafficPolicyInstanceCountWithContext(ctx aws.Context, input *GetTrafficPolicyInstanceCountInput, opts ...aws.Option) (*GetTrafficPolicyInstanceCountOutput, error) {
-	req, out := c.GetTrafficPolicyInstanceCountRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTrafficPolicyInstanceCountOutput{})
+	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input}
 }
 
 const opListGeoLocations = "ListGeoLocations"
 
-// ListGeoLocationsRequest generates a "aws.Request" representing the
-// client's request for the ListGeoLocations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGeoLocationsRequest is a API request type for the ListGeoLocations API operation.
+type ListGeoLocationsRequest struct {
+	*aws.Request
+	Input *ListGeoLocationsInput
+}
+
+// Send marshals and sends the ListGeoLocations API request.
+func (r *ListGeoLocationsRequest) Send() (*ListGeoLocationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGeoLocationsOutput), nil
+}
+
+// ListGeoLocationsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves a list of supported geo locations.
 //
-// See ListGeoLocations for more information on using the ListGeoLocations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Countries are listed first, and continents are listed last. If Amazon Route
+// 53 supports subdivisions for a country (for example, states or provinces),
+// the subdivisions for that country are listed in alphabetical order immediately
+// after the corresponding country.
 //
 //    // Example sending a request using the ListGeoLocationsRequest method.
-//    req, resp := client.ListGeoLocationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGeoLocationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocations
-func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) (req *aws.Request, output *ListGeoLocationsOutput) {
+func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) ListGeoLocationsRequest {
 	op := &aws.Operation{
 		Name:       opListGeoLocations,
 		HTTPMethod: "GET",
@@ -3400,80 +1968,43 @@ func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) (req *aw
 		input = &ListGeoLocationsInput{}
 	}
 
-	output = &ListGeoLocationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGeoLocations API operation for Amazon Route 53.
-//
-// Retrieves a list of supported geo locations.
-//
-// Countries are listed first, and continents are listed last. If Amazon Route
-// 53 supports subdivisions for a country (for example, states or provinces),
-// the subdivisions for that country are listed in alphabetical order immediately
-// after the corresponding country.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListGeoLocations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocations
-func (c *Route53) ListGeoLocations(input *ListGeoLocationsInput) (*ListGeoLocationsOutput, error) {
-	req, out := c.ListGeoLocationsRequest(input)
-	return out, req.Send()
-}
-
-// ListGeoLocationsWithContext is the same as ListGeoLocations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGeoLocations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListGeoLocationsWithContext(ctx aws.Context, input *ListGeoLocationsInput, opts ...aws.Option) (*ListGeoLocationsOutput, error) {
-	req, out := c.ListGeoLocationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGeoLocationsOutput{})
+	return ListGeoLocationsRequest{Request: req, Input: input}
 }
 
 const opListHealthChecks = "ListHealthChecks"
 
-// ListHealthChecksRequest generates a "aws.Request" representing the
-// client's request for the ListHealthChecks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHealthChecksRequest is a API request type for the ListHealthChecks API operation.
+type ListHealthChecksRequest struct {
+	*aws.Request
+	Input *ListHealthChecksInput
+}
+
+// Send marshals and sends the ListHealthChecks API request.
+func (r *ListHealthChecksRequest) Send() (*ListHealthChecksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHealthChecksOutput), nil
+}
+
+// ListHealthChecksRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListHealthChecks for more information on using the ListHealthChecks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieve a list of the health checks that are associated with the current
+// AWS account.
 //
 //    // Example sending a request using the ListHealthChecksRequest method.
-//    req, resp := client.ListHealthChecksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHealthChecksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecks
-func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) (req *aws.Request, output *ListHealthChecksOutput) {
+func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) ListHealthChecksRequest {
 	op := &aws.Operation{
 		Name:       opListHealthChecks,
 		HTTPMethod: "GET",
@@ -3490,51 +2021,8 @@ func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) (req *aw
 		input = &ListHealthChecksInput{}
 	}
 
-	output = &ListHealthChecksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHealthChecks API operation for Amazon Route 53.
-//
-// Retrieve a list of the health checks that are associated with the current
-// AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListHealthChecks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeIncompatibleVersion "IncompatibleVersion"
-//   The resource you're trying to access is unsupported on this Amazon Route
-//   53 endpoint.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecks
-func (c *Route53) ListHealthChecks(input *ListHealthChecksInput) (*ListHealthChecksOutput, error) {
-	req, out := c.ListHealthChecksRequest(input)
-	return out, req.Send()
-}
-
-// ListHealthChecksWithContext is the same as ListHealthChecks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHealthChecks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListHealthChecksWithContext(ctx aws.Context, input *ListHealthChecksInput, opts ...aws.Option) (*ListHealthChecksOutput, error) {
-	req, out := c.ListHealthChecksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHealthChecksOutput{})
+	return ListHealthChecksRequest{Request: req, Input: input}
 }
 
 // ListHealthChecksPages iterates over the pages of a ListHealthChecks operation,
@@ -3573,10 +2061,10 @@ func (c *Route53) ListHealthChecksPagesWithContext(ctx aws.Context, input *ListH
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListHealthChecksRequest(inCpy)
+			req := c.ListHealthChecksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3589,31 +2077,42 @@ func (c *Route53) ListHealthChecksPagesWithContext(ctx aws.Context, input *ListH
 
 const opListHostedZones = "ListHostedZones"
 
-// ListHostedZonesRequest generates a "aws.Request" representing the
-// client's request for the ListHostedZones operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListHostedZonesRequest is a API request type for the ListHostedZones API operation.
+type ListHostedZonesRequest struct {
+	*aws.Request
+	Input *ListHostedZonesInput
+}
+
+// Send marshals and sends the ListHostedZones API request.
+func (r *ListHostedZonesRequest) Send() (*ListHostedZonesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHostedZonesOutput), nil
+}
+
+// ListHostedZonesRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves a list of the public and private hosted zones that are associated
+// with the current AWS account. The response includes a HostedZones child element
+// for each hosted zone.
 //
-// See ListHostedZones for more information on using the ListHostedZones
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Amazon Route 53 returns a maximum of 100 items in each response. If you have
+// a lot of hosted zones, you can use the maxitems parameter to list them in
+// groups of up to 100.
 //
 //    // Example sending a request using the ListHostedZonesRequest method.
-//    req, resp := client.ListHostedZonesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListHostedZonesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZones
-func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) (req *aws.Request, output *ListHostedZonesOutput) {
+func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) ListHostedZonesRequest {
 	op := &aws.Operation{
 		Name:       opListHostedZones,
 		HTTPMethod: "GET",
@@ -3630,58 +2129,8 @@ func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) (req *aws.
 		input = &ListHostedZonesInput{}
 	}
 
-	output = &ListHostedZonesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListHostedZones API operation for Amazon Route 53.
-//
-// Retrieves a list of the public and private hosted zones that are associated
-// with the current AWS account. The response includes a HostedZones child element
-// for each hosted zone.
-//
-// Amazon Route 53 returns a maximum of 100 items in each response. If you have
-// a lot of hosted zones, you can use the maxitems parameter to list them in
-// groups of up to 100.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListHostedZones for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchDelegationSet "NoSuchDelegationSet"
-//   A reusable delegation set with the specified ID does not exist.
-//
-//   * ErrCodeDelegationSetNotReusable "DelegationSetNotReusable"
-//   A reusable delegation set with the specified ID does not exist.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZones
-func (c *Route53) ListHostedZones(input *ListHostedZonesInput) (*ListHostedZonesOutput, error) {
-	req, out := c.ListHostedZonesRequest(input)
-	return out, req.Send()
-}
-
-// ListHostedZonesWithContext is the same as ListHostedZones with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHostedZones for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListHostedZonesWithContext(ctx aws.Context, input *ListHostedZonesInput, opts ...aws.Option) (*ListHostedZonesOutput, error) {
-	req, out := c.ListHostedZonesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListHostedZonesOutput{})
+	return ListHostedZonesRequest{Request: req, Input: input}
 }
 
 // ListHostedZonesPages iterates over the pages of a ListHostedZones operation,
@@ -3720,10 +2169,10 @@ func (c *Route53) ListHostedZonesPagesWithContext(ctx aws.Context, input *ListHo
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListHostedZonesRequest(inCpy)
+			req := c.ListHostedZonesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3736,47 +2185,24 @@ func (c *Route53) ListHostedZonesPagesWithContext(ctx aws.Context, input *ListHo
 
 const opListHostedZonesByName = "ListHostedZonesByName"
 
-// ListHostedZonesByNameRequest generates a "aws.Request" representing the
-// client's request for the ListHostedZonesByName operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListHostedZonesByName for more information on using the ListHostedZonesByName
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListHostedZonesByNameRequest method.
-//    req, resp := client.ListHostedZonesByNameRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByName
-func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput) (req *aws.Request, output *ListHostedZonesByNameOutput) {
-	op := &aws.Operation{
-		Name:       opListHostedZonesByName,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/hostedzonesbyname",
-	}
-
-	if input == nil {
-		input = &ListHostedZonesByNameInput{}
-	}
-
-	output = &ListHostedZonesByNameOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListHostedZonesByNameRequest is a API request type for the ListHostedZonesByName API operation.
+type ListHostedZonesByNameRequest struct {
+	*aws.Request
+	Input *ListHostedZonesByNameInput
 }
 
-// ListHostedZonesByName API operation for Amazon Route 53.
+// Send marshals and sends the ListHostedZonesByName API request.
+func (r *ListHostedZonesByNameRequest) Send() (*ListHostedZonesByNameOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListHostedZonesByNameOutput), nil
+}
+
+// ListHostedZonesByNameRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Retrieves a list of your hosted zones in lexicographic order. The response
 // includes a HostedZones child element for each hosted zone created by the
@@ -3829,85 +2255,49 @@ func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput
 //    of NextDNSName and NextHostedZoneId in the dnsname and hostedzoneid parameters,
 //    respectively.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListHostedZonesByName for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeInvalidDomainName "InvalidDomainName"
-//   The specified domain name is not valid.
+//    // Example sending a request using the ListHostedZonesByNameRequest method.
+//    req := client.ListHostedZonesByNameRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByName
-func (c *Route53) ListHostedZonesByName(input *ListHostedZonesByNameInput) (*ListHostedZonesByNameOutput, error) {
-	req, out := c.ListHostedZonesByNameRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput) ListHostedZonesByNameRequest {
+	op := &aws.Operation{
+		Name:       opListHostedZonesByName,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/hostedzonesbyname",
+	}
 
-// ListHostedZonesByNameWithContext is the same as ListHostedZonesByName with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListHostedZonesByName for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListHostedZonesByNameWithContext(ctx aws.Context, input *ListHostedZonesByNameInput, opts ...aws.Option) (*ListHostedZonesByNameOutput, error) {
-	req, out := c.ListHostedZonesByNameRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListHostedZonesByNameInput{}
+	}
+
+	req := c.newRequest(op, input, &ListHostedZonesByNameOutput{})
+	return ListHostedZonesByNameRequest{Request: req, Input: input}
 }
 
 const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 
-// ListQueryLoggingConfigsRequest generates a "aws.Request" representing the
-// client's request for the ListQueryLoggingConfigs operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListQueryLoggingConfigs for more information on using the ListQueryLoggingConfigs
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListQueryLoggingConfigsRequest method.
-//    req, resp := client.ListQueryLoggingConfigsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigs
-func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsInput) (req *aws.Request, output *ListQueryLoggingConfigsOutput) {
-	op := &aws.Operation{
-		Name:       opListQueryLoggingConfigs,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/queryloggingconfig",
-	}
-
-	if input == nil {
-		input = &ListQueryLoggingConfigsInput{}
-	}
-
-	output = &ListQueryLoggingConfigsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListQueryLoggingConfigsRequest is a API request type for the ListQueryLoggingConfigs API operation.
+type ListQueryLoggingConfigsRequest struct {
+	*aws.Request
+	Input *ListQueryLoggingConfigsInput
 }
 
-// ListQueryLoggingConfigs API operation for Amazon Route 53.
+// Send marshals and sends the ListQueryLoggingConfigs API request.
+func (r *ListQueryLoggingConfigsRequest) Send() (*ListQueryLoggingConfigsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListQueryLoggingConfigsOutput), nil
+}
+
+// ListQueryLoggingConfigsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Lists the configurations for DNS query logging that are associated with the
 // current AWS account or the configuration that is associated with a specified
@@ -3918,95 +2308,49 @@ func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsI
 // Logging DNS Queries (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html)
 // in the Amazon Route 53 Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListQueryLoggingConfigs for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The value that you specified to get the second or subsequent page of results
-//   is invalid.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
+//    // Example sending a request using the ListQueryLoggingConfigsRequest method.
+//    req := client.ListQueryLoggingConfigsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListQueryLoggingConfigs
-func (c *Route53) ListQueryLoggingConfigs(input *ListQueryLoggingConfigsInput) (*ListQueryLoggingConfigsOutput, error) {
-	req, out := c.ListQueryLoggingConfigsRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest {
+	op := &aws.Operation{
+		Name:       opListQueryLoggingConfigs,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/queryloggingconfig",
+	}
 
-// ListQueryLoggingConfigsWithContext is the same as ListQueryLoggingConfigs with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListQueryLoggingConfigs for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListQueryLoggingConfigsWithContext(ctx aws.Context, input *ListQueryLoggingConfigsInput, opts ...aws.Option) (*ListQueryLoggingConfigsOutput, error) {
-	req, out := c.ListQueryLoggingConfigsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListQueryLoggingConfigsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListQueryLoggingConfigsOutput{})
+	return ListQueryLoggingConfigsRequest{Request: req, Input: input}
 }
 
 const opListResourceRecordSets = "ListResourceRecordSets"
 
-// ListResourceRecordSetsRequest generates a "aws.Request" representing the
-// client's request for the ListResourceRecordSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListResourceRecordSets for more information on using the ListResourceRecordSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListResourceRecordSetsRequest method.
-//    req, resp := client.ListResourceRecordSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSets
-func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInput) (req *aws.Request, output *ListResourceRecordSetsOutput) {
-	op := &aws.Operation{
-		Name:       opListResourceRecordSets,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset",
-		Paginator: &aws.Paginator{
-			InputTokens:     []string{"StartRecordName", "StartRecordType", "StartRecordIdentifier"},
-			OutputTokens:    []string{"NextRecordName", "NextRecordType", "NextRecordIdentifier"},
-			LimitToken:      "MaxItems",
-			TruncationToken: "IsTruncated",
-		},
-	}
-
-	if input == nil {
-		input = &ListResourceRecordSetsInput{}
-	}
-
-	output = &ListResourceRecordSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListResourceRecordSetsRequest is a API request type for the ListResourceRecordSets API operation.
+type ListResourceRecordSetsRequest struct {
+	*aws.Request
+	Input *ListResourceRecordSetsInput
 }
 
-// ListResourceRecordSets API operation for Amazon Route 53.
+// Send marshals and sends the ListResourceRecordSets API request.
+func (r *ListResourceRecordSetsRequest) Send() (*ListResourceRecordSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceRecordSetsOutput), nil
+}
+
+// ListResourceRecordSetsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Lists the resource record sets in a specified hosted zone.
 //
@@ -4048,40 +2392,33 @@ func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInp
 // request. If you do, some pages may display results without the latest changes
 // while other pages display results with the latest changes.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListResourceRecordSets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
+//    // Example sending a request using the ListResourceRecordSetsRequest method.
+//    req := client.ListResourceRecordSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSets
-func (c *Route53) ListResourceRecordSets(input *ListResourceRecordSetsInput) (*ListResourceRecordSetsOutput, error) {
-	req, out := c.ListResourceRecordSetsRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInput) ListResourceRecordSetsRequest {
+	op := &aws.Operation{
+		Name:       opListResourceRecordSets,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/hostedzone/{Id}/rrset",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"StartRecordName", "StartRecordType", "StartRecordIdentifier"},
+			OutputTokens:    []string{"NextRecordName", "NextRecordType", "NextRecordIdentifier"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "IsTruncated",
+		},
+	}
 
-// ListResourceRecordSetsWithContext is the same as ListResourceRecordSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListResourceRecordSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListResourceRecordSetsWithContext(ctx aws.Context, input *ListResourceRecordSetsInput, opts ...aws.Option) (*ListResourceRecordSetsOutput, error) {
-	req, out := c.ListResourceRecordSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListResourceRecordSetsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListResourceRecordSetsOutput{})
+	return ListResourceRecordSetsRequest{Request: req, Input: input}
 }
 
 // ListResourceRecordSetsPages iterates over the pages of a ListResourceRecordSets operation,
@@ -4120,10 +2457,10 @@ func (c *Route53) ListResourceRecordSetsPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListResourceRecordSetsRequest(inCpy)
+			req := c.ListResourceRecordSetsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4136,31 +2473,37 @@ func (c *Route53) ListResourceRecordSetsPagesWithContext(ctx aws.Context, input 
 
 const opListReusableDelegationSets = "ListReusableDelegationSets"
 
-// ListReusableDelegationSetsRequest generates a "aws.Request" representing the
-// client's request for the ListReusableDelegationSets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListReusableDelegationSetsRequest is a API request type for the ListReusableDelegationSets API operation.
+type ListReusableDelegationSetsRequest struct {
+	*aws.Request
+	Input *ListReusableDelegationSetsInput
+}
+
+// Send marshals and sends the ListReusableDelegationSets API request.
+func (r *ListReusableDelegationSetsRequest) Send() (*ListReusableDelegationSetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListReusableDelegationSetsOutput), nil
+}
+
+// ListReusableDelegationSetsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListReusableDelegationSets for more information on using the ListReusableDelegationSets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a list of the reusable delegation sets that are associated with
+// the current AWS account.
 //
 //    // Example sending a request using the ListReusableDelegationSetsRequest method.
-//    req, resp := client.ListReusableDelegationSetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListReusableDelegationSetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSets
-func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegationSetsInput) (req *aws.Request, output *ListReusableDelegationSetsOutput) {
+func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegationSetsInput) ListReusableDelegationSetsRequest {
 	op := &aws.Operation{
 		Name:       opListReusableDelegationSets,
 		HTTPMethod: "GET",
@@ -4171,76 +2514,46 @@ func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegatio
 		input = &ListReusableDelegationSetsInput{}
 	}
 
-	output = &ListReusableDelegationSetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListReusableDelegationSets API operation for Amazon Route 53.
-//
-// Retrieves a list of the reusable delegation sets that are associated with
-// the current AWS account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListReusableDelegationSets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSets
-func (c *Route53) ListReusableDelegationSets(input *ListReusableDelegationSetsInput) (*ListReusableDelegationSetsOutput, error) {
-	req, out := c.ListReusableDelegationSetsRequest(input)
-	return out, req.Send()
-}
-
-// ListReusableDelegationSetsWithContext is the same as ListReusableDelegationSets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListReusableDelegationSets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListReusableDelegationSetsWithContext(ctx aws.Context, input *ListReusableDelegationSetsInput, opts ...aws.Option) (*ListReusableDelegationSetsOutput, error) {
-	req, out := c.ListReusableDelegationSetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListReusableDelegationSetsOutput{})
+	return ListReusableDelegationSetsRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists tags for one health check or hosted zone.
 //
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For information about using tags for cost allocation, see Using Cost Allocation
+// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResource
-func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
@@ -4251,96 +2564,46 @@ func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) (r
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
-// ListTagsForResource API operation for Amazon Route 53.
+const opListTagsForResources = "ListTagsForResources"
+
+// ListTagsForResourcesRequest is a API request type for the ListTagsForResources API operation.
+type ListTagsForResourcesRequest struct {
+	*aws.Request
+	Input *ListTagsForResourcesInput
+}
+
+// Send marshals and sends the ListTagsForResources API request.
+func (r *ListTagsForResourcesRequest) Send() (*ListTagsForResourcesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourcesOutput), nil
+}
+
+// ListTagsForResourcesRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Lists tags for one health check or hosted zone.
+// Lists tags for up to 10 health checks or hosted zones.
 //
 // For information about using tags for cost allocation, see Using Cost Allocation
 // Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // in the AWS Billing and Cost Management User Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The limit on the number of requests per second was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResource
-func (c *Route53) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opListTagsForResources = "ListTagsForResources"
-
-// ListTagsForResourcesRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResources operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResources for more information on using the ListTagsForResources
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
 //    // Example sending a request using the ListTagsForResourcesRequest method.
-//    req, resp := client.ListTagsForResourcesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourcesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResources
-func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) (req *aws.Request, output *ListTagsForResourcesOutput) {
+func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) ListTagsForResourcesRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResources,
 		HTTPMethod: "POST",
@@ -4351,96 +2614,44 @@ func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) 
 		input = &ListTagsForResourcesInput{}
 	}
 
-	output = &ListTagsForResourcesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResources API operation for Amazon Route 53.
-//
-// Lists tags for up to 10 health checks or hosted zones.
-//
-// For information about using tags for cost allocation, see Using Cost Allocation
-// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management User Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTagsForResources for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-//   * ErrCodeThrottlingException "ThrottlingException"
-//   The limit on the number of requests per second was exceeded.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResources
-func (c *Route53) ListTagsForResources(input *ListTagsForResourcesInput) (*ListTagsForResourcesOutput, error) {
-	req, out := c.ListTagsForResourcesRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourcesWithContext is the same as ListTagsForResources with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResources for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTagsForResourcesWithContext(ctx aws.Context, input *ListTagsForResourcesInput, opts ...aws.Option) (*ListTagsForResourcesOutput, error) {
-	req, out := c.ListTagsForResourcesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourcesOutput{})
+	return ListTagsForResourcesRequest{Request: req, Input: input}
 }
 
 const opListTrafficPolicies = "ListTrafficPolicies"
 
-// ListTrafficPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListTrafficPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTrafficPoliciesRequest is a API request type for the ListTrafficPolicies API operation.
+type ListTrafficPoliciesRequest struct {
+	*aws.Request
+	Input *ListTrafficPoliciesInput
+}
+
+// Send marshals and sends the ListTrafficPolicies API request.
+func (r *ListTrafficPoliciesRequest) Send() (*ListTrafficPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTrafficPoliciesOutput), nil
+}
+
+// ListTrafficPoliciesRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTrafficPolicies for more information on using the ListTrafficPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about the latest version for every traffic policy that is
+// associated with the current AWS account. Policies are listed in the order
+// in which they were created.
 //
 //    // Example sending a request using the ListTrafficPoliciesRequest method.
-//    req, resp := client.ListTrafficPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTrafficPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicies
-func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) (req *aws.Request, output *ListTrafficPoliciesOutput) {
+func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) ListTrafficPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListTrafficPolicies,
 		HTTPMethod: "GET",
@@ -4451,93 +2662,30 @@ func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) (r
 		input = &ListTrafficPoliciesInput{}
 	}
 
-	output = &ListTrafficPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTrafficPolicies API operation for Amazon Route 53.
-//
-// Gets information about the latest version for every traffic policy that is
-// associated with the current AWS account. Policies are listed in the order
-// in which they were created.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTrafficPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicies
-func (c *Route53) ListTrafficPolicies(input *ListTrafficPoliciesInput) (*ListTrafficPoliciesOutput, error) {
-	req, out := c.ListTrafficPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListTrafficPoliciesWithContext is the same as ListTrafficPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTrafficPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTrafficPoliciesWithContext(ctx aws.Context, input *ListTrafficPoliciesInput, opts ...aws.Option) (*ListTrafficPoliciesOutput, error) {
-	req, out := c.ListTrafficPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTrafficPoliciesOutput{})
+	return ListTrafficPoliciesRequest{Request: req, Input: input}
 }
 
 const opListTrafficPolicyInstances = "ListTrafficPolicyInstances"
 
-// ListTrafficPolicyInstancesRequest generates a "aws.Request" representing the
-// client's request for the ListTrafficPolicyInstances operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTrafficPolicyInstances for more information on using the ListTrafficPolicyInstances
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListTrafficPolicyInstancesRequest method.
-//    req, resp := client.ListTrafficPolicyInstancesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstances
-func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInstancesInput) (req *aws.Request, output *ListTrafficPolicyInstancesOutput) {
-	op := &aws.Operation{
-		Name:       opListTrafficPolicyInstances,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/trafficpolicyinstances",
-	}
-
-	if input == nil {
-		input = &ListTrafficPolicyInstancesInput{}
-	}
-
-	output = &ListTrafficPolicyInstancesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListTrafficPolicyInstancesRequest is a API request type for the ListTrafficPolicyInstances API operation.
+type ListTrafficPolicyInstancesRequest struct {
+	*aws.Request
+	Input *ListTrafficPolicyInstancesInput
 }
 
-// ListTrafficPolicyInstances API operation for Amazon Route 53.
+// Send marshals and sends the ListTrafficPolicyInstances API request.
+func (r *ListTrafficPolicyInstancesRequest) Send() (*ListTrafficPolicyInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTrafficPolicyInstancesOutput), nil
+}
+
+// ListTrafficPolicyInstancesRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Gets information about the traffic policy instances that you created by using
 // the current AWS account.
@@ -4551,85 +2699,49 @@ func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInst
 // a lot of traffic policy instances, you can use the MaxItems parameter to
 // list them in groups of up to 100.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTrafficPolicyInstances for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
+//    // Example sending a request using the ListTrafficPolicyInstancesRequest method.
+//    req := client.ListTrafficPolicyInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstances
-func (c *Route53) ListTrafficPolicyInstances(input *ListTrafficPolicyInstancesInput) (*ListTrafficPolicyInstancesOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInstancesInput) ListTrafficPolicyInstancesRequest {
+	op := &aws.Operation{
+		Name:       opListTrafficPolicyInstances,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/trafficpolicyinstances",
+	}
 
-// ListTrafficPolicyInstancesWithContext is the same as ListTrafficPolicyInstances with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTrafficPolicyInstances for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesInput, opts ...aws.Option) (*ListTrafficPolicyInstancesOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListTrafficPolicyInstancesInput{}
+	}
+
+	req := c.newRequest(op, input, &ListTrafficPolicyInstancesOutput{})
+	return ListTrafficPolicyInstancesRequest{Request: req, Input: input}
 }
 
 const opListTrafficPolicyInstancesByHostedZone = "ListTrafficPolicyInstancesByHostedZone"
 
-// ListTrafficPolicyInstancesByHostedZoneRequest generates a "aws.Request" representing the
-// client's request for the ListTrafficPolicyInstancesByHostedZone operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTrafficPolicyInstancesByHostedZone for more information on using the ListTrafficPolicyInstancesByHostedZone
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListTrafficPolicyInstancesByHostedZoneRequest method.
-//    req, resp := client.ListTrafficPolicyInstancesByHostedZoneRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZone
-func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTrafficPolicyInstancesByHostedZoneInput) (req *aws.Request, output *ListTrafficPolicyInstancesByHostedZoneOutput) {
-	op := &aws.Operation{
-		Name:       opListTrafficPolicyInstancesByHostedZone,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/trafficpolicyinstances/hostedzone",
-	}
-
-	if input == nil {
-		input = &ListTrafficPolicyInstancesByHostedZoneInput{}
-	}
-
-	output = &ListTrafficPolicyInstancesByHostedZoneOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListTrafficPolicyInstancesByHostedZoneRequest is a API request type for the ListTrafficPolicyInstancesByHostedZone API operation.
+type ListTrafficPolicyInstancesByHostedZoneRequest struct {
+	*aws.Request
+	Input *ListTrafficPolicyInstancesByHostedZoneInput
 }
 
-// ListTrafficPolicyInstancesByHostedZone API operation for Amazon Route 53.
+// Send marshals and sends the ListTrafficPolicyInstancesByHostedZone API request.
+func (r *ListTrafficPolicyInstancesByHostedZoneRequest) Send() (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTrafficPolicyInstancesByHostedZoneOutput), nil
+}
+
+// ListTrafficPolicyInstancesByHostedZoneRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Gets information about the traffic policy instances that you created in a
 // specified hosted zone.
@@ -4643,88 +2755,49 @@ func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTraff
 // a lot of traffic policy instances, you can use the MaxItems parameter to
 // list them in groups of up to 100.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTrafficPolicyInstancesByHostedZone for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
-//
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
+//    // Example sending a request using the ListTrafficPolicyInstancesByHostedZoneRequest method.
+//    req := client.ListTrafficPolicyInstancesByHostedZoneRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZone
-func (c *Route53) ListTrafficPolicyInstancesByHostedZone(input *ListTrafficPolicyInstancesByHostedZoneInput) (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesByHostedZoneRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTrafficPolicyInstancesByHostedZoneInput) ListTrafficPolicyInstancesByHostedZoneRequest {
+	op := &aws.Operation{
+		Name:       opListTrafficPolicyInstancesByHostedZone,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/trafficpolicyinstances/hostedzone",
+	}
 
-// ListTrafficPolicyInstancesByHostedZoneWithContext is the same as ListTrafficPolicyInstancesByHostedZone with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTrafficPolicyInstancesByHostedZone for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesByHostedZoneWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByHostedZoneInput, opts ...aws.Option) (*ListTrafficPolicyInstancesByHostedZoneOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesByHostedZoneRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListTrafficPolicyInstancesByHostedZoneInput{}
+	}
+
+	req := c.newRequest(op, input, &ListTrafficPolicyInstancesByHostedZoneOutput{})
+	return ListTrafficPolicyInstancesByHostedZoneRequest{Request: req, Input: input}
 }
 
 const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy"
 
-// ListTrafficPolicyInstancesByPolicyRequest generates a "aws.Request" representing the
-// client's request for the ListTrafficPolicyInstancesByPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTrafficPolicyInstancesByPolicy for more information on using the ListTrafficPolicyInstancesByPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListTrafficPolicyInstancesByPolicyRequest method.
-//    req, resp := client.ListTrafficPolicyInstancesByPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicy
-func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPolicyInstancesByPolicyInput) (req *aws.Request, output *ListTrafficPolicyInstancesByPolicyOutput) {
-	op := &aws.Operation{
-		Name:       opListTrafficPolicyInstancesByPolicy,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2013-04-01/trafficpolicyinstances/trafficpolicy",
-	}
-
-	if input == nil {
-		input = &ListTrafficPolicyInstancesByPolicyInput{}
-	}
-
-	output = &ListTrafficPolicyInstancesByPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListTrafficPolicyInstancesByPolicyRequest is a API request type for the ListTrafficPolicyInstancesByPolicy API operation.
+type ListTrafficPolicyInstancesByPolicyRequest struct {
+	*aws.Request
+	Input *ListTrafficPolicyInstancesByPolicyInput
 }
 
-// ListTrafficPolicyInstancesByPolicy API operation for Amazon Route 53.
+// Send marshals and sends the ListTrafficPolicyInstancesByPolicy API request.
+func (r *ListTrafficPolicyInstancesByPolicyRequest) Send() (*ListTrafficPolicyInstancesByPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTrafficPolicyInstancesByPolicyOutput), nil
+}
+
+// ListTrafficPolicyInstancesByPolicyRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Gets information about the traffic policy instances that you created by using
 // a specify traffic policy version.
@@ -4738,72 +2811,63 @@ func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPo
 // a lot of traffic policy instances, you can use the MaxItems parameter to
 // list them in groups of up to 100.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTrafficPolicyInstancesByPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
-//
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
+//    // Example sending a request using the ListTrafficPolicyInstancesByPolicyRequest method.
+//    req := client.ListTrafficPolicyInstancesByPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicy
-func (c *Route53) ListTrafficPolicyInstancesByPolicy(input *ListTrafficPolicyInstancesByPolicyInput) (*ListTrafficPolicyInstancesByPolicyOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesByPolicyRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPolicyInstancesByPolicyInput) ListTrafficPolicyInstancesByPolicyRequest {
+	op := &aws.Operation{
+		Name:       opListTrafficPolicyInstancesByPolicy,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2013-04-01/trafficpolicyinstances/trafficpolicy",
+	}
 
-// ListTrafficPolicyInstancesByPolicyWithContext is the same as ListTrafficPolicyInstancesByPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTrafficPolicyInstancesByPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyInstancesByPolicyWithContext(ctx aws.Context, input *ListTrafficPolicyInstancesByPolicyInput, opts ...aws.Option) (*ListTrafficPolicyInstancesByPolicyOutput, error) {
-	req, out := c.ListTrafficPolicyInstancesByPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListTrafficPolicyInstancesByPolicyInput{}
+	}
+
+	req := c.newRequest(op, input, &ListTrafficPolicyInstancesByPolicyOutput{})
+	return ListTrafficPolicyInstancesByPolicyRequest{Request: req, Input: input}
 }
 
 const opListTrafficPolicyVersions = "ListTrafficPolicyVersions"
 
-// ListTrafficPolicyVersionsRequest generates a "aws.Request" representing the
-// client's request for the ListTrafficPolicyVersions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTrafficPolicyVersionsRequest is a API request type for the ListTrafficPolicyVersions API operation.
+type ListTrafficPolicyVersionsRequest struct {
+	*aws.Request
+	Input *ListTrafficPolicyVersionsInput
+}
+
+// Send marshals and sends the ListTrafficPolicyVersions API request.
+func (r *ListTrafficPolicyVersionsRequest) Send() (*ListTrafficPolicyVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTrafficPolicyVersionsOutput), nil
+}
+
+// ListTrafficPolicyVersionsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets information about all of the versions for a specified traffic policy.
 //
-// See ListTrafficPolicyVersions for more information on using the ListTrafficPolicyVersions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Traffic policy versions are listed in numerical order by VersionNumber.
 //
 //    // Example sending a request using the ListTrafficPolicyVersionsRequest method.
-//    req, resp := client.ListTrafficPolicyVersionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTrafficPolicyVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersions
-func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersionsInput) (req *aws.Request, output *ListTrafficPolicyVersionsOutput) {
+func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersionsInput) ListTrafficPolicyVersionsRequest {
 	op := &aws.Operation{
 		Name:       opListTrafficPolicyVersions,
 		HTTPMethod: "GET",
@@ -4814,80 +2878,47 @@ func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersi
 		input = &ListTrafficPolicyVersionsInput{}
 	}
 
-	output = &ListTrafficPolicyVersionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTrafficPolicyVersions API operation for Amazon Route 53.
-//
-// Gets information about all of the versions for a specified traffic policy.
-//
-// Traffic policy versions are listed in numerical order by VersionNumber.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListTrafficPolicyVersions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersions
-func (c *Route53) ListTrafficPolicyVersions(input *ListTrafficPolicyVersionsInput) (*ListTrafficPolicyVersionsOutput, error) {
-	req, out := c.ListTrafficPolicyVersionsRequest(input)
-	return out, req.Send()
-}
-
-// ListTrafficPolicyVersionsWithContext is the same as ListTrafficPolicyVersions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTrafficPolicyVersions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListTrafficPolicyVersionsWithContext(ctx aws.Context, input *ListTrafficPolicyVersionsInput, opts ...aws.Option) (*ListTrafficPolicyVersionsOutput, error) {
-	req, out := c.ListTrafficPolicyVersionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTrafficPolicyVersionsOutput{})
+	return ListTrafficPolicyVersionsRequest{Request: req, Input: input}
 }
 
 const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 
-// ListVPCAssociationAuthorizationsRequest generates a "aws.Request" representing the
-// client's request for the ListVPCAssociationAuthorizations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListVPCAssociationAuthorizationsRequest is a API request type for the ListVPCAssociationAuthorizations API operation.
+type ListVPCAssociationAuthorizationsRequest struct {
+	*aws.Request
+	Input *ListVPCAssociationAuthorizationsInput
+}
+
+// Send marshals and sends the ListVPCAssociationAuthorizations API request.
+func (r *ListVPCAssociationAuthorizationsRequest) Send() (*ListVPCAssociationAuthorizationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVPCAssociationAuthorizationsOutput), nil
+}
+
+// ListVPCAssociationAuthorizationsRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Gets a list of the VPCs that were created by other accounts and that can
+// be associated with a specified hosted zone because you've submitted one or
+// more CreateVPCAssociationAuthorization requests.
 //
-// See ListVPCAssociationAuthorizations for more information on using the ListVPCAssociationAuthorizations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The response includes a VPCs element with a VPC child element for each VPC
+// that can be associated with the hosted zone.
 //
 //    // Example sending a request using the ListVPCAssociationAuthorizationsRequest method.
-//    req, resp := client.ListVPCAssociationAuthorizationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListVPCAssociationAuthorizationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations
-func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociationAuthorizationsInput) (req *aws.Request, output *ListVPCAssociationAuthorizationsOutput) {
+func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest {
 	op := &aws.Operation{
 		Name:       opListVPCAssociationAuthorizations,
 		HTTPMethod: "GET",
@@ -4898,87 +2929,44 @@ func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociat
 		input = &ListVPCAssociationAuthorizationsInput{}
 	}
 
-	output = &ListVPCAssociationAuthorizationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListVPCAssociationAuthorizations API operation for Amazon Route 53.
-//
-// Gets a list of the VPCs that were created by other accounts and that can
-// be associated with a specified hosted zone because you've submitted one or
-// more CreateVPCAssociationAuthorization requests.
-//
-// The response includes a VPCs element with a VPC child element for each VPC
-// that can be associated with the hosted zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation ListVPCAssociationAuthorizations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeInvalidPaginationToken "InvalidPaginationToken"
-//   The value that you specified to get the second or subsequent page of results
-//   is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations
-func (c *Route53) ListVPCAssociationAuthorizations(input *ListVPCAssociationAuthorizationsInput) (*ListVPCAssociationAuthorizationsOutput, error) {
-	req, out := c.ListVPCAssociationAuthorizationsRequest(input)
-	return out, req.Send()
-}
-
-// ListVPCAssociationAuthorizationsWithContext is the same as ListVPCAssociationAuthorizations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVPCAssociationAuthorizations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) ListVPCAssociationAuthorizationsWithContext(ctx aws.Context, input *ListVPCAssociationAuthorizationsInput, opts ...aws.Option) (*ListVPCAssociationAuthorizationsOutput, error) {
-	req, out := c.ListVPCAssociationAuthorizationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListVPCAssociationAuthorizationsOutput{})
+	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input}
 }
 
 const opTestDNSAnswer = "TestDNSAnswer"
 
-// TestDNSAnswerRequest generates a "aws.Request" representing the
-// client's request for the TestDNSAnswer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TestDNSAnswerRequest is a API request type for the TestDNSAnswer API operation.
+type TestDNSAnswerRequest struct {
+	*aws.Request
+	Input *TestDNSAnswerInput
+}
+
+// Send marshals and sends the TestDNSAnswer API request.
+func (r *TestDNSAnswerRequest) Send() (*TestDNSAnswerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TestDNSAnswerOutput), nil
+}
+
+// TestDNSAnswerRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TestDNSAnswer for more information on using the TestDNSAnswer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets the value that Amazon Route 53 returns in response to a DNS request
+// for a specified record name and type. You can optionally specify the IP address
+// of a DNS resolver, an EDNS0 client subnet IP address, and a subnet mask.
 //
 //    // Example sending a request using the TestDNSAnswerRequest method.
-//    req, resp := client.TestDNSAnswerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TestDNSAnswerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswer
-func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) (req *aws.Request, output *TestDNSAnswerOutput) {
+func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) TestDNSAnswerRequest {
 	op := &aws.Operation{
 		Name:       opTestDNSAnswer,
 		HTTPMethod: "GET",
@@ -4989,80 +2977,46 @@ func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) (req *aws.Requ
 		input = &TestDNSAnswerInput{}
 	}
 
-	output = &TestDNSAnswerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TestDNSAnswer API operation for Amazon Route 53.
-//
-// Gets the value that Amazon Route 53 returns in response to a DNS request
-// for a specified record name and type. You can optionally specify the IP address
-// of a DNS resolver, an EDNS0 client subnet IP address, and a subnet mask.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation TestDNSAnswer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswer
-func (c *Route53) TestDNSAnswer(input *TestDNSAnswerInput) (*TestDNSAnswerOutput, error) {
-	req, out := c.TestDNSAnswerRequest(input)
-	return out, req.Send()
-}
-
-// TestDNSAnswerWithContext is the same as TestDNSAnswer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TestDNSAnswer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) TestDNSAnswerWithContext(ctx aws.Context, input *TestDNSAnswerInput, opts ...aws.Option) (*TestDNSAnswerOutput, error) {
-	req, out := c.TestDNSAnswerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TestDNSAnswerOutput{})
+	return TestDNSAnswerRequest{Request: req, Input: input}
 }
 
 const opUpdateHealthCheck = "UpdateHealthCheck"
 
-// UpdateHealthCheckRequest generates a "aws.Request" representing the
-// client's request for the UpdateHealthCheck operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateHealthCheckRequest is a API request type for the UpdateHealthCheck API operation.
+type UpdateHealthCheckRequest struct {
+	*aws.Request
+	Input *UpdateHealthCheckInput
+}
+
+// Send marshals and sends the UpdateHealthCheck API request.
+func (r *UpdateHealthCheckRequest) Send() (*UpdateHealthCheckOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateHealthCheckOutput), nil
+}
+
+// UpdateHealthCheckRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates an existing health check. Note that some values can't be updated.
 //
-// See UpdateHealthCheck for more information on using the UpdateHealthCheck
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For more information about updating health checks, see Creating, Updating,
+// and Deleting Health Checks (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html)
+// in the Amazon Route 53 Developer Guide.
 //
 //    // Example sending a request using the UpdateHealthCheckRequest method.
-//    req, resp := client.UpdateHealthCheckRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateHealthCheckRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheck
-func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) (req *aws.Request, output *UpdateHealthCheckOutput) {
+func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) UpdateHealthCheckRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHealthCheck,
 		HTTPMethod: "POST",
@@ -5073,87 +3027,42 @@ func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) (req *
 		input = &UpdateHealthCheckInput{}
 	}
 
-	output = &UpdateHealthCheckOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateHealthCheck API operation for Amazon Route 53.
-//
-// Updates an existing health check. Note that some values can't be updated.
-//
-// For more information about updating health checks, see Creating, Updating,
-// and Deleting Health Checks (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html)
-// in the Amazon Route 53 Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation UpdateHealthCheck for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHealthCheck "NoSuchHealthCheck"
-//   No health check exists with the ID that you specified in the DeleteHealthCheck
-//   request.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeHealthCheckVersionMismatch "HealthCheckVersionMismatch"
-//   The value of HealthCheckVersion in the request doesn't match the value of
-//   HealthCheckVersion in the health check.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheck
-func (c *Route53) UpdateHealthCheck(input *UpdateHealthCheckInput) (*UpdateHealthCheckOutput, error) {
-	req, out := c.UpdateHealthCheckRequest(input)
-	return out, req.Send()
-}
-
-// UpdateHealthCheckWithContext is the same as UpdateHealthCheck with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateHealthCheck for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) UpdateHealthCheckWithContext(ctx aws.Context, input *UpdateHealthCheckInput, opts ...aws.Option) (*UpdateHealthCheckOutput, error) {
-	req, out := c.UpdateHealthCheckRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateHealthCheckOutput{})
+	return UpdateHealthCheckRequest{Request: req, Input: input}
 }
 
 const opUpdateHostedZoneComment = "UpdateHostedZoneComment"
 
-// UpdateHostedZoneCommentRequest generates a "aws.Request" representing the
-// client's request for the UpdateHostedZoneComment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateHostedZoneCommentRequest is a API request type for the UpdateHostedZoneComment API operation.
+type UpdateHostedZoneCommentRequest struct {
+	*aws.Request
+	Input *UpdateHostedZoneCommentInput
+}
+
+// Send marshals and sends the UpdateHostedZoneComment API request.
+func (r *UpdateHostedZoneCommentRequest) Send() (*UpdateHostedZoneCommentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateHostedZoneCommentOutput), nil
+}
+
+// UpdateHostedZoneCommentRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateHostedZoneComment for more information on using the UpdateHostedZoneComment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the comment for a specified hosted zone.
 //
 //    // Example sending a request using the UpdateHostedZoneCommentRequest method.
-//    req, resp := client.UpdateHostedZoneCommentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateHostedZoneCommentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment
-func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentInput) (req *aws.Request, output *UpdateHostedZoneCommentOutput) {
+func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentInput) UpdateHostedZoneCommentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateHostedZoneComment,
 		HTTPMethod: "POST",
@@ -5164,78 +3073,42 @@ func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentI
 		input = &UpdateHostedZoneCommentInput{}
 	}
 
-	output = &UpdateHostedZoneCommentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateHostedZoneComment API operation for Amazon Route 53.
-//
-// Updates the comment for a specified hosted zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation UpdateHostedZoneComment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchHostedZone "NoSuchHostedZone"
-//   No hosted zone exists with the ID that you specified.
-//
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment
-func (c *Route53) UpdateHostedZoneComment(input *UpdateHostedZoneCommentInput) (*UpdateHostedZoneCommentOutput, error) {
-	req, out := c.UpdateHostedZoneCommentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateHostedZoneCommentWithContext is the same as UpdateHostedZoneComment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateHostedZoneComment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) UpdateHostedZoneCommentWithContext(ctx aws.Context, input *UpdateHostedZoneCommentInput, opts ...aws.Option) (*UpdateHostedZoneCommentOutput, error) {
-	req, out := c.UpdateHostedZoneCommentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateHostedZoneCommentOutput{})
+	return UpdateHostedZoneCommentRequest{Request: req, Input: input}
 }
 
 const opUpdateTrafficPolicyComment = "UpdateTrafficPolicyComment"
 
-// UpdateTrafficPolicyCommentRequest generates a "aws.Request" representing the
-// client's request for the UpdateTrafficPolicyComment operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTrafficPolicyCommentRequest is a API request type for the UpdateTrafficPolicyComment API operation.
+type UpdateTrafficPolicyCommentRequest struct {
+	*aws.Request
+	Input *UpdateTrafficPolicyCommentInput
+}
+
+// Send marshals and sends the UpdateTrafficPolicyComment API request.
+func (r *UpdateTrafficPolicyCommentRequest) Send() (*UpdateTrafficPolicyCommentOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTrafficPolicyCommentOutput), nil
+}
+
+// UpdateTrafficPolicyCommentRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTrafficPolicyComment for more information on using the UpdateTrafficPolicyComment
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the comment for a specified traffic policy version.
 //
 //    // Example sending a request using the UpdateTrafficPolicyCommentRequest method.
-//    req, resp := client.UpdateTrafficPolicyCommentRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTrafficPolicyCommentRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyComment
-func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCommentInput) (req *aws.Request, output *UpdateTrafficPolicyCommentOutput) {
+func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCommentInput) UpdateTrafficPolicyCommentRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTrafficPolicyComment,
 		HTTPMethod: "POST",
@@ -5246,98 +3119,30 @@ func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCo
 		input = &UpdateTrafficPolicyCommentInput{}
 	}
 
-	output = &UpdateTrafficPolicyCommentOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTrafficPolicyComment API operation for Amazon Route 53.
-//
-// Updates the comment for a specified traffic policy version.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation UpdateTrafficPolicyComment for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeConcurrentModification "ConcurrentModification"
-//   Another user submitted a request to create, update, or delete the object
-//   at the same time that you did. Retry the request.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyComment
-func (c *Route53) UpdateTrafficPolicyComment(input *UpdateTrafficPolicyCommentInput) (*UpdateTrafficPolicyCommentOutput, error) {
-	req, out := c.UpdateTrafficPolicyCommentRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTrafficPolicyCommentWithContext is the same as UpdateTrafficPolicyComment with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTrafficPolicyComment for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) UpdateTrafficPolicyCommentWithContext(ctx aws.Context, input *UpdateTrafficPolicyCommentInput, opts ...aws.Option) (*UpdateTrafficPolicyCommentOutput, error) {
-	req, out := c.UpdateTrafficPolicyCommentRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTrafficPolicyCommentOutput{})
+	return UpdateTrafficPolicyCommentRequest{Request: req, Input: input}
 }
 
 const opUpdateTrafficPolicyInstance = "UpdateTrafficPolicyInstance"
 
-// UpdateTrafficPolicyInstanceRequest generates a "aws.Request" representing the
-// client's request for the UpdateTrafficPolicyInstance operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTrafficPolicyInstance for more information on using the UpdateTrafficPolicyInstance
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateTrafficPolicyInstanceRequest method.
-//    req, resp := client.UpdateTrafficPolicyInstanceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance
-func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyInstanceInput) (req *aws.Request, output *UpdateTrafficPolicyInstanceOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateTrafficPolicyInstance,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
-	}
-
-	if input == nil {
-		input = &UpdateTrafficPolicyInstanceInput{}
-	}
-
-	output = &UpdateTrafficPolicyInstanceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateTrafficPolicyInstanceRequest is a API request type for the UpdateTrafficPolicyInstance API operation.
+type UpdateTrafficPolicyInstanceRequest struct {
+	*aws.Request
+	Input *UpdateTrafficPolicyInstanceInput
 }
 
-// UpdateTrafficPolicyInstance API operation for Amazon Route 53.
+// Send marshals and sends the UpdateTrafficPolicyInstance API request.
+func (r *UpdateTrafficPolicyInstanceRequest) Send() (*UpdateTrafficPolicyInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTrafficPolicyInstanceOutput), nil
+}
+
+// UpdateTrafficPolicyInstanceRequest returns a request value for making API operation for
+// Amazon Route 53.
 //
 // Updates the resource record sets in a specified hosted zone that were created
 // based on the settings in a specified traffic policy version.
@@ -5359,55 +3164,27 @@ func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyI
 // Amazon Route 53 deletes the old group of resource record sets that are associated
 // with the root resource record set name.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Route 53's
-// API operation UpdateTrafficPolicyInstance for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInput "InvalidInput"
-//   The input is not valid.
-//
-//   * ErrCodeNoSuchTrafficPolicy "NoSuchTrafficPolicy"
-//   No traffic policy exists with the specified ID.
-//
-//   * ErrCodeNoSuchTrafficPolicyInstance "NoSuchTrafficPolicyInstance"
-//   No traffic policy instance exists with the specified ID.
-//
-//   * ErrCodePriorRequestNotComplete "PriorRequestNotComplete"
-//   If Amazon Route 53 can't process a request before the next request arrives,
-//   it will reject subsequent requests for the same hosted zone and return an
-//   HTTP 400 error (Bad request). If Amazon Route 53 returns this error repeatedly
-//   for the same request, we recommend that you wait, in intervals of increasing
-//   duration, before you try the request again.
-//
-//   * ErrCodeConflictingTypes "ConflictingTypes"
-//   You tried to update a traffic policy instance by using a traffic policy version
-//   that has a different DNS type than the current type for the instance. You
-//   specified the type in the JSON document in the CreateTrafficPolicy or CreateTrafficPolicyVersionrequest.
+//    // Example sending a request using the UpdateTrafficPolicyInstanceRequest method.
+//    req := client.UpdateTrafficPolicyInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance
-func (c *Route53) UpdateTrafficPolicyInstance(input *UpdateTrafficPolicyInstanceInput) (*UpdateTrafficPolicyInstanceOutput, error) {
-	req, out := c.UpdateTrafficPolicyInstanceRequest(input)
-	return out, req.Send()
-}
+func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyInstanceInput) UpdateTrafficPolicyInstanceRequest {
+	op := &aws.Operation{
+		Name:       opUpdateTrafficPolicyInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2013-04-01/trafficpolicyinstance/{Id}",
+	}
 
-// UpdateTrafficPolicyInstanceWithContext is the same as UpdateTrafficPolicyInstance with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTrafficPolicyInstance for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53) UpdateTrafficPolicyInstanceWithContext(ctx aws.Context, input *UpdateTrafficPolicyInstanceInput, opts ...aws.Option) (*UpdateTrafficPolicyInstanceOutput, error) {
-	req, out := c.UpdateTrafficPolicyInstanceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateTrafficPolicyInstanceInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateTrafficPolicyInstanceOutput{})
+	return UpdateTrafficPolicyInstanceRequest{Request: req, Input: input}
 }
 
 // A complex type that identifies the CloudWatch alarm that you want Amazon

@@ -25,7 +25,7 @@ var (
 )
 
 func TestCustomizations(t *testing.T) {
-	req, _ := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 	})
@@ -57,7 +57,7 @@ func TestCustomizations(t *testing.T) {
 }
 
 func TestShortcircuitTreehash(t *testing.T) {
-	req, _ := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 		Checksum:  aws.String("000"),
@@ -73,7 +73,7 @@ func TestShortcircuitTreehash(t *testing.T) {
 }
 
 func TestFillAccountIDWithNilStruct(t *testing.T) {
-	req, _ := svc.ListVaultsRequest(nil)
+	req := svc.ListVaultsRequest(nil)
 	err := req.Build()
 	if err != nil {
 		t.Errorf("expect no err, got %v", err)
@@ -97,7 +97,7 @@ func TestFillAccountIDWithNilStruct(t *testing.T) {
 }
 
 func TestHashOnce(t *testing.T) {
-	req, _ := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
+	req := svc.UploadArchiveRequest(&glacier.UploadArchiveInput{
 		VaultName: aws.String("vault"),
 		Body:      payloadBuf,
 	})

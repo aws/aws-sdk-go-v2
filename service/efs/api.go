@@ -14,47 +14,24 @@ import (
 
 const opCreateFileSystem = "CreateFileSystem"
 
-// CreateFileSystemRequest generates a "aws.Request" representing the
-// client's request for the CreateFileSystem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFileSystem for more information on using the CreateFileSystem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateFileSystemRequest method.
-//    req, resp := client.CreateFileSystemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem
-func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *aws.Request, output *FileSystemDescription) {
-	op := &aws.Operation{
-		Name:       opCreateFileSystem,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-02-01/file-systems",
-	}
-
-	if input == nil {
-		input = &CreateFileSystemInput{}
-	}
-
-	output = &FileSystemDescription{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateFileSystemRequest is a API request type for the CreateFileSystem API operation.
+type CreateFileSystemRequest struct {
+	*aws.Request
+	Input *CreateFileSystemInput
 }
 
-// CreateFileSystem API operation for Amazon Elastic File System.
+// Send marshals and sends the CreateFileSystem API request.
+func (r *CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFileSystemOutput), nil
+}
+
+// CreateFileSystemRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Creates a new, empty file system. The operation requires a creation token
 // in the request that Amazon EFS uses to ensure idempotent creation (calling
@@ -103,94 +80,49 @@ func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *aws.Re
 // This operation requires permissions for the elasticfilesystem:CreateFileSystem
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation CreateFileSystem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemAlreadyExists "FileSystemAlreadyExists"
-//   Returned if the file system you are trying to create already exists, with
-//   the creation token you provided.
-//
-//   * ErrCodeFileSystemLimitExceeded "FileSystemLimitExceeded"
-//   Returned if the AWS account has already created maximum number of file systems
-//   allowed per account.
+//    // Example sending a request using the CreateFileSystemRequest method.
+//    req := client.CreateFileSystemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem
-func (c *EFS) CreateFileSystem(input *CreateFileSystemInput) (*FileSystemDescription, error) {
-	req, out := c.CreateFileSystemRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFileSystemRequest {
+	op := &aws.Operation{
+		Name:       opCreateFileSystem,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-02-01/file-systems",
+	}
 
-// CreateFileSystemWithContext is the same as CreateFileSystem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFileSystem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) CreateFileSystemWithContext(ctx aws.Context, input *CreateFileSystemInput, opts ...aws.Option) (*FileSystemDescription, error) {
-	req, out := c.CreateFileSystemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateFileSystemInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateFileSystemOutput{})
+	return CreateFileSystemRequest{Request: req, Input: input}
 }
 
 const opCreateMountTarget = "CreateMountTarget"
 
-// CreateMountTargetRequest generates a "aws.Request" representing the
-// client's request for the CreateMountTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateMountTarget for more information on using the CreateMountTarget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateMountTargetRequest method.
-//    req, resp := client.CreateMountTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget
-func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *aws.Request, output *MountTargetDescription) {
-	op := &aws.Operation{
-		Name:       opCreateMountTarget,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-02-01/mount-targets",
-	}
-
-	if input == nil {
-		input = &CreateMountTargetInput{}
-	}
-
-	output = &MountTargetDescription{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateMountTargetRequest is a API request type for the CreateMountTarget API operation.
+type CreateMountTargetRequest struct {
+	*aws.Request
+	Input *CreateMountTargetInput
 }
 
-// CreateMountTarget API operation for Amazon Elastic File System.
+// Send marshals and sends the CreateMountTarget API request.
+func (r *CreateMountTargetRequest) Send() (*CreateMountTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateMountTargetOutput), nil
+}
+
+// CreateMountTargetRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Creates a mount target for a file system. You can then mount the file system
 // on EC2 instances via the mount target.
@@ -288,109 +220,67 @@ func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *aws.
 //
 //    * ec2:CreateNetworkInterface
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation CreateMountTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
-//
-//   * ErrCodeIncorrectFileSystemLifeCycleState "IncorrectFileSystemLifeCycleState"
-//   Returned if the file system's life cycle state is not "created".
-//
-//   * ErrCodeMountTargetConflict "MountTargetConflict"
-//   Returned if the mount target would violate one of the specified restrictions
-//   based on the file system's existing mount targets.
-//
-//   * ErrCodeSubnetNotFound "SubnetNotFound"
-//   Returned if there is no subnet with ID SubnetId provided in the request.
-//
-//   * ErrCodeNoFreeAddressesInSubnet "NoFreeAddressesInSubnet"
-//   Returned if IpAddress was not specified in the request and there are no free
-//   IP addresses in the subnet.
-//
-//   * ErrCodeIpAddressInUse "IpAddressInUse"
-//   Returned if the request specified an IpAddress that is already in use in
-//   the subnet.
-//
-//   * ErrCodeNetworkInterfaceLimitExceeded "NetworkInterfaceLimitExceeded"
-//   The calling account has reached the ENI limit for the specific AWS region.
-//   Client should try to delete some ENIs or get its account limit raised. For
-//   more information, see Amazon VPC Limits (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
-//   in the Amazon Virtual Private Cloud User Guide (see the Network interfaces
-//   per VPC entry in the table).
-//
-//   * ErrCodeSecurityGroupLimitExceeded "SecurityGroupLimitExceeded"
-//   Returned if the size of SecurityGroups specified in the request is greater
-//   than five.
-//
-//   * ErrCodeSecurityGroupNotFound "SecurityGroupNotFound"
-//   Returned if one of the specified security groups does not exist in the subnet's
-//   VPC.
-//
-//   * ErrCodeUnsupportedAvailabilityZone "UnsupportedAvailabilityZone"
+//    // Example sending a request using the CreateMountTargetRequest method.
+//    req := client.CreateMountTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget
-func (c *EFS) CreateMountTarget(input *CreateMountTargetInput) (*MountTargetDescription, error) {
-	req, out := c.CreateMountTargetRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) CreateMountTargetRequest {
+	op := &aws.Operation{
+		Name:       opCreateMountTarget,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-02-01/mount-targets",
+	}
 
-// CreateMountTargetWithContext is the same as CreateMountTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateMountTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) CreateMountTargetWithContext(ctx aws.Context, input *CreateMountTargetInput, opts ...aws.Option) (*MountTargetDescription, error) {
-	req, out := c.CreateMountTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateMountTargetInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateMountTargetOutput{})
+	return CreateMountTargetRequest{Request: req, Input: input}
 }
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTagsRequest is a API request type for the CreateTags API operation.
+type CreateTagsRequest struct {
+	*aws.Request
+	Input *CreateTagsInput
+}
+
+// Send marshals and sends the CreateTags API request.
+func (r *CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTagsOutput), nil
+}
+
+// CreateTagsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates or overwrites tags associated with a file system. Each tag is a key-value
+// pair. If a tag key specified in the request already exists on the file system,
+// this operation overwrites its value with the value provided in the request.
+// If you add the Name tag to your file system, Amazon EFS returns it in the
+// response to the DescribeFileSystems operation.
 //
-// See CreateTags for more information on using the CreateTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permission for the elasticfilesystem:CreateTags action.
 //
 //    // Example sending a request using the CreateTagsRequest method.
-//    req, resp := client.CreateTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags
-func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+func (c *EFS) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
@@ -401,109 +291,32 @@ func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, outpu
 		input = &CreateTagsInput{}
 	}
 
-	output = &CreateTagsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &CreateTagsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// CreateTags API operation for Amazon Elastic File System.
-//
-// Creates or overwrites tags associated with a file system. Each tag is a key-value
-// pair. If a tag key specified in the request already exists on the file system,
-// this operation overwrites its value with the value provided in the request.
-// If you add the Name tag to your file system, Amazon EFS returns it in the
-// response to the DescribeFileSystems operation.
-//
-// This operation requires permission for the elasticfilesystem:CreateTags action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation CreateTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags
-func (c *EFS) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateTagsWithContext is the same as CreateTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
-	req, out := c.CreateTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return CreateTagsRequest{Request: req, Input: input}
 }
 
 const opDeleteFileSystem = "DeleteFileSystem"
 
-// DeleteFileSystemRequest generates a "aws.Request" representing the
-// client's request for the DeleteFileSystem operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFileSystem for more information on using the DeleteFileSystem
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteFileSystemRequest method.
-//    req, resp := client.DeleteFileSystemRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem
-func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *aws.Request, output *DeleteFileSystemOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteFileSystem,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2015-02-01/file-systems/{FileSystemId}",
-	}
-
-	if input == nil {
-		input = &DeleteFileSystemInput{}
-	}
-
-	output = &DeleteFileSystemOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteFileSystemRequest is a API request type for the DeleteFileSystem API operation.
+type DeleteFileSystemRequest struct {
+	*aws.Request
+	Input *DeleteFileSystemInput
 }
 
-// DeleteFileSystem API operation for Amazon Elastic File System.
+// Send marshals and sends the DeleteFileSystem API request.
+func (r *DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFileSystemOutput), nil
+}
+
+// DeleteFileSystemRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Deletes a file system, permanently severing access to its contents. Upon
 // return, the file system no longer exists and you can't access any contents
@@ -522,95 +335,51 @@ func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *aws.Re
 // This operation requires permissions for the elasticfilesystem:DeleteFileSystem
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DeleteFileSystem for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
-//
-//   * ErrCodeFileSystemInUse "FileSystemInUse"
-//   Returned if a file system has mount targets.
+//    // Example sending a request using the DeleteFileSystemRequest method.
+//    req := client.DeleteFileSystemRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem
-func (c *EFS) DeleteFileSystem(input *DeleteFileSystemInput) (*DeleteFileSystemOutput, error) {
-	req, out := c.DeleteFileSystemRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFileSystemRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFileSystem,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2015-02-01/file-systems/{FileSystemId}",
+	}
 
-// DeleteFileSystemWithContext is the same as DeleteFileSystem with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFileSystem for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DeleteFileSystemWithContext(ctx aws.Context, input *DeleteFileSystemInput, opts ...aws.Option) (*DeleteFileSystemOutput, error) {
-	req, out := c.DeleteFileSystemRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteFileSystemInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteFileSystemOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteFileSystemRequest{Request: req, Input: input}
 }
 
 const opDeleteMountTarget = "DeleteMountTarget"
 
-// DeleteMountTargetRequest generates a "aws.Request" representing the
-// client's request for the DeleteMountTarget operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteMountTarget for more information on using the DeleteMountTarget
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteMountTargetRequest method.
-//    req, resp := client.DeleteMountTargetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget
-func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *aws.Request, output *DeleteMountTargetOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteMountTarget,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}",
-	}
-
-	if input == nil {
-		input = &DeleteMountTargetInput{}
-	}
-
-	output = &DeleteMountTargetOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteMountTargetRequest is a API request type for the DeleteMountTarget API operation.
+type DeleteMountTargetRequest struct {
+	*aws.Request
+	Input *DeleteMountTargetInput
 }
 
-// DeleteMountTarget API operation for Amazon Elastic File System.
+// Send marshals and sends the DeleteMountTarget API request.
+func (r *DeleteMountTargetRequest) Send() (*DeleteMountTargetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMountTargetOutput), nil
+}
+
+// DeleteMountTargetRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Deletes the specified mount target.
 //
@@ -638,96 +407,51 @@ func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *aws.
 //
 //    * ec2:DeleteNetworkInterface
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DeleteMountTarget for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeDependencyTimeout "DependencyTimeout"
-//   The service timed out trying to fulfill the request, and the client should
-//   try the call again.
-//
-//   * ErrCodeMountTargetNotFound "MountTargetNotFound"
-//   Returned if there is no mount target with the specified ID found in the caller's
-//   account.
+//    // Example sending a request using the DeleteMountTargetRequest method.
+//    req := client.DeleteMountTargetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget
-func (c *EFS) DeleteMountTarget(input *DeleteMountTargetInput) (*DeleteMountTargetOutput, error) {
-	req, out := c.DeleteMountTargetRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteMountTargetRequest {
+	op := &aws.Operation{
+		Name:       opDeleteMountTarget,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}",
+	}
 
-// DeleteMountTargetWithContext is the same as DeleteMountTarget with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteMountTarget for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DeleteMountTargetWithContext(ctx aws.Context, input *DeleteMountTargetInput, opts ...aws.Option) (*DeleteMountTargetOutput, error) {
-	req, out := c.DeleteMountTargetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteMountTargetInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteMountTargetOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteMountTargetRequest{Request: req, Input: input}
 }
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws.Request" representing the
-// client's request for the DeleteTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTags for more information on using the DeleteTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteTagsRequest method.
-//    req, resp := client.DeleteTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags
-func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteTags,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2015-02-01/delete-tags/{FileSystemId}",
-	}
-
-	if input == nil {
-		input = &DeleteTagsInput{}
-	}
-
-	output = &DeleteTagsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteTagsRequest is a API request type for the DeleteTags API operation.
+type DeleteTagsRequest struct {
+	*aws.Request
+	Input *DeleteTagsInput
 }
 
-// DeleteTags API operation for Amazon Elastic File System.
+// Send marshals and sends the DeleteTags API request.
+func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagsOutput), nil
+}
+
+// DeleteTagsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Deletes the specified tags from a file system. If the DeleteTags request
 // includes a tag key that does not exist, Amazon EFS ignores it and doesn't
@@ -738,90 +462,51 @@ func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, outpu
 // This operation requires permissions for the elasticfilesystem:DeleteTags
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DeleteTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
+//    // Example sending a request using the DeleteTagsRequest method.
+//    req := client.DeleteTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags
-func (c *EFS) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTags,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-02-01/delete-tags/{FileSystemId}",
+	}
 
-// DeleteTagsWithContext is the same as DeleteTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
-	req, out := c.DeleteTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteTagsInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteTagsOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeFileSystems = "DescribeFileSystems"
 
-// DescribeFileSystemsRequest generates a "aws.Request" representing the
-// client's request for the DescribeFileSystems operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeFileSystems for more information on using the DescribeFileSystems
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeFileSystemsRequest method.
-//    req, resp := client.DescribeFileSystemsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems
-func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *aws.Request, output *DescribeFileSystemsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeFileSystems,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2015-02-01/file-systems",
-	}
-
-	if input == nil {
-		input = &DescribeFileSystemsInput{}
-	}
-
-	output = &DescribeFileSystemsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeFileSystemsRequest is a API request type for the DescribeFileSystems API operation.
+type DescribeFileSystemsRequest struct {
+	*aws.Request
+	Input *DescribeFileSystemsInput
 }
 
-// DescribeFileSystems API operation for Amazon Elastic File System.
+// Send marshals and sends the DescribeFileSystems API request.
+func (r *DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFileSystemsOutput), nil
+}
+
+// DescribeFileSystemsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Returns the description of a specific Amazon EFS file system if either the
 // file system CreationToken or the FileSystemId is provided. Otherwise, it
@@ -850,90 +535,49 @@ func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *
 // This operation requires permissions for the elasticfilesystem:DescribeFileSystems
 // action.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DescribeFileSystems for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
+//    // Example sending a request using the DescribeFileSystemsRequest method.
+//    req := client.DescribeFileSystemsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems
-func (c *EFS) DescribeFileSystems(input *DescribeFileSystemsInput) (*DescribeFileSystemsOutput, error) {
-	req, out := c.DescribeFileSystemsRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) DescribeFileSystemsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeFileSystems,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-02-01/file-systems",
+	}
 
-// DescribeFileSystemsWithContext is the same as DescribeFileSystems with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeFileSystems for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DescribeFileSystemsWithContext(ctx aws.Context, input *DescribeFileSystemsInput, opts ...aws.Option) (*DescribeFileSystemsOutput, error) {
-	req, out := c.DescribeFileSystemsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeFileSystemsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeFileSystemsOutput{})
+	return DescribeFileSystemsRequest{Request: req, Input: input}
 }
 
 const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 
-// DescribeMountTargetSecurityGroupsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMountTargetSecurityGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMountTargetSecurityGroups for more information on using the DescribeMountTargetSecurityGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeMountTargetSecurityGroupsRequest method.
-//    req, resp := client.DescribeMountTargetSecurityGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups
-func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) (req *aws.Request, output *DescribeMountTargetSecurityGroupsOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeMountTargetSecurityGroups,
-		HTTPMethod: "GET",
-		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
-	}
-
-	if input == nil {
-		input = &DescribeMountTargetSecurityGroupsInput{}
-	}
-
-	output = &DescribeMountTargetSecurityGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeMountTargetSecurityGroupsRequest is a API request type for the DescribeMountTargetSecurityGroups API operation.
+type DescribeMountTargetSecurityGroupsRequest struct {
+	*aws.Request
+	Input *DescribeMountTargetSecurityGroupsInput
 }
 
-// DescribeMountTargetSecurityGroups API operation for Amazon Elastic File System.
+// Send marshals and sends the DescribeMountTargetSecurityGroups API request.
+func (r *DescribeMountTargetSecurityGroupsRequest) Send() (*DescribeMountTargetSecurityGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMountTargetSecurityGroupsOutput), nil
+}
+
+// DescribeMountTargetSecurityGroupsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Returns the security groups currently in effect for a mount target. This
 // operation requires that the network interface of the mount target has been
@@ -947,77 +591,67 @@ func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTarge
 //    * ec2:DescribeNetworkInterfaceAttribute action on the mount target's network
 //    interface.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DescribeMountTargetSecurityGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeMountTargetNotFound "MountTargetNotFound"
-//   Returned if there is no mount target with the specified ID found in the caller's
-//   account.
-//
-//   * ErrCodeIncorrectMountTargetState "IncorrectMountTargetState"
-//   Returned if the mount target is not in the correct state for the operation.
+//    // Example sending a request using the DescribeMountTargetSecurityGroupsRequest method.
+//    req := client.DescribeMountTargetSecurityGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups
-func (c *EFS) DescribeMountTargetSecurityGroups(input *DescribeMountTargetSecurityGroupsInput) (*DescribeMountTargetSecurityGroupsOutput, error) {
-	req, out := c.DescribeMountTargetSecurityGroupsRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeMountTargetSecurityGroups,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
+	}
 
-// DescribeMountTargetSecurityGroupsWithContext is the same as DescribeMountTargetSecurityGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMountTargetSecurityGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DescribeMountTargetSecurityGroupsWithContext(ctx aws.Context, input *DescribeMountTargetSecurityGroupsInput, opts ...aws.Option) (*DescribeMountTargetSecurityGroupsOutput, error) {
-	req, out := c.DescribeMountTargetSecurityGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeMountTargetSecurityGroupsInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeMountTargetSecurityGroupsOutput{})
+	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input}
 }
 
 const opDescribeMountTargets = "DescribeMountTargets"
 
-// DescribeMountTargetsRequest generates a "aws.Request" representing the
-// client's request for the DescribeMountTargets operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMountTargetsRequest is a API request type for the DescribeMountTargets API operation.
+type DescribeMountTargetsRequest struct {
+	*aws.Request
+	Input *DescribeMountTargetsInput
+}
+
+// Send marshals and sends the DescribeMountTargets API request.
+func (r *DescribeMountTargetsRequest) Send() (*DescribeMountTargetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMountTargetsOutput), nil
+}
+
+// DescribeMountTargetsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the descriptions of all the current mount targets, or a specific
+// mount target, for a file system. When requesting all of the current mount
+// targets, the order of mount targets returned in the response is unspecified.
 //
-// See DescribeMountTargets for more information on using the DescribeMountTargets
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the elasticfilesystem:DescribeMountTargets
+// action, on either the file system ID that you specify in FileSystemId, or
+// on the file system of the mount target that you specify in MountTargetId.
 //
 //    // Example sending a request using the DescribeMountTargetsRequest method.
-//    req, resp := client.DescribeMountTargetsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMountTargetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets
-func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req *aws.Request, output *DescribeMountTargetsOutput) {
+func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) DescribeMountTargetsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMountTargets,
 		HTTPMethod: "GET",
@@ -1028,93 +662,47 @@ func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req
 		input = &DescribeMountTargetsInput{}
 	}
 
-	output = &DescribeMountTargetsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMountTargets API operation for Amazon Elastic File System.
-//
-// Returns the descriptions of all the current mount targets, or a specific
-// mount target, for a file system. When requesting all of the current mount
-// targets, the order of mount targets returned in the response is unspecified.
-//
-// This operation requires permissions for the elasticfilesystem:DescribeMountTargets
-// action, on either the file system ID that you specify in FileSystemId, or
-// on the file system of the mount target that you specify in MountTargetId.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DescribeMountTargets for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
-//
-//   * ErrCodeMountTargetNotFound "MountTargetNotFound"
-//   Returned if there is no mount target with the specified ID found in the caller's
-//   account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets
-func (c *EFS) DescribeMountTargets(input *DescribeMountTargetsInput) (*DescribeMountTargetsOutput, error) {
-	req, out := c.DescribeMountTargetsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMountTargetsWithContext is the same as DescribeMountTargets with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMountTargets for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DescribeMountTargetsWithContext(ctx aws.Context, input *DescribeMountTargetsInput, opts ...aws.Option) (*DescribeMountTargetsOutput, error) {
-	req, out := c.DescribeMountTargetsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMountTargetsOutput{})
+	return DescribeMountTargetsRequest{Request: req, Input: input}
 }
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the tags associated with a file system. The order of tags returned
+// in the response of one DescribeTags call and the order of tags returned across
+// the responses of a multi-call iteration (when using pagination) is unspecified.
 //
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation requires permissions for the elasticfilesystem:DescribeTags
+// action.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags
-func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "GET",
@@ -1125,106 +713,30 @@ func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, o
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for Amazon Elastic File System.
-//
-// Returns the tags associated with a file system. The order of tags returned
-// in the response of one DescribeTags call and the order of tags returned across
-// the responses of a multi-call iteration (when using pagination) is unspecified.
-//
-// This operation requires permissions for the elasticfilesystem:DescribeTags
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeFileSystemNotFound "FileSystemNotFound"
-//   Returned if the specified FileSystemId does not exist in the requester's
-//   AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags
-func (c *EFS) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
 
-// ModifyMountTargetSecurityGroupsRequest generates a "aws.Request" representing the
-// client's request for the ModifyMountTargetSecurityGroups operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ModifyMountTargetSecurityGroups for more information on using the ModifyMountTargetSecurityGroups
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ModifyMountTargetSecurityGroupsRequest method.
-//    req, resp := client.ModifyMountTargetSecurityGroupsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups
-func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) (req *aws.Request, output *ModifyMountTargetSecurityGroupsOutput) {
-	op := &aws.Operation{
-		Name:       opModifyMountTargetSecurityGroups,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
-	}
-
-	if input == nil {
-		input = &ModifyMountTargetSecurityGroupsInput{}
-	}
-
-	output = &ModifyMountTargetSecurityGroupsOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// ModifyMountTargetSecurityGroupsRequest is a API request type for the ModifyMountTargetSecurityGroups API operation.
+type ModifyMountTargetSecurityGroupsRequest struct {
+	*aws.Request
+	Input *ModifyMountTargetSecurityGroupsInput
 }
 
-// ModifyMountTargetSecurityGroups API operation for Amazon Elastic File System.
+// Send marshals and sends the ModifyMountTargetSecurityGroups API request.
+func (r *ModifyMountTargetSecurityGroupsRequest) Send() (*ModifyMountTargetSecurityGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyMountTargetSecurityGroupsOutput), nil
+}
+
+// ModifyMountTargetSecurityGroupsRequest returns a request value for making API operation for
+// Amazon Elastic File System.
 //
 // Modifies the set of security groups in effect for a mount target.
 //
@@ -1243,56 +755,29 @@ func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSec
 //    * ec2:ModifyNetworkInterfaceAttribute action on the mount target's network
 //    interface.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Elastic File System's
-// API operation ModifyMountTargetSecurityGroups for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequest "BadRequest"
-//   Returned if the request is malformed or contains an error such as an invalid
-//   parameter value or a missing required parameter.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   Returned if an error occurred on the server side.
-//
-//   * ErrCodeMountTargetNotFound "MountTargetNotFound"
-//   Returned if there is no mount target with the specified ID found in the caller's
-//   account.
-//
-//   * ErrCodeIncorrectMountTargetState "IncorrectMountTargetState"
-//   Returned if the mount target is not in the correct state for the operation.
-//
-//   * ErrCodeSecurityGroupLimitExceeded "SecurityGroupLimitExceeded"
-//   Returned if the size of SecurityGroups specified in the request is greater
-//   than five.
-//
-//   * ErrCodeSecurityGroupNotFound "SecurityGroupNotFound"
-//   Returned if one of the specified security groups does not exist in the subnet's
-//   VPC.
+//    // Example sending a request using the ModifyMountTargetSecurityGroupsRequest method.
+//    req := client.ModifyMountTargetSecurityGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups
-func (c *EFS) ModifyMountTargetSecurityGroups(input *ModifyMountTargetSecurityGroupsInput) (*ModifyMountTargetSecurityGroupsOutput, error) {
-	req, out := c.ModifyMountTargetSecurityGroupsRequest(input)
-	return out, req.Send()
-}
+func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) ModifyMountTargetSecurityGroupsRequest {
+	op := &aws.Operation{
+		Name:       opModifyMountTargetSecurityGroups,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
+	}
 
-// ModifyMountTargetSecurityGroupsWithContext is the same as ModifyMountTargetSecurityGroups with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ModifyMountTargetSecurityGroups for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *EFS) ModifyMountTargetSecurityGroupsWithContext(ctx aws.Context, input *ModifyMountTargetSecurityGroupsInput, opts ...aws.Option) (*ModifyMountTargetSecurityGroupsOutput, error) {
-	req, out := c.ModifyMountTargetSecurityGroupsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ModifyMountTargetSecurityGroupsInput{}
+	}
+
+	req := c.newRequest(op, input, &ModifyMountTargetSecurityGroupsOutput{})
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest
@@ -1393,6 +878,150 @@ func (s *CreateFileSystemInput) SetPerformanceMode(v PerformanceMode) *CreateFil
 	return s
 }
 
+// Description of the file system.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
+type CreateFileSystemOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
+	//
+	// CreationTime is a required field
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Opaque string specified in the request.
+	//
+	// CreationToken is a required field
+	CreationToken *string `min:"1" type:"string" required:"true"`
+
+	// A boolean value that, if true, indicates that the file system is encrypted.
+	Encrypted *bool `type:"boolean"`
+
+	// ID of the file system, assigned by Amazon EFS.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `type:"string" required:"true"`
+
+	// The id of an AWS Key Management Service (AWS KMS) customer master key (CMK)
+	// that was used to protect the encrypted file system.
+	KmsKeyId *string `min:"1" type:"string"`
+
+	// Lifecycle phase of the file system.
+	//
+	// LifeCycleState is a required field
+	LifeCycleState LifeCycleState `type:"string" required:"true"`
+
+	// You can add tags to a file system, including a Name tag. For more information,
+	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
+	// value in this field.
+	Name *string `type:"string"`
+
+	// Current number of mount targets that the file system has. For more information,
+	// see CreateMountTarget.
+	//
+	// NumberOfMountTargets is a required field
+	NumberOfMountTargets *int64 `type:"integer" required:"true"`
+
+	// AWS account that created the file system. If the file system was created
+	// by an IAM user, the parent account to which the user belongs is the owner.
+	//
+	// OwnerId is a required field
+	OwnerId *string `type:"string" required:"true"`
+
+	// The PerformanceMode of the file system.
+	//
+	// PerformanceMode is a required field
+	PerformanceMode PerformanceMode `type:"string" required:"true"`
+
+	// Latest known metered size (in bytes) of data stored in the file system, in
+	// bytes, in its Value field, and the time at which that size was determined
+	// in its Timestamp field. The Timestamp value is the integer number of seconds
+	// since 1970-01-01T00:00:00Z. Note that the value does not represent the size
+	// of a consistent snapshot of the file system, but it is eventually consistent
+	// when there are no writes to the file system. That is, the value will represent
+	// actual size only if the file system is not modified for a period longer than
+	// a couple of hours. Otherwise, the value is not the exact size the file system
+	// was at any instant in time.
+	//
+	// SizeInBytes is a required field
+	SizeInBytes *FileSystemSize `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateFileSystemOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFileSystemOutput) GoString() string {
+	return s.String()
+}
+
+// SetCreationTime sets the CreationTime field's value.
+func (s *CreateFileSystemOutput) SetCreationTime(v time.Time) *CreateFileSystemOutput {
+	s.CreationTime = &v
+	return s
+}
+
+// SetCreationToken sets the CreationToken field's value.
+func (s *CreateFileSystemOutput) SetCreationToken(v string) *CreateFileSystemOutput {
+	s.CreationToken = &v
+	return s
+}
+
+// SetEncrypted sets the Encrypted field's value.
+func (s *CreateFileSystemOutput) SetEncrypted(v bool) *CreateFileSystemOutput {
+	s.Encrypted = &v
+	return s
+}
+
+// SetFileSystemId sets the FileSystemId field's value.
+func (s *CreateFileSystemOutput) SetFileSystemId(v string) *CreateFileSystemOutput {
+	s.FileSystemId = &v
+	return s
+}
+
+// SetKmsKeyId sets the KmsKeyId field's value.
+func (s *CreateFileSystemOutput) SetKmsKeyId(v string) *CreateFileSystemOutput {
+	s.KmsKeyId = &v
+	return s
+}
+
+// SetLifeCycleState sets the LifeCycleState field's value.
+func (s *CreateFileSystemOutput) SetLifeCycleState(v LifeCycleState) *CreateFileSystemOutput {
+	s.LifeCycleState = v
+	return s
+}
+
+// SetName sets the Name field's value.
+func (s *CreateFileSystemOutput) SetName(v string) *CreateFileSystemOutput {
+	s.Name = &v
+	return s
+}
+
+// SetNumberOfMountTargets sets the NumberOfMountTargets field's value.
+func (s *CreateFileSystemOutput) SetNumberOfMountTargets(v int64) *CreateFileSystemOutput {
+	s.NumberOfMountTargets = &v
+	return s
+}
+
+// SetOwnerId sets the OwnerId field's value.
+func (s *CreateFileSystemOutput) SetOwnerId(v string) *CreateFileSystemOutput {
+	s.OwnerId = &v
+	return s
+}
+
+// SetPerformanceMode sets the PerformanceMode field's value.
+func (s *CreateFileSystemOutput) SetPerformanceMode(v PerformanceMode) *CreateFileSystemOutput {
+	s.PerformanceMode = v
+	return s
+}
+
+// SetSizeInBytes sets the SizeInBytes field's value.
+func (s *CreateFileSystemOutput) SetSizeInBytes(v *FileSystemSize) *CreateFileSystemOutput {
+	s.SizeInBytes = v
+	return s
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTargetRequest
 type CreateMountTargetInput struct {
 	_ struct{} `type:"structure"`
@@ -1463,6 +1092,94 @@ func (s *CreateMountTargetInput) SetSecurityGroups(v []*string) *CreateMountTarg
 
 // SetSubnetId sets the SubnetId field's value.
 func (s *CreateMountTargetInput) SetSubnetId(v string) *CreateMountTargetInput {
+	s.SubnetId = &v
+	return s
+}
+
+// Provides a description of a mount target.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription
+type CreateMountTargetOutput struct {
+	_ struct{} `type:"structure"`
+
+	// ID of the file system for which the mount target is intended.
+	//
+	// FileSystemId is a required field
+	FileSystemId *string `type:"string" required:"true"`
+
+	// Address at which the file system may be mounted via the mount target.
+	IpAddress *string `type:"string"`
+
+	// Lifecycle state of the mount target.
+	//
+	// LifeCycleState is a required field
+	LifeCycleState LifeCycleState `type:"string" required:"true"`
+
+	// System-assigned mount target ID.
+	//
+	// MountTargetId is a required field
+	MountTargetId *string `type:"string" required:"true"`
+
+	// ID of the network interface that Amazon EFS created when it created the mount
+	// target.
+	NetworkInterfaceId *string `type:"string"`
+
+	// AWS account ID that owns the resource.
+	OwnerId *string `type:"string"`
+
+	// ID of the mount target's subnet.
+	//
+	// SubnetId is a required field
+	SubnetId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateMountTargetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateMountTargetOutput) GoString() string {
+	return s.String()
+}
+
+// SetFileSystemId sets the FileSystemId field's value.
+func (s *CreateMountTargetOutput) SetFileSystemId(v string) *CreateMountTargetOutput {
+	s.FileSystemId = &v
+	return s
+}
+
+// SetIpAddress sets the IpAddress field's value.
+func (s *CreateMountTargetOutput) SetIpAddress(v string) *CreateMountTargetOutput {
+	s.IpAddress = &v
+	return s
+}
+
+// SetLifeCycleState sets the LifeCycleState field's value.
+func (s *CreateMountTargetOutput) SetLifeCycleState(v LifeCycleState) *CreateMountTargetOutput {
+	s.LifeCycleState = v
+	return s
+}
+
+// SetMountTargetId sets the MountTargetId field's value.
+func (s *CreateMountTargetOutput) SetMountTargetId(v string) *CreateMountTargetOutput {
+	s.MountTargetId = &v
+	return s
+}
+
+// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
+func (s *CreateMountTargetOutput) SetNetworkInterfaceId(v string) *CreateMountTargetOutput {
+	s.NetworkInterfaceId = &v
+	return s
+}
+
+// SetOwnerId sets the OwnerId field's value.
+func (s *CreateMountTargetOutput) SetOwnerId(v string) *CreateMountTargetOutput {
+	s.OwnerId = &v
+	return s
+}
+
+// SetSubnetId sets the SubnetId field's value.
+func (s *CreateMountTargetOutput) SetSubnetId(v string) *CreateMountTargetOutput {
 	s.SubnetId = &v
 	return s
 }
@@ -1808,7 +1525,7 @@ type DescribeFileSystemsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Array of file system descriptions.
-	FileSystems []*FileSystemDescription `type:"list"`
+	FileSystems []*CreateFileSystemOutput `type:"list"`
 
 	// Present if provided by caller in the request (String).
 	Marker *string `type:"string"`
@@ -1829,7 +1546,7 @@ func (s DescribeFileSystemsOutput) GoString() string {
 }
 
 // SetFileSystems sets the FileSystems field's value.
-func (s *DescribeFileSystemsOutput) SetFileSystems(v []*FileSystemDescription) *DescribeFileSystemsOutput {
+func (s *DescribeFileSystemsOutput) SetFileSystems(v []*CreateFileSystemOutput) *DescribeFileSystemsOutput {
 	s.FileSystems = v
 	return s
 }
@@ -1991,7 +1708,7 @@ type DescribeMountTargetsOutput struct {
 
 	// Returns the file system's mount targets as an array of MountTargetDescription
 	// objects.
-	MountTargets []*MountTargetDescription `type:"list"`
+	MountTargets []*CreateMountTargetOutput `type:"list"`
 
 	// If a value is present, there are more mount targets to return. In a subsequent
 	// request, you can provide Marker in your request with this value to retrieve
@@ -2016,7 +1733,7 @@ func (s *DescribeMountTargetsOutput) SetMarker(v string) *DescribeMountTargetsOu
 }
 
 // SetMountTargets sets the MountTargets field's value.
-func (s *DescribeMountTargetsOutput) SetMountTargets(v []*MountTargetDescription) *DescribeMountTargetsOutput {
+func (s *DescribeMountTargetsOutput) SetMountTargets(v []*CreateMountTargetOutput) *DescribeMountTargetsOutput {
 	s.MountTargets = v
 	return s
 }
@@ -2138,150 +1855,6 @@ func (s *DescribeTagsOutput) SetTags(v []*Tag) *DescribeTagsOutput {
 	return s
 }
 
-// Description of the file system.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription
-type FileSystemDescription struct {
-	_ struct{} `type:"structure"`
-
-	// Time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
-	//
-	// CreationTime is a required field
-	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
-
-	// Opaque string specified in the request.
-	//
-	// CreationToken is a required field
-	CreationToken *string `min:"1" type:"string" required:"true"`
-
-	// A boolean value that, if true, indicates that the file system is encrypted.
-	Encrypted *bool `type:"boolean"`
-
-	// ID of the file system, assigned by Amazon EFS.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `type:"string" required:"true"`
-
-	// The id of an AWS Key Management Service (AWS KMS) customer master key (CMK)
-	// that was used to protect the encrypted file system.
-	KmsKeyId *string `min:"1" type:"string"`
-
-	// Lifecycle phase of the file system.
-	//
-	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true"`
-
-	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
-	// value in this field.
-	Name *string `type:"string"`
-
-	// Current number of mount targets that the file system has. For more information,
-	// see CreateMountTarget.
-	//
-	// NumberOfMountTargets is a required field
-	NumberOfMountTargets *int64 `type:"integer" required:"true"`
-
-	// AWS account that created the file system. If the file system was created
-	// by an IAM user, the parent account to which the user belongs is the owner.
-	//
-	// OwnerId is a required field
-	OwnerId *string `type:"string" required:"true"`
-
-	// The PerformanceMode of the file system.
-	//
-	// PerformanceMode is a required field
-	PerformanceMode PerformanceMode `type:"string" required:"true"`
-
-	// Latest known metered size (in bytes) of data stored in the file system, in
-	// bytes, in its Value field, and the time at which that size was determined
-	// in its Timestamp field. The Timestamp value is the integer number of seconds
-	// since 1970-01-01T00:00:00Z. Note that the value does not represent the size
-	// of a consistent snapshot of the file system, but it is eventually consistent
-	// when there are no writes to the file system. That is, the value will represent
-	// actual size only if the file system is not modified for a period longer than
-	// a couple of hours. Otherwise, the value is not the exact size the file system
-	// was at any instant in time.
-	//
-	// SizeInBytes is a required field
-	SizeInBytes *FileSystemSize `type:"structure" required:"true"`
-}
-
-// String returns the string representation
-func (s FileSystemDescription) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s FileSystemDescription) GoString() string {
-	return s.String()
-}
-
-// SetCreationTime sets the CreationTime field's value.
-func (s *FileSystemDescription) SetCreationTime(v time.Time) *FileSystemDescription {
-	s.CreationTime = &v
-	return s
-}
-
-// SetCreationToken sets the CreationToken field's value.
-func (s *FileSystemDescription) SetCreationToken(v string) *FileSystemDescription {
-	s.CreationToken = &v
-	return s
-}
-
-// SetEncrypted sets the Encrypted field's value.
-func (s *FileSystemDescription) SetEncrypted(v bool) *FileSystemDescription {
-	s.Encrypted = &v
-	return s
-}
-
-// SetFileSystemId sets the FileSystemId field's value.
-func (s *FileSystemDescription) SetFileSystemId(v string) *FileSystemDescription {
-	s.FileSystemId = &v
-	return s
-}
-
-// SetKmsKeyId sets the KmsKeyId field's value.
-func (s *FileSystemDescription) SetKmsKeyId(v string) *FileSystemDescription {
-	s.KmsKeyId = &v
-	return s
-}
-
-// SetLifeCycleState sets the LifeCycleState field's value.
-func (s *FileSystemDescription) SetLifeCycleState(v LifeCycleState) *FileSystemDescription {
-	s.LifeCycleState = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *FileSystemDescription) SetName(v string) *FileSystemDescription {
-	s.Name = &v
-	return s
-}
-
-// SetNumberOfMountTargets sets the NumberOfMountTargets field's value.
-func (s *FileSystemDescription) SetNumberOfMountTargets(v int64) *FileSystemDescription {
-	s.NumberOfMountTargets = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *FileSystemDescription) SetOwnerId(v string) *FileSystemDescription {
-	s.OwnerId = &v
-	return s
-}
-
-// SetPerformanceMode sets the PerformanceMode field's value.
-func (s *FileSystemDescription) SetPerformanceMode(v PerformanceMode) *FileSystemDescription {
-	s.PerformanceMode = v
-	return s
-}
-
-// SetSizeInBytes sets the SizeInBytes field's value.
-func (s *FileSystemDescription) SetSizeInBytes(v *FileSystemSize) *FileSystemDescription {
-	s.SizeInBytes = v
-	return s
-}
-
 // Latest known metered size (in bytes) of data stored in the file system, in
 // its Value field, and the time at which that size was determined in its Timestamp
 // field. Note that the value does not represent the size of a consistent snapshot
@@ -2388,94 +1961,6 @@ func (s ModifyMountTargetSecurityGroupsOutput) String() string {
 // GoString returns the string representation
 func (s ModifyMountTargetSecurityGroupsOutput) GoString() string {
 	return s.String()
-}
-
-// Provides a description of a mount target.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription
-type MountTargetDescription struct {
-	_ struct{} `type:"structure"`
-
-	// ID of the file system for which the mount target is intended.
-	//
-	// FileSystemId is a required field
-	FileSystemId *string `type:"string" required:"true"`
-
-	// Address at which the file system may be mounted via the mount target.
-	IpAddress *string `type:"string"`
-
-	// Lifecycle state of the mount target.
-	//
-	// LifeCycleState is a required field
-	LifeCycleState LifeCycleState `type:"string" required:"true"`
-
-	// System-assigned mount target ID.
-	//
-	// MountTargetId is a required field
-	MountTargetId *string `type:"string" required:"true"`
-
-	// ID of the network interface that Amazon EFS created when it created the mount
-	// target.
-	NetworkInterfaceId *string `type:"string"`
-
-	// AWS account ID that owns the resource.
-	OwnerId *string `type:"string"`
-
-	// ID of the mount target's subnet.
-	//
-	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s MountTargetDescription) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s MountTargetDescription) GoString() string {
-	return s.String()
-}
-
-// SetFileSystemId sets the FileSystemId field's value.
-func (s *MountTargetDescription) SetFileSystemId(v string) *MountTargetDescription {
-	s.FileSystemId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *MountTargetDescription) SetIpAddress(v string) *MountTargetDescription {
-	s.IpAddress = &v
-	return s
-}
-
-// SetLifeCycleState sets the LifeCycleState field's value.
-func (s *MountTargetDescription) SetLifeCycleState(v LifeCycleState) *MountTargetDescription {
-	s.LifeCycleState = v
-	return s
-}
-
-// SetMountTargetId sets the MountTargetId field's value.
-func (s *MountTargetDescription) SetMountTargetId(v string) *MountTargetDescription {
-	s.MountTargetId = &v
-	return s
-}
-
-// SetNetworkInterfaceId sets the NetworkInterfaceId field's value.
-func (s *MountTargetDescription) SetNetworkInterfaceId(v string) *MountTargetDescription {
-	s.NetworkInterfaceId = &v
-	return s
-}
-
-// SetOwnerId sets the OwnerId field's value.
-func (s *MountTargetDescription) SetOwnerId(v string) *MountTargetDescription {
-	s.OwnerId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *MountTargetDescription) SetSubnetId(v string) *MountTargetDescription {
-	s.SubnetId = &v
-	return s
 }
 
 // A tag is a key-value pair. Allowed characters: letters, whitespace, and numbers,

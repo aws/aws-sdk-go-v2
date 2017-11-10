@@ -13,29 +13,36 @@ import (
 
 const opPutEvents = "PutEvents"
 
-// PutEventsRequest generates a "aws.Request" representing the
-// client's request for the PutEvents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutEventsRequest is a API request type for the PutEvents API operation.
+type PutEventsRequest struct {
+	*aws.Request
+	Input *PutEventsInput
+}
+
+// Send marshals and sends the PutEvents API request.
+func (r *PutEventsRequest) Send() (*PutEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEventsOutput), nil
+}
+
+// PutEventsRequest returns a request value for making API operation for
+// Amazon Mobile Analytics.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutEvents for more information on using the PutEvents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The PutEvents operation records one or more events. You can have up to 1,500
+// unique custom events per app, any combination of up to 40 attributes and
+// metrics per custom event, and any number of attribute or metric values.
 //
 //    // Example sending a request using the PutEventsRequest method.
-//    req, resp := client.PutEventsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
-func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *aws.Request, output *PutEventsOutput) {
+func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) PutEventsRequest {
 	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
@@ -46,49 +53,10 @@ func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *aws.Requ
 		input = &PutEventsInput{}
 	}
 
-	output = &PutEventsOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &PutEventsOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// PutEvents API operation for Amazon Mobile Analytics.
-//
-// The PutEvents operation records one or more events. You can have up to 1,500
-// unique custom events per app, any combination of up to 40 attributes and
-// metrics per custom event, and any number of attribute or metric values.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon Mobile Analytics's
-// API operation PutEvents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeBadRequestException "BadRequestException"
-//   An exception object returned when a request fails.
-//
-func (c *MobileAnalytics) PutEvents(input *PutEventsInput) (*PutEventsOutput, error) {
-	req, out := c.PutEventsRequest(input)
-	return out, req.Send()
-}
-
-// PutEventsWithContext is the same as PutEvents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutEvents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MobileAnalytics) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...aws.Option) (*PutEventsOutput, error) {
-	req, out := c.PutEventsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return PutEventsRequest{Request: req, Input: input}
 }
 
 // A JSON object representing a batch of unique event occurrences in your app.

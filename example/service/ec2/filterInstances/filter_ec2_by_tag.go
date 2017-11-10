@@ -40,7 +40,8 @@ func main() {
 		},
 	}
 
-	resp, err := svc.DescribeInstances(params)
+	req := svc.DescribeInstancesRequest(params)
+	resp, err := req.Send()
 	if err != nil {
 		exitErrorf("failed to describe instances, %s, %v", awsRegion, err)
 	}

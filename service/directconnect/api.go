@@ -12,31 +12,43 @@ import (
 
 const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 
-// AllocateConnectionOnInterconnectRequest generates a "aws.Request" representing the
-// client's request for the AllocateConnectionOnInterconnect operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AllocateConnectionOnInterconnectRequest is a API request type for the AllocateConnectionOnInterconnect API operation.
+type AllocateConnectionOnInterconnectRequest struct {
+	*aws.Request
+	Input *AllocateConnectionOnInterconnectInput
+}
+
+// Send marshals and sends the AllocateConnectionOnInterconnect API request.
+func (r *AllocateConnectionOnInterconnectRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// AllocateConnectionOnInterconnectRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated in favor of AllocateHostedConnection.
 //
-// See AllocateConnectionOnInterconnect for more information on using the AllocateConnectionOnInterconnect
-// API call, and error handling.
+// Creates a hosted connection on an interconnect.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// Allocates a VLAN number and a specified amount of bandwidth for use by a
+// hosted connection on the given interconnect.
 //
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AllocateConnectionOnInterconnectRequest method.
-//    req, resp := client.AllocateConnectionOnInterconnectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AllocateConnectionOnInterconnectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect
-func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) (req *aws.Request, output *Connection) {
+func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, AllocateConnectionOnInterconnect, has been deprecated")
 	}
@@ -50,87 +62,48 @@ func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateC
 		input = &AllocateConnectionOnInterconnectInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AllocateConnectionOnInterconnect API operation for AWS Direct Connect.
-//
-// Deprecated in favor of AllocateHostedConnection.
-//
-// Creates a hosted connection on an interconnect.
-//
-// Allocates a VLAN number and a specified amount of bandwidth for use by a
-// hosted connection on the given interconnect.
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AllocateConnectionOnInterconnect for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect
-func (c *DirectConnect) AllocateConnectionOnInterconnect(input *AllocateConnectionOnInterconnectInput) (*Connection, error) {
-	req, out := c.AllocateConnectionOnInterconnectRequest(input)
-	return out, req.Send()
-}
-
-// AllocateConnectionOnInterconnectWithContext is the same as AllocateConnectionOnInterconnect with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AllocateConnectionOnInterconnect for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AllocateConnectionOnInterconnectWithContext(ctx aws.Context, input *AllocateConnectionOnInterconnectInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.AllocateConnectionOnInterconnectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input}
 }
 
 const opAllocateHostedConnection = "AllocateHostedConnection"
 
-// AllocateHostedConnectionRequest generates a "aws.Request" representing the
-// client's request for the AllocateHostedConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AllocateHostedConnectionRequest is a API request type for the AllocateHostedConnection API operation.
+type AllocateHostedConnectionRequest struct {
+	*aws.Request
+	Input *AllocateHostedConnectionInput
+}
+
+// Send marshals and sends the AllocateHostedConnection API request.
+func (r *AllocateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// AllocateHostedConnectionRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a hosted connection on an interconnect or a link aggregation group
+// (LAG).
 //
-// See AllocateHostedConnection for more information on using the AllocateHostedConnection
-// API call, and error handling.
+// Allocates a VLAN number and a specified amount of bandwidth for use by a
+// hosted connection on the given interconnect or LAG.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AllocateHostedConnectionRequest method.
-//    req, resp := client.AllocateHostedConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AllocateHostedConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection
-func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedConnectionInput) (req *aws.Request, output *Connection) {
+func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedConnectionInput) AllocateHostedConnectionRequest {
 	op := &aws.Operation{
 		Name:       opAllocateHostedConnection,
 		HTTPMethod: "POST",
@@ -141,86 +114,47 @@ func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedCon
 		input = &AllocateHostedConnectionInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AllocateHostedConnection API operation for AWS Direct Connect.
-//
-// Creates a hosted connection on an interconnect or a link aggregation group
-// (LAG).
-//
-// Allocates a VLAN number and a specified amount of bandwidth for use by a
-// hosted connection on the given interconnect or LAG.
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AllocateHostedConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection
-func (c *DirectConnect) AllocateHostedConnection(input *AllocateHostedConnectionInput) (*Connection, error) {
-	req, out := c.AllocateHostedConnectionRequest(input)
-	return out, req.Send()
-}
-
-// AllocateHostedConnectionWithContext is the same as AllocateHostedConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AllocateHostedConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AllocateHostedConnectionWithContext(ctx aws.Context, input *AllocateHostedConnectionInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.AllocateHostedConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return AllocateHostedConnectionRequest{Request: req, Input: input}
 }
 
 const opAllocatePrivateVirtualInterface = "AllocatePrivateVirtualInterface"
 
-// AllocatePrivateVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the AllocatePrivateVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AllocatePrivateVirtualInterfaceRequest is a API request type for the AllocatePrivateVirtualInterface API operation.
+type AllocatePrivateVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *AllocatePrivateVirtualInterfaceInput
+}
+
+// Send marshals and sends the AllocatePrivateVirtualInterface API request.
+func (r *AllocatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+}
+
+// AllocatePrivateVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Provisions a private virtual interface to be owned by another AWS customer.
 //
-// See AllocatePrivateVirtualInterface for more information on using the AllocatePrivateVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Virtual interfaces created using this action must be confirmed by the virtual
+// interface owner by using the ConfirmPrivateVirtualInterface action. Until
+// then, the virtual interface will be in 'Confirming' state, and will not be
+// available for handling traffic.
 //
 //    // Example sending a request using the AllocatePrivateVirtualInterfaceRequest method.
-//    req, resp := client.AllocatePrivateVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AllocatePrivateVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface
-func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePrivateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePrivateVirtualInterfaceInput) AllocatePrivateVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opAllocatePrivateVirtualInterface,
 		HTTPMethod: "POST",
@@ -231,101 +165,30 @@ func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePr
 		input = &AllocatePrivateVirtualInterfaceInput{}
 	}
 
-	output = &VirtualInterface{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AllocatePrivateVirtualInterface API operation for AWS Direct Connect.
-//
-// Provisions a private virtual interface to be owned by another AWS customer.
-//
-// Virtual interfaces created using this action must be confirmed by the virtual
-// interface owner by using the ConfirmPrivateVirtualInterface action. Until
-// then, the virtual interface will be in 'Confirming' state, and will not be
-// available for handling traffic.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AllocatePrivateVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface
-func (c *DirectConnect) AllocatePrivateVirtualInterface(input *AllocatePrivateVirtualInterfaceInput) (*VirtualInterface, error) {
-	req, out := c.AllocatePrivateVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// AllocatePrivateVirtualInterfaceWithContext is the same as AllocatePrivateVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AllocatePrivateVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AllocatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePrivateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
-	req, out := c.AllocatePrivateVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	return AllocatePrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opAllocatePublicVirtualInterface = "AllocatePublicVirtualInterface"
 
-// AllocatePublicVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the AllocatePublicVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AllocatePublicVirtualInterface for more information on using the AllocatePublicVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AllocatePublicVirtualInterfaceRequest method.
-//    req, resp := client.AllocatePublicVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface
-func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePublicVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
-	op := &aws.Operation{
-		Name:       opAllocatePublicVirtualInterface,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AllocatePublicVirtualInterfaceInput{}
-	}
-
-	output = &VirtualInterface{}
-	req = c.newRequest(op, input, output)
-	return
+// AllocatePublicVirtualInterfaceRequest is a API request type for the AllocatePublicVirtualInterface API operation.
+type AllocatePublicVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *AllocatePublicVirtualInterfaceInput
 }
 
-// AllocatePublicVirtualInterface API operation for AWS Direct Connect.
+// Send marshals and sends the AllocatePublicVirtualInterface API request.
+func (r *AllocatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+}
+
+// AllocatePublicVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Provisions a public virtual interface to be owned by a different customer.
 //
@@ -341,87 +204,49 @@ func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePub
 // the customer and amazon address fields should be left blank to use auto-assigned
 // IPv6 space. Custom IPv6 Addresses are currently not supported.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AllocatePublicVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface
-func (c *DirectConnect) AllocatePublicVirtualInterface(input *AllocatePublicVirtualInterfaceInput) (*VirtualInterface, error) {
-	req, out := c.AllocatePublicVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// AllocatePublicVirtualInterfaceWithContext is the same as AllocatePublicVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AllocatePublicVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AllocatePublicVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePublicVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
-	req, out := c.AllocatePublicVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
-
-// AssociateConnectionWithLagRequest generates a "aws.Request" representing the
-// client's request for the AssociateConnectionWithLag operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateConnectionWithLag for more information on using the AssociateConnectionWithLag
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateConnectionWithLagRequest method.
-//    req, resp := client.AssociateConnectionWithLagRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the AllocatePublicVirtualInterfaceRequest method.
+//    req := client.AllocatePublicVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag
-func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnectionWithLagInput) (req *aws.Request, output *Connection) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface
+func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePublicVirtualInterfaceInput) AllocatePublicVirtualInterfaceRequest {
 	op := &aws.Operation{
-		Name:       opAssociateConnectionWithLag,
+		Name:       opAllocatePublicVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &AssociateConnectionWithLagInput{}
+		input = &AllocatePublicVirtualInterfaceInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	return AllocatePublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
-// AssociateConnectionWithLag API operation for AWS Direct Connect.
+const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
+
+// AssociateConnectionWithLagRequest is a API request type for the AssociateConnectionWithLag API operation.
+type AssociateConnectionWithLagRequest struct {
+	*aws.Request
+	Input *AssociateConnectionWithLagInput
+}
+
+// Send marshals and sends the AssociateConnectionWithLag API request.
+func (r *AssociateConnectionWithLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// AssociateConnectionWithLagRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Associates an existing connection with a link aggregation group (LAG). The
 // connection is interrupted and re-established as a member of the LAG (connectivity
@@ -441,71 +266,67 @@ func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnec
 // with the LAG. If the interconnect was originally associated with a different
 // LAG, the hosted connections remain associated with the original LAG.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AssociateConnectionWithLag for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the AssociateConnectionWithLagRequest method.
+//    req := client.AssociateConnectionWithLagRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag
-func (c *DirectConnect) AssociateConnectionWithLag(input *AssociateConnectionWithLagInput) (*Connection, error) {
-	req, out := c.AssociateConnectionWithLagRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest {
+	op := &aws.Operation{
+		Name:       opAssociateConnectionWithLag,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AssociateConnectionWithLagWithContext is the same as AssociateConnectionWithLag with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateConnectionWithLag for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AssociateConnectionWithLagWithContext(ctx aws.Context, input *AssociateConnectionWithLagInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.AssociateConnectionWithLagRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AssociateConnectionWithLagInput{}
+	}
+
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return AssociateConnectionWithLagRequest{Request: req, Input: input}
 }
 
 const opAssociateHostedConnection = "AssociateHostedConnection"
 
-// AssociateHostedConnectionRequest generates a "aws.Request" representing the
-// client's request for the AssociateHostedConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AssociateHostedConnectionRequest is a API request type for the AssociateHostedConnection API operation.
+type AssociateHostedConnectionRequest struct {
+	*aws.Request
+	Input *AssociateHostedConnectionInput
+}
+
+// Send marshals and sends the AssociateHostedConnection API request.
+func (r *AssociateHostedConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// AssociateHostedConnectionRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Associates a hosted connection and its virtual interfaces with a link aggregation
+// group (LAG) or interconnect. If the target interconnect or LAG has an existing
+// hosted connection with a conflicting VLAN number or IP address, the operation
+// fails. This action temporarily interrupts the hosted connection's connectivity
+// to AWS as it is being migrated.
 //
-// See AssociateHostedConnection for more information on using the AssociateHostedConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the AssociateHostedConnectionRequest method.
-//    req, resp := client.AssociateHostedConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AssociateHostedConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection
-func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedConnectionInput) (req *aws.Request, output *Connection) {
+func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedConnectionInput) AssociateHostedConnectionRequest {
 	op := &aws.Operation{
 		Name:       opAssociateHostedConnection,
 		HTTPMethod: "POST",
@@ -516,102 +337,30 @@ func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedC
 		input = &AssociateHostedConnectionInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AssociateHostedConnection API operation for AWS Direct Connect.
-//
-// Associates a hosted connection and its virtual interfaces with a link aggregation
-// group (LAG) or interconnect. If the target interconnect or LAG has an existing
-// hosted connection with a conflicting VLAN number or IP address, the operation
-// fails. This action temporarily interrupts the hosted connection's connectivity
-// to AWS as it is being migrated.
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AssociateHostedConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection
-func (c *DirectConnect) AssociateHostedConnection(input *AssociateHostedConnectionInput) (*Connection, error) {
-	req, out := c.AssociateHostedConnectionRequest(input)
-	return out, req.Send()
-}
-
-// AssociateHostedConnectionWithContext is the same as AssociateHostedConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateHostedConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AssociateHostedConnectionWithContext(ctx aws.Context, input *AssociateHostedConnectionInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.AssociateHostedConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return AssociateHostedConnectionRequest{Request: req, Input: input}
 }
 
 const opAssociateVirtualInterface = "AssociateVirtualInterface"
 
-// AssociateVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the AssociateVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AssociateVirtualInterface for more information on using the AssociateVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AssociateVirtualInterfaceRequest method.
-//    req, resp := client.AssociateVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface
-func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
-	op := &aws.Operation{
-		Name:       opAssociateVirtualInterface,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AssociateVirtualInterfaceInput{}
-	}
-
-	output = &VirtualInterface{}
-	req = c.newRequest(op, input, output)
-	return
+// AssociateVirtualInterfaceRequest is a API request type for the AssociateVirtualInterface API operation.
+type AssociateVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *AssociateVirtualInterfaceInput
 }
 
-// AssociateVirtualInterface API operation for AWS Direct Connect.
+// Send marshals and sends the AssociateVirtualInterface API request.
+func (r *AssociateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+}
+
+// AssociateVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Associates a virtual interface with a specified link aggregation group (LAG)
 // or connection. Connectivity to AWS is temporarily interrupted as the virtual
@@ -627,71 +376,65 @@ func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtual
 // is not the owner of physical connection) can only be reassociated by the
 // owner of the physical connection.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation AssociateVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the AssociateVirtualInterfaceRequest method.
+//    req := client.AssociateVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface
-func (c *DirectConnect) AssociateVirtualInterface(input *AssociateVirtualInterfaceInput) (*VirtualInterface, error) {
-	req, out := c.AssociateVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtualInterfaceInput) AssociateVirtualInterfaceRequest {
+	op := &aws.Operation{
+		Name:       opAssociateVirtualInterface,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AssociateVirtualInterfaceWithContext is the same as AssociateVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AssociateVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) AssociateVirtualInterfaceWithContext(ctx aws.Context, input *AssociateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
-	req, out := c.AssociateVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AssociateVirtualInterfaceInput{}
+	}
+
+	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	return AssociateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opConfirmConnection = "ConfirmConnection"
 
-// ConfirmConnectionRequest generates a "aws.Request" representing the
-// client's request for the ConfirmConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ConfirmConnectionRequest is a API request type for the ConfirmConnection API operation.
+type ConfirmConnectionRequest struct {
+	*aws.Request
+	Input *ConfirmConnectionInput
+}
+
+// Send marshals and sends the ConfirmConnection API request.
+func (r *ConfirmConnectionRequest) Send() (*ConfirmConnectionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ConfirmConnectionOutput), nil
+}
+
+// ConfirmConnectionRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Confirm the creation of a hosted connection on an interconnect.
 //
-// See ConfirmConnection for more information on using the ConfirmConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Upon creation, the hosted connection is initially in the 'Ordering' state,
+// and will remain in this state until the owner calls ConfirmConnection to
+// confirm creation of the hosted connection.
 //
 //    // Example sending a request using the ConfirmConnectionRequest method.
-//    req, resp := client.ConfirmConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ConfirmConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection
-func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) (req *aws.Request, output *ConfirmConnectionOutput) {
+func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) ConfirmConnectionRequest {
 	op := &aws.Operation{
 		Name:       opConfirmConnection,
 		HTTPMethod: "POST",
@@ -702,84 +445,46 @@ func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) 
 		input = &ConfirmConnectionInput{}
 	}
 
-	output = &ConfirmConnectionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ConfirmConnection API operation for AWS Direct Connect.
-//
-// Confirm the creation of a hosted connection on an interconnect.
-//
-// Upon creation, the hosted connection is initially in the 'Ordering' state,
-// and will remain in this state until the owner calls ConfirmConnection to
-// confirm creation of the hosted connection.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation ConfirmConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection
-func (c *DirectConnect) ConfirmConnection(input *ConfirmConnectionInput) (*ConfirmConnectionOutput, error) {
-	req, out := c.ConfirmConnectionRequest(input)
-	return out, req.Send()
-}
-
-// ConfirmConnectionWithContext is the same as ConfirmConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ConfirmConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) ConfirmConnectionWithContext(ctx aws.Context, input *ConfirmConnectionInput, opts ...aws.Option) (*ConfirmConnectionOutput, error) {
-	req, out := c.ConfirmConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ConfirmConnectionOutput{})
+	return ConfirmConnectionRequest{Request: req, Input: input}
 }
 
 const opConfirmPrivateVirtualInterface = "ConfirmPrivateVirtualInterface"
 
-// ConfirmPrivateVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the ConfirmPrivateVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ConfirmPrivateVirtualInterfaceRequest is a API request type for the ConfirmPrivateVirtualInterface API operation.
+type ConfirmPrivateVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *ConfirmPrivateVirtualInterfaceInput
+}
+
+// Send marshals and sends the ConfirmPrivateVirtualInterface API request.
+func (r *ConfirmPrivateVirtualInterfaceRequest) Send() (*ConfirmPrivateVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ConfirmPrivateVirtualInterfaceOutput), nil
+}
+
+// ConfirmPrivateVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Accept ownership of a private virtual interface created by another customer.
 //
-// See ConfirmPrivateVirtualInterface for more information on using the ConfirmPrivateVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// After the virtual interface owner calls this function, the virtual interface
+// will be created and attached to the given virtual private gateway, and will
+// be available for handling traffic.
 //
 //    // Example sending a request using the ConfirmPrivateVirtualInterfaceRequest method.
-//    req, resp := client.ConfirmPrivateVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ConfirmPrivateVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface
-func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPrivateVirtualInterfaceInput) (req *aws.Request, output *ConfirmPrivateVirtualInterfaceOutput) {
+func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPrivateVirtualInterfaceInput) ConfirmPrivateVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmPrivateVirtualInterface,
 		HTTPMethod: "POST",
@@ -790,84 +495,45 @@ func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPriv
 		input = &ConfirmPrivateVirtualInterfaceInput{}
 	}
 
-	output = &ConfirmPrivateVirtualInterfaceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ConfirmPrivateVirtualInterface API operation for AWS Direct Connect.
-//
-// Accept ownership of a private virtual interface created by another customer.
-//
-// After the virtual interface owner calls this function, the virtual interface
-// will be created and attached to the given virtual private gateway, and will
-// be available for handling traffic.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation ConfirmPrivateVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface
-func (c *DirectConnect) ConfirmPrivateVirtualInterface(input *ConfirmPrivateVirtualInterfaceInput) (*ConfirmPrivateVirtualInterfaceOutput, error) {
-	req, out := c.ConfirmPrivateVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// ConfirmPrivateVirtualInterfaceWithContext is the same as ConfirmPrivateVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ConfirmPrivateVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) ConfirmPrivateVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPrivateVirtualInterfaceInput, opts ...aws.Option) (*ConfirmPrivateVirtualInterfaceOutput, error) {
-	req, out := c.ConfirmPrivateVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ConfirmPrivateVirtualInterfaceOutput{})
+	return ConfirmPrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 
-// ConfirmPublicVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the ConfirmPublicVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ConfirmPublicVirtualInterfaceRequest is a API request type for the ConfirmPublicVirtualInterface API operation.
+type ConfirmPublicVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *ConfirmPublicVirtualInterfaceInput
+}
+
+// Send marshals and sends the ConfirmPublicVirtualInterface API request.
+func (r *ConfirmPublicVirtualInterfaceRequest) Send() (*ConfirmPublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ConfirmPublicVirtualInterfaceOutput), nil
+}
+
+// ConfirmPublicVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Accept ownership of a public virtual interface created by another customer.
 //
-// See ConfirmPublicVirtualInterface for more information on using the ConfirmPublicVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// After the virtual interface owner calls this function, the specified virtual
+// interface will be created and made available for handling traffic.
 //
 //    // Example sending a request using the ConfirmPublicVirtualInterfaceRequest method.
-//    req, resp := client.ConfirmPublicVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ConfirmPublicVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface
-func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtualInterfaceInput) (req *aws.Request, output *ConfirmPublicVirtualInterfaceOutput) {
+func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opConfirmPublicVirtualInterface,
 		HTTPMethod: "POST",
@@ -878,99 +544,30 @@ func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPubli
 		input = &ConfirmPublicVirtualInterfaceInput{}
 	}
 
-	output = &ConfirmPublicVirtualInterfaceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ConfirmPublicVirtualInterface API operation for AWS Direct Connect.
-//
-// Accept ownership of a public virtual interface created by another customer.
-//
-// After the virtual interface owner calls this function, the specified virtual
-// interface will be created and made available for handling traffic.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation ConfirmPublicVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface
-func (c *DirectConnect) ConfirmPublicVirtualInterface(input *ConfirmPublicVirtualInterfaceInput) (*ConfirmPublicVirtualInterfaceOutput, error) {
-	req, out := c.ConfirmPublicVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// ConfirmPublicVirtualInterfaceWithContext is the same as ConfirmPublicVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ConfirmPublicVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) ConfirmPublicVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPublicVirtualInterfaceInput, opts ...aws.Option) (*ConfirmPublicVirtualInterfaceOutput, error) {
-	req, out := c.ConfirmPublicVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ConfirmPublicVirtualInterfaceOutput{})
+	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opCreateBGPPeer = "CreateBGPPeer"
 
-// CreateBGPPeerRequest generates a "aws.Request" representing the
-// client's request for the CreateBGPPeer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateBGPPeer for more information on using the CreateBGPPeer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateBGPPeerRequest method.
-//    req, resp := client.CreateBGPPeerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer
-func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) (req *aws.Request, output *CreateBGPPeerOutput) {
-	op := &aws.Operation{
-		Name:       opCreateBGPPeer,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateBGPPeerInput{}
-	}
-
-	output = &CreateBGPPeerOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateBGPPeerRequest is a API request type for the CreateBGPPeer API operation.
+type CreateBGPPeerRequest struct {
+	*aws.Request
+	Input *CreateBGPPeerInput
 }
 
-// CreateBGPPeer API operation for AWS Direct Connect.
+// Send marshals and sends the CreateBGPPeer API request.
+func (r *CreateBGPPeerRequest) Send() (*CreateBGPPeerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBGPPeerOutput), nil
+}
+
+// CreateBGPPeerRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Creates a new BGP peer on a specified virtual interface. The BGP peer cannot
 // be in the same address family (IPv4/IPv6) of an existing BGP peer on the
@@ -986,87 +583,49 @@ func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) (req *aw
 // For a public virtual interface, the Autonomous System Number (ASN) must be
 // private or already whitelisted for the virtual interface.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreateBGPPeer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer
-func (c *DirectConnect) CreateBGPPeer(input *CreateBGPPeerInput) (*CreateBGPPeerOutput, error) {
-	req, out := c.CreateBGPPeerRequest(input)
-	return out, req.Send()
-}
-
-// CreateBGPPeerWithContext is the same as CreateBGPPeer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateBGPPeer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreateBGPPeerWithContext(ctx aws.Context, input *CreateBGPPeerInput, opts ...aws.Option) (*CreateBGPPeerOutput, error) {
-	req, out := c.CreateBGPPeerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateConnection = "CreateConnection"
-
-// CreateConnectionRequest generates a "aws.Request" representing the
-// client's request for the CreateConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateConnection for more information on using the CreateConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateConnectionRequest method.
-//    req, resp := client.CreateConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateBGPPeerRequest method.
+//    req := client.CreateBGPPeerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection
-func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) (req *aws.Request, output *Connection) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer
+func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBGPPeerRequest {
 	op := &aws.Operation{
-		Name:       opCreateConnection,
+		Name:       opCreateBGPPeer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateConnectionInput{}
+		input = &CreateBGPPeerInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateBGPPeerOutput{})
+	return CreateBGPPeerRequest{Request: req, Input: input}
 }
 
-// CreateConnection API operation for AWS Direct Connect.
+const opCreateConnection = "CreateConnection"
+
+// CreateConnectionRequest is a API request type for the CreateConnection API operation.
+type CreateConnectionRequest struct {
+	*aws.Request
+	Input *CreateConnectionInput
+}
+
+// Send marshals and sends the CreateConnection API request.
+func (r *CreateConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// CreateConnectionRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Creates a new connection between the customer network and a specific AWS
 // Direct Connect location.
@@ -1085,87 +644,49 @@ func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) (r
 // LAG. If there are no available ports on the endpoint, the request fails and
 // no connection will be created.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreateConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection
-func (c *DirectConnect) CreateConnection(input *CreateConnectionInput) (*Connection, error) {
-	req, out := c.CreateConnectionRequest(input)
-	return out, req.Send()
-}
-
-// CreateConnectionWithContext is the same as CreateConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.CreateConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateInterconnect = "CreateInterconnect"
-
-// CreateInterconnectRequest generates a "aws.Request" representing the
-// client's request for the CreateInterconnect operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateInterconnect for more information on using the CreateInterconnect
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateInterconnectRequest method.
-//    req, resp := client.CreateInterconnectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateConnectionRequest method.
+//    req := client.CreateConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect
-func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput) (req *aws.Request, output *Interconnect) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection
+func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) CreateConnectionRequest {
 	op := &aws.Operation{
-		Name:       opCreateInterconnect,
+		Name:       opCreateConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateInterconnectInput{}
+		input = &CreateConnectionInput{}
 	}
 
-	output = &Interconnect{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return CreateConnectionRequest{Request: req, Input: input}
 }
 
-// CreateInterconnect API operation for AWS Direct Connect.
+const opCreateInterconnect = "CreateInterconnect"
+
+// CreateInterconnectRequest is a API request type for the CreateInterconnect API operation.
+type CreateInterconnectRequest struct {
+	*aws.Request
+	Input *CreateInterconnectInput
+}
+
+// Send marshals and sends the CreateInterconnect API request.
+func (r *CreateInterconnectRequest) Send() (*CreateInterconnectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInterconnectOutput), nil
+}
+
+// CreateInterconnectRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Creates a new interconnect between a AWS Direct Connect partner's network
 // and a specific AWS Direct Connect location.
@@ -1192,87 +713,49 @@ func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput
 //
 // This is intended for use by AWS Direct Connect partners only.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreateInterconnect for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect
-func (c *DirectConnect) CreateInterconnect(input *CreateInterconnectInput) (*Interconnect, error) {
-	req, out := c.CreateInterconnectRequest(input)
-	return out, req.Send()
-}
-
-// CreateInterconnectWithContext is the same as CreateInterconnect with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInterconnect for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreateInterconnectWithContext(ctx aws.Context, input *CreateInterconnectInput, opts ...aws.Option) (*Interconnect, error) {
-	req, out := c.CreateInterconnectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateLag = "CreateLag"
-
-// CreateLagRequest generates a "aws.Request" representing the
-// client's request for the CreateLag operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateLag for more information on using the CreateLag
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateLagRequest method.
-//    req, resp := client.CreateLagRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateInterconnectRequest method.
+//    req := client.CreateInterconnectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag
-func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) (req *aws.Request, output *Lag) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect
+func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput) CreateInterconnectRequest {
 	op := &aws.Operation{
-		Name:       opCreateLag,
+		Name:       opCreateInterconnect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateLagInput{}
+		input = &CreateInterconnectInput{}
 	}
 
-	output = &Lag{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateInterconnectOutput{})
+	return CreateInterconnectRequest{Request: req, Input: input}
 }
 
-// CreateLag API operation for AWS Direct Connect.
+const opCreateLag = "CreateLag"
+
+// CreateLagRequest is a API request type for the CreateLag API operation.
+type CreateLagRequest struct {
+	*aws.Request
+	Input *CreateLagInput
+}
+
+// Send marshals and sends the CreateLag API request.
+func (r *CreateLagRequest) Send() (*UpdateLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLagOutput), nil
+}
+
+// CreateLagRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Creates a new link aggregation group (LAG) with the specified number of bundled
 // physical connections between the customer network and a specific AWS Direct
@@ -1300,71 +783,63 @@ func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) (req *aws.Reques
 // LAG owned by a partner, any associated virtual interfaces cannot be directly
 // configured.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreateLag for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the CreateLagRequest method.
+//    req := client.CreateLagRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag
-func (c *DirectConnect) CreateLag(input *CreateLagInput) (*Lag, error) {
-	req, out := c.CreateLagRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) CreateLagRequest {
+	op := &aws.Operation{
+		Name:       opCreateLag,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateLagWithContext is the same as CreateLag with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateLag for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreateLagWithContext(ctx aws.Context, input *CreateLagInput, opts ...aws.Option) (*Lag, error) {
-	req, out := c.CreateLagRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateLagInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateLagOutput{})
+	return CreateLagRequest{Request: req, Input: input}
 }
 
 const opCreatePrivateVirtualInterface = "CreatePrivateVirtualInterface"
 
-// CreatePrivateVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the CreatePrivateVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreatePrivateVirtualInterfaceRequest is a API request type for the CreatePrivateVirtualInterface API operation.
+type CreatePrivateVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *CreatePrivateVirtualInterfaceInput
+}
+
+// Send marshals and sends the CreatePrivateVirtualInterface API request.
+func (r *CreatePrivateVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+}
+
+// CreatePrivateVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePrivateVirtualInterface for more information on using the CreatePrivateVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new private virtual interface. A virtual interface is the VLAN
+// that transports AWS Direct Connect traffic. A private virtual interface supports
+// sending traffic to a single virtual private cloud (VPC).
 //
 //    // Example sending a request using the CreatePrivateVirtualInterfaceRequest method.
-//    req, resp := client.CreatePrivateVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreatePrivateVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface
-func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivateVirtualInterfaceInput) CreatePrivateVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opCreatePrivateVirtualInterface,
 		HTTPMethod: "POST",
@@ -1375,98 +850,30 @@ func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivat
 		input = &CreatePrivateVirtualInterfaceInput{}
 	}
 
-	output = &VirtualInterface{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreatePrivateVirtualInterface API operation for AWS Direct Connect.
-//
-// Creates a new private virtual interface. A virtual interface is the VLAN
-// that transports AWS Direct Connect traffic. A private virtual interface supports
-// sending traffic to a single virtual private cloud (VPC).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreatePrivateVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface
-func (c *DirectConnect) CreatePrivateVirtualInterface(input *CreatePrivateVirtualInterfaceInput) (*VirtualInterface, error) {
-	req, out := c.CreatePrivateVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// CreatePrivateVirtualInterfaceWithContext is the same as CreatePrivateVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePrivateVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *CreatePrivateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
-	req, out := c.CreatePrivateVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	return CreatePrivateVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opCreatePublicVirtualInterface = "CreatePublicVirtualInterface"
 
-// CreatePublicVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the CreatePublicVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreatePublicVirtualInterface for more information on using the CreatePublicVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreatePublicVirtualInterfaceRequest method.
-//    req, resp := client.CreatePublicVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface
-func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
-	op := &aws.Operation{
-		Name:       opCreatePublicVirtualInterface,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreatePublicVirtualInterfaceInput{}
-	}
-
-	output = &VirtualInterface{}
-	req = c.newRequest(op, input, output)
-	return
+// CreatePublicVirtualInterfaceRequest is a API request type for the CreatePublicVirtualInterface API operation.
+type CreatePublicVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *CreatePublicVirtualInterfaceInput
 }
 
-// CreatePublicVirtualInterface API operation for AWS Direct Connect.
+// Send marshals and sends the CreatePublicVirtualInterface API request.
+func (r *CreatePublicVirtualInterfaceRequest) Send() (*CreatePublicVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicVirtualInterfaceOutput), nil
+}
+
+// CreatePublicVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Creates a new public virtual interface. A virtual interface is the VLAN that
 // transports AWS Direct Connect traffic. A public virtual interface supports
@@ -1477,71 +884,63 @@ func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicV
 // the customer and amazon address fields should be left blank to use auto-assigned
 // IPv6 space. Custom IPv6 Addresses are currently not supported.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation CreatePublicVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the CreatePublicVirtualInterfaceRequest method.
+//    req := client.CreatePublicVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface
-func (c *DirectConnect) CreatePublicVirtualInterface(input *CreatePublicVirtualInterfaceInput) (*VirtualInterface, error) {
-	req, out := c.CreatePublicVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicVirtualInterfaceInput) CreatePublicVirtualInterfaceRequest {
+	op := &aws.Operation{
+		Name:       opCreatePublicVirtualInterface,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreatePublicVirtualInterfaceWithContext is the same as CreatePublicVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreatePublicVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) CreatePublicVirtualInterfaceWithContext(ctx aws.Context, input *CreatePublicVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
-	req, out := c.CreatePublicVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreatePublicVirtualInterfaceInput{}
+	}
+
+	req := c.newRequest(op, input, &CreatePublicVirtualInterfaceOutput{})
+	return CreatePublicVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opDeleteBGPPeer = "DeleteBGPPeer"
 
-// DeleteBGPPeerRequest generates a "aws.Request" representing the
-// client's request for the DeleteBGPPeer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBGPPeerRequest is a API request type for the DeleteBGPPeer API operation.
+type DeleteBGPPeerRequest struct {
+	*aws.Request
+	Input *DeleteBGPPeerInput
+}
+
+// Send marshals and sends the DeleteBGPPeer API request.
+func (r *DeleteBGPPeerRequest) Send() (*DeleteBGPPeerOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBGPPeerOutput), nil
+}
+
+// DeleteBGPPeerRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBGPPeer for more information on using the DeleteBGPPeer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a BGP peer on the specified virtual interface that matches the specified
+// customer address and ASN. You cannot delete the last BGP peer from a virtual
+// interface.
 //
 //    // Example sending a request using the DeleteBGPPeerRequest method.
-//    req, resp := client.DeleteBGPPeerRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBGPPeerRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer
-func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) (req *aws.Request, output *DeleteBGPPeerOutput) {
+func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBGPPeerRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBGPPeer,
 		HTTPMethod: "POST",
@@ -1552,82 +951,47 @@ func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) (req *aw
 		input = &DeleteBGPPeerInput{}
 	}
 
-	output = &DeleteBGPPeerOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBGPPeer API operation for AWS Direct Connect.
-//
-// Deletes a BGP peer on the specified virtual interface that matches the specified
-// customer address and ASN. You cannot delete the last BGP peer from a virtual
-// interface.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DeleteBGPPeer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer
-func (c *DirectConnect) DeleteBGPPeer(input *DeleteBGPPeerInput) (*DeleteBGPPeerOutput, error) {
-	req, out := c.DeleteBGPPeerRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBGPPeerWithContext is the same as DeleteBGPPeer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBGPPeer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DeleteBGPPeerWithContext(ctx aws.Context, input *DeleteBGPPeerInput, opts ...aws.Option) (*DeleteBGPPeerOutput, error) {
-	req, out := c.DeleteBGPPeerRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBGPPeerOutput{})
+	return DeleteBGPPeerRequest{Request: req, Input: input}
 }
 
 const opDeleteConnection = "DeleteConnection"
 
-// DeleteConnectionRequest generates a "aws.Request" representing the
-// client's request for the DeleteConnection operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteConnectionRequest is a API request type for the DeleteConnection API operation.
+type DeleteConnectionRequest struct {
+	*aws.Request
+	Input *DeleteConnectionInput
+}
+
+// Send marshals and sends the DeleteConnection API request.
+func (r *DeleteConnectionRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// DeleteConnectionRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the connection.
 //
-// See DeleteConnection for more information on using the DeleteConnection
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deleting a connection only stops the AWS Direct Connect port hour and data
+// transfer charges. You need to cancel separately with the providers any services
+// or charges for cross-connects or network circuits that connect you to the
+// AWS Direct Connect location.
 //
 //    // Example sending a request using the DeleteConnectionRequest method.
-//    req, resp := client.DeleteConnectionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteConnectionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection
-func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) (req *aws.Request, output *Connection) {
+func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteConnectionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteConnection,
 		HTTPMethod: "POST",
@@ -1638,85 +1002,44 @@ func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) (r
 		input = &DeleteConnectionInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteConnection API operation for AWS Direct Connect.
-//
-// Deletes the connection.
-//
-// Deleting a connection only stops the AWS Direct Connect port hour and data
-// transfer charges. You need to cancel separately with the providers any services
-// or charges for cross-connects or network circuits that connect you to the
-// AWS Direct Connect location.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DeleteConnection for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection
-func (c *DirectConnect) DeleteConnection(input *DeleteConnectionInput) (*Connection, error) {
-	req, out := c.DeleteConnectionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteConnectionWithContext is the same as DeleteConnection with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteConnection for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.DeleteConnectionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return DeleteConnectionRequest{Request: req, Input: input}
 }
 
 const opDeleteInterconnect = "DeleteInterconnect"
 
-// DeleteInterconnectRequest generates a "aws.Request" representing the
-// client's request for the DeleteInterconnect operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteInterconnectRequest is a API request type for the DeleteInterconnect API operation.
+type DeleteInterconnectRequest struct {
+	*aws.Request
+	Input *DeleteInterconnectInput
+}
+
+// Send marshals and sends the DeleteInterconnect API request.
+func (r *DeleteInterconnectRequest) Send() (*DeleteInterconnectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInterconnectOutput), nil
+}
+
+// DeleteInterconnectRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deletes the specified interconnect.
 //
-// See DeleteInterconnect for more information on using the DeleteInterconnect
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DeleteInterconnectRequest method.
-//    req, resp := client.DeleteInterconnectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteInterconnectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect
-func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput) (req *aws.Request, output *DeleteInterconnectOutput) {
+func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput) DeleteInterconnectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteInterconnect,
 		HTTPMethod: "POST",
@@ -1727,82 +1050,43 @@ func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput
 		input = &DeleteInterconnectInput{}
 	}
 
-	output = &DeleteInterconnectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteInterconnect API operation for AWS Direct Connect.
-//
-// Deletes the specified interconnect.
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DeleteInterconnect for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect
-func (c *DirectConnect) DeleteInterconnect(input *DeleteInterconnectInput) (*DeleteInterconnectOutput, error) {
-	req, out := c.DeleteInterconnectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteInterconnectWithContext is the same as DeleteInterconnect with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteInterconnect for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DeleteInterconnectWithContext(ctx aws.Context, input *DeleteInterconnectInput, opts ...aws.Option) (*DeleteInterconnectOutput, error) {
-	req, out := c.DeleteInterconnectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteInterconnectOutput{})
+	return DeleteInterconnectRequest{Request: req, Input: input}
 }
 
 const opDeleteLag = "DeleteLag"
 
-// DeleteLagRequest generates a "aws.Request" representing the
-// client's request for the DeleteLag operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteLagRequest is a API request type for the DeleteLag API operation.
+type DeleteLagRequest struct {
+	*aws.Request
+	Input *DeleteLagInput
+}
+
+// Send marshals and sends the DeleteLag API request.
+func (r *DeleteLagRequest) Send() (*UpdateLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLagOutput), nil
+}
+
+// DeleteLagRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteLag for more information on using the DeleteLag
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a link aggregation group (LAG). You cannot delete a LAG if it has
+// active virtual interfaces or hosted connections.
 //
 //    // Example sending a request using the DeleteLagRequest method.
-//    req, resp := client.DeleteLagRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteLagRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag
-func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) (req *aws.Request, output *Lag) {
+func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) DeleteLagRequest {
 	op := &aws.Operation{
 		Name:       opDeleteLag,
 		HTTPMethod: "POST",
@@ -1813,81 +1097,42 @@ func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) (req *aws.Reques
 		input = &DeleteLagInput{}
 	}
 
-	output = &Lag{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteLag API operation for AWS Direct Connect.
-//
-// Deletes a link aggregation group (LAG). You cannot delete a LAG if it has
-// active virtual interfaces or hosted connections.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DeleteLag for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag
-func (c *DirectConnect) DeleteLag(input *DeleteLagInput) (*Lag, error) {
-	req, out := c.DeleteLagRequest(input)
-	return out, req.Send()
-}
-
-// DeleteLagWithContext is the same as DeleteLag with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteLag for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DeleteLagWithContext(ctx aws.Context, input *DeleteLagInput, opts ...aws.Option) (*Lag, error) {
-	req, out := c.DeleteLagRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateLagOutput{})
+	return DeleteLagRequest{Request: req, Input: input}
 }
 
 const opDeleteVirtualInterface = "DeleteVirtualInterface"
 
-// DeleteVirtualInterfaceRequest generates a "aws.Request" representing the
-// client's request for the DeleteVirtualInterface operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteVirtualInterfaceRequest is a API request type for the DeleteVirtualInterface API operation.
+type DeleteVirtualInterfaceRequest struct {
+	*aws.Request
+	Input *DeleteVirtualInterfaceInput
+}
+
+// Send marshals and sends the DeleteVirtualInterface API request.
+func (r *DeleteVirtualInterfaceRequest) Send() (*DeleteVirtualInterfaceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVirtualInterfaceOutput), nil
+}
+
+// DeleteVirtualInterfaceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVirtualInterface for more information on using the DeleteVirtualInterface
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a virtual interface.
 //
 //    // Example sending a request using the DeleteVirtualInterfaceRequest method.
-//    req, resp := client.DeleteVirtualInterfaceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteVirtualInterfaceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface
-func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInput) (req *aws.Request, output *DeleteVirtualInterfaceOutput) {
+func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest {
 	op := &aws.Operation{
 		Name:       opDeleteVirtualInterface,
 		HTTPMethod: "POST",
@@ -1898,80 +1143,50 @@ func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterf
 		input = &DeleteVirtualInterfaceInput{}
 	}
 
-	output = &DeleteVirtualInterfaceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteVirtualInterface API operation for AWS Direct Connect.
-//
-// Deletes a virtual interface.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DeleteVirtualInterface for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface
-func (c *DirectConnect) DeleteVirtualInterface(input *DeleteVirtualInterfaceInput) (*DeleteVirtualInterfaceOutput, error) {
-	req, out := c.DeleteVirtualInterfaceRequest(input)
-	return out, req.Send()
-}
-
-// DeleteVirtualInterfaceWithContext is the same as DeleteVirtualInterface with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVirtualInterface for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DeleteVirtualInterfaceWithContext(ctx aws.Context, input *DeleteVirtualInterfaceInput, opts ...aws.Option) (*DeleteVirtualInterfaceOutput, error) {
-	req, out := c.DeleteVirtualInterfaceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteVirtualInterfaceOutput{})
+	return DeleteVirtualInterfaceRequest{Request: req, Input: input}
 }
 
 const opDescribeConnectionLoa = "DescribeConnectionLoa"
 
-// DescribeConnectionLoaRequest generates a "aws.Request" representing the
-// client's request for the DescribeConnectionLoa operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConnectionLoaRequest is a API request type for the DescribeConnectionLoa API operation.
+type DescribeConnectionLoaRequest struct {
+	*aws.Request
+	Input *DescribeConnectionLoaInput
+}
+
+// Send marshals and sends the DescribeConnectionLoa API request.
+func (r *DescribeConnectionLoaRequest) Send() (*DescribeConnectionLoaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeConnectionLoaOutput), nil
+}
+
+// DescribeConnectionLoaRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated in favor of DescribeLoa.
 //
-// See DescribeConnectionLoa for more information on using the DescribeConnectionLoa
-// API call, and error handling.
+// Returns the LOA-CFA for a Connection.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
+// a document that your APN partner or service provider uses when establishing
+// your cross connect to AWS at the colocation facility. For more information,
+// see Requesting Cross Connects at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
+// in the AWS Direct Connect user guide.
 //
 //    // Example sending a request using the DescribeConnectionLoaRequest method.
-//    req, resp := client.DescribeConnectionLoaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConnectionLoaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoa
-func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) (req *aws.Request, output *DescribeConnectionLoaOutput) {
+func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) DescribeConnectionLoaRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionLoa, has been deprecated")
 	}
@@ -1985,88 +1200,44 @@ func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLo
 		input = &DescribeConnectionLoaInput{}
 	}
 
-	output = &DescribeConnectionLoaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConnectionLoa API operation for AWS Direct Connect.
-//
-// Deprecated in favor of DescribeLoa.
-//
-// Returns the LOA-CFA for a Connection.
-//
-// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
-// a document that your APN partner or service provider uses when establishing
-// your cross connect to AWS at the colocation facility. For more information,
-// see Requesting Cross Connects at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the AWS Direct Connect user guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeConnectionLoa for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoa
-func (c *DirectConnect) DescribeConnectionLoa(input *DescribeConnectionLoaInput) (*DescribeConnectionLoaOutput, error) {
-	req, out := c.DescribeConnectionLoaRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConnectionLoaWithContext is the same as DescribeConnectionLoa with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConnectionLoa for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionLoaWithContext(ctx aws.Context, input *DescribeConnectionLoaInput, opts ...aws.Option) (*DescribeConnectionLoaOutput, error) {
-	req, out := c.DescribeConnectionLoaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeConnectionLoaOutput{})
+	return DescribeConnectionLoaRequest{Request: req, Input: input}
 }
 
 const opDescribeConnections = "DescribeConnections"
 
-// DescribeConnectionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeConnections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConnectionsRequest is a API request type for the DescribeConnections API operation.
+type DescribeConnectionsRequest struct {
+	*aws.Request
+	Input *DescribeConnectionsInput
+}
+
+// Send marshals and sends the DescribeConnections API request.
+func (r *DescribeConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHostedConnectionsOutput), nil
+}
+
+// DescribeConnectionsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Displays all connections in this region.
 //
-// See DescribeConnections for more information on using the DescribeConnections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If a connection ID is provided, the call returns only that particular connection.
 //
 //    // Example sending a request using the DescribeConnectionsRequest method.
-//    req, resp := client.DescribeConnectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConnectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections
-func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *aws.Request, output *Connections) {
+func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInput) DescribeConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
@@ -2077,82 +1248,46 @@ func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInp
 		input = &DescribeConnectionsInput{}
 	}
 
-	output = &Connections{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConnections API operation for AWS Direct Connect.
-//
-// Displays all connections in this region.
-//
-// If a connection ID is provided, the call returns only that particular connection.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeConnections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections
-func (c *DirectConnect) DescribeConnections(input *DescribeConnectionsInput) (*Connections, error) {
-	req, out := c.DescribeConnectionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConnectionsWithContext is the same as DescribeConnections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConnections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...aws.Option) (*Connections, error) {
-	req, out := c.DescribeConnectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	return DescribeConnectionsRequest{Request: req, Input: input}
 }
 
 const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 
-// DescribeConnectionsOnInterconnectRequest generates a "aws.Request" representing the
-// client's request for the DescribeConnectionsOnInterconnect operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeConnectionsOnInterconnectRequest is a API request type for the DescribeConnectionsOnInterconnect API operation.
+type DescribeConnectionsOnInterconnectRequest struct {
+	*aws.Request
+	Input *DescribeConnectionsOnInterconnectInput
+}
+
+// Send marshals and sends the DescribeConnectionsOnInterconnect API request.
+func (r *DescribeConnectionsOnInterconnectRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHostedConnectionsOutput), nil
+}
+
+// DescribeConnectionsOnInterconnectRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated in favor of DescribeHostedConnections.
 //
-// See DescribeConnectionsOnInterconnect for more information on using the DescribeConnectionsOnInterconnect
-// API call, and error handling.
+// Returns a list of connections that have been provisioned on the given interconnect.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DescribeConnectionsOnInterconnectRequest method.
-//    req, resp := client.DescribeConnectionsOnInterconnectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeConnectionsOnInterconnectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect
-func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) (req *aws.Request, output *Connections) {
+func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionsOnInterconnect, has been deprecated")
 	}
@@ -2166,84 +1301,45 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *Describe
 		input = &DescribeConnectionsOnInterconnectInput{}
 	}
 
-	output = &Connections{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeConnectionsOnInterconnect API operation for AWS Direct Connect.
-//
-// Deprecated in favor of DescribeHostedConnections.
-//
-// Returns a list of connections that have been provisioned on the given interconnect.
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeConnectionsOnInterconnect for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect
-func (c *DirectConnect) DescribeConnectionsOnInterconnect(input *DescribeConnectionsOnInterconnectInput) (*Connections, error) {
-	req, out := c.DescribeConnectionsOnInterconnectRequest(input)
-	return out, req.Send()
-}
-
-// DescribeConnectionsOnInterconnectWithContext is the same as DescribeConnectionsOnInterconnect with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeConnectionsOnInterconnect for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionsOnInterconnectWithContext(ctx aws.Context, input *DescribeConnectionsOnInterconnectInput, opts ...aws.Option) (*Connections, error) {
-	req, out := c.DescribeConnectionsOnInterconnectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input}
 }
 
 const opDescribeHostedConnections = "DescribeHostedConnections"
 
-// DescribeHostedConnectionsRequest generates a "aws.Request" representing the
-// client's request for the DescribeHostedConnections operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeHostedConnectionsRequest is a API request type for the DescribeHostedConnections API operation.
+type DescribeHostedConnectionsRequest struct {
+	*aws.Request
+	Input *DescribeHostedConnectionsInput
+}
+
+// Send marshals and sends the DescribeHostedConnections API request.
+func (r *DescribeHostedConnectionsRequest) Send() (*DescribeHostedConnectionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeHostedConnectionsOutput), nil
+}
+
+// DescribeHostedConnectionsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of hosted connections that have been provisioned on the given
+// interconnect or link aggregation group (LAG).
 //
-// See DescribeHostedConnections for more information on using the DescribeHostedConnections
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This is intended for use by AWS Direct Connect partners only.
 //
 //    // Example sending a request using the DescribeHostedConnectionsRequest method.
-//    req, resp := client.DescribeHostedConnectionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeHostedConnectionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections
-func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedConnectionsInput) (req *aws.Request, output *Connections) {
+func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeHostedConnections,
 		HTTPMethod: "POST",
@@ -2254,83 +1350,50 @@ func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedCo
 		input = &DescribeHostedConnectionsInput{}
 	}
 
-	output = &Connections{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeHostedConnections API operation for AWS Direct Connect.
-//
-// Returns a list of hosted connections that have been provisioned on the given
-// interconnect or link aggregation group (LAG).
-//
-// This is intended for use by AWS Direct Connect partners only.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeHostedConnections for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections
-func (c *DirectConnect) DescribeHostedConnections(input *DescribeHostedConnectionsInput) (*Connections, error) {
-	req, out := c.DescribeHostedConnectionsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeHostedConnectionsWithContext is the same as DescribeHostedConnections with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeHostedConnections for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeHostedConnectionsWithContext(ctx aws.Context, input *DescribeHostedConnectionsInput, opts ...aws.Option) (*Connections, error) {
-	req, out := c.DescribeHostedConnectionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeHostedConnectionsOutput{})
+	return DescribeHostedConnectionsRequest{Request: req, Input: input}
 }
 
 const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 
-// DescribeInterconnectLoaRequest generates a "aws.Request" representing the
-// client's request for the DescribeInterconnectLoa operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInterconnectLoaRequest is a API request type for the DescribeInterconnectLoa API operation.
+type DescribeInterconnectLoaRequest struct {
+	*aws.Request
+	Input *DescribeInterconnectLoaInput
+}
+
+// Send marshals and sends the DescribeInterconnectLoa API request.
+func (r *DescribeInterconnectLoaRequest) Send() (*DescribeInterconnectLoaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInterconnectLoaOutput), nil
+}
+
+// DescribeInterconnectLoaRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Deprecated in favor of DescribeLoa.
 //
-// See DescribeInterconnectLoa for more information on using the DescribeInterconnectLoa
-// API call, and error handling.
+// Returns the LOA-CFA for an Interconnect.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
+// a document that is used when establishing your cross connect to AWS at the
+// colocation facility. For more information, see Requesting Cross Connects
+// at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
+// in the AWS Direct Connect user guide.
 //
 //    // Example sending a request using the DescribeInterconnectLoaRequest method.
-//    req, resp := client.DescribeInterconnectLoaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInterconnectLoaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoa
-func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) (req *aws.Request, output *DescribeInterconnectLoaOutput) {
+func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeInterconnectLoa, has been deprecated")
 	}
@@ -2344,88 +1407,44 @@ func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconne
 		input = &DescribeInterconnectLoaInput{}
 	}
 
-	output = &DescribeInterconnectLoaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInterconnectLoa API operation for AWS Direct Connect.
-//
-// Deprecated in favor of DescribeLoa.
-//
-// Returns the LOA-CFA for an Interconnect.
-//
-// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
-// a document that is used when establishing your cross connect to AWS at the
-// colocation facility. For more information, see Requesting Cross Connects
-// at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the AWS Direct Connect user guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeInterconnectLoa for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoa
-func (c *DirectConnect) DescribeInterconnectLoa(input *DescribeInterconnectLoaInput) (*DescribeInterconnectLoaOutput, error) {
-	req, out := c.DescribeInterconnectLoaRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInterconnectLoaWithContext is the same as DescribeInterconnectLoa with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInterconnectLoa for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeInterconnectLoaWithContext(ctx aws.Context, input *DescribeInterconnectLoaInput, opts ...aws.Option) (*DescribeInterconnectLoaOutput, error) {
-	req, out := c.DescribeInterconnectLoaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInterconnectLoaOutput{})
+	return DescribeInterconnectLoaRequest{Request: req, Input: input}
 }
 
 const opDescribeInterconnects = "DescribeInterconnects"
 
-// DescribeInterconnectsRequest generates a "aws.Request" representing the
-// client's request for the DescribeInterconnects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeInterconnectsRequest is a API request type for the DescribeInterconnects API operation.
+type DescribeInterconnectsRequest struct {
+	*aws.Request
+	Input *DescribeInterconnectsInput
+}
+
+// Send marshals and sends the DescribeInterconnects API request.
+func (r *DescribeInterconnectsRequest) Send() (*DescribeInterconnectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeInterconnectsOutput), nil
+}
+
+// DescribeInterconnectsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of interconnects owned by the AWS account.
 //
-// See DescribeInterconnects for more information on using the DescribeInterconnects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If an interconnect ID is provided, it will only return this particular interconnect.
 //
 //    // Example sending a request using the DescribeInterconnectsRequest method.
-//    req, resp := client.DescribeInterconnectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeInterconnectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects
-func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnectsInput) (req *aws.Request, output *DescribeInterconnectsOutput) {
+func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnectsInput) DescribeInterconnectsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeInterconnects,
 		HTTPMethod: "POST",
@@ -2436,82 +1455,44 @@ func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnect
 		input = &DescribeInterconnectsInput{}
 	}
 
-	output = &DescribeInterconnectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeInterconnects API operation for AWS Direct Connect.
-//
-// Returns a list of interconnects owned by the AWS account.
-//
-// If an interconnect ID is provided, it will only return this particular interconnect.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeInterconnects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects
-func (c *DirectConnect) DescribeInterconnects(input *DescribeInterconnectsInput) (*DescribeInterconnectsOutput, error) {
-	req, out := c.DescribeInterconnectsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeInterconnectsWithContext is the same as DescribeInterconnects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeInterconnects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeInterconnectsWithContext(ctx aws.Context, input *DescribeInterconnectsInput, opts ...aws.Option) (*DescribeInterconnectsOutput, error) {
-	req, out := c.DescribeInterconnectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeInterconnectsOutput{})
+	return DescribeInterconnectsRequest{Request: req, Input: input}
 }
 
 const opDescribeLags = "DescribeLags"
 
-// DescribeLagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLagsRequest is a API request type for the DescribeLags API operation.
+type DescribeLagsRequest struct {
+	*aws.Request
+	Input *DescribeLagsInput
+}
+
+// Send marshals and sends the DescribeLags API request.
+func (r *DescribeLagsRequest) Send() (*DescribeLagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLagsOutput), nil
+}
+
+// DescribeLagsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Describes the link aggregation groups (LAGs) in your account.
 //
-// See DescribeLags for more information on using the DescribeLags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If a LAG ID is provided, only information about the specified LAG is returned.
 //
 //    // Example sending a request using the DescribeLagsRequest method.
-//    req, resp := client.DescribeLagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags
-func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) (req *aws.Request, output *DescribeLagsOutput) {
+func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) DescribeLagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLags,
 		HTTPMethod: "POST",
@@ -2522,98 +1503,30 @@ func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) (req *aws.
 		input = &DescribeLagsInput{}
 	}
 
-	output = &DescribeLagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLags API operation for AWS Direct Connect.
-//
-// Describes the link aggregation groups (LAGs) in your account.
-//
-// If a LAG ID is provided, only information about the specified LAG is returned.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeLags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags
-func (c *DirectConnect) DescribeLags(input *DescribeLagsInput) (*DescribeLagsOutput, error) {
-	req, out := c.DescribeLagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLagsWithContext is the same as DescribeLags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeLagsWithContext(ctx aws.Context, input *DescribeLagsInput, opts ...aws.Option) (*DescribeLagsOutput, error) {
-	req, out := c.DescribeLagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLagsOutput{})
+	return DescribeLagsRequest{Request: req, Input: input}
 }
 
 const opDescribeLoa = "DescribeLoa"
 
-// DescribeLoaRequest generates a "aws.Request" representing the
-// client's request for the DescribeLoa operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLoa for more information on using the DescribeLoa
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeLoaRequest method.
-//    req, resp := client.DescribeLoaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoa
-func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) (req *aws.Request, output *Loa) {
-	op := &aws.Operation{
-		Name:       opDescribeLoa,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeLoaInput{}
-	}
-
-	output = &Loa{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeLoaRequest is a API request type for the DescribeLoa API operation.
+type DescribeLoaRequest struct {
+	*aws.Request
+	Input *DescribeLoaInput
 }
 
-// DescribeLoa API operation for AWS Direct Connect.
+// Send marshals and sends the DescribeLoa API request.
+func (r *DescribeLoaRequest) Send() (*DescribeLoaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLoaOutput), nil
+}
+
+// DescribeLoaRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Returns the LOA-CFA for a connection, interconnect, or link aggregation group
 // (LAG).
@@ -2624,71 +1537,63 @@ func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) (req *aws.Re
 // at AWS Direct Connect Locations (http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
 // in the AWS Direct Connect user guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeLoa for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the DescribeLoaRequest method.
+//    req := client.DescribeLoaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoa
-func (c *DirectConnect) DescribeLoa(input *DescribeLoaInput) (*Loa, error) {
-	req, out := c.DescribeLoaRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaRequest {
+	op := &aws.Operation{
+		Name:       opDescribeLoa,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DescribeLoaWithContext is the same as DescribeLoa with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLoa for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeLoaWithContext(ctx aws.Context, input *DescribeLoaInput, opts ...aws.Option) (*Loa, error) {
-	req, out := c.DescribeLoaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DescribeLoaInput{}
+	}
+
+	req := c.newRequest(op, input, &DescribeLoaOutput{})
+	return DescribeLoaRequest{Request: req, Input: input}
 }
 
 const opDescribeLocations = "DescribeLocations"
 
-// DescribeLocationsRequest generates a "aws.Request" representing the
-// client's request for the DescribeLocations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeLocationsRequest is a API request type for the DescribeLocations API operation.
+type DescribeLocationsRequest struct {
+	*aws.Request
+	Input *DescribeLocationsInput
+}
+
+// Send marshals and sends the DescribeLocations API request.
+func (r *DescribeLocationsRequest) Send() (*DescribeLocationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeLocationsOutput), nil
+}
+
+// DescribeLocationsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeLocations for more information on using the DescribeLocations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the list of AWS Direct Connect locations in the current AWS region.
+// These are the locations that may be selected when calling CreateConnection
+// or CreateInterconnect.
 //
 //    // Example sending a request using the DescribeLocationsRequest method.
-//    req, resp := client.DescribeLocationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeLocationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations
-func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) (req *aws.Request, output *DescribeLocationsOutput) {
+func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) DescribeLocationsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeLocations,
 		HTTPMethod: "POST",
@@ -2699,82 +1604,42 @@ func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) 
 		input = &DescribeLocationsInput{}
 	}
 
-	output = &DescribeLocationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeLocations API operation for AWS Direct Connect.
-//
-// Returns the list of AWS Direct Connect locations in the current AWS region.
-// These are the locations that may be selected when calling CreateConnection
-// or CreateInterconnect.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeLocations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations
-func (c *DirectConnect) DescribeLocations(input *DescribeLocationsInput) (*DescribeLocationsOutput, error) {
-	req, out := c.DescribeLocationsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeLocationsWithContext is the same as DescribeLocations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeLocations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeLocationsWithContext(ctx aws.Context, input *DescribeLocationsInput, opts ...aws.Option) (*DescribeLocationsOutput, error) {
-	req, out := c.DescribeLocationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeLocationsOutput{})
+	return DescribeLocationsRequest{Request: req, Input: input}
 }
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTagsRequest is a API request type for the DescribeTags API operation.
+type DescribeTagsRequest struct {
+	*aws.Request
+	Input *DescribeTagsInput
+}
+
+// Send marshals and sends the DescribeTags API request.
+func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTagsOutput), nil
+}
+
+// DescribeTagsRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTags for more information on using the DescribeTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the tags associated with the specified Direct Connect resources.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
-//    req, resp := client.DescribeTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTags
-func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
@@ -2785,80 +1650,48 @@ func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.
 		input = &DescribeTagsInput{}
 	}
 
-	output = &DescribeTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTags API operation for AWS Direct Connect.
-//
-// Describes the tags associated with the specified Direct Connect resources.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTags
-func (c *DirectConnect) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTagsWithContext is the same as DescribeTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
-	req, out := c.DescribeTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTagsOutput{})
+	return DescribeTagsRequest{Request: req, Input: input}
 }
 
 const opDescribeVirtualGateways = "DescribeVirtualGateways"
 
-// DescribeVirtualGatewaysRequest generates a "aws.Request" representing the
-// client's request for the DescribeVirtualGateways operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeVirtualGatewaysRequest is a API request type for the DescribeVirtualGateways API operation.
+type DescribeVirtualGatewaysRequest struct {
+	*aws.Request
+	Input *DescribeVirtualGatewaysInput
+}
+
+// Send marshals and sends the DescribeVirtualGateways API request.
+func (r *DescribeVirtualGatewaysRequest) Send() (*DescribeVirtualGatewaysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVirtualGatewaysOutput), nil
+}
+
+// DescribeVirtualGatewaysRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of virtual private gateways owned by the AWS account.
 //
-// See DescribeVirtualGateways for more information on using the DescribeVirtualGateways
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// You can create one or more AWS Direct Connect private virtual interfaces
+// linking to a virtual private gateway. A virtual private gateway can be managed
+// via Amazon Virtual Private Cloud (VPC) console or the EC2 CreateVpnGateway
+// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html)
+// action.
 //
 //    // Example sending a request using the DescribeVirtualGatewaysRequest method.
-//    req, resp := client.DescribeVirtualGatewaysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeVirtualGatewaysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGateways
-func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysInput) (req *aws.Request, output *DescribeVirtualGatewaysOutput) {
+func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVirtualGateways,
 		HTTPMethod: "POST",
@@ -2869,102 +1702,30 @@ func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGat
 		input = &DescribeVirtualGatewaysInput{}
 	}
 
-	output = &DescribeVirtualGatewaysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeVirtualGateways API operation for AWS Direct Connect.
-//
-// Returns a list of virtual private gateways owned by the AWS account.
-//
-// You can create one or more AWS Direct Connect private virtual interfaces
-// linking to a virtual private gateway. A virtual private gateway can be managed
-// via Amazon Virtual Private Cloud (VPC) console or the EC2 CreateVpnGateway
-// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html)
-// action.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeVirtualGateways for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGateways
-func (c *DirectConnect) DescribeVirtualGateways(input *DescribeVirtualGatewaysInput) (*DescribeVirtualGatewaysOutput, error) {
-	req, out := c.DescribeVirtualGatewaysRequest(input)
-	return out, req.Send()
-}
-
-// DescribeVirtualGatewaysWithContext is the same as DescribeVirtualGateways with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVirtualGateways for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeVirtualGatewaysWithContext(ctx aws.Context, input *DescribeVirtualGatewaysInput, opts ...aws.Option) (*DescribeVirtualGatewaysOutput, error) {
-	req, out := c.DescribeVirtualGatewaysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeVirtualGatewaysOutput{})
+	return DescribeVirtualGatewaysRequest{Request: req, Input: input}
 }
 
 const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 
-// DescribeVirtualInterfacesRequest generates a "aws.Request" representing the
-// client's request for the DescribeVirtualInterfaces operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeVirtualInterfaces for more information on using the DescribeVirtualInterfaces
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeVirtualInterfacesRequest method.
-//    req, resp := client.DescribeVirtualInterfacesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces
-func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfacesInput) (req *aws.Request, output *DescribeVirtualInterfacesOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeVirtualInterfaces,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeVirtualInterfacesInput{}
-	}
-
-	output = &DescribeVirtualInterfacesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeVirtualInterfacesRequest is a API request type for the DescribeVirtualInterfaces API operation.
+type DescribeVirtualInterfacesRequest struct {
+	*aws.Request
+	Input *DescribeVirtualInterfacesInput
 }
 
-// DescribeVirtualInterfaces API operation for AWS Direct Connect.
+// Send marshals and sends the DescribeVirtualInterfaces API request.
+func (r *DescribeVirtualInterfacesRequest) Send() (*DescribeVirtualInterfacesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVirtualInterfacesOutput), nil
+}
+
+// DescribeVirtualInterfacesRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Displays all virtual interfaces for an AWS account. Virtual interfaces deleted
 // fewer than 15 minutes before you make the request are also returned. If you
@@ -2975,87 +1736,49 @@ func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualI
 // A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
 // location and the customer.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DescribeVirtualInterfaces for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces
-func (c *DirectConnect) DescribeVirtualInterfaces(input *DescribeVirtualInterfacesInput) (*DescribeVirtualInterfacesOutput, error) {
-	req, out := c.DescribeVirtualInterfacesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeVirtualInterfacesWithContext is the same as DescribeVirtualInterfaces with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVirtualInterfaces for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DescribeVirtualInterfacesWithContext(ctx aws.Context, input *DescribeVirtualInterfacesInput, opts ...aws.Option) (*DescribeVirtualInterfacesOutput, error) {
-	req, out := c.DescribeVirtualInterfacesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
-
-// DisassociateConnectionFromLagRequest generates a "aws.Request" representing the
-// client's request for the DisassociateConnectionFromLag operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisassociateConnectionFromLag for more information on using the DisassociateConnectionFromLag
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisassociateConnectionFromLagRequest method.
-//    req, resp := client.DisassociateConnectionFromLagRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeVirtualInterfacesRequest method.
+//    req := client.DescribeVirtualInterfacesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag
-func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *DisassociateConnectionFromLagInput) (req *aws.Request, output *Connection) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces
+func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest {
 	op := &aws.Operation{
-		Name:       opDisassociateConnectionFromLag,
+		Name:       opDescribeVirtualInterfaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DisassociateConnectionFromLagInput{}
+		input = &DescribeVirtualInterfacesInput{}
 	}
 
-	output = &Connection{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeVirtualInterfacesOutput{})
+	return DescribeVirtualInterfacesRequest{Request: req, Input: input}
 }
 
-// DisassociateConnectionFromLag API operation for AWS Direct Connect.
+const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
+
+// DisassociateConnectionFromLagRequest is a API request type for the DisassociateConnectionFromLag API operation.
+type DisassociateConnectionFromLagRequest struct {
+	*aws.Request
+	Input *DisassociateConnectionFromLagInput
+}
+
+// Send marshals and sends the DisassociateConnectionFromLag API request.
+func (r *DisassociateConnectionFromLagRequest) Send() (*DisassociateConnectionFromLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateConnectionFromLagOutput), nil
+}
+
+// DisassociateConnectionFromLagRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Disassociates a connection from a link aggregation group (LAG). The connection
 // is interrupted and re-established as a standalone connection (the connection
@@ -3069,71 +1792,66 @@ func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *Disassociate
 // when it's the last member of the LAG. If all connections are disassociated,
 // the LAG continues to exist as an empty LAG with no physical connections.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation DisassociateConnectionFromLag for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the DisassociateConnectionFromLagRequest method.
+//    req := client.DisassociateConnectionFromLagRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag
-func (c *DirectConnect) DisassociateConnectionFromLag(input *DisassociateConnectionFromLagInput) (*Connection, error) {
-	req, out := c.DisassociateConnectionFromLagRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *DisassociateConnectionFromLagInput) DisassociateConnectionFromLagRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateConnectionFromLag,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DisassociateConnectionFromLagWithContext is the same as DisassociateConnectionFromLag with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisassociateConnectionFromLag for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) DisassociateConnectionFromLagWithContext(ctx aws.Context, input *DisassociateConnectionFromLagInput, opts ...aws.Option) (*Connection, error) {
-	req, out := c.DisassociateConnectionFromLagRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DisassociateConnectionFromLagInput{}
+	}
+
+	req := c.newRequest(op, input, &DisassociateConnectionFromLagOutput{})
+	return DisassociateConnectionFromLagRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Adds the specified tags to the specified Direct Connect resource. Each Direct
+// Connect resource can have a maximum of 50 tags.
 //
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Each tag consists of a key and an optional value. If a tag with the same
+// key is already associated with the Direct Connect resource, this action updates
+// its value.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResource
-func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -3144,92 +1862,42 @@ func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) (req *aws.Re
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TagResource API operation for AWS Direct Connect.
-//
-// Adds the specified tags to the specified Direct Connect resource. Each Direct
-// Connect resource can have a maximum of 50 tags.
-//
-// Each tag consists of a key and an optional value. If a tag with the same
-// key is already associated with the Direct Connect resource, this action updates
-// its value.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeDuplicateTagKeysException "DuplicateTagKeysException"
-//   A tag key was specified more than once.
-//
-//   * ErrCodeTooManyTagsException "TooManyTagsException"
-//   You have reached the limit on the number of tags that can be assigned to
-//   a Direct Connect resource.
-//
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResource
-func (c *DirectConnect) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TagResourceOutput{})
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes one or more tags from the specified Direct Connect resource.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResource
-func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -3240,96 +1908,30 @@ func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) (req *aw
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UntagResource API operation for AWS Direct Connect.
-//
-// Removes one or more tags from the specified Direct Connect resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResource
-func (c *DirectConnect) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UntagResourceOutput{})
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateLag = "UpdateLag"
 
-// UpdateLagRequest generates a "aws.Request" representing the
-// client's request for the UpdateLag operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateLag for more information on using the UpdateLag
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateLagRequest method.
-//    req, resp := client.UpdateLagRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag
-func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) (req *aws.Request, output *Lag) {
-	op := &aws.Operation{
-		Name:       opUpdateLag,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateLagInput{}
-	}
-
-	output = &Lag{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateLagRequest is a API request type for the UpdateLag API operation.
+type UpdateLagRequest struct {
+	*aws.Request
+	Input *UpdateLagInput
 }
 
-// UpdateLag API operation for AWS Direct Connect.
+// Send marshals and sends the UpdateLag API request.
+func (r *UpdateLagRequest) Send() (*UpdateLagOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateLagOutput), nil
+}
+
+// UpdateLagRequest returns a request value for making API operation for
+// AWS Direct Connect.
 //
 // Updates the attributes of a link aggregation group (LAG).
 //
@@ -3347,42 +1949,27 @@ func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) (req *aws.Reques
 // value should be done with care as it could force the LAG down if the value
 // is set higher than the current number of operational connections.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Direct Connect's
-// API operation UpdateLag for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeServerException "ServerException"
-//   A server-side error occurred during the API call. The error message will
-//   contain additional details about the cause.
-//
-//   * ErrCodeClientException "ClientException"
-//   The API was called with invalid parameters. The error message will contain
-//   additional details about the cause.
+//    // Example sending a request using the UpdateLagRequest method.
+//    req := client.UpdateLagRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag
-func (c *DirectConnect) UpdateLag(input *UpdateLagInput) (*Lag, error) {
-	req, out := c.UpdateLagRequest(input)
-	return out, req.Send()
-}
+func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest {
+	op := &aws.Operation{
+		Name:       opUpdateLag,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateLagWithContext is the same as UpdateLag with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateLag for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectConnect) UpdateLagWithContext(ctx aws.Context, input *UpdateLagInput, opts ...aws.Option) (*Lag, error) {
-	req, out := c.UpdateLagRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateLagInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateLagOutput{})
+	return UpdateLagRequest{Request: req, Input: input}
 }
 
 // Container for the parameters to the AllocateConnectionOnInterconnect operation.
@@ -4402,202 +2989,6 @@ func (s *ConfirmPublicVirtualInterfaceOutput) SetVirtualInterfaceState(v Virtual
 	return s
 }
 
-// A connection represents the physical network connection between the AWS Direct
-// Connect location and the customer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection
-type Connection struct {
-	_ struct{} `type:"structure"`
-
-	// The Direct Connection endpoint which the physical connection terminates on.
-	AwsDevice *string `locationName:"awsDevice" type:"string"`
-
-	// Bandwidth of the connection.
-	//
-	// Example: 1Gbps (for regular connections), or 500Mbps (for hosted connections)
-	//
-	// Default: None
-	Bandwidth *string `locationName:"bandwidth" type:"string"`
-
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// The name of the connection.
-	//
-	// Example: "My Connection to AWS"
-	//
-	// Default: None
-	ConnectionName *string `locationName:"connectionName" type:"string"`
-
-	// State of the connection.
-	//
-	//    * Ordering: The initial state of a hosted connection provisioned on an
-	//    interconnect. The connection stays in the ordering state until the owner
-	//    of the hosted connection confirms or declines the connection order.
-	//
-	//    * Requested: The initial state of a standard connection. The connection
-	//    stays in the requested state until the Letter of Authorization (LOA) is
-	//    sent to the customer.
-	//
-	//    * Pending: The connection has been approved, and is being initialized.
-	//
-	//    * Available: The network link is up, and the connection is ready for use.
-	//
-	//    * Down: The network link is down.
-	//
-	//    * Deleting: The connection is in the process of being deleted.
-	//
-	//    * Deleted: The connection has been deleted.
-	//
-	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
-	//    'Rejected' state if it is deleted by the end customer.
-	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
-
-	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The time of the most recent call to DescribeLoa for this connection.
-	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp" timestampFormat:"unix"`
-
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
-	Location *string `locationName:"location" type:"string"`
-
-	// The AWS account that will own the new connection.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The name of the AWS Direct Connect service provider associated with the connection.
-	PartnerName *string `locationName:"partnerName" type:"string"`
-
-	// The AWS region where the connection is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
-	Region *string `locationName:"region" type:"string"`
-
-	// The VLAN ID.
-	//
-	// Example: 101
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s Connection) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s Connection) GoString() string {
-	return s.String()
-}
-
-// SetAwsDevice sets the AwsDevice field's value.
-func (s *Connection) SetAwsDevice(v string) *Connection {
-	s.AwsDevice = &v
-	return s
-}
-
-// SetBandwidth sets the Bandwidth field's value.
-func (s *Connection) SetBandwidth(v string) *Connection {
-	s.Bandwidth = &v
-	return s
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *Connection) SetConnectionId(v string) *Connection {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetConnectionName sets the ConnectionName field's value.
-func (s *Connection) SetConnectionName(v string) *Connection {
-	s.ConnectionName = &v
-	return s
-}
-
-// SetConnectionState sets the ConnectionState field's value.
-func (s *Connection) SetConnectionState(v ConnectionState) *Connection {
-	s.ConnectionState = v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *Connection) SetLagId(v string) *Connection {
-	s.LagId = &v
-	return s
-}
-
-// SetLoaIssueTime sets the LoaIssueTime field's value.
-func (s *Connection) SetLoaIssueTime(v time.Time) *Connection {
-	s.LoaIssueTime = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *Connection) SetLocation(v string) *Connection {
-	s.Location = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *Connection) SetOwnerAccount(v string) *Connection {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetPartnerName sets the PartnerName field's value.
-func (s *Connection) SetPartnerName(v string) *Connection {
-	s.PartnerName = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Connection) SetRegion(v string) *Connection {
-	s.Region = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *Connection) SetVlan(v int64) *Connection {
-	s.Vlan = &v
-	return s
-}
-
-// A structure containing a list of connections.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connections
-type Connections struct {
-	_ struct{} `type:"structure"`
-
-	// A list of connections.
-	Connections []*Connection `locationName:"connections" type:"list"`
-}
-
-// String returns the string representation
-func (s Connections) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s Connections) GoString() string {
-	return s.String()
-}
-
-// SetConnections sets the Connections field's value.
-func (s *Connections) SetConnections(v []*Connection) *Connections {
-	s.Connections = v
-	return s
-}
-
 // Container for the parameters to the CreateBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerRequest
 type CreateBGPPeerInput struct {
@@ -4645,7 +3036,7 @@ type CreateBGPPeerOutput struct {
 
 	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
 	// location and the customer.
-	VirtualInterface *VirtualInterface `locationName:"virtualInterface" type:"structure"`
+	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
 }
 
 // String returns the string representation
@@ -4659,7 +3050,7 @@ func (s CreateBGPPeerOutput) GoString() string {
 }
 
 // SetVirtualInterface sets the VirtualInterface field's value.
-func (s *CreateBGPPeerOutput) SetVirtualInterface(v *VirtualInterface) *CreateBGPPeerOutput {
+func (s *CreateBGPPeerOutput) SetVirtualInterface(v *CreatePublicVirtualInterfaceOutput) *CreateBGPPeerOutput {
 	s.VirtualInterface = v
 	return s
 }
@@ -4851,6 +3242,147 @@ func (s *CreateInterconnectInput) SetLagId(v string) *CreateInterconnectInput {
 // SetLocation sets the Location field's value.
 func (s *CreateInterconnectInput) SetLocation(v string) *CreateInterconnectInput {
 	s.Location = &v
+	return s
+}
+
+// An interconnect is a connection that can host other connections.
+//
+// Like a standard AWS Direct Connect connection, an interconnect represents
+// the physical connection between an AWS Direct Connect partner's network and
+// a specific Direct Connect location. An AWS Direct Connect partner who owns
+// an interconnect can provision hosted connections on the interconnect for
+// their end customers, thereby providing the end customers with connectivity
+// to AWS services.
+//
+// The resources of the interconnect, including bandwidth and VLAN numbers,
+// are shared by all of the hosted connections on the interconnect, and the
+// owner of the interconnect determines how these resources are assigned.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect
+type CreateInterconnectOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The Direct Connection endpoint which the physical connection terminates on.
+	AwsDevice *string `locationName:"awsDevice" type:"string"`
+
+	// Bandwidth of the connection.
+	//
+	// Example: 1Gbps
+	//
+	// Default: None
+	Bandwidth *string `locationName:"bandwidth" type:"string"`
+
+	// The ID of the interconnect.
+	//
+	// Example: dxcon-abc123
+	InterconnectId *string `locationName:"interconnectId" type:"string"`
+
+	// The name of the interconnect.
+	//
+	// Example: "1G Interconnect to AWS"
+	InterconnectName *string `locationName:"interconnectName" type:"string"`
+
+	// State of the interconnect.
+	//
+	//    * Requested: The initial state of an interconnect. The interconnect stays
+	//    in the requested state until the Letter of Authorization (LOA) is sent
+	//    to the customer.
+	//
+	//    * Pending: The interconnect has been approved, and is being initialized.
+	//
+	//    * Available: The network link is up, and the interconnect is ready for
+	//    use.
+	//
+	//    * Down: The network link is down.
+	//
+	//    * Deleting: The interconnect is in the process of being deleted.
+	//
+	//    * Deleted: The interconnect has been deleted.
+	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
+
+	// The ID of the LAG.
+	//
+	// Example: dxlag-fg5678gh
+	LagId *string `locationName:"lagId" type:"string"`
+
+	// The time of the most recent call to DescribeInterconnectLoa for this Interconnect.
+	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp" timestampFormat:"unix"`
+
+	// Where the connection is located.
+	//
+	// Example: EqSV5
+	//
+	// Default: None
+	Location *string `locationName:"location" type:"string"`
+
+	// The AWS region where the connection is located.
+	//
+	// Example: us-east-1
+	//
+	// Default: None
+	Region *string `locationName:"region" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateInterconnectOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateInterconnectOutput) GoString() string {
+	return s.String()
+}
+
+// SetAwsDevice sets the AwsDevice field's value.
+func (s *CreateInterconnectOutput) SetAwsDevice(v string) *CreateInterconnectOutput {
+	s.AwsDevice = &v
+	return s
+}
+
+// SetBandwidth sets the Bandwidth field's value.
+func (s *CreateInterconnectOutput) SetBandwidth(v string) *CreateInterconnectOutput {
+	s.Bandwidth = &v
+	return s
+}
+
+// SetInterconnectId sets the InterconnectId field's value.
+func (s *CreateInterconnectOutput) SetInterconnectId(v string) *CreateInterconnectOutput {
+	s.InterconnectId = &v
+	return s
+}
+
+// SetInterconnectName sets the InterconnectName field's value.
+func (s *CreateInterconnectOutput) SetInterconnectName(v string) *CreateInterconnectOutput {
+	s.InterconnectName = &v
+	return s
+}
+
+// SetInterconnectState sets the InterconnectState field's value.
+func (s *CreateInterconnectOutput) SetInterconnectState(v InterconnectState) *CreateInterconnectOutput {
+	s.InterconnectState = v
+	return s
+}
+
+// SetLagId sets the LagId field's value.
+func (s *CreateInterconnectOutput) SetLagId(v string) *CreateInterconnectOutput {
+	s.LagId = &v
+	return s
+}
+
+// SetLoaIssueTime sets the LoaIssueTime field's value.
+func (s *CreateInterconnectOutput) SetLoaIssueTime(v time.Time) *CreateInterconnectOutput {
+	s.LoaIssueTime = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *CreateInterconnectOutput) SetLocation(v string) *CreateInterconnectOutput {
+	s.Location = &v
+	return s
+}
+
+// SetRegion sets the Region field's value.
+func (s *CreateInterconnectOutput) SetRegion(v string) *CreateInterconnectOutput {
+	s.Region = &v
 	return s
 }
 
@@ -5102,6 +3634,239 @@ func (s *CreatePublicVirtualInterfaceInput) SetNewPublicVirtualInterface(v *NewP
 	return s
 }
 
+// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
+// location and the customer.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterfaceOutput
+type CreatePublicVirtualInterfaceOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates the address family for the BGP peer.
+	//
+	//    * ipv4: IPv4 address family
+	//
+	//    * ipv6: IPv6 address family
+	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
+
+	// IP address assigned to the Amazon interface.
+	//
+	// Example: 192.168.1.1/30 or 2001:db8::1/125
+	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+	//
+	// Example: 65000
+	Asn *int64 `locationName:"asn" type:"integer"`
+
+	// The authentication key for BGP configuration.
+	//
+	// Example: asdf34example
+	AuthKey *string `locationName:"authKey" type:"string"`
+
+	// A list of the BGP peers configured on this virtual interface.
+	BgpPeers []*BGPPeer `locationName:"bgpPeers" type:"list"`
+
+	// The ID of the connection. This field is also used as the ID type for operations
+	// that use multiple connection types (LAG, interconnect, and/or connection).
+	//
+	// Example: dxcon-fg5678gh
+	//
+	// Default: None
+	ConnectionId *string `locationName:"connectionId" type:"string"`
+
+	// IP address assigned to the customer interface.
+	//
+	// Example: 192.168.1.2/30 or 2001:db8::2/125
+	CustomerAddress *string `locationName:"customerAddress" type:"string"`
+
+	// Information for generating the customer router configuration.
+	CustomerRouterConfig *string `locationName:"customerRouterConfig" type:"string"`
+
+	// Where the connection is located.
+	//
+	// Example: EqSV5
+	//
+	// Default: None
+	Location *string `locationName:"location" type:"string"`
+
+	// The AWS account that will own the new virtual interface.
+	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// A list of routes to be advertised to the AWS network in this region (public
+	// virtual interface).
+	RouteFilterPrefixes []*RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
+
+	// The ID of the virtual private gateway to a VPC. This only applies to private
+	// virtual interfaces.
+	//
+	// Example: vgw-123er56
+	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
+
+	// The ID of the virtual interface.
+	//
+	// Example: dxvif-123dfg56
+	//
+	// Default: None
+	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
+
+	// The name of the virtual interface assigned by the customer.
+	//
+	// Example: "My VPC"
+	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
+
+	// State of the virtual interface.
+	//
+	//    * Confirming: The creation of the virtual interface is pending confirmation
+	//    from the virtual interface owner. If the owner of the virtual interface
+	//    is different from the owner of the connection on which it is provisioned,
+	//    then the virtual interface will remain in this state until it is confirmed
+	//    by the virtual interface owner.
+	//
+	//    * Verifying: This state only applies to public virtual interfaces. Each
+	//    public virtual interface needs validation before the virtual interface
+	//    can be created.
+	//
+	//    * Pending: A virtual interface is in this state from the time that it
+	//    is created until the virtual interface is ready to forward traffic.
+	//
+	//    * Available: A virtual interface that is able to forward traffic.
+	//
+	//    * Down: A virtual interface that is BGP down.
+	//
+	//    * Deleting: A virtual interface is in this state immediately after calling
+	//    DeleteVirtualInterface until it can no longer forward traffic.
+	//
+	//    * Deleted: A virtual interface that cannot forward traffic.
+	//
+	//    * Rejected: The virtual interface owner has declined creation of the virtual
+	//    interface. If a virtual interface in the 'Confirming' state is deleted
+	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
+	//    state.
+	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
+
+	// The type of virtual interface.
+	//
+	// Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, and
+	// so on.)
+	VirtualInterfaceType *string `locationName:"virtualInterfaceType" type:"string"`
+
+	// The VLAN ID.
+	//
+	// Example: 101
+	Vlan *int64 `locationName:"vlan" type:"integer"`
+}
+
+// String returns the string representation
+func (s CreatePublicVirtualInterfaceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreatePublicVirtualInterfaceOutput) GoString() string {
+	return s.String()
+}
+
+// SetAddressFamily sets the AddressFamily field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetAddressFamily(v AddressFamily) *CreatePublicVirtualInterfaceOutput {
+	s.AddressFamily = v
+	return s
+}
+
+// SetAmazonAddress sets the AmazonAddress field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetAmazonAddress(v string) *CreatePublicVirtualInterfaceOutput {
+	s.AmazonAddress = &v
+	return s
+}
+
+// SetAsn sets the Asn field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetAsn(v int64) *CreatePublicVirtualInterfaceOutput {
+	s.Asn = &v
+	return s
+}
+
+// SetAuthKey sets the AuthKey field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetAuthKey(v string) *CreatePublicVirtualInterfaceOutput {
+	s.AuthKey = &v
+	return s
+}
+
+// SetBgpPeers sets the BgpPeers field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetBgpPeers(v []*BGPPeer) *CreatePublicVirtualInterfaceOutput {
+	s.BgpPeers = v
+	return s
+}
+
+// SetConnectionId sets the ConnectionId field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetConnectionId(v string) *CreatePublicVirtualInterfaceOutput {
+	s.ConnectionId = &v
+	return s
+}
+
+// SetCustomerAddress sets the CustomerAddress field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetCustomerAddress(v string) *CreatePublicVirtualInterfaceOutput {
+	s.CustomerAddress = &v
+	return s
+}
+
+// SetCustomerRouterConfig sets the CustomerRouterConfig field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetCustomerRouterConfig(v string) *CreatePublicVirtualInterfaceOutput {
+	s.CustomerRouterConfig = &v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetLocation(v string) *CreatePublicVirtualInterfaceOutput {
+	s.Location = &v
+	return s
+}
+
+// SetOwnerAccount sets the OwnerAccount field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetOwnerAccount(v string) *CreatePublicVirtualInterfaceOutput {
+	s.OwnerAccount = &v
+	return s
+}
+
+// SetRouteFilterPrefixes sets the RouteFilterPrefixes field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetRouteFilterPrefixes(v []*RouteFilterPrefix) *CreatePublicVirtualInterfaceOutput {
+	s.RouteFilterPrefixes = v
+	return s
+}
+
+// SetVirtualGatewayId sets the VirtualGatewayId field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVirtualGatewayId(v string) *CreatePublicVirtualInterfaceOutput {
+	s.VirtualGatewayId = &v
+	return s
+}
+
+// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceId(v string) *CreatePublicVirtualInterfaceOutput {
+	s.VirtualInterfaceId = &v
+	return s
+}
+
+// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceName(v string) *CreatePublicVirtualInterfaceOutput {
+	s.VirtualInterfaceName = &v
+	return s
+}
+
+// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceState(v VirtualInterfaceState) *CreatePublicVirtualInterfaceOutput {
+	s.VirtualInterfaceState = v
+	return s
+}
+
+// SetVirtualInterfaceType sets the VirtualInterfaceType field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVirtualInterfaceType(v string) *CreatePublicVirtualInterfaceOutput {
+	s.VirtualInterfaceType = &v
+	return s
+}
+
+// SetVlan sets the Vlan field's value.
+func (s *CreatePublicVirtualInterfaceOutput) SetVlan(v int64) *CreatePublicVirtualInterfaceOutput {
+	s.Vlan = &v
+	return s
+}
+
 // Container for the parameters to the DeleteBGPPeer operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerRequest
 type DeleteBGPPeerInput struct {
@@ -5160,7 +3925,7 @@ type DeleteBGPPeerOutput struct {
 
 	// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
 	// location and the customer.
-	VirtualInterface *VirtualInterface `locationName:"virtualInterface" type:"structure"`
+	VirtualInterface *CreatePublicVirtualInterfaceOutput `locationName:"virtualInterface" type:"structure"`
 }
 
 // String returns the string representation
@@ -5174,7 +3939,7 @@ func (s DeleteBGPPeerOutput) GoString() string {
 }
 
 // SetVirtualInterface sets the VirtualInterface field's value.
-func (s *DeleteBGPPeerOutput) SetVirtualInterface(v *VirtualInterface) *DeleteBGPPeerOutput {
+func (s *DeleteBGPPeerOutput) SetVirtualInterface(v *CreatePublicVirtualInterfaceOutput) *DeleteBGPPeerOutput {
 	s.VirtualInterface = v
 	return s
 }
@@ -5528,7 +4293,7 @@ type DescribeConnectionLoaOutput struct {
 
 	// A structure containing the Letter of Authorization - Connecting Facility
 	// Assignment (LOA-CFA) for a connection.
-	Loa *Loa `locationName:"loa" type:"structure"`
+	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
 }
 
 // String returns the string representation
@@ -5542,7 +4307,7 @@ func (s DescribeConnectionLoaOutput) GoString() string {
 }
 
 // SetLoa sets the Loa field's value.
-func (s *DescribeConnectionLoaOutput) SetLoa(v *Loa) *DescribeConnectionLoaOutput {
+func (s *DescribeConnectionLoaOutput) SetLoa(v *DescribeLoaOutput) *DescribeConnectionLoaOutput {
 	s.Loa = v
 	return s
 }
@@ -5667,6 +4432,31 @@ func (s *DescribeHostedConnectionsInput) SetConnectionId(v string) *DescribeHost
 	return s
 }
 
+// A structure containing a list of connections.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnectOutput
+type DescribeHostedConnectionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	// A list of connections.
+	Connections []*DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeHostedConnectionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeHostedConnectionsOutput) GoString() string {
+	return s.String()
+}
+
+// SetConnections sets the Connections field's value.
+func (s *DescribeHostedConnectionsOutput) SetConnections(v []*DisassociateConnectionFromLagOutput) *DescribeHostedConnectionsOutput {
+	s.Connections = v
+	return s
+}
+
 // Container for the parameters to the DescribeInterconnectLoa operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaRequest
 type DescribeInterconnectLoaInput struct {
@@ -5742,7 +4532,7 @@ type DescribeInterconnectLoaOutput struct {
 
 	// A structure containing the Letter of Authorization - Connecting Facility
 	// Assignment (LOA-CFA) for a connection.
-	Loa *Loa `locationName:"loa" type:"structure"`
+	Loa *DescribeLoaOutput `locationName:"loa" type:"structure"`
 }
 
 // String returns the string representation
@@ -5756,7 +4546,7 @@ func (s DescribeInterconnectLoaOutput) GoString() string {
 }
 
 // SetLoa sets the Loa field's value.
-func (s *DescribeInterconnectLoaOutput) SetLoa(v *Loa) *DescribeInterconnectLoaOutput {
+func (s *DescribeInterconnectLoaOutput) SetLoa(v *DescribeLoaOutput) *DescribeInterconnectLoaOutput {
 	s.Loa = v
 	return s
 }
@@ -5794,7 +4584,7 @@ type DescribeInterconnectsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of interconnects.
-	Interconnects []*Interconnect `locationName:"interconnects" type:"list"`
+	Interconnects []*CreateInterconnectOutput `locationName:"interconnects" type:"list"`
 }
 
 // String returns the string representation
@@ -5808,7 +4598,7 @@ func (s DescribeInterconnectsOutput) GoString() string {
 }
 
 // SetInterconnects sets the Interconnects field's value.
-func (s *DescribeInterconnectsOutput) SetInterconnects(v []*Interconnect) *DescribeInterconnectsOutput {
+func (s *DescribeInterconnectsOutput) SetInterconnects(v []*CreateInterconnectOutput) *DescribeInterconnectsOutput {
 	s.Interconnects = v
 	return s
 }
@@ -5848,7 +4638,7 @@ type DescribeLagsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of LAGs.
-	Lags []*Lag `locationName:"lags" type:"list"`
+	Lags []*UpdateLagOutput `locationName:"lags" type:"list"`
 }
 
 // String returns the string representation
@@ -5862,7 +4652,7 @@ func (s DescribeLagsOutput) GoString() string {
 }
 
 // SetLags sets the Lags field's value.
-func (s *DescribeLagsOutput) SetLags(v []*Lag) *DescribeLagsOutput {
+func (s *DescribeLagsOutput) SetLags(v []*UpdateLagOutput) *DescribeLagsOutput {
 	s.Lags = v
 	return s
 }
@@ -5935,6 +4725,46 @@ func (s *DescribeLoaInput) SetLoaContentType(v LoaContentType) *DescribeLoaInput
 // SetProviderName sets the ProviderName field's value.
 func (s *DescribeLoaInput) SetProviderName(v string) *DescribeLoaInput {
 	s.ProviderName = &v
+	return s
+}
+
+// A structure containing the Letter of Authorization - Connecting Facility
+// Assignment (LOA-CFA) for a connection.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa
+type DescribeLoaOutput struct {
+	_ struct{} `type:"structure"`
+
+	// The binary contents of the LOA-CFA document.
+	//
+	// LoaContent is automatically base64 encoded/decoded by the SDK.
+	LoaContent []byte `locationName:"loaContent" type:"blob"`
+
+	// A standard media type indicating the content type of the LOA-CFA document.
+	// Currently, the only supported value is "application/pdf".
+	//
+	// Default: application/pdf
+	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeLoaOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeLoaOutput) GoString() string {
+	return s.String()
+}
+
+// SetLoaContent sets the LoaContent field's value.
+func (s *DescribeLoaOutput) SetLoaContent(v []byte) *DescribeLoaOutput {
+	s.LoaContent = v
+	return s
+}
+
+// SetLoaContentType sets the LoaContentType field's value.
+func (s *DescribeLoaOutput) SetLoaContentType(v LoaContentType) *DescribeLoaOutput {
+	s.LoaContentType = v
 	return s
 }
 
@@ -6137,7 +4967,7 @@ type DescribeVirtualInterfacesOutput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of virtual interfaces.
-	VirtualInterfaces []*VirtualInterface `locationName:"virtualInterfaces" type:"list"`
+	VirtualInterfaces []*CreatePublicVirtualInterfaceOutput `locationName:"virtualInterfaces" type:"list"`
 }
 
 // String returns the string representation
@@ -6151,7 +4981,7 @@ func (s DescribeVirtualInterfacesOutput) GoString() string {
 }
 
 // SetVirtualInterfaces sets the VirtualInterfaces field's value.
-func (s *DescribeVirtualInterfacesOutput) SetVirtualInterfaces(v []*VirtualInterface) *DescribeVirtualInterfacesOutput {
+func (s *DescribeVirtualInterfacesOutput) SetVirtualInterfaces(v []*CreatePublicVirtualInterfaceOutput) *DescribeVirtualInterfacesOutput {
 	s.VirtualInterfaces = v
 	return s
 }
@@ -6220,20 +5050,10 @@ func (s *DisassociateConnectionFromLagInput) SetLagId(v string) *DisassociateCon
 	return s
 }
 
-// An interconnect is a connection that can host other connections.
-//
-// Like a standard AWS Direct Connect connection, an interconnect represents
-// the physical connection between an AWS Direct Connect partner's network and
-// a specific Direct Connect location. An AWS Direct Connect partner who owns
-// an interconnect can provision hosted connections on the interconnect for
-// their end customers, thereby providing the end customers with connectivity
-// to AWS services.
-//
-// The resources of the interconnect, including bandwidth and VLAN numbers,
-// are shared by all of the hosted connections on the interconnect, and the
-// owner of the interconnect determines how these resources are assigned.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect
-type Interconnect struct {
+// A connection represents the physical network connection between the AWS Direct
+// Connect location and the customer.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnectionOutput
+type DisassociateConnectionFromLagOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The Direct Connection endpoint which the physical connection terminates on.
@@ -6241,45 +5061,56 @@ type Interconnect struct {
 
 	// Bandwidth of the connection.
 	//
-	// Example: 1Gbps
+	// Example: 1Gbps (for regular connections), or 500Mbps (for hosted connections)
 	//
 	// Default: None
 	Bandwidth *string `locationName:"bandwidth" type:"string"`
 
-	// The ID of the interconnect.
+	// The ID of the connection. This field is also used as the ID type for operations
+	// that use multiple connection types (LAG, interconnect, and/or connection).
 	//
-	// Example: dxcon-abc123
-	InterconnectId *string `locationName:"interconnectId" type:"string"`
+	// Example: dxcon-fg5678gh
+	//
+	// Default: None
+	ConnectionId *string `locationName:"connectionId" type:"string"`
 
-	// The name of the interconnect.
+	// The name of the connection.
 	//
-	// Example: "1G Interconnect to AWS"
-	InterconnectName *string `locationName:"interconnectName" type:"string"`
+	// Example: "My Connection to AWS"
+	//
+	// Default: None
+	ConnectionName *string `locationName:"connectionName" type:"string"`
 
-	// State of the interconnect.
+	// State of the connection.
 	//
-	//    * Requested: The initial state of an interconnect. The interconnect stays
-	//    in the requested state until the Letter of Authorization (LOA) is sent
-	//    to the customer.
+	//    * Ordering: The initial state of a hosted connection provisioned on an
+	//    interconnect. The connection stays in the ordering state until the owner
+	//    of the hosted connection confirms or declines the connection order.
 	//
-	//    * Pending: The interconnect has been approved, and is being initialized.
+	//    * Requested: The initial state of a standard connection. The connection
+	//    stays in the requested state until the Letter of Authorization (LOA) is
+	//    sent to the customer.
 	//
-	//    * Available: The network link is up, and the interconnect is ready for
-	//    use.
+	//    * Pending: The connection has been approved, and is being initialized.
+	//
+	//    * Available: The network link is up, and the connection is ready for use.
 	//
 	//    * Down: The network link is down.
 	//
-	//    * Deleting: The interconnect is in the process of being deleted.
+	//    * Deleting: The connection is in the process of being deleted.
 	//
-	//    * Deleted: The interconnect has been deleted.
-	InterconnectState InterconnectState `locationName:"interconnectState" type:"string"`
+	//    * Deleted: The connection has been deleted.
+	//
+	//    * Rejected: A hosted connection in the 'Ordering' state will enter the
+	//    'Rejected' state if it is deleted by the end customer.
+	ConnectionState ConnectionState `locationName:"connectionState" type:"string"`
 
 	// The ID of the LAG.
 	//
 	// Example: dxlag-fg5678gh
 	LagId *string `locationName:"lagId" type:"string"`
 
-	// The time of the most recent call to DescribeInterconnectLoa for this Interconnect.
+	// The time of the most recent call to DescribeLoa for this connection.
 	LoaIssueTime *time.Time `locationName:"loaIssueTime" type:"timestamp" timestampFormat:"unix"`
 
 	// Where the connection is located.
@@ -6289,276 +5120,104 @@ type Interconnect struct {
 	// Default: None
 	Location *string `locationName:"location" type:"string"`
 
+	// The AWS account that will own the new connection.
+	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// The name of the AWS Direct Connect service provider associated with the connection.
+	PartnerName *string `locationName:"partnerName" type:"string"`
+
 	// The AWS region where the connection is located.
 	//
 	// Example: us-east-1
 	//
 	// Default: None
 	Region *string `locationName:"region" type:"string"`
+
+	// The VLAN ID.
+	//
+	// Example: 101
+	Vlan *int64 `locationName:"vlan" type:"integer"`
 }
 
 // String returns the string representation
-func (s Interconnect) String() string {
+func (s DisassociateConnectionFromLagOutput) String() string {
 	return awsutil.Prettify(s)
 }
 
 // GoString returns the string representation
-func (s Interconnect) GoString() string {
+func (s DisassociateConnectionFromLagOutput) GoString() string {
 	return s.String()
 }
 
 // SetAwsDevice sets the AwsDevice field's value.
-func (s *Interconnect) SetAwsDevice(v string) *Interconnect {
+func (s *DisassociateConnectionFromLagOutput) SetAwsDevice(v string) *DisassociateConnectionFromLagOutput {
 	s.AwsDevice = &v
 	return s
 }
 
 // SetBandwidth sets the Bandwidth field's value.
-func (s *Interconnect) SetBandwidth(v string) *Interconnect {
+func (s *DisassociateConnectionFromLagOutput) SetBandwidth(v string) *DisassociateConnectionFromLagOutput {
 	s.Bandwidth = &v
 	return s
 }
 
-// SetInterconnectId sets the InterconnectId field's value.
-func (s *Interconnect) SetInterconnectId(v string) *Interconnect {
-	s.InterconnectId = &v
+// SetConnectionId sets the ConnectionId field's value.
+func (s *DisassociateConnectionFromLagOutput) SetConnectionId(v string) *DisassociateConnectionFromLagOutput {
+	s.ConnectionId = &v
 	return s
 }
 
-// SetInterconnectName sets the InterconnectName field's value.
-func (s *Interconnect) SetInterconnectName(v string) *Interconnect {
-	s.InterconnectName = &v
+// SetConnectionName sets the ConnectionName field's value.
+func (s *DisassociateConnectionFromLagOutput) SetConnectionName(v string) *DisassociateConnectionFromLagOutput {
+	s.ConnectionName = &v
 	return s
 }
 
-// SetInterconnectState sets the InterconnectState field's value.
-func (s *Interconnect) SetInterconnectState(v InterconnectState) *Interconnect {
-	s.InterconnectState = v
+// SetConnectionState sets the ConnectionState field's value.
+func (s *DisassociateConnectionFromLagOutput) SetConnectionState(v ConnectionState) *DisassociateConnectionFromLagOutput {
+	s.ConnectionState = v
 	return s
 }
 
 // SetLagId sets the LagId field's value.
-func (s *Interconnect) SetLagId(v string) *Interconnect {
+func (s *DisassociateConnectionFromLagOutput) SetLagId(v string) *DisassociateConnectionFromLagOutput {
 	s.LagId = &v
 	return s
 }
 
 // SetLoaIssueTime sets the LoaIssueTime field's value.
-func (s *Interconnect) SetLoaIssueTime(v time.Time) *Interconnect {
+func (s *DisassociateConnectionFromLagOutput) SetLoaIssueTime(v time.Time) *DisassociateConnectionFromLagOutput {
 	s.LoaIssueTime = &v
 	return s
 }
 
 // SetLocation sets the Location field's value.
-func (s *Interconnect) SetLocation(v string) *Interconnect {
+func (s *DisassociateConnectionFromLagOutput) SetLocation(v string) *DisassociateConnectionFromLagOutput {
 	s.Location = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Interconnect) SetRegion(v string) *Interconnect {
-	s.Region = &v
-	return s
-}
-
-// Describes a link aggregation group (LAG). A LAG is a connection that uses
-// the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle
-// of physical connections. Like an interconnect, it can host other connections.
-// All connections in a LAG must terminate on the same physical AWS Direct Connect
-// endpoint, and must be the same bandwidth.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag
-type Lag struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates whether the LAG can host other connections.
-	//
-	// This is intended for use by AWS Direct Connect partners only.
-	AllowsHostedConnections *bool `locationName:"allowsHostedConnections" type:"boolean"`
-
-	// The AWS Direct Connection endpoint that hosts the LAG.
-	AwsDevice *string `locationName:"awsDevice" type:"string"`
-
-	// A list of connections bundled by this LAG.
-	Connections []*Connection `locationName:"connections" type:"list"`
-
-	// The individual bandwidth of the physical connections bundled by the LAG.
-	//
-	// Available values: 1Gbps, 10Gbps
-	ConnectionsBandwidth *string `locationName:"connectionsBandwidth" type:"string"`
-
-	// The ID of the LAG.
-	//
-	// Example: dxlag-fg5678gh
-	LagId *string `locationName:"lagId" type:"string"`
-
-	// The name of the LAG.
-	LagName *string `locationName:"lagName" type:"string"`
-
-	// The state of the LAG.
-	//
-	//    * Requested: The initial state of a LAG. The LAG stays in the requested
-	//    state until the Letter of Authorization (LOA) is available.
-	//
-	//    * Pending: The LAG has been approved, and is being initialized.
-	//
-	//    * Available: The network link is established, and the LAG is ready for
-	//    use.
-	//
-	//    * Down: The network link is down.
-	//
-	//    * Deleting: The LAG is in the process of being deleted.
-	//
-	//    * Deleted: The LAG has been deleted.
-	LagState LagState `locationName:"lagState" type:"string"`
-
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
-	Location *string `locationName:"location" type:"string"`
-
-	// The minimum number of physical connections that must be operational for the
-	// LAG itself to be operational. If the number of operational connections drops
-	// below this setting, the LAG state changes to down. This value can help to
-	// ensure that a LAG is not overutilized if a significant number of its bundled
-	// connections go down.
-	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
-
-	// The number of physical connections bundled by the LAG, up to a maximum of
-	// 10.
-	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer"`
-
-	// The owner of the LAG.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// The AWS region where the connection is located.
-	//
-	// Example: us-east-1
-	//
-	// Default: None
-	Region *string `locationName:"region" type:"string"`
-}
-
-// String returns the string representation
-func (s Lag) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s Lag) GoString() string {
-	return s.String()
-}
-
-// SetAllowsHostedConnections sets the AllowsHostedConnections field's value.
-func (s *Lag) SetAllowsHostedConnections(v bool) *Lag {
-	s.AllowsHostedConnections = &v
-	return s
-}
-
-// SetAwsDevice sets the AwsDevice field's value.
-func (s *Lag) SetAwsDevice(v string) *Lag {
-	s.AwsDevice = &v
-	return s
-}
-
-// SetConnections sets the Connections field's value.
-func (s *Lag) SetConnections(v []*Connection) *Lag {
-	s.Connections = v
-	return s
-}
-
-// SetConnectionsBandwidth sets the ConnectionsBandwidth field's value.
-func (s *Lag) SetConnectionsBandwidth(v string) *Lag {
-	s.ConnectionsBandwidth = &v
-	return s
-}
-
-// SetLagId sets the LagId field's value.
-func (s *Lag) SetLagId(v string) *Lag {
-	s.LagId = &v
-	return s
-}
-
-// SetLagName sets the LagName field's value.
-func (s *Lag) SetLagName(v string) *Lag {
-	s.LagName = &v
-	return s
-}
-
-// SetLagState sets the LagState field's value.
-func (s *Lag) SetLagState(v LagState) *Lag {
-	s.LagState = v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *Lag) SetLocation(v string) *Lag {
-	s.Location = &v
-	return s
-}
-
-// SetMinimumLinks sets the MinimumLinks field's value.
-func (s *Lag) SetMinimumLinks(v int64) *Lag {
-	s.MinimumLinks = &v
-	return s
-}
-
-// SetNumberOfConnections sets the NumberOfConnections field's value.
-func (s *Lag) SetNumberOfConnections(v int64) *Lag {
-	s.NumberOfConnections = &v
 	return s
 }
 
 // SetOwnerAccount sets the OwnerAccount field's value.
-func (s *Lag) SetOwnerAccount(v string) *Lag {
+func (s *DisassociateConnectionFromLagOutput) SetOwnerAccount(v string) *DisassociateConnectionFromLagOutput {
 	s.OwnerAccount = &v
 	return s
 }
 
+// SetPartnerName sets the PartnerName field's value.
+func (s *DisassociateConnectionFromLagOutput) SetPartnerName(v string) *DisassociateConnectionFromLagOutput {
+	s.PartnerName = &v
+	return s
+}
+
 // SetRegion sets the Region field's value.
-func (s *Lag) SetRegion(v string) *Lag {
+func (s *DisassociateConnectionFromLagOutput) SetRegion(v string) *DisassociateConnectionFromLagOutput {
 	s.Region = &v
 	return s
 }
 
-// A structure containing the Letter of Authorization - Connecting Facility
-// Assignment (LOA-CFA) for a connection.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa
-type Loa struct {
-	_ struct{} `type:"structure"`
-
-	// The binary contents of the LOA-CFA document.
-	//
-	// LoaContent is automatically base64 encoded/decoded by the SDK.
-	LoaContent []byte `locationName:"loaContent" type:"blob"`
-
-	// A standard media type indicating the content type of the LOA-CFA document.
-	// Currently, the only supported value is "application/pdf".
-	//
-	// Default: application/pdf
-	LoaContentType LoaContentType `locationName:"loaContentType" type:"string"`
-}
-
-// String returns the string representation
-func (s Loa) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s Loa) GoString() string {
-	return s.String()
-}
-
-// SetLoaContent sets the LoaContent field's value.
-func (s *Loa) SetLoaContent(v []byte) *Loa {
-	s.LoaContent = v
-	return s
-}
-
-// SetLoaContentType sets the LoaContentType field's value.
-func (s *Loa) SetLoaContentType(v LoaContentType) *Loa {
-	s.LoaContentType = v
+// SetVlan sets the Vlan field's value.
+func (s *DisassociateConnectionFromLagOutput) SetVlan(v int64) *DisassociateConnectionFromLagOutput {
+	s.Vlan = &v
 	return s
 }
 
@@ -7550,6 +6209,167 @@ func (s *UpdateLagInput) SetMinimumLinks(v int64) *UpdateLagInput {
 	return s
 }
 
+// Describes a link aggregation group (LAG). A LAG is a connection that uses
+// the Link Aggregation Control Protocol (LACP) to logically aggregate a bundle
+// of physical connections. Like an interconnect, it can host other connections.
+// All connections in a LAG must terminate on the same physical AWS Direct Connect
+// endpoint, and must be the same bandwidth.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLagOutput
+type UpdateLagOutput struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether the LAG can host other connections.
+	//
+	// This is intended for use by AWS Direct Connect partners only.
+	AllowsHostedConnections *bool `locationName:"allowsHostedConnections" type:"boolean"`
+
+	// The AWS Direct Connection endpoint that hosts the LAG.
+	AwsDevice *string `locationName:"awsDevice" type:"string"`
+
+	// A list of connections bundled by this LAG.
+	Connections []*DisassociateConnectionFromLagOutput `locationName:"connections" type:"list"`
+
+	// The individual bandwidth of the physical connections bundled by the LAG.
+	//
+	// Available values: 1Gbps, 10Gbps
+	ConnectionsBandwidth *string `locationName:"connectionsBandwidth" type:"string"`
+
+	// The ID of the LAG.
+	//
+	// Example: dxlag-fg5678gh
+	LagId *string `locationName:"lagId" type:"string"`
+
+	// The name of the LAG.
+	LagName *string `locationName:"lagName" type:"string"`
+
+	// The state of the LAG.
+	//
+	//    * Requested: The initial state of a LAG. The LAG stays in the requested
+	//    state until the Letter of Authorization (LOA) is available.
+	//
+	//    * Pending: The LAG has been approved, and is being initialized.
+	//
+	//    * Available: The network link is established, and the LAG is ready for
+	//    use.
+	//
+	//    * Down: The network link is down.
+	//
+	//    * Deleting: The LAG is in the process of being deleted.
+	//
+	//    * Deleted: The LAG has been deleted.
+	LagState LagState `locationName:"lagState" type:"string"`
+
+	// Where the connection is located.
+	//
+	// Example: EqSV5
+	//
+	// Default: None
+	Location *string `locationName:"location" type:"string"`
+
+	// The minimum number of physical connections that must be operational for the
+	// LAG itself to be operational. If the number of operational connections drops
+	// below this setting, the LAG state changes to down. This value can help to
+	// ensure that a LAG is not overutilized if a significant number of its bundled
+	// connections go down.
+	MinimumLinks *int64 `locationName:"minimumLinks" type:"integer"`
+
+	// The number of physical connections bundled by the LAG, up to a maximum of
+	// 10.
+	NumberOfConnections *int64 `locationName:"numberOfConnections" type:"integer"`
+
+	// The owner of the LAG.
+	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// The AWS region where the connection is located.
+	//
+	// Example: us-east-1
+	//
+	// Default: None
+	Region *string `locationName:"region" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateLagOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateLagOutput) GoString() string {
+	return s.String()
+}
+
+// SetAllowsHostedConnections sets the AllowsHostedConnections field's value.
+func (s *UpdateLagOutput) SetAllowsHostedConnections(v bool) *UpdateLagOutput {
+	s.AllowsHostedConnections = &v
+	return s
+}
+
+// SetAwsDevice sets the AwsDevice field's value.
+func (s *UpdateLagOutput) SetAwsDevice(v string) *UpdateLagOutput {
+	s.AwsDevice = &v
+	return s
+}
+
+// SetConnections sets the Connections field's value.
+func (s *UpdateLagOutput) SetConnections(v []*DisassociateConnectionFromLagOutput) *UpdateLagOutput {
+	s.Connections = v
+	return s
+}
+
+// SetConnectionsBandwidth sets the ConnectionsBandwidth field's value.
+func (s *UpdateLagOutput) SetConnectionsBandwidth(v string) *UpdateLagOutput {
+	s.ConnectionsBandwidth = &v
+	return s
+}
+
+// SetLagId sets the LagId field's value.
+func (s *UpdateLagOutput) SetLagId(v string) *UpdateLagOutput {
+	s.LagId = &v
+	return s
+}
+
+// SetLagName sets the LagName field's value.
+func (s *UpdateLagOutput) SetLagName(v string) *UpdateLagOutput {
+	s.LagName = &v
+	return s
+}
+
+// SetLagState sets the LagState field's value.
+func (s *UpdateLagOutput) SetLagState(v LagState) *UpdateLagOutput {
+	s.LagState = v
+	return s
+}
+
+// SetLocation sets the Location field's value.
+func (s *UpdateLagOutput) SetLocation(v string) *UpdateLagOutput {
+	s.Location = &v
+	return s
+}
+
+// SetMinimumLinks sets the MinimumLinks field's value.
+func (s *UpdateLagOutput) SetMinimumLinks(v int64) *UpdateLagOutput {
+	s.MinimumLinks = &v
+	return s
+}
+
+// SetNumberOfConnections sets the NumberOfConnections field's value.
+func (s *UpdateLagOutput) SetNumberOfConnections(v int64) *UpdateLagOutput {
+	s.NumberOfConnections = &v
+	return s
+}
+
+// SetOwnerAccount sets the OwnerAccount field's value.
+func (s *UpdateLagOutput) SetOwnerAccount(v string) *UpdateLagOutput {
+	s.OwnerAccount = &v
+	return s
+}
+
+// SetRegion sets the Region field's value.
+func (s *UpdateLagOutput) SetRegion(v string) *UpdateLagOutput {
+	s.Region = &v
+	return s
+}
+
 // You can create one or more AWS Direct Connect private virtual interfaces
 // linking to your virtual private gateway.
 //
@@ -7597,239 +6417,6 @@ func (s *VirtualGateway) SetVirtualGatewayId(v string) *VirtualGateway {
 // SetVirtualGatewayState sets the VirtualGatewayState field's value.
 func (s *VirtualGateway) SetVirtualGatewayState(v string) *VirtualGateway {
 	s.VirtualGatewayState = &v
-	return s
-}
-
-// A virtual interface (VLAN) transmits the traffic between the AWS Direct Connect
-// location and the customer.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface
-type VirtualInterface struct {
-	_ struct{} `type:"structure"`
-
-	// Indicates the address family for the BGP peer.
-	//
-	//    * ipv4: IPv4 address family
-	//
-	//    * ipv6: IPv6 address family
-	AddressFamily AddressFamily `locationName:"addressFamily" type:"string"`
-
-	// IP address assigned to the Amazon interface.
-	//
-	// Example: 192.168.1.1/30 or 2001:db8::1/125
-	AmazonAddress *string `locationName:"amazonAddress" type:"string"`
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
-	//
-	// Example: 65000
-	Asn *int64 `locationName:"asn" type:"integer"`
-
-	// The authentication key for BGP configuration.
-	//
-	// Example: asdf34example
-	AuthKey *string `locationName:"authKey" type:"string"`
-
-	// A list of the BGP peers configured on this virtual interface.
-	BgpPeers []*BGPPeer `locationName:"bgpPeers" type:"list"`
-
-	// The ID of the connection. This field is also used as the ID type for operations
-	// that use multiple connection types (LAG, interconnect, and/or connection).
-	//
-	// Example: dxcon-fg5678gh
-	//
-	// Default: None
-	ConnectionId *string `locationName:"connectionId" type:"string"`
-
-	// IP address assigned to the customer interface.
-	//
-	// Example: 192.168.1.2/30 or 2001:db8::2/125
-	CustomerAddress *string `locationName:"customerAddress" type:"string"`
-
-	// Information for generating the customer router configuration.
-	CustomerRouterConfig *string `locationName:"customerRouterConfig" type:"string"`
-
-	// Where the connection is located.
-	//
-	// Example: EqSV5
-	//
-	// Default: None
-	Location *string `locationName:"location" type:"string"`
-
-	// The AWS account that will own the new virtual interface.
-	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
-
-	// A list of routes to be advertised to the AWS network in this region (public
-	// virtual interface).
-	RouteFilterPrefixes []*RouteFilterPrefix `locationName:"routeFilterPrefixes" type:"list"`
-
-	// The ID of the virtual private gateway to a VPC. This only applies to private
-	// virtual interfaces.
-	//
-	// Example: vgw-123er56
-	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
-
-	// The ID of the virtual interface.
-	//
-	// Example: dxvif-123dfg56
-	//
-	// Default: None
-	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
-
-	// The name of the virtual interface assigned by the customer.
-	//
-	// Example: "My VPC"
-	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
-
-	// State of the virtual interface.
-	//
-	//    * Confirming: The creation of the virtual interface is pending confirmation
-	//    from the virtual interface owner. If the owner of the virtual interface
-	//    is different from the owner of the connection on which it is provisioned,
-	//    then the virtual interface will remain in this state until it is confirmed
-	//    by the virtual interface owner.
-	//
-	//    * Verifying: This state only applies to public virtual interfaces. Each
-	//    public virtual interface needs validation before the virtual interface
-	//    can be created.
-	//
-	//    * Pending: A virtual interface is in this state from the time that it
-	//    is created until the virtual interface is ready to forward traffic.
-	//
-	//    * Available: A virtual interface that is able to forward traffic.
-	//
-	//    * Down: A virtual interface that is BGP down.
-	//
-	//    * Deleting: A virtual interface is in this state immediately after calling
-	//    DeleteVirtualInterface until it can no longer forward traffic.
-	//
-	//    * Deleted: A virtual interface that cannot forward traffic.
-	//
-	//    * Rejected: The virtual interface owner has declined creation of the virtual
-	//    interface. If a virtual interface in the 'Confirming' state is deleted
-	//    by the virtual interface owner, the virtual interface will enter the 'Rejected'
-	//    state.
-	VirtualInterfaceState VirtualInterfaceState `locationName:"virtualInterfaceState" type:"string"`
-
-	// The type of virtual interface.
-	//
-	// Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB, and
-	// so on.)
-	VirtualInterfaceType *string `locationName:"virtualInterfaceType" type:"string"`
-
-	// The VLAN ID.
-	//
-	// Example: 101
-	Vlan *int64 `locationName:"vlan" type:"integer"`
-}
-
-// String returns the string representation
-func (s VirtualInterface) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s VirtualInterface) GoString() string {
-	return s.String()
-}
-
-// SetAddressFamily sets the AddressFamily field's value.
-func (s *VirtualInterface) SetAddressFamily(v AddressFamily) *VirtualInterface {
-	s.AddressFamily = v
-	return s
-}
-
-// SetAmazonAddress sets the AmazonAddress field's value.
-func (s *VirtualInterface) SetAmazonAddress(v string) *VirtualInterface {
-	s.AmazonAddress = &v
-	return s
-}
-
-// SetAsn sets the Asn field's value.
-func (s *VirtualInterface) SetAsn(v int64) *VirtualInterface {
-	s.Asn = &v
-	return s
-}
-
-// SetAuthKey sets the AuthKey field's value.
-func (s *VirtualInterface) SetAuthKey(v string) *VirtualInterface {
-	s.AuthKey = &v
-	return s
-}
-
-// SetBgpPeers sets the BgpPeers field's value.
-func (s *VirtualInterface) SetBgpPeers(v []*BGPPeer) *VirtualInterface {
-	s.BgpPeers = v
-	return s
-}
-
-// SetConnectionId sets the ConnectionId field's value.
-func (s *VirtualInterface) SetConnectionId(v string) *VirtualInterface {
-	s.ConnectionId = &v
-	return s
-}
-
-// SetCustomerAddress sets the CustomerAddress field's value.
-func (s *VirtualInterface) SetCustomerAddress(v string) *VirtualInterface {
-	s.CustomerAddress = &v
-	return s
-}
-
-// SetCustomerRouterConfig sets the CustomerRouterConfig field's value.
-func (s *VirtualInterface) SetCustomerRouterConfig(v string) *VirtualInterface {
-	s.CustomerRouterConfig = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *VirtualInterface) SetLocation(v string) *VirtualInterface {
-	s.Location = &v
-	return s
-}
-
-// SetOwnerAccount sets the OwnerAccount field's value.
-func (s *VirtualInterface) SetOwnerAccount(v string) *VirtualInterface {
-	s.OwnerAccount = &v
-	return s
-}
-
-// SetRouteFilterPrefixes sets the RouteFilterPrefixes field's value.
-func (s *VirtualInterface) SetRouteFilterPrefixes(v []*RouteFilterPrefix) *VirtualInterface {
-	s.RouteFilterPrefixes = v
-	return s
-}
-
-// SetVirtualGatewayId sets the VirtualGatewayId field's value.
-func (s *VirtualInterface) SetVirtualGatewayId(v string) *VirtualInterface {
-	s.VirtualGatewayId = &v
-	return s
-}
-
-// SetVirtualInterfaceId sets the VirtualInterfaceId field's value.
-func (s *VirtualInterface) SetVirtualInterfaceId(v string) *VirtualInterface {
-	s.VirtualInterfaceId = &v
-	return s
-}
-
-// SetVirtualInterfaceName sets the VirtualInterfaceName field's value.
-func (s *VirtualInterface) SetVirtualInterfaceName(v string) *VirtualInterface {
-	s.VirtualInterfaceName = &v
-	return s
-}
-
-// SetVirtualInterfaceState sets the VirtualInterfaceState field's value.
-func (s *VirtualInterface) SetVirtualInterfaceState(v VirtualInterfaceState) *VirtualInterface {
-	s.VirtualInterfaceState = v
-	return s
-}
-
-// SetVirtualInterfaceType sets the VirtualInterfaceType field's value.
-func (s *VirtualInterface) SetVirtualInterfaceType(v string) *VirtualInterface {
-	s.VirtualInterfaceType = &v
-	return s
-}
-
-// SetVlan sets the Vlan field's value.
-func (s *VirtualInterface) SetVlan(v int64) *VirtualInterface {
-	s.Vlan = &v
 	return s
 }
 

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To abort a multipart upload identified by the upload ID
 //
 // The example deletes an in-progress multipart upload to a vault named my-vault:
-func ExampleGlacier_AbortMultipartUpload_shared00() {
+func ExampleGlacier_AbortMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -41,7 +41,8 @@ func ExampleGlacier_AbortMultipartUpload_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.AbortMultipartUpload(input)
+	req := svc.AbortMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -71,7 +72,7 @@ func ExampleGlacier_AbortMultipartUpload_shared00() {
 //
 // The example aborts the vault locking process if the vault lock is not in the Locked
 // state for the vault named examplevault.
-func ExampleGlacier_AbortVaultLock_shared00() {
+func ExampleGlacier_AbortVaultLockRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -83,7 +84,8 @@ func ExampleGlacier_AbortVaultLock_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.AbortVaultLock(input)
+	req := svc.AbortVaultLockRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -112,7 +114,7 @@ func ExampleGlacier_AbortVaultLock_shared00() {
 // To add tags to a vault
 //
 // The example adds two tags to a my-vault.
-func ExampleGlacier_AddTagsToVault_shared00() {
+func ExampleGlacier_AddTagsToVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -128,7 +130,8 @@ func ExampleGlacier_AddTagsToVault_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.AddTagsToVault(input)
+	req := svc.AddTagsToVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -159,7 +162,7 @@ func ExampleGlacier_AddTagsToVault_shared00() {
 // To complete a multipart upload
 //
 // The example completes a multipart upload for a 3 MiB archive.
-func ExampleGlacier_CompleteMultipartUpload_shared00() {
+func ExampleGlacier_CompleteMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -174,7 +177,8 @@ func ExampleGlacier_CompleteMultipartUpload_shared00() {
 		VaultName:   aws.String("my-vault"),
 	}
 
-	result, err := svc.CompleteMultipartUpload(input)
+	req := svc.CompleteMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -204,7 +208,7 @@ func ExampleGlacier_CompleteMultipartUpload_shared00() {
 //
 // The example completes the vault locking process by transitioning the vault lock from
 // the InProgress state to the Locked state.
-func ExampleGlacier_CompleteVaultLock_shared00() {
+func ExampleGlacier_CompleteVaultLockRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -217,7 +221,8 @@ func ExampleGlacier_CompleteVaultLock_shared00() {
 		VaultName: aws.String("example-vault"),
 	}
 
-	result, err := svc.CompleteVaultLock(input)
+	req := svc.CompleteVaultLockRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -246,7 +251,7 @@ func ExampleGlacier_CompleteVaultLock_shared00() {
 // To create a new vault
 //
 // The following example creates a new vault named my-vault.
-func ExampleGlacier_CreateVault_shared00() {
+func ExampleGlacier_CreateVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -258,7 +263,8 @@ func ExampleGlacier_CreateVault_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.CreateVault(input)
+	req := svc.CreateVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -287,7 +293,7 @@ func ExampleGlacier_CreateVault_shared00() {
 // To delete an archive
 //
 // The example deletes the archive specified by the archive ID.
-func ExampleGlacier_DeleteArchive_shared00() {
+func ExampleGlacier_DeleteArchiveRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -300,7 +306,8 @@ func ExampleGlacier_DeleteArchive_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.DeleteArchive(input)
+	req := svc.DeleteArchiveRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -329,7 +336,7 @@ func ExampleGlacier_DeleteArchive_shared00() {
 // To delete a vault
 //
 // The example deletes a vault named my-vault:
-func ExampleGlacier_DeleteVault_shared00() {
+func ExampleGlacier_DeleteVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -341,7 +348,8 @@ func ExampleGlacier_DeleteVault_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.DeleteVault(input)
+	req := svc.DeleteVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -370,7 +378,7 @@ func ExampleGlacier_DeleteVault_shared00() {
 // To delete the vault access policy
 //
 // The example deletes the access policy associated with the vault named examplevault.
-func ExampleGlacier_DeleteVaultAccessPolicy_shared00() {
+func ExampleGlacier_DeleteVaultAccessPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -382,7 +390,8 @@ func ExampleGlacier_DeleteVaultAccessPolicy_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.DeleteVaultAccessPolicy(input)
+	req := svc.DeleteVaultAccessPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -411,7 +420,7 @@ func ExampleGlacier_DeleteVaultAccessPolicy_shared00() {
 // To delete the notification configuration set for a vault
 //
 // The example deletes the notification configuration set for the vault named examplevault.
-func ExampleGlacier_DeleteVaultNotifications_shared00() {
+func ExampleGlacier_DeleteVaultNotificationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -423,7 +432,8 @@ func ExampleGlacier_DeleteVaultNotifications_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.DeleteVaultNotifications(input)
+	req := svc.DeleteVaultNotificationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -453,7 +463,7 @@ func ExampleGlacier_DeleteVaultNotifications_shared00() {
 //
 // The example returns information about the previously initiated job specified by the
 // job ID.
-func ExampleGlacier_DescribeJob_shared00() {
+func ExampleGlacier_DescribeJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -466,7 +476,8 @@ func ExampleGlacier_DescribeJob_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.DescribeJob(input)
+	req := svc.DescribeJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -495,7 +506,7 @@ func ExampleGlacier_DescribeJob_shared00() {
 // To retrieve information about a vault
 //
 // The example retrieves data about a vault named my-vault.
-func ExampleGlacier_DescribeVault_shared00() {
+func ExampleGlacier_DescribeVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -507,7 +518,8 @@ func ExampleGlacier_DescribeVault_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.DescribeVault(input)
+	req := svc.DescribeVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -536,7 +548,7 @@ func ExampleGlacier_DescribeVault_shared00() {
 // To get the current data retrieval policy for an account
 //
 // The example returns the current data retrieval policy for the account.
-func ExampleGlacier_GetDataRetrievalPolicy_shared00() {
+func ExampleGlacier_GetDataRetrievalPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -547,7 +559,8 @@ func ExampleGlacier_GetDataRetrievalPolicy_shared00() {
 		AccountId: aws.String("-"),
 	}
 
-	result, err := svc.GetDataRetrievalPolicy(input)
+	req := svc.GetDataRetrievalPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -575,7 +588,7 @@ func ExampleGlacier_GetDataRetrievalPolicy_shared00() {
 //
 // The example downloads the output of a previously initiated inventory retrieval job
 // that is identified by the job ID.
-func ExampleGlacier_GetJobOutput_shared00() {
+func ExampleGlacier_GetJobOutputRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -589,7 +602,8 @@ func ExampleGlacier_GetJobOutput_shared00() {
 		VaultName: aws.String("my-vaul"),
 	}
 
-	result, err := svc.GetJobOutput(input)
+	req := svc.GetJobOutputRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -618,7 +632,7 @@ func ExampleGlacier_GetJobOutput_shared00() {
 // To  get the access-policy set on the vault
 //
 // The example retrieves the access-policy set on the vault named example-vault.
-func ExampleGlacier_GetVaultAccessPolicy_shared00() {
+func ExampleGlacier_GetVaultAccessPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -630,7 +644,8 @@ func ExampleGlacier_GetVaultAccessPolicy_shared00() {
 		VaultName: aws.String("example-vault"),
 	}
 
-	result, err := svc.GetVaultAccessPolicy(input)
+	req := svc.GetVaultAccessPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -660,7 +675,7 @@ func ExampleGlacier_GetVaultAccessPolicy_shared00() {
 //
 // The example retrieves the attributes from the lock-policy subresource set on the
 // vault named examplevault.
-func ExampleGlacier_GetVaultLock_shared00() {
+func ExampleGlacier_GetVaultLockRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -672,7 +687,8 @@ func ExampleGlacier_GetVaultLock_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.GetVaultLock(input)
+	req := svc.GetVaultLockRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -701,7 +717,7 @@ func ExampleGlacier_GetVaultLock_shared00() {
 // To get the notification-configuration for the specified vault
 //
 // The example retrieves the notification-configuration for the vault named my-vault.
-func ExampleGlacier_GetVaultNotifications_shared00() {
+func ExampleGlacier_GetVaultNotificationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -713,7 +729,8 @@ func ExampleGlacier_GetVaultNotifications_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.GetVaultNotifications(input)
+	req := svc.GetVaultNotificationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -742,7 +759,7 @@ func ExampleGlacier_GetVaultNotifications_shared00() {
 // To initiate an inventory-retrieval job
 //
 // The example initiates an inventory-retrieval job for the vault named examplevault.
-func ExampleGlacier_InitiateJob_shared00() {
+func ExampleGlacier_InitiateJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -760,7 +777,8 @@ func ExampleGlacier_InitiateJob_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.InitiateJob(input)
+	req := svc.InitiateJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -794,7 +812,7 @@ func ExampleGlacier_InitiateJob_shared00() {
 //
 // The example initiates a multipart upload to a vault named my-vault with a part size
 // of 1 MiB (1024 x 1024 bytes) per file.
-func ExampleGlacier_InitiateMultipartUpload_shared00() {
+func ExampleGlacier_InitiateMultipartUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -807,7 +825,8 @@ func ExampleGlacier_InitiateMultipartUpload_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.InitiateMultipartUpload(input)
+	req := svc.InitiateMultipartUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -836,7 +855,7 @@ func ExampleGlacier_InitiateMultipartUpload_shared00() {
 // To initiate the vault locking process
 //
 // The example initiates the vault locking process for the vault named my-vault.
-func ExampleGlacier_InitiateVaultLock_shared00() {
+func ExampleGlacier_InitiateVaultLockRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -851,7 +870,8 @@ func ExampleGlacier_InitiateVaultLock_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.InitiateVaultLock(input)
+	req := svc.InitiateVaultLockRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -880,7 +900,7 @@ func ExampleGlacier_InitiateVaultLock_shared00() {
 // To list jobs for a vault
 //
 // The example lists jobs for the vault named my-vault.
-func ExampleGlacier_ListJobs_shared00() {
+func ExampleGlacier_ListJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -892,7 +912,8 @@ func ExampleGlacier_ListJobs_shared00() {
 		VaultName: aws.String("my-vault"),
 	}
 
-	result, err := svc.ListJobs(input)
+	req := svc.ListJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -921,7 +942,7 @@ func ExampleGlacier_ListJobs_shared00() {
 // To list all the in-progress multipart uploads for a vault
 //
 // The example lists all the in-progress multipart uploads for the vault named examplevault.
-func ExampleGlacier_ListMultipartUploads_shared00() {
+func ExampleGlacier_ListMultipartUploadsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -933,7 +954,8 @@ func ExampleGlacier_ListMultipartUploads_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.ListMultipartUploads(input)
+	req := svc.ListMultipartUploadsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -962,7 +984,7 @@ func ExampleGlacier_ListMultipartUploads_shared00() {
 // To list the parts of an archive that have been uploaded in a multipart upload
 //
 // The example lists all the parts of a multipart upload.
-func ExampleGlacier_ListParts_shared00() {
+func ExampleGlacier_ListPartsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -975,7 +997,8 @@ func ExampleGlacier_ListParts_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.ListParts(input)
+	req := svc.ListPartsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1004,7 +1027,7 @@ func ExampleGlacier_ListParts_shared00() {
 // To list the provisioned capacity units for an account
 //
 // The example lists the provisioned capacity units for an account.
-func ExampleGlacier_ListProvisionedCapacity_shared00() {
+func ExampleGlacier_ListProvisionedCapacityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1015,7 +1038,8 @@ func ExampleGlacier_ListProvisionedCapacity_shared00() {
 		AccountId: aws.String("-"),
 	}
 
-	result, err := svc.ListProvisionedCapacity(input)
+	req := svc.ListProvisionedCapacityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1042,7 +1066,7 @@ func ExampleGlacier_ListProvisionedCapacity_shared00() {
 // To list the tags for a vault
 //
 // The example lists all the tags attached to the vault examplevault.
-func ExampleGlacier_ListTagsForVault_shared00() {
+func ExampleGlacier_ListTagsForVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1054,7 +1078,8 @@ func ExampleGlacier_ListTagsForVault_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.ListTagsForVault(input)
+	req := svc.ListTagsForVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1083,7 +1108,7 @@ func ExampleGlacier_ListTagsForVault_shared00() {
 // To list all vaults owned by the calling user's account
 //
 // The example lists all vaults owned by the specified AWS account.
-func ExampleGlacier_ListVaults_shared00() {
+func ExampleGlacier_ListVaultsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1096,7 +1121,8 @@ func ExampleGlacier_ListVaults_shared00() {
 		Marker:    aws.String(""),
 	}
 
-	result, err := svc.ListVaults(input)
+	req := svc.ListVaultsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1125,7 +1151,7 @@ func ExampleGlacier_ListVaults_shared00() {
 // To purchases a provisioned capacity unit for an AWS account
 //
 // The example purchases provisioned capacity unit for an AWS account.
-func ExampleGlacier_PurchaseProvisionedCapacity_shared00() {
+func ExampleGlacier_PurchaseProvisionedCapacityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1136,7 +1162,8 @@ func ExampleGlacier_PurchaseProvisionedCapacity_shared00() {
 		AccountId: aws.String("-"),
 	}
 
-	result, err := svc.PurchaseProvisionedCapacity(input)
+	req := svc.PurchaseProvisionedCapacityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1165,7 +1192,7 @@ func ExampleGlacier_PurchaseProvisionedCapacity_shared00() {
 // To remove tags from a vault
 //
 // The example removes two tags from the vault named examplevault.
-func ExampleGlacier_RemoveTagsFromVault_shared00() {
+func ExampleGlacier_RemoveTagsFromVaultRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1181,7 +1208,8 @@ func ExampleGlacier_RemoveTagsFromVault_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.RemoveTagsFromVault(input)
+	req := svc.RemoveTagsFromVaultRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1210,7 +1238,7 @@ func ExampleGlacier_RemoveTagsFromVault_shared00() {
 // To set and then enact a data retrieval policy
 //
 // The example sets and then enacts a data retrieval policy.
-func ExampleGlacier_SetDataRetrievalPolicy_shared00() {
+func ExampleGlacier_SetDataRetrievalPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1229,7 +1257,8 @@ func ExampleGlacier_SetDataRetrievalPolicy_shared00() {
 		AccountId: aws.String("-"),
 	}
 
-	result, err := svc.SetDataRetrievalPolicy(input)
+	req := svc.SetDataRetrievalPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1256,7 +1285,7 @@ func ExampleGlacier_SetDataRetrievalPolicy_shared00() {
 // To set the access-policy on a vault
 //
 // The example configures an access policy for the vault named examplevault.
-func ExampleGlacier_SetVaultAccessPolicy_shared00() {
+func ExampleGlacier_SetVaultAccessPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1271,7 +1300,8 @@ func ExampleGlacier_SetVaultAccessPolicy_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.SetVaultAccessPolicy(input)
+	req := svc.SetVaultAccessPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1300,7 +1330,7 @@ func ExampleGlacier_SetVaultAccessPolicy_shared00() {
 // To configure a vault to post a message to an Amazon SNS topic when jobs complete
 //
 // The example sets the examplevault notification configuration.
-func ExampleGlacier_SetVaultNotifications_shared00() {
+func ExampleGlacier_SetVaultNotificationsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1319,7 +1349,8 @@ func ExampleGlacier_SetVaultNotifications_shared00() {
 		},
 	}
 
-	result, err := svc.SetVaultNotifications(input)
+	req := svc.SetVaultNotificationsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1348,7 +1379,7 @@ func ExampleGlacier_SetVaultNotifications_shared00() {
 // To upload an archive
 //
 // The example adds an archive to a vault.
-func ExampleGlacier_UploadArchive_shared00() {
+func ExampleGlacier_UploadArchiveRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1363,7 +1394,8 @@ func ExampleGlacier_UploadArchive_shared00() {
 		VaultName:          aws.String("my-vault"),
 	}
 
-	result, err := svc.UploadArchive(input)
+	req := svc.UploadArchiveRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1394,7 +1426,7 @@ func ExampleGlacier_UploadArchive_shared00() {
 // To upload the first part of an archive
 //
 // The example uploads the first 1 MiB (1024 x 1024 bytes) part of an archive.
-func ExampleGlacier_UploadMultipartPart_shared00() {
+func ExampleGlacier_UploadMultipartPartRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1410,7 +1442,8 @@ func ExampleGlacier_UploadMultipartPart_shared00() {
 		VaultName: aws.String("examplevault"),
 	}
 
-	result, err := svc.UploadMultipartPart(input)
+	req := svc.UploadMultipartPartRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

@@ -28,7 +28,7 @@ func parseTime(layout, value string) *time.Time {
 // To get information about builds
 //
 // The following example gets information about builds with the specified build IDs.
-func ExampleCodeBuild_BatchGetBuilds_shared00() {
+func ExampleCodeBuild_BatchGetBuildsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -42,7 +42,8 @@ func ExampleCodeBuild_BatchGetBuilds_shared00() {
 		},
 	}
 
-	result, err := svc.BatchGetBuilds(input)
+	req := svc.BatchGetBuildsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

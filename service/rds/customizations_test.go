@@ -27,24 +27,24 @@ func TestPresignWithPresignNotSet(t *testing.T) {
 
 	f := func() {
 		// Doesn't panic on nil input
-		req, _ := svc.CopyDBSnapshotRequest(nil)
+		req := svc.CopyDBSnapshotRequest(nil)
 		req.Sign()
 	}
 	if paniced, p := awstesting.DidPanic(f); paniced {
 		t.Errorf("expect no panic, got %v", p)
 	}
 
-	reqs[opCopyDBSnapshot], _ = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+	reqs[opCopyDBSnapshot] = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
 		SourceRegion:               aws.String("us-west-1"),
 		SourceDBSnapshotIdentifier: aws.String("foo"),
 		TargetDBSnapshotIdentifier: aws.String("bar"),
-	})
+	}).Request
 
-	reqs[opCreateDBInstanceReadReplica], _ = svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
+	reqs[opCreateDBInstanceReadReplica] = svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
 		SourceRegion:               aws.String("us-west-1"),
 		SourceDBInstanceIdentifier: aws.String("foo"),
 		DBInstanceIdentifier:       aws.String("bar"),
-	})
+	}).Request
 
 	for op, req := range reqs {
 		req.Sign()
@@ -70,26 +70,26 @@ func TestPresignWithPresignSet(t *testing.T) {
 
 	f := func() {
 		// Doesn't panic on nil input
-		req, _ := svc.CopyDBSnapshotRequest(nil)
+		req := svc.CopyDBSnapshotRequest(nil)
 		req.Sign()
 	}
 	if paniced, p := awstesting.DidPanic(f); paniced {
 		t.Errorf("expect no panic, got %v", p)
 	}
 
-	reqs[opCopyDBSnapshot], _ = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+	reqs[opCopyDBSnapshot] = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
 		SourceRegion:               aws.String("us-west-1"),
 		SourceDBSnapshotIdentifier: aws.String("foo"),
 		TargetDBSnapshotIdentifier: aws.String("bar"),
 		PreSignedUrl:               aws.String("presignedURL"),
-	})
+	}).Request
 
-	reqs[opCreateDBInstanceReadReplica], _ = svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
+	reqs[opCreateDBInstanceReadReplica] = svc.CreateDBInstanceReadReplicaRequest(&CreateDBInstanceReadReplicaInput{
 		SourceRegion:               aws.String("us-west-1"),
 		SourceDBInstanceIdentifier: aws.String("foo"),
 		DBInstanceIdentifier:       aws.String("bar"),
 		PreSignedUrl:               aws.String("presignedURL"),
-	})
+	}).Request
 
 	for _, req := range reqs {
 		req.Sign()
@@ -114,17 +114,17 @@ func TestPresignWithSourceNotSet(t *testing.T) {
 
 	f := func() {
 		// Doesn't panic on nil input
-		req, _ := svc.CopyDBSnapshotRequest(nil)
+		req := svc.CopyDBSnapshotRequest(nil)
 		req.Sign()
 	}
 	if paniced, p := awstesting.DidPanic(f); paniced {
 		t.Errorf("expect no panic, got %v", p)
 	}
 
-	reqs[opCopyDBSnapshot], _ = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
+	reqs[opCopyDBSnapshot] = svc.CopyDBSnapshotRequest(&CopyDBSnapshotInput{
 		SourceDBSnapshotIdentifier: aws.String("foo"),
 		TargetDBSnapshotIdentifier: aws.String("bar"),
-	})
+	}).Request
 
 	for _, req := range reqs {
 		_, err := req.Presign(5 * time.Minute)

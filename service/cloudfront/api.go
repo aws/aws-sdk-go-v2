@@ -14,31 +14,41 @@ import (
 
 const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2017_03_25"
 
-// CreateCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
-// client's request for the CreateCloudFrontOriginAccessIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateCloudFrontOriginAccessIdentityRequest is a API request type for the CreateCloudFrontOriginAccessIdentity API operation.
+type CreateCloudFrontOriginAccessIdentityRequest struct {
+	*aws.Request
+	Input *CreateCloudFrontOriginAccessIdentityInput
+}
+
+// Send marshals and sends the CreateCloudFrontOriginAccessIdentity API request.
+func (r *CreateCloudFrontOriginAccessIdentityRequest) Send() (*CreateCloudFrontOriginAccessIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCloudFrontOriginAccessIdentityOutput), nil
+}
+
+// CreateCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCloudFrontOriginAccessIdentity for more information on using the CreateCloudFrontOriginAccessIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new origin access identity. If you're using Amazon S3 for your
+// origin, you can use an origin access identity to require users to access
+// your content using a CloudFront URL instead of the Amazon S3 URL. For more
+// information about how to use origin access identities, see Serving Private
+// Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+// in the Amazon CloudFront Developer Guide.
 //
 //    // Example sending a request using the CreateCloudFrontOriginAccessIdentityRequest method.
-//    req, resp := client.CreateCloudFrontOriginAccessIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateCloudFrontOriginAccessIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity
-func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *CreateCloudFrontOriginAccessIdentityOutput) {
+func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opCreateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "POST",
@@ -49,97 +59,43 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCl
 		input = &CreateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	output = &CreateCloudFrontOriginAccessIdentityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateCloudFrontOriginAccessIdentity API operation for Amazon CloudFront.
-//
-// Creates a new origin access identity. If you're using Amazon S3 for your
-// origin, you can use an origin access identity to require users to access
-// your content using a CloudFront URL instead of the Amazon S3 URL. For more
-// information about how to use origin access identities, see Serving Private
-// Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-// in the Amazon CloudFront Developer Guide.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateCloudFrontOriginAccessIdentity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeOriginAccessIdentityAlreadyExists "OriginAccessIdentityAlreadyExists"
-//   If the CallerReference is a value you already sent in a previous request
-//   to create an identity but the content of the CloudFrontOriginAccessIdentityConfig
-//   is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists
-//   error.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeTooManyCloudFrontOriginAccessIdentities "TooManyCloudFrontOriginAccessIdentities"
-//   Processing your request would cause you to exceed the maximum number of origin
-//   access identities allowed.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity
-func (c *CloudFront) CreateCloudFrontOriginAccessIdentity(input *CreateCloudFrontOriginAccessIdentityInput) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.CreateCloudFrontOriginAccessIdentityRequest(input)
-	return out, req.Send()
-}
-
-// CreateCloudFrontOriginAccessIdentityWithContext is the same as CreateCloudFrontOriginAccessIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCloudFrontOriginAccessIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *CreateCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.CreateCloudFrontOriginAccessIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateCloudFrontOriginAccessIdentityOutput{})
+	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
 const opCreateDistribution = "CreateDistribution2017_03_25"
 
-// CreateDistributionRequest generates a "aws.Request" representing the
-// client's request for the CreateDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDistributionRequest is a API request type for the CreateDistribution API operation.
+type CreateDistributionRequest struct {
+	*aws.Request
+	Input *CreateDistributionInput
+}
+
+// Send marshals and sends the CreateDistribution API request.
+func (r *CreateDistributionRequest) Send() (*CreateDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDistributionOutput), nil
+}
+
+// CreateDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDistribution for more information on using the CreateDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new web distribution. Send a POST request to the /CloudFront API
+// version/distribution/distribution ID resource.
 //
 //    // Example sending a request using the CreateDistributionRequest method.
-//    req, resp := client.CreateDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution
-func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) (req *aws.Request, output *CreateDistributionOutput) {
+func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) CreateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
@@ -150,191 +106,42 @@ func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) (
 		input = &CreateDistributionInput{}
 	}
 
-	output = &CreateDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDistribution API operation for Amazon CloudFront.
-//
-// Creates a new web distribution. Send a POST request to the /CloudFront API
-// version/distribution/distribution ID resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeDistributionAlreadyExists "DistributionAlreadyExists"
-//   The caller reference you attempted to create the distribution with is associated
-//   with another distribution.
-//
-//   * ErrCodeInvalidOrigin "InvalidOrigin"
-//   The Amazon S3 origin server specified does not refer to a valid Amazon S3
-//   bucket.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeInvalidViewerCertificate "InvalidViewerCertificate"
-//
-//   * ErrCodeInvalidMinimumProtocolVersion "InvalidMinimumProtocolVersion"
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeTooManyDistributionCNAMEs "TooManyDistributionCNAMEs"
-//   Your request contains more CNAMEs than are allowed per distribution.
-//
-//   * ErrCodeTooManyDistributions "TooManyDistributions"
-//   Processing your request would cause you to exceed the maximum number of distributions
-//   allowed.
-//
-//   * ErrCodeInvalidDefaultRootObject "InvalidDefaultRootObject"
-//   The default root object file name is too big or contains an invalid character.
-//
-//   * ErrCodeInvalidRelativePath "InvalidRelativePath"
-//   The relative path is too big, is not URL-encoded, or does not begin with
-//   a slash (/).
-//
-//   * ErrCodeInvalidErrorCode "InvalidErrorCode"
-//
-//   * ErrCodeInvalidResponseCode "InvalidResponseCode"
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidRequiredProtocol "InvalidRequiredProtocol"
-//   This operation requires the HTTPS protocol. Ensure that you specify the HTTPS
-//   protocol in your request, or omit the RequiredProtocols element from your
-//   distribution configuration.
-//
-//   * ErrCodeNoSuchOrigin "NoSuchOrigin"
-//   No origin exists with the specified Origin Id.
-//
-//   * ErrCodeTooManyOrigins "TooManyOrigins"
-//   You cannot create more origins for the distribution.
-//
-//   * ErrCodeTooManyCacheBehaviors "TooManyCacheBehaviors"
-//   You cannot create more cache behaviors for the distribution.
-//
-//   * ErrCodeTooManyCookieNamesInWhiteList "TooManyCookieNamesInWhiteList"
-//   Your request contains more cookie names in the whitelist than are allowed
-//   per cache behavior.
-//
-//   * ErrCodeInvalidForwardCookies "InvalidForwardCookies"
-//   Your request contains forward cookies option which doesn't match with the
-//   expectation for the whitelisted list of cookie names. Either list of cookie
-//   names has been specified when not allowed or list of cookie names is missing
-//   when expected.
-//
-//   * ErrCodeTooManyHeadersInForwardedValues "TooManyHeadersInForwardedValues"
-//
-//   * ErrCodeInvalidHeadersForS3Origin "InvalidHeadersForS3Origin"
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-//   * ErrCodeTooManyCertificates "TooManyCertificates"
-//   You cannot create anymore custom SSL/TLS certificates.
-//
-//   * ErrCodeInvalidLocationCode "InvalidLocationCode"
-//
-//   * ErrCodeInvalidGeoRestrictionParameter "InvalidGeoRestrictionParameter"
-//
-//   * ErrCodeInvalidProtocolSettings "InvalidProtocolSettings"
-//   You cannot specify SSLv3 as the minimum protocol version if you only want
-//   to support only clients that support Server Name Indication (SNI).
-//
-//   * ErrCodeInvalidTTLOrder "InvalidTTLOrder"
-//
-//   * ErrCodeInvalidWebACLId "InvalidWebACLId"
-//
-//   * ErrCodeTooManyOriginCustomHeaders "TooManyOriginCustomHeaders"
-//
-//   * ErrCodeTooManyQueryStringParameters "TooManyQueryStringParameters"
-//
-//   * ErrCodeInvalidQueryStringParameters "InvalidQueryStringParameters"
-//
-//   * ErrCodeTooManyDistributionsWithLambdaAssociations "TooManyDistributionsWithLambdaAssociations"
-//   Processing your request would cause the maximum number of distributions with
-//   Lambda function associations per owner to be exceeded.
-//
-//   * ErrCodeTooManyLambdaFunctionAssociations "TooManyLambdaFunctionAssociations"
-//   Your request contains more Lambda function associations than are allowed
-//   per distribution.
-//
-//   * ErrCodeInvalidLambdaFunctionAssociation "InvalidLambdaFunctionAssociation"
-//   The specified Lambda function association is invalid.
-//
-//   * ErrCodeInvalidOriginReadTimeout "InvalidOriginReadTimeout"
-//
-//   * ErrCodeInvalidOriginKeepaliveTimeout "InvalidOriginKeepaliveTimeout"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution
-func (c *CloudFront) CreateDistribution(input *CreateDistributionInput) (*CreateDistributionOutput, error) {
-	req, out := c.CreateDistributionRequest(input)
-	return out, req.Send()
-}
-
-// CreateDistributionWithContext is the same as CreateDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateDistributionWithContext(ctx aws.Context, input *CreateDistributionInput, opts ...aws.Option) (*CreateDistributionOutput, error) {
-	req, out := c.CreateDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDistributionOutput{})
+	return CreateDistributionRequest{Request: req, Input: input}
 }
 
 const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
 
-// CreateDistributionWithTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateDistributionWithTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDistributionWithTagsRequest is a API request type for the CreateDistributionWithTags API operation.
+type CreateDistributionWithTagsRequest struct {
+	*aws.Request
+	Input *CreateDistributionWithTagsInput
+}
+
+// Send marshals and sends the CreateDistributionWithTags API request.
+func (r *CreateDistributionWithTagsRequest) Send() (*CreateDistributionWithTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDistributionWithTagsOutput), nil
+}
+
+// CreateDistributionWithTagsRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDistributionWithTags for more information on using the CreateDistributionWithTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new distribution with tags.
 //
 //    // Example sending a request using the CreateDistributionWithTagsRequest method.
-//    req, resp := client.CreateDistributionWithTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDistributionWithTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags
-func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) (req *aws.Request, output *CreateDistributionWithTagsOutput) {
+func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) CreateDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistributionWithTags,
 		HTTPMethod: "POST",
@@ -345,192 +152,42 @@ func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistribution
 		input = &CreateDistributionWithTagsInput{}
 	}
 
-	output = &CreateDistributionWithTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDistributionWithTags API operation for Amazon CloudFront.
-//
-// Create a new distribution with tags.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateDistributionWithTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeDistributionAlreadyExists "DistributionAlreadyExists"
-//   The caller reference you attempted to create the distribution with is associated
-//   with another distribution.
-//
-//   * ErrCodeInvalidOrigin "InvalidOrigin"
-//   The Amazon S3 origin server specified does not refer to a valid Amazon S3
-//   bucket.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeInvalidViewerCertificate "InvalidViewerCertificate"
-//
-//   * ErrCodeInvalidMinimumProtocolVersion "InvalidMinimumProtocolVersion"
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeTooManyDistributionCNAMEs "TooManyDistributionCNAMEs"
-//   Your request contains more CNAMEs than are allowed per distribution.
-//
-//   * ErrCodeTooManyDistributions "TooManyDistributions"
-//   Processing your request would cause you to exceed the maximum number of distributions
-//   allowed.
-//
-//   * ErrCodeInvalidDefaultRootObject "InvalidDefaultRootObject"
-//   The default root object file name is too big or contains an invalid character.
-//
-//   * ErrCodeInvalidRelativePath "InvalidRelativePath"
-//   The relative path is too big, is not URL-encoded, or does not begin with
-//   a slash (/).
-//
-//   * ErrCodeInvalidErrorCode "InvalidErrorCode"
-//
-//   * ErrCodeInvalidResponseCode "InvalidResponseCode"
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidRequiredProtocol "InvalidRequiredProtocol"
-//   This operation requires the HTTPS protocol. Ensure that you specify the HTTPS
-//   protocol in your request, or omit the RequiredProtocols element from your
-//   distribution configuration.
-//
-//   * ErrCodeNoSuchOrigin "NoSuchOrigin"
-//   No origin exists with the specified Origin Id.
-//
-//   * ErrCodeTooManyOrigins "TooManyOrigins"
-//   You cannot create more origins for the distribution.
-//
-//   * ErrCodeTooManyCacheBehaviors "TooManyCacheBehaviors"
-//   You cannot create more cache behaviors for the distribution.
-//
-//   * ErrCodeTooManyCookieNamesInWhiteList "TooManyCookieNamesInWhiteList"
-//   Your request contains more cookie names in the whitelist than are allowed
-//   per cache behavior.
-//
-//   * ErrCodeInvalidForwardCookies "InvalidForwardCookies"
-//   Your request contains forward cookies option which doesn't match with the
-//   expectation for the whitelisted list of cookie names. Either list of cookie
-//   names has been specified when not allowed or list of cookie names is missing
-//   when expected.
-//
-//   * ErrCodeTooManyHeadersInForwardedValues "TooManyHeadersInForwardedValues"
-//
-//   * ErrCodeInvalidHeadersForS3Origin "InvalidHeadersForS3Origin"
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-//   * ErrCodeTooManyCertificates "TooManyCertificates"
-//   You cannot create anymore custom SSL/TLS certificates.
-//
-//   * ErrCodeInvalidLocationCode "InvalidLocationCode"
-//
-//   * ErrCodeInvalidGeoRestrictionParameter "InvalidGeoRestrictionParameter"
-//
-//   * ErrCodeInvalidProtocolSettings "InvalidProtocolSettings"
-//   You cannot specify SSLv3 as the minimum protocol version if you only want
-//   to support only clients that support Server Name Indication (SNI).
-//
-//   * ErrCodeInvalidTTLOrder "InvalidTTLOrder"
-//
-//   * ErrCodeInvalidWebACLId "InvalidWebACLId"
-//
-//   * ErrCodeTooManyOriginCustomHeaders "TooManyOriginCustomHeaders"
-//
-//   * ErrCodeInvalidTagging "InvalidTagging"
-//
-//   * ErrCodeTooManyQueryStringParameters "TooManyQueryStringParameters"
-//
-//   * ErrCodeInvalidQueryStringParameters "InvalidQueryStringParameters"
-//
-//   * ErrCodeTooManyDistributionsWithLambdaAssociations "TooManyDistributionsWithLambdaAssociations"
-//   Processing your request would cause the maximum number of distributions with
-//   Lambda function associations per owner to be exceeded.
-//
-//   * ErrCodeTooManyLambdaFunctionAssociations "TooManyLambdaFunctionAssociations"
-//   Your request contains more Lambda function associations than are allowed
-//   per distribution.
-//
-//   * ErrCodeInvalidLambdaFunctionAssociation "InvalidLambdaFunctionAssociation"
-//   The specified Lambda function association is invalid.
-//
-//   * ErrCodeInvalidOriginReadTimeout "InvalidOriginReadTimeout"
-//
-//   * ErrCodeInvalidOriginKeepaliveTimeout "InvalidOriginKeepaliveTimeout"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags
-func (c *CloudFront) CreateDistributionWithTags(input *CreateDistributionWithTagsInput) (*CreateDistributionWithTagsOutput, error) {
-	req, out := c.CreateDistributionWithTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateDistributionWithTagsWithContext is the same as CreateDistributionWithTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDistributionWithTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateDistributionWithTagsWithContext(ctx aws.Context, input *CreateDistributionWithTagsInput, opts ...aws.Option) (*CreateDistributionWithTagsOutput, error) {
-	req, out := c.CreateDistributionWithTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDistributionWithTagsOutput{})
+	return CreateDistributionWithTagsRequest{Request: req, Input: input}
 }
 
 const opCreateInvalidation = "CreateInvalidation2017_03_25"
 
-// CreateInvalidationRequest generates a "aws.Request" representing the
-// client's request for the CreateInvalidation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateInvalidationRequest is a API request type for the CreateInvalidation API operation.
+type CreateInvalidationRequest struct {
+	*aws.Request
+	Input *CreateInvalidationInput
+}
+
+// Send marshals and sends the CreateInvalidation API request.
+func (r *CreateInvalidationRequest) Send() (*CreateInvalidationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInvalidationOutput), nil
+}
+
+// CreateInvalidationRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateInvalidation for more information on using the CreateInvalidation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new invalidation.
 //
 //    // Example sending a request using the CreateInvalidationRequest method.
-//    req, resp := client.CreateInvalidationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateInvalidationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation
-func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) (req *aws.Request, output *CreateInvalidationOutput) {
+func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) CreateInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opCreateInvalidation,
 		HTTPMethod: "POST",
@@ -541,110 +198,30 @@ func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) (
 		input = &CreateInvalidationInput{}
 	}
 
-	output = &CreateInvalidationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateInvalidation API operation for Amazon CloudFront.
-//
-// Create a new invalidation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateInvalidation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodeBatchTooLarge "BatchTooLarge"
-//
-//   * ErrCodeTooManyInvalidationsInProgress "TooManyInvalidationsInProgress"
-//   You have exceeded the maximum number of allowable InProgress invalidation
-//   batch requests, or invalidation objects.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation
-func (c *CloudFront) CreateInvalidation(input *CreateInvalidationInput) (*CreateInvalidationOutput, error) {
-	req, out := c.CreateInvalidationRequest(input)
-	return out, req.Send()
-}
-
-// CreateInvalidationWithContext is the same as CreateInvalidation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateInvalidation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateInvalidationWithContext(ctx aws.Context, input *CreateInvalidationInput, opts ...aws.Option) (*CreateInvalidationOutput, error) {
-	req, out := c.CreateInvalidationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateInvalidationOutput{})
+	return CreateInvalidationRequest{Request: req, Input: input}
 }
 
 const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
 
-// CreateStreamingDistributionRequest generates a "aws.Request" representing the
-// client's request for the CreateStreamingDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStreamingDistribution for more information on using the CreateStreamingDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateStreamingDistributionRequest method.
-//    req, resp := client.CreateStreamingDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution
-func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) (req *aws.Request, output *CreateStreamingDistributionOutput) {
-	op := &aws.Operation{
-		Name:       opCreateStreamingDistribution,
-		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/streaming-distribution",
-	}
-
-	if input == nil {
-		input = &CreateStreamingDistributionInput{}
-	}
-
-	output = &CreateStreamingDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateStreamingDistributionRequest is a API request type for the CreateStreamingDistribution API operation.
+type CreateStreamingDistributionRequest struct {
+	*aws.Request
+	Input *CreateStreamingDistributionInput
 }
 
-// CreateStreamingDistribution API operation for Amazon CloudFront.
+// Send marshals and sends the CreateStreamingDistribution API request.
+func (r *CreateStreamingDistributionRequest) Send() (*CreateStreamingDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStreamingDistributionOutput), nil
+}
+
+// CreateStreamingDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
 // Creates a new RMTP distribution. An RTMP distribution is similar to a web
 // distribution, but an RTMP distribution streams media files using the Adobe
@@ -675,99 +252,61 @@ func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDi
 // values you say you're specifying in the Quantity element and the number of
 // values specified.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateStreamingDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeStreamingDistributionAlreadyExists "StreamingDistributionAlreadyExists"
-//
-//   * ErrCodeInvalidOrigin "InvalidOrigin"
-//   The Amazon S3 origin server specified does not refer to a valid Amazon S3
-//   bucket.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeTooManyStreamingDistributionCNAMEs "TooManyStreamingDistributionCNAMEs"
-//
-//   * ErrCodeTooManyStreamingDistributions "TooManyStreamingDistributions"
-//   Processing your request would cause you to exceed the maximum number of streaming
-//   distributions allowed.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
+//    // Example sending a request using the CreateStreamingDistributionRequest method.
+//    req := client.CreateStreamingDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution
-func (c *CloudFront) CreateStreamingDistribution(input *CreateStreamingDistributionInput) (*CreateStreamingDistributionOutput, error) {
-	req, out := c.CreateStreamingDistributionRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) CreateStreamingDistributionRequest {
+	op := &aws.Operation{
+		Name:       opCreateStreamingDistribution,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-03-25/streaming-distribution",
+	}
 
-// CreateStreamingDistributionWithContext is the same as CreateStreamingDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStreamingDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateStreamingDistributionWithContext(ctx aws.Context, input *CreateStreamingDistributionInput, opts ...aws.Option) (*CreateStreamingDistributionOutput, error) {
-	req, out := c.CreateStreamingDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateStreamingDistributionInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateStreamingDistributionOutput{})
+	return CreateStreamingDistributionRequest{Request: req, Input: input}
 }
 
 const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2017_03_25"
 
-// CreateStreamingDistributionWithTagsRequest generates a "aws.Request" representing the
-// client's request for the CreateStreamingDistributionWithTags operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateStreamingDistributionWithTagsRequest is a API request type for the CreateStreamingDistributionWithTags API operation.
+type CreateStreamingDistributionWithTagsRequest struct {
+	*aws.Request
+	Input *CreateStreamingDistributionWithTagsInput
+}
+
+// Send marshals and sends the CreateStreamingDistributionWithTags API request.
+func (r *CreateStreamingDistributionWithTagsRequest) Send() (*CreateStreamingDistributionWithTagsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStreamingDistributionWithTagsOutput), nil
+}
+
+// CreateStreamingDistributionWithTagsRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStreamingDistributionWithTags for more information on using the CreateStreamingDistributionWithTags
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Create a new streaming distribution with tags.
 //
 //    // Example sending a request using the CreateStreamingDistributionWithTagsRequest method.
-//    req, resp := client.CreateStreamingDistributionWithTagsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateStreamingDistributionWithTagsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags
-func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) (req *aws.Request, output *CreateStreamingDistributionWithTagsOutput) {
+func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) CreateStreamingDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistributionWithTags,
 		HTTPMethod: "POST",
@@ -778,110 +317,42 @@ func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStr
 		input = &CreateStreamingDistributionWithTagsInput{}
 	}
 
-	output = &CreateStreamingDistributionWithTagsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateStreamingDistributionWithTags API operation for Amazon CloudFront.
-//
-// Create a new streaming distribution with tags.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation CreateStreamingDistributionWithTags for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeStreamingDistributionAlreadyExists "StreamingDistributionAlreadyExists"
-//
-//   * ErrCodeInvalidOrigin "InvalidOrigin"
-//   The Amazon S3 origin server specified does not refer to a valid Amazon S3
-//   bucket.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeTooManyStreamingDistributionCNAMEs "TooManyStreamingDistributionCNAMEs"
-//
-//   * ErrCodeTooManyStreamingDistributions "TooManyStreamingDistributions"
-//   Processing your request would cause you to exceed the maximum number of streaming
-//   distributions allowed.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-//   * ErrCodeInvalidTagging "InvalidTagging"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags
-func (c *CloudFront) CreateStreamingDistributionWithTags(input *CreateStreamingDistributionWithTagsInput) (*CreateStreamingDistributionWithTagsOutput, error) {
-	req, out := c.CreateStreamingDistributionWithTagsRequest(input)
-	return out, req.Send()
-}
-
-// CreateStreamingDistributionWithTagsWithContext is the same as CreateStreamingDistributionWithTags with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStreamingDistributionWithTags for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) CreateStreamingDistributionWithTagsWithContext(ctx aws.Context, input *CreateStreamingDistributionWithTagsInput, opts ...aws.Option) (*CreateStreamingDistributionWithTagsOutput, error) {
-	req, out := c.CreateStreamingDistributionWithTagsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateStreamingDistributionWithTagsOutput{})
+	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input}
 }
 
 const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2017_03_25"
 
-// DeleteCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
-// client's request for the DeleteCloudFrontOriginAccessIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteCloudFrontOriginAccessIdentityRequest is a API request type for the DeleteCloudFrontOriginAccessIdentity API operation.
+type DeleteCloudFrontOriginAccessIdentityRequest struct {
+	*aws.Request
+	Input *DeleteCloudFrontOriginAccessIdentityInput
+}
+
+// Send marshals and sends the DeleteCloudFrontOriginAccessIdentity API request.
+func (r *DeleteCloudFrontOriginAccessIdentityRequest) Send() (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCloudFrontOriginAccessIdentityOutput), nil
+}
+
+// DeleteCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteCloudFrontOriginAccessIdentity for more information on using the DeleteCloudFrontOriginAccessIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete an origin access identity.
 //
 //    // Example sending a request using the DeleteCloudFrontOriginAccessIdentityRequest method.
-//    req, resp := client.DeleteCloudFrontOriginAccessIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteCloudFrontOriginAccessIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity
-func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *DeleteCloudFrontOriginAccessIdentityOutput) {
+func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) DeleteCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCloudFrontOriginAccessIdentity,
 		HTTPMethod: "DELETE",
@@ -892,89 +363,44 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCl
 		input = &DeleteCloudFrontOriginAccessIdentityInput{}
 	}
 
-	output = &DeleteCloudFrontOriginAccessIdentityOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteCloudFrontOriginAccessIdentityOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteCloudFrontOriginAccessIdentity API operation for Amazon CloudFront.
-//
-// Delete an origin access identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation DeleteCloudFrontOriginAccessIdentity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeNoSuchCloudFrontOriginAccessIdentity "NoSuchCloudFrontOriginAccessIdentity"
-//   The specified origin access identity does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
-//
-//   * ErrCodeOriginAccessIdentityInUse "OriginAccessIdentityInUse"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity
-func (c *CloudFront) DeleteCloudFrontOriginAccessIdentity(input *DeleteCloudFrontOriginAccessIdentityInput) (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.DeleteCloudFrontOriginAccessIdentityRequest(input)
-	return out, req.Send()
-}
-
-// DeleteCloudFrontOriginAccessIdentityWithContext is the same as DeleteCloudFrontOriginAccessIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteCloudFrontOriginAccessIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *DeleteCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.DeleteCloudFrontOriginAccessIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
 const opDeleteDistribution = "DeleteDistribution2017_03_25"
 
-// DeleteDistributionRequest generates a "aws.Request" representing the
-// client's request for the DeleteDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDistributionRequest is a API request type for the DeleteDistribution API operation.
+type DeleteDistributionRequest struct {
+	*aws.Request
+	Input *DeleteDistributionInput
+}
+
+// Send marshals and sends the DeleteDistribution API request.
+func (r *DeleteDistributionRequest) Send() (*DeleteDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDistributionOutput), nil
+}
+
+// DeleteDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDistribution for more information on using the DeleteDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Delete a distribution.
 //
 //    // Example sending a request using the DeleteDistributionRequest method.
-//    req, resp := client.DeleteDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution
-func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) (req *aws.Request, output *DeleteDistributionOutput) {
+func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) DeleteDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDistribution,
 		HTTPMethod: "DELETE",
@@ -985,107 +411,32 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) (
 		input = &DeleteDistributionInput{}
 	}
 
-	output = &DeleteDistributionOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DeleteDistributionOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DeleteDistribution API operation for Amazon CloudFront.
-//
-// Delete a distribution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation DeleteDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeDistributionNotDisabled "DistributionNotDisabled"
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution
-func (c *CloudFront) DeleteDistribution(input *DeleteDistributionInput) (*DeleteDistributionOutput, error) {
-	req, out := c.DeleteDistributionRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDistributionWithContext is the same as DeleteDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) DeleteDistributionWithContext(ctx aws.Context, input *DeleteDistributionInput, opts ...aws.Option) (*DeleteDistributionOutput, error) {
-	req, out := c.DeleteDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DeleteDistributionRequest{Request: req, Input: input}
 }
 
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 
-// DeleteStreamingDistributionRequest generates a "aws.Request" representing the
-// client's request for the DeleteStreamingDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteStreamingDistribution for more information on using the DeleteStreamingDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteStreamingDistributionRequest method.
-//    req, resp := client.DeleteStreamingDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution
-func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) (req *aws.Request, output *DeleteStreamingDistributionOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteStreamingDistribution,
-		HTTPMethod: "DELETE",
-		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
-	}
-
-	if input == nil {
-		input = &DeleteStreamingDistributionInput{}
-	}
-
-	output = &DeleteStreamingDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
-	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
+// DeleteStreamingDistributionRequest is a API request type for the DeleteStreamingDistribution API operation.
+type DeleteStreamingDistributionRequest struct {
+	*aws.Request
+	Input *DeleteStreamingDistributionInput
 }
 
-// DeleteStreamingDistribution API operation for Amazon CloudFront.
+// Send marshals and sends the DeleteStreamingDistribution API request.
+func (r *DeleteStreamingDistributionRequest) Send() (*DeleteStreamingDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteStreamingDistributionOutput), nil
+}
+
+// DeleteStreamingDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
 // Delete a streaming distribution. To delete an RTMP distribution using the
 // CloudFront API, perform the following steps.
@@ -1124,78 +475,63 @@ func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDi
 // see Deleting a Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
 // in the Amazon CloudFront Developer Guide.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation DeleteStreamingDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeStreamingDistributionNotDisabled "StreamingDistributionNotDisabled"
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeNoSuchStreamingDistribution "NoSuchStreamingDistribution"
-//   The specified streaming distribution does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
+//    // Example sending a request using the DeleteStreamingDistributionRequest method.
+//    req := client.DeleteStreamingDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution
-func (c *CloudFront) DeleteStreamingDistribution(input *DeleteStreamingDistributionInput) (*DeleteStreamingDistributionOutput, error) {
-	req, out := c.DeleteStreamingDistributionRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteStreamingDistribution,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
+	}
 
-// DeleteStreamingDistributionWithContext is the same as DeleteStreamingDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteStreamingDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) DeleteStreamingDistributionWithContext(ctx aws.Context, input *DeleteStreamingDistributionInput, opts ...aws.Option) (*DeleteStreamingDistributionOutput, error) {
-	req, out := c.DeleteStreamingDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteStreamingDistributionInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteStreamingDistributionOutput{})
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	return DeleteStreamingDistributionRequest{Request: req, Input: input}
 }
 
 const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity2017_03_25"
 
-// GetCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
-// client's request for the GetCloudFrontOriginAccessIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCloudFrontOriginAccessIdentityRequest is a API request type for the GetCloudFrontOriginAccessIdentity API operation.
+type GetCloudFrontOriginAccessIdentityRequest struct {
+	*aws.Request
+	Input *GetCloudFrontOriginAccessIdentityInput
+}
+
+// Send marshals and sends the GetCloudFrontOriginAccessIdentity API request.
+func (r *GetCloudFrontOriginAccessIdentityRequest) Send() (*GetCloudFrontOriginAccessIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCloudFrontOriginAccessIdentityOutput), nil
+}
+
+// GetCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCloudFrontOriginAccessIdentity for more information on using the GetCloudFrontOriginAccessIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the information about an origin access identity.
 //
 //    // Example sending a request using the GetCloudFrontOriginAccessIdentityRequest method.
-//    req, resp := client.GetCloudFrontOriginAccessIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCloudFrontOriginAccessIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *GetCloudFrontOriginAccessIdentityOutput) {
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOriginAccessIdentityInput) GetCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentity,
 		HTTPMethod: "GET",
@@ -1206,78 +542,42 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFro
 		input = &GetCloudFrontOriginAccessIdentityInput{}
 	}
 
-	output = &GetCloudFrontOriginAccessIdentityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCloudFrontOriginAccessIdentity API operation for Amazon CloudFront.
-//
-// Get the information about an origin access identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetCloudFrontOriginAccessIdentity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchCloudFrontOriginAccessIdentity "NoSuchCloudFrontOriginAccessIdentity"
-//   The specified origin access identity does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity
-func (c *CloudFront) GetCloudFrontOriginAccessIdentity(input *GetCloudFrontOriginAccessIdentityInput) (*GetCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.GetCloudFrontOriginAccessIdentityRequest(input)
-	return out, req.Send()
-}
-
-// GetCloudFrontOriginAccessIdentityWithContext is the same as GetCloudFrontOriginAccessIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCloudFrontOriginAccessIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*GetCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.GetCloudFrontOriginAccessIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityOutput{})
+	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
 const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2017_03_25"
 
-// GetCloudFrontOriginAccessIdentityConfigRequest generates a "aws.Request" representing the
-// client's request for the GetCloudFrontOriginAccessIdentityConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetCloudFrontOriginAccessIdentityConfigRequest is a API request type for the GetCloudFrontOriginAccessIdentityConfig API operation.
+type GetCloudFrontOriginAccessIdentityConfigRequest struct {
+	*aws.Request
+	Input *GetCloudFrontOriginAccessIdentityConfigInput
+}
+
+// Send marshals and sends the GetCloudFrontOriginAccessIdentityConfig API request.
+func (r *GetCloudFrontOriginAccessIdentityConfigRequest) Send() (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCloudFrontOriginAccessIdentityConfigOutput), nil
+}
+
+// GetCloudFrontOriginAccessIdentityConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetCloudFrontOriginAccessIdentityConfig for more information on using the GetCloudFrontOriginAccessIdentityConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the configuration information about an origin access identity.
 //
 //    // Example sending a request using the GetCloudFrontOriginAccessIdentityConfigRequest method.
-//    req, resp := client.GetCloudFrontOriginAccessIdentityConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetCloudFrontOriginAccessIdentityConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) (req *aws.Request, output *GetCloudFrontOriginAccessIdentityConfigOutput) {
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentityConfig,
 		HTTPMethod: "GET",
@@ -1288,78 +588,42 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCl
 		input = &GetCloudFrontOriginAccessIdentityConfigInput{}
 	}
 
-	output = &GetCloudFrontOriginAccessIdentityConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetCloudFrontOriginAccessIdentityConfig API operation for Amazon CloudFront.
-//
-// Get the configuration information about an origin access identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetCloudFrontOriginAccessIdentityConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchCloudFrontOriginAccessIdentity "NoSuchCloudFrontOriginAccessIdentity"
-//   The specified origin access identity does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfig(input *GetCloudFrontOriginAccessIdentityConfigInput) (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
-	req, out := c.GetCloudFrontOriginAccessIdentityConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetCloudFrontOriginAccessIdentityConfigWithContext is the same as GetCloudFrontOriginAccessIdentityConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetCloudFrontOriginAccessIdentityConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityConfigInput, opts ...aws.Option) (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
-	req, out := c.GetCloudFrontOriginAccessIdentityConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetCloudFrontOriginAccessIdentityConfigOutput{})
+	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input}
 }
 
 const opGetDistribution = "GetDistribution2017_03_25"
 
-// GetDistributionRequest generates a "aws.Request" representing the
-// client's request for the GetDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDistributionRequest is a API request type for the GetDistribution API operation.
+type GetDistributionRequest struct {
+	*aws.Request
+	Input *GetDistributionInput
+}
+
+// Send marshals and sends the GetDistribution API request.
+func (r *GetDistributionRequest) Send() (*GetDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDistributionOutput), nil
+}
+
+// GetDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDistribution for more information on using the GetDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the information about a distribution.
 //
 //    // Example sending a request using the GetDistributionRequest method.
-//    req, resp := client.GetDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution
-func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) (req *aws.Request, output *GetDistributionOutput) {
+func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) GetDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetDistribution,
 		HTTPMethod: "GET",
@@ -1370,78 +634,42 @@ func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) (req *a
 		input = &GetDistributionInput{}
 	}
 
-	output = &GetDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDistribution API operation for Amazon CloudFront.
-//
-// Get the information about a distribution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution
-func (c *CloudFront) GetDistribution(input *GetDistributionInput) (*GetDistributionOutput, error) {
-	req, out := c.GetDistributionRequest(input)
-	return out, req.Send()
-}
-
-// GetDistributionWithContext is the same as GetDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetDistributionWithContext(ctx aws.Context, input *GetDistributionInput, opts ...aws.Option) (*GetDistributionOutput, error) {
-	req, out := c.GetDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDistributionOutput{})
+	return GetDistributionRequest{Request: req, Input: input}
 }
 
 const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
 
-// GetDistributionConfigRequest generates a "aws.Request" representing the
-// client's request for the GetDistributionConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDistributionConfigRequest is a API request type for the GetDistributionConfig API operation.
+type GetDistributionConfigRequest struct {
+	*aws.Request
+	Input *GetDistributionConfigInput
+}
+
+// Send marshals and sends the GetDistributionConfig API request.
+func (r *GetDistributionConfigRequest) Send() (*GetDistributionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDistributionConfigOutput), nil
+}
+
+// GetDistributionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDistributionConfig for more information on using the GetDistributionConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the configuration information about a distribution.
 //
 //    // Example sending a request using the GetDistributionConfigRequest method.
-//    req, resp := client.GetDistributionConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDistributionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig
-func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigInput) (req *aws.Request, output *GetDistributionConfigOutput) {
+func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigInput) GetDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDistributionConfig,
 		HTTPMethod: "GET",
@@ -1452,78 +680,42 @@ func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigIn
 		input = &GetDistributionConfigInput{}
 	}
 
-	output = &GetDistributionConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDistributionConfig API operation for Amazon CloudFront.
-//
-// Get the configuration information about a distribution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetDistributionConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig
-func (c *CloudFront) GetDistributionConfig(input *GetDistributionConfigInput) (*GetDistributionConfigOutput, error) {
-	req, out := c.GetDistributionConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetDistributionConfigWithContext is the same as GetDistributionConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDistributionConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetDistributionConfigWithContext(ctx aws.Context, input *GetDistributionConfigInput, opts ...aws.Option) (*GetDistributionConfigOutput, error) {
-	req, out := c.GetDistributionConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDistributionConfigOutput{})
+	return GetDistributionConfigRequest{Request: req, Input: input}
 }
 
 const opGetInvalidation = "GetInvalidation2017_03_25"
 
-// GetInvalidationRequest generates a "aws.Request" representing the
-// client's request for the GetInvalidation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetInvalidationRequest is a API request type for the GetInvalidation API operation.
+type GetInvalidationRequest struct {
+	*aws.Request
+	Input *GetInvalidationInput
+}
+
+// Send marshals and sends the GetInvalidation API request.
+func (r *GetInvalidationRequest) Send() (*GetInvalidationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInvalidationOutput), nil
+}
+
+// GetInvalidationRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetInvalidation for more information on using the GetInvalidation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the information about an invalidation.
 //
 //    // Example sending a request using the GetInvalidationRequest method.
-//    req, resp := client.GetInvalidationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetInvalidationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation
-func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) (req *aws.Request, output *GetInvalidationOutput) {
+func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) GetInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opGetInvalidation,
 		HTTPMethod: "GET",
@@ -1534,81 +726,43 @@ func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) (req *a
 		input = &GetInvalidationInput{}
 	}
 
-	output = &GetInvalidationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetInvalidation API operation for Amazon CloudFront.
-//
-// Get the information about an invalidation.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetInvalidation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchInvalidation "NoSuchInvalidation"
-//   The specified invalidation does not exist.
-//
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation
-func (c *CloudFront) GetInvalidation(input *GetInvalidationInput) (*GetInvalidationOutput, error) {
-	req, out := c.GetInvalidationRequest(input)
-	return out, req.Send()
-}
-
-// GetInvalidationWithContext is the same as GetInvalidation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetInvalidation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetInvalidationWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...aws.Option) (*GetInvalidationOutput, error) {
-	req, out := c.GetInvalidationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetInvalidationOutput{})
+	return GetInvalidationRequest{Request: req, Input: input}
 }
 
 const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
 
-// GetStreamingDistributionRequest generates a "aws.Request" representing the
-// client's request for the GetStreamingDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetStreamingDistributionRequest is a API request type for the GetStreamingDistribution API operation.
+type GetStreamingDistributionRequest struct {
+	*aws.Request
+	Input *GetStreamingDistributionInput
+}
+
+// Send marshals and sends the GetStreamingDistribution API request.
+func (r *GetStreamingDistributionRequest) Send() (*GetStreamingDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStreamingDistributionOutput), nil
+}
+
+// GetStreamingDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetStreamingDistribution for more information on using the GetStreamingDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about a specified RTMP distribution, including the distribution
+// configuration.
 //
 //    // Example sending a request using the GetStreamingDistributionRequest method.
-//    req, resp := client.GetStreamingDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetStreamingDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution
-func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) (req *aws.Request, output *GetStreamingDistributionOutput) {
+func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) GetStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistribution,
 		HTTPMethod: "GET",
@@ -1619,79 +773,42 @@ func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistribu
 		input = &GetStreamingDistributionInput{}
 	}
 
-	output = &GetStreamingDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetStreamingDistribution API operation for Amazon CloudFront.
-//
-// Gets information about a specified RTMP distribution, including the distribution
-// configuration.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetStreamingDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchStreamingDistribution "NoSuchStreamingDistribution"
-//   The specified streaming distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution
-func (c *CloudFront) GetStreamingDistribution(input *GetStreamingDistributionInput) (*GetStreamingDistributionOutput, error) {
-	req, out := c.GetStreamingDistributionRequest(input)
-	return out, req.Send()
-}
-
-// GetStreamingDistributionWithContext is the same as GetStreamingDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetStreamingDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetStreamingDistributionWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...aws.Option) (*GetStreamingDistributionOutput, error) {
-	req, out := c.GetStreamingDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetStreamingDistributionOutput{})
+	return GetStreamingDistributionRequest{Request: req, Input: input}
 }
 
 const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_25"
 
-// GetStreamingDistributionConfigRequest generates a "aws.Request" representing the
-// client's request for the GetStreamingDistributionConfig operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetStreamingDistributionConfigRequest is a API request type for the GetStreamingDistributionConfig API operation.
+type GetStreamingDistributionConfigRequest struct {
+	*aws.Request
+	Input *GetStreamingDistributionConfigInput
+}
+
+// Send marshals and sends the GetStreamingDistributionConfig API request.
+func (r *GetStreamingDistributionConfigRequest) Send() (*GetStreamingDistributionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetStreamingDistributionConfigOutput), nil
+}
+
+// GetStreamingDistributionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetStreamingDistributionConfig for more information on using the GetStreamingDistributionConfig
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Get the configuration information about a streaming distribution.
 //
 //    // Example sending a request using the GetStreamingDistributionConfigRequest method.
-//    req, resp := client.GetStreamingDistributionConfigRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetStreamingDistributionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig
-func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) (req *aws.Request, output *GetStreamingDistributionConfigOutput) {
+func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) GetStreamingDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistributionConfig,
 		HTTPMethod: "GET",
@@ -1702,78 +819,42 @@ func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDi
 		input = &GetStreamingDistributionConfigInput{}
 	}
 
-	output = &GetStreamingDistributionConfigOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetStreamingDistributionConfig API operation for Amazon CloudFront.
-//
-// Get the configuration information about a streaming distribution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation GetStreamingDistributionConfig for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeNoSuchStreamingDistribution "NoSuchStreamingDistribution"
-//   The specified streaming distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig
-func (c *CloudFront) GetStreamingDistributionConfig(input *GetStreamingDistributionConfigInput) (*GetStreamingDistributionConfigOutput, error) {
-	req, out := c.GetStreamingDistributionConfigRequest(input)
-	return out, req.Send()
-}
-
-// GetStreamingDistributionConfigWithContext is the same as GetStreamingDistributionConfig with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetStreamingDistributionConfig for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) GetStreamingDistributionConfigWithContext(ctx aws.Context, input *GetStreamingDistributionConfigInput, opts ...aws.Option) (*GetStreamingDistributionConfigOutput, error) {
-	req, out := c.GetStreamingDistributionConfigRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetStreamingDistributionConfigOutput{})
+	return GetStreamingDistributionConfigRequest{Request: req, Input: input}
 }
 
 const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2017_03_25"
 
-// ListCloudFrontOriginAccessIdentitiesRequest generates a "aws.Request" representing the
-// client's request for the ListCloudFrontOriginAccessIdentities operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCloudFrontOriginAccessIdentitiesRequest is a API request type for the ListCloudFrontOriginAccessIdentities API operation.
+type ListCloudFrontOriginAccessIdentitiesRequest struct {
+	*aws.Request
+	Input *ListCloudFrontOriginAccessIdentitiesInput
+}
+
+// Send marshals and sends the ListCloudFrontOriginAccessIdentities API request.
+func (r *ListCloudFrontOriginAccessIdentitiesRequest) Send() (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCloudFrontOriginAccessIdentitiesOutput), nil
+}
+
+// ListCloudFrontOriginAccessIdentitiesRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCloudFrontOriginAccessIdentities for more information on using the ListCloudFrontOriginAccessIdentities
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists origin access identities.
 //
 //    // Example sending a request using the ListCloudFrontOriginAccessIdentitiesRequest method.
-//    req, resp := client.ListCloudFrontOriginAccessIdentitiesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCloudFrontOriginAccessIdentitiesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities
-func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) (req *aws.Request, output *ListCloudFrontOriginAccessIdentitiesOutput) {
+func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
@@ -1790,46 +871,8 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListClou
 		input = &ListCloudFrontOriginAccessIdentitiesInput{}
 	}
 
-	output = &ListCloudFrontOriginAccessIdentitiesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCloudFrontOriginAccessIdentities API operation for Amazon CloudFront.
-//
-// Lists origin access identities.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListCloudFrontOriginAccessIdentities for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities
-func (c *CloudFront) ListCloudFrontOriginAccessIdentities(input *ListCloudFrontOriginAccessIdentitiesInput) (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
-	req, out := c.ListCloudFrontOriginAccessIdentitiesRequest(input)
-	return out, req.Send()
-}
-
-// ListCloudFrontOriginAccessIdentitiesWithContext is the same as ListCloudFrontOriginAccessIdentities with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCloudFrontOriginAccessIdentities for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesWithContext(ctx aws.Context, input *ListCloudFrontOriginAccessIdentitiesInput, opts ...aws.Option) (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
-	req, out := c.ListCloudFrontOriginAccessIdentitiesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCloudFrontOriginAccessIdentitiesOutput{})
+	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input}
 }
 
 // ListCloudFrontOriginAccessIdentitiesPages iterates over the pages of a ListCloudFrontOriginAccessIdentities operation,
@@ -1868,10 +911,10 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPagesWithContext(ctx aw
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListCloudFrontOriginAccessIdentitiesRequest(inCpy)
+			req := c.ListCloudFrontOriginAccessIdentitiesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -1884,31 +927,36 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPagesWithContext(ctx aw
 
 const opListDistributions = "ListDistributions2017_03_25"
 
-// ListDistributionsRequest generates a "aws.Request" representing the
-// client's request for the ListDistributions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDistributionsRequest is a API request type for the ListDistributions API operation.
+type ListDistributionsRequest struct {
+	*aws.Request
+	Input *ListDistributionsInput
+}
+
+// Send marshals and sends the ListDistributions API request.
+func (r *ListDistributionsRequest) Send() (*ListDistributionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDistributionsOutput), nil
+}
+
+// ListDistributionsRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDistributions for more information on using the ListDistributions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List distributions.
 //
 //    // Example sending a request using the ListDistributionsRequest method.
-//    req, resp := client.ListDistributionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDistributionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions
-func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) (req *aws.Request, output *ListDistributionsOutput) {
+func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) ListDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
@@ -1925,46 +973,8 @@ func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) (re
 		input = &ListDistributionsInput{}
 	}
 
-	output = &ListDistributionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDistributions API operation for Amazon CloudFront.
-//
-// List distributions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListDistributions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions
-func (c *CloudFront) ListDistributions(input *ListDistributionsInput) (*ListDistributionsOutput, error) {
-	req, out := c.ListDistributionsRequest(input)
-	return out, req.Send()
-}
-
-// ListDistributionsWithContext is the same as ListDistributions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDistributions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListDistributionsWithContext(ctx aws.Context, input *ListDistributionsInput, opts ...aws.Option) (*ListDistributionsOutput, error) {
-	req, out := c.ListDistributionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDistributionsOutput{})
+	return ListDistributionsRequest{Request: req, Input: input}
 }
 
 // ListDistributionsPages iterates over the pages of a ListDistributions operation,
@@ -2003,10 +1013,10 @@ func (c *CloudFront) ListDistributionsPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDistributionsRequest(inCpy)
+			req := c.ListDistributionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2019,31 +1029,36 @@ func (c *CloudFront) ListDistributionsPagesWithContext(ctx aws.Context, input *L
 
 const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_03_25"
 
-// ListDistributionsByWebACLIdRequest generates a "aws.Request" representing the
-// client's request for the ListDistributionsByWebACLId operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDistributionsByWebACLIdRequest is a API request type for the ListDistributionsByWebACLId API operation.
+type ListDistributionsByWebACLIdRequest struct {
+	*aws.Request
+	Input *ListDistributionsByWebACLIdInput
+}
+
+// Send marshals and sends the ListDistributionsByWebACLId API request.
+func (r *ListDistributionsByWebACLIdRequest) Send() (*ListDistributionsByWebACLIdOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDistributionsByWebACLIdOutput), nil
+}
+
+// ListDistributionsByWebACLIdRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDistributionsByWebACLId for more information on using the ListDistributionsByWebACLId
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List the distributions that are associated with a specified AWS WAF web ACL.
 //
 //    // Example sending a request using the ListDistributionsByWebACLIdRequest method.
-//    req, resp := client.ListDistributionsByWebACLIdRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDistributionsByWebACLIdRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId
-func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) (req *aws.Request, output *ListDistributionsByWebACLIdOutput) {
+func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) ListDistributionsByWebACLIdRequest {
 	op := &aws.Operation{
 		Name:       opListDistributionsByWebACLId,
 		HTTPMethod: "GET",
@@ -2054,77 +1069,42 @@ func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributions
 		input = &ListDistributionsByWebACLIdInput{}
 	}
 
-	output = &ListDistributionsByWebACLIdOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDistributionsByWebACLId API operation for Amazon CloudFront.
-//
-// List the distributions that are associated with a specified AWS WAF web ACL.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListDistributionsByWebACLId for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidWebACLId "InvalidWebACLId"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId
-func (c *CloudFront) ListDistributionsByWebACLId(input *ListDistributionsByWebACLIdInput) (*ListDistributionsByWebACLIdOutput, error) {
-	req, out := c.ListDistributionsByWebACLIdRequest(input)
-	return out, req.Send()
-}
-
-// ListDistributionsByWebACLIdWithContext is the same as ListDistributionsByWebACLId with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDistributionsByWebACLId for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListDistributionsByWebACLIdWithContext(ctx aws.Context, input *ListDistributionsByWebACLIdInput, opts ...aws.Option) (*ListDistributionsByWebACLIdOutput, error) {
-	req, out := c.ListDistributionsByWebACLIdRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDistributionsByWebACLIdOutput{})
+	return ListDistributionsByWebACLIdRequest{Request: req, Input: input}
 }
 
 const opListInvalidations = "ListInvalidations2017_03_25"
 
-// ListInvalidationsRequest generates a "aws.Request" representing the
-// client's request for the ListInvalidations operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListInvalidationsRequest is a API request type for the ListInvalidations API operation.
+type ListInvalidationsRequest struct {
+	*aws.Request
+	Input *ListInvalidationsInput
+}
+
+// Send marshals and sends the ListInvalidations API request.
+func (r *ListInvalidationsRequest) Send() (*ListInvalidationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInvalidationsOutput), nil
+}
+
+// ListInvalidationsRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListInvalidations for more information on using the ListInvalidations
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists invalidation batches.
 //
 //    // Example sending a request using the ListInvalidationsRequest method.
-//    req, resp := client.ListInvalidationsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListInvalidationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations
-func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) (req *aws.Request, output *ListInvalidationsOutput) {
+func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) ListInvalidationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
@@ -2141,52 +1121,8 @@ func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) (re
 		input = &ListInvalidationsInput{}
 	}
 
-	output = &ListInvalidationsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListInvalidations API operation for Amazon CloudFront.
-//
-// Lists invalidation batches.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListInvalidations for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations
-func (c *CloudFront) ListInvalidations(input *ListInvalidationsInput) (*ListInvalidationsOutput, error) {
-	req, out := c.ListInvalidationsRequest(input)
-	return out, req.Send()
-}
-
-// ListInvalidationsWithContext is the same as ListInvalidations with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListInvalidations for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListInvalidationsWithContext(ctx aws.Context, input *ListInvalidationsInput, opts ...aws.Option) (*ListInvalidationsOutput, error) {
-	req, out := c.ListInvalidationsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListInvalidationsOutput{})
+	return ListInvalidationsRequest{Request: req, Input: input}
 }
 
 // ListInvalidationsPages iterates over the pages of a ListInvalidations operation,
@@ -2225,10 +1161,10 @@ func (c *CloudFront) ListInvalidationsPagesWithContext(ctx aws.Context, input *L
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListInvalidationsRequest(inCpy)
+			req := c.ListInvalidationsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2241,31 +1177,36 @@ func (c *CloudFront) ListInvalidationsPagesWithContext(ctx aws.Context, input *L
 
 const opListStreamingDistributions = "ListStreamingDistributions2017_03_25"
 
-// ListStreamingDistributionsRequest generates a "aws.Request" representing the
-// client's request for the ListStreamingDistributions operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListStreamingDistributionsRequest is a API request type for the ListStreamingDistributions API operation.
+type ListStreamingDistributionsRequest struct {
+	*aws.Request
+	Input *ListStreamingDistributionsInput
+}
+
+// Send marshals and sends the ListStreamingDistributions API request.
+func (r *ListStreamingDistributionsRequest) Send() (*ListStreamingDistributionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListStreamingDistributionsOutput), nil
+}
+
+// ListStreamingDistributionsRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListStreamingDistributions for more information on using the ListStreamingDistributions
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List streaming distributions.
 //
 //    // Example sending a request using the ListStreamingDistributionsRequest method.
-//    req, resp := client.ListStreamingDistributionsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListStreamingDistributionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions
-func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) (req *aws.Request, output *ListStreamingDistributionsOutput) {
+func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) ListStreamingDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListStreamingDistributions,
 		HTTPMethod: "GET",
@@ -2282,46 +1223,8 @@ func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistr
 		input = &ListStreamingDistributionsInput{}
 	}
 
-	output = &ListStreamingDistributionsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListStreamingDistributions API operation for Amazon CloudFront.
-//
-// List streaming distributions.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListStreamingDistributions for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions
-func (c *CloudFront) ListStreamingDistributions(input *ListStreamingDistributionsInput) (*ListStreamingDistributionsOutput, error) {
-	req, out := c.ListStreamingDistributionsRequest(input)
-	return out, req.Send()
-}
-
-// ListStreamingDistributionsWithContext is the same as ListStreamingDistributions with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListStreamingDistributions for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListStreamingDistributionsWithContext(ctx aws.Context, input *ListStreamingDistributionsInput, opts ...aws.Option) (*ListStreamingDistributionsOutput, error) {
-	req, out := c.ListStreamingDistributionsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListStreamingDistributionsOutput{})
+	return ListStreamingDistributionsRequest{Request: req, Input: input}
 }
 
 // ListStreamingDistributionsPages iterates over the pages of a ListStreamingDistributions operation,
@@ -2360,10 +1263,10 @@ func (c *CloudFront) ListStreamingDistributionsPagesWithContext(ctx aws.Context,
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListStreamingDistributionsRequest(inCpy)
+			req := c.ListStreamingDistributionsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2376,31 +1279,36 @@ func (c *CloudFront) ListStreamingDistributionsPagesWithContext(ctx aws.Context,
 
 const opListTagsForResource = "ListTagsForResource2017_03_25"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// List tags for a CloudFront resource.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource
-func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
@@ -2411,82 +1319,42 @@ func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput)
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for Amazon CloudFront.
-//
-// List tags for a CloudFront resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidTagging "InvalidTagging"
-//
-//   * ErrCodeNoSuchResource "NoSuchResource"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource
-func (c *CloudFront) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource2017_03_25"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Add tags to a CloudFront resource.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource
-func (c *CloudFront) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *CloudFront) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
@@ -2497,84 +1365,44 @@ func (c *CloudFront) TagResourceRequest(input *TagResourceInput) (req *aws.Reque
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &TagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// TagResource API operation for Amazon CloudFront.
-//
-// Add tags to a CloudFront resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidTagging "InvalidTagging"
-//
-//   * ErrCodeNoSuchResource "NoSuchResource"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource
-func (c *CloudFront) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource2017_03_25"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Remove tags from a CloudFront resource.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource
-func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
@@ -2585,84 +1413,44 @@ func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) (req *aws.R
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &UntagResourceOutput{})
 	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// UntagResource API operation for Amazon CloudFront.
-//
-// Remove tags from a CloudFront resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidTagging "InvalidTagging"
-//
-//   * ErrCodeNoSuchResource "NoSuchResource"
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource
-func (c *CloudFront) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2017_03_25"
 
-// UpdateCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
-// client's request for the UpdateCloudFrontOriginAccessIdentity operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateCloudFrontOriginAccessIdentityRequest is a API request type for the UpdateCloudFrontOriginAccessIdentity API operation.
+type UpdateCloudFrontOriginAccessIdentityRequest struct {
+	*aws.Request
+	Input *UpdateCloudFrontOriginAccessIdentityInput
+}
+
+// Send marshals and sends the UpdateCloudFrontOriginAccessIdentity API request.
+func (r *UpdateCloudFrontOriginAccessIdentityRequest) Send() (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCloudFrontOriginAccessIdentityOutput), nil
+}
+
+// UpdateCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateCloudFrontOriginAccessIdentity for more information on using the UpdateCloudFrontOriginAccessIdentity
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update an origin access identity.
 //
 //    // Example sending a request using the UpdateCloudFrontOriginAccessIdentityRequest method.
-//    req, resp := client.UpdateCloudFrontOriginAccessIdentityRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateCloudFrontOriginAccessIdentityRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity
-func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *UpdateCloudFrontOriginAccessIdentityOutput) {
+func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) UpdateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "PUT",
@@ -2673,114 +1461,30 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCl
 		input = &UpdateCloudFrontOriginAccessIdentityInput{}
 	}
 
-	output = &UpdateCloudFrontOriginAccessIdentityOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateCloudFrontOriginAccessIdentity API operation for Amazon CloudFront.
-//
-// Update an origin access identity.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation UpdateCloudFrontOriginAccessIdentity for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeIllegalUpdate "IllegalUpdate"
-//   Origin and CallerReference cannot be updated.
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeNoSuchCloudFrontOriginAccessIdentity "NoSuchCloudFrontOriginAccessIdentity"
-//   The specified origin access identity does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity
-func (c *CloudFront) UpdateCloudFrontOriginAccessIdentity(input *UpdateCloudFrontOriginAccessIdentityInput) (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.UpdateCloudFrontOriginAccessIdentityRequest(input)
-	return out, req.Send()
-}
-
-// UpdateCloudFrontOriginAccessIdentityWithContext is the same as UpdateCloudFrontOriginAccessIdentity with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateCloudFrontOriginAccessIdentity for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *UpdateCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
-	req, out := c.UpdateCloudFrontOriginAccessIdentityRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateCloudFrontOriginAccessIdentityOutput{})
+	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
 }
 
 const opUpdateDistribution = "UpdateDistribution2017_03_25"
 
-// UpdateDistributionRequest generates a "aws.Request" representing the
-// client's request for the UpdateDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateDistribution for more information on using the UpdateDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateDistributionRequest method.
-//    req, resp := client.UpdateDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution
-func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) (req *aws.Request, output *UpdateDistributionOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateDistribution,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
-	}
-
-	if input == nil {
-		input = &UpdateDistributionInput{}
-	}
-
-	output = &UpdateDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateDistributionRequest is a API request type for the UpdateDistribution API operation.
+type UpdateDistributionRequest struct {
+	*aws.Request
+	Input *UpdateDistributionInput
 }
 
-// UpdateDistribution API operation for Amazon CloudFront.
+// Send marshals and sends the UpdateDistribution API request.
+func (r *UpdateDistributionRequest) Send() (*UpdateDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDistributionOutput), nil
+}
+
+// UpdateDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
 // Updates the configuration for a web distribution. Perform the following steps.
 //
@@ -2833,178 +1537,61 @@ func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) (
 // between the number of values you say you're specifying in the Quantity element
 // and the number of values you're actually specifying.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation UpdateDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeIllegalUpdate "IllegalUpdate"
-//   Origin and CallerReference cannot be updated.
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeNoSuchDistribution "NoSuchDistribution"
-//   The specified distribution does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
-//
-//   * ErrCodeTooManyDistributionCNAMEs "TooManyDistributionCNAMEs"
-//   Your request contains more CNAMEs than are allowed per distribution.
-//
-//   * ErrCodeInvalidDefaultRootObject "InvalidDefaultRootObject"
-//   The default root object file name is too big or contains an invalid character.
-//
-//   * ErrCodeInvalidRelativePath "InvalidRelativePath"
-//   The relative path is too big, is not URL-encoded, or does not begin with
-//   a slash (/).
-//
-//   * ErrCodeInvalidErrorCode "InvalidErrorCode"
-//
-//   * ErrCodeInvalidResponseCode "InvalidResponseCode"
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeInvalidViewerCertificate "InvalidViewerCertificate"
-//
-//   * ErrCodeInvalidMinimumProtocolVersion "InvalidMinimumProtocolVersion"
-//
-//   * ErrCodeInvalidRequiredProtocol "InvalidRequiredProtocol"
-//   This operation requires the HTTPS protocol. Ensure that you specify the HTTPS
-//   protocol in your request, or omit the RequiredProtocols element from your
-//   distribution configuration.
-//
-//   * ErrCodeNoSuchOrigin "NoSuchOrigin"
-//   No origin exists with the specified Origin Id.
-//
-//   * ErrCodeTooManyOrigins "TooManyOrigins"
-//   You cannot create more origins for the distribution.
-//
-//   * ErrCodeTooManyCacheBehaviors "TooManyCacheBehaviors"
-//   You cannot create more cache behaviors for the distribution.
-//
-//   * ErrCodeTooManyCookieNamesInWhiteList "TooManyCookieNamesInWhiteList"
-//   Your request contains more cookie names in the whitelist than are allowed
-//   per cache behavior.
-//
-//   * ErrCodeInvalidForwardCookies "InvalidForwardCookies"
-//   Your request contains forward cookies option which doesn't match with the
-//   expectation for the whitelisted list of cookie names. Either list of cookie
-//   names has been specified when not allowed or list of cookie names is missing
-//   when expected.
-//
-//   * ErrCodeTooManyHeadersInForwardedValues "TooManyHeadersInForwardedValues"
-//
-//   * ErrCodeInvalidHeadersForS3Origin "InvalidHeadersForS3Origin"
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-//   * ErrCodeTooManyCertificates "TooManyCertificates"
-//   You cannot create anymore custom SSL/TLS certificates.
-//
-//   * ErrCodeInvalidLocationCode "InvalidLocationCode"
-//
-//   * ErrCodeInvalidGeoRestrictionParameter "InvalidGeoRestrictionParameter"
-//
-//   * ErrCodeInvalidTTLOrder "InvalidTTLOrder"
-//
-//   * ErrCodeInvalidWebACLId "InvalidWebACLId"
-//
-//   * ErrCodeTooManyOriginCustomHeaders "TooManyOriginCustomHeaders"
-//
-//   * ErrCodeTooManyQueryStringParameters "TooManyQueryStringParameters"
-//
-//   * ErrCodeInvalidQueryStringParameters "InvalidQueryStringParameters"
-//
-//   * ErrCodeTooManyDistributionsWithLambdaAssociations "TooManyDistributionsWithLambdaAssociations"
-//   Processing your request would cause the maximum number of distributions with
-//   Lambda function associations per owner to be exceeded.
-//
-//   * ErrCodeTooManyLambdaFunctionAssociations "TooManyLambdaFunctionAssociations"
-//   Your request contains more Lambda function associations than are allowed
-//   per distribution.
-//
-//   * ErrCodeInvalidLambdaFunctionAssociation "InvalidLambdaFunctionAssociation"
-//   The specified Lambda function association is invalid.
-//
-//   * ErrCodeInvalidOriginReadTimeout "InvalidOriginReadTimeout"
-//
-//   * ErrCodeInvalidOriginKeepaliveTimeout "InvalidOriginKeepaliveTimeout"
+//    // Example sending a request using the UpdateDistributionRequest method.
+//    req := client.UpdateDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution
-func (c *CloudFront) UpdateDistribution(input *UpdateDistributionInput) (*UpdateDistributionOutput, error) {
-	req, out := c.UpdateDistributionRequest(input)
-	return out, req.Send()
-}
+func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) UpdateDistributionRequest {
+	op := &aws.Operation{
+		Name:       opUpdateDistribution,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
+	}
 
-// UpdateDistributionWithContext is the same as UpdateDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) UpdateDistributionWithContext(ctx aws.Context, input *UpdateDistributionInput, opts ...aws.Option) (*UpdateDistributionOutput, error) {
-	req, out := c.UpdateDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateDistributionInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateDistributionOutput{})
+	return UpdateDistributionRequest{Request: req, Input: input}
 }
 
 const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
 
-// UpdateStreamingDistributionRequest generates a "aws.Request" representing the
-// client's request for the UpdateStreamingDistribution operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateStreamingDistributionRequest is a API request type for the UpdateStreamingDistribution API operation.
+type UpdateStreamingDistributionRequest struct {
+	*aws.Request
+	Input *UpdateStreamingDistributionInput
+}
+
+// Send marshals and sends the UpdateStreamingDistribution API request.
+func (r *UpdateStreamingDistributionRequest) Send() (*UpdateStreamingDistributionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateStreamingDistributionOutput), nil
+}
+
+// UpdateStreamingDistributionRequest returns a request value for making API operation for
+// Amazon CloudFront.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateStreamingDistribution for more information on using the UpdateStreamingDistribution
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Update a streaming distribution.
 //
 //    // Example sending a request using the UpdateStreamingDistributionRequest method.
-//    req, resp := client.UpdateStreamingDistributionRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateStreamingDistributionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution
-func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) (req *aws.Request, output *UpdateStreamingDistributionOutput) {
+func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) UpdateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStreamingDistribution,
 		HTTPMethod: "PUT",
@@ -3015,82 +1602,8 @@ func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDi
 		input = &UpdateStreamingDistributionInput{}
 	}
 
-	output = &UpdateStreamingDistributionOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateStreamingDistribution API operation for Amazon CloudFront.
-//
-// Update a streaming distribution.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudFront's
-// API operation UpdateStreamingDistribution for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeAccessDenied "AccessDenied"
-//   Access denied.
-//
-//   * ErrCodeCNAMEAlreadyExists "CNAMEAlreadyExists"
-//
-//   * ErrCodeIllegalUpdate "IllegalUpdate"
-//   Origin and CallerReference cannot be updated.
-//
-//   * ErrCodeInvalidIfMatchVersion "InvalidIfMatchVersion"
-//   The If-Match version is missing or not valid for the distribution.
-//
-//   * ErrCodeMissingBody "MissingBody"
-//   This operation requires a body. Ensure that the body is present and the Content-Type
-//   header is set.
-//
-//   * ErrCodeNoSuchStreamingDistribution "NoSuchStreamingDistribution"
-//   The specified streaming distribution does not exist.
-//
-//   * ErrCodePreconditionFailed "PreconditionFailed"
-//   The precondition given in one or more of the request-header fields evaluated
-//   to false.
-//
-//   * ErrCodeTooManyStreamingDistributionCNAMEs "TooManyStreamingDistributionCNAMEs"
-//
-//   * ErrCodeInvalidArgument "InvalidArgument"
-//   The argument is invalid.
-//
-//   * ErrCodeInvalidOriginAccessIdentity "InvalidOriginAccessIdentity"
-//   The origin access identity is not valid or doesn't exist.
-//
-//   * ErrCodeTooManyTrustedSigners "TooManyTrustedSigners"
-//   Your request contains more trusted signers than are allowed per distribution.
-//
-//   * ErrCodeTrustedSignerDoesNotExist "TrustedSignerDoesNotExist"
-//   One or more of your trusted signers do not exist.
-//
-//   * ErrCodeInconsistentQuantities "InconsistentQuantities"
-//   The value of Quantity and the size of Items do not match.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution
-func (c *CloudFront) UpdateStreamingDistribution(input *UpdateStreamingDistributionInput) (*UpdateStreamingDistributionOutput, error) {
-	req, out := c.UpdateStreamingDistributionRequest(input)
-	return out, req.Send()
-}
-
-// UpdateStreamingDistributionWithContext is the same as UpdateStreamingDistribution with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateStreamingDistribution for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudFront) UpdateStreamingDistributionWithContext(ctx aws.Context, input *UpdateStreamingDistributionInput, opts ...aws.Option) (*UpdateStreamingDistributionOutput, error) {
-	req, out := c.UpdateStreamingDistributionRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateStreamingDistributionOutput{})
+	return UpdateStreamingDistributionRequest{Request: req, Input: input}
 }
 
 // A complex type that lists the AWS accounts, if any, that you included in

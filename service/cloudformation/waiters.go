@@ -53,10 +53,10 @@ func (c *CloudFormation) WaitUntilChangeSetCreateCompleteWithContext(ctx aws.Con
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeChangeSetRequest(inCpy)
+			req := c.DescribeChangeSetRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -129,10 +129,10 @@ func (c *CloudFormation) WaitUntilStackCreateCompleteWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStacksRequest(inCpy)
+			req := c.DescribeStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -205,10 +205,10 @@ func (c *CloudFormation) WaitUntilStackDeleteCompleteWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStacksRequest(inCpy)
+			req := c.DescribeStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -256,10 +256,10 @@ func (c *CloudFormation) WaitUntilStackExistsWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStacksRequest(inCpy)
+			req := c.DescribeStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -322,10 +322,10 @@ func (c *CloudFormation) WaitUntilStackUpdateCompleteWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeStacksRequest(inCpy)
+			req := c.DescribeStacksRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

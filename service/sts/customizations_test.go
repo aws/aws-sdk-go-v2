@@ -19,7 +19,7 @@ func init() {
 var svc *sts.STS
 
 func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
-	req, _ := svc.AssumeRoleWithSAMLRequest(&sts.AssumeRoleWithSAMLInput{
+	req := svc.AssumeRoleWithSAMLRequest(&sts.AssumeRoleWithSAMLInput{
 		PrincipalArn:  aws.String("ARN01234567890123456789"),
 		RoleArn:       aws.String("ARN01234567890123456789"),
 		SAMLAssertion: aws.String("ASSERT"),
@@ -35,7 +35,7 @@ func TestUnsignedRequest_AssumeRoleWithSAML(t *testing.T) {
 }
 
 func TestUnsignedRequest_AssumeRoleWithWebIdentity(t *testing.T) {
-	req, _ := svc.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{
+	req := svc.AssumeRoleWithWebIdentityRequest(&sts.AssumeRoleWithWebIdentityInput{
 		RoleArn:          aws.String("ARN01234567890123456789"),
 		RoleSessionName:  aws.String("SESSION"),
 		WebIdentityToken: aws.String("TOKEN"),

@@ -45,7 +45,7 @@ import (
 //    type mockAPIGatewayClient struct {
 //        apigatewayiface.APIGatewayAPI
 //    }
-//    func (m *mockAPIGatewayClient) CreateApiKey(input *apigateway.CreateApiKeyInput) (*apigateway.ApiKey, error) {
+//    func (m *mockAPIGatewayClient) CreateApiKey(input *apigateway.CreateApiKeyInput) (*apigateway.UpdateApiKeyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -63,486 +63,262 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type APIGatewayAPI interface {
-	CreateApiKey(*apigateway.CreateApiKeyInput) (*apigateway.ApiKey, error)
-	CreateApiKeyWithContext(aws.Context, *apigateway.CreateApiKeyInput, ...aws.Option) (*apigateway.ApiKey, error)
-	CreateApiKeyRequest(*apigateway.CreateApiKeyInput) (*aws.Request, *apigateway.ApiKey)
+	CreateApiKeyRequest(*apigateway.CreateApiKeyInput) apigateway.CreateApiKeyRequest
 
-	CreateAuthorizer(*apigateway.CreateAuthorizerInput) (*apigateway.Authorizer, error)
-	CreateAuthorizerWithContext(aws.Context, *apigateway.CreateAuthorizerInput, ...aws.Option) (*apigateway.Authorizer, error)
-	CreateAuthorizerRequest(*apigateway.CreateAuthorizerInput) (*aws.Request, *apigateway.Authorizer)
+	CreateAuthorizerRequest(*apigateway.CreateAuthorizerInput) apigateway.CreateAuthorizerRequest
 
-	CreateBasePathMapping(*apigateway.CreateBasePathMappingInput) (*apigateway.BasePathMapping, error)
-	CreateBasePathMappingWithContext(aws.Context, *apigateway.CreateBasePathMappingInput, ...aws.Option) (*apigateway.BasePathMapping, error)
-	CreateBasePathMappingRequest(*apigateway.CreateBasePathMappingInput) (*aws.Request, *apigateway.BasePathMapping)
+	CreateBasePathMappingRequest(*apigateway.CreateBasePathMappingInput) apigateway.CreateBasePathMappingRequest
 
-	CreateDeployment(*apigateway.CreateDeploymentInput) (*apigateway.Deployment, error)
-	CreateDeploymentWithContext(aws.Context, *apigateway.CreateDeploymentInput, ...aws.Option) (*apigateway.Deployment, error)
-	CreateDeploymentRequest(*apigateway.CreateDeploymentInput) (*aws.Request, *apigateway.Deployment)
+	CreateDeploymentRequest(*apigateway.CreateDeploymentInput) apigateway.CreateDeploymentRequest
 
-	CreateDocumentationPart(*apigateway.CreateDocumentationPartInput) (*apigateway.DocumentationPart, error)
-	CreateDocumentationPartWithContext(aws.Context, *apigateway.CreateDocumentationPartInput, ...aws.Option) (*apigateway.DocumentationPart, error)
-	CreateDocumentationPartRequest(*apigateway.CreateDocumentationPartInput) (*aws.Request, *apigateway.DocumentationPart)
+	CreateDocumentationPartRequest(*apigateway.CreateDocumentationPartInput) apigateway.CreateDocumentationPartRequest
 
-	CreateDocumentationVersion(*apigateway.CreateDocumentationVersionInput) (*apigateway.DocumentationVersion, error)
-	CreateDocumentationVersionWithContext(aws.Context, *apigateway.CreateDocumentationVersionInput, ...aws.Option) (*apigateway.DocumentationVersion, error)
-	CreateDocumentationVersionRequest(*apigateway.CreateDocumentationVersionInput) (*aws.Request, *apigateway.DocumentationVersion)
+	CreateDocumentationVersionRequest(*apigateway.CreateDocumentationVersionInput) apigateway.CreateDocumentationVersionRequest
 
-	CreateDomainName(*apigateway.CreateDomainNameInput) (*apigateway.DomainName, error)
-	CreateDomainNameWithContext(aws.Context, *apigateway.CreateDomainNameInput, ...aws.Option) (*apigateway.DomainName, error)
-	CreateDomainNameRequest(*apigateway.CreateDomainNameInput) (*aws.Request, *apigateway.DomainName)
+	CreateDomainNameRequest(*apigateway.CreateDomainNameInput) apigateway.CreateDomainNameRequest
 
-	CreateModel(*apigateway.CreateModelInput) (*apigateway.Model, error)
-	CreateModelWithContext(aws.Context, *apigateway.CreateModelInput, ...aws.Option) (*apigateway.Model, error)
-	CreateModelRequest(*apigateway.CreateModelInput) (*aws.Request, *apigateway.Model)
+	CreateModelRequest(*apigateway.CreateModelInput) apigateway.CreateModelRequest
 
-	CreateRequestValidator(*apigateway.CreateRequestValidatorInput) (*apigateway.UpdateRequestValidatorOutput, error)
-	CreateRequestValidatorWithContext(aws.Context, *apigateway.CreateRequestValidatorInput, ...aws.Option) (*apigateway.UpdateRequestValidatorOutput, error)
-	CreateRequestValidatorRequest(*apigateway.CreateRequestValidatorInput) (*aws.Request, *apigateway.UpdateRequestValidatorOutput)
+	CreateRequestValidatorRequest(*apigateway.CreateRequestValidatorInput) apigateway.CreateRequestValidatorRequest
 
-	CreateResource(*apigateway.CreateResourceInput) (*apigateway.Resource, error)
-	CreateResourceWithContext(aws.Context, *apigateway.CreateResourceInput, ...aws.Option) (*apigateway.Resource, error)
-	CreateResourceRequest(*apigateway.CreateResourceInput) (*aws.Request, *apigateway.Resource)
+	CreateResourceRequest(*apigateway.CreateResourceInput) apigateway.CreateResourceRequest
 
-	CreateRestApi(*apigateway.CreateRestApiInput) (*apigateway.RestApi, error)
-	CreateRestApiWithContext(aws.Context, *apigateway.CreateRestApiInput, ...aws.Option) (*apigateway.RestApi, error)
-	CreateRestApiRequest(*apigateway.CreateRestApiInput) (*aws.Request, *apigateway.RestApi)
+	CreateRestApiRequest(*apigateway.CreateRestApiInput) apigateway.CreateRestApiRequest
 
-	CreateStage(*apigateway.CreateStageInput) (*apigateway.Stage, error)
-	CreateStageWithContext(aws.Context, *apigateway.CreateStageInput, ...aws.Option) (*apigateway.Stage, error)
-	CreateStageRequest(*apigateway.CreateStageInput) (*aws.Request, *apigateway.Stage)
+	CreateStageRequest(*apigateway.CreateStageInput) apigateway.CreateStageRequest
 
-	CreateUsagePlan(*apigateway.CreateUsagePlanInput) (*apigateway.UsagePlan, error)
-	CreateUsagePlanWithContext(aws.Context, *apigateway.CreateUsagePlanInput, ...aws.Option) (*apigateway.UsagePlan, error)
-	CreateUsagePlanRequest(*apigateway.CreateUsagePlanInput) (*aws.Request, *apigateway.UsagePlan)
+	CreateUsagePlanRequest(*apigateway.CreateUsagePlanInput) apigateway.CreateUsagePlanRequest
 
-	CreateUsagePlanKey(*apigateway.CreateUsagePlanKeyInput) (*apigateway.UsagePlanKey, error)
-	CreateUsagePlanKeyWithContext(aws.Context, *apigateway.CreateUsagePlanKeyInput, ...aws.Option) (*apigateway.UsagePlanKey, error)
-	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) (*aws.Request, *apigateway.UsagePlanKey)
+	CreateUsagePlanKeyRequest(*apigateway.CreateUsagePlanKeyInput) apigateway.CreateUsagePlanKeyRequest
 
-	DeleteApiKey(*apigateway.DeleteApiKeyInput) (*apigateway.DeleteApiKeyOutput, error)
-	DeleteApiKeyWithContext(aws.Context, *apigateway.DeleteApiKeyInput, ...aws.Option) (*apigateway.DeleteApiKeyOutput, error)
-	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) (*aws.Request, *apigateway.DeleteApiKeyOutput)
+	DeleteApiKeyRequest(*apigateway.DeleteApiKeyInput) apigateway.DeleteApiKeyRequest
 
-	DeleteAuthorizer(*apigateway.DeleteAuthorizerInput) (*apigateway.DeleteAuthorizerOutput, error)
-	DeleteAuthorizerWithContext(aws.Context, *apigateway.DeleteAuthorizerInput, ...aws.Option) (*apigateway.DeleteAuthorizerOutput, error)
-	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) (*aws.Request, *apigateway.DeleteAuthorizerOutput)
+	DeleteAuthorizerRequest(*apigateway.DeleteAuthorizerInput) apigateway.DeleteAuthorizerRequest
 
-	DeleteBasePathMapping(*apigateway.DeleteBasePathMappingInput) (*apigateway.DeleteBasePathMappingOutput, error)
-	DeleteBasePathMappingWithContext(aws.Context, *apigateway.DeleteBasePathMappingInput, ...aws.Option) (*apigateway.DeleteBasePathMappingOutput, error)
-	DeleteBasePathMappingRequest(*apigateway.DeleteBasePathMappingInput) (*aws.Request, *apigateway.DeleteBasePathMappingOutput)
+	DeleteBasePathMappingRequest(*apigateway.DeleteBasePathMappingInput) apigateway.DeleteBasePathMappingRequest
 
-	DeleteClientCertificate(*apigateway.DeleteClientCertificateInput) (*apigateway.DeleteClientCertificateOutput, error)
-	DeleteClientCertificateWithContext(aws.Context, *apigateway.DeleteClientCertificateInput, ...aws.Option) (*apigateway.DeleteClientCertificateOutput, error)
-	DeleteClientCertificateRequest(*apigateway.DeleteClientCertificateInput) (*aws.Request, *apigateway.DeleteClientCertificateOutput)
+	DeleteClientCertificateRequest(*apigateway.DeleteClientCertificateInput) apigateway.DeleteClientCertificateRequest
 
-	DeleteDeployment(*apigateway.DeleteDeploymentInput) (*apigateway.DeleteDeploymentOutput, error)
-	DeleteDeploymentWithContext(aws.Context, *apigateway.DeleteDeploymentInput, ...aws.Option) (*apigateway.DeleteDeploymentOutput, error)
-	DeleteDeploymentRequest(*apigateway.DeleteDeploymentInput) (*aws.Request, *apigateway.DeleteDeploymentOutput)
+	DeleteDeploymentRequest(*apigateway.DeleteDeploymentInput) apigateway.DeleteDeploymentRequest
 
-	DeleteDocumentationPart(*apigateway.DeleteDocumentationPartInput) (*apigateway.DeleteDocumentationPartOutput, error)
-	DeleteDocumentationPartWithContext(aws.Context, *apigateway.DeleteDocumentationPartInput, ...aws.Option) (*apigateway.DeleteDocumentationPartOutput, error)
-	DeleteDocumentationPartRequest(*apigateway.DeleteDocumentationPartInput) (*aws.Request, *apigateway.DeleteDocumentationPartOutput)
+	DeleteDocumentationPartRequest(*apigateway.DeleteDocumentationPartInput) apigateway.DeleteDocumentationPartRequest
 
-	DeleteDocumentationVersion(*apigateway.DeleteDocumentationVersionInput) (*apigateway.DeleteDocumentationVersionOutput, error)
-	DeleteDocumentationVersionWithContext(aws.Context, *apigateway.DeleteDocumentationVersionInput, ...aws.Option) (*apigateway.DeleteDocumentationVersionOutput, error)
-	DeleteDocumentationVersionRequest(*apigateway.DeleteDocumentationVersionInput) (*aws.Request, *apigateway.DeleteDocumentationVersionOutput)
+	DeleteDocumentationVersionRequest(*apigateway.DeleteDocumentationVersionInput) apigateway.DeleteDocumentationVersionRequest
 
-	DeleteDomainName(*apigateway.DeleteDomainNameInput) (*apigateway.DeleteDomainNameOutput, error)
-	DeleteDomainNameWithContext(aws.Context, *apigateway.DeleteDomainNameInput, ...aws.Option) (*apigateway.DeleteDomainNameOutput, error)
-	DeleteDomainNameRequest(*apigateway.DeleteDomainNameInput) (*aws.Request, *apigateway.DeleteDomainNameOutput)
+	DeleteDomainNameRequest(*apigateway.DeleteDomainNameInput) apigateway.DeleteDomainNameRequest
 
-	DeleteGatewayResponse(*apigateway.DeleteGatewayResponseInput) (*apigateway.DeleteGatewayResponseOutput, error)
-	DeleteGatewayResponseWithContext(aws.Context, *apigateway.DeleteGatewayResponseInput, ...aws.Option) (*apigateway.DeleteGatewayResponseOutput, error)
-	DeleteGatewayResponseRequest(*apigateway.DeleteGatewayResponseInput) (*aws.Request, *apigateway.DeleteGatewayResponseOutput)
+	DeleteGatewayResponseRequest(*apigateway.DeleteGatewayResponseInput) apigateway.DeleteGatewayResponseRequest
 
-	DeleteIntegration(*apigateway.DeleteIntegrationInput) (*apigateway.DeleteIntegrationOutput, error)
-	DeleteIntegrationWithContext(aws.Context, *apigateway.DeleteIntegrationInput, ...aws.Option) (*apigateway.DeleteIntegrationOutput, error)
-	DeleteIntegrationRequest(*apigateway.DeleteIntegrationInput) (*aws.Request, *apigateway.DeleteIntegrationOutput)
+	DeleteIntegrationRequest(*apigateway.DeleteIntegrationInput) apigateway.DeleteIntegrationRequest
 
-	DeleteIntegrationResponse(*apigateway.DeleteIntegrationResponseInput) (*apigateway.DeleteIntegrationResponseOutput, error)
-	DeleteIntegrationResponseWithContext(aws.Context, *apigateway.DeleteIntegrationResponseInput, ...aws.Option) (*apigateway.DeleteIntegrationResponseOutput, error)
-	DeleteIntegrationResponseRequest(*apigateway.DeleteIntegrationResponseInput) (*aws.Request, *apigateway.DeleteIntegrationResponseOutput)
+	DeleteIntegrationResponseRequest(*apigateway.DeleteIntegrationResponseInput) apigateway.DeleteIntegrationResponseRequest
 
-	DeleteMethod(*apigateway.DeleteMethodInput) (*apigateway.DeleteMethodOutput, error)
-	DeleteMethodWithContext(aws.Context, *apigateway.DeleteMethodInput, ...aws.Option) (*apigateway.DeleteMethodOutput, error)
-	DeleteMethodRequest(*apigateway.DeleteMethodInput) (*aws.Request, *apigateway.DeleteMethodOutput)
+	DeleteMethodRequest(*apigateway.DeleteMethodInput) apigateway.DeleteMethodRequest
 
-	DeleteMethodResponse(*apigateway.DeleteMethodResponseInput) (*apigateway.DeleteMethodResponseOutput, error)
-	DeleteMethodResponseWithContext(aws.Context, *apigateway.DeleteMethodResponseInput, ...aws.Option) (*apigateway.DeleteMethodResponseOutput, error)
-	DeleteMethodResponseRequest(*apigateway.DeleteMethodResponseInput) (*aws.Request, *apigateway.DeleteMethodResponseOutput)
+	DeleteMethodResponseRequest(*apigateway.DeleteMethodResponseInput) apigateway.DeleteMethodResponseRequest
 
-	DeleteModel(*apigateway.DeleteModelInput) (*apigateway.DeleteModelOutput, error)
-	DeleteModelWithContext(aws.Context, *apigateway.DeleteModelInput, ...aws.Option) (*apigateway.DeleteModelOutput, error)
-	DeleteModelRequest(*apigateway.DeleteModelInput) (*aws.Request, *apigateway.DeleteModelOutput)
+	DeleteModelRequest(*apigateway.DeleteModelInput) apigateway.DeleteModelRequest
 
-	DeleteRequestValidator(*apigateway.DeleteRequestValidatorInput) (*apigateway.DeleteRequestValidatorOutput, error)
-	DeleteRequestValidatorWithContext(aws.Context, *apigateway.DeleteRequestValidatorInput, ...aws.Option) (*apigateway.DeleteRequestValidatorOutput, error)
-	DeleteRequestValidatorRequest(*apigateway.DeleteRequestValidatorInput) (*aws.Request, *apigateway.DeleteRequestValidatorOutput)
+	DeleteRequestValidatorRequest(*apigateway.DeleteRequestValidatorInput) apigateway.DeleteRequestValidatorRequest
 
-	DeleteResource(*apigateway.DeleteResourceInput) (*apigateway.DeleteResourceOutput, error)
-	DeleteResourceWithContext(aws.Context, *apigateway.DeleteResourceInput, ...aws.Option) (*apigateway.DeleteResourceOutput, error)
-	DeleteResourceRequest(*apigateway.DeleteResourceInput) (*aws.Request, *apigateway.DeleteResourceOutput)
+	DeleteResourceRequest(*apigateway.DeleteResourceInput) apigateway.DeleteResourceRequest
 
-	DeleteRestApi(*apigateway.DeleteRestApiInput) (*apigateway.DeleteRestApiOutput, error)
-	DeleteRestApiWithContext(aws.Context, *apigateway.DeleteRestApiInput, ...aws.Option) (*apigateway.DeleteRestApiOutput, error)
-	DeleteRestApiRequest(*apigateway.DeleteRestApiInput) (*aws.Request, *apigateway.DeleteRestApiOutput)
+	DeleteRestApiRequest(*apigateway.DeleteRestApiInput) apigateway.DeleteRestApiRequest
 
-	DeleteStage(*apigateway.DeleteStageInput) (*apigateway.DeleteStageOutput, error)
-	DeleteStageWithContext(aws.Context, *apigateway.DeleteStageInput, ...aws.Option) (*apigateway.DeleteStageOutput, error)
-	DeleteStageRequest(*apigateway.DeleteStageInput) (*aws.Request, *apigateway.DeleteStageOutput)
+	DeleteStageRequest(*apigateway.DeleteStageInput) apigateway.DeleteStageRequest
 
-	DeleteUsagePlan(*apigateway.DeleteUsagePlanInput) (*apigateway.DeleteUsagePlanOutput, error)
-	DeleteUsagePlanWithContext(aws.Context, *apigateway.DeleteUsagePlanInput, ...aws.Option) (*apigateway.DeleteUsagePlanOutput, error)
-	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) (*aws.Request, *apigateway.DeleteUsagePlanOutput)
+	DeleteUsagePlanRequest(*apigateway.DeleteUsagePlanInput) apigateway.DeleteUsagePlanRequest
 
-	DeleteUsagePlanKey(*apigateway.DeleteUsagePlanKeyInput) (*apigateway.DeleteUsagePlanKeyOutput, error)
-	DeleteUsagePlanKeyWithContext(aws.Context, *apigateway.DeleteUsagePlanKeyInput, ...aws.Option) (*apigateway.DeleteUsagePlanKeyOutput, error)
-	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) (*aws.Request, *apigateway.DeleteUsagePlanKeyOutput)
+	DeleteUsagePlanKeyRequest(*apigateway.DeleteUsagePlanKeyInput) apigateway.DeleteUsagePlanKeyRequest
 
-	FlushStageAuthorizersCache(*apigateway.FlushStageAuthorizersCacheInput) (*apigateway.FlushStageAuthorizersCacheOutput, error)
-	FlushStageAuthorizersCacheWithContext(aws.Context, *apigateway.FlushStageAuthorizersCacheInput, ...aws.Option) (*apigateway.FlushStageAuthorizersCacheOutput, error)
-	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) (*aws.Request, *apigateway.FlushStageAuthorizersCacheOutput)
+	FlushStageAuthorizersCacheRequest(*apigateway.FlushStageAuthorizersCacheInput) apigateway.FlushStageAuthorizersCacheRequest
 
-	FlushStageCache(*apigateway.FlushStageCacheInput) (*apigateway.FlushStageCacheOutput, error)
-	FlushStageCacheWithContext(aws.Context, *apigateway.FlushStageCacheInput, ...aws.Option) (*apigateway.FlushStageCacheOutput, error)
-	FlushStageCacheRequest(*apigateway.FlushStageCacheInput) (*aws.Request, *apigateway.FlushStageCacheOutput)
+	FlushStageCacheRequest(*apigateway.FlushStageCacheInput) apigateway.FlushStageCacheRequest
 
-	GenerateClientCertificate(*apigateway.GenerateClientCertificateInput) (*apigateway.ClientCertificate, error)
-	GenerateClientCertificateWithContext(aws.Context, *apigateway.GenerateClientCertificateInput, ...aws.Option) (*apigateway.ClientCertificate, error)
-	GenerateClientCertificateRequest(*apigateway.GenerateClientCertificateInput) (*aws.Request, *apigateway.ClientCertificate)
+	GenerateClientCertificateRequest(*apigateway.GenerateClientCertificateInput) apigateway.GenerateClientCertificateRequest
 
-	GetAccount(*apigateway.GetAccountInput) (*apigateway.Account, error)
-	GetAccountWithContext(aws.Context, *apigateway.GetAccountInput, ...aws.Option) (*apigateway.Account, error)
-	GetAccountRequest(*apigateway.GetAccountInput) (*aws.Request, *apigateway.Account)
+	GetAccountRequest(*apigateway.GetAccountInput) apigateway.GetAccountRequest
 
-	GetApiKey(*apigateway.GetApiKeyInput) (*apigateway.ApiKey, error)
-	GetApiKeyWithContext(aws.Context, *apigateway.GetApiKeyInput, ...aws.Option) (*apigateway.ApiKey, error)
-	GetApiKeyRequest(*apigateway.GetApiKeyInput) (*aws.Request, *apigateway.ApiKey)
+	GetApiKeyRequest(*apigateway.GetApiKeyInput) apigateway.GetApiKeyRequest
 
-	GetApiKeys(*apigateway.GetApiKeysInput) (*apigateway.GetApiKeysOutput, error)
-	GetApiKeysWithContext(aws.Context, *apigateway.GetApiKeysInput, ...aws.Option) (*apigateway.GetApiKeysOutput, error)
-	GetApiKeysRequest(*apigateway.GetApiKeysInput) (*aws.Request, *apigateway.GetApiKeysOutput)
+	GetApiKeysRequest(*apigateway.GetApiKeysInput) apigateway.GetApiKeysRequest
 
 	GetApiKeysPages(*apigateway.GetApiKeysInput, func(*apigateway.GetApiKeysOutput, bool) bool) error
 	GetApiKeysPagesWithContext(aws.Context, *apigateway.GetApiKeysInput, func(*apigateway.GetApiKeysOutput, bool) bool, ...aws.Option) error
 
-	GetAuthorizer(*apigateway.GetAuthorizerInput) (*apigateway.Authorizer, error)
-	GetAuthorizerWithContext(aws.Context, *apigateway.GetAuthorizerInput, ...aws.Option) (*apigateway.Authorizer, error)
-	GetAuthorizerRequest(*apigateway.GetAuthorizerInput) (*aws.Request, *apigateway.Authorizer)
+	GetAuthorizerRequest(*apigateway.GetAuthorizerInput) apigateway.GetAuthorizerRequest
 
-	GetAuthorizers(*apigateway.GetAuthorizersInput) (*apigateway.GetAuthorizersOutput, error)
-	GetAuthorizersWithContext(aws.Context, *apigateway.GetAuthorizersInput, ...aws.Option) (*apigateway.GetAuthorizersOutput, error)
-	GetAuthorizersRequest(*apigateway.GetAuthorizersInput) (*aws.Request, *apigateway.GetAuthorizersOutput)
+	GetAuthorizersRequest(*apigateway.GetAuthorizersInput) apigateway.GetAuthorizersRequest
 
-	GetBasePathMapping(*apigateway.GetBasePathMappingInput) (*apigateway.BasePathMapping, error)
-	GetBasePathMappingWithContext(aws.Context, *apigateway.GetBasePathMappingInput, ...aws.Option) (*apigateway.BasePathMapping, error)
-	GetBasePathMappingRequest(*apigateway.GetBasePathMappingInput) (*aws.Request, *apigateway.BasePathMapping)
+	GetBasePathMappingRequest(*apigateway.GetBasePathMappingInput) apigateway.GetBasePathMappingRequest
 
-	GetBasePathMappings(*apigateway.GetBasePathMappingsInput) (*apigateway.GetBasePathMappingsOutput, error)
-	GetBasePathMappingsWithContext(aws.Context, *apigateway.GetBasePathMappingsInput, ...aws.Option) (*apigateway.GetBasePathMappingsOutput, error)
-	GetBasePathMappingsRequest(*apigateway.GetBasePathMappingsInput) (*aws.Request, *apigateway.GetBasePathMappingsOutput)
+	GetBasePathMappingsRequest(*apigateway.GetBasePathMappingsInput) apigateway.GetBasePathMappingsRequest
 
 	GetBasePathMappingsPages(*apigateway.GetBasePathMappingsInput, func(*apigateway.GetBasePathMappingsOutput, bool) bool) error
 	GetBasePathMappingsPagesWithContext(aws.Context, *apigateway.GetBasePathMappingsInput, func(*apigateway.GetBasePathMappingsOutput, bool) bool, ...aws.Option) error
 
-	GetClientCertificate(*apigateway.GetClientCertificateInput) (*apigateway.ClientCertificate, error)
-	GetClientCertificateWithContext(aws.Context, *apigateway.GetClientCertificateInput, ...aws.Option) (*apigateway.ClientCertificate, error)
-	GetClientCertificateRequest(*apigateway.GetClientCertificateInput) (*aws.Request, *apigateway.ClientCertificate)
+	GetClientCertificateRequest(*apigateway.GetClientCertificateInput) apigateway.GetClientCertificateRequest
 
-	GetClientCertificates(*apigateway.GetClientCertificatesInput) (*apigateway.GetClientCertificatesOutput, error)
-	GetClientCertificatesWithContext(aws.Context, *apigateway.GetClientCertificatesInput, ...aws.Option) (*apigateway.GetClientCertificatesOutput, error)
-	GetClientCertificatesRequest(*apigateway.GetClientCertificatesInput) (*aws.Request, *apigateway.GetClientCertificatesOutput)
+	GetClientCertificatesRequest(*apigateway.GetClientCertificatesInput) apigateway.GetClientCertificatesRequest
 
 	GetClientCertificatesPages(*apigateway.GetClientCertificatesInput, func(*apigateway.GetClientCertificatesOutput, bool) bool) error
 	GetClientCertificatesPagesWithContext(aws.Context, *apigateway.GetClientCertificatesInput, func(*apigateway.GetClientCertificatesOutput, bool) bool, ...aws.Option) error
 
-	GetDeployment(*apigateway.GetDeploymentInput) (*apigateway.Deployment, error)
-	GetDeploymentWithContext(aws.Context, *apigateway.GetDeploymentInput, ...aws.Option) (*apigateway.Deployment, error)
-	GetDeploymentRequest(*apigateway.GetDeploymentInput) (*aws.Request, *apigateway.Deployment)
+	GetDeploymentRequest(*apigateway.GetDeploymentInput) apigateway.GetDeploymentRequest
 
-	GetDeployments(*apigateway.GetDeploymentsInput) (*apigateway.GetDeploymentsOutput, error)
-	GetDeploymentsWithContext(aws.Context, *apigateway.GetDeploymentsInput, ...aws.Option) (*apigateway.GetDeploymentsOutput, error)
-	GetDeploymentsRequest(*apigateway.GetDeploymentsInput) (*aws.Request, *apigateway.GetDeploymentsOutput)
+	GetDeploymentsRequest(*apigateway.GetDeploymentsInput) apigateway.GetDeploymentsRequest
 
 	GetDeploymentsPages(*apigateway.GetDeploymentsInput, func(*apigateway.GetDeploymentsOutput, bool) bool) error
 	GetDeploymentsPagesWithContext(aws.Context, *apigateway.GetDeploymentsInput, func(*apigateway.GetDeploymentsOutput, bool) bool, ...aws.Option) error
 
-	GetDocumentationPart(*apigateway.GetDocumentationPartInput) (*apigateway.DocumentationPart, error)
-	GetDocumentationPartWithContext(aws.Context, *apigateway.GetDocumentationPartInput, ...aws.Option) (*apigateway.DocumentationPart, error)
-	GetDocumentationPartRequest(*apigateway.GetDocumentationPartInput) (*aws.Request, *apigateway.DocumentationPart)
+	GetDocumentationPartRequest(*apigateway.GetDocumentationPartInput) apigateway.GetDocumentationPartRequest
 
-	GetDocumentationParts(*apigateway.GetDocumentationPartsInput) (*apigateway.GetDocumentationPartsOutput, error)
-	GetDocumentationPartsWithContext(aws.Context, *apigateway.GetDocumentationPartsInput, ...aws.Option) (*apigateway.GetDocumentationPartsOutput, error)
-	GetDocumentationPartsRequest(*apigateway.GetDocumentationPartsInput) (*aws.Request, *apigateway.GetDocumentationPartsOutput)
+	GetDocumentationPartsRequest(*apigateway.GetDocumentationPartsInput) apigateway.GetDocumentationPartsRequest
 
-	GetDocumentationVersion(*apigateway.GetDocumentationVersionInput) (*apigateway.DocumentationVersion, error)
-	GetDocumentationVersionWithContext(aws.Context, *apigateway.GetDocumentationVersionInput, ...aws.Option) (*apigateway.DocumentationVersion, error)
-	GetDocumentationVersionRequest(*apigateway.GetDocumentationVersionInput) (*aws.Request, *apigateway.DocumentationVersion)
+	GetDocumentationVersionRequest(*apigateway.GetDocumentationVersionInput) apigateway.GetDocumentationVersionRequest
 
-	GetDocumentationVersions(*apigateway.GetDocumentationVersionsInput) (*apigateway.GetDocumentationVersionsOutput, error)
-	GetDocumentationVersionsWithContext(aws.Context, *apigateway.GetDocumentationVersionsInput, ...aws.Option) (*apigateway.GetDocumentationVersionsOutput, error)
-	GetDocumentationVersionsRequest(*apigateway.GetDocumentationVersionsInput) (*aws.Request, *apigateway.GetDocumentationVersionsOutput)
+	GetDocumentationVersionsRequest(*apigateway.GetDocumentationVersionsInput) apigateway.GetDocumentationVersionsRequest
 
-	GetDomainName(*apigateway.GetDomainNameInput) (*apigateway.DomainName, error)
-	GetDomainNameWithContext(aws.Context, *apigateway.GetDomainNameInput, ...aws.Option) (*apigateway.DomainName, error)
-	GetDomainNameRequest(*apigateway.GetDomainNameInput) (*aws.Request, *apigateway.DomainName)
+	GetDomainNameRequest(*apigateway.GetDomainNameInput) apigateway.GetDomainNameRequest
 
-	GetDomainNames(*apigateway.GetDomainNamesInput) (*apigateway.GetDomainNamesOutput, error)
-	GetDomainNamesWithContext(aws.Context, *apigateway.GetDomainNamesInput, ...aws.Option) (*apigateway.GetDomainNamesOutput, error)
-	GetDomainNamesRequest(*apigateway.GetDomainNamesInput) (*aws.Request, *apigateway.GetDomainNamesOutput)
+	GetDomainNamesRequest(*apigateway.GetDomainNamesInput) apigateway.GetDomainNamesRequest
 
 	GetDomainNamesPages(*apigateway.GetDomainNamesInput, func(*apigateway.GetDomainNamesOutput, bool) bool) error
 	GetDomainNamesPagesWithContext(aws.Context, *apigateway.GetDomainNamesInput, func(*apigateway.GetDomainNamesOutput, bool) bool, ...aws.Option) error
 
-	GetExport(*apigateway.GetExportInput) (*apigateway.GetExportOutput, error)
-	GetExportWithContext(aws.Context, *apigateway.GetExportInput, ...aws.Option) (*apigateway.GetExportOutput, error)
-	GetExportRequest(*apigateway.GetExportInput) (*aws.Request, *apigateway.GetExportOutput)
+	GetExportRequest(*apigateway.GetExportInput) apigateway.GetExportRequest
 
-	GetGatewayResponse(*apigateway.GetGatewayResponseInput) (*apigateway.UpdateGatewayResponseOutput, error)
-	GetGatewayResponseWithContext(aws.Context, *apigateway.GetGatewayResponseInput, ...aws.Option) (*apigateway.UpdateGatewayResponseOutput, error)
-	GetGatewayResponseRequest(*apigateway.GetGatewayResponseInput) (*aws.Request, *apigateway.UpdateGatewayResponseOutput)
+	GetGatewayResponseRequest(*apigateway.GetGatewayResponseInput) apigateway.GetGatewayResponseRequest
 
-	GetGatewayResponses(*apigateway.GetGatewayResponsesInput) (*apigateway.GetGatewayResponsesOutput, error)
-	GetGatewayResponsesWithContext(aws.Context, *apigateway.GetGatewayResponsesInput, ...aws.Option) (*apigateway.GetGatewayResponsesOutput, error)
-	GetGatewayResponsesRequest(*apigateway.GetGatewayResponsesInput) (*aws.Request, *apigateway.GetGatewayResponsesOutput)
+	GetGatewayResponsesRequest(*apigateway.GetGatewayResponsesInput) apigateway.GetGatewayResponsesRequest
 
-	GetIntegration(*apigateway.GetIntegrationInput) (*apigateway.Integration, error)
-	GetIntegrationWithContext(aws.Context, *apigateway.GetIntegrationInput, ...aws.Option) (*apigateway.Integration, error)
-	GetIntegrationRequest(*apigateway.GetIntegrationInput) (*aws.Request, *apigateway.Integration)
+	GetIntegrationRequest(*apigateway.GetIntegrationInput) apigateway.GetIntegrationRequest
 
-	GetIntegrationResponse(*apigateway.GetIntegrationResponseInput) (*apigateway.IntegrationResponse, error)
-	GetIntegrationResponseWithContext(aws.Context, *apigateway.GetIntegrationResponseInput, ...aws.Option) (*apigateway.IntegrationResponse, error)
-	GetIntegrationResponseRequest(*apigateway.GetIntegrationResponseInput) (*aws.Request, *apigateway.IntegrationResponse)
+	GetIntegrationResponseRequest(*apigateway.GetIntegrationResponseInput) apigateway.GetIntegrationResponseRequest
 
-	GetMethod(*apigateway.GetMethodInput) (*apigateway.Method, error)
-	GetMethodWithContext(aws.Context, *apigateway.GetMethodInput, ...aws.Option) (*apigateway.Method, error)
-	GetMethodRequest(*apigateway.GetMethodInput) (*aws.Request, *apigateway.Method)
+	GetMethodRequest(*apigateway.GetMethodInput) apigateway.GetMethodRequest
 
-	GetMethodResponse(*apigateway.GetMethodResponseInput) (*apigateway.MethodResponse, error)
-	GetMethodResponseWithContext(aws.Context, *apigateway.GetMethodResponseInput, ...aws.Option) (*apigateway.MethodResponse, error)
-	GetMethodResponseRequest(*apigateway.GetMethodResponseInput) (*aws.Request, *apigateway.MethodResponse)
+	GetMethodResponseRequest(*apigateway.GetMethodResponseInput) apigateway.GetMethodResponseRequest
 
-	GetModel(*apigateway.GetModelInput) (*apigateway.Model, error)
-	GetModelWithContext(aws.Context, *apigateway.GetModelInput, ...aws.Option) (*apigateway.Model, error)
-	GetModelRequest(*apigateway.GetModelInput) (*aws.Request, *apigateway.Model)
+	GetModelRequest(*apigateway.GetModelInput) apigateway.GetModelRequest
 
-	GetModelTemplate(*apigateway.GetModelTemplateInput) (*apigateway.GetModelTemplateOutput, error)
-	GetModelTemplateWithContext(aws.Context, *apigateway.GetModelTemplateInput, ...aws.Option) (*apigateway.GetModelTemplateOutput, error)
-	GetModelTemplateRequest(*apigateway.GetModelTemplateInput) (*aws.Request, *apigateway.GetModelTemplateOutput)
+	GetModelTemplateRequest(*apigateway.GetModelTemplateInput) apigateway.GetModelTemplateRequest
 
-	GetModels(*apigateway.GetModelsInput) (*apigateway.GetModelsOutput, error)
-	GetModelsWithContext(aws.Context, *apigateway.GetModelsInput, ...aws.Option) (*apigateway.GetModelsOutput, error)
-	GetModelsRequest(*apigateway.GetModelsInput) (*aws.Request, *apigateway.GetModelsOutput)
+	GetModelsRequest(*apigateway.GetModelsInput) apigateway.GetModelsRequest
 
 	GetModelsPages(*apigateway.GetModelsInput, func(*apigateway.GetModelsOutput, bool) bool) error
 	GetModelsPagesWithContext(aws.Context, *apigateway.GetModelsInput, func(*apigateway.GetModelsOutput, bool) bool, ...aws.Option) error
 
-	GetRequestValidator(*apigateway.GetRequestValidatorInput) (*apigateway.UpdateRequestValidatorOutput, error)
-	GetRequestValidatorWithContext(aws.Context, *apigateway.GetRequestValidatorInput, ...aws.Option) (*apigateway.UpdateRequestValidatorOutput, error)
-	GetRequestValidatorRequest(*apigateway.GetRequestValidatorInput) (*aws.Request, *apigateway.UpdateRequestValidatorOutput)
+	GetRequestValidatorRequest(*apigateway.GetRequestValidatorInput) apigateway.GetRequestValidatorRequest
 
-	GetRequestValidators(*apigateway.GetRequestValidatorsInput) (*apigateway.GetRequestValidatorsOutput, error)
-	GetRequestValidatorsWithContext(aws.Context, *apigateway.GetRequestValidatorsInput, ...aws.Option) (*apigateway.GetRequestValidatorsOutput, error)
-	GetRequestValidatorsRequest(*apigateway.GetRequestValidatorsInput) (*aws.Request, *apigateway.GetRequestValidatorsOutput)
+	GetRequestValidatorsRequest(*apigateway.GetRequestValidatorsInput) apigateway.GetRequestValidatorsRequest
 
-	GetResource(*apigateway.GetResourceInput) (*apigateway.Resource, error)
-	GetResourceWithContext(aws.Context, *apigateway.GetResourceInput, ...aws.Option) (*apigateway.Resource, error)
-	GetResourceRequest(*apigateway.GetResourceInput) (*aws.Request, *apigateway.Resource)
+	GetResourceRequest(*apigateway.GetResourceInput) apigateway.GetResourceRequest
 
-	GetResources(*apigateway.GetResourcesInput) (*apigateway.GetResourcesOutput, error)
-	GetResourcesWithContext(aws.Context, *apigateway.GetResourcesInput, ...aws.Option) (*apigateway.GetResourcesOutput, error)
-	GetResourcesRequest(*apigateway.GetResourcesInput) (*aws.Request, *apigateway.GetResourcesOutput)
+	GetResourcesRequest(*apigateway.GetResourcesInput) apigateway.GetResourcesRequest
 
 	GetResourcesPages(*apigateway.GetResourcesInput, func(*apigateway.GetResourcesOutput, bool) bool) error
 	GetResourcesPagesWithContext(aws.Context, *apigateway.GetResourcesInput, func(*apigateway.GetResourcesOutput, bool) bool, ...aws.Option) error
 
-	GetRestApi(*apigateway.GetRestApiInput) (*apigateway.RestApi, error)
-	GetRestApiWithContext(aws.Context, *apigateway.GetRestApiInput, ...aws.Option) (*apigateway.RestApi, error)
-	GetRestApiRequest(*apigateway.GetRestApiInput) (*aws.Request, *apigateway.RestApi)
+	GetRestApiRequest(*apigateway.GetRestApiInput) apigateway.GetRestApiRequest
 
-	GetRestApis(*apigateway.GetRestApisInput) (*apigateway.GetRestApisOutput, error)
-	GetRestApisWithContext(aws.Context, *apigateway.GetRestApisInput, ...aws.Option) (*apigateway.GetRestApisOutput, error)
-	GetRestApisRequest(*apigateway.GetRestApisInput) (*aws.Request, *apigateway.GetRestApisOutput)
+	GetRestApisRequest(*apigateway.GetRestApisInput) apigateway.GetRestApisRequest
 
 	GetRestApisPages(*apigateway.GetRestApisInput, func(*apigateway.GetRestApisOutput, bool) bool) error
 	GetRestApisPagesWithContext(aws.Context, *apigateway.GetRestApisInput, func(*apigateway.GetRestApisOutput, bool) bool, ...aws.Option) error
 
-	GetSdk(*apigateway.GetSdkInput) (*apigateway.GetSdkOutput, error)
-	GetSdkWithContext(aws.Context, *apigateway.GetSdkInput, ...aws.Option) (*apigateway.GetSdkOutput, error)
-	GetSdkRequest(*apigateway.GetSdkInput) (*aws.Request, *apigateway.GetSdkOutput)
+	GetSdkRequest(*apigateway.GetSdkInput) apigateway.GetSdkRequest
 
-	GetSdkType(*apigateway.GetSdkTypeInput) (*apigateway.SdkType, error)
-	GetSdkTypeWithContext(aws.Context, *apigateway.GetSdkTypeInput, ...aws.Option) (*apigateway.SdkType, error)
-	GetSdkTypeRequest(*apigateway.GetSdkTypeInput) (*aws.Request, *apigateway.SdkType)
+	GetSdkTypeRequest(*apigateway.GetSdkTypeInput) apigateway.GetSdkTypeRequest
 
-	GetSdkTypes(*apigateway.GetSdkTypesInput) (*apigateway.GetSdkTypesOutput, error)
-	GetSdkTypesWithContext(aws.Context, *apigateway.GetSdkTypesInput, ...aws.Option) (*apigateway.GetSdkTypesOutput, error)
-	GetSdkTypesRequest(*apigateway.GetSdkTypesInput) (*aws.Request, *apigateway.GetSdkTypesOutput)
+	GetSdkTypesRequest(*apigateway.GetSdkTypesInput) apigateway.GetSdkTypesRequest
 
-	GetStage(*apigateway.GetStageInput) (*apigateway.Stage, error)
-	GetStageWithContext(aws.Context, *apigateway.GetStageInput, ...aws.Option) (*apigateway.Stage, error)
-	GetStageRequest(*apigateway.GetStageInput) (*aws.Request, *apigateway.Stage)
+	GetStageRequest(*apigateway.GetStageInput) apigateway.GetStageRequest
 
-	GetStages(*apigateway.GetStagesInput) (*apigateway.GetStagesOutput, error)
-	GetStagesWithContext(aws.Context, *apigateway.GetStagesInput, ...aws.Option) (*apigateway.GetStagesOutput, error)
-	GetStagesRequest(*apigateway.GetStagesInput) (*aws.Request, *apigateway.GetStagesOutput)
+	GetStagesRequest(*apigateway.GetStagesInput) apigateway.GetStagesRequest
 
-	GetUsage(*apigateway.GetUsageInput) (*apigateway.Usage, error)
-	GetUsageWithContext(aws.Context, *apigateway.GetUsageInput, ...aws.Option) (*apigateway.Usage, error)
-	GetUsageRequest(*apigateway.GetUsageInput) (*aws.Request, *apigateway.Usage)
+	GetUsageRequest(*apigateway.GetUsageInput) apigateway.GetUsageRequest
 
-	GetUsagePages(*apigateway.GetUsageInput, func(*apigateway.Usage, bool) bool) error
-	GetUsagePagesWithContext(aws.Context, *apigateway.GetUsageInput, func(*apigateway.Usage, bool) bool, ...aws.Option) error
+	GetUsagePages(*apigateway.GetUsageInput, func(*apigateway.UpdateUsageOutput, bool) bool) error
+	GetUsagePagesWithContext(aws.Context, *apigateway.GetUsageInput, func(*apigateway.UpdateUsageOutput, bool) bool, ...aws.Option) error
 
-	GetUsagePlan(*apigateway.GetUsagePlanInput) (*apigateway.UsagePlan, error)
-	GetUsagePlanWithContext(aws.Context, *apigateway.GetUsagePlanInput, ...aws.Option) (*apigateway.UsagePlan, error)
-	GetUsagePlanRequest(*apigateway.GetUsagePlanInput) (*aws.Request, *apigateway.UsagePlan)
+	GetUsagePlanRequest(*apigateway.GetUsagePlanInput) apigateway.GetUsagePlanRequest
 
-	GetUsagePlanKey(*apigateway.GetUsagePlanKeyInput) (*apigateway.UsagePlanKey, error)
-	GetUsagePlanKeyWithContext(aws.Context, *apigateway.GetUsagePlanKeyInput, ...aws.Option) (*apigateway.UsagePlanKey, error)
-	GetUsagePlanKeyRequest(*apigateway.GetUsagePlanKeyInput) (*aws.Request, *apigateway.UsagePlanKey)
+	GetUsagePlanKeyRequest(*apigateway.GetUsagePlanKeyInput) apigateway.GetUsagePlanKeyRequest
 
-	GetUsagePlanKeys(*apigateway.GetUsagePlanKeysInput) (*apigateway.GetUsagePlanKeysOutput, error)
-	GetUsagePlanKeysWithContext(aws.Context, *apigateway.GetUsagePlanKeysInput, ...aws.Option) (*apigateway.GetUsagePlanKeysOutput, error)
-	GetUsagePlanKeysRequest(*apigateway.GetUsagePlanKeysInput) (*aws.Request, *apigateway.GetUsagePlanKeysOutput)
+	GetUsagePlanKeysRequest(*apigateway.GetUsagePlanKeysInput) apigateway.GetUsagePlanKeysRequest
 
 	GetUsagePlanKeysPages(*apigateway.GetUsagePlanKeysInput, func(*apigateway.GetUsagePlanKeysOutput, bool) bool) error
 	GetUsagePlanKeysPagesWithContext(aws.Context, *apigateway.GetUsagePlanKeysInput, func(*apigateway.GetUsagePlanKeysOutput, bool) bool, ...aws.Option) error
 
-	GetUsagePlans(*apigateway.GetUsagePlansInput) (*apigateway.GetUsagePlansOutput, error)
-	GetUsagePlansWithContext(aws.Context, *apigateway.GetUsagePlansInput, ...aws.Option) (*apigateway.GetUsagePlansOutput, error)
-	GetUsagePlansRequest(*apigateway.GetUsagePlansInput) (*aws.Request, *apigateway.GetUsagePlansOutput)
+	GetUsagePlansRequest(*apigateway.GetUsagePlansInput) apigateway.GetUsagePlansRequest
 
 	GetUsagePlansPages(*apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool) error
 	GetUsagePlansPagesWithContext(aws.Context, *apigateway.GetUsagePlansInput, func(*apigateway.GetUsagePlansOutput, bool) bool, ...aws.Option) error
 
-	ImportApiKeys(*apigateway.ImportApiKeysInput) (*apigateway.ImportApiKeysOutput, error)
-	ImportApiKeysWithContext(aws.Context, *apigateway.ImportApiKeysInput, ...aws.Option) (*apigateway.ImportApiKeysOutput, error)
-	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) (*aws.Request, *apigateway.ImportApiKeysOutput)
+	ImportApiKeysRequest(*apigateway.ImportApiKeysInput) apigateway.ImportApiKeysRequest
 
-	ImportDocumentationParts(*apigateway.ImportDocumentationPartsInput) (*apigateway.ImportDocumentationPartsOutput, error)
-	ImportDocumentationPartsWithContext(aws.Context, *apigateway.ImportDocumentationPartsInput, ...aws.Option) (*apigateway.ImportDocumentationPartsOutput, error)
-	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) (*aws.Request, *apigateway.ImportDocumentationPartsOutput)
+	ImportDocumentationPartsRequest(*apigateway.ImportDocumentationPartsInput) apigateway.ImportDocumentationPartsRequest
 
-	ImportRestApi(*apigateway.ImportRestApiInput) (*apigateway.RestApi, error)
-	ImportRestApiWithContext(aws.Context, *apigateway.ImportRestApiInput, ...aws.Option) (*apigateway.RestApi, error)
-	ImportRestApiRequest(*apigateway.ImportRestApiInput) (*aws.Request, *apigateway.RestApi)
+	ImportRestApiRequest(*apigateway.ImportRestApiInput) apigateway.ImportRestApiRequest
 
-	PutGatewayResponse(*apigateway.PutGatewayResponseInput) (*apigateway.UpdateGatewayResponseOutput, error)
-	PutGatewayResponseWithContext(aws.Context, *apigateway.PutGatewayResponseInput, ...aws.Option) (*apigateway.UpdateGatewayResponseOutput, error)
-	PutGatewayResponseRequest(*apigateway.PutGatewayResponseInput) (*aws.Request, *apigateway.UpdateGatewayResponseOutput)
+	PutGatewayResponseRequest(*apigateway.PutGatewayResponseInput) apigateway.PutGatewayResponseRequest
 
-	PutIntegration(*apigateway.PutIntegrationInput) (*apigateway.Integration, error)
-	PutIntegrationWithContext(aws.Context, *apigateway.PutIntegrationInput, ...aws.Option) (*apigateway.Integration, error)
-	PutIntegrationRequest(*apigateway.PutIntegrationInput) (*aws.Request, *apigateway.Integration)
+	PutIntegrationRequest(*apigateway.PutIntegrationInput) apigateway.PutIntegrationRequest
 
-	PutIntegrationResponse(*apigateway.PutIntegrationResponseInput) (*apigateway.IntegrationResponse, error)
-	PutIntegrationResponseWithContext(aws.Context, *apigateway.PutIntegrationResponseInput, ...aws.Option) (*apigateway.IntegrationResponse, error)
-	PutIntegrationResponseRequest(*apigateway.PutIntegrationResponseInput) (*aws.Request, *apigateway.IntegrationResponse)
+	PutIntegrationResponseRequest(*apigateway.PutIntegrationResponseInput) apigateway.PutIntegrationResponseRequest
 
-	PutMethod(*apigateway.PutMethodInput) (*apigateway.Method, error)
-	PutMethodWithContext(aws.Context, *apigateway.PutMethodInput, ...aws.Option) (*apigateway.Method, error)
-	PutMethodRequest(*apigateway.PutMethodInput) (*aws.Request, *apigateway.Method)
+	PutMethodRequest(*apigateway.PutMethodInput) apigateway.PutMethodRequest
 
-	PutMethodResponse(*apigateway.PutMethodResponseInput) (*apigateway.MethodResponse, error)
-	PutMethodResponseWithContext(aws.Context, *apigateway.PutMethodResponseInput, ...aws.Option) (*apigateway.MethodResponse, error)
-	PutMethodResponseRequest(*apigateway.PutMethodResponseInput) (*aws.Request, *apigateway.MethodResponse)
+	PutMethodResponseRequest(*apigateway.PutMethodResponseInput) apigateway.PutMethodResponseRequest
 
-	PutRestApi(*apigateway.PutRestApiInput) (*apigateway.RestApi, error)
-	PutRestApiWithContext(aws.Context, *apigateway.PutRestApiInput, ...aws.Option) (*apigateway.RestApi, error)
-	PutRestApiRequest(*apigateway.PutRestApiInput) (*aws.Request, *apigateway.RestApi)
+	PutRestApiRequest(*apigateway.PutRestApiInput) apigateway.PutRestApiRequest
 
-	TestInvokeAuthorizer(*apigateway.TestInvokeAuthorizerInput) (*apigateway.TestInvokeAuthorizerOutput, error)
-	TestInvokeAuthorizerWithContext(aws.Context, *apigateway.TestInvokeAuthorizerInput, ...aws.Option) (*apigateway.TestInvokeAuthorizerOutput, error)
-	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) (*aws.Request, *apigateway.TestInvokeAuthorizerOutput)
+	TestInvokeAuthorizerRequest(*apigateway.TestInvokeAuthorizerInput) apigateway.TestInvokeAuthorizerRequest
 
-	TestInvokeMethod(*apigateway.TestInvokeMethodInput) (*apigateway.TestInvokeMethodOutput, error)
-	TestInvokeMethodWithContext(aws.Context, *apigateway.TestInvokeMethodInput, ...aws.Option) (*apigateway.TestInvokeMethodOutput, error)
-	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) (*aws.Request, *apigateway.TestInvokeMethodOutput)
+	TestInvokeMethodRequest(*apigateway.TestInvokeMethodInput) apigateway.TestInvokeMethodRequest
 
-	UpdateAccount(*apigateway.UpdateAccountInput) (*apigateway.Account, error)
-	UpdateAccountWithContext(aws.Context, *apigateway.UpdateAccountInput, ...aws.Option) (*apigateway.Account, error)
-	UpdateAccountRequest(*apigateway.UpdateAccountInput) (*aws.Request, *apigateway.Account)
+	UpdateAccountRequest(*apigateway.UpdateAccountInput) apigateway.UpdateAccountRequest
 
-	UpdateApiKey(*apigateway.UpdateApiKeyInput) (*apigateway.ApiKey, error)
-	UpdateApiKeyWithContext(aws.Context, *apigateway.UpdateApiKeyInput, ...aws.Option) (*apigateway.ApiKey, error)
-	UpdateApiKeyRequest(*apigateway.UpdateApiKeyInput) (*aws.Request, *apigateway.ApiKey)
+	UpdateApiKeyRequest(*apigateway.UpdateApiKeyInput) apigateway.UpdateApiKeyRequest
 
-	UpdateAuthorizer(*apigateway.UpdateAuthorizerInput) (*apigateway.Authorizer, error)
-	UpdateAuthorizerWithContext(aws.Context, *apigateway.UpdateAuthorizerInput, ...aws.Option) (*apigateway.Authorizer, error)
-	UpdateAuthorizerRequest(*apigateway.UpdateAuthorizerInput) (*aws.Request, *apigateway.Authorizer)
+	UpdateAuthorizerRequest(*apigateway.UpdateAuthorizerInput) apigateway.UpdateAuthorizerRequest
 
-	UpdateBasePathMapping(*apigateway.UpdateBasePathMappingInput) (*apigateway.BasePathMapping, error)
-	UpdateBasePathMappingWithContext(aws.Context, *apigateway.UpdateBasePathMappingInput, ...aws.Option) (*apigateway.BasePathMapping, error)
-	UpdateBasePathMappingRequest(*apigateway.UpdateBasePathMappingInput) (*aws.Request, *apigateway.BasePathMapping)
+	UpdateBasePathMappingRequest(*apigateway.UpdateBasePathMappingInput) apigateway.UpdateBasePathMappingRequest
 
-	UpdateClientCertificate(*apigateway.UpdateClientCertificateInput) (*apigateway.ClientCertificate, error)
-	UpdateClientCertificateWithContext(aws.Context, *apigateway.UpdateClientCertificateInput, ...aws.Option) (*apigateway.ClientCertificate, error)
-	UpdateClientCertificateRequest(*apigateway.UpdateClientCertificateInput) (*aws.Request, *apigateway.ClientCertificate)
+	UpdateClientCertificateRequest(*apigateway.UpdateClientCertificateInput) apigateway.UpdateClientCertificateRequest
 
-	UpdateDeployment(*apigateway.UpdateDeploymentInput) (*apigateway.Deployment, error)
-	UpdateDeploymentWithContext(aws.Context, *apigateway.UpdateDeploymentInput, ...aws.Option) (*apigateway.Deployment, error)
-	UpdateDeploymentRequest(*apigateway.UpdateDeploymentInput) (*aws.Request, *apigateway.Deployment)
+	UpdateDeploymentRequest(*apigateway.UpdateDeploymentInput) apigateway.UpdateDeploymentRequest
 
-	UpdateDocumentationPart(*apigateway.UpdateDocumentationPartInput) (*apigateway.DocumentationPart, error)
-	UpdateDocumentationPartWithContext(aws.Context, *apigateway.UpdateDocumentationPartInput, ...aws.Option) (*apigateway.DocumentationPart, error)
-	UpdateDocumentationPartRequest(*apigateway.UpdateDocumentationPartInput) (*aws.Request, *apigateway.DocumentationPart)
+	UpdateDocumentationPartRequest(*apigateway.UpdateDocumentationPartInput) apigateway.UpdateDocumentationPartRequest
 
-	UpdateDocumentationVersion(*apigateway.UpdateDocumentationVersionInput) (*apigateway.DocumentationVersion, error)
-	UpdateDocumentationVersionWithContext(aws.Context, *apigateway.UpdateDocumentationVersionInput, ...aws.Option) (*apigateway.DocumentationVersion, error)
-	UpdateDocumentationVersionRequest(*apigateway.UpdateDocumentationVersionInput) (*aws.Request, *apigateway.DocumentationVersion)
+	UpdateDocumentationVersionRequest(*apigateway.UpdateDocumentationVersionInput) apigateway.UpdateDocumentationVersionRequest
 
-	UpdateDomainName(*apigateway.UpdateDomainNameInput) (*apigateway.DomainName, error)
-	UpdateDomainNameWithContext(aws.Context, *apigateway.UpdateDomainNameInput, ...aws.Option) (*apigateway.DomainName, error)
-	UpdateDomainNameRequest(*apigateway.UpdateDomainNameInput) (*aws.Request, *apigateway.DomainName)
+	UpdateDomainNameRequest(*apigateway.UpdateDomainNameInput) apigateway.UpdateDomainNameRequest
 
-	UpdateGatewayResponse(*apigateway.UpdateGatewayResponseInput) (*apigateway.UpdateGatewayResponseOutput, error)
-	UpdateGatewayResponseWithContext(aws.Context, *apigateway.UpdateGatewayResponseInput, ...aws.Option) (*apigateway.UpdateGatewayResponseOutput, error)
-	UpdateGatewayResponseRequest(*apigateway.UpdateGatewayResponseInput) (*aws.Request, *apigateway.UpdateGatewayResponseOutput)
+	UpdateGatewayResponseRequest(*apigateway.UpdateGatewayResponseInput) apigateway.UpdateGatewayResponseRequest
 
-	UpdateIntegration(*apigateway.UpdateIntegrationInput) (*apigateway.Integration, error)
-	UpdateIntegrationWithContext(aws.Context, *apigateway.UpdateIntegrationInput, ...aws.Option) (*apigateway.Integration, error)
-	UpdateIntegrationRequest(*apigateway.UpdateIntegrationInput) (*aws.Request, *apigateway.Integration)
+	UpdateIntegrationRequest(*apigateway.UpdateIntegrationInput) apigateway.UpdateIntegrationRequest
 
-	UpdateIntegrationResponse(*apigateway.UpdateIntegrationResponseInput) (*apigateway.IntegrationResponse, error)
-	UpdateIntegrationResponseWithContext(aws.Context, *apigateway.UpdateIntegrationResponseInput, ...aws.Option) (*apigateway.IntegrationResponse, error)
-	UpdateIntegrationResponseRequest(*apigateway.UpdateIntegrationResponseInput) (*aws.Request, *apigateway.IntegrationResponse)
+	UpdateIntegrationResponseRequest(*apigateway.UpdateIntegrationResponseInput) apigateway.UpdateIntegrationResponseRequest
 
-	UpdateMethod(*apigateway.UpdateMethodInput) (*apigateway.Method, error)
-	UpdateMethodWithContext(aws.Context, *apigateway.UpdateMethodInput, ...aws.Option) (*apigateway.Method, error)
-	UpdateMethodRequest(*apigateway.UpdateMethodInput) (*aws.Request, *apigateway.Method)
+	UpdateMethodRequest(*apigateway.UpdateMethodInput) apigateway.UpdateMethodRequest
 
-	UpdateMethodResponse(*apigateway.UpdateMethodResponseInput) (*apigateway.MethodResponse, error)
-	UpdateMethodResponseWithContext(aws.Context, *apigateway.UpdateMethodResponseInput, ...aws.Option) (*apigateway.MethodResponse, error)
-	UpdateMethodResponseRequest(*apigateway.UpdateMethodResponseInput) (*aws.Request, *apigateway.MethodResponse)
+	UpdateMethodResponseRequest(*apigateway.UpdateMethodResponseInput) apigateway.UpdateMethodResponseRequest
 
-	UpdateModel(*apigateway.UpdateModelInput) (*apigateway.Model, error)
-	UpdateModelWithContext(aws.Context, *apigateway.UpdateModelInput, ...aws.Option) (*apigateway.Model, error)
-	UpdateModelRequest(*apigateway.UpdateModelInput) (*aws.Request, *apigateway.Model)
+	UpdateModelRequest(*apigateway.UpdateModelInput) apigateway.UpdateModelRequest
 
-	UpdateRequestValidator(*apigateway.UpdateRequestValidatorInput) (*apigateway.UpdateRequestValidatorOutput, error)
-	UpdateRequestValidatorWithContext(aws.Context, *apigateway.UpdateRequestValidatorInput, ...aws.Option) (*apigateway.UpdateRequestValidatorOutput, error)
-	UpdateRequestValidatorRequest(*apigateway.UpdateRequestValidatorInput) (*aws.Request, *apigateway.UpdateRequestValidatorOutput)
+	UpdateRequestValidatorRequest(*apigateway.UpdateRequestValidatorInput) apigateway.UpdateRequestValidatorRequest
 
-	UpdateResource(*apigateway.UpdateResourceInput) (*apigateway.Resource, error)
-	UpdateResourceWithContext(aws.Context, *apigateway.UpdateResourceInput, ...aws.Option) (*apigateway.Resource, error)
-	UpdateResourceRequest(*apigateway.UpdateResourceInput) (*aws.Request, *apigateway.Resource)
+	UpdateResourceRequest(*apigateway.UpdateResourceInput) apigateway.UpdateResourceRequest
 
-	UpdateRestApi(*apigateway.UpdateRestApiInput) (*apigateway.RestApi, error)
-	UpdateRestApiWithContext(aws.Context, *apigateway.UpdateRestApiInput, ...aws.Option) (*apigateway.RestApi, error)
-	UpdateRestApiRequest(*apigateway.UpdateRestApiInput) (*aws.Request, *apigateway.RestApi)
+	UpdateRestApiRequest(*apigateway.UpdateRestApiInput) apigateway.UpdateRestApiRequest
 
-	UpdateStage(*apigateway.UpdateStageInput) (*apigateway.Stage, error)
-	UpdateStageWithContext(aws.Context, *apigateway.UpdateStageInput, ...aws.Option) (*apigateway.Stage, error)
-	UpdateStageRequest(*apigateway.UpdateStageInput) (*aws.Request, *apigateway.Stage)
+	UpdateStageRequest(*apigateway.UpdateStageInput) apigateway.UpdateStageRequest
 
-	UpdateUsage(*apigateway.UpdateUsageInput) (*apigateway.Usage, error)
-	UpdateUsageWithContext(aws.Context, *apigateway.UpdateUsageInput, ...aws.Option) (*apigateway.Usage, error)
-	UpdateUsageRequest(*apigateway.UpdateUsageInput) (*aws.Request, *apigateway.Usage)
+	UpdateUsageRequest(*apigateway.UpdateUsageInput) apigateway.UpdateUsageRequest
 
-	UpdateUsagePlan(*apigateway.UpdateUsagePlanInput) (*apigateway.UsagePlan, error)
-	UpdateUsagePlanWithContext(aws.Context, *apigateway.UpdateUsagePlanInput, ...aws.Option) (*apigateway.UsagePlan, error)
-	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) (*aws.Request, *apigateway.UsagePlan)
+	UpdateUsagePlanRequest(*apigateway.UpdateUsagePlanInput) apigateway.UpdateUsagePlanRequest
 }
 
 var _ APIGatewayAPI = (*apigateway.APIGateway)(nil)

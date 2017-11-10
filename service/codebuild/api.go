@@ -12,31 +12,36 @@ import (
 
 const opBatchDeleteBuilds = "BatchDeleteBuilds"
 
-// BatchDeleteBuildsRequest generates a "aws.Request" representing the
-// client's request for the BatchDeleteBuilds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchDeleteBuildsRequest is a API request type for the BatchDeleteBuilds API operation.
+type BatchDeleteBuildsRequest struct {
+	*aws.Request
+	Input *BatchDeleteBuildsInput
+}
+
+// Send marshals and sends the BatchDeleteBuilds API request.
+func (r *BatchDeleteBuildsRequest) Send() (*BatchDeleteBuildsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchDeleteBuildsOutput), nil
+}
+
+// BatchDeleteBuildsRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchDeleteBuilds for more information on using the BatchDeleteBuilds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes one or more builds.
 //
 //    // Example sending a request using the BatchDeleteBuildsRequest method.
-//    req, resp := client.BatchDeleteBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchDeleteBuildsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds
-func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req *aws.Request, output *BatchDeleteBuildsOutput) {
+func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) BatchDeleteBuildsRequest {
 	op := &aws.Operation{
 		Name:       opBatchDeleteBuilds,
 		HTTPMethod: "POST",
@@ -47,75 +52,42 @@ func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req
 		input = &BatchDeleteBuildsInput{}
 	}
 
-	output = &BatchDeleteBuildsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchDeleteBuilds API operation for AWS CodeBuild.
-//
-// Deletes one or more builds.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation BatchDeleteBuilds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds
-func (c *CodeBuild) BatchDeleteBuilds(input *BatchDeleteBuildsInput) (*BatchDeleteBuildsOutput, error) {
-	req, out := c.BatchDeleteBuildsRequest(input)
-	return out, req.Send()
-}
-
-// BatchDeleteBuildsWithContext is the same as BatchDeleteBuilds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchDeleteBuilds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) BatchDeleteBuildsWithContext(ctx aws.Context, input *BatchDeleteBuildsInput, opts ...aws.Option) (*BatchDeleteBuildsOutput, error) {
-	req, out := c.BatchDeleteBuildsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchDeleteBuildsOutput{})
+	return BatchDeleteBuildsRequest{Request: req, Input: input}
 }
 
 const opBatchGetBuilds = "BatchGetBuilds"
 
-// BatchGetBuildsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetBuilds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetBuildsRequest is a API request type for the BatchGetBuilds API operation.
+type BatchGetBuildsRequest struct {
+	*aws.Request
+	Input *BatchGetBuildsInput
+}
+
+// Send marshals and sends the BatchGetBuilds API request.
+func (r *BatchGetBuildsRequest) Send() (*BatchGetBuildsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetBuildsOutput), nil
+}
+
+// BatchGetBuildsRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetBuilds for more information on using the BatchGetBuilds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about builds.
 //
 //    // Example sending a request using the BatchGetBuildsRequest method.
-//    req, resp := client.BatchGetBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetBuildsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
-func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *aws.Request, output *BatchGetBuildsOutput) {
+func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBuildsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetBuilds,
 		HTTPMethod: "POST",
@@ -126,75 +98,42 @@ func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *aws.
 		input = &BatchGetBuildsInput{}
 	}
 
-	output = &BatchGetBuildsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetBuilds API operation for AWS CodeBuild.
-//
-// Gets information about builds.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation BatchGetBuilds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
-func (c *CodeBuild) BatchGetBuilds(input *BatchGetBuildsInput) (*BatchGetBuildsOutput, error) {
-	req, out := c.BatchGetBuildsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetBuildsWithContext is the same as BatchGetBuilds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetBuilds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) BatchGetBuildsWithContext(ctx aws.Context, input *BatchGetBuildsInput, opts ...aws.Option) (*BatchGetBuildsOutput, error) {
-	req, out := c.BatchGetBuildsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetBuildsOutput{})
+	return BatchGetBuildsRequest{Request: req, Input: input}
 }
 
 const opBatchGetProjects = "BatchGetProjects"
 
-// BatchGetProjectsRequest generates a "aws.Request" representing the
-// client's request for the BatchGetProjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchGetProjectsRequest is a API request type for the BatchGetProjects API operation.
+type BatchGetProjectsRequest struct {
+	*aws.Request
+	Input *BatchGetProjectsInput
+}
+
+// Send marshals and sends the BatchGetProjects API request.
+func (r *BatchGetProjectsRequest) Send() (*BatchGetProjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchGetProjectsOutput), nil
+}
+
+// BatchGetProjectsRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchGetProjects for more information on using the BatchGetProjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about build projects.
 //
 //    // Example sending a request using the BatchGetProjectsRequest method.
-//    req, resp := client.BatchGetProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchGetProjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects
-func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *aws.Request, output *BatchGetProjectsOutput) {
+func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) BatchGetProjectsRequest {
 	op := &aws.Operation{
 		Name:       opBatchGetProjects,
 		HTTPMethod: "POST",
@@ -205,75 +144,42 @@ func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *
 		input = &BatchGetProjectsInput{}
 	}
 
-	output = &BatchGetProjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchGetProjects API operation for AWS CodeBuild.
-//
-// Gets information about build projects.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation BatchGetProjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects
-func (c *CodeBuild) BatchGetProjects(input *BatchGetProjectsInput) (*BatchGetProjectsOutput, error) {
-	req, out := c.BatchGetProjectsRequest(input)
-	return out, req.Send()
-}
-
-// BatchGetProjectsWithContext is the same as BatchGetProjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchGetProjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) BatchGetProjectsWithContext(ctx aws.Context, input *BatchGetProjectsInput, opts ...aws.Option) (*BatchGetProjectsOutput, error) {
-	req, out := c.BatchGetProjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchGetProjectsOutput{})
+	return BatchGetProjectsRequest{Request: req, Input: input}
 }
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws.Request" representing the
-// client's request for the CreateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateProjectRequest is a API request type for the CreateProject API operation.
+type CreateProjectRequest struct {
+	*aws.Request
+	Input *CreateProjectInput
+}
+
+// Send marshals and sends the CreateProject API request.
+func (r *CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProjectOutput), nil
+}
+
+// CreateProjectRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateProject for more information on using the CreateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a build project.
 //
 //    // Example sending a request using the CreateProjectRequest method.
-//    req, resp := client.CreateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject
-func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) CreateProjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
@@ -284,98 +190,30 @@ func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *aws.Re
 		input = &CreateProjectInput{}
 	}
 
-	output = &CreateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateProject API operation for AWS CodeBuild.
-//
-// Creates a build project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation CreateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified AWS resource cannot be created, because an AWS resource with
-//   the same settings already exists.
-//
-//   * ErrCodeAccountLimitExceededException "AccountLimitExceededException"
-//   An AWS service limit was exceeded for the calling AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject
-func (c *CodeBuild) CreateProject(input *CreateProjectInput) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	return out, req.Send()
-}
-
-// CreateProjectWithContext is the same as CreateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
-	req, out := c.CreateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateProjectOutput{})
+	return CreateProjectRequest{Request: req, Input: input}
 }
 
 const opCreateWebhook = "CreateWebhook"
 
-// CreateWebhookRequest generates a "aws.Request" representing the
-// client's request for the CreateWebhook operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateWebhook for more information on using the CreateWebhook
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateWebhookRequest method.
-//    req, resp := client.CreateWebhookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook
-func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *aws.Request, output *CreateWebhookOutput) {
-	op := &aws.Operation{
-		Name:       opCreateWebhook,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateWebhookInput{}
-	}
-
-	output = &CreateWebhookOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateWebhookRequest is a API request type for the CreateWebhook API operation.
+type CreateWebhookRequest struct {
+	*aws.Request
+	Input *CreateWebhookInput
 }
 
-// CreateWebhook API operation for AWS CodeBuild.
+// Send marshals and sends the CreateWebhook API request.
+func (r *CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateWebhookOutput), nil
+}
+
+// CreateWebhookRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
 // For an existing AWS CodeBuild build project that has its source code stored
 // in a GitHub repository, enables AWS CodeBuild to begin automatically rebuilding
@@ -390,76 +228,61 @@ func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *aws.Re
 // the Webhook box. For more information, see step 9 in Change a Build Project’s
 // Settings (http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation CreateWebhook for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeOAuthProviderException "OAuthProviderException"
-//   There was a problem with the underlying OAuth provider.
-//
-//   * ErrCodeResourceAlreadyExistsException "ResourceAlreadyExistsException"
-//   The specified AWS resource cannot be created, because an AWS resource with
-//   the same settings already exists.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
+//    // Example sending a request using the CreateWebhookRequest method.
+//    req := client.CreateWebhookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook
-func (c *CodeBuild) CreateWebhook(input *CreateWebhookInput) (*CreateWebhookOutput, error) {
-	req, out := c.CreateWebhookRequest(input)
-	return out, req.Send()
-}
+func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) CreateWebhookRequest {
+	op := &aws.Operation{
+		Name:       opCreateWebhook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateWebhookWithContext is the same as CreateWebhook with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateWebhook for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) CreateWebhookWithContext(ctx aws.Context, input *CreateWebhookInput, opts ...aws.Option) (*CreateWebhookOutput, error) {
-	req, out := c.CreateWebhookRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateWebhookInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateWebhookOutput{})
+	return CreateWebhookRequest{Request: req, Input: input}
 }
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteProjectRequest is a API request type for the DeleteProject API operation.
+type DeleteProjectRequest struct {
+	*aws.Request
+	Input *DeleteProjectInput
+}
+
+// Send marshals and sends the DeleteProject API request.
+func (r *DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProjectOutput), nil
+}
+
+// DeleteProjectRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteProject for more information on using the DeleteProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a build project.
 //
 //    // Example sending a request using the DeleteProjectRequest method.
-//    req, resp := client.DeleteProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject
-func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
@@ -470,75 +293,44 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Re
 		input = &DeleteProjectInput{}
 	}
 
-	output = &DeleteProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteProject API operation for AWS CodeBuild.
-//
-// Deletes a build project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation DeleteProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject
-func (c *CodeBuild) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteProjectWithContext is the same as DeleteProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
-	req, out := c.DeleteProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteProjectOutput{})
+	return DeleteProjectRequest{Request: req, Input: input}
 }
 
 const opDeleteWebhook = "DeleteWebhook"
 
-// DeleteWebhookRequest generates a "aws.Request" representing the
-// client's request for the DeleteWebhook operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteWebhookRequest is a API request type for the DeleteWebhook API operation.
+type DeleteWebhookRequest struct {
+	*aws.Request
+	Input *DeleteWebhookInput
+}
+
+// Send marshals and sends the DeleteWebhook API request.
+func (r *DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteWebhookOutput), nil
+}
+
+// DeleteWebhookRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteWebhook for more information on using the DeleteWebhook
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For an existing AWS CodeBuild build project that has its source code stored
+// in a GitHub repository, stops AWS CodeBuild from automatically rebuilding
+// the source code every time a code change is pushed to the repository.
 //
 //    // Example sending a request using the DeleteWebhookRequest method.
-//    req, resp := client.DeleteWebhookRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteWebhookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook
-func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *aws.Request, output *DeleteWebhookOutput) {
+func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRequest {
 	op := &aws.Operation{
 		Name:       opDeleteWebhook,
 		HTTPMethod: "POST",
@@ -549,83 +341,42 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *aws.Re
 		input = &DeleteWebhookInput{}
 	}
 
-	output = &DeleteWebhookOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteWebhook API operation for AWS CodeBuild.
-//
-// For an existing AWS CodeBuild build project that has its source code stored
-// in a GitHub repository, stops AWS CodeBuild from automatically rebuilding
-// the source code every time a code change is pushed to the repository.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation DeleteWebhook for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
-//
-//   * ErrCodeOAuthProviderException "OAuthProviderException"
-//   There was a problem with the underlying OAuth provider.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook
-func (c *CodeBuild) DeleteWebhook(input *DeleteWebhookInput) (*DeleteWebhookOutput, error) {
-	req, out := c.DeleteWebhookRequest(input)
-	return out, req.Send()
-}
-
-// DeleteWebhookWithContext is the same as DeleteWebhook with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteWebhook for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) DeleteWebhookWithContext(ctx aws.Context, input *DeleteWebhookInput, opts ...aws.Option) (*DeleteWebhookOutput, error) {
-	req, out := c.DeleteWebhookRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteWebhookOutput{})
+	return DeleteWebhookRequest{Request: req, Input: input}
 }
 
 const opListBuilds = "ListBuilds"
 
-// ListBuildsRequest generates a "aws.Request" representing the
-// client's request for the ListBuilds operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBuildsRequest is a API request type for the ListBuilds API operation.
+type ListBuildsRequest struct {
+	*aws.Request
+	Input *ListBuildsInput
+}
+
+// Send marshals and sends the ListBuilds API request.
+func (r *ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBuildsOutput), nil
+}
+
+// ListBuildsRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBuilds for more information on using the ListBuilds
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a list of build IDs, with each build ID representing a single build.
 //
 //    // Example sending a request using the ListBuildsRequest method.
-//    req, resp := client.ListBuildsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBuildsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
-func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request, output *ListBuildsOutput) {
+func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 	op := &aws.Operation{
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
@@ -636,75 +387,43 @@ func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request,
 		input = &ListBuildsInput{}
 	}
 
-	output = &ListBuildsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBuilds API operation for AWS CodeBuild.
-//
-// Gets a list of build IDs, with each build ID representing a single build.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation ListBuilds for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
-func (c *CodeBuild) ListBuilds(input *ListBuildsInput) (*ListBuildsOutput, error) {
-	req, out := c.ListBuildsRequest(input)
-	return out, req.Send()
-}
-
-// ListBuildsWithContext is the same as ListBuilds with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBuilds for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...aws.Option) (*ListBuildsOutput, error) {
-	req, out := c.ListBuildsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBuildsOutput{})
+	return ListBuildsRequest{Request: req, Input: input}
 }
 
 const opListBuildsForProject = "ListBuildsForProject"
 
-// ListBuildsForProjectRequest generates a "aws.Request" representing the
-// client's request for the ListBuildsForProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListBuildsForProjectRequest is a API request type for the ListBuildsForProject API operation.
+type ListBuildsForProjectRequest struct {
+	*aws.Request
+	Input *ListBuildsForProjectInput
+}
+
+// Send marshals and sends the ListBuildsForProject API request.
+func (r *ListBuildsForProjectRequest) Send() (*ListBuildsForProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBuildsForProjectOutput), nil
+}
+
+// ListBuildsForProjectRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListBuildsForProject for more information on using the ListBuildsForProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a list of build IDs for the specified build project, with each build
+// ID representing a single build.
 //
 //    // Example sending a request using the ListBuildsForProjectRequest method.
-//    req, resp := client.ListBuildsForProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListBuildsForProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
-func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) (req *aws.Request, output *ListBuildsForProjectOutput) {
+func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) ListBuildsForProjectRequest {
 	op := &aws.Operation{
 		Name:       opListBuildsForProject,
 		HTTPMethod: "POST",
@@ -715,79 +434,42 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 		input = &ListBuildsForProjectInput{}
 	}
 
-	output = &ListBuildsForProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListBuildsForProject API operation for AWS CodeBuild.
-//
-// Gets a list of build IDs for the specified build project, with each build
-// ID representing a single build.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation ListBuildsForProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
-func (c *CodeBuild) ListBuildsForProject(input *ListBuildsForProjectInput) (*ListBuildsForProjectOutput, error) {
-	req, out := c.ListBuildsForProjectRequest(input)
-	return out, req.Send()
-}
-
-// ListBuildsForProjectWithContext is the same as ListBuildsForProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListBuildsForProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) ListBuildsForProjectWithContext(ctx aws.Context, input *ListBuildsForProjectInput, opts ...aws.Option) (*ListBuildsForProjectOutput, error) {
-	req, out := c.ListBuildsForProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListBuildsForProjectOutput{})
+	return ListBuildsForProjectRequest{Request: req, Input: input}
 }
 
 const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 
-// ListCuratedEnvironmentImagesRequest generates a "aws.Request" representing the
-// client's request for the ListCuratedEnvironmentImages operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListCuratedEnvironmentImagesRequest is a API request type for the ListCuratedEnvironmentImages API operation.
+type ListCuratedEnvironmentImagesRequest struct {
+	*aws.Request
+	Input *ListCuratedEnvironmentImagesInput
+}
+
+// Send marshals and sends the ListCuratedEnvironmentImages API request.
+func (r *ListCuratedEnvironmentImagesRequest) Send() (*ListCuratedEnvironmentImagesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListCuratedEnvironmentImagesOutput), nil
+}
+
+// ListCuratedEnvironmentImagesRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListCuratedEnvironmentImages for more information on using the ListCuratedEnvironmentImages
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets information about Docker images that are managed by AWS CodeBuild.
 //
 //    // Example sending a request using the ListCuratedEnvironmentImagesRequest method.
-//    req, resp := client.ListCuratedEnvironmentImagesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListCuratedEnvironmentImagesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages
-func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) (req *aws.Request, output *ListCuratedEnvironmentImagesOutput) {
+func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest {
 	op := &aws.Operation{
 		Name:       opListCuratedEnvironmentImages,
 		HTTPMethod: "POST",
@@ -798,70 +480,43 @@ func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnviro
 		input = &ListCuratedEnvironmentImagesInput{}
 	}
 
-	output = &ListCuratedEnvironmentImagesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListCuratedEnvironmentImages API operation for AWS CodeBuild.
-//
-// Gets information about Docker images that are managed by AWS CodeBuild.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation ListCuratedEnvironmentImages for usage and error information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages
-func (c *CodeBuild) ListCuratedEnvironmentImages(input *ListCuratedEnvironmentImagesInput) (*ListCuratedEnvironmentImagesOutput, error) {
-	req, out := c.ListCuratedEnvironmentImagesRequest(input)
-	return out, req.Send()
-}
-
-// ListCuratedEnvironmentImagesWithContext is the same as ListCuratedEnvironmentImages with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListCuratedEnvironmentImages for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) ListCuratedEnvironmentImagesWithContext(ctx aws.Context, input *ListCuratedEnvironmentImagesInput, opts ...aws.Option) (*ListCuratedEnvironmentImagesOutput, error) {
-	req, out := c.ListCuratedEnvironmentImagesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListCuratedEnvironmentImagesOutput{})
+	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input}
 }
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws.Request" representing the
-// client's request for the ListProjects operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListProjectsRequest is a API request type for the ListProjects API operation.
+type ListProjectsRequest struct {
+	*aws.Request
+	Input *ListProjectsInput
+}
+
+// Send marshals and sends the ListProjects API request.
+func (r *ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProjectsOutput), nil
+}
+
+// ListProjectsRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListProjects for more information on using the ListProjects
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a list of build project names, with each build project name representing
+// a single build project.
 //
 //    // Example sending a request using the ListProjectsRequest method.
-//    req, resp := client.ListProjectsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListProjectsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
-func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) ListProjectsRequest {
 	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
@@ -872,76 +527,42 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *aws.Requ
 		input = &ListProjectsInput{}
 	}
 
-	output = &ListProjectsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListProjects API operation for AWS CodeBuild.
-//
-// Gets a list of build project names, with each build project name representing
-// a single build project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation ListProjects for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
-func (c *CodeBuild) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	return out, req.Send()
-}
-
-// ListProjectsWithContext is the same as ListProjects with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListProjects for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
-	req, out := c.ListProjectsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListProjectsOutput{})
+	return ListProjectsRequest{Request: req, Input: input}
 }
 
 const opStartBuild = "StartBuild"
 
-// StartBuildRequest generates a "aws.Request" representing the
-// client's request for the StartBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StartBuildRequest is a API request type for the StartBuild API operation.
+type StartBuildRequest struct {
+	*aws.Request
+	Input *StartBuildInput
+}
+
+// Send marshals and sends the StartBuild API request.
+func (r *StartBuildRequest) Send() (*StartBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartBuildOutput), nil
+}
+
+// StartBuildRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartBuild for more information on using the StartBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Starts running a build.
 //
 //    // Example sending a request using the StartBuildRequest method.
-//    req, resp := client.StartBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StartBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild
-func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *aws.Request, output *StartBuildOutput) {
+func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) StartBuildRequest {
 	op := &aws.Operation{
 		Name:       opStartBuild,
 		HTTPMethod: "POST",
@@ -952,81 +573,42 @@ func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *aws.Request,
 		input = &StartBuildInput{}
 	}
 
-	output = &StartBuildOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StartBuild API operation for AWS CodeBuild.
-//
-// Starts running a build.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation StartBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
-//
-//   * ErrCodeAccountLimitExceededException "AccountLimitExceededException"
-//   An AWS service limit was exceeded for the calling AWS account.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild
-func (c *CodeBuild) StartBuild(input *StartBuildInput) (*StartBuildOutput, error) {
-	req, out := c.StartBuildRequest(input)
-	return out, req.Send()
-}
-
-// StartBuildWithContext is the same as StartBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) StartBuildWithContext(ctx aws.Context, input *StartBuildInput, opts ...aws.Option) (*StartBuildOutput, error) {
-	req, out := c.StartBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StartBuildOutput{})
+	return StartBuildRequest{Request: req, Input: input}
 }
 
 const opStopBuild = "StopBuild"
 
-// StopBuildRequest generates a "aws.Request" representing the
-// client's request for the StopBuild operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// StopBuildRequest is a API request type for the StopBuild API operation.
+type StopBuildRequest struct {
+	*aws.Request
+	Input *StopBuildInput
+}
+
+// Send marshals and sends the StopBuild API request.
+func (r *StopBuildRequest) Send() (*StopBuildOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopBuildOutput), nil
+}
+
+// StopBuildRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StopBuild for more information on using the StopBuild
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attempts to stop running a build.
 //
 //    // Example sending a request using the StopBuildRequest method.
-//    req, resp := client.StopBuildRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.StopBuildRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
-func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *aws.Request, output *StopBuildOutput) {
+func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 	op := &aws.Operation{
 		Name:       opStopBuild,
 		HTTPMethod: "POST",
@@ -1037,78 +619,42 @@ func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *aws.Request, o
 		input = &StopBuildInput{}
 	}
 
-	output = &StopBuildOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// StopBuild API operation for AWS CodeBuild.
-//
-// Attempts to stop running a build.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation StopBuild for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
-func (c *CodeBuild) StopBuild(input *StopBuildInput) (*StopBuildOutput, error) {
-	req, out := c.StopBuildRequest(input)
-	return out, req.Send()
-}
-
-// StopBuildWithContext is the same as StopBuild with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StopBuild for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) StopBuildWithContext(ctx aws.Context, input *StopBuildInput, opts ...aws.Option) (*StopBuildOutput, error) {
-	req, out := c.StopBuildRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &StopBuildOutput{})
+	return StopBuildRequest{Request: req, Input: input}
 }
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws.Request" representing the
-// client's request for the UpdateProject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateProjectRequest is a API request type for the UpdateProject API operation.
+type UpdateProjectRequest struct {
+	*aws.Request
+	Input *UpdateProjectInput
+}
+
+// Send marshals and sends the UpdateProject API request.
+func (r *UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateProjectOutput), nil
+}
+
+// UpdateProjectRequest returns a request value for making API operation for
+// AWS CodeBuild.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateProject for more information on using the UpdateProject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Changes the settings of a build project.
 //
 //    // Example sending a request using the UpdateProjectRequest method.
-//    req, resp := client.UpdateProjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateProjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject
-func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRequest {
 	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
@@ -1119,49 +665,8 @@ func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Re
 		input = &UpdateProjectInput{}
 	}
 
-	output = &UpdateProjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateProject API operation for AWS CodeBuild.
-//
-// Changes the settings of a build project.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS CodeBuild's
-// API operation UpdateProject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidInputException "InvalidInputException"
-//   The input value that was provided is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified AWS resource cannot be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject
-func (c *CodeBuild) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	return out, req.Send()
-}
-
-// UpdateProjectWithContext is the same as UpdateProject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateProject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CodeBuild) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
-	req, out := c.UpdateProjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateProjectOutput{})
+	return UpdateProjectRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsInput

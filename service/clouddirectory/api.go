@@ -14,31 +14,36 @@ import (
 
 const opAddFacetToObject = "AddFacetToObject"
 
-// AddFacetToObjectRequest generates a "aws.Request" representing the
-// client's request for the AddFacetToObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddFacetToObjectRequest is a API request type for the AddFacetToObject API operation.
+type AddFacetToObjectRequest struct {
+	*aws.Request
+	Input *AddFacetToObjectInput
+}
+
+// Send marshals and sends the AddFacetToObject API request.
+func (r *AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddFacetToObjectOutput), nil
+}
+
+// AddFacetToObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddFacetToObject for more information on using the AddFacetToObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Adds a new Facet to an object.
 //
 //    // Example sending a request using the AddFacetToObjectRequest method.
-//    req, resp := client.AddFacetToObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddFacetToObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObject
-func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (req *aws.Request, output *AddFacetToObjectOutput) {
+func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) AddFacetToObjectRequest {
 	op := &aws.Operation{
 		Name:       opAddFacetToObject,
 		HTTPMethod: "PUT",
@@ -49,110 +54,43 @@ func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (
 		input = &AddFacetToObjectInput{}
 	}
 
-	output = &AddFacetToObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddFacetToObject API operation for Amazon CloudDirectory.
-//
-// Adds a new Facet to an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation AddFacetToObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObject
-func (c *CloudDirectory) AddFacetToObject(input *AddFacetToObjectInput) (*AddFacetToObjectOutput, error) {
-	req, out := c.AddFacetToObjectRequest(input)
-	return out, req.Send()
-}
-
-// AddFacetToObjectWithContext is the same as AddFacetToObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddFacetToObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) AddFacetToObjectWithContext(ctx aws.Context, input *AddFacetToObjectInput, opts ...aws.Option) (*AddFacetToObjectOutput, error) {
-	req, out := c.AddFacetToObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddFacetToObjectOutput{})
+	return AddFacetToObjectRequest{Request: req, Input: input}
 }
 
 const opApplySchema = "ApplySchema"
 
-// ApplySchemaRequest generates a "aws.Request" representing the
-// client's request for the ApplySchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ApplySchemaRequest is a API request type for the ApplySchema API operation.
+type ApplySchemaRequest struct {
+	*aws.Request
+	Input *ApplySchemaInput
+}
+
+// Send marshals and sends the ApplySchema API request.
+func (r *ApplySchemaRequest) Send() (*ApplySchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ApplySchemaOutput), nil
+}
+
+// ApplySchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ApplySchema for more information on using the ApplySchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Copies the input published schema into the Directory with the same name and
+// version as that of the published schema .
 //
 //    // Example sending a request using the ApplySchemaRequest method.
-//    req, resp := client.ApplySchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ApplySchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchema
-func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *aws.Request, output *ApplySchemaOutput) {
+func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) ApplySchemaRequest {
 	op := &aws.Operation{
 		Name:       opApplySchema,
 		HTTPMethod: "PUT",
@@ -163,109 +101,47 @@ func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *aws.R
 		input = &ApplySchemaInput{}
 	}
 
-	output = &ApplySchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ApplySchema API operation for Amazon CloudDirectory.
-//
-// Copies the input published schema into the Directory with the same name and
-// version as that of the published schema .
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ApplySchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to attach an object with the same link name or
-//   to apply a schema with the same name has occurred. Rename the link or the
-//   schema and then try again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchema
-func (c *CloudDirectory) ApplySchema(input *ApplySchemaInput) (*ApplySchemaOutput, error) {
-	req, out := c.ApplySchemaRequest(input)
-	return out, req.Send()
-}
-
-// ApplySchemaWithContext is the same as ApplySchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ApplySchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ApplySchemaWithContext(ctx aws.Context, input *ApplySchemaInput, opts ...aws.Option) (*ApplySchemaOutput, error) {
-	req, out := c.ApplySchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ApplySchemaOutput{})
+	return ApplySchemaRequest{Request: req, Input: input}
 }
 
 const opAttachObject = "AttachObject"
 
-// AttachObjectRequest generates a "aws.Request" representing the
-// client's request for the AttachObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachObjectRequest is a API request type for the AttachObject API operation.
+type AttachObjectRequest struct {
+	*aws.Request
+	Input *AttachObjectInput
+}
+
+// Send marshals and sends the AttachObject API request.
+func (r *AttachObjectRequest) Send() (*AttachObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachObjectOutput), nil
+}
+
+// AttachObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Attaches an existing object to another object. An object can be accessed
+// in two ways:
 //
-// See AttachObject for more information on using the AttachObject
-// API call, and error handling.
+// Using the path
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Using ObjectIdentifier
 //
 //    // Example sending a request using the AttachObjectRequest method.
-//    req, resp := client.AttachObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObject
-func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *aws.Request, output *AttachObjectOutput) {
+func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) AttachObjectRequest {
 	op := &aws.Operation{
 		Name:       opAttachObject,
 		HTTPMethod: "PUT",
@@ -276,128 +152,43 @@ func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *aws
 		input = &AttachObjectInput{}
 	}
 
-	output = &AttachObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachObject API operation for Amazon CloudDirectory.
-//
-// Attaches an existing object to another object. An object can be accessed
-// in two ways:
-//
-// Using the path
-//
-// Using ObjectIdentifier
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation AttachObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
-//
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to attach an object with the same link name or
-//   to apply a schema with the same name has occurred. Rename the link or the
-//   schema and then try again.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObject
-func (c *CloudDirectory) AttachObject(input *AttachObjectInput) (*AttachObjectOutput, error) {
-	req, out := c.AttachObjectRequest(input)
-	return out, req.Send()
-}
-
-// AttachObjectWithContext is the same as AttachObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) AttachObjectWithContext(ctx aws.Context, input *AttachObjectInput, opts ...aws.Option) (*AttachObjectOutput, error) {
-	req, out := c.AttachObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachObjectOutput{})
+	return AttachObjectRequest{Request: req, Input: input}
 }
 
 const opAttachPolicy = "AttachPolicy"
 
-// AttachPolicyRequest generates a "aws.Request" representing the
-// client's request for the AttachPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachPolicyRequest is a API request type for the AttachPolicy API operation.
+type AttachPolicyRequest struct {
+	*aws.Request
+	Input *AttachPolicyInput
+}
+
+// Send marshals and sends the AttachPolicy API request.
+func (r *AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachPolicyOutput), nil
+}
+
+// AttachPolicyRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachPolicy for more information on using the AttachPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attaches a policy object to a regular object. An object can have a limited
+// number of attached policies.
 //
 //    // Example sending a request using the AttachPolicyRequest method.
-//    req, resp := client.AttachPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicy
-func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *aws.Request, output *AttachPolicyOutput) {
+func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opAttachPolicy,
 		HTTPMethod: "PUT",
@@ -408,113 +199,42 @@ func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *aws
 		input = &AttachPolicyInput{}
 	}
 
-	output = &AttachPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachPolicy API operation for Amazon CloudDirectory.
-//
-// Attaches a policy object to a regular object. An object can have a limited
-// number of attached policies.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation AttachPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicy
-func (c *CloudDirectory) AttachPolicy(input *AttachPolicyInput) (*AttachPolicyOutput, error) {
-	req, out := c.AttachPolicyRequest(input)
-	return out, req.Send()
-}
-
-// AttachPolicyWithContext is the same as AttachPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) AttachPolicyWithContext(ctx aws.Context, input *AttachPolicyInput, opts ...aws.Option) (*AttachPolicyOutput, error) {
-	req, out := c.AttachPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachPolicyOutput{})
+	return AttachPolicyRequest{Request: req, Input: input}
 }
 
 const opAttachToIndex = "AttachToIndex"
 
-// AttachToIndexRequest generates a "aws.Request" representing the
-// client's request for the AttachToIndex operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachToIndexRequest is a API request type for the AttachToIndex API operation.
+type AttachToIndexRequest struct {
+	*aws.Request
+	Input *AttachToIndexInput
+}
+
+// Send marshals and sends the AttachToIndex API request.
+func (r *AttachToIndexRequest) Send() (*AttachToIndexOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachToIndexOutput), nil
+}
+
+// AttachToIndexRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachToIndex for more information on using the AttachToIndex
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attaches the specified object to the specified index.
 //
 //    // Example sending a request using the AttachToIndexRequest method.
-//    req, resp := client.AttachToIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachToIndexRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndex
-func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *aws.Request, output *AttachToIndexOutput) {
+func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) AttachToIndexRequest {
 	op := &aws.Operation{
 		Name:       opAttachToIndex,
 		HTTPMethod: "PUT",
@@ -525,117 +245,43 @@ func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *a
 		input = &AttachToIndexInput{}
 	}
 
-	output = &AttachToIndexOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachToIndex API operation for Amazon CloudDirectory.
-//
-// Attaches the specified object to the specified index.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation AttachToIndex for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
-//
-//   * ErrCodeIndexedAttributeMissingException "IndexedAttributeMissingException"
-//   An object has been attempted to be attached to an object that does not have
-//   the appropriate attribute value.
-//
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndex
-func (c *CloudDirectory) AttachToIndex(input *AttachToIndexInput) (*AttachToIndexOutput, error) {
-	req, out := c.AttachToIndexRequest(input)
-	return out, req.Send()
-}
-
-// AttachToIndexWithContext is the same as AttachToIndex with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachToIndex for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) AttachToIndexWithContext(ctx aws.Context, input *AttachToIndexInput, opts ...aws.Option) (*AttachToIndexOutput, error) {
-	req, out := c.AttachToIndexRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachToIndexOutput{})
+	return AttachToIndexRequest{Request: req, Input: input}
 }
 
 const opAttachTypedLink = "AttachTypedLink"
 
-// AttachTypedLinkRequest generates a "aws.Request" representing the
-// client's request for the AttachTypedLink operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AttachTypedLinkRequest is a API request type for the AttachTypedLink API operation.
+type AttachTypedLinkRequest struct {
+	*aws.Request
+	Input *AttachTypedLinkInput
+}
+
+// Send marshals and sends the AttachTypedLink API request.
+func (r *AttachTypedLinkRequest) Send() (*AttachTypedLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AttachTypedLinkOutput), nil
+}
+
+// AttachTypedLinkRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AttachTypedLink for more information on using the AttachTypedLink
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Attaches a typed link to a specified source and target object. For more information,
+// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the AttachTypedLinkRequest method.
-//    req, resp := client.AttachTypedLinkRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AttachTypedLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink
-func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (req *aws.Request, output *AttachTypedLinkOutput) {
+func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) AttachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opAttachTypedLink,
 		HTTPMethod: "PUT",
@@ -646,120 +292,42 @@ func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (re
 		input = &AttachTypedLinkInput{}
 	}
 
-	output = &AttachTypedLinkOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AttachTypedLink API operation for Amazon CloudDirectory.
-//
-// Attaches a typed link to a specified source and target object. For more information,
-// see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation AttachTypedLink for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidAttachmentException "InvalidAttachmentException"
-//   Indicates that an attempt to attach an object with the same link name or
-//   to apply a schema with the same name has occurred. Rename the link or the
-//   schema and then try again.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink
-func (c *CloudDirectory) AttachTypedLink(input *AttachTypedLinkInput) (*AttachTypedLinkOutput, error) {
-	req, out := c.AttachTypedLinkRequest(input)
-	return out, req.Send()
-}
-
-// AttachTypedLinkWithContext is the same as AttachTypedLink with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AttachTypedLink for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) AttachTypedLinkWithContext(ctx aws.Context, input *AttachTypedLinkInput, opts ...aws.Option) (*AttachTypedLinkOutput, error) {
-	req, out := c.AttachTypedLinkRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AttachTypedLinkOutput{})
+	return AttachTypedLinkRequest{Request: req, Input: input}
 }
 
 const opBatchRead = "BatchRead"
 
-// BatchReadRequest generates a "aws.Request" representing the
-// client's request for the BatchRead operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchReadRequest is a API request type for the BatchRead API operation.
+type BatchReadRequest struct {
+	*aws.Request
+	Input *BatchReadInput
+}
+
+// Send marshals and sends the BatchRead API request.
+func (r *BatchReadRequest) Send() (*BatchReadOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchReadOutput), nil
+}
+
+// BatchReadRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchRead for more information on using the BatchRead
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Performs all the read operations in a batch.
 //
 //    // Example sending a request using the BatchReadRequest method.
-//    req, resp := client.BatchReadRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchReadRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead
-func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *aws.Request, output *BatchReadOutput) {
+func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) BatchReadRequest {
 	op := &aws.Operation{
 		Name:       opBatchRead,
 		HTTPMethod: "POST",
@@ -770,103 +338,43 @@ func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *aws.Reque
 		input = &BatchReadInput{}
 	}
 
-	output = &BatchReadOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchRead API operation for Amazon CloudDirectory.
-//
-// Performs all the read operations in a batch.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation BatchRead for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead
-func (c *CloudDirectory) BatchRead(input *BatchReadInput) (*BatchReadOutput, error) {
-	req, out := c.BatchReadRequest(input)
-	return out, req.Send()
-}
-
-// BatchReadWithContext is the same as BatchRead with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchRead for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) BatchReadWithContext(ctx aws.Context, input *BatchReadInput, opts ...aws.Option) (*BatchReadOutput, error) {
-	req, out := c.BatchReadRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchReadOutput{})
+	return BatchReadRequest{Request: req, Input: input}
 }
 
 const opBatchWrite = "BatchWrite"
 
-// BatchWriteRequest generates a "aws.Request" representing the
-// client's request for the BatchWrite operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// BatchWriteRequest is a API request type for the BatchWrite API operation.
+type BatchWriteRequest struct {
+	*aws.Request
+	Input *BatchWriteInput
+}
+
+// Send marshals and sends the BatchWrite API request.
+func (r *BatchWriteRequest) Send() (*BatchWriteOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BatchWriteOutput), nil
+}
+
+// BatchWriteRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See BatchWrite for more information on using the BatchWrite
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Performs all the write operations in a batch. Either all the operations succeed
+// or none. Batch writes supports only object-related operations.
 //
 //    // Example sending a request using the BatchWriteRequest method.
-//    req, resp := client.BatchWriteRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.BatchWriteRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite
-func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *aws.Request, output *BatchWriteOutput) {
+func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) BatchWriteRequest {
 	op := &aws.Operation{
 		Name:       opBatchWrite,
 		HTTPMethod: "PUT",
@@ -877,107 +385,43 @@ func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *aws.Req
 		input = &BatchWriteInput{}
 	}
 
-	output = &BatchWriteOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// BatchWrite API operation for Amazon CloudDirectory.
-//
-// Performs all the write operations in a batch. Either all the operations succeed
-// or none. Batch writes supports only object-related operations.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation BatchWrite for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeBatchWriteException "BatchWriteException"
-//   A BatchWrite exception has occurred.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite
-func (c *CloudDirectory) BatchWrite(input *BatchWriteInput) (*BatchWriteOutput, error) {
-	req, out := c.BatchWriteRequest(input)
-	return out, req.Send()
-}
-
-// BatchWriteWithContext is the same as BatchWrite with the addition of
-// the ability to pass a context and additional request options.
-//
-// See BatchWrite for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) BatchWriteWithContext(ctx aws.Context, input *BatchWriteInput, opts ...aws.Option) (*BatchWriteOutput, error) {
-	req, out := c.BatchWriteRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &BatchWriteOutput{})
+	return BatchWriteRequest{Request: req, Input: input}
 }
 
 const opCreateDirectory = "CreateDirectory"
 
-// CreateDirectoryRequest generates a "aws.Request" representing the
-// client's request for the CreateDirectory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateDirectoryRequest is a API request type for the CreateDirectory API operation.
+type CreateDirectoryRequest struct {
+	*aws.Request
+	Input *CreateDirectoryInput
+}
+
+// Send marshals and sends the CreateDirectory API request.
+func (r *CreateDirectoryRequest) Send() (*CreateDirectoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateDirectoryOutput), nil
+}
+
+// CreateDirectoryRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateDirectory for more information on using the CreateDirectory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a Directory by copying the published schema into the directory. A
+// directory cannot be created without a schema.
 //
 //    // Example sending a request using the CreateDirectoryRequest method.
-//    req, resp := client.CreateDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateDirectoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectory
-func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (req *aws.Request, output *CreateDirectoryOutput) {
+func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) CreateDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opCreateDirectory,
 		HTTPMethod: "PUT",
@@ -988,111 +432,43 @@ func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (re
 		input = &CreateDirectoryInput{}
 	}
 
-	output = &CreateDirectoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateDirectory API operation for Amazon CloudDirectory.
-//
-// Creates a Directory by copying the published schema into the directory. A
-// directory cannot be created without a schema.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateDirectory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryAlreadyExistsException "DirectoryAlreadyExistsException"
-//   Indicates that a Directory could not be created due to a naming conflict.
-//   Choose a different name and try again.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectory
-func (c *CloudDirectory) CreateDirectory(input *CreateDirectoryInput) (*CreateDirectoryOutput, error) {
-	req, out := c.CreateDirectoryRequest(input)
-	return out, req.Send()
-}
-
-// CreateDirectoryWithContext is the same as CreateDirectory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateDirectory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateDirectoryWithContext(ctx aws.Context, input *CreateDirectoryInput, opts ...aws.Option) (*CreateDirectoryOutput, error) {
-	req, out := c.CreateDirectoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateDirectoryOutput{})
+	return CreateDirectoryRequest{Request: req, Input: input}
 }
 
 const opCreateFacet = "CreateFacet"
 
-// CreateFacetRequest generates a "aws.Request" representing the
-// client's request for the CreateFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateFacetRequest is a API request type for the CreateFacet API operation.
+type CreateFacetRequest struct {
+	*aws.Request
+	Input *CreateFacetInput
+}
+
+// Send marshals and sends the CreateFacet API request.
+func (r *CreateFacetRequest) Send() (*CreateFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFacetOutput), nil
+}
+
+// CreateFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateFacet for more information on using the CreateFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a new Facet in a schema. Facet creation is allowed only in development
+// or applied schemas.
 //
 //    // Example sending a request using the CreateFacetRequest method.
-//    req, resp := client.CreateFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacet
-func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *aws.Request, output *CreateFacetOutput) {
+func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) CreateFacetRequest {
 	op := &aws.Operation{
 		Name:       opCreateFacet,
 		HTTPMethod: "PUT",
@@ -1103,114 +479,43 @@ func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *aws.R
 		input = &CreateFacetInput{}
 	}
 
-	output = &CreateFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateFacet API operation for Amazon CloudDirectory.
-//
-// Creates a new Facet in a schema. Facet creation is allowed only in development
-// or applied schemas.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetAlreadyExistsException "FacetAlreadyExistsException"
-//   A facet with the same name already exists.
-//
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacet
-func (c *CloudDirectory) CreateFacet(input *CreateFacetInput) (*CreateFacetOutput, error) {
-	req, out := c.CreateFacetRequest(input)
-	return out, req.Send()
-}
-
-// CreateFacetWithContext is the same as CreateFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateFacetWithContext(ctx aws.Context, input *CreateFacetInput, opts ...aws.Option) (*CreateFacetOutput, error) {
-	req, out := c.CreateFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateFacetOutput{})
+	return CreateFacetRequest{Request: req, Input: input}
 }
 
 const opCreateIndex = "CreateIndex"
 
-// CreateIndexRequest generates a "aws.Request" representing the
-// client's request for the CreateIndex operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateIndexRequest is a API request type for the CreateIndex API operation.
+type CreateIndexRequest struct {
+	*aws.Request
+	Input *CreateIndexInput
+}
+
+// Send marshals and sends the CreateIndex API request.
+func (r *CreateIndexRequest) Send() (*CreateIndexOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateIndexOutput), nil
+}
+
+// CreateIndexRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateIndex for more information on using the CreateIndex
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
+// for more information.
 //
 //    // Example sending a request using the CreateIndexRequest method.
-//    req, resp := client.CreateIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateIndexRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndex
-func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *aws.Request, output *CreateIndexOutput) {
+func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) CreateIndexRequest {
 	op := &aws.Operation{
 		Name:       opCreateIndex,
 		HTTPMethod: "PUT",
@@ -1221,118 +526,45 @@ func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *aws.R
 		input = &CreateIndexInput{}
 	}
 
-	output = &CreateIndexOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateIndex API operation for Amazon CloudDirectory.
-//
-// Creates an index object. See Indexing (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html)
-// for more information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateIndex for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
-//
-//   * ErrCodeUnsupportedIndexTypeException "UnsupportedIndexTypeException"
-//   Indicates that the requested index type is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndex
-func (c *CloudDirectory) CreateIndex(input *CreateIndexInput) (*CreateIndexOutput, error) {
-	req, out := c.CreateIndexRequest(input)
-	return out, req.Send()
-}
-
-// CreateIndexWithContext is the same as CreateIndex with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateIndex for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateIndexWithContext(ctx aws.Context, input *CreateIndexInput, opts ...aws.Option) (*CreateIndexOutput, error) {
-	req, out := c.CreateIndexRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateIndexOutput{})
+	return CreateIndexRequest{Request: req, Input: input}
 }
 
 const opCreateObject = "CreateObject"
 
-// CreateObjectRequest generates a "aws.Request" representing the
-// client's request for the CreateObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateObjectRequest is a API request type for the CreateObject API operation.
+type CreateObjectRequest struct {
+	*aws.Request
+	Input *CreateObjectInput
+}
+
+// Send marshals and sends the CreateObject API request.
+func (r *CreateObjectRequest) Send() (*CreateObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateObjectOutput), nil
+}
+
+// CreateObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateObject for more information on using the CreateObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates an object in a Directory. Additionally attaches the object to a parent,
+// if a parent reference and LinkName is specified. An object is simply a collection
+// of Facet attributes. You can also use this API call to create a policy object,
+// if the facet from which you create the object is a policy facet.
 //
 //    // Example sending a request using the CreateObjectRequest method.
-//    req, resp := client.CreateObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObject
-func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *aws.Request, output *CreateObjectOutput) {
+func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) CreateObjectRequest {
 	op := &aws.Operation{
 		Name:       opCreateObject,
 		HTTPMethod: "PUT",
@@ -1343,139 +575,30 @@ func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *aws
 		input = &CreateObjectInput{}
 	}
 
-	output = &CreateObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateObject API operation for Amazon CloudDirectory.
-//
-// Creates an object in a Directory. Additionally attaches the object to a parent,
-// if a parent reference and LinkName is specified. An object is simply a collection
-// of Facet attributes. You can also use this API call to create a policy object,
-// if the facet from which you create the object is a policy facet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-//   * ErrCodeLinkNameAlreadyInUseException "LinkNameAlreadyInUseException"
-//   Indicates that a link could not be created due to a naming conflict. Choose
-//   a different name and then try again.
-//
-//   * ErrCodeUnsupportedIndexTypeException "UnsupportedIndexTypeException"
-//   Indicates that the requested index type is not supported.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObject
-func (c *CloudDirectory) CreateObject(input *CreateObjectInput) (*CreateObjectOutput, error) {
-	req, out := c.CreateObjectRequest(input)
-	return out, req.Send()
-}
-
-// CreateObjectWithContext is the same as CreateObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateObjectWithContext(ctx aws.Context, input *CreateObjectInput, opts ...aws.Option) (*CreateObjectOutput, error) {
-	req, out := c.CreateObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateObjectOutput{})
+	return CreateObjectRequest{Request: req, Input: input}
 }
 
 const opCreateSchema = "CreateSchema"
 
-// CreateSchemaRequest generates a "aws.Request" representing the
-// client's request for the CreateSchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSchema for more information on using the CreateSchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateSchemaRequest method.
-//    req, resp := client.CreateSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchema
-func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *aws.Request, output *CreateSchemaOutput) {
-	op := &aws.Operation{
-		Name:       opCreateSchema,
-		HTTPMethod: "PUT",
-		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/create",
-	}
-
-	if input == nil {
-		input = &CreateSchemaInput{}
-	}
-
-	output = &CreateSchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateSchemaRequest is a API request type for the CreateSchema API operation.
+type CreateSchemaRequest struct {
+	*aws.Request
+	Input *CreateSchemaInput
 }
 
-// CreateSchema API operation for Amazon CloudDirectory.
+// Send marshals and sends the CreateSchema API request.
+func (r *CreateSchemaRequest) Send() (*CreateSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSchemaOutput), nil
+}
+
+// CreateSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
 // Creates a new schema in a development state. A schema can exist in three
 // phases:
@@ -1491,98 +614,61 @@ func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *aws
 //    new schema facets. You can also add new, nonrequired attributes to existing
 //    schema facets. You can apply only published schemas to directories.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateSchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeSchemaAlreadyExistsException "SchemaAlreadyExistsException"
-//   Indicates that a schema could not be created due to a naming conflict. Please
-//   select a different name and then try again.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
+//    // Example sending a request using the CreateSchemaRequest method.
+//    req := client.CreateSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchema
-func (c *CloudDirectory) CreateSchema(input *CreateSchemaInput) (*CreateSchemaOutput, error) {
-	req, out := c.CreateSchemaRequest(input)
-	return out, req.Send()
-}
+func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) CreateSchemaRequest {
+	op := &aws.Operation{
+		Name:       opCreateSchema,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/create",
+	}
 
-// CreateSchemaWithContext is the same as CreateSchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateSchemaWithContext(ctx aws.Context, input *CreateSchemaInput, opts ...aws.Option) (*CreateSchemaOutput, error) {
-	req, out := c.CreateSchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateSchemaInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateSchemaOutput{})
+	return CreateSchemaRequest{Request: req, Input: input}
 }
 
 const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
 
-// CreateTypedLinkFacetRequest generates a "aws.Request" representing the
-// client's request for the CreateTypedLinkFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTypedLinkFacetRequest is a API request type for the CreateTypedLinkFacet API operation.
+type CreateTypedLinkFacetRequest struct {
+	*aws.Request
+	Input *CreateTypedLinkFacetInput
+}
+
+// Send marshals and sends the CreateTypedLinkFacet API request.
+func (r *CreateTypedLinkFacetRequest) Send() (*CreateTypedLinkFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTypedLinkFacetOutput), nil
+}
+
+// CreateTypedLinkFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateTypedLinkFacet for more information on using the CreateTypedLinkFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Creates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the CreateTypedLinkFacetRequest method.
-//    req, resp := client.CreateTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTypedLinkFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet
-func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) (req *aws.Request, output *CreateTypedLinkFacetOutput) {
+func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) CreateTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opCreateTypedLinkFacet,
 		HTTPMethod: "PUT",
@@ -1593,113 +679,43 @@ func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacet
 		input = &CreateTypedLinkFacetInput{}
 	}
 
-	output = &CreateTypedLinkFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTypedLinkFacet API operation for Amazon CloudDirectory.
-//
-// Creates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation CreateTypedLinkFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetAlreadyExistsException "FacetAlreadyExistsException"
-//   A facet with the same name already exists.
-//
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet
-func (c *CloudDirectory) CreateTypedLinkFacet(input *CreateTypedLinkFacetInput) (*CreateTypedLinkFacetOutput, error) {
-	req, out := c.CreateTypedLinkFacetRequest(input)
-	return out, req.Send()
-}
-
-// CreateTypedLinkFacetWithContext is the same as CreateTypedLinkFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTypedLinkFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) CreateTypedLinkFacetWithContext(ctx aws.Context, input *CreateTypedLinkFacetInput, opts ...aws.Option) (*CreateTypedLinkFacetOutput, error) {
-	req, out := c.CreateTypedLinkFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTypedLinkFacetOutput{})
+	return CreateTypedLinkFacetRequest{Request: req, Input: input}
 }
 
 const opDeleteDirectory = "DeleteDirectory"
 
-// DeleteDirectoryRequest generates a "aws.Request" representing the
-// client's request for the DeleteDirectory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteDirectoryRequest is a API request type for the DeleteDirectory API operation.
+type DeleteDirectoryRequest struct {
+	*aws.Request
+	Input *DeleteDirectoryInput
+}
+
+// Send marshals and sends the DeleteDirectory API request.
+func (r *DeleteDirectoryRequest) Send() (*DeleteDirectoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteDirectoryOutput), nil
+}
+
+// DeleteDirectoryRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteDirectory for more information on using the DeleteDirectory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a directory. Only disabled directories can be deleted. A deleted
+// directory cannot be undone. Exercise extreme caution when deleting directories.
 //
 //    // Example sending a request using the DeleteDirectoryRequest method.
-//    req, resp := client.DeleteDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteDirectoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectory
-func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *aws.Request, output *DeleteDirectoryOutput) {
+func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) DeleteDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDirectory,
 		HTTPMethod: "PUT",
@@ -1710,111 +726,43 @@ func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (re
 		input = &DeleteDirectoryInput{}
 	}
 
-	output = &DeleteDirectoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteDirectory API operation for Amazon CloudDirectory.
-//
-// Deletes a directory. Only disabled directories can be deleted. A deleted
-// directory cannot be undone. Exercise extreme caution when deleting directories.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DeleteDirectory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeDirectoryNotDisabledException "DirectoryNotDisabledException"
-//   An operation can only operate on a disabled directory.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectory
-func (c *CloudDirectory) DeleteDirectory(input *DeleteDirectoryInput) (*DeleteDirectoryOutput, error) {
-	req, out := c.DeleteDirectoryRequest(input)
-	return out, req.Send()
-}
-
-// DeleteDirectoryWithContext is the same as DeleteDirectory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteDirectory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DeleteDirectoryWithContext(ctx aws.Context, input *DeleteDirectoryInput, opts ...aws.Option) (*DeleteDirectoryOutput, error) {
-	req, out := c.DeleteDirectoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteDirectoryOutput{})
+	return DeleteDirectoryRequest{Request: req, Input: input}
 }
 
 const opDeleteFacet = "DeleteFacet"
 
-// DeleteFacetRequest generates a "aws.Request" representing the
-// client's request for the DeleteFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteFacetRequest is a API request type for the DeleteFacet API operation.
+type DeleteFacetRequest struct {
+	*aws.Request
+	Input *DeleteFacetInput
+}
+
+// Send marshals and sends the DeleteFacet API request.
+func (r *DeleteFacetRequest) Send() (*DeleteFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFacetOutput), nil
+}
+
+// DeleteFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFacet for more information on using the DeleteFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a given Facet. All attributes and Rules that are associated with
+// the facet will be deleted. Only development schema facets are allowed deletion.
 //
 //    // Example sending a request using the DeleteFacetRequest method.
-//    req, resp := client.DeleteFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacet
-func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *aws.Request, output *DeleteFacetOutput) {
+func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) DeleteFacetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFacet,
 		HTTPMethod: "PUT",
@@ -1825,111 +773,43 @@ func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *aws.R
 		input = &DeleteFacetInput{}
 	}
 
-	output = &DeleteFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteFacet API operation for Amazon CloudDirectory.
-//
-// Deletes a given Facet. All attributes and Rules that are associated with
-// the facet will be deleted. Only development schema facets are allowed deletion.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DeleteFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-//   * ErrCodeFacetInUseException "FacetInUseException"
-//   Occurs when deleting a facet that contains an attribute that is a target
-//   to an attribute reference in a different facet.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacet
-func (c *CloudDirectory) DeleteFacet(input *DeleteFacetInput) (*DeleteFacetOutput, error) {
-	req, out := c.DeleteFacetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFacetWithContext is the same as DeleteFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DeleteFacetWithContext(ctx aws.Context, input *DeleteFacetInput, opts ...aws.Option) (*DeleteFacetOutput, error) {
-	req, out := c.DeleteFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteFacetOutput{})
+	return DeleteFacetRequest{Request: req, Input: input}
 }
 
 const opDeleteObject = "DeleteObject"
 
-// DeleteObjectRequest generates a "aws.Request" representing the
-// client's request for the DeleteObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteObjectRequest is a API request type for the DeleteObject API operation.
+type DeleteObjectRequest struct {
+	*aws.Request
+	Input *DeleteObjectInput
+}
+
+// Send marshals and sends the DeleteObject API request.
+func (r *DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteObjectOutput), nil
+}
+
+// DeleteObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteObject for more information on using the DeleteObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes an object and its associated attributes. Only objects with no children
+// and no parents can be deleted.
 //
 //    // Example sending a request using the DeleteObjectRequest method.
-//    req, resp := client.DeleteObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObject
-func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *aws.Request, output *DeleteObjectOutput) {
+func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
 	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "PUT",
@@ -1940,111 +820,43 @@ func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *aws
 		input = &DeleteObjectInput{}
 	}
 
-	output = &DeleteObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteObject API operation for Amazon CloudDirectory.
-//
-// Deletes an object and its associated attributes. Only objects with no children
-// and no parents can be deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DeleteObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeObjectNotDetachedException "ObjectNotDetachedException"
-//   Indicates that the requested operation cannot be completed because the object
-//   has not been detached from the tree.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObject
-func (c *CloudDirectory) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOutput, error) {
-	req, out := c.DeleteObjectRequest(input)
-	return out, req.Send()
-}
-
-// DeleteObjectWithContext is the same as DeleteObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...aws.Option) (*DeleteObjectOutput, error) {
-	req, out := c.DeleteObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteObjectOutput{})
+	return DeleteObjectRequest{Request: req, Input: input}
 }
 
 const opDeleteSchema = "DeleteSchema"
 
-// DeleteSchemaRequest generates a "aws.Request" representing the
-// client's request for the DeleteSchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteSchemaRequest is a API request type for the DeleteSchema API operation.
+type DeleteSchemaRequest struct {
+	*aws.Request
+	Input *DeleteSchemaInput
+}
+
+// Send marshals and sends the DeleteSchema API request.
+func (r *DeleteSchemaRequest) Send() (*DeleteSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSchemaOutput), nil
+}
+
+// DeleteSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSchema for more information on using the DeleteSchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a given schema. Schemas in a development and published state can
+// only be deleted.
 //
 //    // Example sending a request using the DeleteSchemaRequest method.
-//    req, resp := client.DeleteSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchema
-func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *aws.Request, output *DeleteSchemaOutput) {
+func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSchemaRequest {
 	op := &aws.Operation{
 		Name:       opDeleteSchema,
 		HTTPMethod: "PUT",
@@ -2055,108 +867,42 @@ func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *aws
 		input = &DeleteSchemaInput{}
 	}
 
-	output = &DeleteSchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteSchema API operation for Amazon CloudDirectory.
-//
-// Deletes a given schema. Schemas in a development and published state can
-// only be deleted.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DeleteSchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeStillContainsLinksException "StillContainsLinksException"
-//   The object could not be deleted because links still exist. Remove the links
-//   and then try the operation again.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchema
-func (c *CloudDirectory) DeleteSchema(input *DeleteSchemaInput) (*DeleteSchemaOutput, error) {
-	req, out := c.DeleteSchemaRequest(input)
-	return out, req.Send()
-}
-
-// DeleteSchemaWithContext is the same as DeleteSchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DeleteSchemaWithContext(ctx aws.Context, input *DeleteSchemaInput, opts ...aws.Option) (*DeleteSchemaOutput, error) {
-	req, out := c.DeleteSchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteSchemaOutput{})
+	return DeleteSchemaRequest{Request: req, Input: input}
 }
 
 const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 
-// DeleteTypedLinkFacetRequest generates a "aws.Request" representing the
-// client's request for the DeleteTypedLinkFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTypedLinkFacetRequest is a API request type for the DeleteTypedLinkFacet API operation.
+type DeleteTypedLinkFacetRequest struct {
+	*aws.Request
+	Input *DeleteTypedLinkFacetInput
+}
+
+// Send marshals and sends the DeleteTypedLinkFacet API request.
+func (r *DeleteTypedLinkFacetRequest) Send() (*DeleteTypedLinkFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTypedLinkFacetOutput), nil
+}
+
+// DeleteTypedLinkFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTypedLinkFacet for more information on using the DeleteTypedLinkFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the DeleteTypedLinkFacetRequest method.
-//    req, resp := client.DeleteTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTypedLinkFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet
-func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) (req *aws.Request, output *DeleteTypedLinkFacetOutput) {
+func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTypedLinkFacet,
 		HTTPMethod: "PUT",
@@ -2167,106 +913,42 @@ func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacet
 		input = &DeleteTypedLinkFacetInput{}
 	}
 
-	output = &DeleteTypedLinkFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTypedLinkFacet API operation for Amazon CloudDirectory.
-//
-// Deletes a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DeleteTypedLinkFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet
-func (c *CloudDirectory) DeleteTypedLinkFacet(input *DeleteTypedLinkFacetInput) (*DeleteTypedLinkFacetOutput, error) {
-	req, out := c.DeleteTypedLinkFacetRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTypedLinkFacetWithContext is the same as DeleteTypedLinkFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTypedLinkFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DeleteTypedLinkFacetWithContext(ctx aws.Context, input *DeleteTypedLinkFacetInput, opts ...aws.Option) (*DeleteTypedLinkFacetOutput, error) {
-	req, out := c.DeleteTypedLinkFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTypedLinkFacetOutput{})
+	return DeleteTypedLinkFacetRequest{Request: req, Input: input}
 }
 
 const opDetachFromIndex = "DetachFromIndex"
 
-// DetachFromIndexRequest generates a "aws.Request" representing the
-// client's request for the DetachFromIndex operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachFromIndexRequest is a API request type for the DetachFromIndex API operation.
+type DetachFromIndexRequest struct {
+	*aws.Request
+	Input *DetachFromIndexInput
+}
+
+// Send marshals and sends the DetachFromIndex API request.
+func (r *DetachFromIndexRequest) Send() (*DetachFromIndexOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachFromIndexOutput), nil
+}
+
+// DetachFromIndexRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachFromIndex for more information on using the DetachFromIndex
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches the specified object from the specified index.
 //
 //    // Example sending a request using the DetachFromIndexRequest method.
-//    req, resp := client.DetachFromIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachFromIndexRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndex
-func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (req *aws.Request, output *DetachFromIndexOutput) {
+func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) DetachFromIndexRequest {
 	op := &aws.Operation{
 		Name:       opDetachFromIndex,
 		HTTPMethod: "PUT",
@@ -2277,112 +959,43 @@ func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (re
 		input = &DetachFromIndexInput{}
 	}
 
-	output = &DetachFromIndexOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachFromIndex API operation for Amazon CloudDirectory.
-//
-// Detaches the specified object from the specified index.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DetachFromIndex for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeObjectAlreadyDetachedException "ObjectAlreadyDetachedException"
-//   Indicates that the object is not attached to the index.
-//
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndex
-func (c *CloudDirectory) DetachFromIndex(input *DetachFromIndexInput) (*DetachFromIndexOutput, error) {
-	req, out := c.DetachFromIndexRequest(input)
-	return out, req.Send()
-}
-
-// DetachFromIndexWithContext is the same as DetachFromIndex with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachFromIndex for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DetachFromIndexWithContext(ctx aws.Context, input *DetachFromIndexInput, opts ...aws.Option) (*DetachFromIndexOutput, error) {
-	req, out := c.DetachFromIndexRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachFromIndexOutput{})
+	return DetachFromIndexRequest{Request: req, Input: input}
 }
 
 const opDetachObject = "DetachObject"
 
-// DetachObjectRequest generates a "aws.Request" representing the
-// client's request for the DetachObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachObjectRequest is a API request type for the DetachObject API operation.
+type DetachObjectRequest struct {
+	*aws.Request
+	Input *DetachObjectInput
+}
+
+// Send marshals and sends the DetachObject API request.
+func (r *DetachObjectRequest) Send() (*DetachObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachObjectOutput), nil
+}
+
+// DetachObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachObject for more information on using the DetachObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches a given object from the parent object. The object that is to be
+// detached from the parent is specified by the link name.
 //
 //    // Example sending a request using the DetachObjectRequest method.
-//    req, resp := client.DetachObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObject
-func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *aws.Request, output *DetachObjectOutput) {
+func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) DetachObjectRequest {
 	op := &aws.Operation{
 		Name:       opDetachObject,
 		HTTPMethod: "PUT",
@@ -2393,107 +1006,42 @@ func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *aws
 		input = &DetachObjectInput{}
 	}
 
-	output = &DetachObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachObject API operation for Amazon CloudDirectory.
-//
-// Detaches a given object from the parent object. The object that is to be
-// detached from the parent is specified by the link name.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DetachObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObject
-func (c *CloudDirectory) DetachObject(input *DetachObjectInput) (*DetachObjectOutput, error) {
-	req, out := c.DetachObjectRequest(input)
-	return out, req.Send()
-}
-
-// DetachObjectWithContext is the same as DetachObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DetachObjectWithContext(ctx aws.Context, input *DetachObjectInput, opts ...aws.Option) (*DetachObjectOutput, error) {
-	req, out := c.DetachObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachObjectOutput{})
+	return DetachObjectRequest{Request: req, Input: input}
 }
 
 const opDetachPolicy = "DetachPolicy"
 
-// DetachPolicyRequest generates a "aws.Request" representing the
-// client's request for the DetachPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachPolicyRequest is a API request type for the DetachPolicy API operation.
+type DetachPolicyRequest struct {
+	*aws.Request
+	Input *DetachPolicyInput
+}
+
+// Send marshals and sends the DetachPolicy API request.
+func (r *DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachPolicyOutput), nil
+}
+
+// DetachPolicyRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachPolicy for more information on using the DetachPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches a policy from an object.
 //
 //    // Example sending a request using the DetachPolicyRequest method.
-//    req, resp := client.DetachPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicy
-func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *aws.Request, output *DetachPolicyOutput) {
+func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyRequest {
 	op := &aws.Operation{
 		Name:       opDetachPolicy,
 		HTTPMethod: "PUT",
@@ -2504,112 +1052,43 @@ func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *aws
 		input = &DetachPolicyInput{}
 	}
 
-	output = &DetachPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DetachPolicy API operation for Amazon CloudDirectory.
-//
-// Detaches a policy from an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DetachPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicy
-func (c *CloudDirectory) DetachPolicy(input *DetachPolicyInput) (*DetachPolicyOutput, error) {
-	req, out := c.DetachPolicyRequest(input)
-	return out, req.Send()
-}
-
-// DetachPolicyWithContext is the same as DetachPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DetachPolicyWithContext(ctx aws.Context, input *DetachPolicyInput, opts ...aws.Option) (*DetachPolicyOutput, error) {
-	req, out := c.DetachPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DetachPolicyOutput{})
+	return DetachPolicyRequest{Request: req, Input: input}
 }
 
 const opDetachTypedLink = "DetachTypedLink"
 
-// DetachTypedLinkRequest generates a "aws.Request" representing the
-// client's request for the DetachTypedLink operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DetachTypedLinkRequest is a API request type for the DetachTypedLink API operation.
+type DetachTypedLinkRequest struct {
+	*aws.Request
+	Input *DetachTypedLinkInput
+}
+
+// Send marshals and sends the DetachTypedLink API request.
+func (r *DetachTypedLinkRequest) Send() (*DetachTypedLinkOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DetachTypedLinkOutput), nil
+}
+
+// DetachTypedLinkRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DetachTypedLink for more information on using the DetachTypedLink
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Detaches a typed link from a specified source and target object. For more
+// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the DetachTypedLinkRequest method.
-//    req, resp := client.DetachTypedLinkRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DetachTypedLinkRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink
-func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (req *aws.Request, output *DetachTypedLinkOutput) {
+func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) DetachTypedLinkRequest {
 	op := &aws.Operation{
 		Name:       opDetachTypedLink,
 		HTTPMethod: "PUT",
@@ -2620,113 +1099,46 @@ func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (re
 		input = &DetachTypedLinkInput{}
 	}
 
-	output = &DetachTypedLinkOutput{}
-	req = c.newRequest(op, input, output)
+	req := c.newRequest(op, input, &DetachTypedLinkOutput{})
 	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	return
-}
-
-// DetachTypedLink API operation for Amazon CloudDirectory.
-//
-// Detaches a typed link from a specified source and target object. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DetachTypedLink for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink
-func (c *CloudDirectory) DetachTypedLink(input *DetachTypedLinkInput) (*DetachTypedLinkOutput, error) {
-	req, out := c.DetachTypedLinkRequest(input)
-	return out, req.Send()
-}
-
-// DetachTypedLinkWithContext is the same as DetachTypedLink with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DetachTypedLink for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DetachTypedLinkWithContext(ctx aws.Context, input *DetachTypedLinkInput, opts ...aws.Option) (*DetachTypedLinkOutput, error) {
-	req, out := c.DetachTypedLinkRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	return DetachTypedLinkRequest{Request: req, Input: input}
 }
 
 const opDisableDirectory = "DisableDirectory"
 
-// DisableDirectoryRequest generates a "aws.Request" representing the
-// client's request for the DisableDirectory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DisableDirectoryRequest is a API request type for the DisableDirectory API operation.
+type DisableDirectoryRequest struct {
+	*aws.Request
+	Input *DisableDirectoryInput
+}
+
+// Send marshals and sends the DisableDirectory API request.
+func (r *DisableDirectoryRequest) Send() (*DisableDirectoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableDirectoryOutput), nil
+}
+
+// DisableDirectoryRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableDirectory for more information on using the DisableDirectory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Disables the specified directory. Disabled directories cannot be read or
+// written to. Only enabled directories can be disabled. Disabled directories
+// may be reenabled.
 //
 //    // Example sending a request using the DisableDirectoryRequest method.
-//    req, resp := client.DisableDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DisableDirectoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectory
-func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (req *aws.Request, output *DisableDirectoryOutput) {
+func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) DisableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opDisableDirectory,
 		HTTPMethod: "PUT",
@@ -2737,109 +1149,43 @@ func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (
 		input = &DisableDirectoryInput{}
 	}
 
-	output = &DisableDirectoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DisableDirectory API operation for Amazon CloudDirectory.
-//
-// Disables the specified directory. Disabled directories cannot be read or
-// written to. Only enabled directories can be disabled. Disabled directories
-// may be reenabled.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation DisableDirectory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectory
-func (c *CloudDirectory) DisableDirectory(input *DisableDirectoryInput) (*DisableDirectoryOutput, error) {
-	req, out := c.DisableDirectoryRequest(input)
-	return out, req.Send()
-}
-
-// DisableDirectoryWithContext is the same as DisableDirectory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableDirectory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) DisableDirectoryWithContext(ctx aws.Context, input *DisableDirectoryInput, opts ...aws.Option) (*DisableDirectoryOutput, error) {
-	req, out := c.DisableDirectoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DisableDirectoryOutput{})
+	return DisableDirectoryRequest{Request: req, Input: input}
 }
 
 const opEnableDirectory = "EnableDirectory"
 
-// EnableDirectoryRequest generates a "aws.Request" representing the
-// client's request for the EnableDirectory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// EnableDirectoryRequest is a API request type for the EnableDirectory API operation.
+type EnableDirectoryRequest struct {
+	*aws.Request
+	Input *EnableDirectoryInput
+}
+
+// Send marshals and sends the EnableDirectory API request.
+func (r *EnableDirectoryRequest) Send() (*EnableDirectoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*EnableDirectoryOutput), nil
+}
+
+// EnableDirectoryRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See EnableDirectory for more information on using the EnableDirectory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Enables the specified directory. Only disabled directories can be enabled.
+// Once enabled, the directory can then be read and written to.
 //
 //    // Example sending a request using the EnableDirectoryRequest method.
-//    req, resp := client.EnableDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.EnableDirectoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectory
-func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (req *aws.Request, output *EnableDirectoryOutput) {
+func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) EnableDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opEnableDirectory,
 		HTTPMethod: "PUT",
@@ -2850,108 +1196,42 @@ func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (re
 		input = &EnableDirectoryInput{}
 	}
 
-	output = &EnableDirectoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// EnableDirectory API operation for Amazon CloudDirectory.
-//
-// Enables the specified directory. Only disabled directories can be enabled.
-// Once enabled, the directory can then be read and written to.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation EnableDirectory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeDirectoryDeletedException "DirectoryDeletedException"
-//   A directory that has been deleted and to which access has been attempted.
-//   Note: The requested resource will eventually cease to exist.
-//
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectory
-func (c *CloudDirectory) EnableDirectory(input *EnableDirectoryInput) (*EnableDirectoryOutput, error) {
-	req, out := c.EnableDirectoryRequest(input)
-	return out, req.Send()
-}
-
-// EnableDirectoryWithContext is the same as EnableDirectory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See EnableDirectory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) EnableDirectoryWithContext(ctx aws.Context, input *EnableDirectoryInput, opts ...aws.Option) (*EnableDirectoryOutput, error) {
-	req, out := c.EnableDirectoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &EnableDirectoryOutput{})
+	return EnableDirectoryRequest{Request: req, Input: input}
 }
 
 const opGetDirectory = "GetDirectory"
 
-// GetDirectoryRequest generates a "aws.Request" representing the
-// client's request for the GetDirectory operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetDirectoryRequest is a API request type for the GetDirectory API operation.
+type GetDirectoryRequest struct {
+	*aws.Request
+	Input *GetDirectoryInput
+}
+
+// Send marshals and sends the GetDirectory API request.
+func (r *GetDirectoryRequest) Send() (*GetDirectoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDirectoryOutput), nil
+}
+
+// GetDirectoryRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetDirectory for more information on using the GetDirectory
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metadata about a directory.
 //
 //    // Example sending a request using the GetDirectoryRequest method.
-//    req, resp := client.GetDirectoryRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetDirectoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectory
-func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *aws.Request, output *GetDirectoryOutput) {
+func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) GetDirectoryRequest {
 	op := &aws.Operation{
 		Name:       opGetDirectory,
 		HTTPMethod: "POST",
@@ -2962,100 +1242,44 @@ func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *aws
 		input = &GetDirectoryInput{}
 	}
 
-	output = &GetDirectoryOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetDirectory API operation for Amazon CloudDirectory.
-//
-// Retrieves metadata about a directory.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation GetDirectory for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectory
-func (c *CloudDirectory) GetDirectory(input *GetDirectoryInput) (*GetDirectoryOutput, error) {
-	req, out := c.GetDirectoryRequest(input)
-	return out, req.Send()
-}
-
-// GetDirectoryWithContext is the same as GetDirectory with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetDirectory for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) GetDirectoryWithContext(ctx aws.Context, input *GetDirectoryInput, opts ...aws.Option) (*GetDirectoryOutput, error) {
-	req, out := c.GetDirectoryRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetDirectoryOutput{})
+	return GetDirectoryRequest{Request: req, Input: input}
 }
 
 const opGetFacet = "GetFacet"
 
-// GetFacetRequest generates a "aws.Request" representing the
-// client's request for the GetFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetFacetRequest is a API request type for the GetFacet API operation.
+type GetFacetRequest struct {
+	*aws.Request
+	Input *GetFacetInput
+}
+
+// Send marshals and sends the GetFacet API request.
+func (r *GetFacetRequest) Send() (*GetFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFacetOutput), nil
+}
+
+// GetFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetFacet for more information on using the GetFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType.
+// You can call this on all kinds of schema facets -- published, development,
+// or applied.
 //
 //    // Example sending a request using the GetFacetRequest method.
-//    req, resp := client.GetFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacet
-func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *aws.Request, output *GetFacetOutput) {
+func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	op := &aws.Operation{
 		Name:       opGetFacet,
 		HTTPMethod: "POST",
@@ -3066,108 +1290,42 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *aws.Request
 		input = &GetFacetInput{}
 	}
 
-	output = &GetFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetFacet API operation for Amazon CloudDirectory.
-//
-// Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType.
-// You can call this on all kinds of schema facets -- published, development,
-// or applied.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation GetFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacet
-func (c *CloudDirectory) GetFacet(input *GetFacetInput) (*GetFacetOutput, error) {
-	req, out := c.GetFacetRequest(input)
-	return out, req.Send()
-}
-
-// GetFacetWithContext is the same as GetFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) GetFacetWithContext(ctx aws.Context, input *GetFacetInput, opts ...aws.Option) (*GetFacetOutput, error) {
-	req, out := c.GetFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetFacetOutput{})
+	return GetFacetRequest{Request: req, Input: input}
 }
 
 const opGetObjectInformation = "GetObjectInformation"
 
-// GetObjectInformationRequest generates a "aws.Request" representing the
-// client's request for the GetObjectInformation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetObjectInformationRequest is a API request type for the GetObjectInformation API operation.
+type GetObjectInformationRequest struct {
+	*aws.Request
+	Input *GetObjectInformationInput
+}
+
+// Send marshals and sends the GetObjectInformation API request.
+func (r *GetObjectInformationRequest) Send() (*GetObjectInformationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectInformationOutput), nil
+}
+
+// GetObjectInformationRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetObjectInformation for more information on using the GetObjectInformation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves metadata about an object.
 //
 //    // Example sending a request using the GetObjectInformationRequest method.
-//    req, resp := client.GetObjectInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetObjectInformationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformation
-func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) (req *aws.Request, output *GetObjectInformationOutput) {
+func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) GetObjectInformationRequest {
 	op := &aws.Operation{
 		Name:       opGetObjectInformation,
 		HTTPMethod: "POST",
@@ -3178,106 +1336,43 @@ func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformation
 		input = &GetObjectInformationInput{}
 	}
 
-	output = &GetObjectInformationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetObjectInformation API operation for Amazon CloudDirectory.
-//
-// Retrieves metadata about an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation GetObjectInformation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformation
-func (c *CloudDirectory) GetObjectInformation(input *GetObjectInformationInput) (*GetObjectInformationOutput, error) {
-	req, out := c.GetObjectInformationRequest(input)
-	return out, req.Send()
-}
-
-// GetObjectInformationWithContext is the same as GetObjectInformation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetObjectInformation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) GetObjectInformationWithContext(ctx aws.Context, input *GetObjectInformationInput, opts ...aws.Option) (*GetObjectInformationOutput, error) {
-	req, out := c.GetObjectInformationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetObjectInformationOutput{})
+	return GetObjectInformationRequest{Request: req, Input: input}
 }
 
 const opGetSchemaAsJson = "GetSchemaAsJson"
 
-// GetSchemaAsJsonRequest generates a "aws.Request" representing the
-// client's request for the GetSchemaAsJson operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetSchemaAsJsonRequest is a API request type for the GetSchemaAsJson API operation.
+type GetSchemaAsJsonRequest struct {
+	*aws.Request
+	Input *GetSchemaAsJsonInput
+}
+
+// Send marshals and sends the GetSchemaAsJson API request.
+func (r *GetSchemaAsJsonRequest) Send() (*GetSchemaAsJsonOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSchemaAsJsonOutput), nil
+}
+
+// GetSchemaAsJsonRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetSchemaAsJson for more information on using the GetSchemaAsJson
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves a JSON representation of the schema. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// for more information.
 //
 //    // Example sending a request using the GetSchemaAsJsonRequest method.
-//    req, resp := client.GetSchemaAsJsonRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetSchemaAsJsonRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJson
-func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (req *aws.Request, output *GetSchemaAsJsonOutput) {
+func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) GetSchemaAsJsonRequest {
 	op := &aws.Operation{
 		Name:       opGetSchemaAsJson,
 		HTTPMethod: "POST",
@@ -3288,108 +1383,43 @@ func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (re
 		input = &GetSchemaAsJsonInput{}
 	}
 
-	output = &GetSchemaAsJsonOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetSchemaAsJson API operation for Amazon CloudDirectory.
-//
-// Retrieves a JSON representation of the schema. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
-// for more information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation GetSchemaAsJson for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJson
-func (c *CloudDirectory) GetSchemaAsJson(input *GetSchemaAsJsonInput) (*GetSchemaAsJsonOutput, error) {
-	req, out := c.GetSchemaAsJsonRequest(input)
-	return out, req.Send()
-}
-
-// GetSchemaAsJsonWithContext is the same as GetSchemaAsJson with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetSchemaAsJson for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) GetSchemaAsJsonWithContext(ctx aws.Context, input *GetSchemaAsJsonInput, opts ...aws.Option) (*GetSchemaAsJsonOutput, error) {
-	req, out := c.GetSchemaAsJsonRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetSchemaAsJsonOutput{})
+	return GetSchemaAsJsonRequest{Request: req, Input: input}
 }
 
 const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 
-// GetTypedLinkFacetInformationRequest generates a "aws.Request" representing the
-// client's request for the GetTypedLinkFacetInformation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// GetTypedLinkFacetInformationRequest is a API request type for the GetTypedLinkFacetInformation API operation.
+type GetTypedLinkFacetInformationRequest struct {
+	*aws.Request
+	Input *GetTypedLinkFacetInformationInput
+}
+
+// Send marshals and sends the GetTypedLinkFacetInformation API request.
+func (r *GetTypedLinkFacetInformationRequest) Send() (*GetTypedLinkFacetInformationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetTypedLinkFacetInformationOutput), nil
+}
+
+// GetTypedLinkFacetInformationRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See GetTypedLinkFacetInformation for more information on using the GetTypedLinkFacetInformation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the identity attribute order for a specific TypedLinkFacet. For more
+// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the GetTypedLinkFacetInformationRequest method.
-//    req, resp := client.GetTypedLinkFacetInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.GetTypedLinkFacetInformationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation
-func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) (req *aws.Request, output *GetTypedLinkFacetInformationOutput) {
+func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest {
 	op := &aws.Operation{
 		Name:       opGetTypedLinkFacetInformation,
 		HTTPMethod: "POST",
@@ -3400,110 +1430,42 @@ func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLink
 		input = &GetTypedLinkFacetInformationInput{}
 	}
 
-	output = &GetTypedLinkFacetInformationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// GetTypedLinkFacetInformation API operation for Amazon CloudDirectory.
-//
-// Returns the identity attribute order for a specific TypedLinkFacet. For more
-// information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation GetTypedLinkFacetInformation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation
-func (c *CloudDirectory) GetTypedLinkFacetInformation(input *GetTypedLinkFacetInformationInput) (*GetTypedLinkFacetInformationOutput, error) {
-	req, out := c.GetTypedLinkFacetInformationRequest(input)
-	return out, req.Send()
-}
-
-// GetTypedLinkFacetInformationWithContext is the same as GetTypedLinkFacetInformation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See GetTypedLinkFacetInformation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) GetTypedLinkFacetInformationWithContext(ctx aws.Context, input *GetTypedLinkFacetInformationInput, opts ...aws.Option) (*GetTypedLinkFacetInformationOutput, error) {
-	req, out := c.GetTypedLinkFacetInformationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &GetTypedLinkFacetInformationOutput{})
+	return GetTypedLinkFacetInformationRequest{Request: req, Input: input}
 }
 
 const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 
-// ListAppliedSchemaArnsRequest generates a "aws.Request" representing the
-// client's request for the ListAppliedSchemaArns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAppliedSchemaArnsRequest is a API request type for the ListAppliedSchemaArns API operation.
+type ListAppliedSchemaArnsRequest struct {
+	*aws.Request
+	Input *ListAppliedSchemaArnsInput
+}
+
+// Send marshals and sends the ListAppliedSchemaArns API request.
+func (r *ListAppliedSchemaArnsRequest) Send() (*ListAppliedSchemaArnsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAppliedSchemaArnsOutput), nil
+}
+
+// ListAppliedSchemaArnsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAppliedSchemaArns for more information on using the ListAppliedSchemaArns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists schemas applied to a directory.
 //
 //    // Example sending a request using the ListAppliedSchemaArnsRequest method.
-//    req, resp := client.ListAppliedSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAppliedSchemaArnsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArns
-func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) (req *aws.Request, output *ListAppliedSchemaArnsOutput) {
+func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListAppliedSchemaArns,
 		HTTPMethod: "POST",
@@ -3520,77 +1482,8 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 		input = &ListAppliedSchemaArnsInput{}
 	}
 
-	output = &ListAppliedSchemaArnsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAppliedSchemaArns API operation for Amazon CloudDirectory.
-//
-// Lists schemas applied to a directory.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListAppliedSchemaArns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArns
-func (c *CloudDirectory) ListAppliedSchemaArns(input *ListAppliedSchemaArnsInput) (*ListAppliedSchemaArnsOutput, error) {
-	req, out := c.ListAppliedSchemaArnsRequest(input)
-	return out, req.Send()
-}
-
-// ListAppliedSchemaArnsWithContext is the same as ListAppliedSchemaArns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAppliedSchemaArns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListAppliedSchemaArnsWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, opts ...aws.Option) (*ListAppliedSchemaArnsOutput, error) {
-	req, out := c.ListAppliedSchemaArnsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAppliedSchemaArnsOutput{})
+	return ListAppliedSchemaArnsRequest{Request: req, Input: input}
 }
 
 // ListAppliedSchemaArnsPages iterates over the pages of a ListAppliedSchemaArns operation,
@@ -3629,10 +1522,10 @@ func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAppliedSchemaArnsRequest(inCpy)
+			req := c.ListAppliedSchemaArnsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3645,31 +1538,36 @@ func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, 
 
 const opListAttachedIndices = "ListAttachedIndices"
 
-// ListAttachedIndicesRequest generates a "aws.Request" representing the
-// client's request for the ListAttachedIndices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListAttachedIndicesRequest is a API request type for the ListAttachedIndices API operation.
+type ListAttachedIndicesRequest struct {
+	*aws.Request
+	Input *ListAttachedIndicesInput
+}
+
+// Send marshals and sends the ListAttachedIndices API request.
+func (r *ListAttachedIndicesRequest) Send() (*ListAttachedIndicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListAttachedIndicesOutput), nil
+}
+
+// ListAttachedIndicesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListAttachedIndices for more information on using the ListAttachedIndices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists indices attached to an object.
 //
 //    // Example sending a request using the ListAttachedIndicesRequest method.
-//    req, resp := client.ListAttachedIndicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListAttachedIndicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndices
-func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) (req *aws.Request, output *ListAttachedIndicesOutput) {
+func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) ListAttachedIndicesRequest {
 	op := &aws.Operation{
 		Name:       opListAttachedIndices,
 		HTTPMethod: "POST",
@@ -3686,77 +1584,8 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 		input = &ListAttachedIndicesInput{}
 	}
 
-	output = &ListAttachedIndicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListAttachedIndices API operation for Amazon CloudDirectory.
-//
-// Lists indices attached to an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListAttachedIndices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndices
-func (c *CloudDirectory) ListAttachedIndices(input *ListAttachedIndicesInput) (*ListAttachedIndicesOutput, error) {
-	req, out := c.ListAttachedIndicesRequest(input)
-	return out, req.Send()
-}
-
-// ListAttachedIndicesWithContext is the same as ListAttachedIndices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListAttachedIndices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListAttachedIndicesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, opts ...aws.Option) (*ListAttachedIndicesOutput, error) {
-	req, out := c.ListAttachedIndicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListAttachedIndicesOutput{})
+	return ListAttachedIndicesRequest{Request: req, Input: input}
 }
 
 // ListAttachedIndicesPages iterates over the pages of a ListAttachedIndices operation,
@@ -3795,10 +1624,10 @@ func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListAttachedIndicesRequest(inCpy)
+			req := c.ListAttachedIndicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3811,31 +1640,36 @@ func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, in
 
 const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 
-// ListDevelopmentSchemaArnsRequest generates a "aws.Request" representing the
-// client's request for the ListDevelopmentSchemaArns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDevelopmentSchemaArnsRequest is a API request type for the ListDevelopmentSchemaArns API operation.
+type ListDevelopmentSchemaArnsRequest struct {
+	*aws.Request
+	Input *ListDevelopmentSchemaArnsInput
+}
+
+// Send marshals and sends the ListDevelopmentSchemaArns API request.
+func (r *ListDevelopmentSchemaArnsRequest) Send() (*ListDevelopmentSchemaArnsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDevelopmentSchemaArnsOutput), nil
+}
+
+// ListDevelopmentSchemaArnsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDevelopmentSchemaArns for more information on using the ListDevelopmentSchemaArns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
 //
 //    // Example sending a request using the ListDevelopmentSchemaArnsRequest method.
-//    req, resp := client.ListDevelopmentSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDevelopmentSchemaArnsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArns
-func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) (req *aws.Request, output *ListDevelopmentSchemaArnsOutput) {
+func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListDevelopmentSchemaArns,
 		HTTPMethod: "POST",
@@ -3852,77 +1686,8 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 		input = &ListDevelopmentSchemaArnsInput{}
 	}
 
-	output = &ListDevelopmentSchemaArnsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDevelopmentSchemaArns API operation for Amazon CloudDirectory.
-//
-// Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListDevelopmentSchemaArns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArns
-func (c *CloudDirectory) ListDevelopmentSchemaArns(input *ListDevelopmentSchemaArnsInput) (*ListDevelopmentSchemaArnsOutput, error) {
-	req, out := c.ListDevelopmentSchemaArnsRequest(input)
-	return out, req.Send()
-}
-
-// ListDevelopmentSchemaArnsWithContext is the same as ListDevelopmentSchemaArns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDevelopmentSchemaArns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListDevelopmentSchemaArnsWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, opts ...aws.Option) (*ListDevelopmentSchemaArnsOutput, error) {
-	req, out := c.ListDevelopmentSchemaArnsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDevelopmentSchemaArnsOutput{})
+	return ListDevelopmentSchemaArnsRequest{Request: req, Input: input}
 }
 
 // ListDevelopmentSchemaArnsPages iterates over the pages of a ListDevelopmentSchemaArns operation,
@@ -3961,10 +1726,10 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Conte
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDevelopmentSchemaArnsRequest(inCpy)
+			req := c.ListDevelopmentSchemaArnsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3977,31 +1742,36 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Conte
 
 const opListDirectories = "ListDirectories"
 
-// ListDirectoriesRequest generates a "aws.Request" representing the
-// client's request for the ListDirectories operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListDirectoriesRequest is a API request type for the ListDirectories API operation.
+type ListDirectoriesRequest struct {
+	*aws.Request
+	Input *ListDirectoriesInput
+}
+
+// Send marshals and sends the ListDirectories API request.
+func (r *ListDirectoriesRequest) Send() (*ListDirectoriesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDirectoriesOutput), nil
+}
+
+// ListDirectoriesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListDirectories for more information on using the ListDirectories
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists directories created within an account.
 //
 //    // Example sending a request using the ListDirectoriesRequest method.
-//    req, resp := client.ListDirectoriesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListDirectoriesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectories
-func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (req *aws.Request, output *ListDirectoriesOutput) {
+func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) ListDirectoriesRequest {
 	op := &aws.Operation{
 		Name:       opListDirectories,
 		HTTPMethod: "POST",
@@ -4018,74 +1788,8 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (re
 		input = &ListDirectoriesInput{}
 	}
 
-	output = &ListDirectoriesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListDirectories API operation for Amazon CloudDirectory.
-//
-// Lists directories created within an account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListDirectories for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectories
-func (c *CloudDirectory) ListDirectories(input *ListDirectoriesInput) (*ListDirectoriesOutput, error) {
-	req, out := c.ListDirectoriesRequest(input)
-	return out, req.Send()
-}
-
-// ListDirectoriesWithContext is the same as ListDirectories with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListDirectories for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListDirectoriesWithContext(ctx aws.Context, input *ListDirectoriesInput, opts ...aws.Option) (*ListDirectoriesOutput, error) {
-	req, out := c.ListDirectoriesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListDirectoriesOutput{})
+	return ListDirectoriesRequest{Request: req, Input: input}
 }
 
 // ListDirectoriesPages iterates over the pages of a ListDirectories operation,
@@ -4124,10 +1828,10 @@ func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListDirectoriesRequest(inCpy)
+			req := c.ListDirectoriesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4140,31 +1844,36 @@ func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input 
 
 const opListFacetAttributes = "ListFacetAttributes"
 
-// ListFacetAttributesRequest generates a "aws.Request" representing the
-// client's request for the ListFacetAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFacetAttributesRequest is a API request type for the ListFacetAttributes API operation.
+type ListFacetAttributesRequest struct {
+	*aws.Request
+	Input *ListFacetAttributesInput
+}
+
+// Send marshals and sends the ListFacetAttributes API request.
+func (r *ListFacetAttributesRequest) Send() (*ListFacetAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFacetAttributesOutput), nil
+}
+
+// ListFacetAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFacetAttributes for more information on using the ListFacetAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves attributes attached to the facet.
 //
 //    // Example sending a request using the ListFacetAttributesRequest method.
-//    req, resp := client.ListFacetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFacetAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributes
-func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) (req *aws.Request, output *ListFacetAttributesOutput) {
+func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) ListFacetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListFacetAttributes,
 		HTTPMethod: "POST",
@@ -4181,80 +1890,8 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 		input = &ListFacetAttributesInput{}
 	}
 
-	output = &ListFacetAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFacetAttributes API operation for Amazon CloudDirectory.
-//
-// Retrieves attributes attached to the facet.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListFacetAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributes
-func (c *CloudDirectory) ListFacetAttributes(input *ListFacetAttributesInput) (*ListFacetAttributesOutput, error) {
-	req, out := c.ListFacetAttributesRequest(input)
-	return out, req.Send()
-}
-
-// ListFacetAttributesWithContext is the same as ListFacetAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFacetAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListFacetAttributesWithContext(ctx aws.Context, input *ListFacetAttributesInput, opts ...aws.Option) (*ListFacetAttributesOutput, error) {
-	req, out := c.ListFacetAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFacetAttributesOutput{})
+	return ListFacetAttributesRequest{Request: req, Input: input}
 }
 
 // ListFacetAttributesPages iterates over the pages of a ListFacetAttributes operation,
@@ -4293,10 +1930,10 @@ func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListFacetAttributesRequest(inCpy)
+			req := c.ListFacetAttributesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4309,31 +1946,36 @@ func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, in
 
 const opListFacetNames = "ListFacetNames"
 
-// ListFacetNamesRequest generates a "aws.Request" representing the
-// client's request for the ListFacetNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFacetNamesRequest is a API request type for the ListFacetNames API operation.
+type ListFacetNamesRequest struct {
+	*aws.Request
+	Input *ListFacetNamesInput
+}
+
+// Send marshals and sends the ListFacetNames API request.
+func (r *ListFacetNamesRequest) Send() (*ListFacetNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFacetNamesOutput), nil
+}
+
+// ListFacetNamesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFacetNames for more information on using the ListFacetNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves the names of facets that exist in a schema.
 //
 //    // Example sending a request using the ListFacetNamesRequest method.
-//    req, resp := client.ListFacetNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFacetNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNames
-func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req *aws.Request, output *ListFacetNamesOutput) {
+func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListFacetNamesRequest {
 	op := &aws.Operation{
 		Name:       opListFacetNames,
 		HTTPMethod: "POST",
@@ -4350,77 +1992,8 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req 
 		input = &ListFacetNamesInput{}
 	}
 
-	output = &ListFacetNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFacetNames API operation for Amazon CloudDirectory.
-//
-// Retrieves the names of facets that exist in a schema.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListFacetNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNames
-func (c *CloudDirectory) ListFacetNames(input *ListFacetNamesInput) (*ListFacetNamesOutput, error) {
-	req, out := c.ListFacetNamesRequest(input)
-	return out, req.Send()
-}
-
-// ListFacetNamesWithContext is the same as ListFacetNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFacetNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListFacetNamesWithContext(ctx aws.Context, input *ListFacetNamesInput, opts ...aws.Option) (*ListFacetNamesOutput, error) {
-	req, out := c.ListFacetNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFacetNamesOutput{})
+	return ListFacetNamesRequest{Request: req, Input: input}
 }
 
 // ListFacetNamesPages iterates over the pages of a ListFacetNames operation,
@@ -4459,10 +2032,10 @@ func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListFacetNamesRequest(inCpy)
+			req := c.ListFacetNamesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4475,31 +2048,38 @@ func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *
 
 const opListIncomingTypedLinks = "ListIncomingTypedLinks"
 
-// ListIncomingTypedLinksRequest generates a "aws.Request" representing the
-// client's request for the ListIncomingTypedLinks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListIncomingTypedLinksRequest is a API request type for the ListIncomingTypedLinks API operation.
+type ListIncomingTypedLinksRequest struct {
+	*aws.Request
+	Input *ListIncomingTypedLinksInput
+}
+
+// Send marshals and sends the ListIncomingTypedLinks API request.
+func (r *ListIncomingTypedLinksRequest) Send() (*ListIncomingTypedLinksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListIncomingTypedLinksOutput), nil
+}
+
+// ListIncomingTypedLinksRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListIncomingTypedLinks for more information on using the ListIncomingTypedLinks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all the incoming TypedLinkSpecifier information
+// for an object. It also supports filtering by typed link facet and identity
+// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the ListIncomingTypedLinksRequest method.
-//    req, resp := client.ListIncomingTypedLinksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListIncomingTypedLinksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks
-func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) (req *aws.Request, output *ListIncomingTypedLinksOutput) {
+func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) ListIncomingTypedLinksRequest {
 	op := &aws.Operation{
 		Name:       opListIncomingTypedLinks,
 		HTTPMethod: "POST",
@@ -4510,115 +2090,42 @@ func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedL
 		input = &ListIncomingTypedLinksInput{}
 	}
 
-	output = &ListIncomingTypedLinksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListIncomingTypedLinks API operation for Amazon CloudDirectory.
-//
-// Returns a paginated list of all the incoming TypedLinkSpecifier information
-// for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListIncomingTypedLinks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks
-func (c *CloudDirectory) ListIncomingTypedLinks(input *ListIncomingTypedLinksInput) (*ListIncomingTypedLinksOutput, error) {
-	req, out := c.ListIncomingTypedLinksRequest(input)
-	return out, req.Send()
-}
-
-// ListIncomingTypedLinksWithContext is the same as ListIncomingTypedLinks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListIncomingTypedLinks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListIncomingTypedLinksWithContext(ctx aws.Context, input *ListIncomingTypedLinksInput, opts ...aws.Option) (*ListIncomingTypedLinksOutput, error) {
-	req, out := c.ListIncomingTypedLinksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListIncomingTypedLinksOutput{})
+	return ListIncomingTypedLinksRequest{Request: req, Input: input}
 }
 
 const opListIndex = "ListIndex"
 
-// ListIndexRequest generates a "aws.Request" representing the
-// client's request for the ListIndex operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListIndexRequest is a API request type for the ListIndex API operation.
+type ListIndexRequest struct {
+	*aws.Request
+	Input *ListIndexInput
+}
+
+// Send marshals and sends the ListIndex API request.
+func (r *ListIndexRequest) Send() (*ListIndexOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListIndexOutput), nil
+}
+
+// ListIndexRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListIndex for more information on using the ListIndex
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists objects attached to the specified index.
 //
 //    // Example sending a request using the ListIndexRequest method.
-//    req, resp := client.ListIndexRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListIndexRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndex
-func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *aws.Request, output *ListIndexOutput) {
+func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexRequest {
 	op := &aws.Operation{
 		Name:       opListIndex,
 		HTTPMethod: "POST",
@@ -4635,80 +2142,8 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *aws.Reque
 		input = &ListIndexInput{}
 	}
 
-	output = &ListIndexOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListIndex API operation for Amazon CloudDirectory.
-//
-// Lists objects attached to the specified index.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListIndex for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeNotIndexException "NotIndexException"
-//   Indicates that the requested operation can only operate on index objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndex
-func (c *CloudDirectory) ListIndex(input *ListIndexInput) (*ListIndexOutput, error) {
-	req, out := c.ListIndexRequest(input)
-	return out, req.Send()
-}
-
-// ListIndexWithContext is the same as ListIndex with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListIndex for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListIndexWithContext(ctx aws.Context, input *ListIndexInput, opts ...aws.Option) (*ListIndexOutput, error) {
-	req, out := c.ListIndexRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListIndexOutput{})
+	return ListIndexRequest{Request: req, Input: input}
 }
 
 // ListIndexPages iterates over the pages of a ListIndex operation,
@@ -4747,10 +2182,10 @@ func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListI
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListIndexRequest(inCpy)
+			req := c.ListIndexRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4763,31 +2198,36 @@ func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListI
 
 const opListObjectAttributes = "ListObjectAttributes"
 
-// ListObjectAttributesRequest generates a "aws.Request" representing the
-// client's request for the ListObjectAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectAttributesRequest is a API request type for the ListObjectAttributes API operation.
+type ListObjectAttributesRequest struct {
+	*aws.Request
+	Input *ListObjectAttributesInput
+}
+
+// Send marshals and sends the ListObjectAttributes API request.
+func (r *ListObjectAttributesRequest) Send() (*ListObjectAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectAttributesOutput), nil
+}
+
+// ListObjectAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectAttributes for more information on using the ListObjectAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all attributes that are associated with an object.
 //
 //    // Example sending a request using the ListObjectAttributesRequest method.
-//    req, resp := client.ListObjectAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributes
-func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) (req *aws.Request, output *ListObjectAttributesOutput) {
+func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) ListObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListObjectAttributes,
 		HTTPMethod: "POST",
@@ -4804,87 +2244,8 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 		input = &ListObjectAttributesInput{}
 	}
 
-	output = &ListObjectAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectAttributes API operation for Amazon CloudDirectory.
-//
-// Lists all attributes that are associated with an object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListObjectAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributes
-func (c *CloudDirectory) ListObjectAttributes(input *ListObjectAttributesInput) (*ListObjectAttributesOutput, error) {
-	req, out := c.ListObjectAttributesRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectAttributesWithContext is the same as ListObjectAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectAttributesWithContext(ctx aws.Context, input *ListObjectAttributesInput, opts ...aws.Option) (*ListObjectAttributesOutput, error) {
-	req, out := c.ListObjectAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectAttributesOutput{})
+	return ListObjectAttributesRequest{Request: req, Input: input}
 }
 
 // ListObjectAttributesPages iterates over the pages of a ListObjectAttributes operation,
@@ -4923,10 +2284,10 @@ func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectAttributesRequest(inCpy)
+			req := c.ListObjectAttributesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4939,31 +2300,37 @@ func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, i
 
 const opListObjectChildren = "ListObjectChildren"
 
-// ListObjectChildrenRequest generates a "aws.Request" representing the
-// client's request for the ListObjectChildren operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectChildrenRequest is a API request type for the ListObjectChildren API operation.
+type ListObjectChildrenRequest struct {
+	*aws.Request
+	Input *ListObjectChildrenInput
+}
+
+// Send marshals and sends the ListObjectChildren API request.
+func (r *ListObjectChildrenRequest) Send() (*ListObjectChildrenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectChildrenOutput), nil
+}
+
+// ListObjectChildrenRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectChildren for more information on using the ListObjectChildren
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of child objects that are associated with a given
+// object.
 //
 //    // Example sending a request using the ListObjectChildrenRequest method.
-//    req, resp := client.ListObjectChildrenRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectChildrenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildren
-func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) (req *aws.Request, output *ListObjectChildrenOutput) {
+func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) ListObjectChildrenRequest {
 	op := &aws.Operation{
 		Name:       opListObjectChildren,
 		HTTPMethod: "POST",
@@ -4980,88 +2347,8 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 		input = &ListObjectChildrenInput{}
 	}
 
-	output = &ListObjectChildrenOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectChildren API operation for Amazon CloudDirectory.
-//
-// Returns a paginated list of child objects that are associated with a given
-// object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListObjectChildren for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeNotNodeException "NotNodeException"
-//   Occurs when any invalid operations are performed on an object that is not
-//   a node, such as calling ListObjectChildren for a leaf node object.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildren
-func (c *CloudDirectory) ListObjectChildren(input *ListObjectChildrenInput) (*ListObjectChildrenOutput, error) {
-	req, out := c.ListObjectChildrenRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectChildrenWithContext is the same as ListObjectChildren with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectChildren for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectChildrenWithContext(ctx aws.Context, input *ListObjectChildrenInput, opts ...aws.Option) (*ListObjectChildrenOutput, error) {
-	req, out := c.ListObjectChildrenRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectChildrenOutput{})
+	return ListObjectChildrenRequest{Request: req, Input: input}
 }
 
 // ListObjectChildrenPages iterates over the pages of a ListObjectChildren operation,
@@ -5100,10 +2387,10 @@ func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectChildrenRequest(inCpy)
+			req := c.ListObjectChildrenRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5116,31 +2403,46 @@ func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, inp
 
 const opListObjectParentPaths = "ListObjectParentPaths"
 
-// ListObjectParentPathsRequest generates a "aws.Request" representing the
-// client's request for the ListObjectParentPaths operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectParentPathsRequest is a API request type for the ListObjectParentPaths API operation.
+type ListObjectParentPathsRequest struct {
+	*aws.Request
+	Input *ListObjectParentPathsInput
+}
+
+// Send marshals and sends the ListObjectParentPaths API request.
+func (r *ListObjectParentPathsRequest) Send() (*ListObjectParentPathsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectParentPathsOutput), nil
+}
+
+// ListObjectParentPathsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Retrieves all available parent paths for any object type such as node, leaf
+// node, policy node, and index node objects. For more information about objects,
+// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
 //
-// See ListObjectParentPaths for more information on using the ListObjectParentPaths
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Use this API to evaluate all parents for an object. The call returns all
+// objects from the root of the directory up to the requested object. The API
+// returns the number of paths based on user-defined MaxResults, in case there
+// are multiple paths to the parent. The order of the paths and nodes returned
+// is consistent among multiple API calls unless the objects are deleted or
+// moved. Paths not leading to the directory root are ignored from the target
+// object.
 //
 //    // Example sending a request using the ListObjectParentPathsRequest method.
-//    req, resp := client.ListObjectParentPathsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectParentPathsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths
-func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) (req *aws.Request, output *ListObjectParentPathsOutput) {
+func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) ListObjectParentPathsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectParentPaths,
 		HTTPMethod: "POST",
@@ -5157,90 +2459,8 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 		input = &ListObjectParentPathsInput{}
 	}
 
-	output = &ListObjectParentPathsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectParentPaths API operation for Amazon CloudDirectory.
-//
-// Retrieves all available parent paths for any object type such as node, leaf
-// node, policy node, and index node objects. For more information about objects,
-// see Directory Structure (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure).
-//
-// Use this API to evaluate all parents for an object. The call returns all
-// objects from the root of the directory up to the requested object. The API
-// returns the number of paths based on user-defined MaxResults, in case there
-// are multiple paths to the parent. The order of the paths and nodes returned
-// is consistent among multiple API calls unless the objects are deleted or
-// moved. Paths not leading to the directory root are ignored from the target
-// object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListObjectParentPaths for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths
-func (c *CloudDirectory) ListObjectParentPaths(input *ListObjectParentPathsInput) (*ListObjectParentPathsOutput, error) {
-	req, out := c.ListObjectParentPathsRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectParentPathsWithContext is the same as ListObjectParentPaths with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectParentPaths for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentPathsWithContext(ctx aws.Context, input *ListObjectParentPathsInput, opts ...aws.Option) (*ListObjectParentPathsOutput, error) {
-	req, out := c.ListObjectParentPathsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectParentPathsOutput{})
+	return ListObjectParentPathsRequest{Request: req, Input: input}
 }
 
 // ListObjectParentPathsPages iterates over the pages of a ListObjectParentPaths operation,
@@ -5279,10 +2499,10 @@ func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectParentPathsRequest(inCpy)
+			req := c.ListObjectParentPathsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5295,31 +2515,37 @@ func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, 
 
 const opListObjectParents = "ListObjectParents"
 
-// ListObjectParentsRequest generates a "aws.Request" representing the
-// client's request for the ListObjectParents operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectParentsRequest is a API request type for the ListObjectParents API operation.
+type ListObjectParentsRequest struct {
+	*aws.Request
+	Input *ListObjectParentsInput
+}
+
+// Send marshals and sends the ListObjectParents API request.
+func (r *ListObjectParentsRequest) Send() (*ListObjectParentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectParentsOutput), nil
+}
+
+// ListObjectParentsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectParents for more information on using the ListObjectParents
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists parent objects that are associated with a given object in pagination
+// fashion.
 //
 //    // Example sending a request using the ListObjectParentsRequest method.
-//    req, resp := client.ListObjectParentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectParentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParents
-func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) (req *aws.Request, output *ListObjectParentsOutput) {
+func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) ListObjectParentsRequest {
 	op := &aws.Operation{
 		Name:       opListObjectParents,
 		HTTPMethod: "POST",
@@ -5336,87 +2562,8 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 		input = &ListObjectParentsInput{}
 	}
 
-	output = &ListObjectParentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectParents API operation for Amazon CloudDirectory.
-//
-// Lists parent objects that are associated with a given object in pagination
-// fashion.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListObjectParents for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeCannotListParentOfRootException "CannotListParentOfRootException"
-//   Cannot list the parents of a Directory root.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParents
-func (c *CloudDirectory) ListObjectParents(input *ListObjectParentsInput) (*ListObjectParentsOutput, error) {
-	req, out := c.ListObjectParentsRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectParentsWithContext is the same as ListObjectParents with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectParents for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentsWithContext(ctx aws.Context, input *ListObjectParentsInput, opts ...aws.Option) (*ListObjectParentsOutput, error) {
-	req, out := c.ListObjectParentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectParentsOutput{})
+	return ListObjectParentsRequest{Request: req, Input: input}
 }
 
 // ListObjectParentsPages iterates over the pages of a ListObjectParents operation,
@@ -5455,10 +2602,10 @@ func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, inpu
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectParentsRequest(inCpy)
+			req := c.ListObjectParentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5471,31 +2618,36 @@ func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, inpu
 
 const opListObjectPolicies = "ListObjectPolicies"
 
-// ListObjectPoliciesRequest generates a "aws.Request" representing the
-// client's request for the ListObjectPolicies operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListObjectPoliciesRequest is a API request type for the ListObjectPolicies API operation.
+type ListObjectPoliciesRequest struct {
+	*aws.Request
+	Input *ListObjectPoliciesInput
+}
+
+// Send marshals and sends the ListObjectPolicies API request.
+func (r *ListObjectPoliciesRequest) Send() (*ListObjectPoliciesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListObjectPoliciesOutput), nil
+}
+
+// ListObjectPoliciesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListObjectPolicies for more information on using the ListObjectPolicies
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns policies attached to an object in pagination fashion.
 //
 //    // Example sending a request using the ListObjectPoliciesRequest method.
-//    req, resp := client.ListObjectPoliciesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListObjectPoliciesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPolicies
-func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) (req *aws.Request, output *ListObjectPoliciesOutput) {
+func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) ListObjectPoliciesRequest {
 	op := &aws.Operation{
 		Name:       opListObjectPolicies,
 		HTTPMethod: "POST",
@@ -5512,80 +2664,8 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 		input = &ListObjectPoliciesInput{}
 	}
 
-	output = &ListObjectPoliciesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListObjectPolicies API operation for Amazon CloudDirectory.
-//
-// Returns policies attached to an object in pagination fashion.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListObjectPolicies for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPolicies
-func (c *CloudDirectory) ListObjectPolicies(input *ListObjectPoliciesInput) (*ListObjectPoliciesOutput, error) {
-	req, out := c.ListObjectPoliciesRequest(input)
-	return out, req.Send()
-}
-
-// ListObjectPoliciesWithContext is the same as ListObjectPolicies with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListObjectPolicies for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectPoliciesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, opts ...aws.Option) (*ListObjectPoliciesOutput, error) {
-	req, out := c.ListObjectPoliciesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListObjectPoliciesOutput{})
+	return ListObjectPoliciesRequest{Request: req, Input: input}
 }
 
 // ListObjectPoliciesPages iterates over the pages of a ListObjectPolicies operation,
@@ -5624,10 +2704,10 @@ func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListObjectPoliciesRequest(inCpy)
+			req := c.ListObjectPoliciesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5640,31 +2720,38 @@ func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, inp
 
 const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
 
-// ListOutgoingTypedLinksRequest generates a "aws.Request" representing the
-// client's request for the ListOutgoingTypedLinks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListOutgoingTypedLinksRequest is a API request type for the ListOutgoingTypedLinks API operation.
+type ListOutgoingTypedLinksRequest struct {
+	*aws.Request
+	Input *ListOutgoingTypedLinksInput
+}
+
+// Send marshals and sends the ListOutgoingTypedLinks API request.
+func (r *ListOutgoingTypedLinksRequest) Send() (*ListOutgoingTypedLinksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListOutgoingTypedLinksOutput), nil
+}
+
+// ListOutgoingTypedLinksRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListOutgoingTypedLinks for more information on using the ListOutgoingTypedLinks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all the outgoing TypedLinkSpecifier information
+// for an object. It also supports filtering by typed link facet and identity
+// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the ListOutgoingTypedLinksRequest method.
-//    req, resp := client.ListOutgoingTypedLinksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListOutgoingTypedLinksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks
-func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) (req *aws.Request, output *ListOutgoingTypedLinksOutput) {
+func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) ListOutgoingTypedLinksRequest {
 	op := &aws.Operation{
 		Name:       opListOutgoingTypedLinks,
 		HTTPMethod: "POST",
@@ -5675,115 +2762,42 @@ func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedL
 		input = &ListOutgoingTypedLinksInput{}
 	}
 
-	output = &ListOutgoingTypedLinksOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListOutgoingTypedLinks API operation for Amazon CloudDirectory.
-//
-// Returns a paginated list of all the outgoing TypedLinkSpecifier information
-// for an object. It also supports filtering by typed link facet and identity
-// attributes. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListOutgoingTypedLinks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks
-func (c *CloudDirectory) ListOutgoingTypedLinks(input *ListOutgoingTypedLinksInput) (*ListOutgoingTypedLinksOutput, error) {
-	req, out := c.ListOutgoingTypedLinksRequest(input)
-	return out, req.Send()
-}
-
-// ListOutgoingTypedLinksWithContext is the same as ListOutgoingTypedLinks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListOutgoingTypedLinks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListOutgoingTypedLinksWithContext(ctx aws.Context, input *ListOutgoingTypedLinksInput, opts ...aws.Option) (*ListOutgoingTypedLinksOutput, error) {
-	req, out := c.ListOutgoingTypedLinksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListOutgoingTypedLinksOutput{})
+	return ListOutgoingTypedLinksRequest{Request: req, Input: input}
 }
 
 const opListPolicyAttachments = "ListPolicyAttachments"
 
-// ListPolicyAttachmentsRequest generates a "aws.Request" representing the
-// client's request for the ListPolicyAttachments operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPolicyAttachmentsRequest is a API request type for the ListPolicyAttachments API operation.
+type ListPolicyAttachmentsRequest struct {
+	*aws.Request
+	Input *ListPolicyAttachmentsInput
+}
+
+// Send marshals and sends the ListPolicyAttachments API request.
+func (r *ListPolicyAttachmentsRequest) Send() (*ListPolicyAttachmentsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPolicyAttachmentsOutput), nil
+}
+
+// ListPolicyAttachmentsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPolicyAttachments for more information on using the ListPolicyAttachments
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns all of the ObjectIdentifiers to which a given policy is attached.
 //
 //    // Example sending a request using the ListPolicyAttachmentsRequest method.
-//    req, resp := client.ListPolicyAttachmentsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPolicyAttachmentsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachments
-func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) (req *aws.Request, output *ListPolicyAttachmentsOutput) {
+func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) ListPolicyAttachmentsRequest {
 	op := &aws.Operation{
 		Name:       opListPolicyAttachments,
 		HTTPMethod: "POST",
@@ -5800,86 +2814,8 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 		input = &ListPolicyAttachmentsInput{}
 	}
 
-	output = &ListPolicyAttachmentsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPolicyAttachments API operation for Amazon CloudDirectory.
-//
-// Returns all of the ObjectIdentifiers to which a given policy is attached.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListPolicyAttachments for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeNotPolicyException "NotPolicyException"
-//   Indicates that the requested operation can only operate on policy objects.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachments
-func (c *CloudDirectory) ListPolicyAttachments(input *ListPolicyAttachmentsInput) (*ListPolicyAttachmentsOutput, error) {
-	req, out := c.ListPolicyAttachmentsRequest(input)
-	return out, req.Send()
-}
-
-// ListPolicyAttachmentsWithContext is the same as ListPolicyAttachments with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPolicyAttachments for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListPolicyAttachmentsWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, opts ...aws.Option) (*ListPolicyAttachmentsOutput, error) {
-	req, out := c.ListPolicyAttachmentsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPolicyAttachmentsOutput{})
+	return ListPolicyAttachmentsRequest{Request: req, Input: input}
 }
 
 // ListPolicyAttachmentsPages iterates over the pages of a ListPolicyAttachments operation,
@@ -5918,10 +2854,10 @@ func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPolicyAttachmentsRequest(inCpy)
+			req := c.ListPolicyAttachmentsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -5934,31 +2870,36 @@ func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, 
 
 const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 
-// ListPublishedSchemaArnsRequest generates a "aws.Request" representing the
-// client's request for the ListPublishedSchemaArns operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListPublishedSchemaArnsRequest is a API request type for the ListPublishedSchemaArns API operation.
+type ListPublishedSchemaArnsRequest struct {
+	*aws.Request
+	Input *ListPublishedSchemaArnsInput
+}
+
+// Send marshals and sends the ListPublishedSchemaArns API request.
+func (r *ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPublishedSchemaArnsOutput), nil
+}
+
+// ListPublishedSchemaArnsRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListPublishedSchemaArns for more information on using the ListPublishedSchemaArns
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Retrieves each published schema Amazon Resource Name (ARN).
 //
 //    // Example sending a request using the ListPublishedSchemaArnsRequest method.
-//    req, resp := client.ListPublishedSchemaArnsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListPublishedSchemaArnsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArns
-func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) (req *aws.Request, output *ListPublishedSchemaArnsOutput) {
+func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest {
 	op := &aws.Operation{
 		Name:       opListPublishedSchemaArns,
 		HTTPMethod: "POST",
@@ -5975,77 +2916,8 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 		input = &ListPublishedSchemaArnsInput{}
 	}
 
-	output = &ListPublishedSchemaArnsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListPublishedSchemaArns API operation for Amazon CloudDirectory.
-//
-// Retrieves each published schema Amazon Resource Name (ARN).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListPublishedSchemaArns for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArns
-func (c *CloudDirectory) ListPublishedSchemaArns(input *ListPublishedSchemaArnsInput) (*ListPublishedSchemaArnsOutput, error) {
-	req, out := c.ListPublishedSchemaArnsRequest(input)
-	return out, req.Send()
-}
-
-// ListPublishedSchemaArnsWithContext is the same as ListPublishedSchemaArns with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListPublishedSchemaArns for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListPublishedSchemaArnsWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, opts ...aws.Option) (*ListPublishedSchemaArnsOutput, error) {
-	req, out := c.ListPublishedSchemaArnsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListPublishedSchemaArnsOutput{})
+	return ListPublishedSchemaArnsRequest{Request: req, Input: input}
 }
 
 // ListPublishedSchemaArnsPages iterates over the pages of a ListPublishedSchemaArns operation,
@@ -6084,10 +2956,10 @@ func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListPublishedSchemaArnsRequest(inCpy)
+			req := c.ListPublishedSchemaArnsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6100,31 +2972,38 @@ func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns tags for a resource. Tagging is currently supported only for directories
+// with a limit of 50 tags per directory. All 50 tags are returned for a given
+// directory with this API call.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResource
-func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -6141,81 +3020,8 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for Amazon CloudDirectory.
-//
-// Returns tags for a resource. Tagging is currently supported only for directories
-// with a limit of 50 tags per directory. All 50 tags are returned for a given
-// directory with this API call.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResource
-func (c *CloudDirectory) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 // ListTagsForResourcePages iterates over the pages of a ListTagsForResource operation,
@@ -6254,10 +3060,10 @@ func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, in
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTagsForResourceRequest(inCpy)
+			req := c.ListTagsForResourceRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6270,31 +3076,37 @@ func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, in
 
 const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 
-// ListTypedLinkFacetAttributesRequest generates a "aws.Request" representing the
-// client's request for the ListTypedLinkFacetAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTypedLinkFacetAttributesRequest is a API request type for the ListTypedLinkFacetAttributes API operation.
+type ListTypedLinkFacetAttributesRequest struct {
+	*aws.Request
+	Input *ListTypedLinkFacetAttributesInput
+}
+
+// Send marshals and sends the ListTypedLinkFacetAttributes API request.
+func (r *ListTypedLinkFacetAttributesRequest) Send() (*ListTypedLinkFacetAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTypedLinkFacetAttributesOutput), nil
+}
+
+// ListTypedLinkFacetAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTypedLinkFacetAttributes for more information on using the ListTypedLinkFacetAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of all attribute definitions for a particular TypedLinkFacet.
+// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetAttributesRequest method.
-//    req, resp := client.ListTypedLinkFacetAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTypedLinkFacetAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes
-func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) (req *aws.Request, output *ListTypedLinkFacetAttributesOutput) {
+func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest {
 	op := &aws.Operation{
 		Name:       opListTypedLinkFacetAttributes,
 		HTTPMethod: "POST",
@@ -6311,81 +3123,8 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 		input = &ListTypedLinkFacetAttributesInput{}
 	}
 
-	output = &ListTypedLinkFacetAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTypedLinkFacetAttributes API operation for Amazon CloudDirectory.
-//
-// Returns a paginated list of all attribute definitions for a particular TypedLinkFacet.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListTypedLinkFacetAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes
-func (c *CloudDirectory) ListTypedLinkFacetAttributes(input *ListTypedLinkFacetAttributesInput) (*ListTypedLinkFacetAttributesOutput, error) {
-	req, out := c.ListTypedLinkFacetAttributesRequest(input)
-	return out, req.Send()
-}
-
-// ListTypedLinkFacetAttributesWithContext is the same as ListTypedLinkFacetAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTypedLinkFacetAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetAttributesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, opts ...aws.Option) (*ListTypedLinkFacetAttributesOutput, error) {
-	req, out := c.ListTypedLinkFacetAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTypedLinkFacetAttributesOutput{})
+	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input}
 }
 
 // ListTypedLinkFacetAttributesPages iterates over the pages of a ListTypedLinkFacetAttributes operation,
@@ -6424,10 +3163,10 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Co
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTypedLinkFacetAttributesRequest(inCpy)
+			req := c.ListTypedLinkFacetAttributesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6440,31 +3179,37 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Co
 
 const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
 
-// ListTypedLinkFacetNamesRequest generates a "aws.Request" representing the
-// client's request for the ListTypedLinkFacetNames operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTypedLinkFacetNamesRequest is a API request type for the ListTypedLinkFacetNames API operation.
+type ListTypedLinkFacetNamesRequest struct {
+	*aws.Request
+	Input *ListTypedLinkFacetNamesInput
+}
+
+// Send marshals and sends the ListTypedLinkFacetNames API request.
+func (r *ListTypedLinkFacetNamesRequest) Send() (*ListTypedLinkFacetNamesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTypedLinkFacetNamesOutput), nil
+}
+
+// ListTypedLinkFacetNamesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTypedLinkFacetNames for more information on using the ListTypedLinkFacetNames
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a paginated list of TypedLink facet names for a particular schema.
+// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the ListTypedLinkFacetNamesRequest method.
-//    req, resp := client.ListTypedLinkFacetNamesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTypedLinkFacetNamesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames
-func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) (req *aws.Request, output *ListTypedLinkFacetNamesOutput) {
+func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) ListTypedLinkFacetNamesRequest {
 	op := &aws.Operation{
 		Name:       opListTypedLinkFacetNames,
 		HTTPMethod: "POST",
@@ -6481,78 +3226,8 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 		input = &ListTypedLinkFacetNamesInput{}
 	}
 
-	output = &ListTypedLinkFacetNamesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTypedLinkFacetNames API operation for Amazon CloudDirectory.
-//
-// Returns a paginated list of TypedLink facet names for a particular schema.
-// For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation ListTypedLinkFacetNames for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames
-func (c *CloudDirectory) ListTypedLinkFacetNames(input *ListTypedLinkFacetNamesInput) (*ListTypedLinkFacetNamesOutput, error) {
-	req, out := c.ListTypedLinkFacetNamesRequest(input)
-	return out, req.Send()
-}
-
-// ListTypedLinkFacetNamesWithContext is the same as ListTypedLinkFacetNames with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTypedLinkFacetNames for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetNamesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, opts ...aws.Option) (*ListTypedLinkFacetNamesOutput, error) {
-	req, out := c.ListTypedLinkFacetNamesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTypedLinkFacetNamesOutput{})
+	return ListTypedLinkFacetNamesRequest{Request: req, Input: input}
 }
 
 // ListTypedLinkFacetNamesPages iterates over the pages of a ListTypedLinkFacetNames operation,
@@ -6591,10 +3266,10 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListTypedLinkFacetNamesRequest(inCpy)
+			req := c.ListTypedLinkFacetNamesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6607,31 +3282,42 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context
 
 const opLookupPolicy = "LookupPolicy"
 
-// LookupPolicyRequest generates a "aws.Request" representing the
-// client's request for the LookupPolicy operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// LookupPolicyRequest is a API request type for the LookupPolicy API operation.
+type LookupPolicyRequest struct {
+	*aws.Request
+	Input *LookupPolicyInput
+}
+
+// Send marshals and sends the LookupPolicy API request.
+func (r *LookupPolicyRequest) Send() (*LookupPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*LookupPolicyOutput), nil
+}
+
+// LookupPolicyRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See LookupPolicy for more information on using the LookupPolicy
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists all policies from the root of the Directory to the object specified.
+// If there are no policies present, an empty list is returned. If policies
+// are present, and if some objects don't have the policies attached, it returns
+// the ObjectIdentifier for such objects. If policies are present, it returns
+// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
+// root from the target object are ignored. For more information, see Policies
+// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
 //
 //    // Example sending a request using the LookupPolicyRequest method.
-//    req, resp := client.LookupPolicyRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.LookupPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicy
-func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *aws.Request, output *LookupPolicyOutput) {
+func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPolicyRequest {
 	op := &aws.Operation{
 		Name:       opLookupPolicy,
 		HTTPMethod: "POST",
@@ -6648,89 +3334,8 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *aws
 		input = &LookupPolicyInput{}
 	}
 
-	output = &LookupPolicyOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// LookupPolicy API operation for Amazon CloudDirectory.
-//
-// Lists all policies from the root of the Directory to the object specified.
-// If there are no policies present, an empty list is returned. If policies
-// are present, and if some objects don't have the policies attached, it returns
-// the ObjectIdentifier for such objects. If policies are present, it returns
-// ObjectIdentifier, policyId, and policyType. Paths that don't lead to the
-// root from the target object are ignored. For more information, see Policies
-// (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation LookupPolicy for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeInvalidNextTokenException "InvalidNextTokenException"
-//   Indicates that the NextToken value is not valid.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicy
-func (c *CloudDirectory) LookupPolicy(input *LookupPolicyInput) (*LookupPolicyOutput, error) {
-	req, out := c.LookupPolicyRequest(input)
-	return out, req.Send()
-}
-
-// LookupPolicyWithContext is the same as LookupPolicy with the addition of
-// the ability to pass a context and additional request options.
-//
-// See LookupPolicy for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) LookupPolicyWithContext(ctx aws.Context, input *LookupPolicyInput, opts ...aws.Option) (*LookupPolicyOutput, error) {
-	req, out := c.LookupPolicyRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &LookupPolicyOutput{})
+	return LookupPolicyRequest{Request: req, Input: input}
 }
 
 // LookupPolicyPages iterates over the pages of a LookupPolicy operation,
@@ -6769,10 +3374,10 @@ func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *Lo
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.LookupPolicyRequest(inCpy)
+			req := c.LookupPolicyRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -6785,31 +3390,39 @@ func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *Lo
 
 const opPublishSchema = "PublishSchema"
 
-// PublishSchemaRequest generates a "aws.Request" representing the
-// client's request for the PublishSchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PublishSchemaRequest is a API request type for the PublishSchema API operation.
+type PublishSchemaRequest struct {
+	*aws.Request
+	Input *PublishSchemaInput
+}
+
+// Send marshals and sends the PublishSchema API request.
+func (r *PublishSchemaRequest) Send() (*PublishSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PublishSchemaOutput), nil
+}
+
+// PublishSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PublishSchema for more information on using the PublishSchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Publishes a development schema with a version. If description and attributes
+// are specified, PublishSchema overrides the development schema description
+// and attributes. If not, the development schema description and attributes
+// are used.
 //
 //    // Example sending a request using the PublishSchemaRequest method.
-//    req, resp := client.PublishSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PublishSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchema
-func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *aws.Request, output *PublishSchemaOutput) {
+func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) PublishSchemaRequest {
 	op := &aws.Operation{
 		Name:       opPublishSchema,
 		HTTPMethod: "PUT",
@@ -6820,109 +3433,44 @@ func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *a
 		input = &PublishSchemaInput{}
 	}
 
-	output = &PublishSchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PublishSchema API operation for Amazon CloudDirectory.
-//
-// Publishes a development schema with a version. If description and attributes
-// are specified, PublishSchema overrides the development schema description
-// and attributes. If not, the development schema description and attributes
-// are used.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation PublishSchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeSchemaAlreadyPublishedException "SchemaAlreadyPublishedException"
-//   Indicates that a schema is already published.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchema
-func (c *CloudDirectory) PublishSchema(input *PublishSchemaInput) (*PublishSchemaOutput, error) {
-	req, out := c.PublishSchemaRequest(input)
-	return out, req.Send()
-}
-
-// PublishSchemaWithContext is the same as PublishSchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PublishSchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) PublishSchemaWithContext(ctx aws.Context, input *PublishSchemaInput, opts ...aws.Option) (*PublishSchemaOutput, error) {
-	req, out := c.PublishSchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PublishSchemaOutput{})
+	return PublishSchemaRequest{Request: req, Input: input}
 }
 
 const opPutSchemaFromJson = "PutSchemaFromJson"
 
-// PutSchemaFromJsonRequest generates a "aws.Request" representing the
-// client's request for the PutSchemaFromJson operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// PutSchemaFromJsonRequest is a API request type for the PutSchemaFromJson API operation.
+type PutSchemaFromJsonRequest struct {
+	*aws.Request
+	Input *PutSchemaFromJsonInput
+}
+
+// Send marshals and sends the PutSchemaFromJson API request.
+func (r *PutSchemaFromJsonRequest) Send() (*PutSchemaFromJsonOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutSchemaFromJsonOutput), nil
+}
+
+// PutSchemaFromJsonRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See PutSchemaFromJson for more information on using the PutSchemaFromJson
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Allows a schema to be updated using JSON upload. Only available for development
+// schemas. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
+// for more information.
 //
 //    // Example sending a request using the PutSchemaFromJsonRequest method.
-//    req, resp := client.PutSchemaFromJsonRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.PutSchemaFromJsonRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJson
-func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) (req *aws.Request, output *PutSchemaFromJsonOutput) {
+func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) PutSchemaFromJsonRequest {
 	op := &aws.Operation{
 		Name:       opPutSchemaFromJson,
 		HTTPMethod: "PUT",
@@ -6933,108 +3481,42 @@ func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput)
 		input = &PutSchemaFromJsonInput{}
 	}
 
-	output = &PutSchemaFromJsonOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// PutSchemaFromJson API operation for Amazon CloudDirectory.
-//
-// Allows a schema to be updated using JSON upload. Only available for development
-// schemas. See JSON Schema Format (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat)
-// for more information.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation PutSchemaFromJson for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeInvalidSchemaDocException "InvalidSchemaDocException"
-//   Indicates that the provided SchemaDoc value is not valid.
-//
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJson
-func (c *CloudDirectory) PutSchemaFromJson(input *PutSchemaFromJsonInput) (*PutSchemaFromJsonOutput, error) {
-	req, out := c.PutSchemaFromJsonRequest(input)
-	return out, req.Send()
-}
-
-// PutSchemaFromJsonWithContext is the same as PutSchemaFromJson with the addition of
-// the ability to pass a context and additional request options.
-//
-// See PutSchemaFromJson for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) PutSchemaFromJsonWithContext(ctx aws.Context, input *PutSchemaFromJsonInput, opts ...aws.Option) (*PutSchemaFromJsonOutput, error) {
-	req, out := c.PutSchemaFromJsonRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &PutSchemaFromJsonOutput{})
+	return PutSchemaFromJsonRequest{Request: req, Input: input}
 }
 
 const opRemoveFacetFromObject = "RemoveFacetFromObject"
 
-// RemoveFacetFromObjectRequest generates a "aws.Request" representing the
-// client's request for the RemoveFacetFromObject operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveFacetFromObjectRequest is a API request type for the RemoveFacetFromObject API operation.
+type RemoveFacetFromObjectRequest struct {
+	*aws.Request
+	Input *RemoveFacetFromObjectInput
+}
+
+// Send marshals and sends the RemoveFacetFromObject API request.
+func (r *RemoveFacetFromObjectRequest) Send() (*RemoveFacetFromObjectOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveFacetFromObjectOutput), nil
+}
+
+// RemoveFacetFromObjectRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveFacetFromObject for more information on using the RemoveFacetFromObject
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes the specified facet from the specified object.
 //
 //    // Example sending a request using the RemoveFacetFromObjectRequest method.
-//    req, resp := client.RemoveFacetFromObjectRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveFacetFromObjectRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObject
-func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) (req *aws.Request, output *RemoveFacetFromObjectOutput) {
+func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) RemoveFacetFromObjectRequest {
 	op := &aws.Operation{
 		Name:       opRemoveFacetFromObject,
 		HTTPMethod: "PUT",
@@ -7045,110 +3527,42 @@ func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObje
 		input = &RemoveFacetFromObjectInput{}
 	}
 
-	output = &RemoveFacetFromObjectOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveFacetFromObject API operation for Amazon CloudDirectory.
-//
-// Removes the specified facet from the specified object.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation RemoveFacetFromObject for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObject
-func (c *CloudDirectory) RemoveFacetFromObject(input *RemoveFacetFromObjectInput) (*RemoveFacetFromObjectOutput, error) {
-	req, out := c.RemoveFacetFromObjectRequest(input)
-	return out, req.Send()
-}
-
-// RemoveFacetFromObjectWithContext is the same as RemoveFacetFromObject with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveFacetFromObject for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) RemoveFacetFromObjectWithContext(ctx aws.Context, input *RemoveFacetFromObjectInput, opts ...aws.Option) (*RemoveFacetFromObjectOutput, error) {
-	req, out := c.RemoveFacetFromObjectRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveFacetFromObjectOutput{})
+	return RemoveFacetFromObjectRequest{Request: req, Input: input}
 }
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws.Request" representing the
-// client's request for the TagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See TagResource for more information on using the TagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// An API operation for adding tags to a resource.
 //
 //    // Example sending a request using the TagResourceRequest method.
-//    req, resp := client.TagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResource
-func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "PUT",
@@ -7159,108 +3573,42 @@ func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *aws.R
 		input = &TagResourceInput{}
 	}
 
-	output = &TagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// TagResource API operation for Amazon CloudDirectory.
-//
-// An API operation for adding tags to a resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation TagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResource
-func (c *CloudDirectory) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	return out, req.Send()
-}
-
-// TagResourceWithContext is the same as TagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See TagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
-	req, out := c.TagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &TagResourceOutput{})
+	return TagResourceRequest{Request: req, Input: input}
 }
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws.Request" representing the
-// client's request for the UntagResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UntagResource for more information on using the UntagResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// An API operation for removing tags from a resource.
 //
 //    // Example sending a request using the UntagResourceRequest method.
-//    req, resp := client.UntagResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResource
-func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "PUT",
@@ -7271,108 +3619,48 @@ func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *a
 		input = &UntagResourceInput{}
 	}
 
-	output = &UntagResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UntagResource API operation for Amazon CloudDirectory.
-//
-// An API operation for removing tags from a resource.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation UntagResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeInvalidTaggingRequestException "InvalidTaggingRequestException"
-//   Can occur for multiple reasons such as when you tag a resource that doesn’t
-//   exist or if you specify a higher number of tags for a resource than the allowed
-//   limit. Allowed limit is 50 tags per resource.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResource
-func (c *CloudDirectory) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	return out, req.Send()
-}
-
-// UntagResourceWithContext is the same as UntagResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UntagResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
-	req, out := c.UntagResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UntagResourceOutput{})
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateFacet = "UpdateFacet"
 
-// UpdateFacetRequest generates a "aws.Request" representing the
-// client's request for the UpdateFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateFacetRequest is a API request type for the UpdateFacet API operation.
+type UpdateFacetRequest struct {
+	*aws.Request
+	Input *UpdateFacetInput
+}
+
+// Send marshals and sends the UpdateFacet API request.
+func (r *UpdateFacetRequest) Send() (*UpdateFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFacetOutput), nil
+}
+
+// UpdateFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Does the following:
 //
-// See UpdateFacet for more information on using the UpdateFacet
-// API call, and error handling.
+// Adds new Attributes, Rules, or ObjectTypes.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+// Updates existing Attributes, Rules, or ObjectTypes.
 //
+// Deletes existing Attributes, Rules, or ObjectTypes.
 //
 //    // Example sending a request using the UpdateFacetRequest method.
-//    req, resp := client.UpdateFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacet
-func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *aws.Request, output *UpdateFacetOutput) {
+func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFacet,
 		HTTPMethod: "PUT",
@@ -7383,118 +3671,42 @@ func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *aws.R
 		input = &UpdateFacetInput{}
 	}
 
-	output = &UpdateFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateFacet API operation for Amazon CloudDirectory.
-//
-// Does the following:
-//
-// Adds new Attributes, Rules, or ObjectTypes.
-//
-// Updates existing Attributes, Rules, or ObjectTypes.
-//
-// Deletes existing Attributes, Rules, or ObjectTypes.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation UpdateFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeInvalidFacetUpdateException "InvalidFacetUpdateException"
-//   An attempt to modify a Facet resulted in an invalid schema exception.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacet
-func (c *CloudDirectory) UpdateFacet(input *UpdateFacetInput) (*UpdateFacetOutput, error) {
-	req, out := c.UpdateFacetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateFacetWithContext is the same as UpdateFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) UpdateFacetWithContext(ctx aws.Context, input *UpdateFacetInput, opts ...aws.Option) (*UpdateFacetOutput, error) {
-	req, out := c.UpdateFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateFacetOutput{})
+	return UpdateFacetRequest{Request: req, Input: input}
 }
 
 const opUpdateObjectAttributes = "UpdateObjectAttributes"
 
-// UpdateObjectAttributesRequest generates a "aws.Request" representing the
-// client's request for the UpdateObjectAttributes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateObjectAttributesRequest is a API request type for the UpdateObjectAttributes API operation.
+type UpdateObjectAttributesRequest struct {
+	*aws.Request
+	Input *UpdateObjectAttributesInput
+}
+
+// Send marshals and sends the UpdateObjectAttributes API request.
+func (r *UpdateObjectAttributesRequest) Send() (*UpdateObjectAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateObjectAttributesOutput), nil
+}
+
+// UpdateObjectAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateObjectAttributes for more information on using the UpdateObjectAttributes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a given object's attributes.
 //
 //    // Example sending a request using the UpdateObjectAttributesRequest method.
-//    req, resp := client.UpdateObjectAttributesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateObjectAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributes
-func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) (req *aws.Request, output *UpdateObjectAttributesOutput) {
+func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) UpdateObjectAttributesRequest {
 	op := &aws.Operation{
 		Name:       opUpdateObjectAttributes,
 		HTTPMethod: "PUT",
@@ -7505,110 +3717,43 @@ func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttrib
 		input = &UpdateObjectAttributesInput{}
 	}
 
-	output = &UpdateObjectAttributesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateObjectAttributes API operation for Amazon CloudDirectory.
-//
-// Updates a given object's attributes.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation UpdateObjectAttributes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeDirectoryNotEnabledException "DirectoryNotEnabledException"
-//   An operation can only operate on a directory that is not enabled.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributes
-func (c *CloudDirectory) UpdateObjectAttributes(input *UpdateObjectAttributesInput) (*UpdateObjectAttributesOutput, error) {
-	req, out := c.UpdateObjectAttributesRequest(input)
-	return out, req.Send()
-}
-
-// UpdateObjectAttributesWithContext is the same as UpdateObjectAttributes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateObjectAttributes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) UpdateObjectAttributesWithContext(ctx aws.Context, input *UpdateObjectAttributesInput, opts ...aws.Option) (*UpdateObjectAttributesOutput, error) {
-	req, out := c.UpdateObjectAttributesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateObjectAttributesOutput{})
+	return UpdateObjectAttributesRequest{Request: req, Input: input}
 }
 
 const opUpdateSchema = "UpdateSchema"
 
-// UpdateSchemaRequest generates a "aws.Request" representing the
-// client's request for the UpdateSchema operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateSchemaRequest is a API request type for the UpdateSchema API operation.
+type UpdateSchemaRequest struct {
+	*aws.Request
+	Input *UpdateSchemaInput
+}
+
+// Send marshals and sends the UpdateSchema API request.
+func (r *UpdateSchemaRequest) Send() (*UpdateSchemaOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSchemaOutput), nil
+}
+
+// UpdateSchemaRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSchema for more information on using the UpdateSchema
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the schema name with a new name. Only development schema names can
+// be updated.
 //
 //    // Example sending a request using the UpdateSchemaRequest method.
-//    req, resp := client.UpdateSchemaRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateSchemaRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchema
-func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *aws.Request, output *UpdateSchemaOutput) {
+func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSchemaRequest {
 	op := &aws.Operation{
 		Name:       opUpdateSchema,
 		HTTPMethod: "PUT",
@@ -7619,104 +3764,42 @@ func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *aws
 		input = &UpdateSchemaInput{}
 	}
 
-	output = &UpdateSchemaOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateSchema API operation for Amazon CloudDirectory.
-//
-// Updates the schema name with a new name. Only development schema names can
-// be updated.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation UpdateSchema for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchema
-func (c *CloudDirectory) UpdateSchema(input *UpdateSchemaInput) (*UpdateSchemaOutput, error) {
-	req, out := c.UpdateSchemaRequest(input)
-	return out, req.Send()
-}
-
-// UpdateSchemaWithContext is the same as UpdateSchema with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSchema for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) UpdateSchemaWithContext(ctx aws.Context, input *UpdateSchemaInput, opts ...aws.Option) (*UpdateSchemaOutput, error) {
-	req, out := c.UpdateSchemaRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateSchemaOutput{})
+	return UpdateSchemaRequest{Request: req, Input: input}
 }
 
 const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
 
-// UpdateTypedLinkFacetRequest generates a "aws.Request" representing the
-// client's request for the UpdateTypedLinkFacet operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateTypedLinkFacetRequest is a API request type for the UpdateTypedLinkFacet API operation.
+type UpdateTypedLinkFacetRequest struct {
+	*aws.Request
+	Input *UpdateTypedLinkFacetInput
+}
+
+// Send marshals and sends the UpdateTypedLinkFacet API request.
+func (r *UpdateTypedLinkFacetRequest) Send() (*UpdateTypedLinkFacetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateTypedLinkFacetOutput), nil
+}
+
+// UpdateTypedLinkFacetRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateTypedLinkFacet for more information on using the UpdateTypedLinkFacet
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
 //
 //    // Example sending a request using the UpdateTypedLinkFacetRequest method.
-//    req, resp := client.UpdateTypedLinkFacetRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateTypedLinkFacetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet
-func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) (req *aws.Request, output *UpdateTypedLinkFacetOutput) {
+func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) UpdateTypedLinkFacetRequest {
 	op := &aws.Operation{
 		Name:       opUpdateTypedLinkFacet,
 		HTTPMethod: "PUT",
@@ -7727,87 +3810,8 @@ func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacet
 		input = &UpdateTypedLinkFacetInput{}
 	}
 
-	output = &UpdateTypedLinkFacetOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateTypedLinkFacet API operation for Amazon CloudDirectory.
-//
-// Updates a TypedLinkFacet. For more information, see Typed link (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for Amazon CloudDirectory's
-// API operation UpdateTypedLinkFacet for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInternalServiceException "InternalServiceException"
-//   Indicates a problem that must be resolved by Amazon Web Services. This might
-//   be a transient error in which case you can retry your request until it succeeds.
-//   Otherwise, go to the AWS Service Health Dashboard (http://status.aws.amazon.com/)
-//   site to see if there are any operational issues with the service.
-//
-//   * ErrCodeInvalidArnException "InvalidArnException"
-//   Indicates that the provided ARN value is not valid.
-//
-//   * ErrCodeRetryableConflictException "RetryableConflictException"
-//   Occurs when a conflict with a previous successful write is detected. For
-//   example, if a write operation occurs on an object and then an attempt is
-//   made to read the object using “SERIALIZABLE” consistency, this exception
-//   may result. This generally occurs when the previous write did not have time
-//   to propagate to the host serving the current request. A retry (with appropriate
-//   backoff logic) is the recommended response to this exception.
-//
-//   * ErrCodeValidationException "ValidationException"
-//   Indicates that your request is malformed in some manner. See the exception
-//   message.
-//
-//   * ErrCodeLimitExceededException "LimitExceededException"
-//   Indicates that limits are exceeded. See Limits (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html)
-//   for more information.
-//
-//   * ErrCodeAccessDeniedException "AccessDeniedException"
-//   Access denied. Check your permissions.
-//
-//   * ErrCodeFacetValidationException "FacetValidationException"
-//   The Facet that you provided was not well formed or could not be validated
-//   with the schema.
-//
-//   * ErrCodeInvalidFacetUpdateException "InvalidFacetUpdateException"
-//   An attempt to modify a Facet resulted in an invalid schema exception.
-//
-//   * ErrCodeResourceNotFoundException "ResourceNotFoundException"
-//   The specified resource could not be found.
-//
-//   * ErrCodeFacetNotFoundException "FacetNotFoundException"
-//   The specified Facet could not be found.
-//
-//   * ErrCodeInvalidRuleException "InvalidRuleException"
-//   Occurs when any of the rule parameter keys or values are invalid.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet
-func (c *CloudDirectory) UpdateTypedLinkFacet(input *UpdateTypedLinkFacetInput) (*UpdateTypedLinkFacetOutput, error) {
-	req, out := c.UpdateTypedLinkFacetRequest(input)
-	return out, req.Send()
-}
-
-// UpdateTypedLinkFacetWithContext is the same as UpdateTypedLinkFacet with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateTypedLinkFacet for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) UpdateTypedLinkFacetWithContext(ctx aws.Context, input *UpdateTypedLinkFacetInput, opts ...aws.Option) (*UpdateTypedLinkFacetOutput, error) {
-	req, out := c.UpdateTypedLinkFacetRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateTypedLinkFacetOutput{})
+	return UpdateTypedLinkFacetRequest{Request: req, Input: input}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectRequest

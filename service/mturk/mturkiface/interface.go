@@ -63,191 +63,113 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type MTurkAPI interface {
-	AcceptQualificationRequest(*mturk.AcceptQualificationRequestInput) (*mturk.AcceptQualificationRequestOutput, error)
-	AcceptQualificationRequestWithContext(aws.Context, *mturk.AcceptQualificationRequestInput, ...aws.Option) (*mturk.AcceptQualificationRequestOutput, error)
-	AcceptQualificationRequestRequest(*mturk.AcceptQualificationRequestInput) (*aws.Request, *mturk.AcceptQualificationRequestOutput)
+	AcceptQualificationRequestRequest(*mturk.AcceptQualificationRequestInput) mturk.AcceptQualificationRequestRequest
 
-	ApproveAssignment(*mturk.ApproveAssignmentInput) (*mturk.ApproveAssignmentOutput, error)
-	ApproveAssignmentWithContext(aws.Context, *mturk.ApproveAssignmentInput, ...aws.Option) (*mturk.ApproveAssignmentOutput, error)
-	ApproveAssignmentRequest(*mturk.ApproveAssignmentInput) (*aws.Request, *mturk.ApproveAssignmentOutput)
+	ApproveAssignmentRequest(*mturk.ApproveAssignmentInput) mturk.ApproveAssignmentRequest
 
-	AssociateQualificationWithWorker(*mturk.AssociateQualificationWithWorkerInput) (*mturk.AssociateQualificationWithWorkerOutput, error)
-	AssociateQualificationWithWorkerWithContext(aws.Context, *mturk.AssociateQualificationWithWorkerInput, ...aws.Option) (*mturk.AssociateQualificationWithWorkerOutput, error)
-	AssociateQualificationWithWorkerRequest(*mturk.AssociateQualificationWithWorkerInput) (*aws.Request, *mturk.AssociateQualificationWithWorkerOutput)
+	AssociateQualificationWithWorkerRequest(*mturk.AssociateQualificationWithWorkerInput) mturk.AssociateQualificationWithWorkerRequest
 
-	CreateAdditionalAssignmentsForHIT(*mturk.CreateAdditionalAssignmentsForHITInput) (*mturk.CreateAdditionalAssignmentsForHITOutput, error)
-	CreateAdditionalAssignmentsForHITWithContext(aws.Context, *mturk.CreateAdditionalAssignmentsForHITInput, ...aws.Option) (*mturk.CreateAdditionalAssignmentsForHITOutput, error)
-	CreateAdditionalAssignmentsForHITRequest(*mturk.CreateAdditionalAssignmentsForHITInput) (*aws.Request, *mturk.CreateAdditionalAssignmentsForHITOutput)
+	CreateAdditionalAssignmentsForHITRequest(*mturk.CreateAdditionalAssignmentsForHITInput) mturk.CreateAdditionalAssignmentsForHITRequest
 
-	CreateHIT(*mturk.CreateHITInput) (*mturk.CreateHITOutput, error)
-	CreateHITWithContext(aws.Context, *mturk.CreateHITInput, ...aws.Option) (*mturk.CreateHITOutput, error)
-	CreateHITRequest(*mturk.CreateHITInput) (*aws.Request, *mturk.CreateHITOutput)
+	CreateHITRequest(*mturk.CreateHITInput) mturk.CreateHITRequest
 
-	CreateHITType(*mturk.CreateHITTypeInput) (*mturk.CreateHITTypeOutput, error)
-	CreateHITTypeWithContext(aws.Context, *mturk.CreateHITTypeInput, ...aws.Option) (*mturk.CreateHITTypeOutput, error)
-	CreateHITTypeRequest(*mturk.CreateHITTypeInput) (*aws.Request, *mturk.CreateHITTypeOutput)
+	CreateHITTypeRequest(*mturk.CreateHITTypeInput) mturk.CreateHITTypeRequest
 
-	CreateHITWithHITType(*mturk.CreateHITWithHITTypeInput) (*mturk.CreateHITWithHITTypeOutput, error)
-	CreateHITWithHITTypeWithContext(aws.Context, *mturk.CreateHITWithHITTypeInput, ...aws.Option) (*mturk.CreateHITWithHITTypeOutput, error)
-	CreateHITWithHITTypeRequest(*mturk.CreateHITWithHITTypeInput) (*aws.Request, *mturk.CreateHITWithHITTypeOutput)
+	CreateHITWithHITTypeRequest(*mturk.CreateHITWithHITTypeInput) mturk.CreateHITWithHITTypeRequest
 
-	CreateQualificationType(*mturk.CreateQualificationTypeInput) (*mturk.CreateQualificationTypeOutput, error)
-	CreateQualificationTypeWithContext(aws.Context, *mturk.CreateQualificationTypeInput, ...aws.Option) (*mturk.CreateQualificationTypeOutput, error)
-	CreateQualificationTypeRequest(*mturk.CreateQualificationTypeInput) (*aws.Request, *mturk.CreateQualificationTypeOutput)
+	CreateQualificationTypeRequest(*mturk.CreateQualificationTypeInput) mturk.CreateQualificationTypeRequest
 
-	CreateWorkerBlock(*mturk.CreateWorkerBlockInput) (*mturk.CreateWorkerBlockOutput, error)
-	CreateWorkerBlockWithContext(aws.Context, *mturk.CreateWorkerBlockInput, ...aws.Option) (*mturk.CreateWorkerBlockOutput, error)
-	CreateWorkerBlockRequest(*mturk.CreateWorkerBlockInput) (*aws.Request, *mturk.CreateWorkerBlockOutput)
+	CreateWorkerBlockRequest(*mturk.CreateWorkerBlockInput) mturk.CreateWorkerBlockRequest
 
-	DeleteHIT(*mturk.DeleteHITInput) (*mturk.DeleteHITOutput, error)
-	DeleteHITWithContext(aws.Context, *mturk.DeleteHITInput, ...aws.Option) (*mturk.DeleteHITOutput, error)
-	DeleteHITRequest(*mturk.DeleteHITInput) (*aws.Request, *mturk.DeleteHITOutput)
+	DeleteHITRequest(*mturk.DeleteHITInput) mturk.DeleteHITRequest
 
-	DeleteQualificationType(*mturk.DeleteQualificationTypeInput) (*mturk.DeleteQualificationTypeOutput, error)
-	DeleteQualificationTypeWithContext(aws.Context, *mturk.DeleteQualificationTypeInput, ...aws.Option) (*mturk.DeleteQualificationTypeOutput, error)
-	DeleteQualificationTypeRequest(*mturk.DeleteQualificationTypeInput) (*aws.Request, *mturk.DeleteQualificationTypeOutput)
+	DeleteQualificationTypeRequest(*mturk.DeleteQualificationTypeInput) mturk.DeleteQualificationTypeRequest
 
-	DeleteWorkerBlock(*mturk.DeleteWorkerBlockInput) (*mturk.DeleteWorkerBlockOutput, error)
-	DeleteWorkerBlockWithContext(aws.Context, *mturk.DeleteWorkerBlockInput, ...aws.Option) (*mturk.DeleteWorkerBlockOutput, error)
-	DeleteWorkerBlockRequest(*mturk.DeleteWorkerBlockInput) (*aws.Request, *mturk.DeleteWorkerBlockOutput)
+	DeleteWorkerBlockRequest(*mturk.DeleteWorkerBlockInput) mturk.DeleteWorkerBlockRequest
 
-	DisassociateQualificationFromWorker(*mturk.DisassociateQualificationFromWorkerInput) (*mturk.DisassociateQualificationFromWorkerOutput, error)
-	DisassociateQualificationFromWorkerWithContext(aws.Context, *mturk.DisassociateQualificationFromWorkerInput, ...aws.Option) (*mturk.DisassociateQualificationFromWorkerOutput, error)
-	DisassociateQualificationFromWorkerRequest(*mturk.DisassociateQualificationFromWorkerInput) (*aws.Request, *mturk.DisassociateQualificationFromWorkerOutput)
+	DisassociateQualificationFromWorkerRequest(*mturk.DisassociateQualificationFromWorkerInput) mturk.DisassociateQualificationFromWorkerRequest
 
-	GetAccountBalance(*mturk.GetAccountBalanceInput) (*mturk.GetAccountBalanceOutput, error)
-	GetAccountBalanceWithContext(aws.Context, *mturk.GetAccountBalanceInput, ...aws.Option) (*mturk.GetAccountBalanceOutput, error)
-	GetAccountBalanceRequest(*mturk.GetAccountBalanceInput) (*aws.Request, *mturk.GetAccountBalanceOutput)
+	GetAccountBalanceRequest(*mturk.GetAccountBalanceInput) mturk.GetAccountBalanceRequest
 
-	GetAssignment(*mturk.GetAssignmentInput) (*mturk.GetAssignmentOutput, error)
-	GetAssignmentWithContext(aws.Context, *mturk.GetAssignmentInput, ...aws.Option) (*mturk.GetAssignmentOutput, error)
-	GetAssignmentRequest(*mturk.GetAssignmentInput) (*aws.Request, *mturk.GetAssignmentOutput)
+	GetAssignmentRequest(*mturk.GetAssignmentInput) mturk.GetAssignmentRequest
 
-	GetFileUploadURL(*mturk.GetFileUploadURLInput) (*mturk.GetFileUploadURLOutput, error)
-	GetFileUploadURLWithContext(aws.Context, *mturk.GetFileUploadURLInput, ...aws.Option) (*mturk.GetFileUploadURLOutput, error)
-	GetFileUploadURLRequest(*mturk.GetFileUploadURLInput) (*aws.Request, *mturk.GetFileUploadURLOutput)
+	GetFileUploadURLRequest(*mturk.GetFileUploadURLInput) mturk.GetFileUploadURLRequest
 
-	GetHIT(*mturk.GetHITInput) (*mturk.GetHITOutput, error)
-	GetHITWithContext(aws.Context, *mturk.GetHITInput, ...aws.Option) (*mturk.GetHITOutput, error)
-	GetHITRequest(*mturk.GetHITInput) (*aws.Request, *mturk.GetHITOutput)
+	GetHITRequest(*mturk.GetHITInput) mturk.GetHITRequest
 
-	GetQualificationScore(*mturk.GetQualificationScoreInput) (*mturk.GetQualificationScoreOutput, error)
-	GetQualificationScoreWithContext(aws.Context, *mturk.GetQualificationScoreInput, ...aws.Option) (*mturk.GetQualificationScoreOutput, error)
-	GetQualificationScoreRequest(*mturk.GetQualificationScoreInput) (*aws.Request, *mturk.GetQualificationScoreOutput)
+	GetQualificationScoreRequest(*mturk.GetQualificationScoreInput) mturk.GetQualificationScoreRequest
 
-	GetQualificationType(*mturk.GetQualificationTypeInput) (*mturk.GetQualificationTypeOutput, error)
-	GetQualificationTypeWithContext(aws.Context, *mturk.GetQualificationTypeInput, ...aws.Option) (*mturk.GetQualificationTypeOutput, error)
-	GetQualificationTypeRequest(*mturk.GetQualificationTypeInput) (*aws.Request, *mturk.GetQualificationTypeOutput)
+	GetQualificationTypeRequest(*mturk.GetQualificationTypeInput) mturk.GetQualificationTypeRequest
 
-	ListAssignmentsForHIT(*mturk.ListAssignmentsForHITInput) (*mturk.ListAssignmentsForHITOutput, error)
-	ListAssignmentsForHITWithContext(aws.Context, *mturk.ListAssignmentsForHITInput, ...aws.Option) (*mturk.ListAssignmentsForHITOutput, error)
-	ListAssignmentsForHITRequest(*mturk.ListAssignmentsForHITInput) (*aws.Request, *mturk.ListAssignmentsForHITOutput)
+	ListAssignmentsForHITRequest(*mturk.ListAssignmentsForHITInput) mturk.ListAssignmentsForHITRequest
 
 	ListAssignmentsForHITPages(*mturk.ListAssignmentsForHITInput, func(*mturk.ListAssignmentsForHITOutput, bool) bool) error
 	ListAssignmentsForHITPagesWithContext(aws.Context, *mturk.ListAssignmentsForHITInput, func(*mturk.ListAssignmentsForHITOutput, bool) bool, ...aws.Option) error
 
-	ListBonusPayments(*mturk.ListBonusPaymentsInput) (*mturk.ListBonusPaymentsOutput, error)
-	ListBonusPaymentsWithContext(aws.Context, *mturk.ListBonusPaymentsInput, ...aws.Option) (*mturk.ListBonusPaymentsOutput, error)
-	ListBonusPaymentsRequest(*mturk.ListBonusPaymentsInput) (*aws.Request, *mturk.ListBonusPaymentsOutput)
+	ListBonusPaymentsRequest(*mturk.ListBonusPaymentsInput) mturk.ListBonusPaymentsRequest
 
 	ListBonusPaymentsPages(*mturk.ListBonusPaymentsInput, func(*mturk.ListBonusPaymentsOutput, bool) bool) error
 	ListBonusPaymentsPagesWithContext(aws.Context, *mturk.ListBonusPaymentsInput, func(*mturk.ListBonusPaymentsOutput, bool) bool, ...aws.Option) error
 
-	ListHITs(*mturk.ListHITsInput) (*mturk.ListHITsOutput, error)
-	ListHITsWithContext(aws.Context, *mturk.ListHITsInput, ...aws.Option) (*mturk.ListHITsOutput, error)
-	ListHITsRequest(*mturk.ListHITsInput) (*aws.Request, *mturk.ListHITsOutput)
+	ListHITsRequest(*mturk.ListHITsInput) mturk.ListHITsRequest
 
 	ListHITsPages(*mturk.ListHITsInput, func(*mturk.ListHITsOutput, bool) bool) error
 	ListHITsPagesWithContext(aws.Context, *mturk.ListHITsInput, func(*mturk.ListHITsOutput, bool) bool, ...aws.Option) error
 
-	ListHITsForQualificationType(*mturk.ListHITsForQualificationTypeInput) (*mturk.ListHITsForQualificationTypeOutput, error)
-	ListHITsForQualificationTypeWithContext(aws.Context, *mturk.ListHITsForQualificationTypeInput, ...aws.Option) (*mturk.ListHITsForQualificationTypeOutput, error)
-	ListHITsForQualificationTypeRequest(*mturk.ListHITsForQualificationTypeInput) (*aws.Request, *mturk.ListHITsForQualificationTypeOutput)
+	ListHITsForQualificationTypeRequest(*mturk.ListHITsForQualificationTypeInput) mturk.ListHITsForQualificationTypeRequest
 
 	ListHITsForQualificationTypePages(*mturk.ListHITsForQualificationTypeInput, func(*mturk.ListHITsForQualificationTypeOutput, bool) bool) error
 	ListHITsForQualificationTypePagesWithContext(aws.Context, *mturk.ListHITsForQualificationTypeInput, func(*mturk.ListHITsForQualificationTypeOutput, bool) bool, ...aws.Option) error
 
-	ListQualificationRequests(*mturk.ListQualificationRequestsInput) (*mturk.ListQualificationRequestsOutput, error)
-	ListQualificationRequestsWithContext(aws.Context, *mturk.ListQualificationRequestsInput, ...aws.Option) (*mturk.ListQualificationRequestsOutput, error)
-	ListQualificationRequestsRequest(*mturk.ListQualificationRequestsInput) (*aws.Request, *mturk.ListQualificationRequestsOutput)
+	ListQualificationRequestsRequest(*mturk.ListQualificationRequestsInput) mturk.ListQualificationRequestsRequest
 
 	ListQualificationRequestsPages(*mturk.ListQualificationRequestsInput, func(*mturk.ListQualificationRequestsOutput, bool) bool) error
 	ListQualificationRequestsPagesWithContext(aws.Context, *mturk.ListQualificationRequestsInput, func(*mturk.ListQualificationRequestsOutput, bool) bool, ...aws.Option) error
 
-	ListQualificationTypes(*mturk.ListQualificationTypesInput) (*mturk.ListQualificationTypesOutput, error)
-	ListQualificationTypesWithContext(aws.Context, *mturk.ListQualificationTypesInput, ...aws.Option) (*mturk.ListQualificationTypesOutput, error)
-	ListQualificationTypesRequest(*mturk.ListQualificationTypesInput) (*aws.Request, *mturk.ListQualificationTypesOutput)
+	ListQualificationTypesRequest(*mturk.ListQualificationTypesInput) mturk.ListQualificationTypesRequest
 
 	ListQualificationTypesPages(*mturk.ListQualificationTypesInput, func(*mturk.ListQualificationTypesOutput, bool) bool) error
 	ListQualificationTypesPagesWithContext(aws.Context, *mturk.ListQualificationTypesInput, func(*mturk.ListQualificationTypesOutput, bool) bool, ...aws.Option) error
 
-	ListReviewPolicyResultsForHIT(*mturk.ListReviewPolicyResultsForHITInput) (*mturk.ListReviewPolicyResultsForHITOutput, error)
-	ListReviewPolicyResultsForHITWithContext(aws.Context, *mturk.ListReviewPolicyResultsForHITInput, ...aws.Option) (*mturk.ListReviewPolicyResultsForHITOutput, error)
-	ListReviewPolicyResultsForHITRequest(*mturk.ListReviewPolicyResultsForHITInput) (*aws.Request, *mturk.ListReviewPolicyResultsForHITOutput)
+	ListReviewPolicyResultsForHITRequest(*mturk.ListReviewPolicyResultsForHITInput) mturk.ListReviewPolicyResultsForHITRequest
 
 	ListReviewPolicyResultsForHITPages(*mturk.ListReviewPolicyResultsForHITInput, func(*mturk.ListReviewPolicyResultsForHITOutput, bool) bool) error
 	ListReviewPolicyResultsForHITPagesWithContext(aws.Context, *mturk.ListReviewPolicyResultsForHITInput, func(*mturk.ListReviewPolicyResultsForHITOutput, bool) bool, ...aws.Option) error
 
-	ListReviewableHITs(*mturk.ListReviewableHITsInput) (*mturk.ListReviewableHITsOutput, error)
-	ListReviewableHITsWithContext(aws.Context, *mturk.ListReviewableHITsInput, ...aws.Option) (*mturk.ListReviewableHITsOutput, error)
-	ListReviewableHITsRequest(*mturk.ListReviewableHITsInput) (*aws.Request, *mturk.ListReviewableHITsOutput)
+	ListReviewableHITsRequest(*mturk.ListReviewableHITsInput) mturk.ListReviewableHITsRequest
 
 	ListReviewableHITsPages(*mturk.ListReviewableHITsInput, func(*mturk.ListReviewableHITsOutput, bool) bool) error
 	ListReviewableHITsPagesWithContext(aws.Context, *mturk.ListReviewableHITsInput, func(*mturk.ListReviewableHITsOutput, bool) bool, ...aws.Option) error
 
-	ListWorkerBlocks(*mturk.ListWorkerBlocksInput) (*mturk.ListWorkerBlocksOutput, error)
-	ListWorkerBlocksWithContext(aws.Context, *mturk.ListWorkerBlocksInput, ...aws.Option) (*mturk.ListWorkerBlocksOutput, error)
-	ListWorkerBlocksRequest(*mturk.ListWorkerBlocksInput) (*aws.Request, *mturk.ListWorkerBlocksOutput)
+	ListWorkerBlocksRequest(*mturk.ListWorkerBlocksInput) mturk.ListWorkerBlocksRequest
 
 	ListWorkerBlocksPages(*mturk.ListWorkerBlocksInput, func(*mturk.ListWorkerBlocksOutput, bool) bool) error
 	ListWorkerBlocksPagesWithContext(aws.Context, *mturk.ListWorkerBlocksInput, func(*mturk.ListWorkerBlocksOutput, bool) bool, ...aws.Option) error
 
-	ListWorkersWithQualificationType(*mturk.ListWorkersWithQualificationTypeInput) (*mturk.ListWorkersWithQualificationTypeOutput, error)
-	ListWorkersWithQualificationTypeWithContext(aws.Context, *mturk.ListWorkersWithQualificationTypeInput, ...aws.Option) (*mturk.ListWorkersWithQualificationTypeOutput, error)
-	ListWorkersWithQualificationTypeRequest(*mturk.ListWorkersWithQualificationTypeInput) (*aws.Request, *mturk.ListWorkersWithQualificationTypeOutput)
+	ListWorkersWithQualificationTypeRequest(*mturk.ListWorkersWithQualificationTypeInput) mturk.ListWorkersWithQualificationTypeRequest
 
 	ListWorkersWithQualificationTypePages(*mturk.ListWorkersWithQualificationTypeInput, func(*mturk.ListWorkersWithQualificationTypeOutput, bool) bool) error
 	ListWorkersWithQualificationTypePagesWithContext(aws.Context, *mturk.ListWorkersWithQualificationTypeInput, func(*mturk.ListWorkersWithQualificationTypeOutput, bool) bool, ...aws.Option) error
 
-	NotifyWorkers(*mturk.NotifyWorkersInput) (*mturk.NotifyWorkersOutput, error)
-	NotifyWorkersWithContext(aws.Context, *mturk.NotifyWorkersInput, ...aws.Option) (*mturk.NotifyWorkersOutput, error)
-	NotifyWorkersRequest(*mturk.NotifyWorkersInput) (*aws.Request, *mturk.NotifyWorkersOutput)
+	NotifyWorkersRequest(*mturk.NotifyWorkersInput) mturk.NotifyWorkersRequest
 
-	RejectAssignment(*mturk.RejectAssignmentInput) (*mturk.RejectAssignmentOutput, error)
-	RejectAssignmentWithContext(aws.Context, *mturk.RejectAssignmentInput, ...aws.Option) (*mturk.RejectAssignmentOutput, error)
-	RejectAssignmentRequest(*mturk.RejectAssignmentInput) (*aws.Request, *mturk.RejectAssignmentOutput)
+	RejectAssignmentRequest(*mturk.RejectAssignmentInput) mturk.RejectAssignmentRequest
 
-	RejectQualificationRequest(*mturk.RejectQualificationRequestInput) (*mturk.RejectQualificationRequestOutput, error)
-	RejectQualificationRequestWithContext(aws.Context, *mturk.RejectQualificationRequestInput, ...aws.Option) (*mturk.RejectQualificationRequestOutput, error)
-	RejectQualificationRequestRequest(*mturk.RejectQualificationRequestInput) (*aws.Request, *mturk.RejectQualificationRequestOutput)
+	RejectQualificationRequestRequest(*mturk.RejectQualificationRequestInput) mturk.RejectQualificationRequestRequest
 
-	SendBonus(*mturk.SendBonusInput) (*mturk.SendBonusOutput, error)
-	SendBonusWithContext(aws.Context, *mturk.SendBonusInput, ...aws.Option) (*mturk.SendBonusOutput, error)
-	SendBonusRequest(*mturk.SendBonusInput) (*aws.Request, *mturk.SendBonusOutput)
+	SendBonusRequest(*mturk.SendBonusInput) mturk.SendBonusRequest
 
-	SendTestEventNotification(*mturk.SendTestEventNotificationInput) (*mturk.SendTestEventNotificationOutput, error)
-	SendTestEventNotificationWithContext(aws.Context, *mturk.SendTestEventNotificationInput, ...aws.Option) (*mturk.SendTestEventNotificationOutput, error)
-	SendTestEventNotificationRequest(*mturk.SendTestEventNotificationInput) (*aws.Request, *mturk.SendTestEventNotificationOutput)
+	SendTestEventNotificationRequest(*mturk.SendTestEventNotificationInput) mturk.SendTestEventNotificationRequest
 
-	UpdateExpirationForHIT(*mturk.UpdateExpirationForHITInput) (*mturk.UpdateExpirationForHITOutput, error)
-	UpdateExpirationForHITWithContext(aws.Context, *mturk.UpdateExpirationForHITInput, ...aws.Option) (*mturk.UpdateExpirationForHITOutput, error)
-	UpdateExpirationForHITRequest(*mturk.UpdateExpirationForHITInput) (*aws.Request, *mturk.UpdateExpirationForHITOutput)
+	UpdateExpirationForHITRequest(*mturk.UpdateExpirationForHITInput) mturk.UpdateExpirationForHITRequest
 
-	UpdateHITReviewStatus(*mturk.UpdateHITReviewStatusInput) (*mturk.UpdateHITReviewStatusOutput, error)
-	UpdateHITReviewStatusWithContext(aws.Context, *mturk.UpdateHITReviewStatusInput, ...aws.Option) (*mturk.UpdateHITReviewStatusOutput, error)
-	UpdateHITReviewStatusRequest(*mturk.UpdateHITReviewStatusInput) (*aws.Request, *mturk.UpdateHITReviewStatusOutput)
+	UpdateHITReviewStatusRequest(*mturk.UpdateHITReviewStatusInput) mturk.UpdateHITReviewStatusRequest
 
-	UpdateHITTypeOfHIT(*mturk.UpdateHITTypeOfHITInput) (*mturk.UpdateHITTypeOfHITOutput, error)
-	UpdateHITTypeOfHITWithContext(aws.Context, *mturk.UpdateHITTypeOfHITInput, ...aws.Option) (*mturk.UpdateHITTypeOfHITOutput, error)
-	UpdateHITTypeOfHITRequest(*mturk.UpdateHITTypeOfHITInput) (*aws.Request, *mturk.UpdateHITTypeOfHITOutput)
+	UpdateHITTypeOfHITRequest(*mturk.UpdateHITTypeOfHITInput) mturk.UpdateHITTypeOfHITRequest
 
-	UpdateNotificationSettings(*mturk.UpdateNotificationSettingsInput) (*mturk.UpdateNotificationSettingsOutput, error)
-	UpdateNotificationSettingsWithContext(aws.Context, *mturk.UpdateNotificationSettingsInput, ...aws.Option) (*mturk.UpdateNotificationSettingsOutput, error)
-	UpdateNotificationSettingsRequest(*mturk.UpdateNotificationSettingsInput) (*aws.Request, *mturk.UpdateNotificationSettingsOutput)
+	UpdateNotificationSettingsRequest(*mturk.UpdateNotificationSettingsInput) mturk.UpdateNotificationSettingsRequest
 
-	UpdateQualificationType(*mturk.UpdateQualificationTypeInput) (*mturk.UpdateQualificationTypeOutput, error)
-	UpdateQualificationTypeWithContext(aws.Context, *mturk.UpdateQualificationTypeInput, ...aws.Option) (*mturk.UpdateQualificationTypeOutput, error)
-	UpdateQualificationTypeRequest(*mturk.UpdateQualificationTypeInput) (*aws.Request, *mturk.UpdateQualificationTypeOutput)
+	UpdateQualificationTypeRequest(*mturk.UpdateQualificationTypeInput) mturk.UpdateQualificationTypeRequest
 }
 
 var _ MTurkAPI = (*mturk.MTurk)(nil)

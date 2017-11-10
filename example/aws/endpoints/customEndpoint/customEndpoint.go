@@ -36,10 +36,11 @@ func main() {
 	// endpoint resolver wrapping the default endpoint resolver.
 	s3Svc := s3.New(cfg)
 	// Operation calls will be made to the custom endpoint.
-	s3Svc.GetObject(&s3.GetObjectInput{
+	getReq := s3Svc.GetObjectRequest(&s3.GetObjectInput{
 		Bucket: aws.String("myBucket"),
 		Key:    aws.String("myObjectKey"),
 	})
+	getReq.Send()
 
 	// Create the SQS service client with the shared config. This will
 	// fallback to the default endpoint resolver because the customization
@@ -47,9 +48,10 @@ func main() {
 	sqsSvc := sqs.New(cfg)
 	// Operation calls will be made to the default endpoint for SQS for the
 	// region configured.
-	sqsSvc.ReceiveMessage(&sqs.ReceiveMessageInput{
+	msgReq := sqsSvc.ReceiveMessageRequest(&sqs.ReceiveMessageInput{
 		QueueUrl: aws.String("my-queue-url"),
 	})
+	msgReq.Send()
 
 	// Create a DynamoDB service client that will use a custom endpoint
 	// resolver that overrides the shared config's. This is useful when
@@ -68,7 +70,8 @@ func main() {
 	ddbSvc := dynamodb.New(cfgCp)
 	// Operation calls will be made to the custom endpoint set in the
 	// ddCustResolverFn.
-	ddbSvc.ListTables(&dynamodb.ListTablesInput{})
+	listReq := ddbSvc.ListTablesRequest(&dynamodb.ListTablesInput{})
+	listReq.Send()
 
 	// Setting Config's Endpoint will override the EndpointResolver. Forcing
 	// the service clien to make all operation to the endpoint specified
@@ -77,5 +80,6 @@ func main() {
 	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:8088")
 
 	ddbSvcLocal := dynamodb.New(cfgCp)
-	ddbSvcLocal.ListTables(&dynamodb.ListTablesInput{})
+	listReq = ddbSvcLocal.ListTablesRequest(&dynamodb.ListTablesInput{})
+	listReq.Send()
 }

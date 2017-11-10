@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example deletes a scaling policy for the Amazon ECS service called web-app,
 // which is running in the default cluster.
-func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
+func ExampleApplicationAutoScaling_DeleteScalingPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -43,7 +43,8 @@ func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
 		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.DeleteScalingPolicy(input)
+	req := svc.DeleteScalingPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -73,7 +74,7 @@ func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
 //
 // This example deregisters a scalable target for an Amazon ECS service called web-app
 // that is running in the default cluster.
-func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
+func ExampleApplicationAutoScaling_DeregisterScalableTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -86,7 +87,8 @@ func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
 		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.DeregisterScalableTarget(input)
+	req := svc.DeregisterScalableTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -115,7 +117,7 @@ func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
 // To describe scalable targets
 //
 // This example describes the scalable targets for the ecs service namespace.
-func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
+func ExampleApplicationAutoScaling_DescribeScalableTargetsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -126,7 +128,8 @@ func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
 		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.DescribeScalableTargets(input)
+	req := svc.DescribeScalableTargetsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -156,7 +159,7 @@ func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
 //
 // This example describes the scaling activities for an Amazon ECS service called web-app
 // that is running in the default cluster.
-func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
+func ExampleApplicationAutoScaling_DescribeScalingActivitiesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -169,7 +172,8 @@ func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
 		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.DescribeScalingActivities(input)
+	req := svc.DescribeScalingActivitiesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -198,7 +202,7 @@ func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
 // To describe scaling policies
 //
 // This example describes the scaling policies for the ecs service namespace.
-func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
+func ExampleApplicationAutoScaling_DescribeScalingPoliciesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -209,7 +213,8 @@ func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
 		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.DescribeScalingPolicies(input)
+	req := svc.DescribeScalingPoliciesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -242,7 +247,7 @@ func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
 // This example applies a scaling policy to an Amazon ECS service called web-app in
 // the default cluster. The policy increases the desired count of the service by 200%,
 // with a cool down period of 60 seconds.
-func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
+func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -267,7 +272,8 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
 		},
 	}
 
-	result, err := svc.PutScalingPolicy(input)
+	req := svc.PutScalingPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -303,7 +309,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
 // the target capacity of the spot fleet by 200%, with a cool down period of 180 seconds.",
 //
 //
-func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
+func ExampleApplicationAutoScaling_PutScalingPolicyRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -328,7 +334,8 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
 		},
 	}
 
-	result, err := svc.PutScalingPolicy(input)
+	req := svc.PutScalingPolicyRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -363,7 +370,7 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
 // This example registers a scalable target from an Amazon ECS service called web-app
 // that is running on the default cluster, with a minimum desired count of 1 task and
 // a maximum desired count of 10 tasks.
-func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
+func ExampleApplicationAutoScaling_RegisterScalableTargetRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -379,7 +386,8 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
 		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
-	result, err := svc.RegisterScalableTarget(input)
+	req := svc.RegisterScalableTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -409,7 +417,7 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
 //
 // This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum
 // target capacity of 1 and a maximum of 10.
-func ExampleApplicationAutoScaling_RegisterScalableTarget_shared01() {
+func ExampleApplicationAutoScaling_RegisterScalableTargetRequest_shared01() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -425,7 +433,8 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared01() {
 		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEc2,
 	}
 
-	result, err := svc.RegisterScalableTarget(input)
+	req := svc.RegisterScalableTargetRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {

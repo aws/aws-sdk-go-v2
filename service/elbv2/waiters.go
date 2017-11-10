@@ -53,10 +53,10 @@ func (c *ELBV2) WaitUntilLoadBalancerAvailableWithContext(ctx aws.Context, input
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLoadBalancersRequest(inCpy)
+			req := c.DescribeLoadBalancersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -104,10 +104,10 @@ func (c *ELBV2) WaitUntilLoadBalancerExistsWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLoadBalancersRequest(inCpy)
+			req := c.DescribeLoadBalancersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -155,10 +155,10 @@ func (c *ELBV2) WaitUntilLoadBalancersDeletedWithContext(ctx aws.Context, input 
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeLoadBalancersRequest(inCpy)
+			req := c.DescribeLoadBalancersRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -206,10 +206,10 @@ func (c *ELBV2) WaitUntilTargetDeregisteredWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTargetHealthRequest(inCpy)
+			req := c.DescribeTargetHealthRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)
@@ -257,10 +257,10 @@ func (c *ELBV2) WaitUntilTargetInServiceWithContext(ctx aws.Context, input *Desc
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTargetHealthRequest(inCpy)
+			req := c.DescribeTargetHealthRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 	w.ApplyOptions(opts...)

@@ -12,47 +12,24 @@ import (
 
 const opActivateGateway = "ActivateGateway"
 
-// ActivateGatewayRequest generates a "aws.Request" representing the
-// client's request for the ActivateGateway operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ActivateGateway for more information on using the ActivateGateway
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ActivateGatewayRequest method.
-//    req, resp := client.ActivateGatewayRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGateway
-func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (req *aws.Request, output *ActivateGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opActivateGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ActivateGatewayInput{}
-	}
-
-	output = &ActivateGatewayOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ActivateGatewayRequest is a API request type for the ActivateGateway API operation.
+type ActivateGatewayRequest struct {
+	*aws.Request
+	Input *ActivateGatewayInput
 }
 
-// ActivateGateway API operation for AWS Storage Gateway.
+// Send marshals and sends the ActivateGateway API request.
+func (r *ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ActivateGatewayOutput), nil
+}
+
+// ActivateGatewayRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Activates the gateway you previously deployed on your host. For more information,
 // see  Activate the AWS Storage Gateway (http://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedActivateGateway-common.html).
@@ -64,71 +41,67 @@ func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) (re
 //
 // You must turn on the gateway VM before you can activate your gateway.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ActivateGateway for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the ActivateGatewayRequest method.
+//    req := client.ActivateGatewayRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGateway
-func (c *StorageGateway) ActivateGateway(input *ActivateGatewayInput) (*ActivateGatewayOutput, error) {
-	req, out := c.ActivateGatewayRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) ActivateGatewayRequest {
+	op := &aws.Operation{
+		Name:       opActivateGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ActivateGatewayWithContext is the same as ActivateGateway with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ActivateGateway for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ActivateGatewayWithContext(ctx aws.Context, input *ActivateGatewayInput, opts ...aws.Option) (*ActivateGatewayOutput, error) {
-	req, out := c.ActivateGatewayRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ActivateGatewayInput{}
+	}
+
+	req := c.newRequest(op, input, &ActivateGatewayOutput{})
+	return ActivateGatewayRequest{Request: req, Input: input}
 }
 
 const opAddCache = "AddCache"
 
-// AddCacheRequest generates a "aws.Request" representing the
-// client's request for the AddCache operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddCacheRequest is a API request type for the AddCache API operation.
+type AddCacheRequest struct {
+	*aws.Request
+	Input *AddCacheInput
+}
+
+// Send marshals and sends the AddCache API request.
+func (r *AddCacheRequest) Send() (*AddCacheOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddCacheOutput), nil
+}
+
+// AddCacheRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Configures one or more gateway local disks as cache for a gateway. This operation
+// is only supported in the cached volume, tape and file gateway architectures
+// (see Storage Gateway Concepts (http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html)).
 //
-// See AddCache for more information on using the AddCache
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// In the request, you specify the gateway Amazon Resource Name (ARN) to which
+// you want to add cache, and one or more disk IDs that you want to configure
+// as cache.
 //
 //    // Example sending a request using the AddCacheRequest method.
-//    req, resp := client.AddCacheRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddCacheRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCache
-func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *aws.Request, output *AddCacheOutput) {
+func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 	op := &aws.Operation{
 		Name:       opAddCache,
 		HTTPMethod: "POST",
@@ -139,102 +112,30 @@ func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) (req *aws.Request
 		input = &AddCacheInput{}
 	}
 
-	output = &AddCacheOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddCache API operation for AWS Storage Gateway.
-//
-// Configures one or more gateway local disks as cache for a gateway. This operation
-// is only supported in the cached volume, tape and file gateway architectures
-// (see Storage Gateway Concepts (http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html)).
-//
-// In the request, you specify the gateway Amazon Resource Name (ARN) to which
-// you want to add cache, and one or more disk IDs that you want to configure
-// as cache.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation AddCache for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCache
-func (c *StorageGateway) AddCache(input *AddCacheInput) (*AddCacheOutput, error) {
-	req, out := c.AddCacheRequest(input)
-	return out, req.Send()
-}
-
-// AddCacheWithContext is the same as AddCache with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddCache for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) AddCacheWithContext(ctx aws.Context, input *AddCacheInput, opts ...aws.Option) (*AddCacheOutput, error) {
-	req, out := c.AddCacheRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddCacheOutput{})
+	return AddCacheRequest{Request: req, Input: input}
 }
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws.Request" representing the
-// client's request for the AddTagsToResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddTagsToResource for more information on using the AddTagsToResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddTagsToResourceRequest method.
-//    req, resp := client.AddTagsToResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResource
-func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
-	op := &aws.Operation{
-		Name:       opAddTagsToResource,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddTagsToResourceInput{}
-	}
-
-	output = &AddTagsToResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddTagsToResourceRequest is a API request type for the AddTagsToResource API operation.
+type AddTagsToResourceRequest struct {
+	*aws.Request
+	Input *AddTagsToResourceInput
 }
 
-// AddTagsToResource API operation for AWS Storage Gateway.
+// Send marshals and sends the AddTagsToResource API request.
+func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddTagsToResourceOutput), nil
+}
+
+// AddTagsToResourceRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Adds one or more tags to the specified resource. You use tags to add metadata
 // to resources, which you can use to categorize these resources. For example,
@@ -251,71 +152,67 @@ func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput)
 // You can create a maximum of 10 tags for each resource. Virtual tapes and
 // storage volumes that are recovered to a new gateway maintain their tags.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation AddTagsToResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the AddTagsToResourceRequest method.
+//    req := client.AddTagsToResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResource
-func (c *StorageGateway) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToResourceRequest {
+	op := &aws.Operation{
+		Name:       opAddTagsToResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddTagsToResourceWithContext is the same as AddTagsToResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddTagsToResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
-	req, out := c.AddTagsToResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddTagsToResourceInput{}
+	}
+
+	req := c.newRequest(op, input, &AddTagsToResourceOutput{})
+	return AddTagsToResourceRequest{Request: req, Input: input}
 }
 
 const opAddUploadBuffer = "AddUploadBuffer"
 
-// AddUploadBufferRequest generates a "aws.Request" representing the
-// client's request for the AddUploadBuffer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// AddUploadBufferRequest is a API request type for the AddUploadBuffer API operation.
+type AddUploadBufferRequest struct {
+	*aws.Request
+	Input *AddUploadBufferInput
+}
+
+// Send marshals and sends the AddUploadBuffer API request.
+func (r *AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddUploadBufferOutput), nil
+}
+
+// AddUploadBufferRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Configures one or more gateway local disks as upload buffer for a specified
+// gateway. This operation is supported for the stored volume, cached volume
+// and tape gateway architectures.
 //
-// See AddUploadBuffer for more information on using the AddUploadBuffer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// In the request, you specify the gateway Amazon Resource Name (ARN) to which
+// you want to add upload buffer, and one or more disk IDs that you want to
+// configure as upload buffer.
 //
 //    // Example sending a request using the AddUploadBufferRequest method.
-//    req, resp := client.AddUploadBufferRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.AddUploadBufferRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBuffer
-func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (req *aws.Request, output *AddUploadBufferOutput) {
+func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) AddUploadBufferRequest {
 	op := &aws.Operation{
 		Name:       opAddUploadBuffer,
 		HTTPMethod: "POST",
@@ -326,102 +223,30 @@ func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) (re
 		input = &AddUploadBufferInput{}
 	}
 
-	output = &AddUploadBufferOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// AddUploadBuffer API operation for AWS Storage Gateway.
-//
-// Configures one or more gateway local disks as upload buffer for a specified
-// gateway. This operation is supported for the stored volume, cached volume
-// and tape gateway architectures.
-//
-// In the request, you specify the gateway Amazon Resource Name (ARN) to which
-// you want to add upload buffer, and one or more disk IDs that you want to
-// configure as upload buffer.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation AddUploadBuffer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBuffer
-func (c *StorageGateway) AddUploadBuffer(input *AddUploadBufferInput) (*AddUploadBufferOutput, error) {
-	req, out := c.AddUploadBufferRequest(input)
-	return out, req.Send()
-}
-
-// AddUploadBufferWithContext is the same as AddUploadBuffer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddUploadBuffer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) AddUploadBufferWithContext(ctx aws.Context, input *AddUploadBufferInput, opts ...aws.Option) (*AddUploadBufferOutput, error) {
-	req, out := c.AddUploadBufferRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &AddUploadBufferOutput{})
+	return AddUploadBufferRequest{Request: req, Input: input}
 }
 
 const opAddWorkingStorage = "AddWorkingStorage"
 
-// AddWorkingStorageRequest generates a "aws.Request" representing the
-// client's request for the AddWorkingStorage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See AddWorkingStorage for more information on using the AddWorkingStorage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the AddWorkingStorageRequest method.
-//    req, resp := client.AddWorkingStorageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorage
-func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) (req *aws.Request, output *AddWorkingStorageOutput) {
-	op := &aws.Operation{
-		Name:       opAddWorkingStorage,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &AddWorkingStorageInput{}
-	}
-
-	output = &AddWorkingStorageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// AddWorkingStorageRequest is a API request type for the AddWorkingStorage API operation.
+type AddWorkingStorageRequest struct {
+	*aws.Request
+	Input *AddWorkingStorageInput
 }
 
-// AddWorkingStorage API operation for AWS Storage Gateway.
+// Send marshals and sends the AddWorkingStorage API request.
+func (r *AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AddWorkingStorageOutput), nil
+}
+
+// AddWorkingStorageRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Configures one or more gateway local disks as working storage for a gateway.
 // This operation is only supported in the stored volume gateway architecture.
@@ -435,71 +260,63 @@ func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput)
 // you want to add working storage, and one or more disk IDs that you want to
 // configure as working storage.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation AddWorkingStorage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the AddWorkingStorageRequest method.
+//    req := client.AddWorkingStorageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorage
-func (c *StorageGateway) AddWorkingStorage(input *AddWorkingStorageInput) (*AddWorkingStorageOutput, error) {
-	req, out := c.AddWorkingStorageRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput) AddWorkingStorageRequest {
+	op := &aws.Operation{
+		Name:       opAddWorkingStorage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// AddWorkingStorageWithContext is the same as AddWorkingStorage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See AddWorkingStorage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) AddWorkingStorageWithContext(ctx aws.Context, input *AddWorkingStorageInput, opts ...aws.Option) (*AddWorkingStorageOutput, error) {
-	req, out := c.AddWorkingStorageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &AddWorkingStorageInput{}
+	}
+
+	req := c.newRequest(op, input, &AddWorkingStorageOutput{})
+	return AddWorkingStorageRequest{Request: req, Input: input}
 }
 
 const opCancelArchival = "CancelArchival"
 
-// CancelArchivalRequest generates a "aws.Request" representing the
-// client's request for the CancelArchival operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelArchivalRequest is a API request type for the CancelArchival API operation.
+type CancelArchivalRequest struct {
+	*aws.Request
+	Input *CancelArchivalInput
+}
+
+// Send marshals and sends the CancelArchival API request.
+func (r *CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelArchivalOutput), nil
+}
+
+// CancelArchivalRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelArchival for more information on using the CancelArchival
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after
+// the archiving process is initiated. This operation is only supported in the
+// tape gateway architecture.
 //
 //    // Example sending a request using the CancelArchivalRequest method.
-//    req, resp := client.CancelArchivalRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelArchivalRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchival
-func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req *aws.Request, output *CancelArchivalOutput) {
+func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) CancelArchivalRequest {
 	op := &aws.Operation{
 		Name:       opCancelArchival,
 		HTTPMethod: "POST",
@@ -510,82 +327,44 @@ func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) (req 
 		input = &CancelArchivalInput{}
 	}
 
-	output = &CancelArchivalOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelArchival API operation for AWS Storage Gateway.
-//
-// Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after
-// the archiving process is initiated. This operation is only supported in the
-// tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CancelArchival for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchival
-func (c *StorageGateway) CancelArchival(input *CancelArchivalInput) (*CancelArchivalOutput, error) {
-	req, out := c.CancelArchivalRequest(input)
-	return out, req.Send()
-}
-
-// CancelArchivalWithContext is the same as CancelArchival with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelArchival for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CancelArchivalWithContext(ctx aws.Context, input *CancelArchivalInput, opts ...aws.Option) (*CancelArchivalOutput, error) {
-	req, out := c.CancelArchivalRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelArchivalOutput{})
+	return CancelArchivalRequest{Request: req, Input: input}
 }
 
 const opCancelRetrieval = "CancelRetrieval"
 
-// CancelRetrievalRequest generates a "aws.Request" representing the
-// client's request for the CancelRetrieval operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CancelRetrievalRequest is a API request type for the CancelRetrieval API operation.
+type CancelRetrievalRequest struct {
+	*aws.Request
+	Input *CancelRetrievalInput
+}
+
+// Send marshals and sends the CancelRetrieval API request.
+func (r *CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelRetrievalOutput), nil
+}
+
+// CancelRetrievalRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CancelRetrieval for more information on using the CancelRetrieval
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to
+// a gateway after the retrieval process is initiated. The virtual tape is returned
+// to the VTS.
 //
 //    // Example sending a request using the CancelRetrievalRequest method.
-//    req, resp := client.CancelRetrievalRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CancelRetrievalRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrieval
-func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (req *aws.Request, output *CancelRetrievalOutput) {
+func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) CancelRetrievalRequest {
 	op := &aws.Operation{
 		Name:       opCancelRetrieval,
 		HTTPMethod: "POST",
@@ -596,98 +375,30 @@ func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) (re
 		input = &CancelRetrievalInput{}
 	}
 
-	output = &CancelRetrievalOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CancelRetrieval API operation for AWS Storage Gateway.
-//
-// Cancels retrieval of a virtual tape from the virtual tape shelf (VTS) to
-// a gateway after the retrieval process is initiated. The virtual tape is returned
-// to the VTS.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CancelRetrieval for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrieval
-func (c *StorageGateway) CancelRetrieval(input *CancelRetrievalInput) (*CancelRetrievalOutput, error) {
-	req, out := c.CancelRetrievalRequest(input)
-	return out, req.Send()
-}
-
-// CancelRetrievalWithContext is the same as CancelRetrieval with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CancelRetrieval for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CancelRetrievalWithContext(ctx aws.Context, input *CancelRetrievalInput, opts ...aws.Option) (*CancelRetrievalOutput, error) {
-	req, out := c.CancelRetrievalRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CancelRetrievalOutput{})
+	return CancelRetrievalRequest{Request: req, Input: input}
 }
 
 const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
 
-// CreateCachediSCSIVolumeRequest generates a "aws.Request" representing the
-// client's request for the CreateCachediSCSIVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateCachediSCSIVolume for more information on using the CreateCachediSCSIVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateCachediSCSIVolumeRequest method.
-//    req, resp := client.CreateCachediSCSIVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolume
-func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) (req *aws.Request, output *CreateCachediSCSIVolumeOutput) {
-	op := &aws.Operation{
-		Name:       opCreateCachediSCSIVolume,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &CreateCachediSCSIVolumeInput{}
-	}
-
-	output = &CreateCachediSCSIVolumeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// CreateCachediSCSIVolumeRequest is a API request type for the CreateCachediSCSIVolume API operation.
+type CreateCachediSCSIVolumeRequest struct {
+	*aws.Request
+	Input *CreateCachediSCSIVolumeInput
 }
 
-// CreateCachediSCSIVolume API operation for AWS Storage Gateway.
+// Send marshals and sends the CreateCachediSCSIVolume API request.
+func (r *CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateCachediSCSIVolumeOutput), nil
+}
+
+// CreateCachediSCSIVolumeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Creates a cached volume on a specified cached volume gateway. This operation
 // is only supported in the cached volume gateway architecture.
@@ -707,87 +418,49 @@ func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSI
 // latest recovery point. The VolumeSizeInBytes value must be equal to or larger
 // than the size of the copied volume, in bytes.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateCachediSCSIVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolume
-func (c *StorageGateway) CreateCachediSCSIVolume(input *CreateCachediSCSIVolumeInput) (*CreateCachediSCSIVolumeOutput, error) {
-	req, out := c.CreateCachediSCSIVolumeRequest(input)
-	return out, req.Send()
-}
-
-// CreateCachediSCSIVolumeWithContext is the same as CreateCachediSCSIVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateCachediSCSIVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateCachediSCSIVolumeWithContext(ctx aws.Context, input *CreateCachediSCSIVolumeInput, opts ...aws.Option) (*CreateCachediSCSIVolumeOutput, error) {
-	req, out := c.CreateCachediSCSIVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateNFSFileShare = "CreateNFSFileShare"
-
-// CreateNFSFileShareRequest generates a "aws.Request" representing the
-// client's request for the CreateNFSFileShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateNFSFileShare for more information on using the CreateNFSFileShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateNFSFileShareRequest method.
-//    req, resp := client.CreateNFSFileShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateCachediSCSIVolumeRequest method.
+//    req := client.CreateCachediSCSIVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShare
-func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInput) (req *aws.Request, output *CreateNFSFileShareOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolume
+func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSIVolumeInput) CreateCachediSCSIVolumeRequest {
 	op := &aws.Operation{
-		Name:       opCreateNFSFileShare,
+		Name:       opCreateCachediSCSIVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateNFSFileShareInput{}
+		input = &CreateCachediSCSIVolumeInput{}
 	}
 
-	output = &CreateNFSFileShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateCachediSCSIVolumeOutput{})
+	return CreateCachediSCSIVolumeRequest{Request: req, Input: input}
 }
 
-// CreateNFSFileShare API operation for AWS Storage Gateway.
+const opCreateNFSFileShare = "CreateNFSFileShare"
+
+// CreateNFSFileShareRequest is a API request type for the CreateNFSFileShare API operation.
+type CreateNFSFileShareRequest struct {
+	*aws.Request
+	Input *CreateNFSFileShareInput
+}
+
+// Send marshals and sends the CreateNFSFileShare API request.
+func (r *CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateNFSFileShareOutput), nil
+}
+
+// CreateNFSFileShareRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Creates a file share on an existing file gateway. In Storage Gateway, a file
 // share is a file system mount point backed by Amazon S3 cloud storage. Storage
@@ -803,87 +476,49 @@ func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInpu
 //
 // File gateway does not support creating hard or symbolic links on a file share.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateNFSFileShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShare
-func (c *StorageGateway) CreateNFSFileShare(input *CreateNFSFileShareInput) (*CreateNFSFileShareOutput, error) {
-	req, out := c.CreateNFSFileShareRequest(input)
-	return out, req.Send()
-}
-
-// CreateNFSFileShareWithContext is the same as CreateNFSFileShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateNFSFileShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateNFSFileShareWithContext(ctx aws.Context, input *CreateNFSFileShareInput, opts ...aws.Option) (*CreateNFSFileShareOutput, error) {
-	req, out := c.CreateNFSFileShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateSnapshot = "CreateSnapshot"
-
-// CreateSnapshotRequest generates a "aws.Request" representing the
-// client's request for the CreateSnapshot operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSnapshot for more information on using the CreateSnapshot
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateSnapshotRequest method.
-//    req, resp := client.CreateSnapshotRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateNFSFileShareRequest method.
+//    req := client.CreateNFSFileShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot
-func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShare
+func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInput) CreateNFSFileShareRequest {
 	op := &aws.Operation{
-		Name:       opCreateSnapshot,
+		Name:       opCreateNFSFileShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateSnapshotInput{}
+		input = &CreateNFSFileShareInput{}
 	}
 
-	output = &CreateSnapshotOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateNFSFileShareOutput{})
+	return CreateNFSFileShareRequest{Request: req, Input: input}
 }
 
-// CreateSnapshot API operation for AWS Storage Gateway.
+const opCreateSnapshot = "CreateSnapshot"
+
+// CreateSnapshotRequest is a API request type for the CreateSnapshot API operation.
+type CreateSnapshotRequest struct {
+	*aws.Request
+	Input *CreateSnapshotInput
+}
+
+// Send marshals and sends the CreateSnapshot API request.
+func (r *CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSnapshotOutput), nil
+}
+
+// CreateSnapshotRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Initiates a snapshot of a volume.
 //
@@ -910,91 +545,49 @@ func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) (req 
 // information, see the important note on the Welcome (http://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html)
 // page.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateSnapshot for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-//   * ErrCodeServiceUnavailableError "ServiceUnavailableError"
-//   An internal server error has occurred because the service is unavailable.
-//   For more information, see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot
-func (c *StorageGateway) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnapshotOutput, error) {
-	req, out := c.CreateSnapshotRequest(input)
-	return out, req.Send()
-}
-
-// CreateSnapshotWithContext is the same as CreateSnapshot with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSnapshot for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...aws.Option) (*CreateSnapshotOutput, error) {
-	req, out := c.CreateSnapshotRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
-
-// CreateSnapshotFromVolumeRecoveryPointRequest generates a "aws.Request" representing the
-// client's request for the CreateSnapshotFromVolumeRecoveryPoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateSnapshotFromVolumeRecoveryPoint for more information on using the CreateSnapshotFromVolumeRecoveryPoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateSnapshotFromVolumeRecoveryPointRequest method.
-//    req, resp := client.CreateSnapshotFromVolumeRecoveryPointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateSnapshotRequest method.
+//    req := client.CreateSnapshotRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) (req *aws.Request, output *CreateSnapshotFromVolumeRecoveryPointOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot
+func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRequest {
 	op := &aws.Operation{
-		Name:       opCreateSnapshotFromVolumeRecoveryPoint,
+		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateSnapshotFromVolumeRecoveryPointInput{}
+		input = &CreateSnapshotInput{}
 	}
 
-	output = &CreateSnapshotFromVolumeRecoveryPointOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateSnapshotOutput{})
+	return CreateSnapshotRequest{Request: req, Input: input}
 }
 
-// CreateSnapshotFromVolumeRecoveryPoint API operation for AWS Storage Gateway.
+const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
+
+// CreateSnapshotFromVolumeRecoveryPointRequest is a API request type for the CreateSnapshotFromVolumeRecoveryPoint API operation.
+type CreateSnapshotFromVolumeRecoveryPointRequest struct {
+	*aws.Request
+	Input *CreateSnapshotFromVolumeRecoveryPointInput
+}
+
+// Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
+func (r *CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSnapshotFromVolumeRecoveryPointOutput), nil
+}
+
+// CreateSnapshotFromVolumeRecoveryPointRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Initiates a snapshot of a gateway from a volume recovery point. This operation
 // is only supported in the cached volume gateway architecture.
@@ -1014,91 +607,49 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *Cre
 // To list or delete a snapshot, you must use the Amazon EC2 API. For more information,
 // in Amazon Elastic Compute Cloud API Reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateSnapshotFromVolumeRecoveryPoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-//   * ErrCodeServiceUnavailableError "ServiceUnavailableError"
-//   An internal server error has occurred because the service is unavailable.
-//   For more information, see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPoint(input *CreateSnapshotFromVolumeRecoveryPointInput) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
-	req, out := c.CreateSnapshotFromVolumeRecoveryPointRequest(input)
-	return out, req.Send()
-}
-
-// CreateSnapshotFromVolumeRecoveryPointWithContext is the same as CreateSnapshotFromVolumeRecoveryPoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateSnapshotFromVolumeRecoveryPoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointWithContext(ctx aws.Context, input *CreateSnapshotFromVolumeRecoveryPointInput, opts ...aws.Option) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
-	req, out := c.CreateSnapshotFromVolumeRecoveryPointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
-
-// CreateStorediSCSIVolumeRequest generates a "aws.Request" representing the
-// client's request for the CreateStorediSCSIVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See CreateStorediSCSIVolume for more information on using the CreateStorediSCSIVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the CreateStorediSCSIVolumeRequest method.
-//    req, resp := client.CreateStorediSCSIVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the CreateSnapshotFromVolumeRecoveryPointRequest method.
+//    req := client.CreateSnapshotFromVolumeRecoveryPointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolume
-func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) (req *aws.Request, output *CreateStorediSCSIVolumeOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint
+func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest {
 	op := &aws.Operation{
-		Name:       opCreateStorediSCSIVolume,
+		Name:       opCreateSnapshotFromVolumeRecoveryPoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &CreateStorediSCSIVolumeInput{}
+		input = &CreateSnapshotFromVolumeRecoveryPointInput{}
 	}
 
-	output = &CreateStorediSCSIVolumeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &CreateSnapshotFromVolumeRecoveryPointOutput{})
+	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input}
 }
 
-// CreateStorediSCSIVolume API operation for AWS Storage Gateway.
+const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
+
+// CreateStorediSCSIVolumeRequest is a API request type for the CreateStorediSCSIVolume API operation.
+type CreateStorediSCSIVolumeRequest struct {
+	*aws.Request
+	Input *CreateStorediSCSIVolumeInput
+}
+
+// Send marshals and sends the CreateStorediSCSIVolume API request.
+func (r *CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateStorediSCSIVolumeOutput), nil
+}
+
+// CreateStorediSCSIVolumeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Creates a volume on a specified gateway. This operation is only supported
 // in the stored volume gateway architecture.
@@ -1114,71 +665,67 @@ func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSI
 // its size, and the iSCSI target ARN that initiators can use to connect to
 // the volume target.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateStorediSCSIVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the CreateStorediSCSIVolumeRequest method.
+//    req := client.CreateStorediSCSIVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolume
-func (c *StorageGateway) CreateStorediSCSIVolume(input *CreateStorediSCSIVolumeInput) (*CreateStorediSCSIVolumeOutput, error) {
-	req, out := c.CreateStorediSCSIVolumeRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSIVolumeInput) CreateStorediSCSIVolumeRequest {
+	op := &aws.Operation{
+		Name:       opCreateStorediSCSIVolume,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// CreateStorediSCSIVolumeWithContext is the same as CreateStorediSCSIVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateStorediSCSIVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateStorediSCSIVolumeWithContext(ctx aws.Context, input *CreateStorediSCSIVolumeInput, opts ...aws.Option) (*CreateStorediSCSIVolumeOutput, error) {
-	req, out := c.CreateStorediSCSIVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &CreateStorediSCSIVolumeInput{}
+	}
+
+	req := c.newRequest(op, input, &CreateStorediSCSIVolumeOutput{})
+	return CreateStorediSCSIVolumeRequest{Request: req, Input: input}
 }
 
 const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 
-// CreateTapeWithBarcodeRequest generates a "aws.Request" representing the
-// client's request for the CreateTapeWithBarcode operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTapeWithBarcodeRequest is a API request type for the CreateTapeWithBarcode API operation.
+type CreateTapeWithBarcodeRequest struct {
+	*aws.Request
+	Input *CreateTapeWithBarcodeInput
+}
+
+// Send marshals and sends the CreateTapeWithBarcode API request.
+func (r *CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTapeWithBarcodeOutput), nil
+}
+
+// CreateTapeWithBarcodeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates a virtual tape by using your own barcode. You write data to the virtual
+// tape and then archive the tape. A barcode is unique and can not be reused
+// if it has already been used on a tape . This applies to barcodes used on
+// deleted tapes. This operation is only supported in the tape gateway. architecture.
 //
-// See CreateTapeWithBarcode for more information on using the CreateTapeWithBarcode
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cache storage must be allocated to the gateway before you can create a virtual
+// tape. Use the AddCache operation to add cache storage to a gateway.
 //
 //    // Example sending a request using the CreateTapeWithBarcodeRequest method.
-//    req, resp := client.CreateTapeWithBarcodeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTapeWithBarcodeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcode
-func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput) (req *aws.Request, output *CreateTapeWithBarcodeOutput) {
+func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest {
 	op := &aws.Operation{
 		Name:       opCreateTapeWithBarcode,
 		HTTPMethod: "POST",
@@ -1189,86 +736,47 @@ func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarco
 		input = &CreateTapeWithBarcodeInput{}
 	}
 
-	output = &CreateTapeWithBarcodeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTapeWithBarcode API operation for AWS Storage Gateway.
-//
-// Creates a virtual tape by using your own barcode. You write data to the virtual
-// tape and then archive the tape. A barcode is unique and can not be reused
-// if it has already been used on a tape . This applies to barcodes used on
-// deleted tapes. This operation is only supported in the tape gateway. architecture.
-//
-// Cache storage must be allocated to the gateway before you can create a virtual
-// tape. Use the AddCache operation to add cache storage to a gateway.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateTapeWithBarcode for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcode
-func (c *StorageGateway) CreateTapeWithBarcode(input *CreateTapeWithBarcodeInput) (*CreateTapeWithBarcodeOutput, error) {
-	req, out := c.CreateTapeWithBarcodeRequest(input)
-	return out, req.Send()
-}
-
-// CreateTapeWithBarcodeWithContext is the same as CreateTapeWithBarcode with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTapeWithBarcode for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateTapeWithBarcodeWithContext(ctx aws.Context, input *CreateTapeWithBarcodeInput, opts ...aws.Option) (*CreateTapeWithBarcodeOutput, error) {
-	req, out := c.CreateTapeWithBarcodeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTapeWithBarcodeOutput{})
+	return CreateTapeWithBarcodeRequest{Request: req, Input: input}
 }
 
 const opCreateTapes = "CreateTapes"
 
-// CreateTapesRequest generates a "aws.Request" representing the
-// client's request for the CreateTapes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// CreateTapesRequest is a API request type for the CreateTapes API operation.
+type CreateTapesRequest struct {
+	*aws.Request
+	Input *CreateTapesInput
+}
+
+// Send marshals and sends the CreateTapes API request.
+func (r *CreateTapesRequest) Send() (*CreateTapesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateTapesOutput), nil
+}
+
+// CreateTapesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Creates one or more virtual tapes. You write data to the virtual tapes and
+// then archive the tapes. This operation is only supported in the tape gateway
+// architecture.
 //
-// See CreateTapes for more information on using the CreateTapes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Cache storage must be allocated to the gateway before you can create virtual
+// tapes. Use the AddCache operation to add cache storage to a gateway.
 //
 //    // Example sending a request using the CreateTapesRequest method.
-//    req, resp := client.CreateTapesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.CreateTapesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapes
-func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *aws.Request, output *CreateTapesOutput) {
+func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) CreateTapesRequest {
 	op := &aws.Operation{
 		Name:       opCreateTapes,
 		HTTPMethod: "POST",
@@ -1279,85 +787,46 @@ func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) (req *aws.R
 		input = &CreateTapesInput{}
 	}
 
-	output = &CreateTapesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// CreateTapes API operation for AWS Storage Gateway.
-//
-// Creates one or more virtual tapes. You write data to the virtual tapes and
-// then archive the tapes. This operation is only supported in the tape gateway
-// architecture.
-//
-// Cache storage must be allocated to the gateway before you can create virtual
-// tapes. Use the AddCache operation to add cache storage to a gateway.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation CreateTapes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapes
-func (c *StorageGateway) CreateTapes(input *CreateTapesInput) (*CreateTapesOutput, error) {
-	req, out := c.CreateTapesRequest(input)
-	return out, req.Send()
-}
-
-// CreateTapesWithContext is the same as CreateTapes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See CreateTapes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) CreateTapesWithContext(ctx aws.Context, input *CreateTapesInput, opts ...aws.Option) (*CreateTapesOutput, error) {
-	req, out := c.CreateTapesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &CreateTapesOutput{})
+	return CreateTapesRequest{Request: req, Input: input}
 }
 
 const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 
-// DeleteBandwidthRateLimitRequest generates a "aws.Request" representing the
-// client's request for the DeleteBandwidthRateLimit operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteBandwidthRateLimitRequest is a API request type for the DeleteBandwidthRateLimit API operation.
+type DeleteBandwidthRateLimitRequest struct {
+	*aws.Request
+	Input *DeleteBandwidthRateLimitInput
+}
+
+// Send marshals and sends the DeleteBandwidthRateLimit API request.
+func (r *DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBandwidthRateLimitOutput), nil
+}
+
+// DeleteBandwidthRateLimitRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteBandwidthRateLimit for more information on using the DeleteBandwidthRateLimit
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the bandwidth rate limits of a gateway. You can delete either the
+// upload and download bandwidth rate limit, or you can delete both. If you
+// delete only one of the limits, the other limit remains unchanged. To specify
+// which gateway to work with, use the Amazon Resource Name (ARN) of the gateway
+// in your request.
 //
 //    // Example sending a request using the DeleteBandwidthRateLimitRequest method.
-//    req, resp := client.DeleteBandwidthRateLimitRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteBandwidthRateLimitRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimit
-func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) (req *aws.Request, output *DeleteBandwidthRateLimitOutput) {
+func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest {
 	op := &aws.Operation{
 		Name:       opDeleteBandwidthRateLimit,
 		HTTPMethod: "POST",
@@ -1368,84 +837,43 @@ func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthR
 		input = &DeleteBandwidthRateLimitInput{}
 	}
 
-	output = &DeleteBandwidthRateLimitOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteBandwidthRateLimit API operation for AWS Storage Gateway.
-//
-// Deletes the bandwidth rate limits of a gateway. You can delete either the
-// upload and download bandwidth rate limit, or you can delete both. If you
-// delete only one of the limits, the other limit remains unchanged. To specify
-// which gateway to work with, use the Amazon Resource Name (ARN) of the gateway
-// in your request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteBandwidthRateLimit for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimit
-func (c *StorageGateway) DeleteBandwidthRateLimit(input *DeleteBandwidthRateLimitInput) (*DeleteBandwidthRateLimitOutput, error) {
-	req, out := c.DeleteBandwidthRateLimitRequest(input)
-	return out, req.Send()
-}
-
-// DeleteBandwidthRateLimitWithContext is the same as DeleteBandwidthRateLimit with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteBandwidthRateLimit for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteBandwidthRateLimitWithContext(ctx aws.Context, input *DeleteBandwidthRateLimitInput, opts ...aws.Option) (*DeleteBandwidthRateLimitOutput, error) {
-	req, out := c.DeleteBandwidthRateLimitRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteBandwidthRateLimitOutput{})
+	return DeleteBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
 const opDeleteChapCredentials = "DeleteChapCredentials"
 
-// DeleteChapCredentialsRequest generates a "aws.Request" representing the
-// client's request for the DeleteChapCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteChapCredentialsRequest is a API request type for the DeleteChapCredentials API operation.
+type DeleteChapCredentialsRequest struct {
+	*aws.Request
+	Input *DeleteChapCredentialsInput
+}
+
+// Send marshals and sends the DeleteChapCredentials API request.
+func (r *DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteChapCredentialsOutput), nil
+}
+
+// DeleteChapCredentialsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteChapCredentials for more information on using the DeleteChapCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for
+// a specified iSCSI target and initiator pair.
 //
 //    // Example sending a request using the DeleteChapCredentialsRequest method.
-//    req, resp := client.DeleteChapCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteChapCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentials
-func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) (req *aws.Request, output *DeleteChapCredentialsOutput) {
+func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentialsInput) DeleteChapCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opDeleteChapCredentials,
 		HTTPMethod: "POST",
@@ -1456,81 +884,43 @@ func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentia
 		input = &DeleteChapCredentialsInput{}
 	}
 
-	output = &DeleteChapCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteChapCredentials API operation for AWS Storage Gateway.
-//
-// Deletes Challenge-Handshake Authentication Protocol (CHAP) credentials for
-// a specified iSCSI target and initiator pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteChapCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentials
-func (c *StorageGateway) DeleteChapCredentials(input *DeleteChapCredentialsInput) (*DeleteChapCredentialsOutput, error) {
-	req, out := c.DeleteChapCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// DeleteChapCredentialsWithContext is the same as DeleteChapCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteChapCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteChapCredentialsWithContext(ctx aws.Context, input *DeleteChapCredentialsInput, opts ...aws.Option) (*DeleteChapCredentialsOutput, error) {
-	req, out := c.DeleteChapCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteChapCredentialsOutput{})
+	return DeleteChapCredentialsRequest{Request: req, Input: input}
 }
 
 const opDeleteFileShare = "DeleteFileShare"
 
-// DeleteFileShareRequest generates a "aws.Request" representing the
-// client's request for the DeleteFileShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteFileShareRequest is a API request type for the DeleteFileShare API operation.
+type DeleteFileShareRequest struct {
+	*aws.Request
+	Input *DeleteFileShareInput
+}
+
+// Send marshals and sends the DeleteFileShare API request.
+func (r *DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFileShareOutput), nil
+}
+
+// DeleteFileShareRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteFileShare for more information on using the DeleteFileShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes a file share from a file gateway. This operation is only supported
+// in the file gateway architecture.
 //
 //    // Example sending a request using the DeleteFileShareRequest method.
-//    req, resp := client.DeleteFileShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteFileShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShare
-func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) (req *aws.Request, output *DeleteFileShareOutput) {
+func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) DeleteFileShareRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFileShare,
 		HTTPMethod: "POST",
@@ -1541,97 +931,30 @@ func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) (re
 		input = &DeleteFileShareInput{}
 	}
 
-	output = &DeleteFileShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteFileShare API operation for AWS Storage Gateway.
-//
-// Deletes a file share from a file gateway. This operation is only supported
-// in the file gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteFileShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShare
-func (c *StorageGateway) DeleteFileShare(input *DeleteFileShareInput) (*DeleteFileShareOutput, error) {
-	req, out := c.DeleteFileShareRequest(input)
-	return out, req.Send()
-}
-
-// DeleteFileShareWithContext is the same as DeleteFileShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteFileShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteFileShareWithContext(ctx aws.Context, input *DeleteFileShareInput, opts ...aws.Option) (*DeleteFileShareOutput, error) {
-	req, out := c.DeleteFileShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteFileShareOutput{})
+	return DeleteFileShareRequest{Request: req, Input: input}
 }
 
 const opDeleteGateway = "DeleteGateway"
 
-// DeleteGatewayRequest generates a "aws.Request" representing the
-// client's request for the DeleteGateway operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteGateway for more information on using the DeleteGateway
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteGatewayRequest method.
-//    req, resp := client.DeleteGatewayRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway
-func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *aws.Request, output *DeleteGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteGatewayInput{}
-	}
-
-	output = &DeleteGatewayOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteGatewayRequest is a API request type for the DeleteGateway API operation.
+type DeleteGatewayRequest struct {
+	*aws.Request
+	Input *DeleteGatewayInput
 }
 
-// DeleteGateway API operation for AWS Storage Gateway.
+// Send marshals and sends the DeleteGateway API request.
+func (r *DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGatewayOutput), nil
+}
+
+// DeleteGatewayRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Deletes a gateway. To specify which gateway to delete, use the Amazon Resource
 // Name (ARN) of the gateway in your request. The operation deletes the gateway;
@@ -1650,87 +973,49 @@ func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) (req *a
 // Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2
 // console. For more information, see the  AWS Storage Gateway Detail Page (http://aws.amazon.com/storagegateway).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteGateway for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway
-func (c *StorageGateway) DeleteGateway(input *DeleteGatewayInput) (*DeleteGatewayOutput, error) {
-	req, out := c.DeleteGatewayRequest(input)
-	return out, req.Send()
-}
-
-// DeleteGatewayWithContext is the same as DeleteGateway with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteGateway for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteGatewayWithContext(ctx aws.Context, input *DeleteGatewayInput, opts ...aws.Option) (*DeleteGatewayOutput, error) {
-	req, out := c.DeleteGatewayRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
-
-// DeleteSnapshotScheduleRequest generates a "aws.Request" representing the
-// client's request for the DeleteSnapshotSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteSnapshotSchedule for more information on using the DeleteSnapshotSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteSnapshotScheduleRequest method.
-//    req, resp := client.DeleteSnapshotScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DeleteGatewayRequest method.
+//    req := client.DeleteGatewayRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotSchedule
-func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) (req *aws.Request, output *DeleteSnapshotScheduleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway
+func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteGatewayRequest {
 	op := &aws.Operation{
-		Name:       opDeleteSnapshotSchedule,
+		Name:       opDeleteGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DeleteSnapshotScheduleInput{}
+		input = &DeleteGatewayInput{}
 	}
 
-	output = &DeleteSnapshotScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DeleteGatewayOutput{})
+	return DeleteGatewayRequest{Request: req, Input: input}
 }
 
-// DeleteSnapshotSchedule API operation for AWS Storage Gateway.
+const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
+
+// DeleteSnapshotScheduleRequest is a API request type for the DeleteSnapshotSchedule API operation.
+type DeleteSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *DeleteSnapshotScheduleInput
+}
+
+// Send marshals and sends the DeleteSnapshotSchedule API request.
+func (r *DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteSnapshotScheduleOutput), nil
+}
+
+// DeleteSnapshotScheduleRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Deletes a snapshot of a volume.
 //
@@ -1743,71 +1028,62 @@ func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotSche
 // To list or delete a snapshot, you must use the Amazon EC2 API. in Amazon
 // Elastic Compute Cloud API Reference.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteSnapshotSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the DeleteSnapshotScheduleRequest method.
+//    req := client.DeleteSnapshotScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotSchedule
-func (c *StorageGateway) DeleteSnapshotSchedule(input *DeleteSnapshotScheduleInput) (*DeleteSnapshotScheduleOutput, error) {
-	req, out := c.DeleteSnapshotScheduleRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteSnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteSnapshotScheduleWithContext is the same as DeleteSnapshotSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteSnapshotSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteSnapshotScheduleWithContext(ctx aws.Context, input *DeleteSnapshotScheduleInput, opts ...aws.Option) (*DeleteSnapshotScheduleOutput, error) {
-	req, out := c.DeleteSnapshotScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteSnapshotScheduleInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteSnapshotScheduleOutput{})
+	return DeleteSnapshotScheduleRequest{Request: req, Input: input}
 }
 
 const opDeleteTape = "DeleteTape"
 
-// DeleteTapeRequest generates a "aws.Request" representing the
-// client's request for the DeleteTape operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTapeRequest is a API request type for the DeleteTape API operation.
+type DeleteTapeRequest struct {
+	*aws.Request
+	Input *DeleteTapeInput
+}
+
+// Send marshals and sends the DeleteTape API request.
+func (r *DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTapeOutput), nil
+}
+
+// DeleteTapeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTape for more information on using the DeleteTape
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified virtual tape. This operation is only supported in the
+// tape gateway architecture.
 //
 //    // Example sending a request using the DeleteTapeRequest method.
-//    req, resp := client.DeleteTapeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTapeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTape
-func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *aws.Request, output *DeleteTapeOutput) {
+func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTape,
 		HTTPMethod: "POST",
@@ -1818,81 +1094,43 @@ func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) (req *aws.Req
 		input = &DeleteTapeInput{}
 	}
 
-	output = &DeleteTapeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTape API operation for AWS Storage Gateway.
-//
-// Deletes the specified virtual tape. This operation is only supported in the
-// tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteTape for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTape
-func (c *StorageGateway) DeleteTape(input *DeleteTapeInput) (*DeleteTapeOutput, error) {
-	req, out := c.DeleteTapeRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTapeWithContext is the same as DeleteTape with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTape for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteTapeWithContext(ctx aws.Context, input *DeleteTapeInput, opts ...aws.Option) (*DeleteTapeOutput, error) {
-	req, out := c.DeleteTapeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTapeOutput{})
+	return DeleteTapeRequest{Request: req, Input: input}
 }
 
 const opDeleteTapeArchive = "DeleteTapeArchive"
 
-// DeleteTapeArchiveRequest generates a "aws.Request" representing the
-// client's request for the DeleteTapeArchive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DeleteTapeArchiveRequest is a API request type for the DeleteTapeArchive API operation.
+type DeleteTapeArchiveRequest struct {
+	*aws.Request
+	Input *DeleteTapeArchiveInput
+}
+
+// Send marshals and sends the DeleteTapeArchive API request.
+func (r *DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTapeArchiveOutput), nil
+}
+
+// DeleteTapeArchiveRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteTapeArchive for more information on using the DeleteTapeArchive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Deletes the specified virtual tape from the virtual tape shelf (VTS). This
+// operation is only supported in the tape gateway architecture.
 //
 //    // Example sending a request using the DeleteTapeArchiveRequest method.
-//    req, resp := client.DeleteTapeArchiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DeleteTapeArchiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchive
-func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) (req *aws.Request, output *DeleteTapeArchiveOutput) {
+func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput) DeleteTapeArchiveRequest {
 	op := &aws.Operation{
 		Name:       opDeleteTapeArchive,
 		HTTPMethod: "POST",
@@ -1903,97 +1141,30 @@ func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput)
 		input = &DeleteTapeArchiveInput{}
 	}
 
-	output = &DeleteTapeArchiveOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DeleteTapeArchive API operation for AWS Storage Gateway.
-//
-// Deletes the specified virtual tape from the virtual tape shelf (VTS). This
-// operation is only supported in the tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteTapeArchive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchive
-func (c *StorageGateway) DeleteTapeArchive(input *DeleteTapeArchiveInput) (*DeleteTapeArchiveOutput, error) {
-	req, out := c.DeleteTapeArchiveRequest(input)
-	return out, req.Send()
-}
-
-// DeleteTapeArchiveWithContext is the same as DeleteTapeArchive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteTapeArchive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteTapeArchiveWithContext(ctx aws.Context, input *DeleteTapeArchiveInput, opts ...aws.Option) (*DeleteTapeArchiveOutput, error) {
-	req, out := c.DeleteTapeArchiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DeleteTapeArchiveOutput{})
+	return DeleteTapeArchiveRequest{Request: req, Input: input}
 }
 
 const opDeleteVolume = "DeleteVolume"
 
-// DeleteVolumeRequest generates a "aws.Request" representing the
-// client's request for the DeleteVolume operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DeleteVolume for more information on using the DeleteVolume
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DeleteVolumeRequest method.
-//    req, resp := client.DeleteVolumeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolume
-func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *aws.Request, output *DeleteVolumeOutput) {
-	op := &aws.Operation{
-		Name:       opDeleteVolume,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DeleteVolumeInput{}
-	}
-
-	output = &DeleteVolumeOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DeleteVolumeRequest is a API request type for the DeleteVolume API operation.
+type DeleteVolumeRequest struct {
+	*aws.Request
+	Input *DeleteVolumeInput
 }
 
-// DeleteVolume API operation for AWS Storage Gateway.
+// Send marshals and sends the DeleteVolume API request.
+func (r *DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVolumeOutput), nil
+}
+
+// DeleteVolumeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Deletes the specified storage volume that you previously created using the
 // CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is
@@ -2012,71 +1183,67 @@ func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) (req *aws
 // In the request, you must provide the Amazon Resource Name (ARN) of the storage
 // volume you want to delete.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DeleteVolume for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the DeleteVolumeRequest method.
+//    req := client.DeleteVolumeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolume
-func (c *StorageGateway) DeleteVolume(input *DeleteVolumeInput) (*DeleteVolumeOutput, error) {
-	req, out := c.DeleteVolumeRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVolume,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DeleteVolumeWithContext is the same as DeleteVolume with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DeleteVolume for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DeleteVolumeWithContext(ctx aws.Context, input *DeleteVolumeInput, opts ...aws.Option) (*DeleteVolumeOutput, error) {
-	req, out := c.DeleteVolumeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DeleteVolumeInput{}
+	}
+
+	req := c.newRequest(op, input, &DeleteVolumeOutput{})
+	return DeleteVolumeRequest{Request: req, Input: input}
 }
 
 const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
 
-// DescribeBandwidthRateLimitRequest generates a "aws.Request" representing the
-// client's request for the DescribeBandwidthRateLimit operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeBandwidthRateLimitRequest is a API request type for the DescribeBandwidthRateLimit API operation.
+type DescribeBandwidthRateLimitRequest struct {
+	*aws.Request
+	Input *DescribeBandwidthRateLimitInput
+}
+
+// Send marshals and sends the DescribeBandwidthRateLimit API request.
+func (r *DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBandwidthRateLimitOutput), nil
+}
+
+// DescribeBandwidthRateLimitRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns the bandwidth rate limits of a gateway. By default, these limits
+// are not set, which means no bandwidth rate limiting is in effect.
 //
-// See DescribeBandwidthRateLimit for more information on using the DescribeBandwidthRateLimit
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation only returns a value for a bandwidth rate limit only if the
+// limit is set. If no limits are set for the gateway, then this operation returns
+// only the gateway ARN in the response body. To specify which gateway to describe,
+// use the Amazon Resource Name (ARN) of the gateway in your request.
 //
 //    // Example sending a request using the DescribeBandwidthRateLimitRequest method.
-//    req, resp := client.DescribeBandwidthRateLimitRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeBandwidthRateLimitRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimit
-func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) (req *aws.Request, output *DescribeBandwidthRateLimitOutput) {
+func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwidthRateLimitInput) DescribeBandwidthRateLimitRequest {
 	op := &aws.Operation{
 		Name:       opDescribeBandwidthRateLimit,
 		HTTPMethod: "POST",
@@ -2087,86 +1254,46 @@ func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwi
 		input = &DescribeBandwidthRateLimitInput{}
 	}
 
-	output = &DescribeBandwidthRateLimitOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeBandwidthRateLimit API operation for AWS Storage Gateway.
-//
-// Returns the bandwidth rate limits of a gateway. By default, these limits
-// are not set, which means no bandwidth rate limiting is in effect.
-//
-// This operation only returns a value for a bandwidth rate limit only if the
-// limit is set. If no limits are set for the gateway, then this operation returns
-// only the gateway ARN in the response body. To specify which gateway to describe,
-// use the Amazon Resource Name (ARN) of the gateway in your request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeBandwidthRateLimit for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimit
-func (c *StorageGateway) DescribeBandwidthRateLimit(input *DescribeBandwidthRateLimitInput) (*DescribeBandwidthRateLimitOutput, error) {
-	req, out := c.DescribeBandwidthRateLimitRequest(input)
-	return out, req.Send()
-}
-
-// DescribeBandwidthRateLimitWithContext is the same as DescribeBandwidthRateLimit with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeBandwidthRateLimit for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeBandwidthRateLimitWithContext(ctx aws.Context, input *DescribeBandwidthRateLimitInput, opts ...aws.Option) (*DescribeBandwidthRateLimitOutput, error) {
-	req, out := c.DescribeBandwidthRateLimitRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeBandwidthRateLimitOutput{})
+	return DescribeBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
 const opDescribeCache = "DescribeCache"
 
-// DescribeCacheRequest generates a "aws.Request" representing the
-// client's request for the DescribeCache operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCacheRequest is a API request type for the DescribeCache API operation.
+type DescribeCacheRequest struct {
+	*aws.Request
+	Input *DescribeCacheInput
+}
+
+// Send marshals and sends the DescribeCache API request.
+func (r *DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCacheOutput), nil
+}
+
+// DescribeCacheRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the cache of a gateway. This operation is only
+// supported in the cached volume,tape and file gateway architectures.
 //
-// See DescribeCache for more information on using the DescribeCache
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The response includes disk IDs that are configured as cache, and it includes
+// the amount of cache allocated and used.
 //
 //    // Example sending a request using the DescribeCacheRequest method.
-//    req, resp := client.DescribeCacheRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCacheRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCache
-func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *aws.Request, output *DescribeCacheOutput) {
+func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) DescribeCacheRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCache,
 		HTTPMethod: "POST",
@@ -2177,84 +1304,47 @@ func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) (req *a
 		input = &DescribeCacheInput{}
 	}
 
-	output = &DescribeCacheOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCache API operation for AWS Storage Gateway.
-//
-// Returns information about the cache of a gateway. This operation is only
-// supported in the cached volume,tape and file gateway architectures.
-//
-// The response includes disk IDs that are configured as cache, and it includes
-// the amount of cache allocated and used.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeCache for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCache
-func (c *StorageGateway) DescribeCache(input *DescribeCacheInput) (*DescribeCacheOutput, error) {
-	req, out := c.DescribeCacheRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCacheWithContext is the same as DescribeCache with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCache for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeCacheWithContext(ctx aws.Context, input *DescribeCacheInput, opts ...aws.Option) (*DescribeCacheOutput, error) {
-	req, out := c.DescribeCacheRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCacheOutput{})
+	return DescribeCacheRequest{Request: req, Input: input}
 }
 
 const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 
-// DescribeCachediSCSIVolumesRequest generates a "aws.Request" representing the
-// client's request for the DescribeCachediSCSIVolumes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeCachediSCSIVolumesRequest is a API request type for the DescribeCachediSCSIVolumes API operation.
+type DescribeCachediSCSIVolumesRequest struct {
+	*aws.Request
+	Input *DescribeCachediSCSIVolumesInput
+}
+
+// Send marshals and sends the DescribeCachediSCSIVolumes API request.
+func (r *DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeCachediSCSIVolumesOutput), nil
+}
+
+// DescribeCachediSCSIVolumesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a description of the gateway volumes specified in the request. This
+// operation is only supported in the cached volume gateway architecture.
 //
-// See DescribeCachediSCSIVolumes for more information on using the DescribeCachediSCSIVolumes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The list of gateway volumes in the request must be from one gateway. In the
+// response Amazon Storage Gateway returns volume information sorted by volume
+// Amazon Resource Name (ARN).
 //
 //    // Example sending a request using the DescribeCachediSCSIVolumesRequest method.
-//    req, resp := client.DescribeCachediSCSIVolumesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeCachediSCSIVolumesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes
-func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) (req *aws.Request, output *DescribeCachediSCSIVolumesOutput) {
+func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeCachediSCSIVolumes,
 		HTTPMethod: "POST",
@@ -2265,85 +1355,43 @@ func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCached
 		input = &DescribeCachediSCSIVolumesInput{}
 	}
 
-	output = &DescribeCachediSCSIVolumesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeCachediSCSIVolumes API operation for AWS Storage Gateway.
-//
-// Returns a description of the gateway volumes specified in the request. This
-// operation is only supported in the cached volume gateway architecture.
-//
-// The list of gateway volumes in the request must be from one gateway. In the
-// response Amazon Storage Gateway returns volume information sorted by volume
-// Amazon Resource Name (ARN).
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeCachediSCSIVolumes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes
-func (c *StorageGateway) DescribeCachediSCSIVolumes(input *DescribeCachediSCSIVolumesInput) (*DescribeCachediSCSIVolumesOutput, error) {
-	req, out := c.DescribeCachediSCSIVolumesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeCachediSCSIVolumesWithContext is the same as DescribeCachediSCSIVolumes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeCachediSCSIVolumes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeCachediSCSIVolumesWithContext(ctx aws.Context, input *DescribeCachediSCSIVolumesInput, opts ...aws.Option) (*DescribeCachediSCSIVolumesOutput, error) {
-	req, out := c.DescribeCachediSCSIVolumesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeCachediSCSIVolumesOutput{})
+	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input}
 }
 
 const opDescribeChapCredentials = "DescribeChapCredentials"
 
-// DescribeChapCredentialsRequest generates a "aws.Request" representing the
-// client's request for the DescribeChapCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeChapCredentialsRequest is a API request type for the DescribeChapCredentials API operation.
+type DescribeChapCredentialsRequest struct {
+	*aws.Request
+	Input *DescribeChapCredentialsInput
+}
+
+// Send marshals and sends the DescribeChapCredentials API request.
+func (r *DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeChapCredentialsOutput), nil
+}
+
+// DescribeChapCredentialsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeChapCredentials for more information on using the DescribeChapCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials
+// information for a specified iSCSI target, one for each target-initiator pair.
 //
 //    // Example sending a request using the DescribeChapCredentialsRequest method.
-//    req, resp := client.DescribeChapCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeChapCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentials
-func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) (req *aws.Request, output *DescribeChapCredentialsOutput) {
+func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCredentialsInput) DescribeChapCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeChapCredentials,
 		HTTPMethod: "POST",
@@ -2354,81 +1402,45 @@ func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCrede
 		input = &DescribeChapCredentialsInput{}
 	}
 
-	output = &DescribeChapCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeChapCredentials API operation for AWS Storage Gateway.
-//
-// Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials
-// information for a specified iSCSI target, one for each target-initiator pair.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeChapCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentials
-func (c *StorageGateway) DescribeChapCredentials(input *DescribeChapCredentialsInput) (*DescribeChapCredentialsOutput, error) {
-	req, out := c.DescribeChapCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeChapCredentialsWithContext is the same as DescribeChapCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeChapCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeChapCredentialsWithContext(ctx aws.Context, input *DescribeChapCredentialsInput, opts ...aws.Option) (*DescribeChapCredentialsOutput, error) {
-	req, out := c.DescribeChapCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeChapCredentialsOutput{})
+	return DescribeChapCredentialsRequest{Request: req, Input: input}
 }
 
 const opDescribeGatewayInformation = "DescribeGatewayInformation"
 
-// DescribeGatewayInformationRequest generates a "aws.Request" representing the
-// client's request for the DescribeGatewayInformation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeGatewayInformationRequest is a API request type for the DescribeGatewayInformation API operation.
+type DescribeGatewayInformationRequest struct {
+	*aws.Request
+	Input *DescribeGatewayInformationInput
+}
+
+// Send marshals and sends the DescribeGatewayInformation API request.
+func (r *DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGatewayInformationOutput), nil
+}
+
+// DescribeGatewayInformationRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeGatewayInformation for more information on using the DescribeGatewayInformation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns metadata about a gateway such as its name, network interfaces, configured
+// time zone, and the state (whether the gateway is running or not). To specify
+// which gateway to describe, use the Amazon Resource Name (ARN) of the gateway
+// in your request.
 //
 //    // Example sending a request using the DescribeGatewayInformationRequest method.
-//    req, resp := client.DescribeGatewayInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeGatewayInformationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation
-func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) (req *aws.Request, output *DescribeGatewayInformationOutput) {
+func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewayInformationInput) DescribeGatewayInformationRequest {
 	op := &aws.Operation{
 		Name:       opDescribeGatewayInformation,
 		HTTPMethod: "POST",
@@ -2439,83 +1451,43 @@ func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewa
 		input = &DescribeGatewayInformationInput{}
 	}
 
-	output = &DescribeGatewayInformationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeGatewayInformation API operation for AWS Storage Gateway.
-//
-// Returns metadata about a gateway such as its name, network interfaces, configured
-// time zone, and the state (whether the gateway is running or not). To specify
-// which gateway to describe, use the Amazon Resource Name (ARN) of the gateway
-// in your request.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeGatewayInformation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation
-func (c *StorageGateway) DescribeGatewayInformation(input *DescribeGatewayInformationInput) (*DescribeGatewayInformationOutput, error) {
-	req, out := c.DescribeGatewayInformationRequest(input)
-	return out, req.Send()
-}
-
-// DescribeGatewayInformationWithContext is the same as DescribeGatewayInformation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeGatewayInformation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeGatewayInformationWithContext(ctx aws.Context, input *DescribeGatewayInformationInput, opts ...aws.Option) (*DescribeGatewayInformationOutput, error) {
-	req, out := c.DescribeGatewayInformationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeGatewayInformationOutput{})
+	return DescribeGatewayInformationRequest{Request: req, Input: input}
 }
 
 const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 
-// DescribeMaintenanceStartTimeRequest generates a "aws.Request" representing the
-// client's request for the DescribeMaintenanceStartTime operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeMaintenanceStartTimeRequest is a API request type for the DescribeMaintenanceStartTime API operation.
+type DescribeMaintenanceStartTimeRequest struct {
+	*aws.Request
+	Input *DescribeMaintenanceStartTimeInput
+}
+
+// Send marshals and sends the DescribeMaintenanceStartTime API request.
+func (r *DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTimeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeMaintenanceStartTimeOutput), nil
+}
+
+// DescribeMaintenanceStartTimeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeMaintenanceStartTime for more information on using the DescribeMaintenanceStartTime
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns your gateway's weekly maintenance start time including the day and
+// time of the week. Note that values are in terms of the gateway's time zone.
 //
 //    // Example sending a request using the DescribeMaintenanceStartTimeRequest method.
-//    req, resp := client.DescribeMaintenanceStartTimeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeMaintenanceStartTimeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime
-func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) (req *aws.Request, output *DescribeMaintenanceStartTimeOutput) {
+func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest {
 	op := &aws.Operation{
 		Name:       opDescribeMaintenanceStartTime,
 		HTTPMethod: "POST",
@@ -2526,81 +1498,43 @@ func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMain
 		input = &DescribeMaintenanceStartTimeInput{}
 	}
 
-	output = &DescribeMaintenanceStartTimeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeMaintenanceStartTime API operation for AWS Storage Gateway.
-//
-// Returns your gateway's weekly maintenance start time including the day and
-// time of the week. Note that values are in terms of the gateway's time zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeMaintenanceStartTime for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime
-func (c *StorageGateway) DescribeMaintenanceStartTime(input *DescribeMaintenanceStartTimeInput) (*DescribeMaintenanceStartTimeOutput, error) {
-	req, out := c.DescribeMaintenanceStartTimeRequest(input)
-	return out, req.Send()
-}
-
-// DescribeMaintenanceStartTimeWithContext is the same as DescribeMaintenanceStartTime with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeMaintenanceStartTime for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeMaintenanceStartTimeWithContext(ctx aws.Context, input *DescribeMaintenanceStartTimeInput, opts ...aws.Option) (*DescribeMaintenanceStartTimeOutput, error) {
-	req, out := c.DescribeMaintenanceStartTimeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeMaintenanceStartTimeOutput{})
+	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input}
 }
 
 const opDescribeNFSFileShares = "DescribeNFSFileShares"
 
-// DescribeNFSFileSharesRequest generates a "aws.Request" representing the
-// client's request for the DescribeNFSFileShares operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeNFSFileSharesRequest is a API request type for the DescribeNFSFileShares API operation.
+type DescribeNFSFileSharesRequest struct {
+	*aws.Request
+	Input *DescribeNFSFileSharesInput
+}
+
+// Send marshals and sends the DescribeNFSFileShares API request.
+func (r *DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeNFSFileSharesOutput), nil
+}
+
+// DescribeNFSFileSharesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeNFSFileShares for more information on using the DescribeNFSFileShares
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a description for one or more file shares from a file gateway. This
+// operation is only supported in file gateways.
 //
 //    // Example sending a request using the DescribeNFSFileSharesRequest method.
-//    req, resp := client.DescribeNFSFileSharesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeNFSFileSharesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares
-func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput) (req *aws.Request, output *DescribeNFSFileSharesOutput) {
+func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeNFSFileShares,
 		HTTPMethod: "POST",
@@ -2611,81 +1545,45 @@ func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileShar
 		input = &DescribeNFSFileSharesInput{}
 	}
 
-	output = &DescribeNFSFileSharesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeNFSFileShares API operation for AWS Storage Gateway.
-//
-// Gets a description for one or more file shares from a file gateway. This
-// operation is only supported in file gateways.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeNFSFileShares for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares
-func (c *StorageGateway) DescribeNFSFileShares(input *DescribeNFSFileSharesInput) (*DescribeNFSFileSharesOutput, error) {
-	req, out := c.DescribeNFSFileSharesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeNFSFileSharesWithContext is the same as DescribeNFSFileShares with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeNFSFileShares for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeNFSFileSharesWithContext(ctx aws.Context, input *DescribeNFSFileSharesInput, opts ...aws.Option) (*DescribeNFSFileSharesOutput, error) {
-	req, out := c.DescribeNFSFileSharesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeNFSFileSharesOutput{})
+	return DescribeNFSFileSharesRequest{Request: req, Input: input}
 }
 
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 
-// DescribeSnapshotScheduleRequest generates a "aws.Request" representing the
-// client's request for the DescribeSnapshotSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeSnapshotScheduleRequest is a API request type for the DescribeSnapshotSchedule API operation.
+type DescribeSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *DescribeSnapshotScheduleInput
+}
+
+// Send marshals and sends the DescribeSnapshotSchedule API request.
+func (r *DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeSnapshotScheduleOutput), nil
+}
+
+// DescribeSnapshotScheduleRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeSnapshotSchedule for more information on using the DescribeSnapshotSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Describes the snapshot schedule for the specified gateway volume. The snapshot
+// schedule information includes intervals at which snapshots are automatically
+// initiated on the volume. This operation is only supported in the cached volume
+// and stored volume architectures.
 //
 //    // Example sending a request using the DescribeSnapshotScheduleRequest method.
-//    req, resp := client.DescribeSnapshotScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeSnapshotScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule
-func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) (req *aws.Request, output *DescribeSnapshotScheduleOutput) {
+func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest {
 	op := &aws.Operation{
 		Name:       opDescribeSnapshotSchedule,
 		HTTPMethod: "POST",
@@ -2696,83 +1594,45 @@ func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshot
 		input = &DescribeSnapshotScheduleInput{}
 	}
 
-	output = &DescribeSnapshotScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeSnapshotSchedule API operation for AWS Storage Gateway.
-//
-// Describes the snapshot schedule for the specified gateway volume. The snapshot
-// schedule information includes intervals at which snapshots are automatically
-// initiated on the volume. This operation is only supported in the cached volume
-// and stored volume architectures.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeSnapshotSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule
-func (c *StorageGateway) DescribeSnapshotSchedule(input *DescribeSnapshotScheduleInput) (*DescribeSnapshotScheduleOutput, error) {
-	req, out := c.DescribeSnapshotScheduleRequest(input)
-	return out, req.Send()
-}
-
-// DescribeSnapshotScheduleWithContext is the same as DescribeSnapshotSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeSnapshotSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeSnapshotScheduleWithContext(ctx aws.Context, input *DescribeSnapshotScheduleInput, opts ...aws.Option) (*DescribeSnapshotScheduleOutput, error) {
-	req, out := c.DescribeSnapshotScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeSnapshotScheduleOutput{})
+	return DescribeSnapshotScheduleRequest{Request: req, Input: input}
 }
 
 const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 
-// DescribeStorediSCSIVolumesRequest generates a "aws.Request" representing the
-// client's request for the DescribeStorediSCSIVolumes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeStorediSCSIVolumesRequest is a API request type for the DescribeStorediSCSIVolumes API operation.
+type DescribeStorediSCSIVolumesRequest struct {
+	*aws.Request
+	Input *DescribeStorediSCSIVolumesInput
+}
+
+// Send marshals and sends the DescribeStorediSCSIVolumes API request.
+func (r *DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeStorediSCSIVolumesOutput), nil
+}
+
+// DescribeStorediSCSIVolumesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeStorediSCSIVolumes for more information on using the DescribeStorediSCSIVolumes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns the description of the gateway volumes specified in the request.
+// The list of gateway volumes in the request must be from one gateway. In the
+// response Amazon Storage Gateway returns volume information sorted by volume
+// ARNs. This operation is only supported in stored volume gateway architecture.
 //
 //    // Example sending a request using the DescribeStorediSCSIVolumesRequest method.
-//    req, resp := client.DescribeStorediSCSIVolumesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeStorediSCSIVolumesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes
-func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) (req *aws.Request, output *DescribeStorediSCSIVolumesOutput) {
+func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStorediSCSIVolumesInput) DescribeStorediSCSIVolumesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeStorediSCSIVolumes,
 		HTTPMethod: "POST",
@@ -2783,83 +1643,46 @@ func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStored
 		input = &DescribeStorediSCSIVolumesInput{}
 	}
 
-	output = &DescribeStorediSCSIVolumesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeStorediSCSIVolumes API operation for AWS Storage Gateway.
-//
-// Returns the description of the gateway volumes specified in the request.
-// The list of gateway volumes in the request must be from one gateway. In the
-// response Amazon Storage Gateway returns volume information sorted by volume
-// ARNs. This operation is only supported in stored volume gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeStorediSCSIVolumes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes
-func (c *StorageGateway) DescribeStorediSCSIVolumes(input *DescribeStorediSCSIVolumesInput) (*DescribeStorediSCSIVolumesOutput, error) {
-	req, out := c.DescribeStorediSCSIVolumesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeStorediSCSIVolumesWithContext is the same as DescribeStorediSCSIVolumes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeStorediSCSIVolumes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeStorediSCSIVolumesWithContext(ctx aws.Context, input *DescribeStorediSCSIVolumesInput, opts ...aws.Option) (*DescribeStorediSCSIVolumesOutput, error) {
-	req, out := c.DescribeStorediSCSIVolumesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeStorediSCSIVolumesOutput{})
+	return DescribeStorediSCSIVolumesRequest{Request: req, Input: input}
 }
 
 const opDescribeTapeArchives = "DescribeTapeArchives"
 
-// DescribeTapeArchivesRequest generates a "aws.Request" representing the
-// client's request for the DescribeTapeArchives operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTapeArchivesRequest is a API request type for the DescribeTapeArchives API operation.
+type DescribeTapeArchivesRequest struct {
+	*aws.Request
+	Input *DescribeTapeArchivesInput
+}
+
+// Send marshals and sends the DescribeTapeArchives API request.
+func (r *DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTapeArchivesOutput), nil
+}
+
+// DescribeTapeArchivesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a description of specified virtual tapes in the virtual tape shelf
+// (VTS). This operation is only supported in the tape gateway architecture.
 //
-// See DescribeTapeArchives for more information on using the DescribeTapeArchives
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If a specific TapeARN is not specified, AWS Storage Gateway returns a description
+// of all virtual tapes found in the VTS associated with your account.
 //
 //    // Example sending a request using the DescribeTapeArchivesRequest method.
-//    req, resp := client.DescribeTapeArchivesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTapeArchivesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives
-func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) (req *aws.Request, output *DescribeTapeArchivesOutput) {
+func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchivesInput) DescribeTapeArchivesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTapeArchives,
 		HTTPMethod: "POST",
@@ -2876,55 +1699,8 @@ func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchives
 		input = &DescribeTapeArchivesInput{}
 	}
 
-	output = &DescribeTapeArchivesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTapeArchives API operation for AWS Storage Gateway.
-//
-// Returns a description of specified virtual tapes in the virtual tape shelf
-// (VTS). This operation is only supported in the tape gateway architecture.
-//
-// If a specific TapeARN is not specified, AWS Storage Gateway returns a description
-// of all virtual tapes found in the VTS associated with your account.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeTapeArchives for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives
-func (c *StorageGateway) DescribeTapeArchives(input *DescribeTapeArchivesInput) (*DescribeTapeArchivesOutput, error) {
-	req, out := c.DescribeTapeArchivesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTapeArchivesWithContext is the same as DescribeTapeArchives with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTapeArchives for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeArchivesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, opts ...aws.Option) (*DescribeTapeArchivesOutput, error) {
-	req, out := c.DescribeTapeArchivesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTapeArchivesOutput{})
+	return DescribeTapeArchivesRequest{Request: req, Input: input}
 }
 
 // DescribeTapeArchivesPages iterates over the pages of a DescribeTapeArchives operation,
@@ -2963,10 +1739,10 @@ func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, i
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTapeArchivesRequest(inCpy)
+			req := c.DescribeTapeArchivesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -2979,31 +1755,42 @@ func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, i
 
 const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
 
-// DescribeTapeRecoveryPointsRequest generates a "aws.Request" representing the
-// client's request for the DescribeTapeRecoveryPoints operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTapeRecoveryPointsRequest is a API request type for the DescribeTapeRecoveryPoints API operation.
+type DescribeTapeRecoveryPointsRequest struct {
+	*aws.Request
+	Input *DescribeTapeRecoveryPointsInput
+}
+
+// Send marshals and sends the DescribeTapeRecoveryPoints API request.
+func (r *DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTapeRecoveryPointsOutput), nil
+}
+
+// DescribeTapeRecoveryPointsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a list of virtual tape recovery points that are available for the
+// specified tape gateway.
 //
-// See DescribeTapeRecoveryPoints for more information on using the DescribeTapeRecoveryPoints
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// A recovery point is a point-in-time view of a virtual tape at which all the
+// data on the virtual tape is consistent. If your gateway crashes, virtual
+// tapes that have recovery points can be recovered to a new gateway. This operation
+// is only supported in the tape gateway architecture.
 //
 //    // Example sending a request using the DescribeTapeRecoveryPointsRequest method.
-//    req, resp := client.DescribeTapeRecoveryPointsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTapeRecoveryPointsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPoints
-func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) (req *aws.Request, output *DescribeTapeRecoveryPointsOutput) {
+func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRecoveryPointsInput) DescribeTapeRecoveryPointsRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTapeRecoveryPoints,
 		HTTPMethod: "POST",
@@ -3020,57 +1807,8 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRe
 		input = &DescribeTapeRecoveryPointsInput{}
 	}
 
-	output = &DescribeTapeRecoveryPointsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTapeRecoveryPoints API operation for AWS Storage Gateway.
-//
-// Returns a list of virtual tape recovery points that are available for the
-// specified tape gateway.
-//
-// A recovery point is a point-in-time view of a virtual tape at which all the
-// data on the virtual tape is consistent. If your gateway crashes, virtual
-// tapes that have recovery points can be recovered to a new gateway. This operation
-// is only supported in the tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeTapeRecoveryPoints for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPoints
-func (c *StorageGateway) DescribeTapeRecoveryPoints(input *DescribeTapeRecoveryPointsInput) (*DescribeTapeRecoveryPointsOutput, error) {
-	req, out := c.DescribeTapeRecoveryPointsRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTapeRecoveryPointsWithContext is the same as DescribeTapeRecoveryPoints with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTapeRecoveryPoints for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeRecoveryPointsWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, opts ...aws.Option) (*DescribeTapeRecoveryPointsOutput, error) {
-	req, out := c.DescribeTapeRecoveryPointsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTapeRecoveryPointsOutput{})
+	return DescribeTapeRecoveryPointsRequest{Request: req, Input: input}
 }
 
 // DescribeTapeRecoveryPointsPages iterates over the pages of a DescribeTapeRecoveryPoints operation,
@@ -3109,10 +1847,10 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Cont
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTapeRecoveryPointsRequest(inCpy)
+			req := c.DescribeTapeRecoveryPointsRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3125,31 +1863,39 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Cont
 
 const opDescribeTapes = "DescribeTapes"
 
-// DescribeTapesRequest generates a "aws.Request" representing the
-// client's request for the DescribeTapes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeTapesRequest is a API request type for the DescribeTapes API operation.
+type DescribeTapesRequest struct {
+	*aws.Request
+	Input *DescribeTapesInput
+}
+
+// Send marshals and sends the DescribeTapes API request.
+func (r *DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeTapesOutput), nil
+}
+
+// DescribeTapesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeTapes for more information on using the DescribeTapes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Returns a description of the specified Amazon Resource Name (ARN) of virtual
+// tapes. If a TapeARN is not specified, returns a description of all virtual
+// tapes associated with the specified gateway. This operation is only supported
+// in the tape gateway architecture.
 //
 //    // Example sending a request using the DescribeTapesRequest method.
-//    req, resp := client.DescribeTapesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeTapesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes
-func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *aws.Request, output *DescribeTapesOutput) {
+func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) DescribeTapesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeTapes,
 		HTTPMethod: "POST",
@@ -3166,54 +1912,8 @@ func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) (req *a
 		input = &DescribeTapesInput{}
 	}
 
-	output = &DescribeTapesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeTapes API operation for AWS Storage Gateway.
-//
-// Returns a description of the specified Amazon Resource Name (ARN) of virtual
-// tapes. If a TapeARN is not specified, returns a description of all virtual
-// tapes associated with the specified gateway. This operation is only supported
-// in the tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeTapes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes
-func (c *StorageGateway) DescribeTapes(input *DescribeTapesInput) (*DescribeTapesOutput, error) {
-	req, out := c.DescribeTapesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeTapesWithContext is the same as DescribeTapes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeTapes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapesWithContext(ctx aws.Context, input *DescribeTapesInput, opts ...aws.Option) (*DescribeTapesOutput, error) {
-	req, out := c.DescribeTapesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeTapesOutput{})
+	return DescribeTapesRequest{Request: req, Input: input}
 }
 
 // DescribeTapesPages iterates over the pages of a DescribeTapes operation,
@@ -3252,10 +1952,10 @@ func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *D
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeTapesRequest(inCpy)
+			req := c.DescribeTapesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3268,31 +1968,40 @@ func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeUploadBuffer = "DescribeUploadBuffer"
 
-// DescribeUploadBufferRequest generates a "aws.Request" representing the
-// client's request for the DescribeUploadBuffer operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeUploadBufferRequest is a API request type for the DescribeUploadBuffer API operation.
+type DescribeUploadBufferRequest struct {
+	*aws.Request
+	Input *DescribeUploadBufferInput
+}
+
+// Send marshals and sends the DescribeUploadBuffer API request.
+func (r *DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeUploadBufferOutput), nil
+}
+
+// DescribeUploadBufferRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns information about the upload buffer of a gateway. This operation
+// is supported for the stored volume, cached volume and tape gateway architectures.
 //
-// See DescribeUploadBuffer for more information on using the DescribeUploadBuffer
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The response includes disk IDs that are configured as upload buffer space,
+// and it includes the amount of upload buffer space allocated and used.
 //
 //    // Example sending a request using the DescribeUploadBufferRequest method.
-//    req, resp := client.DescribeUploadBufferRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeUploadBufferRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBuffer
-func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) (req *aws.Request, output *DescribeUploadBufferOutput) {
+func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBufferInput) DescribeUploadBufferRequest {
 	op := &aws.Operation{
 		Name:       opDescribeUploadBuffer,
 		HTTPMethod: "POST",
@@ -3303,84 +2012,45 @@ func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBuffer
 		input = &DescribeUploadBufferInput{}
 	}
 
-	output = &DescribeUploadBufferOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeUploadBuffer API operation for AWS Storage Gateway.
-//
-// Returns information about the upload buffer of a gateway. This operation
-// is supported for the stored volume, cached volume and tape gateway architectures.
-//
-// The response includes disk IDs that are configured as upload buffer space,
-// and it includes the amount of upload buffer space allocated and used.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeUploadBuffer for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBuffer
-func (c *StorageGateway) DescribeUploadBuffer(input *DescribeUploadBufferInput) (*DescribeUploadBufferOutput, error) {
-	req, out := c.DescribeUploadBufferRequest(input)
-	return out, req.Send()
-}
-
-// DescribeUploadBufferWithContext is the same as DescribeUploadBuffer with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeUploadBuffer for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeUploadBufferWithContext(ctx aws.Context, input *DescribeUploadBufferInput, opts ...aws.Option) (*DescribeUploadBufferOutput, error) {
-	req, out := c.DescribeUploadBufferRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeUploadBufferOutput{})
+	return DescribeUploadBufferRequest{Request: req, Input: input}
 }
 
 const opDescribeVTLDevices = "DescribeVTLDevices"
 
-// DescribeVTLDevicesRequest generates a "aws.Request" representing the
-// client's request for the DescribeVTLDevices operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// DescribeVTLDevicesRequest is a API request type for the DescribeVTLDevices API operation.
+type DescribeVTLDevicesRequest struct {
+	*aws.Request
+	Input *DescribeVTLDevicesInput
+}
+
+// Send marshals and sends the DescribeVTLDevices API request.
+func (r *DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeVTLDevicesOutput), nil
+}
+
+// DescribeVTLDevicesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Returns a description of virtual tape library (VTL) devices for the specified
+// tape gateway. In the response, AWS Storage Gateway returns VTL device information.
 //
-// See DescribeVTLDevices for more information on using the DescribeVTLDevices
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// This operation is only supported in the tape gateway architecture.
 //
 //    // Example sending a request using the DescribeVTLDevicesRequest method.
-//    req, resp := client.DescribeVTLDevicesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.DescribeVTLDevicesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevices
-func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) (req *aws.Request, output *DescribeVTLDevicesOutput) {
+func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInput) DescribeVTLDevicesRequest {
 	op := &aws.Operation{
 		Name:       opDescribeVTLDevices,
 		HTTPMethod: "POST",
@@ -3397,54 +2067,8 @@ func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInpu
 		input = &DescribeVTLDevicesInput{}
 	}
 
-	output = &DescribeVTLDevicesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// DescribeVTLDevices API operation for AWS Storage Gateway.
-//
-// Returns a description of virtual tape library (VTL) devices for the specified
-// tape gateway. In the response, AWS Storage Gateway returns VTL device information.
-//
-// This operation is only supported in the tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeVTLDevices for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevices
-func (c *StorageGateway) DescribeVTLDevices(input *DescribeVTLDevicesInput) (*DescribeVTLDevicesOutput, error) {
-	req, out := c.DescribeVTLDevicesRequest(input)
-	return out, req.Send()
-}
-
-// DescribeVTLDevicesWithContext is the same as DescribeVTLDevices with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeVTLDevices for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeVTLDevicesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, opts ...aws.Option) (*DescribeVTLDevicesOutput, error) {
-	req, out := c.DescribeVTLDevicesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &DescribeVTLDevicesOutput{})
+	return DescribeVTLDevicesRequest{Request: req, Input: input}
 }
 
 // DescribeVTLDevicesPages iterates over the pages of a DescribeVTLDevices operation,
@@ -3483,10 +2107,10 @@ func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, inp
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.DescribeVTLDevicesRequest(inCpy)
+			req := c.DescribeVTLDevicesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3499,47 +2123,24 @@ func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, inp
 
 const opDescribeWorkingStorage = "DescribeWorkingStorage"
 
-// DescribeWorkingStorageRequest generates a "aws.Request" representing the
-// client's request for the DescribeWorkingStorage operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DescribeWorkingStorage for more information on using the DescribeWorkingStorage
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DescribeWorkingStorageRequest method.
-//    req, resp := client.DescribeWorkingStorageRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage
-func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) (req *aws.Request, output *DescribeWorkingStorageOutput) {
-	op := &aws.Operation{
-		Name:       opDescribeWorkingStorage,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &DescribeWorkingStorageInput{}
-	}
-
-	output = &DescribeWorkingStorageOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// DescribeWorkingStorageRequest is a API request type for the DescribeWorkingStorage API operation.
+type DescribeWorkingStorageRequest struct {
+	*aws.Request
+	Input *DescribeWorkingStorageInput
 }
 
-// DescribeWorkingStorage API operation for AWS Storage Gateway.
+// Send marshals and sends the DescribeWorkingStorage API request.
+func (r *DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeWorkingStorageOutput), nil
+}
+
+// DescribeWorkingStorageRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Returns information about the working storage of a gateway. This operation
 // is only supported in the stored volumes gateway architecture. This operation
@@ -3552,87 +2153,49 @@ func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingSto
 // The response includes disk IDs that are configured as working storage, and
 // it includes the amount of working storage allocated and used.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DescribeWorkingStorage for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage
-func (c *StorageGateway) DescribeWorkingStorage(input *DescribeWorkingStorageInput) (*DescribeWorkingStorageOutput, error) {
-	req, out := c.DescribeWorkingStorageRequest(input)
-	return out, req.Send()
-}
-
-// DescribeWorkingStorageWithContext is the same as DescribeWorkingStorage with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DescribeWorkingStorage for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeWorkingStorageWithContext(ctx aws.Context, input *DescribeWorkingStorageInput, opts ...aws.Option) (*DescribeWorkingStorageOutput, error) {
-	req, out := c.DescribeWorkingStorageRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opDisableGateway = "DisableGateway"
-
-// DisableGatewayRequest generates a "aws.Request" representing the
-// client's request for the DisableGateway operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See DisableGateway for more information on using the DisableGateway
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the DisableGatewayRequest method.
-//    req, resp := client.DisableGatewayRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the DescribeWorkingStorageRequest method.
+//    req := client.DescribeWorkingStorageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGateway
-func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req *aws.Request, output *DisableGatewayOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage
+func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingStorageInput) DescribeWorkingStorageRequest {
 	op := &aws.Operation{
-		Name:       opDisableGateway,
+		Name:       opDescribeWorkingStorage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &DisableGatewayInput{}
+		input = &DescribeWorkingStorageInput{}
 	}
 
-	output = &DisableGatewayOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &DescribeWorkingStorageOutput{})
+	return DescribeWorkingStorageRequest{Request: req, Input: input}
 }
 
-// DisableGateway API operation for AWS Storage Gateway.
+const opDisableGateway = "DisableGateway"
+
+// DisableGatewayRequest is a API request type for the DisableGateway API operation.
+type DisableGatewayRequest struct {
+	*aws.Request
+	Input *DisableGatewayInput
+}
+
+// Send marshals and sends the DisableGateway API request.
+func (r *DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisableGatewayOutput), nil
+}
+
+// DisableGatewayRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Disables a tape gateway when the gateway is no longer functioning. For example,
 // if your gateway VM is damaged, you can disable the gateway so you can recover
@@ -3643,71 +2206,63 @@ func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) (req 
 //
 // Once a gateway is disabled it cannot be enabled.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation DisableGateway for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the DisableGatewayRequest method.
+//    req := client.DisableGatewayRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGateway
-func (c *StorageGateway) DisableGateway(input *DisableGatewayInput) (*DisableGatewayOutput, error) {
-	req, out := c.DisableGatewayRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) DisableGatewayRequest {
+	op := &aws.Operation{
+		Name:       opDisableGateway,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// DisableGatewayWithContext is the same as DisableGateway with the addition of
-// the ability to pass a context and additional request options.
-//
-// See DisableGateway for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DisableGatewayWithContext(ctx aws.Context, input *DisableGatewayInput, opts ...aws.Option) (*DisableGatewayOutput, error) {
-	req, out := c.DisableGatewayRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &DisableGatewayInput{}
+	}
+
+	req := c.newRequest(op, input, &DisableGatewayOutput{})
+	return DisableGatewayRequest{Request: req, Input: input}
 }
 
 const opListFileShares = "ListFileShares"
 
-// ListFileSharesRequest generates a "aws.Request" representing the
-// client's request for the ListFileShares operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListFileSharesRequest is a API request type for the ListFileShares API operation.
+type ListFileSharesRequest struct {
+	*aws.Request
+	Input *ListFileSharesInput
+}
+
+// Send marshals and sends the ListFileShares API request.
+func (r *ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFileSharesOutput), nil
+}
+
+// ListFileSharesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListFileShares for more information on using the ListFileShares
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Gets a list of the file shares for a specific file gateway, or the list of
+// file shares that belong to the calling user account. This operation is only
+// supported in the file gateway architecture.
 //
 //    // Example sending a request using the ListFileSharesRequest method.
-//    req, resp := client.ListFileSharesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListFileSharesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileShares
-func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) (req *aws.Request, output *ListFileSharesOutput) {
+func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) ListFileSharesRequest {
 	op := &aws.Operation{
 		Name:       opListFileShares,
 		HTTPMethod: "POST",
@@ -3718,82 +2273,52 @@ func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) (req 
 		input = &ListFileSharesInput{}
 	}
 
-	output = &ListFileSharesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListFileShares API operation for AWS Storage Gateway.
-//
-// Gets a list of the file shares for a specific file gateway, or the list of
-// file shares that belong to the calling user account. This operation is only
-// supported in the file gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListFileShares for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileShares
-func (c *StorageGateway) ListFileShares(input *ListFileSharesInput) (*ListFileSharesOutput, error) {
-	req, out := c.ListFileSharesRequest(input)
-	return out, req.Send()
-}
-
-// ListFileSharesWithContext is the same as ListFileShares with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListFileShares for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListFileSharesWithContext(ctx aws.Context, input *ListFileSharesInput, opts ...aws.Option) (*ListFileSharesOutput, error) {
-	req, out := c.ListFileSharesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListFileSharesOutput{})
+	return ListFileSharesRequest{Request: req, Input: input}
 }
 
 const opListGateways = "ListGateways"
 
-// ListGatewaysRequest generates a "aws.Request" representing the
-// client's request for the ListGateways operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListGatewaysRequest is a API request type for the ListGateways API operation.
+type ListGatewaysRequest struct {
+	*aws.Request
+	Input *ListGatewaysInput
+}
+
+// Send marshals and sends the ListGateways API request.
+func (r *ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGatewaysOutput), nil
+}
+
+// ListGatewaysRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists gateways owned by an AWS account in a region specified in the request.
+// The returned list is ordered by gateway Amazon Resource Name (ARN).
 //
-// See ListGateways for more information on using the ListGateways
-// API call, and error handling.
+// By default, the operation returns a maximum of 100 gateways. This operation
+// supports pagination that allows you to optionally reduce the number of gateways
+// returned in a response.
 //
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// If you have more gateways than are returned in a response (that is, the response
+// returns only a truncated list of your gateways), the response contains a
+// marker that you can specify in your next request to fetch the next page of
+// gateways.
 //
 //    // Example sending a request using the ListGatewaysRequest method.
-//    req, resp := client.ListGatewaysRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListGatewaysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways
-func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *aws.Request, output *ListGatewaysOutput) {
+func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) ListGatewaysRequest {
 	op := &aws.Operation{
 		Name:       opListGateways,
 		HTTPMethod: "POST",
@@ -3810,61 +2335,8 @@ func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) (req *aws
 		input = &ListGatewaysInput{}
 	}
 
-	output = &ListGatewaysOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListGateways API operation for AWS Storage Gateway.
-//
-// Lists gateways owned by an AWS account in a region specified in the request.
-// The returned list is ordered by gateway Amazon Resource Name (ARN).
-//
-// By default, the operation returns a maximum of 100 gateways. This operation
-// supports pagination that allows you to optionally reduce the number of gateways
-// returned in a response.
-//
-// If you have more gateways than are returned in a response (that is, the response
-// returns only a truncated list of your gateways), the response contains a
-// marker that you can specify in your next request to fetch the next page of
-// gateways.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListGateways for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways
-func (c *StorageGateway) ListGateways(input *ListGatewaysInput) (*ListGatewaysOutput, error) {
-	req, out := c.ListGatewaysRequest(input)
-	return out, req.Send()
-}
-
-// ListGatewaysWithContext is the same as ListGateways with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListGateways for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListGatewaysWithContext(ctx aws.Context, input *ListGatewaysInput, opts ...aws.Option) (*ListGatewaysOutput, error) {
-	req, out := c.ListGatewaysRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListGatewaysOutput{})
+	return ListGatewaysRequest{Request: req, Input: input}
 }
 
 // ListGatewaysPages iterates over the pages of a ListGateways operation,
@@ -3903,10 +2375,10 @@ func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *Li
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListGatewaysRequest(inCpy)
+			req := c.ListGatewaysRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -3919,47 +2391,24 @@ func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *Li
 
 const opListLocalDisks = "ListLocalDisks"
 
-// ListLocalDisksRequest generates a "aws.Request" representing the
-// client's request for the ListLocalDisks operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListLocalDisks for more information on using the ListLocalDisks
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListLocalDisksRequest method.
-//    req, resp := client.ListLocalDisksRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks
-func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req *aws.Request, output *ListLocalDisksOutput) {
-	op := &aws.Operation{
-		Name:       opListLocalDisks,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListLocalDisksInput{}
-	}
-
-	output = &ListLocalDisksOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListLocalDisksRequest is a API request type for the ListLocalDisks API operation.
+type ListLocalDisksRequest struct {
+	*aws.Request
+	Input *ListLocalDisksInput
 }
 
-// ListLocalDisks API operation for AWS Storage Gateway.
+// Send marshals and sends the ListLocalDisks API request.
+func (r *ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListLocalDisksOutput), nil
+}
+
+// ListLocalDisksRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Returns a list of the gateway's local disks. To specify which gateway to
 // describe, you use the Amazon Resource Name (ARN) of the gateway in the body
@@ -3972,71 +2421,62 @@ func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) (req 
 // connected to the gateway), or mismatch (the disk node is occupied by a disk
 // that has incorrect metadata or the disk content is corrupted).
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListLocalDisks for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the ListLocalDisksRequest method.
+//    req := client.ListLocalDisksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks
-func (c *StorageGateway) ListLocalDisks(input *ListLocalDisksInput) (*ListLocalDisksOutput, error) {
-	req, out := c.ListLocalDisksRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) ListLocalDisksRequest {
+	op := &aws.Operation{
+		Name:       opListLocalDisks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListLocalDisksWithContext is the same as ListLocalDisks with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListLocalDisks for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListLocalDisksWithContext(ctx aws.Context, input *ListLocalDisksInput, opts ...aws.Option) (*ListLocalDisksOutput, error) {
-	req, out := c.ListLocalDisksRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListLocalDisksInput{}
+	}
+
+	req := c.newRequest(op, input, &ListLocalDisksOutput{})
+	return ListLocalDisksRequest{Request: req, Input: input}
 }
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws.Request" representing the
-// client's request for the ListTagsForResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTagsForResource for more information on using the ListTagsForResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists the tags that have been added to the specified resource. This operation
+// is only supported in the cached volume, stored volume and tape gateway architecture.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
-//    req, resp := client.ListTagsForResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResource
-func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
@@ -4047,97 +2487,30 @@ func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceIn
 		input = &ListTagsForResourceInput{}
 	}
 
-	output = &ListTagsForResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListTagsForResource API operation for AWS Storage Gateway.
-//
-// Lists the tags that have been added to the specified resource. This operation
-// is only supported in the cached volume, stored volume and tape gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListTagsForResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResource
-func (c *StorageGateway) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	return out, req.Send()
-}
-
-// ListTagsForResourceWithContext is the same as ListTagsForResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTagsForResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
-	req, out := c.ListTagsForResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListTagsForResourceOutput{})
+	return ListTagsForResourceRequest{Request: req, Input: input}
 }
 
 const opListTapes = "ListTapes"
 
-// ListTapesRequest generates a "aws.Request" representing the
-// client's request for the ListTapes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListTapes for more information on using the ListTapes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListTapesRequest method.
-//    req, resp := client.ListTapesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes
-func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) (req *aws.Request, output *ListTapesOutput) {
-	op := &aws.Operation{
-		Name:       opListTapes,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListTapesInput{}
-	}
-
-	output = &ListTapesOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListTapesRequest is a API request type for the ListTapes API operation.
+type ListTapesRequest struct {
+	*aws.Request
+	Input *ListTapesInput
 }
 
-// ListTapes API operation for AWS Storage Gateway.
+// Send marshals and sends the ListTapes API request.
+func (r *ListTapesRequest) Send() (*ListTapesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTapesOutput), nil
+}
+
+// ListTapesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Lists virtual tapes in your virtual tape library (VTL) and your virtual tape
 // shelf (VTS). You specify the tapes to list by specifying one or more tape
@@ -4151,71 +2524,63 @@ func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) (req *aws.Reque
 // that you can use in your subsequent request to retrieve the next set of tapes.
 // This operation is only supported in the tape gateway architecture.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListTapes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the ListTapesRequest method.
+//    req := client.ListTapesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes
-func (c *StorageGateway) ListTapes(input *ListTapesInput) (*ListTapesOutput, error) {
-	req, out := c.ListTapesRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) ListTapesRequest {
+	op := &aws.Operation{
+		Name:       opListTapes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListTapesWithContext is the same as ListTapes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListTapes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListTapesWithContext(ctx aws.Context, input *ListTapesInput, opts ...aws.Option) (*ListTapesOutput, error) {
-	req, out := c.ListTapesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListTapesInput{}
+	}
+
+	req := c.newRequest(op, input, &ListTapesOutput{})
+	return ListTapesRequest{Request: req, Input: input}
 }
 
 const opListVolumeInitiators = "ListVolumeInitiators"
 
-// ListVolumeInitiatorsRequest generates a "aws.Request" representing the
-// client's request for the ListVolumeInitiators operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListVolumeInitiatorsRequest is a API request type for the ListVolumeInitiators API operation.
+type ListVolumeInitiatorsRequest struct {
+	*aws.Request
+	Input *ListVolumeInitiatorsInput
+}
+
+// Send marshals and sends the ListVolumeInitiators API request.
+func (r *ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVolumeInitiatorsOutput), nil
+}
+
+// ListVolumeInitiatorsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListVolumeInitiators for more information on using the ListVolumeInitiators
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Lists iSCSI initiators that are connected to a volume. You can use this operation
+// to determine whether a volume is being used or not. This operation is only
+// supported in the cached volume and stored volume gateway architecture.
 //
 //    // Example sending a request using the ListVolumeInitiatorsRequest method.
-//    req, resp := client.ListVolumeInitiatorsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListVolumeInitiatorsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiators
-func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) (req *aws.Request, output *ListVolumeInitiatorsOutput) {
+func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest {
 	op := &aws.Operation{
 		Name:       opListVolumeInitiators,
 		HTTPMethod: "POST",
@@ -4226,98 +2591,30 @@ func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiators
 		input = &ListVolumeInitiatorsInput{}
 	}
 
-	output = &ListVolumeInitiatorsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListVolumeInitiators API operation for AWS Storage Gateway.
-//
-// Lists iSCSI initiators that are connected to a volume. You can use this operation
-// to determine whether a volume is being used or not. This operation is only
-// supported in the cached volume and stored volume gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListVolumeInitiators for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiators
-func (c *StorageGateway) ListVolumeInitiators(input *ListVolumeInitiatorsInput) (*ListVolumeInitiatorsOutput, error) {
-	req, out := c.ListVolumeInitiatorsRequest(input)
-	return out, req.Send()
-}
-
-// ListVolumeInitiatorsWithContext is the same as ListVolumeInitiators with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVolumeInitiators for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListVolumeInitiatorsWithContext(ctx aws.Context, input *ListVolumeInitiatorsInput, opts ...aws.Option) (*ListVolumeInitiatorsOutput, error) {
-	req, out := c.ListVolumeInitiatorsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListVolumeInitiatorsOutput{})
+	return ListVolumeInitiatorsRequest{Request: req, Input: input}
 }
 
 const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 
-// ListVolumeRecoveryPointsRequest generates a "aws.Request" representing the
-// client's request for the ListVolumeRecoveryPoints operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ListVolumeRecoveryPoints for more information on using the ListVolumeRecoveryPoints
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ListVolumeRecoveryPointsRequest method.
-//    req, resp := client.ListVolumeRecoveryPointsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPoints
-func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) (req *aws.Request, output *ListVolumeRecoveryPointsOutput) {
-	op := &aws.Operation{
-		Name:       opListVolumeRecoveryPoints,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ListVolumeRecoveryPointsInput{}
-	}
-
-	output = &ListVolumeRecoveryPointsOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ListVolumeRecoveryPointsRequest is a API request type for the ListVolumeRecoveryPoints API operation.
+type ListVolumeRecoveryPointsRequest struct {
+	*aws.Request
+	Input *ListVolumeRecoveryPointsInput
 }
 
-// ListVolumeRecoveryPoints API operation for AWS Storage Gateway.
+// Send marshals and sends the ListVolumeRecoveryPoints API request.
+func (r *ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVolumeRecoveryPointsOutput), nil
+}
+
+// ListVolumeRecoveryPointsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Lists the recovery points for a specified gateway. This operation is only
 // supported in the cached volume gateway architecture.
@@ -4328,71 +2625,72 @@ func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecove
 // To create a snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPoint
 // operation.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListVolumeRecoveryPoints for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the ListVolumeRecoveryPointsRequest method.
+//    req := client.ListVolumeRecoveryPointsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPoints
-func (c *StorageGateway) ListVolumeRecoveryPoints(input *ListVolumeRecoveryPointsInput) (*ListVolumeRecoveryPointsOutput, error) {
-	req, out := c.ListVolumeRecoveryPointsRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest {
+	op := &aws.Operation{
+		Name:       opListVolumeRecoveryPoints,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// ListVolumeRecoveryPointsWithContext is the same as ListVolumeRecoveryPoints with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVolumeRecoveryPoints for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListVolumeRecoveryPointsWithContext(ctx aws.Context, input *ListVolumeRecoveryPointsInput, opts ...aws.Option) (*ListVolumeRecoveryPointsOutput, error) {
-	req, out := c.ListVolumeRecoveryPointsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &ListVolumeRecoveryPointsInput{}
+	}
+
+	req := c.newRequest(op, input, &ListVolumeRecoveryPointsOutput{})
+	return ListVolumeRecoveryPointsRequest{Request: req, Input: input}
 }
 
 const opListVolumes = "ListVolumes"
 
-// ListVolumesRequest generates a "aws.Request" representing the
-// client's request for the ListVolumes operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// ListVolumesRequest is a API request type for the ListVolumes API operation.
+type ListVolumesRequest struct {
+	*aws.Request
+	Input *ListVolumesInput
+}
+
+// Send marshals and sends the ListVolumes API request.
+func (r *ListVolumesRequest) Send() (*ListVolumesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVolumesOutput), nil
+}
+
+// ListVolumesRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Lists the iSCSI stored volumes of a gateway. Results are sorted by volume
+// ARN. The response includes only the volume ARNs. If you want additional volume
+// information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes
+// API.
 //
-// See ListVolumes for more information on using the ListVolumes
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// The operation supports pagination. By default, the operation returns a maximum
+// of up to 100 volumes. You can optionally specify the Limit field in the body
+// to limit the number of volumes in the response. If the number of volumes
+// returned in the response is truncated, the response includes a Marker field.
+// You can use this Marker value in your subsequent request to retrieve the
+// next set of volumes. This operation is only supported in the cached volume
+// and stored volume gateway architectures.
 //
 //    // Example sending a request using the ListVolumesRequest method.
-//    req, resp := client.ListVolumesRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.ListVolumesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes
-func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *aws.Request, output *ListVolumesOutput) {
+func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) ListVolumesRequest {
 	op := &aws.Operation{
 		Name:       opListVolumes,
 		HTTPMethod: "POST",
@@ -4409,62 +2707,8 @@ func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) (req *aws.R
 		input = &ListVolumesInput{}
 	}
 
-	output = &ListVolumesOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// ListVolumes API operation for AWS Storage Gateway.
-//
-// Lists the iSCSI stored volumes of a gateway. Results are sorted by volume
-// ARN. The response includes only the volume ARNs. If you want additional volume
-// information, use the DescribeStorediSCSIVolumes or the DescribeCachediSCSIVolumes
-// API.
-//
-// The operation supports pagination. By default, the operation returns a maximum
-// of up to 100 volumes. You can optionally specify the Limit field in the body
-// to limit the number of volumes in the response. If the number of volumes
-// returned in the response is truncated, the response includes a Marker field.
-// You can use this Marker value in your subsequent request to retrieve the
-// next set of volumes. This operation is only supported in the cached volume
-// and stored volume gateway architectures.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ListVolumes for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes
-func (c *StorageGateway) ListVolumes(input *ListVolumesInput) (*ListVolumesOutput, error) {
-	req, out := c.ListVolumesRequest(input)
-	return out, req.Send()
-}
-
-// ListVolumesWithContext is the same as ListVolumes with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ListVolumes for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListVolumesWithContext(ctx aws.Context, input *ListVolumesInput, opts ...aws.Option) (*ListVolumesOutput, error) {
-	req, out := c.ListVolumesRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &ListVolumesOutput{})
+	return ListVolumesRequest{Request: req, Input: input}
 }
 
 // ListVolumesPages iterates over the pages of a ListVolumes operation,
@@ -4503,10 +2747,10 @@ func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *Lis
 				tmp := *input
 				inCpy = &tmp
 			}
-			req, _ := c.ListVolumesRequest(inCpy)
+			req := c.ListVolumesRequest(inCpy)
 			req.SetContext(ctx)
 			req.ApplyOptions(opts...)
-			return req, nil
+			return req.Request, nil
 		},
 	}
 
@@ -4519,31 +2763,38 @@ func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *Lis
 
 const opRefreshCache = "RefreshCache"
 
-// RefreshCacheRequest generates a "aws.Request" representing the
-// client's request for the RefreshCache operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RefreshCacheRequest is a API request type for the RefreshCache API operation.
+type RefreshCacheRequest struct {
+	*aws.Request
+	Input *RefreshCacheInput
+}
+
+// Send marshals and sends the RefreshCache API request.
+func (r *RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RefreshCacheOutput), nil
+}
+
+// RefreshCacheRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RefreshCache for more information on using the RefreshCache
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Refreshes the cache for the specified file share. This operation finds objects
+// in the Amazon S3 bucket that were added, removed or replaced since the gateway
+// last listed the bucket's contents and cached the results.
 //
 //    // Example sending a request using the RefreshCacheRequest method.
-//    req, resp := client.RefreshCacheRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RefreshCacheRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCache
-func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) (req *aws.Request, output *RefreshCacheOutput) {
+func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) RefreshCacheRequest {
 	op := &aws.Operation{
 		Name:       opRefreshCache,
 		HTTPMethod: "POST",
@@ -4554,82 +2805,43 @@ func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) (req *aws
 		input = &RefreshCacheInput{}
 	}
 
-	output = &RefreshCacheOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RefreshCache API operation for AWS Storage Gateway.
-//
-// Refreshes the cache for the specified file share. This operation finds objects
-// in the Amazon S3 bucket that were added, removed or replaced since the gateway
-// last listed the bucket's contents and cached the results.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation RefreshCache for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCache
-func (c *StorageGateway) RefreshCache(input *RefreshCacheInput) (*RefreshCacheOutput, error) {
-	req, out := c.RefreshCacheRequest(input)
-	return out, req.Send()
-}
-
-// RefreshCacheWithContext is the same as RefreshCache with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RefreshCache for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) RefreshCacheWithContext(ctx aws.Context, input *RefreshCacheInput, opts ...aws.Option) (*RefreshCacheOutput, error) {
-	req, out := c.RefreshCacheRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RefreshCacheOutput{})
+	return RefreshCacheRequest{Request: req, Input: input}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
-// client's request for the RemoveTagsFromResource operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// RemoveTagsFromResourceRequest is a API request type for the RemoveTagsFromResource API operation.
+type RemoveTagsFromResourceRequest struct {
+	*aws.Request
+	Input *RemoveTagsFromResourceInput
+}
+
+// Send marshals and sends the RemoveTagsFromResource API request.
+func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RemoveTagsFromResourceOutput), nil
+}
+
+// RemoveTagsFromResourceRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RemoveTagsFromResource for more information on using the RemoveTagsFromResource
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Removes one or more tags from the specified resource. This operation is only
+// supported in the cached volume, stored volume and tape gateway architectures.
 //
 //    // Example sending a request using the RemoveTagsFromResourceRequest method.
-//    req, resp := client.RemoveTagsFromResourceRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.RemoveTagsFromResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResource
-func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest {
 	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
@@ -4640,97 +2852,30 @@ func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromReso
 		input = &RemoveTagsFromResourceInput{}
 	}
 
-	output = &RemoveTagsFromResourceOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// RemoveTagsFromResource API operation for AWS Storage Gateway.
-//
-// Removes one or more tags from the specified resource. This operation is only
-// supported in the cached volume, stored volume and tape gateway architectures.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation RemoveTagsFromResource for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResource
-func (c *StorageGateway) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	return out, req.Send()
-}
-
-// RemoveTagsFromResourceWithContext is the same as RemoveTagsFromResource with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RemoveTagsFromResource for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
-	req, out := c.RemoveTagsFromResourceRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &RemoveTagsFromResourceOutput{})
+	return RemoveTagsFromResourceRequest{Request: req, Input: input}
 }
 
 const opResetCache = "ResetCache"
 
-// ResetCacheRequest generates a "aws.Request" representing the
-// client's request for the ResetCache operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ResetCache for more information on using the ResetCache
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ResetCacheRequest method.
-//    req, resp := client.ResetCacheRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache
-func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *aws.Request, output *ResetCacheOutput) {
-	op := &aws.Operation{
-		Name:       opResetCache,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ResetCacheInput{}
-	}
-
-	output = &ResetCacheOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ResetCacheRequest is a API request type for the ResetCache API operation.
+type ResetCacheRequest struct {
+	*aws.Request
+	Input *ResetCacheInput
 }
 
-// ResetCache API operation for AWS Storage Gateway.
+// Send marshals and sends the ResetCache API request.
+func (r *ResetCacheRequest) Send() (*ResetCacheOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ResetCacheOutput), nil
+}
+
+// ResetCacheRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Resets all cache disks that have encountered a error and makes the disks
 // available for reconfiguration as cache storage. If your cache disk encounters
@@ -4746,87 +2891,49 @@ func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) (req *aws.Req
 // will be no configured cache disks left in the gateway, so you must configure
 // at least one new cache disk for your gateway to function properly.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ResetCache for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache
-func (c *StorageGateway) ResetCache(input *ResetCacheInput) (*ResetCacheOutput, error) {
-	req, out := c.ResetCacheRequest(input)
-	return out, req.Send()
-}
-
-// ResetCacheWithContext is the same as ResetCache with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ResetCache for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ResetCacheWithContext(ctx aws.Context, input *ResetCacheInput, opts ...aws.Option) (*ResetCacheOutput, error) {
-	req, out := c.ResetCacheRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRetrieveTapeArchive = "RetrieveTapeArchive"
-
-// RetrieveTapeArchiveRequest generates a "aws.Request" representing the
-// client's request for the RetrieveTapeArchive operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RetrieveTapeArchive for more information on using the RetrieveTapeArchive
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RetrieveTapeArchiveRequest method.
-//    req, resp := client.RetrieveTapeArchiveRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ResetCacheRequest method.
+//    req := client.ResetCacheRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchive
-func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) (req *aws.Request, output *RetrieveTapeArchiveOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache
+func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) ResetCacheRequest {
 	op := &aws.Operation{
-		Name:       opRetrieveTapeArchive,
+		Name:       opResetCache,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RetrieveTapeArchiveInput{}
+		input = &ResetCacheInput{}
 	}
 
-	output = &RetrieveTapeArchiveOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ResetCacheOutput{})
+	return ResetCacheRequest{Request: req, Input: input}
 }
 
-// RetrieveTapeArchive API operation for AWS Storage Gateway.
+const opRetrieveTapeArchive = "RetrieveTapeArchive"
+
+// RetrieveTapeArchiveRequest is a API request type for the RetrieveTapeArchive API operation.
+type RetrieveTapeArchiveRequest struct {
+	*aws.Request
+	Input *RetrieveTapeArchiveInput
+}
+
+// Send marshals and sends the RetrieveTapeArchive API request.
+func (r *RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RetrieveTapeArchiveOutput), nil
+}
+
+// RetrieveTapeArchiveRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a
 // tape gateway. Virtual tapes archived in the VTS are not associated with any
@@ -4839,87 +2946,49 @@ func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveIn
 // retrieve it to another gateway. This operation is only supported in the tape
 // gateway architecture.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation RetrieveTapeArchive for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchive
-func (c *StorageGateway) RetrieveTapeArchive(input *RetrieveTapeArchiveInput) (*RetrieveTapeArchiveOutput, error) {
-	req, out := c.RetrieveTapeArchiveRequest(input)
-	return out, req.Send()
-}
-
-// RetrieveTapeArchiveWithContext is the same as RetrieveTapeArchive with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RetrieveTapeArchive for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) RetrieveTapeArchiveWithContext(ctx aws.Context, input *RetrieveTapeArchiveInput, opts ...aws.Option) (*RetrieveTapeArchiveOutput, error) {
-	req, out := c.RetrieveTapeArchiveRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
-
-// RetrieveTapeRecoveryPointRequest generates a "aws.Request" representing the
-// client's request for the RetrieveTapeRecoveryPoint operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See RetrieveTapeRecoveryPoint for more information on using the RetrieveTapeRecoveryPoint
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the RetrieveTapeRecoveryPointRequest method.
-//    req, resp := client.RetrieveTapeRecoveryPointRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the RetrieveTapeArchiveRequest method.
+//    req := client.RetrieveTapeArchiveRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPoint
-func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) (req *aws.Request, output *RetrieveTapeRecoveryPointOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchive
+func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveInput) RetrieveTapeArchiveRequest {
 	op := &aws.Operation{
-		Name:       opRetrieveTapeRecoveryPoint,
+		Name:       opRetrieveTapeArchive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &RetrieveTapeRecoveryPointInput{}
+		input = &RetrieveTapeArchiveInput{}
 	}
 
-	output = &RetrieveTapeRecoveryPointOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &RetrieveTapeArchiveOutput{})
+	return RetrieveTapeArchiveRequest{Request: req, Input: input}
 }
 
-// RetrieveTapeRecoveryPoint API operation for AWS Storage Gateway.
+const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
+
+// RetrieveTapeRecoveryPointRequest is a API request type for the RetrieveTapeRecoveryPoint API operation.
+type RetrieveTapeRecoveryPointRequest struct {
+	*aws.Request
+	Input *RetrieveTapeRecoveryPointInput
+}
+
+// Send marshals and sends the RetrieveTapeRecoveryPoint API request.
+func (r *RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RetrieveTapeRecoveryPointOutput), nil
+}
+
+// RetrieveTapeRecoveryPointRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Retrieves the recovery point for the specified virtual tape. This operation
 // is only supported in the tape gateway architecture.
@@ -4932,71 +3001,64 @@ func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRec
 // is read-only. The virtual tape can be retrieved to only a tape gateway. There
 // is no charge for retrieving recovery points.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation RetrieveTapeRecoveryPoint for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the RetrieveTapeRecoveryPointRequest method.
+//    req := client.RetrieveTapeRecoveryPointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPoint
-func (c *StorageGateway) RetrieveTapeRecoveryPoint(input *RetrieveTapeRecoveryPointInput) (*RetrieveTapeRecoveryPointOutput, error) {
-	req, out := c.RetrieveTapeRecoveryPointRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest {
+	op := &aws.Operation{
+		Name:       opRetrieveTapeRecoveryPoint,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// RetrieveTapeRecoveryPointWithContext is the same as RetrieveTapeRecoveryPoint with the addition of
-// the ability to pass a context and additional request options.
-//
-// See RetrieveTapeRecoveryPoint for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) RetrieveTapeRecoveryPointWithContext(ctx aws.Context, input *RetrieveTapeRecoveryPointInput, opts ...aws.Option) (*RetrieveTapeRecoveryPointOutput, error) {
-	req, out := c.RetrieveTapeRecoveryPointRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &RetrieveTapeRecoveryPointInput{}
+	}
+
+	req := c.newRequest(op, input, &RetrieveTapeRecoveryPointOutput{})
+	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input}
 }
 
 const opSetLocalConsolePassword = "SetLocalConsolePassword"
 
-// SetLocalConsolePasswordRequest generates a "aws.Request" representing the
-// client's request for the SetLocalConsolePassword operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// SetLocalConsolePasswordRequest is a API request type for the SetLocalConsolePassword API operation.
+type SetLocalConsolePasswordRequest struct {
+	*aws.Request
+	Input *SetLocalConsolePasswordInput
+}
+
+// Send marshals and sends the SetLocalConsolePassword API request.
+func (r *SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SetLocalConsolePasswordOutput), nil
+}
+
+// SetLocalConsolePasswordRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See SetLocalConsolePassword for more information on using the SetLocalConsolePassword
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Sets the password for your VM local console. When you log in to the local
+// console for the first time, you log in to the VM with the default credentials.
+// We recommend that you set a new password. You don't need to know the default
+// password to set a new password.
 //
 //    // Example sending a request using the SetLocalConsolePasswordRequest method.
-//    req, resp := client.SetLocalConsolePasswordRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.SetLocalConsolePasswordRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePassword
-func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordInput) (req *aws.Request, output *SetLocalConsolePasswordOutput) {
+func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest {
 	op := &aws.Operation{
 		Name:       opSetLocalConsolePassword,
 		HTTPMethod: "POST",
@@ -5007,99 +3069,30 @@ func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePa
 		input = &SetLocalConsolePasswordInput{}
 	}
 
-	output = &SetLocalConsolePasswordOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// SetLocalConsolePassword API operation for AWS Storage Gateway.
-//
-// Sets the password for your VM local console. When you log in to the local
-// console for the first time, you log in to the VM with the default credentials.
-// We recommend that you set a new password. You don't need to know the default
-// password to set a new password.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation SetLocalConsolePassword for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePassword
-func (c *StorageGateway) SetLocalConsolePassword(input *SetLocalConsolePasswordInput) (*SetLocalConsolePasswordOutput, error) {
-	req, out := c.SetLocalConsolePasswordRequest(input)
-	return out, req.Send()
-}
-
-// SetLocalConsolePasswordWithContext is the same as SetLocalConsolePassword with the addition of
-// the ability to pass a context and additional request options.
-//
-// See SetLocalConsolePassword for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) SetLocalConsolePasswordWithContext(ctx aws.Context, input *SetLocalConsolePasswordInput, opts ...aws.Option) (*SetLocalConsolePasswordOutput, error) {
-	req, out := c.SetLocalConsolePasswordRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &SetLocalConsolePasswordOutput{})
+	return SetLocalConsolePasswordRequest{Request: req, Input: input}
 }
 
 const opShutdownGateway = "ShutdownGateway"
 
-// ShutdownGatewayRequest generates a "aws.Request" representing the
-// client's request for the ShutdownGateway operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See ShutdownGateway for more information on using the ShutdownGateway
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the ShutdownGatewayRequest method.
-//    req, resp := client.ShutdownGatewayRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway
-func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (req *aws.Request, output *ShutdownGatewayOutput) {
-	op := &aws.Operation{
-		Name:       opShutdownGateway,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &ShutdownGatewayInput{}
-	}
-
-	output = &ShutdownGatewayOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// ShutdownGatewayRequest is a API request type for the ShutdownGateway API operation.
+type ShutdownGatewayRequest struct {
+	*aws.Request
+	Input *ShutdownGatewayInput
 }
 
-// ShutdownGateway API operation for AWS Storage Gateway.
+// Send marshals and sends the ShutdownGateway API request.
+func (r *ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ShutdownGatewayOutput), nil
+}
+
+// ShutdownGatewayRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Shuts down a gateway. To specify which gateway to shut down, use the Amazon
 // Resource Name (ARN) of the gateway in the body of your request.
@@ -5123,87 +3116,49 @@ func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) (re
 // If do not intend to use the gateway again, you must delete the gateway (using
 // DeleteGateway) to no longer pay software charges associated with the gateway.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation ShutdownGateway for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway
-func (c *StorageGateway) ShutdownGateway(input *ShutdownGatewayInput) (*ShutdownGatewayOutput, error) {
-	req, out := c.ShutdownGatewayRequest(input)
-	return out, req.Send()
-}
-
-// ShutdownGatewayWithContext is the same as ShutdownGateway with the addition of
-// the ability to pass a context and additional request options.
-//
-// See ShutdownGateway for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ShutdownGatewayWithContext(ctx aws.Context, input *ShutdownGatewayInput, opts ...aws.Option) (*ShutdownGatewayOutput, error) {
-	req, out := c.ShutdownGatewayRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opStartGateway = "StartGateway"
-
-// StartGatewayRequest generates a "aws.Request" representing the
-// client's request for the StartGateway operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See StartGateway for more information on using the StartGateway
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the StartGatewayRequest method.
-//    req, resp := client.StartGatewayRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the ShutdownGatewayRequest method.
+//    req := client.ShutdownGatewayRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway
-func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *aws.Request, output *StartGatewayOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway
+func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) ShutdownGatewayRequest {
 	op := &aws.Operation{
-		Name:       opStartGateway,
+		Name:       opShutdownGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &StartGatewayInput{}
+		input = &ShutdownGatewayInput{}
 	}
 
-	output = &StartGatewayOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &ShutdownGatewayOutput{})
+	return ShutdownGatewayRequest{Request: req, Input: input}
 }
 
-// StartGateway API operation for AWS Storage Gateway.
+const opStartGateway = "StartGateway"
+
+// StartGatewayRequest is a API request type for the StartGateway API operation.
+type StartGatewayRequest struct {
+	*aws.Request
+	Input *StartGatewayInput
+}
+
+// Send marshals and sends the StartGateway API request.
+func (r *StartGatewayRequest) Send() (*StartGatewayOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartGatewayOutput), nil
+}
+
+// StartGatewayRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Starts a gateway that you previously shut down (see ShutdownGateway). After
 // the gateway starts, you can then make other API calls, your applications
@@ -5218,87 +3173,49 @@ func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) (req *aws
 // To specify which gateway to start, use the Amazon Resource Name (ARN) of
 // the gateway in your request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation StartGateway for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway
-func (c *StorageGateway) StartGateway(input *StartGatewayInput) (*StartGatewayOutput, error) {
-	req, out := c.StartGatewayRequest(input)
-	return out, req.Send()
-}
-
-// StartGatewayWithContext is the same as StartGateway with the addition of
-// the ability to pass a context and additional request options.
-//
-// See StartGateway for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) StartGatewayWithContext(ctx aws.Context, input *StartGatewayInput, opts ...aws.Option) (*StartGatewayOutput, error) {
-	req, out := c.StartGatewayRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
-
-// UpdateBandwidthRateLimitRequest generates a "aws.Request" representing the
-// client's request for the UpdateBandwidthRateLimit operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateBandwidthRateLimit for more information on using the UpdateBandwidthRateLimit
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateBandwidthRateLimitRequest method.
-//    req, resp := client.UpdateBandwidthRateLimitRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the StartGatewayRequest method.
+//    req := client.StartGatewayRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimit
-func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) (req *aws.Request, output *UpdateBandwidthRateLimitOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway
+func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) StartGatewayRequest {
 	op := &aws.Operation{
-		Name:       opUpdateBandwidthRateLimit,
+		Name:       opStartGateway,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateBandwidthRateLimitInput{}
+		input = &StartGatewayInput{}
 	}
 
-	output = &UpdateBandwidthRateLimitOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &StartGatewayOutput{})
+	return StartGatewayRequest{Request: req, Input: input}
 }
 
-// UpdateBandwidthRateLimit API operation for AWS Storage Gateway.
+const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
+
+// UpdateBandwidthRateLimitRequest is a API request type for the UpdateBandwidthRateLimit API operation.
+type UpdateBandwidthRateLimitRequest struct {
+	*aws.Request
+	Input *UpdateBandwidthRateLimitInput
+}
+
+// Send marshals and sends the UpdateBandwidthRateLimit API request.
+func (r *UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateBandwidthRateLimitOutput), nil
+}
+
+// UpdateBandwidthRateLimitRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Updates the bandwidth rate limits of a gateway. You can update both the upload
 // and download bandwidth rate limit or specify only one of the two. If you
@@ -5311,71 +3228,66 @@ func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthR
 // To specify which gateway to update, use the Amazon Resource Name (ARN) of
 // the gateway in your request.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateBandwidthRateLimit for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the UpdateBandwidthRateLimitRequest method.
+//    req := client.UpdateBandwidthRateLimitRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimit
-func (c *StorageGateway) UpdateBandwidthRateLimit(input *UpdateBandwidthRateLimitInput) (*UpdateBandwidthRateLimitOutput, error) {
-	req, out := c.UpdateBandwidthRateLimitRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest {
+	op := &aws.Operation{
+		Name:       opUpdateBandwidthRateLimit,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateBandwidthRateLimitWithContext is the same as UpdateBandwidthRateLimit with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateBandwidthRateLimit for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateBandwidthRateLimitWithContext(ctx aws.Context, input *UpdateBandwidthRateLimitInput, opts ...aws.Option) (*UpdateBandwidthRateLimitOutput, error) {
-	req, out := c.UpdateBandwidthRateLimitRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateBandwidthRateLimitInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateBandwidthRateLimitOutput{})
+	return UpdateBandwidthRateLimitRequest{Request: req, Input: input}
 }
 
 const opUpdateChapCredentials = "UpdateChapCredentials"
 
-// UpdateChapCredentialsRequest generates a "aws.Request" representing the
-// client's request for the UpdateChapCredentials operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateChapCredentialsRequest is a API request type for the UpdateChapCredentials API operation.
+type UpdateChapCredentialsRequest struct {
+	*aws.Request
+	Input *UpdateChapCredentialsInput
+}
+
+// Send marshals and sends the UpdateChapCredentials API request.
+func (r *UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateChapCredentialsOutput), nil
+}
+
+// UpdateChapCredentialsRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials
+// for a specified iSCSI target. By default, a gateway does not have CHAP enabled;
+// however, for added security, you might use it.
 //
-// See UpdateChapCredentials for more information on using the UpdateChapCredentials
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// When you update CHAP credentials, all existing connections on the target
+// are closed and initiators must reconnect with the new credentials.
 //
 //    // Example sending a request using the UpdateChapCredentialsRequest method.
-//    req, resp := client.UpdateChapCredentialsRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateChapCredentialsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentials
-func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) (req *aws.Request, output *UpdateChapCredentialsOutput) {
+func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentialsInput) UpdateChapCredentialsRequest {
 	op := &aws.Operation{
 		Name:       opUpdateChapCredentials,
 		HTTPMethod: "POST",
@@ -5386,85 +3298,48 @@ func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentia
 		input = &UpdateChapCredentialsInput{}
 	}
 
-	output = &UpdateChapCredentialsOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateChapCredentials API operation for AWS Storage Gateway.
-//
-// Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials
-// for a specified iSCSI target. By default, a gateway does not have CHAP enabled;
-// however, for added security, you might use it.
-//
-// When you update CHAP credentials, all existing connections on the target
-// are closed and initiators must reconnect with the new credentials.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateChapCredentials for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentials
-func (c *StorageGateway) UpdateChapCredentials(input *UpdateChapCredentialsInput) (*UpdateChapCredentialsOutput, error) {
-	req, out := c.UpdateChapCredentialsRequest(input)
-	return out, req.Send()
-}
-
-// UpdateChapCredentialsWithContext is the same as UpdateChapCredentials with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateChapCredentials for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateChapCredentialsWithContext(ctx aws.Context, input *UpdateChapCredentialsInput, opts ...aws.Option) (*UpdateChapCredentialsOutput, error) {
-	req, out := c.UpdateChapCredentialsRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateChapCredentialsOutput{})
+	return UpdateChapCredentialsRequest{Request: req, Input: input}
 }
 
 const opUpdateGatewayInformation = "UpdateGatewayInformation"
 
-// UpdateGatewayInformationRequest generates a "aws.Request" representing the
-// client's request for the UpdateGatewayInformation operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateGatewayInformationRequest is a API request type for the UpdateGatewayInformation API operation.
+type UpdateGatewayInformationRequest struct {
+	*aws.Request
+	Input *UpdateGatewayInformationInput
+}
+
+// Send marshals and sends the UpdateGatewayInformation API request.
+func (r *UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGatewayInformationOutput), nil
+}
+
+// UpdateGatewayInformationRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
+// Updates a gateway's metadata, which includes the gateway's name and time
+// zone. To specify which gateway to update, use the Amazon Resource Name (ARN)
+// of the gateway in your request.
 //
-// See UpdateGatewayInformation for more information on using the UpdateGatewayInformation
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// For Gateways activated after September 2, 2015, the gateway's ARN contains
+// the gateway ID rather than the gateway name. However, changing the name of
+// the gateway has no effect on the gateway's ARN.
 //
 //    // Example sending a request using the UpdateGatewayInformationRequest method.
-//    req, resp := client.UpdateGatewayInformationRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateGatewayInformationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformation
-func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) (req *aws.Request, output *UpdateGatewayInformationOutput) {
+func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInformationInput) UpdateGatewayInformationRequest {
 	op := &aws.Operation{
 		Name:       opUpdateGatewayInformation,
 		HTTPMethod: "POST",
@@ -5475,102 +3350,30 @@ func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInf
 		input = &UpdateGatewayInformationInput{}
 	}
 
-	output = &UpdateGatewayInformationOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateGatewayInformation API operation for AWS Storage Gateway.
-//
-// Updates a gateway's metadata, which includes the gateway's name and time
-// zone. To specify which gateway to update, use the Amazon Resource Name (ARN)
-// of the gateway in your request.
-//
-// For Gateways activated after September 2, 2015, the gateway's ARN contains
-// the gateway ID rather than the gateway name. However, changing the name of
-// the gateway has no effect on the gateway's ARN.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateGatewayInformation for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformation
-func (c *StorageGateway) UpdateGatewayInformation(input *UpdateGatewayInformationInput) (*UpdateGatewayInformationOutput, error) {
-	req, out := c.UpdateGatewayInformationRequest(input)
-	return out, req.Send()
-}
-
-// UpdateGatewayInformationWithContext is the same as UpdateGatewayInformation with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGatewayInformation for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateGatewayInformationWithContext(ctx aws.Context, input *UpdateGatewayInformationInput, opts ...aws.Option) (*UpdateGatewayInformationOutput, error) {
-	req, out := c.UpdateGatewayInformationRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateGatewayInformationOutput{})
+	return UpdateGatewayInformationRequest{Request: req, Input: input}
 }
 
 const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 
-// UpdateGatewaySoftwareNowRequest generates a "aws.Request" representing the
-// client's request for the UpdateGatewaySoftwareNow operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateGatewaySoftwareNow for more information on using the UpdateGatewaySoftwareNow
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateGatewaySoftwareNowRequest method.
-//    req, resp := client.UpdateGatewaySoftwareNowRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNow
-func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) (req *aws.Request, output *UpdateGatewaySoftwareNowOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateGatewaySoftwareNow,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateGatewaySoftwareNowInput{}
-	}
-
-	output = &UpdateGatewaySoftwareNowOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateGatewaySoftwareNowRequest is a API request type for the UpdateGatewaySoftwareNow API operation.
+type UpdateGatewaySoftwareNowRequest struct {
+	*aws.Request
+	Input *UpdateGatewaySoftwareNowInput
 }
 
-// UpdateGatewaySoftwareNow API operation for AWS Storage Gateway.
+// Send marshals and sends the UpdateGatewaySoftwareNow API request.
+func (r *UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGatewaySoftwareNowOutput), nil
+}
+
+// UpdateGatewaySoftwareNowRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Updates the gateway virtual machine (VM) software. The request immediately
 // triggers the software update.
@@ -5588,71 +3391,63 @@ func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySof
 // and Customizing Your Linux iSCSI Settings (http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings),
 // respectively.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateGatewaySoftwareNow for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the UpdateGatewaySoftwareNowRequest method.
+//    req := client.UpdateGatewaySoftwareNowRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNow
-func (c *StorageGateway) UpdateGatewaySoftwareNow(input *UpdateGatewaySoftwareNowInput) (*UpdateGatewaySoftwareNowOutput, error) {
-	req, out := c.UpdateGatewaySoftwareNowRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGatewaySoftwareNow,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateGatewaySoftwareNowWithContext is the same as UpdateGatewaySoftwareNow with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateGatewaySoftwareNow for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateGatewaySoftwareNowWithContext(ctx aws.Context, input *UpdateGatewaySoftwareNowInput, opts ...aws.Option) (*UpdateGatewaySoftwareNowOutput, error) {
-	req, out := c.UpdateGatewaySoftwareNowRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateGatewaySoftwareNowInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateGatewaySoftwareNowOutput{})
+	return UpdateGatewaySoftwareNowRequest{Request: req, Input: input}
 }
 
 const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
 
-// UpdateMaintenanceStartTimeRequest generates a "aws.Request" representing the
-// client's request for the UpdateMaintenanceStartTime operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateMaintenanceStartTimeRequest is a API request type for the UpdateMaintenanceStartTime API operation.
+type UpdateMaintenanceStartTimeRequest struct {
+	*aws.Request
+	Input *UpdateMaintenanceStartTimeInput
+}
+
+// Send marshals and sends the UpdateMaintenanceStartTime API request.
+func (r *UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateMaintenanceStartTimeOutput), nil
+}
+
+// UpdateMaintenanceStartTimeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateMaintenanceStartTime for more information on using the UpdateMaintenanceStartTime
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates a gateway's weekly maintenance start time information, including
+// day and time of the week. The maintenance time is the time in your gateway's
+// time zone.
 //
 //    // Example sending a request using the UpdateMaintenanceStartTimeRequest method.
-//    req, resp := client.UpdateMaintenanceStartTimeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateMaintenanceStartTimeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTime
-func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) (req *aws.Request, output *UpdateMaintenanceStartTimeOutput) {
+func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintenanceStartTimeInput) UpdateMaintenanceStartTimeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateMaintenanceStartTime,
 		HTTPMethod: "POST",
@@ -5663,98 +3458,30 @@ func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintena
 		input = &UpdateMaintenanceStartTimeInput{}
 	}
 
-	output = &UpdateMaintenanceStartTimeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateMaintenanceStartTime API operation for AWS Storage Gateway.
-//
-// Updates a gateway's weekly maintenance start time information, including
-// day and time of the week. The maintenance time is the time in your gateway's
-// time zone.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateMaintenanceStartTime for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTime
-func (c *StorageGateway) UpdateMaintenanceStartTime(input *UpdateMaintenanceStartTimeInput) (*UpdateMaintenanceStartTimeOutput, error) {
-	req, out := c.UpdateMaintenanceStartTimeRequest(input)
-	return out, req.Send()
-}
-
-// UpdateMaintenanceStartTimeWithContext is the same as UpdateMaintenanceStartTime with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateMaintenanceStartTime for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateMaintenanceStartTimeWithContext(ctx aws.Context, input *UpdateMaintenanceStartTimeInput, opts ...aws.Option) (*UpdateMaintenanceStartTimeOutput, error) {
-	req, out := c.UpdateMaintenanceStartTimeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateMaintenanceStartTimeOutput{})
+	return UpdateMaintenanceStartTimeRequest{Request: req, Input: input}
 }
 
 const opUpdateNFSFileShare = "UpdateNFSFileShare"
 
-// UpdateNFSFileShareRequest generates a "aws.Request" representing the
-// client's request for the UpdateNFSFileShare operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateNFSFileShare for more information on using the UpdateNFSFileShare
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateNFSFileShareRequest method.
-//    req, resp := client.UpdateNFSFileShareRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShare
-func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInput) (req *aws.Request, output *UpdateNFSFileShareOutput) {
-	op := &aws.Operation{
-		Name:       opUpdateNFSFileShare,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &UpdateNFSFileShareInput{}
-	}
-
-	output = &UpdateNFSFileShareOutput{}
-	req = c.newRequest(op, input, output)
-	return
+// UpdateNFSFileShareRequest is a API request type for the UpdateNFSFileShare API operation.
+type UpdateNFSFileShareRequest struct {
+	*aws.Request
+	Input *UpdateNFSFileShareInput
 }
 
-// UpdateNFSFileShare API operation for AWS Storage Gateway.
+// Send marshals and sends the UpdateNFSFileShare API request.
+func (r *UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateNFSFileShareOutput), nil
+}
+
+// UpdateNFSFileShareRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Updates a file share. This operation is only supported in the file gateway
 // architecture.
@@ -5777,87 +3504,49 @@ func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInpu
 // To leave a file share field unchanged, set the corresponding input field
 // to null. This operation is only supported in file gateways.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateNFSFileShare for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShare
-func (c *StorageGateway) UpdateNFSFileShare(input *UpdateNFSFileShareInput) (*UpdateNFSFileShareOutput, error) {
-	req, out := c.UpdateNFSFileShareRequest(input)
-	return out, req.Send()
-}
-
-// UpdateNFSFileShareWithContext is the same as UpdateNFSFileShare with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateNFSFileShare for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateNFSFileShareWithContext(ctx aws.Context, input *UpdateNFSFileShareInput, opts ...aws.Option) (*UpdateNFSFileShareOutput, error) {
-	req, out := c.UpdateNFSFileShareRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
-}
-
-const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
-
-// UpdateSnapshotScheduleRequest generates a "aws.Request" representing the
-// client's request for the UpdateSnapshotSchedule operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
-//
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateSnapshotSchedule for more information on using the UpdateSnapshotSchedule
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
-//
-//    // Example sending a request using the UpdateSnapshotScheduleRequest method.
-//    req, resp := client.UpdateSnapshotScheduleRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    // Example sending a request using the UpdateNFSFileShareRequest method.
+//    req := client.UpdateNFSFileShareRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotSchedule
-func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) (req *aws.Request, output *UpdateSnapshotScheduleOutput) {
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShare
+func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInput) UpdateNFSFileShareRequest {
 	op := &aws.Operation{
-		Name:       opUpdateSnapshotSchedule,
+		Name:       opUpdateNFSFileShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
 	}
 
 	if input == nil {
-		input = &UpdateSnapshotScheduleInput{}
+		input = &UpdateNFSFileShareInput{}
 	}
 
-	output = &UpdateSnapshotScheduleOutput{}
-	req = c.newRequest(op, input, output)
-	return
+	req := c.newRequest(op, input, &UpdateNFSFileShareOutput{})
+	return UpdateNFSFileShareRequest{Request: req, Input: input}
 }
 
-// UpdateSnapshotSchedule API operation for AWS Storage Gateway.
+const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
+
+// UpdateSnapshotScheduleRequest is a API request type for the UpdateSnapshotSchedule API operation.
+type UpdateSnapshotScheduleRequest struct {
+	*aws.Request
+	Input *UpdateSnapshotScheduleInput
+}
+
+// Send marshals and sends the UpdateSnapshotSchedule API request.
+func (r *UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateSnapshotScheduleOutput), nil
+}
+
+// UpdateSnapshotScheduleRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
 // Updates a snapshot schedule configured for a gateway volume. This operation
 // is only supported in the cached volume and stored volume gateway architectures.
@@ -5870,71 +3559,65 @@ func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotSche
 // you want to update, and the schedule information, including when you want
 // the snapshot to begin on a day and the frequency (in hours) of snapshots.
 //
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateSnapshotSchedule for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
+//    // Example sending a request using the UpdateSnapshotScheduleRequest method.
+//    req := client.UpdateSnapshotScheduleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotSchedule
-func (c *StorageGateway) UpdateSnapshotSchedule(input *UpdateSnapshotScheduleInput) (*UpdateSnapshotScheduleOutput, error) {
-	req, out := c.UpdateSnapshotScheduleRequest(input)
-	return out, req.Send()
-}
+func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest {
+	op := &aws.Operation{
+		Name:       opUpdateSnapshotSchedule,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
 
-// UpdateSnapshotScheduleWithContext is the same as UpdateSnapshotSchedule with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateSnapshotSchedule for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateSnapshotScheduleWithContext(ctx aws.Context, input *UpdateSnapshotScheduleInput, opts ...aws.Option) (*UpdateSnapshotScheduleOutput, error) {
-	req, out := c.UpdateSnapshotScheduleRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	if input == nil {
+		input = &UpdateSnapshotScheduleInput{}
+	}
+
+	req := c.newRequest(op, input, &UpdateSnapshotScheduleOutput{})
+	return UpdateSnapshotScheduleRequest{Request: req, Input: input}
 }
 
 const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 
-// UpdateVTLDeviceTypeRequest generates a "aws.Request" representing the
-// client's request for the UpdateVTLDeviceType operation. The "output" return
-// value will be populated with the request's response once the request complets
-// successfuly.
+// UpdateVTLDeviceTypeRequest is a API request type for the UpdateVTLDeviceType API operation.
+type UpdateVTLDeviceTypeRequest struct {
+	*aws.Request
+	Input *UpdateVTLDeviceTypeInput
+}
+
+// Send marshals and sends the UpdateVTLDeviceType API request.
+func (r *UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVTLDeviceTypeOutput), nil
+}
+
+// UpdateVTLDeviceTypeRequest returns a request value for making API operation for
+// AWS Storage Gateway.
 //
-// Use "Send" method on the returned Request to send the API call to the service.
-// the "output" return value is not valid until after Send returns without error.
-//
-// See UpdateVTLDeviceType for more information on using the UpdateVTLDeviceType
-// API call, and error handling.
-//
-// This method is useful when you want to inject custom logic or configuration
-// into the SDK's request lifecycle. Such as custom headers, or retry logic.
-//
+// Updates the type of medium changer in a tape gateway. When you activate a
+// tape gateway, you select a medium changer type for the tape gateway. This
+// operation enables you to select a different type of medium changer after
+// a tape gateway is activated. This operation is only supported in the tape
+// gateway architecture.
 //
 //    // Example sending a request using the UpdateVTLDeviceTypeRequest method.
-//    req, resp := client.UpdateVTLDeviceTypeRequest(params)
-//
-//    err := req.Send()
-//    if err == nil { // resp is now filled
+//    req := client.UpdateVTLDeviceTypeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
 //        fmt.Println(resp)
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceType
-func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) (req *aws.Request, output *UpdateVTLDeviceTypeOutput) {
+func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest {
 	op := &aws.Operation{
 		Name:       opUpdateVTLDeviceType,
 		HTTPMethod: "POST",
@@ -5945,55 +3628,8 @@ func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeIn
 		input = &UpdateVTLDeviceTypeInput{}
 	}
 
-	output = &UpdateVTLDeviceTypeOutput{}
-	req = c.newRequest(op, input, output)
-	return
-}
-
-// UpdateVTLDeviceType API operation for AWS Storage Gateway.
-//
-// Updates the type of medium changer in a tape gateway. When you activate a
-// tape gateway, you select a medium changer type for the tape gateway. This
-// operation enables you to select a different type of medium changer after
-// a tape gateway is activated. This operation is only supported in the tape
-// gateway architecture.
-//
-// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
-// with awserr.Error's Code and Message methods to get detailed information about
-// the error.
-//
-// See the AWS API reference guide for AWS Storage Gateway's
-// API operation UpdateVTLDeviceType for usage and error information.
-//
-// Returned Error Codes:
-//   * ErrCodeInvalidGatewayRequestException "InvalidGatewayRequestException"
-//   An exception occurred because an invalid gateway request was issued to the
-//   service. For more information, see the error and message fields.
-//
-//   * ErrCodeInternalServerError "InternalServerError"
-//   An internal server error has occurred during the request. For more information,
-//   see the error and message fields.
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceType
-func (c *StorageGateway) UpdateVTLDeviceType(input *UpdateVTLDeviceTypeInput) (*UpdateVTLDeviceTypeOutput, error) {
-	req, out := c.UpdateVTLDeviceTypeRequest(input)
-	return out, req.Send()
-}
-
-// UpdateVTLDeviceTypeWithContext is the same as UpdateVTLDeviceType with the addition of
-// the ability to pass a context and additional request options.
-//
-// See UpdateVTLDeviceType for details on how to use this API operation.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) UpdateVTLDeviceTypeWithContext(ctx aws.Context, input *UpdateVTLDeviceTypeInput, opts ...aws.Option) (*UpdateVTLDeviceTypeOutput, error) {
-	req, out := c.UpdateVTLDeviceTypeRequest(input)
-	req.SetContext(ctx)
-	req.ApplyOptions(opts...)
-	return out, req.Send()
+	req := c.newRequest(op, input, &UpdateVTLDeviceTypeOutput{})
+	return UpdateVTLDeviceTypeRequest{Request: req, Input: input}
 }
 
 // A JSON object containing one or more of the following fields:

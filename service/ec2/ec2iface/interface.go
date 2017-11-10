@@ -63,1002 +63,520 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type EC2API interface {
-	AcceptReservedInstancesExchangeQuote(*ec2.AcceptReservedInstancesExchangeQuoteInput) (*ec2.AcceptReservedInstancesExchangeQuoteOutput, error)
-	AcceptReservedInstancesExchangeQuoteWithContext(aws.Context, *ec2.AcceptReservedInstancesExchangeQuoteInput, ...aws.Option) (*ec2.AcceptReservedInstancesExchangeQuoteOutput, error)
-	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) (*aws.Request, *ec2.AcceptReservedInstancesExchangeQuoteOutput)
-
-	AcceptVpcPeeringConnection(*ec2.AcceptVpcPeeringConnectionInput) (*ec2.AcceptVpcPeeringConnectionOutput, error)
-	AcceptVpcPeeringConnectionWithContext(aws.Context, *ec2.AcceptVpcPeeringConnectionInput, ...aws.Option) (*ec2.AcceptVpcPeeringConnectionOutput, error)
-	AcceptVpcPeeringConnectionRequest(*ec2.AcceptVpcPeeringConnectionInput) (*aws.Request, *ec2.AcceptVpcPeeringConnectionOutput)
-
-	AllocateAddress(*ec2.AllocateAddressInput) (*ec2.AllocateAddressOutput, error)
-	AllocateAddressWithContext(aws.Context, *ec2.AllocateAddressInput, ...aws.Option) (*ec2.AllocateAddressOutput, error)
-	AllocateAddressRequest(*ec2.AllocateAddressInput) (*aws.Request, *ec2.AllocateAddressOutput)
-
-	AllocateHosts(*ec2.AllocateHostsInput) (*ec2.AllocateHostsOutput, error)
-	AllocateHostsWithContext(aws.Context, *ec2.AllocateHostsInput, ...aws.Option) (*ec2.AllocateHostsOutput, error)
-	AllocateHostsRequest(*ec2.AllocateHostsInput) (*aws.Request, *ec2.AllocateHostsOutput)
-
-	AssignIpv6Addresses(*ec2.AssignIpv6AddressesInput) (*ec2.AssignIpv6AddressesOutput, error)
-	AssignIpv6AddressesWithContext(aws.Context, *ec2.AssignIpv6AddressesInput, ...aws.Option) (*ec2.AssignIpv6AddressesOutput, error)
-	AssignIpv6AddressesRequest(*ec2.AssignIpv6AddressesInput) (*aws.Request, *ec2.AssignIpv6AddressesOutput)
-
-	AssignPrivateIpAddresses(*ec2.AssignPrivateIpAddressesInput) (*ec2.AssignPrivateIpAddressesOutput, error)
-	AssignPrivateIpAddressesWithContext(aws.Context, *ec2.AssignPrivateIpAddressesInput, ...aws.Option) (*ec2.AssignPrivateIpAddressesOutput, error)
-	AssignPrivateIpAddressesRequest(*ec2.AssignPrivateIpAddressesInput) (*aws.Request, *ec2.AssignPrivateIpAddressesOutput)
-
-	AssociateAddress(*ec2.AssociateAddressInput) (*ec2.AssociateAddressOutput, error)
-	AssociateAddressWithContext(aws.Context, *ec2.AssociateAddressInput, ...aws.Option) (*ec2.AssociateAddressOutput, error)
-	AssociateAddressRequest(*ec2.AssociateAddressInput) (*aws.Request, *ec2.AssociateAddressOutput)
-
-	AssociateDhcpOptions(*ec2.AssociateDhcpOptionsInput) (*ec2.AssociateDhcpOptionsOutput, error)
-	AssociateDhcpOptionsWithContext(aws.Context, *ec2.AssociateDhcpOptionsInput, ...aws.Option) (*ec2.AssociateDhcpOptionsOutput, error)
-	AssociateDhcpOptionsRequest(*ec2.AssociateDhcpOptionsInput) (*aws.Request, *ec2.AssociateDhcpOptionsOutput)
-
-	AssociateIamInstanceProfile(*ec2.AssociateIamInstanceProfileInput) (*ec2.AssociateIamInstanceProfileOutput, error)
-	AssociateIamInstanceProfileWithContext(aws.Context, *ec2.AssociateIamInstanceProfileInput, ...aws.Option) (*ec2.AssociateIamInstanceProfileOutput, error)
-	AssociateIamInstanceProfileRequest(*ec2.AssociateIamInstanceProfileInput) (*aws.Request, *ec2.AssociateIamInstanceProfileOutput)
-
-	AssociateRouteTable(*ec2.AssociateRouteTableInput) (*ec2.AssociateRouteTableOutput, error)
-	AssociateRouteTableWithContext(aws.Context, *ec2.AssociateRouteTableInput, ...aws.Option) (*ec2.AssociateRouteTableOutput, error)
-	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) (*aws.Request, *ec2.AssociateRouteTableOutput)
-
-	AssociateSubnetCidrBlock(*ec2.AssociateSubnetCidrBlockInput) (*ec2.AssociateSubnetCidrBlockOutput, error)
-	AssociateSubnetCidrBlockWithContext(aws.Context, *ec2.AssociateSubnetCidrBlockInput, ...aws.Option) (*ec2.AssociateSubnetCidrBlockOutput, error)
-	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) (*aws.Request, *ec2.AssociateSubnetCidrBlockOutput)
-
-	AssociateVpcCidrBlock(*ec2.AssociateVpcCidrBlockInput) (*ec2.AssociateVpcCidrBlockOutput, error)
-	AssociateVpcCidrBlockWithContext(aws.Context, *ec2.AssociateVpcCidrBlockInput, ...aws.Option) (*ec2.AssociateVpcCidrBlockOutput, error)
-	AssociateVpcCidrBlockRequest(*ec2.AssociateVpcCidrBlockInput) (*aws.Request, *ec2.AssociateVpcCidrBlockOutput)
-
-	AttachClassicLinkVpc(*ec2.AttachClassicLinkVpcInput) (*ec2.AttachClassicLinkVpcOutput, error)
-	AttachClassicLinkVpcWithContext(aws.Context, *ec2.AttachClassicLinkVpcInput, ...aws.Option) (*ec2.AttachClassicLinkVpcOutput, error)
-	AttachClassicLinkVpcRequest(*ec2.AttachClassicLinkVpcInput) (*aws.Request, *ec2.AttachClassicLinkVpcOutput)
-
-	AttachInternetGateway(*ec2.AttachInternetGatewayInput) (*ec2.AttachInternetGatewayOutput, error)
-	AttachInternetGatewayWithContext(aws.Context, *ec2.AttachInternetGatewayInput, ...aws.Option) (*ec2.AttachInternetGatewayOutput, error)
-	AttachInternetGatewayRequest(*ec2.AttachInternetGatewayInput) (*aws.Request, *ec2.AttachInternetGatewayOutput)
-
-	AttachNetworkInterface(*ec2.AttachNetworkInterfaceInput) (*ec2.AttachNetworkInterfaceOutput, error)
-	AttachNetworkInterfaceWithContext(aws.Context, *ec2.AttachNetworkInterfaceInput, ...aws.Option) (*ec2.AttachNetworkInterfaceOutput, error)
-	AttachNetworkInterfaceRequest(*ec2.AttachNetworkInterfaceInput) (*aws.Request, *ec2.AttachNetworkInterfaceOutput)
-
-	AttachVolume(*ec2.AttachVolumeInput) (*ec2.VolumeAttachment, error)
-	AttachVolumeWithContext(aws.Context, *ec2.AttachVolumeInput, ...aws.Option) (*ec2.VolumeAttachment, error)
-	AttachVolumeRequest(*ec2.AttachVolumeInput) (*aws.Request, *ec2.VolumeAttachment)
-
-	AttachVpnGateway(*ec2.AttachVpnGatewayInput) (*ec2.AttachVpnGatewayOutput, error)
-	AttachVpnGatewayWithContext(aws.Context, *ec2.AttachVpnGatewayInput, ...aws.Option) (*ec2.AttachVpnGatewayOutput, error)
-	AttachVpnGatewayRequest(*ec2.AttachVpnGatewayInput) (*aws.Request, *ec2.AttachVpnGatewayOutput)
-
-	AuthorizeSecurityGroupEgress(*ec2.AuthorizeSecurityGroupEgressInput) (*ec2.AuthorizeSecurityGroupEgressOutput, error)
-	AuthorizeSecurityGroupEgressWithContext(aws.Context, *ec2.AuthorizeSecurityGroupEgressInput, ...aws.Option) (*ec2.AuthorizeSecurityGroupEgressOutput, error)
-	AuthorizeSecurityGroupEgressRequest(*ec2.AuthorizeSecurityGroupEgressInput) (*aws.Request, *ec2.AuthorizeSecurityGroupEgressOutput)
-
-	AuthorizeSecurityGroupIngress(*ec2.AuthorizeSecurityGroupIngressInput) (*ec2.AuthorizeSecurityGroupIngressOutput, error)
-	AuthorizeSecurityGroupIngressWithContext(aws.Context, *ec2.AuthorizeSecurityGroupIngressInput, ...aws.Option) (*ec2.AuthorizeSecurityGroupIngressOutput, error)
-	AuthorizeSecurityGroupIngressRequest(*ec2.AuthorizeSecurityGroupIngressInput) (*aws.Request, *ec2.AuthorizeSecurityGroupIngressOutput)
-
-	BundleInstance(*ec2.BundleInstanceInput) (*ec2.BundleInstanceOutput, error)
-	BundleInstanceWithContext(aws.Context, *ec2.BundleInstanceInput, ...aws.Option) (*ec2.BundleInstanceOutput, error)
-	BundleInstanceRequest(*ec2.BundleInstanceInput) (*aws.Request, *ec2.BundleInstanceOutput)
-
-	CancelBundleTask(*ec2.CancelBundleTaskInput) (*ec2.CancelBundleTaskOutput, error)
-	CancelBundleTaskWithContext(aws.Context, *ec2.CancelBundleTaskInput, ...aws.Option) (*ec2.CancelBundleTaskOutput, error)
-	CancelBundleTaskRequest(*ec2.CancelBundleTaskInput) (*aws.Request, *ec2.CancelBundleTaskOutput)
-
-	CancelConversionTask(*ec2.CancelConversionTaskInput) (*ec2.CancelConversionTaskOutput, error)
-	CancelConversionTaskWithContext(aws.Context, *ec2.CancelConversionTaskInput, ...aws.Option) (*ec2.CancelConversionTaskOutput, error)
-	CancelConversionTaskRequest(*ec2.CancelConversionTaskInput) (*aws.Request, *ec2.CancelConversionTaskOutput)
-
-	CancelExportTask(*ec2.CancelExportTaskInput) (*ec2.CancelExportTaskOutput, error)
-	CancelExportTaskWithContext(aws.Context, *ec2.CancelExportTaskInput, ...aws.Option) (*ec2.CancelExportTaskOutput, error)
-	CancelExportTaskRequest(*ec2.CancelExportTaskInput) (*aws.Request, *ec2.CancelExportTaskOutput)
-
-	CancelImportTask(*ec2.CancelImportTaskInput) (*ec2.CancelImportTaskOutput, error)
-	CancelImportTaskWithContext(aws.Context, *ec2.CancelImportTaskInput, ...aws.Option) (*ec2.CancelImportTaskOutput, error)
-	CancelImportTaskRequest(*ec2.CancelImportTaskInput) (*aws.Request, *ec2.CancelImportTaskOutput)
-
-	CancelReservedInstancesListing(*ec2.CancelReservedInstancesListingInput) (*ec2.CancelReservedInstancesListingOutput, error)
-	CancelReservedInstancesListingWithContext(aws.Context, *ec2.CancelReservedInstancesListingInput, ...aws.Option) (*ec2.CancelReservedInstancesListingOutput, error)
-	CancelReservedInstancesListingRequest(*ec2.CancelReservedInstancesListingInput) (*aws.Request, *ec2.CancelReservedInstancesListingOutput)
-
-	CancelSpotFleetRequests(*ec2.CancelSpotFleetRequestsInput) (*ec2.CancelSpotFleetRequestsOutput, error)
-	CancelSpotFleetRequestsWithContext(aws.Context, *ec2.CancelSpotFleetRequestsInput, ...aws.Option) (*ec2.CancelSpotFleetRequestsOutput, error)
-	CancelSpotFleetRequestsRequest(*ec2.CancelSpotFleetRequestsInput) (*aws.Request, *ec2.CancelSpotFleetRequestsOutput)
-
-	CancelSpotInstanceRequests(*ec2.CancelSpotInstanceRequestsInput) (*ec2.CancelSpotInstanceRequestsOutput, error)
-	CancelSpotInstanceRequestsWithContext(aws.Context, *ec2.CancelSpotInstanceRequestsInput, ...aws.Option) (*ec2.CancelSpotInstanceRequestsOutput, error)
-	CancelSpotInstanceRequestsRequest(*ec2.CancelSpotInstanceRequestsInput) (*aws.Request, *ec2.CancelSpotInstanceRequestsOutput)
-
-	ConfirmProductInstance(*ec2.ConfirmProductInstanceInput) (*ec2.ConfirmProductInstanceOutput, error)
-	ConfirmProductInstanceWithContext(aws.Context, *ec2.ConfirmProductInstanceInput, ...aws.Option) (*ec2.ConfirmProductInstanceOutput, error)
-	ConfirmProductInstanceRequest(*ec2.ConfirmProductInstanceInput) (*aws.Request, *ec2.ConfirmProductInstanceOutput)
-
-	CopyFpgaImage(*ec2.CopyFpgaImageInput) (*ec2.CopyFpgaImageOutput, error)
-	CopyFpgaImageWithContext(aws.Context, *ec2.CopyFpgaImageInput, ...aws.Option) (*ec2.CopyFpgaImageOutput, error)
-	CopyFpgaImageRequest(*ec2.CopyFpgaImageInput) (*aws.Request, *ec2.CopyFpgaImageOutput)
-
-	CopyImage(*ec2.CopyImageInput) (*ec2.CopyImageOutput, error)
-	CopyImageWithContext(aws.Context, *ec2.CopyImageInput, ...aws.Option) (*ec2.CopyImageOutput, error)
-	CopyImageRequest(*ec2.CopyImageInput) (*aws.Request, *ec2.CopyImageOutput)
-
-	CopySnapshot(*ec2.CopySnapshotInput) (*ec2.CopySnapshotOutput, error)
-	CopySnapshotWithContext(aws.Context, *ec2.CopySnapshotInput, ...aws.Option) (*ec2.CopySnapshotOutput, error)
-	CopySnapshotRequest(*ec2.CopySnapshotInput) (*aws.Request, *ec2.CopySnapshotOutput)
-
-	CreateCustomerGateway(*ec2.CreateCustomerGatewayInput) (*ec2.CreateCustomerGatewayOutput, error)
-	CreateCustomerGatewayWithContext(aws.Context, *ec2.CreateCustomerGatewayInput, ...aws.Option) (*ec2.CreateCustomerGatewayOutput, error)
-	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) (*aws.Request, *ec2.CreateCustomerGatewayOutput)
-
-	CreateDefaultVpc(*ec2.CreateDefaultVpcInput) (*ec2.CreateDefaultVpcOutput, error)
-	CreateDefaultVpcWithContext(aws.Context, *ec2.CreateDefaultVpcInput, ...aws.Option) (*ec2.CreateDefaultVpcOutput, error)
-	CreateDefaultVpcRequest(*ec2.CreateDefaultVpcInput) (*aws.Request, *ec2.CreateDefaultVpcOutput)
-
-	CreateDhcpOptions(*ec2.CreateDhcpOptionsInput) (*ec2.CreateDhcpOptionsOutput, error)
-	CreateDhcpOptionsWithContext(aws.Context, *ec2.CreateDhcpOptionsInput, ...aws.Option) (*ec2.CreateDhcpOptionsOutput, error)
-	CreateDhcpOptionsRequest(*ec2.CreateDhcpOptionsInput) (*aws.Request, *ec2.CreateDhcpOptionsOutput)
-
-	CreateEgressOnlyInternetGateway(*ec2.CreateEgressOnlyInternetGatewayInput) (*ec2.CreateEgressOnlyInternetGatewayOutput, error)
-	CreateEgressOnlyInternetGatewayWithContext(aws.Context, *ec2.CreateEgressOnlyInternetGatewayInput, ...aws.Option) (*ec2.CreateEgressOnlyInternetGatewayOutput, error)
-	CreateEgressOnlyInternetGatewayRequest(*ec2.CreateEgressOnlyInternetGatewayInput) (*aws.Request, *ec2.CreateEgressOnlyInternetGatewayOutput)
-
-	CreateFlowLogs(*ec2.CreateFlowLogsInput) (*ec2.CreateFlowLogsOutput, error)
-	CreateFlowLogsWithContext(aws.Context, *ec2.CreateFlowLogsInput, ...aws.Option) (*ec2.CreateFlowLogsOutput, error)
-	CreateFlowLogsRequest(*ec2.CreateFlowLogsInput) (*aws.Request, *ec2.CreateFlowLogsOutput)
-
-	CreateFpgaImage(*ec2.CreateFpgaImageInput) (*ec2.CreateFpgaImageOutput, error)
-	CreateFpgaImageWithContext(aws.Context, *ec2.CreateFpgaImageInput, ...aws.Option) (*ec2.CreateFpgaImageOutput, error)
-	CreateFpgaImageRequest(*ec2.CreateFpgaImageInput) (*aws.Request, *ec2.CreateFpgaImageOutput)
-
-	CreateImage(*ec2.CreateImageInput) (*ec2.CreateImageOutput, error)
-	CreateImageWithContext(aws.Context, *ec2.CreateImageInput, ...aws.Option) (*ec2.CreateImageOutput, error)
-	CreateImageRequest(*ec2.CreateImageInput) (*aws.Request, *ec2.CreateImageOutput)
-
-	CreateInstanceExportTask(*ec2.CreateInstanceExportTaskInput) (*ec2.CreateInstanceExportTaskOutput, error)
-	CreateInstanceExportTaskWithContext(aws.Context, *ec2.CreateInstanceExportTaskInput, ...aws.Option) (*ec2.CreateInstanceExportTaskOutput, error)
-	CreateInstanceExportTaskRequest(*ec2.CreateInstanceExportTaskInput) (*aws.Request, *ec2.CreateInstanceExportTaskOutput)
-
-	CreateInternetGateway(*ec2.CreateInternetGatewayInput) (*ec2.CreateInternetGatewayOutput, error)
-	CreateInternetGatewayWithContext(aws.Context, *ec2.CreateInternetGatewayInput, ...aws.Option) (*ec2.CreateInternetGatewayOutput, error)
-	CreateInternetGatewayRequest(*ec2.CreateInternetGatewayInput) (*aws.Request, *ec2.CreateInternetGatewayOutput)
-
-	CreateKeyPair(*ec2.CreateKeyPairInput) (*ec2.CreateKeyPairOutput, error)
-	CreateKeyPairWithContext(aws.Context, *ec2.CreateKeyPairInput, ...aws.Option) (*ec2.CreateKeyPairOutput, error)
-	CreateKeyPairRequest(*ec2.CreateKeyPairInput) (*aws.Request, *ec2.CreateKeyPairOutput)
-
-	CreateNatGateway(*ec2.CreateNatGatewayInput) (*ec2.CreateNatGatewayOutput, error)
-	CreateNatGatewayWithContext(aws.Context, *ec2.CreateNatGatewayInput, ...aws.Option) (*ec2.CreateNatGatewayOutput, error)
-	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) (*aws.Request, *ec2.CreateNatGatewayOutput)
-
-	CreateNetworkAcl(*ec2.CreateNetworkAclInput) (*ec2.CreateNetworkAclOutput, error)
-	CreateNetworkAclWithContext(aws.Context, *ec2.CreateNetworkAclInput, ...aws.Option) (*ec2.CreateNetworkAclOutput, error)
-	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) (*aws.Request, *ec2.CreateNetworkAclOutput)
-
-	CreateNetworkAclEntry(*ec2.CreateNetworkAclEntryInput) (*ec2.CreateNetworkAclEntryOutput, error)
-	CreateNetworkAclEntryWithContext(aws.Context, *ec2.CreateNetworkAclEntryInput, ...aws.Option) (*ec2.CreateNetworkAclEntryOutput, error)
-	CreateNetworkAclEntryRequest(*ec2.CreateNetworkAclEntryInput) (*aws.Request, *ec2.CreateNetworkAclEntryOutput)
-
-	CreateNetworkInterface(*ec2.CreateNetworkInterfaceInput) (*ec2.CreateNetworkInterfaceOutput, error)
-	CreateNetworkInterfaceWithContext(aws.Context, *ec2.CreateNetworkInterfaceInput, ...aws.Option) (*ec2.CreateNetworkInterfaceOutput, error)
-	CreateNetworkInterfaceRequest(*ec2.CreateNetworkInterfaceInput) (*aws.Request, *ec2.CreateNetworkInterfaceOutput)
-
-	CreateNetworkInterfacePermission(*ec2.CreateNetworkInterfacePermissionInput) (*ec2.CreateNetworkInterfacePermissionOutput, error)
-	CreateNetworkInterfacePermissionWithContext(aws.Context, *ec2.CreateNetworkInterfacePermissionInput, ...aws.Option) (*ec2.CreateNetworkInterfacePermissionOutput, error)
-	CreateNetworkInterfacePermissionRequest(*ec2.CreateNetworkInterfacePermissionInput) (*aws.Request, *ec2.CreateNetworkInterfacePermissionOutput)
-
-	CreatePlacementGroup(*ec2.CreatePlacementGroupInput) (*ec2.CreatePlacementGroupOutput, error)
-	CreatePlacementGroupWithContext(aws.Context, *ec2.CreatePlacementGroupInput, ...aws.Option) (*ec2.CreatePlacementGroupOutput, error)
-	CreatePlacementGroupRequest(*ec2.CreatePlacementGroupInput) (*aws.Request, *ec2.CreatePlacementGroupOutput)
-
-	CreateReservedInstancesListing(*ec2.CreateReservedInstancesListingInput) (*ec2.CreateReservedInstancesListingOutput, error)
-	CreateReservedInstancesListingWithContext(aws.Context, *ec2.CreateReservedInstancesListingInput, ...aws.Option) (*ec2.CreateReservedInstancesListingOutput, error)
-	CreateReservedInstancesListingRequest(*ec2.CreateReservedInstancesListingInput) (*aws.Request, *ec2.CreateReservedInstancesListingOutput)
-
-	CreateRoute(*ec2.CreateRouteInput) (*ec2.CreateRouteOutput, error)
-	CreateRouteWithContext(aws.Context, *ec2.CreateRouteInput, ...aws.Option) (*ec2.CreateRouteOutput, error)
-	CreateRouteRequest(*ec2.CreateRouteInput) (*aws.Request, *ec2.CreateRouteOutput)
-
-	CreateRouteTable(*ec2.CreateRouteTableInput) (*ec2.CreateRouteTableOutput, error)
-	CreateRouteTableWithContext(aws.Context, *ec2.CreateRouteTableInput, ...aws.Option) (*ec2.CreateRouteTableOutput, error)
-	CreateRouteTableRequest(*ec2.CreateRouteTableInput) (*aws.Request, *ec2.CreateRouteTableOutput)
-
-	CreateSecurityGroup(*ec2.CreateSecurityGroupInput) (*ec2.CreateSecurityGroupOutput, error)
-	CreateSecurityGroupWithContext(aws.Context, *ec2.CreateSecurityGroupInput, ...aws.Option) (*ec2.CreateSecurityGroupOutput, error)
-	CreateSecurityGroupRequest(*ec2.CreateSecurityGroupInput) (*aws.Request, *ec2.CreateSecurityGroupOutput)
-
-	CreateSnapshot(*ec2.CreateSnapshotInput) (*ec2.Snapshot, error)
-	CreateSnapshotWithContext(aws.Context, *ec2.CreateSnapshotInput, ...aws.Option) (*ec2.Snapshot, error)
-	CreateSnapshotRequest(*ec2.CreateSnapshotInput) (*aws.Request, *ec2.Snapshot)
-
-	CreateSpotDatafeedSubscription(*ec2.CreateSpotDatafeedSubscriptionInput) (*ec2.CreateSpotDatafeedSubscriptionOutput, error)
-	CreateSpotDatafeedSubscriptionWithContext(aws.Context, *ec2.CreateSpotDatafeedSubscriptionInput, ...aws.Option) (*ec2.CreateSpotDatafeedSubscriptionOutput, error)
-	CreateSpotDatafeedSubscriptionRequest(*ec2.CreateSpotDatafeedSubscriptionInput) (*aws.Request, *ec2.CreateSpotDatafeedSubscriptionOutput)
-
-	CreateSubnet(*ec2.CreateSubnetInput) (*ec2.CreateSubnetOutput, error)
-	CreateSubnetWithContext(aws.Context, *ec2.CreateSubnetInput, ...aws.Option) (*ec2.CreateSubnetOutput, error)
-	CreateSubnetRequest(*ec2.CreateSubnetInput) (*aws.Request, *ec2.CreateSubnetOutput)
-
-	CreateTags(*ec2.CreateTagsInput) (*ec2.CreateTagsOutput, error)
-	CreateTagsWithContext(aws.Context, *ec2.CreateTagsInput, ...aws.Option) (*ec2.CreateTagsOutput, error)
-	CreateTagsRequest(*ec2.CreateTagsInput) (*aws.Request, *ec2.CreateTagsOutput)
-
-	CreateVolume(*ec2.CreateVolumeInput) (*ec2.Volume, error)
-	CreateVolumeWithContext(aws.Context, *ec2.CreateVolumeInput, ...aws.Option) (*ec2.Volume, error)
-	CreateVolumeRequest(*ec2.CreateVolumeInput) (*aws.Request, *ec2.Volume)
-
-	CreateVpc(*ec2.CreateVpcInput) (*ec2.CreateVpcOutput, error)
-	CreateVpcWithContext(aws.Context, *ec2.CreateVpcInput, ...aws.Option) (*ec2.CreateVpcOutput, error)
-	CreateVpcRequest(*ec2.CreateVpcInput) (*aws.Request, *ec2.CreateVpcOutput)
-
-	CreateVpcEndpoint(*ec2.CreateVpcEndpointInput) (*ec2.CreateVpcEndpointOutput, error)
-	CreateVpcEndpointWithContext(aws.Context, *ec2.CreateVpcEndpointInput, ...aws.Option) (*ec2.CreateVpcEndpointOutput, error)
-	CreateVpcEndpointRequest(*ec2.CreateVpcEndpointInput) (*aws.Request, *ec2.CreateVpcEndpointOutput)
-
-	CreateVpcPeeringConnection(*ec2.CreateVpcPeeringConnectionInput) (*ec2.CreateVpcPeeringConnectionOutput, error)
-	CreateVpcPeeringConnectionWithContext(aws.Context, *ec2.CreateVpcPeeringConnectionInput, ...aws.Option) (*ec2.CreateVpcPeeringConnectionOutput, error)
-	CreateVpcPeeringConnectionRequest(*ec2.CreateVpcPeeringConnectionInput) (*aws.Request, *ec2.CreateVpcPeeringConnectionOutput)
-
-	CreateVpnConnection(*ec2.CreateVpnConnectionInput) (*ec2.CreateVpnConnectionOutput, error)
-	CreateVpnConnectionWithContext(aws.Context, *ec2.CreateVpnConnectionInput, ...aws.Option) (*ec2.CreateVpnConnectionOutput, error)
-	CreateVpnConnectionRequest(*ec2.CreateVpnConnectionInput) (*aws.Request, *ec2.CreateVpnConnectionOutput)
-
-	CreateVpnConnectionRoute(*ec2.CreateVpnConnectionRouteInput) (*ec2.CreateVpnConnectionRouteOutput, error)
-	CreateVpnConnectionRouteWithContext(aws.Context, *ec2.CreateVpnConnectionRouteInput, ...aws.Option) (*ec2.CreateVpnConnectionRouteOutput, error)
-	CreateVpnConnectionRouteRequest(*ec2.CreateVpnConnectionRouteInput) (*aws.Request, *ec2.CreateVpnConnectionRouteOutput)
-
-	CreateVpnGateway(*ec2.CreateVpnGatewayInput) (*ec2.CreateVpnGatewayOutput, error)
-	CreateVpnGatewayWithContext(aws.Context, *ec2.CreateVpnGatewayInput, ...aws.Option) (*ec2.CreateVpnGatewayOutput, error)
-	CreateVpnGatewayRequest(*ec2.CreateVpnGatewayInput) (*aws.Request, *ec2.CreateVpnGatewayOutput)
-
-	DeleteCustomerGateway(*ec2.DeleteCustomerGatewayInput) (*ec2.DeleteCustomerGatewayOutput, error)
-	DeleteCustomerGatewayWithContext(aws.Context, *ec2.DeleteCustomerGatewayInput, ...aws.Option) (*ec2.DeleteCustomerGatewayOutput, error)
-	DeleteCustomerGatewayRequest(*ec2.DeleteCustomerGatewayInput) (*aws.Request, *ec2.DeleteCustomerGatewayOutput)
-
-	DeleteDhcpOptions(*ec2.DeleteDhcpOptionsInput) (*ec2.DeleteDhcpOptionsOutput, error)
-	DeleteDhcpOptionsWithContext(aws.Context, *ec2.DeleteDhcpOptionsInput, ...aws.Option) (*ec2.DeleteDhcpOptionsOutput, error)
-	DeleteDhcpOptionsRequest(*ec2.DeleteDhcpOptionsInput) (*aws.Request, *ec2.DeleteDhcpOptionsOutput)
-
-	DeleteEgressOnlyInternetGateway(*ec2.DeleteEgressOnlyInternetGatewayInput) (*ec2.DeleteEgressOnlyInternetGatewayOutput, error)
-	DeleteEgressOnlyInternetGatewayWithContext(aws.Context, *ec2.DeleteEgressOnlyInternetGatewayInput, ...aws.Option) (*ec2.DeleteEgressOnlyInternetGatewayOutput, error)
-	DeleteEgressOnlyInternetGatewayRequest(*ec2.DeleteEgressOnlyInternetGatewayInput) (*aws.Request, *ec2.DeleteEgressOnlyInternetGatewayOutput)
-
-	DeleteFlowLogs(*ec2.DeleteFlowLogsInput) (*ec2.DeleteFlowLogsOutput, error)
-	DeleteFlowLogsWithContext(aws.Context, *ec2.DeleteFlowLogsInput, ...aws.Option) (*ec2.DeleteFlowLogsOutput, error)
-	DeleteFlowLogsRequest(*ec2.DeleteFlowLogsInput) (*aws.Request, *ec2.DeleteFlowLogsOutput)
-
-	DeleteFpgaImage(*ec2.DeleteFpgaImageInput) (*ec2.DeleteFpgaImageOutput, error)
-	DeleteFpgaImageWithContext(aws.Context, *ec2.DeleteFpgaImageInput, ...aws.Option) (*ec2.DeleteFpgaImageOutput, error)
-	DeleteFpgaImageRequest(*ec2.DeleteFpgaImageInput) (*aws.Request, *ec2.DeleteFpgaImageOutput)
-
-	DeleteInternetGateway(*ec2.DeleteInternetGatewayInput) (*ec2.DeleteInternetGatewayOutput, error)
-	DeleteInternetGatewayWithContext(aws.Context, *ec2.DeleteInternetGatewayInput, ...aws.Option) (*ec2.DeleteInternetGatewayOutput, error)
-	DeleteInternetGatewayRequest(*ec2.DeleteInternetGatewayInput) (*aws.Request, *ec2.DeleteInternetGatewayOutput)
-
-	DeleteKeyPair(*ec2.DeleteKeyPairInput) (*ec2.DeleteKeyPairOutput, error)
-	DeleteKeyPairWithContext(aws.Context, *ec2.DeleteKeyPairInput, ...aws.Option) (*ec2.DeleteKeyPairOutput, error)
-	DeleteKeyPairRequest(*ec2.DeleteKeyPairInput) (*aws.Request, *ec2.DeleteKeyPairOutput)
-
-	DeleteNatGateway(*ec2.DeleteNatGatewayInput) (*ec2.DeleteNatGatewayOutput, error)
-	DeleteNatGatewayWithContext(aws.Context, *ec2.DeleteNatGatewayInput, ...aws.Option) (*ec2.DeleteNatGatewayOutput, error)
-	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) (*aws.Request, *ec2.DeleteNatGatewayOutput)
-
-	DeleteNetworkAcl(*ec2.DeleteNetworkAclInput) (*ec2.DeleteNetworkAclOutput, error)
-	DeleteNetworkAclWithContext(aws.Context, *ec2.DeleteNetworkAclInput, ...aws.Option) (*ec2.DeleteNetworkAclOutput, error)
-	DeleteNetworkAclRequest(*ec2.DeleteNetworkAclInput) (*aws.Request, *ec2.DeleteNetworkAclOutput)
-
-	DeleteNetworkAclEntry(*ec2.DeleteNetworkAclEntryInput) (*ec2.DeleteNetworkAclEntryOutput, error)
-	DeleteNetworkAclEntryWithContext(aws.Context, *ec2.DeleteNetworkAclEntryInput, ...aws.Option) (*ec2.DeleteNetworkAclEntryOutput, error)
-	DeleteNetworkAclEntryRequest(*ec2.DeleteNetworkAclEntryInput) (*aws.Request, *ec2.DeleteNetworkAclEntryOutput)
-
-	DeleteNetworkInterface(*ec2.DeleteNetworkInterfaceInput) (*ec2.DeleteNetworkInterfaceOutput, error)
-	DeleteNetworkInterfaceWithContext(aws.Context, *ec2.DeleteNetworkInterfaceInput, ...aws.Option) (*ec2.DeleteNetworkInterfaceOutput, error)
-	DeleteNetworkInterfaceRequest(*ec2.DeleteNetworkInterfaceInput) (*aws.Request, *ec2.DeleteNetworkInterfaceOutput)
-
-	DeleteNetworkInterfacePermission(*ec2.DeleteNetworkInterfacePermissionInput) (*ec2.DeleteNetworkInterfacePermissionOutput, error)
-	DeleteNetworkInterfacePermissionWithContext(aws.Context, *ec2.DeleteNetworkInterfacePermissionInput, ...aws.Option) (*ec2.DeleteNetworkInterfacePermissionOutput, error)
-	DeleteNetworkInterfacePermissionRequest(*ec2.DeleteNetworkInterfacePermissionInput) (*aws.Request, *ec2.DeleteNetworkInterfacePermissionOutput)
-
-	DeletePlacementGroup(*ec2.DeletePlacementGroupInput) (*ec2.DeletePlacementGroupOutput, error)
-	DeletePlacementGroupWithContext(aws.Context, *ec2.DeletePlacementGroupInput, ...aws.Option) (*ec2.DeletePlacementGroupOutput, error)
-	DeletePlacementGroupRequest(*ec2.DeletePlacementGroupInput) (*aws.Request, *ec2.DeletePlacementGroupOutput)
-
-	DeleteRoute(*ec2.DeleteRouteInput) (*ec2.DeleteRouteOutput, error)
-	DeleteRouteWithContext(aws.Context, *ec2.DeleteRouteInput, ...aws.Option) (*ec2.DeleteRouteOutput, error)
-	DeleteRouteRequest(*ec2.DeleteRouteInput) (*aws.Request, *ec2.DeleteRouteOutput)
-
-	DeleteRouteTable(*ec2.DeleteRouteTableInput) (*ec2.DeleteRouteTableOutput, error)
-	DeleteRouteTableWithContext(aws.Context, *ec2.DeleteRouteTableInput, ...aws.Option) (*ec2.DeleteRouteTableOutput, error)
-	DeleteRouteTableRequest(*ec2.DeleteRouteTableInput) (*aws.Request, *ec2.DeleteRouteTableOutput)
-
-	DeleteSecurityGroup(*ec2.DeleteSecurityGroupInput) (*ec2.DeleteSecurityGroupOutput, error)
-	DeleteSecurityGroupWithContext(aws.Context, *ec2.DeleteSecurityGroupInput, ...aws.Option) (*ec2.DeleteSecurityGroupOutput, error)
-	DeleteSecurityGroupRequest(*ec2.DeleteSecurityGroupInput) (*aws.Request, *ec2.DeleteSecurityGroupOutput)
-
-	DeleteSnapshot(*ec2.DeleteSnapshotInput) (*ec2.DeleteSnapshotOutput, error)
-	DeleteSnapshotWithContext(aws.Context, *ec2.DeleteSnapshotInput, ...aws.Option) (*ec2.DeleteSnapshotOutput, error)
-	DeleteSnapshotRequest(*ec2.DeleteSnapshotInput) (*aws.Request, *ec2.DeleteSnapshotOutput)
-
-	DeleteSpotDatafeedSubscription(*ec2.DeleteSpotDatafeedSubscriptionInput) (*ec2.DeleteSpotDatafeedSubscriptionOutput, error)
-	DeleteSpotDatafeedSubscriptionWithContext(aws.Context, *ec2.DeleteSpotDatafeedSubscriptionInput, ...aws.Option) (*ec2.DeleteSpotDatafeedSubscriptionOutput, error)
-	DeleteSpotDatafeedSubscriptionRequest(*ec2.DeleteSpotDatafeedSubscriptionInput) (*aws.Request, *ec2.DeleteSpotDatafeedSubscriptionOutput)
-
-	DeleteSubnet(*ec2.DeleteSubnetInput) (*ec2.DeleteSubnetOutput, error)
-	DeleteSubnetWithContext(aws.Context, *ec2.DeleteSubnetInput, ...aws.Option) (*ec2.DeleteSubnetOutput, error)
-	DeleteSubnetRequest(*ec2.DeleteSubnetInput) (*aws.Request, *ec2.DeleteSubnetOutput)
-
-	DeleteTags(*ec2.DeleteTagsInput) (*ec2.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *ec2.DeleteTagsInput, ...aws.Option) (*ec2.DeleteTagsOutput, error)
-	DeleteTagsRequest(*ec2.DeleteTagsInput) (*aws.Request, *ec2.DeleteTagsOutput)
-
-	DeleteVolume(*ec2.DeleteVolumeInput) (*ec2.DeleteVolumeOutput, error)
-	DeleteVolumeWithContext(aws.Context, *ec2.DeleteVolumeInput, ...aws.Option) (*ec2.DeleteVolumeOutput, error)
-	DeleteVolumeRequest(*ec2.DeleteVolumeInput) (*aws.Request, *ec2.DeleteVolumeOutput)
-
-	DeleteVpc(*ec2.DeleteVpcInput) (*ec2.DeleteVpcOutput, error)
-	DeleteVpcWithContext(aws.Context, *ec2.DeleteVpcInput, ...aws.Option) (*ec2.DeleteVpcOutput, error)
-	DeleteVpcRequest(*ec2.DeleteVpcInput) (*aws.Request, *ec2.DeleteVpcOutput)
-
-	DeleteVpcEndpoints(*ec2.DeleteVpcEndpointsInput) (*ec2.DeleteVpcEndpointsOutput, error)
-	DeleteVpcEndpointsWithContext(aws.Context, *ec2.DeleteVpcEndpointsInput, ...aws.Option) (*ec2.DeleteVpcEndpointsOutput, error)
-	DeleteVpcEndpointsRequest(*ec2.DeleteVpcEndpointsInput) (*aws.Request, *ec2.DeleteVpcEndpointsOutput)
-
-	DeleteVpcPeeringConnection(*ec2.DeleteVpcPeeringConnectionInput) (*ec2.DeleteVpcPeeringConnectionOutput, error)
-	DeleteVpcPeeringConnectionWithContext(aws.Context, *ec2.DeleteVpcPeeringConnectionInput, ...aws.Option) (*ec2.DeleteVpcPeeringConnectionOutput, error)
-	DeleteVpcPeeringConnectionRequest(*ec2.DeleteVpcPeeringConnectionInput) (*aws.Request, *ec2.DeleteVpcPeeringConnectionOutput)
-
-	DeleteVpnConnection(*ec2.DeleteVpnConnectionInput) (*ec2.DeleteVpnConnectionOutput, error)
-	DeleteVpnConnectionWithContext(aws.Context, *ec2.DeleteVpnConnectionInput, ...aws.Option) (*ec2.DeleteVpnConnectionOutput, error)
-	DeleteVpnConnectionRequest(*ec2.DeleteVpnConnectionInput) (*aws.Request, *ec2.DeleteVpnConnectionOutput)
-
-	DeleteVpnConnectionRoute(*ec2.DeleteVpnConnectionRouteInput) (*ec2.DeleteVpnConnectionRouteOutput, error)
-	DeleteVpnConnectionRouteWithContext(aws.Context, *ec2.DeleteVpnConnectionRouteInput, ...aws.Option) (*ec2.DeleteVpnConnectionRouteOutput, error)
-	DeleteVpnConnectionRouteRequest(*ec2.DeleteVpnConnectionRouteInput) (*aws.Request, *ec2.DeleteVpnConnectionRouteOutput)
-
-	DeleteVpnGateway(*ec2.DeleteVpnGatewayInput) (*ec2.DeleteVpnGatewayOutput, error)
-	DeleteVpnGatewayWithContext(aws.Context, *ec2.DeleteVpnGatewayInput, ...aws.Option) (*ec2.DeleteVpnGatewayOutput, error)
-	DeleteVpnGatewayRequest(*ec2.DeleteVpnGatewayInput) (*aws.Request, *ec2.DeleteVpnGatewayOutput)
-
-	DeregisterImage(*ec2.DeregisterImageInput) (*ec2.DeregisterImageOutput, error)
-	DeregisterImageWithContext(aws.Context, *ec2.DeregisterImageInput, ...aws.Option) (*ec2.DeregisterImageOutput, error)
-	DeregisterImageRequest(*ec2.DeregisterImageInput) (*aws.Request, *ec2.DeregisterImageOutput)
-
-	DescribeAccountAttributes(*ec2.DescribeAccountAttributesInput) (*ec2.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesWithContext(aws.Context, *ec2.DescribeAccountAttributesInput, ...aws.Option) (*ec2.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) (*aws.Request, *ec2.DescribeAccountAttributesOutput)
-
-	DescribeAddresses(*ec2.DescribeAddressesInput) (*ec2.DescribeAddressesOutput, error)
-	DescribeAddressesWithContext(aws.Context, *ec2.DescribeAddressesInput, ...aws.Option) (*ec2.DescribeAddressesOutput, error)
-	DescribeAddressesRequest(*ec2.DescribeAddressesInput) (*aws.Request, *ec2.DescribeAddressesOutput)
-
-	DescribeAvailabilityZones(*ec2.DescribeAvailabilityZonesInput) (*ec2.DescribeAvailabilityZonesOutput, error)
-	DescribeAvailabilityZonesWithContext(aws.Context, *ec2.DescribeAvailabilityZonesInput, ...aws.Option) (*ec2.DescribeAvailabilityZonesOutput, error)
-	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) (*aws.Request, *ec2.DescribeAvailabilityZonesOutput)
-
-	DescribeBundleTasks(*ec2.DescribeBundleTasksInput) (*ec2.DescribeBundleTasksOutput, error)
-	DescribeBundleTasksWithContext(aws.Context, *ec2.DescribeBundleTasksInput, ...aws.Option) (*ec2.DescribeBundleTasksOutput, error)
-	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) (*aws.Request, *ec2.DescribeBundleTasksOutput)
-
-	DescribeClassicLinkInstances(*ec2.DescribeClassicLinkInstancesInput) (*ec2.DescribeClassicLinkInstancesOutput, error)
-	DescribeClassicLinkInstancesWithContext(aws.Context, *ec2.DescribeClassicLinkInstancesInput, ...aws.Option) (*ec2.DescribeClassicLinkInstancesOutput, error)
-	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) (*aws.Request, *ec2.DescribeClassicLinkInstancesOutput)
-
-	DescribeConversionTasks(*ec2.DescribeConversionTasksInput) (*ec2.DescribeConversionTasksOutput, error)
-	DescribeConversionTasksWithContext(aws.Context, *ec2.DescribeConversionTasksInput, ...aws.Option) (*ec2.DescribeConversionTasksOutput, error)
-	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) (*aws.Request, *ec2.DescribeConversionTasksOutput)
-
-	DescribeCustomerGateways(*ec2.DescribeCustomerGatewaysInput) (*ec2.DescribeCustomerGatewaysOutput, error)
-	DescribeCustomerGatewaysWithContext(aws.Context, *ec2.DescribeCustomerGatewaysInput, ...aws.Option) (*ec2.DescribeCustomerGatewaysOutput, error)
-	DescribeCustomerGatewaysRequest(*ec2.DescribeCustomerGatewaysInput) (*aws.Request, *ec2.DescribeCustomerGatewaysOutput)
-
-	DescribeDhcpOptions(*ec2.DescribeDhcpOptionsInput) (*ec2.DescribeDhcpOptionsOutput, error)
-	DescribeDhcpOptionsWithContext(aws.Context, *ec2.DescribeDhcpOptionsInput, ...aws.Option) (*ec2.DescribeDhcpOptionsOutput, error)
-	DescribeDhcpOptionsRequest(*ec2.DescribeDhcpOptionsInput) (*aws.Request, *ec2.DescribeDhcpOptionsOutput)
-
-	DescribeEgressOnlyInternetGateways(*ec2.DescribeEgressOnlyInternetGatewaysInput) (*ec2.DescribeEgressOnlyInternetGatewaysOutput, error)
-	DescribeEgressOnlyInternetGatewaysWithContext(aws.Context, *ec2.DescribeEgressOnlyInternetGatewaysInput, ...aws.Option) (*ec2.DescribeEgressOnlyInternetGatewaysOutput, error)
-	DescribeEgressOnlyInternetGatewaysRequest(*ec2.DescribeEgressOnlyInternetGatewaysInput) (*aws.Request, *ec2.DescribeEgressOnlyInternetGatewaysOutput)
-
-	DescribeElasticGpus(*ec2.DescribeElasticGpusInput) (*ec2.DescribeElasticGpusOutput, error)
-	DescribeElasticGpusWithContext(aws.Context, *ec2.DescribeElasticGpusInput, ...aws.Option) (*ec2.DescribeElasticGpusOutput, error)
-	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) (*aws.Request, *ec2.DescribeElasticGpusOutput)
-
-	DescribeExportTasks(*ec2.DescribeExportTasksInput) (*ec2.DescribeExportTasksOutput, error)
-	DescribeExportTasksWithContext(aws.Context, *ec2.DescribeExportTasksInput, ...aws.Option) (*ec2.DescribeExportTasksOutput, error)
-	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) (*aws.Request, *ec2.DescribeExportTasksOutput)
-
-	DescribeFlowLogs(*ec2.DescribeFlowLogsInput) (*ec2.DescribeFlowLogsOutput, error)
-	DescribeFlowLogsWithContext(aws.Context, *ec2.DescribeFlowLogsInput, ...aws.Option) (*ec2.DescribeFlowLogsOutput, error)
-	DescribeFlowLogsRequest(*ec2.DescribeFlowLogsInput) (*aws.Request, *ec2.DescribeFlowLogsOutput)
-
-	DescribeFpgaImageAttribute(*ec2.DescribeFpgaImageAttributeInput) (*ec2.DescribeFpgaImageAttributeOutput, error)
-	DescribeFpgaImageAttributeWithContext(aws.Context, *ec2.DescribeFpgaImageAttributeInput, ...aws.Option) (*ec2.DescribeFpgaImageAttributeOutput, error)
-	DescribeFpgaImageAttributeRequest(*ec2.DescribeFpgaImageAttributeInput) (*aws.Request, *ec2.DescribeFpgaImageAttributeOutput)
-
-	DescribeFpgaImages(*ec2.DescribeFpgaImagesInput) (*ec2.DescribeFpgaImagesOutput, error)
-	DescribeFpgaImagesWithContext(aws.Context, *ec2.DescribeFpgaImagesInput, ...aws.Option) (*ec2.DescribeFpgaImagesOutput, error)
-	DescribeFpgaImagesRequest(*ec2.DescribeFpgaImagesInput) (*aws.Request, *ec2.DescribeFpgaImagesOutput)
-
-	DescribeHostReservationOfferings(*ec2.DescribeHostReservationOfferingsInput) (*ec2.DescribeHostReservationOfferingsOutput, error)
-	DescribeHostReservationOfferingsWithContext(aws.Context, *ec2.DescribeHostReservationOfferingsInput, ...aws.Option) (*ec2.DescribeHostReservationOfferingsOutput, error)
-	DescribeHostReservationOfferingsRequest(*ec2.DescribeHostReservationOfferingsInput) (*aws.Request, *ec2.DescribeHostReservationOfferingsOutput)
-
-	DescribeHostReservations(*ec2.DescribeHostReservationsInput) (*ec2.DescribeHostReservationsOutput, error)
-	DescribeHostReservationsWithContext(aws.Context, *ec2.DescribeHostReservationsInput, ...aws.Option) (*ec2.DescribeHostReservationsOutput, error)
-	DescribeHostReservationsRequest(*ec2.DescribeHostReservationsInput) (*aws.Request, *ec2.DescribeHostReservationsOutput)
-
-	DescribeHosts(*ec2.DescribeHostsInput) (*ec2.DescribeHostsOutput, error)
-	DescribeHostsWithContext(aws.Context, *ec2.DescribeHostsInput, ...aws.Option) (*ec2.DescribeHostsOutput, error)
-	DescribeHostsRequest(*ec2.DescribeHostsInput) (*aws.Request, *ec2.DescribeHostsOutput)
-
-	DescribeIamInstanceProfileAssociations(*ec2.DescribeIamInstanceProfileAssociationsInput) (*ec2.DescribeIamInstanceProfileAssociationsOutput, error)
-	DescribeIamInstanceProfileAssociationsWithContext(aws.Context, *ec2.DescribeIamInstanceProfileAssociationsInput, ...aws.Option) (*ec2.DescribeIamInstanceProfileAssociationsOutput, error)
-	DescribeIamInstanceProfileAssociationsRequest(*ec2.DescribeIamInstanceProfileAssociationsInput) (*aws.Request, *ec2.DescribeIamInstanceProfileAssociationsOutput)
-
-	DescribeIdFormat(*ec2.DescribeIdFormatInput) (*ec2.DescribeIdFormatOutput, error)
-	DescribeIdFormatWithContext(aws.Context, *ec2.DescribeIdFormatInput, ...aws.Option) (*ec2.DescribeIdFormatOutput, error)
-	DescribeIdFormatRequest(*ec2.DescribeIdFormatInput) (*aws.Request, *ec2.DescribeIdFormatOutput)
-
-	DescribeIdentityIdFormat(*ec2.DescribeIdentityIdFormatInput) (*ec2.DescribeIdentityIdFormatOutput, error)
-	DescribeIdentityIdFormatWithContext(aws.Context, *ec2.DescribeIdentityIdFormatInput, ...aws.Option) (*ec2.DescribeIdentityIdFormatOutput, error)
-	DescribeIdentityIdFormatRequest(*ec2.DescribeIdentityIdFormatInput) (*aws.Request, *ec2.DescribeIdentityIdFormatOutput)
-
-	DescribeImageAttribute(*ec2.DescribeImageAttributeInput) (*ec2.DescribeImageAttributeOutput, error)
-	DescribeImageAttributeWithContext(aws.Context, *ec2.DescribeImageAttributeInput, ...aws.Option) (*ec2.DescribeImageAttributeOutput, error)
-	DescribeImageAttributeRequest(*ec2.DescribeImageAttributeInput) (*aws.Request, *ec2.DescribeImageAttributeOutput)
-
-	DescribeImages(*ec2.DescribeImagesInput) (*ec2.DescribeImagesOutput, error)
-	DescribeImagesWithContext(aws.Context, *ec2.DescribeImagesInput, ...aws.Option) (*ec2.DescribeImagesOutput, error)
-	DescribeImagesRequest(*ec2.DescribeImagesInput) (*aws.Request, *ec2.DescribeImagesOutput)
-
-	DescribeImportImageTasks(*ec2.DescribeImportImageTasksInput) (*ec2.DescribeImportImageTasksOutput, error)
-	DescribeImportImageTasksWithContext(aws.Context, *ec2.DescribeImportImageTasksInput, ...aws.Option) (*ec2.DescribeImportImageTasksOutput, error)
-	DescribeImportImageTasksRequest(*ec2.DescribeImportImageTasksInput) (*aws.Request, *ec2.DescribeImportImageTasksOutput)
-
-	DescribeImportSnapshotTasks(*ec2.DescribeImportSnapshotTasksInput) (*ec2.DescribeImportSnapshotTasksOutput, error)
-	DescribeImportSnapshotTasksWithContext(aws.Context, *ec2.DescribeImportSnapshotTasksInput, ...aws.Option) (*ec2.DescribeImportSnapshotTasksOutput, error)
-	DescribeImportSnapshotTasksRequest(*ec2.DescribeImportSnapshotTasksInput) (*aws.Request, *ec2.DescribeImportSnapshotTasksOutput)
-
-	DescribeInstanceAttribute(*ec2.DescribeInstanceAttributeInput) (*ec2.DescribeInstanceAttributeOutput, error)
-	DescribeInstanceAttributeWithContext(aws.Context, *ec2.DescribeInstanceAttributeInput, ...aws.Option) (*ec2.DescribeInstanceAttributeOutput, error)
-	DescribeInstanceAttributeRequest(*ec2.DescribeInstanceAttributeInput) (*aws.Request, *ec2.DescribeInstanceAttributeOutput)
-
-	DescribeInstanceStatus(*ec2.DescribeInstanceStatusInput) (*ec2.DescribeInstanceStatusOutput, error)
-	DescribeInstanceStatusWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, ...aws.Option) (*ec2.DescribeInstanceStatusOutput, error)
-	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) (*aws.Request, *ec2.DescribeInstanceStatusOutput)
+	AcceptReservedInstancesExchangeQuoteRequest(*ec2.AcceptReservedInstancesExchangeQuoteInput) ec2.AcceptReservedInstancesExchangeQuoteRequest
+
+	AcceptVpcPeeringConnectionRequest(*ec2.AcceptVpcPeeringConnectionInput) ec2.AcceptVpcPeeringConnectionRequest
+
+	AllocateAddressRequest(*ec2.AllocateAddressInput) ec2.AllocateAddressRequest
+
+	AllocateHostsRequest(*ec2.AllocateHostsInput) ec2.AllocateHostsRequest
+
+	AssignIpv6AddressesRequest(*ec2.AssignIpv6AddressesInput) ec2.AssignIpv6AddressesRequest
+
+	AssignPrivateIpAddressesRequest(*ec2.AssignPrivateIpAddressesInput) ec2.AssignPrivateIpAddressesRequest
+
+	AssociateAddressRequest(*ec2.AssociateAddressInput) ec2.AssociateAddressRequest
+
+	AssociateDhcpOptionsRequest(*ec2.AssociateDhcpOptionsInput) ec2.AssociateDhcpOptionsRequest
+
+	AssociateIamInstanceProfileRequest(*ec2.AssociateIamInstanceProfileInput) ec2.AssociateIamInstanceProfileRequest
+
+	AssociateRouteTableRequest(*ec2.AssociateRouteTableInput) ec2.AssociateRouteTableRequest
+
+	AssociateSubnetCidrBlockRequest(*ec2.AssociateSubnetCidrBlockInput) ec2.AssociateSubnetCidrBlockRequest
+
+	AssociateVpcCidrBlockRequest(*ec2.AssociateVpcCidrBlockInput) ec2.AssociateVpcCidrBlockRequest
+
+	AttachClassicLinkVpcRequest(*ec2.AttachClassicLinkVpcInput) ec2.AttachClassicLinkVpcRequest
+
+	AttachInternetGatewayRequest(*ec2.AttachInternetGatewayInput) ec2.AttachInternetGatewayRequest
+
+	AttachNetworkInterfaceRequest(*ec2.AttachNetworkInterfaceInput) ec2.AttachNetworkInterfaceRequest
+
+	AttachVolumeRequest(*ec2.AttachVolumeInput) ec2.AttachVolumeRequest
+
+	AttachVpnGatewayRequest(*ec2.AttachVpnGatewayInput) ec2.AttachVpnGatewayRequest
+
+	AuthorizeSecurityGroupEgressRequest(*ec2.AuthorizeSecurityGroupEgressInput) ec2.AuthorizeSecurityGroupEgressRequest
+
+	AuthorizeSecurityGroupIngressRequest(*ec2.AuthorizeSecurityGroupIngressInput) ec2.AuthorizeSecurityGroupIngressRequest
+
+	BundleInstanceRequest(*ec2.BundleInstanceInput) ec2.BundleInstanceRequest
+
+	CancelBundleTaskRequest(*ec2.CancelBundleTaskInput) ec2.CancelBundleTaskRequest
+
+	CancelConversionTaskRequest(*ec2.CancelConversionTaskInput) ec2.CancelConversionTaskRequest
+
+	CancelExportTaskRequest(*ec2.CancelExportTaskInput) ec2.CancelExportTaskRequest
+
+	CancelImportTaskRequest(*ec2.CancelImportTaskInput) ec2.CancelImportTaskRequest
+
+	CancelReservedInstancesListingRequest(*ec2.CancelReservedInstancesListingInput) ec2.CancelReservedInstancesListingRequest
+
+	CancelSpotFleetRequestsRequest(*ec2.CancelSpotFleetRequestsInput) ec2.CancelSpotFleetRequestsRequest
+
+	CancelSpotInstanceRequestsRequest(*ec2.CancelSpotInstanceRequestsInput) ec2.CancelSpotInstanceRequestsRequest
+
+	ConfirmProductInstanceRequest(*ec2.ConfirmProductInstanceInput) ec2.ConfirmProductInstanceRequest
+
+	CopyFpgaImageRequest(*ec2.CopyFpgaImageInput) ec2.CopyFpgaImageRequest
+
+	CopyImageRequest(*ec2.CopyImageInput) ec2.CopyImageRequest
+
+	CopySnapshotRequest(*ec2.CopySnapshotInput) ec2.CopySnapshotRequest
+
+	CreateCustomerGatewayRequest(*ec2.CreateCustomerGatewayInput) ec2.CreateCustomerGatewayRequest
+
+	CreateDefaultVpcRequest(*ec2.CreateDefaultVpcInput) ec2.CreateDefaultVpcRequest
+
+	CreateDhcpOptionsRequest(*ec2.CreateDhcpOptionsInput) ec2.CreateDhcpOptionsRequest
+
+	CreateEgressOnlyInternetGatewayRequest(*ec2.CreateEgressOnlyInternetGatewayInput) ec2.CreateEgressOnlyInternetGatewayRequest
+
+	CreateFlowLogsRequest(*ec2.CreateFlowLogsInput) ec2.CreateFlowLogsRequest
+
+	CreateFpgaImageRequest(*ec2.CreateFpgaImageInput) ec2.CreateFpgaImageRequest
+
+	CreateImageRequest(*ec2.CreateImageInput) ec2.CreateImageRequest
+
+	CreateInstanceExportTaskRequest(*ec2.CreateInstanceExportTaskInput) ec2.CreateInstanceExportTaskRequest
+
+	CreateInternetGatewayRequest(*ec2.CreateInternetGatewayInput) ec2.CreateInternetGatewayRequest
+
+	CreateKeyPairRequest(*ec2.CreateKeyPairInput) ec2.CreateKeyPairRequest
+
+	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
+
+	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
+
+	CreateNetworkAclEntryRequest(*ec2.CreateNetworkAclEntryInput) ec2.CreateNetworkAclEntryRequest
+
+	CreateNetworkInterfaceRequest(*ec2.CreateNetworkInterfaceInput) ec2.CreateNetworkInterfaceRequest
+
+	CreateNetworkInterfacePermissionRequest(*ec2.CreateNetworkInterfacePermissionInput) ec2.CreateNetworkInterfacePermissionRequest
+
+	CreatePlacementGroupRequest(*ec2.CreatePlacementGroupInput) ec2.CreatePlacementGroupRequest
+
+	CreateReservedInstancesListingRequest(*ec2.CreateReservedInstancesListingInput) ec2.CreateReservedInstancesListingRequest
+
+	CreateRouteRequest(*ec2.CreateRouteInput) ec2.CreateRouteRequest
+
+	CreateRouteTableRequest(*ec2.CreateRouteTableInput) ec2.CreateRouteTableRequest
+
+	CreateSecurityGroupRequest(*ec2.CreateSecurityGroupInput) ec2.CreateSecurityGroupRequest
+
+	CreateSnapshotRequest(*ec2.CreateSnapshotInput) ec2.CreateSnapshotRequest
+
+	CreateSpotDatafeedSubscriptionRequest(*ec2.CreateSpotDatafeedSubscriptionInput) ec2.CreateSpotDatafeedSubscriptionRequest
+
+	CreateSubnetRequest(*ec2.CreateSubnetInput) ec2.CreateSubnetRequest
+
+	CreateTagsRequest(*ec2.CreateTagsInput) ec2.CreateTagsRequest
+
+	CreateVolumeRequest(*ec2.CreateVolumeInput) ec2.CreateVolumeRequest
+
+	CreateVpcRequest(*ec2.CreateVpcInput) ec2.CreateVpcRequest
+
+	CreateVpcEndpointRequest(*ec2.CreateVpcEndpointInput) ec2.CreateVpcEndpointRequest
+
+	CreateVpcPeeringConnectionRequest(*ec2.CreateVpcPeeringConnectionInput) ec2.CreateVpcPeeringConnectionRequest
+
+	CreateVpnConnectionRequest(*ec2.CreateVpnConnectionInput) ec2.CreateVpnConnectionRequest
+
+	CreateVpnConnectionRouteRequest(*ec2.CreateVpnConnectionRouteInput) ec2.CreateVpnConnectionRouteRequest
+
+	CreateVpnGatewayRequest(*ec2.CreateVpnGatewayInput) ec2.CreateVpnGatewayRequest
+
+	DeleteCustomerGatewayRequest(*ec2.DeleteCustomerGatewayInput) ec2.DeleteCustomerGatewayRequest
+
+	DeleteDhcpOptionsRequest(*ec2.DeleteDhcpOptionsInput) ec2.DeleteDhcpOptionsRequest
+
+	DeleteEgressOnlyInternetGatewayRequest(*ec2.DeleteEgressOnlyInternetGatewayInput) ec2.DeleteEgressOnlyInternetGatewayRequest
+
+	DeleteFlowLogsRequest(*ec2.DeleteFlowLogsInput) ec2.DeleteFlowLogsRequest
+
+	DeleteFpgaImageRequest(*ec2.DeleteFpgaImageInput) ec2.DeleteFpgaImageRequest
+
+	DeleteInternetGatewayRequest(*ec2.DeleteInternetGatewayInput) ec2.DeleteInternetGatewayRequest
+
+	DeleteKeyPairRequest(*ec2.DeleteKeyPairInput) ec2.DeleteKeyPairRequest
+
+	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
+
+	DeleteNetworkAclRequest(*ec2.DeleteNetworkAclInput) ec2.DeleteNetworkAclRequest
+
+	DeleteNetworkAclEntryRequest(*ec2.DeleteNetworkAclEntryInput) ec2.DeleteNetworkAclEntryRequest
+
+	DeleteNetworkInterfaceRequest(*ec2.DeleteNetworkInterfaceInput) ec2.DeleteNetworkInterfaceRequest
+
+	DeleteNetworkInterfacePermissionRequest(*ec2.DeleteNetworkInterfacePermissionInput) ec2.DeleteNetworkInterfacePermissionRequest
+
+	DeletePlacementGroupRequest(*ec2.DeletePlacementGroupInput) ec2.DeletePlacementGroupRequest
+
+	DeleteRouteRequest(*ec2.DeleteRouteInput) ec2.DeleteRouteRequest
+
+	DeleteRouteTableRequest(*ec2.DeleteRouteTableInput) ec2.DeleteRouteTableRequest
+
+	DeleteSecurityGroupRequest(*ec2.DeleteSecurityGroupInput) ec2.DeleteSecurityGroupRequest
+
+	DeleteSnapshotRequest(*ec2.DeleteSnapshotInput) ec2.DeleteSnapshotRequest
+
+	DeleteSpotDatafeedSubscriptionRequest(*ec2.DeleteSpotDatafeedSubscriptionInput) ec2.DeleteSpotDatafeedSubscriptionRequest
+
+	DeleteSubnetRequest(*ec2.DeleteSubnetInput) ec2.DeleteSubnetRequest
+
+	DeleteTagsRequest(*ec2.DeleteTagsInput) ec2.DeleteTagsRequest
+
+	DeleteVolumeRequest(*ec2.DeleteVolumeInput) ec2.DeleteVolumeRequest
+
+	DeleteVpcRequest(*ec2.DeleteVpcInput) ec2.DeleteVpcRequest
+
+	DeleteVpcEndpointsRequest(*ec2.DeleteVpcEndpointsInput) ec2.DeleteVpcEndpointsRequest
+
+	DeleteVpcPeeringConnectionRequest(*ec2.DeleteVpcPeeringConnectionInput) ec2.DeleteVpcPeeringConnectionRequest
+
+	DeleteVpnConnectionRequest(*ec2.DeleteVpnConnectionInput) ec2.DeleteVpnConnectionRequest
+
+	DeleteVpnConnectionRouteRequest(*ec2.DeleteVpnConnectionRouteInput) ec2.DeleteVpnConnectionRouteRequest
+
+	DeleteVpnGatewayRequest(*ec2.DeleteVpnGatewayInput) ec2.DeleteVpnGatewayRequest
+
+	DeregisterImageRequest(*ec2.DeregisterImageInput) ec2.DeregisterImageRequest
+
+	DescribeAccountAttributesRequest(*ec2.DescribeAccountAttributesInput) ec2.DescribeAccountAttributesRequest
+
+	DescribeAddressesRequest(*ec2.DescribeAddressesInput) ec2.DescribeAddressesRequest
+
+	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
+
+	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
+
+	DescribeClassicLinkInstancesRequest(*ec2.DescribeClassicLinkInstancesInput) ec2.DescribeClassicLinkInstancesRequest
+
+	DescribeConversionTasksRequest(*ec2.DescribeConversionTasksInput) ec2.DescribeConversionTasksRequest
+
+	DescribeCustomerGatewaysRequest(*ec2.DescribeCustomerGatewaysInput) ec2.DescribeCustomerGatewaysRequest
+
+	DescribeDhcpOptionsRequest(*ec2.DescribeDhcpOptionsInput) ec2.DescribeDhcpOptionsRequest
+
+	DescribeEgressOnlyInternetGatewaysRequest(*ec2.DescribeEgressOnlyInternetGatewaysInput) ec2.DescribeEgressOnlyInternetGatewaysRequest
+
+	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
+
+	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
+
+	DescribeFlowLogsRequest(*ec2.DescribeFlowLogsInput) ec2.DescribeFlowLogsRequest
+
+	DescribeFpgaImageAttributeRequest(*ec2.DescribeFpgaImageAttributeInput) ec2.DescribeFpgaImageAttributeRequest
+
+	DescribeFpgaImagesRequest(*ec2.DescribeFpgaImagesInput) ec2.DescribeFpgaImagesRequest
+
+	DescribeHostReservationOfferingsRequest(*ec2.DescribeHostReservationOfferingsInput) ec2.DescribeHostReservationOfferingsRequest
+
+	DescribeHostReservationsRequest(*ec2.DescribeHostReservationsInput) ec2.DescribeHostReservationsRequest
+
+	DescribeHostsRequest(*ec2.DescribeHostsInput) ec2.DescribeHostsRequest
+
+	DescribeIamInstanceProfileAssociationsRequest(*ec2.DescribeIamInstanceProfileAssociationsInput) ec2.DescribeIamInstanceProfileAssociationsRequest
+
+	DescribeIdFormatRequest(*ec2.DescribeIdFormatInput) ec2.DescribeIdFormatRequest
+
+	DescribeIdentityIdFormatRequest(*ec2.DescribeIdentityIdFormatInput) ec2.DescribeIdentityIdFormatRequest
+
+	DescribeImageAttributeRequest(*ec2.DescribeImageAttributeInput) ec2.DescribeImageAttributeRequest
+
+	DescribeImagesRequest(*ec2.DescribeImagesInput) ec2.DescribeImagesRequest
+
+	DescribeImportImageTasksRequest(*ec2.DescribeImportImageTasksInput) ec2.DescribeImportImageTasksRequest
+
+	DescribeImportSnapshotTasksRequest(*ec2.DescribeImportSnapshotTasksInput) ec2.DescribeImportSnapshotTasksRequest
+
+	DescribeInstanceAttributeRequest(*ec2.DescribeInstanceAttributeInput) ec2.DescribeInstanceAttributeRequest
+
+	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
 
 	DescribeInstanceStatusPages(*ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool) error
 	DescribeInstanceStatusPagesWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool, ...aws.Option) error
 
-	DescribeInstances(*ec2.DescribeInstancesInput) (*ec2.DescribeInstancesOutput, error)
-	DescribeInstancesWithContext(aws.Context, *ec2.DescribeInstancesInput, ...aws.Option) (*ec2.DescribeInstancesOutput, error)
-	DescribeInstancesRequest(*ec2.DescribeInstancesInput) (*aws.Request, *ec2.DescribeInstancesOutput)
+	DescribeInstancesRequest(*ec2.DescribeInstancesInput) ec2.DescribeInstancesRequest
 
 	DescribeInstancesPages(*ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool) error
 	DescribeInstancesPagesWithContext(aws.Context, *ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool, ...aws.Option) error
 
-	DescribeInternetGateways(*ec2.DescribeInternetGatewaysInput) (*ec2.DescribeInternetGatewaysOutput, error)
-	DescribeInternetGatewaysWithContext(aws.Context, *ec2.DescribeInternetGatewaysInput, ...aws.Option) (*ec2.DescribeInternetGatewaysOutput, error)
-	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) (*aws.Request, *ec2.DescribeInternetGatewaysOutput)
+	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
 
-	DescribeKeyPairs(*ec2.DescribeKeyPairsInput) (*ec2.DescribeKeyPairsOutput, error)
-	DescribeKeyPairsWithContext(aws.Context, *ec2.DescribeKeyPairsInput, ...aws.Option) (*ec2.DescribeKeyPairsOutput, error)
-	DescribeKeyPairsRequest(*ec2.DescribeKeyPairsInput) (*aws.Request, *ec2.DescribeKeyPairsOutput)
+	DescribeKeyPairsRequest(*ec2.DescribeKeyPairsInput) ec2.DescribeKeyPairsRequest
 
-	DescribeMovingAddresses(*ec2.DescribeMovingAddressesInput) (*ec2.DescribeMovingAddressesOutput, error)
-	DescribeMovingAddressesWithContext(aws.Context, *ec2.DescribeMovingAddressesInput, ...aws.Option) (*ec2.DescribeMovingAddressesOutput, error)
-	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) (*aws.Request, *ec2.DescribeMovingAddressesOutput)
+	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
 
-	DescribeNatGateways(*ec2.DescribeNatGatewaysInput) (*ec2.DescribeNatGatewaysOutput, error)
-	DescribeNatGatewaysWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, ...aws.Option) (*ec2.DescribeNatGatewaysOutput, error)
-	DescribeNatGatewaysRequest(*ec2.DescribeNatGatewaysInput) (*aws.Request, *ec2.DescribeNatGatewaysOutput)
+	DescribeNatGatewaysRequest(*ec2.DescribeNatGatewaysInput) ec2.DescribeNatGatewaysRequest
 
 	DescribeNatGatewaysPages(*ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool) error
 	DescribeNatGatewaysPagesWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool, ...aws.Option) error
 
-	DescribeNetworkAcls(*ec2.DescribeNetworkAclsInput) (*ec2.DescribeNetworkAclsOutput, error)
-	DescribeNetworkAclsWithContext(aws.Context, *ec2.DescribeNetworkAclsInput, ...aws.Option) (*ec2.DescribeNetworkAclsOutput, error)
-	DescribeNetworkAclsRequest(*ec2.DescribeNetworkAclsInput) (*aws.Request, *ec2.DescribeNetworkAclsOutput)
+	DescribeNetworkAclsRequest(*ec2.DescribeNetworkAclsInput) ec2.DescribeNetworkAclsRequest
 
-	DescribeNetworkInterfaceAttribute(*ec2.DescribeNetworkInterfaceAttributeInput) (*ec2.DescribeNetworkInterfaceAttributeOutput, error)
-	DescribeNetworkInterfaceAttributeWithContext(aws.Context, *ec2.DescribeNetworkInterfaceAttributeInput, ...aws.Option) (*ec2.DescribeNetworkInterfaceAttributeOutput, error)
-	DescribeNetworkInterfaceAttributeRequest(*ec2.DescribeNetworkInterfaceAttributeInput) (*aws.Request, *ec2.DescribeNetworkInterfaceAttributeOutput)
+	DescribeNetworkInterfaceAttributeRequest(*ec2.DescribeNetworkInterfaceAttributeInput) ec2.DescribeNetworkInterfaceAttributeRequest
 
-	DescribeNetworkInterfacePermissions(*ec2.DescribeNetworkInterfacePermissionsInput) (*ec2.DescribeNetworkInterfacePermissionsOutput, error)
-	DescribeNetworkInterfacePermissionsWithContext(aws.Context, *ec2.DescribeNetworkInterfacePermissionsInput, ...aws.Option) (*ec2.DescribeNetworkInterfacePermissionsOutput, error)
-	DescribeNetworkInterfacePermissionsRequest(*ec2.DescribeNetworkInterfacePermissionsInput) (*aws.Request, *ec2.DescribeNetworkInterfacePermissionsOutput)
+	DescribeNetworkInterfacePermissionsRequest(*ec2.DescribeNetworkInterfacePermissionsInput) ec2.DescribeNetworkInterfacePermissionsRequest
 
-	DescribeNetworkInterfaces(*ec2.DescribeNetworkInterfacesInput) (*ec2.DescribeNetworkInterfacesOutput, error)
-	DescribeNetworkInterfacesWithContext(aws.Context, *ec2.DescribeNetworkInterfacesInput, ...aws.Option) (*ec2.DescribeNetworkInterfacesOutput, error)
-	DescribeNetworkInterfacesRequest(*ec2.DescribeNetworkInterfacesInput) (*aws.Request, *ec2.DescribeNetworkInterfacesOutput)
+	DescribeNetworkInterfacesRequest(*ec2.DescribeNetworkInterfacesInput) ec2.DescribeNetworkInterfacesRequest
 
-	DescribePlacementGroups(*ec2.DescribePlacementGroupsInput) (*ec2.DescribePlacementGroupsOutput, error)
-	DescribePlacementGroupsWithContext(aws.Context, *ec2.DescribePlacementGroupsInput, ...aws.Option) (*ec2.DescribePlacementGroupsOutput, error)
-	DescribePlacementGroupsRequest(*ec2.DescribePlacementGroupsInput) (*aws.Request, *ec2.DescribePlacementGroupsOutput)
+	DescribePlacementGroupsRequest(*ec2.DescribePlacementGroupsInput) ec2.DescribePlacementGroupsRequest
 
-	DescribePrefixLists(*ec2.DescribePrefixListsInput) (*ec2.DescribePrefixListsOutput, error)
-	DescribePrefixListsWithContext(aws.Context, *ec2.DescribePrefixListsInput, ...aws.Option) (*ec2.DescribePrefixListsOutput, error)
-	DescribePrefixListsRequest(*ec2.DescribePrefixListsInput) (*aws.Request, *ec2.DescribePrefixListsOutput)
+	DescribePrefixListsRequest(*ec2.DescribePrefixListsInput) ec2.DescribePrefixListsRequest
 
-	DescribeRegions(*ec2.DescribeRegionsInput) (*ec2.DescribeRegionsOutput, error)
-	DescribeRegionsWithContext(aws.Context, *ec2.DescribeRegionsInput, ...aws.Option) (*ec2.DescribeRegionsOutput, error)
-	DescribeRegionsRequest(*ec2.DescribeRegionsInput) (*aws.Request, *ec2.DescribeRegionsOutput)
+	DescribeRegionsRequest(*ec2.DescribeRegionsInput) ec2.DescribeRegionsRequest
 
-	DescribeReservedInstances(*ec2.DescribeReservedInstancesInput) (*ec2.DescribeReservedInstancesOutput, error)
-	DescribeReservedInstancesWithContext(aws.Context, *ec2.DescribeReservedInstancesInput, ...aws.Option) (*ec2.DescribeReservedInstancesOutput, error)
-	DescribeReservedInstancesRequest(*ec2.DescribeReservedInstancesInput) (*aws.Request, *ec2.DescribeReservedInstancesOutput)
+	DescribeReservedInstancesRequest(*ec2.DescribeReservedInstancesInput) ec2.DescribeReservedInstancesRequest
 
-	DescribeReservedInstancesListings(*ec2.DescribeReservedInstancesListingsInput) (*ec2.DescribeReservedInstancesListingsOutput, error)
-	DescribeReservedInstancesListingsWithContext(aws.Context, *ec2.DescribeReservedInstancesListingsInput, ...aws.Option) (*ec2.DescribeReservedInstancesListingsOutput, error)
-	DescribeReservedInstancesListingsRequest(*ec2.DescribeReservedInstancesListingsInput) (*aws.Request, *ec2.DescribeReservedInstancesListingsOutput)
+	DescribeReservedInstancesListingsRequest(*ec2.DescribeReservedInstancesListingsInput) ec2.DescribeReservedInstancesListingsRequest
 
-	DescribeReservedInstancesModifications(*ec2.DescribeReservedInstancesModificationsInput) (*ec2.DescribeReservedInstancesModificationsOutput, error)
-	DescribeReservedInstancesModificationsWithContext(aws.Context, *ec2.DescribeReservedInstancesModificationsInput, ...aws.Option) (*ec2.DescribeReservedInstancesModificationsOutput, error)
-	DescribeReservedInstancesModificationsRequest(*ec2.DescribeReservedInstancesModificationsInput) (*aws.Request, *ec2.DescribeReservedInstancesModificationsOutput)
+	DescribeReservedInstancesModificationsRequest(*ec2.DescribeReservedInstancesModificationsInput) ec2.DescribeReservedInstancesModificationsRequest
 
 	DescribeReservedInstancesModificationsPages(*ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool) error
 	DescribeReservedInstancesModificationsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool, ...aws.Option) error
 
-	DescribeReservedInstancesOfferings(*ec2.DescribeReservedInstancesOfferingsInput) (*ec2.DescribeReservedInstancesOfferingsOutput, error)
-	DescribeReservedInstancesOfferingsWithContext(aws.Context, *ec2.DescribeReservedInstancesOfferingsInput, ...aws.Option) (*ec2.DescribeReservedInstancesOfferingsOutput, error)
-	DescribeReservedInstancesOfferingsRequest(*ec2.DescribeReservedInstancesOfferingsInput) (*aws.Request, *ec2.DescribeReservedInstancesOfferingsOutput)
+	DescribeReservedInstancesOfferingsRequest(*ec2.DescribeReservedInstancesOfferingsInput) ec2.DescribeReservedInstancesOfferingsRequest
 
 	DescribeReservedInstancesOfferingsPages(*ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool) error
 	DescribeReservedInstancesOfferingsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool, ...aws.Option) error
 
-	DescribeRouteTables(*ec2.DescribeRouteTablesInput) (*ec2.DescribeRouteTablesOutput, error)
-	DescribeRouteTablesWithContext(aws.Context, *ec2.DescribeRouteTablesInput, ...aws.Option) (*ec2.DescribeRouteTablesOutput, error)
-	DescribeRouteTablesRequest(*ec2.DescribeRouteTablesInput) (*aws.Request, *ec2.DescribeRouteTablesOutput)
+	DescribeRouteTablesRequest(*ec2.DescribeRouteTablesInput) ec2.DescribeRouteTablesRequest
 
-	DescribeScheduledInstanceAvailability(*ec2.DescribeScheduledInstanceAvailabilityInput) (*ec2.DescribeScheduledInstanceAvailabilityOutput, error)
-	DescribeScheduledInstanceAvailabilityWithContext(aws.Context, *ec2.DescribeScheduledInstanceAvailabilityInput, ...aws.Option) (*ec2.DescribeScheduledInstanceAvailabilityOutput, error)
-	DescribeScheduledInstanceAvailabilityRequest(*ec2.DescribeScheduledInstanceAvailabilityInput) (*aws.Request, *ec2.DescribeScheduledInstanceAvailabilityOutput)
+	DescribeScheduledInstanceAvailabilityRequest(*ec2.DescribeScheduledInstanceAvailabilityInput) ec2.DescribeScheduledInstanceAvailabilityRequest
 
-	DescribeScheduledInstances(*ec2.DescribeScheduledInstancesInput) (*ec2.DescribeScheduledInstancesOutput, error)
-	DescribeScheduledInstancesWithContext(aws.Context, *ec2.DescribeScheduledInstancesInput, ...aws.Option) (*ec2.DescribeScheduledInstancesOutput, error)
-	DescribeScheduledInstancesRequest(*ec2.DescribeScheduledInstancesInput) (*aws.Request, *ec2.DescribeScheduledInstancesOutput)
+	DescribeScheduledInstancesRequest(*ec2.DescribeScheduledInstancesInput) ec2.DescribeScheduledInstancesRequest
 
-	DescribeSecurityGroupReferences(*ec2.DescribeSecurityGroupReferencesInput) (*ec2.DescribeSecurityGroupReferencesOutput, error)
-	DescribeSecurityGroupReferencesWithContext(aws.Context, *ec2.DescribeSecurityGroupReferencesInput, ...aws.Option) (*ec2.DescribeSecurityGroupReferencesOutput, error)
-	DescribeSecurityGroupReferencesRequest(*ec2.DescribeSecurityGroupReferencesInput) (*aws.Request, *ec2.DescribeSecurityGroupReferencesOutput)
+	DescribeSecurityGroupReferencesRequest(*ec2.DescribeSecurityGroupReferencesInput) ec2.DescribeSecurityGroupReferencesRequest
 
-	DescribeSecurityGroups(*ec2.DescribeSecurityGroupsInput) (*ec2.DescribeSecurityGroupsOutput, error)
-	DescribeSecurityGroupsWithContext(aws.Context, *ec2.DescribeSecurityGroupsInput, ...aws.Option) (*ec2.DescribeSecurityGroupsOutput, error)
-	DescribeSecurityGroupsRequest(*ec2.DescribeSecurityGroupsInput) (*aws.Request, *ec2.DescribeSecurityGroupsOutput)
+	DescribeSecurityGroupsRequest(*ec2.DescribeSecurityGroupsInput) ec2.DescribeSecurityGroupsRequest
 
-	DescribeSnapshotAttribute(*ec2.DescribeSnapshotAttributeInput) (*ec2.DescribeSnapshotAttributeOutput, error)
-	DescribeSnapshotAttributeWithContext(aws.Context, *ec2.DescribeSnapshotAttributeInput, ...aws.Option) (*ec2.DescribeSnapshotAttributeOutput, error)
-	DescribeSnapshotAttributeRequest(*ec2.DescribeSnapshotAttributeInput) (*aws.Request, *ec2.DescribeSnapshotAttributeOutput)
+	DescribeSnapshotAttributeRequest(*ec2.DescribeSnapshotAttributeInput) ec2.DescribeSnapshotAttributeRequest
 
-	DescribeSnapshots(*ec2.DescribeSnapshotsInput) (*ec2.DescribeSnapshotsOutput, error)
-	DescribeSnapshotsWithContext(aws.Context, *ec2.DescribeSnapshotsInput, ...aws.Option) (*ec2.DescribeSnapshotsOutput, error)
-	DescribeSnapshotsRequest(*ec2.DescribeSnapshotsInput) (*aws.Request, *ec2.DescribeSnapshotsOutput)
+	DescribeSnapshotsRequest(*ec2.DescribeSnapshotsInput) ec2.DescribeSnapshotsRequest
 
 	DescribeSnapshotsPages(*ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool) error
 	DescribeSnapshotsPagesWithContext(aws.Context, *ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool, ...aws.Option) error
 
-	DescribeSpotDatafeedSubscription(*ec2.DescribeSpotDatafeedSubscriptionInput) (*ec2.DescribeSpotDatafeedSubscriptionOutput, error)
-	DescribeSpotDatafeedSubscriptionWithContext(aws.Context, *ec2.DescribeSpotDatafeedSubscriptionInput, ...aws.Option) (*ec2.DescribeSpotDatafeedSubscriptionOutput, error)
-	DescribeSpotDatafeedSubscriptionRequest(*ec2.DescribeSpotDatafeedSubscriptionInput) (*aws.Request, *ec2.DescribeSpotDatafeedSubscriptionOutput)
+	DescribeSpotDatafeedSubscriptionRequest(*ec2.DescribeSpotDatafeedSubscriptionInput) ec2.DescribeSpotDatafeedSubscriptionRequest
 
-	DescribeSpotFleetInstances(*ec2.DescribeSpotFleetInstancesInput) (*ec2.DescribeSpotFleetInstancesOutput, error)
-	DescribeSpotFleetInstancesWithContext(aws.Context, *ec2.DescribeSpotFleetInstancesInput, ...aws.Option) (*ec2.DescribeSpotFleetInstancesOutput, error)
-	DescribeSpotFleetInstancesRequest(*ec2.DescribeSpotFleetInstancesInput) (*aws.Request, *ec2.DescribeSpotFleetInstancesOutput)
+	DescribeSpotFleetInstancesRequest(*ec2.DescribeSpotFleetInstancesInput) ec2.DescribeSpotFleetInstancesRequest
 
-	DescribeSpotFleetRequestHistory(*ec2.DescribeSpotFleetRequestHistoryInput) (*ec2.DescribeSpotFleetRequestHistoryOutput, error)
-	DescribeSpotFleetRequestHistoryWithContext(aws.Context, *ec2.DescribeSpotFleetRequestHistoryInput, ...aws.Option) (*ec2.DescribeSpotFleetRequestHistoryOutput, error)
-	DescribeSpotFleetRequestHistoryRequest(*ec2.DescribeSpotFleetRequestHistoryInput) (*aws.Request, *ec2.DescribeSpotFleetRequestHistoryOutput)
+	DescribeSpotFleetRequestHistoryRequest(*ec2.DescribeSpotFleetRequestHistoryInput) ec2.DescribeSpotFleetRequestHistoryRequest
 
-	DescribeSpotFleetRequests(*ec2.DescribeSpotFleetRequestsInput) (*ec2.DescribeSpotFleetRequestsOutput, error)
-	DescribeSpotFleetRequestsWithContext(aws.Context, *ec2.DescribeSpotFleetRequestsInput, ...aws.Option) (*ec2.DescribeSpotFleetRequestsOutput, error)
-	DescribeSpotFleetRequestsRequest(*ec2.DescribeSpotFleetRequestsInput) (*aws.Request, *ec2.DescribeSpotFleetRequestsOutput)
+	DescribeSpotFleetRequestsRequest(*ec2.DescribeSpotFleetRequestsInput) ec2.DescribeSpotFleetRequestsRequest
 
 	DescribeSpotFleetRequestsPages(*ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool) error
 	DescribeSpotFleetRequestsPagesWithContext(aws.Context, *ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool, ...aws.Option) error
 
-	DescribeSpotInstanceRequests(*ec2.DescribeSpotInstanceRequestsInput) (*ec2.DescribeSpotInstanceRequestsOutput, error)
-	DescribeSpotInstanceRequestsWithContext(aws.Context, *ec2.DescribeSpotInstanceRequestsInput, ...aws.Option) (*ec2.DescribeSpotInstanceRequestsOutput, error)
-	DescribeSpotInstanceRequestsRequest(*ec2.DescribeSpotInstanceRequestsInput) (*aws.Request, *ec2.DescribeSpotInstanceRequestsOutput)
+	DescribeSpotInstanceRequestsRequest(*ec2.DescribeSpotInstanceRequestsInput) ec2.DescribeSpotInstanceRequestsRequest
 
-	DescribeSpotPriceHistory(*ec2.DescribeSpotPriceHistoryInput) (*ec2.DescribeSpotPriceHistoryOutput, error)
-	DescribeSpotPriceHistoryWithContext(aws.Context, *ec2.DescribeSpotPriceHistoryInput, ...aws.Option) (*ec2.DescribeSpotPriceHistoryOutput, error)
-	DescribeSpotPriceHistoryRequest(*ec2.DescribeSpotPriceHistoryInput) (*aws.Request, *ec2.DescribeSpotPriceHistoryOutput)
+	DescribeSpotPriceHistoryRequest(*ec2.DescribeSpotPriceHistoryInput) ec2.DescribeSpotPriceHistoryRequest
 
 	DescribeSpotPriceHistoryPages(*ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool) error
 	DescribeSpotPriceHistoryPagesWithContext(aws.Context, *ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool, ...aws.Option) error
 
-	DescribeStaleSecurityGroups(*ec2.DescribeStaleSecurityGroupsInput) (*ec2.DescribeStaleSecurityGroupsOutput, error)
-	DescribeStaleSecurityGroupsWithContext(aws.Context, *ec2.DescribeStaleSecurityGroupsInput, ...aws.Option) (*ec2.DescribeStaleSecurityGroupsOutput, error)
-	DescribeStaleSecurityGroupsRequest(*ec2.DescribeStaleSecurityGroupsInput) (*aws.Request, *ec2.DescribeStaleSecurityGroupsOutput)
+	DescribeStaleSecurityGroupsRequest(*ec2.DescribeStaleSecurityGroupsInput) ec2.DescribeStaleSecurityGroupsRequest
 
-	DescribeSubnets(*ec2.DescribeSubnetsInput) (*ec2.DescribeSubnetsOutput, error)
-	DescribeSubnetsWithContext(aws.Context, *ec2.DescribeSubnetsInput, ...aws.Option) (*ec2.DescribeSubnetsOutput, error)
-	DescribeSubnetsRequest(*ec2.DescribeSubnetsInput) (*aws.Request, *ec2.DescribeSubnetsOutput)
+	DescribeSubnetsRequest(*ec2.DescribeSubnetsInput) ec2.DescribeSubnetsRequest
 
-	DescribeTags(*ec2.DescribeTagsInput) (*ec2.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *ec2.DescribeTagsInput, ...aws.Option) (*ec2.DescribeTagsOutput, error)
-	DescribeTagsRequest(*ec2.DescribeTagsInput) (*aws.Request, *ec2.DescribeTagsOutput)
+	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
 
 	DescribeTagsPages(*ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool) error
 	DescribeTagsPagesWithContext(aws.Context, *ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool, ...aws.Option) error
 
-	DescribeVolumeAttribute(*ec2.DescribeVolumeAttributeInput) (*ec2.DescribeVolumeAttributeOutput, error)
-	DescribeVolumeAttributeWithContext(aws.Context, *ec2.DescribeVolumeAttributeInput, ...aws.Option) (*ec2.DescribeVolumeAttributeOutput, error)
-	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) (*aws.Request, *ec2.DescribeVolumeAttributeOutput)
+	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
 
-	DescribeVolumeStatus(*ec2.DescribeVolumeStatusInput) (*ec2.DescribeVolumeStatusOutput, error)
-	DescribeVolumeStatusWithContext(aws.Context, *ec2.DescribeVolumeStatusInput, ...aws.Option) (*ec2.DescribeVolumeStatusOutput, error)
-	DescribeVolumeStatusRequest(*ec2.DescribeVolumeStatusInput) (*aws.Request, *ec2.DescribeVolumeStatusOutput)
+	DescribeVolumeStatusRequest(*ec2.DescribeVolumeStatusInput) ec2.DescribeVolumeStatusRequest
 
 	DescribeVolumeStatusPages(*ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool) error
 	DescribeVolumeStatusPagesWithContext(aws.Context, *ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool, ...aws.Option) error
 
-	DescribeVolumes(*ec2.DescribeVolumesInput) (*ec2.DescribeVolumesOutput, error)
-	DescribeVolumesWithContext(aws.Context, *ec2.DescribeVolumesInput, ...aws.Option) (*ec2.DescribeVolumesOutput, error)
-	DescribeVolumesRequest(*ec2.DescribeVolumesInput) (*aws.Request, *ec2.DescribeVolumesOutput)
+	DescribeVolumesRequest(*ec2.DescribeVolumesInput) ec2.DescribeVolumesRequest
 
 	DescribeVolumesPages(*ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool) error
 	DescribeVolumesPagesWithContext(aws.Context, *ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool, ...aws.Option) error
 
-	DescribeVolumesModifications(*ec2.DescribeVolumesModificationsInput) (*ec2.DescribeVolumesModificationsOutput, error)
-	DescribeVolumesModificationsWithContext(aws.Context, *ec2.DescribeVolumesModificationsInput, ...aws.Option) (*ec2.DescribeVolumesModificationsOutput, error)
-	DescribeVolumesModificationsRequest(*ec2.DescribeVolumesModificationsInput) (*aws.Request, *ec2.DescribeVolumesModificationsOutput)
-
-	DescribeVpcAttribute(*ec2.DescribeVpcAttributeInput) (*ec2.DescribeVpcAttributeOutput, error)
-	DescribeVpcAttributeWithContext(aws.Context, *ec2.DescribeVpcAttributeInput, ...aws.Option) (*ec2.DescribeVpcAttributeOutput, error)
-	DescribeVpcAttributeRequest(*ec2.DescribeVpcAttributeInput) (*aws.Request, *ec2.DescribeVpcAttributeOutput)
-
-	DescribeVpcClassicLink(*ec2.DescribeVpcClassicLinkInput) (*ec2.DescribeVpcClassicLinkOutput, error)
-	DescribeVpcClassicLinkWithContext(aws.Context, *ec2.DescribeVpcClassicLinkInput, ...aws.Option) (*ec2.DescribeVpcClassicLinkOutput, error)
-	DescribeVpcClassicLinkRequest(*ec2.DescribeVpcClassicLinkInput) (*aws.Request, *ec2.DescribeVpcClassicLinkOutput)
-
-	DescribeVpcClassicLinkDnsSupport(*ec2.DescribeVpcClassicLinkDnsSupportInput) (*ec2.DescribeVpcClassicLinkDnsSupportOutput, error)
-	DescribeVpcClassicLinkDnsSupportWithContext(aws.Context, *ec2.DescribeVpcClassicLinkDnsSupportInput, ...aws.Option) (*ec2.DescribeVpcClassicLinkDnsSupportOutput, error)
-	DescribeVpcClassicLinkDnsSupportRequest(*ec2.DescribeVpcClassicLinkDnsSupportInput) (*aws.Request, *ec2.DescribeVpcClassicLinkDnsSupportOutput)
-
-	DescribeVpcEndpointServices(*ec2.DescribeVpcEndpointServicesInput) (*ec2.DescribeVpcEndpointServicesOutput, error)
-	DescribeVpcEndpointServicesWithContext(aws.Context, *ec2.DescribeVpcEndpointServicesInput, ...aws.Option) (*ec2.DescribeVpcEndpointServicesOutput, error)
-	DescribeVpcEndpointServicesRequest(*ec2.DescribeVpcEndpointServicesInput) (*aws.Request, *ec2.DescribeVpcEndpointServicesOutput)
-
-	DescribeVpcEndpoints(*ec2.DescribeVpcEndpointsInput) (*ec2.DescribeVpcEndpointsOutput, error)
-	DescribeVpcEndpointsWithContext(aws.Context, *ec2.DescribeVpcEndpointsInput, ...aws.Option) (*ec2.DescribeVpcEndpointsOutput, error)
-	DescribeVpcEndpointsRequest(*ec2.DescribeVpcEndpointsInput) (*aws.Request, *ec2.DescribeVpcEndpointsOutput)
-
-	DescribeVpcPeeringConnections(*ec2.DescribeVpcPeeringConnectionsInput) (*ec2.DescribeVpcPeeringConnectionsOutput, error)
-	DescribeVpcPeeringConnectionsWithContext(aws.Context, *ec2.DescribeVpcPeeringConnectionsInput, ...aws.Option) (*ec2.DescribeVpcPeeringConnectionsOutput, error)
-	DescribeVpcPeeringConnectionsRequest(*ec2.DescribeVpcPeeringConnectionsInput) (*aws.Request, *ec2.DescribeVpcPeeringConnectionsOutput)
-
-	DescribeVpcs(*ec2.DescribeVpcsInput) (*ec2.DescribeVpcsOutput, error)
-	DescribeVpcsWithContext(aws.Context, *ec2.DescribeVpcsInput, ...aws.Option) (*ec2.DescribeVpcsOutput, error)
-	DescribeVpcsRequest(*ec2.DescribeVpcsInput) (*aws.Request, *ec2.DescribeVpcsOutput)
-
-	DescribeVpnConnections(*ec2.DescribeVpnConnectionsInput) (*ec2.DescribeVpnConnectionsOutput, error)
-	DescribeVpnConnectionsWithContext(aws.Context, *ec2.DescribeVpnConnectionsInput, ...aws.Option) (*ec2.DescribeVpnConnectionsOutput, error)
-	DescribeVpnConnectionsRequest(*ec2.DescribeVpnConnectionsInput) (*aws.Request, *ec2.DescribeVpnConnectionsOutput)
-
-	DescribeVpnGateways(*ec2.DescribeVpnGatewaysInput) (*ec2.DescribeVpnGatewaysOutput, error)
-	DescribeVpnGatewaysWithContext(aws.Context, *ec2.DescribeVpnGatewaysInput, ...aws.Option) (*ec2.DescribeVpnGatewaysOutput, error)
-	DescribeVpnGatewaysRequest(*ec2.DescribeVpnGatewaysInput) (*aws.Request, *ec2.DescribeVpnGatewaysOutput)
-
-	DetachClassicLinkVpc(*ec2.DetachClassicLinkVpcInput) (*ec2.DetachClassicLinkVpcOutput, error)
-	DetachClassicLinkVpcWithContext(aws.Context, *ec2.DetachClassicLinkVpcInput, ...aws.Option) (*ec2.DetachClassicLinkVpcOutput, error)
-	DetachClassicLinkVpcRequest(*ec2.DetachClassicLinkVpcInput) (*aws.Request, *ec2.DetachClassicLinkVpcOutput)
-
-	DetachInternetGateway(*ec2.DetachInternetGatewayInput) (*ec2.DetachInternetGatewayOutput, error)
-	DetachInternetGatewayWithContext(aws.Context, *ec2.DetachInternetGatewayInput, ...aws.Option) (*ec2.DetachInternetGatewayOutput, error)
-	DetachInternetGatewayRequest(*ec2.DetachInternetGatewayInput) (*aws.Request, *ec2.DetachInternetGatewayOutput)
-
-	DetachNetworkInterface(*ec2.DetachNetworkInterfaceInput) (*ec2.DetachNetworkInterfaceOutput, error)
-	DetachNetworkInterfaceWithContext(aws.Context, *ec2.DetachNetworkInterfaceInput, ...aws.Option) (*ec2.DetachNetworkInterfaceOutput, error)
-	DetachNetworkInterfaceRequest(*ec2.DetachNetworkInterfaceInput) (*aws.Request, *ec2.DetachNetworkInterfaceOutput)
-
-	DetachVolume(*ec2.DetachVolumeInput) (*ec2.VolumeAttachment, error)
-	DetachVolumeWithContext(aws.Context, *ec2.DetachVolumeInput, ...aws.Option) (*ec2.VolumeAttachment, error)
-	DetachVolumeRequest(*ec2.DetachVolumeInput) (*aws.Request, *ec2.VolumeAttachment)
-
-	DetachVpnGateway(*ec2.DetachVpnGatewayInput) (*ec2.DetachVpnGatewayOutput, error)
-	DetachVpnGatewayWithContext(aws.Context, *ec2.DetachVpnGatewayInput, ...aws.Option) (*ec2.DetachVpnGatewayOutput, error)
-	DetachVpnGatewayRequest(*ec2.DetachVpnGatewayInput) (*aws.Request, *ec2.DetachVpnGatewayOutput)
-
-	DisableVgwRoutePropagation(*ec2.DisableVgwRoutePropagationInput) (*ec2.DisableVgwRoutePropagationOutput, error)
-	DisableVgwRoutePropagationWithContext(aws.Context, *ec2.DisableVgwRoutePropagationInput, ...aws.Option) (*ec2.DisableVgwRoutePropagationOutput, error)
-	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) (*aws.Request, *ec2.DisableVgwRoutePropagationOutput)
-
-	DisableVpcClassicLink(*ec2.DisableVpcClassicLinkInput) (*ec2.DisableVpcClassicLinkOutput, error)
-	DisableVpcClassicLinkWithContext(aws.Context, *ec2.DisableVpcClassicLinkInput, ...aws.Option) (*ec2.DisableVpcClassicLinkOutput, error)
-	DisableVpcClassicLinkRequest(*ec2.DisableVpcClassicLinkInput) (*aws.Request, *ec2.DisableVpcClassicLinkOutput)
-
-	DisableVpcClassicLinkDnsSupport(*ec2.DisableVpcClassicLinkDnsSupportInput) (*ec2.DisableVpcClassicLinkDnsSupportOutput, error)
-	DisableVpcClassicLinkDnsSupportWithContext(aws.Context, *ec2.DisableVpcClassicLinkDnsSupportInput, ...aws.Option) (*ec2.DisableVpcClassicLinkDnsSupportOutput, error)
-	DisableVpcClassicLinkDnsSupportRequest(*ec2.DisableVpcClassicLinkDnsSupportInput) (*aws.Request, *ec2.DisableVpcClassicLinkDnsSupportOutput)
-
-	DisassociateAddress(*ec2.DisassociateAddressInput) (*ec2.DisassociateAddressOutput, error)
-	DisassociateAddressWithContext(aws.Context, *ec2.DisassociateAddressInput, ...aws.Option) (*ec2.DisassociateAddressOutput, error)
-	DisassociateAddressRequest(*ec2.DisassociateAddressInput) (*aws.Request, *ec2.DisassociateAddressOutput)
-
-	DisassociateIamInstanceProfile(*ec2.DisassociateIamInstanceProfileInput) (*ec2.DisassociateIamInstanceProfileOutput, error)
-	DisassociateIamInstanceProfileWithContext(aws.Context, *ec2.DisassociateIamInstanceProfileInput, ...aws.Option) (*ec2.DisassociateIamInstanceProfileOutput, error)
-	DisassociateIamInstanceProfileRequest(*ec2.DisassociateIamInstanceProfileInput) (*aws.Request, *ec2.DisassociateIamInstanceProfileOutput)
-
-	DisassociateRouteTable(*ec2.DisassociateRouteTableInput) (*ec2.DisassociateRouteTableOutput, error)
-	DisassociateRouteTableWithContext(aws.Context, *ec2.DisassociateRouteTableInput, ...aws.Option) (*ec2.DisassociateRouteTableOutput, error)
-	DisassociateRouteTableRequest(*ec2.DisassociateRouteTableInput) (*aws.Request, *ec2.DisassociateRouteTableOutput)
-
-	DisassociateSubnetCidrBlock(*ec2.DisassociateSubnetCidrBlockInput) (*ec2.DisassociateSubnetCidrBlockOutput, error)
-	DisassociateSubnetCidrBlockWithContext(aws.Context, *ec2.DisassociateSubnetCidrBlockInput, ...aws.Option) (*ec2.DisassociateSubnetCidrBlockOutput, error)
-	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) (*aws.Request, *ec2.DisassociateSubnetCidrBlockOutput)
-
-	DisassociateVpcCidrBlock(*ec2.DisassociateVpcCidrBlockInput) (*ec2.DisassociateVpcCidrBlockOutput, error)
-	DisassociateVpcCidrBlockWithContext(aws.Context, *ec2.DisassociateVpcCidrBlockInput, ...aws.Option) (*ec2.DisassociateVpcCidrBlockOutput, error)
-	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) (*aws.Request, *ec2.DisassociateVpcCidrBlockOutput)
-
-	EnableVgwRoutePropagation(*ec2.EnableVgwRoutePropagationInput) (*ec2.EnableVgwRoutePropagationOutput, error)
-	EnableVgwRoutePropagationWithContext(aws.Context, *ec2.EnableVgwRoutePropagationInput, ...aws.Option) (*ec2.EnableVgwRoutePropagationOutput, error)
-	EnableVgwRoutePropagationRequest(*ec2.EnableVgwRoutePropagationInput) (*aws.Request, *ec2.EnableVgwRoutePropagationOutput)
-
-	EnableVolumeIO(*ec2.EnableVolumeIOInput) (*ec2.EnableVolumeIOOutput, error)
-	EnableVolumeIOWithContext(aws.Context, *ec2.EnableVolumeIOInput, ...aws.Option) (*ec2.EnableVolumeIOOutput, error)
-	EnableVolumeIORequest(*ec2.EnableVolumeIOInput) (*aws.Request, *ec2.EnableVolumeIOOutput)
-
-	EnableVpcClassicLink(*ec2.EnableVpcClassicLinkInput) (*ec2.EnableVpcClassicLinkOutput, error)
-	EnableVpcClassicLinkWithContext(aws.Context, *ec2.EnableVpcClassicLinkInput, ...aws.Option) (*ec2.EnableVpcClassicLinkOutput, error)
-	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) (*aws.Request, *ec2.EnableVpcClassicLinkOutput)
-
-	EnableVpcClassicLinkDnsSupport(*ec2.EnableVpcClassicLinkDnsSupportInput) (*ec2.EnableVpcClassicLinkDnsSupportOutput, error)
-	EnableVpcClassicLinkDnsSupportWithContext(aws.Context, *ec2.EnableVpcClassicLinkDnsSupportInput, ...aws.Option) (*ec2.EnableVpcClassicLinkDnsSupportOutput, error)
-	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) (*aws.Request, *ec2.EnableVpcClassicLinkDnsSupportOutput)
-
-	GetConsoleOutput(*ec2.GetConsoleOutputInput) (*ec2.GetConsoleOutputOutput, error)
-	GetConsoleOutputWithContext(aws.Context, *ec2.GetConsoleOutputInput, ...aws.Option) (*ec2.GetConsoleOutputOutput, error)
-	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) (*aws.Request, *ec2.GetConsoleOutputOutput)
-
-	GetConsoleScreenshot(*ec2.GetConsoleScreenshotInput) (*ec2.GetConsoleScreenshotOutput, error)
-	GetConsoleScreenshotWithContext(aws.Context, *ec2.GetConsoleScreenshotInput, ...aws.Option) (*ec2.GetConsoleScreenshotOutput, error)
-	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) (*aws.Request, *ec2.GetConsoleScreenshotOutput)
-
-	GetHostReservationPurchasePreview(*ec2.GetHostReservationPurchasePreviewInput) (*ec2.GetHostReservationPurchasePreviewOutput, error)
-	GetHostReservationPurchasePreviewWithContext(aws.Context, *ec2.GetHostReservationPurchasePreviewInput, ...aws.Option) (*ec2.GetHostReservationPurchasePreviewOutput, error)
-	GetHostReservationPurchasePreviewRequest(*ec2.GetHostReservationPurchasePreviewInput) (*aws.Request, *ec2.GetHostReservationPurchasePreviewOutput)
-
-	GetPasswordData(*ec2.GetPasswordDataInput) (*ec2.GetPasswordDataOutput, error)
-	GetPasswordDataWithContext(aws.Context, *ec2.GetPasswordDataInput, ...aws.Option) (*ec2.GetPasswordDataOutput, error)
-	GetPasswordDataRequest(*ec2.GetPasswordDataInput) (*aws.Request, *ec2.GetPasswordDataOutput)
-
-	GetReservedInstancesExchangeQuote(*ec2.GetReservedInstancesExchangeQuoteInput) (*ec2.GetReservedInstancesExchangeQuoteOutput, error)
-	GetReservedInstancesExchangeQuoteWithContext(aws.Context, *ec2.GetReservedInstancesExchangeQuoteInput, ...aws.Option) (*ec2.GetReservedInstancesExchangeQuoteOutput, error)
-	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) (*aws.Request, *ec2.GetReservedInstancesExchangeQuoteOutput)
-
-	ImportImage(*ec2.ImportImageInput) (*ec2.ImportImageOutput, error)
-	ImportImageWithContext(aws.Context, *ec2.ImportImageInput, ...aws.Option) (*ec2.ImportImageOutput, error)
-	ImportImageRequest(*ec2.ImportImageInput) (*aws.Request, *ec2.ImportImageOutput)
-
-	ImportInstance(*ec2.ImportInstanceInput) (*ec2.ImportInstanceOutput, error)
-	ImportInstanceWithContext(aws.Context, *ec2.ImportInstanceInput, ...aws.Option) (*ec2.ImportInstanceOutput, error)
-	ImportInstanceRequest(*ec2.ImportInstanceInput) (*aws.Request, *ec2.ImportInstanceOutput)
-
-	ImportKeyPair(*ec2.ImportKeyPairInput) (*ec2.ImportKeyPairOutput, error)
-	ImportKeyPairWithContext(aws.Context, *ec2.ImportKeyPairInput, ...aws.Option) (*ec2.ImportKeyPairOutput, error)
-	ImportKeyPairRequest(*ec2.ImportKeyPairInput) (*aws.Request, *ec2.ImportKeyPairOutput)
-
-	ImportSnapshot(*ec2.ImportSnapshotInput) (*ec2.ImportSnapshotOutput, error)
-	ImportSnapshotWithContext(aws.Context, *ec2.ImportSnapshotInput, ...aws.Option) (*ec2.ImportSnapshotOutput, error)
-	ImportSnapshotRequest(*ec2.ImportSnapshotInput) (*aws.Request, *ec2.ImportSnapshotOutput)
-
-	ImportVolume(*ec2.ImportVolumeInput) (*ec2.ImportVolumeOutput, error)
-	ImportVolumeWithContext(aws.Context, *ec2.ImportVolumeInput, ...aws.Option) (*ec2.ImportVolumeOutput, error)
-	ImportVolumeRequest(*ec2.ImportVolumeInput) (*aws.Request, *ec2.ImportVolumeOutput)
-
-	ModifyFpgaImageAttribute(*ec2.ModifyFpgaImageAttributeInput) (*ec2.ModifyFpgaImageAttributeOutput, error)
-	ModifyFpgaImageAttributeWithContext(aws.Context, *ec2.ModifyFpgaImageAttributeInput, ...aws.Option) (*ec2.ModifyFpgaImageAttributeOutput, error)
-	ModifyFpgaImageAttributeRequest(*ec2.ModifyFpgaImageAttributeInput) (*aws.Request, *ec2.ModifyFpgaImageAttributeOutput)
-
-	ModifyHosts(*ec2.ModifyHostsInput) (*ec2.ModifyHostsOutput, error)
-	ModifyHostsWithContext(aws.Context, *ec2.ModifyHostsInput, ...aws.Option) (*ec2.ModifyHostsOutput, error)
-	ModifyHostsRequest(*ec2.ModifyHostsInput) (*aws.Request, *ec2.ModifyHostsOutput)
-
-	ModifyIdFormat(*ec2.ModifyIdFormatInput) (*ec2.ModifyIdFormatOutput, error)
-	ModifyIdFormatWithContext(aws.Context, *ec2.ModifyIdFormatInput, ...aws.Option) (*ec2.ModifyIdFormatOutput, error)
-	ModifyIdFormatRequest(*ec2.ModifyIdFormatInput) (*aws.Request, *ec2.ModifyIdFormatOutput)
-
-	ModifyIdentityIdFormat(*ec2.ModifyIdentityIdFormatInput) (*ec2.ModifyIdentityIdFormatOutput, error)
-	ModifyIdentityIdFormatWithContext(aws.Context, *ec2.ModifyIdentityIdFormatInput, ...aws.Option) (*ec2.ModifyIdentityIdFormatOutput, error)
-	ModifyIdentityIdFormatRequest(*ec2.ModifyIdentityIdFormatInput) (*aws.Request, *ec2.ModifyIdentityIdFormatOutput)
-
-	ModifyImageAttribute(*ec2.ModifyImageAttributeInput) (*ec2.ModifyImageAttributeOutput, error)
-	ModifyImageAttributeWithContext(aws.Context, *ec2.ModifyImageAttributeInput, ...aws.Option) (*ec2.ModifyImageAttributeOutput, error)
-	ModifyImageAttributeRequest(*ec2.ModifyImageAttributeInput) (*aws.Request, *ec2.ModifyImageAttributeOutput)
-
-	ModifyInstanceAttribute(*ec2.ModifyInstanceAttributeInput) (*ec2.ModifyInstanceAttributeOutput, error)
-	ModifyInstanceAttributeWithContext(aws.Context, *ec2.ModifyInstanceAttributeInput, ...aws.Option) (*ec2.ModifyInstanceAttributeOutput, error)
-	ModifyInstanceAttributeRequest(*ec2.ModifyInstanceAttributeInput) (*aws.Request, *ec2.ModifyInstanceAttributeOutput)
-
-	ModifyInstancePlacement(*ec2.ModifyInstancePlacementInput) (*ec2.ModifyInstancePlacementOutput, error)
-	ModifyInstancePlacementWithContext(aws.Context, *ec2.ModifyInstancePlacementInput, ...aws.Option) (*ec2.ModifyInstancePlacementOutput, error)
-	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) (*aws.Request, *ec2.ModifyInstancePlacementOutput)
-
-	ModifyNetworkInterfaceAttribute(*ec2.ModifyNetworkInterfaceAttributeInput) (*ec2.ModifyNetworkInterfaceAttributeOutput, error)
-	ModifyNetworkInterfaceAttributeWithContext(aws.Context, *ec2.ModifyNetworkInterfaceAttributeInput, ...aws.Option) (*ec2.ModifyNetworkInterfaceAttributeOutput, error)
-	ModifyNetworkInterfaceAttributeRequest(*ec2.ModifyNetworkInterfaceAttributeInput) (*aws.Request, *ec2.ModifyNetworkInterfaceAttributeOutput)
-
-	ModifyReservedInstances(*ec2.ModifyReservedInstancesInput) (*ec2.ModifyReservedInstancesOutput, error)
-	ModifyReservedInstancesWithContext(aws.Context, *ec2.ModifyReservedInstancesInput, ...aws.Option) (*ec2.ModifyReservedInstancesOutput, error)
-	ModifyReservedInstancesRequest(*ec2.ModifyReservedInstancesInput) (*aws.Request, *ec2.ModifyReservedInstancesOutput)
-
-	ModifySnapshotAttribute(*ec2.ModifySnapshotAttributeInput) (*ec2.ModifySnapshotAttributeOutput, error)
-	ModifySnapshotAttributeWithContext(aws.Context, *ec2.ModifySnapshotAttributeInput, ...aws.Option) (*ec2.ModifySnapshotAttributeOutput, error)
-	ModifySnapshotAttributeRequest(*ec2.ModifySnapshotAttributeInput) (*aws.Request, *ec2.ModifySnapshotAttributeOutput)
-
-	ModifySpotFleetRequest(*ec2.ModifySpotFleetRequestInput) (*ec2.ModifySpotFleetRequestOutput, error)
-	ModifySpotFleetRequestWithContext(aws.Context, *ec2.ModifySpotFleetRequestInput, ...aws.Option) (*ec2.ModifySpotFleetRequestOutput, error)
-	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) (*aws.Request, *ec2.ModifySpotFleetRequestOutput)
-
-	ModifySubnetAttribute(*ec2.ModifySubnetAttributeInput) (*ec2.ModifySubnetAttributeOutput, error)
-	ModifySubnetAttributeWithContext(aws.Context, *ec2.ModifySubnetAttributeInput, ...aws.Option) (*ec2.ModifySubnetAttributeOutput, error)
-	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) (*aws.Request, *ec2.ModifySubnetAttributeOutput)
-
-	ModifyVolume(*ec2.ModifyVolumeInput) (*ec2.ModifyVolumeOutput, error)
-	ModifyVolumeWithContext(aws.Context, *ec2.ModifyVolumeInput, ...aws.Option) (*ec2.ModifyVolumeOutput, error)
-	ModifyVolumeRequest(*ec2.ModifyVolumeInput) (*aws.Request, *ec2.ModifyVolumeOutput)
-
-	ModifyVolumeAttribute(*ec2.ModifyVolumeAttributeInput) (*ec2.ModifyVolumeAttributeOutput, error)
-	ModifyVolumeAttributeWithContext(aws.Context, *ec2.ModifyVolumeAttributeInput, ...aws.Option) (*ec2.ModifyVolumeAttributeOutput, error)
-	ModifyVolumeAttributeRequest(*ec2.ModifyVolumeAttributeInput) (*aws.Request, *ec2.ModifyVolumeAttributeOutput)
-
-	ModifyVpcAttribute(*ec2.ModifyVpcAttributeInput) (*ec2.ModifyVpcAttributeOutput, error)
-	ModifyVpcAttributeWithContext(aws.Context, *ec2.ModifyVpcAttributeInput, ...aws.Option) (*ec2.ModifyVpcAttributeOutput, error)
-	ModifyVpcAttributeRequest(*ec2.ModifyVpcAttributeInput) (*aws.Request, *ec2.ModifyVpcAttributeOutput)
-
-	ModifyVpcEndpoint(*ec2.ModifyVpcEndpointInput) (*ec2.ModifyVpcEndpointOutput, error)
-	ModifyVpcEndpointWithContext(aws.Context, *ec2.ModifyVpcEndpointInput, ...aws.Option) (*ec2.ModifyVpcEndpointOutput, error)
-	ModifyVpcEndpointRequest(*ec2.ModifyVpcEndpointInput) (*aws.Request, *ec2.ModifyVpcEndpointOutput)
-
-	ModifyVpcPeeringConnectionOptions(*ec2.ModifyVpcPeeringConnectionOptionsInput) (*ec2.ModifyVpcPeeringConnectionOptionsOutput, error)
-	ModifyVpcPeeringConnectionOptionsWithContext(aws.Context, *ec2.ModifyVpcPeeringConnectionOptionsInput, ...aws.Option) (*ec2.ModifyVpcPeeringConnectionOptionsOutput, error)
-	ModifyVpcPeeringConnectionOptionsRequest(*ec2.ModifyVpcPeeringConnectionOptionsInput) (*aws.Request, *ec2.ModifyVpcPeeringConnectionOptionsOutput)
-
-	MonitorInstances(*ec2.MonitorInstancesInput) (*ec2.MonitorInstancesOutput, error)
-	MonitorInstancesWithContext(aws.Context, *ec2.MonitorInstancesInput, ...aws.Option) (*ec2.MonitorInstancesOutput, error)
-	MonitorInstancesRequest(*ec2.MonitorInstancesInput) (*aws.Request, *ec2.MonitorInstancesOutput)
-
-	MoveAddressToVpc(*ec2.MoveAddressToVpcInput) (*ec2.MoveAddressToVpcOutput, error)
-	MoveAddressToVpcWithContext(aws.Context, *ec2.MoveAddressToVpcInput, ...aws.Option) (*ec2.MoveAddressToVpcOutput, error)
-	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) (*aws.Request, *ec2.MoveAddressToVpcOutput)
-
-	PurchaseHostReservation(*ec2.PurchaseHostReservationInput) (*ec2.PurchaseHostReservationOutput, error)
-	PurchaseHostReservationWithContext(aws.Context, *ec2.PurchaseHostReservationInput, ...aws.Option) (*ec2.PurchaseHostReservationOutput, error)
-	PurchaseHostReservationRequest(*ec2.PurchaseHostReservationInput) (*aws.Request, *ec2.PurchaseHostReservationOutput)
-
-	PurchaseReservedInstancesOffering(*ec2.PurchaseReservedInstancesOfferingInput) (*ec2.PurchaseReservedInstancesOfferingOutput, error)
-	PurchaseReservedInstancesOfferingWithContext(aws.Context, *ec2.PurchaseReservedInstancesOfferingInput, ...aws.Option) (*ec2.PurchaseReservedInstancesOfferingOutput, error)
-	PurchaseReservedInstancesOfferingRequest(*ec2.PurchaseReservedInstancesOfferingInput) (*aws.Request, *ec2.PurchaseReservedInstancesOfferingOutput)
-
-	PurchaseScheduledInstances(*ec2.PurchaseScheduledInstancesInput) (*ec2.PurchaseScheduledInstancesOutput, error)
-	PurchaseScheduledInstancesWithContext(aws.Context, *ec2.PurchaseScheduledInstancesInput, ...aws.Option) (*ec2.PurchaseScheduledInstancesOutput, error)
-	PurchaseScheduledInstancesRequest(*ec2.PurchaseScheduledInstancesInput) (*aws.Request, *ec2.PurchaseScheduledInstancesOutput)
-
-	RebootInstances(*ec2.RebootInstancesInput) (*ec2.RebootInstancesOutput, error)
-	RebootInstancesWithContext(aws.Context, *ec2.RebootInstancesInput, ...aws.Option) (*ec2.RebootInstancesOutput, error)
-	RebootInstancesRequest(*ec2.RebootInstancesInput) (*aws.Request, *ec2.RebootInstancesOutput)
-
-	RegisterImage(*ec2.RegisterImageInput) (*ec2.RegisterImageOutput, error)
-	RegisterImageWithContext(aws.Context, *ec2.RegisterImageInput, ...aws.Option) (*ec2.RegisterImageOutput, error)
-	RegisterImageRequest(*ec2.RegisterImageInput) (*aws.Request, *ec2.RegisterImageOutput)
-
-	RejectVpcPeeringConnection(*ec2.RejectVpcPeeringConnectionInput) (*ec2.RejectVpcPeeringConnectionOutput, error)
-	RejectVpcPeeringConnectionWithContext(aws.Context, *ec2.RejectVpcPeeringConnectionInput, ...aws.Option) (*ec2.RejectVpcPeeringConnectionOutput, error)
-	RejectVpcPeeringConnectionRequest(*ec2.RejectVpcPeeringConnectionInput) (*aws.Request, *ec2.RejectVpcPeeringConnectionOutput)
-
-	ReleaseAddress(*ec2.ReleaseAddressInput) (*ec2.ReleaseAddressOutput, error)
-	ReleaseAddressWithContext(aws.Context, *ec2.ReleaseAddressInput, ...aws.Option) (*ec2.ReleaseAddressOutput, error)
-	ReleaseAddressRequest(*ec2.ReleaseAddressInput) (*aws.Request, *ec2.ReleaseAddressOutput)
-
-	ReleaseHosts(*ec2.ReleaseHostsInput) (*ec2.ReleaseHostsOutput, error)
-	ReleaseHostsWithContext(aws.Context, *ec2.ReleaseHostsInput, ...aws.Option) (*ec2.ReleaseHostsOutput, error)
-	ReleaseHostsRequest(*ec2.ReleaseHostsInput) (*aws.Request, *ec2.ReleaseHostsOutput)
-
-	ReplaceIamInstanceProfileAssociation(*ec2.ReplaceIamInstanceProfileAssociationInput) (*ec2.ReplaceIamInstanceProfileAssociationOutput, error)
-	ReplaceIamInstanceProfileAssociationWithContext(aws.Context, *ec2.ReplaceIamInstanceProfileAssociationInput, ...aws.Option) (*ec2.ReplaceIamInstanceProfileAssociationOutput, error)
-	ReplaceIamInstanceProfileAssociationRequest(*ec2.ReplaceIamInstanceProfileAssociationInput) (*aws.Request, *ec2.ReplaceIamInstanceProfileAssociationOutput)
-
-	ReplaceNetworkAclAssociation(*ec2.ReplaceNetworkAclAssociationInput) (*ec2.ReplaceNetworkAclAssociationOutput, error)
-	ReplaceNetworkAclAssociationWithContext(aws.Context, *ec2.ReplaceNetworkAclAssociationInput, ...aws.Option) (*ec2.ReplaceNetworkAclAssociationOutput, error)
-	ReplaceNetworkAclAssociationRequest(*ec2.ReplaceNetworkAclAssociationInput) (*aws.Request, *ec2.ReplaceNetworkAclAssociationOutput)
-
-	ReplaceNetworkAclEntry(*ec2.ReplaceNetworkAclEntryInput) (*ec2.ReplaceNetworkAclEntryOutput, error)
-	ReplaceNetworkAclEntryWithContext(aws.Context, *ec2.ReplaceNetworkAclEntryInput, ...aws.Option) (*ec2.ReplaceNetworkAclEntryOutput, error)
-	ReplaceNetworkAclEntryRequest(*ec2.ReplaceNetworkAclEntryInput) (*aws.Request, *ec2.ReplaceNetworkAclEntryOutput)
-
-	ReplaceRoute(*ec2.ReplaceRouteInput) (*ec2.ReplaceRouteOutput, error)
-	ReplaceRouteWithContext(aws.Context, *ec2.ReplaceRouteInput, ...aws.Option) (*ec2.ReplaceRouteOutput, error)
-	ReplaceRouteRequest(*ec2.ReplaceRouteInput) (*aws.Request, *ec2.ReplaceRouteOutput)
-
-	ReplaceRouteTableAssociation(*ec2.ReplaceRouteTableAssociationInput) (*ec2.ReplaceRouteTableAssociationOutput, error)
-	ReplaceRouteTableAssociationWithContext(aws.Context, *ec2.ReplaceRouteTableAssociationInput, ...aws.Option) (*ec2.ReplaceRouteTableAssociationOutput, error)
-	ReplaceRouteTableAssociationRequest(*ec2.ReplaceRouteTableAssociationInput) (*aws.Request, *ec2.ReplaceRouteTableAssociationOutput)
-
-	ReportInstanceStatus(*ec2.ReportInstanceStatusInput) (*ec2.ReportInstanceStatusOutput, error)
-	ReportInstanceStatusWithContext(aws.Context, *ec2.ReportInstanceStatusInput, ...aws.Option) (*ec2.ReportInstanceStatusOutput, error)
-	ReportInstanceStatusRequest(*ec2.ReportInstanceStatusInput) (*aws.Request, *ec2.ReportInstanceStatusOutput)
-
-	RequestSpotFleet(*ec2.RequestSpotFleetInput) (*ec2.RequestSpotFleetOutput, error)
-	RequestSpotFleetWithContext(aws.Context, *ec2.RequestSpotFleetInput, ...aws.Option) (*ec2.RequestSpotFleetOutput, error)
-	RequestSpotFleetRequest(*ec2.RequestSpotFleetInput) (*aws.Request, *ec2.RequestSpotFleetOutput)
-
-	RequestSpotInstances(*ec2.RequestSpotInstancesInput) (*ec2.RequestSpotInstancesOutput, error)
-	RequestSpotInstancesWithContext(aws.Context, *ec2.RequestSpotInstancesInput, ...aws.Option) (*ec2.RequestSpotInstancesOutput, error)
-	RequestSpotInstancesRequest(*ec2.RequestSpotInstancesInput) (*aws.Request, *ec2.RequestSpotInstancesOutput)
-
-	ResetFpgaImageAttribute(*ec2.ResetFpgaImageAttributeInput) (*ec2.ResetFpgaImageAttributeOutput, error)
-	ResetFpgaImageAttributeWithContext(aws.Context, *ec2.ResetFpgaImageAttributeInput, ...aws.Option) (*ec2.ResetFpgaImageAttributeOutput, error)
-	ResetFpgaImageAttributeRequest(*ec2.ResetFpgaImageAttributeInput) (*aws.Request, *ec2.ResetFpgaImageAttributeOutput)
-
-	ResetImageAttribute(*ec2.ResetImageAttributeInput) (*ec2.ResetImageAttributeOutput, error)
-	ResetImageAttributeWithContext(aws.Context, *ec2.ResetImageAttributeInput, ...aws.Option) (*ec2.ResetImageAttributeOutput, error)
-	ResetImageAttributeRequest(*ec2.ResetImageAttributeInput) (*aws.Request, *ec2.ResetImageAttributeOutput)
-
-	ResetInstanceAttribute(*ec2.ResetInstanceAttributeInput) (*ec2.ResetInstanceAttributeOutput, error)
-	ResetInstanceAttributeWithContext(aws.Context, *ec2.ResetInstanceAttributeInput, ...aws.Option) (*ec2.ResetInstanceAttributeOutput, error)
-	ResetInstanceAttributeRequest(*ec2.ResetInstanceAttributeInput) (*aws.Request, *ec2.ResetInstanceAttributeOutput)
-
-	ResetNetworkInterfaceAttribute(*ec2.ResetNetworkInterfaceAttributeInput) (*ec2.ResetNetworkInterfaceAttributeOutput, error)
-	ResetNetworkInterfaceAttributeWithContext(aws.Context, *ec2.ResetNetworkInterfaceAttributeInput, ...aws.Option) (*ec2.ResetNetworkInterfaceAttributeOutput, error)
-	ResetNetworkInterfaceAttributeRequest(*ec2.ResetNetworkInterfaceAttributeInput) (*aws.Request, *ec2.ResetNetworkInterfaceAttributeOutput)
-
-	ResetSnapshotAttribute(*ec2.ResetSnapshotAttributeInput) (*ec2.ResetSnapshotAttributeOutput, error)
-	ResetSnapshotAttributeWithContext(aws.Context, *ec2.ResetSnapshotAttributeInput, ...aws.Option) (*ec2.ResetSnapshotAttributeOutput, error)
-	ResetSnapshotAttributeRequest(*ec2.ResetSnapshotAttributeInput) (*aws.Request, *ec2.ResetSnapshotAttributeOutput)
-
-	RestoreAddressToClassic(*ec2.RestoreAddressToClassicInput) (*ec2.RestoreAddressToClassicOutput, error)
-	RestoreAddressToClassicWithContext(aws.Context, *ec2.RestoreAddressToClassicInput, ...aws.Option) (*ec2.RestoreAddressToClassicOutput, error)
-	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) (*aws.Request, *ec2.RestoreAddressToClassicOutput)
-
-	RevokeSecurityGroupEgress(*ec2.RevokeSecurityGroupEgressInput) (*ec2.RevokeSecurityGroupEgressOutput, error)
-	RevokeSecurityGroupEgressWithContext(aws.Context, *ec2.RevokeSecurityGroupEgressInput, ...aws.Option) (*ec2.RevokeSecurityGroupEgressOutput, error)
-	RevokeSecurityGroupEgressRequest(*ec2.RevokeSecurityGroupEgressInput) (*aws.Request, *ec2.RevokeSecurityGroupEgressOutput)
-
-	RevokeSecurityGroupIngress(*ec2.RevokeSecurityGroupIngressInput) (*ec2.RevokeSecurityGroupIngressOutput, error)
-	RevokeSecurityGroupIngressWithContext(aws.Context, *ec2.RevokeSecurityGroupIngressInput, ...aws.Option) (*ec2.RevokeSecurityGroupIngressOutput, error)
-	RevokeSecurityGroupIngressRequest(*ec2.RevokeSecurityGroupIngressInput) (*aws.Request, *ec2.RevokeSecurityGroupIngressOutput)
-
-	RunInstances(*ec2.RunInstancesInput) (*ec2.Reservation, error)
-	RunInstancesWithContext(aws.Context, *ec2.RunInstancesInput, ...aws.Option) (*ec2.Reservation, error)
-	RunInstancesRequest(*ec2.RunInstancesInput) (*aws.Request, *ec2.Reservation)
-
-	RunScheduledInstances(*ec2.RunScheduledInstancesInput) (*ec2.RunScheduledInstancesOutput, error)
-	RunScheduledInstancesWithContext(aws.Context, *ec2.RunScheduledInstancesInput, ...aws.Option) (*ec2.RunScheduledInstancesOutput, error)
-	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) (*aws.Request, *ec2.RunScheduledInstancesOutput)
-
-	StartInstances(*ec2.StartInstancesInput) (*ec2.StartInstancesOutput, error)
-	StartInstancesWithContext(aws.Context, *ec2.StartInstancesInput, ...aws.Option) (*ec2.StartInstancesOutput, error)
-	StartInstancesRequest(*ec2.StartInstancesInput) (*aws.Request, *ec2.StartInstancesOutput)
-
-	StopInstances(*ec2.StopInstancesInput) (*ec2.StopInstancesOutput, error)
-	StopInstancesWithContext(aws.Context, *ec2.StopInstancesInput, ...aws.Option) (*ec2.StopInstancesOutput, error)
-	StopInstancesRequest(*ec2.StopInstancesInput) (*aws.Request, *ec2.StopInstancesOutput)
-
-	TerminateInstances(*ec2.TerminateInstancesInput) (*ec2.TerminateInstancesOutput, error)
-	TerminateInstancesWithContext(aws.Context, *ec2.TerminateInstancesInput, ...aws.Option) (*ec2.TerminateInstancesOutput, error)
-	TerminateInstancesRequest(*ec2.TerminateInstancesInput) (*aws.Request, *ec2.TerminateInstancesOutput)
-
-	UnassignIpv6Addresses(*ec2.UnassignIpv6AddressesInput) (*ec2.UnassignIpv6AddressesOutput, error)
-	UnassignIpv6AddressesWithContext(aws.Context, *ec2.UnassignIpv6AddressesInput, ...aws.Option) (*ec2.UnassignIpv6AddressesOutput, error)
-	UnassignIpv6AddressesRequest(*ec2.UnassignIpv6AddressesInput) (*aws.Request, *ec2.UnassignIpv6AddressesOutput)
-
-	UnassignPrivateIpAddresses(*ec2.UnassignPrivateIpAddressesInput) (*ec2.UnassignPrivateIpAddressesOutput, error)
-	UnassignPrivateIpAddressesWithContext(aws.Context, *ec2.UnassignPrivateIpAddressesInput, ...aws.Option) (*ec2.UnassignPrivateIpAddressesOutput, error)
-	UnassignPrivateIpAddressesRequest(*ec2.UnassignPrivateIpAddressesInput) (*aws.Request, *ec2.UnassignPrivateIpAddressesOutput)
-
-	UnmonitorInstances(*ec2.UnmonitorInstancesInput) (*ec2.UnmonitorInstancesOutput, error)
-	UnmonitorInstancesWithContext(aws.Context, *ec2.UnmonitorInstancesInput, ...aws.Option) (*ec2.UnmonitorInstancesOutput, error)
-	UnmonitorInstancesRequest(*ec2.UnmonitorInstancesInput) (*aws.Request, *ec2.UnmonitorInstancesOutput)
-
-	UpdateSecurityGroupRuleDescriptionsEgress(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) (*ec2.UpdateSecurityGroupRuleDescriptionsEgressOutput, error)
-	UpdateSecurityGroupRuleDescriptionsEgressWithContext(aws.Context, *ec2.UpdateSecurityGroupRuleDescriptionsEgressInput, ...aws.Option) (*ec2.UpdateSecurityGroupRuleDescriptionsEgressOutput, error)
-	UpdateSecurityGroupRuleDescriptionsEgressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) (*aws.Request, *ec2.UpdateSecurityGroupRuleDescriptionsEgressOutput)
-
-	UpdateSecurityGroupRuleDescriptionsIngress(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) (*ec2.UpdateSecurityGroupRuleDescriptionsIngressOutput, error)
-	UpdateSecurityGroupRuleDescriptionsIngressWithContext(aws.Context, *ec2.UpdateSecurityGroupRuleDescriptionsIngressInput, ...aws.Option) (*ec2.UpdateSecurityGroupRuleDescriptionsIngressOutput, error)
-	UpdateSecurityGroupRuleDescriptionsIngressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) (*aws.Request, *ec2.UpdateSecurityGroupRuleDescriptionsIngressOutput)
+	DescribeVolumesModificationsRequest(*ec2.DescribeVolumesModificationsInput) ec2.DescribeVolumesModificationsRequest
+
+	DescribeVpcAttributeRequest(*ec2.DescribeVpcAttributeInput) ec2.DescribeVpcAttributeRequest
+
+	DescribeVpcClassicLinkRequest(*ec2.DescribeVpcClassicLinkInput) ec2.DescribeVpcClassicLinkRequest
+
+	DescribeVpcClassicLinkDnsSupportRequest(*ec2.DescribeVpcClassicLinkDnsSupportInput) ec2.DescribeVpcClassicLinkDnsSupportRequest
+
+	DescribeVpcEndpointServicesRequest(*ec2.DescribeVpcEndpointServicesInput) ec2.DescribeVpcEndpointServicesRequest
+
+	DescribeVpcEndpointsRequest(*ec2.DescribeVpcEndpointsInput) ec2.DescribeVpcEndpointsRequest
+
+	DescribeVpcPeeringConnectionsRequest(*ec2.DescribeVpcPeeringConnectionsInput) ec2.DescribeVpcPeeringConnectionsRequest
+
+	DescribeVpcsRequest(*ec2.DescribeVpcsInput) ec2.DescribeVpcsRequest
+
+	DescribeVpnConnectionsRequest(*ec2.DescribeVpnConnectionsInput) ec2.DescribeVpnConnectionsRequest
+
+	DescribeVpnGatewaysRequest(*ec2.DescribeVpnGatewaysInput) ec2.DescribeVpnGatewaysRequest
+
+	DetachClassicLinkVpcRequest(*ec2.DetachClassicLinkVpcInput) ec2.DetachClassicLinkVpcRequest
+
+	DetachInternetGatewayRequest(*ec2.DetachInternetGatewayInput) ec2.DetachInternetGatewayRequest
+
+	DetachNetworkInterfaceRequest(*ec2.DetachNetworkInterfaceInput) ec2.DetachNetworkInterfaceRequest
+
+	DetachVolumeRequest(*ec2.DetachVolumeInput) ec2.DetachVolumeRequest
+
+	DetachVpnGatewayRequest(*ec2.DetachVpnGatewayInput) ec2.DetachVpnGatewayRequest
+
+	DisableVgwRoutePropagationRequest(*ec2.DisableVgwRoutePropagationInput) ec2.DisableVgwRoutePropagationRequest
+
+	DisableVpcClassicLinkRequest(*ec2.DisableVpcClassicLinkInput) ec2.DisableVpcClassicLinkRequest
+
+	DisableVpcClassicLinkDnsSupportRequest(*ec2.DisableVpcClassicLinkDnsSupportInput) ec2.DisableVpcClassicLinkDnsSupportRequest
+
+	DisassociateAddressRequest(*ec2.DisassociateAddressInput) ec2.DisassociateAddressRequest
+
+	DisassociateIamInstanceProfileRequest(*ec2.DisassociateIamInstanceProfileInput) ec2.DisassociateIamInstanceProfileRequest
+
+	DisassociateRouteTableRequest(*ec2.DisassociateRouteTableInput) ec2.DisassociateRouteTableRequest
+
+	DisassociateSubnetCidrBlockRequest(*ec2.DisassociateSubnetCidrBlockInput) ec2.DisassociateSubnetCidrBlockRequest
+
+	DisassociateVpcCidrBlockRequest(*ec2.DisassociateVpcCidrBlockInput) ec2.DisassociateVpcCidrBlockRequest
+
+	EnableVgwRoutePropagationRequest(*ec2.EnableVgwRoutePropagationInput) ec2.EnableVgwRoutePropagationRequest
+
+	EnableVolumeIORequest(*ec2.EnableVolumeIOInput) ec2.EnableVolumeIORequest
+
+	EnableVpcClassicLinkRequest(*ec2.EnableVpcClassicLinkInput) ec2.EnableVpcClassicLinkRequest
+
+	EnableVpcClassicLinkDnsSupportRequest(*ec2.EnableVpcClassicLinkDnsSupportInput) ec2.EnableVpcClassicLinkDnsSupportRequest
+
+	GetConsoleOutputRequest(*ec2.GetConsoleOutputInput) ec2.GetConsoleOutputRequest
+
+	GetConsoleScreenshotRequest(*ec2.GetConsoleScreenshotInput) ec2.GetConsoleScreenshotRequest
+
+	GetHostReservationPurchasePreviewRequest(*ec2.GetHostReservationPurchasePreviewInput) ec2.GetHostReservationPurchasePreviewRequest
+
+	GetPasswordDataRequest(*ec2.GetPasswordDataInput) ec2.GetPasswordDataRequest
+
+	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
+
+	ImportImageRequest(*ec2.ImportImageInput) ec2.ImportImageRequest
+
+	ImportInstanceRequest(*ec2.ImportInstanceInput) ec2.ImportInstanceRequest
+
+	ImportKeyPairRequest(*ec2.ImportKeyPairInput) ec2.ImportKeyPairRequest
+
+	ImportSnapshotRequest(*ec2.ImportSnapshotInput) ec2.ImportSnapshotRequest
+
+	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
+
+	ModifyFpgaImageAttributeRequest(*ec2.ModifyFpgaImageAttributeInput) ec2.ModifyFpgaImageAttributeRequest
+
+	ModifyHostsRequest(*ec2.ModifyHostsInput) ec2.ModifyHostsRequest
+
+	ModifyIdFormatRequest(*ec2.ModifyIdFormatInput) ec2.ModifyIdFormatRequest
+
+	ModifyIdentityIdFormatRequest(*ec2.ModifyIdentityIdFormatInput) ec2.ModifyIdentityIdFormatRequest
+
+	ModifyImageAttributeRequest(*ec2.ModifyImageAttributeInput) ec2.ModifyImageAttributeRequest
+
+	ModifyInstanceAttributeRequest(*ec2.ModifyInstanceAttributeInput) ec2.ModifyInstanceAttributeRequest
+
+	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
+
+	ModifyNetworkInterfaceAttributeRequest(*ec2.ModifyNetworkInterfaceAttributeInput) ec2.ModifyNetworkInterfaceAttributeRequest
+
+	ModifyReservedInstancesRequest(*ec2.ModifyReservedInstancesInput) ec2.ModifyReservedInstancesRequest
+
+	ModifySnapshotAttributeRequest(*ec2.ModifySnapshotAttributeInput) ec2.ModifySnapshotAttributeRequest
+
+	ModifySpotFleetRequestRequest(*ec2.ModifySpotFleetRequestInput) ec2.ModifySpotFleetRequestRequest
+
+	ModifySubnetAttributeRequest(*ec2.ModifySubnetAttributeInput) ec2.ModifySubnetAttributeRequest
+
+	ModifyVolumeRequest(*ec2.ModifyVolumeInput) ec2.ModifyVolumeRequest
+
+	ModifyVolumeAttributeRequest(*ec2.ModifyVolumeAttributeInput) ec2.ModifyVolumeAttributeRequest
+
+	ModifyVpcAttributeRequest(*ec2.ModifyVpcAttributeInput) ec2.ModifyVpcAttributeRequest
+
+	ModifyVpcEndpointRequest(*ec2.ModifyVpcEndpointInput) ec2.ModifyVpcEndpointRequest
+
+	ModifyVpcPeeringConnectionOptionsRequest(*ec2.ModifyVpcPeeringConnectionOptionsInput) ec2.ModifyVpcPeeringConnectionOptionsRequest
+
+	MonitorInstancesRequest(*ec2.MonitorInstancesInput) ec2.MonitorInstancesRequest
+
+	MoveAddressToVpcRequest(*ec2.MoveAddressToVpcInput) ec2.MoveAddressToVpcRequest
+
+	PurchaseHostReservationRequest(*ec2.PurchaseHostReservationInput) ec2.PurchaseHostReservationRequest
+
+	PurchaseReservedInstancesOfferingRequest(*ec2.PurchaseReservedInstancesOfferingInput) ec2.PurchaseReservedInstancesOfferingRequest
+
+	PurchaseScheduledInstancesRequest(*ec2.PurchaseScheduledInstancesInput) ec2.PurchaseScheduledInstancesRequest
+
+	RebootInstancesRequest(*ec2.RebootInstancesInput) ec2.RebootInstancesRequest
+
+	RegisterImageRequest(*ec2.RegisterImageInput) ec2.RegisterImageRequest
+
+	RejectVpcPeeringConnectionRequest(*ec2.RejectVpcPeeringConnectionInput) ec2.RejectVpcPeeringConnectionRequest
+
+	ReleaseAddressRequest(*ec2.ReleaseAddressInput) ec2.ReleaseAddressRequest
+
+	ReleaseHostsRequest(*ec2.ReleaseHostsInput) ec2.ReleaseHostsRequest
+
+	ReplaceIamInstanceProfileAssociationRequest(*ec2.ReplaceIamInstanceProfileAssociationInput) ec2.ReplaceIamInstanceProfileAssociationRequest
+
+	ReplaceNetworkAclAssociationRequest(*ec2.ReplaceNetworkAclAssociationInput) ec2.ReplaceNetworkAclAssociationRequest
+
+	ReplaceNetworkAclEntryRequest(*ec2.ReplaceNetworkAclEntryInput) ec2.ReplaceNetworkAclEntryRequest
+
+	ReplaceRouteRequest(*ec2.ReplaceRouteInput) ec2.ReplaceRouteRequest
+
+	ReplaceRouteTableAssociationRequest(*ec2.ReplaceRouteTableAssociationInput) ec2.ReplaceRouteTableAssociationRequest
+
+	ReportInstanceStatusRequest(*ec2.ReportInstanceStatusInput) ec2.ReportInstanceStatusRequest
+
+	RequestSpotFleetRequest(*ec2.RequestSpotFleetInput) ec2.RequestSpotFleetRequest
+
+	RequestSpotInstancesRequest(*ec2.RequestSpotInstancesInput) ec2.RequestSpotInstancesRequest
+
+	ResetFpgaImageAttributeRequest(*ec2.ResetFpgaImageAttributeInput) ec2.ResetFpgaImageAttributeRequest
+
+	ResetImageAttributeRequest(*ec2.ResetImageAttributeInput) ec2.ResetImageAttributeRequest
+
+	ResetInstanceAttributeRequest(*ec2.ResetInstanceAttributeInput) ec2.ResetInstanceAttributeRequest
+
+	ResetNetworkInterfaceAttributeRequest(*ec2.ResetNetworkInterfaceAttributeInput) ec2.ResetNetworkInterfaceAttributeRequest
+
+	ResetSnapshotAttributeRequest(*ec2.ResetSnapshotAttributeInput) ec2.ResetSnapshotAttributeRequest
+
+	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
+
+	RevokeSecurityGroupEgressRequest(*ec2.RevokeSecurityGroupEgressInput) ec2.RevokeSecurityGroupEgressRequest
+
+	RevokeSecurityGroupIngressRequest(*ec2.RevokeSecurityGroupIngressInput) ec2.RevokeSecurityGroupIngressRequest
+
+	RunInstancesRequest(*ec2.RunInstancesInput) ec2.RunInstancesRequest
+
+	RunScheduledInstancesRequest(*ec2.RunScheduledInstancesInput) ec2.RunScheduledInstancesRequest
+
+	StartInstancesRequest(*ec2.StartInstancesInput) ec2.StartInstancesRequest
+
+	StopInstancesRequest(*ec2.StopInstancesInput) ec2.StopInstancesRequest
+
+	TerminateInstancesRequest(*ec2.TerminateInstancesInput) ec2.TerminateInstancesRequest
+
+	UnassignIpv6AddressesRequest(*ec2.UnassignIpv6AddressesInput) ec2.UnassignIpv6AddressesRequest
+
+	UnassignPrivateIpAddressesRequest(*ec2.UnassignPrivateIpAddressesInput) ec2.UnassignPrivateIpAddressesRequest
+
+	UnmonitorInstancesRequest(*ec2.UnmonitorInstancesInput) ec2.UnmonitorInstancesRequest
+
+	UpdateSecurityGroupRuleDescriptionsEgressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsEgressInput) ec2.UpdateSecurityGroupRuleDescriptionsEgressRequest
+
+	UpdateSecurityGroupRuleDescriptionsIngressRequest(*ec2.UpdateSecurityGroupRuleDescriptionsIngressInput) ec2.UpdateSecurityGroupRuleDescriptionsIngressRequest
 
 	WaitUntilBundleTaskComplete(*ec2.DescribeBundleTasksInput) error
 	WaitUntilBundleTaskCompleteWithContext(aws.Context, *ec2.DescribeBundleTasksInput, ...aws.WaiterOption) error

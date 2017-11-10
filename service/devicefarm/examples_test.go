@@ -29,7 +29,7 @@ func parseTime(layout, value string) *time.Time {
 //
 // The following example creates a new device pool named MyDevicePool inside an existing
 // project.
-func ExampleDeviceFarm_CreateDevicePool_shared00() {
+func ExampleDeviceFarm_CreateDevicePoolRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -42,7 +42,8 @@ func ExampleDeviceFarm_CreateDevicePool_shared00() {
 		ProjectArn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.CreateDevicePool(input)
+	req := svc.CreateDevicePoolRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -71,7 +72,7 @@ func ExampleDeviceFarm_CreateDevicePool_shared00() {
 // To create a new project
 //
 // The following example creates a new project named MyProject.
-func ExampleDeviceFarm_CreateProject_shared00() {
+func ExampleDeviceFarm_CreateProjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -82,7 +83,8 @@ func ExampleDeviceFarm_CreateProject_shared00() {
 		Name: aws.String("MyProject"),
 	}
 
-	result, err := svc.CreateProject(input)
+	req := svc.CreateProjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -111,7 +113,7 @@ func ExampleDeviceFarm_CreateProject_shared00() {
 // To create a remote access session
 //
 // The following example creates a remote access session named MySession.
-func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
+func ExampleDeviceFarm_CreateRemoteAccessSessionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -127,7 +129,8 @@ func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
 		ProjectArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.CreateRemoteAccessSession(input)
+	req := svc.CreateRemoteAccessSessionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -157,7 +160,7 @@ func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
 //
 // The following example creates a new Appium Python test package upload inside an existing
 // project.
-func ExampleDeviceFarm_CreateUpload_shared00() {
+func ExampleDeviceFarm_CreateUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -170,7 +173,8 @@ func ExampleDeviceFarm_CreateUpload_shared00() {
 		Type:       devicefarm.UploadTypeAppiumPythonTestPackage,
 	}
 
-	result, err := svc.CreateUpload(input)
+	req := svc.CreateUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -199,7 +203,7 @@ func ExampleDeviceFarm_CreateUpload_shared00() {
 // To delete a device pool
 //
 // The following example deletes a specific device pool.
-func ExampleDeviceFarm_DeleteDevicePool_shared00() {
+func ExampleDeviceFarm_DeleteDevicePoolRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -210,7 +214,8 @@ func ExampleDeviceFarm_DeleteDevicePool_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"),
 	}
 
-	result, err := svc.DeleteDevicePool(input)
+	req := svc.DeleteDevicePoolRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -239,7 +244,7 @@ func ExampleDeviceFarm_DeleteDevicePool_shared00() {
 // To delete a project
 //
 // The following example deletes a specific project.
-func ExampleDeviceFarm_DeleteProject_shared00() {
+func ExampleDeviceFarm_DeleteProjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -250,7 +255,8 @@ func ExampleDeviceFarm_DeleteProject_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.DeleteProject(input)
+	req := svc.DeleteProjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -279,7 +285,7 @@ func ExampleDeviceFarm_DeleteProject_shared00() {
 // To delete a specific remote access session
 //
 // The following example deletes a specific remote access session.
-func ExampleDeviceFarm_DeleteRemoteAccessSession_shared00() {
+func ExampleDeviceFarm_DeleteRemoteAccessSessionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -290,7 +296,8 @@ func ExampleDeviceFarm_DeleteRemoteAccessSession_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.DeleteRemoteAccessSession(input)
+	req := svc.DeleteRemoteAccessSessionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -319,7 +326,7 @@ func ExampleDeviceFarm_DeleteRemoteAccessSession_shared00() {
 // To delete a run
 //
 // The following example deletes a specific test run.
-func ExampleDeviceFarm_DeleteRun_shared00() {
+func ExampleDeviceFarm_DeleteRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -330,7 +337,8 @@ func ExampleDeviceFarm_DeleteRun_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.DeleteRun(input)
+	req := svc.DeleteRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -359,7 +367,7 @@ func ExampleDeviceFarm_DeleteRun_shared00() {
 // To delete a specific upload
 //
 // The following example deletes a specific upload.
-func ExampleDeviceFarm_DeleteUpload_shared00() {
+func ExampleDeviceFarm_DeleteUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -370,7 +378,8 @@ func ExampleDeviceFarm_DeleteUpload_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.DeleteUpload(input)
+	req := svc.DeleteUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -399,7 +408,7 @@ func ExampleDeviceFarm_DeleteUpload_shared00() {
 // To get information about account settings
 //
 // The following example returns information about your Device Farm account settings.
-func ExampleDeviceFarm_GetAccountSettings_shared00() {
+func ExampleDeviceFarm_GetAccountSettingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -408,7 +417,8 @@ func ExampleDeviceFarm_GetAccountSettings_shared00() {
 	svc := devicefarm.New(cfg)
 	input := &devicefarm.GetAccountSettingsInput{}
 
-	result, err := svc.GetAccountSettings(input)
+	req := svc.GetAccountSettingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -437,7 +447,7 @@ func ExampleDeviceFarm_GetAccountSettings_shared00() {
 // To get information about a device
 //
 // The following example returns information about a specific device.
-func ExampleDeviceFarm_GetDevice_shared00() {
+func ExampleDeviceFarm_GetDeviceRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -448,7 +458,8 @@ func ExampleDeviceFarm_GetDevice_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::device:123EXAMPLE"),
 	}
 
-	result, err := svc.GetDevice(input)
+	req := svc.GetDeviceRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -478,7 +489,7 @@ func ExampleDeviceFarm_GetDevice_shared00() {
 //
 // The following example returns information about a specific device pool, given a project
 // ARN.
-func ExampleDeviceFarm_GetDevicePool_shared00() {
+func ExampleDeviceFarm_GetDevicePoolRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -489,7 +500,8 @@ func ExampleDeviceFarm_GetDevicePool_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.GetDevicePool(input)
+	req := svc.GetDevicePoolRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -519,7 +531,7 @@ func ExampleDeviceFarm_GetDevicePool_shared00() {
 //
 // The following example returns information about the compatibility of a specific device
 // pool, given its ARN.
-func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
+func ExampleDeviceFarm_GetDevicePoolCompatibilityRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -532,7 +544,8 @@ func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
 		TestType:      devicefarm.TestTypeAppiumPython,
 	}
 
-	result, err := svc.GetDevicePoolCompatibility(input)
+	req := svc.GetDevicePoolCompatibilityRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -561,7 +574,7 @@ func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
 // To get information about a job
 //
 // The following example returns information about a specific job.
-func ExampleDeviceFarm_GetJob_shared00() {
+func ExampleDeviceFarm_GetJobRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -572,7 +585,8 @@ func ExampleDeviceFarm_GetJob_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2::job:123-456-EXAMPLE-GUID"),
 	}
 
-	result, err := svc.GetJob(input)
+	req := svc.GetJobRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -602,7 +616,7 @@ func ExampleDeviceFarm_GetJob_shared00() {
 //
 // The following example returns information about Device Farm offerings available to
 // your account.
-func ExampleDeviceFarm_GetOfferingStatus_shared00() {
+func ExampleDeviceFarm_GetOfferingStatusRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -613,7 +627,8 @@ func ExampleDeviceFarm_GetOfferingStatus_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
-	result, err := svc.GetOfferingStatus(input)
+	req := svc.GetOfferingStatusRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -644,7 +659,7 @@ func ExampleDeviceFarm_GetOfferingStatus_shared00() {
 // To get information about a project
 //
 // The following example gets information about a specific project.
-func ExampleDeviceFarm_GetProject_shared00() {
+func ExampleDeviceFarm_GetProjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -655,7 +670,8 @@ func ExampleDeviceFarm_GetProject_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:5e01a8c7-c861-4c0a-b1d5-12345EXAMPLE"),
 	}
 
-	result, err := svc.GetProject(input)
+	req := svc.GetProjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -684,7 +700,7 @@ func ExampleDeviceFarm_GetProject_shared00() {
 // To get a remote access session
 //
 // The following example gets a specific remote access session.
-func ExampleDeviceFarm_GetRemoteAccessSession_shared00() {
+func ExampleDeviceFarm_GetRemoteAccessSessionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -695,7 +711,8 @@ func ExampleDeviceFarm_GetRemoteAccessSession_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.GetRemoteAccessSession(input)
+	req := svc.GetRemoteAccessSessionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -724,7 +741,7 @@ func ExampleDeviceFarm_GetRemoteAccessSession_shared00() {
 // To get information about a test run
 //
 // The following example gets information about a specific test run.
-func ExampleDeviceFarm_GetRun_shared00() {
+func ExampleDeviceFarm_GetRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -735,7 +752,8 @@ func ExampleDeviceFarm_GetRun_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:5e01a8c7-c861-4c0a-b1d5-5ec6e6c6dd23/0fcac17b-6122-44d7-ae5a-12345EXAMPLE"),
 	}
 
-	result, err := svc.GetRun(input)
+	req := svc.GetRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -764,7 +782,7 @@ func ExampleDeviceFarm_GetRun_shared00() {
 // To get information about a test suite
 //
 // The following example gets information about a specific test suite.
-func ExampleDeviceFarm_GetSuite_shared00() {
+func ExampleDeviceFarm_GetSuiteRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -775,7 +793,8 @@ func ExampleDeviceFarm_GetSuite_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:suite:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.GetSuite(input)
+	req := svc.GetSuiteRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -804,7 +823,7 @@ func ExampleDeviceFarm_GetSuite_shared00() {
 // To get information about a specific test
 //
 // The following example gets information about a specific test.
-func ExampleDeviceFarm_GetTest_shared00() {
+func ExampleDeviceFarm_GetTestRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -815,7 +834,8 @@ func ExampleDeviceFarm_GetTest_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.GetTest(input)
+	req := svc.GetTestRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -844,7 +864,7 @@ func ExampleDeviceFarm_GetTest_shared00() {
 // To get information about a specific upload
 //
 // The following example gets information about a specific upload.
-func ExampleDeviceFarm_GetUpload_shared00() {
+func ExampleDeviceFarm_GetUploadRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -855,7 +875,8 @@ func ExampleDeviceFarm_GetUpload_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:upload:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.GetUpload(input)
+	req := svc.GetUploadRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -885,7 +906,7 @@ func ExampleDeviceFarm_GetUpload_shared00() {
 //
 // The following example installs a specific app to a device in a specific remote access
 // session.
-func ExampleDeviceFarm_InstallToRemoteAccessSession_shared00() {
+func ExampleDeviceFarm_InstallToRemoteAccessSessionRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -897,7 +918,8 @@ func ExampleDeviceFarm_InstallToRemoteAccessSession_shared00() {
 		RemoteAccessSessionArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:session:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.InstallToRemoteAccessSession(input)
+	req := svc.InstallToRemoteAccessSessionRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -926,7 +948,7 @@ func ExampleDeviceFarm_InstallToRemoteAccessSession_shared00() {
 // To list artifacts for a resource
 //
 // The following example lists screenshot artifacts for a specific run.
-func ExampleDeviceFarm_ListArtifacts_shared00() {
+func ExampleDeviceFarm_ListArtifactsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -938,7 +960,8 @@ func ExampleDeviceFarm_ListArtifacts_shared00() {
 		Type: devicefarm.ArtifactCategoryScreenshot,
 	}
 
-	result, err := svc.ListArtifacts(input)
+	req := svc.ListArtifactsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -968,7 +991,7 @@ func ExampleDeviceFarm_ListArtifacts_shared00() {
 //
 // The following example returns information about the private device pools in a specific
 // project.
-func ExampleDeviceFarm_ListDevicePools_shared00() {
+func ExampleDeviceFarm_ListDevicePoolsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -980,7 +1003,8 @@ func ExampleDeviceFarm_ListDevicePools_shared00() {
 		Type: devicefarm.DevicePoolTypePrivate,
 	}
 
-	result, err := svc.ListDevicePools(input)
+	req := svc.ListDevicePoolsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1010,7 +1034,7 @@ func ExampleDeviceFarm_ListDevicePools_shared00() {
 //
 // The following example returns information about the available devices in a specific
 // project.
-func ExampleDeviceFarm_ListDevices_shared00() {
+func ExampleDeviceFarm_ListDevicesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1021,7 +1045,8 @@ func ExampleDeviceFarm_ListDevices_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.ListDevices(input)
+	req := svc.ListDevicesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1050,7 +1075,7 @@ func ExampleDeviceFarm_ListDevices_shared00() {
 // To get information about jobs
 //
 // The following example returns information about jobs in a specific project.
-func ExampleDeviceFarm_ListJobs_shared00() {
+func ExampleDeviceFarm_ListJobsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1061,7 +1086,8 @@ func ExampleDeviceFarm_ListJobs_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.ListJobs(input)
+	req := svc.ListJobsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1090,7 +1116,7 @@ func ExampleDeviceFarm_ListJobs_shared00() {
 // To get information about device offering transactions
 //
 // The following example returns information about Device Farm offering transactions.
-func ExampleDeviceFarm_ListOfferingTransactions_shared00() {
+func ExampleDeviceFarm_ListOfferingTransactionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1101,7 +1127,8 @@ func ExampleDeviceFarm_ListOfferingTransactions_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
-	result, err := svc.ListOfferingTransactions(input)
+	req := svc.ListOfferingTransactionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1132,7 +1159,7 @@ func ExampleDeviceFarm_ListOfferingTransactions_shared00() {
 // To get information about device offerings
 //
 // The following example returns information about available device offerings.
-func ExampleDeviceFarm_ListOfferings_shared00() {
+func ExampleDeviceFarm_ListOfferingsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1143,7 +1170,8 @@ func ExampleDeviceFarm_ListOfferings_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
-	result, err := svc.ListOfferings(input)
+	req := svc.ListOfferingsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1174,7 +1202,7 @@ func ExampleDeviceFarm_ListOfferings_shared00() {
 // To get information about a Device Farm project
 //
 // The following example returns information about the specified project in Device Farm.
-func ExampleDeviceFarm_ListProjects_shared00() {
+func ExampleDeviceFarm_ListProjectsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1186,7 +1214,8 @@ func ExampleDeviceFarm_ListProjects_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListProjects(input)
+	req := svc.ListProjectsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1216,7 +1245,7 @@ func ExampleDeviceFarm_ListProjects_shared00() {
 //
 // The following example returns information about a specific Device Farm remote access
 // session.
-func ExampleDeviceFarm_ListRemoteAccessSessions_shared00() {
+func ExampleDeviceFarm_ListRemoteAccessSessionsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1228,7 +1257,8 @@ func ExampleDeviceFarm_ListRemoteAccessSessions_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE="),
 	}
 
-	result, err := svc.ListRemoteAccessSessions(input)
+	req := svc.ListRemoteAccessSessionsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1257,7 +1287,7 @@ func ExampleDeviceFarm_ListRemoteAccessSessions_shared00() {
 // To get information about a test run
 //
 // The following example returns information about a specific test run.
-func ExampleDeviceFarm_ListRuns_shared00() {
+func ExampleDeviceFarm_ListRunsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1269,7 +1299,8 @@ func ExampleDeviceFarm_ListRuns_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListRuns(input)
+	req := svc.ListRunsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1299,7 +1330,7 @@ func ExampleDeviceFarm_ListRuns_shared00() {
 //
 // The following example returns information about samples, given a specific Device
 // Farm project.
-func ExampleDeviceFarm_ListSamples_shared00() {
+func ExampleDeviceFarm_ListSamplesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1311,7 +1342,8 @@ func ExampleDeviceFarm_ListSamples_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListSamples(input)
+	req := svc.ListSamplesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1341,7 +1373,7 @@ func ExampleDeviceFarm_ListSamples_shared00() {
 //
 // The following example returns information about suites, given a specific Device Farm
 // project.
-func ExampleDeviceFarm_ListSuites_shared00() {
+func ExampleDeviceFarm_ListSuitesRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1353,7 +1385,8 @@ func ExampleDeviceFarm_ListSuites_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListSuites(input)
+	req := svc.ListSuitesRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1383,7 +1416,7 @@ func ExampleDeviceFarm_ListSuites_shared00() {
 //
 // The following example returns information about tests, given a specific Device Farm
 // project.
-func ExampleDeviceFarm_ListTests_shared00() {
+func ExampleDeviceFarm_ListTestsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1395,7 +1428,8 @@ func ExampleDeviceFarm_ListTests_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListTests(input)
+	req := svc.ListTestsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1425,7 +1459,7 @@ func ExampleDeviceFarm_ListTests_shared00() {
 //
 // The following example returns information about unique problems, given a specific
 // Device Farm project.
-func ExampleDeviceFarm_ListUniqueProblems_shared00() {
+func ExampleDeviceFarm_ListUniqueProblemsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1437,7 +1471,8 @@ func ExampleDeviceFarm_ListUniqueProblems_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListUniqueProblems(input)
+	req := svc.ListUniqueProblemsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1467,7 +1502,7 @@ func ExampleDeviceFarm_ListUniqueProblems_shared00() {
 //
 // The following example returns information about uploads, given a specific Device
 // Farm project.
-func ExampleDeviceFarm_ListUploads_shared00() {
+func ExampleDeviceFarm_ListUploadsRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1479,7 +1514,8 @@ func ExampleDeviceFarm_ListUploads_shared00() {
 		NextToken: aws.String("RW5DdDJkMWYwZjM2MzM2VHVpOHJIUXlDUXlhc2QzRGViYnc9SEXAMPLE"),
 	}
 
-	result, err := svc.ListUploads(input)
+	req := svc.ListUploadsRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1508,7 +1544,7 @@ func ExampleDeviceFarm_ListUploads_shared00() {
 // To purchase a device slot offering
 //
 // The following example purchases a specific device slot offering.
-func ExampleDeviceFarm_PurchaseOffering_shared00() {
+func ExampleDeviceFarm_PurchaseOfferingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1520,7 +1556,8 @@ func ExampleDeviceFarm_PurchaseOffering_shared00() {
 		Quantity:   aws.Int64(1),
 	}
 
-	result, err := svc.PurchaseOffering(input)
+	req := svc.PurchaseOfferingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1551,7 +1588,7 @@ func ExampleDeviceFarm_PurchaseOffering_shared00() {
 // To renew a device slot offering
 //
 // The following example renews a specific device slot offering.
-func ExampleDeviceFarm_RenewOffering_shared00() {
+func ExampleDeviceFarm_RenewOfferingRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1563,7 +1600,8 @@ func ExampleDeviceFarm_RenewOffering_shared00() {
 		Quantity:   aws.Int64(1),
 	}
 
-	result, err := svc.RenewOffering(input)
+	req := svc.RenewOfferingRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1594,7 +1632,7 @@ func ExampleDeviceFarm_RenewOffering_shared00() {
 // To schedule a test run
 //
 // The following example schedules a test run named MyRun.
-func ExampleDeviceFarm_ScheduleRun_shared00() {
+func ExampleDeviceFarm_ScheduleRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1611,7 +1649,8 @@ func ExampleDeviceFarm_ScheduleRun_shared00() {
 		},
 	}
 
-	result, err := svc.ScheduleRun(input)
+	req := svc.ScheduleRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1642,7 +1681,7 @@ func ExampleDeviceFarm_ScheduleRun_shared00() {
 // To stop a test run
 //
 // The following example stops a specific test run.
-func ExampleDeviceFarm_StopRun_shared00() {
+func ExampleDeviceFarm_StopRunRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1653,7 +1692,8 @@ func ExampleDeviceFarm_StopRun_shared00() {
 		Arn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
 	}
 
-	result, err := svc.StopRun(input)
+	req := svc.StopRunRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1683,7 +1723,7 @@ func ExampleDeviceFarm_StopRun_shared00() {
 //
 // The following example updates the specified device pool with a new name and description.
 // It also enables remote access of devices in the device pool.
-func ExampleDeviceFarm_UpdateDevicePool_shared00() {
+func ExampleDeviceFarm_UpdateDevicePoolRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1703,7 +1743,8 @@ func ExampleDeviceFarm_UpdateDevicePool_shared00() {
 		},
 	}
 
-	result, err := svc.UpdateDevicePool(input)
+	req := svc.UpdateDevicePoolRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
@@ -1732,7 +1773,7 @@ func ExampleDeviceFarm_UpdateDevicePool_shared00() {
 // To update a device pool
 //
 // The following example updates the specified project with a new name.
-func ExampleDeviceFarm_UpdateProject_shared00() {
+func ExampleDeviceFarm_UpdateProjectRequest_shared00() {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		panic("failed to load config, " + err.Error())
@@ -1744,7 +1785,8 @@ func ExampleDeviceFarm_UpdateProject_shared00() {
 		Name: aws.String("NewName"),
 	}
 
-	result, err := svc.UpdateProject(input)
+	req := svc.UpdateProjectRequest(input)
+	result, err := req.Send()
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
