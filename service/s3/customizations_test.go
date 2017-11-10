@@ -146,7 +146,7 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		t.Log("WEE")
 	})
 
-	err := req.Send()
+	err = req.Send()
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
