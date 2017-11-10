@@ -5047,6 +5047,7 @@ func (s AllocateStaticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateStaticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllocateStaticIpInput"}
+
 	if s.StaticIpName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
@@ -5116,9 +5117,11 @@ func (s AttachStaticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachStaticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachStaticIpInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
+
 	if s.StaticIpName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
@@ -5232,7 +5235,7 @@ type Blueprint struct {
 	ProductUrl *string `locationName:"productUrl" type:"string"`
 
 	// The type of the blueprint (e.g., os or app).
-	Type *string `locationName:"type" type:"string" enum:"BlueprintType"`
+	Type BlueprintType `locationName:"type" type:"string"`
 
 	// The version number of the operating system, application, or stack (e.g.,
 	// 2016.03.0).
@@ -5301,8 +5304,8 @@ func (s *Blueprint) SetProductUrl(v string) *Blueprint {
 }
 
 // SetType sets the Type field's value.
-func (s *Blueprint) SetType(v string) *Blueprint {
-	s.Type = &v
+func (s *Blueprint) SetType(v BlueprintType) *Blueprint {
+	s.Type = v
 	return s
 }
 
@@ -5453,9 +5456,11 @@ func (s CloseInstancePublicPortsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloseInstancePublicPortsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloseInstancePublicPortsInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
+
 	if s.PortInfo == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
 	}
@@ -5532,9 +5537,11 @@ func (s CreateDomainEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainEntryInput"}
+
 	if s.DomainEntry == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -5609,6 +5616,7 @@ func (s CreateDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -5678,9 +5686,11 @@ func (s CreateInstanceSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceSnapshotInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
+
 	if s.InstanceSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
@@ -5785,15 +5795,19 @@ func (s CreateInstancesFromSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstancesFromSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesFromSnapshotInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
+
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
+
 	if s.InstanceSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
@@ -5929,15 +5943,19 @@ func (s CreateInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstancesInput"}
+
 	if s.AvailabilityZone == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
+
 	if s.BlueprintId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BlueprintId"))
 	}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
+
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
@@ -6038,6 +6056,7 @@ func (s CreateKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyPairInput"}
+
 	if s.KeyPairName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
@@ -6135,9 +6154,11 @@ func (s DeleteDomainEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainEntryInput"}
+
 	if s.DomainEntry == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -6208,6 +6229,7 @@ func (s DeleteDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -6272,6 +6294,7 @@ func (s DeleteInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -6336,6 +6359,7 @@ func (s DeleteInstanceSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceSnapshotInput"}
+
 	if s.InstanceSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
@@ -6400,6 +6424,7 @@ func (s DeleteKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteKeyPairInput"}
+
 	if s.KeyPairName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
@@ -6464,6 +6489,7 @@ func (s DetachStaticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachStaticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachStaticIpInput"}
+
 	if s.StaticIpName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
@@ -6545,7 +6571,7 @@ type Disk struct {
 	Path *string `locationName:"path" type:"string"`
 
 	// The resource type of the disk.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The size of the disk in GB.
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
@@ -6633,8 +6659,8 @@ func (s *Disk) SetPath(v string) *Disk {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *Disk) SetResourceType(v string) *Disk {
-	s.ResourceType = &v
+func (s *Disk) SetResourceType(v ResourceType) *Disk {
+	s.ResourceType = v
 	return s
 }
 
@@ -6671,7 +6697,7 @@ type Domain struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -6720,8 +6746,8 @@ func (s *Domain) SetName(v string) *Domain {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *Domain) SetResourceType(v string) *Domain {
-	s.ResourceType = &v
+func (s *Domain) SetResourceType(v ResourceType) *Domain {
+	s.ResourceType = v
 	return s
 }
 
@@ -7060,6 +7086,7 @@ func (s GetDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -7171,7 +7198,7 @@ type GetInstanceAccessDetailsInput struct {
 	InstanceName *string `locationName:"instanceName" type:"string" required:"true"`
 
 	// The protocol to use to connect to your instance. Defaults to ssh.
-	Protocol *string `locationName:"protocol" type:"string" enum:"InstanceAccessProtocol"`
+	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string"`
 }
 
 // String returns the string representation
@@ -7187,6 +7214,7 @@ func (s GetInstanceAccessDetailsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceAccessDetailsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceAccessDetailsInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -7204,8 +7232,8 @@ func (s *GetInstanceAccessDetailsInput) SetInstanceName(v string) *GetInstanceAc
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *GetInstanceAccessDetailsInput) SetProtocol(v string) *GetInstanceAccessDetailsInput {
-	s.Protocol = &v
+func (s *GetInstanceAccessDetailsInput) SetProtocol(v InstanceAccessProtocol) *GetInstanceAccessDetailsInput {
+	s.Protocol = v
 	return s
 }
 
@@ -7257,6 +7285,7 @@ func (s GetInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -7290,7 +7319,7 @@ type GetInstanceMetricDataInput struct {
 	// The metric name to get data about.
 	//
 	// MetricName is a required field
-	MetricName *string `locationName:"metricName" type:"string" required:"true" enum:"InstanceMetricName"`
+	MetricName InstanceMetricName `locationName:"metricName" type:"string" required:"true"`
 
 	// The time period for which you are requesting data.
 	//
@@ -7305,12 +7334,12 @@ type GetInstanceMetricDataInput struct {
 	// The instance statistics.
 	//
 	// Statistics is a required field
-	Statistics []*string `locationName:"statistics" type:"list" required:"true"`
+	Statistics []MetricStatistic `locationName:"statistics" type:"list" required:"true"`
 
 	// The unit. The list of valid values is below.
 	//
 	// Unit is a required field
-	Unit *string `locationName:"unit" type:"string" required:"true" enum:"MetricUnit"`
+	Unit MetricUnit `locationName:"unit" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7326,28 +7355,33 @@ func (s GetInstanceMetricDataInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceMetricDataInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceMetricDataInput"}
+
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
-	if s.MetricName == nil {
+	if len(s.MetricName) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Period == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 60 {
 		invalidParams.Add(aws.NewErrParamMinValue("Period", 60))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
+
 	if s.Statistics == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Statistics"))
 	}
-	if s.Unit == nil {
+	if len(s.Unit) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Unit"))
 	}
 
@@ -7370,8 +7404,8 @@ func (s *GetInstanceMetricDataInput) SetInstanceName(v string) *GetInstanceMetri
 }
 
 // SetMetricName sets the MetricName field's value.
-func (s *GetInstanceMetricDataInput) SetMetricName(v string) *GetInstanceMetricDataInput {
-	s.MetricName = &v
+func (s *GetInstanceMetricDataInput) SetMetricName(v InstanceMetricName) *GetInstanceMetricDataInput {
+	s.MetricName = v
 	return s
 }
 
@@ -7388,14 +7422,14 @@ func (s *GetInstanceMetricDataInput) SetStartTime(v time.Time) *GetInstanceMetri
 }
 
 // SetStatistics sets the Statistics field's value.
-func (s *GetInstanceMetricDataInput) SetStatistics(v []*string) *GetInstanceMetricDataInput {
+func (s *GetInstanceMetricDataInput) SetStatistics(v []MetricStatistic) *GetInstanceMetricDataInput {
 	s.Statistics = v
 	return s
 }
 
 // SetUnit sets the Unit field's value.
-func (s *GetInstanceMetricDataInput) SetUnit(v string) *GetInstanceMetricDataInput {
-	s.Unit = &v
+func (s *GetInstanceMetricDataInput) SetUnit(v MetricUnit) *GetInstanceMetricDataInput {
+	s.Unit = v
 	return s
 }
 
@@ -7408,7 +7442,7 @@ type GetInstanceMetricDataOutput struct {
 	MetricData []*MetricDatapoint `locationName:"metricData" type:"list"`
 
 	// The metric name to return data for.
-	MetricName *string `locationName:"metricName" type:"string" enum:"InstanceMetricName"`
+	MetricName InstanceMetricName `locationName:"metricName" type:"string"`
 }
 
 // String returns the string representation
@@ -7428,8 +7462,8 @@ func (s *GetInstanceMetricDataOutput) SetMetricData(v []*MetricDatapoint) *GetIn
 }
 
 // SetMetricName sets the MetricName field's value.
-func (s *GetInstanceMetricDataOutput) SetMetricName(v string) *GetInstanceMetricDataOutput {
-	s.MetricName = &v
+func (s *GetInstanceMetricDataOutput) SetMetricName(v InstanceMetricName) *GetInstanceMetricDataOutput {
+	s.MetricName = v
 	return s
 }
 
@@ -7480,6 +7514,7 @@ func (s GetInstancePortStatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstancePortStatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstancePortStatesInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -7543,6 +7578,7 @@ func (s GetInstanceSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceSnapshotInput"}
+
 	if s.InstanceSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceSnapshotName"))
 	}
@@ -7667,6 +7703,7 @@ func (s GetInstanceStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInstanceStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceStateInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -7789,6 +7826,7 @@ func (s GetKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPairInput"}
+
 	if s.KeyPairName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
@@ -7911,6 +7949,7 @@ func (s GetOperationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOperationInput"}
+
 	if s.OperationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
@@ -7979,6 +8018,7 @@ func (s GetOperationsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOperationsForResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
@@ -8182,6 +8222,7 @@ func (s GetStaticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStaticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStaticIpInput"}
+
 	if s.StaticIpName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
@@ -8311,9 +8352,11 @@ func (s ImportKeyPairInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportKeyPairInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyPairInput"}
+
 	if s.KeyPairName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyPairName"))
 	}
+
 	if s.PublicKeyBase64 == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublicKeyBase64"))
 	}
@@ -8407,7 +8450,7 @@ type Instance struct {
 	PublicIpAddress *string `locationName:"publicIpAddress" type:"string"`
 
 	// The type of resource (usually Instance).
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The name of the SSH key being used to connect to the instance (e.g., LightsailDefaultKeyPair).
 	SshKeyName *string `locationName:"sshKeyName" type:"string"`
@@ -8513,8 +8556,8 @@ func (s *Instance) SetPublicIpAddress(v string) *Instance {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *Instance) SetResourceType(v string) *Instance {
-	s.ResourceType = &v
+func (s *Instance) SetResourceType(v ResourceType) *Instance {
+	s.ResourceType = v
 	return s
 }
 
@@ -8569,7 +8612,7 @@ type InstanceAccessDetails struct {
 	PrivateKey *string `locationName:"privateKey" type:"string"`
 
 	// The protocol for these Amazon Lightsail instance access details.
-	Protocol *string `locationName:"protocol" type:"string" enum:"InstanceAccessProtocol"`
+	Protocol InstanceAccessProtocol `locationName:"protocol" type:"string"`
 
 	// The user name to use when logging in to the Amazon Lightsail instance.
 	Username *string `locationName:"username" type:"string"`
@@ -8622,8 +8665,8 @@ func (s *InstanceAccessDetails) SetPrivateKey(v string) *InstanceAccessDetails {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *InstanceAccessDetails) SetProtocol(v string) *InstanceAccessDetails {
-	s.Protocol = &v
+func (s *InstanceAccessDetails) SetProtocol(v InstanceAccessProtocol) *InstanceAccessDetails {
+	s.Protocol = v
 	return s
 }
 
@@ -8717,13 +8760,13 @@ type InstancePortInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The access direction (inbound or outbound).
-	AccessDirection *string `locationName:"accessDirection" type:"string" enum:"AccessDirection"`
+	AccessDirection AccessDirection `locationName:"accessDirection" type:"string"`
 
 	// The location from which access is allowed (e.g., Anywhere (0.0.0.0/0)).
 	AccessFrom *string `locationName:"accessFrom" type:"string"`
 
 	// The type of access (Public or Private).
-	AccessType *string `locationName:"accessType" type:"string" enum:"PortAccessType"`
+	AccessType PortAccessType `locationName:"accessType" type:"string"`
 
 	// The common name.
 	CommonName *string `locationName:"commonName" type:"string"`
@@ -8749,7 +8792,7 @@ type InstancePortInfo struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
-	Protocol *string `locationName:"protocol" type:"string" enum:"NetworkProtocol"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -8766,8 +8809,8 @@ func (s InstancePortInfo) GoString() string {
 }
 
 // SetAccessDirection sets the AccessDirection field's value.
-func (s *InstancePortInfo) SetAccessDirection(v string) *InstancePortInfo {
-	s.AccessDirection = &v
+func (s *InstancePortInfo) SetAccessDirection(v AccessDirection) *InstancePortInfo {
+	s.AccessDirection = v
 	return s
 }
 
@@ -8778,8 +8821,8 @@ func (s *InstancePortInfo) SetAccessFrom(v string) *InstancePortInfo {
 }
 
 // SetAccessType sets the AccessType field's value.
-func (s *InstancePortInfo) SetAccessType(v string) *InstancePortInfo {
-	s.AccessType = &v
+func (s *InstancePortInfo) SetAccessType(v PortAccessType) *InstancePortInfo {
+	s.AccessType = v
 	return s
 }
 
@@ -8796,8 +8839,8 @@ func (s *InstancePortInfo) SetFromPort(v int64) *InstancePortInfo {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *InstancePortInfo) SetProtocol(v string) *InstancePortInfo {
-	s.Protocol = &v
+func (s *InstancePortInfo) SetProtocol(v NetworkProtocol) *InstancePortInfo {
+	s.Protocol = v
 	return s
 }
 
@@ -8833,10 +8876,10 @@ type InstancePortState struct {
 	//    can use UDP, which provides a connectionless datagram service that emphasizes
 	//    reduced latency over reliability. If you do require reliable data stream
 	//    service, use TCP instead.
-	Protocol *string `locationName:"protocol" type:"string" enum:"NetworkProtocol"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
 
 	// Specifies whether the instance port is open or closed.
-	State *string `locationName:"state" type:"string" enum:"PortState"`
+	State PortState `locationName:"state" type:"string"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -8859,14 +8902,14 @@ func (s *InstancePortState) SetFromPort(v int64) *InstancePortState {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *InstancePortState) SetProtocol(v string) *InstancePortState {
-	s.Protocol = &v
+func (s *InstancePortState) SetProtocol(v NetworkProtocol) *InstancePortState {
+	s.Protocol = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *InstancePortState) SetState(v string) *InstancePortState {
-	s.State = &v
+func (s *InstancePortState) SetState(v PortState) *InstancePortState {
+	s.State = v
 	return s
 }
 
@@ -8912,13 +8955,13 @@ type InstanceSnapshot struct {
 	Progress *string `locationName:"progress" type:"string"`
 
 	// The type of resource (usually InstanceSnapshot).
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The size in GB of the SSD.
 	SizeInGb *int64 `locationName:"sizeInGb" type:"integer"`
 
 	// The state the snapshot is in.
-	State *string `locationName:"state" type:"string" enum:"InstanceSnapshotState"`
+	State InstanceSnapshotState `locationName:"state" type:"string"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -8991,8 +9034,8 @@ func (s *InstanceSnapshot) SetProgress(v string) *InstanceSnapshot {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *InstanceSnapshot) SetResourceType(v string) *InstanceSnapshot {
-	s.ResourceType = &v
+func (s *InstanceSnapshot) SetResourceType(v ResourceType) *InstanceSnapshot {
+	s.ResourceType = v
 	return s
 }
 
@@ -9003,8 +9046,8 @@ func (s *InstanceSnapshot) SetSizeInGb(v int64) *InstanceSnapshot {
 }
 
 // SetState sets the State field's value.
-func (s *InstanceSnapshot) SetState(v string) *InstanceSnapshot {
-	s.State = &v
+func (s *InstanceSnapshot) SetState(v InstanceSnapshotState) *InstanceSnapshot {
+	s.State = v
 	return s
 }
 
@@ -9108,7 +9151,7 @@ type KeyPair struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type (usually KeyPair).
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -9157,8 +9200,8 @@ func (s *KeyPair) SetName(v string) *KeyPair {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *KeyPair) SetResourceType(v string) *KeyPair {
-	s.ResourceType = &v
+func (s *KeyPair) SetResourceType(v ResourceType) *KeyPair {
+	s.ResourceType = v
 	return s
 }
 
@@ -9192,7 +9235,7 @@ type MetricDatapoint struct {
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"unix"`
 
 	// The unit.
-	Unit *string `locationName:"unit" type:"string" enum:"MetricUnit"`
+	Unit MetricUnit `locationName:"unit" type:"string"`
 }
 
 // String returns the string representation
@@ -9242,8 +9285,8 @@ func (s *MetricDatapoint) SetTimestamp(v time.Time) *MetricDatapoint {
 }
 
 // SetUnit sets the Unit field's value.
-func (s *MetricDatapoint) SetUnit(v string) *MetricDatapoint {
-	s.Unit = &v
+func (s *MetricDatapoint) SetUnit(v MetricUnit) *MetricDatapoint {
+	s.Unit = v
 	return s
 }
 
@@ -9301,9 +9344,11 @@ func (s OpenInstancePublicPortsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OpenInstancePublicPortsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OpenInstancePublicPortsInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
+
 	if s.PortInfo == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortInfo"))
 	}
@@ -9377,16 +9422,16 @@ type Operation struct {
 	OperationDetails *string `locationName:"operationDetails" type:"string"`
 
 	// The type of operation.
-	OperationType *string `locationName:"operationType" type:"string" enum:"OperationType"`
+	OperationType OperationType `locationName:"operationType" type:"string"`
 
 	// The resource name.
 	ResourceName *string `locationName:"resourceName" type:"string"`
 
 	// The resource type.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The status of the operation.
-	Status *string `locationName:"status" type:"string" enum:"OperationStatus"`
+	Status OperationStatus `locationName:"status" type:"string"`
 
 	// The timestamp when the status was changed (e.g., 1479816991.349).
 	StatusChangedAt *time.Time `locationName:"statusChangedAt" type:"timestamp" timestampFormat:"unix"`
@@ -9445,8 +9490,8 @@ func (s *Operation) SetOperationDetails(v string) *Operation {
 }
 
 // SetOperationType sets the OperationType field's value.
-func (s *Operation) SetOperationType(v string) *Operation {
-	s.OperationType = &v
+func (s *Operation) SetOperationType(v OperationType) *Operation {
+	s.OperationType = v
 	return s
 }
 
@@ -9457,14 +9502,14 @@ func (s *Operation) SetResourceName(v string) *Operation {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *Operation) SetResourceType(v string) *Operation {
-	s.ResourceType = &v
+func (s *Operation) SetResourceType(v ResourceType) *Operation {
+	s.ResourceType = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *Operation) SetStatus(v string) *Operation {
-	s.Status = &v
+func (s *Operation) SetStatus(v OperationStatus) *Operation {
+	s.Status = v
 	return s
 }
 
@@ -9523,7 +9568,7 @@ type PortInfo struct {
 	FromPort *int64 `locationName:"fromPort" type:"integer"`
 
 	// The protocol.
-	Protocol *string `locationName:"protocol" type:"string" enum:"NetworkProtocol"`
+	Protocol NetworkProtocol `locationName:"protocol" type:"string"`
 
 	// The last port in the range.
 	ToPort *int64 `locationName:"toPort" type:"integer"`
@@ -9546,8 +9591,8 @@ func (s *PortInfo) SetFromPort(v int64) *PortInfo {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *PortInfo) SetProtocol(v string) *PortInfo {
-	s.Protocol = &v
+func (s *PortInfo) SetProtocol(v NetworkProtocol) *PortInfo {
+	s.Protocol = v
 	return s
 }
 
@@ -9585,9 +9630,11 @@ func (s PutInstancePublicPortsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutInstancePublicPortsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutInstancePublicPortsInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
+
 	if s.PortInfos == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortInfos"))
 	}
@@ -9657,6 +9704,7 @@ func (s RebootInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -9716,7 +9764,7 @@ type Region struct {
 	DisplayName *string `locationName:"displayName" type:"string"`
 
 	// The region name (e.g., us-east-1).
-	Name *string `locationName:"name" type:"string" enum:"RegionName"`
+	Name RegionName `locationName:"name" type:"string"`
 }
 
 // String returns the string representation
@@ -9754,8 +9802,8 @@ func (s *Region) SetDisplayName(v string) *Region {
 }
 
 // SetName sets the Name field's value.
-func (s *Region) SetName(v string) *Region {
-	s.Name = &v
+func (s *Region) SetName(v RegionName) *Region {
+	s.Name = v
 	return s
 }
 
@@ -9782,6 +9830,7 @@ func (s ReleaseStaticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReleaseStaticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReleaseStaticIpInput"}
+
 	if s.StaticIpName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticIpName"))
 	}
@@ -9831,7 +9880,7 @@ type ResourceLocation struct {
 	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The AWS Region name.
-	RegionName *string `locationName:"regionName" type:"string" enum:"RegionName"`
+	RegionName RegionName `locationName:"regionName" type:"string"`
 }
 
 // String returns the string representation
@@ -9851,8 +9900,8 @@ func (s *ResourceLocation) SetAvailabilityZone(v string) *ResourceLocation {
 }
 
 // SetRegionName sets the RegionName field's value.
-func (s *ResourceLocation) SetRegionName(v string) *ResourceLocation {
-	s.RegionName = &v
+func (s *ResourceLocation) SetRegionName(v RegionName) *ResourceLocation {
+	s.RegionName = v
 	return s
 }
 
@@ -9879,6 +9928,7 @@ func (s StartInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -9946,7 +9996,7 @@ type StaticIp struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The resource type (usually StaticIp).
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -10007,8 +10057,8 @@ func (s *StaticIp) SetName(v string) *StaticIp {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *StaticIp) SetResourceType(v string) *StaticIp {
-	s.ResourceType = &v
+func (s *StaticIp) SetResourceType(v ResourceType) *StaticIp {
+	s.ResourceType = v
 	return s
 }
 
@@ -10041,6 +10091,7 @@ func (s StopInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -10148,9 +10199,11 @@ func (s UpdateDomainEntryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainEntryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainEntryInput"}
+
 	if s.DomainEntry == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainEntry"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -10197,312 +10250,180 @@ func (s *UpdateDomainEntryOutput) SetOperations(v []*Operation) *UpdateDomainEnt
 	return s
 }
 
-const (
-	// AccessDirectionInbound is a AccessDirection enum value
-	AccessDirectionInbound = "inbound"
+type AccessDirection string
 
-	// AccessDirectionOutbound is a AccessDirection enum value
-	AccessDirectionOutbound = "outbound"
+// Enum values for AccessDirection
+const (
+	AccessDirectionInbound  AccessDirection = "inbound"
+	AccessDirectionOutbound AccessDirection = "outbound"
 )
 
-const (
-	// BlueprintTypeOs is a BlueprintType enum value
-	BlueprintTypeOs = "os"
+type BlueprintType string
 
-	// BlueprintTypeApp is a BlueprintType enum value
-	BlueprintTypeApp = "app"
+// Enum values for BlueprintType
+const (
+	BlueprintTypeOs  BlueprintType = "os"
+	BlueprintTypeApp BlueprintType = "app"
 )
 
-const (
-	// InstanceAccessProtocolSsh is a InstanceAccessProtocol enum value
-	InstanceAccessProtocolSsh = "ssh"
+type InstanceAccessProtocol string
 
-	// InstanceAccessProtocolRdp is a InstanceAccessProtocol enum value
-	InstanceAccessProtocolRdp = "rdp"
+// Enum values for InstanceAccessProtocol
+const (
+	InstanceAccessProtocolSsh InstanceAccessProtocol = "ssh"
+	InstanceAccessProtocolRdp InstanceAccessProtocol = "rdp"
 )
 
+type InstanceMetricName string
+
+// Enum values for InstanceMetricName
 const (
-	// InstanceMetricNameCpuutilization is a InstanceMetricName enum value
-	InstanceMetricNameCpuutilization = "CPUUtilization"
-
-	// InstanceMetricNameNetworkIn is a InstanceMetricName enum value
-	InstanceMetricNameNetworkIn = "NetworkIn"
-
-	// InstanceMetricNameNetworkOut is a InstanceMetricName enum value
-	InstanceMetricNameNetworkOut = "NetworkOut"
-
-	// InstanceMetricNameStatusCheckFailed is a InstanceMetricName enum value
-	InstanceMetricNameStatusCheckFailed = "StatusCheckFailed"
-
-	// InstanceMetricNameStatusCheckFailedInstance is a InstanceMetricName enum value
-	InstanceMetricNameStatusCheckFailedInstance = "StatusCheckFailed_Instance"
-
-	// InstanceMetricNameStatusCheckFailedSystem is a InstanceMetricName enum value
-	InstanceMetricNameStatusCheckFailedSystem = "StatusCheckFailed_System"
+	InstanceMetricNameCpuutilization            InstanceMetricName = "CPUUtilization"
+	InstanceMetricNameNetworkIn                 InstanceMetricName = "NetworkIn"
+	InstanceMetricNameNetworkOut                InstanceMetricName = "NetworkOut"
+	InstanceMetricNameStatusCheckFailed         InstanceMetricName = "StatusCheckFailed"
+	InstanceMetricNameStatusCheckFailedInstance InstanceMetricName = "StatusCheckFailed_Instance"
+	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
 )
 
+type InstanceSnapshotState string
+
+// Enum values for InstanceSnapshotState
 const (
-	// InstanceSnapshotStatePending is a InstanceSnapshotState enum value
-	InstanceSnapshotStatePending = "pending"
-
-	// InstanceSnapshotStateError is a InstanceSnapshotState enum value
-	InstanceSnapshotStateError = "error"
-
-	// InstanceSnapshotStateAvailable is a InstanceSnapshotState enum value
-	InstanceSnapshotStateAvailable = "available"
+	InstanceSnapshotStatePending   InstanceSnapshotState = "pending"
+	InstanceSnapshotStateError     InstanceSnapshotState = "error"
+	InstanceSnapshotStateAvailable InstanceSnapshotState = "available"
 )
 
+type MetricStatistic string
+
+// Enum values for MetricStatistic
 const (
-	// MetricStatisticMinimum is a MetricStatistic enum value
-	MetricStatisticMinimum = "Minimum"
-
-	// MetricStatisticMaximum is a MetricStatistic enum value
-	MetricStatisticMaximum = "Maximum"
-
-	// MetricStatisticSum is a MetricStatistic enum value
-	MetricStatisticSum = "Sum"
-
-	// MetricStatisticAverage is a MetricStatistic enum value
-	MetricStatisticAverage = "Average"
-
-	// MetricStatisticSampleCount is a MetricStatistic enum value
-	MetricStatisticSampleCount = "SampleCount"
+	MetricStatisticMinimum     MetricStatistic = "Minimum"
+	MetricStatisticMaximum     MetricStatistic = "Maximum"
+	MetricStatisticSum         MetricStatistic = "Sum"
+	MetricStatisticAverage     MetricStatistic = "Average"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 )
 
+type MetricUnit string
+
+// Enum values for MetricUnit
 const (
-	// MetricUnitSeconds is a MetricUnit enum value
-	MetricUnitSeconds = "Seconds"
-
-	// MetricUnitMicroseconds is a MetricUnit enum value
-	MetricUnitMicroseconds = "Microseconds"
-
-	// MetricUnitMilliseconds is a MetricUnit enum value
-	MetricUnitMilliseconds = "Milliseconds"
-
-	// MetricUnitBytes is a MetricUnit enum value
-	MetricUnitBytes = "Bytes"
-
-	// MetricUnitKilobytes is a MetricUnit enum value
-	MetricUnitKilobytes = "Kilobytes"
-
-	// MetricUnitMegabytes is a MetricUnit enum value
-	MetricUnitMegabytes = "Megabytes"
-
-	// MetricUnitGigabytes is a MetricUnit enum value
-	MetricUnitGigabytes = "Gigabytes"
-
-	// MetricUnitTerabytes is a MetricUnit enum value
-	MetricUnitTerabytes = "Terabytes"
-
-	// MetricUnitBits is a MetricUnit enum value
-	MetricUnitBits = "Bits"
-
-	// MetricUnitKilobits is a MetricUnit enum value
-	MetricUnitKilobits = "Kilobits"
-
-	// MetricUnitMegabits is a MetricUnit enum value
-	MetricUnitMegabits = "Megabits"
-
-	// MetricUnitGigabits is a MetricUnit enum value
-	MetricUnitGigabits = "Gigabits"
-
-	// MetricUnitTerabits is a MetricUnit enum value
-	MetricUnitTerabits = "Terabits"
-
-	// MetricUnitPercent is a MetricUnit enum value
-	MetricUnitPercent = "Percent"
-
-	// MetricUnitCount is a MetricUnit enum value
-	MetricUnitCount = "Count"
-
-	// MetricUnitBytesSecond is a MetricUnit enum value
-	MetricUnitBytesSecond = "Bytes/Second"
-
-	// MetricUnitKilobytesSecond is a MetricUnit enum value
-	MetricUnitKilobytesSecond = "Kilobytes/Second"
-
-	// MetricUnitMegabytesSecond is a MetricUnit enum value
-	MetricUnitMegabytesSecond = "Megabytes/Second"
-
-	// MetricUnitGigabytesSecond is a MetricUnit enum value
-	MetricUnitGigabytesSecond = "Gigabytes/Second"
-
-	// MetricUnitTerabytesSecond is a MetricUnit enum value
-	MetricUnitTerabytesSecond = "Terabytes/Second"
-
-	// MetricUnitBitsSecond is a MetricUnit enum value
-	MetricUnitBitsSecond = "Bits/Second"
-
-	// MetricUnitKilobitsSecond is a MetricUnit enum value
-	MetricUnitKilobitsSecond = "Kilobits/Second"
-
-	// MetricUnitMegabitsSecond is a MetricUnit enum value
-	MetricUnitMegabitsSecond = "Megabits/Second"
-
-	// MetricUnitGigabitsSecond is a MetricUnit enum value
-	MetricUnitGigabitsSecond = "Gigabits/Second"
-
-	// MetricUnitTerabitsSecond is a MetricUnit enum value
-	MetricUnitTerabitsSecond = "Terabits/Second"
-
-	// MetricUnitCountSecond is a MetricUnit enum value
-	MetricUnitCountSecond = "Count/Second"
-
-	// MetricUnitNone is a MetricUnit enum value
-	MetricUnitNone = "None"
+	MetricUnitSeconds         MetricUnit = "Seconds"
+	MetricUnitMicroseconds    MetricUnit = "Microseconds"
+	MetricUnitMilliseconds    MetricUnit = "Milliseconds"
+	MetricUnitBytes           MetricUnit = "Bytes"
+	MetricUnitKilobytes       MetricUnit = "Kilobytes"
+	MetricUnitMegabytes       MetricUnit = "Megabytes"
+	MetricUnitGigabytes       MetricUnit = "Gigabytes"
+	MetricUnitTerabytes       MetricUnit = "Terabytes"
+	MetricUnitBits            MetricUnit = "Bits"
+	MetricUnitKilobits        MetricUnit = "Kilobits"
+	MetricUnitMegabits        MetricUnit = "Megabits"
+	MetricUnitGigabits        MetricUnit = "Gigabits"
+	MetricUnitTerabits        MetricUnit = "Terabits"
+	MetricUnitPercent         MetricUnit = "Percent"
+	MetricUnitCount           MetricUnit = "Count"
+	MetricUnitBytesSecond     MetricUnit = "Bytes/Second"
+	MetricUnitKilobytesSecond MetricUnit = "Kilobytes/Second"
+	MetricUnitMegabytesSecond MetricUnit = "Megabytes/Second"
+	MetricUnitGigabytesSecond MetricUnit = "Gigabytes/Second"
+	MetricUnitTerabytesSecond MetricUnit = "Terabytes/Second"
+	MetricUnitBitsSecond      MetricUnit = "Bits/Second"
+	MetricUnitKilobitsSecond  MetricUnit = "Kilobits/Second"
+	MetricUnitMegabitsSecond  MetricUnit = "Megabits/Second"
+	MetricUnitGigabitsSecond  MetricUnit = "Gigabits/Second"
+	MetricUnitTerabitsSecond  MetricUnit = "Terabits/Second"
+	MetricUnitCountSecond     MetricUnit = "Count/Second"
+	MetricUnitNone            MetricUnit = "None"
 )
 
+type NetworkProtocol string
+
+// Enum values for NetworkProtocol
 const (
-	// NetworkProtocolTcp is a NetworkProtocol enum value
-	NetworkProtocolTcp = "tcp"
-
-	// NetworkProtocolAll is a NetworkProtocol enum value
-	NetworkProtocolAll = "all"
-
-	// NetworkProtocolUdp is a NetworkProtocol enum value
-	NetworkProtocolUdp = "udp"
+	NetworkProtocolTcp NetworkProtocol = "tcp"
+	NetworkProtocolAll NetworkProtocol = "all"
+	NetworkProtocolUdp NetworkProtocol = "udp"
 )
 
+type OperationStatus string
+
+// Enum values for OperationStatus
 const (
-	// OperationStatusNotStarted is a OperationStatus enum value
-	OperationStatusNotStarted = "NotStarted"
-
-	// OperationStatusStarted is a OperationStatus enum value
-	OperationStatusStarted = "Started"
-
-	// OperationStatusFailed is a OperationStatus enum value
-	OperationStatusFailed = "Failed"
-
-	// OperationStatusCompleted is a OperationStatus enum value
-	OperationStatusCompleted = "Completed"
+	OperationStatusNotStarted OperationStatus = "NotStarted"
+	OperationStatusStarted    OperationStatus = "Started"
+	OperationStatusFailed     OperationStatus = "Failed"
+	OperationStatusCompleted  OperationStatus = "Completed"
 )
 
+type OperationType string
+
+// Enum values for OperationType
 const (
-	// OperationTypeDeleteInstance is a OperationType enum value
-	OperationTypeDeleteInstance = "DeleteInstance"
-
-	// OperationTypeCreateInstance is a OperationType enum value
-	OperationTypeCreateInstance = "CreateInstance"
-
-	// OperationTypeStopInstance is a OperationType enum value
-	OperationTypeStopInstance = "StopInstance"
-
-	// OperationTypeStartInstance is a OperationType enum value
-	OperationTypeStartInstance = "StartInstance"
-
-	// OperationTypeRebootInstance is a OperationType enum value
-	OperationTypeRebootInstance = "RebootInstance"
-
-	// OperationTypeOpenInstancePublicPorts is a OperationType enum value
-	OperationTypeOpenInstancePublicPorts = "OpenInstancePublicPorts"
-
-	// OperationTypePutInstancePublicPorts is a OperationType enum value
-	OperationTypePutInstancePublicPorts = "PutInstancePublicPorts"
-
-	// OperationTypeCloseInstancePublicPorts is a OperationType enum value
-	OperationTypeCloseInstancePublicPorts = "CloseInstancePublicPorts"
-
-	// OperationTypeAllocateStaticIp is a OperationType enum value
-	OperationTypeAllocateStaticIp = "AllocateStaticIp"
-
-	// OperationTypeReleaseStaticIp is a OperationType enum value
-	OperationTypeReleaseStaticIp = "ReleaseStaticIp"
-
-	// OperationTypeAttachStaticIp is a OperationType enum value
-	OperationTypeAttachStaticIp = "AttachStaticIp"
-
-	// OperationTypeDetachStaticIp is a OperationType enum value
-	OperationTypeDetachStaticIp = "DetachStaticIp"
-
-	// OperationTypeUpdateDomainEntry is a OperationType enum value
-	OperationTypeUpdateDomainEntry = "UpdateDomainEntry"
-
-	// OperationTypeDeleteDomainEntry is a OperationType enum value
-	OperationTypeDeleteDomainEntry = "DeleteDomainEntry"
-
-	// OperationTypeCreateDomain is a OperationType enum value
-	OperationTypeCreateDomain = "CreateDomain"
-
-	// OperationTypeDeleteDomain is a OperationType enum value
-	OperationTypeDeleteDomain = "DeleteDomain"
-
-	// OperationTypeCreateInstanceSnapshot is a OperationType enum value
-	OperationTypeCreateInstanceSnapshot = "CreateInstanceSnapshot"
-
-	// OperationTypeDeleteInstanceSnapshot is a OperationType enum value
-	OperationTypeDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
-
-	// OperationTypeCreateInstancesFromSnapshot is a OperationType enum value
-	OperationTypeCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
+	OperationTypeDeleteInstance              OperationType = "DeleteInstance"
+	OperationTypeCreateInstance              OperationType = "CreateInstance"
+	OperationTypeStopInstance                OperationType = "StopInstance"
+	OperationTypeStartInstance               OperationType = "StartInstance"
+	OperationTypeRebootInstance              OperationType = "RebootInstance"
+	OperationTypeOpenInstancePublicPorts     OperationType = "OpenInstancePublicPorts"
+	OperationTypePutInstancePublicPorts      OperationType = "PutInstancePublicPorts"
+	OperationTypeCloseInstancePublicPorts    OperationType = "CloseInstancePublicPorts"
+	OperationTypeAllocateStaticIp            OperationType = "AllocateStaticIp"
+	OperationTypeReleaseStaticIp             OperationType = "ReleaseStaticIp"
+	OperationTypeAttachStaticIp              OperationType = "AttachStaticIp"
+	OperationTypeDetachStaticIp              OperationType = "DetachStaticIp"
+	OperationTypeUpdateDomainEntry           OperationType = "UpdateDomainEntry"
+	OperationTypeDeleteDomainEntry           OperationType = "DeleteDomainEntry"
+	OperationTypeCreateDomain                OperationType = "CreateDomain"
+	OperationTypeDeleteDomain                OperationType = "DeleteDomain"
+	OperationTypeCreateInstanceSnapshot      OperationType = "CreateInstanceSnapshot"
+	OperationTypeDeleteInstanceSnapshot      OperationType = "DeleteInstanceSnapshot"
+	OperationTypeCreateInstancesFromSnapshot OperationType = "CreateInstancesFromSnapshot"
 )
 
-const (
-	// PortAccessTypePublic is a PortAccessType enum value
-	PortAccessTypePublic = "Public"
+type PortAccessType string
 
-	// PortAccessTypePrivate is a PortAccessType enum value
-	PortAccessTypePrivate = "Private"
+// Enum values for PortAccessType
+const (
+	PortAccessTypePublic  PortAccessType = "Public"
+	PortAccessTypePrivate PortAccessType = "Private"
 )
 
-const (
-	// PortStateOpen is a PortState enum value
-	PortStateOpen = "open"
+type PortState string
 
-	// PortStateClosed is a PortState enum value
-	PortStateClosed = "closed"
+// Enum values for PortState
+const (
+	PortStateOpen   PortState = "open"
+	PortStateClosed PortState = "closed"
 )
 
+type RegionName string
+
+// Enum values for RegionName
 const (
-	// RegionNameUsEast1 is a RegionName enum value
-	RegionNameUsEast1 = "us-east-1"
-
-	// RegionNameUsEast2 is a RegionName enum value
-	RegionNameUsEast2 = "us-east-2"
-
-	// RegionNameUsWest1 is a RegionName enum value
-	RegionNameUsWest1 = "us-west-1"
-
-	// RegionNameUsWest2 is a RegionName enum value
-	RegionNameUsWest2 = "us-west-2"
-
-	// RegionNameEuWest1 is a RegionName enum value
-	RegionNameEuWest1 = "eu-west-1"
-
-	// RegionNameEuCentral1 is a RegionName enum value
-	RegionNameEuCentral1 = "eu-central-1"
-
-	// RegionNameApSouth1 is a RegionName enum value
-	RegionNameApSouth1 = "ap-south-1"
-
-	// RegionNameApSoutheast1 is a RegionName enum value
-	RegionNameApSoutheast1 = "ap-southeast-1"
-
-	// RegionNameApSoutheast2 is a RegionName enum value
-	RegionNameApSoutheast2 = "ap-southeast-2"
-
-	// RegionNameApNortheast1 is a RegionName enum value
-	RegionNameApNortheast1 = "ap-northeast-1"
-
-	// RegionNameApNortheast2 is a RegionName enum value
-	RegionNameApNortheast2 = "ap-northeast-2"
+	RegionNameUsEast1      RegionName = "us-east-1"
+	RegionNameUsEast2      RegionName = "us-east-2"
+	RegionNameUsWest1      RegionName = "us-west-1"
+	RegionNameUsWest2      RegionName = "us-west-2"
+	RegionNameEuWest1      RegionName = "eu-west-1"
+	RegionNameEuCentral1   RegionName = "eu-central-1"
+	RegionNameApSouth1     RegionName = "ap-south-1"
+	RegionNameApSoutheast1 RegionName = "ap-southeast-1"
+	RegionNameApSoutheast2 RegionName = "ap-southeast-2"
+	RegionNameApNortheast1 RegionName = "ap-northeast-1"
+	RegionNameApNortheast2 RegionName = "ap-northeast-2"
 )
 
+type ResourceType string
+
+// Enum values for ResourceType
 const (
-	// ResourceTypeInstance is a ResourceType enum value
-	ResourceTypeInstance = "Instance"
-
-	// ResourceTypeStaticIp is a ResourceType enum value
-	ResourceTypeStaticIp = "StaticIp"
-
-	// ResourceTypeKeyPair is a ResourceType enum value
-	ResourceTypeKeyPair = "KeyPair"
-
-	// ResourceTypeInstanceSnapshot is a ResourceType enum value
-	ResourceTypeInstanceSnapshot = "InstanceSnapshot"
-
-	// ResourceTypeDomain is a ResourceType enum value
-	ResourceTypeDomain = "Domain"
-
-	// ResourceTypePeeredVpc is a ResourceType enum value
-	ResourceTypePeeredVpc = "PeeredVpc"
+	ResourceTypeInstance         ResourceType = "Instance"
+	ResourceTypeStaticIp         ResourceType = "StaticIp"
+	ResourceTypeKeyPair          ResourceType = "KeyPair"
+	ResourceTypeInstanceSnapshot ResourceType = "InstanceSnapshot"
+	ResourceTypeDomain           ResourceType = "Domain"
+	ResourceTypePeeredVpc        ResourceType = "PeeredVpc"
 )

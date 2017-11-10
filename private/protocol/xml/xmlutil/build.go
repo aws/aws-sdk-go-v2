@@ -281,10 +281,16 @@ func (b *xmlBuilder) buildScalar(value reflect.Value, current *XMLNode, tag refl
 		const ISO8601UTC = "2006-01-02T15:04:05Z"
 		str = converted.UTC().Format(ISO8601UTC)
 	default:
-		return fmt.Errorf("unsupported value for param %s: %v (%s)",
-			tag.Get("locationName"), value.Interface(), value.Type().Name())
+		if value.Kind() != reflect.String {
+			return fmt.Errorf("unsupported value for param %s: %v (%s)",
+				tag.Get("locationName"), value.Interface(), value.Type().Name())
+		}
+		str = value.Convert(reflect.TypeOf("")).String()
 	}
 
+	if len(str) == 0 {
+		return nil
+	}
 	xname := xml.Name{Local: tag.Get("locationName")}
 	if tag.Get("xmlAttribute") != "" { // put into current node's attribute list
 		attr := xml.Attr{Name: xname, Value: str}

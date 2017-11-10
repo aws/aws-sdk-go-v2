@@ -392,11 +392,7 @@ func hasParity(o1 *s3.DeleteObjectsInput, o2 BatchDeleteObject) bool {
 		return false
 	}
 
-	if o1.RequestPayer != nil && o2.Object.RequestPayer != nil {
-		if *o1.RequestPayer != *o2.Object.RequestPayer {
-			return false
-		}
-	} else if o1.RequestPayer != o2.Object.RequestPayer {
+	if o1.RequestPayer != o2.Object.RequestPayer {
 		return false
 	}
 

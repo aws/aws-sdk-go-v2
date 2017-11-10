@@ -7847,12 +7847,15 @@ func (s AddFacetToObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddFacetToObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddFacetToObjectInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.SchemaFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
@@ -7947,9 +7950,11 @@ func (s ApplySchemaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplySchemaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApplySchemaInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.PublishedSchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PublishedSchemaArn"))
 	}
@@ -8047,18 +8052,22 @@ func (s AttachObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachObjectInput"}
+
 	if s.ChildReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChildReference"))
 	}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.ParentReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
@@ -8149,9 +8158,11 @@ func (s AttachPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -8229,12 +8240,15 @@ func (s AttachToIndexInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachToIndexInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachToIndexInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -8331,18 +8345,23 @@ func (s AttachTypedLinkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachTypedLinkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachTypedLinkInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.SourceObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
+
 	if s.TargetObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
+
 	if s.TypedLinkFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
@@ -8457,18 +8476,21 @@ func (s AttributeKey) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeKey) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttributeKey"}
+
 	if s.FacetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FacetName"))
 	}
 	if s.FacetName != nil && len(*s.FacetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FacetName", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -8526,9 +8548,11 @@ func (s AttributeKeyAndValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeKeyAndValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttributeKeyAndValue"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -8585,12 +8609,14 @@ func (s AttributeNameAndValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeNameAndValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttributeNameAndValue"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -8647,12 +8673,15 @@ func (s BatchAddFacetToObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAddFacetToObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchAddFacetToObject"}
+
 	if s.ObjectAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectAttributeList"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.SchemaFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
@@ -8746,15 +8775,18 @@ func (s BatchAttachObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachObject"}
+
 	if s.ChildReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChildReference"))
 	}
+
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.ParentReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
@@ -8838,9 +8870,11 @@ func (s BatchAttachPolicy) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachPolicy"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -8909,9 +8943,11 @@ func (s BatchAttachToIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachToIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachToIndex"}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -8999,15 +9035,19 @@ func (s BatchAttachTypedLink) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachTypedLink) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachTypedLink"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.SourceObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
+
 	if s.TargetObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
+
 	if s.TypedLinkFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
@@ -9124,12 +9164,14 @@ func (s BatchCreateIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreateIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchCreateIndex"}
+
 	if s.IsUnique == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IsUnique"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.OrderedIndexedAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrderedIndexedAttributeList"))
 	}
@@ -9252,21 +9294,26 @@ func (s BatchCreateObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreateObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchCreateObject"}
+
 	if s.BatchReferenceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
 	}
+
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.ObjectAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectAttributeList"))
 	}
+
 	if s.ParentReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
+
 	if s.SchemaFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
@@ -9376,6 +9423,7 @@ func (s BatchDeleteObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteObject"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -9438,9 +9486,11 @@ func (s BatchDetachFromIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachFromIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachFromIndex"}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -9523,15 +9573,18 @@ func (s BatchDetachObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachObject"}
+
 	if s.BatchReferenceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
 	}
+
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.ParentReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
@@ -9615,9 +9668,11 @@ func (s BatchDetachPolicy) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachPolicy"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -9681,6 +9736,7 @@ func (s BatchDetachTypedLink) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachTypedLink) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachTypedLink"}
+
 	if s.TypedLinkSpecifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
 	}
@@ -9743,6 +9799,7 @@ func (s BatchGetObjectInformation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetObjectInformation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetObjectInformation"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -9827,6 +9884,7 @@ func (s *BatchListAttachedIndices) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -9934,6 +9992,7 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10057,6 +10116,7 @@ func (s BatchListIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchListIndex"}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
@@ -10176,6 +10236,7 @@ func (s *BatchListObjectAttributes) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10284,6 +10345,7 @@ func (s *BatchListObjectChildren) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10382,6 +10444,7 @@ func (s *BatchListObjectParentPaths) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10478,6 +10541,7 @@ func (s *BatchListObjectPolicies) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10585,6 +10649,7 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10709,6 +10774,7 @@ func (s *BatchListPolicyAttachments) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -10806,6 +10872,7 @@ func (s *BatchLookupPolicy) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -10879,7 +10946,7 @@ type BatchReadException struct {
 	Message *string `type:"string"`
 
 	// A type of exception, such as InvalidArnException.
-	Type *string `type:"string" enum:"BatchReadExceptionType"`
+	Type BatchReadExceptionType `type:"string"`
 }
 
 // String returns the string representation
@@ -10899,8 +10966,8 @@ func (s *BatchReadException) SetMessage(v string) *BatchReadException {
 }
 
 // SetType sets the Type field's value.
-func (s *BatchReadException) SetType(v string) *BatchReadException {
-	s.Type = &v
+func (s *BatchReadException) SetType(v BatchReadExceptionType) *BatchReadException {
+	s.Type = v
 	return s
 }
 
@@ -10910,7 +10977,7 @@ type BatchReadInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory. For
 	// more information, see arns.
@@ -10937,9 +11004,11 @@ func (s BatchReadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchReadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchReadInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.Operations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Operations"))
 	}
@@ -10961,8 +11030,8 @@ func (s *BatchReadInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *BatchReadInput) SetConsistencyLevel(v string) *BatchReadInput {
-	s.ConsistencyLevel = &v
+func (s *BatchReadInput) SetConsistencyLevel(v ConsistencyLevel) *BatchReadInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -11386,9 +11455,11 @@ func (s BatchRemoveFacetFromObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchRemoveFacetFromObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchRemoveFacetFromObject"}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.SchemaFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
@@ -11461,9 +11532,11 @@ func (s BatchUpdateObjectAttributes) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchUpdateObjectAttributes) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateObjectAttributes"}
+
 	if s.AttributeUpdates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -11550,9 +11623,11 @@ func (s BatchWriteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchWriteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchWriteInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.Operations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Operations"))
 	}
@@ -12010,12 +12085,14 @@ func (s CreateDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12125,7 +12202,7 @@ type CreateFacetInput struct {
 	//    * Index: Can be created with the Index API.
 	//
 	// ObjectType is a required field
-	ObjectType *string `type:"string" required:"true" enum:"ObjectType"`
+	ObjectType ObjectType `type:"string" required:"true"`
 
 	// The schema ARN in which the new Facet will be created. For more information,
 	// see arns.
@@ -12147,15 +12224,17 @@ func (s CreateFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFacetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.ObjectType == nil {
+	if len(s.ObjectType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectType"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12189,8 +12268,8 @@ func (s *CreateFacetInput) SetName(v string) *CreateFacetInput {
 }
 
 // SetObjectType sets the ObjectType field's value.
-func (s *CreateFacetInput) SetObjectType(v string) *CreateFacetInput {
-	s.ObjectType = &v
+func (s *CreateFacetInput) SetObjectType(v ObjectType) *CreateFacetInput {
+	s.ObjectType = v
 	return s
 }
 
@@ -12256,15 +12335,18 @@ func (s CreateIndexInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIndexInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIndexInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.IsUnique == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IsUnique"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.OrderedIndexedAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrderedIndexedAttributeList"))
 	}
@@ -12379,12 +12461,14 @@ func (s CreateObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateObjectInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.SchemaFacets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacets"))
 	}
@@ -12493,6 +12577,7 @@ func (s CreateSchemaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSchemaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSchemaInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12566,9 +12651,11 @@ func (s CreateTypedLinkFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTypedLinkFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTypedLinkFacetInput"}
+
 	if s.Facet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Facet"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12634,6 +12721,7 @@ func (s DeleteDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
@@ -12705,12 +12793,14 @@ func (s DeleteFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFacetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12777,9 +12867,11 @@ func (s DeleteObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -12841,6 +12933,7 @@ func (s DeleteSchemaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSchemaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSchemaInput"}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12911,9 +13004,11 @@ func (s DeleteTypedLinkFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTypedLinkFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTypedLinkFacetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -12985,12 +13080,15 @@ func (s DetachFromIndexInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachFromIndexInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachFromIndexInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -13078,15 +13176,18 @@ func (s DetachObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachObjectInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
+
 	if s.ParentReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
@@ -13173,12 +13274,15 @@ func (s DetachPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachPolicyInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -13251,9 +13355,11 @@ func (s DetachTypedLinkInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachTypedLinkInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachTypedLinkInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.TypedLinkSpecifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
 	}
@@ -13312,7 +13418,7 @@ type Directory struct {
 	Name *string `min:"1" type:"string"`
 
 	// The state of the directory. Can be either Enabled, Disabled, or Deleted.
-	State *string `type:"string" enum:"DirectoryState"`
+	State DirectoryState `type:"string"`
 }
 
 // String returns the string representation
@@ -13344,8 +13450,8 @@ func (s *Directory) SetName(v string) *Directory {
 }
 
 // SetState sets the State field's value.
-func (s *Directory) SetState(v string) *Directory {
-	s.State = &v
+func (s *Directory) SetState(v DirectoryState) *Directory {
+	s.State = v
 	return s
 }
 
@@ -13372,6 +13478,7 @@ func (s DisableDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableDirectoryInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
@@ -13437,6 +13544,7 @@ func (s EnableDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableDirectoryInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
@@ -13489,7 +13597,7 @@ type Facet struct {
 
 	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType
 	// for more details.
-	ObjectType *string `type:"string" enum:"ObjectType"`
+	ObjectType ObjectType `type:"string"`
 }
 
 // String returns the string representation
@@ -13509,8 +13617,8 @@ func (s *Facet) SetName(v string) *Facet {
 }
 
 // SetObjectType sets the ObjectType field's value.
-func (s *Facet) SetObjectType(v string) *Facet {
-	s.ObjectType = &v
+func (s *Facet) SetObjectType(v ObjectType) *Facet {
+	s.ObjectType = v
 	return s
 }
 
@@ -13535,7 +13643,7 @@ type FacetAttribute struct {
 	Name *string `min:"1" type:"string" required:"true"`
 
 	// The required behavior of the FacetAttribute.
-	RequiredBehavior *string `type:"string" enum:"RequiredAttributeBehavior"`
+	RequiredBehavior RequiredAttributeBehavior `type:"string"`
 }
 
 // String returns the string representation
@@ -13551,6 +13659,7 @@ func (s FacetAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FacetAttribute"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -13593,8 +13702,8 @@ func (s *FacetAttribute) SetName(v string) *FacetAttribute {
 }
 
 // SetRequiredBehavior sets the RequiredBehavior field's value.
-func (s *FacetAttribute) SetRequiredBehavior(v string) *FacetAttribute {
-	s.RequiredBehavior = &v
+func (s *FacetAttribute) SetRequiredBehavior(v RequiredAttributeBehavior) *FacetAttribute {
+	s.RequiredBehavior = v
 	return s
 }
 
@@ -13616,7 +13725,7 @@ type FacetAttributeDefinition struct {
 	// The type of the attribute.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"FacetAttributeType"`
+	Type FacetAttributeType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -13632,7 +13741,7 @@ func (s FacetAttributeDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttributeDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FacetAttributeDefinition"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -13661,8 +13770,8 @@ func (s *FacetAttributeDefinition) SetRules(v map[string]*Rule) *FacetAttributeD
 }
 
 // SetType sets the Type field's value.
-func (s *FacetAttributeDefinition) SetType(v string) *FacetAttributeDefinition {
-	s.Type = &v
+func (s *FacetAttributeDefinition) SetType(v FacetAttributeType) *FacetAttributeDefinition {
+	s.Type = v
 	return s
 }
 
@@ -13700,12 +13809,14 @@ func (s FacetAttributeReference) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttributeReference) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FacetAttributeReference"}
+
 	if s.TargetAttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetAttributeName"))
 	}
 	if s.TargetAttributeName != nil && len(*s.TargetAttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TargetAttributeName", 1))
 	}
+
 	if s.TargetFacetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetFacetName"))
 	}
@@ -13737,7 +13848,7 @@ type FacetAttributeUpdate struct {
 	_ struct{} `type:"structure"`
 
 	// The action to perform when updating the attribute.
-	Action *string `type:"string" enum:"UpdateActionType"`
+	Action UpdateActionType `type:"string"`
 
 	// The attribute to update.
 	Attribute *FacetAttribute `type:"structure"`
@@ -13769,8 +13880,8 @@ func (s *FacetAttributeUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *FacetAttributeUpdate) SetAction(v string) *FacetAttributeUpdate {
-	s.Action = &v
+func (s *FacetAttributeUpdate) SetAction(v UpdateActionType) *FacetAttributeUpdate {
+	s.Action = v
 	return s
 }
 
@@ -13803,6 +13914,7 @@ func (s GetDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDirectoryInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
@@ -13874,12 +13986,14 @@ func (s GetFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFacetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -13931,7 +14045,7 @@ type GetObjectInformationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level at which to retrieve the object information.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The ARN of the directory being retrieved.
 	//
@@ -13957,9 +14071,11 @@ func (s GetObjectInformationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectInformationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetObjectInformationInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -13971,8 +14087,8 @@ func (s *GetObjectInformationInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *GetObjectInformationInput) SetConsistencyLevel(v string) *GetObjectInformationInput {
-	s.ConsistencyLevel = &v
+func (s *GetObjectInformationInput) SetConsistencyLevel(v ConsistencyLevel) *GetObjectInformationInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -14044,6 +14160,7 @@ func (s GetSchemaAsJsonInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSchemaAsJsonInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSchemaAsJsonInput"}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -14122,9 +14239,11 @@ func (s GetTypedLinkFacetInformationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTypedLinkFacetInformationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTypedLinkFacetInformationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -14241,6 +14360,7 @@ func (s ListAppliedSchemaArnsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAppliedSchemaArnsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAppliedSchemaArnsInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
@@ -14310,7 +14430,7 @@ type ListAttachedIndicesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to use for this operation.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The ARN of the directory.
 	//
@@ -14342,12 +14462,14 @@ func (s ListAttachedIndicesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttachedIndicesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAttachedIndicesInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TargetReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
@@ -14359,8 +14481,8 @@ func (s *ListAttachedIndicesInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListAttachedIndicesInput) SetConsistencyLevel(v string) *ListAttachedIndicesInput {
-	s.ConsistencyLevel = &v
+func (s *ListAttachedIndicesInput) SetConsistencyLevel(v ConsistencyLevel) *ListAttachedIndicesInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -14512,7 +14634,7 @@ type ListDirectoriesInput struct {
 
 	// The state of the directories in the list. Can be either Enabled, Disabled,
 	// or Deleted.
-	State *string `locationName:"state" type:"string" enum:"DirectoryState"`
+	State DirectoryState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -14551,8 +14673,8 @@ func (s *ListDirectoriesInput) SetNextToken(v string) *ListDirectoriesInput {
 }
 
 // SetState sets the State field's value.
-func (s *ListDirectoriesInput) SetState(v string) *ListDirectoriesInput {
-	s.State = &v
+func (s *ListDirectoriesInput) SetState(v DirectoryState) *ListDirectoriesInput {
+	s.State = v
 	return s
 }
 
@@ -14629,12 +14751,14 @@ func (s *ListFacetAttributesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -14734,6 +14858,7 @@ func (s *ListFacetNamesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -14800,7 +14925,7 @@ type ListIncomingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel *string `type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the directory where you want to list the
 	// typed links.
@@ -14843,12 +14968,14 @@ func (s ListIncomingTypedLinksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIncomingTypedLinksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIncomingTypedLinksInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -14875,8 +15002,8 @@ func (s *ListIncomingTypedLinksInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListIncomingTypedLinksInput) SetConsistencyLevel(v string) *ListIncomingTypedLinksInput {
-	s.ConsistencyLevel = &v
+func (s *ListIncomingTypedLinksInput) SetConsistencyLevel(v ConsistencyLevel) *ListIncomingTypedLinksInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -14954,7 +15081,7 @@ type ListIndexInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The ARN of the directory that the index exists in.
 	//
@@ -14989,9 +15116,11 @@ func (s ListIndexInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIndexInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIndexInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.IndexReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
@@ -15016,8 +15145,8 @@ func (s *ListIndexInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListIndexInput) SetConsistencyLevel(v string) *ListIndexInput {
-	s.ConsistencyLevel = &v
+func (s *ListIndexInput) SetConsistencyLevel(v ConsistencyLevel) *ListIndexInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15090,7 +15219,7 @@ type ListObjectAttributesInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -15128,12 +15257,14 @@ func (s ListObjectAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectAttributesInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15150,8 +15281,8 @@ func (s *ListObjectAttributesInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectAttributesInput) SetConsistencyLevel(v string) *ListObjectAttributesInput {
-	s.ConsistencyLevel = &v
+func (s *ListObjectAttributesInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectAttributesInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15225,7 +15356,7 @@ type ListObjectChildrenInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -15260,12 +15391,14 @@ func (s ListObjectChildrenInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectChildrenInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectChildrenInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15277,8 +15410,8 @@ func (s *ListObjectChildrenInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectChildrenInput) SetConsistencyLevel(v string) *ListObjectChildrenInput {
-	s.ConsistencyLevel = &v
+func (s *ListObjectChildrenInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectChildrenInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15375,12 +15508,14 @@ func (s ListObjectParentPathsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectParentPathsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectParentPathsInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15454,7 +15589,7 @@ type ListObjectParentsInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// the object resides. For more information, see arns.
@@ -15489,12 +15624,14 @@ func (s ListObjectParentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectParentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectParentsInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15506,8 +15643,8 @@ func (s *ListObjectParentsInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectParentsInput) SetConsistencyLevel(v string) *ListObjectParentsInput {
-	s.ConsistencyLevel = &v
+func (s *ListObjectParentsInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectParentsInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15575,7 +15712,7 @@ type ListObjectPoliciesInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// objects reside. For more information, see arns.
@@ -15609,12 +15746,14 @@ func (s ListObjectPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectPoliciesInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15626,8 +15765,8 @@ func (s *ListObjectPoliciesInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListObjectPoliciesInput) SetConsistencyLevel(v string) *ListObjectPoliciesInput {
-	s.ConsistencyLevel = &v
+func (s *ListObjectPoliciesInput) SetConsistencyLevel(v ConsistencyLevel) *ListObjectPoliciesInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15693,7 +15832,7 @@ type ListOutgoingTypedLinksInput struct {
 	_ struct{} `type:"structure"`
 
 	// The consistency level to execute the request at.
-	ConsistencyLevel *string `type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the directory where you want to list the
 	// typed links.
@@ -15736,12 +15875,14 @@ func (s ListOutgoingTypedLinksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOutgoingTypedLinksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListOutgoingTypedLinksInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -15768,8 +15909,8 @@ func (s *ListOutgoingTypedLinksInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListOutgoingTypedLinksInput) SetConsistencyLevel(v string) *ListOutgoingTypedLinksInput {
-	s.ConsistencyLevel = &v
+func (s *ListOutgoingTypedLinksInput) SetConsistencyLevel(v ConsistencyLevel) *ListOutgoingTypedLinksInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -15848,7 +15989,7 @@ type ListPolicyAttachmentsInput struct {
 
 	// Represents the manner and timing in which the successful write or update
 	// of an object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel *string `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"ConsistencyLevel"`
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// objects reside. For more information, see arns.
@@ -15882,12 +16023,14 @@ func (s ListPolicyAttachmentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPolicyAttachmentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyAttachmentsInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.PolicyReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
@@ -15899,8 +16042,8 @@ func (s *ListPolicyAttachmentsInput) Validate() error {
 }
 
 // SetConsistencyLevel sets the ConsistencyLevel field's value.
-func (s *ListPolicyAttachmentsInput) SetConsistencyLevel(v string) *ListPolicyAttachmentsInput {
-	s.ConsistencyLevel = &v
+func (s *ListPolicyAttachmentsInput) SetConsistencyLevel(v ConsistencyLevel) *ListPolicyAttachmentsInput {
+	s.ConsistencyLevel = v
 	return s
 }
 
@@ -16075,6 +16218,7 @@ func (s *ListTagsForResourceInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 50 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 50))
 	}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -16175,9 +16319,11 @@ func (s *ListTypedLinkFacetAttributesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -16278,6 +16424,7 @@ func (s *ListTypedLinkFacetNamesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -16375,12 +16522,14 @@ func (s LookupPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LookupPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LookupPolicyInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -16455,7 +16604,7 @@ type ObjectAttributeAction struct {
 	_ struct{} `type:"structure"`
 
 	// A type that can be either Update or Delete.
-	ObjectAttributeActionType *string `type:"string" enum:"UpdateActionType"`
+	ObjectAttributeActionType UpdateActionType `type:"string"`
 
 	// The value that you want to update to.
 	ObjectAttributeUpdateValue *TypedAttributeValue `type:"structure"`
@@ -16472,8 +16621,8 @@ func (s ObjectAttributeAction) GoString() string {
 }
 
 // SetObjectAttributeActionType sets the ObjectAttributeActionType field's value.
-func (s *ObjectAttributeAction) SetObjectAttributeActionType(v string) *ObjectAttributeAction {
-	s.ObjectAttributeActionType = &v
+func (s *ObjectAttributeAction) SetObjectAttributeActionType(v UpdateActionType) *ObjectAttributeAction {
+	s.ObjectAttributeActionType = v
 	return s
 }
 
@@ -16773,12 +16922,14 @@ func (s PublishSchemaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishSchemaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PublishSchemaInput"}
+
 	if s.DevelopmentSchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DevelopmentSchemaArn"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -16863,9 +17014,11 @@ func (s PutSchemaFromJsonInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSchemaFromJsonInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutSchemaFromJsonInput"}
+
 	if s.Document == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -16945,12 +17098,15 @@ func (s RemoveFacetFromObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveFacetFromObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveFacetFromObjectInput"}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
+
 	if s.SchemaFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
@@ -17009,7 +17165,7 @@ type Rule struct {
 	Parameters map[string]*string `type:"map"`
 
 	// The type of attribute validation rule.
-	Type *string `type:"string" enum:"RuleType"`
+	Type RuleType `type:"string"`
 }
 
 // String returns the string representation
@@ -17029,8 +17185,8 @@ func (s *Rule) SetParameters(v map[string]*string) *Rule {
 }
 
 // SetType sets the Type field's value.
-func (s *Rule) SetType(v string) *Rule {
-	s.Type = &v
+func (s *Rule) SetType(v RuleType) *Rule {
+	s.Type = v
 	return s
 }
 
@@ -17144,9 +17300,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -17257,7 +17415,7 @@ type TypedAttributeValueRange struct {
 	// The inclusive or exclusive range end.
 	//
 	// EndMode is a required field
-	EndMode *string `type:"string" required:"true" enum:"RangeMode"`
+	EndMode RangeMode `type:"string" required:"true"`
 
 	// The attribute value to terminate the range at.
 	EndValue *TypedAttributeValue `type:"structure"`
@@ -17265,7 +17423,7 @@ type TypedAttributeValueRange struct {
 	// The inclusive or exclusive range start.
 	//
 	// StartMode is a required field
-	StartMode *string `type:"string" required:"true" enum:"RangeMode"`
+	StartMode RangeMode `type:"string" required:"true"`
 
 	// The value to start the range at.
 	StartValue *TypedAttributeValue `type:"structure"`
@@ -17284,10 +17442,10 @@ func (s TypedAttributeValueRange) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedAttributeValueRange) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedAttributeValueRange"}
-	if s.EndMode == nil {
+	if len(s.EndMode) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EndMode"))
 	}
-	if s.StartMode == nil {
+	if len(s.StartMode) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("StartMode"))
 	}
 
@@ -17298,8 +17456,8 @@ func (s *TypedAttributeValueRange) Validate() error {
 }
 
 // SetEndMode sets the EndMode field's value.
-func (s *TypedAttributeValueRange) SetEndMode(v string) *TypedAttributeValueRange {
-	s.EndMode = &v
+func (s *TypedAttributeValueRange) SetEndMode(v RangeMode) *TypedAttributeValueRange {
+	s.EndMode = v
 	return s
 }
 
@@ -17310,8 +17468,8 @@ func (s *TypedAttributeValueRange) SetEndValue(v *TypedAttributeValue) *TypedAtt
 }
 
 // SetStartMode sets the StartMode field's value.
-func (s *TypedAttributeValueRange) SetStartMode(v string) *TypedAttributeValueRange {
-	s.StartMode = &v
+func (s *TypedAttributeValueRange) SetStartMode(v RangeMode) *TypedAttributeValueRange {
+	s.StartMode = v
 	return s
 }
 
@@ -17340,7 +17498,7 @@ type TypedLinkAttributeDefinition struct {
 	// The required behavior of the TypedLinkAttributeDefinition.
 	//
 	// RequiredBehavior is a required field
-	RequiredBehavior *string `type:"string" required:"true" enum:"RequiredAttributeBehavior"`
+	RequiredBehavior RequiredAttributeBehavior `type:"string" required:"true"`
 
 	// Validation rules that are attached to the attribute definition.
 	Rules map[string]*Rule `type:"map"`
@@ -17348,7 +17506,7 @@ type TypedLinkAttributeDefinition struct {
 	// The type of the attribute.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"FacetAttributeType"`
+	Type FacetAttributeType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -17364,16 +17522,17 @@ func (s TypedLinkAttributeDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkAttributeDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkAttributeDefinition"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.RequiredBehavior == nil {
+	if len(s.RequiredBehavior) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RequiredBehavior"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -17402,8 +17561,8 @@ func (s *TypedLinkAttributeDefinition) SetName(v string) *TypedLinkAttributeDefi
 }
 
 // SetRequiredBehavior sets the RequiredBehavior field's value.
-func (s *TypedLinkAttributeDefinition) SetRequiredBehavior(v string) *TypedLinkAttributeDefinition {
-	s.RequiredBehavior = &v
+func (s *TypedLinkAttributeDefinition) SetRequiredBehavior(v RequiredAttributeBehavior) *TypedLinkAttributeDefinition {
+	s.RequiredBehavior = v
 	return s
 }
 
@@ -17414,8 +17573,8 @@ func (s *TypedLinkAttributeDefinition) SetRules(v map[string]*Rule) *TypedLinkAt
 }
 
 // SetType sets the Type field's value.
-func (s *TypedLinkAttributeDefinition) SetType(v string) *TypedLinkAttributeDefinition {
-	s.Type = &v
+func (s *TypedLinkAttributeDefinition) SetType(v FacetAttributeType) *TypedLinkAttributeDefinition {
+	s.Type = v
 	return s
 }
 
@@ -17449,6 +17608,7 @@ func (s *TypedLinkAttributeRange) Validate() error {
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
+
 	if s.Range == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Range"))
 	}
@@ -17517,12 +17677,15 @@ func (s TypedLinkFacet) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkFacet) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkFacet"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.IdentityAttributeOrder == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeOrder"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -17569,7 +17732,7 @@ type TypedLinkFacetAttributeUpdate struct {
 	// The action to perform when updating the attribute.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"UpdateActionType"`
+	Action UpdateActionType `type:"string" required:"true"`
 
 	// The attribute to update.
 	//
@@ -17590,9 +17753,10 @@ func (s TypedLinkFacetAttributeUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkFacetAttributeUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkFacetAttributeUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.Attribute == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
@@ -17609,8 +17773,8 @@ func (s *TypedLinkFacetAttributeUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *TypedLinkFacetAttributeUpdate) SetAction(v string) *TypedLinkFacetAttributeUpdate {
-	s.Action = &v
+func (s *TypedLinkFacetAttributeUpdate) SetAction(v UpdateActionType) *TypedLinkFacetAttributeUpdate {
+	s.Action = v
 	return s
 }
 
@@ -17651,9 +17815,11 @@ func (s TypedLinkSchemaAndFacetName) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkSchemaAndFacetName) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkSchemaAndFacetName"}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
+
 	if s.TypedLinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkName"))
 	}
@@ -17720,15 +17886,19 @@ func (s TypedLinkSpecifier) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkSpecifier) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkSpecifier"}
+
 	if s.IdentityAttributeValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeValues"))
 	}
+
 	if s.SourceObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
+
 	if s.TargetObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
+
 	if s.TypedLinkFacet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
@@ -17807,9 +17977,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -17863,7 +18035,7 @@ type UpdateFacetInput struct {
 
 	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType
 	// for more details.
-	ObjectType *string `type:"string" enum:"ObjectType"`
+	ObjectType ObjectType `type:"string"`
 
 	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
 	// information, see arns.
@@ -17885,12 +18057,14 @@ func (s UpdateFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFacetInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -17924,8 +18098,8 @@ func (s *UpdateFacetInput) SetName(v string) *UpdateFacetInput {
 }
 
 // SetObjectType sets the ObjectType field's value.
-func (s *UpdateFacetInput) SetObjectType(v string) *UpdateFacetInput {
-	s.ObjectType = &v
+func (s *UpdateFacetInput) SetObjectType(v ObjectType) *UpdateFacetInput {
+	s.ObjectType = v
 	return s
 }
 
@@ -17984,12 +18158,15 @@ func (s UpdateObjectAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateObjectAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateObjectAttributesInput"}
+
 	if s.AttributeUpdates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
+
 	if s.DirectoryArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
+
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
@@ -18081,12 +18258,14 @@ func (s UpdateSchemaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSchemaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSchemaInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -18180,15 +18359,19 @@ func (s UpdateTypedLinkFacetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTypedLinkFacetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTypedLinkFacetInput"}
+
 	if s.AttributeUpdates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
+
 	if s.IdentityAttributeOrder == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeOrder"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SchemaArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
@@ -18248,193 +18431,119 @@ func (s UpdateTypedLinkFacetOutput) GoString() string {
 	return s.String()
 }
 
+type BatchReadExceptionType string
+
+// Enum values for BatchReadExceptionType
 const (
-	// BatchReadExceptionTypeValidationException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeValidationException = "ValidationException"
-
-	// BatchReadExceptionTypeInvalidArnException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeInvalidArnException = "InvalidArnException"
-
-	// BatchReadExceptionTypeResourceNotFoundException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeResourceNotFoundException = "ResourceNotFoundException"
-
-	// BatchReadExceptionTypeInvalidNextTokenException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeInvalidNextTokenException = "InvalidNextTokenException"
-
-	// BatchReadExceptionTypeAccessDeniedException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeAccessDeniedException = "AccessDeniedException"
-
-	// BatchReadExceptionTypeNotNodeException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeNotNodeException = "NotNodeException"
-
-	// BatchReadExceptionTypeFacetValidationException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeFacetValidationException = "FacetValidationException"
-
-	// BatchReadExceptionTypeCannotListParentOfRootException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeCannotListParentOfRootException = "CannotListParentOfRootException"
-
-	// BatchReadExceptionTypeNotIndexException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeNotIndexException = "NotIndexException"
-
-	// BatchReadExceptionTypeNotPolicyException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeNotPolicyException = "NotPolicyException"
-
-	// BatchReadExceptionTypeDirectoryNotEnabledException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeDirectoryNotEnabledException = "DirectoryNotEnabledException"
-
-	// BatchReadExceptionTypeLimitExceededException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeLimitExceededException = "LimitExceededException"
-
-	// BatchReadExceptionTypeInternalServiceException is a BatchReadExceptionType enum value
-	BatchReadExceptionTypeInternalServiceException = "InternalServiceException"
+	BatchReadExceptionTypeValidationException             BatchReadExceptionType = "ValidationException"
+	BatchReadExceptionTypeInvalidArnException             BatchReadExceptionType = "InvalidArnException"
+	BatchReadExceptionTypeResourceNotFoundException       BatchReadExceptionType = "ResourceNotFoundException"
+	BatchReadExceptionTypeInvalidNextTokenException       BatchReadExceptionType = "InvalidNextTokenException"
+	BatchReadExceptionTypeAccessDeniedException           BatchReadExceptionType = "AccessDeniedException"
+	BatchReadExceptionTypeNotNodeException                BatchReadExceptionType = "NotNodeException"
+	BatchReadExceptionTypeFacetValidationException        BatchReadExceptionType = "FacetValidationException"
+	BatchReadExceptionTypeCannotListParentOfRootException BatchReadExceptionType = "CannotListParentOfRootException"
+	BatchReadExceptionTypeNotIndexException               BatchReadExceptionType = "NotIndexException"
+	BatchReadExceptionTypeNotPolicyException              BatchReadExceptionType = "NotPolicyException"
+	BatchReadExceptionTypeDirectoryNotEnabledException    BatchReadExceptionType = "DirectoryNotEnabledException"
+	BatchReadExceptionTypeLimitExceededException          BatchReadExceptionType = "LimitExceededException"
+	BatchReadExceptionTypeInternalServiceException        BatchReadExceptionType = "InternalServiceException"
 )
 
+type BatchWriteExceptionType string
+
+// Enum values for BatchWriteExceptionType
 const (
-	// BatchWriteExceptionTypeInternalServiceException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeInternalServiceException = "InternalServiceException"
-
-	// BatchWriteExceptionTypeValidationException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeValidationException = "ValidationException"
-
-	// BatchWriteExceptionTypeInvalidArnException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeInvalidArnException = "InvalidArnException"
-
-	// BatchWriteExceptionTypeLinkNameAlreadyInUseException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeLinkNameAlreadyInUseException = "LinkNameAlreadyInUseException"
-
-	// BatchWriteExceptionTypeStillContainsLinksException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeStillContainsLinksException = "StillContainsLinksException"
-
-	// BatchWriteExceptionTypeFacetValidationException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeFacetValidationException = "FacetValidationException"
-
-	// BatchWriteExceptionTypeObjectNotDetachedException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeObjectNotDetachedException = "ObjectNotDetachedException"
-
-	// BatchWriteExceptionTypeResourceNotFoundException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeResourceNotFoundException = "ResourceNotFoundException"
-
-	// BatchWriteExceptionTypeAccessDeniedException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeAccessDeniedException = "AccessDeniedException"
-
-	// BatchWriteExceptionTypeInvalidAttachmentException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeInvalidAttachmentException = "InvalidAttachmentException"
-
-	// BatchWriteExceptionTypeNotIndexException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeNotIndexException = "NotIndexException"
-
-	// BatchWriteExceptionTypeIndexedAttributeMissingException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeIndexedAttributeMissingException = "IndexedAttributeMissingException"
-
-	// BatchWriteExceptionTypeObjectAlreadyDetachedException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeObjectAlreadyDetachedException = "ObjectAlreadyDetachedException"
-
-	// BatchWriteExceptionTypeNotPolicyException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeNotPolicyException = "NotPolicyException"
-
-	// BatchWriteExceptionTypeDirectoryNotEnabledException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeDirectoryNotEnabledException = "DirectoryNotEnabledException"
-
-	// BatchWriteExceptionTypeLimitExceededException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeLimitExceededException = "LimitExceededException"
-
-	// BatchWriteExceptionTypeUnsupportedIndexTypeException is a BatchWriteExceptionType enum value
-	BatchWriteExceptionTypeUnsupportedIndexTypeException = "UnsupportedIndexTypeException"
+	BatchWriteExceptionTypeInternalServiceException         BatchWriteExceptionType = "InternalServiceException"
+	BatchWriteExceptionTypeValidationException              BatchWriteExceptionType = "ValidationException"
+	BatchWriteExceptionTypeInvalidArnException              BatchWriteExceptionType = "InvalidArnException"
+	BatchWriteExceptionTypeLinkNameAlreadyInUseException    BatchWriteExceptionType = "LinkNameAlreadyInUseException"
+	BatchWriteExceptionTypeStillContainsLinksException      BatchWriteExceptionType = "StillContainsLinksException"
+	BatchWriteExceptionTypeFacetValidationException         BatchWriteExceptionType = "FacetValidationException"
+	BatchWriteExceptionTypeObjectNotDetachedException       BatchWriteExceptionType = "ObjectNotDetachedException"
+	BatchWriteExceptionTypeResourceNotFoundException        BatchWriteExceptionType = "ResourceNotFoundException"
+	BatchWriteExceptionTypeAccessDeniedException            BatchWriteExceptionType = "AccessDeniedException"
+	BatchWriteExceptionTypeInvalidAttachmentException       BatchWriteExceptionType = "InvalidAttachmentException"
+	BatchWriteExceptionTypeNotIndexException                BatchWriteExceptionType = "NotIndexException"
+	BatchWriteExceptionTypeIndexedAttributeMissingException BatchWriteExceptionType = "IndexedAttributeMissingException"
+	BatchWriteExceptionTypeObjectAlreadyDetachedException   BatchWriteExceptionType = "ObjectAlreadyDetachedException"
+	BatchWriteExceptionTypeNotPolicyException               BatchWriteExceptionType = "NotPolicyException"
+	BatchWriteExceptionTypeDirectoryNotEnabledException     BatchWriteExceptionType = "DirectoryNotEnabledException"
+	BatchWriteExceptionTypeLimitExceededException           BatchWriteExceptionType = "LimitExceededException"
+	BatchWriteExceptionTypeUnsupportedIndexTypeException    BatchWriteExceptionType = "UnsupportedIndexTypeException"
 )
 
-const (
-	// ConsistencyLevelSerializable is a ConsistencyLevel enum value
-	ConsistencyLevelSerializable = "SERIALIZABLE"
+type ConsistencyLevel string
 
-	// ConsistencyLevelEventual is a ConsistencyLevel enum value
-	ConsistencyLevelEventual = "EVENTUAL"
+// Enum values for ConsistencyLevel
+const (
+	ConsistencyLevelSerializable ConsistencyLevel = "SERIALIZABLE"
+	ConsistencyLevelEventual     ConsistencyLevel = "EVENTUAL"
 )
 
+type DirectoryState string
+
+// Enum values for DirectoryState
 const (
-	// DirectoryStateEnabled is a DirectoryState enum value
-	DirectoryStateEnabled = "ENABLED"
-
-	// DirectoryStateDisabled is a DirectoryState enum value
-	DirectoryStateDisabled = "DISABLED"
-
-	// DirectoryStateDeleted is a DirectoryState enum value
-	DirectoryStateDeleted = "DELETED"
+	DirectoryStateEnabled  DirectoryState = "ENABLED"
+	DirectoryStateDisabled DirectoryState = "DISABLED"
+	DirectoryStateDeleted  DirectoryState = "DELETED"
 )
 
+type FacetAttributeType string
+
+// Enum values for FacetAttributeType
 const (
-	// FacetAttributeTypeString is a FacetAttributeType enum value
-	FacetAttributeTypeString = "STRING"
-
-	// FacetAttributeTypeBinary is a FacetAttributeType enum value
-	FacetAttributeTypeBinary = "BINARY"
-
-	// FacetAttributeTypeBoolean is a FacetAttributeType enum value
-	FacetAttributeTypeBoolean = "BOOLEAN"
-
-	// FacetAttributeTypeNumber is a FacetAttributeType enum value
-	FacetAttributeTypeNumber = "NUMBER"
-
-	// FacetAttributeTypeDatetime is a FacetAttributeType enum value
-	FacetAttributeTypeDatetime = "DATETIME"
+	FacetAttributeTypeString   FacetAttributeType = "STRING"
+	FacetAttributeTypeBinary   FacetAttributeType = "BINARY"
+	FacetAttributeTypeBoolean  FacetAttributeType = "BOOLEAN"
+	FacetAttributeTypeNumber   FacetAttributeType = "NUMBER"
+	FacetAttributeTypeDatetime FacetAttributeType = "DATETIME"
 )
 
+type ObjectType string
+
+// Enum values for ObjectType
 const (
-	// ObjectTypeNode is a ObjectType enum value
-	ObjectTypeNode = "NODE"
-
-	// ObjectTypeLeafNode is a ObjectType enum value
-	ObjectTypeLeafNode = "LEAF_NODE"
-
-	// ObjectTypePolicy is a ObjectType enum value
-	ObjectTypePolicy = "POLICY"
-
-	// ObjectTypeIndex is a ObjectType enum value
-	ObjectTypeIndex = "INDEX"
+	ObjectTypeNode     ObjectType = "NODE"
+	ObjectTypeLeafNode ObjectType = "LEAF_NODE"
+	ObjectTypePolicy   ObjectType = "POLICY"
+	ObjectTypeIndex    ObjectType = "INDEX"
 )
 
+type RangeMode string
+
+// Enum values for RangeMode
 const (
-	// RangeModeFirst is a RangeMode enum value
-	RangeModeFirst = "FIRST"
-
-	// RangeModeLast is a RangeMode enum value
-	RangeModeLast = "LAST"
-
-	// RangeModeLastBeforeMissingValues is a RangeMode enum value
-	RangeModeLastBeforeMissingValues = "LAST_BEFORE_MISSING_VALUES"
-
-	// RangeModeInclusive is a RangeMode enum value
-	RangeModeInclusive = "INCLUSIVE"
-
-	// RangeModeExclusive is a RangeMode enum value
-	RangeModeExclusive = "EXCLUSIVE"
+	RangeModeFirst                   RangeMode = "FIRST"
+	RangeModeLast                    RangeMode = "LAST"
+	RangeModeLastBeforeMissingValues RangeMode = "LAST_BEFORE_MISSING_VALUES"
+	RangeModeInclusive               RangeMode = "INCLUSIVE"
+	RangeModeExclusive               RangeMode = "EXCLUSIVE"
 )
 
-const (
-	// RequiredAttributeBehaviorRequiredAlways is a RequiredAttributeBehavior enum value
-	RequiredAttributeBehaviorRequiredAlways = "REQUIRED_ALWAYS"
+type RequiredAttributeBehavior string
 
-	// RequiredAttributeBehaviorNotRequired is a RequiredAttributeBehavior enum value
-	RequiredAttributeBehaviorNotRequired = "NOT_REQUIRED"
+// Enum values for RequiredAttributeBehavior
+const (
+	RequiredAttributeBehaviorRequiredAlways RequiredAttributeBehavior = "REQUIRED_ALWAYS"
+	RequiredAttributeBehaviorNotRequired    RequiredAttributeBehavior = "NOT_REQUIRED"
 )
 
+type RuleType string
+
+// Enum values for RuleType
 const (
-	// RuleTypeBinaryLength is a RuleType enum value
-	RuleTypeBinaryLength = "BINARY_LENGTH"
-
-	// RuleTypeNumberComparison is a RuleType enum value
-	RuleTypeNumberComparison = "NUMBER_COMPARISON"
-
-	// RuleTypeStringFromSet is a RuleType enum value
-	RuleTypeStringFromSet = "STRING_FROM_SET"
-
-	// RuleTypeStringLength is a RuleType enum value
-	RuleTypeStringLength = "STRING_LENGTH"
+	RuleTypeBinaryLength     RuleType = "BINARY_LENGTH"
+	RuleTypeNumberComparison RuleType = "NUMBER_COMPARISON"
+	RuleTypeStringFromSet    RuleType = "STRING_FROM_SET"
+	RuleTypeStringLength     RuleType = "STRING_LENGTH"
 )
 
-const (
-	// UpdateActionTypeCreateOrUpdate is a UpdateActionType enum value
-	UpdateActionTypeCreateOrUpdate = "CREATE_OR_UPDATE"
+type UpdateActionType string
 
-	// UpdateActionTypeDelete is a UpdateActionType enum value
-	UpdateActionTypeDelete = "DELETE"
+// Enum values for UpdateActionType
+const (
+	UpdateActionTypeCreateOrUpdate UpdateActionType = "CREATE_OR_UPDATE"
+	UpdateActionTypeDelete         UpdateActionType = "DELETE"
 )

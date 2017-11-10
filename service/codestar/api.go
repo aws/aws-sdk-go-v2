@@ -1643,15 +1643,18 @@ func (s *AssociateTeamMemberInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
+
 	if s.ProjectRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectRole"))
 	}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -1757,12 +1760,14 @@ func (s *CreateProjectInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1895,18 +1900,21 @@ func (s CreateUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserProfileInput"}
+
 	if s.DisplayName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
 	}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
+
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 3))
 	}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -2054,6 +2062,7 @@ func (s *DeleteProjectInput) Validate() error {
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -2142,6 +2151,7 @@ func (s DeleteUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserProfileInput"}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -2210,6 +2220,7 @@ func (s DescribeProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProjectInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -2341,6 +2352,7 @@ func (s DescribeUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserProfileInput"}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -2476,12 +2488,14 @@ func (s DisassociateTeamMemberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateTeamMemberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTeamMemberInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -2644,6 +2658,7 @@ func (s *ListResourcesInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -2738,6 +2753,7 @@ func (s ListTagsForProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForProjectInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -2844,6 +2860,7 @@ func (s *ListTeamMembersInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -3086,12 +3103,14 @@ func (s TagProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagProjectInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -3216,12 +3235,14 @@ func (s UntagProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagProjectInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -3288,6 +3309,7 @@ func (s UpdateProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3377,12 +3399,14 @@ func (s UpdateTeamMemberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTeamMemberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTeamMemberInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
@@ -3506,6 +3530,7 @@ func (s *UpdateUserProfileInput) Validate() error {
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 3))
 	}
+
 	if s.UserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}

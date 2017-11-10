@@ -610,6 +610,7 @@ func (s DeleteLexiconInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLexiconInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLexiconInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -648,7 +649,7 @@ type DescribeVoicesInput struct {
 	// The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
 	// this optional parameter, all available voices are returned.
-	LanguageCode *string `location:"querystring" locationName:"LanguageCode" type:"string" enum:"LanguageCode"`
+	LanguageCode LanguageCode `location:"querystring" locationName:"LanguageCode" type:"string"`
 
 	// An opaque pagination token returned from the previous DescribeVoices operation.
 	// If present, this indicates where to continue the listing.
@@ -666,8 +667,8 @@ func (s DescribeVoicesInput) GoString() string {
 }
 
 // SetLanguageCode sets the LanguageCode field's value.
-func (s *DescribeVoicesInput) SetLanguageCode(v string) *DescribeVoicesInput {
-	s.LanguageCode = &v
+func (s *DescribeVoicesInput) SetLanguageCode(v LanguageCode) *DescribeVoicesInput {
+	s.LanguageCode = v
 	return s
 }
 
@@ -734,6 +735,7 @@ func (s GetLexiconInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLexiconInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetLexiconInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -833,7 +835,7 @@ type LexiconAttributes struct {
 	// Language code that the lexicon applies to. A lexicon with a language code
 	// such as "en" would be applied to all English languages (en-GB, en-US, en-AUS,
 	// en-WLS, and so on.
-	LanguageCode *string `type:"string" enum:"LanguageCode"`
+	LanguageCode LanguageCode `type:"string"`
 
 	// Date lexicon was last modified (a timestamp value).
 	LastModified *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -865,8 +867,8 @@ func (s *LexiconAttributes) SetAlphabet(v string) *LexiconAttributes {
 }
 
 // SetLanguageCode sets the LanguageCode field's value.
-func (s *LexiconAttributes) SetLanguageCode(v string) *LexiconAttributes {
-	s.LanguageCode = &v
+func (s *LexiconAttributes) SetLanguageCode(v LanguageCode) *LexiconAttributes {
+	s.LanguageCode = v
 	return s
 }
 
@@ -1017,9 +1019,11 @@ func (s PutLexiconInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutLexiconInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutLexiconInput"}
+
 	if s.Content == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1071,7 +1075,7 @@ type SynthesizeSpeechInput struct {
 	// this will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
 	//
 	// OutputFormat is a required field
-	OutputFormat *string `type:"string" required:"true" enum:"OutputFormat"`
+	OutputFormat OutputFormat `type:"string" required:"true"`
 
 	// The audio frequency specified in Hz.
 	//
@@ -1082,7 +1086,7 @@ type SynthesizeSpeechInput struct {
 	SampleRate *string `type:"string"`
 
 	// The type of speech marks returned for the input text.
-	SpeechMarkTypes []*string `type:"list"`
+	SpeechMarkTypes []SpeechMarkType `type:"list"`
 
 	// Input text to synthesize. If you specify ssml as the TextType, follow the
 	// SSML format for the input text.
@@ -1092,14 +1096,14 @@ type SynthesizeSpeechInput struct {
 
 	// Specifies whether the input text is plain text or SSML. The default value
 	// is plain text. For more information, see Using SSML (http://docs.aws.amazon.com/polly/latest/dg/ssml.html).
-	TextType *string `type:"string" enum:"TextType"`
+	TextType TextType `type:"string"`
 
 	// Voice ID to use for the synthesis. You can get a list of available voice
 	// IDs by calling the DescribeVoices (http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
 	// operation.
 	//
 	// VoiceId is a required field
-	VoiceId *string `type:"string" required:"true" enum:"VoiceId"`
+	VoiceId VoiceId `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1115,13 +1119,14 @@ func (s SynthesizeSpeechInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SynthesizeSpeechInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SynthesizeSpeechInput"}
-	if s.OutputFormat == nil {
+	if len(s.OutputFormat) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("OutputFormat"))
 	}
+
 	if s.Text == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Text"))
 	}
-	if s.VoiceId == nil {
+	if len(s.VoiceId) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("VoiceId"))
 	}
 
@@ -1138,8 +1143,8 @@ func (s *SynthesizeSpeechInput) SetLexiconNames(v []*string) *SynthesizeSpeechIn
 }
 
 // SetOutputFormat sets the OutputFormat field's value.
-func (s *SynthesizeSpeechInput) SetOutputFormat(v string) *SynthesizeSpeechInput {
-	s.OutputFormat = &v
+func (s *SynthesizeSpeechInput) SetOutputFormat(v OutputFormat) *SynthesizeSpeechInput {
+	s.OutputFormat = v
 	return s
 }
 
@@ -1150,7 +1155,7 @@ func (s *SynthesizeSpeechInput) SetSampleRate(v string) *SynthesizeSpeechInput {
 }
 
 // SetSpeechMarkTypes sets the SpeechMarkTypes field's value.
-func (s *SynthesizeSpeechInput) SetSpeechMarkTypes(v []*string) *SynthesizeSpeechInput {
+func (s *SynthesizeSpeechInput) SetSpeechMarkTypes(v []SpeechMarkType) *SynthesizeSpeechInput {
 	s.SpeechMarkTypes = v
 	return s
 }
@@ -1162,14 +1167,14 @@ func (s *SynthesizeSpeechInput) SetText(v string) *SynthesizeSpeechInput {
 }
 
 // SetTextType sets the TextType field's value.
-func (s *SynthesizeSpeechInput) SetTextType(v string) *SynthesizeSpeechInput {
-	s.TextType = &v
+func (s *SynthesizeSpeechInput) SetTextType(v TextType) *SynthesizeSpeechInput {
+	s.TextType = v
 	return s
 }
 
 // SetVoiceId sets the VoiceId field's value.
-func (s *SynthesizeSpeechInput) SetVoiceId(v string) *SynthesizeSpeechInput {
-	s.VoiceId = &v
+func (s *SynthesizeSpeechInput) SetVoiceId(v VoiceId) *SynthesizeSpeechInput {
+	s.VoiceId = v
 	return s
 }
 
@@ -1235,14 +1240,14 @@ type Voice struct {
 	_ struct{} `type:"structure"`
 
 	// Gender of the voice.
-	Gender *string `type:"string" enum:"Gender"`
+	Gender Gender `type:"string"`
 
 	// Amazon Polly assigned voice ID. This is the ID that you specify when calling
 	// the SynthesizeSpeech operation.
-	Id *string `type:"string" enum:"VoiceId"`
+	Id VoiceId `type:"string"`
 
 	// Language code of the voice.
-	LanguageCode *string `type:"string" enum:"LanguageCode"`
+	LanguageCode LanguageCode `type:"string"`
 
 	// Human readable name of the language in English.
 	LanguageName *string `type:"string"`
@@ -1263,20 +1268,20 @@ func (s Voice) GoString() string {
 }
 
 // SetGender sets the Gender field's value.
-func (s *Voice) SetGender(v string) *Voice {
-	s.Gender = &v
+func (s *Voice) SetGender(v Gender) *Voice {
+	s.Gender = v
 	return s
 }
 
 // SetId sets the Id field's value.
-func (s *Voice) SetId(v string) *Voice {
-	s.Id = &v
+func (s *Voice) SetId(v VoiceId) *Voice {
+	s.Id = v
 	return s
 }
 
 // SetLanguageCode sets the LanguageCode field's value.
-func (s *Voice) SetLanguageCode(v string) *Voice {
-	s.LanguageCode = &v
+func (s *Voice) SetLanguageCode(v LanguageCode) *Voice {
+	s.LanguageCode = v
 	return s
 }
 
@@ -1292,266 +1297,122 @@ func (s *Voice) SetName(v string) *Voice {
 	return s
 }
 
-const (
-	// GenderFemale is a Gender enum value
-	GenderFemale = "Female"
+type Gender string
 
-	// GenderMale is a Gender enum value
-	GenderMale = "Male"
+// Enum values for Gender
+const (
+	GenderFemale Gender = "Female"
+	GenderMale   Gender = "Male"
 )
 
+type LanguageCode string
+
+// Enum values for LanguageCode
 const (
-	// LanguageCodeCyGb is a LanguageCode enum value
-	LanguageCodeCyGb = "cy-GB"
-
-	// LanguageCodeDaDk is a LanguageCode enum value
-	LanguageCodeDaDk = "da-DK"
-
-	// LanguageCodeDeDe is a LanguageCode enum value
-	LanguageCodeDeDe = "de-DE"
-
-	// LanguageCodeEnAu is a LanguageCode enum value
-	LanguageCodeEnAu = "en-AU"
-
-	// LanguageCodeEnGb is a LanguageCode enum value
-	LanguageCodeEnGb = "en-GB"
-
-	// LanguageCodeEnGbWls is a LanguageCode enum value
-	LanguageCodeEnGbWls = "en-GB-WLS"
-
-	// LanguageCodeEnIn is a LanguageCode enum value
-	LanguageCodeEnIn = "en-IN"
-
-	// LanguageCodeEnUs is a LanguageCode enum value
-	LanguageCodeEnUs = "en-US"
-
-	// LanguageCodeEsEs is a LanguageCode enum value
-	LanguageCodeEsEs = "es-ES"
-
-	// LanguageCodeEsUs is a LanguageCode enum value
-	LanguageCodeEsUs = "es-US"
-
-	// LanguageCodeFrCa is a LanguageCode enum value
-	LanguageCodeFrCa = "fr-CA"
-
-	// LanguageCodeFrFr is a LanguageCode enum value
-	LanguageCodeFrFr = "fr-FR"
-
-	// LanguageCodeIsIs is a LanguageCode enum value
-	LanguageCodeIsIs = "is-IS"
-
-	// LanguageCodeItIt is a LanguageCode enum value
-	LanguageCodeItIt = "it-IT"
-
-	// LanguageCodeJaJp is a LanguageCode enum value
-	LanguageCodeJaJp = "ja-JP"
-
-	// LanguageCodeNbNo is a LanguageCode enum value
-	LanguageCodeNbNo = "nb-NO"
-
-	// LanguageCodeNlNl is a LanguageCode enum value
-	LanguageCodeNlNl = "nl-NL"
-
-	// LanguageCodePlPl is a LanguageCode enum value
-	LanguageCodePlPl = "pl-PL"
-
-	// LanguageCodePtBr is a LanguageCode enum value
-	LanguageCodePtBr = "pt-BR"
-
-	// LanguageCodePtPt is a LanguageCode enum value
-	LanguageCodePtPt = "pt-PT"
-
-	// LanguageCodeRoRo is a LanguageCode enum value
-	LanguageCodeRoRo = "ro-RO"
-
-	// LanguageCodeRuRu is a LanguageCode enum value
-	LanguageCodeRuRu = "ru-RU"
-
-	// LanguageCodeSvSe is a LanguageCode enum value
-	LanguageCodeSvSe = "sv-SE"
-
-	// LanguageCodeTrTr is a LanguageCode enum value
-	LanguageCodeTrTr = "tr-TR"
+	LanguageCodeCyGb    LanguageCode = "cy-GB"
+	LanguageCodeDaDk    LanguageCode = "da-DK"
+	LanguageCodeDeDe    LanguageCode = "de-DE"
+	LanguageCodeEnAu    LanguageCode = "en-AU"
+	LanguageCodeEnGb    LanguageCode = "en-GB"
+	LanguageCodeEnGbWls LanguageCode = "en-GB-WLS"
+	LanguageCodeEnIn    LanguageCode = "en-IN"
+	LanguageCodeEnUs    LanguageCode = "en-US"
+	LanguageCodeEsEs    LanguageCode = "es-ES"
+	LanguageCodeEsUs    LanguageCode = "es-US"
+	LanguageCodeFrCa    LanguageCode = "fr-CA"
+	LanguageCodeFrFr    LanguageCode = "fr-FR"
+	LanguageCodeIsIs    LanguageCode = "is-IS"
+	LanguageCodeItIt    LanguageCode = "it-IT"
+	LanguageCodeJaJp    LanguageCode = "ja-JP"
+	LanguageCodeNbNo    LanguageCode = "nb-NO"
+	LanguageCodeNlNl    LanguageCode = "nl-NL"
+	LanguageCodePlPl    LanguageCode = "pl-PL"
+	LanguageCodePtBr    LanguageCode = "pt-BR"
+	LanguageCodePtPt    LanguageCode = "pt-PT"
+	LanguageCodeRoRo    LanguageCode = "ro-RO"
+	LanguageCodeRuRu    LanguageCode = "ru-RU"
+	LanguageCodeSvSe    LanguageCode = "sv-SE"
+	LanguageCodeTrTr    LanguageCode = "tr-TR"
 )
 
+type OutputFormat string
+
+// Enum values for OutputFormat
 const (
-	// OutputFormatJson is a OutputFormat enum value
-	OutputFormatJson = "json"
-
-	// OutputFormatMp3 is a OutputFormat enum value
-	OutputFormatMp3 = "mp3"
-
-	// OutputFormatOggVorbis is a OutputFormat enum value
-	OutputFormatOggVorbis = "ogg_vorbis"
-
-	// OutputFormatPcm is a OutputFormat enum value
-	OutputFormatPcm = "pcm"
+	OutputFormatJson      OutputFormat = "json"
+	OutputFormatMp3       OutputFormat = "mp3"
+	OutputFormatOggVorbis OutputFormat = "ogg_vorbis"
+	OutputFormatPcm       OutputFormat = "pcm"
 )
 
+type SpeechMarkType string
+
+// Enum values for SpeechMarkType
 const (
-	// SpeechMarkTypeSentence is a SpeechMarkType enum value
-	SpeechMarkTypeSentence = "sentence"
-
-	// SpeechMarkTypeSsml is a SpeechMarkType enum value
-	SpeechMarkTypeSsml = "ssml"
-
-	// SpeechMarkTypeViseme is a SpeechMarkType enum value
-	SpeechMarkTypeViseme = "viseme"
-
-	// SpeechMarkTypeWord is a SpeechMarkType enum value
-	SpeechMarkTypeWord = "word"
+	SpeechMarkTypeSentence SpeechMarkType = "sentence"
+	SpeechMarkTypeSsml     SpeechMarkType = "ssml"
+	SpeechMarkTypeViseme   SpeechMarkType = "viseme"
+	SpeechMarkTypeWord     SpeechMarkType = "word"
 )
 
-const (
-	// TextTypeSsml is a TextType enum value
-	TextTypeSsml = "ssml"
+type TextType string
 
-	// TextTypeText is a TextType enum value
-	TextTypeText = "text"
+// Enum values for TextType
+const (
+	TextTypeSsml TextType = "ssml"
+	TextTypeText TextType = "text"
 )
 
+type VoiceId string
+
+// Enum values for VoiceId
 const (
-	// VoiceIdGeraint is a VoiceId enum value
-	VoiceIdGeraint = "Geraint"
-
-	// VoiceIdGwyneth is a VoiceId enum value
-	VoiceIdGwyneth = "Gwyneth"
-
-	// VoiceIdMads is a VoiceId enum value
-	VoiceIdMads = "Mads"
-
-	// VoiceIdNaja is a VoiceId enum value
-	VoiceIdNaja = "Naja"
-
-	// VoiceIdHans is a VoiceId enum value
-	VoiceIdHans = "Hans"
-
-	// VoiceIdMarlene is a VoiceId enum value
-	VoiceIdMarlene = "Marlene"
-
-	// VoiceIdNicole is a VoiceId enum value
-	VoiceIdNicole = "Nicole"
-
-	// VoiceIdRussell is a VoiceId enum value
-	VoiceIdRussell = "Russell"
-
-	// VoiceIdAmy is a VoiceId enum value
-	VoiceIdAmy = "Amy"
-
-	// VoiceIdBrian is a VoiceId enum value
-	VoiceIdBrian = "Brian"
-
-	// VoiceIdEmma is a VoiceId enum value
-	VoiceIdEmma = "Emma"
-
-	// VoiceIdRaveena is a VoiceId enum value
-	VoiceIdRaveena = "Raveena"
-
-	// VoiceIdIvy is a VoiceId enum value
-	VoiceIdIvy = "Ivy"
-
-	// VoiceIdJoanna is a VoiceId enum value
-	VoiceIdJoanna = "Joanna"
-
-	// VoiceIdJoey is a VoiceId enum value
-	VoiceIdJoey = "Joey"
-
-	// VoiceIdJustin is a VoiceId enum value
-	VoiceIdJustin = "Justin"
-
-	// VoiceIdKendra is a VoiceId enum value
-	VoiceIdKendra = "Kendra"
-
-	// VoiceIdKimberly is a VoiceId enum value
-	VoiceIdKimberly = "Kimberly"
-
-	// VoiceIdSalli is a VoiceId enum value
-	VoiceIdSalli = "Salli"
-
-	// VoiceIdConchita is a VoiceId enum value
-	VoiceIdConchita = "Conchita"
-
-	// VoiceIdEnrique is a VoiceId enum value
-	VoiceIdEnrique = "Enrique"
-
-	// VoiceIdMiguel is a VoiceId enum value
-	VoiceIdMiguel = "Miguel"
-
-	// VoiceIdPenelope is a VoiceId enum value
-	VoiceIdPenelope = "Penelope"
-
-	// VoiceIdChantal is a VoiceId enum value
-	VoiceIdChantal = "Chantal"
-
-	// VoiceIdCeline is a VoiceId enum value
-	VoiceIdCeline = "Celine"
-
-	// VoiceIdMathieu is a VoiceId enum value
-	VoiceIdMathieu = "Mathieu"
-
-	// VoiceIdDora is a VoiceId enum value
-	VoiceIdDora = "Dora"
-
-	// VoiceIdKarl is a VoiceId enum value
-	VoiceIdKarl = "Karl"
-
-	// VoiceIdCarla is a VoiceId enum value
-	VoiceIdCarla = "Carla"
-
-	// VoiceIdGiorgio is a VoiceId enum value
-	VoiceIdGiorgio = "Giorgio"
-
-	// VoiceIdMizuki is a VoiceId enum value
-	VoiceIdMizuki = "Mizuki"
-
-	// VoiceIdLiv is a VoiceId enum value
-	VoiceIdLiv = "Liv"
-
-	// VoiceIdLotte is a VoiceId enum value
-	VoiceIdLotte = "Lotte"
-
-	// VoiceIdRuben is a VoiceId enum value
-	VoiceIdRuben = "Ruben"
-
-	// VoiceIdEwa is a VoiceId enum value
-	VoiceIdEwa = "Ewa"
-
-	// VoiceIdJacek is a VoiceId enum value
-	VoiceIdJacek = "Jacek"
-
-	// VoiceIdJan is a VoiceId enum value
-	VoiceIdJan = "Jan"
-
-	// VoiceIdMaja is a VoiceId enum value
-	VoiceIdMaja = "Maja"
-
-	// VoiceIdRicardo is a VoiceId enum value
-	VoiceIdRicardo = "Ricardo"
-
-	// VoiceIdVitoria is a VoiceId enum value
-	VoiceIdVitoria = "Vitoria"
-
-	// VoiceIdCristiano is a VoiceId enum value
-	VoiceIdCristiano = "Cristiano"
-
-	// VoiceIdInes is a VoiceId enum value
-	VoiceIdInes = "Ines"
-
-	// VoiceIdCarmen is a VoiceId enum value
-	VoiceIdCarmen = "Carmen"
-
-	// VoiceIdMaxim is a VoiceId enum value
-	VoiceIdMaxim = "Maxim"
-
-	// VoiceIdTatyana is a VoiceId enum value
-	VoiceIdTatyana = "Tatyana"
-
-	// VoiceIdAstrid is a VoiceId enum value
-	VoiceIdAstrid = "Astrid"
-
-	// VoiceIdFiliz is a VoiceId enum value
-	VoiceIdFiliz = "Filiz"
-
-	// VoiceIdVicki is a VoiceId enum value
-	VoiceIdVicki = "Vicki"
+	VoiceIdGeraint   VoiceId = "Geraint"
+	VoiceIdGwyneth   VoiceId = "Gwyneth"
+	VoiceIdMads      VoiceId = "Mads"
+	VoiceIdNaja      VoiceId = "Naja"
+	VoiceIdHans      VoiceId = "Hans"
+	VoiceIdMarlene   VoiceId = "Marlene"
+	VoiceIdNicole    VoiceId = "Nicole"
+	VoiceIdRussell   VoiceId = "Russell"
+	VoiceIdAmy       VoiceId = "Amy"
+	VoiceIdBrian     VoiceId = "Brian"
+	VoiceIdEmma      VoiceId = "Emma"
+	VoiceIdRaveena   VoiceId = "Raveena"
+	VoiceIdIvy       VoiceId = "Ivy"
+	VoiceIdJoanna    VoiceId = "Joanna"
+	VoiceIdJoey      VoiceId = "Joey"
+	VoiceIdJustin    VoiceId = "Justin"
+	VoiceIdKendra    VoiceId = "Kendra"
+	VoiceIdKimberly  VoiceId = "Kimberly"
+	VoiceIdSalli     VoiceId = "Salli"
+	VoiceIdConchita  VoiceId = "Conchita"
+	VoiceIdEnrique   VoiceId = "Enrique"
+	VoiceIdMiguel    VoiceId = "Miguel"
+	VoiceIdPenelope  VoiceId = "Penelope"
+	VoiceIdChantal   VoiceId = "Chantal"
+	VoiceIdCeline    VoiceId = "Celine"
+	VoiceIdMathieu   VoiceId = "Mathieu"
+	VoiceIdDora      VoiceId = "Dora"
+	VoiceIdKarl      VoiceId = "Karl"
+	VoiceIdCarla     VoiceId = "Carla"
+	VoiceIdGiorgio   VoiceId = "Giorgio"
+	VoiceIdMizuki    VoiceId = "Mizuki"
+	VoiceIdLiv       VoiceId = "Liv"
+	VoiceIdLotte     VoiceId = "Lotte"
+	VoiceIdRuben     VoiceId = "Ruben"
+	VoiceIdEwa       VoiceId = "Ewa"
+	VoiceIdJacek     VoiceId = "Jacek"
+	VoiceIdJan       VoiceId = "Jan"
+	VoiceIdMaja      VoiceId = "Maja"
+	VoiceIdRicardo   VoiceId = "Ricardo"
+	VoiceIdVitoria   VoiceId = "Vitoria"
+	VoiceIdCristiano VoiceId = "Cristiano"
+	VoiceIdInes      VoiceId = "Ines"
+	VoiceIdCarmen    VoiceId = "Carmen"
+	VoiceIdMaxim     VoiceId = "Maxim"
+	VoiceIdTatyana   VoiceId = "Tatyana"
+	VoiceIdAstrid    VoiceId = "Astrid"
+	VoiceIdFiliz     VoiceId = "Filiz"
+	VoiceIdVicki     VoiceId = "Vicki"
 )

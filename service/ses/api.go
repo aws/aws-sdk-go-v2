@@ -4723,9 +4723,11 @@ func (s AddHeaderAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddHeaderAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddHeaderAction"}
+
 	if s.HeaderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
 	}
+
 	if s.HeaderValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HeaderValue"))
 	}
@@ -4856,12 +4858,15 @@ func (s BounceAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BounceAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BounceAction"}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
+
 	if s.Sender == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Sender"))
 	}
+
 	if s.SmtpReplyCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SmtpReplyCode"))
 	}
@@ -4912,7 +4917,7 @@ type BouncedRecipientInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The reason for the bounce. You must provide either this parameter or RecipientDsnFields.
-	BounceType *string `type:"string" enum:"BounceType"`
+	BounceType BounceType `type:"string"`
 
 	// The email address of the recipient of the bounced email.
 	//
@@ -4944,6 +4949,7 @@ func (s BouncedRecipientInfo) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BouncedRecipientInfo) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BouncedRecipientInfo"}
+
 	if s.Recipient == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Recipient"))
 	}
@@ -4960,8 +4966,8 @@ func (s *BouncedRecipientInfo) Validate() error {
 }
 
 // SetBounceType sets the BounceType field's value.
-func (s *BouncedRecipientInfo) SetBounceType(v string) *BouncedRecipientInfo {
-	s.BounceType = &v
+func (s *BouncedRecipientInfo) SetBounceType(v BounceType) *BouncedRecipientInfo {
+	s.BounceType = v
 	return s
 }
 
@@ -5021,9 +5027,11 @@ func (s CloneReceiptRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloneReceiptRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloneReceiptRuleSetInput"}
+
 	if s.OriginalRuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OriginalRuleSetName"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -5092,6 +5100,7 @@ func (s CloudWatchDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchDestination"}
+
 	if s.DimensionConfigurations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DimensionConfigurations"))
 	}
@@ -5157,7 +5166,7 @@ type CloudWatchDimensionConfiguration struct {
 	// choose emailHeader.
 	//
 	// DimensionValueSource is a required field
-	DimensionValueSource *string `type:"string" required:"true" enum:"DimensionValueSource"`
+	DimensionValueSource DimensionValueSource `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5173,13 +5182,15 @@ func (s CloudWatchDimensionConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchDimensionConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchDimensionConfiguration"}
+
 	if s.DefaultDimensionValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultDimensionValue"))
 	}
+
 	if s.DimensionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DimensionName"))
 	}
-	if s.DimensionValueSource == nil {
+	if len(s.DimensionValueSource) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("DimensionValueSource"))
 	}
 
@@ -5202,8 +5213,8 @@ func (s *CloudWatchDimensionConfiguration) SetDimensionName(v string) *CloudWatc
 }
 
 // SetDimensionValueSource sets the DimensionValueSource field's value.
-func (s *CloudWatchDimensionConfiguration) SetDimensionValueSource(v string) *CloudWatchDimensionConfiguration {
-	s.DimensionValueSource = &v
+func (s *CloudWatchDimensionConfiguration) SetDimensionValueSource(v DimensionValueSource) *CloudWatchDimensionConfiguration {
+	s.DimensionValueSource = v
 	return s
 }
 
@@ -5241,6 +5252,7 @@ func (s ConfigurationSet) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigurationSet) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfigurationSet"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5288,6 +5300,7 @@ func (s Content) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Content) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Content"}
+
 	if s.Data == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
@@ -5345,9 +5358,11 @@ func (s CreateConfigurationSetEventDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetEventDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetEventDestinationInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
+
 	if s.EventDestination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
 	}
@@ -5417,6 +5432,7 @@ func (s CreateConfigurationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetInput"}
+
 	if s.ConfigurationSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSet"))
 	}
@@ -5491,9 +5507,11 @@ func (s CreateConfigurationSetTrackingOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetTrackingOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetTrackingOptionsInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
+
 	if s.TrackingOptions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrackingOptions"))
 	}
@@ -5559,6 +5577,7 @@ func (s CreateReceiptFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptFilterInput"}
+
 	if s.Filter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
@@ -5633,9 +5652,11 @@ func (s CreateReceiptRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptRuleInput"}
+
 	if s.Rule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -5718,6 +5739,7 @@ func (s CreateReceiptRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptRuleSetInput"}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -5782,9 +5804,11 @@ func (s DeleteConfigurationSetEventDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetEventDestinationInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
+
 	if s.EventDestinationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
 	}
@@ -5849,6 +5873,7 @@ func (s DeleteConfigurationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
@@ -5907,6 +5932,7 @@ func (s DeleteConfigurationSetTrackingOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetTrackingOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetTrackingOptionsInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
@@ -5964,6 +5990,7 @@ func (s DeleteIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
@@ -6032,9 +6059,11 @@ func (s DeleteIdentityPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityPolicyInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -6102,6 +6131,7 @@ func (s DeleteReceiptFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptFilterInput"}
+
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
@@ -6165,9 +6195,11 @@ func (s DeleteReceiptRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -6232,6 +6264,7 @@ func (s DeleteReceiptRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptRuleSetInput"}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -6289,6 +6322,7 @@ func (s DeleteVerifiedEmailAddressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVerifiedEmailAddressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVerifiedEmailAddressInput"}
+
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
@@ -6383,7 +6417,7 @@ type DescribeConfigurationSetInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of configuration set attributes to return.
-	ConfigurationSetAttributeNames []*string `type:"list"`
+	ConfigurationSetAttributeNames []ConfigurationSetAttribute `type:"list"`
 
 	// The name of the configuration set to describe.
 	//
@@ -6404,6 +6438,7 @@ func (s DescribeConfigurationSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSetInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
@@ -6415,7 +6450,7 @@ func (s *DescribeConfigurationSetInput) Validate() error {
 }
 
 // SetConfigurationSetAttributeNames sets the ConfigurationSetAttributeNames field's value.
-func (s *DescribeConfigurationSetInput) SetConfigurationSetAttributeNames(v []*string) *DescribeConfigurationSetInput {
+func (s *DescribeConfigurationSetInput) SetConfigurationSetAttributeNames(v []ConfigurationSetAttribute) *DescribeConfigurationSetInput {
 	s.ConfigurationSetAttributeNames = v
 	return s
 }
@@ -6504,9 +6539,11 @@ func (s DescribeReceiptRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReceiptRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -6582,6 +6619,7 @@ func (s DescribeReceiptRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReceiptRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleSetInput"}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -6714,7 +6752,7 @@ type EventDestination struct {
 	// The type of email sending events to publish to the event destination.
 	//
 	// MatchingEventTypes is a required field
-	MatchingEventTypes []*string `type:"list" required:"true"`
+	MatchingEventTypes []EventType `type:"list" required:"true"`
 
 	// The name of the event destination. The name must:
 	//
@@ -6744,9 +6782,11 @@ func (s EventDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EventDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EventDestination"}
+
 	if s.MatchingEventTypes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MatchingEventTypes"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6791,7 +6831,7 @@ func (s *EventDestination) SetKinesisFirehoseDestination(v *KinesisFirehoseDesti
 }
 
 // SetMatchingEventTypes sets the MatchingEventTypes field's value.
-func (s *EventDestination) SetMatchingEventTypes(v []*string) *EventDestination {
+func (s *EventDestination) SetMatchingEventTypes(v []EventType) *EventDestination {
 	s.MatchingEventTypes = v
 	return s
 }
@@ -6843,9 +6883,11 @@ func (s ExtensionField) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtensionField) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExtensionField"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -6897,6 +6939,7 @@ func (s GetIdentityDkimAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityDkimAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityDkimAttributesInput"}
+
 	if s.Identities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
@@ -6969,6 +7012,7 @@ func (s GetIdentityMailFromDomainAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityMailFromDomainAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityMailFromDomainAttributesInput"}
+
 	if s.Identities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
@@ -7040,6 +7084,7 @@ func (s GetIdentityNotificationAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityNotificationAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityNotificationAttributesInput"}
+
 	if s.Identities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
@@ -7121,9 +7166,11 @@ func (s GetIdentityPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoliciesInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
+
 	if s.PolicyNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
@@ -7200,6 +7247,7 @@ func (s GetIdentityVerificationAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityVerificationAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityVerificationAttributesInput"}
+
 	if s.Identities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
@@ -7377,7 +7425,7 @@ type IdentityDkimAttributes struct {
 	// identities, not email address identities.)
 	//
 	// DkimVerificationStatus is a required field
-	DkimVerificationStatus *string `type:"string" required:"true" enum:"VerificationStatus"`
+	DkimVerificationStatus VerificationStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7403,8 +7451,8 @@ func (s *IdentityDkimAttributes) SetDkimTokens(v []*string) *IdentityDkimAttribu
 }
 
 // SetDkimVerificationStatus sets the DkimVerificationStatus field's value.
-func (s *IdentityDkimAttributes) SetDkimVerificationStatus(v string) *IdentityDkimAttributes {
-	s.DkimVerificationStatus = &v
+func (s *IdentityDkimAttributes) SetDkimVerificationStatus(v VerificationStatus) *IdentityDkimAttributes {
+	s.DkimVerificationStatus = v
 	return s
 }
 
@@ -7425,7 +7473,7 @@ type IdentityMailFromDomainAttributes struct {
 	// Failed, and TemporaryFailure.
 	//
 	// BehaviorOnMXFailure is a required field
-	BehaviorOnMXFailure *string `type:"string" required:"true" enum:"BehaviorOnMXFailure"`
+	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string" required:"true"`
 
 	// The custom MAIL FROM domain that the identity is configured to use.
 	//
@@ -7439,7 +7487,7 @@ type IdentityMailFromDomainAttributes struct {
 	// described by BehaviorOnMXFailure.
 	//
 	// MailFromDomainStatus is a required field
-	MailFromDomainStatus *string `type:"string" required:"true" enum:"CustomMailFromStatus"`
+	MailFromDomainStatus CustomMailFromStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7453,8 +7501,8 @@ func (s IdentityMailFromDomainAttributes) GoString() string {
 }
 
 // SetBehaviorOnMXFailure sets the BehaviorOnMXFailure field's value.
-func (s *IdentityMailFromDomainAttributes) SetBehaviorOnMXFailure(v string) *IdentityMailFromDomainAttributes {
-	s.BehaviorOnMXFailure = &v
+func (s *IdentityMailFromDomainAttributes) SetBehaviorOnMXFailure(v BehaviorOnMXFailure) *IdentityMailFromDomainAttributes {
+	s.BehaviorOnMXFailure = v
 	return s
 }
 
@@ -7465,8 +7513,8 @@ func (s *IdentityMailFromDomainAttributes) SetMailFromDomain(v string) *Identity
 }
 
 // SetMailFromDomainStatus sets the MailFromDomainStatus field's value.
-func (s *IdentityMailFromDomainAttributes) SetMailFromDomainStatus(v string) *IdentityMailFromDomainAttributes {
-	s.MailFromDomainStatus = &v
+func (s *IdentityMailFromDomainAttributes) SetMailFromDomainStatus(v CustomMailFromStatus) *IdentityMailFromDomainAttributes {
+	s.MailFromDomainStatus = v
 	return s
 }
 
@@ -7584,7 +7632,7 @@ type IdentityVerificationAttributes struct {
 	// or "TemporaryFailure".
 	//
 	// VerificationStatus is a required field
-	VerificationStatus *string `type:"string" required:"true" enum:"VerificationStatus"`
+	VerificationStatus VerificationStatus `type:"string" required:"true"`
 
 	// The verification token for a domain identity. Null for email address identities.
 	VerificationToken *string `type:"string"`
@@ -7601,8 +7649,8 @@ func (s IdentityVerificationAttributes) GoString() string {
 }
 
 // SetVerificationStatus sets the VerificationStatus field's value.
-func (s *IdentityVerificationAttributes) SetVerificationStatus(v string) *IdentityVerificationAttributes {
-	s.VerificationStatus = &v
+func (s *IdentityVerificationAttributes) SetVerificationStatus(v VerificationStatus) *IdentityVerificationAttributes {
+	s.VerificationStatus = v
 	return s
 }
 
@@ -7649,9 +7697,11 @@ func (s KinesisFirehoseDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseDestination"}
+
 	if s.DeliveryStreamARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamARN"))
 	}
+
 	if s.IAMRoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IAMRoleARN"))
 	}
@@ -7707,7 +7757,7 @@ type LambdaAction struct {
 	// Event invocation in most cases. Use RequestResponse only when you want to
 	// make a mail flow decision, such as whether to stop the receipt rule or the
 	// receipt rule set.
-	InvocationType *string `type:"string" enum:"InvocationType"`
+	InvocationType InvocationType `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
 	// Lambda action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.
@@ -7729,6 +7779,7 @@ func (s LambdaAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LambdaAction"}
+
 	if s.FunctionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionArn"))
 	}
@@ -7746,8 +7797,8 @@ func (s *LambdaAction) SetFunctionArn(v string) *LambdaAction {
 }
 
 // SetInvocationType sets the InvocationType field's value.
-func (s *LambdaAction) SetInvocationType(v string) *LambdaAction {
-	s.InvocationType = &v
+func (s *LambdaAction) SetInvocationType(v InvocationType) *LambdaAction {
+	s.InvocationType = v
 	return s
 }
 
@@ -7841,7 +7892,7 @@ type ListIdentitiesInput struct {
 
 	// The type of the identities to list. Possible values are "EmailAddress" and
 	// "Domain". If this parameter is omitted, then all identities will be listed.
-	IdentityType *string `type:"string" enum:"IdentityType"`
+	IdentityType IdentityType `type:"string"`
 
 	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
 	MaxItems *int64 `type:"integer"`
@@ -7861,8 +7912,8 @@ func (s ListIdentitiesInput) GoString() string {
 }
 
 // SetIdentityType sets the IdentityType field's value.
-func (s *ListIdentitiesInput) SetIdentityType(v string) *ListIdentitiesInput {
-	s.IdentityType = &v
+func (s *ListIdentitiesInput) SetIdentityType(v IdentityType) *ListIdentitiesInput {
+	s.IdentityType = v
 	return s
 }
 
@@ -7946,6 +7997,7 @@ func (s ListIdentityPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentityPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityPoliciesInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
@@ -8169,9 +8221,11 @@ func (s Message) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Message) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Message"}
+
 	if s.Body == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
+
 	if s.Subject == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
@@ -8241,6 +8295,7 @@ func (s MessageDsn) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageDsn) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MessageDsn"}
+
 	if s.ReportingMta == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReportingMta"))
 	}
@@ -8323,9 +8378,11 @@ func (s MessageTag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageTag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MessageTag"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -8395,15 +8452,18 @@ func (s PutIdentityPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIdentityPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutIdentityPolicyInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
+
 	if s.Policy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -8493,6 +8553,7 @@ func (s RawMessage) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RawMessage) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RawMessage"}
+
 	if s.Data == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
@@ -8685,9 +8746,11 @@ func (s ReceiptFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReceiptFilter"}
+
 	if s.IpFilter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpFilter"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8735,7 +8798,7 @@ type ReceiptIpFilter struct {
 	// Indicates whether to block or allow incoming mail from the specified IP addresses.
 	//
 	// Policy is a required field
-	Policy *string `type:"string" required:"true" enum:"ReceiptFilterPolicy"`
+	Policy ReceiptFilterPolicy `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8751,10 +8814,11 @@ func (s ReceiptIpFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptIpFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReceiptIpFilter"}
+
 	if s.Cidr == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
 	}
-	if s.Policy == nil {
+	if len(s.Policy) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 
@@ -8771,8 +8835,8 @@ func (s *ReceiptIpFilter) SetCidr(v string) *ReceiptIpFilter {
 }
 
 // SetPolicy sets the Policy field's value.
-func (s *ReceiptIpFilter) SetPolicy(v string) *ReceiptIpFilter {
-	s.Policy = &v
+func (s *ReceiptIpFilter) SetPolicy(v ReceiptFilterPolicy) *ReceiptIpFilter {
+	s.Policy = v
 	return s
 }
 
@@ -8823,7 +8887,7 @@ type ReceiptRule struct {
 	// over a connection encrypted with Transport Layer Security (TLS). If this
 	// parameter is set to Require, Amazon SES will bounce emails that are not received
 	// over TLS. The default is Optional.
-	TlsPolicy *string `type:"string" enum:"TlsPolicy"`
+	TlsPolicy TlsPolicy `type:"string"`
 }
 
 // String returns the string representation
@@ -8839,6 +8903,7 @@ func (s ReceiptRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReceiptRule"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8890,8 +8955,8 @@ func (s *ReceiptRule) SetScanEnabled(v bool) *ReceiptRule {
 }
 
 // SetTlsPolicy sets the TlsPolicy field's value.
-func (s *ReceiptRule) SetTlsPolicy(v string) *ReceiptRule {
-	s.TlsPolicy = &v
+func (s *ReceiptRule) SetTlsPolicy(v TlsPolicy) *ReceiptRule {
+	s.TlsPolicy = v
 	return s
 }
 
@@ -8956,7 +9021,7 @@ type RecipientDsnFields struct {
 	// by RFC 3464 (https://tools.ietf.org/html/rfc3464).
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"DsnAction"`
+	Action DsnAction `type:"string" required:"true"`
 
 	// An extended explanation of what went wrong; this is usually an SMTP response.
 	// See RFC 3463 (https://tools.ietf.org/html/rfc3463) for the correct formatting
@@ -9006,9 +9071,10 @@ func (s RecipientDsnFields) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecipientDsnFields) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecipientDsnFields"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.Status == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
@@ -9030,8 +9096,8 @@ func (s *RecipientDsnFields) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *RecipientDsnFields) SetAction(v string) *RecipientDsnFields {
-	s.Action = &v
+func (s *RecipientDsnFields) SetAction(v DsnAction) *RecipientDsnFields {
+	s.Action = v
 	return s
 }
 
@@ -9103,9 +9169,11 @@ func (s ReorderReceiptRuleSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReorderReceiptRuleSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReorderReceiptRuleSetInput"}
+
 	if s.RuleNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleNames"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -9223,6 +9291,7 @@ func (s S3Action) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3Action"}
+
 	if s.BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
@@ -9283,7 +9352,7 @@ type SNSAction struct {
 	// is easier to use, but may not preserve all special characters when a message
 	// was encoded with a different encoding format. Base64 preserves all special
 	// characters. The default value is UTF-8.
-	Encoding *string `type:"string" enum:"SNSActionEncoding"`
+	Encoding SNSActionEncoding `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An example
 	// of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.
@@ -9307,6 +9376,7 @@ func (s SNSAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SNSAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SNSAction"}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -9318,8 +9388,8 @@ func (s *SNSAction) Validate() error {
 }
 
 // SetEncoding sets the Encoding field's value.
-func (s *SNSAction) SetEncoding(v string) *SNSAction {
-	s.Encoding = &v
+func (s *SNSAction) SetEncoding(v SNSActionEncoding) *SNSAction {
+	s.Encoding = v
 	return s
 }
 
@@ -9361,6 +9431,7 @@ func (s SNSDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SNSDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SNSDestination"}
+
 	if s.TopicARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
 	}
@@ -9430,12 +9501,15 @@ func (s SendBounceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendBounceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendBounceInput"}
+
 	if s.BounceSender == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BounceSender"))
 	}
+
 	if s.BouncedRecipientInfoList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BouncedRecipientInfoList"))
 	}
+
 	if s.OriginalMessageId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OriginalMessageId"))
 	}
@@ -9680,12 +9754,15 @@ func (s SendEmailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendEmailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendEmailInput"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
+
 	if s.Source == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
@@ -9907,6 +9984,7 @@ func (s SendRawEmailInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendRawEmailInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendRawEmailInput"}
+
 	if s.RawMessage == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RawMessage"))
 	}
@@ -10083,9 +10161,11 @@ func (s SetIdentityDkimEnabledInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityDkimEnabledInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityDkimEnabledInput"}
+
 	if s.DkimEnabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DkimEnabled"))
 	}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
@@ -10161,9 +10241,11 @@ func (s SetIdentityFeedbackForwardingEnabledInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityFeedbackForwardingEnabledInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityFeedbackForwardingEnabledInput"}
+
 	if s.ForwardingEnabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ForwardingEnabled"))
 	}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
@@ -10229,7 +10311,7 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	// The notification type for which to enable or disable headers in notifications.
 	//
 	// NotificationType is a required field
-	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
+	NotificationType NotificationType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10245,13 +10327,15 @@ func (s SetIdentityHeadersInNotificationsEnabledInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityHeadersInNotificationsEnabledInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityHeadersInNotificationsEnabledInput"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
-	if s.NotificationType == nil {
+	if len(s.NotificationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
 
@@ -10274,8 +10358,8 @@ func (s *SetIdentityHeadersInNotificationsEnabledInput) SetIdentity(v string) *S
 }
 
 // SetNotificationType sets the NotificationType field's value.
-func (s *SetIdentityHeadersInNotificationsEnabledInput) SetNotificationType(v string) *SetIdentityHeadersInNotificationsEnabledInput {
-	s.NotificationType = &v
+func (s *SetIdentityHeadersInNotificationsEnabledInput) SetNotificationType(v NotificationType) *SetIdentityHeadersInNotificationsEnabledInput {
+	s.NotificationType = v
 	return s
 }
 
@@ -10310,7 +10394,7 @@ type SetIdentityMailFromDomainInput struct {
 	//
 	// The action specified in BehaviorOnMXFailure is taken when the custom MAIL
 	// FROM domain setup is in the Pending, Failed, and TemporaryFailure states.
-	BehaviorOnMXFailure *string `type:"string" enum:"BehaviorOnMXFailure"`
+	BehaviorOnMXFailure BehaviorOnMXFailure `type:"string"`
 
 	// The verified identity for which you want to enable or disable the specified
 	// custom MAIL FROM domain.
@@ -10341,6 +10425,7 @@ func (s SetIdentityMailFromDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityMailFromDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityMailFromDomainInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
@@ -10352,8 +10437,8 @@ func (s *SetIdentityMailFromDomainInput) Validate() error {
 }
 
 // SetBehaviorOnMXFailure sets the BehaviorOnMXFailure field's value.
-func (s *SetIdentityMailFromDomainInput) SetBehaviorOnMXFailure(v string) *SetIdentityMailFromDomainInput {
-	s.BehaviorOnMXFailure = &v
+func (s *SetIdentityMailFromDomainInput) SetBehaviorOnMXFailure(v BehaviorOnMXFailure) *SetIdentityMailFromDomainInput {
+	s.BehaviorOnMXFailure = v
 	return s
 }
 
@@ -10404,7 +10489,7 @@ type SetIdentityNotificationTopicInput struct {
 	// SNS topic.
 	//
 	// NotificationType is a required field
-	NotificationType *string `type:"string" required:"true" enum:"NotificationType"`
+	NotificationType NotificationType `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic. If the parameter
 	// is omitted from the request or a null value is passed, SnsTopic is cleared
@@ -10425,10 +10510,11 @@ func (s SetIdentityNotificationTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityNotificationTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityNotificationTopicInput"}
+
 	if s.Identity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
-	if s.NotificationType == nil {
+	if len(s.NotificationType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
 
@@ -10445,8 +10531,8 @@ func (s *SetIdentityNotificationTopicInput) SetIdentity(v string) *SetIdentityNo
 }
 
 // SetNotificationType sets the NotificationType field's value.
-func (s *SetIdentityNotificationTopicInput) SetNotificationType(v string) *SetIdentityNotificationTopicInput {
-	s.NotificationType = &v
+func (s *SetIdentityNotificationTopicInput) SetNotificationType(v NotificationType) *SetIdentityNotificationTopicInput {
+	s.NotificationType = v
 	return s
 }
 
@@ -10506,9 +10592,11 @@ func (s SetReceiptRulePositionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetReceiptRulePositionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetReceiptRulePositionInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -10566,7 +10654,7 @@ type StopAction struct {
 	// The name of the RuleSet that is being stopped.
 	//
 	// Scope is a required field
-	Scope *string `type:"string" required:"true" enum:"StopScope"`
+	Scope StopScope `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to notify when the
 	// stop action is taken. An example of an Amazon SNS topic ARN is arn:aws:sns:us-west-2:123456789012:MyTopic.
@@ -10588,7 +10676,7 @@ func (s StopAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopAction"}
-	if s.Scope == nil {
+	if len(s.Scope) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Scope"))
 	}
 
@@ -10599,8 +10687,8 @@ func (s *StopAction) Validate() error {
 }
 
 // SetScope sets the Scope field's value.
-func (s *StopAction) SetScope(v string) *StopAction {
-	s.Scope = &v
+func (s *StopAction) SetScope(v StopScope) *StopAction {
+	s.Scope = v
 	return s
 }
 
@@ -10675,9 +10763,11 @@ func (s UpdateConfigurationSetEventDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationSetEventDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetEventDestinationInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
+
 	if s.EventDestination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
 	}
@@ -10757,9 +10847,11 @@ func (s UpdateConfigurationSetTrackingOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationSetTrackingOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetTrackingOptionsInput"}
+
 	if s.ConfigurationSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
+
 	if s.TrackingOptions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrackingOptions"))
 	}
@@ -10829,9 +10921,11 @@ func (s UpdateReceiptRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateReceiptRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateReceiptRuleInput"}
+
 	if s.Rule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
+
 	if s.RuleSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
@@ -10901,6 +10995,7 @@ func (s VerifyDomainDkimInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyDomainDkimInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyDomainDkimInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -10982,6 +11077,7 @@ func (s VerifyDomainIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyDomainIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyDomainIdentityInput"}
+
 	if s.Domain == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
@@ -11060,6 +11156,7 @@ func (s VerifyEmailAddressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyEmailAddressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyEmailAddressInput"}
+
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
@@ -11117,6 +11214,7 @@ func (s VerifyEmailIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyEmailIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyEmailIdentityInput"}
+
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
@@ -11188,6 +11286,7 @@ func (s WorkmailAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkmailAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkmailAction"}
+
 	if s.OrganizationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationArn"))
 	}
@@ -11210,176 +11309,140 @@ func (s *WorkmailAction) SetTopicArn(v string) *WorkmailAction {
 	return s
 }
 
-const (
-	// BehaviorOnMXFailureUseDefaultValue is a BehaviorOnMXFailure enum value
-	BehaviorOnMXFailureUseDefaultValue = "UseDefaultValue"
+type BehaviorOnMXFailure string
 
-	// BehaviorOnMXFailureRejectMessage is a BehaviorOnMXFailure enum value
-	BehaviorOnMXFailureRejectMessage = "RejectMessage"
+// Enum values for BehaviorOnMXFailure
+const (
+	BehaviorOnMXFailureUseDefaultValue BehaviorOnMXFailure = "UseDefaultValue"
+	BehaviorOnMXFailureRejectMessage   BehaviorOnMXFailure = "RejectMessage"
 )
 
+type BounceType string
+
+// Enum values for BounceType
 const (
-	// BounceTypeDoesNotExist is a BounceType enum value
-	BounceTypeDoesNotExist = "DoesNotExist"
-
-	// BounceTypeMessageTooLarge is a BounceType enum value
-	BounceTypeMessageTooLarge = "MessageTooLarge"
-
-	// BounceTypeExceededQuota is a BounceType enum value
-	BounceTypeExceededQuota = "ExceededQuota"
-
-	// BounceTypeContentRejected is a BounceType enum value
-	BounceTypeContentRejected = "ContentRejected"
-
-	// BounceTypeUndefined is a BounceType enum value
-	BounceTypeUndefined = "Undefined"
-
-	// BounceTypeTemporaryFailure is a BounceType enum value
-	BounceTypeTemporaryFailure = "TemporaryFailure"
+	BounceTypeDoesNotExist     BounceType = "DoesNotExist"
+	BounceTypeMessageTooLarge  BounceType = "MessageTooLarge"
+	BounceTypeExceededQuota    BounceType = "ExceededQuota"
+	BounceTypeContentRejected  BounceType = "ContentRejected"
+	BounceTypeUndefined        BounceType = "Undefined"
+	BounceTypeTemporaryFailure BounceType = "TemporaryFailure"
 )
 
-const (
-	// ConfigurationSetAttributeEventDestinations is a ConfigurationSetAttribute enum value
-	ConfigurationSetAttributeEventDestinations = "eventDestinations"
+type ConfigurationSetAttribute string
 
-	// ConfigurationSetAttributeTrackingOptions is a ConfigurationSetAttribute enum value
-	ConfigurationSetAttributeTrackingOptions = "trackingOptions"
+// Enum values for ConfigurationSetAttribute
+const (
+	ConfigurationSetAttributeEventDestinations ConfigurationSetAttribute = "eventDestinations"
+	ConfigurationSetAttributeTrackingOptions   ConfigurationSetAttribute = "trackingOptions"
 )
 
+type CustomMailFromStatus string
+
+// Enum values for CustomMailFromStatus
 const (
-	// CustomMailFromStatusPending is a CustomMailFromStatus enum value
-	CustomMailFromStatusPending = "Pending"
-
-	// CustomMailFromStatusSuccess is a CustomMailFromStatus enum value
-	CustomMailFromStatusSuccess = "Success"
-
-	// CustomMailFromStatusFailed is a CustomMailFromStatus enum value
-	CustomMailFromStatusFailed = "Failed"
-
-	// CustomMailFromStatusTemporaryFailure is a CustomMailFromStatus enum value
-	CustomMailFromStatusTemporaryFailure = "TemporaryFailure"
+	CustomMailFromStatusPending          CustomMailFromStatus = "Pending"
+	CustomMailFromStatusSuccess          CustomMailFromStatus = "Success"
+	CustomMailFromStatusFailed           CustomMailFromStatus = "Failed"
+	CustomMailFromStatusTemporaryFailure CustomMailFromStatus = "TemporaryFailure"
 )
 
+type DimensionValueSource string
+
+// Enum values for DimensionValueSource
 const (
-	// DimensionValueSourceMessageTag is a DimensionValueSource enum value
-	DimensionValueSourceMessageTag = "messageTag"
-
-	// DimensionValueSourceEmailHeader is a DimensionValueSource enum value
-	DimensionValueSourceEmailHeader = "emailHeader"
-
-	// DimensionValueSourceLinkTag is a DimensionValueSource enum value
-	DimensionValueSourceLinkTag = "linkTag"
+	DimensionValueSourceMessageTag  DimensionValueSource = "messageTag"
+	DimensionValueSourceEmailHeader DimensionValueSource = "emailHeader"
+	DimensionValueSourceLinkTag     DimensionValueSource = "linkTag"
 )
 
+type DsnAction string
+
+// Enum values for DsnAction
 const (
-	// DsnActionFailed is a DsnAction enum value
-	DsnActionFailed = "failed"
-
-	// DsnActionDelayed is a DsnAction enum value
-	DsnActionDelayed = "delayed"
-
-	// DsnActionDelivered is a DsnAction enum value
-	DsnActionDelivered = "delivered"
-
-	// DsnActionRelayed is a DsnAction enum value
-	DsnActionRelayed = "relayed"
-
-	// DsnActionExpanded is a DsnAction enum value
-	DsnActionExpanded = "expanded"
+	DsnActionFailed    DsnAction = "failed"
+	DsnActionDelayed   DsnAction = "delayed"
+	DsnActionDelivered DsnAction = "delivered"
+	DsnActionRelayed   DsnAction = "relayed"
+	DsnActionExpanded  DsnAction = "expanded"
 )
 
+type EventType string
+
+// Enum values for EventType
 const (
-	// EventTypeSend is a EventType enum value
-	EventTypeSend = "send"
-
-	// EventTypeReject is a EventType enum value
-	EventTypeReject = "reject"
-
-	// EventTypeBounce is a EventType enum value
-	EventTypeBounce = "bounce"
-
-	// EventTypeComplaint is a EventType enum value
-	EventTypeComplaint = "complaint"
-
-	// EventTypeDelivery is a EventType enum value
-	EventTypeDelivery = "delivery"
-
-	// EventTypeOpen is a EventType enum value
-	EventTypeOpen = "open"
-
-	// EventTypeClick is a EventType enum value
-	EventTypeClick = "click"
+	EventTypeSend      EventType = "send"
+	EventTypeReject    EventType = "reject"
+	EventTypeBounce    EventType = "bounce"
+	EventTypeComplaint EventType = "complaint"
+	EventTypeDelivery  EventType = "delivery"
+	EventTypeOpen      EventType = "open"
+	EventTypeClick     EventType = "click"
 )
 
-const (
-	// IdentityTypeEmailAddress is a IdentityType enum value
-	IdentityTypeEmailAddress = "EmailAddress"
+type IdentityType string
 
-	// IdentityTypeDomain is a IdentityType enum value
-	IdentityTypeDomain = "Domain"
+// Enum values for IdentityType
+const (
+	IdentityTypeEmailAddress IdentityType = "EmailAddress"
+	IdentityTypeDomain       IdentityType = "Domain"
 )
 
-const (
-	// InvocationTypeEvent is a InvocationType enum value
-	InvocationTypeEvent = "Event"
+type InvocationType string
 
-	// InvocationTypeRequestResponse is a InvocationType enum value
-	InvocationTypeRequestResponse = "RequestResponse"
+// Enum values for InvocationType
+const (
+	InvocationTypeEvent           InvocationType = "Event"
+	InvocationTypeRequestResponse InvocationType = "RequestResponse"
 )
 
+type NotificationType string
+
+// Enum values for NotificationType
 const (
-	// NotificationTypeBounce is a NotificationType enum value
-	NotificationTypeBounce = "Bounce"
-
-	// NotificationTypeComplaint is a NotificationType enum value
-	NotificationTypeComplaint = "Complaint"
-
-	// NotificationTypeDelivery is a NotificationType enum value
-	NotificationTypeDelivery = "Delivery"
+	NotificationTypeBounce    NotificationType = "Bounce"
+	NotificationTypeComplaint NotificationType = "Complaint"
+	NotificationTypeDelivery  NotificationType = "Delivery"
 )
 
-const (
-	// ReceiptFilterPolicyBlock is a ReceiptFilterPolicy enum value
-	ReceiptFilterPolicyBlock = "Block"
+type ReceiptFilterPolicy string
 
-	// ReceiptFilterPolicyAllow is a ReceiptFilterPolicy enum value
-	ReceiptFilterPolicyAllow = "Allow"
+// Enum values for ReceiptFilterPolicy
+const (
+	ReceiptFilterPolicyBlock ReceiptFilterPolicy = "Block"
+	ReceiptFilterPolicyAllow ReceiptFilterPolicy = "Allow"
 )
 
-const (
-	// SNSActionEncodingUtf8 is a SNSActionEncoding enum value
-	SNSActionEncodingUtf8 = "UTF-8"
+type SNSActionEncoding string
 
-	// SNSActionEncodingBase64 is a SNSActionEncoding enum value
-	SNSActionEncodingBase64 = "Base64"
+// Enum values for SNSActionEncoding
+const (
+	SNSActionEncodingUtf8   SNSActionEncoding = "UTF-8"
+	SNSActionEncodingBase64 SNSActionEncoding = "Base64"
 )
 
+type StopScope string
+
+// Enum values for StopScope
 const (
-	// StopScopeRuleSet is a StopScope enum value
-	StopScopeRuleSet = "RuleSet"
+	StopScopeRuleSet StopScope = "RuleSet"
 )
 
-const (
-	// TlsPolicyRequire is a TlsPolicy enum value
-	TlsPolicyRequire = "Require"
+type TlsPolicy string
 
-	// TlsPolicyOptional is a TlsPolicy enum value
-	TlsPolicyOptional = "Optional"
+// Enum values for TlsPolicy
+const (
+	TlsPolicyRequire  TlsPolicy = "Require"
+	TlsPolicyOptional TlsPolicy = "Optional"
 )
 
+type VerificationStatus string
+
+// Enum values for VerificationStatus
 const (
-	// VerificationStatusPending is a VerificationStatus enum value
-	VerificationStatusPending = "Pending"
-
-	// VerificationStatusSuccess is a VerificationStatus enum value
-	VerificationStatusSuccess = "Success"
-
-	// VerificationStatusFailed is a VerificationStatus enum value
-	VerificationStatusFailed = "Failed"
-
-	// VerificationStatusTemporaryFailure is a VerificationStatus enum value
-	VerificationStatusTemporaryFailure = "TemporaryFailure"
-
-	// VerificationStatusNotStarted is a VerificationStatus enum value
-	VerificationStatusNotStarted = "NotStarted"
+	VerificationStatusPending          VerificationStatus = "Pending"
+	VerificationStatusSuccess          VerificationStatus = "Success"
+	VerificationStatusFailed           VerificationStatus = "Failed"
+	VerificationStatusTemporaryFailure VerificationStatus = "TemporaryFailure"
+	VerificationStatusNotStarted       VerificationStatus = "NotStarted"
 )

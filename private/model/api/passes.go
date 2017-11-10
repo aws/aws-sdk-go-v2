@@ -232,12 +232,10 @@ func (a *API) renameExportable() {
 	}
 
 	for _, s := range a.Shapes {
-		// fix enum names
 		if s.IsEnum() {
 			s.EnumConsts = make([]string, len(s.Enum))
 			for i := range s.Enum {
-				shape := s.ShapeName
-				shape = strings.ToUpper(shape[0:1]) + shape[1:]
+				shape := strings.Title(s.ShapeName)
 				s.EnumConsts[i] = shape + s.EnumName(i)
 			}
 		}

@@ -2212,7 +2212,7 @@ type AnalysisOptions struct {
 	// The available levels vary depending on the language. For more information,
 	// see Language Specific Text Processing Settings (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
 	// in the Amazon CloudSearch Developer Guide
-	AlgorithmicStemming *string `type:"string" enum:"AlgorithmicStemming"`
+	AlgorithmicStemming AlgorithmicStemming `type:"string"`
 
 	// A JSON array that contains a collection of terms, tokens, readings and part
 	// of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary
@@ -2256,8 +2256,8 @@ func (s AnalysisOptions) GoString() string {
 }
 
 // SetAlgorithmicStemming sets the AlgorithmicStemming field's value.
-func (s *AnalysisOptions) SetAlgorithmicStemming(v string) *AnalysisOptions {
-	s.AlgorithmicStemming = &v
+func (s *AnalysisOptions) SetAlgorithmicStemming(v AlgorithmicStemming) *AnalysisOptions {
+	s.AlgorithmicStemming = v
 	return s
 }
 
@@ -2300,7 +2300,7 @@ type AnalysisScheme struct {
 	// for multiple languages.
 	//
 	// AnalysisSchemeLanguage is a required field
-	AnalysisSchemeLanguage *string `type:"string" required:"true" enum:"AnalysisSchemeLanguage"`
+	AnalysisSchemeLanguage AnalysisSchemeLanguage `type:"string" required:"true"`
 
 	// Names must begin with a letter and can contain the following characters:
 	// a-z (lowercase), 0-9, and _ (underscore).
@@ -2322,9 +2322,10 @@ func (s AnalysisScheme) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalysisScheme) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AnalysisScheme"}
-	if s.AnalysisSchemeLanguage == nil {
+	if len(s.AnalysisSchemeLanguage) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeLanguage"))
 	}
+
 	if s.AnalysisSchemeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeName"))
 	}
@@ -2345,8 +2346,8 @@ func (s *AnalysisScheme) SetAnalysisOptions(v *AnalysisOptions) *AnalysisScheme 
 }
 
 // SetAnalysisSchemeLanguage sets the AnalysisSchemeLanguage field's value.
-func (s *AnalysisScheme) SetAnalysisSchemeLanguage(v string) *AnalysisScheme {
-	s.AnalysisSchemeLanguage = &v
+func (s *AnalysisScheme) SetAnalysisSchemeLanguage(v AnalysisSchemeLanguage) *AnalysisScheme {
+	s.AnalysisSchemeLanguage = v
 	return s
 }
 
@@ -2460,6 +2461,7 @@ func (s BuildSuggestersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BuildSuggestersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BuildSuggestersInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2530,6 +2532,7 @@ func (s CreateDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2768,9 +2771,11 @@ func (s DefineAnalysisSchemeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineAnalysisSchemeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefineAnalysisSchemeInput"}
+
 	if s.AnalysisScheme == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AnalysisScheme"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -2863,12 +2868,14 @@ func (s DefineExpressionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineExpressionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefineExpressionInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.Expression == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Expression"))
 	}
@@ -2955,12 +2962,14 @@ func (s DefineIndexFieldInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineIndexFieldInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefineIndexFieldInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.IndexField == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexField"))
 	}
@@ -3049,12 +3058,14 @@ func (s DefineSuggesterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineSuggesterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefineSuggesterInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.Suggester == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Suggester"))
 	}
@@ -3142,12 +3153,14 @@ func (s DeleteAnalysisSchemeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAnalysisSchemeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAnalysisSchemeInput"}
+
 	if s.AnalysisSchemeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeName"))
 	}
 	if s.AnalysisSchemeName != nil && len(*s.AnalysisSchemeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AnalysisSchemeName", 1))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3224,6 +3237,7 @@ func (s DeleteDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3301,12 +3315,14 @@ func (s DeleteExpressionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteExpressionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteExpressionInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.ExpressionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExpressionName"))
 	}
@@ -3393,12 +3409,14 @@ func (s DeleteIndexFieldInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIndexFieldInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIndexFieldInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.IndexFieldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexFieldName"))
 	}
@@ -3483,12 +3501,14 @@ func (s DeleteSuggesterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSuggesterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSuggesterInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.SuggesterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SuggesterName"))
 	}
@@ -3575,6 +3595,7 @@ func (s DescribeAnalysisSchemesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAnalysisSchemesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAnalysisSchemesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3663,6 +3684,7 @@ func (s DescribeAvailabilityOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAvailabilityOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAvailabilityOptionsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3802,6 +3824,7 @@ func (s DescribeExpressionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExpressionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeExpressionsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3895,6 +3918,7 @@ func (s DescribeIndexFieldsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIndexFieldsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIndexFieldsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3980,6 +4004,7 @@ func (s DescribeScalingParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingParametersInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4056,6 +4081,7 @@ func (s DescribeServiceAccessPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeServiceAccessPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeServiceAccessPoliciesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4141,6 +4167,7 @@ func (s DescribeSuggestersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSuggestersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeSuggestersInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4207,7 +4234,7 @@ type DocumentSuggesterOptions struct {
 	// With low, suggestions must differ from the specified string by no more than
 	// one character. With high, suggestions can differ by up to two characters.
 	// The default is none.
-	FuzzyMatching *string `type:"string" enum:"SuggesterFuzzyMatching"`
+	FuzzyMatching SuggesterFuzzyMatching `type:"string"`
 
 	// An expression that computes a score for each suggestion to control how they
 	// are sorted. The scores are rounded to the nearest integer, with a floor of
@@ -4237,6 +4264,7 @@ func (s DocumentSuggesterOptions) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentSuggesterOptions) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DocumentSuggesterOptions"}
+
 	if s.SourceField == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceField"))
 	}
@@ -4251,8 +4279,8 @@ func (s *DocumentSuggesterOptions) Validate() error {
 }
 
 // SetFuzzyMatching sets the FuzzyMatching field's value.
-func (s *DocumentSuggesterOptions) SetFuzzyMatching(v string) *DocumentSuggesterOptions {
-	s.FuzzyMatching = &v
+func (s *DocumentSuggesterOptions) SetFuzzyMatching(v SuggesterFuzzyMatching) *DocumentSuggesterOptions {
+	s.FuzzyMatching = v
 	return s
 }
 
@@ -4598,12 +4626,14 @@ func (s Expression) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Expression) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Expression"}
+
 	if s.ExpressionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExpressionName"))
 	}
 	if s.ExpressionName != nil && len(*s.ExpressionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExpressionName", 1))
 	}
+
 	if s.ExpressionValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExpressionValue"))
 	}
@@ -4693,6 +4723,7 @@ func (s IndexDocumentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexDocumentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IndexDocumentsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -4785,7 +4816,7 @@ type IndexField struct {
 	// in the Amazon CloudSearch Developer Guide.
 	//
 	// IndexFieldType is a required field
-	IndexFieldType *string `type:"string" required:"true" enum:"IndexFieldType"`
+	IndexFieldType IndexFieldType `type:"string" required:"true"`
 
 	// Options for a field that contains an array of 64-bit signed integers. Present
 	// if IndexFieldType specifies the field is of type int-array. All options are
@@ -4834,13 +4865,14 @@ func (s IndexField) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexField) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IndexField"}
+
 	if s.IndexFieldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexFieldName"))
 	}
 	if s.IndexFieldName != nil && len(*s.IndexFieldName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexFieldName", 1))
 	}
-	if s.IndexFieldType == nil {
+	if len(s.IndexFieldType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("IndexFieldType"))
 	}
 	if s.DateOptions != nil {
@@ -4911,8 +4943,8 @@ func (s *IndexField) SetIndexFieldName(v string) *IndexField {
 }
 
 // SetIndexFieldType sets the IndexFieldType field's value.
-func (s *IndexField) SetIndexFieldType(v string) *IndexField {
-	s.IndexFieldType = &v
+func (s *IndexField) SetIndexFieldType(v IndexFieldType) *IndexField {
+	s.IndexFieldType = v
 	return s
 }
 
@@ -5493,7 +5525,7 @@ type OptionStatus struct {
 	//    option value or update or remove the incompatible documents.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"OptionState"`
+	State OptionState `type:"string" required:"true"`
 
 	// A timestamp for when this option was last updated.
 	//
@@ -5527,8 +5559,8 @@ func (s *OptionStatus) SetPendingDeletion(v bool) *OptionStatus {
 }
 
 // SetState sets the State field's value.
-func (s *OptionStatus) SetState(v string) *OptionStatus {
-	s.State = &v
+func (s *OptionStatus) SetState(v OptionState) *OptionStatus {
+	s.State = v
 	return s
 }
 
@@ -5550,7 +5582,7 @@ type ScalingParameters struct {
 
 	// The instance type that you want to preconfigure for your domain. For example,
 	// search.m1.small.
-	DesiredInstanceType *string `type:"string" enum:"PartitionInstanceType"`
+	DesiredInstanceType PartitionInstanceType `type:"string"`
 
 	// The number of partitions you want to preconfigure for your domain. Only valid
 	// when you select m2.2xlarge as the desired instance type.
@@ -5571,8 +5603,8 @@ func (s ScalingParameters) GoString() string {
 }
 
 // SetDesiredInstanceType sets the DesiredInstanceType field's value.
-func (s *ScalingParameters) SetDesiredInstanceType(v string) *ScalingParameters {
-	s.DesiredInstanceType = &v
+func (s *ScalingParameters) SetDesiredInstanceType(v PartitionInstanceType) *ScalingParameters {
+	s.DesiredInstanceType = v
 	return s
 }
 
@@ -5681,9 +5713,11 @@ func (s Suggester) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Suggester) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Suggester"}
+
 	if s.DocumentSuggesterOptions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentSuggesterOptions"))
 	}
+
 	if s.SuggesterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SuggesterName"))
 	}
@@ -5948,12 +5982,14 @@ func (s UpdateAvailabilityOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAvailabilityOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAvailabilityOptionsInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.MultiAZ == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MultiAZ"))
 	}
@@ -6035,12 +6071,14 @@ func (s UpdateScalingParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateScalingParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateScalingParametersInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.ScalingParameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingParameters"))
 	}
@@ -6124,9 +6162,11 @@ func (s UpdateServiceAccessPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServiceAccessPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceAccessPoliciesInput"}
+
 	if s.AccessPolicies == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessPolicies"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -6179,166 +6219,78 @@ func (s *UpdateServiceAccessPoliciesOutput) SetAccessPolicies(v *AccessPoliciesS
 	return s
 }
 
+type AlgorithmicStemming string
+
+// Enum values for AlgorithmicStemming
 const (
-	// AlgorithmicStemmingNone is a AlgorithmicStemming enum value
-	AlgorithmicStemmingNone = "none"
-
-	// AlgorithmicStemmingMinimal is a AlgorithmicStemming enum value
-	AlgorithmicStemmingMinimal = "minimal"
-
-	// AlgorithmicStemmingLight is a AlgorithmicStemming enum value
-	AlgorithmicStemmingLight = "light"
-
-	// AlgorithmicStemmingFull is a AlgorithmicStemming enum value
-	AlgorithmicStemmingFull = "full"
+	AlgorithmicStemmingNone    AlgorithmicStemming = "none"
+	AlgorithmicStemmingMinimal AlgorithmicStemming = "minimal"
+	AlgorithmicStemmingLight   AlgorithmicStemming = "light"
+	AlgorithmicStemmingFull    AlgorithmicStemming = "full"
 )
 
 // An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul
 // for multiple languages.
+type AnalysisSchemeLanguage string
+
+// Enum values for AnalysisSchemeLanguage
 const (
-	// AnalysisSchemeLanguageAr is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageAr = "ar"
-
-	// AnalysisSchemeLanguageBg is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageBg = "bg"
-
-	// AnalysisSchemeLanguageCa is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageCa = "ca"
-
-	// AnalysisSchemeLanguageCs is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageCs = "cs"
-
-	// AnalysisSchemeLanguageDa is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageDa = "da"
-
-	// AnalysisSchemeLanguageDe is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageDe = "de"
-
-	// AnalysisSchemeLanguageEl is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageEl = "el"
-
-	// AnalysisSchemeLanguageEn is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageEn = "en"
-
-	// AnalysisSchemeLanguageEs is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageEs = "es"
-
-	// AnalysisSchemeLanguageEu is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageEu = "eu"
-
-	// AnalysisSchemeLanguageFa is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageFa = "fa"
-
-	// AnalysisSchemeLanguageFi is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageFi = "fi"
-
-	// AnalysisSchemeLanguageFr is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageFr = "fr"
-
-	// AnalysisSchemeLanguageGa is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageGa = "ga"
-
-	// AnalysisSchemeLanguageGl is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageGl = "gl"
-
-	// AnalysisSchemeLanguageHe is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageHe = "he"
-
-	// AnalysisSchemeLanguageHi is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageHi = "hi"
-
-	// AnalysisSchemeLanguageHu is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageHu = "hu"
-
-	// AnalysisSchemeLanguageHy is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageHy = "hy"
-
-	// AnalysisSchemeLanguageId is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageId = "id"
-
-	// AnalysisSchemeLanguageIt is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageIt = "it"
-
-	// AnalysisSchemeLanguageJa is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageJa = "ja"
-
-	// AnalysisSchemeLanguageKo is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageKo = "ko"
-
-	// AnalysisSchemeLanguageLv is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageLv = "lv"
-
-	// AnalysisSchemeLanguageMul is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageMul = "mul"
-
-	// AnalysisSchemeLanguageNl is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageNl = "nl"
-
-	// AnalysisSchemeLanguageNo is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageNo = "no"
-
-	// AnalysisSchemeLanguagePt is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguagePt = "pt"
-
-	// AnalysisSchemeLanguageRo is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageRo = "ro"
-
-	// AnalysisSchemeLanguageRu is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageRu = "ru"
-
-	// AnalysisSchemeLanguageSv is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageSv = "sv"
-
-	// AnalysisSchemeLanguageTh is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageTh = "th"
-
-	// AnalysisSchemeLanguageTr is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageTr = "tr"
-
-	// AnalysisSchemeLanguageZhHans is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageZhHans = "zh-Hans"
-
-	// AnalysisSchemeLanguageZhHant is a AnalysisSchemeLanguage enum value
-	AnalysisSchemeLanguageZhHant = "zh-Hant"
+	AnalysisSchemeLanguageAr     AnalysisSchemeLanguage = "ar"
+	AnalysisSchemeLanguageBg     AnalysisSchemeLanguage = "bg"
+	AnalysisSchemeLanguageCa     AnalysisSchemeLanguage = "ca"
+	AnalysisSchemeLanguageCs     AnalysisSchemeLanguage = "cs"
+	AnalysisSchemeLanguageDa     AnalysisSchemeLanguage = "da"
+	AnalysisSchemeLanguageDe     AnalysisSchemeLanguage = "de"
+	AnalysisSchemeLanguageEl     AnalysisSchemeLanguage = "el"
+	AnalysisSchemeLanguageEn     AnalysisSchemeLanguage = "en"
+	AnalysisSchemeLanguageEs     AnalysisSchemeLanguage = "es"
+	AnalysisSchemeLanguageEu     AnalysisSchemeLanguage = "eu"
+	AnalysisSchemeLanguageFa     AnalysisSchemeLanguage = "fa"
+	AnalysisSchemeLanguageFi     AnalysisSchemeLanguage = "fi"
+	AnalysisSchemeLanguageFr     AnalysisSchemeLanguage = "fr"
+	AnalysisSchemeLanguageGa     AnalysisSchemeLanguage = "ga"
+	AnalysisSchemeLanguageGl     AnalysisSchemeLanguage = "gl"
+	AnalysisSchemeLanguageHe     AnalysisSchemeLanguage = "he"
+	AnalysisSchemeLanguageHi     AnalysisSchemeLanguage = "hi"
+	AnalysisSchemeLanguageHu     AnalysisSchemeLanguage = "hu"
+	AnalysisSchemeLanguageHy     AnalysisSchemeLanguage = "hy"
+	AnalysisSchemeLanguageId     AnalysisSchemeLanguage = "id"
+	AnalysisSchemeLanguageIt     AnalysisSchemeLanguage = "it"
+	AnalysisSchemeLanguageJa     AnalysisSchemeLanguage = "ja"
+	AnalysisSchemeLanguageKo     AnalysisSchemeLanguage = "ko"
+	AnalysisSchemeLanguageLv     AnalysisSchemeLanguage = "lv"
+	AnalysisSchemeLanguageMul    AnalysisSchemeLanguage = "mul"
+	AnalysisSchemeLanguageNl     AnalysisSchemeLanguage = "nl"
+	AnalysisSchemeLanguageNo     AnalysisSchemeLanguage = "no"
+	AnalysisSchemeLanguagePt     AnalysisSchemeLanguage = "pt"
+	AnalysisSchemeLanguageRo     AnalysisSchemeLanguage = "ro"
+	AnalysisSchemeLanguageRu     AnalysisSchemeLanguage = "ru"
+	AnalysisSchemeLanguageSv     AnalysisSchemeLanguage = "sv"
+	AnalysisSchemeLanguageTh     AnalysisSchemeLanguage = "th"
+	AnalysisSchemeLanguageTr     AnalysisSchemeLanguage = "tr"
+	AnalysisSchemeLanguageZhHans AnalysisSchemeLanguage = "zh-Hans"
+	AnalysisSchemeLanguageZhHant AnalysisSchemeLanguage = "zh-Hant"
 )
 
 // The type of field. The valid options for a field depend on the field type.
 // For more information about the supported field types, see Configuring Index
 // Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
 // in the Amazon CloudSearch Developer Guide.
+type IndexFieldType string
+
+// Enum values for IndexFieldType
 const (
-	// IndexFieldTypeInt is a IndexFieldType enum value
-	IndexFieldTypeInt = "int"
-
-	// IndexFieldTypeDouble is a IndexFieldType enum value
-	IndexFieldTypeDouble = "double"
-
-	// IndexFieldTypeLiteral is a IndexFieldType enum value
-	IndexFieldTypeLiteral = "literal"
-
-	// IndexFieldTypeText is a IndexFieldType enum value
-	IndexFieldTypeText = "text"
-
-	// IndexFieldTypeDate is a IndexFieldType enum value
-	IndexFieldTypeDate = "date"
-
-	// IndexFieldTypeLatlon is a IndexFieldType enum value
-	IndexFieldTypeLatlon = "latlon"
-
-	// IndexFieldTypeIntArray is a IndexFieldType enum value
-	IndexFieldTypeIntArray = "int-array"
-
-	// IndexFieldTypeDoubleArray is a IndexFieldType enum value
-	IndexFieldTypeDoubleArray = "double-array"
-
-	// IndexFieldTypeLiteralArray is a IndexFieldType enum value
-	IndexFieldTypeLiteralArray = "literal-array"
-
-	// IndexFieldTypeTextArray is a IndexFieldType enum value
-	IndexFieldTypeTextArray = "text-array"
-
-	// IndexFieldTypeDateArray is a IndexFieldType enum value
-	IndexFieldTypeDateArray = "date-array"
+	IndexFieldTypeInt          IndexFieldType = "int"
+	IndexFieldTypeDouble       IndexFieldType = "double"
+	IndexFieldTypeLiteral      IndexFieldType = "literal"
+	IndexFieldTypeText         IndexFieldType = "text"
+	IndexFieldTypeDate         IndexFieldType = "date"
+	IndexFieldTypeLatlon       IndexFieldType = "latlon"
+	IndexFieldTypeIntArray     IndexFieldType = "int-array"
+	IndexFieldTypeDoubleArray  IndexFieldType = "double-array"
+	IndexFieldTypeLiteralArray IndexFieldType = "literal-array"
+	IndexFieldTypeTextArray    IndexFieldType = "text-array"
+	IndexFieldTypeDateArray    IndexFieldType = "date-array"
 )
 
 // The state of processing a change to an option. One of:
@@ -6351,55 +6303,37 @@ const (
 //    * FailedToValidate: The option value is not compatible with the domain's
 //    data and cannot be used to index the data. You must either modify the
 //    option value or update or remove the incompatible documents.
+type OptionState string
+
+// Enum values for OptionState
 const (
-	// OptionStateRequiresIndexDocuments is a OptionState enum value
-	OptionStateRequiresIndexDocuments = "RequiresIndexDocuments"
-
-	// OptionStateProcessing is a OptionState enum value
-	OptionStateProcessing = "Processing"
-
-	// OptionStateActive is a OptionState enum value
-	OptionStateActive = "Active"
-
-	// OptionStateFailedToValidate is a OptionState enum value
-	OptionStateFailedToValidate = "FailedToValidate"
+	OptionStateRequiresIndexDocuments OptionState = "RequiresIndexDocuments"
+	OptionStateProcessing             OptionState = "Processing"
+	OptionStateActive                 OptionState = "Active"
+	OptionStateFailedToValidate       OptionState = "FailedToValidate"
 )
 
 // The instance type (such as search.m1.small) on which an index partition is
 // hosted.
+type PartitionInstanceType string
+
+// Enum values for PartitionInstanceType
 const (
-	// PartitionInstanceTypeSearchM1Small is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM1Small = "search.m1.small"
-
-	// PartitionInstanceTypeSearchM1Large is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM1Large = "search.m1.large"
-
-	// PartitionInstanceTypeSearchM2Xlarge is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM2Xlarge = "search.m2.xlarge"
-
-	// PartitionInstanceTypeSearchM22xlarge is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM22xlarge = "search.m2.2xlarge"
-
-	// PartitionInstanceTypeSearchM3Medium is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM3Medium = "search.m3.medium"
-
-	// PartitionInstanceTypeSearchM3Large is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM3Large = "search.m3.large"
-
-	// PartitionInstanceTypeSearchM3Xlarge is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM3Xlarge = "search.m3.xlarge"
-
-	// PartitionInstanceTypeSearchM32xlarge is a PartitionInstanceType enum value
-	PartitionInstanceTypeSearchM32xlarge = "search.m3.2xlarge"
+	PartitionInstanceTypeSearchM1Small   PartitionInstanceType = "search.m1.small"
+	PartitionInstanceTypeSearchM1Large   PartitionInstanceType = "search.m1.large"
+	PartitionInstanceTypeSearchM2Xlarge  PartitionInstanceType = "search.m2.xlarge"
+	PartitionInstanceTypeSearchM22xlarge PartitionInstanceType = "search.m2.2xlarge"
+	PartitionInstanceTypeSearchM3Medium  PartitionInstanceType = "search.m3.medium"
+	PartitionInstanceTypeSearchM3Large   PartitionInstanceType = "search.m3.large"
+	PartitionInstanceTypeSearchM3Xlarge  PartitionInstanceType = "search.m3.xlarge"
+	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
 )
 
+type SuggesterFuzzyMatching string
+
+// Enum values for SuggesterFuzzyMatching
 const (
-	// SuggesterFuzzyMatchingNone is a SuggesterFuzzyMatching enum value
-	SuggesterFuzzyMatchingNone = "none"
-
-	// SuggesterFuzzyMatchingLow is a SuggesterFuzzyMatching enum value
-	SuggesterFuzzyMatchingLow = "low"
-
-	// SuggesterFuzzyMatchingHigh is a SuggesterFuzzyMatching enum value
-	SuggesterFuzzyMatchingHigh = "high"
+	SuggesterFuzzyMatchingNone SuggesterFuzzyMatching = "none"
+	SuggesterFuzzyMatchingLow  SuggesterFuzzyMatching = "low"
+	SuggesterFuzzyMatchingHigh SuggesterFuzzyMatching = "high"
 )

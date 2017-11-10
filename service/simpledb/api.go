@@ -1207,9 +1207,11 @@ func (s BatchDeleteAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteAttributesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
@@ -1283,9 +1285,11 @@ func (s BatchPutAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchPutAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchPutAttributesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
@@ -1355,6 +1359,7 @@ func (s CreateDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1410,6 +1415,7 @@ func (s DeletableAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletableAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletableAttribute"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1454,6 +1460,7 @@ func (s DeletableItem) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletableItem) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletableItem"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -1523,9 +1530,11 @@ func (s DeleteAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.ItemName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
@@ -1606,6 +1615,7 @@ func (s DeleteDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1658,6 +1668,7 @@ func (s DomainMetadataInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DomainMetadataInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DomainMetadataInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1785,9 +1796,11 @@ func (s GetAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAttributesInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.ItemName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
@@ -1993,12 +2006,15 @@ func (s PutAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.ItemName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
@@ -2088,9 +2104,11 @@ func (s ReplaceableAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceableAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceableAttribute"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -2146,9 +2164,11 @@ func (s ReplaceableItem) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceableItem) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceableItem"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2210,6 +2230,7 @@ func (s SelectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SelectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SelectInput"}
+
 	if s.SelectExpression == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SelectExpression"))
 	}

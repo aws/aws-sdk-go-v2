@@ -36,11 +36,11 @@ func TestGetBucketLocation(t *testing.T) {
 		}
 
 		if test.loc == "" {
-			if v := resp.LocationConstraint; v != nil {
-				t.Errorf("expect location constraint to be nil, got %s", *v)
+			if v := resp.LocationConstraint; len(v) > 0 {
+				t.Errorf("expect location constraint to be empty, got %v", v)
 			}
 		} else {
-			if e, a := test.loc, *resp.LocationConstraint; e != a {
+			if e, a := test.loc, string(resp.LocationConstraint); e != a {
 				t.Errorf("expect %s location constraint, got %v", e, a)
 			}
 		}
@@ -58,8 +58,8 @@ func TestNormalizeBucketLocation(t *testing.T) {
 	}
 
 	for i, c := range cases {
-		actual := s3.NormalizeBucketLocation(c.In)
-		if e, a := c.Out, actual; e != a {
+		actual := s3.NormalizeBucketLocation(s3.BucketLocationConstraint(c.In))
+		if e, a := c.Out, string(actual); e != a {
 			t.Errorf("%d, expect %s bucket location, got %s", i, e, a)
 		}
 	}
@@ -80,12 +80,12 @@ func TestWithNormalizeBucketLocation(t *testing.T) {
 
 	for i, c := range cases {
 		req.Data = &s3.GetBucketLocationOutput{
-			LocationConstraint: aws.String(c.In),
+			LocationConstraint: s3.BucketLocationConstraint(c.In),
 		}
 		req.Handlers.Unmarshal.Run(req)
 
 		v := req.Data.(*s3.GetBucketLocationOutput).LocationConstraint
-		if e, a := c.Out, aws.StringValue(v); e != a {
+		if e, a := c.Out, string(v); e != a {
 			t.Errorf("%d, expect %s bucket location, got %s", i, e, a)
 		}
 	}
@@ -102,7 +102,7 @@ func TestPopulateLocationConstraint(t *testing.T) {
 	}
 
 	v, _ := awsutil.ValuesAtPath(req.Params, "CreateBucketConfiguration.LocationConstraint")
-	if e, a := "mock-region", *(v[0].(*string)); e != a {
+	if e, a := "mock-region", string(v[0].(s3.BucketLocationConstraint)); e != a {
 		t.Errorf("expect %s location constraint, got %s", e, a)
 	}
 	if v := in.CreateBucketConfiguration; v != nil {
@@ -121,8 +121,11 @@ func TestNoPopulateLocationConstraintIfProvided(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 	v, _ := awsutil.ValuesAtPath(req.Params, "CreateBucketConfiguration.LocationConstraint")
-	if l := len(v); l != 0 {
-		t.Errorf("expect no values, got %d", l)
+	if l := len(v); l != 1 {
+		t.Errorf("expect empty string only, got %d elements", l)
+	}
+	if v[0].(s3.BucketLocationConstraint) != s3.BucketLocationConstraint("") {
+		t.Errorf("expected empty string, but received %v", v[0])
 	}
 }
 

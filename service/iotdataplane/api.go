@@ -425,6 +425,7 @@ func (s DeleteThingShadowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingShadowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingShadowInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -493,6 +494,7 @@ func (s GetThingShadowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetThingShadowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetThingShadowInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -565,6 +567,7 @@ func (s PublishInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PublishInput"}
+
 	if s.Topic == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Topic"))
 	}
@@ -635,9 +638,11 @@ func (s UpdateThingShadowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateThingShadowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingShadowInput"}
+
 	if s.Payload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Payload"))
 	}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}

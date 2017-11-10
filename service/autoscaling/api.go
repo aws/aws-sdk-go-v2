@@ -5096,7 +5096,7 @@ type Activity struct {
 	// The current status of the activity.
 	//
 	// StatusCode is a required field
-	StatusCode *string `type:"string" required:"true" enum:"ScalingActivityStatusCode"`
+	StatusCode ScalingActivityStatusCode `type:"string" required:"true"`
 
 	// A friendly, more verbose description of the activity status.
 	StatusMessage *string `min:"1" type:"string"`
@@ -5161,8 +5161,8 @@ func (s *Activity) SetStartTime(v time.Time) *Activity {
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *Activity) SetStatusCode(v string) *Activity {
-	s.StatusCode = &v
+func (s *Activity) SetStatusCode(v ScalingActivityStatusCode) *Activity {
+	s.StatusCode = v
 	return s
 }
 
@@ -5261,6 +5261,7 @@ func (s AttachInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachInstancesInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -5329,12 +5330,14 @@ func (s AttachLoadBalancerTargetGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachLoadBalancerTargetGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerTargetGroupsInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.TargetGroupARNs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupARNs"))
 	}
@@ -5400,12 +5403,14 @@ func (s AttachLoadBalancersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachLoadBalancersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancersInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.LoadBalancerNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
@@ -5480,6 +5485,7 @@ func (s BlockDeviceMapping) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BlockDeviceMapping) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BlockDeviceMapping"}
+
 	if s.DeviceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceName"))
 	}
@@ -5567,6 +5573,7 @@ func (s CompleteLifecycleActionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteLifecycleActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompleteLifecycleActionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -5576,12 +5583,14 @@ func (s *CompleteLifecycleActionInput) Validate() error {
 	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
 	}
+
 	if s.LifecycleActionResult == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleActionResult"))
 	}
 	if s.LifecycleActionToken != nil && len(*s.LifecycleActionToken) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("LifecycleActionToken", 36))
 	}
+
 	if s.LifecycleHookName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
 	}
@@ -5773,6 +5782,7 @@ func (s CreateAutoScalingGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAutoScalingGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAutoScalingGroupInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -5791,9 +5801,11 @@ func (s *CreateAutoScalingGroupInput) Validate() error {
 	if s.LaunchConfigurationName != nil && len(*s.LaunchConfigurationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LaunchConfigurationName", 1))
 	}
+
 	if s.MaxSize == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxSize"))
 	}
+
 	if s.MinSize == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinSize"))
 	}
@@ -6135,6 +6147,7 @@ func (s *CreateLaunchConfigurationInput) Validate() error {
 	if s.KeyName != nil && len(*s.KeyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyName", 1))
 	}
+
 	if s.LaunchConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LaunchConfigurationName"))
 	}
@@ -6313,6 +6326,7 @@ func (s CreateOrUpdateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOrUpdateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateOrUpdateTagsInput"}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -6375,7 +6389,7 @@ type CustomizedMetricSpecification struct {
 	// The statistic of the metric.
 	//
 	// Statistic is a required field
-	Statistic *string `type:"string" required:"true" enum:"MetricStatistic"`
+	Statistic MetricStatistic `type:"string" required:"true"`
 
 	// The unit of the metric.
 	Unit *string `type:"string"`
@@ -6394,13 +6408,15 @@ func (s CustomizedMetricSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomizedMetricSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomizedMetricSpecification"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Namespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
-	if s.Statistic == nil {
+	if len(s.Statistic) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Statistic"))
 	}
 	if s.Dimensions != nil {
@@ -6439,8 +6455,8 @@ func (s *CustomizedMetricSpecification) SetNamespace(v string) *CustomizedMetric
 }
 
 // SetStatistic sets the Statistic field's value.
-func (s *CustomizedMetricSpecification) SetStatistic(v string) *CustomizedMetricSpecification {
-	s.Statistic = &v
+func (s *CustomizedMetricSpecification) SetStatistic(v MetricStatistic) *CustomizedMetricSpecification {
+	s.Statistic = v
 	return s
 }
 
@@ -6478,6 +6494,7 @@ func (s DeleteAutoScalingGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAutoScalingGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAutoScalingGroupInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -6541,6 +6558,7 @@ func (s DeleteLaunchConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLaunchConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLaunchConfigurationInput"}
+
 	if s.LaunchConfigurationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LaunchConfigurationName"))
 	}
@@ -6603,12 +6621,14 @@ func (s DeleteLifecycleHookInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLifecycleHookInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLifecycleHookInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.LifecycleHookName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
 	}
@@ -6678,12 +6698,14 @@ func (s DeleteNotificationConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNotificationConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationConfigurationInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.TopicARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
 	}
@@ -6753,6 +6775,7 @@ func (s *DeletePolicyInput) Validate() error {
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -6821,12 +6844,14 @@ func (s DeleteScheduledActionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteScheduledActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteScheduledActionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.ScheduledActionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScheduledActionName"))
 	}
@@ -6890,6 +6915,7 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7385,6 +7411,7 @@ func (s DescribeLifecycleHooksInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLifecycleHooksInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLifecycleHooksInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -7465,6 +7492,7 @@ func (s DescribeLoadBalancerTargetGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancerTargetGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerTargetGroupsInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -7561,6 +7589,7 @@ func (s DescribeLoadBalancersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -8288,12 +8317,14 @@ func (s DetachInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachInstancesInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.ShouldDecrementDesiredCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
 	}
@@ -8374,12 +8405,14 @@ func (s DetachLoadBalancerTargetGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachLoadBalancerTargetGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancerTargetGroupsInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.TargetGroupARNs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupARNs"))
 	}
@@ -8445,12 +8478,14 @@ func (s DetachLoadBalancersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachLoadBalancersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancersInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.LoadBalancerNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
@@ -8531,6 +8566,7 @@ func (s DisableMetricsCollectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableMetricsCollectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableMetricsCollectionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -8733,12 +8769,14 @@ func (s EnableMetricsCollectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableMetricsCollectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableMetricsCollectionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.Granularity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Granularity"))
 	}
@@ -8870,12 +8908,14 @@ func (s EnterStandbyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnterStandbyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnterStandbyInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.ShouldDecrementDesiredCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
 	}
@@ -8986,6 +9026,7 @@ func (s *ExecutePolicyInput) Validate() error {
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -9070,6 +9111,7 @@ func (s ExitStandbyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExitStandbyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExitStandbyInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -9423,7 +9465,7 @@ type Instance struct {
 	// is not used.
 	//
 	// LifecycleState is a required field
-	LifecycleState *string `type:"string" required:"true" enum:"LifecycleState"`
+	LifecycleState LifecycleState `type:"string" required:"true"`
 
 	// Indicates whether the instance is protected from termination by Auto Scaling
 	// when scaling in.
@@ -9467,8 +9509,8 @@ func (s *Instance) SetLaunchConfigurationName(v string) *Instance {
 }
 
 // SetLifecycleState sets the LifecycleState field's value.
-func (s *Instance) SetLifecycleState(v string) *Instance {
-	s.LifecycleState = &v
+func (s *Instance) SetLifecycleState(v LifecycleState) *Instance {
+	s.LifecycleState = v
 	return s
 }
 
@@ -9974,6 +10016,7 @@ func (s LifecycleHookSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleHookSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LifecycleHookSpecification"}
+
 	if s.LifecycleHookName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
 	}
@@ -10220,9 +10263,11 @@ func (s MetricDimension) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricDimension) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricDimension"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -10332,7 +10377,7 @@ type PredefinedMetricSpecification struct {
 	// The metric type.
 	//
 	// PredefinedMetricType is a required field
-	PredefinedMetricType *string `type:"string" required:"true" enum:"MetricType"`
+	PredefinedMetricType MetricType `type:"string" required:"true"`
 
 	// Identifies the resource associated with the metric type. The following predefined
 	// metrics are available:
@@ -10374,7 +10419,7 @@ func (s PredefinedMetricSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PredefinedMetricSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PredefinedMetricSpecification"}
-	if s.PredefinedMetricType == nil {
+	if len(s.PredefinedMetricType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PredefinedMetricType"))
 	}
 	if s.ResourceLabel != nil && len(*s.ResourceLabel) < 1 {
@@ -10388,8 +10433,8 @@ func (s *PredefinedMetricSpecification) Validate() error {
 }
 
 // SetPredefinedMetricType sets the PredefinedMetricType field's value.
-func (s *PredefinedMetricSpecification) SetPredefinedMetricType(v string) *PredefinedMetricSpecification {
-	s.PredefinedMetricType = &v
+func (s *PredefinedMetricSpecification) SetPredefinedMetricType(v MetricType) *PredefinedMetricSpecification {
+	s.PredefinedMetricType = v
 	return s
 }
 
@@ -10519,12 +10564,14 @@ func (s PutLifecycleHookInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutLifecycleHookInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutLifecycleHookInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.LifecycleHookName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
 	}
@@ -10642,15 +10689,18 @@ func (s PutNotificationConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutNotificationConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutNotificationConfigurationInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.NotificationTypes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationTypes"))
 	}
+
 	if s.TopicARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
 	}
@@ -10797,6 +10847,7 @@ func (s *PutScalingPolicyInput) Validate() error {
 	if s.AdjustmentType != nil && len(*s.AdjustmentType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AdjustmentType", 1))
 	}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -10806,6 +10857,7 @@ func (s *PutScalingPolicyInput) Validate() error {
 	if s.MetricAggregationType != nil && len(*s.MetricAggregationType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MetricAggregationType", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -11001,6 +11053,7 @@ func (s PutScheduledUpdateGroupActionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScheduledUpdateGroupActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutScheduledUpdateGroupActionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -11010,6 +11063,7 @@ func (s *PutScheduledUpdateGroupActionInput) Validate() error {
 	if s.Recurrence != nil && len(*s.Recurrence) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Recurrence", 1))
 	}
+
 	if s.ScheduledActionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScheduledActionName"))
 	}
@@ -11128,6 +11182,7 @@ func (s RecordLifecycleActionHeartbeatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordLifecycleActionHeartbeatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordLifecycleActionHeartbeatInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -11140,6 +11195,7 @@ func (s *RecordLifecycleActionHeartbeatInput) Validate() error {
 	if s.LifecycleActionToken != nil && len(*s.LifecycleActionToken) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("LifecycleActionToken", 36))
 	}
+
 	if s.LifecycleHookName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifecycleHookName"))
 	}
@@ -11402,6 +11458,7 @@ func (s ScalingProcessQuery) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingProcessQuery) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScalingProcessQuery"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -11572,12 +11629,14 @@ func (s SetDesiredCapacityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDesiredCapacityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetDesiredCapacityInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.DesiredCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DesiredCapacity"))
 	}
@@ -11660,12 +11719,14 @@ func (s SetInstanceHealthInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetInstanceHealthInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetInstanceHealthInput"}
+
 	if s.HealthStatus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HealthStatus"))
 	}
 	if s.HealthStatus != nil && len(*s.HealthStatus) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HealthStatus", 1))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -11746,15 +11807,18 @@ func (s SetInstanceProtectionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetInstanceProtectionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetInstanceProtectionInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if s.AutoScalingGroupName != nil && len(*s.AutoScalingGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AutoScalingGroupName", 1))
 	}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
+
 	if s.ProtectedFromScaleIn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProtectedFromScaleIn"))
 	}
@@ -11868,6 +11932,7 @@ func (s StepAdjustment) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepAdjustment) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StepAdjustment"}
+
 	if s.ScalingAdjustment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
@@ -11983,6 +12048,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -12126,6 +12192,7 @@ func (s TargetTrackingConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetTrackingConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TargetTrackingConfiguration"}
+
 	if s.TargetValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
 	}
@@ -12199,12 +12266,14 @@ func (s TerminateInstanceInAutoScalingGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateInstanceInAutoScalingGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateInstanceInAutoScalingGroupInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.InstanceId != nil && len(*s.InstanceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InstanceId", 1))
 	}
+
 	if s.ShouldDecrementDesiredCapacity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShouldDecrementDesiredCapacity"))
 	}
@@ -12337,6 +12406,7 @@ func (s UpdateAutoScalingGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAutoScalingGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAutoScalingGroupInput"}
+
 	if s.AutoScalingGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -12458,112 +12528,60 @@ func (s UpdateAutoScalingGroupOutput) GoString() string {
 	return s.String()
 }
 
+type LifecycleState string
+
+// Enum values for LifecycleState
 const (
-	// LifecycleStatePending is a LifecycleState enum value
-	LifecycleStatePending = "Pending"
-
-	// LifecycleStatePendingWait is a LifecycleState enum value
-	LifecycleStatePendingWait = "Pending:Wait"
-
-	// LifecycleStatePendingProceed is a LifecycleState enum value
-	LifecycleStatePendingProceed = "Pending:Proceed"
-
-	// LifecycleStateQuarantined is a LifecycleState enum value
-	LifecycleStateQuarantined = "Quarantined"
-
-	// LifecycleStateInService is a LifecycleState enum value
-	LifecycleStateInService = "InService"
-
-	// LifecycleStateTerminating is a LifecycleState enum value
-	LifecycleStateTerminating = "Terminating"
-
-	// LifecycleStateTerminatingWait is a LifecycleState enum value
-	LifecycleStateTerminatingWait = "Terminating:Wait"
-
-	// LifecycleStateTerminatingProceed is a LifecycleState enum value
-	LifecycleStateTerminatingProceed = "Terminating:Proceed"
-
-	// LifecycleStateTerminated is a LifecycleState enum value
-	LifecycleStateTerminated = "Terminated"
-
-	// LifecycleStateDetaching is a LifecycleState enum value
-	LifecycleStateDetaching = "Detaching"
-
-	// LifecycleStateDetached is a LifecycleState enum value
-	LifecycleStateDetached = "Detached"
-
-	// LifecycleStateEnteringStandby is a LifecycleState enum value
-	LifecycleStateEnteringStandby = "EnteringStandby"
-
-	// LifecycleStateStandby is a LifecycleState enum value
-	LifecycleStateStandby = "Standby"
+	LifecycleStatePending            LifecycleState = "Pending"
+	LifecycleStatePendingWait        LifecycleState = "Pending:Wait"
+	LifecycleStatePendingProceed     LifecycleState = "Pending:Proceed"
+	LifecycleStateQuarantined        LifecycleState = "Quarantined"
+	LifecycleStateInService          LifecycleState = "InService"
+	LifecycleStateTerminating        LifecycleState = "Terminating"
+	LifecycleStateTerminatingWait    LifecycleState = "Terminating:Wait"
+	LifecycleStateTerminatingProceed LifecycleState = "Terminating:Proceed"
+	LifecycleStateTerminated         LifecycleState = "Terminated"
+	LifecycleStateDetaching          LifecycleState = "Detaching"
+	LifecycleStateDetached           LifecycleState = "Detached"
+	LifecycleStateEnteringStandby    LifecycleState = "EnteringStandby"
+	LifecycleStateStandby            LifecycleState = "Standby"
 )
 
+type MetricStatistic string
+
+// Enum values for MetricStatistic
 const (
-	// MetricStatisticAverage is a MetricStatistic enum value
-	MetricStatisticAverage = "Average"
-
-	// MetricStatisticMinimum is a MetricStatistic enum value
-	MetricStatisticMinimum = "Minimum"
-
-	// MetricStatisticMaximum is a MetricStatistic enum value
-	MetricStatisticMaximum = "Maximum"
-
-	// MetricStatisticSampleCount is a MetricStatistic enum value
-	MetricStatisticSampleCount = "SampleCount"
-
-	// MetricStatisticSum is a MetricStatistic enum value
-	MetricStatisticSum = "Sum"
+	MetricStatisticAverage     MetricStatistic = "Average"
+	MetricStatisticMinimum     MetricStatistic = "Minimum"
+	MetricStatisticMaximum     MetricStatistic = "Maximum"
+	MetricStatisticSampleCount MetricStatistic = "SampleCount"
+	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
+type MetricType string
+
+// Enum values for MetricType
 const (
-	// MetricTypeAsgaverageCpuutilization is a MetricType enum value
-	MetricTypeAsgaverageCpuutilization = "ASGAverageCPUUtilization"
-
-	// MetricTypeAsgaverageNetworkIn is a MetricType enum value
-	MetricTypeAsgaverageNetworkIn = "ASGAverageNetworkIn"
-
-	// MetricTypeAsgaverageNetworkOut is a MetricType enum value
-	MetricTypeAsgaverageNetworkOut = "ASGAverageNetworkOut"
-
-	// MetricTypeAlbrequestCountPerTarget is a MetricType enum value
-	MetricTypeAlbrequestCountPerTarget = "ALBRequestCountPerTarget"
+	MetricTypeAsgaverageCpuutilization MetricType = "ASGAverageCPUUtilization"
+	MetricTypeAsgaverageNetworkIn      MetricType = "ASGAverageNetworkIn"
+	MetricTypeAsgaverageNetworkOut     MetricType = "ASGAverageNetworkOut"
+	MetricTypeAlbrequestCountPerTarget MetricType = "ALBRequestCountPerTarget"
 )
 
+type ScalingActivityStatusCode string
+
+// Enum values for ScalingActivityStatusCode
 const (
-	// ScalingActivityStatusCodePendingSpotBidPlacement is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodePendingSpotBidPlacement = "PendingSpotBidPlacement"
-
-	// ScalingActivityStatusCodeWaitingForSpotInstanceRequestId is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeWaitingForSpotInstanceRequestId = "WaitingForSpotInstanceRequestId"
-
-	// ScalingActivityStatusCodeWaitingForSpotInstanceId is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeWaitingForSpotInstanceId = "WaitingForSpotInstanceId"
-
-	// ScalingActivityStatusCodeWaitingForInstanceId is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeWaitingForInstanceId = "WaitingForInstanceId"
-
-	// ScalingActivityStatusCodePreInService is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodePreInService = "PreInService"
-
-	// ScalingActivityStatusCodeInProgress is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeInProgress = "InProgress"
-
-	// ScalingActivityStatusCodeWaitingForElbconnectionDraining is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeWaitingForElbconnectionDraining = "WaitingForELBConnectionDraining"
-
-	// ScalingActivityStatusCodeMidLifecycleAction is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeMidLifecycleAction = "MidLifecycleAction"
-
-	// ScalingActivityStatusCodeWaitingForInstanceWarmup is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeWaitingForInstanceWarmup = "WaitingForInstanceWarmup"
-
-	// ScalingActivityStatusCodeSuccessful is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeSuccessful = "Successful"
-
-	// ScalingActivityStatusCodeFailed is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeFailed = "Failed"
-
-	// ScalingActivityStatusCodeCancelled is a ScalingActivityStatusCode enum value
-	ScalingActivityStatusCodeCancelled = "Cancelled"
+	ScalingActivityStatusCodePendingSpotBidPlacement         ScalingActivityStatusCode = "PendingSpotBidPlacement"
+	ScalingActivityStatusCodeWaitingForSpotInstanceRequestId ScalingActivityStatusCode = "WaitingForSpotInstanceRequestId"
+	ScalingActivityStatusCodeWaitingForSpotInstanceId        ScalingActivityStatusCode = "WaitingForSpotInstanceId"
+	ScalingActivityStatusCodeWaitingForInstanceId            ScalingActivityStatusCode = "WaitingForInstanceId"
+	ScalingActivityStatusCodePreInService                    ScalingActivityStatusCode = "PreInService"
+	ScalingActivityStatusCodeInProgress                      ScalingActivityStatusCode = "InProgress"
+	ScalingActivityStatusCodeWaitingForElbconnectionDraining ScalingActivityStatusCode = "WaitingForELBConnectionDraining"
+	ScalingActivityStatusCodeMidLifecycleAction              ScalingActivityStatusCode = "MidLifecycleAction"
+	ScalingActivityStatusCodeWaitingForInstanceWarmup        ScalingActivityStatusCode = "WaitingForInstanceWarmup"
+	ScalingActivityStatusCodeSuccessful                      ScalingActivityStatusCode = "Successful"
+	ScalingActivityStatusCodeFailed                          ScalingActivityStatusCode = "Failed"
+	ScalingActivityStatusCodeCancelled                       ScalingActivityStatusCode = "Cancelled"
 )

@@ -4632,9 +4632,11 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -4694,12 +4696,15 @@ func (s AuthorizeCacheSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeCacheSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeCacheSecurityGroupIngressInput"}
+
 	if s.CacheSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
+
 	if s.EC2SecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupName"))
 	}
+
 	if s.EC2SecurityGroupOwnerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupOwnerId"))
 	}
@@ -5282,7 +5287,7 @@ type CacheNodeTypeSpecificParameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until
 	// the next maintenance window's reboot. For more information, see Rebooting
 	// a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html).
-	ChangeType *string `type:"string" enum:"ChangeType"`
+	ChangeType ChangeType `type:"string"`
 
 	// The valid data type for the parameter.
 	DataType *string `type:"string"`
@@ -5328,8 +5333,8 @@ func (s *CacheNodeTypeSpecificParameter) SetCacheNodeTypeSpecificValues(v []*Cac
 }
 
 // SetChangeType sets the ChangeType field's value.
-func (s *CacheNodeTypeSpecificParameter) SetChangeType(v string) *CacheNodeTypeSpecificParameter {
-	s.ChangeType = &v
+func (s *CacheNodeTypeSpecificParameter) SetChangeType(v ChangeType) *CacheNodeTypeSpecificParameter {
+	s.ChangeType = v
 	return s
 }
 
@@ -5717,9 +5722,11 @@ func (s CopySnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopySnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
+
 	if s.SourceSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
 	}
+
 	if s.TargetSnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotName"))
 	}
@@ -5786,7 +5793,7 @@ type CreateCacheClusterInput struct {
 	//
 	// If the AZMode and PreferredAvailabilityZones are not specified, ElastiCache
 	// assumes single-az mode.
-	AZMode *string `type:"string" enum:"AZMode"`
+	AZMode AZMode `type:"string"`
 
 	// Reserved parameter. The password used to access a password protected server.
 	//
@@ -6047,6 +6054,7 @@ func (s CreateCacheClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheClusterInput"}
+
 	if s.CacheClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
@@ -6058,8 +6066,8 @@ func (s *CreateCacheClusterInput) Validate() error {
 }
 
 // SetAZMode sets the AZMode field's value.
-func (s *CreateCacheClusterInput) SetAZMode(v string) *CreateCacheClusterInput {
-	s.AZMode = &v
+func (s *CreateCacheClusterInput) SetAZMode(v AZMode) *CreateCacheClusterInput {
+	s.AZMode = v
 	return s
 }
 
@@ -6256,12 +6264,15 @@ func (s CreateCacheParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheParameterGroupInput"}
+
 	if s.CacheParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupFamily"))
 	}
+
 	if s.CacheParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
@@ -6349,9 +6360,11 @@ func (s CreateCacheSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSecurityGroupInput"}
+
 	if s.CacheSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
@@ -6442,12 +6455,15 @@ func (s CreateCacheSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSubnetGroupInput"}
+
 	if s.CacheSubnetGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupDescription"))
 	}
+
 	if s.CacheSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -6802,9 +6818,11 @@ func (s CreateReplicationGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationGroupInput"}
+
 	if s.ReplicationGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupDescription"))
 	}
+
 	if s.ReplicationGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
@@ -7027,6 +7045,7 @@ func (s CreateSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
+
 	if s.SnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
 	}
@@ -7110,6 +7129,7 @@ func (s DeleteCacheClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheClusterInput"}
+
 	if s.CacheClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
@@ -7183,6 +7203,7 @@ func (s DeleteCacheParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheParameterGroupInput"}
+
 	if s.CacheParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
@@ -7240,6 +7261,7 @@ func (s DeleteCacheSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheSecurityGroupInput"}
+
 	if s.CacheSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
@@ -7297,6 +7319,7 @@ func (s DeleteCacheSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheSubnetGroupInput"}
+
 	if s.CacheSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
@@ -7363,6 +7386,7 @@ func (s DeleteReplicationGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationGroupInput"}
+
 	if s.ReplicationGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
@@ -7439,6 +7463,7 @@ func (s DeleteSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
+
 	if s.SnapshotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
 	}
@@ -7844,6 +7869,7 @@ func (s DescribeCacheParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCacheParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCacheParametersInput"}
+
 	if s.CacheParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
@@ -8134,6 +8160,7 @@ func (s DescribeEngineDefaultParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
+
 	if s.CacheParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupFamily"))
 	}
@@ -8220,7 +8247,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format.
@@ -8270,8 +8297,8 @@ func (s *DescribeEventsInput) SetSourceIdentifier(v string) *DescribeEventsInput
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v string) *DescribeEventsInput {
-	s.SourceType = &v
+func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
+	s.SourceType = v
 	return s
 }
 
@@ -9039,7 +9066,7 @@ type Event struct {
 
 	// Specifies the origin of this event - a cache cluster, a parameter group,
 	// a security group, etc.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -9071,8 +9098,8 @@ func (s *Event) SetSourceIdentifier(v string) *Event {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v string) *Event {
-	s.SourceType = &v
+func (s *Event) SetSourceType(v SourceType) *Event {
+	s.SourceType = v
 	return s
 }
 
@@ -9180,6 +9207,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
@@ -9216,7 +9244,7 @@ type ModifyCacheClusterInput struct {
 	// instructions on how to move existing Memcached nodes to different Availability
 	// Zones, see the Availability Zone Considerations section of Cache Node Considerations
 	// for Memcached (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html).
-	AZMode *string `type:"string" enum:"AZMode"`
+	AZMode AZMode `type:"string"`
 
 	// If true, this parameter causes the modifications in this request and any
 	// pending modifications to be applied, asynchronously and as soon as possible,
@@ -9453,6 +9481,7 @@ func (s ModifyCacheClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheClusterInput"}
+
 	if s.CacheClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
@@ -9464,8 +9493,8 @@ func (s *ModifyCacheClusterInput) Validate() error {
 }
 
 // SetAZMode sets the AZMode field's value.
-func (s *ModifyCacheClusterInput) SetAZMode(v string) *ModifyCacheClusterInput {
-	s.AZMode = &v
+func (s *ModifyCacheClusterInput) SetAZMode(v AZMode) *ModifyCacheClusterInput {
+	s.AZMode = v
 	return s
 }
 
@@ -9620,9 +9649,11 @@ func (s ModifyCacheParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheParameterGroupInput"}
+
 	if s.CacheParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
+
 	if s.ParameterNameValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
 	}
@@ -9680,6 +9711,7 @@ func (s ModifyCacheSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheSubnetGroupInput"}
+
 	if s.CacheSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
@@ -9896,6 +9928,7 @@ func (s ModifyReplicationGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationGroupInput"}
+
 	if s.ReplicationGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
@@ -10357,7 +10390,7 @@ type Parameter struct {
 	// a reboot for the change to be applied. You can force a reboot or wait until
 	// the next maintenance window's reboot. For more information, see Rebooting
 	// a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html).
-	ChangeType *string `type:"string" enum:"ChangeType"`
+	ChangeType ChangeType `type:"string"`
 
 	// The valid data type for the parameter.
 	DataType *string `type:"string"`
@@ -10400,8 +10433,8 @@ func (s *Parameter) SetAllowedValues(v string) *Parameter {
 }
 
 // SetChangeType sets the ChangeType field's value.
-func (s *Parameter) SetChangeType(v string) *Parameter {
-	s.ChangeType = &v
+func (s *Parameter) SetChangeType(v ChangeType) *Parameter {
+	s.ChangeType = v
 	return s
 }
 
@@ -10579,6 +10612,7 @@ func (s PurchaseReservedCacheNodesOfferingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedCacheNodesOfferingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedCacheNodesOfferingInput"}
+
 	if s.ReservedCacheNodesOfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedCacheNodesOfferingId"))
 	}
@@ -10662,9 +10696,11 @@ func (s RebootCacheClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootCacheClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootCacheClusterInput"}
+
 	if s.CacheClusterId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
+
 	if s.CacheNodeIdsToReboot == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheNodeIdsToReboot"))
 	}
@@ -10780,9 +10816,11 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -10819,7 +10857,7 @@ type ReplicationGroup struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailover *string `type:"string" enum:"AutomaticFailoverStatus"`
+	AutomaticFailover AutomaticFailoverStatus `type:"string"`
 
 	// The name of the compute and memory capacity node type for each node in the
 	// replication group.
@@ -10893,8 +10931,8 @@ func (s ReplicationGroup) GoString() string {
 }
 
 // SetAutomaticFailover sets the AutomaticFailover field's value.
-func (s *ReplicationGroup) SetAutomaticFailover(v string) *ReplicationGroup {
-	s.AutomaticFailover = &v
+func (s *ReplicationGroup) SetAutomaticFailover(v AutomaticFailoverStatus) *ReplicationGroup {
+	s.AutomaticFailover = v
 	return s
 }
 
@@ -10985,7 +11023,7 @@ type ReplicationGroupPendingModifiedValues struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailoverStatus *string `type:"string" enum:"PendingAutomaticFailoverStatus"`
+	AutomaticFailoverStatus PendingAutomaticFailoverStatus `type:"string"`
 
 	// The primary cluster ID that is applied immediately (if --apply-immediately
 	// was specified), or during the next maintenance window.
@@ -11003,8 +11041,8 @@ func (s ReplicationGroupPendingModifiedValues) GoString() string {
 }
 
 // SetAutomaticFailoverStatus sets the AutomaticFailoverStatus field's value.
-func (s *ReplicationGroupPendingModifiedValues) SetAutomaticFailoverStatus(v string) *ReplicationGroupPendingModifiedValues {
-	s.AutomaticFailoverStatus = &v
+func (s *ReplicationGroupPendingModifiedValues) SetAutomaticFailoverStatus(v PendingAutomaticFailoverStatus) *ReplicationGroupPendingModifiedValues {
+	s.AutomaticFailoverStatus = v
 	return s
 }
 
@@ -11336,6 +11374,7 @@ func (s ResetCacheParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetCacheParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheParameterGroupInput"}
+
 	if s.CacheParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
@@ -11400,12 +11439,15 @@ func (s RevokeCacheSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeCacheSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeCacheSecurityGroupIngressInput"}
+
 	if s.CacheSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
+
 	if s.EC2SecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupName"))
 	}
+
 	if s.EC2SecurityGroupOwnerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupOwnerId"))
 	}
@@ -11518,7 +11560,7 @@ type Snapshot struct {
 	// Redis (cluster mode disabled):T1 and T2 cache node types.
 	//
 	// Redis (cluster mode enabled): T1 node types.
-	AutomaticFailover *string `type:"string" enum:"AutomaticFailoverStatus"`
+	AutomaticFailover AutomaticFailoverStatus `type:"string"`
 
 	// The date and time when the source cache cluster was created.
 	CacheClusterCreateTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -11684,8 +11726,8 @@ func (s *Snapshot) SetAutoMinorVersionUpgrade(v bool) *Snapshot {
 }
 
 // SetAutomaticFailover sets the AutomaticFailover field's value.
-func (s *Snapshot) SetAutomaticFailover(v string) *Snapshot {
-	s.AutomaticFailover = &v
+func (s *Snapshot) SetAutomaticFailover(v AutomaticFailoverStatus) *Snapshot {
+	s.AutomaticFailover = v
 	return s
 }
 
@@ -11950,9 +11992,11 @@ func (s TestFailoverInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestFailoverInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestFailoverInput"}
+
 	if s.NodeGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NodeGroupId"))
 	}
+
 	if s.ReplicationGroupId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
@@ -11999,57 +12043,47 @@ func (s *TestFailoverOutput) SetReplicationGroup(v *ReplicationGroup) *TestFailo
 	return s
 }
 
-const (
-	// AZModeSingleAz is a AZMode enum value
-	AZModeSingleAz = "single-az"
+type AZMode string
 
-	// AZModeCrossAz is a AZMode enum value
-	AZModeCrossAz = "cross-az"
+// Enum values for AZMode
+const (
+	AZModeSingleAz AZMode = "single-az"
+	AZModeCrossAz  AZMode = "cross-az"
 )
 
+type AutomaticFailoverStatus string
+
+// Enum values for AutomaticFailoverStatus
 const (
-	// AutomaticFailoverStatusEnabled is a AutomaticFailoverStatus enum value
-	AutomaticFailoverStatusEnabled = "enabled"
-
-	// AutomaticFailoverStatusDisabled is a AutomaticFailoverStatus enum value
-	AutomaticFailoverStatusDisabled = "disabled"
-
-	// AutomaticFailoverStatusEnabling is a AutomaticFailoverStatus enum value
-	AutomaticFailoverStatusEnabling = "enabling"
-
-	// AutomaticFailoverStatusDisabling is a AutomaticFailoverStatus enum value
-	AutomaticFailoverStatusDisabling = "disabling"
+	AutomaticFailoverStatusEnabled   AutomaticFailoverStatus = "enabled"
+	AutomaticFailoverStatusDisabled  AutomaticFailoverStatus = "disabled"
+	AutomaticFailoverStatusEnabling  AutomaticFailoverStatus = "enabling"
+	AutomaticFailoverStatusDisabling AutomaticFailoverStatus = "disabling"
 )
 
-const (
-	// ChangeTypeImmediate is a ChangeType enum value
-	ChangeTypeImmediate = "immediate"
+type ChangeType string
 
-	// ChangeTypeRequiresReboot is a ChangeType enum value
-	ChangeTypeRequiresReboot = "requires-reboot"
+// Enum values for ChangeType
+const (
+	ChangeTypeImmediate      ChangeType = "immediate"
+	ChangeTypeRequiresReboot ChangeType = "requires-reboot"
 )
 
-const (
-	// PendingAutomaticFailoverStatusEnabled is a PendingAutomaticFailoverStatus enum value
-	PendingAutomaticFailoverStatusEnabled = "enabled"
+type PendingAutomaticFailoverStatus string
 
-	// PendingAutomaticFailoverStatusDisabled is a PendingAutomaticFailoverStatus enum value
-	PendingAutomaticFailoverStatusDisabled = "disabled"
+// Enum values for PendingAutomaticFailoverStatus
+const (
+	PendingAutomaticFailoverStatusEnabled  PendingAutomaticFailoverStatus = "enabled"
+	PendingAutomaticFailoverStatusDisabled PendingAutomaticFailoverStatus = "disabled"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeCacheCluster is a SourceType enum value
-	SourceTypeCacheCluster = "cache-cluster"
-
-	// SourceTypeCacheParameterGroup is a SourceType enum value
-	SourceTypeCacheParameterGroup = "cache-parameter-group"
-
-	// SourceTypeCacheSecurityGroup is a SourceType enum value
-	SourceTypeCacheSecurityGroup = "cache-security-group"
-
-	// SourceTypeCacheSubnetGroup is a SourceType enum value
-	SourceTypeCacheSubnetGroup = "cache-subnet-group"
-
-	// SourceTypeReplicationGroup is a SourceType enum value
-	SourceTypeReplicationGroup = "replication-group"
+	SourceTypeCacheCluster        SourceType = "cache-cluster"
+	SourceTypeCacheParameterGroup SourceType = "cache-parameter-group"
+	SourceTypeCacheSecurityGroup  SourceType = "cache-security-group"
+	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
+	SourceTypeReplicationGroup    SourceType = "replication-group"
 )

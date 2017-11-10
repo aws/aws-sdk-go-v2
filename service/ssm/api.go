@@ -9472,7 +9472,7 @@ type AddTagsToResourceInput struct {
 	// Specifies the type of resource you are tagging.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"ResourceTypeForTagging"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
 
 	// One or more tags. The value parameter is required, but if you don't want
 	// the tag to have a value, specify the parameter with no value, and we set
@@ -9495,12 +9495,14 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -9528,8 +9530,8 @@ func (s *AddTagsToResourceInput) SetResourceId(v string) *AddTagsToResourceInput
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *AddTagsToResourceInput) SetResourceType(v string) *AddTagsToResourceInput {
-	s.ResourceType = &v
+func (s *AddTagsToResourceInput) SetResourceType(v ResourceTypeForTagging) *AddTagsToResourceInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -9829,7 +9831,7 @@ type AssociationFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key *string `locationName:"key" type:"string" required:"true" enum:"AssociationFilterKey"`
+	Key AssociationFilterKey `locationName:"key" type:"string" required:"true"`
 
 	// The filter value.
 	//
@@ -9850,9 +9852,10 @@ func (s AssociationFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociationFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociationFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -9867,8 +9870,8 @@ func (s *AssociationFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *AssociationFilter) SetKey(v string) *AssociationFilter {
-	s.Key = &v
+func (s *AssociationFilter) SetKey(v AssociationFilterKey) *AssociationFilter {
+	s.Key = v
 	return s
 }
 
@@ -9944,7 +9947,7 @@ type AssociationStatus struct {
 	// The status.
 	//
 	// Name is a required field
-	Name *string `type:"string" required:"true" enum:"AssociationStatusName"`
+	Name AssociationStatusName `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9960,16 +9963,18 @@ func (s AssociationStatus) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociationStatus) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociationStatus"}
+
 	if s.Date == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Date"))
 	}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Message != nil && len(*s.Message) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
 	}
-	if s.Name == nil {
+	if len(s.Name) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
@@ -9998,8 +10003,8 @@ func (s *AssociationStatus) SetMessage(v string) *AssociationStatus {
 }
 
 // SetName sets the Name field's value.
-func (s *AssociationStatus) SetName(v string) *AssociationStatus {
-	s.Name = &v
+func (s *AssociationStatus) SetName(v AssociationStatusName) *AssociationStatus {
+	s.Name = v
 	return s
 }
 
@@ -10124,7 +10129,7 @@ type AutomationExecution struct {
 	AutomationExecutionId *string `min:"36" type:"string"`
 
 	// The execution status of the Automation.
-	AutomationExecutionStatus *string `type:"string" enum:"AutomationExecutionStatus"`
+	AutomationExecutionStatus AutomationExecutionStatus `type:"string"`
 
 	// The name of the Automation document used during the execution.
 	DocumentName *string `type:"string"`
@@ -10171,8 +10176,8 @@ func (s *AutomationExecution) SetAutomationExecutionId(v string) *AutomationExec
 }
 
 // SetAutomationExecutionStatus sets the AutomationExecutionStatus field's value.
-func (s *AutomationExecution) SetAutomationExecutionStatus(v string) *AutomationExecution {
-	s.AutomationExecutionStatus = &v
+func (s *AutomationExecution) SetAutomationExecutionStatus(v AutomationExecutionStatus) *AutomationExecution {
+	s.AutomationExecutionStatus = v
 	return s
 }
 
@@ -10233,7 +10238,7 @@ type AutomationExecutionFilter struct {
 	// The aspect of the Automation execution information that should be limited.
 	//
 	// Key is a required field
-	Key *string `type:"string" required:"true" enum:"AutomationExecutionFilterKey"`
+	Key AutomationExecutionFilterKey `type:"string" required:"true"`
 
 	// The values used to limit the execution information associated with the filter's
 	// key.
@@ -10255,9 +10260,10 @@ func (s AutomationExecutionFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AutomationExecutionFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AutomationExecutionFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -10272,8 +10278,8 @@ func (s *AutomationExecutionFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *AutomationExecutionFilter) SetKey(v string) *AutomationExecutionFilter {
-	s.Key = &v
+func (s *AutomationExecutionFilter) SetKey(v AutomationExecutionFilterKey) *AutomationExecutionFilter {
+	s.Key = v
 	return s
 }
 
@@ -10293,7 +10299,7 @@ type AutomationExecutionMetadata struct {
 
 	// The status of the execution. Valid values include: Running, Succeeded, Failed,
 	// Timed out, or Cancelled.
-	AutomationExecutionStatus *string `type:"string" enum:"AutomationExecutionStatus"`
+	AutomationExecutionStatus AutomationExecutionStatus `type:"string"`
 
 	// The name of the Automation document used during execution.
 	DocumentName *string `type:"string"`
@@ -10335,8 +10341,8 @@ func (s *AutomationExecutionMetadata) SetAutomationExecutionId(v string) *Automa
 }
 
 // SetAutomationExecutionStatus sets the AutomationExecutionStatus field's value.
-func (s *AutomationExecutionMetadata) SetAutomationExecutionStatus(v string) *AutomationExecutionMetadata {
-	s.AutomationExecutionStatus = &v
+func (s *AutomationExecutionMetadata) SetAutomationExecutionStatus(v AutomationExecutionStatus) *AutomationExecutionMetadata {
+	s.AutomationExecutionStatus = v
 	return s
 }
 
@@ -10410,6 +10416,7 @@ func (s CancelCommandInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelCommandInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelCommandInput"}
+
 	if s.CommandId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommandId"))
 	}
@@ -10524,7 +10531,7 @@ type Command struct {
 	ServiceRole *string `type:"string"`
 
 	// The status of the command.
-	Status *string `type:"string" enum:"CommandStatus"`
+	Status CommandStatus `type:"string"`
 
 	// A detailed status of the command execution. StatusDetails includes more information
 	// than Status because it includes states resulting from error and concurrency
@@ -10677,8 +10684,8 @@ func (s *Command) SetServiceRole(v string) *Command {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Command) SetStatus(v string) *Command {
-	s.Status = &v
+func (s *Command) SetStatus(v CommandStatus) *Command {
+	s.Status = v
 	return s
 }
 
@@ -10708,7 +10715,7 @@ type CommandFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key *string `locationName:"key" type:"string" required:"true" enum:"CommandFilterKey"`
+	Key CommandFilterKey `locationName:"key" type:"string" required:"true"`
 
 	// The filter value.
 	//
@@ -10729,9 +10736,10 @@ func (s CommandFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CommandFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CommandFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -10746,8 +10754,8 @@ func (s *CommandFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *CommandFilter) SetKey(v string) *CommandFilter {
-	s.Key = &v
+func (s *CommandFilter) SetKey(v CommandFilterKey) *CommandFilter {
+	s.Key = v
 	return s
 }
 
@@ -10810,7 +10818,7 @@ type CommandInvocation struct {
 	StandardOutputUrl *string `type:"string"`
 
 	// Whether or not the invocation succeeded, failed, or is pending.
-	Status *string `type:"string" enum:"CommandInvocationStatus"`
+	Status CommandInvocationStatus `type:"string"`
 
 	// A detailed status of the command execution for each invocation (each instance
 	// targeted by the command). StatusDetails includes more information than Status
@@ -10937,8 +10945,8 @@ func (s *CommandInvocation) SetStandardOutputUrl(v string) *CommandInvocation {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CommandInvocation) SetStatus(v string) *CommandInvocation {
-	s.Status = &v
+func (s *CommandInvocation) SetStatus(v CommandInvocationStatus) *CommandInvocation {
+	s.Status = v
 	return s
 }
 
@@ -11022,7 +11030,7 @@ type CommandPlugin struct {
 	StandardOutputUrl *string `type:"string"`
 
 	// The status of this plugin. You can execute a document with multiple plugins.
-	Status *string `type:"string" enum:"CommandPluginStatus"`
+	Status CommandPluginStatus `type:"string"`
 
 	// A detailed status of the plugin execution. StatusDetails includes more information
 	// than Status because it includes states resulting from error and concurrency
@@ -11139,8 +11147,8 @@ func (s *CommandPlugin) SetStandardOutputUrl(v string) *CommandPlugin {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CommandPlugin) SetStatus(v string) *CommandPlugin {
-	s.Status = &v
+func (s *CommandPlugin) SetStatus(v CommandPluginStatus) *CommandPlugin {
+	s.Status = v
 	return s
 }
 
@@ -11184,6 +11192,7 @@ func (s ComplianceExecutionSummary) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceExecutionSummary) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ComplianceExecutionSummary"}
+
 	if s.ExecutionTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExecutionTime"))
 	}
@@ -11243,10 +11252,10 @@ type ComplianceItem struct {
 
 	// The severity of the compliance status. Severity can be one of the following:
 	// Critical, High, Medium, Low, Informational, Unspecified.
-	Severity *string `type:"string" enum:"ComplianceSeverity"`
+	Severity ComplianceSeverity `type:"string"`
 
 	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
-	Status *string `type:"string" enum:"ComplianceStatus"`
+	Status ComplianceStatus `type:"string"`
 
 	// A title for the compliance item. For example, if the compliance item is a
 	// Windows patch, the title could be the title of the KB article for the patch.
@@ -11301,14 +11310,14 @@ func (s *ComplianceItem) SetResourceType(v string) *ComplianceItem {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *ComplianceItem) SetSeverity(v string) *ComplianceItem {
-	s.Severity = &v
+func (s *ComplianceItem) SetSeverity(v ComplianceSeverity) *ComplianceItem {
+	s.Severity = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ComplianceItem) SetStatus(v string) *ComplianceItem {
-	s.Status = &v
+func (s *ComplianceItem) SetStatus(v ComplianceStatus) *ComplianceItem {
+	s.Status = v
 	return s
 }
 
@@ -11334,12 +11343,12 @@ type ComplianceItemEntry struct {
 	// Critical, High, Medium, Low, Informational, Unspecified.
 	//
 	// Severity is a required field
-	Severity *string `type:"string" required:"true" enum:"ComplianceSeverity"`
+	Severity ComplianceSeverity `type:"string" required:"true"`
 
 	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ComplianceStatus"`
+	Status ComplianceStatus `type:"string" required:"true"`
 
 	// The title of the compliance item. For example, if the compliance item is
 	// a Windows patch, the title could be the title of the KB article for the patch.
@@ -11363,10 +11372,10 @@ func (s *ComplianceItemEntry) Validate() error {
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
-	if s.Severity == nil {
+	if len(s.Severity) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Severity"))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -11389,14 +11398,14 @@ func (s *ComplianceItemEntry) SetId(v string) *ComplianceItemEntry {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *ComplianceItemEntry) SetSeverity(v string) *ComplianceItemEntry {
-	s.Severity = &v
+func (s *ComplianceItemEntry) SetSeverity(v ComplianceSeverity) *ComplianceItemEntry {
+	s.Severity = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ComplianceItemEntry) SetStatus(v string) *ComplianceItemEntry {
-	s.Status = &v
+func (s *ComplianceItemEntry) SetStatus(v ComplianceStatus) *ComplianceItemEntry {
+	s.Status = v
 	return s
 }
 
@@ -11416,7 +11425,7 @@ type ComplianceStringFilter struct {
 
 	// The type of comparison that should be performed for the value: Equal, NotEqual,
 	// BeginWith, LessThan, or GreaterThan.
-	Type *string `type:"string" enum:"ComplianceQueryOperatorType"`
+	Type ComplianceQueryOperatorType `type:"string"`
 
 	// The value for which to search.
 	Values []*string `locationNameList:"FilterValue" min:"1" type:"list"`
@@ -11455,8 +11464,8 @@ func (s *ComplianceStringFilter) SetKey(v string) *ComplianceStringFilter {
 }
 
 // SetType sets the Type field's value.
-func (s *ComplianceStringFilter) SetType(v string) *ComplianceStringFilter {
-	s.Type = &v
+func (s *ComplianceStringFilter) SetType(v ComplianceQueryOperatorType) *ComplianceStringFilter {
+	s.Type = v
 	return s
 }
 
@@ -11585,6 +11594,7 @@ func (s CreateActivationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateActivationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateActivationInput"}
+
 	if s.IamRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
 	}
@@ -11686,6 +11696,7 @@ func (s CreateAssociationBatchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationBatchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchInput"}
+
 	if s.Entries == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
@@ -11793,6 +11804,7 @@ func (s CreateAssociationBatchRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationBatchRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchRequestEntry"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -11914,6 +11926,7 @@ func (s CreateAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12025,7 +12038,7 @@ type CreateDocumentInput struct {
 
 	// The type of document to create. Valid document types include: Policy, Automation,
 	// and Command.
-	DocumentType *string `type:"string" enum:"DocumentType"`
+	DocumentType DocumentType `type:"string"`
 
 	// A name for the Systems Manager document.
 	//
@@ -12046,12 +12059,14 @@ func (s CreateDocumentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentInput"}
+
 	if s.Content == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12069,8 +12084,8 @@ func (s *CreateDocumentInput) SetContent(v string) *CreateDocumentInput {
 }
 
 // SetDocumentType sets the DocumentType field's value.
-func (s *CreateDocumentInput) SetDocumentType(v string) *CreateDocumentInput {
-	s.DocumentType = &v
+func (s *CreateDocumentInput) SetDocumentType(v DocumentType) *CreateDocumentInput {
+	s.DocumentType = v
 	return s
 }
 
@@ -12161,30 +12176,35 @@ func (s CreateMaintenanceWindowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMaintenanceWindowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMaintenanceWindowInput"}
+
 	if s.AllowUnassociatedTargets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllowUnassociatedTargets"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
+
 	if s.Cutoff == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Cutoff"))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.Duration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Duration"))
 	}
 	if s.Duration != nil && *s.Duration < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Duration", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
+
 	if s.Schedule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Schedule"))
 	}
@@ -12278,7 +12298,7 @@ type CreatePatchBaselineInput struct {
 	// approved patch is reported as missing, this is the severity of the compliance
 	// violation. Valid compliance severity levels include the following: CRITICAL,
 	// HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
-	ApprovedPatchesComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// User-provided idempotency token.
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
@@ -12297,7 +12317,7 @@ type CreatePatchBaselineInput struct {
 	// Defines the operating system the patch baseline applies to. Supported operating
 	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
 	// The Default value is WINDOWS.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []*string `type:"list"`
@@ -12322,6 +12342,7 @@ func (s *CreatePatchBaselineInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12358,8 +12379,8 @@ func (s *CreatePatchBaselineInput) SetApprovedPatches(v []*string) *CreatePatchB
 }
 
 // SetApprovedPatchesComplianceLevel sets the ApprovedPatchesComplianceLevel field's value.
-func (s *CreatePatchBaselineInput) SetApprovedPatchesComplianceLevel(v string) *CreatePatchBaselineInput {
-	s.ApprovedPatchesComplianceLevel = &v
+func (s *CreatePatchBaselineInput) SetApprovedPatchesComplianceLevel(v PatchComplianceLevel) *CreatePatchBaselineInput {
+	s.ApprovedPatchesComplianceLevel = v
 	return s
 }
 
@@ -12388,8 +12409,8 @@ func (s *CreatePatchBaselineInput) SetName(v string) *CreatePatchBaselineInput {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *CreatePatchBaselineInput) SetOperatingSystem(v string) *CreatePatchBaselineInput {
-	s.OperatingSystem = &v
+func (s *CreatePatchBaselineInput) SetOperatingSystem(v OperatingSystem) *CreatePatchBaselineInput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -12451,9 +12472,11 @@ func (s CreateResourceDataSyncInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceDataSyncInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceDataSyncInput"}
+
 	if s.S3Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Destination"))
 	}
+
 	if s.SyncName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SyncName"))
 	}
@@ -12522,6 +12545,7 @@ func (s DeleteActivationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteActivationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivationInput"}
+
 	if s.ActivationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivationId"))
 	}
@@ -12633,6 +12657,7 @@ func (s DeleteDocumentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12687,6 +12712,7 @@ func (s DeleteMaintenanceWindowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMaintenanceWindowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMaintenanceWindowInput"}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -12753,6 +12779,7 @@ func (s DeleteParameterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParameterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -12810,6 +12837,7 @@ func (s DeleteParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteParametersInput"}
+
 	if s.Names == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
@@ -12886,6 +12914,7 @@ func (s DeletePatchBaselineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePatchBaselineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePatchBaselineInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
@@ -12952,6 +12981,7 @@ func (s DeleteResourceDataSyncInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceDataSyncInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceDataSyncInput"}
+
 	if s.SyncName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SyncName"))
 	}
@@ -13010,6 +13040,7 @@ func (s DeregisterManagedInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterManagedInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterManagedInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -13069,12 +13100,14 @@ func (s DeregisterPatchBaselineForPatchGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterPatchBaselineForPatchGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterPatchBaselineForPatchGroupInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
+
 	if s.PatchGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
@@ -13166,12 +13199,14 @@ func (s DeregisterTargetFromMaintenanceWindowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTargetFromMaintenanceWindowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetFromMaintenanceWindowInput"}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
+
 	if s.WindowTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowTargetId"))
 	}
@@ -13264,12 +13299,14 @@ func (s DeregisterTaskFromMaintenanceWindowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTaskFromMaintenanceWindowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTaskFromMaintenanceWindowInput"}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
+
 	if s.WindowTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
@@ -13334,7 +13371,7 @@ type DescribeActivationsFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the filter.
-	FilterKey *string `type:"string" enum:"DescribeActivationsFilterKeys"`
+	FilterKey DescribeActivationsFilterKeys `type:"string"`
 
 	// The filter values.
 	FilterValues []*string `type:"list"`
@@ -13351,8 +13388,8 @@ func (s DescribeActivationsFilter) GoString() string {
 }
 
 // SetFilterKey sets the FilterKey field's value.
-func (s *DescribeActivationsFilter) SetFilterKey(v string) *DescribeActivationsFilter {
-	s.FilterKey = &v
+func (s *DescribeActivationsFilter) SetFilterKey(v DescribeActivationsFilterKeys) *DescribeActivationsFilter {
+	s.FilterKey = v
 	return s
 }
 
@@ -13764,6 +13801,7 @@ func (s DescribeDocumentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDocumentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -13822,7 +13860,7 @@ type DescribeDocumentPermissionInput struct {
 	// The permission type for the document. The permission type can be Share.
 	//
 	// PermissionType is a required field
-	PermissionType *string `type:"string" required:"true" enum:"DocumentPermissionType"`
+	PermissionType DocumentPermissionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -13838,10 +13876,11 @@ func (s DescribeDocumentPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDocumentPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentPermissionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.PermissionType == nil {
+	if len(s.PermissionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PermissionType"))
 	}
 
@@ -13858,8 +13897,8 @@ func (s *DescribeDocumentPermissionInput) SetName(v string) *DescribeDocumentPer
 }
 
 // SetPermissionType sets the PermissionType field's value.
-func (s *DescribeDocumentPermissionInput) SetPermissionType(v string) *DescribeDocumentPermissionInput {
-	s.PermissionType = &v
+func (s *DescribeDocumentPermissionInput) SetPermissionType(v DocumentPermissionType) *DescribeDocumentPermissionInput {
+	s.PermissionType = v
 	return s
 }
 
@@ -13920,6 +13959,7 @@ func (s DescribeEffectiveInstanceAssociationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEffectiveInstanceAssociationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEffectiveInstanceAssociationsInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -14015,6 +14055,7 @@ func (s DescribeEffectivePatchesForPatchBaselineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEffectivePatchesForPatchBaselineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEffectivePatchesForPatchBaselineInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
@@ -14115,6 +14156,7 @@ func (s DescribeInstanceAssociationsStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceAssociationsStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceAssociationsStatusInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -14344,6 +14386,7 @@ func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.PatchGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
@@ -14455,6 +14498,7 @@ func (s DescribeInstancePatchStatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancePatchStatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchStatesInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -14557,6 +14601,7 @@ func (s DescribeInstancePatchesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancePatchesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchesInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -14699,12 +14744,14 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Validate() erro
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
+
 	if s.WindowExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
@@ -14833,6 +14880,7 @@ func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.WindowExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
@@ -14959,6 +15007,7 @@ func (s *DescribeMaintenanceWindowExecutionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -15079,6 +15128,7 @@ func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -15199,6 +15249,7 @@ func (s *DescribeMaintenanceWindowTasksInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 10 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -15631,6 +15682,7 @@ func (s DescribePatchGroupStateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePatchGroupStateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchGroupStateInput"}
+
 	if s.PatchGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
@@ -15874,7 +15926,7 @@ type DocumentDescription struct {
 	Description *string `type:"string"`
 
 	// The type of document.
-	DocumentType *string `type:"string" enum:"DocumentType"`
+	DocumentType DocumentType `type:"string"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -15887,7 +15939,7 @@ type DocumentDescription struct {
 	// Sha256 or Sha1.
 	//
 	// Sha1 hashes have been deprecated.
-	HashType *string `type:"string" enum:"DocumentHashType"`
+	HashType DocumentHashType `type:"string"`
 
 	// The latest version of the document.
 	LatestVersion *string `type:"string"`
@@ -15902,7 +15954,7 @@ type DocumentDescription struct {
 	Parameters []*DocumentParameter `locationNameList:"DocumentParameter" type:"list"`
 
 	// The list of OS platforms compatible with this Systems Manager document.
-	PlatformTypes []*string `locationNameList:"PlatformType" type:"list"`
+	PlatformTypes []PlatformType `locationNameList:"PlatformType" type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
@@ -15911,7 +15963,7 @@ type DocumentDescription struct {
 	Sha1 *string `type:"string"`
 
 	// The status of the Systems Manager document.
-	Status *string `type:"string" enum:"DocumentStatus"`
+	Status DocumentStatus `type:"string"`
 
 	// The tags, or metadata, that have been applied to the document.
 	Tags []*Tag `type:"list"`
@@ -15946,8 +15998,8 @@ func (s *DocumentDescription) SetDescription(v string) *DocumentDescription {
 }
 
 // SetDocumentType sets the DocumentType field's value.
-func (s *DocumentDescription) SetDocumentType(v string) *DocumentDescription {
-	s.DocumentType = &v
+func (s *DocumentDescription) SetDocumentType(v DocumentType) *DocumentDescription {
+	s.DocumentType = v
 	return s
 }
 
@@ -15964,8 +16016,8 @@ func (s *DocumentDescription) SetHash(v string) *DocumentDescription {
 }
 
 // SetHashType sets the HashType field's value.
-func (s *DocumentDescription) SetHashType(v string) *DocumentDescription {
-	s.HashType = &v
+func (s *DocumentDescription) SetHashType(v DocumentHashType) *DocumentDescription {
+	s.HashType = v
 	return s
 }
 
@@ -15994,7 +16046,7 @@ func (s *DocumentDescription) SetParameters(v []*DocumentParameter) *DocumentDes
 }
 
 // SetPlatformTypes sets the PlatformTypes field's value.
-func (s *DocumentDescription) SetPlatformTypes(v []*string) *DocumentDescription {
+func (s *DocumentDescription) SetPlatformTypes(v []PlatformType) *DocumentDescription {
 	s.PlatformTypes = v
 	return s
 }
@@ -16012,8 +16064,8 @@ func (s *DocumentDescription) SetSha1(v string) *DocumentDescription {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DocumentDescription) SetStatus(v string) *DocumentDescription {
-	s.Status = &v
+func (s *DocumentDescription) SetStatus(v DocumentStatus) *DocumentDescription {
+	s.Status = v
 	return s
 }
 
@@ -16031,7 +16083,7 @@ type DocumentFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key *string `locationName:"key" type:"string" required:"true" enum:"DocumentFilterKey"`
+	Key DocumentFilterKey `locationName:"key" type:"string" required:"true"`
 
 	// The value of the filter.
 	//
@@ -16052,9 +16104,10 @@ func (s DocumentFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DocumentFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -16069,8 +16122,8 @@ func (s *DocumentFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *DocumentFilter) SetKey(v string) *DocumentFilter {
-	s.Key = &v
+func (s *DocumentFilter) SetKey(v DocumentFilterKey) *DocumentFilter {
+	s.Key = v
 	return s
 }
 
@@ -16086,7 +16139,7 @@ type DocumentIdentifier struct {
 	_ struct{} `type:"structure"`
 
 	// The document type.
-	DocumentType *string `type:"string" enum:"DocumentType"`
+	DocumentType DocumentType `type:"string"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -16098,7 +16151,7 @@ type DocumentIdentifier struct {
 	Owner *string `type:"string"`
 
 	// The operating system platform.
-	PlatformTypes []*string `locationNameList:"PlatformType" type:"list"`
+	PlatformTypes []PlatformType `locationNameList:"PlatformType" type:"list"`
 
 	// The schema version.
 	SchemaVersion *string `type:"string"`
@@ -16118,8 +16171,8 @@ func (s DocumentIdentifier) GoString() string {
 }
 
 // SetDocumentType sets the DocumentType field's value.
-func (s *DocumentIdentifier) SetDocumentType(v string) *DocumentIdentifier {
-	s.DocumentType = &v
+func (s *DocumentIdentifier) SetDocumentType(v DocumentType) *DocumentIdentifier {
+	s.DocumentType = v
 	return s
 }
 
@@ -16142,7 +16195,7 @@ func (s *DocumentIdentifier) SetOwner(v string) *DocumentIdentifier {
 }
 
 // SetPlatformTypes sets the PlatformTypes field's value.
-func (s *DocumentIdentifier) SetPlatformTypes(v []*string) *DocumentIdentifier {
+func (s *DocumentIdentifier) SetPlatformTypes(v []PlatformType) *DocumentIdentifier {
 	s.PlatformTypes = v
 	return s
 }
@@ -16248,7 +16301,7 @@ type DocumentParameter struct {
 	Name *string `type:"string"`
 
 	// The type of parameter. The type can be either String or StringList.
-	Type *string `type:"string" enum:"DocumentParameterType"`
+	Type DocumentParameterType `type:"string"`
 }
 
 // String returns the string representation
@@ -16280,8 +16333,8 @@ func (s *DocumentParameter) SetName(v string) *DocumentParameter {
 }
 
 // SetType sets the Type field's value.
-func (s *DocumentParameter) SetType(v string) *DocumentParameter {
-	s.Type = &v
+func (s *DocumentParameter) SetType(v DocumentParameterType) *DocumentParameter {
+	s.Type = v
 	return s
 }
 
@@ -16388,7 +16441,7 @@ type FailedCreateAssociation struct {
 	Entry *CreateAssociationBatchRequestEntry `type:"structure"`
 
 	// The source of the failure.
-	Fault *string `type:"string" enum:"Fault"`
+	Fault Fault `type:"string"`
 
 	// A description of the failure.
 	Message *string `type:"string"`
@@ -16411,8 +16464,8 @@ func (s *FailedCreateAssociation) SetEntry(v *CreateAssociationBatchRequestEntry
 }
 
 // SetFault sets the Fault field's value.
-func (s *FailedCreateAssociation) SetFault(v string) *FailedCreateAssociation {
-	s.Fault = &v
+func (s *FailedCreateAssociation) SetFault(v Fault) *FailedCreateAssociation {
+	s.Fault = v
 	return s
 }
 
@@ -16492,6 +16545,7 @@ func (s GetAutomationExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAutomationExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAutomationExecutionInput"}
+
 	if s.AutomationExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
@@ -16570,12 +16624,14 @@ func (s GetCommandInvocationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCommandInvocationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCommandInvocationInput"}
+
 	if s.CommandId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommandId"))
 	}
 	if s.CommandId != nil && len(*s.CommandId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -16674,7 +16730,7 @@ type GetCommandInvocationOutput struct {
 
 	// The status of the parent command for this invocation. This status can be
 	// different than StatusDetails.
-	Status *string `type:"string" enum:"CommandInvocationStatus"`
+	Status CommandInvocationStatus `type:"string"`
 
 	// A detailed status of the command execution for an invocation. StatusDetails
 	// includes more information than Status because it includes states resulting
@@ -16815,8 +16871,8 @@ func (s *GetCommandInvocationOutput) SetStandardOutputUrl(v string) *GetCommandI
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetCommandInvocationOutput) SetStatus(v string) *GetCommandInvocationOutput {
-	s.Status = &v
+func (s *GetCommandInvocationOutput) SetStatus(v CommandInvocationStatus) *GetCommandInvocationOutput {
+	s.Status = v
 	return s
 }
 
@@ -16831,7 +16887,7 @@ type GetDefaultPatchBaselineInput struct {
 	_ struct{} `type:"structure"`
 
 	// Returns the default patch baseline for the specified operating system.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 }
 
 // String returns the string representation
@@ -16845,8 +16901,8 @@ func (s GetDefaultPatchBaselineInput) GoString() string {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *GetDefaultPatchBaselineInput) SetOperatingSystem(v string) *GetDefaultPatchBaselineInput {
-	s.OperatingSystem = &v
+func (s *GetDefaultPatchBaselineInput) SetOperatingSystem(v OperatingSystem) *GetDefaultPatchBaselineInput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -16858,7 +16914,7 @@ type GetDefaultPatchBaselineOutput struct {
 	BaselineId *string `min:"20" type:"string"`
 
 	// The operating system for the returned patch baseline.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 }
 
 // String returns the string representation
@@ -16878,8 +16934,8 @@ func (s *GetDefaultPatchBaselineOutput) SetBaselineId(v string) *GetDefaultPatch
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *GetDefaultPatchBaselineOutput) SetOperatingSystem(v string) *GetDefaultPatchBaselineOutput {
-	s.OperatingSystem = &v
+func (s *GetDefaultPatchBaselineOutput) SetOperatingSystem(v OperatingSystem) *GetDefaultPatchBaselineOutput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -16912,9 +16968,11 @@ func (s GetDeployablePatchSnapshotForInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeployablePatchSnapshotForInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeployablePatchSnapshotForInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -17018,6 +17076,7 @@ func (s GetDocumentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -17048,7 +17107,7 @@ type GetDocumentOutput struct {
 	Content *string `min:"1" type:"string"`
 
 	// The document type.
-	DocumentType *string `type:"string" enum:"DocumentType"`
+	DocumentType DocumentType `type:"string"`
 
 	// The document version.
 	DocumentVersion *string `type:"string"`
@@ -17074,8 +17133,8 @@ func (s *GetDocumentOutput) SetContent(v string) *GetDocumentOutput {
 }
 
 // SetDocumentType sets the DocumentType field's value.
-func (s *GetDocumentOutput) SetDocumentType(v string) *GetDocumentOutput {
-	s.DocumentType = &v
+func (s *GetDocumentOutput) SetDocumentType(v DocumentType) *GetDocumentOutput {
+	s.DocumentType = v
 	return s
 }
 
@@ -17342,6 +17401,7 @@ func (s GetMaintenanceWindowExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionInput"}
+
 	if s.WindowExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
@@ -17372,7 +17432,7 @@ type GetMaintenanceWindowExecutionOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the Maintenance Window execution.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -17407,8 +17467,8 @@ func (s *GetMaintenanceWindowExecutionOutput) SetStartTime(v time.Time) *GetMain
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetMaintenanceWindowExecutionOutput) SetStatus(v string) *GetMaintenanceWindowExecutionOutput {
-	s.Status = &v
+func (s *GetMaintenanceWindowExecutionOutput) SetStatus(v MaintenanceWindowExecutionStatus) *GetMaintenanceWindowExecutionOutput {
+	s.Status = v
 	return s
 }
 
@@ -17459,12 +17519,14 @@ func (s GetMaintenanceWindowExecutionTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInput"}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
+
 	if s.WindowExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
@@ -17524,18 +17586,21 @@ func (s GetMaintenanceWindowExecutionTaskInvocationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionTaskInvocationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInvocationInput"}
+
 	if s.InvocationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InvocationId"))
 	}
 	if s.InvocationId != nil && len(*s.InvocationId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("InvocationId", 36))
 	}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
+
 	if s.WindowExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
@@ -17591,7 +17656,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The task status for an invocation.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the status. Details are only available for certain
 	// status values.
@@ -17602,7 +17667,7 @@ type GetMaintenanceWindowExecutionTaskInvocationOutput struct {
 
 	// Retrieves the task type for a Maintenance Window. Task types include the
 	// following: LAMBDA, STEP_FUNCTION, AUTOMATION, RUN_COMMAND.
-	TaskType *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	TaskType MaintenanceWindowTaskType `type:"string"`
 
 	// The Maintenance Window execution ID.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -17658,8 +17723,8 @@ func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetStartTime(v time.
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetStatus(v string) *GetMaintenanceWindowExecutionTaskInvocationOutput {
-	s.Status = &v
+func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetStatus(v MaintenanceWindowExecutionStatus) *GetMaintenanceWindowExecutionTaskInvocationOutput {
+	s.Status = v
 	return s
 }
 
@@ -17676,8 +17741,8 @@ func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetTaskExecutionId(v
 }
 
 // SetTaskType sets the TaskType field's value.
-func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetTaskType(v string) *GetMaintenanceWindowExecutionTaskInvocationOutput {
-	s.TaskType = &v
+func (s *GetMaintenanceWindowExecutionTaskInvocationOutput) SetTaskType(v MaintenanceWindowTaskType) *GetMaintenanceWindowExecutionTaskInvocationOutput {
+	s.TaskType = v
 	return s
 }
 
@@ -17717,7 +17782,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -17738,7 +17803,7 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	TaskParameters []map[string]*MaintenanceWindowTaskParameterValueExpression `type:"list"`
 
 	// The type of task executed.
-	Type *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	Type MaintenanceWindowTaskType `type:"string"`
 
 	// The ID of the Maintenance Window execution that includes the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -17791,8 +17856,8 @@ func (s *GetMaintenanceWindowExecutionTaskOutput) SetStartTime(v time.Time) *Get
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetMaintenanceWindowExecutionTaskOutput) SetStatus(v string) *GetMaintenanceWindowExecutionTaskOutput {
-	s.Status = &v
+func (s *GetMaintenanceWindowExecutionTaskOutput) SetStatus(v MaintenanceWindowExecutionStatus) *GetMaintenanceWindowExecutionTaskOutput {
+	s.Status = v
 	return s
 }
 
@@ -17821,8 +17886,8 @@ func (s *GetMaintenanceWindowExecutionTaskOutput) SetTaskParameters(v []map[stri
 }
 
 // SetType sets the Type field's value.
-func (s *GetMaintenanceWindowExecutionTaskOutput) SetType(v string) *GetMaintenanceWindowExecutionTaskOutput {
-	s.Type = &v
+func (s *GetMaintenanceWindowExecutionTaskOutput) SetType(v MaintenanceWindowTaskType) *GetMaintenanceWindowExecutionTaskOutput {
+	s.Type = v
 	return s
 }
 
@@ -17855,6 +17920,7 @@ func (s GetMaintenanceWindowInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowInput"}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -18009,12 +18075,14 @@ func (s GetMaintenanceWindowTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowTaskInput"}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
+
 	if s.WindowTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
@@ -18082,7 +18150,7 @@ type GetMaintenanceWindowTaskOutput struct {
 	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression `type:"map"`
 
 	// The type of task to execute.
-	TaskType *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	TaskType MaintenanceWindowTaskType `type:"string"`
 
 	// The retrieved Maintenance Window ID.
 	WindowId *string `min:"20" type:"string"`
@@ -18168,8 +18236,8 @@ func (s *GetMaintenanceWindowTaskOutput) SetTaskParameters(v map[string]*Mainten
 }
 
 // SetTaskType sets the TaskType field's value.
-func (s *GetMaintenanceWindowTaskOutput) SetTaskType(v string) *GetMaintenanceWindowTaskOutput {
-	s.TaskType = &v
+func (s *GetMaintenanceWindowTaskOutput) SetTaskType(v MaintenanceWindowTaskType) *GetMaintenanceWindowTaskOutput {
+	s.TaskType = v
 	return s
 }
 
@@ -18224,6 +18292,7 @@ func (s *GetParameterHistoryInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -18322,6 +18391,7 @@ func (s GetParameterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParameterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetParameterInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -18418,6 +18488,7 @@ func (s *GetParametersByPathInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Path == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Path"))
 	}
@@ -18539,6 +18610,7 @@ func (s GetParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetParametersInput"}
+
 	if s.Names == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
@@ -18604,7 +18676,7 @@ type GetPatchBaselineForPatchGroupInput struct {
 
 	// Returns he operating system rule specified for patch groups using the patch
 	// baseline.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// The name of the patch group whose patch baseline should be retrieved.
 	//
@@ -18625,6 +18697,7 @@ func (s GetPatchBaselineForPatchGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPatchBaselineForPatchGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPatchBaselineForPatchGroupInput"}
+
 	if s.PatchGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
@@ -18639,8 +18712,8 @@ func (s *GetPatchBaselineForPatchGroupInput) Validate() error {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *GetPatchBaselineForPatchGroupInput) SetOperatingSystem(v string) *GetPatchBaselineForPatchGroupInput {
-	s.OperatingSystem = &v
+func (s *GetPatchBaselineForPatchGroupInput) SetOperatingSystem(v OperatingSystem) *GetPatchBaselineForPatchGroupInput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -18658,7 +18731,7 @@ type GetPatchBaselineForPatchGroupOutput struct {
 	BaselineId *string `min:"20" type:"string"`
 
 	// The operating system rule specified for patch groups using the patch baseline.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// The name of the patch group.
 	PatchGroup *string `min:"1" type:"string"`
@@ -18681,8 +18754,8 @@ func (s *GetPatchBaselineForPatchGroupOutput) SetBaselineId(v string) *GetPatchB
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *GetPatchBaselineForPatchGroupOutput) SetOperatingSystem(v string) *GetPatchBaselineForPatchGroupOutput {
-	s.OperatingSystem = &v
+func (s *GetPatchBaselineForPatchGroupOutput) SetOperatingSystem(v OperatingSystem) *GetPatchBaselineForPatchGroupOutput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -18715,6 +18788,7 @@ func (s GetPatchBaselineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPatchBaselineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPatchBaselineInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
@@ -18746,7 +18820,7 @@ type GetPatchBaselineOutput struct {
 
 	// Returns the specified compliance severity level for approved patches in the
 	// patch baseline.
-	ApprovedPatchesComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// The ID of the retrieved patch baseline.
 	BaselineId *string `min:"20" type:"string"`
@@ -18767,7 +18841,7 @@ type GetPatchBaselineOutput struct {
 	Name *string `min:"3" type:"string"`
 
 	// Returns the operating system specified for the patch baseline.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// Patch groups included in the patch baseline.
 	PatchGroups []*string `type:"list"`
@@ -18799,8 +18873,8 @@ func (s *GetPatchBaselineOutput) SetApprovedPatches(v []*string) *GetPatchBaseli
 }
 
 // SetApprovedPatchesComplianceLevel sets the ApprovedPatchesComplianceLevel field's value.
-func (s *GetPatchBaselineOutput) SetApprovedPatchesComplianceLevel(v string) *GetPatchBaselineOutput {
-	s.ApprovedPatchesComplianceLevel = &v
+func (s *GetPatchBaselineOutput) SetApprovedPatchesComplianceLevel(v PatchComplianceLevel) *GetPatchBaselineOutput {
+	s.ApprovedPatchesComplianceLevel = v
 	return s
 }
 
@@ -18841,8 +18915,8 @@ func (s *GetPatchBaselineOutput) SetName(v string) *GetPatchBaselineOutput {
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *GetPatchBaselineOutput) SetOperatingSystem(v string) *GetPatchBaselineOutput {
-	s.OperatingSystem = &v
+func (s *GetPatchBaselineOutput) SetOperatingSystem(v OperatingSystem) *GetPatchBaselineOutput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -19180,13 +19254,13 @@ type InstanceInformation struct {
 	Name *string `type:"string"`
 
 	// Connection status of the SSM Agent.
-	PingStatus *string `type:"string" enum:"PingStatus"`
+	PingStatus PingStatus `type:"string"`
 
 	// The name of the operating system platform running on your instance.
 	PlatformName *string `type:"string"`
 
 	// The operating system platform type.
-	PlatformType *string `type:"string" enum:"PlatformType"`
+	PlatformType PlatformType `type:"string"`
 
 	// The version of the OS platform running on your instance.
 	PlatformVersion *string `type:"string"`
@@ -19195,7 +19269,7 @@ type InstanceInformation struct {
 	RegistrationDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The type of instance. Instances are either EC2 instances or managed instances.
-	ResourceType *string `type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -19287,8 +19361,8 @@ func (s *InstanceInformation) SetName(v string) *InstanceInformation {
 }
 
 // SetPingStatus sets the PingStatus field's value.
-func (s *InstanceInformation) SetPingStatus(v string) *InstanceInformation {
-	s.PingStatus = &v
+func (s *InstanceInformation) SetPingStatus(v PingStatus) *InstanceInformation {
+	s.PingStatus = v
 	return s
 }
 
@@ -19299,8 +19373,8 @@ func (s *InstanceInformation) SetPlatformName(v string) *InstanceInformation {
 }
 
 // SetPlatformType sets the PlatformType field's value.
-func (s *InstanceInformation) SetPlatformType(v string) *InstanceInformation {
-	s.PlatformType = &v
+func (s *InstanceInformation) SetPlatformType(v PlatformType) *InstanceInformation {
+	s.PlatformType = v
 	return s
 }
 
@@ -19317,8 +19391,8 @@ func (s *InstanceInformation) SetRegistrationDate(v time.Time) *InstanceInformat
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *InstanceInformation) SetResourceType(v string) *InstanceInformation {
-	s.ResourceType = &v
+func (s *InstanceInformation) SetResourceType(v ResourceType) *InstanceInformation {
+	s.ResourceType = v
 	return s
 }
 
@@ -19330,7 +19404,7 @@ type InstanceInformationFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key *string `locationName:"key" type:"string" required:"true" enum:"InstanceInformationFilterKey"`
+	Key InstanceInformationFilterKey `locationName:"key" type:"string" required:"true"`
 
 	// The filter values.
 	//
@@ -19351,9 +19425,10 @@ func (s InstanceInformationFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceInformationFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceInformationFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.ValueSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ValueSet"))
 	}
@@ -19368,8 +19443,8 @@ func (s *InstanceInformationFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *InstanceInformationFilter) SetKey(v string) *InstanceInformationFilter {
-	s.Key = &v
+func (s *InstanceInformationFilter) SetKey(v InstanceInformationFilterKey) *InstanceInformationFilter {
+	s.Key = v
 	return s
 }
 
@@ -19411,12 +19486,14 @@ func (s InstanceInformationStringFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceInformationStringFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceInformationStringFilter"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -19484,7 +19561,7 @@ type InstancePatchState struct {
 	// state) or INSTALL (install missing patches).
 	//
 	// Operation is a required field
-	Operation *string `type:"string" required:"true" enum:"PatchOperationType"`
+	Operation PatchOperationType `type:"string" required:"true"`
 
 	// The time the most recent patching operation completed on the instance.
 	//
@@ -19563,8 +19640,8 @@ func (s *InstancePatchState) SetNotApplicableCount(v int64) *InstancePatchState 
 }
 
 // SetOperation sets the Operation field's value.
-func (s *InstancePatchState) SetOperation(v string) *InstancePatchState {
-	s.Operation = &v
+func (s *InstancePatchState) SetOperation(v PatchOperationType) *InstancePatchState {
+	s.Operation = v
 	return s
 }
 
@@ -19614,7 +19691,7 @@ type InstancePatchStateFilter struct {
 	// LessThan or GreaterThan.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"InstancePatchStateOperatorType"`
+	Type InstancePatchStateOperatorType `type:"string" required:"true"`
 
 	// The value for the filter, must be an integer greater than or equal to 0.
 	//
@@ -19635,15 +19712,17 @@ func (s InstancePatchStateFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstancePatchStateFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstancePatchStateFilter"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -19664,8 +19743,8 @@ func (s *InstancePatchStateFilter) SetKey(v string) *InstancePatchStateFilter {
 }
 
 // SetType sets the Type field's value.
-func (s *InstancePatchStateFilter) SetType(v string) *InstancePatchStateFilter {
-	s.Type = &v
+func (s *InstancePatchStateFilter) SetType(v InstancePatchStateOperatorType) *InstancePatchStateFilter {
+	s.Type = v
 	return s
 }
 
@@ -19686,7 +19765,7 @@ type InventoryFilter struct {
 	Key *string `min:"1" type:"string" required:"true"`
 
 	// The type of filter. Valid values include the following: "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"
-	Type *string `type:"string" enum:"InventoryQueryOperatorType"`
+	Type InventoryQueryOperatorType `type:"string"`
 
 	// Inventory filter values. Example: inventory filter where instance IDs are
 	// specified as values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g,
@@ -19709,12 +19788,14 @@ func (s InventoryFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryFilter"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -19735,8 +19816,8 @@ func (s *InventoryFilter) SetKey(v string) *InventoryFilter {
 }
 
 // SetType sets the Type field's value.
-func (s *InventoryFilter) SetType(v string) *InventoryFilter {
-	s.Type = &v
+func (s *InventoryFilter) SetType(v InventoryQueryOperatorType) *InventoryFilter {
+	s.Type = v
 	return s
 }
 
@@ -19798,12 +19879,15 @@ func (s InventoryItem) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryItem) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryItem"}
+
 	if s.CaptureTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CaptureTime"))
 	}
+
 	if s.SchemaVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaVersion"))
 	}
+
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
@@ -19862,7 +19946,7 @@ type InventoryItemAttribute struct {
 	// The data type of the inventory item attribute.
 	//
 	// DataType is a required field
-	DataType *string `type:"string" required:"true" enum:"InventoryAttributeDataType"`
+	DataType InventoryAttributeDataType `type:"string" required:"true"`
 
 	// Name of the inventory item attribute.
 	//
@@ -19881,8 +19965,8 @@ func (s InventoryItemAttribute) GoString() string {
 }
 
 // SetDataType sets the DataType field's value.
-func (s *InventoryItemAttribute) SetDataType(v string) *InventoryItemAttribute {
-	s.DataType = &v
+func (s *InventoryItemAttribute) SetDataType(v InventoryAttributeDataType) *InventoryItemAttribute {
+	s.DataType = v
 	return s
 }
 
@@ -20082,6 +20166,7 @@ func (s ListAssociationVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociationVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationVersionsInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -20784,6 +20869,7 @@ func (s *ListDocumentVersionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -21013,12 +21099,14 @@ func (s *ListInventoryEntriesInput) Validate() error {
 	if s.Filters != nil && len(s.Filters) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
@@ -21339,7 +21427,7 @@ type ListTagsForResourceInput struct {
 	// Returns a list of tags for a specific resource type.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"ResourceTypeForTagging"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -21355,10 +21443,11 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
@@ -21375,8 +21464,8 @@ func (s *ListTagsForResourceInput) SetResourceId(v string) *ListTagsForResourceI
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *ListTagsForResourceInput) SetResourceType(v string) *ListTagsForResourceInput {
-	s.ResourceType = &v
+func (s *ListTagsForResourceInput) SetResourceType(v ResourceTypeForTagging) *ListTagsForResourceInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -21436,12 +21525,14 @@ func (s LoggingInfo) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingInfo) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LoggingInfo"}
+
 	if s.S3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
 	if s.S3BucketName != nil && len(*s.S3BucketName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("S3BucketName", 3))
 	}
+
 	if s.S3Region == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Region"))
 	}
@@ -21532,7 +21623,7 @@ type MaintenanceWindowExecution struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the execution.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string `type:"string"`
@@ -21567,8 +21658,8 @@ func (s *MaintenanceWindowExecution) SetStartTime(v time.Time) *MaintenanceWindo
 }
 
 // SetStatus sets the Status field's value.
-func (s *MaintenanceWindowExecution) SetStatus(v string) *MaintenanceWindowExecution {
-	s.Status = &v
+func (s *MaintenanceWindowExecution) SetStatus(v MaintenanceWindowExecutionStatus) *MaintenanceWindowExecution {
+	s.Status = v
 	return s
 }
 
@@ -21603,7 +21694,7 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task execution.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the status of the task execution. Only available for
 	// certain status values.
@@ -21616,7 +21707,7 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The type of executed task.
-	TaskType *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	TaskType MaintenanceWindowTaskType `type:"string"`
 
 	// The ID of the Maintenance Window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -21645,8 +21736,8 @@ func (s *MaintenanceWindowExecutionTaskIdentity) SetStartTime(v time.Time) *Main
 }
 
 // SetStatus sets the Status field's value.
-func (s *MaintenanceWindowExecutionTaskIdentity) SetStatus(v string) *MaintenanceWindowExecutionTaskIdentity {
-	s.Status = &v
+func (s *MaintenanceWindowExecutionTaskIdentity) SetStatus(v MaintenanceWindowExecutionStatus) *MaintenanceWindowExecutionTaskIdentity {
+	s.Status = v
 	return s
 }
 
@@ -21669,8 +21760,8 @@ func (s *MaintenanceWindowExecutionTaskIdentity) SetTaskExecutionId(v string) *M
 }
 
 // SetTaskType sets the TaskType field's value.
-func (s *MaintenanceWindowExecutionTaskIdentity) SetTaskType(v string) *MaintenanceWindowExecutionTaskIdentity {
-	s.TaskType = &v
+func (s *MaintenanceWindowExecutionTaskIdentity) SetTaskType(v MaintenanceWindowTaskType) *MaintenanceWindowExecutionTaskIdentity {
+	s.TaskType = v
 	return s
 }
 
@@ -21708,7 +21799,7 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the task invocation.
-	Status *string `type:"string" enum:"MaintenanceWindowExecutionStatus"`
+	Status MaintenanceWindowExecutionStatus `type:"string"`
 
 	// The details explaining the status of the task invocation. Only available
 	// for certain Status values.
@@ -21718,7 +21809,7 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 	TaskExecutionId *string `min:"36" type:"string"`
 
 	// The task type.
-	TaskType *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	TaskType MaintenanceWindowTaskType `type:"string"`
 
 	// The ID of the Maintenance Window execution that ran the task.
 	WindowExecutionId *string `min:"36" type:"string"`
@@ -21775,8 +21866,8 @@ func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetStartTime(v time.T
 }
 
 // SetStatus sets the Status field's value.
-func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetStatus(v string) *MaintenanceWindowExecutionTaskInvocationIdentity {
-	s.Status = &v
+func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetStatus(v MaintenanceWindowExecutionStatus) *MaintenanceWindowExecutionTaskInvocationIdentity {
+	s.Status = v
 	return s
 }
 
@@ -21793,8 +21884,8 @@ func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetTaskExecutionId(v 
 }
 
 // SetTaskType sets the TaskType field's value.
-func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetTaskType(v string) *MaintenanceWindowExecutionTaskInvocationIdentity {
-	s.TaskType = &v
+func (s *MaintenanceWindowExecutionTaskInvocationIdentity) SetTaskType(v MaintenanceWindowTaskType) *MaintenanceWindowExecutionTaskInvocationIdentity {
+	s.TaskType = v
 	return s
 }
 
@@ -22007,7 +22098,7 @@ type MaintenanceWindowRunCommandParameters struct {
 	DocumentHash *string `type:"string"`
 
 	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
-	DocumentHashType *string `type:"string" enum:"DocumentHashType"`
+	DocumentHashType DocumentHashType `type:"string"`
 
 	// Configurations for sending notifications about command status changes on
 	// a per-instance basis.
@@ -22069,8 +22160,8 @@ func (s *MaintenanceWindowRunCommandParameters) SetDocumentHash(v string) *Maint
 }
 
 // SetDocumentHashType sets the DocumentHashType field's value.
-func (s *MaintenanceWindowRunCommandParameters) SetDocumentHashType(v string) *MaintenanceWindowRunCommandParameters {
-	s.DocumentHashType = &v
+func (s *MaintenanceWindowRunCommandParameters) SetDocumentHashType(v DocumentHashType) *MaintenanceWindowRunCommandParameters {
+	s.DocumentHashType = v
 	return s
 }
 
@@ -22173,7 +22264,7 @@ type MaintenanceWindowTarget struct {
 	OwnerInformation *string `min:"1" type:"string"`
 
 	// The type of target.
-	ResourceType *string `type:"string" enum:"MaintenanceWindowResourceType"`
+	ResourceType MaintenanceWindowResourceType `type:"string"`
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
@@ -22215,8 +22306,8 @@ func (s *MaintenanceWindowTarget) SetOwnerInformation(v string) *MaintenanceWind
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *MaintenanceWindowTarget) SetResourceType(v string) *MaintenanceWindowTarget {
-	s.ResourceType = &v
+func (s *MaintenanceWindowTarget) SetResourceType(v MaintenanceWindowResourceType) *MaintenanceWindowTarget {
+	s.ResourceType = v
 	return s
 }
 
@@ -22281,7 +22372,7 @@ type MaintenanceWindowTask struct {
 
 	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
 	// LAMBDA, or STEP_FUNCTION.
-	Type *string `type:"string" enum:"MaintenanceWindowTaskType"`
+	Type MaintenanceWindowTaskType `type:"string"`
 
 	// The Maintenance Window ID where the task is registered.
 	WindowId *string `min:"20" type:"string"`
@@ -22361,8 +22452,8 @@ func (s *MaintenanceWindowTask) SetTaskParameters(v map[string]*MaintenanceWindo
 }
 
 // SetType sets the Type field's value.
-func (s *MaintenanceWindowTask) SetType(v string) *MaintenanceWindowTask {
-	s.Type = &v
+func (s *MaintenanceWindowTask) SetType(v MaintenanceWindowTaskType) *MaintenanceWindowTask {
+	s.Type = v
 	return s
 }
 
@@ -22508,7 +22599,7 @@ type ModifyDocumentPermissionInput struct {
 	// The permission type for the document. The permission type can be Share.
 	//
 	// PermissionType is a required field
-	PermissionType *string `type:"string" required:"true" enum:"DocumentPermissionType"`
+	PermissionType DocumentPermissionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -22524,10 +22615,11 @@ func (s ModifyDocumentPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDocumentPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDocumentPermissionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.PermissionType == nil {
+	if len(s.PermissionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PermissionType"))
 	}
 
@@ -22556,8 +22648,8 @@ func (s *ModifyDocumentPermissionInput) SetName(v string) *ModifyDocumentPermiss
 }
 
 // SetPermissionType sets the PermissionType field's value.
-func (s *ModifyDocumentPermissionInput) SetPermissionType(v string) *ModifyDocumentPermissionInput {
-	s.PermissionType = &v
+func (s *ModifyDocumentPermissionInput) SetPermissionType(v DocumentPermissionType) *ModifyDocumentPermissionInput {
+	s.PermissionType = v
 	return s
 }
 
@@ -22625,12 +22717,12 @@ type NotificationConfig struct {
 	// Failed. To learn more about these events, see Setting Up Events and Notifications
 	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the Amazon EC2 Systems Manager User Guide.
-	NotificationEvents []*string `type:"list"`
+	NotificationEvents []NotificationEvent `type:"list"`
 
 	// Command: Receive notification when the status of a command changes. Invocation:
 	// For commands sent to multiple instances, receive notification on a per-instance
 	// basis when the status of a command changes.
-	NotificationType *string `type:"string" enum:"NotificationType"`
+	NotificationType NotificationType `type:"string"`
 }
 
 // String returns the string representation
@@ -22650,14 +22742,14 @@ func (s *NotificationConfig) SetNotificationArn(v string) *NotificationConfig {
 }
 
 // SetNotificationEvents sets the NotificationEvents field's value.
-func (s *NotificationConfig) SetNotificationEvents(v []*string) *NotificationConfig {
+func (s *NotificationConfig) SetNotificationEvents(v []NotificationEvent) *NotificationConfig {
 	s.NotificationEvents = v
 	return s
 }
 
 // SetNotificationType sets the NotificationType field's value.
-func (s *NotificationConfig) SetNotificationType(v string) *NotificationConfig {
-	s.NotificationType = &v
+func (s *NotificationConfig) SetNotificationType(v NotificationType) *NotificationConfig {
+	s.NotificationType = v
 	return s
 }
 
@@ -22671,7 +22763,7 @@ type Parameter struct {
 
 	// The type of parameter. Valid values include the following: String, String
 	// list, Secure string.
-	Type *string `type:"string" enum:"ParameterType"`
+	Type ParameterType `type:"string"`
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
@@ -22694,8 +22786,8 @@ func (s *Parameter) SetName(v string) *Parameter {
 }
 
 // SetType sets the Type field's value.
-func (s *Parameter) SetType(v string) *Parameter {
-	s.Type = &v
+func (s *Parameter) SetType(v ParameterType) *Parameter {
+	s.Type = v
 	return s
 }
 
@@ -22731,7 +22823,7 @@ type ParameterHistory struct {
 	Name *string `min:"1" type:"string"`
 
 	// The type of parameter used.
-	Type *string `type:"string" enum:"ParameterType"`
+	Type ParameterType `type:"string"`
 
 	// The parameter value.
 	Value *string `min:"1" type:"string"`
@@ -22784,8 +22876,8 @@ func (s *ParameterHistory) SetName(v string) *ParameterHistory {
 }
 
 // SetType sets the Type field's value.
-func (s *ParameterHistory) SetType(v string) *ParameterHistory {
-	s.Type = &v
+func (s *ParameterHistory) SetType(v ParameterType) *ParameterHistory {
+	s.Type = v
 	return s
 }
 
@@ -22823,7 +22915,7 @@ type ParameterMetadata struct {
 
 	// The type of parameter. Valid parameter types include the following: String,
 	// String list, Secure string.
-	Type *string `type:"string" enum:"ParameterType"`
+	Type ParameterType `type:"string"`
 }
 
 // String returns the string representation
@@ -22873,8 +22965,8 @@ func (s *ParameterMetadata) SetName(v string) *ParameterMetadata {
 }
 
 // SetType sets the Type field's value.
-func (s *ParameterMetadata) SetType(v string) *ParameterMetadata {
-	s.Type = &v
+func (s *ParameterMetadata) SetType(v ParameterType) *ParameterMetadata {
+	s.Type = v
 	return s
 }
 
@@ -22909,6 +23001,7 @@ func (s ParameterStringFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterStringFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParameterStringFilter"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -22954,7 +23047,7 @@ type ParametersFilter struct {
 	// The name of the filter.
 	//
 	// Key is a required field
-	Key *string `type:"string" required:"true" enum:"ParametersFilterKey"`
+	Key ParametersFilterKey `type:"string" required:"true"`
 
 	// The filter values.
 	//
@@ -22975,9 +23068,10 @@ func (s ParametersFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParametersFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParametersFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -22992,8 +23086,8 @@ func (s *ParametersFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *ParametersFilter) SetKey(v string) *ParametersFilter {
-	s.Key = &v
+func (s *ParametersFilter) SetKey(v ParametersFilterKey) *ParametersFilter {
+	s.Key = v
 	return s
 }
 
@@ -23159,7 +23253,7 @@ type PatchBaselineIdentity struct {
 	// Defines the operating system the patch baseline applies to. Supported operating
 	// systems include WINDOWS, AMAZON_LINUX, UBUNTU and REDHAT_ENTERPRISE_LINUX.
 	// The Default value is WINDOWS.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 }
 
 // String returns the string representation
@@ -23197,8 +23291,8 @@ func (s *PatchBaselineIdentity) SetDefaultBaseline(v bool) *PatchBaselineIdentit
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *PatchBaselineIdentity) SetOperatingSystem(v string) *PatchBaselineIdentity {
-	s.OperatingSystem = &v
+func (s *PatchBaselineIdentity) SetOperatingSystem(v OperatingSystem) *PatchBaselineIdentity {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -23233,7 +23327,7 @@ type PatchComplianceData struct {
 	// NOT_APPLICABLE or FAILED).
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"PatchComplianceDataState"`
+	State PatchComplianceDataState `type:"string" required:"true"`
 
 	// The title of the patch.
 	//
@@ -23276,8 +23370,8 @@ func (s *PatchComplianceData) SetSeverity(v string) *PatchComplianceData {
 }
 
 // SetState sets the State field's value.
-func (s *PatchComplianceData) SetState(v string) *PatchComplianceData {
-	s.State = &v
+func (s *PatchComplianceData) SetState(v PatchComplianceDataState) *PatchComplianceData {
+	s.State = v
 	return s
 }
 
@@ -23295,7 +23389,7 @@ type PatchFilter struct {
 	// The key for the filter (PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID)
 	//
 	// Key is a required field
-	Key *string `type:"string" required:"true" enum:"PatchFilterKey"`
+	Key PatchFilterKey `type:"string" required:"true"`
 
 	// The value for the filter key.
 	//
@@ -23316,9 +23410,10 @@ func (s PatchFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchFilter"}
-	if s.Key == nil {
+	if len(s.Key) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -23333,8 +23428,8 @@ func (s *PatchFilter) Validate() error {
 }
 
 // SetKey sets the Key field's value.
-func (s *PatchFilter) SetKey(v string) *PatchFilter {
-	s.Key = &v
+func (s *PatchFilter) SetKey(v PatchFilterKey) *PatchFilter {
+	s.Key = v
 	return s
 }
 
@@ -23368,6 +23463,7 @@ func (s PatchFilterGroup) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchFilterGroup) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchFilterGroup"}
+
 	if s.PatchFilters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchFilters"))
 	}
@@ -23490,7 +23586,7 @@ type PatchRule struct {
 	// A compliance severity level for all approved patches in a patch baseline.
 	// Valid compliance severity levels include the following: Unspecified, Critical,
 	// High, Medium, Low, and Informational.
-	ComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// The patch filter group that defines the criteria for the rule.
 	//
@@ -23511,9 +23607,11 @@ func (s PatchRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchRule"}
+
 	if s.ApproveAfterDays == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApproveAfterDays"))
 	}
+
 	if s.PatchFilterGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchFilterGroup"))
 	}
@@ -23536,8 +23634,8 @@ func (s *PatchRule) SetApproveAfterDays(v int64) *PatchRule {
 }
 
 // SetComplianceLevel sets the ComplianceLevel field's value.
-func (s *PatchRule) SetComplianceLevel(v string) *PatchRule {
-	s.ComplianceLevel = &v
+func (s *PatchRule) SetComplianceLevel(v PatchComplianceLevel) *PatchRule {
+	s.ComplianceLevel = v
 	return s
 }
 
@@ -23571,6 +23669,7 @@ func (s PatchRuleGroup) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRuleGroup) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PatchRuleGroup"}
+
 	if s.PatchRules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchRules"))
 	}
@@ -23606,11 +23705,11 @@ type PatchStatus struct {
 	ApprovalDate *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The compliance severity level for a patch.
-	ComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED,
 	// EXPLICIT_REJECTED).
-	DeploymentStatus *string `type:"string" enum:"PatchDeploymentStatus"`
+	DeploymentStatus PatchDeploymentStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -23630,14 +23729,14 @@ func (s *PatchStatus) SetApprovalDate(v time.Time) *PatchStatus {
 }
 
 // SetComplianceLevel sets the ComplianceLevel field's value.
-func (s *PatchStatus) SetComplianceLevel(v string) *PatchStatus {
-	s.ComplianceLevel = &v
+func (s *PatchStatus) SetComplianceLevel(v PatchComplianceLevel) *PatchStatus {
+	s.ComplianceLevel = v
 	return s
 }
 
 // SetDeploymentStatus sets the DeploymentStatus field's value.
-func (s *PatchStatus) SetDeploymentStatus(v string) *PatchStatus {
-	s.DeploymentStatus = &v
+func (s *PatchStatus) SetDeploymentStatus(v PatchDeploymentStatus) *PatchStatus {
+	s.DeploymentStatus = v
 	return s
 }
 
@@ -23696,24 +23795,29 @@ func (s PutComplianceItemsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutComplianceItemsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutComplianceItemsInput"}
+
 	if s.ComplianceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComplianceType"))
 	}
 	if s.ComplianceType != nil && len(*s.ComplianceType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ComplianceType", 1))
 	}
+
 	if s.ExecutionSummary == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExecutionSummary"))
 	}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
+
 	if s.ResourceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
@@ -23821,9 +23925,11 @@ func (s PutInventoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutInventoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutInventoryInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
@@ -23902,7 +24008,7 @@ type PutParameterInput struct {
 	// The type of parameter that you want to add to the system.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"ParameterType"`
+	Type ParameterType `type:"string" required:"true"`
 
 	// The parameter value that you want to add to the system.
 	//
@@ -23929,15 +24035,17 @@ func (s *PutParameterInput) Validate() error {
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -23982,8 +24090,8 @@ func (s *PutParameterInput) SetOverwrite(v bool) *PutParameterInput {
 }
 
 // SetType sets the Type field's value.
-func (s *PutParameterInput) SetType(v string) *PutParameterInput {
-	s.Type = &v
+func (s *PutParameterInput) SetType(v ParameterType) *PutParameterInput {
+	s.Type = v
 	return s
 }
 
@@ -24031,6 +24139,7 @@ func (s RegisterDefaultPatchBaselineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDefaultPatchBaselineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterDefaultPatchBaselineInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
@@ -24102,12 +24211,14 @@ func (s RegisterPatchBaselineForPatchGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterPatchBaselineForPatchGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterPatchBaselineForPatchGroupInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
+
 	if s.PatchGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
@@ -24186,7 +24297,7 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// The type of target being registered with the Maintenance Window.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"MaintenanceWindowResourceType"`
+	ResourceType MaintenanceWindowResourceType `type:"string" required:"true"`
 
 	// The targets (either instances or tags). Instances are specified using Key=instanceids,Values=<instanceid1>,<instanceid2>.
 	// Tags are specified using Key=<tag name>,Values=<tag value>.
@@ -24225,12 +24336,14 @@ func (s *RegisterTargetWithMaintenanceWindowInput) Validate() error {
 	if s.OwnerInformation != nil && len(*s.OwnerInformation) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OwnerInformation", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -24279,8 +24392,8 @@ func (s *RegisterTargetWithMaintenanceWindowInput) SetOwnerInformation(v string)
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *RegisterTargetWithMaintenanceWindowInput) SetResourceType(v string) *RegisterTargetWithMaintenanceWindowInput {
-	s.ResourceType = &v
+func (s *RegisterTargetWithMaintenanceWindowInput) SetResourceType(v MaintenanceWindowResourceType) *RegisterTargetWithMaintenanceWindowInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -24378,7 +24491,7 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// The type of task being registered.
 	//
 	// TaskType is a required field
-	TaskType *string `type:"string" required:"true" enum:"MaintenanceWindowTaskType"`
+	TaskType MaintenanceWindowTaskType `type:"string" required:"true"`
 
 	// The id of the Maintenance Window the task should be added to.
 	//
@@ -24405,12 +24518,14 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
+
 	if s.MaxConcurrency == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxConcurrency"))
 	}
 	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
 	}
+
 	if s.MaxErrors == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxErrors"))
 	}
@@ -24420,21 +24535,25 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
+
 	if s.ServiceRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
+
 	if s.TaskArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskArn"))
 	}
 	if s.TaskArn != nil && len(*s.TaskArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskArn", 1))
 	}
-	if s.TaskType == nil {
+	if len(s.TaskType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TaskType"))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -24541,8 +24660,8 @@ func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskParameters(v map[string]
 }
 
 // SetTaskType sets the TaskType field's value.
-func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskType(v string) *RegisterTaskWithMaintenanceWindowInput {
-	s.TaskType = &v
+func (s *RegisterTaskWithMaintenanceWindowInput) SetTaskType(v MaintenanceWindowTaskType) *RegisterTaskWithMaintenanceWindowInput {
+	s.TaskType = v
 	return s
 }
 
@@ -24588,7 +24707,7 @@ type RemoveTagsFromResourceInput struct {
 	// The type of resource of which you want to remove a tag.
 	//
 	// ResourceType is a required field
-	ResourceType *string `type:"string" required:"true" enum:"ResourceTypeForTagging"`
+	ResourceType ResourceTypeForTagging `type:"string" required:"true"`
 
 	// Tag keys that you want to remove from the specified resource.
 	//
@@ -24609,12 +24728,14 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -24632,8 +24753,8 @@ func (s *RemoveTagsFromResourceInput) SetResourceId(v string) *RemoveTagsFromRes
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *RemoveTagsFromResourceInput) SetResourceType(v string) *RemoveTagsFromResourceInput {
-	s.ResourceType = &v
+func (s *RemoveTagsFromResourceInput) SetResourceType(v ResourceTypeForTagging) *RemoveTagsFromResourceInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -24677,7 +24798,7 @@ type ResourceComplianceSummaryItem struct {
 
 	// The highest severity item found for the resource. The resource is compliant
 	// for this item.
-	OverallSeverity *string `type:"string" enum:"ComplianceSeverity"`
+	OverallSeverity ComplianceSeverity `type:"string"`
 
 	// The resource ID.
 	ResourceId *string `min:"1" type:"string"`
@@ -24686,7 +24807,7 @@ type ResourceComplianceSummaryItem struct {
 	ResourceType *string `min:"1" type:"string"`
 
 	// The compliance status for the resource.
-	Status *string `type:"string" enum:"ComplianceStatus"`
+	Status ComplianceStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -24724,8 +24845,8 @@ func (s *ResourceComplianceSummaryItem) SetNonCompliantSummary(v *NonCompliantSu
 }
 
 // SetOverallSeverity sets the OverallSeverity field's value.
-func (s *ResourceComplianceSummaryItem) SetOverallSeverity(v string) *ResourceComplianceSummaryItem {
-	s.OverallSeverity = &v
+func (s *ResourceComplianceSummaryItem) SetOverallSeverity(v ComplianceSeverity) *ResourceComplianceSummaryItem {
+	s.OverallSeverity = v
 	return s
 }
 
@@ -24742,8 +24863,8 @@ func (s *ResourceComplianceSummaryItem) SetResourceType(v string) *ResourceCompl
 }
 
 // SetStatus sets the Status field's value.
-func (s *ResourceComplianceSummaryItem) SetStatus(v string) *ResourceComplianceSummaryItem {
-	s.Status = &v
+func (s *ResourceComplianceSummaryItem) SetStatus(v ComplianceStatus) *ResourceComplianceSummaryItem {
+	s.Status = v
 	return s
 }
 
@@ -24754,7 +24875,7 @@ type ResourceDataSyncItem struct {
 	_ struct{} `type:"structure"`
 
 	// The status reported by the last sync.
-	LastStatus *string `type:"string" enum:"LastResourceDataSyncStatus"`
+	LastStatus LastResourceDataSyncStatus `type:"string"`
 
 	// The last time the sync operations returned a status of SUCCESSFUL (UTC).
 	LastSuccessfulSyncTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -24783,8 +24904,8 @@ func (s ResourceDataSyncItem) GoString() string {
 }
 
 // SetLastStatus sets the LastStatus field's value.
-func (s *ResourceDataSyncItem) SetLastStatus(v string) *ResourceDataSyncItem {
-	s.LastStatus = &v
+func (s *ResourceDataSyncItem) SetLastStatus(v LastResourceDataSyncStatus) *ResourceDataSyncItem {
+	s.LastStatus = v
 	return s
 }
 
@@ -24843,7 +24964,7 @@ type ResourceDataSyncS3Destination struct {
 	// A supported sync format. The following format is currently supported: JsonSerDe
 	//
 	// SyncFormat is a required field
-	SyncFormat *string `type:"string" required:"true" enum:"ResourceDataSyncS3Format"`
+	SyncFormat ResourceDataSyncS3Format `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -24862,6 +24983,7 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 	if s.AWSKMSKeyARN != nil && len(*s.AWSKMSKeyARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AWSKMSKeyARN", 1))
 	}
+
 	if s.BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
@@ -24871,13 +24993,14 @@ func (s *ResourceDataSyncS3Destination) Validate() error {
 	if s.Prefix != nil && len(*s.Prefix) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Prefix", 1))
 	}
+
 	if s.Region == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Region"))
 	}
 	if s.Region != nil && len(*s.Region) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
 	}
-	if s.SyncFormat == nil {
+	if len(s.SyncFormat) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SyncFormat"))
 	}
 
@@ -24912,8 +25035,8 @@ func (s *ResourceDataSyncS3Destination) SetRegion(v string) *ResourceDataSyncS3D
 }
 
 // SetSyncFormat sets the SyncFormat field's value.
-func (s *ResourceDataSyncS3Destination) SetSyncFormat(v string) *ResourceDataSyncS3Destination {
-	s.SyncFormat = &v
+func (s *ResourceDataSyncS3Destination) SetSyncFormat(v ResourceDataSyncS3Format) *ResourceDataSyncS3Destination {
+	s.SyncFormat = v
 	return s
 }
 
@@ -24942,6 +25065,7 @@ func (s ResultAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResultAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResultAttribute"}
+
 	if s.TypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
@@ -25067,7 +25191,7 @@ type SendAutomationSignalInput struct {
 	// Reject
 	//
 	// SignalType is a required field
-	SignalType *string `type:"string" required:"true" enum:"SignalType"`
+	SignalType SignalType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -25083,6 +25207,7 @@ func (s SendAutomationSignalInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendAutomationSignalInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendAutomationSignalInput"}
+
 	if s.AutomationExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
@@ -25092,7 +25217,7 @@ func (s *SendAutomationSignalInput) Validate() error {
 	if s.Payload != nil && len(s.Payload) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Payload", 1))
 	}
-	if s.SignalType == nil {
+	if len(s.SignalType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SignalType"))
 	}
 
@@ -25115,8 +25240,8 @@ func (s *SendAutomationSignalInput) SetPayload(v map[string][]*string) *SendAuto
 }
 
 // SetSignalType sets the SignalType field's value.
-func (s *SendAutomationSignalInput) SetSignalType(v string) *SendAutomationSignalInput {
-	s.SignalType = &v
+func (s *SendAutomationSignalInput) SetSignalType(v SignalType) *SendAutomationSignalInput {
+	s.SignalType = v
 	return s
 }
 
@@ -25151,7 +25276,7 @@ type SendCommandInput struct {
 	// Sha256 or Sha1.
 	//
 	// Sha1 hashes have been deprecated.
-	DocumentHashType *string `type:"string" enum:"DocumentHashType"`
+	DocumentHashType DocumentHashType `type:"string"`
 
 	// Required. The name of the Systems Manager document to execute. This can be
 	// a public document or a custom document.
@@ -25224,6 +25349,7 @@ func (s SendCommandInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendCommandInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendCommandInput"}
+
 	if s.DocumentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentName"))
 	}
@@ -25272,8 +25398,8 @@ func (s *SendCommandInput) SetDocumentHash(v string) *SendCommandInput {
 }
 
 // SetDocumentHashType sets the DocumentHashType field's value.
-func (s *SendCommandInput) SetDocumentHashType(v string) *SendCommandInput {
-	s.DocumentHashType = &v
+func (s *SendCommandInput) SetDocumentHashType(v DocumentHashType) *SendCommandInput {
+	s.DocumentHashType = v
 	return s
 }
 
@@ -25494,6 +25620,7 @@ func (s *StartAutomationExecutionInput) Validate() error {
 	if s.ClientToken != nil && len(*s.ClientToken) < 36 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 36))
 	}
+
 	if s.DocumentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentName"))
 	}
@@ -25595,7 +25722,7 @@ type StepExecution struct {
 
 	// The execution status for this step. Valid values include: Pending, InProgress,
 	// Success, Cancelled, Failed, and TimedOut.
-	StepStatus *string `type:"string" enum:"AutomationExecutionStatus"`
+	StepStatus AutomationExecutionStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -25669,8 +25796,8 @@ func (s *StepExecution) SetStepName(v string) *StepExecution {
 }
 
 // SetStepStatus sets the StepStatus field's value.
-func (s *StepExecution) SetStepStatus(v string) *StepExecution {
-	s.StepStatus = &v
+func (s *StepExecution) SetStepStatus(v AutomationExecutionStatus) *StepExecution {
+	s.StepStatus = v
 	return s
 }
 
@@ -25697,6 +25824,7 @@ func (s StopAutomationExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopAutomationExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopAutomationExecutionInput"}
+
 	if s.AutomationExecutionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
@@ -25763,12 +25891,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -25900,6 +26030,7 @@ func (s UpdateAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationInput"}
+
 	if s.AssociationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
@@ -26039,12 +26170,15 @@ func (s UpdateAssociationStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssociationStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationStatusInput"}
+
 	if s.AssociationStatus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssociationStatus"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -26130,9 +26264,11 @@ func (s UpdateDocumentDefaultVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentDefaultVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentDefaultVersionInput"}
+
 	if s.DocumentVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentVersion"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -26211,12 +26347,14 @@ func (s UpdateDocumentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentInput"}
+
 	if s.Content == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -26332,6 +26470,7 @@ func (s *UpdateMaintenanceWindowInput) Validate() error {
 	if s.Schedule != nil && len(*s.Schedule) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Schedule", 1))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
@@ -26543,12 +26682,14 @@ func (s *UpdateMaintenanceWindowTargetInput) Validate() error {
 	if s.OwnerInformation != nil && len(*s.OwnerInformation) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OwnerInformation", 1))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
+
 	if s.WindowTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowTargetId"))
 	}
@@ -26775,12 +26916,14 @@ func (s *UpdateMaintenanceWindowTaskInput) Validate() error {
 	if s.TaskArn != nil && len(*s.TaskArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskArn", 1))
 	}
+
 	if s.WindowId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
+
 	if s.WindowTaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
@@ -27058,9 +27201,11 @@ func (s UpdateManagedInstanceRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateManagedInstanceRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateManagedInstanceRoleInput"}
+
 	if s.IamRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -27109,7 +27254,7 @@ type UpdatePatchBaselineInput struct {
 	ApprovedPatches []*string `type:"list"`
 
 	// Assigns a new compliance severity level to an existing patch baseline.
-	ApprovedPatchesComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// The ID of the patch baseline to update.
 	//
@@ -27142,6 +27287,7 @@ func (s UpdatePatchBaselineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePatchBaselineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdatePatchBaselineInput"}
+
 	if s.BaselineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
@@ -27184,8 +27330,8 @@ func (s *UpdatePatchBaselineInput) SetApprovedPatches(v []*string) *UpdatePatchB
 }
 
 // SetApprovedPatchesComplianceLevel sets the ApprovedPatchesComplianceLevel field's value.
-func (s *UpdatePatchBaselineInput) SetApprovedPatchesComplianceLevel(v string) *UpdatePatchBaselineInput {
-	s.ApprovedPatchesComplianceLevel = &v
+func (s *UpdatePatchBaselineInput) SetApprovedPatchesComplianceLevel(v PatchComplianceLevel) *UpdatePatchBaselineInput {
+	s.ApprovedPatchesComplianceLevel = v
 	return s
 }
 
@@ -27231,7 +27377,7 @@ type UpdatePatchBaselineOutput struct {
 
 	// The compliance severity level assigned to the patch baseline after the update
 	// completed.
-	ApprovedPatchesComplianceLevel *string `type:"string" enum:"PatchComplianceLevel"`
+	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string"`
 
 	// The ID of the deleted patch baseline.
 	BaselineId *string `min:"20" type:"string"`
@@ -27252,7 +27398,7 @@ type UpdatePatchBaselineOutput struct {
 	Name *string `min:"3" type:"string"`
 
 	// The operating system rule used by the updated patch baseline.
-	OperatingSystem *string `type:"string" enum:"OperatingSystem"`
+	OperatingSystem OperatingSystem `type:"string"`
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []*string `type:"list"`
@@ -27281,8 +27427,8 @@ func (s *UpdatePatchBaselineOutput) SetApprovedPatches(v []*string) *UpdatePatch
 }
 
 // SetApprovedPatchesComplianceLevel sets the ApprovedPatchesComplianceLevel field's value.
-func (s *UpdatePatchBaselineOutput) SetApprovedPatchesComplianceLevel(v string) *UpdatePatchBaselineOutput {
-	s.ApprovedPatchesComplianceLevel = &v
+func (s *UpdatePatchBaselineOutput) SetApprovedPatchesComplianceLevel(v PatchComplianceLevel) *UpdatePatchBaselineOutput {
+	s.ApprovedPatchesComplianceLevel = v
 	return s
 }
 
@@ -27323,8 +27469,8 @@ func (s *UpdatePatchBaselineOutput) SetName(v string) *UpdatePatchBaselineOutput
 }
 
 // SetOperatingSystem sets the OperatingSystem field's value.
-func (s *UpdatePatchBaselineOutput) SetOperatingSystem(v string) *UpdatePatchBaselineOutput {
-	s.OperatingSystem = &v
+func (s *UpdatePatchBaselineOutput) SetOperatingSystem(v OperatingSystem) *UpdatePatchBaselineOutput {
+	s.OperatingSystem = v
 	return s
 }
 
@@ -27334,601 +27480,431 @@ func (s *UpdatePatchBaselineOutput) SetRejectedPatches(v []*string) *UpdatePatch
 	return s
 }
 
+type AssociationFilterKey string
+
+// Enum values for AssociationFilterKey
 const (
-	// AssociationFilterKeyInstanceId is a AssociationFilterKey enum value
-	AssociationFilterKeyInstanceId = "InstanceId"
-
-	// AssociationFilterKeyName is a AssociationFilterKey enum value
-	AssociationFilterKeyName = "Name"
-
-	// AssociationFilterKeyAssociationId is a AssociationFilterKey enum value
-	AssociationFilterKeyAssociationId = "AssociationId"
-
-	// AssociationFilterKeyAssociationStatusName is a AssociationFilterKey enum value
-	AssociationFilterKeyAssociationStatusName = "AssociationStatusName"
-
-	// AssociationFilterKeyLastExecutedBefore is a AssociationFilterKey enum value
-	AssociationFilterKeyLastExecutedBefore = "LastExecutedBefore"
-
-	// AssociationFilterKeyLastExecutedAfter is a AssociationFilterKey enum value
-	AssociationFilterKeyLastExecutedAfter = "LastExecutedAfter"
-
-	// AssociationFilterKeyAssociationName is a AssociationFilterKey enum value
-	AssociationFilterKeyAssociationName = "AssociationName"
+	AssociationFilterKeyInstanceId            AssociationFilterKey = "InstanceId"
+	AssociationFilterKeyName                  AssociationFilterKey = "Name"
+	AssociationFilterKeyAssociationId         AssociationFilterKey = "AssociationId"
+	AssociationFilterKeyAssociationStatusName AssociationFilterKey = "AssociationStatusName"
+	AssociationFilterKeyLastExecutedBefore    AssociationFilterKey = "LastExecutedBefore"
+	AssociationFilterKeyLastExecutedAfter     AssociationFilterKey = "LastExecutedAfter"
+	AssociationFilterKeyAssociationName       AssociationFilterKey = "AssociationName"
 )
 
+type AssociationStatusName string
+
+// Enum values for AssociationStatusName
 const (
-	// AssociationStatusNamePending is a AssociationStatusName enum value
-	AssociationStatusNamePending = "Pending"
-
-	// AssociationStatusNameSuccess is a AssociationStatusName enum value
-	AssociationStatusNameSuccess = "Success"
-
-	// AssociationStatusNameFailed is a AssociationStatusName enum value
-	AssociationStatusNameFailed = "Failed"
+	AssociationStatusNamePending AssociationStatusName = "Pending"
+	AssociationStatusNameSuccess AssociationStatusName = "Success"
+	AssociationStatusNameFailed  AssociationStatusName = "Failed"
 )
 
-const (
-	// AutomationExecutionFilterKeyDocumentNamePrefix is a AutomationExecutionFilterKey enum value
-	AutomationExecutionFilterKeyDocumentNamePrefix = "DocumentNamePrefix"
+type AutomationExecutionFilterKey string
 
-	// AutomationExecutionFilterKeyExecutionStatus is a AutomationExecutionFilterKey enum value
-	AutomationExecutionFilterKeyExecutionStatus = "ExecutionStatus"
+// Enum values for AutomationExecutionFilterKey
+const (
+	AutomationExecutionFilterKeyDocumentNamePrefix AutomationExecutionFilterKey = "DocumentNamePrefix"
+	AutomationExecutionFilterKeyExecutionStatus    AutomationExecutionFilterKey = "ExecutionStatus"
 )
 
+type AutomationExecutionStatus string
+
+// Enum values for AutomationExecutionStatus
 const (
-	// AutomationExecutionStatusPending is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusPending = "Pending"
-
-	// AutomationExecutionStatusInProgress is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusInProgress = "InProgress"
-
-	// AutomationExecutionStatusWaiting is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusWaiting = "Waiting"
-
-	// AutomationExecutionStatusSuccess is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusSuccess = "Success"
-
-	// AutomationExecutionStatusTimedOut is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusTimedOut = "TimedOut"
-
-	// AutomationExecutionStatusCancelled is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusCancelled = "Cancelled"
-
-	// AutomationExecutionStatusFailed is a AutomationExecutionStatus enum value
-	AutomationExecutionStatusFailed = "Failed"
+	AutomationExecutionStatusPending    AutomationExecutionStatus = "Pending"
+	AutomationExecutionStatusInProgress AutomationExecutionStatus = "InProgress"
+	AutomationExecutionStatusWaiting    AutomationExecutionStatus = "Waiting"
+	AutomationExecutionStatusSuccess    AutomationExecutionStatus = "Success"
+	AutomationExecutionStatusTimedOut   AutomationExecutionStatus = "TimedOut"
+	AutomationExecutionStatusCancelled  AutomationExecutionStatus = "Cancelled"
+	AutomationExecutionStatusFailed     AutomationExecutionStatus = "Failed"
 )
 
+type CommandFilterKey string
+
+// Enum values for CommandFilterKey
 const (
-	// CommandFilterKeyInvokedAfter is a CommandFilterKey enum value
-	CommandFilterKeyInvokedAfter = "InvokedAfter"
-
-	// CommandFilterKeyInvokedBefore is a CommandFilterKey enum value
-	CommandFilterKeyInvokedBefore = "InvokedBefore"
-
-	// CommandFilterKeyStatus is a CommandFilterKey enum value
-	CommandFilterKeyStatus = "Status"
+	CommandFilterKeyInvokedAfter  CommandFilterKey = "InvokedAfter"
+	CommandFilterKeyInvokedBefore CommandFilterKey = "InvokedBefore"
+	CommandFilterKeyStatus        CommandFilterKey = "Status"
 )
 
+type CommandInvocationStatus string
+
+// Enum values for CommandInvocationStatus
 const (
-	// CommandInvocationStatusPending is a CommandInvocationStatus enum value
-	CommandInvocationStatusPending = "Pending"
-
-	// CommandInvocationStatusInProgress is a CommandInvocationStatus enum value
-	CommandInvocationStatusInProgress = "InProgress"
-
-	// CommandInvocationStatusDelayed is a CommandInvocationStatus enum value
-	CommandInvocationStatusDelayed = "Delayed"
-
-	// CommandInvocationStatusSuccess is a CommandInvocationStatus enum value
-	CommandInvocationStatusSuccess = "Success"
-
-	// CommandInvocationStatusCancelled is a CommandInvocationStatus enum value
-	CommandInvocationStatusCancelled = "Cancelled"
-
-	// CommandInvocationStatusTimedOut is a CommandInvocationStatus enum value
-	CommandInvocationStatusTimedOut = "TimedOut"
-
-	// CommandInvocationStatusFailed is a CommandInvocationStatus enum value
-	CommandInvocationStatusFailed = "Failed"
-
-	// CommandInvocationStatusCancelling is a CommandInvocationStatus enum value
-	CommandInvocationStatusCancelling = "Cancelling"
+	CommandInvocationStatusPending    CommandInvocationStatus = "Pending"
+	CommandInvocationStatusInProgress CommandInvocationStatus = "InProgress"
+	CommandInvocationStatusDelayed    CommandInvocationStatus = "Delayed"
+	CommandInvocationStatusSuccess    CommandInvocationStatus = "Success"
+	CommandInvocationStatusCancelled  CommandInvocationStatus = "Cancelled"
+	CommandInvocationStatusTimedOut   CommandInvocationStatus = "TimedOut"
+	CommandInvocationStatusFailed     CommandInvocationStatus = "Failed"
+	CommandInvocationStatusCancelling CommandInvocationStatus = "Cancelling"
 )
 
+type CommandPluginStatus string
+
+// Enum values for CommandPluginStatus
 const (
-	// CommandPluginStatusPending is a CommandPluginStatus enum value
-	CommandPluginStatusPending = "Pending"
-
-	// CommandPluginStatusInProgress is a CommandPluginStatus enum value
-	CommandPluginStatusInProgress = "InProgress"
-
-	// CommandPluginStatusSuccess is a CommandPluginStatus enum value
-	CommandPluginStatusSuccess = "Success"
-
-	// CommandPluginStatusTimedOut is a CommandPluginStatus enum value
-	CommandPluginStatusTimedOut = "TimedOut"
-
-	// CommandPluginStatusCancelled is a CommandPluginStatus enum value
-	CommandPluginStatusCancelled = "Cancelled"
-
-	// CommandPluginStatusFailed is a CommandPluginStatus enum value
-	CommandPluginStatusFailed = "Failed"
+	CommandPluginStatusPending    CommandPluginStatus = "Pending"
+	CommandPluginStatusInProgress CommandPluginStatus = "InProgress"
+	CommandPluginStatusSuccess    CommandPluginStatus = "Success"
+	CommandPluginStatusTimedOut   CommandPluginStatus = "TimedOut"
+	CommandPluginStatusCancelled  CommandPluginStatus = "Cancelled"
+	CommandPluginStatusFailed     CommandPluginStatus = "Failed"
 )
 
+type CommandStatus string
+
+// Enum values for CommandStatus
 const (
-	// CommandStatusPending is a CommandStatus enum value
-	CommandStatusPending = "Pending"
-
-	// CommandStatusInProgress is a CommandStatus enum value
-	CommandStatusInProgress = "InProgress"
-
-	// CommandStatusSuccess is a CommandStatus enum value
-	CommandStatusSuccess = "Success"
-
-	// CommandStatusCancelled is a CommandStatus enum value
-	CommandStatusCancelled = "Cancelled"
-
-	// CommandStatusFailed is a CommandStatus enum value
-	CommandStatusFailed = "Failed"
-
-	// CommandStatusTimedOut is a CommandStatus enum value
-	CommandStatusTimedOut = "TimedOut"
-
-	// CommandStatusCancelling is a CommandStatus enum value
-	CommandStatusCancelling = "Cancelling"
+	CommandStatusPending    CommandStatus = "Pending"
+	CommandStatusInProgress CommandStatus = "InProgress"
+	CommandStatusSuccess    CommandStatus = "Success"
+	CommandStatusCancelled  CommandStatus = "Cancelled"
+	CommandStatusFailed     CommandStatus = "Failed"
+	CommandStatusTimedOut   CommandStatus = "TimedOut"
+	CommandStatusCancelling CommandStatus = "Cancelling"
 )
 
+type ComplianceQueryOperatorType string
+
+// Enum values for ComplianceQueryOperatorType
 const (
-	// ComplianceQueryOperatorTypeEqual is a ComplianceQueryOperatorType enum value
-	ComplianceQueryOperatorTypeEqual = "EQUAL"
-
-	// ComplianceQueryOperatorTypeNotEqual is a ComplianceQueryOperatorType enum value
-	ComplianceQueryOperatorTypeNotEqual = "NOT_EQUAL"
-
-	// ComplianceQueryOperatorTypeBeginWith is a ComplianceQueryOperatorType enum value
-	ComplianceQueryOperatorTypeBeginWith = "BEGIN_WITH"
-
-	// ComplianceQueryOperatorTypeLessThan is a ComplianceQueryOperatorType enum value
-	ComplianceQueryOperatorTypeLessThan = "LESS_THAN"
-
-	// ComplianceQueryOperatorTypeGreaterThan is a ComplianceQueryOperatorType enum value
-	ComplianceQueryOperatorTypeGreaterThan = "GREATER_THAN"
+	ComplianceQueryOperatorTypeEqual       ComplianceQueryOperatorType = "EQUAL"
+	ComplianceQueryOperatorTypeNotEqual    ComplianceQueryOperatorType = "NOT_EQUAL"
+	ComplianceQueryOperatorTypeBeginWith   ComplianceQueryOperatorType = "BEGIN_WITH"
+	ComplianceQueryOperatorTypeLessThan    ComplianceQueryOperatorType = "LESS_THAN"
+	ComplianceQueryOperatorTypeGreaterThan ComplianceQueryOperatorType = "GREATER_THAN"
 )
 
+type ComplianceSeverity string
+
+// Enum values for ComplianceSeverity
 const (
-	// ComplianceSeverityCritical is a ComplianceSeverity enum value
-	ComplianceSeverityCritical = "CRITICAL"
-
-	// ComplianceSeverityHigh is a ComplianceSeverity enum value
-	ComplianceSeverityHigh = "HIGH"
-
-	// ComplianceSeverityMedium is a ComplianceSeverity enum value
-	ComplianceSeverityMedium = "MEDIUM"
-
-	// ComplianceSeverityLow is a ComplianceSeverity enum value
-	ComplianceSeverityLow = "LOW"
-
-	// ComplianceSeverityInformational is a ComplianceSeverity enum value
-	ComplianceSeverityInformational = "INFORMATIONAL"
-
-	// ComplianceSeverityUnspecified is a ComplianceSeverity enum value
-	ComplianceSeverityUnspecified = "UNSPECIFIED"
+	ComplianceSeverityCritical      ComplianceSeverity = "CRITICAL"
+	ComplianceSeverityHigh          ComplianceSeverity = "HIGH"
+	ComplianceSeverityMedium        ComplianceSeverity = "MEDIUM"
+	ComplianceSeverityLow           ComplianceSeverity = "LOW"
+	ComplianceSeverityInformational ComplianceSeverity = "INFORMATIONAL"
+	ComplianceSeverityUnspecified   ComplianceSeverity = "UNSPECIFIED"
 )
 
-const (
-	// ComplianceStatusCompliant is a ComplianceStatus enum value
-	ComplianceStatusCompliant = "COMPLIANT"
+type ComplianceStatus string
 
-	// ComplianceStatusNonCompliant is a ComplianceStatus enum value
-	ComplianceStatusNonCompliant = "NON_COMPLIANT"
+// Enum values for ComplianceStatus
+const (
+	ComplianceStatusCompliant    ComplianceStatus = "COMPLIANT"
+	ComplianceStatusNonCompliant ComplianceStatus = "NON_COMPLIANT"
 )
 
+type DescribeActivationsFilterKeys string
+
+// Enum values for DescribeActivationsFilterKeys
 const (
-	// DescribeActivationsFilterKeysActivationIds is a DescribeActivationsFilterKeys enum value
-	DescribeActivationsFilterKeysActivationIds = "ActivationIds"
-
-	// DescribeActivationsFilterKeysDefaultInstanceName is a DescribeActivationsFilterKeys enum value
-	DescribeActivationsFilterKeysDefaultInstanceName = "DefaultInstanceName"
-
-	// DescribeActivationsFilterKeysIamRole is a DescribeActivationsFilterKeys enum value
-	DescribeActivationsFilterKeysIamRole = "IamRole"
+	DescribeActivationsFilterKeysActivationIds       DescribeActivationsFilterKeys = "ActivationIds"
+	DescribeActivationsFilterKeysDefaultInstanceName DescribeActivationsFilterKeys = "DefaultInstanceName"
+	DescribeActivationsFilterKeysIamRole             DescribeActivationsFilterKeys = "IamRole"
 )
 
+type DocumentFilterKey string
+
+// Enum values for DocumentFilterKey
 const (
-	// DocumentFilterKeyName is a DocumentFilterKey enum value
-	DocumentFilterKeyName = "Name"
-
-	// DocumentFilterKeyOwner is a DocumentFilterKey enum value
-	DocumentFilterKeyOwner = "Owner"
-
-	// DocumentFilterKeyPlatformTypes is a DocumentFilterKey enum value
-	DocumentFilterKeyPlatformTypes = "PlatformTypes"
-
-	// DocumentFilterKeyDocumentType is a DocumentFilterKey enum value
-	DocumentFilterKeyDocumentType = "DocumentType"
+	DocumentFilterKeyName          DocumentFilterKey = "Name"
+	DocumentFilterKeyOwner         DocumentFilterKey = "Owner"
+	DocumentFilterKeyPlatformTypes DocumentFilterKey = "PlatformTypes"
+	DocumentFilterKeyDocumentType  DocumentFilterKey = "DocumentType"
 )
 
-const (
-	// DocumentHashTypeSha256 is a DocumentHashType enum value
-	DocumentHashTypeSha256 = "Sha256"
+type DocumentHashType string
 
-	// DocumentHashTypeSha1 is a DocumentHashType enum value
-	DocumentHashTypeSha1 = "Sha1"
+// Enum values for DocumentHashType
+const (
+	DocumentHashTypeSha256 DocumentHashType = "Sha256"
+	DocumentHashTypeSha1   DocumentHashType = "Sha1"
 )
 
-const (
-	// DocumentParameterTypeString is a DocumentParameterType enum value
-	DocumentParameterTypeString = "String"
+type DocumentParameterType string
 
-	// DocumentParameterTypeStringList is a DocumentParameterType enum value
-	DocumentParameterTypeStringList = "StringList"
+// Enum values for DocumentParameterType
+const (
+	DocumentParameterTypeString     DocumentParameterType = "String"
+	DocumentParameterTypeStringList DocumentParameterType = "StringList"
 )
 
+type DocumentPermissionType string
+
+// Enum values for DocumentPermissionType
 const (
-	// DocumentPermissionTypeShare is a DocumentPermissionType enum value
-	DocumentPermissionTypeShare = "Share"
+	DocumentPermissionTypeShare DocumentPermissionType = "Share"
 )
 
+type DocumentStatus string
+
+// Enum values for DocumentStatus
 const (
-	// DocumentStatusCreating is a DocumentStatus enum value
-	DocumentStatusCreating = "Creating"
-
-	// DocumentStatusActive is a DocumentStatus enum value
-	DocumentStatusActive = "Active"
-
-	// DocumentStatusUpdating is a DocumentStatus enum value
-	DocumentStatusUpdating = "Updating"
-
-	// DocumentStatusDeleting is a DocumentStatus enum value
-	DocumentStatusDeleting = "Deleting"
+	DocumentStatusCreating DocumentStatus = "Creating"
+	DocumentStatusActive   DocumentStatus = "Active"
+	DocumentStatusUpdating DocumentStatus = "Updating"
+	DocumentStatusDeleting DocumentStatus = "Deleting"
 )
 
+type DocumentType string
+
+// Enum values for DocumentType
 const (
-	// DocumentTypeCommand is a DocumentType enum value
-	DocumentTypeCommand = "Command"
-
-	// DocumentTypePolicy is a DocumentType enum value
-	DocumentTypePolicy = "Policy"
-
-	// DocumentTypeAutomation is a DocumentType enum value
-	DocumentTypeAutomation = "Automation"
+	DocumentTypeCommand    DocumentType = "Command"
+	DocumentTypePolicy     DocumentType = "Policy"
+	DocumentTypeAutomation DocumentType = "Automation"
 )
 
+type Fault string
+
+// Enum values for Fault
 const (
-	// FaultClient is a Fault enum value
-	FaultClient = "Client"
-
-	// FaultServer is a Fault enum value
-	FaultServer = "Server"
-
-	// FaultUnknown is a Fault enum value
-	FaultUnknown = "Unknown"
+	FaultClient  Fault = "Client"
+	FaultServer  Fault = "Server"
+	FaultUnknown Fault = "Unknown"
 )
 
+type InstanceInformationFilterKey string
+
+// Enum values for InstanceInformationFilterKey
 const (
-	// InstanceInformationFilterKeyInstanceIds is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyInstanceIds = "InstanceIds"
-
-	// InstanceInformationFilterKeyAgentVersion is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyAgentVersion = "AgentVersion"
-
-	// InstanceInformationFilterKeyPingStatus is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyPingStatus = "PingStatus"
-
-	// InstanceInformationFilterKeyPlatformTypes is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyPlatformTypes = "PlatformTypes"
-
-	// InstanceInformationFilterKeyActivationIds is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyActivationIds = "ActivationIds"
-
-	// InstanceInformationFilterKeyIamRole is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyIamRole = "IamRole"
-
-	// InstanceInformationFilterKeyResourceType is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyResourceType = "ResourceType"
-
-	// InstanceInformationFilterKeyAssociationStatus is a InstanceInformationFilterKey enum value
-	InstanceInformationFilterKeyAssociationStatus = "AssociationStatus"
+	InstanceInformationFilterKeyInstanceIds       InstanceInformationFilterKey = "InstanceIds"
+	InstanceInformationFilterKeyAgentVersion      InstanceInformationFilterKey = "AgentVersion"
+	InstanceInformationFilterKeyPingStatus        InstanceInformationFilterKey = "PingStatus"
+	InstanceInformationFilterKeyPlatformTypes     InstanceInformationFilterKey = "PlatformTypes"
+	InstanceInformationFilterKeyActivationIds     InstanceInformationFilterKey = "ActivationIds"
+	InstanceInformationFilterKeyIamRole           InstanceInformationFilterKey = "IamRole"
+	InstanceInformationFilterKeyResourceType      InstanceInformationFilterKey = "ResourceType"
+	InstanceInformationFilterKeyAssociationStatus InstanceInformationFilterKey = "AssociationStatus"
 )
 
+type InstancePatchStateOperatorType string
+
+// Enum values for InstancePatchStateOperatorType
 const (
-	// InstancePatchStateOperatorTypeEqual is a InstancePatchStateOperatorType enum value
-	InstancePatchStateOperatorTypeEqual = "Equal"
-
-	// InstancePatchStateOperatorTypeNotEqual is a InstancePatchStateOperatorType enum value
-	InstancePatchStateOperatorTypeNotEqual = "NotEqual"
-
-	// InstancePatchStateOperatorTypeLessThan is a InstancePatchStateOperatorType enum value
-	InstancePatchStateOperatorTypeLessThan = "LessThan"
-
-	// InstancePatchStateOperatorTypeGreaterThan is a InstancePatchStateOperatorType enum value
-	InstancePatchStateOperatorTypeGreaterThan = "GreaterThan"
+	InstancePatchStateOperatorTypeEqual       InstancePatchStateOperatorType = "Equal"
+	InstancePatchStateOperatorTypeNotEqual    InstancePatchStateOperatorType = "NotEqual"
+	InstancePatchStateOperatorTypeLessThan    InstancePatchStateOperatorType = "LessThan"
+	InstancePatchStateOperatorTypeGreaterThan InstancePatchStateOperatorType = "GreaterThan"
 )
 
-const (
-	// InventoryAttributeDataTypeString is a InventoryAttributeDataType enum value
-	InventoryAttributeDataTypeString = "string"
+type InventoryAttributeDataType string
 
-	// InventoryAttributeDataTypeNumber is a InventoryAttributeDataType enum value
-	InventoryAttributeDataTypeNumber = "number"
+// Enum values for InventoryAttributeDataType
+const (
+	InventoryAttributeDataTypeString InventoryAttributeDataType = "string"
+	InventoryAttributeDataTypeNumber InventoryAttributeDataType = "number"
 )
 
+type InventoryQueryOperatorType string
+
+// Enum values for InventoryQueryOperatorType
 const (
-	// InventoryQueryOperatorTypeEqual is a InventoryQueryOperatorType enum value
-	InventoryQueryOperatorTypeEqual = "Equal"
-
-	// InventoryQueryOperatorTypeNotEqual is a InventoryQueryOperatorType enum value
-	InventoryQueryOperatorTypeNotEqual = "NotEqual"
-
-	// InventoryQueryOperatorTypeBeginWith is a InventoryQueryOperatorType enum value
-	InventoryQueryOperatorTypeBeginWith = "BeginWith"
-
-	// InventoryQueryOperatorTypeLessThan is a InventoryQueryOperatorType enum value
-	InventoryQueryOperatorTypeLessThan = "LessThan"
-
-	// InventoryQueryOperatorTypeGreaterThan is a InventoryQueryOperatorType enum value
-	InventoryQueryOperatorTypeGreaterThan = "GreaterThan"
+	InventoryQueryOperatorTypeEqual       InventoryQueryOperatorType = "Equal"
+	InventoryQueryOperatorTypeNotEqual    InventoryQueryOperatorType = "NotEqual"
+	InventoryQueryOperatorTypeBeginWith   InventoryQueryOperatorType = "BeginWith"
+	InventoryQueryOperatorTypeLessThan    InventoryQueryOperatorType = "LessThan"
+	InventoryQueryOperatorTypeGreaterThan InventoryQueryOperatorType = "GreaterThan"
 )
 
+type LastResourceDataSyncStatus string
+
+// Enum values for LastResourceDataSyncStatus
 const (
-	// LastResourceDataSyncStatusSuccessful is a LastResourceDataSyncStatus enum value
-	LastResourceDataSyncStatusSuccessful = "Successful"
-
-	// LastResourceDataSyncStatusFailed is a LastResourceDataSyncStatus enum value
-	LastResourceDataSyncStatusFailed = "Failed"
-
-	// LastResourceDataSyncStatusInProgress is a LastResourceDataSyncStatus enum value
-	LastResourceDataSyncStatusInProgress = "InProgress"
+	LastResourceDataSyncStatusSuccessful LastResourceDataSyncStatus = "Successful"
+	LastResourceDataSyncStatusFailed     LastResourceDataSyncStatus = "Failed"
+	LastResourceDataSyncStatusInProgress LastResourceDataSyncStatus = "InProgress"
 )
 
+type MaintenanceWindowExecutionStatus string
+
+// Enum values for MaintenanceWindowExecutionStatus
 const (
-	// MaintenanceWindowExecutionStatusPending is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusPending = "PENDING"
-
-	// MaintenanceWindowExecutionStatusInProgress is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusInProgress = "IN_PROGRESS"
-
-	// MaintenanceWindowExecutionStatusSuccess is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusSuccess = "SUCCESS"
-
-	// MaintenanceWindowExecutionStatusFailed is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusFailed = "FAILED"
-
-	// MaintenanceWindowExecutionStatusTimedOut is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusTimedOut = "TIMED_OUT"
-
-	// MaintenanceWindowExecutionStatusCancelling is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusCancelling = "CANCELLING"
-
-	// MaintenanceWindowExecutionStatusCancelled is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusCancelled = "CANCELLED"
-
-	// MaintenanceWindowExecutionStatusSkippedOverlapping is a MaintenanceWindowExecutionStatus enum value
-	MaintenanceWindowExecutionStatusSkippedOverlapping = "SKIPPED_OVERLAPPING"
+	MaintenanceWindowExecutionStatusPending            MaintenanceWindowExecutionStatus = "PENDING"
+	MaintenanceWindowExecutionStatusInProgress         MaintenanceWindowExecutionStatus = "IN_PROGRESS"
+	MaintenanceWindowExecutionStatusSuccess            MaintenanceWindowExecutionStatus = "SUCCESS"
+	MaintenanceWindowExecutionStatusFailed             MaintenanceWindowExecutionStatus = "FAILED"
+	MaintenanceWindowExecutionStatusTimedOut           MaintenanceWindowExecutionStatus = "TIMED_OUT"
+	MaintenanceWindowExecutionStatusCancelling         MaintenanceWindowExecutionStatus = "CANCELLING"
+	MaintenanceWindowExecutionStatusCancelled          MaintenanceWindowExecutionStatus = "CANCELLED"
+	MaintenanceWindowExecutionStatusSkippedOverlapping MaintenanceWindowExecutionStatus = "SKIPPED_OVERLAPPING"
 )
 
+type MaintenanceWindowResourceType string
+
+// Enum values for MaintenanceWindowResourceType
 const (
-	// MaintenanceWindowResourceTypeInstance is a MaintenanceWindowResourceType enum value
-	MaintenanceWindowResourceTypeInstance = "INSTANCE"
+	MaintenanceWindowResourceTypeInstance MaintenanceWindowResourceType = "INSTANCE"
 )
 
+type MaintenanceWindowTaskType string
+
+// Enum values for MaintenanceWindowTaskType
 const (
-	// MaintenanceWindowTaskTypeRunCommand is a MaintenanceWindowTaskType enum value
-	MaintenanceWindowTaskTypeRunCommand = "RUN_COMMAND"
-
-	// MaintenanceWindowTaskTypeAutomation is a MaintenanceWindowTaskType enum value
-	MaintenanceWindowTaskTypeAutomation = "AUTOMATION"
-
-	// MaintenanceWindowTaskTypeStepFunctions is a MaintenanceWindowTaskType enum value
-	MaintenanceWindowTaskTypeStepFunctions = "STEP_FUNCTIONS"
-
-	// MaintenanceWindowTaskTypeLambda is a MaintenanceWindowTaskType enum value
-	MaintenanceWindowTaskTypeLambda = "LAMBDA"
+	MaintenanceWindowTaskTypeRunCommand    MaintenanceWindowTaskType = "RUN_COMMAND"
+	MaintenanceWindowTaskTypeAutomation    MaintenanceWindowTaskType = "AUTOMATION"
+	MaintenanceWindowTaskTypeStepFunctions MaintenanceWindowTaskType = "STEP_FUNCTIONS"
+	MaintenanceWindowTaskTypeLambda        MaintenanceWindowTaskType = "LAMBDA"
 )
 
+type NotificationEvent string
+
+// Enum values for NotificationEvent
 const (
-	// NotificationEventAll is a NotificationEvent enum value
-	NotificationEventAll = "All"
-
-	// NotificationEventInProgress is a NotificationEvent enum value
-	NotificationEventInProgress = "InProgress"
-
-	// NotificationEventSuccess is a NotificationEvent enum value
-	NotificationEventSuccess = "Success"
-
-	// NotificationEventTimedOut is a NotificationEvent enum value
-	NotificationEventTimedOut = "TimedOut"
-
-	// NotificationEventCancelled is a NotificationEvent enum value
-	NotificationEventCancelled = "Cancelled"
-
-	// NotificationEventFailed is a NotificationEvent enum value
-	NotificationEventFailed = "Failed"
+	NotificationEventAll        NotificationEvent = "All"
+	NotificationEventInProgress NotificationEvent = "InProgress"
+	NotificationEventSuccess    NotificationEvent = "Success"
+	NotificationEventTimedOut   NotificationEvent = "TimedOut"
+	NotificationEventCancelled  NotificationEvent = "Cancelled"
+	NotificationEventFailed     NotificationEvent = "Failed"
 )
 
-const (
-	// NotificationTypeCommand is a NotificationType enum value
-	NotificationTypeCommand = "Command"
+type NotificationType string
 
-	// NotificationTypeInvocation is a NotificationType enum value
-	NotificationTypeInvocation = "Invocation"
+// Enum values for NotificationType
+const (
+	NotificationTypeCommand    NotificationType = "Command"
+	NotificationTypeInvocation NotificationType = "Invocation"
 )
 
+type OperatingSystem string
+
+// Enum values for OperatingSystem
 const (
-	// OperatingSystemWindows is a OperatingSystem enum value
-	OperatingSystemWindows = "WINDOWS"
-
-	// OperatingSystemAmazonLinux is a OperatingSystem enum value
-	OperatingSystemAmazonLinux = "AMAZON_LINUX"
-
-	// OperatingSystemUbuntu is a OperatingSystem enum value
-	OperatingSystemUbuntu = "UBUNTU"
-
-	// OperatingSystemRedhatEnterpriseLinux is a OperatingSystem enum value
-	OperatingSystemRedhatEnterpriseLinux = "REDHAT_ENTERPRISE_LINUX"
+	OperatingSystemWindows               OperatingSystem = "WINDOWS"
+	OperatingSystemAmazonLinux           OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemUbuntu                OperatingSystem = "UBUNTU"
+	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
 )
 
+type ParameterType string
+
+// Enum values for ParameterType
 const (
-	// ParameterTypeString is a ParameterType enum value
-	ParameterTypeString = "String"
-
-	// ParameterTypeStringList is a ParameterType enum value
-	ParameterTypeStringList = "StringList"
-
-	// ParameterTypeSecureString is a ParameterType enum value
-	ParameterTypeSecureString = "SecureString"
+	ParameterTypeString       ParameterType = "String"
+	ParameterTypeStringList   ParameterType = "StringList"
+	ParameterTypeSecureString ParameterType = "SecureString"
 )
 
+type ParametersFilterKey string
+
+// Enum values for ParametersFilterKey
 const (
-	// ParametersFilterKeyName is a ParametersFilterKey enum value
-	ParametersFilterKeyName = "Name"
-
-	// ParametersFilterKeyType is a ParametersFilterKey enum value
-	ParametersFilterKeyType = "Type"
-
-	// ParametersFilterKeyKeyId is a ParametersFilterKey enum value
-	ParametersFilterKeyKeyId = "KeyId"
+	ParametersFilterKeyName  ParametersFilterKey = "Name"
+	ParametersFilterKeyType  ParametersFilterKey = "Type"
+	ParametersFilterKeyKeyId ParametersFilterKey = "KeyId"
 )
 
+type PatchComplianceDataState string
+
+// Enum values for PatchComplianceDataState
 const (
-	// PatchComplianceDataStateInstalled is a PatchComplianceDataState enum value
-	PatchComplianceDataStateInstalled = "INSTALLED"
-
-	// PatchComplianceDataStateInstalledOther is a PatchComplianceDataState enum value
-	PatchComplianceDataStateInstalledOther = "INSTALLED_OTHER"
-
-	// PatchComplianceDataStateMissing is a PatchComplianceDataState enum value
-	PatchComplianceDataStateMissing = "MISSING"
-
-	// PatchComplianceDataStateNotApplicable is a PatchComplianceDataState enum value
-	PatchComplianceDataStateNotApplicable = "NOT_APPLICABLE"
-
-	// PatchComplianceDataStateFailed is a PatchComplianceDataState enum value
-	PatchComplianceDataStateFailed = "FAILED"
+	PatchComplianceDataStateInstalled      PatchComplianceDataState = "INSTALLED"
+	PatchComplianceDataStateInstalledOther PatchComplianceDataState = "INSTALLED_OTHER"
+	PatchComplianceDataStateMissing        PatchComplianceDataState = "MISSING"
+	PatchComplianceDataStateNotApplicable  PatchComplianceDataState = "NOT_APPLICABLE"
+	PatchComplianceDataStateFailed         PatchComplianceDataState = "FAILED"
 )
 
+type PatchComplianceLevel string
+
+// Enum values for PatchComplianceLevel
 const (
-	// PatchComplianceLevelCritical is a PatchComplianceLevel enum value
-	PatchComplianceLevelCritical = "CRITICAL"
-
-	// PatchComplianceLevelHigh is a PatchComplianceLevel enum value
-	PatchComplianceLevelHigh = "HIGH"
-
-	// PatchComplianceLevelMedium is a PatchComplianceLevel enum value
-	PatchComplianceLevelMedium = "MEDIUM"
-
-	// PatchComplianceLevelLow is a PatchComplianceLevel enum value
-	PatchComplianceLevelLow = "LOW"
-
-	// PatchComplianceLevelInformational is a PatchComplianceLevel enum value
-	PatchComplianceLevelInformational = "INFORMATIONAL"
-
-	// PatchComplianceLevelUnspecified is a PatchComplianceLevel enum value
-	PatchComplianceLevelUnspecified = "UNSPECIFIED"
+	PatchComplianceLevelCritical      PatchComplianceLevel = "CRITICAL"
+	PatchComplianceLevelHigh          PatchComplianceLevel = "HIGH"
+	PatchComplianceLevelMedium        PatchComplianceLevel = "MEDIUM"
+	PatchComplianceLevelLow           PatchComplianceLevel = "LOW"
+	PatchComplianceLevelInformational PatchComplianceLevel = "INFORMATIONAL"
+	PatchComplianceLevelUnspecified   PatchComplianceLevel = "UNSPECIFIED"
 )
 
+type PatchDeploymentStatus string
+
+// Enum values for PatchDeploymentStatus
 const (
-	// PatchDeploymentStatusApproved is a PatchDeploymentStatus enum value
-	PatchDeploymentStatusApproved = "APPROVED"
-
-	// PatchDeploymentStatusPendingApproval is a PatchDeploymentStatus enum value
-	PatchDeploymentStatusPendingApproval = "PENDING_APPROVAL"
-
-	// PatchDeploymentStatusExplicitApproved is a PatchDeploymentStatus enum value
-	PatchDeploymentStatusExplicitApproved = "EXPLICIT_APPROVED"
-
-	// PatchDeploymentStatusExplicitRejected is a PatchDeploymentStatus enum value
-	PatchDeploymentStatusExplicitRejected = "EXPLICIT_REJECTED"
+	PatchDeploymentStatusApproved         PatchDeploymentStatus = "APPROVED"
+	PatchDeploymentStatusPendingApproval  PatchDeploymentStatus = "PENDING_APPROVAL"
+	PatchDeploymentStatusExplicitApproved PatchDeploymentStatus = "EXPLICIT_APPROVED"
+	PatchDeploymentStatusExplicitRejected PatchDeploymentStatus = "EXPLICIT_REJECTED"
 )
 
+type PatchFilterKey string
+
+// Enum values for PatchFilterKey
 const (
-	// PatchFilterKeyProduct is a PatchFilterKey enum value
-	PatchFilterKeyProduct = "PRODUCT"
-
-	// PatchFilterKeyClassification is a PatchFilterKey enum value
-	PatchFilterKeyClassification = "CLASSIFICATION"
-
-	// PatchFilterKeyMsrcSeverity is a PatchFilterKey enum value
-	PatchFilterKeyMsrcSeverity = "MSRC_SEVERITY"
-
-	// PatchFilterKeyPatchId is a PatchFilterKey enum value
-	PatchFilterKeyPatchId = "PATCH_ID"
-
-	// PatchFilterKeySection is a PatchFilterKey enum value
-	PatchFilterKeySection = "SECTION"
-
-	// PatchFilterKeyPriority is a PatchFilterKey enum value
-	PatchFilterKeyPriority = "PRIORITY"
-
-	// PatchFilterKeySeverity is a PatchFilterKey enum value
-	PatchFilterKeySeverity = "SEVERITY"
+	PatchFilterKeyProduct        PatchFilterKey = "PRODUCT"
+	PatchFilterKeyClassification PatchFilterKey = "CLASSIFICATION"
+	PatchFilterKeyMsrcSeverity   PatchFilterKey = "MSRC_SEVERITY"
+	PatchFilterKeyPatchId        PatchFilterKey = "PATCH_ID"
+	PatchFilterKeySection        PatchFilterKey = "SECTION"
+	PatchFilterKeyPriority       PatchFilterKey = "PRIORITY"
+	PatchFilterKeySeverity       PatchFilterKey = "SEVERITY"
 )
 
-const (
-	// PatchOperationTypeScan is a PatchOperationType enum value
-	PatchOperationTypeScan = "Scan"
+type PatchOperationType string
 
-	// PatchOperationTypeInstall is a PatchOperationType enum value
-	PatchOperationTypeInstall = "Install"
+// Enum values for PatchOperationType
+const (
+	PatchOperationTypeScan    PatchOperationType = "Scan"
+	PatchOperationTypeInstall PatchOperationType = "Install"
 )
 
+type PingStatus string
+
+// Enum values for PingStatus
 const (
-	// PingStatusOnline is a PingStatus enum value
-	PingStatusOnline = "Online"
-
-	// PingStatusConnectionLost is a PingStatus enum value
-	PingStatusConnectionLost = "ConnectionLost"
-
-	// PingStatusInactive is a PingStatus enum value
-	PingStatusInactive = "Inactive"
+	PingStatusOnline         PingStatus = "Online"
+	PingStatusConnectionLost PingStatus = "ConnectionLost"
+	PingStatusInactive       PingStatus = "Inactive"
 )
 
-const (
-	// PlatformTypeWindows is a PlatformType enum value
-	PlatformTypeWindows = "Windows"
+type PlatformType string
 
-	// PlatformTypeLinux is a PlatformType enum value
-	PlatformTypeLinux = "Linux"
+// Enum values for PlatformType
+const (
+	PlatformTypeWindows PlatformType = "Windows"
+	PlatformTypeLinux   PlatformType = "Linux"
 )
 
+type ResourceDataSyncS3Format string
+
+// Enum values for ResourceDataSyncS3Format
 const (
-	// ResourceDataSyncS3FormatJsonSerDe is a ResourceDataSyncS3Format enum value
-	ResourceDataSyncS3FormatJsonSerDe = "JsonSerDe"
+	ResourceDataSyncS3FormatJsonSerDe ResourceDataSyncS3Format = "JsonSerDe"
 )
 
+type ResourceType string
+
+// Enum values for ResourceType
 const (
-	// ResourceTypeManagedInstance is a ResourceType enum value
-	ResourceTypeManagedInstance = "ManagedInstance"
-
-	// ResourceTypeDocument is a ResourceType enum value
-	ResourceTypeDocument = "Document"
-
-	// ResourceTypeEc2instance is a ResourceType enum value
-	ResourceTypeEc2instance = "EC2Instance"
+	ResourceTypeManagedInstance ResourceType = "ManagedInstance"
+	ResourceTypeDocument        ResourceType = "Document"
+	ResourceTypeEc2instance     ResourceType = "EC2Instance"
 )
 
+type ResourceTypeForTagging string
+
+// Enum values for ResourceTypeForTagging
 const (
-	// ResourceTypeForTaggingDocument is a ResourceTypeForTagging enum value
-	ResourceTypeForTaggingDocument = "Document"
-
-	// ResourceTypeForTaggingManagedInstance is a ResourceTypeForTagging enum value
-	ResourceTypeForTaggingManagedInstance = "ManagedInstance"
-
-	// ResourceTypeForTaggingMaintenanceWindow is a ResourceTypeForTagging enum value
-	ResourceTypeForTaggingMaintenanceWindow = "MaintenanceWindow"
-
-	// ResourceTypeForTaggingParameter is a ResourceTypeForTagging enum value
-	ResourceTypeForTaggingParameter = "Parameter"
-
-	// ResourceTypeForTaggingPatchBaseline is a ResourceTypeForTagging enum value
-	ResourceTypeForTaggingPatchBaseline = "PatchBaseline"
+	ResourceTypeForTaggingDocument          ResourceTypeForTagging = "Document"
+	ResourceTypeForTaggingManagedInstance   ResourceTypeForTagging = "ManagedInstance"
+	ResourceTypeForTaggingMaintenanceWindow ResourceTypeForTagging = "MaintenanceWindow"
+	ResourceTypeForTaggingParameter         ResourceTypeForTagging = "Parameter"
+	ResourceTypeForTaggingPatchBaseline     ResourceTypeForTagging = "PatchBaseline"
 )
 
-const (
-	// SignalTypeApprove is a SignalType enum value
-	SignalTypeApprove = "Approve"
+type SignalType string
 
-	// SignalTypeReject is a SignalType enum value
-	SignalTypeReject = "Reject"
+// Enum values for SignalType
+const (
+	SignalTypeApprove SignalType = "Approve"
+	SignalTypeReject  SignalType = "Reject"
 )

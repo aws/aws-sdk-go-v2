@@ -351,12 +351,14 @@ func (s BatchMeterUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchMeterUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchMeterUsageInput"}
+
 	if s.ProductCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
 	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
 	}
+
 	if s.UsageRecords == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsageRecords"))
 	}
@@ -476,24 +478,29 @@ func (s MeterUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MeterUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MeterUsageInput"}
+
 	if s.DryRun == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DryRun"))
 	}
+
 	if s.ProductCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
 	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
 	}
+
 	if s.Timestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
+
 	if s.UsageDimension == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsageDimension"))
 	}
 	if s.UsageDimension != nil && len(*s.UsageDimension) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UsageDimension", 1))
 	}
+
 	if s.UsageQuantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UsageQuantity"))
 	}
@@ -583,6 +590,7 @@ func (s ResolveCustomerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResolveCustomerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResolveCustomerInput"}
+
 	if s.RegistrationToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RegistrationToken"))
 	}
@@ -688,21 +696,25 @@ func (s UsageRecord) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UsageRecord) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UsageRecord"}
+
 	if s.CustomerIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomerIdentifier"))
 	}
 	if s.CustomerIdentifier != nil && len(*s.CustomerIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomerIdentifier", 1))
 	}
+
 	if s.Dimension == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Dimension"))
 	}
 	if s.Dimension != nil && len(*s.Dimension) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Dimension", 1))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
+
 	if s.Timestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
@@ -758,7 +770,7 @@ type UsageRecordResult struct {
 	//    * DuplicateRecord- Indicates that the UsageRecord was invalid and not
 	//    honored. A previously metered UsageRecord had the same customer, dimension,
 	//    and time, but a different quantity.
-	Status *string `type:"string" enum:"UsageRecordResultStatus"`
+	Status UsageRecordResultStatus `type:"string"`
 
 	// The UsageRecord that was part of the BatchMeterUsage request.
 	UsageRecord *UsageRecord `type:"structure"`
@@ -781,8 +793,8 @@ func (s *UsageRecordResult) SetMeteringRecordId(v string) *UsageRecordResult {
 }
 
 // SetStatus sets the Status field's value.
-func (s *UsageRecordResult) SetStatus(v string) *UsageRecordResult {
-	s.Status = &v
+func (s *UsageRecordResult) SetStatus(v UsageRecordResultStatus) *UsageRecordResult {
+	s.Status = v
 	return s
 }
 
@@ -792,13 +804,11 @@ func (s *UsageRecordResult) SetUsageRecord(v *UsageRecord) *UsageRecordResult {
 	return s
 }
 
+type UsageRecordResultStatus string
+
+// Enum values for UsageRecordResultStatus
 const (
-	// UsageRecordResultStatusSuccess is a UsageRecordResultStatus enum value
-	UsageRecordResultStatusSuccess = "Success"
-
-	// UsageRecordResultStatusCustomerNotSubscribed is a UsageRecordResultStatus enum value
-	UsageRecordResultStatusCustomerNotSubscribed = "CustomerNotSubscribed"
-
-	// UsageRecordResultStatusDuplicateRecord is a UsageRecordResultStatus enum value
-	UsageRecordResultStatusDuplicateRecord = "DuplicateRecord"
+	UsageRecordResultStatusSuccess               UsageRecordResultStatus = "Success"
+	UsageRecordResultStatusCustomerNotSubscribed UsageRecordResultStatus = "CustomerNotSubscribed"
+	UsageRecordResultStatusDuplicateRecord       UsageRecordResultStatus = "DuplicateRecord"
 )

@@ -153,7 +153,7 @@ func TestUnmarshalError(t *testing.T) {
 			}
 		})
 		_, err := s.PutBucketAcl(&s3.PutBucketAclInput{
-			Bucket: aws.String("bucket"), ACL: aws.String("public-read"),
+			Bucket: aws.String("bucket"), ACL: s3.BucketCannedACLPublicRead,
 		})
 
 		if err == nil {

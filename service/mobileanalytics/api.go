@@ -139,12 +139,14 @@ func (s Event) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Event) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Event"}
+
 	if s.EventType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventType"))
 	}
 	if s.EventType != nil && len(*s.EventType) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EventType", 1))
 	}
+
 	if s.Timestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
@@ -231,9 +233,11 @@ func (s PutEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
+
 	if s.ClientContext == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ClientContext"))
 	}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}

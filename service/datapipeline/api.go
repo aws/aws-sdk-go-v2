@@ -2010,6 +2010,7 @@ func (s ActivatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActivatePipelineInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -2096,12 +2097,14 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2200,12 +2203,14 @@ func (s CreatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.UniqueId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
 	}
@@ -2310,6 +2315,7 @@ func (s DeactivatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeactivatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeactivatePipelineInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -2375,6 +2381,7 @@ func (s DeletePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -2449,9 +2456,11 @@ func (s DescribeObjectsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeObjectsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeObjectsInput"}
+
 	if s.ObjectIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
 	}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -2561,6 +2570,7 @@ func (s DescribePipelinesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePipelinesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePipelinesInput"}
+
 	if s.PipelineIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineIds"))
 	}
@@ -2638,15 +2648,18 @@ func (s EvaluateExpressionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EvaluateExpressionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EvaluateExpressionInput"}
+
 	if s.Expression == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Expression"))
 	}
+
 	if s.ObjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectId"))
 	}
 	if s.ObjectId != nil && len(*s.ObjectId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ObjectId", 1))
 	}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -2737,6 +2750,7 @@ func (s Field) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Field) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Field"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -2800,6 +2814,7 @@ func (s GetPipelineDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPipelineDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPipelineDefinitionInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -3022,7 +3037,7 @@ type Operator struct {
 	// only alpha-numeric values, as symbols may be reserved by AWS Data Pipeline.
 	// User-defined fields that you add to a pipeline should prefix their name with
 	// the string "my".
-	Type *string `locationName:"type" type:"string" enum:"OperatorType"`
+	Type OperatorType `locationName:"type" type:"string"`
 
 	// The value that the actual field value will be compared with.
 	Values []*string `locationName:"values" type:"list"`
@@ -3039,8 +3054,8 @@ func (s Operator) GoString() string {
 }
 
 // SetType sets the Type field's value.
-func (s *Operator) SetType(v string) *Operator {
-	s.Type = &v
+func (s *Operator) SetType(v OperatorType) *Operator {
+	s.Type = v
 	return s
 }
 
@@ -3079,12 +3094,14 @@ func (s ParameterAttribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterAttribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParameterAttribute"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.StringValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StringValue"))
 	}
@@ -3136,9 +3153,11 @@ func (s ParameterObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParameterObject"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3203,12 +3222,14 @@ func (s ParameterValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ParameterValue"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.StringValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StringValue"))
 	}
@@ -3374,15 +3395,18 @@ func (s PipelineObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PipelineObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PipelineObject"}
+
 	if s.Fields == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Fields"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3466,6 +3490,7 @@ func (s *PollForTaskInput) Validate() error {
 	if s.Hostname != nil && len(*s.Hostname) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Hostname", 1))
 	}
+
 	if s.WorkerGroup == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerGroup"))
 	}
@@ -3558,12 +3583,14 @@ func (s PutPipelineDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutPipelineDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutPipelineDefinitionInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.PipelineObjects == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineObjects"))
 	}
@@ -3747,12 +3774,14 @@ func (s QueryObjectsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryObjectsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "QueryObjectsInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.Sphere == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Sphere"))
 	}
@@ -3868,12 +3897,14 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -3941,6 +3972,7 @@ func (s ReportTaskProgressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportTaskProgressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReportTaskProgressInput"}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
@@ -4045,6 +4077,7 @@ func (s *ReportTaskRunnerHeartbeatInput) Validate() error {
 	if s.Hostname != nil && len(*s.Hostname) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Hostname", 1))
 	}
+
 	if s.TaskrunnerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskrunnerId"))
 	}
@@ -4178,15 +4211,18 @@ func (s SetStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetStatusInput"}
+
 	if s.ObjectIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectIds"))
 	}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.Status == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
@@ -4263,7 +4299,7 @@ type SetTaskStatusInput struct {
 	// Preconditions use false.
 	//
 	// TaskStatus is a required field
-	TaskStatus *string `locationName:"taskStatus" type:"string" required:"true" enum:"TaskStatus"`
+	TaskStatus TaskStatus `locationName:"taskStatus" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4279,13 +4315,14 @@ func (s SetTaskStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTaskStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTaskStatusInput"}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
-	if s.TaskStatus == nil {
+	if len(s.TaskStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TaskStatus"))
 	}
 
@@ -4320,8 +4357,8 @@ func (s *SetTaskStatusInput) SetTaskId(v string) *SetTaskStatusInput {
 }
 
 // SetTaskStatus sets the TaskStatus field's value.
-func (s *SetTaskStatusInput) SetTaskStatus(v string) *SetTaskStatusInput {
-	s.TaskStatus = &v
+func (s *SetTaskStatusInput) SetTaskStatus(v TaskStatus) *SetTaskStatusInput {
+	s.TaskStatus = v
 	return s
 }
 
@@ -4378,12 +4415,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -4496,12 +4535,14 @@ func (s ValidatePipelineDefinitionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidatePipelineDefinitionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ValidatePipelineDefinitionInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
 	if s.PipelineId != nil && len(*s.PipelineId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PipelineId", 1))
 	}
+
 	if s.PipelineObjects == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineObjects"))
 	}
@@ -4683,30 +4724,22 @@ func (s *ValidationWarning) SetWarnings(v []*string) *ValidationWarning {
 	return s
 }
 
+type OperatorType string
+
+// Enum values for OperatorType
 const (
-	// OperatorTypeEq is a OperatorType enum value
-	OperatorTypeEq = "EQ"
-
-	// OperatorTypeRefEq is a OperatorType enum value
-	OperatorTypeRefEq = "REF_EQ"
-
-	// OperatorTypeLe is a OperatorType enum value
-	OperatorTypeLe = "LE"
-
-	// OperatorTypeGe is a OperatorType enum value
-	OperatorTypeGe = "GE"
-
-	// OperatorTypeBetween is a OperatorType enum value
-	OperatorTypeBetween = "BETWEEN"
+	OperatorTypeEq      OperatorType = "EQ"
+	OperatorTypeRefEq   OperatorType = "REF_EQ"
+	OperatorTypeLe      OperatorType = "LE"
+	OperatorTypeGe      OperatorType = "GE"
+	OperatorTypeBetween OperatorType = "BETWEEN"
 )
 
+type TaskStatus string
+
+// Enum values for TaskStatus
 const (
-	// TaskStatusFinished is a TaskStatus enum value
-	TaskStatusFinished = "FINISHED"
-
-	// TaskStatusFailed is a TaskStatus enum value
-	TaskStatusFailed = "FAILED"
-
-	// TaskStatusFalse is a TaskStatus enum value
-	TaskStatusFalse = "FALSE"
+	TaskStatusFinished TaskStatus = "FINISHED"
+	TaskStatusFailed   TaskStatus = "FAILED"
+	TaskStatusFalse    TaskStatus = "FALSE"
 )

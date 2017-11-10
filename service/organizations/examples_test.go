@@ -359,7 +359,7 @@ func ExampleOrganizations_CreateOrganization_shared01() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.CreateOrganizationInput{
-		FeatureSet: aws.String("CONSOLIDATED_BILLING"),
+		FeatureSet: organizations.OrganizationFeatureSetConsolidatedBilling,
 	}
 
 	result, err := svc.CreateOrganization(input)
@@ -466,7 +466,7 @@ func ExampleOrganizations_CreatePolicy_shared00() {
 		Content:     aws.String("{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":\\\"s3:*\\\"}}"),
 		Description: aws.String("Enables admins of attached accounts to delegate all S3 permissions"),
 		Name:        aws.String("AllowAllS3Actions"),
-		Type:        aws.String("SERVICE_CONTROL_POLICY"),
+		Type:        organizations.PolicyTypeServiceControlPolicy,
 	}
 
 	result, err := svc.CreatePolicy(input)
@@ -989,7 +989,7 @@ func ExampleOrganizations_DisablePolicyType_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.DisablePolicyTypeInput{
-		PolicyType: aws.String("SERVICE_CONTROL_POLICY"),
+		PolicyType: organizations.PolicyTypeServiceControlPolicy,
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
@@ -1092,7 +1092,7 @@ func ExampleOrganizations_EnablePolicyType_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.EnablePolicyTypeInput{
-		PolicyType: aws.String("SERVICE_CONTROL_POLICY"),
+		PolicyType: organizations.PolicyTypeServiceControlPolicy,
 		RootId:     aws.String("r-examplerootid111"),
 	}
 
@@ -1149,7 +1149,7 @@ func ExampleOrganizations_InviteAccountToOrganization_shared00() {
 		Notes: aws.String("This is a request for Juan's account to join Bill's organization"),
 		Target: &organizations.HandshakeParty{
 			Id:   aws.String("juan@example.com"),
-			Type: aws.String("EMAIL"),
+			Type: organizations.HandshakePartyTypeEmail,
 		},
 	}
 
@@ -1333,7 +1333,7 @@ func ExampleOrganizations_ListChildren_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.ListChildrenInput{
-		ChildType: aws.String("ORGANIZATIONAL_UNIT"),
+		ChildType: organizations.ChildTypeOrganizationalUnit,
 		ParentId:  aws.String("ou-examplerootid111-exampleouid111"),
 	}
 
@@ -1379,8 +1379,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.ListCreateAccountStatusInput{
-		States: []*string{
-			aws.String("SUCCEEDED"),
+		States: []organizations.CreateAccountState{
+			organizations.CreateAccountState("SUCCEEDED"),
 		},
 	}
 
@@ -1424,8 +1424,8 @@ func ExampleOrganizations_ListCreateAccountStatus_shared01() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.ListCreateAccountStatusInput{
-		States: []*string{
-			aws.String("IN_PROGRESS"),
+		States: []organizations.CreateAccountState{
+			organizations.CreateAccountState("IN_PROGRESS"),
 		},
 	}
 
@@ -1640,7 +1640,7 @@ func ExampleOrganizations_ListPolicies_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.ListPoliciesInput{
-		Filter: aws.String("SERVICE_CONTROL_POLICY"),
+		Filter: organizations.PolicyTypeServiceControlPolicy,
 	}
 
 	result, err := svc.ListPolicies(input)
@@ -1685,7 +1685,7 @@ func ExampleOrganizations_ListPoliciesForTarget_shared00() {
 
 	svc := organizations.New(cfg)
 	input := &organizations.ListPoliciesForTargetInput{
-		Filter:   aws.String("SERVICE_CONTROL_POLICY"),
+		Filter:   organizations.PolicyTypeServiceControlPolicy,
 		TargetId: aws.String("444444444444"),
 	}
 

@@ -78,7 +78,7 @@ func ExampleSES_CreateReceiptFilter_shared00() {
 		Filter: &ses.ReceiptFilter{
 			IpFilter: &ses.ReceiptIpFilter{
 				Cidr:   aws.String("1.2.3.4/24"),
-				Policy: aws.String("Allow"),
+				Policy: ses.ReceiptFilterPolicyAllow,
 			},
 			Name: aws.String("MyFilter"),
 		},
@@ -125,7 +125,7 @@ func ExampleSES_CreateReceiptRule_shared00() {
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),
 			ScanEnabled: aws.Bool(true),
-			TlsPolicy:   aws.String("Optional"),
+			TlsPolicy:   ses.TlsPolicyOptional,
 		},
 		RuleSetName: aws.String("MyRuleSet"),
 	}
@@ -746,7 +746,7 @@ func ExampleSES_ListIdentities_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.ListIdentitiesInput{
-		IdentityType: aws.String("EmailAddress"),
+		IdentityType: ses.IdentityTypeEmailAddress,
 		MaxItems:     aws.Int64(123),
 		NextToken:    aws.String(""),
 	}
@@ -1198,7 +1198,7 @@ func ExampleSES_SetIdentityHeadersInNotificationsEnabled_shared00() {
 	input := &ses.SetIdentityHeadersInNotificationsEnabledInput{
 		Enabled:          aws.Bool(true),
 		Identity:         aws.String("user@example.com"),
-		NotificationType: aws.String("Bounce"),
+		NotificationType: ses.NotificationTypeBounce,
 	}
 
 	result, err := svc.SetIdentityHeadersInNotificationsEnabled(input)
@@ -1231,7 +1231,7 @@ func ExampleSES_SetIdentityMailFromDomain_shared00() {
 
 	svc := ses.New(cfg)
 	input := &ses.SetIdentityMailFromDomainInput{
-		BehaviorOnMXFailure: aws.String("UseDefaultValue"),
+		BehaviorOnMXFailure: ses.BehaviorOnMXFailureUseDefaultValue,
 		Identity:            aws.String("user@example.com"),
 		MailFromDomain:      aws.String("bounces.example.com"),
 	}
@@ -1268,7 +1268,7 @@ func ExampleSES_SetIdentityNotificationTopic_shared00() {
 	svc := ses.New(cfg)
 	input := &ses.SetIdentityNotificationTopicInput{
 		Identity:         aws.String("user@example.com"),
-		NotificationType: aws.String("Bounce"),
+		NotificationType: ses.NotificationTypeBounce,
 		SnsTopic:         aws.String("arn:aws:sns:us-west-2:111122223333:MyTopic"),
 	}
 
@@ -1346,7 +1346,7 @@ func ExampleSES_UpdateReceiptRule_shared00() {
 			Enabled:     aws.Bool(true),
 			Name:        aws.String("MyRule"),
 			ScanEnabled: aws.Bool(true),
-			TlsPolicy:   aws.String("Optional"),
+			TlsPolicy:   ses.TlsPolicyOptional,
 		},
 		RuleSetName: aws.String("MyRuleSet"),
 	}

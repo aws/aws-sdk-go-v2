@@ -1699,15 +1699,18 @@ func (s AddApplicationCloudWatchLoggingOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationCloudWatchLoggingOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationCloudWatchLoggingOptionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CloudWatchLoggingOption == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOption"))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
@@ -1794,18 +1797,21 @@ func (s AddApplicationInputInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationInputInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationInputInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.Input == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Input"))
 	}
@@ -1897,24 +1903,28 @@ func (s AddApplicationInputProcessingConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationInputProcessingConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationInputProcessingConfigurationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.InputId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
 	if s.InputId != nil && len(*s.InputId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputId", 1))
 	}
+
 	if s.InputProcessingConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputProcessingConfiguration"))
 	}
@@ -2008,18 +2018,21 @@ func (s AddApplicationOutputInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationOutputInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationOutputInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.Output == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Output"))
 	}
@@ -2109,18 +2122,21 @@ func (s AddApplicationReferenceDataSourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationReferenceDataSourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationReferenceDataSourceInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.ReferenceDataSource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReferenceDataSource"))
 	}
@@ -2195,7 +2211,7 @@ type ApplicationDetail struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus *string `type:"string" required:"true" enum:"ApplicationStatus"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
 
 	// Provides the current application version.
 	//
@@ -2261,8 +2277,8 @@ func (s *ApplicationDetail) SetApplicationName(v string) *ApplicationDetail {
 }
 
 // SetApplicationStatus sets the ApplicationStatus field's value.
-func (s *ApplicationDetail) SetApplicationStatus(v string) *ApplicationDetail {
-	s.ApplicationStatus = &v
+func (s *ApplicationDetail) SetApplicationStatus(v ApplicationStatus) *ApplicationDetail {
+	s.ApplicationStatus = v
 	return s
 }
 
@@ -2327,7 +2343,7 @@ type ApplicationSummary struct {
 	// Status of the application.
 	//
 	// ApplicationStatus is a required field
-	ApplicationStatus *string `type:"string" required:"true" enum:"ApplicationStatus"`
+	ApplicationStatus ApplicationStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2353,8 +2369,8 @@ func (s *ApplicationSummary) SetApplicationName(v string) *ApplicationSummary {
 }
 
 // SetApplicationStatus sets the ApplicationStatus field's value.
-func (s *ApplicationSummary) SetApplicationStatus(v string) *ApplicationSummary {
-	s.ApplicationStatus = &v
+func (s *ApplicationSummary) SetApplicationStatus(v ApplicationStatus) *ApplicationSummary {
+	s.ApplicationStatus = v
 	return s
 }
 
@@ -2506,12 +2522,14 @@ func (s CSVMappingParameters) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CSVMappingParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CSVMappingParameters"}
+
 	if s.RecordColumnDelimiter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordColumnDelimiter"))
 	}
 	if s.RecordColumnDelimiter != nil && len(*s.RecordColumnDelimiter) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RecordColumnDelimiter", 1))
 	}
+
 	if s.RecordRowDelimiter == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordRowDelimiter"))
 	}
@@ -2569,12 +2587,14 @@ func (s CloudWatchLoggingOption) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchLoggingOption) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLoggingOption"}
+
 	if s.LogStreamARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogStreamARN"))
 	}
 	if s.LogStreamARN != nil && len(*s.LogStreamARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogStreamARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -2681,6 +2701,7 @@ func (s CloudWatchLoggingOptionUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchLoggingOptionUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLoggingOptionUpdate"}
+
 	if s.CloudWatchLoggingOptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOptionId"))
 	}
@@ -2802,6 +2823,7 @@ func (s CreateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -2944,18 +2966,21 @@ func (s DeleteApplicationCloudWatchLoggingOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationCloudWatchLoggingOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationCloudWatchLoggingOptionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CloudWatchLoggingOptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOptionId"))
 	}
 	if s.CloudWatchLoggingOptionId != nil && len(*s.CloudWatchLoggingOptionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
@@ -3030,12 +3055,14 @@ func (s DeleteApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CreateTimestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreateTimestamp"))
 	}
@@ -3093,18 +3120,21 @@ func (s DeleteApplicationInputProcessingConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInputProcessingConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInputProcessingConfigurationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.InputId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
@@ -3206,18 +3236,21 @@ func (s DeleteApplicationOutputInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationOutputInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationOutputInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.OutputId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputId"))
 	}
@@ -3302,18 +3335,21 @@ func (s DeleteApplicationReferenceDataSourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationReferenceDataSourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationReferenceDataSourceInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
+
 	if s.ReferenceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReferenceId"))
 	}
@@ -3383,6 +3419,7 @@ func (s DescribeApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -3437,7 +3474,7 @@ type DestinationSchema struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies the format of the records on the output stream.
-	RecordFormatType *string `type:"string" enum:"RecordFormatType"`
+	RecordFormatType RecordFormatType `type:"string"`
 }
 
 // String returns the string representation
@@ -3451,8 +3488,8 @@ func (s DestinationSchema) GoString() string {
 }
 
 // SetRecordFormatType sets the RecordFormatType field's value.
-func (s *DestinationSchema) SetRecordFormatType(v string) *DestinationSchema {
-	s.RecordFormatType = &v
+func (s *DestinationSchema) SetRecordFormatType(v RecordFormatType) *DestinationSchema {
+	s.RecordFormatType = v
 	return s
 }
 
@@ -3665,9 +3702,11 @@ func (s Input) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Input) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Input"}
+
 	if s.InputSchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputSchema"))
 	}
+
 	if s.NamePrefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NamePrefix"))
 	}
@@ -3774,12 +3813,14 @@ func (s InputConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputConfiguration"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
+
 	if s.InputStartingPositionConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputStartingPositionConfiguration"))
 	}
@@ -3942,12 +3983,14 @@ func (s InputLambdaProcessor) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputLambdaProcessor) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputLambdaProcessor"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -4168,6 +4211,7 @@ func (s InputProcessingConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputProcessingConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputProcessingConfiguration"}
+
 	if s.InputLambdaProcessor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputLambdaProcessor"))
 	}
@@ -4239,6 +4283,7 @@ func (s InputProcessingConfigurationUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputProcessingConfigurationUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputProcessingConfigurationUpdate"}
+
 	if s.InputLambdaProcessorUpdate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputLambdaProcessorUpdate"))
 	}
@@ -4350,7 +4395,7 @@ type InputStartingPositionConfiguration struct {
 	//
 	//    * LAST_STOPPED_POINT - Resume reading from where the application last
 	//    stopped reading.
-	InputStartingPosition *string `type:"string" enum:"InputStartingPosition"`
+	InputStartingPosition InputStartingPosition `type:"string"`
 }
 
 // String returns the string representation
@@ -4364,8 +4409,8 @@ func (s InputStartingPositionConfiguration) GoString() string {
 }
 
 // SetInputStartingPosition sets the InputStartingPosition field's value.
-func (s *InputStartingPositionConfiguration) SetInputStartingPosition(v string) *InputStartingPositionConfiguration {
-	s.InputStartingPosition = &v
+func (s *InputStartingPositionConfiguration) SetInputStartingPosition(v InputStartingPosition) *InputStartingPositionConfiguration {
+	s.InputStartingPosition = v
 	return s
 }
 
@@ -4419,6 +4464,7 @@ func (s InputUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputUpdate"}
+
 	if s.InputId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
@@ -4527,6 +4573,7 @@ func (s JSONMappingParameters) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JSONMappingParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "JSONMappingParameters"}
+
 	if s.RecordRowPath == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordRowPath"))
 	}
@@ -4580,12 +4627,14 @@ func (s KinesisFirehoseInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseInput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -4733,12 +4782,14 @@ func (s KinesisFirehoseOutput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseOutput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseOutput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -4887,12 +4938,14 @@ func (s KinesisStreamsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsInput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -5041,12 +5094,14 @@ func (s KinesisStreamsOutput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsOutput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsOutput"}
+
 	if s.ResourceARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -5352,9 +5407,11 @@ func (s Output) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Output) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Output"}
+
 	if s.DestinationSchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationSchema"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5509,6 +5566,7 @@ func (s *OutputUpdate) Validate() error {
 	if s.NameUpdate != nil && len(*s.NameUpdate) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NameUpdate", 1))
 	}
+
 	if s.OutputId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputId"))
 	}
@@ -5599,9 +5657,11 @@ func (s RecordColumn) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordColumn) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordColumn"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.SqlType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlType"))
 	}
@@ -5648,7 +5708,7 @@ type RecordFormat struct {
 	// The type of record format.
 	//
 	// RecordFormatType is a required field
-	RecordFormatType *string `type:"string" required:"true" enum:"RecordFormatType"`
+	RecordFormatType RecordFormatType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5664,7 +5724,7 @@ func (s RecordFormat) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordFormat) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordFormat"}
-	if s.RecordFormatType == nil {
+	if len(s.RecordFormatType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RecordFormatType"))
 	}
 	if s.MappingParameters != nil {
@@ -5686,8 +5746,8 @@ func (s *RecordFormat) SetMappingParameters(v *MappingParameters) *RecordFormat 
 }
 
 // SetRecordFormatType sets the RecordFormatType field's value.
-func (s *RecordFormat) SetRecordFormatType(v string) *RecordFormat {
-	s.RecordFormatType = &v
+func (s *RecordFormat) SetRecordFormatType(v RecordFormatType) *RecordFormat {
+	s.RecordFormatType = v
 	return s
 }
 
@@ -5733,9 +5793,11 @@ func (s ReferenceDataSource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReferenceDataSource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReferenceDataSource"}
+
 	if s.ReferenceSchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReferenceSchema"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -5883,6 +5945,7 @@ func (s ReferenceDataSourceUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReferenceDataSourceUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReferenceDataSourceUpdate"}
+
 	if s.ReferenceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReferenceId"))
 	}
@@ -5960,18 +6023,21 @@ func (s S3Configuration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Configuration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3Configuration"}
+
 	if s.BucketARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
+
 	if s.FileKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileKey"))
 	}
 	if s.FileKey != nil && len(*s.FileKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileKey", 1))
 	}
+
 	if s.RoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
@@ -6046,18 +6112,21 @@ func (s S3ReferenceDataSource) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3ReferenceDataSource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3ReferenceDataSource"}
+
 	if s.BucketARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
+
 	if s.FileKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileKey"))
 	}
 	if s.FileKey != nil && len(*s.FileKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileKey", 1))
 	}
+
 	if s.ReferenceRoleARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReferenceRoleARN"))
 	}
@@ -6239,12 +6308,14 @@ func (s SourceSchema) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceSchema) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SourceSchema"}
+
 	if s.RecordColumns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordColumns"))
 	}
 	if s.RecordColumns != nil && len(s.RecordColumns) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RecordColumns", 1))
 	}
+
 	if s.RecordFormat == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RecordFormat"))
 	}
@@ -6319,12 +6390,14 @@ func (s StartApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.InputConfigurations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputConfigurations"))
 	}
@@ -6395,6 +6468,7 @@ func (s StopApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -6463,15 +6537,18 @@ func (s UpdateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.ApplicationUpdate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationUpdate"))
 	}
+
 	if s.CurrentApplicationVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
@@ -6523,41 +6600,31 @@ func (s UpdateApplicationOutput) GoString() string {
 	return s.String()
 }
 
+type ApplicationStatus string
+
+// Enum values for ApplicationStatus
 const (
-	// ApplicationStatusDeleting is a ApplicationStatus enum value
-	ApplicationStatusDeleting = "DELETING"
-
-	// ApplicationStatusStarting is a ApplicationStatus enum value
-	ApplicationStatusStarting = "STARTING"
-
-	// ApplicationStatusStopping is a ApplicationStatus enum value
-	ApplicationStatusStopping = "STOPPING"
-
-	// ApplicationStatusReady is a ApplicationStatus enum value
-	ApplicationStatusReady = "READY"
-
-	// ApplicationStatusRunning is a ApplicationStatus enum value
-	ApplicationStatusRunning = "RUNNING"
-
-	// ApplicationStatusUpdating is a ApplicationStatus enum value
-	ApplicationStatusUpdating = "UPDATING"
+	ApplicationStatusDeleting ApplicationStatus = "DELETING"
+	ApplicationStatusStarting ApplicationStatus = "STARTING"
+	ApplicationStatusStopping ApplicationStatus = "STOPPING"
+	ApplicationStatusReady    ApplicationStatus = "READY"
+	ApplicationStatusRunning  ApplicationStatus = "RUNNING"
+	ApplicationStatusUpdating ApplicationStatus = "UPDATING"
 )
 
+type InputStartingPosition string
+
+// Enum values for InputStartingPosition
 const (
-	// InputStartingPositionNow is a InputStartingPosition enum value
-	InputStartingPositionNow = "NOW"
-
-	// InputStartingPositionTrimHorizon is a InputStartingPosition enum value
-	InputStartingPositionTrimHorizon = "TRIM_HORIZON"
-
-	// InputStartingPositionLastStoppedPoint is a InputStartingPosition enum value
-	InputStartingPositionLastStoppedPoint = "LAST_STOPPED_POINT"
+	InputStartingPositionNow              InputStartingPosition = "NOW"
+	InputStartingPositionTrimHorizon      InputStartingPosition = "TRIM_HORIZON"
+	InputStartingPositionLastStoppedPoint InputStartingPosition = "LAST_STOPPED_POINT"
 )
 
-const (
-	// RecordFormatTypeJson is a RecordFormatType enum value
-	RecordFormatTypeJson = "JSON"
+type RecordFormatType string
 
-	// RecordFormatTypeCsv is a RecordFormatType enum value
-	RecordFormatTypeCsv = "CSV"
+// Enum values for RecordFormatType
+const (
+	RecordFormatTypeJson RecordFormatType = "JSON"
+	RecordFormatTypeCsv  RecordFormatType = "CSV"
 )

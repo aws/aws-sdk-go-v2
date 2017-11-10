@@ -3128,15 +3128,19 @@ func (s AddPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
+
 	if s.AWSAccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AWSAccountId"))
 	}
+
 	if s.ActionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionName"))
 	}
+
 	if s.Label == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -3210,6 +3214,7 @@ func (s CheckIfPhoneNumberIsOptedOutInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckIfPhoneNumberIsOptedOutInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CheckIfPhoneNumberIsOptedOutInput"}
+
 	if s.PhoneNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
 	}
@@ -3292,9 +3297,11 @@ func (s ConfirmSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConfirmSubscriptionInput"}
+
 	if s.Token == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -3385,12 +3392,15 @@ func (s CreatePlatformApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlatformApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformApplicationInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Platform == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Platform"))
 	}
@@ -3485,9 +3495,11 @@ func (s CreatePlatformEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlatformEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformEndpointInput"}
+
 	if s.PlatformApplicationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
+
 	if s.Token == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
@@ -3575,6 +3587,7 @@ func (s CreateTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3640,6 +3653,7 @@ func (s DeleteEndpointInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEndpointInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -3695,6 +3709,7 @@ func (s DeletePlatformApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePlatformApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePlatformApplicationInput"}
+
 	if s.PlatformApplicationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
@@ -3749,6 +3764,7 @@ func (s DeleteTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTopicInput"}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -3838,6 +3854,7 @@ func (s GetEndpointAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEndpointAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEndpointAttributesInput"}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -3916,6 +3933,7 @@ func (s GetPlatformApplicationAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPlatformApplicationAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPlatformApplicationAttributesInput"}
+
 	if s.PlatformApplicationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
@@ -4049,6 +4067,7 @@ func (s GetSubscriptionAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionAttributesInput"}
+
 	if s.SubscriptionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}
@@ -4131,6 +4150,7 @@ func (s GetTopicAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTopicAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTopicAttributesInput"}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -4224,6 +4244,7 @@ func (s ListEndpointsByPlatformApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListEndpointsByPlatformApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListEndpointsByPlatformApplicationInput"}
+
 	if s.PlatformApplicationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
@@ -4432,6 +4453,7 @@ func (s ListSubscriptionsByTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSubscriptionsByTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionsByTopicInput"}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -4651,6 +4673,7 @@ func (s MessageAttributeValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageAttributeValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MessageAttributeValue"}
+
 	if s.DataType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataType"))
 	}
@@ -4703,6 +4726,7 @@ func (s OptInPhoneNumberInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OptInPhoneNumberInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OptInPhoneNumberInput"}
+
 	if s.PhoneNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
 	}
@@ -4879,6 +4903,7 @@ func (s PublishInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PublishInput"}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
@@ -4997,9 +5022,11 @@ func (s RemovePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
+
 	if s.Label == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Label"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -5079,9 +5106,11 @@ func (s SetEndpointAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetEndpointAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetEndpointAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.EndpointArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
@@ -5181,9 +5210,11 @@ func (s SetPlatformApplicationAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetPlatformApplicationAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetPlatformApplicationAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.PlatformApplicationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformApplicationArn"))
 	}
@@ -5316,6 +5347,7 @@ func (s SetSMSAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSMSAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetSMSAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
@@ -5383,9 +5415,11 @@ func (s SetSubscriptionAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSubscriptionAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetSubscriptionAttributesInput"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
+
 	if s.SubscriptionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}
@@ -5464,9 +5498,11 @@ func (s SetTopicAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTopicAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTopicAttributesInput"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -5577,9 +5613,11 @@ func (s SubscribeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubscribeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SubscribeInput"}
+
 	if s.Protocol == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -5745,6 +5783,7 @@ func (s UnsubscribeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnsubscribeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeInput"}
+
 	if s.SubscriptionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionArn"))
 	}

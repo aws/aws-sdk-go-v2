@@ -5709,7 +5709,7 @@ type ActivatedRule struct {
 	// be aware that if you try to add a RATE_BASED rule to a web ACL without setting
 	// the type, the UpdateWebACL request will fail because the request tries to
 	// add a REGULAR rule with the specified ID, which does not exist.
-	Type *string `type:"string" enum:"WafRuleType"`
+	Type WafRuleType `type:"string"`
 }
 
 // String returns the string representation
@@ -5725,12 +5725,15 @@ func (s ActivatedRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivatedRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ActivatedRule"}
+
 	if s.Action == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.Priority == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -5768,8 +5771,8 @@ func (s *ActivatedRule) SetRuleId(v string) *ActivatedRule {
 }
 
 // SetType sets the Type field's value.
-func (s *ActivatedRule) SetType(v string) *ActivatedRule {
-	s.Type = &v
+func (s *ActivatedRule) SetType(v WafRuleType) *ActivatedRule {
+	s.Type = v
 	return s
 }
 
@@ -5889,7 +5892,7 @@ type ByteMatchSetUpdate struct {
 	// Specifies whether to insert or delete a ByteMatchTuple.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// Information about the part of a web request that you want AWS WAF to inspect
 	// and the value that you want AWS WAF to search for. If you specify DELETE
@@ -5913,9 +5916,10 @@ func (s ByteMatchSetUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ByteMatchSetUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ByteMatchSetUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.ByteMatchTuple == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ByteMatchTuple"))
 	}
@@ -5932,8 +5936,8 @@ func (s *ByteMatchSetUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *ByteMatchSetUpdate) SetAction(v string) *ByteMatchSetUpdate {
-	s.Action = &v
+func (s *ByteMatchSetUpdate) SetAction(v ChangeAction) *ByteMatchSetUpdate {
+	s.Action = v
 	return s
 }
 
@@ -6003,7 +6007,7 @@ type ByteMatchTuple struct {
 	// the web request.
 	//
 	// PositionalConstraint is a required field
-	PositionalConstraint *string `type:"string" required:"true" enum:"PositionalConstraint"`
+	PositionalConstraint PositionalConstraint `type:"string" required:"true"`
 
 	// The value that you want AWS WAF to search for. AWS WAF searches for the specified
 	// string in the part of web requests that you specified in FieldToMatch. The
@@ -6128,7 +6132,7 @@ type ByteMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation *string `type:"string" required:"true" enum:"TextTransformation"`
+	TextTransformation TextTransformation `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6144,16 +6148,18 @@ func (s ByteMatchTuple) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ByteMatchTuple) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ByteMatchTuple"}
+
 	if s.FieldToMatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
-	if s.PositionalConstraint == nil {
+	if len(s.PositionalConstraint) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PositionalConstraint"))
 	}
+
 	if s.TargetString == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetString"))
 	}
-	if s.TextTransformation == nil {
+	if len(s.TextTransformation) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
@@ -6175,8 +6181,8 @@ func (s *ByteMatchTuple) SetFieldToMatch(v *FieldToMatch) *ByteMatchTuple {
 }
 
 // SetPositionalConstraint sets the PositionalConstraint field's value.
-func (s *ByteMatchTuple) SetPositionalConstraint(v string) *ByteMatchTuple {
-	s.PositionalConstraint = &v
+func (s *ByteMatchTuple) SetPositionalConstraint(v PositionalConstraint) *ByteMatchTuple {
+	s.PositionalConstraint = v
 	return s
 }
 
@@ -6187,8 +6193,8 @@ func (s *ByteMatchTuple) SetTargetString(v []byte) *ByteMatchTuple {
 }
 
 // SetTextTransformation sets the TextTransformation field's value.
-func (s *ByteMatchTuple) SetTextTransformation(v string) *ByteMatchTuple {
-	s.TextTransformation = &v
+func (s *ByteMatchTuple) SetTextTransformation(v TextTransformation) *ByteMatchTuple {
+	s.TextTransformation = v
 	return s
 }
 
@@ -6221,12 +6227,14 @@ func (s CreateByteMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateByteMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateByteMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6316,12 +6324,14 @@ func (s CreateIPSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIPSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6413,7 +6423,7 @@ type CreateRateBasedRuleInput struct {
 	// same IP address are subject to the RateLimit that is specified in the RateBasedRule.
 	//
 	// RateKey is a required field
-	RateKey *string `type:"string" required:"true" enum:"RateKey"`
+	RateKey RateKey `type:"string" required:"true"`
 
 	// The maximum number of requests, which have an identical value in the field
 	// that is specified by RateKey, allowed in a five-minute period. If the number
@@ -6438,24 +6448,28 @@ func (s CreateRateBasedRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRateBasedRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRateBasedRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.RateKey == nil {
+	if len(s.RateKey) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RateKey"))
 	}
+
 	if s.RateLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
@@ -6488,8 +6502,8 @@ func (s *CreateRateBasedRuleInput) SetName(v string) *CreateRateBasedRuleInput {
 }
 
 // SetRateKey sets the RateKey field's value.
-func (s *CreateRateBasedRuleInput) SetRateKey(v string) *CreateRateBasedRuleInput {
-	s.RateKey = &v
+func (s *CreateRateBasedRuleInput) SetRateKey(v RateKey) *CreateRateBasedRuleInput {
+	s.RateKey = v
 	return s
 }
 
@@ -6571,15 +6585,18 @@ func (s CreateRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6675,12 +6692,14 @@ func (s CreateSizeConstraintSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSizeConstraintSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSizeConstraintSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6771,12 +6790,14 @@ func (s CreateSqlInjectionMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSqlInjectionMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSqlInjectionMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6881,18 +6902,22 @@ func (s CreateWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateWebACLInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.DefaultAction == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultAction"))
 	}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -7000,12 +7025,14 @@ func (s CreateXssMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateXssMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateXssMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -7096,12 +7123,14 @@ func (s DeleteByteMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteByteMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteByteMatchSetInput"}
+
 	if s.ByteMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
 	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
 	}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
@@ -7182,12 +7211,14 @@ func (s DeleteIPSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIPSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIPSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.IPSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
@@ -7268,12 +7299,14 @@ func (s DeleteRateBasedRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRateBasedRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRateBasedRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -7354,12 +7387,14 @@ func (s DeleteRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -7440,12 +7475,14 @@ func (s DeleteSizeConstraintSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSizeConstraintSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSizeConstraintSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.SizeConstraintSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
@@ -7527,12 +7564,14 @@ func (s DeleteSqlInjectionMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSqlInjectionMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.SqlInjectionMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
@@ -7614,12 +7653,14 @@ func (s DeleteWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebACLInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -7701,12 +7742,14 @@ func (s DeleteXssMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteXssMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteXssMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.XssMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
@@ -7797,7 +7840,7 @@ type FieldToMatch struct {
 	//    see CreateSizeConstraintSet.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"MatchFieldType"`
+	Type MatchFieldType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7813,7 +7856,7 @@ func (s FieldToMatch) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FieldToMatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FieldToMatch"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -7830,8 +7873,8 @@ func (s *FieldToMatch) SetData(v string) *FieldToMatch {
 }
 
 // SetType sets the Type field's value.
-func (s *FieldToMatch) SetType(v string) *FieldToMatch {
-	s.Type = &v
+func (s *FieldToMatch) SetType(v MatchFieldType) *FieldToMatch {
+	s.Type = v
 	return s
 }
 
@@ -7859,6 +7902,7 @@ func (s GetByteMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetByteMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetByteMatchSetInput"}
+
 	if s.ByteMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
@@ -7975,6 +8019,7 @@ func (s GetChangeTokenStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetChangeTokenStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetChangeTokenStatusInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
@@ -7999,7 +8044,7 @@ type GetChangeTokenStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the change token.
-	ChangeTokenStatus *string `type:"string" enum:"ChangeTokenStatus"`
+	ChangeTokenStatus ChangeTokenStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -8013,8 +8058,8 @@ func (s GetChangeTokenStatusOutput) GoString() string {
 }
 
 // SetChangeTokenStatus sets the ChangeTokenStatus field's value.
-func (s *GetChangeTokenStatusOutput) SetChangeTokenStatus(v string) *GetChangeTokenStatusOutput {
-	s.ChangeTokenStatus = &v
+func (s *GetChangeTokenStatusOutput) SetChangeTokenStatus(v ChangeTokenStatus) *GetChangeTokenStatusOutput {
+	s.ChangeTokenStatus = v
 	return s
 }
 
@@ -8042,6 +8087,7 @@ func (s GetIPSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIPSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIPSetInput"}
+
 	if s.IPSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
@@ -8115,6 +8161,7 @@ func (s GetRateBasedRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRateBasedRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleInput"}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -8164,6 +8211,7 @@ func (s *GetRateBasedRuleManagedKeysInput) Validate() error {
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -8271,6 +8319,7 @@ func (s GetRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRuleInput"}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
@@ -8371,21 +8420,25 @@ func (s GetSampledRequestsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSampledRequestsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSampledRequestsInput"}
+
 	if s.MaxItems == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxItems"))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
+
 	if s.TimeWindow == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimeWindow"))
 	}
+
 	if s.WebAclId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebAclId"))
 	}
@@ -8500,6 +8553,7 @@ func (s GetSizeConstraintSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSizeConstraintSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSizeConstraintSetInput"}
+
 	if s.SizeConstraintSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
@@ -8578,6 +8632,7 @@ func (s GetSqlInjectionMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSqlInjectionMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSqlInjectionMatchSetInput"}
+
 	if s.SqlInjectionMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
@@ -8655,6 +8710,7 @@ func (s GetWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLInput"}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -8734,6 +8790,7 @@ func (s GetXssMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetXssMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetXssMatchSetInput"}
+
 	if s.XssMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
@@ -8982,7 +9039,7 @@ type IPSetDescriptor struct {
 	// Specify IPV4 or IPV6.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"IPSetDescriptorType"`
+	Type IPSetDescriptorType `type:"string" required:"true"`
 
 	// Specify an IPv4 address by using CIDR notation. For example:
 	//
@@ -9021,9 +9078,10 @@ func (s IPSetDescriptor) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IPSetDescriptor) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IPSetDescriptor"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -9035,8 +9093,8 @@ func (s *IPSetDescriptor) Validate() error {
 }
 
 // SetType sets the Type field's value.
-func (s *IPSetDescriptor) SetType(v string) *IPSetDescriptor {
-	s.Type = &v
+func (s *IPSetDescriptor) SetType(v IPSetDescriptorType) *IPSetDescriptor {
+	s.Type = v
 	return s
 }
 
@@ -9094,7 +9152,7 @@ type IPSetUpdate struct {
 	// Specifies whether to insert or delete an IP address with UpdateIPSet.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// The IP address type (IPV4 or IPV6) and the IP address range (in CIDR notation)
 	// that web requests originate from.
@@ -9116,9 +9174,10 @@ func (s IPSetUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IPSetUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IPSetUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.IPSetDescriptor == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IPSetDescriptor"))
 	}
@@ -9135,8 +9194,8 @@ func (s *IPSetUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *IPSetUpdate) SetAction(v string) *IPSetUpdate {
-	s.Action = &v
+func (s *IPSetUpdate) SetAction(v ChangeAction) *IPSetUpdate {
+	s.Action = v
 	return s
 }
 
@@ -9898,7 +9957,7 @@ type Predicate struct {
 	// The type of predicate in a Rule, such as ByteMatchSet or IPSet.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"PredicateType"`
+	Type PredicateType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9914,16 +9973,18 @@ func (s Predicate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Predicate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Predicate"}
+
 	if s.DataId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataId"))
 	}
 	if s.DataId != nil && len(*s.DataId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DataId", 1))
 	}
+
 	if s.Negated == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Negated"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -9946,8 +10007,8 @@ func (s *Predicate) SetNegated(v bool) *Predicate {
 }
 
 // SetType sets the Type field's value.
-func (s *Predicate) SetType(v string) *Predicate {
-	s.Type = &v
+func (s *Predicate) SetType(v PredicateType) *Predicate {
+	s.Type = v
 	return s
 }
 
@@ -9992,7 +10053,7 @@ type RateBasedRule struct {
 	// are subject to the RateLimit that is specified in the RateBasedRule.
 	//
 	// RateKey is a required field
-	RateKey *string `type:"string" required:"true" enum:"RateKey"`
+	RateKey RateKey `type:"string" required:"true"`
 
 	// The maximum number of requests, which have an identical value in the field
 	// specified by the RateKey, allowed in a five-minute period. If the number
@@ -10042,8 +10103,8 @@ func (s *RateBasedRule) SetName(v string) *RateBasedRule {
 }
 
 // SetRateKey sets the RateKey field's value.
-func (s *RateBasedRule) SetRateKey(v string) *RateBasedRule {
-	s.RateKey = &v
+func (s *RateBasedRule) SetRateKey(v RateKey) *RateBasedRule {
+	s.RateKey = v
 	return s
 }
 
@@ -10189,7 +10250,7 @@ type RuleUpdate struct {
 	// from a Rule.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// The ID of the Predicate (such as an IPSet) that you want to add to a Rule.
 	//
@@ -10210,9 +10271,10 @@ func (s RuleUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RuleUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RuleUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.Predicate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Predicate"))
 	}
@@ -10229,8 +10291,8 @@ func (s *RuleUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *RuleUpdate) SetAction(v string) *RuleUpdate {
-	s.Action = &v
+func (s *RuleUpdate) SetAction(v ChangeAction) *RuleUpdate {
+	s.Action = v
 	return s
 }
 
@@ -10330,7 +10392,7 @@ type SizeConstraint struct {
 	// GT: Used to test if the Size is strictly greater than the size of the FieldToMatch
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 
 	// Specifies where in a web request to look for the size constraint.
 	//
@@ -10427,7 +10489,7 @@ type SizeConstraint struct {
 	// Use this option to decode a URL-encoded value.
 	//
 	// TextTransformation is a required field
-	TextTransformation *string `type:"string" required:"true" enum:"TextTransformation"`
+	TextTransformation TextTransformation `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10443,16 +10505,18 @@ func (s SizeConstraint) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SizeConstraint) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SizeConstraint"}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
+
 	if s.FieldToMatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
+
 	if s.Size == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
-	if s.TextTransformation == nil {
+	if len(s.TextTransformation) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
@@ -10468,8 +10532,8 @@ func (s *SizeConstraint) Validate() error {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *SizeConstraint) SetComparisonOperator(v string) *SizeConstraint {
-	s.ComparisonOperator = &v
+func (s *SizeConstraint) SetComparisonOperator(v ComparisonOperator) *SizeConstraint {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -10486,8 +10550,8 @@ func (s *SizeConstraint) SetSize(v int64) *SizeConstraint {
 }
 
 // SetTextTransformation sets the TextTransformation field's value.
-func (s *SizeConstraint) SetTextTransformation(v string) *SizeConstraint {
-	s.TextTransformation = &v
+func (s *SizeConstraint) SetTextTransformation(v TextTransformation) *SizeConstraint {
+	s.TextTransformation = v
 	return s
 }
 
@@ -10602,7 +10666,7 @@ type SizeConstraintSetUpdate struct {
 	// DELETE to remove a SizeConstraintSetUpdate from a SizeConstraintSet.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// Specifies a constraint on the size of a part of the web request. AWS WAF
 	// uses the Size, ComparisonOperator, and FieldToMatch to build an expression
@@ -10626,9 +10690,10 @@ func (s SizeConstraintSetUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SizeConstraintSetUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SizeConstraintSetUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.SizeConstraint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeConstraint"))
 	}
@@ -10645,8 +10710,8 @@ func (s *SizeConstraintSetUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *SizeConstraintSetUpdate) SetAction(v string) *SizeConstraintSetUpdate {
-	s.Action = &v
+func (s *SizeConstraintSetUpdate) SetAction(v ChangeAction) *SizeConstraintSetUpdate {
+	s.Action = v
 	return s
 }
 
@@ -10770,7 +10835,7 @@ type SqlInjectionMatchSetUpdate struct {
 	// Use DELETE to remove a SqlInjectionMatchSetUpdate from a SqlInjectionMatchSet.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// Specifies the part of a web request that you want AWS WAF to inspect for
 	// snippets of malicious SQL code and, if you want AWS WAF to inspect a header,
@@ -10793,9 +10858,10 @@ func (s SqlInjectionMatchSetUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqlInjectionMatchSetUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SqlInjectionMatchSetUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.SqlInjectionMatchTuple == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchTuple"))
 	}
@@ -10812,8 +10878,8 @@ func (s *SqlInjectionMatchSetUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *SqlInjectionMatchSetUpdate) SetAction(v string) *SqlInjectionMatchSetUpdate {
-	s.Action = &v
+func (s *SqlInjectionMatchSetUpdate) SetAction(v ChangeAction) *SqlInjectionMatchSetUpdate {
+	s.Action = v
 	return s
 }
 
@@ -10907,7 +10973,7 @@ type SqlInjectionMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation *string `type:"string" required:"true" enum:"TextTransformation"`
+	TextTransformation TextTransformation `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10923,10 +10989,11 @@ func (s SqlInjectionMatchTuple) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqlInjectionMatchTuple) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SqlInjectionMatchTuple"}
+
 	if s.FieldToMatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
-	if s.TextTransformation == nil {
+	if len(s.TextTransformation) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
@@ -10948,8 +11015,8 @@ func (s *SqlInjectionMatchTuple) SetFieldToMatch(v *FieldToMatch) *SqlInjectionM
 }
 
 // SetTextTransformation sets the TextTransformation field's value.
-func (s *SqlInjectionMatchTuple) SetTextTransformation(v string) *SqlInjectionMatchTuple {
-	s.TextTransformation = &v
+func (s *SqlInjectionMatchTuple) SetTextTransformation(v TextTransformation) *SqlInjectionMatchTuple {
+	s.TextTransformation = v
 	return s
 }
 
@@ -10997,9 +11064,11 @@ func (s TimeWindow) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimeWindow) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TimeWindow"}
+
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
@@ -11064,18 +11133,21 @@ func (s UpdateByteMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateByteMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateByteMatchSetInput"}
+
 	if s.ByteMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
 	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
 	}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11179,18 +11251,21 @@ func (s UpdateIPSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIPSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateIPSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.IPSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
 	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11299,24 +11374,28 @@ func (s UpdateRateBasedRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRateBasedRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRateBasedRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.RateLimit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
 	if s.RateLimit != nil && *s.RateLimit < 2000 {
 		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11428,18 +11507,21 @@ func (s UpdateRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.RuleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11547,18 +11629,21 @@ func (s UpdateSizeConstraintSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSizeConstraintSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSizeConstraintSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.SizeConstraintSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
 	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11666,18 +11751,21 @@ func (s UpdateSqlInjectionMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateSqlInjectionMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.SqlInjectionMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
 	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
@@ -11789,12 +11877,14 @@ func (s UpdateWebACLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateWebACLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebACLInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -11915,15 +12005,18 @@ func (s UpdateXssMatchSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateXssMatchSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateXssMatchSetInput"}
+
 	if s.ChangeToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
+
 	if s.Updates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
+
 	if s.XssMatchSetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
@@ -12014,7 +12107,7 @@ type WafAction struct {
 	//    COUNT for the default action for a WebACL.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"WafActionType"`
+	Type WafActionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -12030,7 +12123,7 @@ func (s WafAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WafAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WafAction"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -12041,8 +12134,8 @@ func (s *WafAction) Validate() error {
 }
 
 // SetType sets the Type field's value.
-func (s *WafAction) SetType(v string) *WafAction {
-	s.Type = &v
+func (s *WafAction) SetType(v WafActionType) *WafAction {
+	s.Type = v
 	return s
 }
 
@@ -12180,7 +12273,7 @@ type WebACLUpdate struct {
 	// Specifies whether to insert a Rule into or delete a Rule from a WebACL.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// The ActivatedRule object in an UpdateWebACL request specifies a Rule that
 	// you want to insert or delete, the priority of the Rule in the WebACL, and
@@ -12204,9 +12297,10 @@ func (s WebACLUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WebACLUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WebACLUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.ActivatedRule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivatedRule"))
 	}
@@ -12223,8 +12317,8 @@ func (s *WebACLUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *WebACLUpdate) SetAction(v string) *WebACLUpdate {
-	s.Action = &v
+func (s *WebACLUpdate) SetAction(v ChangeAction) *WebACLUpdate {
+	s.Action = v
 	return s
 }
 
@@ -12346,7 +12440,7 @@ type XssMatchSetUpdate struct {
 	// remove a XssMatchSetUpdate from an XssMatchSet.
 	//
 	// Action is a required field
-	Action *string `type:"string" required:"true" enum:"ChangeAction"`
+	Action ChangeAction `type:"string" required:"true"`
 
 	// Specifies the part of a web request that you want AWS WAF to inspect for
 	// cross-site scripting attacks and, if you want AWS WAF to inspect a header,
@@ -12369,9 +12463,10 @@ func (s XssMatchSetUpdate) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *XssMatchSetUpdate) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "XssMatchSetUpdate"}
-	if s.Action == nil {
+	if len(s.Action) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.XssMatchTuple == nil {
 		invalidParams.Add(aws.NewErrParamRequired("XssMatchTuple"))
 	}
@@ -12388,8 +12483,8 @@ func (s *XssMatchSetUpdate) Validate() error {
 }
 
 // SetAction sets the Action field's value.
-func (s *XssMatchSetUpdate) SetAction(v string) *XssMatchSetUpdate {
-	s.Action = &v
+func (s *XssMatchSetUpdate) SetAction(v ChangeAction) *XssMatchSetUpdate {
+	s.Action = v
 	return s
 }
 
@@ -12483,7 +12578,7 @@ type XssMatchTuple struct {
 	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// TextTransformation is a required field
-	TextTransformation *string `type:"string" required:"true" enum:"TextTransformation"`
+	TextTransformation TextTransformation `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -12499,10 +12594,11 @@ func (s XssMatchTuple) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *XssMatchTuple) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "XssMatchTuple"}
+
 	if s.FieldToMatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
-	if s.TextTransformation == nil {
+	if len(s.TextTransformation) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
@@ -12524,195 +12620,139 @@ func (s *XssMatchTuple) SetFieldToMatch(v *FieldToMatch) *XssMatchTuple {
 }
 
 // SetTextTransformation sets the TextTransformation field's value.
-func (s *XssMatchTuple) SetTextTransformation(v string) *XssMatchTuple {
-	s.TextTransformation = &v
+func (s *XssMatchTuple) SetTextTransformation(v TextTransformation) *XssMatchTuple {
+	s.TextTransformation = v
 	return s
 }
 
-const (
-	// ChangeActionInsert is a ChangeAction enum value
-	ChangeActionInsert = "INSERT"
+type ChangeAction string
 
-	// ChangeActionDelete is a ChangeAction enum value
-	ChangeActionDelete = "DELETE"
+// Enum values for ChangeAction
+const (
+	ChangeActionInsert ChangeAction = "INSERT"
+	ChangeActionDelete ChangeAction = "DELETE"
 )
 
+type ChangeTokenStatus string
+
+// Enum values for ChangeTokenStatus
 const (
-	// ChangeTokenStatusProvisioned is a ChangeTokenStatus enum value
-	ChangeTokenStatusProvisioned = "PROVISIONED"
-
-	// ChangeTokenStatusPending is a ChangeTokenStatus enum value
-	ChangeTokenStatusPending = "PENDING"
-
-	// ChangeTokenStatusInsync is a ChangeTokenStatus enum value
-	ChangeTokenStatusInsync = "INSYNC"
+	ChangeTokenStatusProvisioned ChangeTokenStatus = "PROVISIONED"
+	ChangeTokenStatusPending     ChangeTokenStatus = "PENDING"
+	ChangeTokenStatusInsync      ChangeTokenStatus = "INSYNC"
 )
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorEq is a ComparisonOperator enum value
-	ComparisonOperatorEq = "EQ"
-
-	// ComparisonOperatorNe is a ComparisonOperator enum value
-	ComparisonOperatorNe = "NE"
-
-	// ComparisonOperatorLe is a ComparisonOperator enum value
-	ComparisonOperatorLe = "LE"
-
-	// ComparisonOperatorLt is a ComparisonOperator enum value
-	ComparisonOperatorLt = "LT"
-
-	// ComparisonOperatorGe is a ComparisonOperator enum value
-	ComparisonOperatorGe = "GE"
-
-	// ComparisonOperatorGt is a ComparisonOperator enum value
-	ComparisonOperatorGt = "GT"
+	ComparisonOperatorEq ComparisonOperator = "EQ"
+	ComparisonOperatorNe ComparisonOperator = "NE"
+	ComparisonOperatorLe ComparisonOperator = "LE"
+	ComparisonOperatorLt ComparisonOperator = "LT"
+	ComparisonOperatorGe ComparisonOperator = "GE"
+	ComparisonOperatorGt ComparisonOperator = "GT"
 )
 
-const (
-	// IPSetDescriptorTypeIpv4 is a IPSetDescriptorType enum value
-	IPSetDescriptorTypeIpv4 = "IPV4"
+type IPSetDescriptorType string
 
-	// IPSetDescriptorTypeIpv6 is a IPSetDescriptorType enum value
-	IPSetDescriptorTypeIpv6 = "IPV6"
+// Enum values for IPSetDescriptorType
+const (
+	IPSetDescriptorTypeIpv4 IPSetDescriptorType = "IPV4"
+	IPSetDescriptorTypeIpv6 IPSetDescriptorType = "IPV6"
 )
 
+type MatchFieldType string
+
+// Enum values for MatchFieldType
 const (
-	// MatchFieldTypeUri is a MatchFieldType enum value
-	MatchFieldTypeUri = "URI"
-
-	// MatchFieldTypeQueryString is a MatchFieldType enum value
-	MatchFieldTypeQueryString = "QUERY_STRING"
-
-	// MatchFieldTypeHeader is a MatchFieldType enum value
-	MatchFieldTypeHeader = "HEADER"
-
-	// MatchFieldTypeMethod is a MatchFieldType enum value
-	MatchFieldTypeMethod = "METHOD"
-
-	// MatchFieldTypeBody is a MatchFieldType enum value
-	MatchFieldTypeBody = "BODY"
+	MatchFieldTypeUri         MatchFieldType = "URI"
+	MatchFieldTypeQueryString MatchFieldType = "QUERY_STRING"
+	MatchFieldTypeHeader      MatchFieldType = "HEADER"
+	MatchFieldTypeMethod      MatchFieldType = "METHOD"
+	MatchFieldTypeBody        MatchFieldType = "BODY"
 )
 
+type ParameterExceptionField string
+
+// Enum values for ParameterExceptionField
 const (
-	// ParameterExceptionFieldChangeAction is a ParameterExceptionField enum value
-	ParameterExceptionFieldChangeAction = "CHANGE_ACTION"
-
-	// ParameterExceptionFieldWafAction is a ParameterExceptionField enum value
-	ParameterExceptionFieldWafAction = "WAF_ACTION"
-
-	// ParameterExceptionFieldPredicateType is a ParameterExceptionField enum value
-	ParameterExceptionFieldPredicateType = "PREDICATE_TYPE"
-
-	// ParameterExceptionFieldIpsetType is a ParameterExceptionField enum value
-	ParameterExceptionFieldIpsetType = "IPSET_TYPE"
-
-	// ParameterExceptionFieldByteMatchFieldType is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchFieldType = "BYTE_MATCH_FIELD_TYPE"
-
-	// ParameterExceptionFieldSqlInjectionMatchFieldType is a ParameterExceptionField enum value
-	ParameterExceptionFieldSqlInjectionMatchFieldType = "SQL_INJECTION_MATCH_FIELD_TYPE"
-
-	// ParameterExceptionFieldByteMatchTextTransformation is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchTextTransformation = "BYTE_MATCH_TEXT_TRANSFORMATION"
-
-	// ParameterExceptionFieldByteMatchPositionalConstraint is a ParameterExceptionField enum value
-	ParameterExceptionFieldByteMatchPositionalConstraint = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
-
-	// ParameterExceptionFieldSizeConstraintComparisonOperator is a ParameterExceptionField enum value
-	ParameterExceptionFieldSizeConstraintComparisonOperator = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
-
-	// ParameterExceptionFieldRateKey is a ParameterExceptionField enum value
-	ParameterExceptionFieldRateKey = "RATE_KEY"
-
-	// ParameterExceptionFieldRuleType is a ParameterExceptionField enum value
-	ParameterExceptionFieldRuleType = "RULE_TYPE"
-
-	// ParameterExceptionFieldNextMarker is a ParameterExceptionField enum value
-	ParameterExceptionFieldNextMarker = "NEXT_MARKER"
+	ParameterExceptionFieldChangeAction                     ParameterExceptionField = "CHANGE_ACTION"
+	ParameterExceptionFieldWafAction                        ParameterExceptionField = "WAF_ACTION"
+	ParameterExceptionFieldPredicateType                    ParameterExceptionField = "PREDICATE_TYPE"
+	ParameterExceptionFieldIpsetType                        ParameterExceptionField = "IPSET_TYPE"
+	ParameterExceptionFieldByteMatchFieldType               ParameterExceptionField = "BYTE_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldSqlInjectionMatchFieldType       ParameterExceptionField = "SQL_INJECTION_MATCH_FIELD_TYPE"
+	ParameterExceptionFieldByteMatchTextTransformation      ParameterExceptionField = "BYTE_MATCH_TEXT_TRANSFORMATION"
+	ParameterExceptionFieldByteMatchPositionalConstraint    ParameterExceptionField = "BYTE_MATCH_POSITIONAL_CONSTRAINT"
+	ParameterExceptionFieldSizeConstraintComparisonOperator ParameterExceptionField = "SIZE_CONSTRAINT_COMPARISON_OPERATOR"
+	ParameterExceptionFieldRateKey                          ParameterExceptionField = "RATE_KEY"
+	ParameterExceptionFieldRuleType                         ParameterExceptionField = "RULE_TYPE"
+	ParameterExceptionFieldNextMarker                       ParameterExceptionField = "NEXT_MARKER"
 )
 
-const (
-	// ParameterExceptionReasonInvalidOption is a ParameterExceptionReason enum value
-	ParameterExceptionReasonInvalidOption = "INVALID_OPTION"
+type ParameterExceptionReason string
 
-	// ParameterExceptionReasonIllegalCombination is a ParameterExceptionReason enum value
-	ParameterExceptionReasonIllegalCombination = "ILLEGAL_COMBINATION"
+// Enum values for ParameterExceptionReason
+const (
+	ParameterExceptionReasonInvalidOption      ParameterExceptionReason = "INVALID_OPTION"
+	ParameterExceptionReasonIllegalCombination ParameterExceptionReason = "ILLEGAL_COMBINATION"
 )
 
+type PositionalConstraint string
+
+// Enum values for PositionalConstraint
 const (
-	// PositionalConstraintExactly is a PositionalConstraint enum value
-	PositionalConstraintExactly = "EXACTLY"
-
-	// PositionalConstraintStartsWith is a PositionalConstraint enum value
-	PositionalConstraintStartsWith = "STARTS_WITH"
-
-	// PositionalConstraintEndsWith is a PositionalConstraint enum value
-	PositionalConstraintEndsWith = "ENDS_WITH"
-
-	// PositionalConstraintContains is a PositionalConstraint enum value
-	PositionalConstraintContains = "CONTAINS"
-
-	// PositionalConstraintContainsWord is a PositionalConstraint enum value
-	PositionalConstraintContainsWord = "CONTAINS_WORD"
+	PositionalConstraintExactly      PositionalConstraint = "EXACTLY"
+	PositionalConstraintStartsWith   PositionalConstraint = "STARTS_WITH"
+	PositionalConstraintEndsWith     PositionalConstraint = "ENDS_WITH"
+	PositionalConstraintContains     PositionalConstraint = "CONTAINS"
+	PositionalConstraintContainsWord PositionalConstraint = "CONTAINS_WORD"
 )
 
+type PredicateType string
+
+// Enum values for PredicateType
 const (
-	// PredicateTypeIpmatch is a PredicateType enum value
-	PredicateTypeIpmatch = "IPMatch"
-
-	// PredicateTypeByteMatch is a PredicateType enum value
-	PredicateTypeByteMatch = "ByteMatch"
-
-	// PredicateTypeSqlInjectionMatch is a PredicateType enum value
-	PredicateTypeSqlInjectionMatch = "SqlInjectionMatch"
-
-	// PredicateTypeSizeConstraint is a PredicateType enum value
-	PredicateTypeSizeConstraint = "SizeConstraint"
-
-	// PredicateTypeXssMatch is a PredicateType enum value
-	PredicateTypeXssMatch = "XssMatch"
+	PredicateTypeIpmatch           PredicateType = "IPMatch"
+	PredicateTypeByteMatch         PredicateType = "ByteMatch"
+	PredicateTypeSqlInjectionMatch PredicateType = "SqlInjectionMatch"
+	PredicateTypeSizeConstraint    PredicateType = "SizeConstraint"
+	PredicateTypeXssMatch          PredicateType = "XssMatch"
 )
 
+type RateKey string
+
+// Enum values for RateKey
 const (
-	// RateKeyIp is a RateKey enum value
-	RateKeyIp = "IP"
+	RateKeyIp RateKey = "IP"
 )
 
+type TextTransformation string
+
+// Enum values for TextTransformation
 const (
-	// TextTransformationNone is a TextTransformation enum value
-	TextTransformationNone = "NONE"
-
-	// TextTransformationCompressWhiteSpace is a TextTransformation enum value
-	TextTransformationCompressWhiteSpace = "COMPRESS_WHITE_SPACE"
-
-	// TextTransformationHtmlEntityDecode is a TextTransformation enum value
-	TextTransformationHtmlEntityDecode = "HTML_ENTITY_DECODE"
-
-	// TextTransformationLowercase is a TextTransformation enum value
-	TextTransformationLowercase = "LOWERCASE"
-
-	// TextTransformationCmdLine is a TextTransformation enum value
-	TextTransformationCmdLine = "CMD_LINE"
-
-	// TextTransformationUrlDecode is a TextTransformation enum value
-	TextTransformationUrlDecode = "URL_DECODE"
+	TextTransformationNone               TextTransformation = "NONE"
+	TextTransformationCompressWhiteSpace TextTransformation = "COMPRESS_WHITE_SPACE"
+	TextTransformationHtmlEntityDecode   TextTransformation = "HTML_ENTITY_DECODE"
+	TextTransformationLowercase          TextTransformation = "LOWERCASE"
+	TextTransformationCmdLine            TextTransformation = "CMD_LINE"
+	TextTransformationUrlDecode          TextTransformation = "URL_DECODE"
 )
 
+type WafActionType string
+
+// Enum values for WafActionType
 const (
-	// WafActionTypeBlock is a WafActionType enum value
-	WafActionTypeBlock = "BLOCK"
-
-	// WafActionTypeAllow is a WafActionType enum value
-	WafActionTypeAllow = "ALLOW"
-
-	// WafActionTypeCount is a WafActionType enum value
-	WafActionTypeCount = "COUNT"
+	WafActionTypeBlock WafActionType = "BLOCK"
+	WafActionTypeAllow WafActionType = "ALLOW"
+	WafActionTypeCount WafActionType = "COUNT"
 )
 
-const (
-	// WafRuleTypeRegular is a WafRuleType enum value
-	WafRuleTypeRegular = "REGULAR"
+type WafRuleType string
 
-	// WafRuleTypeRateBased is a WafRuleType enum value
-	WafRuleTypeRateBased = "RATE_BASED"
+// Enum values for WafRuleType
+const (
+	WafRuleTypeRegular   WafRuleType = "REGULAR"
+	WafRuleTypeRateBased WafRuleType = "RATE_BASED"
 )

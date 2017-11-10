@@ -157,7 +157,7 @@ func ExampleS3_CreateBucket_shared00() {
 	input := &s3.CreateBucketInput{
 		Bucket: aws.String("examplebucket"),
 		CreateBucketConfiguration: &s3.CreateBucketConfiguration{
-			LocationConstraint: aws.String("eu-west-1"),
+			LocationConstraint: s3.BucketLocationConstraintEuWest1,
 		},
 	}
 
@@ -1726,11 +1726,11 @@ func ExampleS3_PutBucketLifecycleConfiguration_shared00() {
 			Rules: []*s3.LifecycleRule{
 				{
 					ID:     aws.String("TestOnly"),
-					Status: aws.String("Enabled"),
+					Status: s3.ExpirationStatusEnabled,
 					Transitions: []*s3.Transition{
 						{
 							Days:         aws.Int64(365),
-							StorageClass: aws.String("GLACIER"),
+							StorageClass: s3.TransitionStorageClassGlacier,
 						},
 					},
 				},
@@ -1775,7 +1775,7 @@ func ExampleS3_PutBucketLogging_shared00() {
 				TargetBucket: aws.String("targetbucket"),
 				TargetGrants: []*s3.TargetGrant{
 					{
-						Permission: aws.String("READ"),
+						Permission: s3.BucketLogsPermissionRead,
 					},
 				},
 				TargetPrefix: aws.String("MyBucketLogs/"),
@@ -1817,8 +1817,8 @@ func ExampleS3_PutBucketNotificationConfiguration_shared00() {
 		NotificationConfiguration: &s3.NotificationConfiguration{
 			TopicConfigurations: []*s3.TopicConfiguration{
 				{
-					Events: []*string{
-						aws.String("s3:ObjectCreated:*"),
+					Events: []s3.Event{
+						s3.EventS3ObjectCreated,
 					},
 					TopicArn: aws.String("arn:aws:sns:us-west-2:123456789012:s3-notification-topic"),
 				},
@@ -1894,7 +1894,7 @@ func ExampleS3_PutBucketReplication_shared00() {
 			Rules: []*s3.ReplicationRule{
 				{
 					Prefix: aws.String(""),
-					Status: aws.String("Enabled"),
+					Status: s3.ReplicationRuleStatusEnabled,
 				},
 			},
 		},
@@ -1932,7 +1932,7 @@ func ExampleS3_PutBucketRequestPayment_shared00() {
 	input := &s3.PutBucketRequestPaymentInput{
 		Bucket: aws.String("examplebucket"),
 		RequestPaymentConfiguration: &s3.RequestPaymentConfiguration{
-			Payer: aws.String("Requester"),
+			Payer: s3.PayerRequester,
 		},
 	}
 
@@ -2012,8 +2012,8 @@ func ExampleS3_PutBucketVersioning_shared00() {
 	input := &s3.PutBucketVersioningInput{
 		Bucket: aws.String("examplebucket"),
 		VersioningConfiguration: &s3.VersioningConfiguration{
-			MFADelete: aws.String("Disabled"),
-			Status:    aws.String("Enabled"),
+			MFADelete: s3.MFADeleteDisabled,
+			Status:    s3.BucketVersioningStatusEnabled,
 		},
 	}
 
@@ -2091,7 +2091,7 @@ func ExampleS3_PutObject_shared00() {
 		Body:                 aws.ReadSeekCloser(strings.NewReader("filetoupload")),
 		Bucket:               aws.String("examplebucket"),
 		Key:                  aws.String("exampleobject"),
-		ServerSideEncryption: aws.String("AES256"),
+		ServerSideEncryption: s3.ServerSideEncryptionAes256,
 		Tagging:              aws.String("key1=value1&key2=value2"),
 	}
 
@@ -2126,7 +2126,7 @@ func ExampleS3_PutObject_shared01() {
 
 	svc := s3.New(cfg)
 	input := &s3.PutObjectInput{
-		ACL:    aws.String("authenticated-read"),
+		ACL:    s3.ObjectCannedACLAuthenticatedRead,
 		Body:   aws.ReadSeekCloser(strings.NewReader("filetoupload")),
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("exampleobject"),
@@ -2311,8 +2311,8 @@ func ExampleS3_PutObject_shared06() {
 		Body:                 aws.ReadSeekCloser(strings.NewReader("HappyFace.jpg")),
 		Bucket:               aws.String("examplebucket"),
 		Key:                  aws.String("HappyFace.jpg"),
-		ServerSideEncryption: aws.String("AES256"),
-		StorageClass:         aws.String("STANDARD_IA"),
+		ServerSideEncryption: s3.ServerSideEncryptionAes256,
+		StorageClass:         s3.StorageClassStandardIa,
 	}
 
 	result, err := svc.PutObject(input)
@@ -2434,7 +2434,7 @@ func ExampleS3_RestoreObject_shared00() {
 		RestoreRequest: &s3.RestoreRequest{
 			Days: aws.Int64(1),
 			GlacierJobParameters: &s3.GlacierJobParameters{
-				Tier: aws.String("Expedited"),
+				Tier: s3.TierExpedited,
 			},
 		},
 	}

@@ -1380,9 +1380,11 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.ARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
+
 	if s.TagList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
@@ -1567,6 +1569,7 @@ func (s CreateElasticsearchDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateElasticsearchDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateElasticsearchDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1671,6 +1674,7 @@ func (s DeleteElasticsearchDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteElasticsearchDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteElasticsearchDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1740,6 +1744,7 @@ func (s DescribeElasticsearchDomainConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainConfigInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1810,6 +1815,7 @@ func (s DescribeElasticsearchDomainInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -1880,6 +1886,7 @@ func (s DescribeElasticsearchDomainsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainsInput"}
+
 	if s.DomainNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainNames"))
 	}
@@ -1941,7 +1948,7 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	// are needed.
 	//
 	// InstanceType is a required field
-	InstanceType *string `location:"uri" locationName:"InstanceType" type:"string" required:"true" enum:"ESPartitionInstanceType"`
+	InstanceType ESPartitionInstanceType `location:"uri" locationName:"InstanceType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1960,10 +1967,11 @@ func (s *DescribeElasticsearchInstanceTypeLimitsInput) Validate() error {
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.ElasticsearchVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
 	}
-	if s.InstanceType == nil {
+	if len(s.InstanceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 
@@ -1986,8 +1994,8 @@ func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetElasticsearchVersion(v
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetInstanceType(v string) *DescribeElasticsearchInstanceTypeLimitsInput {
-	s.InstanceType = &v
+func (s *DescribeElasticsearchInstanceTypeLimitsInput) SetInstanceType(v ESPartitionInstanceType) *DescribeElasticsearchInstanceTypeLimitsInput {
+	s.InstanceType = v
 	return s
 }
 
@@ -2057,7 +2065,7 @@ type EBSOptions struct {
 	VolumeSize *int64 `type:"integer"`
 
 	// Specifies the volume type for EBS-based storage.
-	VolumeType *string `type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `type:"string"`
 }
 
 // String returns the string representation
@@ -2089,8 +2097,8 @@ func (s *EBSOptions) SetVolumeSize(v int64) *EBSOptions {
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *EBSOptions) SetVolumeType(v string) *EBSOptions {
-	s.VolumeType = &v
+func (s *EBSOptions) SetVolumeType(v VolumeType) *EBSOptions {
+	s.VolumeType = v
 	return s
 }
 
@@ -2145,13 +2153,13 @@ type ElasticsearchClusterConfig struct {
 	DedicatedMasterEnabled *bool `type:"boolean"`
 
 	// The instance type for a dedicated master node.
-	DedicatedMasterType *string `type:"string" enum:"ESPartitionInstanceType"`
+	DedicatedMasterType ESPartitionInstanceType `type:"string"`
 
 	// The number of instances in the specified domain cluster.
 	InstanceCount *int64 `type:"integer"`
 
 	// The instance type for an Elasticsearch cluster.
-	InstanceType *string `type:"string" enum:"ESPartitionInstanceType"`
+	InstanceType ESPartitionInstanceType `type:"string"`
 
 	// A boolean value to indicate whether zone awareness is enabled. See About
 	// Zone Awareness (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
@@ -2182,8 +2190,8 @@ func (s *ElasticsearchClusterConfig) SetDedicatedMasterEnabled(v bool) *Elastics
 }
 
 // SetDedicatedMasterType sets the DedicatedMasterType field's value.
-func (s *ElasticsearchClusterConfig) SetDedicatedMasterType(v string) *ElasticsearchClusterConfig {
-	s.DedicatedMasterType = &v
+func (s *ElasticsearchClusterConfig) SetDedicatedMasterType(v ESPartitionInstanceType) *ElasticsearchClusterConfig {
+	s.DedicatedMasterType = v
 	return s
 }
 
@@ -2194,8 +2202,8 @@ func (s *ElasticsearchClusterConfig) SetInstanceCount(v int64) *ElasticsearchClu
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *ElasticsearchClusterConfig) SetInstanceType(v string) *ElasticsearchClusterConfig {
-	s.InstanceType = &v
+func (s *ElasticsearchClusterConfig) SetInstanceType(v ESPartitionInstanceType) *ElasticsearchClusterConfig {
+	s.InstanceType = v
 	return s
 }
 
@@ -2690,6 +2698,7 @@ func (s *ListElasticsearchInstanceTypesInput) Validate() error {
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+
 	if s.ElasticsearchVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
 	}
@@ -2730,7 +2739,7 @@ type ListElasticsearchInstanceTypesOutput struct {
 
 	// List of instance types supported by Amazon Elasticsearch service for given
 	// ElasticsearchVersion
-	ElasticsearchInstanceTypes []*string `type:"list"`
+	ElasticsearchInstanceTypes []ESPartitionInstanceType `type:"list"`
 
 	// In case if there are more results available NextToken would be present, make
 	// further request to the same API with received NextToken to paginate remaining
@@ -2749,7 +2758,7 @@ func (s ListElasticsearchInstanceTypesOutput) GoString() string {
 }
 
 // SetElasticsearchInstanceTypes sets the ElasticsearchInstanceTypes field's value.
-func (s *ListElasticsearchInstanceTypesOutput) SetElasticsearchInstanceTypes(v []*string) *ListElasticsearchInstanceTypesOutput {
+func (s *ListElasticsearchInstanceTypesOutput) SetElasticsearchInstanceTypes(v []ESPartitionInstanceType) *ListElasticsearchInstanceTypesOutput {
 	s.ElasticsearchInstanceTypes = v
 	return s
 }
@@ -2863,6 +2872,7 @@ func (s ListTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
 	if s.ARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
@@ -2919,7 +2929,7 @@ type OptionStatus struct {
 	// Provides the OptionState for the Elasticsearch domain.
 	//
 	// State is a required field
-	State *string `type:"string" required:"true" enum:"OptionState"`
+	State OptionState `type:"string" required:"true"`
 
 	// Timestamp which tells the last updated time for the entity.
 	//
@@ -2953,8 +2963,8 @@ func (s *OptionStatus) SetPendingDeletion(v bool) *OptionStatus {
 }
 
 // SetState sets the State field's value.
-func (s *OptionStatus) SetState(v string) *OptionStatus {
-	s.State = &v
+func (s *OptionStatus) SetState(v OptionState) *OptionStatus {
+	s.State = v
 	return s
 }
 
@@ -3002,9 +3012,11 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.ARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -3228,12 +3240,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -3299,6 +3313,7 @@ func (s UpdateElasticsearchDomainConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateElasticsearchDomainConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateElasticsearchDomainConfigInput"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
@@ -3375,108 +3390,44 @@ func (s *UpdateElasticsearchDomainConfigOutput) SetDomainConfig(v *Elasticsearch
 	return s
 }
 
+type ESPartitionInstanceType string
+
+// Enum values for ESPartitionInstanceType
 const (
-	// ESPartitionInstanceTypeM3MediumElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM3MediumElasticsearch = "m3.medium.elasticsearch"
-
-	// ESPartitionInstanceTypeM3LargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM3LargeElasticsearch = "m3.large.elasticsearch"
-
-	// ESPartitionInstanceTypeM3XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM3XlargeElasticsearch = "m3.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeM32xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM32xlargeElasticsearch = "m3.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeM4LargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM4LargeElasticsearch = "m4.large.elasticsearch"
-
-	// ESPartitionInstanceTypeM4XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM4XlargeElasticsearch = "m4.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeM42xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM42xlargeElasticsearch = "m4.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeM44xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM44xlargeElasticsearch = "m4.4xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeM410xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeM410xlargeElasticsearch = "m4.10xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeT2MicroElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeT2MicroElasticsearch = "t2.micro.elasticsearch"
-
-	// ESPartitionInstanceTypeT2SmallElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeT2SmallElasticsearch = "t2.small.elasticsearch"
-
-	// ESPartitionInstanceTypeT2MediumElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeT2MediumElasticsearch = "t2.medium.elasticsearch"
-
-	// ESPartitionInstanceTypeR3LargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR3LargeElasticsearch = "r3.large.elasticsearch"
-
-	// ESPartitionInstanceTypeR3XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR3XlargeElasticsearch = "r3.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR32xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR32xlargeElasticsearch = "r3.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR34xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR34xlargeElasticsearch = "r3.4xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR38xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR38xlargeElasticsearch = "r3.8xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeI2XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeI2XlargeElasticsearch = "i2.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeI22xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeI22xlargeElasticsearch = "i2.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeD2XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeD2XlargeElasticsearch = "d2.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeD22xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeD22xlargeElasticsearch = "d2.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeD24xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeD24xlargeElasticsearch = "d2.4xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeD28xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeD28xlargeElasticsearch = "d2.8xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeC4LargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeC4LargeElasticsearch = "c4.large.elasticsearch"
-
-	// ESPartitionInstanceTypeC4XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeC4XlargeElasticsearch = "c4.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeC42xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeC42xlargeElasticsearch = "c4.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeC44xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeC44xlargeElasticsearch = "c4.4xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeC48xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeC48xlargeElasticsearch = "c4.8xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR4LargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR4LargeElasticsearch = "r4.large.elasticsearch"
-
-	// ESPartitionInstanceTypeR4XlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR4XlargeElasticsearch = "r4.xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR42xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR42xlargeElasticsearch = "r4.2xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR44xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR44xlargeElasticsearch = "r4.4xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR48xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR48xlargeElasticsearch = "r4.8xlarge.elasticsearch"
-
-	// ESPartitionInstanceTypeR416xlargeElasticsearch is a ESPartitionInstanceType enum value
-	ESPartitionInstanceTypeR416xlargeElasticsearch = "r4.16xlarge.elasticsearch"
+	ESPartitionInstanceTypeM3MediumElasticsearch   ESPartitionInstanceType = "m3.medium.elasticsearch"
+	ESPartitionInstanceTypeM3LargeElasticsearch    ESPartitionInstanceType = "m3.large.elasticsearch"
+	ESPartitionInstanceTypeM3XlargeElasticsearch   ESPartitionInstanceType = "m3.xlarge.elasticsearch"
+	ESPartitionInstanceTypeM32xlargeElasticsearch  ESPartitionInstanceType = "m3.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeM4LargeElasticsearch    ESPartitionInstanceType = "m4.large.elasticsearch"
+	ESPartitionInstanceTypeM4XlargeElasticsearch   ESPartitionInstanceType = "m4.xlarge.elasticsearch"
+	ESPartitionInstanceTypeM42xlargeElasticsearch  ESPartitionInstanceType = "m4.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeM44xlargeElasticsearch  ESPartitionInstanceType = "m4.4xlarge.elasticsearch"
+	ESPartitionInstanceTypeM410xlargeElasticsearch ESPartitionInstanceType = "m4.10xlarge.elasticsearch"
+	ESPartitionInstanceTypeT2MicroElasticsearch    ESPartitionInstanceType = "t2.micro.elasticsearch"
+	ESPartitionInstanceTypeT2SmallElasticsearch    ESPartitionInstanceType = "t2.small.elasticsearch"
+	ESPartitionInstanceTypeT2MediumElasticsearch   ESPartitionInstanceType = "t2.medium.elasticsearch"
+	ESPartitionInstanceTypeR3LargeElasticsearch    ESPartitionInstanceType = "r3.large.elasticsearch"
+	ESPartitionInstanceTypeR3XlargeElasticsearch   ESPartitionInstanceType = "r3.xlarge.elasticsearch"
+	ESPartitionInstanceTypeR32xlargeElasticsearch  ESPartitionInstanceType = "r3.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeR34xlargeElasticsearch  ESPartitionInstanceType = "r3.4xlarge.elasticsearch"
+	ESPartitionInstanceTypeR38xlargeElasticsearch  ESPartitionInstanceType = "r3.8xlarge.elasticsearch"
+	ESPartitionInstanceTypeI2XlargeElasticsearch   ESPartitionInstanceType = "i2.xlarge.elasticsearch"
+	ESPartitionInstanceTypeI22xlargeElasticsearch  ESPartitionInstanceType = "i2.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeD2XlargeElasticsearch   ESPartitionInstanceType = "d2.xlarge.elasticsearch"
+	ESPartitionInstanceTypeD22xlargeElasticsearch  ESPartitionInstanceType = "d2.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeD24xlargeElasticsearch  ESPartitionInstanceType = "d2.4xlarge.elasticsearch"
+	ESPartitionInstanceTypeD28xlargeElasticsearch  ESPartitionInstanceType = "d2.8xlarge.elasticsearch"
+	ESPartitionInstanceTypeC4LargeElasticsearch    ESPartitionInstanceType = "c4.large.elasticsearch"
+	ESPartitionInstanceTypeC4XlargeElasticsearch   ESPartitionInstanceType = "c4.xlarge.elasticsearch"
+	ESPartitionInstanceTypeC42xlargeElasticsearch  ESPartitionInstanceType = "c4.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeC44xlargeElasticsearch  ESPartitionInstanceType = "c4.4xlarge.elasticsearch"
+	ESPartitionInstanceTypeC48xlargeElasticsearch  ESPartitionInstanceType = "c4.8xlarge.elasticsearch"
+	ESPartitionInstanceTypeR4LargeElasticsearch    ESPartitionInstanceType = "r4.large.elasticsearch"
+	ESPartitionInstanceTypeR4XlargeElasticsearch   ESPartitionInstanceType = "r4.xlarge.elasticsearch"
+	ESPartitionInstanceTypeR42xlargeElasticsearch  ESPartitionInstanceType = "r4.2xlarge.elasticsearch"
+	ESPartitionInstanceTypeR44xlargeElasticsearch  ESPartitionInstanceType = "r4.4xlarge.elasticsearch"
+	ESPartitionInstanceTypeR48xlargeElasticsearch  ESPartitionInstanceType = "r4.8xlarge.elasticsearch"
+	ESPartitionInstanceTypeR416xlargeElasticsearch ESPartitionInstanceType = "r4.16xlarge.elasticsearch"
 )
 
 // The state of a requested change. One of the following:
@@ -3484,27 +3435,23 @@ const (
 //    * Processing: The request change is still in-process.
 //    * Active: The request change is processed and deployed to the Elasticsearch
 //    domain.
+type OptionState string
+
+// Enum values for OptionState
 const (
-	// OptionStateRequiresIndexDocuments is a OptionState enum value
-	OptionStateRequiresIndexDocuments = "RequiresIndexDocuments"
-
-	// OptionStateProcessing is a OptionState enum value
-	OptionStateProcessing = "Processing"
-
-	// OptionStateActive is a OptionState enum value
-	OptionStateActive = "Active"
+	OptionStateRequiresIndexDocuments OptionState = "RequiresIndexDocuments"
+	OptionStateProcessing             OptionState = "Processing"
+	OptionStateActive                 OptionState = "Active"
 )
 
 // The type of EBS volume, standard, gp2, or io1. See Configuring EBS-based
 // Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)for
 // more information.
+type VolumeType string
+
+// Enum values for VolumeType
 const (
-	// VolumeTypeStandard is a VolumeType enum value
-	VolumeTypeStandard = "standard"
-
-	// VolumeTypeGp2 is a VolumeType enum value
-	VolumeTypeGp2 = "gp2"
-
-	// VolumeTypeIo1 is a VolumeType enum value
-	VolumeTypeIo1 = "io1"
+	VolumeTypeStandard VolumeType = "standard"
+	VolumeTypeGp2      VolumeType = "gp2"
+	VolumeTypeIo1      VolumeType = "io1"
 )

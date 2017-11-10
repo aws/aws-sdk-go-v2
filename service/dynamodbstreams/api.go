@@ -444,6 +444,7 @@ func (s *DescribeStreamInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.StreamArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamArn"))
 	}
@@ -535,6 +536,7 @@ func (s *GetRecordsInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.ShardIterator == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardIterator"))
 	}
@@ -628,7 +630,7 @@ type GetShardIteratorInput struct {
 	//    shard, so that you always read the most recent data in the shard.
 	//
 	// ShardIteratorType is a required field
-	ShardIteratorType *string `type:"string" required:"true" enum:"ShardIteratorType"`
+	ShardIteratorType ShardIteratorType `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) for the stream.
 	//
@@ -652,15 +654,17 @@ func (s *GetShardIteratorInput) Validate() error {
 	if s.SequenceNumber != nil && len(*s.SequenceNumber) < 21 {
 		invalidParams.Add(aws.NewErrParamMinLen("SequenceNumber", 21))
 	}
+
 	if s.ShardId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardId"))
 	}
 	if s.ShardId != nil && len(*s.ShardId) < 28 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardId", 28))
 	}
-	if s.ShardIteratorType == nil {
+	if len(s.ShardIteratorType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ShardIteratorType"))
 	}
+
 	if s.StreamArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamArn"))
 	}
@@ -687,8 +691,8 @@ func (s *GetShardIteratorInput) SetShardId(v string) *GetShardIteratorInput {
 }
 
 // SetShardIteratorType sets the ShardIteratorType field's value.
-func (s *GetShardIteratorInput) SetShardIteratorType(v string) *GetShardIteratorInput {
-	s.ShardIteratorType = &v
+func (s *GetShardIteratorInput) SetShardIteratorType(v ShardIteratorType) *GetShardIteratorInput {
+	s.ShardIteratorType = v
 	return s
 }
 
@@ -891,7 +895,7 @@ type Record struct {
 	//    * MODIFY - one or more of an existing item's attributes were modified.
 	//
 	//    * REMOVE - the item was deleted from the table
-	EventName *string `locationName:"eventName" type:"string" enum:"OperationType"`
+	EventName OperationType `locationName:"eventName" type:"string"`
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
 	// this is aws:dynamodb.
@@ -947,8 +951,8 @@ func (s *Record) SetEventID(v string) *Record {
 }
 
 // SetEventName sets the EventName field's value.
-func (s *Record) SetEventName(v string) *Record {
-	s.EventName = &v
+func (s *Record) SetEventName(v OperationType) *Record {
+	s.EventName = v
 	return s
 }
 
@@ -1154,7 +1158,7 @@ type StreamDescription struct {
 	//    * DISABLING - Streams is currently being disabled on the DynamoDB table.
 	//
 	//    * DISABLED - the stream is disabled.
-	StreamStatus *string `type:"string" enum:"StreamStatus"`
+	StreamStatus StreamStatus `type:"string"`
 
 	// Indicates the format of the records within this stream:
 	//
@@ -1169,7 +1173,7 @@ type StreamDescription struct {
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old images of the items from
 	//    the table.
-	StreamViewType *string `type:"string" enum:"StreamViewType"`
+	StreamViewType StreamViewType `type:"string"`
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string `min:"3" type:"string"`
@@ -1222,14 +1226,14 @@ func (s *StreamDescription) SetStreamLabel(v string) *StreamDescription {
 }
 
 // SetStreamStatus sets the StreamStatus field's value.
-func (s *StreamDescription) SetStreamStatus(v string) *StreamDescription {
-	s.StreamStatus = &v
+func (s *StreamDescription) SetStreamStatus(v StreamStatus) *StreamDescription {
+	s.StreamStatus = v
 	return s
 }
 
 // SetStreamViewType sets the StreamViewType field's value.
-func (s *StreamDescription) SetStreamViewType(v string) *StreamDescription {
-	s.StreamViewType = &v
+func (s *StreamDescription) SetStreamViewType(v StreamViewType) *StreamDescription {
+	s.StreamViewType = v
 	return s
 }
 
@@ -1274,7 +1278,7 @@ type StreamRecord struct {
 	//    * OLD_IMAGE - the entire item, as it appeared before it was modified.
 	//
 	//    * NEW_AND_OLD_IMAGES - both the new and the old item images of the item.
-	StreamViewType *string `type:"string" enum:"StreamViewType"`
+	StreamViewType StreamViewType `type:"string"`
 }
 
 // String returns the string representation
@@ -1324,68 +1328,54 @@ func (s *StreamRecord) SetSizeBytes(v int64) *StreamRecord {
 }
 
 // SetStreamViewType sets the StreamViewType field's value.
-func (s *StreamRecord) SetStreamViewType(v string) *StreamRecord {
-	s.StreamViewType = &v
+func (s *StreamRecord) SetStreamViewType(v StreamViewType) *StreamRecord {
+	s.StreamViewType = v
 	return s
 }
 
-const (
-	// KeyTypeHash is a KeyType enum value
-	KeyTypeHash = "HASH"
+type KeyType string
 
-	// KeyTypeRange is a KeyType enum value
-	KeyTypeRange = "RANGE"
+// Enum values for KeyType
+const (
+	KeyTypeHash  KeyType = "HASH"
+	KeyTypeRange KeyType = "RANGE"
 )
 
+type OperationType string
+
+// Enum values for OperationType
 const (
-	// OperationTypeInsert is a OperationType enum value
-	OperationTypeInsert = "INSERT"
-
-	// OperationTypeModify is a OperationType enum value
-	OperationTypeModify = "MODIFY"
-
-	// OperationTypeRemove is a OperationType enum value
-	OperationTypeRemove = "REMOVE"
+	OperationTypeInsert OperationType = "INSERT"
+	OperationTypeModify OperationType = "MODIFY"
+	OperationTypeRemove OperationType = "REMOVE"
 )
 
+type ShardIteratorType string
+
+// Enum values for ShardIteratorType
 const (
-	// ShardIteratorTypeTrimHorizon is a ShardIteratorType enum value
-	ShardIteratorTypeTrimHorizon = "TRIM_HORIZON"
-
-	// ShardIteratorTypeLatest is a ShardIteratorType enum value
-	ShardIteratorTypeLatest = "LATEST"
-
-	// ShardIteratorTypeAtSequenceNumber is a ShardIteratorType enum value
-	ShardIteratorTypeAtSequenceNumber = "AT_SEQUENCE_NUMBER"
-
-	// ShardIteratorTypeAfterSequenceNumber is a ShardIteratorType enum value
-	ShardIteratorTypeAfterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
+	ShardIteratorTypeTrimHorizon         ShardIteratorType = "TRIM_HORIZON"
+	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
+	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
+	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
 )
 
+type StreamStatus string
+
+// Enum values for StreamStatus
 const (
-	// StreamStatusEnabling is a StreamStatus enum value
-	StreamStatusEnabling = "ENABLING"
-
-	// StreamStatusEnabled is a StreamStatus enum value
-	StreamStatusEnabled = "ENABLED"
-
-	// StreamStatusDisabling is a StreamStatus enum value
-	StreamStatusDisabling = "DISABLING"
-
-	// StreamStatusDisabled is a StreamStatus enum value
-	StreamStatusDisabled = "DISABLED"
+	StreamStatusEnabling  StreamStatus = "ENABLING"
+	StreamStatusEnabled   StreamStatus = "ENABLED"
+	StreamStatusDisabling StreamStatus = "DISABLING"
+	StreamStatusDisabled  StreamStatus = "DISABLED"
 )
 
+type StreamViewType string
+
+// Enum values for StreamViewType
 const (
-	// StreamViewTypeNewImage is a StreamViewType enum value
-	StreamViewTypeNewImage = "NEW_IMAGE"
-
-	// StreamViewTypeOldImage is a StreamViewType enum value
-	StreamViewTypeOldImage = "OLD_IMAGE"
-
-	// StreamViewTypeNewAndOldImages is a StreamViewType enum value
-	StreamViewTypeNewAndOldImages = "NEW_AND_OLD_IMAGES"
-
-	// StreamViewTypeKeysOnly is a StreamViewType enum value
-	StreamViewTypeKeysOnly = "KEYS_ONLY"
+	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
+	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
+	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
+	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )

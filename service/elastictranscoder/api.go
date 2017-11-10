@@ -2314,6 +2314,7 @@ func (s CancelJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -2700,6 +2701,7 @@ func (s *CreateJobInput) Validate() error {
 	if s.OutputKeyPrefix != nil && len(*s.OutputKeyPrefix) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OutputKeyPrefix", 1))
 	}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -3433,15 +3435,18 @@ func (s CreatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePipelineInput"}
+
 	if s.InputBucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputBucket"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
@@ -3593,9 +3598,11 @@ func (s CreatePresetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePresetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePresetInput"}
+
 	if s.Container == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Container"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3710,6 +3717,7 @@ func (s DeletePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePipelineInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -3764,6 +3772,7 @@ func (s DeletePresetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePresetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePresetInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -5018,6 +5027,7 @@ func (s ListJobsByPipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsByPipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByPipelineInput"}
+
 	if s.PipelineId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PipelineId"))
 	}
@@ -5114,6 +5124,7 @@ func (s ListJobsByStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsByStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListJobsByStatusInput"}
+
 	if s.Status == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
@@ -6407,6 +6418,7 @@ func (s ReadJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReadJobInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6470,6 +6482,7 @@ func (s ReadPipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadPipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReadPipelineInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6547,6 +6560,7 @@ func (s ReadPresetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReadPresetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReadPresetInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6629,15 +6643,19 @@ func (s TestRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestRoleInput"}
+
 	if s.InputBucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputBucket"))
 	}
+
 	if s.OutputBucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OutputBucket"))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
+
 	if s.Topics == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Topics"))
 	}
@@ -7132,6 +7150,7 @@ func (s UpdatePipelineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7253,9 +7272,11 @@ func (s UpdatePipelineNotificationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineNotificationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineNotificationsInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.Notifications == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notifications"))
 	}
@@ -7374,9 +7395,11 @@ func (s UpdatePipelineStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePipelineStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdatePipelineStatusInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.Status == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}

@@ -2177,6 +2177,7 @@ func (s BatchGetRepositoriesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetRepositoriesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetRepositoriesInput"}
+
 	if s.RepositoryNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryNames"))
 	}
@@ -2425,15 +2426,18 @@ func (s CreateBranchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBranchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBranchInput"}
+
 	if s.BranchName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
 	}
 	if s.BranchName != nil && len(*s.BranchName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
 	}
+
 	if s.CommitId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommitId"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2519,6 +2523,7 @@ func (s CreateRepositoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRepositoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRepositoryInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2593,6 +2598,7 @@ func (s DeleteRepositoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2652,7 +2658,7 @@ type Difference struct {
 
 	// Whether the change type of the difference is an addition (A), deletion (D),
 	// or modification (M).
-	ChangeType *string `locationName:"changeType" type:"string" enum:"ChangeTypeEnum"`
+	ChangeType ChangeTypeEnum `locationName:"changeType" type:"string"`
 }
 
 // String returns the string representation
@@ -2678,8 +2684,8 @@ func (s *Difference) SetBeforeBlob(v *BlobMetadata) *Difference {
 }
 
 // SetChangeType sets the ChangeType field's value.
-func (s *Difference) SetChangeType(v string) *Difference {
-	s.ChangeType = &v
+func (s *Difference) SetChangeType(v ChangeTypeEnum) *Difference {
+	s.ChangeType = v
 	return s
 }
 
@@ -2712,9 +2718,11 @@ func (s GetBlobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBlobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBlobInput"}
+
 	if s.BlobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BlobId"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2874,9 +2882,11 @@ func (s GetCommitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCommitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCommitInput"}
+
 	if s.CommitId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommitId"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2983,9 +2993,11 @@ func (s GetDifferencesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDifferencesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDifferencesInput"}
+
 	if s.AfterCommitSpecifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AfterCommitSpecifier"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3100,6 +3112,7 @@ func (s GetRepositoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3168,6 +3181,7 @@ func (s GetRepositoryTriggersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryTriggersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryTriggersInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3248,6 +3262,7 @@ func (s ListBranchesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBranchesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBranchesInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3319,10 +3334,10 @@ type ListRepositoriesInput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The order in which to sort the results of a list repositories operation.
-	Order *string `locationName:"order" type:"string" enum:"OrderEnum"`
+	Order OrderEnum `locationName:"order" type:"string"`
 
 	// The criteria used to sort the results of a list repositories operation.
-	SortBy *string `locationName:"sortBy" type:"string" enum:"SortByEnum"`
+	SortBy SortByEnum `locationName:"sortBy" type:"string"`
 }
 
 // String returns the string representation
@@ -3342,14 +3357,14 @@ func (s *ListRepositoriesInput) SetNextToken(v string) *ListRepositoriesInput {
 }
 
 // SetOrder sets the Order field's value.
-func (s *ListRepositoriesInput) SetOrder(v string) *ListRepositoriesInput {
-	s.Order = &v
+func (s *ListRepositoriesInput) SetOrder(v OrderEnum) *ListRepositoriesInput {
+	s.Order = v
 	return s
 }
 
 // SetSortBy sets the SortBy field's value.
-func (s *ListRepositoriesInput) SetSortBy(v string) *ListRepositoriesInput {
-	s.SortBy = &v
+func (s *ListRepositoriesInput) SetSortBy(v SortByEnum) *ListRepositoriesInput {
+	s.SortBy = v
 	return s
 }
 
@@ -3419,12 +3434,14 @@ func (s PutRepositoryTriggersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRepositoryTriggersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRepositoryTriggersInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
+
 	if s.Triggers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Triggers"))
 	}
@@ -3648,7 +3665,7 @@ type RepositoryTrigger struct {
 	// The valid value "all" cannot be used with any other values.
 	//
 	// Events is a required field
-	Events []*string `locationName:"events" type:"list" required:"true"`
+	Events []RepositoryTriggerEventEnum `locationName:"events" type:"list" required:"true"`
 
 	// The name of the trigger.
 	//
@@ -3669,12 +3686,15 @@ func (s RepositoryTrigger) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RepositoryTrigger) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RepositoryTrigger"}
+
 	if s.DestinationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationArn"))
 	}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3704,7 +3724,7 @@ func (s *RepositoryTrigger) SetDestinationArn(v string) *RepositoryTrigger {
 }
 
 // SetEvents sets the Events field's value.
-func (s *RepositoryTrigger) SetEvents(v []*string) *RepositoryTrigger {
+func (s *RepositoryTrigger) SetEvents(v []RepositoryTriggerEventEnum) *RepositoryTrigger {
 	s.Events = v
 	return s
 }
@@ -3778,12 +3798,14 @@ func (s TestRepositoryTriggersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestRepositoryTriggersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestRepositoryTriggersInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
+
 	if s.Triggers == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Triggers"))
 	}
@@ -3881,12 +3903,14 @@ func (s UpdateDefaultBranchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDefaultBranchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDefaultBranchInput"}
+
 	if s.DefaultBranchName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultBranchName"))
 	}
 	if s.DefaultBranchName != nil && len(*s.DefaultBranchName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultBranchName", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3955,6 +3979,7 @@ func (s UpdateRepositoryDescriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRepositoryDescriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRepositoryDescriptionInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -4024,12 +4049,14 @@ func (s UpdateRepositoryNameInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRepositoryNameInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRepositoryNameInput"}
+
 	if s.NewName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewName"))
 	}
 	if s.NewName != nil && len(*s.NewName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NewName", 1))
 	}
+
 	if s.OldName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OldName"))
 	}
@@ -4113,43 +4140,37 @@ func (s *UserInfo) SetName(v string) *UserInfo {
 	return s
 }
 
+type ChangeTypeEnum string
+
+// Enum values for ChangeTypeEnum
 const (
-	// ChangeTypeEnumA is a ChangeTypeEnum enum value
-	ChangeTypeEnumA = "A"
-
-	// ChangeTypeEnumM is a ChangeTypeEnum enum value
-	ChangeTypeEnumM = "M"
-
-	// ChangeTypeEnumD is a ChangeTypeEnum enum value
-	ChangeTypeEnumD = "D"
+	ChangeTypeEnumA ChangeTypeEnum = "A"
+	ChangeTypeEnumM ChangeTypeEnum = "M"
+	ChangeTypeEnumD ChangeTypeEnum = "D"
 )
 
-const (
-	// OrderEnumAscending is a OrderEnum enum value
-	OrderEnumAscending = "ascending"
+type OrderEnum string
 
-	// OrderEnumDescending is a OrderEnum enum value
-	OrderEnumDescending = "descending"
+// Enum values for OrderEnum
+const (
+	OrderEnumAscending  OrderEnum = "ascending"
+	OrderEnumDescending OrderEnum = "descending"
 )
 
+type RepositoryTriggerEventEnum string
+
+// Enum values for RepositoryTriggerEventEnum
 const (
-	// RepositoryTriggerEventEnumAll is a RepositoryTriggerEventEnum enum value
-	RepositoryTriggerEventEnumAll = "all"
-
-	// RepositoryTriggerEventEnumUpdateReference is a RepositoryTriggerEventEnum enum value
-	RepositoryTriggerEventEnumUpdateReference = "updateReference"
-
-	// RepositoryTriggerEventEnumCreateReference is a RepositoryTriggerEventEnum enum value
-	RepositoryTriggerEventEnumCreateReference = "createReference"
-
-	// RepositoryTriggerEventEnumDeleteReference is a RepositoryTriggerEventEnum enum value
-	RepositoryTriggerEventEnumDeleteReference = "deleteReference"
+	RepositoryTriggerEventEnumAll             RepositoryTriggerEventEnum = "all"
+	RepositoryTriggerEventEnumUpdateReference RepositoryTriggerEventEnum = "updateReference"
+	RepositoryTriggerEventEnumCreateReference RepositoryTriggerEventEnum = "createReference"
+	RepositoryTriggerEventEnumDeleteReference RepositoryTriggerEventEnum = "deleteReference"
 )
 
-const (
-	// SortByEnumRepositoryName is a SortByEnum enum value
-	SortByEnumRepositoryName = "repositoryName"
+type SortByEnum string
 
-	// SortByEnumLastModifiedDate is a SortByEnum enum value
-	SortByEnumLastModifiedDate = "lastModifiedDate"
+// Enum values for SortByEnum
+const (
+	SortByEnumRepositoryName   SortByEnum = "repositoryName"
+	SortByEnumLastModifiedDate SortByEnum = "lastModifiedDate"
 )

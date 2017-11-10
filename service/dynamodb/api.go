@@ -2418,7 +2418,7 @@ type AttributeDefinition struct {
 	//    * B - the attribute is of type Binary
 	//
 	// AttributeType is a required field
-	AttributeType *string `type:"string" required:"true" enum:"ScalarAttributeType"`
+	AttributeType ScalarAttributeType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2434,13 +2434,14 @@ func (s AttributeDefinition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeDefinition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttributeDefinition"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
-	if s.AttributeType == nil {
+	if len(s.AttributeType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeType"))
 	}
 
@@ -2457,8 +2458,8 @@ func (s *AttributeDefinition) SetAttributeName(v string) *AttributeDefinition {
 }
 
 // SetAttributeType sets the AttributeType field's value.
-func (s *AttributeDefinition) SetAttributeType(v string) *AttributeDefinition {
-	s.AttributeType = &v
+func (s *AttributeDefinition) SetAttributeType(v ScalarAttributeType) *AttributeDefinition {
+	s.AttributeType = v
 	return s
 }
 
@@ -2681,7 +2682,7 @@ type AttributeValueUpdate struct {
 	//    * ADD - DynamoDB creates an item with the supplied primary key and number
 	//    (or set of numbers) for the attribute value. The only data types allowed
 	//    are number and number set; no other data types can be specified.
-	Action *string `type:"string" enum:"AttributeAction"`
+	Action AttributeAction `type:"string"`
 
 	// Represents the data for an attribute.
 	//
@@ -2704,8 +2705,8 @@ func (s AttributeValueUpdate) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *AttributeValueUpdate) SetAction(v string) *AttributeValueUpdate {
-	s.Action = &v
+func (s *AttributeValueUpdate) SetAction(v AttributeAction) *AttributeValueUpdate {
+	s.Action = v
 	return s
 }
 
@@ -2805,7 +2806,7 @@ type BatchGetItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 }
 
 // String returns the string representation
@@ -2821,6 +2822,7 @@ func (s BatchGetItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetItemInput"}
+
 	if s.RequestItems == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestItems"))
 	}
@@ -2851,8 +2853,8 @@ func (s *BatchGetItemInput) SetRequestItems(v map[string]*KeysAndAttributes) *Ba
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *BatchGetItemInput) SetReturnConsumedCapacity(v string) *BatchGetItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *BatchGetItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *BatchGetItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
@@ -2976,13 +2978,13 @@ type BatchWriteItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics *string `type:"string" enum:"ReturnItemCollectionMetrics"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
 }
 
 // String returns the string representation
@@ -2998,6 +3000,7 @@ func (s BatchWriteItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchWriteItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchWriteItemInput"}
+
 	if s.RequestItems == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestItems"))
 	}
@@ -3018,14 +3021,14 @@ func (s *BatchWriteItemInput) SetRequestItems(v map[string][]*WriteRequest) *Bat
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *BatchWriteItemInput) SetReturnConsumedCapacity(v string) *BatchWriteItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *BatchWriteItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *BatchWriteItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
 // SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *BatchWriteItemInput) SetReturnItemCollectionMetrics(v string) *BatchWriteItemInput {
-	s.ReturnItemCollectionMetrics = &v
+func (s *BatchWriteItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *BatchWriteItemInput {
+	s.ReturnItemCollectionMetrics = v
 	return s
 }
 
@@ -3224,7 +3227,7 @@ type Condition struct {
 	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
 	//
 	// ComparisonOperator is a required field
-	ComparisonOperator *string `type:"string" required:"true" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3240,7 +3243,7 @@ func (s Condition) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Condition) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
-	if s.ComparisonOperator == nil {
+	if len(s.ComparisonOperator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 
@@ -3257,8 +3260,8 @@ func (s *Condition) SetAttributeValueList(v []*AttributeValue) *Condition {
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *Condition) SetComparisonOperator(v string) *Condition {
-	s.ComparisonOperator = &v
+func (s *Condition) SetComparisonOperator(v ComparisonOperator) *Condition {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -3374,21 +3377,25 @@ func (s CreateGlobalSecondaryIndexAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGlobalSecondaryIndexAction"}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
+
 	if s.KeySchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
+
 	if s.Projection == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
+
 	if s.ProvisionedThroughput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
@@ -3607,18 +3614,22 @@ func (s CreateTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTableInput"}
+
 	if s.AttributeDefinitions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeDefinitions"))
 	}
+
 	if s.KeySchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
+
 	if s.ProvisionedThroughput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -3768,6 +3779,7 @@ func (s DeleteGlobalSecondaryIndexAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGlobalSecondaryIndexAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteGlobalSecondaryIndexAction"}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
@@ -3814,7 +3826,7 @@ type DeleteItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator *string `type:"string" enum:"ConditionalOperator"`
+	ConditionalOperator ConditionalOperator `type:"string"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -3906,13 +3918,13 @@ type DeleteItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics *string `type:"string" enum:"ReturnItemCollectionMetrics"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
 
 	// Use ReturnValues if you want to get the item attributes as they appeared
 	// before they were deleted. For DeleteItem, the valid values are:
@@ -3924,7 +3936,7 @@ type DeleteItemInput struct {
 	//
 	// The ReturnValues parameter is used by several DynamoDB operations; however,
 	// DeleteItem does not recognize any values other than NONE or ALL_OLD.
-	ReturnValues *string `type:"string" enum:"ReturnValue"`
+	ReturnValues ReturnValue `type:"string"`
 
 	// The name of the table from which to delete the item.
 	//
@@ -3945,9 +3957,11 @@ func (s DeleteItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteItemInput"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -3968,8 +3982,8 @@ func (s *DeleteItemInput) SetConditionExpression(v string) *DeleteItemInput {
 }
 
 // SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *DeleteItemInput) SetConditionalOperator(v string) *DeleteItemInput {
-	s.ConditionalOperator = &v
+func (s *DeleteItemInput) SetConditionalOperator(v ConditionalOperator) *DeleteItemInput {
+	s.ConditionalOperator = v
 	return s
 }
 
@@ -3998,20 +4012,20 @@ func (s *DeleteItemInput) SetKey(v map[string]*AttributeValue) *DeleteItemInput 
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *DeleteItemInput) SetReturnConsumedCapacity(v string) *DeleteItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *DeleteItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *DeleteItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
 // SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *DeleteItemInput) SetReturnItemCollectionMetrics(v string) *DeleteItemInput {
-	s.ReturnItemCollectionMetrics = &v
+func (s *DeleteItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *DeleteItemInput {
+	s.ReturnItemCollectionMetrics = v
 	return s
 }
 
 // SetReturnValues sets the ReturnValues field's value.
-func (s *DeleteItemInput) SetReturnValues(v string) *DeleteItemInput {
-	s.ReturnValues = &v
+func (s *DeleteItemInput) SetReturnValues(v ReturnValue) *DeleteItemInput {
+	s.ReturnValues = v
 	return s
 }
 
@@ -4142,6 +4156,7 @@ func (s DeleteTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTableInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -4284,6 +4299,7 @@ func (s DescribeTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -4351,6 +4367,7 @@ func (s DescribeTimeToLiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTimeToLiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTimeToLiveInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -4476,7 +4493,7 @@ type ExpectedAttributeValue struct {
 	// AttributeValueListcan contain only one AttributeValueof type String, Number, or Binary (not a set type). If an item contains an
 	// AttributeValueelement of a different type than the one provided in the request, the value
 	// does not match. For example, {"S":"6"}does not equal {"N":"6"}. Also, {"N":"6"}does not compare to {"NS":["6", "2", "1"]}
-	ComparisonOperator *string `type:"string" enum:"ComparisonOperator"`
+	ComparisonOperator ComparisonOperator `type:"string"`
 
 	// Causes DynamoDB to evaluate the value before attempting a conditional operation:
 	//
@@ -4529,8 +4546,8 @@ func (s *ExpectedAttributeValue) SetAttributeValueList(v []*AttributeValue) *Exp
 }
 
 // SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *ExpectedAttributeValue) SetComparisonOperator(v string) *ExpectedAttributeValue {
-	s.ComparisonOperator = &v
+func (s *ExpectedAttributeValue) SetComparisonOperator(v ComparisonOperator) *ExpectedAttributeValue {
+	s.ComparisonOperator = v
 	return s
 }
 
@@ -4636,7 +4653,7 @@ type GetItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// The name of the table containing the requested item.
 	//
@@ -4660,9 +4677,11 @@ func (s *GetItemInput) Validate() error {
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -4707,8 +4726,8 @@ func (s *GetItemInput) SetProjectionExpression(v string) *GetItemInput {
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *GetItemInput) SetReturnConsumedCapacity(v string) *GetItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *GetItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *GetItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
@@ -4818,21 +4837,25 @@ func (s GlobalSecondaryIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlobalSecondaryIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GlobalSecondaryIndex"}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
+
 	if s.KeySchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
+
 	if s.Projection == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
+
 	if s.ProvisionedThroughput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
@@ -4923,7 +4946,7 @@ type GlobalSecondaryIndexDescription struct {
 	//    * DELETING - The index is being deleted.
 	//
 	//    * ACTIVE - The index is ready for use.
-	IndexStatus *string `type:"string" enum:"IndexStatus"`
+	IndexStatus IndexStatus `type:"string"`
 
 	// The number of items in the specified index. DynamoDB updates this value approximately
 	// every six hours. Recent changes might not be reflected in this value.
@@ -4995,8 +5018,8 @@ func (s *GlobalSecondaryIndexDescription) SetIndexSizeBytes(v int64) *GlobalSeco
 }
 
 // SetIndexStatus sets the IndexStatus field's value.
-func (s *GlobalSecondaryIndexDescription) SetIndexStatus(v string) *GlobalSecondaryIndexDescription {
-	s.IndexStatus = &v
+func (s *GlobalSecondaryIndexDescription) SetIndexStatus(v IndexStatus) *GlobalSecondaryIndexDescription {
+	s.IndexStatus = v
 	return s
 }
 
@@ -5193,7 +5216,7 @@ type KeySchemaElement struct {
 	// key physically close together, in sorted order by the sort key value.
 	//
 	// KeyType is a required field
-	KeyType *string `type:"string" required:"true" enum:"KeyType"`
+	KeyType KeyType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5209,13 +5232,14 @@ func (s KeySchemaElement) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KeySchemaElement) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KeySchemaElement"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
-	if s.KeyType == nil {
+	if len(s.KeyType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
 	}
 
@@ -5232,8 +5256,8 @@ func (s *KeySchemaElement) SetAttributeName(v string) *KeySchemaElement {
 }
 
 // SetKeyType sets the KeyType field's value.
-func (s *KeySchemaElement) SetKeyType(v string) *KeySchemaElement {
-	s.KeyType = &v
+func (s *KeySchemaElement) SetKeyType(v KeyType) *KeySchemaElement {
+	s.KeyType = v
 	return s
 }
 
@@ -5329,6 +5353,7 @@ func (s *KeysAndAttributes) Validate() error {
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
+
 	if s.Keys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Keys"))
 	}
@@ -5498,6 +5523,7 @@ func (s ListTagsOfResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsOfResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsOfResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -5609,18 +5635,21 @@ func (s LocalSecondaryIndex) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LocalSecondaryIndex) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LocalSecondaryIndex"}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
+
 	if s.KeySchema == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
+
 	if s.Projection == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
@@ -5776,7 +5805,7 @@ type Projection struct {
 	//    index. The list of projected attributes are in NonKeyAttributes.
 	//
 	//    * ALL - All of the table attributes are projected into the index.
-	ProjectionType *string `type:"string" enum:"ProjectionType"`
+	ProjectionType ProjectionType `type:"string"`
 }
 
 // String returns the string representation
@@ -5809,8 +5838,8 @@ func (s *Projection) SetNonKeyAttributes(v []*string) *Projection {
 }
 
 // SetProjectionType sets the ProjectionType field's value.
-func (s *Projection) SetProjectionType(v string) *Projection {
-	s.ProjectionType = &v
+func (s *Projection) SetProjectionType(v ProjectionType) *Projection {
+	s.ProjectionType = v
 	return s
 }
 
@@ -5854,12 +5883,14 @@ func (s ProvisionedThroughput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisionedThroughput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProvisionedThroughput"}
+
 	if s.ReadCapacityUnits == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReadCapacityUnits"))
 	}
 	if s.ReadCapacityUnits != nil && *s.ReadCapacityUnits < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ReadCapacityUnits", 1))
 	}
+
 	if s.WriteCapacityUnits == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WriteCapacityUnits"))
 	}
@@ -5981,7 +6012,7 @@ type PutItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator *string `type:"string" enum:"ConditionalOperator"`
+	ConditionalOperator ConditionalOperator `type:"string"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -6083,13 +6114,13 @@ type PutItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics *string `type:"string" enum:"ReturnItemCollectionMetrics"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
 
 	// Use ReturnValues if you want to get the item attributes as they appeared
 	// before they were updated with the PutItem request. For PutItem, the valid
@@ -6103,7 +6134,7 @@ type PutItemInput struct {
 	//
 	// The ReturnValues parameter is used by several DynamoDB operations; however,
 	// PutItem does not recognize any values other than NONE or ALL_OLD.
-	ReturnValues *string `type:"string" enum:"ReturnValue"`
+	ReturnValues ReturnValue `type:"string"`
 
 	// The name of the table to contain the item.
 	//
@@ -6124,9 +6155,11 @@ func (s PutItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutItemInput"}
+
 	if s.Item == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Item"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -6147,8 +6180,8 @@ func (s *PutItemInput) SetConditionExpression(v string) *PutItemInput {
 }
 
 // SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *PutItemInput) SetConditionalOperator(v string) *PutItemInput {
-	s.ConditionalOperator = &v
+func (s *PutItemInput) SetConditionalOperator(v ConditionalOperator) *PutItemInput {
+	s.ConditionalOperator = v
 	return s
 }
 
@@ -6177,20 +6210,20 @@ func (s *PutItemInput) SetItem(v map[string]*AttributeValue) *PutItemInput {
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *PutItemInput) SetReturnConsumedCapacity(v string) *PutItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *PutItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *PutItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
 // SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *PutItemInput) SetReturnItemCollectionMetrics(v string) *PutItemInput {
-	s.ReturnItemCollectionMetrics = &v
+func (s *PutItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *PutItemInput {
+	s.ReturnItemCollectionMetrics = v
 	return s
 }
 
 // SetReturnValues sets the ReturnValues field's value.
-func (s *PutItemInput) SetReturnValues(v string) *PutItemInput {
-	s.ReturnValues = &v
+func (s *PutItemInput) SetReturnValues(v ReturnValue) *PutItemInput {
+	s.ReturnValues = v
 	return s
 }
 
@@ -6312,7 +6345,7 @@ type QueryInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator *string `type:"string" enum:"ConditionalOperator"`
+	ConditionalOperator ConditionalOperator `type:"string"`
 
 	// Determines the read consistency model: If set to true, then the operation
 	// uses strongly consistent reads; otherwise, the operation uses eventually
@@ -6525,7 +6558,7 @@ type QueryInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// Specifies the order for index traversal: If true (default), the traversal
 	// is performed in ascending order; if false, the traversal is performed in
@@ -6587,7 +6620,7 @@ type QueryInput struct {
 	// If you use the ProjectionExpression parameter, then the value for Select
 	// can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an
 	// error.
-	Select *string `type:"string" enum:"Select"`
+	Select Select `type:"string"`
 
 	// The name of the table containing the requested items.
 	//
@@ -6617,6 +6650,7 @@ func (s *QueryInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -6657,8 +6691,8 @@ func (s *QueryInput) SetAttributesToGet(v []*string) *QueryInput {
 }
 
 // SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *QueryInput) SetConditionalOperator(v string) *QueryInput {
-	s.ConditionalOperator = &v
+func (s *QueryInput) SetConditionalOperator(v ConditionalOperator) *QueryInput {
+	s.ConditionalOperator = v
 	return s
 }
 
@@ -6729,8 +6763,8 @@ func (s *QueryInput) SetQueryFilter(v map[string]*Condition) *QueryInput {
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *QueryInput) SetReturnConsumedCapacity(v string) *QueryInput {
-	s.ReturnConsumedCapacity = &v
+func (s *QueryInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *QueryInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
@@ -6741,8 +6775,8 @@ func (s *QueryInput) SetScanIndexForward(v bool) *QueryInput {
 }
 
 // SetSelect sets the Select field's value.
-func (s *QueryInput) SetSelect(v string) *QueryInput {
-	s.Select = &v
+func (s *QueryInput) SetSelect(v Select) *QueryInput {
+	s.Select = v
 	return s
 }
 
@@ -6854,7 +6888,7 @@ type ScanInput struct {
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator *string `type:"string" enum:"ConditionalOperator"`
+	ConditionalOperator ConditionalOperator `type:"string"`
 
 	// A Boolean value that determines the read consistency model during the scan:
 	//
@@ -6997,7 +7031,7 @@ type ScanInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
 	// see ScanFilter (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ScanFilter.html)
@@ -7066,7 +7100,7 @@ type ScanInput struct {
 	// If you use the ProjectionExpression parameter, then the value for Select
 	// can only be SPECIFIC_ATTRIBUTES. Any other value for Select will return an
 	// error.
-	Select *string `type:"string" enum:"Select"`
+	Select Select `type:"string"`
 
 	// The name of the table containing the requested items; or, if you provide
 	// IndexName, the name of the table to which that index belongs.
@@ -7110,6 +7144,7 @@ func (s *ScanInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -7143,8 +7178,8 @@ func (s *ScanInput) SetAttributesToGet(v []*string) *ScanInput {
 }
 
 // SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *ScanInput) SetConditionalOperator(v string) *ScanInput {
-	s.ConditionalOperator = &v
+func (s *ScanInput) SetConditionalOperator(v ConditionalOperator) *ScanInput {
+	s.ConditionalOperator = v
 	return s
 }
 
@@ -7197,8 +7232,8 @@ func (s *ScanInput) SetProjectionExpression(v string) *ScanInput {
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *ScanInput) SetReturnConsumedCapacity(v string) *ScanInput {
-	s.ReturnConsumedCapacity = &v
+func (s *ScanInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *ScanInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
@@ -7215,8 +7250,8 @@ func (s *ScanInput) SetSegment(v int64) *ScanInput {
 }
 
 // SetSelect sets the Select field's value.
-func (s *ScanInput) SetSelect(v string) *ScanInput {
-	s.Select = &v
+func (s *ScanInput) SetSelect(v Select) *ScanInput {
+	s.Select = v
 	return s
 }
 
@@ -7344,7 +7379,7 @@ type StreamSpecification struct {
 	//
 	//    * NEW_AND_OLD_IMAGES - Both the new and the old item images of the item
 	//    are written to the stream.
-	StreamViewType *string `type:"string" enum:"StreamViewType"`
+	StreamViewType StreamViewType `type:"string"`
 }
 
 // String returns the string representation
@@ -7364,8 +7399,8 @@ func (s *StreamSpecification) SetStreamEnabled(v bool) *StreamSpecification {
 }
 
 // SetStreamViewType sets the StreamViewType field's value.
-func (s *StreamSpecification) SetStreamViewType(v string) *StreamSpecification {
-	s.StreamViewType = &v
+func (s *StreamSpecification) SetStreamViewType(v StreamViewType) *StreamSpecification {
+	s.StreamViewType = v
 	return s
 }
 
@@ -7565,7 +7600,7 @@ type TableDescription struct {
 	//    * DELETING - The table is being deleted.
 	//
 	//    * ACTIVE - The table is ready for use.
-	TableStatus *string `type:"string" enum:"TableStatus"`
+	TableStatus TableStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -7657,8 +7692,8 @@ func (s *TableDescription) SetTableSizeBytes(v int64) *TableDescription {
 }
 
 // SetTableStatus sets the TableStatus field's value.
-func (s *TableDescription) SetTableStatus(v string) *TableDescription {
-	s.TableStatus = &v
+func (s *TableDescription) SetTableStatus(v TableStatus) *TableDescription {
+	s.TableStatus = v
 	return s
 }
 
@@ -7702,12 +7737,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -7759,12 +7796,14 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7821,7 +7860,7 @@ type TimeToLiveDescription struct {
 	AttributeName *string `min:"1" type:"string"`
 
 	// The Time to Live status for the table.
-	TimeToLiveStatus *string `type:"string" enum:"TimeToLiveStatus"`
+	TimeToLiveStatus TimeToLiveStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -7841,8 +7880,8 @@ func (s *TimeToLiveDescription) SetAttributeName(v string) *TimeToLiveDescriptio
 }
 
 // SetTimeToLiveStatus sets the TimeToLiveStatus field's value.
-func (s *TimeToLiveDescription) SetTimeToLiveStatus(v string) *TimeToLiveDescription {
-	s.TimeToLiveStatus = &v
+func (s *TimeToLiveDescription) SetTimeToLiveStatus(v TimeToLiveStatus) *TimeToLiveDescription {
+	s.TimeToLiveStatus = v
 	return s
 }
 
@@ -7878,12 +7917,14 @@ func (s TimeToLiveSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimeToLiveSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TimeToLiveSpecification"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -7936,12 +7977,14 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -8014,12 +8057,14 @@ func (s UpdateGlobalSecondaryIndexAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGlobalSecondaryIndexAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalSecondaryIndexAction"}
+
 	if s.IndexName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
+
 	if s.ProvisionedThroughput == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
@@ -8078,7 +8123,7 @@ type UpdateItemInput struct {
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see ConditionalOperator (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator *string `type:"string" enum:"ConditionalOperator"`
+	ConditionalOperator ConditionalOperator `type:"string"`
 
 	// This is a legacy parameter. Use ConditionExpression instead. For more information,
 	// see Expected (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
@@ -8170,13 +8215,13 @@ type UpdateItemInput struct {
 	//    the operation.
 	//
 	//    * NONE - No ConsumedCapacity details are included in the response.
-	ReturnConsumedCapacity *string `type:"string" enum:"ReturnConsumedCapacity"`
+	ReturnConsumedCapacity ReturnConsumedCapacity `type:"string"`
 
 	// Determines whether item collection metrics are returned. If set to SIZE,
 	// the response includes statistics about item collections, if any, that were
 	// modified during the operation are returned in the response. If set to NONE
 	// (the default), no statistics are returned.
-	ReturnItemCollectionMetrics *string `type:"string" enum:"ReturnItemCollectionMetrics"`
+	ReturnItemCollectionMetrics ReturnItemCollectionMetrics `type:"string"`
 
 	// Use ReturnValues if you want to get the item attributes as they appear before
 	// or after they are updated. For UpdateItem, the valid values are:
@@ -8201,7 +8246,7 @@ type UpdateItemInput struct {
 	// No read capacity units are consumed.
 	//
 	// The values returned are strongly consistent.
-	ReturnValues *string `type:"string" enum:"ReturnValue"`
+	ReturnValues ReturnValue `type:"string"`
 
 	// The name of the table containing the item to update.
 	//
@@ -8297,9 +8342,11 @@ func (s UpdateItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateItemInput"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -8326,8 +8373,8 @@ func (s *UpdateItemInput) SetConditionExpression(v string) *UpdateItemInput {
 }
 
 // SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *UpdateItemInput) SetConditionalOperator(v string) *UpdateItemInput {
-	s.ConditionalOperator = &v
+func (s *UpdateItemInput) SetConditionalOperator(v ConditionalOperator) *UpdateItemInput {
+	s.ConditionalOperator = v
 	return s
 }
 
@@ -8356,20 +8403,20 @@ func (s *UpdateItemInput) SetKey(v map[string]*AttributeValue) *UpdateItemInput 
 }
 
 // SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *UpdateItemInput) SetReturnConsumedCapacity(v string) *UpdateItemInput {
-	s.ReturnConsumedCapacity = &v
+func (s *UpdateItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *UpdateItemInput {
+	s.ReturnConsumedCapacity = v
 	return s
 }
 
 // SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *UpdateItemInput) SetReturnItemCollectionMetrics(v string) *UpdateItemInput {
-	s.ReturnItemCollectionMetrics = &v
+func (s *UpdateItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *UpdateItemInput {
+	s.ReturnItemCollectionMetrics = v
 	return s
 }
 
 // SetReturnValues sets the ReturnValues field's value.
-func (s *UpdateItemInput) SetReturnValues(v string) *UpdateItemInput {
-	s.ReturnValues = &v
+func (s *UpdateItemInput) SetReturnValues(v ReturnValue) *UpdateItemInput {
+	s.ReturnValues = v
 	return s
 }
 
@@ -8508,6 +8555,7 @@ func (s UpdateTableInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTableInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTableInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -8631,12 +8679,14 @@ func (s UpdateTimeToLiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTimeToLiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTimeToLiveInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
+
 	if s.TimeToLiveSpecification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimeToLiveSpecification"))
 	}
@@ -8725,97 +8775,67 @@ func (s *WriteRequest) SetPutRequest(v *PutRequest) *WriteRequest {
 	return s
 }
 
+type AttributeAction string
+
+// Enum values for AttributeAction
 const (
-	// AttributeActionAdd is a AttributeAction enum value
-	AttributeActionAdd = "ADD"
-
-	// AttributeActionPut is a AttributeAction enum value
-	AttributeActionPut = "PUT"
-
-	// AttributeActionDelete is a AttributeAction enum value
-	AttributeActionDelete = "DELETE"
+	AttributeActionAdd    AttributeAction = "ADD"
+	AttributeActionPut    AttributeAction = "PUT"
+	AttributeActionDelete AttributeAction = "DELETE"
 )
 
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
 const (
-	// ComparisonOperatorEq is a ComparisonOperator enum value
-	ComparisonOperatorEq = "EQ"
-
-	// ComparisonOperatorNe is a ComparisonOperator enum value
-	ComparisonOperatorNe = "NE"
-
-	// ComparisonOperatorIn is a ComparisonOperator enum value
-	ComparisonOperatorIn = "IN"
-
-	// ComparisonOperatorLe is a ComparisonOperator enum value
-	ComparisonOperatorLe = "LE"
-
-	// ComparisonOperatorLt is a ComparisonOperator enum value
-	ComparisonOperatorLt = "LT"
-
-	// ComparisonOperatorGe is a ComparisonOperator enum value
-	ComparisonOperatorGe = "GE"
-
-	// ComparisonOperatorGt is a ComparisonOperator enum value
-	ComparisonOperatorGt = "GT"
-
-	// ComparisonOperatorBetween is a ComparisonOperator enum value
-	ComparisonOperatorBetween = "BETWEEN"
-
-	// ComparisonOperatorNotNull is a ComparisonOperator enum value
-	ComparisonOperatorNotNull = "NOT_NULL"
-
-	// ComparisonOperatorNull is a ComparisonOperator enum value
-	ComparisonOperatorNull = "NULL"
-
-	// ComparisonOperatorContains is a ComparisonOperator enum value
-	ComparisonOperatorContains = "CONTAINS"
-
-	// ComparisonOperatorNotContains is a ComparisonOperator enum value
-	ComparisonOperatorNotContains = "NOT_CONTAINS"
-
-	// ComparisonOperatorBeginsWith is a ComparisonOperator enum value
-	ComparisonOperatorBeginsWith = "BEGINS_WITH"
+	ComparisonOperatorEq          ComparisonOperator = "EQ"
+	ComparisonOperatorNe          ComparisonOperator = "NE"
+	ComparisonOperatorIn          ComparisonOperator = "IN"
+	ComparisonOperatorLe          ComparisonOperator = "LE"
+	ComparisonOperatorLt          ComparisonOperator = "LT"
+	ComparisonOperatorGe          ComparisonOperator = "GE"
+	ComparisonOperatorGt          ComparisonOperator = "GT"
+	ComparisonOperatorBetween     ComparisonOperator = "BETWEEN"
+	ComparisonOperatorNotNull     ComparisonOperator = "NOT_NULL"
+	ComparisonOperatorNull        ComparisonOperator = "NULL"
+	ComparisonOperatorContains    ComparisonOperator = "CONTAINS"
+	ComparisonOperatorNotContains ComparisonOperator = "NOT_CONTAINS"
+	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
 )
 
-const (
-	// ConditionalOperatorAnd is a ConditionalOperator enum value
-	ConditionalOperatorAnd = "AND"
+type ConditionalOperator string
 
-	// ConditionalOperatorOr is a ConditionalOperator enum value
-	ConditionalOperatorOr = "OR"
+// Enum values for ConditionalOperator
+const (
+	ConditionalOperatorAnd ConditionalOperator = "AND"
+	ConditionalOperatorOr  ConditionalOperator = "OR"
 )
 
+type IndexStatus string
+
+// Enum values for IndexStatus
 const (
-	// IndexStatusCreating is a IndexStatus enum value
-	IndexStatusCreating = "CREATING"
-
-	// IndexStatusUpdating is a IndexStatus enum value
-	IndexStatusUpdating = "UPDATING"
-
-	// IndexStatusDeleting is a IndexStatus enum value
-	IndexStatusDeleting = "DELETING"
-
-	// IndexStatusActive is a IndexStatus enum value
-	IndexStatusActive = "ACTIVE"
+	IndexStatusCreating IndexStatus = "CREATING"
+	IndexStatusUpdating IndexStatus = "UPDATING"
+	IndexStatusDeleting IndexStatus = "DELETING"
+	IndexStatusActive   IndexStatus = "ACTIVE"
 )
 
-const (
-	// KeyTypeHash is a KeyType enum value
-	KeyTypeHash = "HASH"
+type KeyType string
 
-	// KeyTypeRange is a KeyType enum value
-	KeyTypeRange = "RANGE"
+// Enum values for KeyType
+const (
+	KeyTypeHash  KeyType = "HASH"
+	KeyTypeRange KeyType = "RANGE"
 )
 
+type ProjectionType string
+
+// Enum values for ProjectionType
 const (
-	// ProjectionTypeAll is a ProjectionType enum value
-	ProjectionTypeAll = "ALL"
-
-	// ProjectionTypeKeysOnly is a ProjectionType enum value
-	ProjectionTypeKeysOnly = "KEYS_ONLY"
-
-	// ProjectionTypeInclude is a ProjectionType enum value
-	ProjectionTypeInclude = "INCLUDE"
+	ProjectionTypeAll      ProjectionType = "ALL"
+	ProjectionTypeKeysOnly ProjectionType = "KEYS_ONLY"
+	ProjectionTypeInclude  ProjectionType = "INCLUDE"
 )
 
 // Determines the level of detail about provisioned throughput consumption that
@@ -8833,105 +8853,79 @@ const (
 //    the operation.
 //
 //    * NONE - No ConsumedCapacity details are included in the response.
+type ReturnConsumedCapacity string
+
+// Enum values for ReturnConsumedCapacity
 const (
-	// ReturnConsumedCapacityIndexes is a ReturnConsumedCapacity enum value
-	ReturnConsumedCapacityIndexes = "INDEXES"
-
-	// ReturnConsumedCapacityTotal is a ReturnConsumedCapacity enum value
-	ReturnConsumedCapacityTotal = "TOTAL"
-
-	// ReturnConsumedCapacityNone is a ReturnConsumedCapacity enum value
-	ReturnConsumedCapacityNone = "NONE"
+	ReturnConsumedCapacityIndexes ReturnConsumedCapacity = "INDEXES"
+	ReturnConsumedCapacityTotal   ReturnConsumedCapacity = "TOTAL"
+	ReturnConsumedCapacityNone    ReturnConsumedCapacity = "NONE"
 )
 
-const (
-	// ReturnItemCollectionMetricsSize is a ReturnItemCollectionMetrics enum value
-	ReturnItemCollectionMetricsSize = "SIZE"
+type ReturnItemCollectionMetrics string
 
-	// ReturnItemCollectionMetricsNone is a ReturnItemCollectionMetrics enum value
-	ReturnItemCollectionMetricsNone = "NONE"
+// Enum values for ReturnItemCollectionMetrics
+const (
+	ReturnItemCollectionMetricsSize ReturnItemCollectionMetrics = "SIZE"
+	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
 )
 
+type ReturnValue string
+
+// Enum values for ReturnValue
 const (
-	// ReturnValueNone is a ReturnValue enum value
-	ReturnValueNone = "NONE"
-
-	// ReturnValueAllOld is a ReturnValue enum value
-	ReturnValueAllOld = "ALL_OLD"
-
-	// ReturnValueUpdatedOld is a ReturnValue enum value
-	ReturnValueUpdatedOld = "UPDATED_OLD"
-
-	// ReturnValueAllNew is a ReturnValue enum value
-	ReturnValueAllNew = "ALL_NEW"
-
-	// ReturnValueUpdatedNew is a ReturnValue enum value
-	ReturnValueUpdatedNew = "UPDATED_NEW"
+	ReturnValueNone       ReturnValue = "NONE"
+	ReturnValueAllOld     ReturnValue = "ALL_OLD"
+	ReturnValueUpdatedOld ReturnValue = "UPDATED_OLD"
+	ReturnValueAllNew     ReturnValue = "ALL_NEW"
+	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
 )
 
+type ScalarAttributeType string
+
+// Enum values for ScalarAttributeType
 const (
-	// ScalarAttributeTypeS is a ScalarAttributeType enum value
-	ScalarAttributeTypeS = "S"
-
-	// ScalarAttributeTypeN is a ScalarAttributeType enum value
-	ScalarAttributeTypeN = "N"
-
-	// ScalarAttributeTypeB is a ScalarAttributeType enum value
-	ScalarAttributeTypeB = "B"
+	ScalarAttributeTypeS ScalarAttributeType = "S"
+	ScalarAttributeTypeN ScalarAttributeType = "N"
+	ScalarAttributeTypeB ScalarAttributeType = "B"
 )
 
+type Select string
+
+// Enum values for Select
 const (
-	// SelectAllAttributes is a Select enum value
-	SelectAllAttributes = "ALL_ATTRIBUTES"
-
-	// SelectAllProjectedAttributes is a Select enum value
-	SelectAllProjectedAttributes = "ALL_PROJECTED_ATTRIBUTES"
-
-	// SelectSpecificAttributes is a Select enum value
-	SelectSpecificAttributes = "SPECIFIC_ATTRIBUTES"
-
-	// SelectCount is a Select enum value
-	SelectCount = "COUNT"
+	SelectAllAttributes          Select = "ALL_ATTRIBUTES"
+	SelectAllProjectedAttributes Select = "ALL_PROJECTED_ATTRIBUTES"
+	SelectSpecificAttributes     Select = "SPECIFIC_ATTRIBUTES"
+	SelectCount                  Select = "COUNT"
 )
 
+type StreamViewType string
+
+// Enum values for StreamViewType
 const (
-	// StreamViewTypeNewImage is a StreamViewType enum value
-	StreamViewTypeNewImage = "NEW_IMAGE"
-
-	// StreamViewTypeOldImage is a StreamViewType enum value
-	StreamViewTypeOldImage = "OLD_IMAGE"
-
-	// StreamViewTypeNewAndOldImages is a StreamViewType enum value
-	StreamViewTypeNewAndOldImages = "NEW_AND_OLD_IMAGES"
-
-	// StreamViewTypeKeysOnly is a StreamViewType enum value
-	StreamViewTypeKeysOnly = "KEYS_ONLY"
+	StreamViewTypeNewImage        StreamViewType = "NEW_IMAGE"
+	StreamViewTypeOldImage        StreamViewType = "OLD_IMAGE"
+	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
+	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
 
+type TableStatus string
+
+// Enum values for TableStatus
 const (
-	// TableStatusCreating is a TableStatus enum value
-	TableStatusCreating = "CREATING"
-
-	// TableStatusUpdating is a TableStatus enum value
-	TableStatusUpdating = "UPDATING"
-
-	// TableStatusDeleting is a TableStatus enum value
-	TableStatusDeleting = "DELETING"
-
-	// TableStatusActive is a TableStatus enum value
-	TableStatusActive = "ACTIVE"
+	TableStatusCreating TableStatus = "CREATING"
+	TableStatusUpdating TableStatus = "UPDATING"
+	TableStatusDeleting TableStatus = "DELETING"
+	TableStatusActive   TableStatus = "ACTIVE"
 )
 
+type TimeToLiveStatus string
+
+// Enum values for TimeToLiveStatus
 const (
-	// TimeToLiveStatusEnabling is a TimeToLiveStatus enum value
-	TimeToLiveStatusEnabling = "ENABLING"
-
-	// TimeToLiveStatusDisabling is a TimeToLiveStatus enum value
-	TimeToLiveStatusDisabling = "DISABLING"
-
-	// TimeToLiveStatusEnabled is a TimeToLiveStatus enum value
-	TimeToLiveStatusEnabled = "ENABLED"
-
-	// TimeToLiveStatusDisabled is a TimeToLiveStatus enum value
-	TimeToLiveStatusDisabled = "DISABLED"
+	TimeToLiveStatusEnabling  TimeToLiveStatus = "ENABLING"
+	TimeToLiveStatusDisabling TimeToLiveStatus = "DISABLING"
+	TimeToLiveStatusEnabled   TimeToLiveStatus = "ENABLED"
+	TimeToLiveStatusDisabled  TimeToLiveStatus = "DISABLED"
 )

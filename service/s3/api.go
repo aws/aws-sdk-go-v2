@@ -5984,7 +5984,7 @@ type AbortMultipartUploadInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// UploadId is a required field
 	UploadId *string `location:"querystring" locationName:"uploadId" type:"string" required:"true"`
@@ -6003,15 +6003,18 @@ func (s AbortMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -6042,8 +6045,8 @@ func (s *AbortMultipartUploadInput) SetKey(v string) *AbortMultipartUploadInput 
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *AbortMultipartUploadInput) SetRequestPayer(v string) *AbortMultipartUploadInput {
-	s.RequestPayer = &v
+func (s *AbortMultipartUploadInput) SetRequestPayer(v RequestPayer) *AbortMultipartUploadInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -6059,7 +6062,7 @@ type AbortMultipartUploadOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -6073,8 +6076,8 @@ func (s AbortMultipartUploadOutput) GoString() string {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *AbortMultipartUploadOutput) SetRequestCharged(v string) *AbortMultipartUploadOutput {
-	s.RequestCharged = &v
+func (s *AbortMultipartUploadOutput) SetRequestCharged(v RequestCharged) *AbortMultipartUploadOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -6083,7 +6086,7 @@ type AccelerateConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The accelerate configuration of the bucket.
-	Status *string `type:"string" enum:"BucketAccelerateStatus"`
+	Status BucketAccelerateStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -6097,8 +6100,8 @@ func (s AccelerateConfiguration) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *AccelerateConfiguration) SetStatus(v string) *AccelerateConfiguration {
-	s.Status = &v
+func (s *AccelerateConfiguration) SetStatus(v BucketAccelerateStatus) *AccelerateConfiguration {
+	s.Status = v
 	return s
 }
 
@@ -6241,9 +6244,11 @@ func (s AnalyticsConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsConfiguration"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.StorageClassAnalysis == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StorageClassAnalysis"))
 	}
@@ -6305,6 +6310,7 @@ func (s AnalyticsExportDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsExportDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsExportDestination"}
+
 	if s.S3BucketDestination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketDestination"))
 	}
@@ -6405,7 +6411,7 @@ type AnalyticsS3BucketDestination struct {
 	// The file format used when exporting data to Amazon S3.
 	//
 	// Format is a required field
-	Format *string `type:"string" required:"true" enum:"AnalyticsS3ExportFileFormat"`
+	Format AnalyticsS3ExportFileFormat `type:"string" required:"true"`
 
 	// The prefix to use when exporting data. The exported data begins with this
 	// prefix.
@@ -6425,10 +6431,11 @@ func (s AnalyticsS3BucketDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsS3BucketDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsS3BucketDestination"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
-	if s.Format == nil {
+	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
@@ -6458,8 +6465,8 @@ func (s *AnalyticsS3BucketDestination) SetBucketAccountId(v string) *AnalyticsS3
 }
 
 // SetFormat sets the Format field's value.
-func (s *AnalyticsS3BucketDestination) SetFormat(v string) *AnalyticsS3BucketDestination {
-	s.Format = &v
+func (s *AnalyticsS3BucketDestination) SetFormat(v AnalyticsS3ExportFileFormat) *AnalyticsS3BucketDestination {
+	s.Format = v
 	return s
 }
 
@@ -6523,6 +6530,7 @@ func (s BucketLifecycleConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BucketLifecycleConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BucketLifecycleConfiguration"}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -6608,6 +6616,7 @@ func (s CORSConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CORSConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CORSConfiguration"}
+
 	if s.CORSRules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CORSRules"))
 	}
@@ -6675,9 +6684,11 @@ func (s CORSRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CORSRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CORSRule"}
+
 	if s.AllowedMethods == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllowedMethods"))
 	}
+
 	if s.AllowedOrigins == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AllowedOrigins"))
 	}
@@ -6725,9 +6736,9 @@ type CloudFunctionConfiguration struct {
 	CloudFunction *string `type:"string"`
 
 	// Bucket event for which to send notifications.
-	Event *string `deprecated:"true" type:"string" enum:"Event"`
+	Event Event `deprecated:"true" type:"string"`
 
-	Events []*string `locationName:"Event" type:"list" flattened:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// Optional unique identifier for configurations in a notification configuration.
 	// If you don't provide one, Amazon S3 will assign an ID.
@@ -6753,13 +6764,13 @@ func (s *CloudFunctionConfiguration) SetCloudFunction(v string) *CloudFunctionCo
 }
 
 // SetEvent sets the Event field's value.
-func (s *CloudFunctionConfiguration) SetEvent(v string) *CloudFunctionConfiguration {
-	s.Event = &v
+func (s *CloudFunctionConfiguration) SetEvent(v Event) *CloudFunctionConfiguration {
+	s.Event = v
 	return s
 }
 
 // SetEvents sets the Events field's value.
-func (s *CloudFunctionConfiguration) SetEvents(v []*string) *CloudFunctionConfiguration {
+func (s *CloudFunctionConfiguration) SetEvents(v []Event) *CloudFunctionConfiguration {
 	s.Events = v
 	return s
 }
@@ -6815,7 +6826,7 @@ type CompleteMultipartUploadInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// UploadId is a required field
 	UploadId *string `location:"querystring" locationName:"uploadId" type:"string" required:"true"`
@@ -6834,15 +6845,18 @@ func (s CompleteMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -6879,8 +6893,8 @@ func (s *CompleteMultipartUploadInput) SetMultipartUpload(v *CompletedMultipartU
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *CompleteMultipartUploadInput) SetRequestPayer(v string) *CompleteMultipartUploadInput {
-	s.RequestPayer = &v
+func (s *CompleteMultipartUploadInput) SetRequestPayer(v RequestPayer) *CompleteMultipartUploadInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -6909,7 +6923,7 @@ type CompleteMultipartUploadOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If present, specifies the ID of the AWS Key Management Service (KMS) master
 	// encryption key that was used for the object.
@@ -6917,7 +6931,7 @@ type CompleteMultipartUploadOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// Version of the object.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
@@ -6971,8 +6985,8 @@ func (s *CompleteMultipartUploadOutput) SetLocation(v string) *CompleteMultipart
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *CompleteMultipartUploadOutput) SetRequestCharged(v string) *CompleteMultipartUploadOutput {
-	s.RequestCharged = &v
+func (s *CompleteMultipartUploadOutput) SetRequestCharged(v RequestCharged) *CompleteMultipartUploadOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -6983,8 +6997,8 @@ func (s *CompleteMultipartUploadOutput) SetSSEKMSKeyId(v string) *CompleteMultip
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CompleteMultipartUploadOutput) SetServerSideEncryption(v string) *CompleteMultipartUploadOutput {
-	s.ServerSideEncryption = &v
+func (s *CompleteMultipartUploadOutput) SetServerSideEncryption(v ServerSideEncryption) *CompleteMultipartUploadOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -7099,7 +7113,7 @@ type CopyObjectInput struct {
 	_ struct{} `type:"structure"`
 
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"ObjectCannedACL"`
+	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -7176,13 +7190,13 @@ type CopyObjectInput struct {
 
 	// Specifies whether the metadata is copied from the source object or replaced
 	// with metadata provided in the request.
-	MetadataDirective *string `location:"header" locationName:"x-amz-metadata-directive" type:"string" enum:"MetadataDirective"`
+	MetadataDirective MetadataDirective `location:"header" locationName:"x-amz-metadata-directive" type:"string"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -7207,10 +7221,10 @@ type CopyObjectInput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The tag-set for the object destination object this value must be used in
 	// conjunction with the TaggingDirective. The tag-set must be encoded as URL
@@ -7219,7 +7233,7 @@ type CopyObjectInput struct {
 
 	// Specifies whether the object tag-set are copied from the source object or
 	// replaced with tag-set provided in the request.
-	TaggingDirective *string `location:"header" locationName:"x-amz-tagging-directive" type:"string" enum:"TaggingDirective"`
+	TaggingDirective TaggingDirective `location:"header" locationName:"x-amz-tagging-directive" type:"string"`
 
 	// If the bucket is configured as a website, redirects requests for this object
 	// to another object in the same bucket or to an external URL. Amazon S3 stores
@@ -7240,12 +7254,15 @@ func (s CopyObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.CopySource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CopySource"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -7260,8 +7277,8 @@ func (s *CopyObjectInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *CopyObjectInput) SetACL(v string) *CopyObjectInput {
-	s.ACL = &v
+func (s *CopyObjectInput) SetACL(v ObjectCannedACL) *CopyObjectInput {
+	s.ACL = v
 	return s
 }
 
@@ -7406,14 +7423,14 @@ func (s *CopyObjectInput) SetMetadata(v map[string]*string) *CopyObjectInput {
 }
 
 // SetMetadataDirective sets the MetadataDirective field's value.
-func (s *CopyObjectInput) SetMetadataDirective(v string) *CopyObjectInput {
-	s.MetadataDirective = &v
+func (s *CopyObjectInput) SetMetadataDirective(v MetadataDirective) *CopyObjectInput {
+	s.MetadataDirective = v
 	return s
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *CopyObjectInput) SetRequestPayer(v string) *CopyObjectInput {
-	s.RequestPayer = &v
+func (s *CopyObjectInput) SetRequestPayer(v RequestPayer) *CopyObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -7449,14 +7466,14 @@ func (s *CopyObjectInput) SetSSEKMSKeyId(v string) *CopyObjectInput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CopyObjectInput) SetServerSideEncryption(v string) *CopyObjectInput {
-	s.ServerSideEncryption = &v
+func (s *CopyObjectInput) SetServerSideEncryption(v ServerSideEncryption) *CopyObjectInput {
+	s.ServerSideEncryption = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *CopyObjectInput) SetStorageClass(v string) *CopyObjectInput {
-	s.StorageClass = &v
+func (s *CopyObjectInput) SetStorageClass(v StorageClass) *CopyObjectInput {
+	s.StorageClass = v
 	return s
 }
 
@@ -7467,8 +7484,8 @@ func (s *CopyObjectInput) SetTagging(v string) *CopyObjectInput {
 }
 
 // SetTaggingDirective sets the TaggingDirective field's value.
-func (s *CopyObjectInput) SetTaggingDirective(v string) *CopyObjectInput {
-	s.TaggingDirective = &v
+func (s *CopyObjectInput) SetTaggingDirective(v TaggingDirective) *CopyObjectInput {
+	s.TaggingDirective = v
 	return s
 }
 
@@ -7491,7 +7508,7 @@ type CopyObjectOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm
@@ -7509,7 +7526,7 @@ type CopyObjectOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// Version ID of the newly created copy.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
@@ -7544,8 +7561,8 @@ func (s *CopyObjectOutput) SetExpiration(v string) *CopyObjectOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *CopyObjectOutput) SetRequestCharged(v string) *CopyObjectOutput {
-	s.RequestCharged = &v
+func (s *CopyObjectOutput) SetRequestCharged(v RequestCharged) *CopyObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -7568,8 +7585,8 @@ func (s *CopyObjectOutput) SetSSEKMSKeyId(v string) *CopyObjectOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CopyObjectOutput) SetServerSideEncryption(v string) *CopyObjectOutput {
-	s.ServerSideEncryption = &v
+func (s *CopyObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *CopyObjectOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -7649,7 +7666,7 @@ type CreateBucketConfiguration struct {
 
 	// Specifies the region where the bucket will be created. If you don't specify
 	// a region, the bucket will be created in US Standard.
-	LocationConstraint *string `type:"string" enum:"BucketLocationConstraint"`
+	LocationConstraint BucketLocationConstraint `type:"string"`
 }
 
 // String returns the string representation
@@ -7663,8 +7680,8 @@ func (s CreateBucketConfiguration) GoString() string {
 }
 
 // SetLocationConstraint sets the LocationConstraint field's value.
-func (s *CreateBucketConfiguration) SetLocationConstraint(v string) *CreateBucketConfiguration {
-	s.LocationConstraint = &v
+func (s *CreateBucketConfiguration) SetLocationConstraint(v BucketLocationConstraint) *CreateBucketConfiguration {
+	s.LocationConstraint = v
 	return s
 }
 
@@ -7673,7 +7690,7 @@ type CreateBucketInput struct {
 	_ struct{} `type:"structure" payload:"CreateBucketConfiguration"`
 
 	// The canned ACL to apply to the bucket.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"BucketCannedACL"`
+	ACL BucketCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -7710,6 +7727,7 @@ func (s CreateBucketInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBucketInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBucketInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -7721,8 +7739,8 @@ func (s *CreateBucketInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *CreateBucketInput) SetACL(v string) *CreateBucketInput {
-	s.ACL = &v
+func (s *CreateBucketInput) SetACL(v BucketCannedACL) *CreateBucketInput {
+	s.ACL = v
 	return s
 }
 
@@ -7803,7 +7821,7 @@ type CreateMultipartUploadInput struct {
 	_ struct{} `type:"structure"`
 
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"ObjectCannedACL"`
+	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	// Bucket is a required field
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
@@ -7850,7 +7868,7 @@ type CreateMultipartUploadInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -7875,10 +7893,10 @@ type CreateMultipartUploadInput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters
 	Tagging *string `location:"header" locationName:"x-amz-tagging" type:"string"`
@@ -7902,9 +7920,11 @@ func (s CreateMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMultipartUploadInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -7919,8 +7939,8 @@ func (s *CreateMultipartUploadInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *CreateMultipartUploadInput) SetACL(v string) *CreateMultipartUploadInput {
-	s.ACL = &v
+func (s *CreateMultipartUploadInput) SetACL(v ObjectCannedACL) *CreateMultipartUploadInput {
+	s.ACL = v
 	return s
 }
 
@@ -8010,8 +8030,8 @@ func (s *CreateMultipartUploadInput) SetMetadata(v map[string]*string) *CreateMu
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *CreateMultipartUploadInput) SetRequestPayer(v string) *CreateMultipartUploadInput {
-	s.RequestPayer = &v
+func (s *CreateMultipartUploadInput) SetRequestPayer(v RequestPayer) *CreateMultipartUploadInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -8047,14 +8067,14 @@ func (s *CreateMultipartUploadInput) SetSSEKMSKeyId(v string) *CreateMultipartUp
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CreateMultipartUploadInput) SetServerSideEncryption(v string) *CreateMultipartUploadInput {
-	s.ServerSideEncryption = &v
+func (s *CreateMultipartUploadInput) SetServerSideEncryption(v ServerSideEncryption) *CreateMultipartUploadInput {
+	s.ServerSideEncryption = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *CreateMultipartUploadInput) SetStorageClass(v string) *CreateMultipartUploadInput {
-	s.StorageClass = &v
+func (s *CreateMultipartUploadInput) SetStorageClass(v StorageClass) *CreateMultipartUploadInput {
+	s.StorageClass = v
 	return s
 }
 
@@ -8089,7 +8109,7 @@ type CreateMultipartUploadOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm
@@ -8107,7 +8127,7 @@ type CreateMultipartUploadOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// ID for the initiated multipart upload.
 	UploadId *string `type:"string"`
@@ -8155,8 +8175,8 @@ func (s *CreateMultipartUploadOutput) SetKey(v string) *CreateMultipartUploadOut
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *CreateMultipartUploadOutput) SetRequestCharged(v string) *CreateMultipartUploadOutput {
-	s.RequestCharged = &v
+func (s *CreateMultipartUploadOutput) SetRequestCharged(v RequestCharged) *CreateMultipartUploadOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -8179,8 +8199,8 @@ func (s *CreateMultipartUploadOutput) SetSSEKMSKeyId(v string) *CreateMultipartU
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *CreateMultipartUploadOutput) SetServerSideEncryption(v string) *CreateMultipartUploadOutput {
-	s.ServerSideEncryption = &v
+func (s *CreateMultipartUploadOutput) SetServerSideEncryption(v ServerSideEncryption) *CreateMultipartUploadOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -8215,6 +8235,7 @@ func (s Delete) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Delete) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Delete"}
+
 	if s.Objects == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Objects"))
 	}
@@ -8275,9 +8296,11 @@ func (s DeleteBucketAnalyticsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketAnalyticsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketAnalyticsConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8343,6 +8366,7 @@ func (s DeleteBucketCorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketCorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketCorsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8402,6 +8426,7 @@ func (s DeleteBucketInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8453,9 +8478,11 @@ func (s DeleteBucketInventoryConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketInventoryConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketInventoryConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8521,6 +8548,7 @@ func (s DeleteBucketLifecycleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketLifecycleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketLifecycleInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8587,9 +8615,11 @@ func (s DeleteBucketMetricsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketMetricsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketMetricsConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8670,6 +8700,7 @@ func (s DeleteBucketPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketPolicyInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8729,6 +8760,7 @@ func (s DeleteBucketReplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketReplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketReplicationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8788,6 +8820,7 @@ func (s DeleteBucketTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8847,6 +8880,7 @@ func (s DeleteBucketWebsiteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketWebsiteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketWebsiteInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -8963,7 +8997,7 @@ type DeleteObjectInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
@@ -8982,9 +9016,11 @@ func (s DeleteObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -9024,8 +9060,8 @@ func (s *DeleteObjectInput) SetMFA(v string) *DeleteObjectInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *DeleteObjectInput) SetRequestPayer(v string) *DeleteObjectInput {
-	s.RequestPayer = &v
+func (s *DeleteObjectInput) SetRequestPayer(v RequestPayer) *DeleteObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -9045,7 +9081,7 @@ type DeleteObjectOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// Returns the version ID of the delete marker created as a result of the DELETE
 	// operation.
@@ -9069,8 +9105,8 @@ func (s *DeleteObjectOutput) SetDeleteMarker(v bool) *DeleteObjectOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *DeleteObjectOutput) SetRequestCharged(v string) *DeleteObjectOutput {
-	s.RequestCharged = &v
+func (s *DeleteObjectOutput) SetRequestCharged(v RequestCharged) *DeleteObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -9107,9 +9143,11 @@ func (s DeleteObjectTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -9190,7 +9228,7 @@ type DeleteObjectsInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 }
 
 // String returns the string representation
@@ -9206,9 +9244,11 @@ func (s DeleteObjectsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Delete == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Delete"))
 	}
@@ -9250,8 +9290,8 @@ func (s *DeleteObjectsInput) SetMFA(v string) *DeleteObjectsInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *DeleteObjectsInput) SetRequestPayer(v string) *DeleteObjectsInput {
-	s.RequestPayer = &v
+func (s *DeleteObjectsInput) SetRequestPayer(v RequestPayer) *DeleteObjectsInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -9265,7 +9305,7 @@ type DeleteObjectsOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -9291,8 +9331,8 @@ func (s *DeleteObjectsOutput) SetErrors(v []*Error) *DeleteObjectsOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *DeleteObjectsOutput) SetRequestCharged(v string) *DeleteObjectsOutput {
-	s.RequestCharged = &v
+func (s *DeleteObjectsOutput) SetRequestCharged(v RequestCharged) *DeleteObjectsOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -9354,7 +9394,7 @@ type Destination struct {
 	Bucket *string `type:"string" required:"true"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `type:"string"`
 }
 
 // String returns the string representation
@@ -9370,6 +9410,7 @@ func (s Destination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Destination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Destination"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -9394,8 +9435,8 @@ func (s *Destination) getBucket() (v string) {
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *Destination) SetStorageClass(v string) *Destination {
-	s.StorageClass = &v
+func (s *Destination) SetStorageClass(v StorageClass) *Destination {
+	s.StorageClass = v
 	return s
 }
 
@@ -9469,6 +9510,7 @@ func (s ErrorDocument) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ErrorDocument) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ErrorDocument"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -9497,7 +9539,7 @@ type FilterRule struct {
 	// the filtering rule applies. Maximum prefix length can be up to 1,024 characters.
 	// Overlapping prefixes and suffixes are not supported. For more information,
 	// go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
-	Name *string `type:"string" enum:"FilterRuleName"`
+	Name FilterRuleName `type:"string"`
 
 	Value *string `type:"string"`
 }
@@ -9513,8 +9555,8 @@ func (s FilterRule) GoString() string {
 }
 
 // SetName sets the Name field's value.
-func (s *FilterRule) SetName(v string) *FilterRule {
-	s.Name = &v
+func (s *FilterRule) SetName(v FilterRuleName) *FilterRule {
+	s.Name = v
 	return s
 }
 
@@ -9547,6 +9589,7 @@ func (s GetBucketAccelerateConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAccelerateConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAccelerateConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -9575,7 +9618,7 @@ type GetBucketAccelerateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The accelerate configuration of the bucket.
-	Status *string `type:"string" enum:"BucketAccelerateStatus"`
+	Status BucketAccelerateStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -9589,8 +9632,8 @@ func (s GetBucketAccelerateConfigurationOutput) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetBucketAccelerateConfigurationOutput) SetStatus(v string) *GetBucketAccelerateConfigurationOutput {
-	s.Status = &v
+func (s *GetBucketAccelerateConfigurationOutput) SetStatus(v BucketAccelerateStatus) *GetBucketAccelerateConfigurationOutput {
+	s.Status = v
 	return s
 }
 
@@ -9615,6 +9658,7 @@ func (s GetBucketAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAclInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -9698,9 +9742,11 @@ func (s GetBucketAnalyticsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAnalyticsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAnalyticsConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -9775,6 +9821,7 @@ func (s GetBucketCorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketCorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketCorsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -9849,9 +9896,11 @@ func (s GetBucketInventoryConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketInventoryConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketInventoryConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -9926,6 +9975,7 @@ func (s GetBucketLifecycleConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLifecycleConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLifecycleConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -9993,6 +10043,7 @@ func (s GetBucketLifecycleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLifecycleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLifecycleInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10060,6 +10111,7 @@ func (s GetBucketLocationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLocationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLocationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10087,7 +10139,7 @@ func (s *GetBucketLocationInput) getBucket() (v string) {
 type GetBucketLocationOutput struct {
 	_ struct{} `type:"structure"`
 
-	LocationConstraint *string `type:"string" enum:"BucketLocationConstraint"`
+	LocationConstraint BucketLocationConstraint `type:"string"`
 }
 
 // String returns the string representation
@@ -10101,8 +10153,8 @@ func (s GetBucketLocationOutput) GoString() string {
 }
 
 // SetLocationConstraint sets the LocationConstraint field's value.
-func (s *GetBucketLocationOutput) SetLocationConstraint(v string) *GetBucketLocationOutput {
-	s.LocationConstraint = &v
+func (s *GetBucketLocationOutput) SetLocationConstraint(v BucketLocationConstraint) *GetBucketLocationOutput {
+	s.LocationConstraint = v
 	return s
 }
 
@@ -10127,6 +10179,7 @@ func (s GetBucketLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLoggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10201,9 +10254,11 @@ func (s GetBucketMetricsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketMetricsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketMetricsConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -10280,6 +10335,7 @@ func (s GetBucketNotificationConfigurationRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketNotificationConfigurationRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationRequest"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10324,6 +10380,7 @@ func (s GetBucketPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketPolicyInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10392,6 +10449,7 @@ func (s GetBucketReplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketReplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketReplicationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10461,6 +10519,7 @@ func (s GetBucketRequestPaymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketRequestPaymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketRequestPaymentInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10489,7 +10548,7 @@ type GetBucketRequestPaymentOutput struct {
 	_ struct{} `type:"structure"`
 
 	// Specifies who pays for the download and request fees.
-	Payer *string `type:"string" enum:"Payer"`
+	Payer Payer `type:"string"`
 }
 
 // String returns the string representation
@@ -10503,8 +10562,8 @@ func (s GetBucketRequestPaymentOutput) GoString() string {
 }
 
 // SetPayer sets the Payer field's value.
-func (s *GetBucketRequestPaymentOutput) SetPayer(v string) *GetBucketRequestPaymentOutput {
-	s.Payer = &v
+func (s *GetBucketRequestPaymentOutput) SetPayer(v Payer) *GetBucketRequestPaymentOutput {
+	s.Payer = v
 	return s
 }
 
@@ -10529,6 +10588,7 @@ func (s GetBucketTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10597,6 +10657,7 @@ func (s GetBucketVersioningInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketVersioningInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketVersioningInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10627,10 +10688,10 @@ type GetBucketVersioningOutput struct {
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
 	// This element is only returned if the bucket has been configured with MFA
 	// delete. If the bucket has never been so configured, this element is not returned.
-	MFADelete *string `locationName:"MfaDelete" type:"string" enum:"MFADeleteStatus"`
+	MFADelete MFADeleteStatus `locationName:"MfaDelete" type:"string"`
 
 	// The versioning state of the bucket.
-	Status *string `type:"string" enum:"BucketVersioningStatus"`
+	Status BucketVersioningStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -10644,14 +10705,14 @@ func (s GetBucketVersioningOutput) GoString() string {
 }
 
 // SetMFADelete sets the MFADelete field's value.
-func (s *GetBucketVersioningOutput) SetMFADelete(v string) *GetBucketVersioningOutput {
-	s.MFADelete = &v
+func (s *GetBucketVersioningOutput) SetMFADelete(v MFADeleteStatus) *GetBucketVersioningOutput {
+	s.MFADelete = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetBucketVersioningOutput) SetStatus(v string) *GetBucketVersioningOutput {
-	s.Status = &v
+func (s *GetBucketVersioningOutput) SetStatus(v BucketVersioningStatus) *GetBucketVersioningOutput {
+	s.Status = v
 	return s
 }
 
@@ -10676,6 +10737,7 @@ func (s GetBucketWebsiteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketWebsiteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBucketWebsiteInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -10760,7 +10822,7 @@ type GetObjectAclInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
@@ -10779,9 +10841,11 @@ func (s GetObjectAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetObjectAclInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -10815,8 +10879,8 @@ func (s *GetObjectAclInput) SetKey(v string) *GetObjectAclInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectAclInput) SetRequestPayer(v string) *GetObjectAclInput {
-	s.RequestPayer = &v
+func (s *GetObjectAclInput) SetRequestPayer(v RequestPayer) *GetObjectAclInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -10837,7 +10901,7 @@ type GetObjectAclOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -10863,8 +10927,8 @@ func (s *GetObjectAclOutput) SetOwner(v *Owner) *GetObjectAclOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectAclOutput) SetRequestCharged(v string) *GetObjectAclOutput {
-	s.RequestCharged = &v
+func (s *GetObjectAclOutput) SetRequestCharged(v RequestCharged) *GetObjectAclOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -10907,7 +10971,7 @@ type GetObjectInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Sets the Cache-Control header of the response.
 	ResponseCacheControl *string `location:"querystring" locationName:"response-cache-control" type:"string"`
@@ -10959,9 +11023,11 @@ func (s GetObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -11031,8 +11097,8 @@ func (s *GetObjectInput) SetRange(v string) *GetObjectInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectInput) SetRequestPayer(v string) *GetObjectInput {
-	s.RequestPayer = &v
+func (s *GetObjectInput) SetRequestPayer(v RequestPayer) *GetObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -11167,11 +11233,11 @@ type GetObjectOutput struct {
 	// The count of parts this object has.
 	PartsCount *int64 `location:"header" locationName:"x-amz-mp-parts-count" type:"integer"`
 
-	ReplicationStatus *string `location:"header" locationName:"x-amz-replication-status" type:"string" enum:"ReplicationStatus"`
+	ReplicationStatus ReplicationStatus `location:"header" locationName:"x-amz-replication-status" type:"string"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// Provides information about object restoration operation and expiration time
 	// of the restored object copy.
@@ -11193,9 +11259,9 @@ type GetObjectOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The number of tags, if any, on the object.
 	TagCount *int64 `location:"header" locationName:"x-amz-tagging-count" type:"integer"`
@@ -11322,14 +11388,14 @@ func (s *GetObjectOutput) SetPartsCount(v int64) *GetObjectOutput {
 }
 
 // SetReplicationStatus sets the ReplicationStatus field's value.
-func (s *GetObjectOutput) SetReplicationStatus(v string) *GetObjectOutput {
-	s.ReplicationStatus = &v
+func (s *GetObjectOutput) SetReplicationStatus(v ReplicationStatus) *GetObjectOutput {
+	s.ReplicationStatus = v
 	return s
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectOutput) SetRequestCharged(v string) *GetObjectOutput {
-	s.RequestCharged = &v
+func (s *GetObjectOutput) SetRequestCharged(v RequestCharged) *GetObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -11358,14 +11424,14 @@ func (s *GetObjectOutput) SetSSEKMSKeyId(v string) *GetObjectOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *GetObjectOutput) SetServerSideEncryption(v string) *GetObjectOutput {
-	s.ServerSideEncryption = &v
+func (s *GetObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *GetObjectOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *GetObjectOutput) SetStorageClass(v string) *GetObjectOutput {
-	s.StorageClass = &v
+func (s *GetObjectOutput) SetStorageClass(v StorageClass) *GetObjectOutput {
+	s.StorageClass = v
 	return s
 }
 
@@ -11413,9 +11479,11 @@ func (s GetObjectTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -11500,7 +11568,7 @@ type GetObjectTorrentInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 }
 
 // String returns the string representation
@@ -11516,9 +11584,11 @@ func (s GetObjectTorrentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectTorrentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTorrentInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -11552,8 +11622,8 @@ func (s *GetObjectTorrentInput) SetKey(v string) *GetObjectTorrentInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *GetObjectTorrentInput) SetRequestPayer(v string) *GetObjectTorrentInput {
-	s.RequestPayer = &v
+func (s *GetObjectTorrentInput) SetRequestPayer(v RequestPayer) *GetObjectTorrentInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -11565,7 +11635,7 @@ type GetObjectTorrentOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -11585,8 +11655,8 @@ func (s *GetObjectTorrentOutput) SetBody(v io.ReadCloser) *GetObjectTorrentOutpu
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *GetObjectTorrentOutput) SetRequestCharged(v string) *GetObjectTorrentOutput {
-	s.RequestCharged = &v
+func (s *GetObjectTorrentOutput) SetRequestCharged(v RequestCharged) *GetObjectTorrentOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -11597,7 +11667,7 @@ type GlacierJobParameters struct {
 	// Glacier retrieval tier at which the restore will be processed.
 	//
 	// Tier is a required field
-	Tier *string `type:"string" required:"true" enum:"Tier"`
+	Tier Tier `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -11613,7 +11683,7 @@ func (s GlacierJobParameters) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlacierJobParameters) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GlacierJobParameters"}
-	if s.Tier == nil {
+	if len(s.Tier) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Tier"))
 	}
 
@@ -11624,8 +11694,8 @@ func (s *GlacierJobParameters) Validate() error {
 }
 
 // SetTier sets the Tier field's value.
-func (s *GlacierJobParameters) SetTier(v string) *GlacierJobParameters {
-	s.Tier = &v
+func (s *GlacierJobParameters) SetTier(v Tier) *GlacierJobParameters {
+	s.Tier = v
 	return s
 }
 
@@ -11636,7 +11706,7 @@ type Grant struct {
 	Grantee *Grantee `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
 	// Specifies the permission given to the grantee.
-	Permission *string `type:"string" enum:"Permission"`
+	Permission Permission `type:"string"`
 }
 
 // String returns the string representation
@@ -11671,8 +11741,8 @@ func (s *Grant) SetGrantee(v *Grantee) *Grant {
 }
 
 // SetPermission sets the Permission field's value.
-func (s *Grant) SetPermission(v string) *Grant {
-	s.Permission = &v
+func (s *Grant) SetPermission(v Permission) *Grant {
+	s.Permission = v
 	return s
 }
 
@@ -11692,7 +11762,7 @@ type Grantee struct {
 	// Type of grantee
 	//
 	// Type is a required field
-	Type *string `locationName:"xsi:type" type:"string" xmlAttribute:"true" required:"true" enum:"Type"`
+	Type Type `locationName:"xsi:type" type:"string" xmlAttribute:"true" required:"true"`
 
 	// URI of the grantee group.
 	URI *string `type:"string"`
@@ -11711,7 +11781,7 @@ func (s Grantee) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Grantee) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Grantee"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -11740,8 +11810,8 @@ func (s *Grantee) SetID(v string) *Grantee {
 }
 
 // SetType sets the Type field's value.
-func (s *Grantee) SetType(v string) *Grantee {
-	s.Type = &v
+func (s *Grantee) SetType(v Type) *Grantee {
+	s.Type = v
 	return s
 }
 
@@ -11772,6 +11842,7 @@ func (s HeadBucketInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HeadBucketInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HeadBucketInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -11850,7 +11921,7 @@ type HeadObjectInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -11884,9 +11955,11 @@ func (s HeadObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HeadObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HeadObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -11956,8 +12029,8 @@ func (s *HeadObjectInput) SetRange(v string) *HeadObjectInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *HeadObjectInput) SetRequestPayer(v string) *HeadObjectInput {
-	s.RequestPayer = &v
+func (s *HeadObjectInput) SetRequestPayer(v RequestPayer) *HeadObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -12050,11 +12123,11 @@ type HeadObjectOutput struct {
 	// The count of parts this object has.
 	PartsCount *int64 `location:"header" locationName:"x-amz-mp-parts-count" type:"integer"`
 
-	ReplicationStatus *string `location:"header" locationName:"x-amz-replication-status" type:"string" enum:"ReplicationStatus"`
+	ReplicationStatus ReplicationStatus `location:"header" locationName:"x-amz-replication-status" type:"string"`
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// Provides information about object restoration operation and expiration time
 	// of the restored object copy.
@@ -12076,9 +12149,9 @@ type HeadObjectOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// Version of the object.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
@@ -12190,14 +12263,14 @@ func (s *HeadObjectOutput) SetPartsCount(v int64) *HeadObjectOutput {
 }
 
 // SetReplicationStatus sets the ReplicationStatus field's value.
-func (s *HeadObjectOutput) SetReplicationStatus(v string) *HeadObjectOutput {
-	s.ReplicationStatus = &v
+func (s *HeadObjectOutput) SetReplicationStatus(v ReplicationStatus) *HeadObjectOutput {
+	s.ReplicationStatus = v
 	return s
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *HeadObjectOutput) SetRequestCharged(v string) *HeadObjectOutput {
-	s.RequestCharged = &v
+func (s *HeadObjectOutput) SetRequestCharged(v RequestCharged) *HeadObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -12226,14 +12299,14 @@ func (s *HeadObjectOutput) SetSSEKMSKeyId(v string) *HeadObjectOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *HeadObjectOutput) SetServerSideEncryption(v string) *HeadObjectOutput {
-	s.ServerSideEncryption = &v
+func (s *HeadObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *HeadObjectOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *HeadObjectOutput) SetStorageClass(v string) *HeadObjectOutput {
-	s.StorageClass = &v
+func (s *HeadObjectOutput) SetStorageClass(v StorageClass) *HeadObjectOutput {
+	s.StorageClass = v
 	return s
 }
 
@@ -12275,6 +12348,7 @@ func (s IndexDocument) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexDocument) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IndexDocument"}
+
 	if s.Suffix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Suffix"))
 	}
@@ -12346,7 +12420,7 @@ type InventoryConfiguration struct {
 	// Specifies which object version(s) to included in the inventory results.
 	//
 	// IncludedObjectVersions is a required field
-	IncludedObjectVersions *string `type:"string" required:"true" enum:"InventoryIncludedObjectVersions"`
+	IncludedObjectVersions InventoryIncludedObjectVersions `type:"string" required:"true"`
 
 	// Specifies whether the inventory is enabled or disabled.
 	//
@@ -12354,7 +12428,7 @@ type InventoryConfiguration struct {
 	IsEnabled *bool `type:"boolean" required:"true"`
 
 	// Contains the optional fields that are included in the inventory results.
-	OptionalFields []*string `locationNameList:"Field" type:"list"`
+	OptionalFields []InventoryOptionalField `locationNameList:"Field" type:"list"`
 
 	// Specifies the schedule for generating inventory results.
 	//
@@ -12375,18 +12449,22 @@ func (s InventoryConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryConfiguration"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
-	if s.IncludedObjectVersions == nil {
+	if len(s.IncludedObjectVersions) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("IncludedObjectVersions"))
 	}
+
 	if s.IsEnabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IsEnabled"))
 	}
+
 	if s.Schedule == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Schedule"))
 	}
@@ -12431,8 +12509,8 @@ func (s *InventoryConfiguration) SetId(v string) *InventoryConfiguration {
 }
 
 // SetIncludedObjectVersions sets the IncludedObjectVersions field's value.
-func (s *InventoryConfiguration) SetIncludedObjectVersions(v string) *InventoryConfiguration {
-	s.IncludedObjectVersions = &v
+func (s *InventoryConfiguration) SetIncludedObjectVersions(v InventoryIncludedObjectVersions) *InventoryConfiguration {
+	s.IncludedObjectVersions = v
 	return s
 }
 
@@ -12443,7 +12521,7 @@ func (s *InventoryConfiguration) SetIsEnabled(v bool) *InventoryConfiguration {
 }
 
 // SetOptionalFields sets the OptionalFields field's value.
-func (s *InventoryConfiguration) SetOptionalFields(v []*string) *InventoryConfiguration {
+func (s *InventoryConfiguration) SetOptionalFields(v []InventoryOptionalField) *InventoryConfiguration {
 	s.OptionalFields = v
 	return s
 }
@@ -12478,6 +12556,7 @@ func (s InventoryDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryDestination"}
+
 	if s.S3BucketDestination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketDestination"))
 	}
@@ -12522,6 +12601,7 @@ func (s InventoryFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryFilter"}
+
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
@@ -12554,7 +12634,7 @@ type InventoryS3BucketDestination struct {
 	// Specifies the output format of the inventory results.
 	//
 	// Format is a required field
-	Format *string `type:"string" required:"true" enum:"InventoryFormat"`
+	Format InventoryFormat `type:"string" required:"true"`
 
 	// The prefix that is prepended to all inventory results.
 	Prefix *string `type:"string"`
@@ -12573,10 +12653,11 @@ func (s InventoryS3BucketDestination) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryS3BucketDestination) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventoryS3BucketDestination"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
-	if s.Format == nil {
+	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
@@ -12606,8 +12687,8 @@ func (s *InventoryS3BucketDestination) getBucket() (v string) {
 }
 
 // SetFormat sets the Format field's value.
-func (s *InventoryS3BucketDestination) SetFormat(v string) *InventoryS3BucketDestination {
-	s.Format = &v
+func (s *InventoryS3BucketDestination) SetFormat(v InventoryFormat) *InventoryS3BucketDestination {
+	s.Format = v
 	return s
 }
 
@@ -12624,7 +12705,7 @@ type InventorySchedule struct {
 	// Specifies how frequently inventory results are produced.
 	//
 	// Frequency is a required field
-	Frequency *string `type:"string" required:"true" enum:"InventoryFrequency"`
+	Frequency InventoryFrequency `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -12640,7 +12721,7 @@ func (s InventorySchedule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventorySchedule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InventorySchedule"}
-	if s.Frequency == nil {
+	if len(s.Frequency) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Frequency"))
 	}
 
@@ -12651,8 +12732,8 @@ func (s *InventorySchedule) Validate() error {
 }
 
 // SetFrequency sets the Frequency field's value.
-func (s *InventorySchedule) SetFrequency(v string) *InventorySchedule {
-	s.Frequency = &v
+func (s *InventorySchedule) SetFrequency(v InventoryFrequency) *InventorySchedule {
+	s.Frequency = v
 	return s
 }
 
@@ -12688,7 +12769,7 @@ type LambdaFunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Events is a required field
-	Events []*string `locationName:"Event" type:"list" flattened:"true" required:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
@@ -12718,9 +12799,11 @@ func (s LambdaFunctionConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaFunctionConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LambdaFunctionConfiguration"}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
+
 	if s.LambdaFunctionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LambdaFunctionArn"))
 	}
@@ -12732,7 +12815,7 @@ func (s *LambdaFunctionConfiguration) Validate() error {
 }
 
 // SetEvents sets the Events field's value.
-func (s *LambdaFunctionConfiguration) SetEvents(v []*string) *LambdaFunctionConfiguration {
+func (s *LambdaFunctionConfiguration) SetEvents(v []Event) *LambdaFunctionConfiguration {
 	s.Events = v
 	return s
 }
@@ -12776,6 +12859,7 @@ func (s LifecycleConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LifecycleConfiguration"}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -12883,7 +12967,7 @@ type LifecycleRule struct {
 	// is not currently being applied.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ExpirationStatus"`
+	Status ExpirationStatus `type:"string" required:"true"`
 
 	Transitions []*Transition `locationName:"Transition" type:"list" flattened:"true"`
 }
@@ -12901,7 +12985,7 @@ func (s LifecycleRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LifecycleRule"}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.Filter != nil {
@@ -12959,8 +13043,8 @@ func (s *LifecycleRule) SetPrefix(v string) *LifecycleRule {
 }
 
 // SetStatus sets the Status field's value.
-func (s *LifecycleRule) SetStatus(v string) *LifecycleRule {
-	s.Status = &v
+func (s *LifecycleRule) SetStatus(v ExpirationStatus) *LifecycleRule {
+	s.Status = v
 	return s
 }
 
@@ -13119,6 +13203,7 @@ func (s ListBucketAnalyticsConfigurationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketAnalyticsConfigurationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBucketAnalyticsConfigurationsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -13232,6 +13317,7 @@ func (s ListBucketInventoryConfigurationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketInventoryConfigurationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBucketInventoryConfigurationsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -13345,6 +13431,7 @@ func (s ListBucketMetricsConfigurationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketMetricsConfigurationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListBucketMetricsConfigurationsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -13493,7 +13580,7 @@ type ListMultipartUploadsInput struct {
 	// with an ASCII value from 0 to 10. For characters that are not supported in
 	// XML 1.0, you can add this parameter to request that Amazon S3 encode the
 	// keys in the response.
-	EncodingType *string `location:"querystring" locationName:"encoding-type" type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `location:"querystring" locationName:"encoding-type" type:"string"`
 
 	// Together with upload-id-marker, this parameter specifies the multipart upload
 	// after which listing should begin.
@@ -13527,6 +13614,7 @@ func (s ListMultipartUploadsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMultipartUploadsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -13557,8 +13645,8 @@ func (s *ListMultipartUploadsInput) SetDelimiter(v string) *ListMultipartUploads
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListMultipartUploadsInput) SetEncodingType(v string) *ListMultipartUploadsInput {
-	s.EncodingType = &v
+func (s *ListMultipartUploadsInput) SetEncodingType(v EncodingType) *ListMultipartUploadsInput {
+	s.EncodingType = v
 	return s
 }
 
@@ -13598,7 +13686,7 @@ type ListMultipartUploadsOutput struct {
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType *string `type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `type:"string"`
 
 	// Indicates whether the returned list of multipart uploads is truncated. A
 	// value of true indicates that the list was truncated. The list can be truncated
@@ -13667,8 +13755,8 @@ func (s *ListMultipartUploadsOutput) SetDelimiter(v string) *ListMultipartUpload
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListMultipartUploadsOutput) SetEncodingType(v string) *ListMultipartUploadsOutput {
-	s.EncodingType = &v
+func (s *ListMultipartUploadsOutput) SetEncodingType(v EncodingType) *ListMultipartUploadsOutput {
+	s.EncodingType = v
 	return s
 }
 
@@ -13736,7 +13824,7 @@ type ListObjectVersionsInput struct {
 	// with an ASCII value from 0 to 10. For characters that are not supported in
 	// XML 1.0, you can add this parameter to request that Amazon S3 encode the
 	// keys in the response.
-	EncodingType *string `location:"querystring" locationName:"encoding-type" type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `location:"querystring" locationName:"encoding-type" type:"string"`
 
 	// Specifies the key to start with when listing objects in a bucket.
 	KeyMarker *string `location:"querystring" locationName:"key-marker" type:"string"`
@@ -13765,6 +13853,7 @@ func (s ListObjectVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectVersionsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -13795,8 +13884,8 @@ func (s *ListObjectVersionsInput) SetDelimiter(v string) *ListObjectVersionsInpu
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectVersionsInput) SetEncodingType(v string) *ListObjectVersionsInput {
-	s.EncodingType = &v
+func (s *ListObjectVersionsInput) SetEncodingType(v EncodingType) *ListObjectVersionsInput {
+	s.EncodingType = v
 	return s
 }
 
@@ -13835,7 +13924,7 @@ type ListObjectVersionsOutput struct {
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType *string `type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `type:"string"`
 
 	// A flag that indicates whether or not Amazon S3 returned all of the results
 	// that satisfied the search criteria. If your results were truncated, you can
@@ -13893,8 +13982,8 @@ func (s *ListObjectVersionsOutput) SetDelimiter(v string) *ListObjectVersionsOut
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectVersionsOutput) SetEncodingType(v string) *ListObjectVersionsOutput {
-	s.EncodingType = &v
+func (s *ListObjectVersionsOutput) SetEncodingType(v EncodingType) *ListObjectVersionsOutput {
+	s.EncodingType = v
 	return s
 }
 
@@ -13968,7 +14057,7 @@ type ListObjectsInput struct {
 	// with an ASCII value from 0 to 10. For characters that are not supported in
 	// XML 1.0, you can add this parameter to request that Amazon S3 encode the
 	// keys in the response.
-	EncodingType *string `location:"querystring" locationName:"encoding-type" type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `location:"querystring" locationName:"encoding-type" type:"string"`
 
 	// Specifies the key to start with when listing objects in a bucket.
 	Marker *string `location:"querystring" locationName:"marker" type:"string"`
@@ -13983,7 +14072,7 @@ type ListObjectsInput struct {
 	// Confirms that the requester knows that she or he will be charged for the
 	// list objects request. Bucket owners need not specify this parameter in their
 	// requests.
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 }
 
 // String returns the string representation
@@ -13999,6 +14088,7 @@ func (s ListObjectsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -14029,8 +14119,8 @@ func (s *ListObjectsInput) SetDelimiter(v string) *ListObjectsInput {
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsInput) SetEncodingType(v string) *ListObjectsInput {
-	s.EncodingType = &v
+func (s *ListObjectsInput) SetEncodingType(v EncodingType) *ListObjectsInput {
+	s.EncodingType = v
 	return s
 }
 
@@ -14053,8 +14143,8 @@ func (s *ListObjectsInput) SetPrefix(v string) *ListObjectsInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *ListObjectsInput) SetRequestPayer(v string) *ListObjectsInput {
-	s.RequestPayer = &v
+func (s *ListObjectsInput) SetRequestPayer(v RequestPayer) *ListObjectsInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -14069,7 +14159,7 @@ type ListObjectsOutput struct {
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType *string `type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `type:"string"`
 
 	// A flag that indicates whether or not Amazon S3 returned all of the results
 	// that satisfied the search criteria.
@@ -14122,8 +14212,8 @@ func (s *ListObjectsOutput) SetDelimiter(v string) *ListObjectsOutput {
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsOutput) SetEncodingType(v string) *ListObjectsOutput {
-	s.EncodingType = &v
+func (s *ListObjectsOutput) SetEncodingType(v EncodingType) *ListObjectsOutput {
+	s.EncodingType = v
 	return s
 }
 
@@ -14181,7 +14271,7 @@ type ListObjectsV2Input struct {
 	Delimiter *string `location:"querystring" locationName:"delimiter" type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType *string `location:"querystring" locationName:"encoding-type" type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `location:"querystring" locationName:"encoding-type" type:"string"`
 
 	// The owner field is not present in listV2 by default, if you want to return
 	// owner field with each key in the result then set the fetch owner field to
@@ -14198,7 +14288,7 @@ type ListObjectsV2Input struct {
 	// Confirms that the requester knows that she or he will be charged for the
 	// list objects request in V2 style. Bucket owners need not specify this parameter
 	// in their requests.
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
 	// listing after this specified key. StartAfter can be any key in the bucket
@@ -14218,6 +14308,7 @@ func (s ListObjectsV2Input) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectsV2Input) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListObjectsV2Input"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -14254,8 +14345,8 @@ func (s *ListObjectsV2Input) SetDelimiter(v string) *ListObjectsV2Input {
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsV2Input) SetEncodingType(v string) *ListObjectsV2Input {
-	s.EncodingType = &v
+func (s *ListObjectsV2Input) SetEncodingType(v EncodingType) *ListObjectsV2Input {
+	s.EncodingType = v
 	return s
 }
 
@@ -14278,8 +14369,8 @@ func (s *ListObjectsV2Input) SetPrefix(v string) *ListObjectsV2Input {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *ListObjectsV2Input) SetRequestPayer(v string) *ListObjectsV2Input {
-	s.RequestPayer = &v
+func (s *ListObjectsV2Input) SetRequestPayer(v RequestPayer) *ListObjectsV2Input {
+	s.RequestPayer = v
 	return s
 }
 
@@ -14309,7 +14400,7 @@ type ListObjectsV2Output struct {
 	Delimiter *string `type:"string"`
 
 	// Encoding type used by Amazon S3 to encode object keys in the response.
-	EncodingType *string `type:"string" enum:"EncodingType"`
+	EncodingType EncodingType `type:"string"`
 
 	// A flag that indicates whether or not Amazon S3 returned all of the results
 	// that satisfied the search criteria.
@@ -14376,8 +14467,8 @@ func (s *ListObjectsV2Output) SetDelimiter(v string) *ListObjectsV2Output {
 }
 
 // SetEncodingType sets the EncodingType field's value.
-func (s *ListObjectsV2Output) SetEncodingType(v string) *ListObjectsV2Output {
-	s.EncodingType = &v
+func (s *ListObjectsV2Output) SetEncodingType(v EncodingType) *ListObjectsV2Output {
+	s.EncodingType = v
 	return s
 }
 
@@ -14444,7 +14535,7 @@ type ListPartsInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Upload ID identifying the multipart upload whose parts are being listed.
 	//
@@ -14465,15 +14556,18 @@ func (s ListPartsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPartsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPartsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -14516,8 +14610,8 @@ func (s *ListPartsInput) SetPartNumberMarker(v int64) *ListPartsInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *ListPartsInput) SetRequestPayer(v string) *ListPartsInput {
-	s.RequestPayer = &v
+func (s *ListPartsInput) SetRequestPayer(v RequestPayer) *ListPartsInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -14567,10 +14661,10 @@ type ListPartsOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `type:"string"`
 
 	// Upload ID identifying the multipart upload whose parts are being listed.
 	UploadId *string `type:"string"`
@@ -14660,14 +14754,14 @@ func (s *ListPartsOutput) SetParts(v []*Part) *ListPartsOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *ListPartsOutput) SetRequestCharged(v string) *ListPartsOutput {
-	s.RequestCharged = &v
+func (s *ListPartsOutput) SetRequestCharged(v RequestCharged) *ListPartsOutput {
+	s.RequestCharged = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *ListPartsOutput) SetStorageClass(v string) *ListPartsOutput {
-	s.StorageClass = &v
+func (s *ListPartsOutput) SetStorageClass(v StorageClass) *ListPartsOutput {
+	s.StorageClass = v
 	return s
 }
 
@@ -14825,6 +14919,7 @@ func (s MetricsConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricsConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricsConfiguration"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -14932,7 +15027,7 @@ type MultipartUpload struct {
 	Owner *Owner `type:"structure"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `type:"string"`
 
 	// Upload ID that identifies the multipart upload.
 	UploadId *string `type:"string"`
@@ -14973,8 +15068,8 @@ func (s *MultipartUpload) SetOwner(v *Owner) *MultipartUpload {
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *MultipartUpload) SetStorageClass(v string) *MultipartUpload {
-	s.StorageClass = &v
+func (s *MultipartUpload) SetStorageClass(v StorageClass) *MultipartUpload {
+	s.StorageClass = v
 	return s
 }
 
@@ -15032,7 +15127,7 @@ type NoncurrentVersionTransition struct {
 	NoncurrentDays *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"TransitionStorageClass"`
+	StorageClass TransitionStorageClass `type:"string"`
 }
 
 // String returns the string representation
@@ -15052,8 +15147,8 @@ func (s *NoncurrentVersionTransition) SetNoncurrentDays(v int64) *NoncurrentVers
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *NoncurrentVersionTransition) SetStorageClass(v string) *NoncurrentVersionTransition {
-	s.StorageClass = &v
+func (s *NoncurrentVersionTransition) SetStorageClass(v TransitionStorageClass) *NoncurrentVersionTransition {
+	s.StorageClass = v
 	return s
 }
 
@@ -15218,7 +15313,7 @@ type Object struct {
 	Size *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"ObjectStorageClass"`
+	StorageClass ObjectStorageClass `type:"string"`
 }
 
 // String returns the string representation
@@ -15262,8 +15357,8 @@ func (s *Object) SetSize(v int64) *Object {
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *Object) SetStorageClass(v string) *Object {
-	s.StorageClass = &v
+func (s *Object) SetStorageClass(v ObjectStorageClass) *Object {
+	s.StorageClass = v
 	return s
 }
 
@@ -15293,6 +15388,7 @@ func (s ObjectIdentifier) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ObjectIdentifier) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ObjectIdentifier"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -15340,7 +15436,7 @@ type ObjectVersion struct {
 	Size *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"ObjectVersionStorageClass"`
+	StorageClass ObjectVersionStorageClass `type:"string"`
 
 	// Version ID of an object.
 	VersionId *string `type:"string"`
@@ -15393,8 +15489,8 @@ func (s *ObjectVersion) SetSize(v int64) *ObjectVersion {
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *ObjectVersion) SetStorageClass(v string) *ObjectVersion {
-	s.StorageClass = &v
+func (s *ObjectVersion) SetStorageClass(v ObjectVersionStorageClass) *ObjectVersion {
+	s.StorageClass = v
 	return s
 }
 
@@ -15515,9 +15611,11 @@ func (s PutBucketAccelerateConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAccelerateConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAccelerateConfigurationInput"}
+
 	if s.AccelerateConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccelerateConfiguration"))
 	}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -15567,7 +15665,7 @@ type PutBucketAclInput struct {
 	_ struct{} `type:"structure" payload:"AccessControlPolicy"`
 
 	// The canned ACL to apply to the bucket.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"BucketCannedACL"`
+	ACL BucketCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	AccessControlPolicy *AccessControlPolicy `locationName:"AccessControlPolicy" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
@@ -15604,6 +15702,7 @@ func (s PutBucketAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAclInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -15620,8 +15719,8 @@ func (s *PutBucketAclInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *PutBucketAclInput) SetACL(v string) *PutBucketAclInput {
-	s.ACL = &v
+func (s *PutBucketAclInput) SetACL(v BucketCannedACL) *PutBucketAclInput {
+	s.ACL = v
 	return s
 }
 
@@ -15722,12 +15821,15 @@ func (s PutBucketAnalyticsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAnalyticsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAnalyticsConfigurationInput"}
+
 	if s.AnalyticsConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AnalyticsConfiguration"))
 	}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -15807,9 +15909,11 @@ func (s PutBucketCorsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketCorsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketCorsInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.CORSConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CORSConfiguration"))
 	}
@@ -15892,12 +15996,15 @@ func (s PutBucketInventoryConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketInventoryConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketInventoryConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.InventoryConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InventoryConfiguration"))
 	}
@@ -15976,6 +16083,7 @@ func (s PutBucketLifecycleConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLifecycleConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLifecycleConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -16048,6 +16156,7 @@ func (s PutBucketLifecycleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLifecycleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLifecycleInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
@@ -16121,9 +16230,11 @@ func (s PutBucketLoggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLoggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLoggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.BucketLoggingStatus == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketLoggingStatus"))
 	}
@@ -16206,12 +16317,15 @@ func (s PutBucketMetricsConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketMetricsConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketMetricsConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.MetricsConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricsConfiguration"))
 	}
@@ -16294,9 +16408,11 @@ func (s PutBucketNotificationConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketNotificationConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketNotificationConfigurationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.NotificationConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationConfiguration"))
 	}
@@ -16370,9 +16486,11 @@ func (s PutBucketNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketNotificationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.NotificationConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NotificationConfiguration"))
 	}
@@ -16443,9 +16561,11 @@ func (s PutBucketPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketPolicyInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Policy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
@@ -16517,9 +16637,11 @@ func (s PutBucketReplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketReplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketReplicationInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.ReplicationConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationConfiguration"))
 	}
@@ -16593,9 +16715,11 @@ func (s PutBucketRequestPaymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketRequestPaymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketRequestPaymentInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.RequestPaymentConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestPaymentConfiguration"))
 	}
@@ -16669,9 +16793,11 @@ func (s PutBucketTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Tagging == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tagging"))
 	}
@@ -16749,9 +16875,11 @@ func (s PutBucketVersioningInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketVersioningInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketVersioningInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.VersioningConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersioningConfiguration"))
 	}
@@ -16826,9 +16954,11 @@ func (s PutBucketWebsiteInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketWebsiteInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBucketWebsiteInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.WebsiteConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebsiteConfiguration"))
 	}
@@ -16883,7 +17013,7 @@ type PutObjectAclInput struct {
 	_ struct{} `type:"structure" payload:"AccessControlPolicy"`
 
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"ObjectCannedACL"`
+	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	AccessControlPolicy *AccessControlPolicy `locationName:"AccessControlPolicy" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
@@ -16913,7 +17043,7 @@ type PutObjectAclInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string `location:"querystring" locationName:"versionId" type:"string"`
@@ -16932,9 +17062,11 @@ func (s PutObjectAclInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectAclInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutObjectAclInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -16954,8 +17086,8 @@ func (s *PutObjectAclInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *PutObjectAclInput) SetACL(v string) *PutObjectAclInput {
-	s.ACL = &v
+func (s *PutObjectAclInput) SetACL(v ObjectCannedACL) *PutObjectAclInput {
+	s.ACL = v
 	return s
 }
 
@@ -17015,8 +17147,8 @@ func (s *PutObjectAclInput) SetKey(v string) *PutObjectAclInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *PutObjectAclInput) SetRequestPayer(v string) *PutObjectAclInput {
-	s.RequestPayer = &v
+func (s *PutObjectAclInput) SetRequestPayer(v RequestPayer) *PutObjectAclInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -17032,7 +17164,7 @@ type PutObjectAclOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -17046,8 +17178,8 @@ func (s PutObjectAclOutput) GoString() string {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *PutObjectAclOutput) SetRequestCharged(v string) *PutObjectAclOutput {
-	s.RequestCharged = &v
+func (s *PutObjectAclOutput) SetRequestCharged(v RequestCharged) *PutObjectAclOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -17056,7 +17188,7 @@ type PutObjectInput struct {
 	_ struct{} `type:"structure" payload:"Body"`
 
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string" enum:"ObjectCannedACL"`
+	ACL ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	// Object data.
 	Body io.ReadSeeker `type:"blob"`
@@ -17117,7 +17249,7 @@ type PutObjectInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -17142,10 +17274,10 @@ type PutObjectInput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string" enum:"StorageClass"`
+	StorageClass StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters
 	Tagging *string `location:"header" locationName:"x-amz-tagging" type:"string"`
@@ -17169,9 +17301,11 @@ func (s PutObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -17186,8 +17320,8 @@ func (s *PutObjectInput) Validate() error {
 }
 
 // SetACL sets the ACL field's value.
-func (s *PutObjectInput) SetACL(v string) *PutObjectInput {
-	s.ACL = &v
+func (s *PutObjectInput) SetACL(v ObjectCannedACL) *PutObjectInput {
+	s.ACL = v
 	return s
 }
 
@@ -17295,8 +17429,8 @@ func (s *PutObjectInput) SetMetadata(v map[string]*string) *PutObjectInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *PutObjectInput) SetRequestPayer(v string) *PutObjectInput {
-	s.RequestPayer = &v
+func (s *PutObjectInput) SetRequestPayer(v RequestPayer) *PutObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -17332,14 +17466,14 @@ func (s *PutObjectInput) SetSSEKMSKeyId(v string) *PutObjectInput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *PutObjectInput) SetServerSideEncryption(v string) *PutObjectInput {
-	s.ServerSideEncryption = &v
+func (s *PutObjectInput) SetServerSideEncryption(v ServerSideEncryption) *PutObjectInput {
+	s.ServerSideEncryption = v
 	return s
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *PutObjectInput) SetStorageClass(v string) *PutObjectInput {
-	s.StorageClass = &v
+func (s *PutObjectInput) SetStorageClass(v StorageClass) *PutObjectInput {
+	s.StorageClass = v
 	return s
 }
 
@@ -17368,7 +17502,7 @@ type PutObjectOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm
@@ -17386,7 +17520,7 @@ type PutObjectOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// Version of the object.
 	VersionId *string `location:"header" locationName:"x-amz-version-id" type:"string"`
@@ -17415,8 +17549,8 @@ func (s *PutObjectOutput) SetExpiration(v string) *PutObjectOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *PutObjectOutput) SetRequestCharged(v string) *PutObjectOutput {
-	s.RequestCharged = &v
+func (s *PutObjectOutput) SetRequestCharged(v RequestCharged) *PutObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -17439,8 +17573,8 @@ func (s *PutObjectOutput) SetSSEKMSKeyId(v string) *PutObjectOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *PutObjectOutput) SetServerSideEncryption(v string) *PutObjectOutput {
-	s.ServerSideEncryption = &v
+func (s *PutObjectOutput) SetServerSideEncryption(v ServerSideEncryption) *PutObjectOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -17479,15 +17613,18 @@ func (s PutObjectTaggingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectTaggingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutObjectTaggingInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Tagging == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tagging"))
 	}
@@ -17564,7 +17701,7 @@ type QueueConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Events is a required field
-	Events []*string `locationName:"Event" type:"list" flattened:"true" required:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
@@ -17594,9 +17731,11 @@ func (s QueueConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueueConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "QueueConfiguration"}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
+
 	if s.QueueArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueArn"))
 	}
@@ -17608,7 +17747,7 @@ func (s *QueueConfiguration) Validate() error {
 }
 
 // SetEvents sets the Events field's value.
-func (s *QueueConfiguration) SetEvents(v []*string) *QueueConfiguration {
+func (s *QueueConfiguration) SetEvents(v []Event) *QueueConfiguration {
 	s.Events = v
 	return s
 }
@@ -17636,9 +17775,9 @@ type QueueConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
 	// Bucket event for which to send notifications.
-	Event *string `deprecated:"true" type:"string" enum:"Event"`
+	Event Event `deprecated:"true" type:"string"`
 
-	Events []*string `locationName:"Event" type:"list" flattened:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// Optional unique identifier for configurations in a notification configuration.
 	// If you don't provide one, Amazon S3 will assign an ID.
@@ -17658,13 +17797,13 @@ func (s QueueConfigurationDeprecated) GoString() string {
 }
 
 // SetEvent sets the Event field's value.
-func (s *QueueConfigurationDeprecated) SetEvent(v string) *QueueConfigurationDeprecated {
-	s.Event = &v
+func (s *QueueConfigurationDeprecated) SetEvent(v Event) *QueueConfigurationDeprecated {
+	s.Event = v
 	return s
 }
 
 // SetEvents sets the Events field's value.
-func (s *QueueConfigurationDeprecated) SetEvents(v []*string) *QueueConfigurationDeprecated {
+func (s *QueueConfigurationDeprecated) SetEvents(v []Event) *QueueConfigurationDeprecated {
 	s.Events = v
 	return s
 }
@@ -17694,7 +17833,7 @@ type Redirect struct {
 
 	// Protocol to use (http, https) when redirecting requests. The default is the
 	// protocol that is used in the original request.
-	Protocol *string `type:"string" enum:"Protocol"`
+	Protocol Protocol `type:"string"`
 
 	// The object key prefix to use in the redirect request. For example, to redirect
 	// requests for all pages with prefix docs/ (objects in the docs/ folder) to
@@ -17733,8 +17872,8 @@ func (s *Redirect) SetHttpRedirectCode(v string) *Redirect {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *Redirect) SetProtocol(v string) *Redirect {
-	s.Protocol = &v
+func (s *Redirect) SetProtocol(v Protocol) *Redirect {
+	s.Protocol = v
 	return s
 }
 
@@ -17761,7 +17900,7 @@ type RedirectAllRequestsTo struct {
 
 	// Protocol to use (http, https) when redirecting requests. The default is the
 	// protocol that is used in the original request.
-	Protocol *string `type:"string" enum:"Protocol"`
+	Protocol Protocol `type:"string"`
 }
 
 // String returns the string representation
@@ -17777,6 +17916,7 @@ func (s RedirectAllRequestsTo) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedirectAllRequestsTo) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RedirectAllRequestsTo"}
+
 	if s.HostName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HostName"))
 	}
@@ -17794,8 +17934,8 @@ func (s *RedirectAllRequestsTo) SetHostName(v string) *RedirectAllRequestsTo {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *RedirectAllRequestsTo) SetProtocol(v string) *RedirectAllRequestsTo {
-	s.Protocol = &v
+func (s *RedirectAllRequestsTo) SetProtocol(v Protocol) *RedirectAllRequestsTo {
+	s.Protocol = v
 	return s
 }
 
@@ -17831,9 +17971,11 @@ func (s ReplicationConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplicationConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplicationConfiguration"}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
+
 	if s.Rules == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
@@ -17886,7 +18028,7 @@ type ReplicationRule struct {
 	// The rule is ignored if status is not Enabled.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ReplicationRuleStatus"`
+	Status ReplicationRuleStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -17902,13 +18044,15 @@ func (s ReplicationRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplicationRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplicationRule"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
+
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.Destination != nil {
@@ -17942,8 +18086,8 @@ func (s *ReplicationRule) SetPrefix(v string) *ReplicationRule {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ReplicationRule) SetStatus(v string) *ReplicationRule {
-	s.Status = &v
+func (s *ReplicationRule) SetStatus(v ReplicationRuleStatus) *ReplicationRule {
+	s.Status = v
 	return s
 }
 
@@ -17954,7 +18098,7 @@ type RequestPaymentConfiguration struct {
 	// Specifies who pays for the download and request fees.
 	//
 	// Payer is a required field
-	Payer *string `type:"string" required:"true" enum:"Payer"`
+	Payer Payer `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -17970,7 +18114,7 @@ func (s RequestPaymentConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestPaymentConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestPaymentConfiguration"}
-	if s.Payer == nil {
+	if len(s.Payer) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Payer"))
 	}
 
@@ -17981,8 +18125,8 @@ func (s *RequestPaymentConfiguration) Validate() error {
 }
 
 // SetPayer sets the Payer field's value.
-func (s *RequestPaymentConfiguration) SetPayer(v string) *RequestPaymentConfiguration {
-	s.Payer = &v
+func (s *RequestPaymentConfiguration) SetPayer(v Payer) *RequestPaymentConfiguration {
+	s.Payer = v
 	return s
 }
 
@@ -18000,7 +18144,7 @@ type RestoreObjectInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	RestoreRequest *RestoreRequest `locationName:"RestoreRequest" type:"structure" xmlURI:"http://s3.amazonaws.com/doc/2006-03-01/"`
 
@@ -18020,9 +18164,11 @@ func (s RestoreObjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreObjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreObjectInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -18061,8 +18207,8 @@ func (s *RestoreObjectInput) SetKey(v string) *RestoreObjectInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *RestoreObjectInput) SetRequestPayer(v string) *RestoreObjectInput {
-	s.RequestPayer = &v
+func (s *RestoreObjectInput) SetRequestPayer(v RequestPayer) *RestoreObjectInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -18084,7 +18230,7 @@ type RestoreObjectOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 }
 
 // String returns the string representation
@@ -18098,8 +18244,8 @@ func (s RestoreObjectOutput) GoString() string {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *RestoreObjectOutput) SetRequestCharged(v string) *RestoreObjectOutput {
-	s.RequestCharged = &v
+func (s *RestoreObjectOutput) SetRequestCharged(v RequestCharged) *RestoreObjectOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -18129,6 +18275,7 @@ func (s RestoreRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreRequest"}
+
 	if s.Days == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Days"))
 	}
@@ -18187,6 +18334,7 @@ func (s RoutingRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RoutingRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RoutingRule"}
+
 	if s.Redirect == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Redirect"))
 	}
@@ -18245,7 +18393,7 @@ type Rule struct {
 	// is not currently being applied.
 	//
 	// Status is a required field
-	Status *string `type:"string" required:"true" enum:"ExpirationStatus"`
+	Status ExpirationStatus `type:"string" required:"true"`
 
 	Transition *Transition `type:"structure"`
 }
@@ -18263,10 +18411,11 @@ func (s Rule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Rule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Rule"}
+
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
-	if s.Status == nil {
+	if len(s.Status) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
@@ -18313,8 +18462,8 @@ func (s *Rule) SetPrefix(v string) *Rule {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Rule) SetStatus(v string) *Rule {
-	s.Status = &v
+func (s *Rule) SetStatus(v ExpirationStatus) *Rule {
+	s.Status = v
 	return s
 }
 
@@ -18376,7 +18525,7 @@ type StorageClassAnalysisDataExport struct {
 	// The version of the output schema to use when exporting data. Must be V_1.
 	//
 	// OutputSchemaVersion is a required field
-	OutputSchemaVersion *string `type:"string" required:"true" enum:"StorageClassAnalysisSchemaVersion"`
+	OutputSchemaVersion StorageClassAnalysisSchemaVersion `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -18392,10 +18541,11 @@ func (s StorageClassAnalysisDataExport) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageClassAnalysisDataExport) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StorageClassAnalysisDataExport"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
-	if s.OutputSchemaVersion == nil {
+	if len(s.OutputSchemaVersion) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("OutputSchemaVersion"))
 	}
 	if s.Destination != nil {
@@ -18417,8 +18567,8 @@ func (s *StorageClassAnalysisDataExport) SetDestination(v *AnalyticsExportDestin
 }
 
 // SetOutputSchemaVersion sets the OutputSchemaVersion field's value.
-func (s *StorageClassAnalysisDataExport) SetOutputSchemaVersion(v string) *StorageClassAnalysisDataExport {
-	s.OutputSchemaVersion = &v
+func (s *StorageClassAnalysisDataExport) SetOutputSchemaVersion(v StorageClassAnalysisSchemaVersion) *StorageClassAnalysisDataExport {
+	s.OutputSchemaVersion = v
 	return s
 }
 
@@ -18450,12 +18600,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -18499,6 +18651,7 @@ func (s Tagging) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tagging) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tagging"}
+
 	if s.TagSet == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagSet"))
 	}
@@ -18532,7 +18685,7 @@ type TargetGrant struct {
 	Grantee *Grantee `type:"structure" xmlPrefix:"xsi" xmlURI:"http://www.w3.org/2001/XMLSchema-instance"`
 
 	// Logging permissions assigned to the Grantee for the bucket.
-	Permission *string `type:"string" enum:"BucketLogsPermission"`
+	Permission BucketLogsPermission `type:"string"`
 }
 
 // String returns the string representation
@@ -18567,8 +18720,8 @@ func (s *TargetGrant) SetGrantee(v *Grantee) *TargetGrant {
 }
 
 // SetPermission sets the Permission field's value.
-func (s *TargetGrant) SetPermission(v string) *TargetGrant {
-	s.Permission = &v
+func (s *TargetGrant) SetPermission(v BucketLogsPermission) *TargetGrant {
+	s.Permission = v
 	return s
 }
 
@@ -18579,7 +18732,7 @@ type TopicConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// Events is a required field
-	Events []*string `locationName:"Event" type:"list" flattened:"true" required:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true" required:"true"`
 
 	// Container for object key name filtering rules. For information about key
 	// name filtering, go to Configuring Event Notifications (http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
@@ -18609,9 +18762,11 @@ func (s TopicConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TopicConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TopicConfiguration"}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -18623,7 +18778,7 @@ func (s *TopicConfiguration) Validate() error {
 }
 
 // SetEvents sets the Events field's value.
-func (s *TopicConfiguration) SetEvents(v []*string) *TopicConfiguration {
+func (s *TopicConfiguration) SetEvents(v []Event) *TopicConfiguration {
 	s.Events = v
 	return s
 }
@@ -18651,9 +18806,9 @@ type TopicConfigurationDeprecated struct {
 	_ struct{} `type:"structure"`
 
 	// Bucket event for which to send notifications.
-	Event *string `deprecated:"true" type:"string" enum:"Event"`
+	Event Event `deprecated:"true" type:"string"`
 
-	Events []*string `locationName:"Event" type:"list" flattened:"true"`
+	Events []Event `locationName:"Event" type:"list" flattened:"true"`
 
 	// Optional unique identifier for configurations in a notification configuration.
 	// If you don't provide one, Amazon S3 will assign an ID.
@@ -18675,13 +18830,13 @@ func (s TopicConfigurationDeprecated) GoString() string {
 }
 
 // SetEvent sets the Event field's value.
-func (s *TopicConfigurationDeprecated) SetEvent(v string) *TopicConfigurationDeprecated {
-	s.Event = &v
+func (s *TopicConfigurationDeprecated) SetEvent(v Event) *TopicConfigurationDeprecated {
+	s.Event = v
 	return s
 }
 
 // SetEvents sets the Events field's value.
-func (s *TopicConfigurationDeprecated) SetEvents(v []*string) *TopicConfigurationDeprecated {
+func (s *TopicConfigurationDeprecated) SetEvents(v []Event) *TopicConfigurationDeprecated {
 	s.Events = v
 	return s
 }
@@ -18711,7 +18866,7 @@ type Transition struct {
 	Days *int64 `type:"integer"`
 
 	// The class of storage used to store the object.
-	StorageClass *string `type:"string" enum:"TransitionStorageClass"`
+	StorageClass TransitionStorageClass `type:"string"`
 }
 
 // String returns the string representation
@@ -18737,8 +18892,8 @@ func (s *Transition) SetDays(v int64) *Transition {
 }
 
 // SetStorageClass sets the StorageClass field's value.
-func (s *Transition) SetStorageClass(v string) *Transition {
-	s.StorageClass = &v
+func (s *Transition) SetStorageClass(v TransitionStorageClass) *Transition {
+	s.StorageClass = v
 	return s
 }
 
@@ -18801,7 +18956,7 @@ type UploadPartCopyInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -18838,21 +18993,26 @@ func (s UploadPartCopyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadPartCopyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadPartCopyInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.CopySource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CopySource"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.PartNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartNumber"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -18950,8 +19110,8 @@ func (s *UploadPartCopyInput) SetPartNumber(v int64) *UploadPartCopyInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *UploadPartCopyInput) SetRequestPayer(v string) *UploadPartCopyInput {
-	s.RequestPayer = &v
+func (s *UploadPartCopyInput) SetRequestPayer(v RequestPayer) *UploadPartCopyInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -18998,7 +19158,7 @@ type UploadPartCopyOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm
@@ -19016,7 +19176,7 @@ type UploadPartCopyOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 }
 
 // String returns the string representation
@@ -19042,8 +19202,8 @@ func (s *UploadPartCopyOutput) SetCopySourceVersionId(v string) *UploadPartCopyO
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *UploadPartCopyOutput) SetRequestCharged(v string) *UploadPartCopyOutput {
-	s.RequestCharged = &v
+func (s *UploadPartCopyOutput) SetRequestCharged(v RequestCharged) *UploadPartCopyOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -19066,8 +19226,8 @@ func (s *UploadPartCopyOutput) SetSSEKMSKeyId(v string) *UploadPartCopyOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *UploadPartCopyOutput) SetServerSideEncryption(v string) *UploadPartCopyOutput {
-	s.ServerSideEncryption = &v
+func (s *UploadPartCopyOutput) SetServerSideEncryption(v ServerSideEncryption) *UploadPartCopyOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -19105,7 +19265,7 @@ type UploadPartInput struct {
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string" enum:"RequestPayer"`
+	RequestPayer RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256).
 	SSECustomerAlgorithm *string `location:"header" locationName:"x-amz-server-side-encryption-customer-algorithm" type:"string"`
@@ -19142,18 +19302,22 @@ func (s UploadPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadPartInput"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.PartNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartNumber"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -19208,8 +19372,8 @@ func (s *UploadPartInput) SetPartNumber(v int64) *UploadPartInput {
 }
 
 // SetRequestPayer sets the RequestPayer field's value.
-func (s *UploadPartInput) SetRequestPayer(v string) *UploadPartInput {
-	s.RequestPayer = &v
+func (s *UploadPartInput) SetRequestPayer(v RequestPayer) *UploadPartInput {
+	s.RequestPayer = v
 	return s
 }
 
@@ -19253,7 +19417,7 @@ type UploadPartOutput struct {
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
-	RequestCharged *string `location:"header" locationName:"x-amz-request-charged" type:"string" enum:"RequestCharged"`
+	RequestCharged RequestCharged `location:"header" locationName:"x-amz-request-charged" type:"string"`
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm
@@ -19271,7 +19435,7 @@ type UploadPartOutput struct {
 
 	// The Server-side encryption algorithm used when storing this object in S3
 	// (e.g., AES256, aws:kms).
-	ServerSideEncryption *string `location:"header" locationName:"x-amz-server-side-encryption" type:"string" enum:"ServerSideEncryption"`
+	ServerSideEncryption ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 }
 
 // String returns the string representation
@@ -19291,8 +19455,8 @@ func (s *UploadPartOutput) SetETag(v string) *UploadPartOutput {
 }
 
 // SetRequestCharged sets the RequestCharged field's value.
-func (s *UploadPartOutput) SetRequestCharged(v string) *UploadPartOutput {
-	s.RequestCharged = &v
+func (s *UploadPartOutput) SetRequestCharged(v RequestCharged) *UploadPartOutput {
+	s.RequestCharged = v
 	return s
 }
 
@@ -19315,8 +19479,8 @@ func (s *UploadPartOutput) SetSSEKMSKeyId(v string) *UploadPartOutput {
 }
 
 // SetServerSideEncryption sets the ServerSideEncryption field's value.
-func (s *UploadPartOutput) SetServerSideEncryption(v string) *UploadPartOutput {
-	s.ServerSideEncryption = &v
+func (s *UploadPartOutput) SetServerSideEncryption(v ServerSideEncryption) *UploadPartOutput {
+	s.ServerSideEncryption = v
 	return s
 }
 
@@ -19327,10 +19491,10 @@ type VersioningConfiguration struct {
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.
 	// This element is only returned if the bucket has been configured with MFA
 	// delete. If the bucket has never been so configured, this element is not returned.
-	MFADelete *string `locationName:"MfaDelete" type:"string" enum:"MFADelete"`
+	MFADelete MFADelete `locationName:"MfaDelete" type:"string"`
 
 	// The versioning state of the bucket.
-	Status *string `type:"string" enum:"BucketVersioningStatus"`
+	Status BucketVersioningStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -19344,14 +19508,14 @@ func (s VersioningConfiguration) GoString() string {
 }
 
 // SetMFADelete sets the MFADelete field's value.
-func (s *VersioningConfiguration) SetMFADelete(v string) *VersioningConfiguration {
-	s.MFADelete = &v
+func (s *VersioningConfiguration) SetMFADelete(v MFADelete) *VersioningConfiguration {
+	s.MFADelete = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *VersioningConfiguration) SetStatus(v string) *VersioningConfiguration {
-	s.Status = &v
+func (s *VersioningConfiguration) SetStatus(v BucketVersioningStatus) *VersioningConfiguration {
+	s.Status = v
 	return s
 }
 
@@ -19437,85 +19601,63 @@ func (s *WebsiteConfiguration) SetRoutingRules(v []*RoutingRule) *WebsiteConfigu
 	return s
 }
 
+type AnalyticsS3ExportFileFormat string
+
+// Enum values for AnalyticsS3ExportFileFormat
 const (
-	// AnalyticsS3ExportFileFormatCsv is a AnalyticsS3ExportFileFormat enum value
-	AnalyticsS3ExportFileFormatCsv = "CSV"
+	AnalyticsS3ExportFileFormatCsv AnalyticsS3ExportFileFormat = "CSV"
 )
 
-const (
-	// BucketAccelerateStatusEnabled is a BucketAccelerateStatus enum value
-	BucketAccelerateStatusEnabled = "Enabled"
+type BucketAccelerateStatus string
 
-	// BucketAccelerateStatusSuspended is a BucketAccelerateStatus enum value
-	BucketAccelerateStatusSuspended = "Suspended"
+// Enum values for BucketAccelerateStatus
+const (
+	BucketAccelerateStatusEnabled   BucketAccelerateStatus = "Enabled"
+	BucketAccelerateStatusSuspended BucketAccelerateStatus = "Suspended"
 )
 
+type BucketCannedACL string
+
+// Enum values for BucketCannedACL
 const (
-	// BucketCannedACLPrivate is a BucketCannedACL enum value
-	BucketCannedACLPrivate = "private"
-
-	// BucketCannedACLPublicRead is a BucketCannedACL enum value
-	BucketCannedACLPublicRead = "public-read"
-
-	// BucketCannedACLPublicReadWrite is a BucketCannedACL enum value
-	BucketCannedACLPublicReadWrite = "public-read-write"
-
-	// BucketCannedACLAuthenticatedRead is a BucketCannedACL enum value
-	BucketCannedACLAuthenticatedRead = "authenticated-read"
+	BucketCannedACLPrivate           BucketCannedACL = "private"
+	BucketCannedACLPublicRead        BucketCannedACL = "public-read"
+	BucketCannedACLPublicReadWrite   BucketCannedACL = "public-read-write"
+	BucketCannedACLAuthenticatedRead BucketCannedACL = "authenticated-read"
 )
 
+type BucketLocationConstraint string
+
+// Enum values for BucketLocationConstraint
 const (
-	// BucketLocationConstraintEu is a BucketLocationConstraint enum value
-	BucketLocationConstraintEu = "EU"
-
-	// BucketLocationConstraintEuWest1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintEuWest1 = "eu-west-1"
-
-	// BucketLocationConstraintUsWest1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintUsWest1 = "us-west-1"
-
-	// BucketLocationConstraintUsWest2 is a BucketLocationConstraint enum value
-	BucketLocationConstraintUsWest2 = "us-west-2"
-
-	// BucketLocationConstraintApSouth1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintApSouth1 = "ap-south-1"
-
-	// BucketLocationConstraintApSoutheast1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintApSoutheast1 = "ap-southeast-1"
-
-	// BucketLocationConstraintApSoutheast2 is a BucketLocationConstraint enum value
-	BucketLocationConstraintApSoutheast2 = "ap-southeast-2"
-
-	// BucketLocationConstraintApNortheast1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintApNortheast1 = "ap-northeast-1"
-
-	// BucketLocationConstraintSaEast1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintSaEast1 = "sa-east-1"
-
-	// BucketLocationConstraintCnNorth1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintCnNorth1 = "cn-north-1"
-
-	// BucketLocationConstraintEuCentral1 is a BucketLocationConstraint enum value
-	BucketLocationConstraintEuCentral1 = "eu-central-1"
+	BucketLocationConstraintEu           BucketLocationConstraint = "EU"
+	BucketLocationConstraintEuWest1      BucketLocationConstraint = "eu-west-1"
+	BucketLocationConstraintUsWest1      BucketLocationConstraint = "us-west-1"
+	BucketLocationConstraintUsWest2      BucketLocationConstraint = "us-west-2"
+	BucketLocationConstraintApSouth1     BucketLocationConstraint = "ap-south-1"
+	BucketLocationConstraintApSoutheast1 BucketLocationConstraint = "ap-southeast-1"
+	BucketLocationConstraintApSoutheast2 BucketLocationConstraint = "ap-southeast-2"
+	BucketLocationConstraintApNortheast1 BucketLocationConstraint = "ap-northeast-1"
+	BucketLocationConstraintSaEast1      BucketLocationConstraint = "sa-east-1"
+	BucketLocationConstraintCnNorth1     BucketLocationConstraint = "cn-north-1"
+	BucketLocationConstraintEuCentral1   BucketLocationConstraint = "eu-central-1"
 )
 
+type BucketLogsPermission string
+
+// Enum values for BucketLogsPermission
 const (
-	// BucketLogsPermissionFullControl is a BucketLogsPermission enum value
-	BucketLogsPermissionFullControl = "FULL_CONTROL"
-
-	// BucketLogsPermissionRead is a BucketLogsPermission enum value
-	BucketLogsPermissionRead = "READ"
-
-	// BucketLogsPermissionWrite is a BucketLogsPermission enum value
-	BucketLogsPermissionWrite = "WRITE"
+	BucketLogsPermissionFullControl BucketLogsPermission = "FULL_CONTROL"
+	BucketLogsPermissionRead        BucketLogsPermission = "READ"
+	BucketLogsPermissionWrite       BucketLogsPermission = "WRITE"
 )
 
-const (
-	// BucketVersioningStatusEnabled is a BucketVersioningStatus enum value
-	BucketVersioningStatusEnabled = "Enabled"
+type BucketVersioningStatus string
 
-	// BucketVersioningStatusSuspended is a BucketVersioningStatus enum value
-	BucketVersioningStatusSuspended = "Suspended"
+// Enum values for BucketVersioningStatus
+const (
+	BucketVersioningStatusEnabled   BucketVersioningStatus = "Enabled"
+	BucketVersioningStatusSuspended BucketVersioningStatus = "Suspended"
 )
 
 // Requests Amazon S3 to encode the object keys in the response and specifies
@@ -19524,290 +19666,252 @@ const (
 // with an ASCII value from 0 to 10. For characters that are not supported in
 // XML 1.0, you can add this parameter to request that Amazon S3 encode the
 // keys in the response.
+type EncodingType string
+
+// Enum values for EncodingType
 const (
-	// EncodingTypeUrl is a EncodingType enum value
-	EncodingTypeUrl = "url"
+	EncodingTypeUrl EncodingType = "url"
 )
 
 // Bucket event for which to send notifications.
+type Event string
+
+// Enum values for Event
 const (
-	// EventS3ReducedRedundancyLostObject is a Event enum value
-	EventS3ReducedRedundancyLostObject = "s3:ReducedRedundancyLostObject"
-
-	// EventS3ObjectCreated is a Event enum value
-	EventS3ObjectCreated = "s3:ObjectCreated:*"
-
-	// EventS3ObjectCreatedPut is a Event enum value
-	EventS3ObjectCreatedPut = "s3:ObjectCreated:Put"
-
-	// EventS3ObjectCreatedPost is a Event enum value
-	EventS3ObjectCreatedPost = "s3:ObjectCreated:Post"
-
-	// EventS3ObjectCreatedCopy is a Event enum value
-	EventS3ObjectCreatedCopy = "s3:ObjectCreated:Copy"
-
-	// EventS3ObjectCreatedCompleteMultipartUpload is a Event enum value
-	EventS3ObjectCreatedCompleteMultipartUpload = "s3:ObjectCreated:CompleteMultipartUpload"
-
-	// EventS3ObjectRemoved is a Event enum value
-	EventS3ObjectRemoved = "s3:ObjectRemoved:*"
-
-	// EventS3ObjectRemovedDelete is a Event enum value
-	EventS3ObjectRemovedDelete = "s3:ObjectRemoved:Delete"
-
-	// EventS3ObjectRemovedDeleteMarkerCreated is a Event enum value
-	EventS3ObjectRemovedDeleteMarkerCreated = "s3:ObjectRemoved:DeleteMarkerCreated"
+	EventS3ReducedRedundancyLostObject          Event = "s3:ReducedRedundancyLostObject"
+	EventS3ObjectCreated                        Event = "s3:ObjectCreated:*"
+	EventS3ObjectCreatedPut                     Event = "s3:ObjectCreated:Put"
+	EventS3ObjectCreatedPost                    Event = "s3:ObjectCreated:Post"
+	EventS3ObjectCreatedCopy                    Event = "s3:ObjectCreated:Copy"
+	EventS3ObjectCreatedCompleteMultipartUpload Event = "s3:ObjectCreated:CompleteMultipartUpload"
+	EventS3ObjectRemoved                        Event = "s3:ObjectRemoved:*"
+	EventS3ObjectRemovedDelete                  Event = "s3:ObjectRemoved:Delete"
+	EventS3ObjectRemovedDeleteMarkerCreated     Event = "s3:ObjectRemoved:DeleteMarkerCreated"
 )
 
-const (
-	// ExpirationStatusEnabled is a ExpirationStatus enum value
-	ExpirationStatusEnabled = "Enabled"
+type ExpirationStatus string
 
-	// ExpirationStatusDisabled is a ExpirationStatus enum value
-	ExpirationStatusDisabled = "Disabled"
+// Enum values for ExpirationStatus
+const (
+	ExpirationStatusEnabled  ExpirationStatus = "Enabled"
+	ExpirationStatusDisabled ExpirationStatus = "Disabled"
 )
 
-const (
-	// FilterRuleNamePrefix is a FilterRuleName enum value
-	FilterRuleNamePrefix = "prefix"
+type FilterRuleName string
 
-	// FilterRuleNameSuffix is a FilterRuleName enum value
-	FilterRuleNameSuffix = "suffix"
+// Enum values for FilterRuleName
+const (
+	FilterRuleNamePrefix FilterRuleName = "prefix"
+	FilterRuleNameSuffix FilterRuleName = "suffix"
 )
 
+type InventoryFormat string
+
+// Enum values for InventoryFormat
 const (
-	// InventoryFormatCsv is a InventoryFormat enum value
-	InventoryFormatCsv = "CSV"
+	InventoryFormatCsv InventoryFormat = "CSV"
 )
 
-const (
-	// InventoryFrequencyDaily is a InventoryFrequency enum value
-	InventoryFrequencyDaily = "Daily"
+type InventoryFrequency string
 
-	// InventoryFrequencyWeekly is a InventoryFrequency enum value
-	InventoryFrequencyWeekly = "Weekly"
+// Enum values for InventoryFrequency
+const (
+	InventoryFrequencyDaily  InventoryFrequency = "Daily"
+	InventoryFrequencyWeekly InventoryFrequency = "Weekly"
 )
 
-const (
-	// InventoryIncludedObjectVersionsAll is a InventoryIncludedObjectVersions enum value
-	InventoryIncludedObjectVersionsAll = "All"
+type InventoryIncludedObjectVersions string
 
-	// InventoryIncludedObjectVersionsCurrent is a InventoryIncludedObjectVersions enum value
-	InventoryIncludedObjectVersionsCurrent = "Current"
+// Enum values for InventoryIncludedObjectVersions
+const (
+	InventoryIncludedObjectVersionsAll     InventoryIncludedObjectVersions = "All"
+	InventoryIncludedObjectVersionsCurrent InventoryIncludedObjectVersions = "Current"
 )
 
+type InventoryOptionalField string
+
+// Enum values for InventoryOptionalField
 const (
-	// InventoryOptionalFieldSize is a InventoryOptionalField enum value
-	InventoryOptionalFieldSize = "Size"
-
-	// InventoryOptionalFieldLastModifiedDate is a InventoryOptionalField enum value
-	InventoryOptionalFieldLastModifiedDate = "LastModifiedDate"
-
-	// InventoryOptionalFieldStorageClass is a InventoryOptionalField enum value
-	InventoryOptionalFieldStorageClass = "StorageClass"
-
-	// InventoryOptionalFieldEtag is a InventoryOptionalField enum value
-	InventoryOptionalFieldEtag = "ETag"
-
-	// InventoryOptionalFieldIsMultipartUploaded is a InventoryOptionalField enum value
-	InventoryOptionalFieldIsMultipartUploaded = "IsMultipartUploaded"
-
-	// InventoryOptionalFieldReplicationStatus is a InventoryOptionalField enum value
-	InventoryOptionalFieldReplicationStatus = "ReplicationStatus"
+	InventoryOptionalFieldSize                InventoryOptionalField = "Size"
+	InventoryOptionalFieldLastModifiedDate    InventoryOptionalField = "LastModifiedDate"
+	InventoryOptionalFieldStorageClass        InventoryOptionalField = "StorageClass"
+	InventoryOptionalFieldEtag                InventoryOptionalField = "ETag"
+	InventoryOptionalFieldIsMultipartUploaded InventoryOptionalField = "IsMultipartUploaded"
+	InventoryOptionalFieldReplicationStatus   InventoryOptionalField = "ReplicationStatus"
 )
 
-const (
-	// MFADeleteEnabled is a MFADelete enum value
-	MFADeleteEnabled = "Enabled"
+type MFADelete string
 
-	// MFADeleteDisabled is a MFADelete enum value
-	MFADeleteDisabled = "Disabled"
+// Enum values for MFADelete
+const (
+	MFADeleteEnabled  MFADelete = "Enabled"
+	MFADeleteDisabled MFADelete = "Disabled"
 )
 
-const (
-	// MFADeleteStatusEnabled is a MFADeleteStatus enum value
-	MFADeleteStatusEnabled = "Enabled"
+type MFADeleteStatus string
 
-	// MFADeleteStatusDisabled is a MFADeleteStatus enum value
-	MFADeleteStatusDisabled = "Disabled"
+// Enum values for MFADeleteStatus
+const (
+	MFADeleteStatusEnabled  MFADeleteStatus = "Enabled"
+	MFADeleteStatusDisabled MFADeleteStatus = "Disabled"
 )
 
-const (
-	// MetadataDirectiveCopy is a MetadataDirective enum value
-	MetadataDirectiveCopy = "COPY"
+type MetadataDirective string
 
-	// MetadataDirectiveReplace is a MetadataDirective enum value
-	MetadataDirectiveReplace = "REPLACE"
+// Enum values for MetadataDirective
+const (
+	MetadataDirectiveCopy    MetadataDirective = "COPY"
+	MetadataDirectiveReplace MetadataDirective = "REPLACE"
 )
 
+type ObjectCannedACL string
+
+// Enum values for ObjectCannedACL
 const (
-	// ObjectCannedACLPrivate is a ObjectCannedACL enum value
-	ObjectCannedACLPrivate = "private"
-
-	// ObjectCannedACLPublicRead is a ObjectCannedACL enum value
-	ObjectCannedACLPublicRead = "public-read"
-
-	// ObjectCannedACLPublicReadWrite is a ObjectCannedACL enum value
-	ObjectCannedACLPublicReadWrite = "public-read-write"
-
-	// ObjectCannedACLAuthenticatedRead is a ObjectCannedACL enum value
-	ObjectCannedACLAuthenticatedRead = "authenticated-read"
-
-	// ObjectCannedACLAwsExecRead is a ObjectCannedACL enum value
-	ObjectCannedACLAwsExecRead = "aws-exec-read"
-
-	// ObjectCannedACLBucketOwnerRead is a ObjectCannedACL enum value
-	ObjectCannedACLBucketOwnerRead = "bucket-owner-read"
-
-	// ObjectCannedACLBucketOwnerFullControl is a ObjectCannedACL enum value
-	ObjectCannedACLBucketOwnerFullControl = "bucket-owner-full-control"
+	ObjectCannedACLPrivate                ObjectCannedACL = "private"
+	ObjectCannedACLPublicRead             ObjectCannedACL = "public-read"
+	ObjectCannedACLPublicReadWrite        ObjectCannedACL = "public-read-write"
+	ObjectCannedACLAuthenticatedRead      ObjectCannedACL = "authenticated-read"
+	ObjectCannedACLAwsExecRead            ObjectCannedACL = "aws-exec-read"
+	ObjectCannedACLBucketOwnerRead        ObjectCannedACL = "bucket-owner-read"
+	ObjectCannedACLBucketOwnerFullControl ObjectCannedACL = "bucket-owner-full-control"
 )
 
+type ObjectStorageClass string
+
+// Enum values for ObjectStorageClass
 const (
-	// ObjectStorageClassStandard is a ObjectStorageClass enum value
-	ObjectStorageClassStandard = "STANDARD"
-
-	// ObjectStorageClassReducedRedundancy is a ObjectStorageClass enum value
-	ObjectStorageClassReducedRedundancy = "REDUCED_REDUNDANCY"
-
-	// ObjectStorageClassGlacier is a ObjectStorageClass enum value
-	ObjectStorageClassGlacier = "GLACIER"
+	ObjectStorageClassStandard          ObjectStorageClass = "STANDARD"
+	ObjectStorageClassReducedRedundancy ObjectStorageClass = "REDUCED_REDUNDANCY"
+	ObjectStorageClassGlacier           ObjectStorageClass = "GLACIER"
 )
 
+type ObjectVersionStorageClass string
+
+// Enum values for ObjectVersionStorageClass
 const (
-	// ObjectVersionStorageClassStandard is a ObjectVersionStorageClass enum value
-	ObjectVersionStorageClassStandard = "STANDARD"
+	ObjectVersionStorageClassStandard ObjectVersionStorageClass = "STANDARD"
 )
 
-const (
-	// PayerRequester is a Payer enum value
-	PayerRequester = "Requester"
+type Payer string
 
-	// PayerBucketOwner is a Payer enum value
-	PayerBucketOwner = "BucketOwner"
+// Enum values for Payer
+const (
+	PayerRequester   Payer = "Requester"
+	PayerBucketOwner Payer = "BucketOwner"
 )
 
+type Permission string
+
+// Enum values for Permission
 const (
-	// PermissionFullControl is a Permission enum value
-	PermissionFullControl = "FULL_CONTROL"
-
-	// PermissionWrite is a Permission enum value
-	PermissionWrite = "WRITE"
-
-	// PermissionWriteAcp is a Permission enum value
-	PermissionWriteAcp = "WRITE_ACP"
-
-	// PermissionRead is a Permission enum value
-	PermissionRead = "READ"
-
-	// PermissionReadAcp is a Permission enum value
-	PermissionReadAcp = "READ_ACP"
+	PermissionFullControl Permission = "FULL_CONTROL"
+	PermissionWrite       Permission = "WRITE"
+	PermissionWriteAcp    Permission = "WRITE_ACP"
+	PermissionRead        Permission = "READ"
+	PermissionReadAcp     Permission = "READ_ACP"
 )
 
-const (
-	// ProtocolHttp is a Protocol enum value
-	ProtocolHttp = "http"
+type Protocol string
 
-	// ProtocolHttps is a Protocol enum value
-	ProtocolHttps = "https"
+// Enum values for Protocol
+const (
+	ProtocolHttp  Protocol = "http"
+	ProtocolHttps Protocol = "https"
 )
 
-const (
-	// ReplicationRuleStatusEnabled is a ReplicationRuleStatus enum value
-	ReplicationRuleStatusEnabled = "Enabled"
+type ReplicationRuleStatus string
 
-	// ReplicationRuleStatusDisabled is a ReplicationRuleStatus enum value
-	ReplicationRuleStatusDisabled = "Disabled"
+// Enum values for ReplicationRuleStatus
+const (
+	ReplicationRuleStatusEnabled  ReplicationRuleStatus = "Enabled"
+	ReplicationRuleStatusDisabled ReplicationRuleStatus = "Disabled"
 )
 
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
 const (
-	// ReplicationStatusComplete is a ReplicationStatus enum value
-	ReplicationStatusComplete = "COMPLETE"
-
-	// ReplicationStatusPending is a ReplicationStatus enum value
-	ReplicationStatusPending = "PENDING"
-
-	// ReplicationStatusFailed is a ReplicationStatus enum value
-	ReplicationStatusFailed = "FAILED"
-
-	// ReplicationStatusReplica is a ReplicationStatus enum value
-	ReplicationStatusReplica = "REPLICA"
+	ReplicationStatusComplete ReplicationStatus = "COMPLETE"
+	ReplicationStatusPending  ReplicationStatus = "PENDING"
+	ReplicationStatusFailed   ReplicationStatus = "FAILED"
+	ReplicationStatusReplica  ReplicationStatus = "REPLICA"
 )
 
 // If present, indicates that the requester was successfully charged for the
 // request.
+type RequestCharged string
+
+// Enum values for RequestCharged
 const (
-	// RequestChargedRequester is a RequestCharged enum value
-	RequestChargedRequester = "requester"
+	RequestChargedRequester RequestCharged = "requester"
 )
 
 // Confirms that the requester knows that she or he will be charged for the
 // request. Bucket owners need not specify this parameter in their requests.
 // Documentation on downloading objects from requester pays buckets can be found
 // at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+type RequestPayer string
+
+// Enum values for RequestPayer
 const (
-	// RequestPayerRequester is a RequestPayer enum value
-	RequestPayerRequester = "requester"
+	RequestPayerRequester RequestPayer = "requester"
 )
 
-const (
-	// ServerSideEncryptionAes256 is a ServerSideEncryption enum value
-	ServerSideEncryptionAes256 = "AES256"
+type ServerSideEncryption string
 
-	// ServerSideEncryptionAwsKms is a ServerSideEncryption enum value
-	ServerSideEncryptionAwsKms = "aws:kms"
+// Enum values for ServerSideEncryption
+const (
+	ServerSideEncryptionAes256 ServerSideEncryption = "AES256"
+	ServerSideEncryptionAwsKms ServerSideEncryption = "aws:kms"
 )
 
+type StorageClass string
+
+// Enum values for StorageClass
 const (
-	// StorageClassStandard is a StorageClass enum value
-	StorageClassStandard = "STANDARD"
-
-	// StorageClassReducedRedundancy is a StorageClass enum value
-	StorageClassReducedRedundancy = "REDUCED_REDUNDANCY"
-
-	// StorageClassStandardIa is a StorageClass enum value
-	StorageClassStandardIa = "STANDARD_IA"
+	StorageClassStandard          StorageClass = "STANDARD"
+	StorageClassReducedRedundancy StorageClass = "REDUCED_REDUNDANCY"
+	StorageClassStandardIa        StorageClass = "STANDARD_IA"
 )
 
+type StorageClassAnalysisSchemaVersion string
+
+// Enum values for StorageClassAnalysisSchemaVersion
 const (
-	// StorageClassAnalysisSchemaVersionV1 is a StorageClassAnalysisSchemaVersion enum value
-	StorageClassAnalysisSchemaVersionV1 = "V_1"
+	StorageClassAnalysisSchemaVersionV1 StorageClassAnalysisSchemaVersion = "V_1"
 )
 
-const (
-	// TaggingDirectiveCopy is a TaggingDirective enum value
-	TaggingDirectiveCopy = "COPY"
+type TaggingDirective string
 
-	// TaggingDirectiveReplace is a TaggingDirective enum value
-	TaggingDirectiveReplace = "REPLACE"
+// Enum values for TaggingDirective
+const (
+	TaggingDirectiveCopy    TaggingDirective = "COPY"
+	TaggingDirectiveReplace TaggingDirective = "REPLACE"
 )
 
+type Tier string
+
+// Enum values for Tier
 const (
-	// TierStandard is a Tier enum value
-	TierStandard = "Standard"
-
-	// TierBulk is a Tier enum value
-	TierBulk = "Bulk"
-
-	// TierExpedited is a Tier enum value
-	TierExpedited = "Expedited"
+	TierStandard  Tier = "Standard"
+	TierBulk      Tier = "Bulk"
+	TierExpedited Tier = "Expedited"
 )
 
-const (
-	// TransitionStorageClassGlacier is a TransitionStorageClass enum value
-	TransitionStorageClassGlacier = "GLACIER"
+type TransitionStorageClass string
 
-	// TransitionStorageClassStandardIa is a TransitionStorageClass enum value
-	TransitionStorageClassStandardIa = "STANDARD_IA"
+// Enum values for TransitionStorageClass
+const (
+	TransitionStorageClassGlacier    TransitionStorageClass = "GLACIER"
+	TransitionStorageClassStandardIa TransitionStorageClass = "STANDARD_IA"
 )
 
+type Type string
+
+// Enum values for Type
 const (
-	// TypeCanonicalUser is a Type enum value
-	TypeCanonicalUser = "CanonicalUser"
-
-	// TypeAmazonCustomerByEmail is a Type enum value
-	TypeAmazonCustomerByEmail = "AmazonCustomerByEmail"
-
-	// TypeGroup is a Type enum value
-	TypeGroup = "Group"
+	TypeCanonicalUser         Type = "CanonicalUser"
+	TypeAmazonCustomerByEmail Type = "AmazonCustomerByEmail"
+	TypeGroup                 Type = "Group"
 )

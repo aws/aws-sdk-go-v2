@@ -120,7 +120,7 @@ func ExampleDeviceFarm_CreateRemoteAccessSession_shared00() {
 	svc := devicefarm.New(cfg)
 	input := &devicefarm.CreateRemoteAccessSessionInput{
 		Configuration: &devicefarm.CreateRemoteAccessSessionConfiguration{
-			BillingMethod: aws.String("METERED"),
+			BillingMethod: devicefarm.BillingMethodMetered,
 		},
 		DeviceArn:  aws.String("arn:aws:devicefarm:us-west-2::device:123EXAMPLE"),
 		Name:       aws.String("MySession"),
@@ -167,7 +167,7 @@ func ExampleDeviceFarm_CreateUpload_shared00() {
 	input := &devicefarm.CreateUploadInput{
 		Name:       aws.String("MyAppiumPythonUpload"),
 		ProjectArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
-		Type:       aws.String("APPIUM_PYTHON_TEST_PACKAGE"),
+		Type:       devicefarm.UploadTypeAppiumPythonTestPackage,
 	}
 
 	result, err := svc.CreateUpload(input)
@@ -529,7 +529,7 @@ func ExampleDeviceFarm_GetDevicePoolCompatibility_shared00() {
 	input := &devicefarm.GetDevicePoolCompatibilityInput{
 		AppArn:        aws.String("arn:aws:devicefarm:us-west-2::app:123-456-EXAMPLE-GUID"),
 		DevicePoolArn: aws.String("arn:aws:devicefarm:us-west-2::devicepool:123-456-EXAMPLE-GUID"),
-		TestType:      aws.String("APPIUM_PYTHON"),
+		TestType:      devicefarm.TestTypeAppiumPython,
 	}
 
 	result, err := svc.GetDevicePoolCompatibility(input)
@@ -935,7 +935,7 @@ func ExampleDeviceFarm_ListArtifacts_shared00() {
 	svc := devicefarm.New(cfg)
 	input := &devicefarm.ListArtifactsInput{
 		Arn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:run:EXAMPLE-GUID-123-456"),
-		Type: aws.String("SCREENSHOT"),
+		Type: devicefarm.ArtifactCategoryScreenshot,
 	}
 
 	result, err := svc.ListArtifacts(input)
@@ -977,7 +977,7 @@ func ExampleDeviceFarm_ListDevicePools_shared00() {
 	svc := devicefarm.New(cfg)
 	input := &devicefarm.ListDevicePoolsInput{
 		Arn:  aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
-		Type: aws.String("PRIVATE"),
+		Type: devicefarm.DevicePoolTypePrivate,
 	}
 
 	result, err := svc.ListDevicePools(input)
@@ -1607,7 +1607,7 @@ func ExampleDeviceFarm_ScheduleRun_shared00() {
 		ProjectArn:    aws.String("arn:aws:devicefarm:us-west-2:123456789101:project:EXAMPLE-GUID-123-456"),
 		Test: &devicefarm.ScheduleRunTest{
 			TestPackageArn: aws.String("arn:aws:devicefarm:us-west-2:123456789101:test:EXAMPLE-GUID-123-456"),
-			Type:           aws.String("APPIUM_JAVA_JUNIT"),
+			Type:           devicefarm.TestTypeAppiumJavaJunit,
 		},
 	}
 
@@ -1696,8 +1696,8 @@ func ExampleDeviceFarm_UpdateDevicePool_shared00() {
 		Name:        aws.String("NewName"),
 		Rules: []*devicefarm.Rule{
 			{
-				Attribute: aws.String("REMOTE_ACCESS_ENABLED"),
-				Operator:  aws.String("EQUALS"),
+				Attribute: devicefarm.DeviceAttributeRemoteAccessEnabled,
+				Operator:  devicefarm.RuleOperatorEquals,
 				Value:     aws.String("True"),
 			},
 		},

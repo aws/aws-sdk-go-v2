@@ -3191,6 +3191,7 @@ func (s Aliases) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Aliases) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Aliases"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -3248,7 +3249,7 @@ type AllowedMethods struct {
 	// process and forward to your origin.
 	//
 	// Items is a required field
-	Items []*string `locationNameList:"Method" type:"list" required:"true"`
+	Items []Method `locationNameList:"Method" type:"list" required:"true"`
 
 	// The number of HTTP methods that you want CloudFront to forward to your origin.
 	// Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD, and OPTIONS
@@ -3271,9 +3272,11 @@ func (s AllowedMethods) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllowedMethods) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AllowedMethods"}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -3296,7 +3299,7 @@ func (s *AllowedMethods) SetCachedMethods(v *CachedMethods) *AllowedMethods {
 }
 
 // SetItems sets the Items field's value.
-func (s *AllowedMethods) SetItems(v []*string) *AllowedMethods {
+func (s *AllowedMethods) SetItems(v []Method) *AllowedMethods {
 	s.Items = v
 	return s
 }
@@ -3481,7 +3484,7 @@ type CacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
-	ViewerProtocolPolicy *string `type:"string" required:"true" enum:"ViewerProtocolPolicy"`
+	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3497,22 +3500,27 @@ func (s CacheBehavior) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CacheBehavior) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CacheBehavior"}
+
 	if s.ForwardedValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
 	}
+
 	if s.MinTTL == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
 	}
+
 	if s.PathPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PathPattern"))
 	}
+
 	if s.TargetOriginId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetOriginId"))
 	}
+
 	if s.TrustedSigners == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
-	if s.ViewerProtocolPolicy == nil {
+	if len(s.ViewerProtocolPolicy) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ViewerProtocolPolicy"))
 	}
 	if s.AllowedMethods != nil {
@@ -3609,8 +3617,8 @@ func (s *CacheBehavior) SetTrustedSigners(v *TrustedSigners) *CacheBehavior {
 }
 
 // SetViewerProtocolPolicy sets the ViewerProtocolPolicy field's value.
-func (s *CacheBehavior) SetViewerProtocolPolicy(v string) *CacheBehavior {
-	s.ViewerProtocolPolicy = &v
+func (s *CacheBehavior) SetViewerProtocolPolicy(v ViewerProtocolPolicy) *CacheBehavior {
+	s.ViewerProtocolPolicy = v
 	return s
 }
 
@@ -3642,6 +3650,7 @@ func (s CacheBehaviors) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CacheBehaviors) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CacheBehaviors"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -3692,7 +3701,7 @@ type CachedMethods struct {
 	// cache responses to.
 	//
 	// Items is a required field
-	Items []*string `locationNameList:"Method" type:"list" required:"true"`
+	Items []Method `locationNameList:"Method" type:"list" required:"true"`
 
 	// The number of HTTP methods for which you want CloudFront to cache responses.
 	// Valid values are 2 (for caching responses to GET and HEAD requests) and 3
@@ -3715,9 +3724,11 @@ func (s CachedMethods) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CachedMethods) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CachedMethods"}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -3729,7 +3740,7 @@ func (s *CachedMethods) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *CachedMethods) SetItems(v []*string) *CachedMethods {
+func (s *CachedMethods) SetItems(v []Method) *CachedMethods {
 	s.Items = v
 	return s
 }
@@ -3773,6 +3784,7 @@ func (s CookieNames) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CookieNames) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CookieNames"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -3812,7 +3824,7 @@ type CookiePreference struct {
 	// requests to an Amazon S3 origin, specify none for the Forward element.
 	//
 	// Forward is a required field
-	Forward *string `type:"string" required:"true" enum:"ItemSelection"`
+	Forward ItemSelection `type:"string" required:"true"`
 
 	// Required if you specify whitelist for the value of Forward:. A complex type
 	// that specifies how many different cookies you want CloudFront to forward
@@ -3843,7 +3855,7 @@ func (s CookiePreference) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CookiePreference) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CookiePreference"}
-	if s.Forward == nil {
+	if len(s.Forward) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Forward"))
 	}
 	if s.WhitelistedNames != nil {
@@ -3859,8 +3871,8 @@ func (s *CookiePreference) Validate() error {
 }
 
 // SetForward sets the Forward field's value.
-func (s *CookiePreference) SetForward(v string) *CookiePreference {
-	s.Forward = &v
+func (s *CookiePreference) SetForward(v ItemSelection) *CookiePreference {
+	s.Forward = v
 	return s
 }
 
@@ -3894,6 +3906,7 @@ func (s CreateCloudFrontOriginAccessIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCloudFrontOriginAccessIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFrontOriginAccessIdentityInput"}
+
 	if s.CloudFrontOriginAccessIdentityConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	}
@@ -3983,6 +3996,7 @@ func (s CreateDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDistributionInput"}
+
 	if s.DistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
@@ -4072,6 +4086,7 @@ func (s CreateDistributionWithTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDistributionWithTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDistributionWithTagsInput"}
+
 	if s.DistributionConfigWithTags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionConfigWithTags"))
 	}
@@ -4166,9 +4181,11 @@ func (s CreateInvalidationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInvalidationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInvalidationInput"}
+
 	if s.DistributionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
+
 	if s.InvalidationBatch == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InvalidationBatch"))
 	}
@@ -4255,6 +4272,7 @@ func (s CreateStreamingDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamingDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingDistributionInput"}
+
 	if s.StreamingDistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
@@ -4344,6 +4362,7 @@ func (s CreateStreamingDistributionWithTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamingDistributionWithTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingDistributionWithTagsInput"}
+
 	if s.StreamingDistributionConfigWithTags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfigWithTags"))
 	}
@@ -4503,6 +4522,7 @@ func (s CustomErrorResponse) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomErrorResponse) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomErrorResponse"}
+
 	if s.ErrorCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ErrorCode"))
 	}
@@ -4576,6 +4596,7 @@ func (s CustomErrorResponses) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomErrorResponses) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomErrorResponses"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -4637,6 +4658,7 @@ func (s CustomHeaders) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomHeaders) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomHeaders"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -4696,7 +4718,7 @@ type CustomOriginConfig struct {
 	// The origin protocol policy to apply to your origin.
 	//
 	// OriginProtocolPolicy is a required field
-	OriginProtocolPolicy *string `type:"string" required:"true" enum:"OriginProtocolPolicy"`
+	OriginProtocolPolicy OriginProtocolPolicy `type:"string" required:"true"`
 
 	// You can create a custom origin read timeout. All timeout units are in seconds.
 	// The default origin read timeout is 30 seconds, but you can configure custom
@@ -4725,13 +4747,15 @@ func (s CustomOriginConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomOriginConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CustomOriginConfig"}
+
 	if s.HTTPPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HTTPPort"))
 	}
+
 	if s.HTTPSPort == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HTTPSPort"))
 	}
-	if s.OriginProtocolPolicy == nil {
+	if len(s.OriginProtocolPolicy) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("OriginProtocolPolicy"))
 	}
 	if s.OriginSslProtocols != nil {
@@ -4765,8 +4789,8 @@ func (s *CustomOriginConfig) SetOriginKeepaliveTimeout(v int64) *CustomOriginCon
 }
 
 // SetOriginProtocolPolicy sets the OriginProtocolPolicy field's value.
-func (s *CustomOriginConfig) SetOriginProtocolPolicy(v string) *CustomOriginConfig {
-	s.OriginProtocolPolicy = &v
+func (s *CustomOriginConfig) SetOriginProtocolPolicy(v OriginProtocolPolicy) *CustomOriginConfig {
+	s.OriginProtocolPolicy = v
 	return s
 }
 
@@ -4906,7 +4930,7 @@ type DefaultCacheBehavior struct {
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
-	ViewerProtocolPolicy *string `type:"string" required:"true" enum:"ViewerProtocolPolicy"`
+	ViewerProtocolPolicy ViewerProtocolPolicy `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4922,19 +4946,23 @@ func (s DefaultCacheBehavior) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefaultCacheBehavior) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefaultCacheBehavior"}
+
 	if s.ForwardedValues == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
 	}
+
 	if s.MinTTL == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
 	}
+
 	if s.TargetOriginId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetOriginId"))
 	}
+
 	if s.TrustedSigners == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
-	if s.ViewerProtocolPolicy == nil {
+	if len(s.ViewerProtocolPolicy) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ViewerProtocolPolicy"))
 	}
 	if s.AllowedMethods != nil {
@@ -5025,8 +5053,8 @@ func (s *DefaultCacheBehavior) SetTrustedSigners(v *TrustedSigners) *DefaultCach
 }
 
 // SetViewerProtocolPolicy sets the ViewerProtocolPolicy field's value.
-func (s *DefaultCacheBehavior) SetViewerProtocolPolicy(v string) *DefaultCacheBehavior {
-	s.ViewerProtocolPolicy = &v
+func (s *DefaultCacheBehavior) SetViewerProtocolPolicy(v ViewerProtocolPolicy) *DefaultCacheBehavior {
+	s.ViewerProtocolPolicy = v
 	return s
 }
 
@@ -5058,6 +5086,7 @@ func (s DeleteCloudFrontOriginAccessIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCloudFrontOriginAccessIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCloudFrontOriginAccessIdentityInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -5157,6 +5186,7 @@ func (s DeleteDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDistributionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -5222,6 +5252,7 @@ func (s DeleteStreamingDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStreamingDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamingDistributionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -5477,7 +5508,7 @@ type DistributionConfig struct {
 	// In general, configuring CloudFront to communicate with viewers using HTTP/2
 	// reduces latency. You can improve performance by optimizing for HTTP/2. For
 	// more information, do an Internet search for "http/2 optimization."
-	HttpVersion *string `type:"string" enum:"HttpVersion"`
+	HttpVersion HttpVersion `type:"string"`
 
 	// If you want CloudFront to respond to IPv6 DNS requests with an IPv6 address
 	// for your distribution, specify true. If you specify false, CloudFront responds
@@ -5539,7 +5570,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide. For information about CloudFront
 	// pricing, including how price classes map to CloudFront regions, see Amazon
 	// CloudFront Pricing (https://aws.amazon.com/cloudfront/pricing/).
-	PriceClass *string `type:"string" enum:"PriceClass"`
+	PriceClass PriceClass `type:"string"`
 
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
@@ -5588,18 +5619,23 @@ func (s DistributionConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DistributionConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DistributionConfig"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
+
 	if s.Comment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
+
 	if s.DefaultCacheBehavior == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultCacheBehavior"))
 	}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.Origins == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Origins"))
 	}
@@ -5694,8 +5730,8 @@ func (s *DistributionConfig) SetEnabled(v bool) *DistributionConfig {
 }
 
 // SetHttpVersion sets the HttpVersion field's value.
-func (s *DistributionConfig) SetHttpVersion(v string) *DistributionConfig {
-	s.HttpVersion = &v
+func (s *DistributionConfig) SetHttpVersion(v HttpVersion) *DistributionConfig {
+	s.HttpVersion = v
 	return s
 }
 
@@ -5718,8 +5754,8 @@ func (s *DistributionConfig) SetOrigins(v *Origins) *DistributionConfig {
 }
 
 // SetPriceClass sets the PriceClass field's value.
-func (s *DistributionConfig) SetPriceClass(v string) *DistributionConfig {
-	s.PriceClass = &v
+func (s *DistributionConfig) SetPriceClass(v PriceClass) *DistributionConfig {
+	s.PriceClass = v
 	return s
 }
 
@@ -5771,9 +5807,11 @@ func (s DistributionConfigWithTags) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DistributionConfigWithTags) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DistributionConfigWithTags"}
+
 	if s.DistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -5944,7 +5982,7 @@ type DistributionSummary struct {
 	// that don't support HTTP/2 will automatically use an earlier version.
 	//
 	// HttpVersion is a required field
-	HttpVersion *string `type:"string" required:"true" enum:"HttpVersion"`
+	HttpVersion HttpVersion `type:"string" required:"true"`
 
 	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
 	//
@@ -5968,7 +6006,7 @@ type DistributionSummary struct {
 	Origins *Origins `type:"structure" required:"true"`
 
 	// PriceClass is a required field
-	PriceClass *string `type:"string" required:"true" enum:"PriceClass"`
+	PriceClass PriceClass `type:"string" required:"true"`
 
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
@@ -6065,8 +6103,8 @@ func (s *DistributionSummary) SetEnabled(v bool) *DistributionSummary {
 }
 
 // SetHttpVersion sets the HttpVersion field's value.
-func (s *DistributionSummary) SetHttpVersion(v string) *DistributionSummary {
-	s.HttpVersion = &v
+func (s *DistributionSummary) SetHttpVersion(v HttpVersion) *DistributionSummary {
+	s.HttpVersion = v
 	return s
 }
 
@@ -6095,8 +6133,8 @@ func (s *DistributionSummary) SetOrigins(v *Origins) *DistributionSummary {
 }
 
 // SetPriceClass sets the PriceClass field's value.
-func (s *DistributionSummary) SetPriceClass(v string) *DistributionSummary {
-	s.PriceClass = &v
+func (s *DistributionSummary) SetPriceClass(v PriceClass) *DistributionSummary {
+	s.PriceClass = v
 	return s
 }
 
@@ -6187,9 +6225,11 @@ func (s ForwardedValues) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForwardedValues) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ForwardedValues"}
+
 	if s.Cookies == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Cookies"))
 	}
+
 	if s.QueryString == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
@@ -6280,7 +6320,7 @@ type GeoRestriction struct {
 	//    want CloudFront to distribute your content.
 	//
 	// RestrictionType is a required field
-	RestrictionType *string `type:"string" required:"true" enum:"GeoRestrictionType"`
+	RestrictionType GeoRestrictionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6296,10 +6336,11 @@ func (s GeoRestriction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GeoRestriction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GeoRestriction"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
-	if s.RestrictionType == nil {
+	if len(s.RestrictionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("RestrictionType"))
 	}
 
@@ -6322,8 +6363,8 @@ func (s *GeoRestriction) SetQuantity(v int64) *GeoRestriction {
 }
 
 // SetRestrictionType sets the RestrictionType field's value.
-func (s *GeoRestriction) SetRestrictionType(v string) *GeoRestriction {
-	s.RestrictionType = &v
+func (s *GeoRestriction) SetRestrictionType(v GeoRestrictionType) *GeoRestriction {
+	s.RestrictionType = v
 	return s
 }
 
@@ -6352,6 +6393,7 @@ func (s GetCloudFrontOriginAccessIdentityConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCloudFrontOriginAccessIdentityConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityConfigInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6426,6 +6468,7 @@ func (s GetCloudFrontOriginAccessIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCloudFrontOriginAccessIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6501,6 +6544,7 @@ func (s GetDistributionConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDistributionConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDistributionConfigInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6575,6 +6619,7 @@ func (s GetDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDistributionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6654,9 +6699,11 @@ func (s GetInvalidationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInvalidationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetInvalidationInput"}
+
 	if s.DistributionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6729,6 +6776,7 @@ func (s GetStreamingDistributionConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStreamingDistributionConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStreamingDistributionConfigInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6803,6 +6851,7 @@ func (s GetStreamingDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStreamingDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetStreamingDistributionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6914,6 +6963,7 @@ func (s Headers) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Headers) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Headers"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -7043,9 +7093,11 @@ func (s InvalidationBatch) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvalidationBatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InvalidationBatch"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
+
 	if s.Paths == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Paths"))
 	}
@@ -7266,7 +7318,7 @@ type LambdaFunctionAssociation struct {
 	//    * viewer-response
 	//
 	//    * origin-response
-	EventType *string `type:"string" enum:"EventType"`
+	EventType EventType `type:"string"`
 
 	// The ARN of the Lambda function.
 	LambdaFunctionARN *string `type:"string"`
@@ -7283,8 +7335,8 @@ func (s LambdaFunctionAssociation) GoString() string {
 }
 
 // SetEventType sets the EventType field's value.
-func (s *LambdaFunctionAssociation) SetEventType(v string) *LambdaFunctionAssociation {
-	s.EventType = &v
+func (s *LambdaFunctionAssociation) SetEventType(v EventType) *LambdaFunctionAssociation {
+	s.EventType = v
 	return s
 }
 
@@ -7332,6 +7384,7 @@ func (s LambdaFunctionAssociations) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaFunctionAssociations) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LambdaFunctionAssociations"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -7455,6 +7508,7 @@ func (s ListDistributionsByWebACLIdInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDistributionsByWebACLIdInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDistributionsByWebACLIdInput"}
+
 	if s.WebACLId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
@@ -7609,6 +7663,7 @@ func (s ListInvalidationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInvalidationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListInvalidationsInput"}
+
 	if s.DistributionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
@@ -7745,6 +7800,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
@@ -7840,15 +7896,19 @@ func (s LoggingConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LoggingConfig"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.IncludeCookies == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IncludeCookies"))
 	}
+
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
@@ -7983,9 +8043,11 @@ func (s Origin) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Origin) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Origin"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8139,9 +8201,11 @@ func (s OriginAccessIdentityConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginAccessIdentityConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OriginAccessIdentityConfig"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
+
 	if s.Comment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
@@ -8343,9 +8407,11 @@ func (s OriginCustomHeader) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginCustomHeader) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OriginCustomHeader"}
+
 	if s.HeaderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
 	}
+
 	if s.HeaderValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HeaderValue"))
 	}
@@ -8377,7 +8443,7 @@ type OriginSslProtocols struct {
 	// A list that contains allowed SSL/TLS protocols for this distribution.
 	//
 	// Items is a required field
-	Items []*string `locationNameList:"SslProtocol" type:"list" required:"true"`
+	Items []SslProtocol `locationNameList:"SslProtocol" type:"list" required:"true"`
 
 	// The number of SSL/TLS protocols that you want to allow CloudFront to use
 	// when establishing an HTTPS connection with this origin.
@@ -8399,9 +8465,11 @@ func (s OriginSslProtocols) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginSslProtocols) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OriginSslProtocols"}
+
 	if s.Items == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -8413,7 +8481,7 @@ func (s *OriginSslProtocols) Validate() error {
 }
 
 // SetItems sets the Items field's value.
-func (s *OriginSslProtocols) SetItems(v []*string) *OriginSslProtocols {
+func (s *OriginSslProtocols) SetItems(v []SslProtocol) *OriginSslProtocols {
 	s.Items = v
 	return s
 }
@@ -8454,6 +8522,7 @@ func (s *Origins) Validate() error {
 	if s.Items != nil && len(s.Items) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Items", 1))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -8516,6 +8585,7 @@ func (s Paths) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Paths) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Paths"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -8566,6 +8636,7 @@ func (s QueryStringCacheKeys) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryStringCacheKeys) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "QueryStringCacheKeys"}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -8614,6 +8685,7 @@ func (s Restrictions) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Restrictions) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Restrictions"}
+
 	if s.GeoRestriction == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GeoRestriction"))
 	}
@@ -8681,9 +8753,11 @@ func (s S3Origin) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Origin) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3Origin"}
+
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
+
 	if s.OriginAccessIdentity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OriginAccessIdentity"))
 	}
@@ -8753,6 +8827,7 @@ func (s S3OriginConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3OriginConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3OriginConfig"}
+
 	if s.OriginAccessIdentity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OriginAccessIdentity"))
 	}
@@ -8952,7 +9027,7 @@ type StreamingDistributionConfig struct {
 
 	// A complex type that contains information about price class for this streaming
 	// distribution.
-	PriceClass *string `type:"string" enum:"PriceClass"`
+	PriceClass PriceClass `type:"string"`
 
 	// A complex type that contains information about the Amazon S3 bucket from
 	// which you want CloudFront to get your media files for distribution.
@@ -8984,18 +9059,23 @@ func (s StreamingDistributionConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingDistributionConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StreamingDistributionConfig"}
+
 	if s.CallerReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
+
 	if s.Comment == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.S3Origin == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3Origin"))
 	}
+
 	if s.TrustedSigners == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
@@ -9057,8 +9137,8 @@ func (s *StreamingDistributionConfig) SetLogging(v *StreamingLoggingConfig) *Str
 }
 
 // SetPriceClass sets the PriceClass field's value.
-func (s *StreamingDistributionConfig) SetPriceClass(v string) *StreamingDistributionConfig {
-	s.PriceClass = &v
+func (s *StreamingDistributionConfig) SetPriceClass(v PriceClass) *StreamingDistributionConfig {
+	s.PriceClass = v
 	return s
 }
 
@@ -9104,9 +9184,11 @@ func (s StreamingDistributionConfigWithTags) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingDistributionConfigWithTags) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StreamingDistributionConfigWithTags"}
+
 	if s.StreamingDistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -9268,7 +9350,7 @@ type StreamingDistributionSummary struct {
 	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// PriceClass is a required field
-	PriceClass *string `type:"string" required:"true" enum:"PriceClass"`
+	PriceClass PriceClass `type:"string" required:"true"`
 
 	// A complex type that contains information about the Amazon S3 bucket from
 	// which you want CloudFront to get your media files for distribution.
@@ -9351,8 +9433,8 @@ func (s *StreamingDistributionSummary) SetLastModifiedTime(v time.Time) *Streami
 }
 
 // SetPriceClass sets the PriceClass field's value.
-func (s *StreamingDistributionSummary) SetPriceClass(v string) *StreamingDistributionSummary {
-	s.PriceClass = &v
+func (s *StreamingDistributionSummary) SetPriceClass(v PriceClass) *StreamingDistributionSummary {
+	s.PriceClass = v
 	return s
 }
 
@@ -9417,12 +9499,15 @@ func (s StreamingLoggingConfig) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingLoggingConfig) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StreamingLoggingConfig"}
+
 	if s.Bucket == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.Prefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
@@ -9484,6 +9569,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -9563,9 +9649,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -9704,9 +9792,11 @@ func (s TrustedSigners) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TrustedSigners) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TrustedSigners"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
+
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
@@ -9764,9 +9854,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -9837,9 +9929,11 @@ func (s UpdateCloudFrontOriginAccessIdentityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCloudFrontOriginAccessIdentityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCloudFrontOriginAccessIdentityInput"}
+
 	if s.CloudFrontOriginAccessIdentityConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -9940,9 +10034,11 @@ func (s UpdateDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDistributionInput"}
+
 	if s.DistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -10043,9 +10139,11 @@ func (s UpdateStreamingDistributionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStreamingDistributionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStreamingDistributionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.StreamingDistributionConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
@@ -10216,7 +10314,7 @@ type ViewerCertificate struct {
 
 	// This field is deprecated. You can use one of the following: [ACMCertificateArn,
 	// IAMCertificateId, or CloudFrontDefaultCertificate].
-	CertificateSource *string `deprecated:"true" type:"string" enum:"CertificateSource"`
+	CertificateSource CertificateSource `deprecated:"true" type:"string"`
 
 	CloudFrontDefaultCertificate *bool `type:"boolean"`
 
@@ -10235,7 +10333,7 @@ type ViewerCertificate struct {
 	//    * If you're using a custom certificate (if you specify a value for ACMCertificateArn
 	//    or for IAMCertificateId) and if you're using SNI (if you specify sni-only
 	//    for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
-	MinimumProtocolVersion *string `type:"string" enum:"MinimumProtocolVersion"`
+	MinimumProtocolVersion MinimumProtocolVersion `type:"string"`
 
 	// If you specify a value for ACMCertificateArn or for IAMCertificateId, you
 	// must also specify how you want CloudFront to serve HTTPS requests: using
@@ -10265,7 +10363,7 @@ type ViewerCertificate struct {
 	//
 	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html)
 	// in the Amazon CloudFront Developer Guide.
-	SSLSupportMethod *string `type:"string" enum:"SSLSupportMethod"`
+	SSLSupportMethod SSLSupportMethod `type:"string"`
 }
 
 // String returns the string representation
@@ -10291,8 +10389,8 @@ func (s *ViewerCertificate) SetCertificate(v string) *ViewerCertificate {
 }
 
 // SetCertificateSource sets the CertificateSource field's value.
-func (s *ViewerCertificate) SetCertificateSource(v string) *ViewerCertificate {
-	s.CertificateSource = &v
+func (s *ViewerCertificate) SetCertificateSource(v CertificateSource) *ViewerCertificate {
+	s.CertificateSource = v
 	return s
 }
 
@@ -10309,154 +10407,124 @@ func (s *ViewerCertificate) SetIAMCertificateId(v string) *ViewerCertificate {
 }
 
 // SetMinimumProtocolVersion sets the MinimumProtocolVersion field's value.
-func (s *ViewerCertificate) SetMinimumProtocolVersion(v string) *ViewerCertificate {
-	s.MinimumProtocolVersion = &v
+func (s *ViewerCertificate) SetMinimumProtocolVersion(v MinimumProtocolVersion) *ViewerCertificate {
+	s.MinimumProtocolVersion = v
 	return s
 }
 
 // SetSSLSupportMethod sets the SSLSupportMethod field's value.
-func (s *ViewerCertificate) SetSSLSupportMethod(v string) *ViewerCertificate {
-	s.SSLSupportMethod = &v
+func (s *ViewerCertificate) SetSSLSupportMethod(v SSLSupportMethod) *ViewerCertificate {
+	s.SSLSupportMethod = v
 	return s
 }
 
+type CertificateSource string
+
+// Enum values for CertificateSource
 const (
-	// CertificateSourceCloudfront is a CertificateSource enum value
-	CertificateSourceCloudfront = "cloudfront"
-
-	// CertificateSourceIam is a CertificateSource enum value
-	CertificateSourceIam = "iam"
-
-	// CertificateSourceAcm is a CertificateSource enum value
-	CertificateSourceAcm = "acm"
+	CertificateSourceCloudfront CertificateSource = "cloudfront"
+	CertificateSourceIam        CertificateSource = "iam"
+	CertificateSourceAcm        CertificateSource = "acm"
 )
 
+type EventType string
+
+// Enum values for EventType
 const (
-	// EventTypeViewerRequest is a EventType enum value
-	EventTypeViewerRequest = "viewer-request"
-
-	// EventTypeViewerResponse is a EventType enum value
-	EventTypeViewerResponse = "viewer-response"
-
-	// EventTypeOriginRequest is a EventType enum value
-	EventTypeOriginRequest = "origin-request"
-
-	// EventTypeOriginResponse is a EventType enum value
-	EventTypeOriginResponse = "origin-response"
+	EventTypeViewerRequest  EventType = "viewer-request"
+	EventTypeViewerResponse EventType = "viewer-response"
+	EventTypeOriginRequest  EventType = "origin-request"
+	EventTypeOriginResponse EventType = "origin-response"
 )
 
+type GeoRestrictionType string
+
+// Enum values for GeoRestrictionType
 const (
-	// GeoRestrictionTypeBlacklist is a GeoRestrictionType enum value
-	GeoRestrictionTypeBlacklist = "blacklist"
-
-	// GeoRestrictionTypeWhitelist is a GeoRestrictionType enum value
-	GeoRestrictionTypeWhitelist = "whitelist"
-
-	// GeoRestrictionTypeNone is a GeoRestrictionType enum value
-	GeoRestrictionTypeNone = "none"
+	GeoRestrictionTypeBlacklist GeoRestrictionType = "blacklist"
+	GeoRestrictionTypeWhitelist GeoRestrictionType = "whitelist"
+	GeoRestrictionTypeNone      GeoRestrictionType = "none"
 )
 
-const (
-	// HttpVersionHttp11 is a HttpVersion enum value
-	HttpVersionHttp11 = "http1.1"
+type HttpVersion string
 
-	// HttpVersionHttp2 is a HttpVersion enum value
-	HttpVersionHttp2 = "http2"
+// Enum values for HttpVersion
+const (
+	HttpVersionHttp11 HttpVersion = "http1.1"
+	HttpVersionHttp2  HttpVersion = "http2"
 )
 
+type ItemSelection string
+
+// Enum values for ItemSelection
 const (
-	// ItemSelectionNone is a ItemSelection enum value
-	ItemSelectionNone = "none"
-
-	// ItemSelectionWhitelist is a ItemSelection enum value
-	ItemSelectionWhitelist = "whitelist"
-
-	// ItemSelectionAll is a ItemSelection enum value
-	ItemSelectionAll = "all"
+	ItemSelectionNone      ItemSelection = "none"
+	ItemSelectionWhitelist ItemSelection = "whitelist"
+	ItemSelectionAll       ItemSelection = "all"
 )
 
+type Method string
+
+// Enum values for Method
 const (
-	// MethodGet is a Method enum value
-	MethodGet = "GET"
-
-	// MethodHead is a Method enum value
-	MethodHead = "HEAD"
-
-	// MethodPost is a Method enum value
-	MethodPost = "POST"
-
-	// MethodPut is a Method enum value
-	MethodPut = "PUT"
-
-	// MethodPatch is a Method enum value
-	MethodPatch = "PATCH"
-
-	// MethodOptions is a Method enum value
-	MethodOptions = "OPTIONS"
-
-	// MethodDelete is a Method enum value
-	MethodDelete = "DELETE"
+	MethodGet     Method = "GET"
+	MethodHead    Method = "HEAD"
+	MethodPost    Method = "POST"
+	MethodPut     Method = "PUT"
+	MethodPatch   Method = "PATCH"
+	MethodOptions Method = "OPTIONS"
+	MethodDelete  Method = "DELETE"
 )
 
-const (
-	// MinimumProtocolVersionSslv3 is a MinimumProtocolVersion enum value
-	MinimumProtocolVersionSslv3 = "SSLv3"
+type MinimumProtocolVersion string
 
-	// MinimumProtocolVersionTlsv1 is a MinimumProtocolVersion enum value
-	MinimumProtocolVersionTlsv1 = "TLSv1"
+// Enum values for MinimumProtocolVersion
+const (
+	MinimumProtocolVersionSslv3 MinimumProtocolVersion = "SSLv3"
+	MinimumProtocolVersionTlsv1 MinimumProtocolVersion = "TLSv1"
 )
 
+type OriginProtocolPolicy string
+
+// Enum values for OriginProtocolPolicy
 const (
-	// OriginProtocolPolicyHttpOnly is a OriginProtocolPolicy enum value
-	OriginProtocolPolicyHttpOnly = "http-only"
-
-	// OriginProtocolPolicyMatchViewer is a OriginProtocolPolicy enum value
-	OriginProtocolPolicyMatchViewer = "match-viewer"
-
-	// OriginProtocolPolicyHttpsOnly is a OriginProtocolPolicy enum value
-	OriginProtocolPolicyHttpsOnly = "https-only"
+	OriginProtocolPolicyHttpOnly    OriginProtocolPolicy = "http-only"
+	OriginProtocolPolicyMatchViewer OriginProtocolPolicy = "match-viewer"
+	OriginProtocolPolicyHttpsOnly   OriginProtocolPolicy = "https-only"
 )
 
+type PriceClass string
+
+// Enum values for PriceClass
 const (
-	// PriceClassPriceClass100 is a PriceClass enum value
-	PriceClassPriceClass100 = "PriceClass_100"
-
-	// PriceClassPriceClass200 is a PriceClass enum value
-	PriceClassPriceClass200 = "PriceClass_200"
-
-	// PriceClassPriceClassAll is a PriceClass enum value
-	PriceClassPriceClassAll = "PriceClass_All"
+	PriceClassPriceClass100 PriceClass = "PriceClass_100"
+	PriceClassPriceClass200 PriceClass = "PriceClass_200"
+	PriceClassPriceClassAll PriceClass = "PriceClass_All"
 )
 
-const (
-	// SSLSupportMethodSniOnly is a SSLSupportMethod enum value
-	SSLSupportMethodSniOnly = "sni-only"
+type SSLSupportMethod string
 
-	// SSLSupportMethodVip is a SSLSupportMethod enum value
-	SSLSupportMethodVip = "vip"
+// Enum values for SSLSupportMethod
+const (
+	SSLSupportMethodSniOnly SSLSupportMethod = "sni-only"
+	SSLSupportMethodVip     SSLSupportMethod = "vip"
 )
 
+type SslProtocol string
+
+// Enum values for SslProtocol
 const (
-	// SslProtocolSslv3 is a SslProtocol enum value
-	SslProtocolSslv3 = "SSLv3"
-
-	// SslProtocolTlsv1 is a SslProtocol enum value
-	SslProtocolTlsv1 = "TLSv1"
-
-	// SslProtocolTlsv11 is a SslProtocol enum value
-	SslProtocolTlsv11 = "TLSv1.1"
-
-	// SslProtocolTlsv12 is a SslProtocol enum value
-	SslProtocolTlsv12 = "TLSv1.2"
+	SslProtocolSslv3  SslProtocol = "SSLv3"
+	SslProtocolTlsv1  SslProtocol = "TLSv1"
+	SslProtocolTlsv11 SslProtocol = "TLSv1.1"
+	SslProtocolTlsv12 SslProtocol = "TLSv1.2"
 )
 
+type ViewerProtocolPolicy string
+
+// Enum values for ViewerProtocolPolicy
 const (
-	// ViewerProtocolPolicyAllowAll is a ViewerProtocolPolicy enum value
-	ViewerProtocolPolicyAllowAll = "allow-all"
-
-	// ViewerProtocolPolicyHttpsOnly is a ViewerProtocolPolicy enum value
-	ViewerProtocolPolicyHttpsOnly = "https-only"
-
-	// ViewerProtocolPolicyRedirectToHttps is a ViewerProtocolPolicy enum value
-	ViewerProtocolPolicyRedirectToHttps = "redirect-to-https"
+	ViewerProtocolPolicyAllowAll        ViewerProtocolPolicy = "allow-all"
+	ViewerProtocolPolicyHttpsOnly       ViewerProtocolPolicy = "https-only"
+	ViewerProtocolPolicyRedirectToHttps ViewerProtocolPolicy = "redirect-to-https"
 )

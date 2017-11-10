@@ -9463,9 +9463,11 @@ func (s AddRoleToDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddRoleToDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddRoleToDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -9548,9 +9550,11 @@ func (s AddSourceIdentifierToSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddSourceIdentifierToSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddSourceIdentifierToSubscriptionInput"}
+
 	if s.SourceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -9628,9 +9632,11 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -9715,12 +9721,15 @@ func (s ApplyPendingMaintenanceActionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplyPendingMaintenanceActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApplyPendingMaintenanceActionInput"}
+
 	if s.ApplyAction == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplyAction"))
 	}
+
 	if s.OptInType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptInType"))
 	}
+
 	if s.ResourceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceIdentifier"))
 	}
@@ -9816,6 +9825,7 @@ func (s AuthorizeDBSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeDBSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeDBSecurityGroupIngressInput"}
+
 	if s.DBSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
@@ -10085,12 +10095,15 @@ func (s CopyDBClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterParameterGroupInput"}
+
 	if s.SourceDBClusterParameterGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterParameterGroupIdentifier"))
 	}
+
 	if s.TargetDBClusterParameterGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterParameterGroupDescription"))
 	}
+
 	if s.TargetDBClusterParameterGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterParameterGroupIdentifier"))
 	}
@@ -10285,9 +10298,11 @@ func (s CopyDBClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyDBClusterSnapshotInput"}
+
 	if s.SourceDBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterSnapshotIdentifier"))
 	}
+
 	if s.TargetDBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBClusterSnapshotIdentifier"))
 	}
@@ -10434,12 +10449,15 @@ func (s CopyDBParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyDBParameterGroupInput"}
+
 	if s.SourceDBParameterGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBParameterGroupIdentifier"))
 	}
+
 	if s.TargetDBParameterGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBParameterGroupDescription"))
 	}
+
 	if s.TargetDBParameterGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBParameterGroupIdentifier"))
 	}
@@ -10649,9 +10667,11 @@ func (s CopyDBSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyDBSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyDBSnapshotInput"}
+
 	if s.SourceDBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBSnapshotIdentifier"))
 	}
+
 	if s.TargetDBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBSnapshotIdentifier"))
 	}
@@ -10806,12 +10826,15 @@ func (s CopyOptionGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyOptionGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyOptionGroupInput"}
+
 	if s.SourceOptionGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceOptionGroupIdentifier"))
 	}
+
 	if s.TargetOptionGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetOptionGroupDescription"))
 	}
+
 	if s.TargetOptionGroupIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetOptionGroupIdentifier"))
 	}
@@ -11105,9 +11128,11 @@ func (s CreateDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
@@ -11349,12 +11374,15 @@ func (s CreateDBClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterParameterGroupInput"}
+
 	if s.DBClusterParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
+
 	if s.DBParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
@@ -11471,9 +11499,11 @@ func (s CreateDBClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBClusterSnapshotInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
@@ -12314,12 +12344,15 @@ func (s CreateDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBInstanceInput"}
+
 	if s.DBInstanceClass == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceClass"))
 	}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
@@ -12872,9 +12905,11 @@ func (s CreateDBInstanceReadReplicaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBInstanceReadReplicaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBInstanceReadReplicaInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+
 	if s.SourceDBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBInstanceIdentifier"))
 	}
@@ -13102,12 +13137,15 @@ func (s CreateDBParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBParameterGroupInput"}
+
 	if s.DBParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
+
 	if s.DBParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
@@ -13213,9 +13251,11 @@ func (s CreateDBSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSecurityGroupInput"}
+
 	if s.DBSecurityGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupDescription"))
 	}
+
 	if s.DBSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
@@ -13330,9 +13370,11 @@ func (s CreateDBSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSnapshotInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -13432,12 +13474,15 @@ func (s CreateDBSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDBSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDBSubnetGroupInput"}
+
 	if s.DBSubnetGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupDescription"))
 	}
+
 	if s.DBSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -13584,9 +13629,11 @@ func (s CreateEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+
 	if s.SnsTopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -13717,15 +13764,19 @@ func (s CreateOptionGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOptionGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateOptionGroupInput"}
+
 	if s.EngineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
+
 	if s.MajorEngineVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MajorEngineVersion"))
 	}
+
 	if s.OptionGroupDescription == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionGroupDescription"))
 	}
+
 	if s.OptionGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
@@ -16159,6 +16210,7 @@ func (s DeleteDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
@@ -16256,6 +16308,7 @@ func (s DeleteDBClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterParameterGroupInput"}
+
 	if s.DBClusterParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
@@ -16313,6 +16366,7 @@ func (s DeleteDBClusterSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBClusterSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBClusterSnapshotInput"}
+
 	if s.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
@@ -16425,6 +16479,7 @@ func (s DeleteDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBInstanceInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -16520,6 +16575,7 @@ func (s DeleteDBParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBParameterGroupInput"}
+
 	if s.DBParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
@@ -16586,6 +16642,7 @@ func (s DeleteDBSecurityGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSecurityGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSecurityGroupInput"}
+
 	if s.DBSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
@@ -16643,6 +16700,7 @@ func (s DeleteDBSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSnapshotInput"}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -16721,6 +16779,7 @@ func (s DeleteDBSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDBSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDBSubnetGroupInput"}
+
 	if s.DBSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
@@ -16775,6 +16834,7 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -16841,6 +16901,7 @@ func (s DeleteOptionGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteOptionGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteOptionGroupInput"}
+
 	if s.OptionGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
@@ -17213,6 +17274,7 @@ func (s DescribeDBClusterParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterParametersInput"}
+
 	if s.DBClusterParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
@@ -17323,6 +17385,7 @@ func (s DescribeDBClusterSnapshotAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBClusterSnapshotAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterSnapshotAttributesInput"}
+
 	if s.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
@@ -18117,6 +18180,7 @@ func (s DescribeDBLogFilesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBLogFilesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBLogFilesInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -18392,6 +18456,7 @@ func (s DescribeDBParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBParametersInput"}
+
 	if s.DBParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
@@ -18618,6 +18683,7 @@ func (s DescribeDBSnapshotAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDBSnapshotAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBSnapshotAttributesInput"}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -19027,6 +19093,7 @@ func (s DescribeEngineDefaultClusterParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultClusterParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultClusterParametersInput"}
+
 	if s.DBParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
@@ -19136,6 +19203,7 @@ func (s DescribeEngineDefaultParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
+
 	if s.DBParameterGroupFamily == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupFamily"))
 	}
@@ -19460,7 +19528,7 @@ type DescribeEventsInput struct {
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
 	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
@@ -19543,8 +19611,8 @@ func (s *DescribeEventsInput) SetSourceIdentifier(v string) *DescribeEventsInput
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v string) *DescribeEventsInput {
-	s.SourceType = &v
+func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
+	s.SourceType = v
 	return s
 }
 
@@ -19635,6 +19703,7 @@ func (s DescribeOptionGroupOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOptionGroupOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeOptionGroupOptionsInput"}
+
 	if s.EngineName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
@@ -19913,6 +19982,7 @@ func (s DescribeOrderableDBInstanceOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOrderableDBInstanceOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrderableDBInstanceOptionsInput"}
+
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
@@ -20740,9 +20810,11 @@ func (s DownloadDBLogFilePortionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DownloadDBLogFilePortionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DownloadDBLogFilePortionInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+
 	if s.LogFileName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogFileName"))
 	}
@@ -20998,7 +21070,7 @@ type Event struct {
 	SourceIdentifier *string `type:"string"`
 
 	// Specifies the source type for this event.
-	SourceType *string `type:"string" enum:"SourceType"`
+	SourceType SourceType `type:"string"`
 }
 
 // String returns the string representation
@@ -21042,8 +21114,8 @@ func (s *Event) SetSourceIdentifier(v string) *Event {
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v string) *Event {
-	s.SourceType = &v
+func (s *Event) SetSourceType(v SourceType) *Event {
+	s.SourceType = v
 	return s
 }
 
@@ -21310,9 +21382,11 @@ func (s Filter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Values == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
@@ -21399,6 +21473,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
@@ -21600,6 +21675,7 @@ func (s ModifyDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
@@ -21748,9 +21824,11 @@ func (s ModifyDBClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterParameterGroupInput"}
+
 	if s.DBClusterParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
+
 	if s.Parameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
@@ -21825,9 +21903,11 @@ func (s ModifyDBClusterSnapshotAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBClusterSnapshotAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBClusterSnapshotAttributeInput"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
+
 	if s.DBClusterSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterSnapshotIdentifier"))
 	}
@@ -22430,6 +22510,7 @@ func (s ModifyDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBInstanceInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -22733,9 +22814,11 @@ func (s ModifyDBParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBParameterGroupInput"}
+
 	if s.DBParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
+
 	if s.Parameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
@@ -22808,9 +22891,11 @@ func (s ModifyDBSnapshotAttributeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSnapshotAttributeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSnapshotAttributeInput"}
+
 	if s.AttributeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -22923,6 +23008,7 @@ func (s ModifyDBSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSnapshotInput"}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -23017,9 +23103,11 @@ func (s ModifyDBSubnetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDBSubnetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyDBSubnetGroupInput"}
+
 	if s.DBSubnetGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSubnetGroupName"))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
@@ -23129,6 +23217,7 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -23232,6 +23321,7 @@ func (s ModifyOptionGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyOptionGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyOptionGroupInput"}
+
 	if s.OptionGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionGroupName"))
 	}
@@ -23437,6 +23527,7 @@ func (s OptionConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OptionConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "OptionConfiguration"}
+
 	if s.OptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionName"))
 	}
@@ -24148,7 +24239,7 @@ type Parameter struct {
 	AllowedValues *string `type:"string"`
 
 	// Indicates when to apply parameter updates.
-	ApplyMethod *string `type:"string" enum:"ApplyMethod"`
+	ApplyMethod ApplyMethod `type:"string"`
 
 	// Specifies the engine specific parameters type.
 	ApplyType *string `type:"string"`
@@ -24194,8 +24285,8 @@ func (s *Parameter) SetAllowedValues(v string) *Parameter {
 }
 
 // SetApplyMethod sets the ApplyMethod field's value.
-func (s *Parameter) SetApplyMethod(v string) *Parameter {
-	s.ApplyMethod = &v
+func (s *Parameter) SetApplyMethod(v ApplyMethod) *Parameter {
+	s.ApplyMethod = v
 	return s
 }
 
@@ -24501,6 +24592,7 @@ func (s PromoteReadReplicaDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PromoteReadReplicaDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PromoteReadReplicaDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
@@ -24620,6 +24712,7 @@ func (s PromoteReadReplicaInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PromoteReadReplicaInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PromoteReadReplicaInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -24722,6 +24815,7 @@ func (s PurchaseReservedDBInstancesOfferingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedDBInstancesOfferingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedDBInstancesOfferingInput"}
+
 	if s.ReservedDBInstancesOfferingId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReservedDBInstancesOfferingId"))
 	}
@@ -24818,6 +24912,7 @@ func (s RebootDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootDBInstanceInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -24940,9 +25035,11 @@ func (s RemoveRoleFromDBClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveRoleFromDBClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveRoleFromDBClusterInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -25010,9 +25107,11 @@ func (s RemoveSourceIdentifierFromSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveSourceIdentifierFromSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
+
 	if s.SourceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
+
 	if s.SubscriptionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
@@ -25090,9 +25189,11 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -25422,6 +25523,7 @@ func (s ResetDBClusterParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDBClusterParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetDBClusterParameterGroupInput"}
+
 	if s.DBClusterParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterParameterGroupName"))
 	}
@@ -25513,6 +25615,7 @@ func (s ResetDBParameterGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDBParameterGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResetDBParameterGroupInput"}
+
 	if s.DBParameterGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBParameterGroupName"))
 	}
@@ -25797,27 +25900,35 @@ func (s RestoreDBClusterFromS3Input) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterFromS3Input) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterFromS3Input"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
+
 	if s.MasterUserPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MasterUserPassword"))
 	}
+
 	if s.MasterUsername == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MasterUsername"))
 	}
+
 	if s.S3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
+
 	if s.S3IngestionRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("S3IngestionRoleArn"))
 	}
+
 	if s.SourceEngine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceEngine"))
 	}
+
 	if s.SourceEngineVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceEngineVersion"))
 	}
@@ -26135,12 +26246,15 @@ func (s RestoreDBClusterFromSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterFromSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterFromSnapshotInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.Engine == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
+
 	if s.SnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotIdentifier"))
 	}
@@ -26410,9 +26524,11 @@ func (s RestoreDBClusterToPointInTimeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBClusterToPointInTimeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBClusterToPointInTimeInput"}
+
 	if s.DBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
 	}
+
 	if s.SourceDBClusterIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBClusterIdentifier"))
 	}
@@ -26733,9 +26849,11 @@ func (s RestoreDBInstanceFromDBSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBInstanceFromDBSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBInstanceFromDBSnapshotInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
+
 	if s.DBSnapshotIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSnapshotIdentifier"))
 	}
@@ -27128,9 +27246,11 @@ func (s RestoreDBInstanceToPointInTimeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreDBInstanceToPointInTimeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreDBInstanceToPointInTimeInput"}
+
 	if s.SourceDBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceDBInstanceIdentifier"))
 	}
+
 	if s.TargetDBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetDBInstanceIdentifier"))
 	}
@@ -27366,6 +27486,7 @@ func (s RevokeDBSecurityGroupIngressInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeDBSecurityGroupIngressInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeDBSecurityGroupIngressInput"}
+
 	if s.DBSecurityGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBSecurityGroupName"))
 	}
@@ -27508,6 +27629,7 @@ func (s StartDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartDBInstanceInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -27587,6 +27709,7 @@ func (s StopDBInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDBInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopDBInstanceInput"}
+
 	if s.DBInstanceIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DBInstanceIdentifier"))
 	}
@@ -27858,30 +27981,22 @@ func (s *VpcSecurityGroupMembership) SetVpcSecurityGroupId(v string) *VpcSecurit
 	return s
 }
 
-const (
-	// ApplyMethodImmediate is a ApplyMethod enum value
-	ApplyMethodImmediate = "immediate"
+type ApplyMethod string
 
-	// ApplyMethodPendingReboot is a ApplyMethod enum value
-	ApplyMethodPendingReboot = "pending-reboot"
+// Enum values for ApplyMethod
+const (
+	ApplyMethodImmediate     ApplyMethod = "immediate"
+	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeDbInstance is a SourceType enum value
-	SourceTypeDbInstance = "db-instance"
-
-	// SourceTypeDbParameterGroup is a SourceType enum value
-	SourceTypeDbParameterGroup = "db-parameter-group"
-
-	// SourceTypeDbSecurityGroup is a SourceType enum value
-	SourceTypeDbSecurityGroup = "db-security-group"
-
-	// SourceTypeDbSnapshot is a SourceType enum value
-	SourceTypeDbSnapshot = "db-snapshot"
-
-	// SourceTypeDbCluster is a SourceType enum value
-	SourceTypeDbCluster = "db-cluster"
-
-	// SourceTypeDbClusterSnapshot is a SourceType enum value
-	SourceTypeDbClusterSnapshot = "db-cluster-snapshot"
+	SourceTypeDbInstance        SourceType = "db-instance"
+	SourceTypeDbParameterGroup  SourceType = "db-parameter-group"
+	SourceTypeDbSecurityGroup   SourceType = "db-security-group"
+	SourceTypeDbSnapshot        SourceType = "db-snapshot"
+	SourceTypeDbCluster         SourceType = "db-cluster"
+	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
 )

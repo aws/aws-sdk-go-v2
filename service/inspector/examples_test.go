@@ -1260,7 +1260,7 @@ func ExampleInspector_SubscribeToEvent_shared00() {
 
 	svc := inspector.New(cfg)
 	input := &inspector.SubscribeToEventInput{
-		Event:       aws.String("ASSESSMENT_RUN_COMPLETED"),
+		Event:       inspector.EventAssessmentRunCompleted,
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}
@@ -1305,7 +1305,7 @@ func ExampleInspector_UnsubscribeFromEvent_shared00() {
 
 	svc := inspector.New(cfg)
 	input := &inspector.UnsubscribeFromEventInput{
-		Event:       aws.String("ASSESSMENT_RUN_COMPLETED"),
+		Event:       inspector.EventAssessmentRunCompleted,
 		ResourceArn: aws.String("arn:aws:inspector:us-west-2:123456789012:target/0-nvgVhaxX/template/0-7sbz2Kz0"),
 		TopicArn:    aws.String("arn:aws:sns:us-west-2:123456789012:exampletopic"),
 	}

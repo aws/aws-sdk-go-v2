@@ -217,7 +217,7 @@ func ExampleWAF_CreateWebACL_shared00() {
 	input := &waf.CreateWebACLInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		DefaultAction: &waf.WafAction{
-			Type: aws.String("ALLOW"),
+			Type: waf.WafActionTypeAllow,
 		},
 		MetricName: aws.String("CreateExample"),
 		Name:       aws.String("CreateExample"),
@@ -1226,7 +1226,7 @@ func ExampleWAF_UpdateByteMatchSet_shared00() {
 		ChangeToken:    aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Updates: []*waf.ByteMatchSetUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 	}
@@ -1281,7 +1281,7 @@ func ExampleWAF_UpdateIPSet_shared00() {
 		IPSetId:     aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 		Updates: []*waf.IPSetUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 	}
@@ -1337,7 +1337,7 @@ func ExampleWAF_UpdateRule_shared00() {
 		RuleId:      aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 		Updates: []*waf.RuleUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 	}
@@ -1394,7 +1394,7 @@ func ExampleWAF_UpdateSizeConstraintSet_shared00() {
 		SizeConstraintSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 		Updates: []*waf.SizeConstraintSetUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 	}
@@ -1451,7 +1451,7 @@ func ExampleWAF_UpdateSqlInjectionMatchSet_shared00() {
 		SqlInjectionMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),
 		Updates: []*waf.SqlInjectionMatchSetUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 	}
@@ -1503,11 +1503,11 @@ func ExampleWAF_UpdateWebACL_shared00() {
 	input := &waf.UpdateWebACLInput{
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		DefaultAction: &waf.WafAction{
-			Type: aws.String("ALLOW"),
+			Type: waf.WafActionTypeAllow,
 		},
 		Updates: []*waf.WebACLUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 		WebACLId: aws.String("webacl-1472061481310"),
@@ -1564,7 +1564,7 @@ func ExampleWAF_UpdateXssMatchSet_shared00() {
 		ChangeToken: aws.String("abcd12f2-46da-4fdb-b8d5-fbd4c466928f"),
 		Updates: []*waf.XssMatchSetUpdate{
 			{
-				Action: aws.String("DELETE"),
+				Action: waf.ChangeActionDelete,
 			},
 		},
 		XssMatchSetId: aws.String("example1ds3t-46da-4fdb-b8d5-abc321j569j5"),

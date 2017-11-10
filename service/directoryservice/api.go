@@ -3885,9 +3885,11 @@ func (s AddIpRoutesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddIpRoutesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddIpRoutesInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.IpRoutes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IpRoutes"))
 	}
@@ -3959,9 +3961,11 @@ func (s AddTagsToResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -4084,9 +4088,11 @@ func (s CancelSchemaExtensionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelSchemaExtensionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelSchemaExtensionInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.SchemaExtensionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SchemaExtensionId"))
 	}
@@ -4187,7 +4193,7 @@ type ConditionalForwarder struct {
 	// The replication scope of the conditional forwarder. The only allowed value
 	// is Domain, which will replicate the conditional forwarder to all of the domain
 	// controllers for your AWS directory.
-	ReplicationScope *string `type:"string" enum:"ReplicationScope"`
+	ReplicationScope ReplicationScope `type:"string"`
 }
 
 // String returns the string representation
@@ -4213,8 +4219,8 @@ func (s *ConditionalForwarder) SetRemoteDomainName(v string) *ConditionalForward
 }
 
 // SetReplicationScope sets the ReplicationScope field's value.
-func (s *ConditionalForwarder) SetReplicationScope(v string) *ConditionalForwarder {
-	s.ReplicationScope = &v
+func (s *ConditionalForwarder) SetReplicationScope(v ReplicationScope) *ConditionalForwarder {
+	s.ReplicationScope = v
 	return s
 }
 
@@ -4248,7 +4254,7 @@ type ConnectDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size *string `type:"string" required:"true" enum:"DirectorySize"`
+	Size DirectorySize `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4264,19 +4270,22 @@ func (s ConnectDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ConnectDirectoryInput"}
+
 	if s.ConnectSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectSettings"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
-	if s.Size == nil {
+	if len(s.Size) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 	if s.ConnectSettings != nil {
@@ -4322,8 +4331,8 @@ func (s *ConnectDirectoryInput) SetShortName(v string) *ConnectDirectoryInput {
 }
 
 // SetSize sets the Size field's value.
-func (s *ConnectDirectoryInput) SetSize(v string) *ConnectDirectoryInput {
-	s.Size = &v
+func (s *ConnectDirectoryInput) SetSize(v DirectorySize) *ConnectDirectoryInput {
+	s.Size = v
 	return s
 }
 
@@ -4384,12 +4393,14 @@ func (s CreateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
+
 	if s.Alias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Alias"))
 	}
 	if s.Alias != nil && len(*s.Alias) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Alias", 1))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -4489,18 +4500,21 @@ func (s CreateComputerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateComputerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateComputerInput"}
+
 	if s.ComputerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ComputerName"))
 	}
 	if s.ComputerName != nil && len(*s.ComputerName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ComputerName", 1))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.OrganizationalUnitDistinguishedName != nil && len(*s.OrganizationalUnitDistinguishedName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationalUnitDistinguishedName", 1))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
@@ -4617,12 +4631,15 @@ func (s CreateConditionalForwarderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConditionalForwarderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConditionalForwarderInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.DnsIpAddrs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DnsIpAddrs"))
 	}
+
 	if s.RemoteDomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
@@ -4693,7 +4710,7 @@ type CreateDirectoryInput struct {
 	// The size of the directory.
 	//
 	// Size is a required field
-	Size *string `type:"string" required:"true" enum:"DirectorySize"`
+	Size DirectorySize `type:"string" required:"true"`
 
 	// A DirectoryVpcSettings object that contains additional information for the
 	// operation.
@@ -4713,13 +4730,15 @@ func (s CreateDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
-	if s.Size == nil {
+	if len(s.Size) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 	if s.VpcSettings != nil {
@@ -4759,8 +4778,8 @@ func (s *CreateDirectoryInput) SetShortName(v string) *CreateDirectoryInput {
 }
 
 // SetSize sets the Size field's value.
-func (s *CreateDirectoryInput) SetSize(v string) *CreateDirectoryInput {
-	s.Size = &v
+func (s *CreateDirectoryInput) SetSize(v DirectorySize) *CreateDirectoryInput {
+	s.Size = v
 	return s
 }
 
@@ -4840,12 +4859,15 @@ func (s CreateMicrosoftADInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMicrosoftADInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMicrosoftADInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
+
 	if s.VpcSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcSettings"))
 	}
@@ -4943,6 +4965,7 @@ func (s CreateSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -5020,7 +5043,7 @@ type CreateTrustInput struct {
 	// The direction of the trust relationship.
 	//
 	// TrustDirection is a required field
-	TrustDirection *string `type:"string" required:"true" enum:"TrustDirection"`
+	TrustDirection TrustDirection `type:"string" required:"true"`
 
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
@@ -5029,7 +5052,7 @@ type CreateTrustInput struct {
 	TrustPassword *string `min:"1" type:"string" required:"true"`
 
 	// The trust relationship type.
-	TrustType *string `type:"string" enum:"TrustType"`
+	TrustType TrustType `type:"string"`
 }
 
 // String returns the string representation
@@ -5045,15 +5068,18 @@ func (s CreateTrustInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrustInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTrustInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.RemoteDomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
-	if s.TrustDirection == nil {
+	if len(s.TrustDirection) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TrustDirection"))
 	}
+
 	if s.TrustPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustPassword"))
 	}
@@ -5086,8 +5112,8 @@ func (s *CreateTrustInput) SetRemoteDomainName(v string) *CreateTrustInput {
 }
 
 // SetTrustDirection sets the TrustDirection field's value.
-func (s *CreateTrustInput) SetTrustDirection(v string) *CreateTrustInput {
-	s.TrustDirection = &v
+func (s *CreateTrustInput) SetTrustDirection(v TrustDirection) *CreateTrustInput {
+	s.TrustDirection = v
 	return s
 }
 
@@ -5098,8 +5124,8 @@ func (s *CreateTrustInput) SetTrustPassword(v string) *CreateTrustInput {
 }
 
 // SetTrustType sets the TrustType field's value.
-func (s *CreateTrustInput) SetTrustType(v string) *CreateTrustInput {
-	s.TrustType = &v
+func (s *CreateTrustInput) SetTrustType(v TrustType) *CreateTrustInput {
+	s.TrustType = v
 	return s
 }
 
@@ -5158,9 +5184,11 @@ func (s DeleteConditionalForwarderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConditionalForwarderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConditionalForwarderInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.RemoteDomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
@@ -5223,6 +5251,7 @@ func (s DeleteDirectoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -5288,6 +5317,7 @@ func (s DeleteSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -5357,6 +5387,7 @@ func (s DeleteTrustInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrustInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrustInput"}
+
 	if s.TrustId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
 	}
@@ -5434,9 +5465,11 @@ func (s DeregisterEventTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterEventTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEventTopicInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.TopicName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
 	}
@@ -5507,6 +5540,7 @@ func (s DescribeConditionalForwardersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConditionalForwardersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConditionalForwardersInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -5678,6 +5712,7 @@ func (s DescribeDomainControllersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDomainControllersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainControllersInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -6055,18 +6090,22 @@ func (s DirectoryConnectSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DirectoryConnectSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DirectoryConnectSettings"}
+
 	if s.CustomerDnsIps == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomerDnsIps"))
 	}
+
 	if s.CustomerUserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomerUserName"))
 	}
 	if s.CustomerUserName != nil && len(*s.CustomerUserName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomerUserName", 1))
 	}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -6218,20 +6257,20 @@ type DirectoryDescription struct {
 	RadiusSettings *RadiusSettings `type:"structure"`
 
 	// The status of the RADIUS MFA server connection.
-	RadiusStatus *string `type:"string" enum:"RadiusStatus"`
+	RadiusStatus RadiusStatus `type:"string"`
 
 	// The short name of the directory.
 	ShortName *string `type:"string"`
 
 	// The directory size.
-	Size *string `type:"string" enum:"DirectorySize"`
+	Size DirectorySize `type:"string"`
 
 	// Indicates if single-sign on is enabled for the directory. For more information,
 	// see EnableSso and DisableSso.
 	SsoEnabled *bool `type:"boolean"`
 
 	// The current stage of the directory.
-	Stage *string `type:"string" enum:"DirectoryStage"`
+	Stage DirectoryStage `type:"string"`
 
 	// The date and time that the stage was last updated.
 	StageLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6240,7 +6279,7 @@ type DirectoryDescription struct {
 	StageReason *string `type:"string"`
 
 	// The directory size.
-	Type *string `type:"string" enum:"DirectoryType"`
+	Type DirectoryType `type:"string"`
 
 	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple
@@ -6319,8 +6358,8 @@ func (s *DirectoryDescription) SetRadiusSettings(v *RadiusSettings) *DirectoryDe
 }
 
 // SetRadiusStatus sets the RadiusStatus field's value.
-func (s *DirectoryDescription) SetRadiusStatus(v string) *DirectoryDescription {
-	s.RadiusStatus = &v
+func (s *DirectoryDescription) SetRadiusStatus(v RadiusStatus) *DirectoryDescription {
+	s.RadiusStatus = v
 	return s
 }
 
@@ -6331,8 +6370,8 @@ func (s *DirectoryDescription) SetShortName(v string) *DirectoryDescription {
 }
 
 // SetSize sets the Size field's value.
-func (s *DirectoryDescription) SetSize(v string) *DirectoryDescription {
-	s.Size = &v
+func (s *DirectoryDescription) SetSize(v DirectorySize) *DirectoryDescription {
+	s.Size = v
 	return s
 }
 
@@ -6343,8 +6382,8 @@ func (s *DirectoryDescription) SetSsoEnabled(v bool) *DirectoryDescription {
 }
 
 // SetStage sets the Stage field's value.
-func (s *DirectoryDescription) SetStage(v string) *DirectoryDescription {
-	s.Stage = &v
+func (s *DirectoryDescription) SetStage(v DirectoryStage) *DirectoryDescription {
+	s.Stage = v
 	return s
 }
 
@@ -6361,8 +6400,8 @@ func (s *DirectoryDescription) SetStageReason(v string) *DirectoryDescription {
 }
 
 // SetType sets the Type field's value.
-func (s *DirectoryDescription) SetType(v string) *DirectoryDescription {
-	s.Type = &v
+func (s *DirectoryDescription) SetType(v DirectoryType) *DirectoryDescription {
+	s.Type = v
 	return s
 }
 
@@ -6500,9 +6539,11 @@ func (s DirectoryVpcSettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DirectoryVpcSettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DirectoryVpcSettings"}
+
 	if s.SubnetIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -6604,6 +6645,7 @@ func (s DisableRadiusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableRadiusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableRadiusInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -6676,6 +6718,7 @@ func (s DisableSsoInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableSsoInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableSsoInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -6747,7 +6790,7 @@ type DomainController struct {
 	LaunchTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the domain controller.
-	Status *string `type:"string" enum:"DomainControllerStatus"`
+	Status DomainControllerStatus `type:"string"`
 
 	// The date and time that the status was last updated.
 	StatusLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -6803,8 +6846,8 @@ func (s *DomainController) SetLaunchTime(v time.Time) *DomainController {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DomainController) SetStatus(v string) *DomainController {
-	s.Status = &v
+func (s *DomainController) SetStatus(v DomainControllerStatus) *DomainController {
+	s.Status = v
 	return s
 }
 
@@ -6861,9 +6904,11 @@ func (s EnableRadiusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableRadiusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableRadiusInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.RadiusSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
 	}
@@ -6947,6 +6992,7 @@ func (s EnableSsoInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableSsoInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableSsoInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -7010,7 +7056,7 @@ type EventTopic struct {
 	DirectoryId *string `type:"string"`
 
 	// The topic registration status.
-	Status *string `type:"string" enum:"TopicStatus"`
+	Status TopicStatus `type:"string"`
 
 	// The SNS topic ARN (Amazon Resource Name).
 	TopicArn *string `type:"string"`
@@ -7042,8 +7088,8 @@ func (s *EventTopic) SetDirectoryId(v string) *EventTopic {
 }
 
 // SetStatus sets the Status field's value.
-func (s *EventTopic) SetStatus(v string) *EventTopic {
-	s.Status = &v
+func (s *EventTopic) SetStatus(v TopicStatus) *EventTopic {
+	s.Status = v
 	return s
 }
 
@@ -7125,6 +7171,7 @@ func (s GetSnapshotLimitsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSnapshotLimitsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSnapshotLimitsInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -7222,7 +7269,7 @@ type IpRouteInfo struct {
 	DirectoryId *string `type:"string"`
 
 	// The status of the IP address block.
-	IpRouteStatusMsg *string `type:"string" enum:"IpRouteStatusMsg"`
+	IpRouteStatusMsg IpRouteStatusMsg `type:"string"`
 
 	// The reason for the IpRouteStatusMsg.
 	IpRouteStatusReason *string `type:"string"`
@@ -7263,8 +7310,8 @@ func (s *IpRouteInfo) SetDirectoryId(v string) *IpRouteInfo {
 }
 
 // SetIpRouteStatusMsg sets the IpRouteStatusMsg field's value.
-func (s *IpRouteInfo) SetIpRouteStatusMsg(v string) *IpRouteInfo {
-	s.IpRouteStatusMsg = &v
+func (s *IpRouteInfo) SetIpRouteStatusMsg(v IpRouteStatusMsg) *IpRouteInfo {
+	s.IpRouteStatusMsg = v
 	return s
 }
 
@@ -7305,6 +7352,7 @@ func (s ListIpRoutesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIpRoutesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListIpRoutesInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -7399,6 +7447,7 @@ func (s ListSchemaExtensionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSchemaExtensionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListSchemaExtensionsInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -7491,6 +7540,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -7559,7 +7609,7 @@ type RadiusSettings struct {
 	_ struct{} `type:"structure"`
 
 	// The protocol specified for your RADIUS endpoints.
-	AuthenticationProtocol *string `type:"string" enum:"RadiusAuthenticationProtocol"`
+	AuthenticationProtocol RadiusAuthenticationProtocol `type:"string"`
 
 	// Not currently used.
 	DisplayLabel *string `min:"1" type:"string"`
@@ -7620,8 +7670,8 @@ func (s *RadiusSettings) Validate() error {
 }
 
 // SetAuthenticationProtocol sets the AuthenticationProtocol field's value.
-func (s *RadiusSettings) SetAuthenticationProtocol(v string) *RadiusSettings {
-	s.AuthenticationProtocol = &v
+func (s *RadiusSettings) SetAuthenticationProtocol(v RadiusAuthenticationProtocol) *RadiusSettings {
+	s.AuthenticationProtocol = v
 	return s
 }
 
@@ -7697,9 +7747,11 @@ func (s RegisterEventTopicInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterEventTopicInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterEventTopicInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.TopicName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
 	}
@@ -7769,9 +7821,11 @@ func (s RemoveIpRoutesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveIpRoutesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveIpRoutesInput"}
+
 	if s.CidrIps == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CidrIps"))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -7837,9 +7891,11 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -7901,6 +7957,7 @@ func (s RestoreFromSnapshotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreFromSnapshotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RestoreFromSnapshotInput"}
+
 	if s.SnapshotId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
@@ -7951,7 +8008,7 @@ type SchemaExtensionInfo struct {
 	SchemaExtensionId *string `type:"string"`
 
 	// The current status of the schema extension.
-	SchemaExtensionStatus *string `type:"string" enum:"SchemaExtensionStatus"`
+	SchemaExtensionStatus SchemaExtensionStatus `type:"string"`
 
 	// The reason for the SchemaExtensionStatus.
 	SchemaExtensionStatusReason *string `type:"string"`
@@ -7996,8 +8053,8 @@ func (s *SchemaExtensionInfo) SetSchemaExtensionId(v string) *SchemaExtensionInf
 }
 
 // SetSchemaExtensionStatus sets the SchemaExtensionStatus field's value.
-func (s *SchemaExtensionInfo) SetSchemaExtensionStatus(v string) *SchemaExtensionInfo {
-	s.SchemaExtensionStatus = &v
+func (s *SchemaExtensionInfo) SetSchemaExtensionStatus(v SchemaExtensionStatus) *SchemaExtensionInfo {
+	s.SchemaExtensionStatus = v
 	return s
 }
 
@@ -8031,10 +8088,10 @@ type Snapshot struct {
 	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The snapshot status.
-	Status *string `type:"string" enum:"SnapshotStatus"`
+	Status SnapshotStatus `type:"string"`
 
 	// The snapshot type.
-	Type *string `type:"string" enum:"SnapshotType"`
+	Type SnapshotType `type:"string"`
 }
 
 // String returns the string representation
@@ -8072,14 +8129,14 @@ func (s *Snapshot) SetStartTime(v time.Time) *Snapshot {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Snapshot) SetStatus(v string) *Snapshot {
-	s.Status = &v
+func (s *Snapshot) SetStatus(v SnapshotStatus) *Snapshot {
+	s.Status = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *Snapshot) SetType(v string) *Snapshot {
-	s.Type = &v
+func (s *Snapshot) SetType(v SnapshotType) *Snapshot {
+	s.Type = v
 	return s
 }
 
@@ -8168,15 +8225,19 @@ func (s StartSchemaExtensionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartSchemaExtensionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartSchemaExtensionInput"}
+
 	if s.CreateSnapshotBeforeSchemaExtension == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.LdifContent == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LdifContent"))
 	}
@@ -8271,12 +8332,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -8322,19 +8385,19 @@ type Trust struct {
 	StateLastUpdatedDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The trust relationship direction.
-	TrustDirection *string `type:"string" enum:"TrustDirection"`
+	TrustDirection TrustDirection `type:"string"`
 
 	// The unique ID of the trust relationship.
 	TrustId *string `type:"string"`
 
 	// The trust relationship state.
-	TrustState *string `type:"string" enum:"TrustState"`
+	TrustState TrustState `type:"string"`
 
 	// The reason for the TrustState.
 	TrustStateReason *string `type:"string"`
 
 	// The trust relationship type.
-	TrustType *string `type:"string" enum:"TrustType"`
+	TrustType TrustType `type:"string"`
 }
 
 // String returns the string representation
@@ -8378,8 +8441,8 @@ func (s *Trust) SetStateLastUpdatedDateTime(v time.Time) *Trust {
 }
 
 // SetTrustDirection sets the TrustDirection field's value.
-func (s *Trust) SetTrustDirection(v string) *Trust {
-	s.TrustDirection = &v
+func (s *Trust) SetTrustDirection(v TrustDirection) *Trust {
+	s.TrustDirection = v
 	return s
 }
 
@@ -8390,8 +8453,8 @@ func (s *Trust) SetTrustId(v string) *Trust {
 }
 
 // SetTrustState sets the TrustState field's value.
-func (s *Trust) SetTrustState(v string) *Trust {
-	s.TrustState = &v
+func (s *Trust) SetTrustState(v TrustState) *Trust {
+	s.TrustState = v
 	return s
 }
 
@@ -8402,8 +8465,8 @@ func (s *Trust) SetTrustStateReason(v string) *Trust {
 }
 
 // SetTrustType sets the TrustType field's value.
-func (s *Trust) SetTrustType(v string) *Trust {
-	s.TrustType = &v
+func (s *Trust) SetTrustType(v TrustType) *Trust {
+	s.TrustType = v
 	return s
 }
 
@@ -8444,12 +8507,15 @@ func (s UpdateConditionalForwarderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConditionalForwarderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConditionalForwarderInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.DnsIpAddrs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DnsIpAddrs"))
 	}
+
 	if s.RemoteDomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
@@ -8523,12 +8589,14 @@ func (s UpdateNumberOfDomainControllersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNumberOfDomainControllersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateNumberOfDomainControllersInput"}
+
 	if s.DesiredNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DesiredNumber"))
 	}
 	if s.DesiredNumber != nil && *s.DesiredNumber < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("DesiredNumber", 2))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
@@ -8595,9 +8663,11 @@ func (s UpdateRadiusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRadiusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRadiusInput"}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.RadiusSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
 	}
@@ -8666,6 +8736,7 @@ func (s VerifyTrustInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyTrustInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VerifyTrustInput"}
+
 	if s.TrustId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
 	}
@@ -8707,233 +8778,159 @@ func (s *VerifyTrustOutput) SetTrustId(v string) *VerifyTrustOutput {
 	return s
 }
 
-const (
-	// DirectorySizeSmall is a DirectorySize enum value
-	DirectorySizeSmall = "Small"
+type DirectorySize string
 
-	// DirectorySizeLarge is a DirectorySize enum value
-	DirectorySizeLarge = "Large"
+// Enum values for DirectorySize
+const (
+	DirectorySizeSmall DirectorySize = "Small"
+	DirectorySizeLarge DirectorySize = "Large"
 )
 
+type DirectoryStage string
+
+// Enum values for DirectoryStage
 const (
-	// DirectoryStageRequested is a DirectoryStage enum value
-	DirectoryStageRequested = "Requested"
-
-	// DirectoryStageCreating is a DirectoryStage enum value
-	DirectoryStageCreating = "Creating"
-
-	// DirectoryStageCreated is a DirectoryStage enum value
-	DirectoryStageCreated = "Created"
-
-	// DirectoryStageActive is a DirectoryStage enum value
-	DirectoryStageActive = "Active"
-
-	// DirectoryStageInoperable is a DirectoryStage enum value
-	DirectoryStageInoperable = "Inoperable"
-
-	// DirectoryStageImpaired is a DirectoryStage enum value
-	DirectoryStageImpaired = "Impaired"
-
-	// DirectoryStageRestoring is a DirectoryStage enum value
-	DirectoryStageRestoring = "Restoring"
-
-	// DirectoryStageRestoreFailed is a DirectoryStage enum value
-	DirectoryStageRestoreFailed = "RestoreFailed"
-
-	// DirectoryStageDeleting is a DirectoryStage enum value
-	DirectoryStageDeleting = "Deleting"
-
-	// DirectoryStageDeleted is a DirectoryStage enum value
-	DirectoryStageDeleted = "Deleted"
-
-	// DirectoryStageFailed is a DirectoryStage enum value
-	DirectoryStageFailed = "Failed"
+	DirectoryStageRequested     DirectoryStage = "Requested"
+	DirectoryStageCreating      DirectoryStage = "Creating"
+	DirectoryStageCreated       DirectoryStage = "Created"
+	DirectoryStageActive        DirectoryStage = "Active"
+	DirectoryStageInoperable    DirectoryStage = "Inoperable"
+	DirectoryStageImpaired      DirectoryStage = "Impaired"
+	DirectoryStageRestoring     DirectoryStage = "Restoring"
+	DirectoryStageRestoreFailed DirectoryStage = "RestoreFailed"
+	DirectoryStageDeleting      DirectoryStage = "Deleting"
+	DirectoryStageDeleted       DirectoryStage = "Deleted"
+	DirectoryStageFailed        DirectoryStage = "Failed"
 )
 
+type DirectoryType string
+
+// Enum values for DirectoryType
 const (
-	// DirectoryTypeSimpleAd is a DirectoryType enum value
-	DirectoryTypeSimpleAd = "SimpleAD"
-
-	// DirectoryTypeAdconnector is a DirectoryType enum value
-	DirectoryTypeAdconnector = "ADConnector"
-
-	// DirectoryTypeMicrosoftAd is a DirectoryType enum value
-	DirectoryTypeMicrosoftAd = "MicrosoftAD"
+	DirectoryTypeSimpleAd    DirectoryType = "SimpleAD"
+	DirectoryTypeAdconnector DirectoryType = "ADConnector"
+	DirectoryTypeMicrosoftAd DirectoryType = "MicrosoftAD"
 )
 
+type DomainControllerStatus string
+
+// Enum values for DomainControllerStatus
 const (
-	// DomainControllerStatusCreating is a DomainControllerStatus enum value
-	DomainControllerStatusCreating = "Creating"
-
-	// DomainControllerStatusActive is a DomainControllerStatus enum value
-	DomainControllerStatusActive = "Active"
-
-	// DomainControllerStatusImpaired is a DomainControllerStatus enum value
-	DomainControllerStatusImpaired = "Impaired"
-
-	// DomainControllerStatusRestoring is a DomainControllerStatus enum value
-	DomainControllerStatusRestoring = "Restoring"
-
-	// DomainControllerStatusDeleting is a DomainControllerStatus enum value
-	DomainControllerStatusDeleting = "Deleting"
-
-	// DomainControllerStatusDeleted is a DomainControllerStatus enum value
-	DomainControllerStatusDeleted = "Deleted"
-
-	// DomainControllerStatusFailed is a DomainControllerStatus enum value
-	DomainControllerStatusFailed = "Failed"
+	DomainControllerStatusCreating  DomainControllerStatus = "Creating"
+	DomainControllerStatusActive    DomainControllerStatus = "Active"
+	DomainControllerStatusImpaired  DomainControllerStatus = "Impaired"
+	DomainControllerStatusRestoring DomainControllerStatus = "Restoring"
+	DomainControllerStatusDeleting  DomainControllerStatus = "Deleting"
+	DomainControllerStatusDeleted   DomainControllerStatus = "Deleted"
+	DomainControllerStatusFailed    DomainControllerStatus = "Failed"
 )
 
+type IpRouteStatusMsg string
+
+// Enum values for IpRouteStatusMsg
 const (
-	// IpRouteStatusMsgAdding is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgAdding = "Adding"
-
-	// IpRouteStatusMsgAdded is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgAdded = "Added"
-
-	// IpRouteStatusMsgRemoving is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgRemoving = "Removing"
-
-	// IpRouteStatusMsgRemoved is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgRemoved = "Removed"
-
-	// IpRouteStatusMsgAddFailed is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgAddFailed = "AddFailed"
-
-	// IpRouteStatusMsgRemoveFailed is a IpRouteStatusMsg enum value
-	IpRouteStatusMsgRemoveFailed = "RemoveFailed"
+	IpRouteStatusMsgAdding       IpRouteStatusMsg = "Adding"
+	IpRouteStatusMsgAdded        IpRouteStatusMsg = "Added"
+	IpRouteStatusMsgRemoving     IpRouteStatusMsg = "Removing"
+	IpRouteStatusMsgRemoved      IpRouteStatusMsg = "Removed"
+	IpRouteStatusMsgAddFailed    IpRouteStatusMsg = "AddFailed"
+	IpRouteStatusMsgRemoveFailed IpRouteStatusMsg = "RemoveFailed"
 )
 
+type RadiusAuthenticationProtocol string
+
+// Enum values for RadiusAuthenticationProtocol
 const (
-	// RadiusAuthenticationProtocolPap is a RadiusAuthenticationProtocol enum value
-	RadiusAuthenticationProtocolPap = "PAP"
-
-	// RadiusAuthenticationProtocolChap is a RadiusAuthenticationProtocol enum value
-	RadiusAuthenticationProtocolChap = "CHAP"
-
-	// RadiusAuthenticationProtocolMsChapv1 is a RadiusAuthenticationProtocol enum value
-	RadiusAuthenticationProtocolMsChapv1 = "MS-CHAPv1"
-
-	// RadiusAuthenticationProtocolMsChapv2 is a RadiusAuthenticationProtocol enum value
-	RadiusAuthenticationProtocolMsChapv2 = "MS-CHAPv2"
+	RadiusAuthenticationProtocolPap      RadiusAuthenticationProtocol = "PAP"
+	RadiusAuthenticationProtocolChap     RadiusAuthenticationProtocol = "CHAP"
+	RadiusAuthenticationProtocolMsChapv1 RadiusAuthenticationProtocol = "MS-CHAPv1"
+	RadiusAuthenticationProtocolMsChapv2 RadiusAuthenticationProtocol = "MS-CHAPv2"
 )
 
+type RadiusStatus string
+
+// Enum values for RadiusStatus
 const (
-	// RadiusStatusCreating is a RadiusStatus enum value
-	RadiusStatusCreating = "Creating"
-
-	// RadiusStatusCompleted is a RadiusStatus enum value
-	RadiusStatusCompleted = "Completed"
-
-	// RadiusStatusFailed is a RadiusStatus enum value
-	RadiusStatusFailed = "Failed"
+	RadiusStatusCreating  RadiusStatus = "Creating"
+	RadiusStatusCompleted RadiusStatus = "Completed"
+	RadiusStatusFailed    RadiusStatus = "Failed"
 )
 
+type ReplicationScope string
+
+// Enum values for ReplicationScope
 const (
-	// ReplicationScopeDomain is a ReplicationScope enum value
-	ReplicationScopeDomain = "Domain"
+	ReplicationScopeDomain ReplicationScope = "Domain"
 )
 
+type SchemaExtensionStatus string
+
+// Enum values for SchemaExtensionStatus
 const (
-	// SchemaExtensionStatusInitializing is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusInitializing = "Initializing"
-
-	// SchemaExtensionStatusCreatingSnapshot is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusCreatingSnapshot = "CreatingSnapshot"
-
-	// SchemaExtensionStatusUpdatingSchema is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusUpdatingSchema = "UpdatingSchema"
-
-	// SchemaExtensionStatusReplicating is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusReplicating = "Replicating"
-
-	// SchemaExtensionStatusCancelInProgress is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusCancelInProgress = "CancelInProgress"
-
-	// SchemaExtensionStatusRollbackInProgress is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusRollbackInProgress = "RollbackInProgress"
-
-	// SchemaExtensionStatusCancelled is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusCancelled = "Cancelled"
-
-	// SchemaExtensionStatusFailed is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusFailed = "Failed"
-
-	// SchemaExtensionStatusCompleted is a SchemaExtensionStatus enum value
-	SchemaExtensionStatusCompleted = "Completed"
+	SchemaExtensionStatusInitializing       SchemaExtensionStatus = "Initializing"
+	SchemaExtensionStatusCreatingSnapshot   SchemaExtensionStatus = "CreatingSnapshot"
+	SchemaExtensionStatusUpdatingSchema     SchemaExtensionStatus = "UpdatingSchema"
+	SchemaExtensionStatusReplicating        SchemaExtensionStatus = "Replicating"
+	SchemaExtensionStatusCancelInProgress   SchemaExtensionStatus = "CancelInProgress"
+	SchemaExtensionStatusRollbackInProgress SchemaExtensionStatus = "RollbackInProgress"
+	SchemaExtensionStatusCancelled          SchemaExtensionStatus = "Cancelled"
+	SchemaExtensionStatusFailed             SchemaExtensionStatus = "Failed"
+	SchemaExtensionStatusCompleted          SchemaExtensionStatus = "Completed"
 )
 
+type SnapshotStatus string
+
+// Enum values for SnapshotStatus
 const (
-	// SnapshotStatusCreating is a SnapshotStatus enum value
-	SnapshotStatusCreating = "Creating"
-
-	// SnapshotStatusCompleted is a SnapshotStatus enum value
-	SnapshotStatusCompleted = "Completed"
-
-	// SnapshotStatusFailed is a SnapshotStatus enum value
-	SnapshotStatusFailed = "Failed"
+	SnapshotStatusCreating  SnapshotStatus = "Creating"
+	SnapshotStatusCompleted SnapshotStatus = "Completed"
+	SnapshotStatusFailed    SnapshotStatus = "Failed"
 )
 
-const (
-	// SnapshotTypeAuto is a SnapshotType enum value
-	SnapshotTypeAuto = "Auto"
+type SnapshotType string
 
-	// SnapshotTypeManual is a SnapshotType enum value
-	SnapshotTypeManual = "Manual"
+// Enum values for SnapshotType
+const (
+	SnapshotTypeAuto   SnapshotType = "Auto"
+	SnapshotTypeManual SnapshotType = "Manual"
 )
 
+type TopicStatus string
+
+// Enum values for TopicStatus
 const (
-	// TopicStatusRegistered is a TopicStatus enum value
-	TopicStatusRegistered = "Registered"
-
-	// TopicStatusTopicnotfound is a TopicStatus enum value
-	TopicStatusTopicnotfound = "Topic not found"
-
-	// TopicStatusFailed is a TopicStatus enum value
-	TopicStatusFailed = "Failed"
-
-	// TopicStatusDeleted is a TopicStatus enum value
-	TopicStatusDeleted = "Deleted"
+	TopicStatusRegistered    TopicStatus = "Registered"
+	TopicStatusTopicnotfound TopicStatus = "Topic not found"
+	TopicStatusFailed        TopicStatus = "Failed"
+	TopicStatusDeleted       TopicStatus = "Deleted"
 )
 
+type TrustDirection string
+
+// Enum values for TrustDirection
 const (
-	// TrustDirectionOneWayOutgoing is a TrustDirection enum value
-	TrustDirectionOneWayOutgoing = "One-Way: Outgoing"
-
-	// TrustDirectionOneWayIncoming is a TrustDirection enum value
-	TrustDirectionOneWayIncoming = "One-Way: Incoming"
-
-	// TrustDirectionTwoWay is a TrustDirection enum value
-	TrustDirectionTwoWay = "Two-Way"
+	TrustDirectionOneWayOutgoing TrustDirection = "One-Way: Outgoing"
+	TrustDirectionOneWayIncoming TrustDirection = "One-Way: Incoming"
+	TrustDirectionTwoWay         TrustDirection = "Two-Way"
 )
 
+type TrustState string
+
+// Enum values for TrustState
 const (
-	// TrustStateCreating is a TrustState enum value
-	TrustStateCreating = "Creating"
-
-	// TrustStateCreated is a TrustState enum value
-	TrustStateCreated = "Created"
-
-	// TrustStateVerifying is a TrustState enum value
-	TrustStateVerifying = "Verifying"
-
-	// TrustStateVerifyFailed is a TrustState enum value
-	TrustStateVerifyFailed = "VerifyFailed"
-
-	// TrustStateVerified is a TrustState enum value
-	TrustStateVerified = "Verified"
-
-	// TrustStateDeleting is a TrustState enum value
-	TrustStateDeleting = "Deleting"
-
-	// TrustStateDeleted is a TrustState enum value
-	TrustStateDeleted = "Deleted"
-
-	// TrustStateFailed is a TrustState enum value
-	TrustStateFailed = "Failed"
+	TrustStateCreating     TrustState = "Creating"
+	TrustStateCreated      TrustState = "Created"
+	TrustStateVerifying    TrustState = "Verifying"
+	TrustStateVerifyFailed TrustState = "VerifyFailed"
+	TrustStateVerified     TrustState = "Verified"
+	TrustStateDeleting     TrustState = "Deleting"
+	TrustStateDeleted      TrustState = "Deleted"
+	TrustStateFailed       TrustState = "Failed"
 )
 
+type TrustType string
+
+// Enum values for TrustType
 const (
-	// TrustTypeForest is a TrustType enum value
-	TrustTypeForest = "Forest"
+	TrustTypeForest TrustType = "Forest"
 )

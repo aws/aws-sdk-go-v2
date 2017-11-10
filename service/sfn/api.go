@@ -1968,6 +1968,7 @@ func (s CreateActivityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateActivityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateActivityInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -2058,18 +2059,21 @@ func (s CreateStateMachineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStateMachineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStateMachineInput"}
+
 	if s.Definition == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Definition"))
 	}
 	if s.Definition != nil && len(*s.Definition) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Definition", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -2161,6 +2165,7 @@ func (s DeleteActivityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteActivityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivityInput"}
+
 	if s.ActivityArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
@@ -2218,6 +2223,7 @@ func (s DeleteStateMachineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStateMachineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStateMachineInput"}
+
 	if s.StateMachineArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
@@ -2275,6 +2281,7 @@ func (s DescribeActivityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityInput"}
+
 	if s.ActivityArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
@@ -2365,6 +2372,7 @@ func (s DescribeExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeExecutionInput"}
+
 	if s.ExecutionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
@@ -2417,7 +2425,7 @@ type DescribeExecutionOutput struct {
 	// The current status of the execution.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string" required:"true"`
 
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix"`
@@ -2470,8 +2478,8 @@ func (s *DescribeExecutionOutput) SetStateMachineArn(v string) *DescribeExecutio
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeExecutionOutput) SetStatus(v string) *DescribeExecutionOutput {
-	s.Status = &v
+func (s *DescribeExecutionOutput) SetStatus(v ExecutionStatus) *DescribeExecutionOutput {
+	s.Status = v
 	return s
 }
 
@@ -2504,6 +2512,7 @@ func (s DescribeStateMachineInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStateMachineInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStateMachineInput"}
+
 	if s.StateMachineArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
@@ -2554,7 +2563,7 @@ type DescribeStateMachineOutput struct {
 	StateMachineArn *string `locationName:"stateMachineArn" min:"1" type:"string" required:"true"`
 
 	// The current status of the state machine.
-	Status *string `locationName:"status" type:"string" enum:"StateMachineStatus"`
+	Status StateMachineStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -2598,8 +2607,8 @@ func (s *DescribeStateMachineOutput) SetStateMachineArn(v string) *DescribeState
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeStateMachineOutput) SetStatus(v string) *DescribeStateMachineOutput {
-	s.Status = &v
+func (s *DescribeStateMachineOutput) SetStatus(v StateMachineStatus) *DescribeStateMachineOutput {
+	s.Status = v
 	return s
 }
 
@@ -2696,7 +2705,7 @@ type ExecutionListItem struct {
 	// The current status of the execution.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ExecutionStatus"`
+	Status ExecutionStatus `locationName:"status" type:"string" required:"true"`
 
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time `locationName:"stopDate" type:"timestamp" timestampFormat:"unix"`
@@ -2737,8 +2746,8 @@ func (s *ExecutionListItem) SetStateMachineArn(v string) *ExecutionListItem {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ExecutionListItem) SetStatus(v string) *ExecutionListItem {
-	s.Status = &v
+func (s *ExecutionListItem) SetStatus(v ExecutionStatus) *ExecutionListItem {
+	s.Status = v
 	return s
 }
 
@@ -2867,6 +2876,7 @@ func (s GetActivityTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetActivityTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetActivityTaskInput"}
+
 	if s.ActivityArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
@@ -2972,6 +2982,7 @@ func (s GetExecutionHistoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExecutionHistoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetExecutionHistoryInput"}
+
 	if s.ExecutionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
@@ -3110,7 +3121,7 @@ type HistoryEvent struct {
 	// The type of the event.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"HistoryEventType"`
+	Type HistoryEventType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3256,8 +3267,8 @@ func (s *HistoryEvent) SetTimestamp(v time.Time) *HistoryEvent {
 }
 
 // SetType sets the Type field's value.
-func (s *HistoryEvent) SetType(v string) *HistoryEvent {
-	s.Type = &v
+func (s *HistoryEvent) SetType(v HistoryEventType) *HistoryEvent {
+	s.Type = v
 	return s
 }
 
@@ -3585,7 +3596,7 @@ type ListExecutionsInput struct {
 
 	// If specified, only list the executions whose current execution status matches
 	// the given filter.
-	StatusFilter *string `locationName:"statusFilter" type:"string" enum:"ExecutionStatus"`
+	StatusFilter ExecutionStatus `locationName:"statusFilter" type:"string"`
 }
 
 // String returns the string representation
@@ -3604,6 +3615,7 @@ func (s *ListExecutionsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.StateMachineArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
@@ -3636,8 +3648,8 @@ func (s *ListExecutionsInput) SetStateMachineArn(v string) *ListExecutionsInput 
 }
 
 // SetStatusFilter sets the StatusFilter field's value.
-func (s *ListExecutionsInput) SetStatusFilter(v string) *ListExecutionsInput {
-	s.StatusFilter = &v
+func (s *ListExecutionsInput) SetStatusFilter(v ExecutionStatus) *ListExecutionsInput {
+	s.StatusFilter = v
 	return s
 }
 
@@ -3805,6 +3817,7 @@ func (s SendTaskFailureInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskFailureInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendTaskFailureInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -3875,6 +3888,7 @@ func (s SendTaskHeartbeatInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskHeartbeatInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendTaskHeartbeatInput"}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -3938,9 +3952,11 @@ func (s SendTaskSuccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskSuccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendTaskSuccessInput"}
+
 	if s.Output == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Output"))
 	}
+
 	if s.TaskToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
@@ -4014,6 +4030,7 @@ func (s *StartExecutionInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.StateMachineArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
@@ -4229,6 +4246,7 @@ func (s StopExecutionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopExecutionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopExecutionInput"}
+
 	if s.ExecutionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
@@ -4286,122 +4304,58 @@ func (s *StopExecutionOutput) SetStopDate(v time.Time) *StopExecutionOutput {
 	return s
 }
 
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
 const (
-	// ExecutionStatusRunning is a ExecutionStatus enum value
-	ExecutionStatusRunning = "RUNNING"
-
-	// ExecutionStatusSucceeded is a ExecutionStatus enum value
-	ExecutionStatusSucceeded = "SUCCEEDED"
-
-	// ExecutionStatusFailed is a ExecutionStatus enum value
-	ExecutionStatusFailed = "FAILED"
-
-	// ExecutionStatusTimedOut is a ExecutionStatus enum value
-	ExecutionStatusTimedOut = "TIMED_OUT"
-
-	// ExecutionStatusAborted is a ExecutionStatus enum value
-	ExecutionStatusAborted = "ABORTED"
+	ExecutionStatusRunning   ExecutionStatus = "RUNNING"
+	ExecutionStatusSucceeded ExecutionStatus = "SUCCEEDED"
+	ExecutionStatusFailed    ExecutionStatus = "FAILED"
+	ExecutionStatusTimedOut  ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusAborted   ExecutionStatus = "ABORTED"
 )
 
+type HistoryEventType string
+
+// Enum values for HistoryEventType
 const (
-	// HistoryEventTypeActivityFailed is a HistoryEventType enum value
-	HistoryEventTypeActivityFailed = "ActivityFailed"
-
-	// HistoryEventTypeActivityScheduleFailed is a HistoryEventType enum value
-	HistoryEventTypeActivityScheduleFailed = "ActivityScheduleFailed"
-
-	// HistoryEventTypeActivityScheduled is a HistoryEventType enum value
-	HistoryEventTypeActivityScheduled = "ActivityScheduled"
-
-	// HistoryEventTypeActivityStarted is a HistoryEventType enum value
-	HistoryEventTypeActivityStarted = "ActivityStarted"
-
-	// HistoryEventTypeActivitySucceeded is a HistoryEventType enum value
-	HistoryEventTypeActivitySucceeded = "ActivitySucceeded"
-
-	// HistoryEventTypeActivityTimedOut is a HistoryEventType enum value
-	HistoryEventTypeActivityTimedOut = "ActivityTimedOut"
-
-	// HistoryEventTypeChoiceStateEntered is a HistoryEventType enum value
-	HistoryEventTypeChoiceStateEntered = "ChoiceStateEntered"
-
-	// HistoryEventTypeChoiceStateExited is a HistoryEventType enum value
-	HistoryEventTypeChoiceStateExited = "ChoiceStateExited"
-
-	// HistoryEventTypeExecutionFailed is a HistoryEventType enum value
-	HistoryEventTypeExecutionFailed = "ExecutionFailed"
-
-	// HistoryEventTypeExecutionStarted is a HistoryEventType enum value
-	HistoryEventTypeExecutionStarted = "ExecutionStarted"
-
-	// HistoryEventTypeExecutionSucceeded is a HistoryEventType enum value
-	HistoryEventTypeExecutionSucceeded = "ExecutionSucceeded"
-
-	// HistoryEventTypeExecutionAborted is a HistoryEventType enum value
-	HistoryEventTypeExecutionAborted = "ExecutionAborted"
-
-	// HistoryEventTypeExecutionTimedOut is a HistoryEventType enum value
-	HistoryEventTypeExecutionTimedOut = "ExecutionTimedOut"
-
-	// HistoryEventTypeFailStateEntered is a HistoryEventType enum value
-	HistoryEventTypeFailStateEntered = "FailStateEntered"
-
-	// HistoryEventTypeLambdaFunctionFailed is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionFailed = "LambdaFunctionFailed"
-
-	// HistoryEventTypeLambdaFunctionScheduleFailed is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionScheduleFailed = "LambdaFunctionScheduleFailed"
-
-	// HistoryEventTypeLambdaFunctionScheduled is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionScheduled = "LambdaFunctionScheduled"
-
-	// HistoryEventTypeLambdaFunctionStartFailed is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionStartFailed = "LambdaFunctionStartFailed"
-
-	// HistoryEventTypeLambdaFunctionStarted is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionStarted = "LambdaFunctionStarted"
-
-	// HistoryEventTypeLambdaFunctionSucceeded is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionSucceeded = "LambdaFunctionSucceeded"
-
-	// HistoryEventTypeLambdaFunctionTimedOut is a HistoryEventType enum value
-	HistoryEventTypeLambdaFunctionTimedOut = "LambdaFunctionTimedOut"
-
-	// HistoryEventTypeSucceedStateEntered is a HistoryEventType enum value
-	HistoryEventTypeSucceedStateEntered = "SucceedStateEntered"
-
-	// HistoryEventTypeSucceedStateExited is a HistoryEventType enum value
-	HistoryEventTypeSucceedStateExited = "SucceedStateExited"
-
-	// HistoryEventTypeTaskStateEntered is a HistoryEventType enum value
-	HistoryEventTypeTaskStateEntered = "TaskStateEntered"
-
-	// HistoryEventTypeTaskStateExited is a HistoryEventType enum value
-	HistoryEventTypeTaskStateExited = "TaskStateExited"
-
-	// HistoryEventTypePassStateEntered is a HistoryEventType enum value
-	HistoryEventTypePassStateEntered = "PassStateEntered"
-
-	// HistoryEventTypePassStateExited is a HistoryEventType enum value
-	HistoryEventTypePassStateExited = "PassStateExited"
-
-	// HistoryEventTypeParallelStateEntered is a HistoryEventType enum value
-	HistoryEventTypeParallelStateEntered = "ParallelStateEntered"
-
-	// HistoryEventTypeParallelStateExited is a HistoryEventType enum value
-	HistoryEventTypeParallelStateExited = "ParallelStateExited"
-
-	// HistoryEventTypeWaitStateEntered is a HistoryEventType enum value
-	HistoryEventTypeWaitStateEntered = "WaitStateEntered"
-
-	// HistoryEventTypeWaitStateExited is a HistoryEventType enum value
-	HistoryEventTypeWaitStateExited = "WaitStateExited"
+	HistoryEventTypeActivityFailed               HistoryEventType = "ActivityFailed"
+	HistoryEventTypeActivityScheduleFailed       HistoryEventType = "ActivityScheduleFailed"
+	HistoryEventTypeActivityScheduled            HistoryEventType = "ActivityScheduled"
+	HistoryEventTypeActivityStarted              HistoryEventType = "ActivityStarted"
+	HistoryEventTypeActivitySucceeded            HistoryEventType = "ActivitySucceeded"
+	HistoryEventTypeActivityTimedOut             HistoryEventType = "ActivityTimedOut"
+	HistoryEventTypeChoiceStateEntered           HistoryEventType = "ChoiceStateEntered"
+	HistoryEventTypeChoiceStateExited            HistoryEventType = "ChoiceStateExited"
+	HistoryEventTypeExecutionFailed              HistoryEventType = "ExecutionFailed"
+	HistoryEventTypeExecutionStarted             HistoryEventType = "ExecutionStarted"
+	HistoryEventTypeExecutionSucceeded           HistoryEventType = "ExecutionSucceeded"
+	HistoryEventTypeExecutionAborted             HistoryEventType = "ExecutionAborted"
+	HistoryEventTypeExecutionTimedOut            HistoryEventType = "ExecutionTimedOut"
+	HistoryEventTypeFailStateEntered             HistoryEventType = "FailStateEntered"
+	HistoryEventTypeLambdaFunctionFailed         HistoryEventType = "LambdaFunctionFailed"
+	HistoryEventTypeLambdaFunctionScheduleFailed HistoryEventType = "LambdaFunctionScheduleFailed"
+	HistoryEventTypeLambdaFunctionScheduled      HistoryEventType = "LambdaFunctionScheduled"
+	HistoryEventTypeLambdaFunctionStartFailed    HistoryEventType = "LambdaFunctionStartFailed"
+	HistoryEventTypeLambdaFunctionStarted        HistoryEventType = "LambdaFunctionStarted"
+	HistoryEventTypeLambdaFunctionSucceeded      HistoryEventType = "LambdaFunctionSucceeded"
+	HistoryEventTypeLambdaFunctionTimedOut       HistoryEventType = "LambdaFunctionTimedOut"
+	HistoryEventTypeSucceedStateEntered          HistoryEventType = "SucceedStateEntered"
+	HistoryEventTypeSucceedStateExited           HistoryEventType = "SucceedStateExited"
+	HistoryEventTypeTaskStateEntered             HistoryEventType = "TaskStateEntered"
+	HistoryEventTypeTaskStateExited              HistoryEventType = "TaskStateExited"
+	HistoryEventTypePassStateEntered             HistoryEventType = "PassStateEntered"
+	HistoryEventTypePassStateExited              HistoryEventType = "PassStateExited"
+	HistoryEventTypeParallelStateEntered         HistoryEventType = "ParallelStateEntered"
+	HistoryEventTypeParallelStateExited          HistoryEventType = "ParallelStateExited"
+	HistoryEventTypeWaitStateEntered             HistoryEventType = "WaitStateEntered"
+	HistoryEventTypeWaitStateExited              HistoryEventType = "WaitStateExited"
 )
 
-const (
-	// StateMachineStatusActive is a StateMachineStatus enum value
-	StateMachineStatusActive = "ACTIVE"
+type StateMachineStatus string
 
-	// StateMachineStatusDeleting is a StateMachineStatus enum value
-	StateMachineStatusDeleting = "DELETING"
+// Enum values for StateMachineStatus
+const (
+	StateMachineStatusActive   StateMachineStatus = "ACTIVE"
+	StateMachineStatusDeleting StateMachineStatus = "DELETING"
 )

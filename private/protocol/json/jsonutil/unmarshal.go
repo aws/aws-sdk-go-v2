@@ -174,6 +174,11 @@ func unmarshalScalar(value reflect.Value, data interface{}, tag reflect.StructTa
 	case nil:
 		return nil // nothing to do here
 	case string:
+		if value.Kind() == reflect.String {
+			value.SetString(d)
+			return nil
+		}
+
 		switch value.Interface().(type) {
 		case *string:
 			value.Set(reflect.ValueOf(&d))

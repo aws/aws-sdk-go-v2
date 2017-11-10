@@ -3317,7 +3317,7 @@ type Action struct {
 	// The type of action.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"ActionTypeEnum"`
+	Type ActionTypeEnum `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -3333,10 +3333,11 @@ func (s Action) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Action"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -3353,8 +3354,8 @@ func (s *Action) SetTargetGroupArn(v string) *Action {
 }
 
 // SetType sets the Type field's value.
-func (s *Action) SetType(v string) *Action {
-	s.Type = &v
+func (s *Action) SetType(v ActionTypeEnum) *Action {
+	s.Type = v
 	return s
 }
 
@@ -3386,9 +3387,11 @@ func (s AddListenerCertificatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddListenerCertificatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddListenerCertificatesInput"}
+
 	if s.Certificates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
 	}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
@@ -3463,9 +3466,11 @@ func (s AddTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
+
 	if s.ResourceArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -3657,7 +3662,7 @@ type CreateListenerInput struct {
 	// Balancers, the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol *string `type:"string" required:"true" enum:"ProtocolEnum"`
+	Protocol ProtocolEnum `type:"string" required:"true"`
 
 	// [HTTPS listeners] The security policy that defines which ciphers and protocols
 	// are supported. The default is the current predefined security policy.
@@ -3677,19 +3682,22 @@ func (s CreateListenerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateListenerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateListenerInput"}
+
 	if s.DefaultActions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultActions"))
 	}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
+
 	if s.Port == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Port"))
 	}
 	if s.Port != nil && *s.Port < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
-	if s.Protocol == nil {
+	if len(s.Protocol) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.DefaultActions != nil {
@@ -3734,8 +3742,8 @@ func (s *CreateListenerInput) SetPort(v int64) *CreateListenerInput {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *CreateListenerInput) SetProtocol(v string) *CreateListenerInput {
-	s.Protocol = &v
+func (s *CreateListenerInput) SetProtocol(v ProtocolEnum) *CreateListenerInput {
+	s.Protocol = v
 	return s
 }
 
@@ -3777,7 +3785,7 @@ type CreateLoadBalancerInput struct {
 	// for your load balancer. The possible values are ipv4 (for IPv4 addresses)
 	// and dualstack (for IPv4 and IPv6 addresses). Internal load balancers must
 	// use ipv4.
-	IpAddressType *string `type:"string" enum:"IpAddressType"`
+	IpAddressType IpAddressType `type:"string"`
 
 	// The name of the load balancer.
 	//
@@ -3799,7 +3807,7 @@ type CreateLoadBalancerInput struct {
 	// requests from clients with access to the VPC for the load balancer.
 	//
 	// The default is an Internet-facing load balancer.
-	Scheme *string `type:"string" enum:"LoadBalancerSchemeEnum"`
+	Scheme LoadBalancerSchemeEnum `type:"string"`
 
 	// [Application Load Balancers] The IDs of the security groups to assign to
 	// the load balancer.
@@ -3827,7 +3835,7 @@ type CreateLoadBalancerInput struct {
 	Tags []*Tag `min:"1" type:"list"`
 
 	// The type of load balancer to create. The default is application.
-	Type *string `type:"string" enum:"LoadBalancerTypeEnum"`
+	Type LoadBalancerTypeEnum `type:"string"`
 }
 
 // String returns the string representation
@@ -3843,6 +3851,7 @@ func (s CreateLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3867,8 +3876,8 @@ func (s *CreateLoadBalancerInput) Validate() error {
 }
 
 // SetIpAddressType sets the IpAddressType field's value.
-func (s *CreateLoadBalancerInput) SetIpAddressType(v string) *CreateLoadBalancerInput {
-	s.IpAddressType = &v
+func (s *CreateLoadBalancerInput) SetIpAddressType(v IpAddressType) *CreateLoadBalancerInput {
+	s.IpAddressType = v
 	return s
 }
 
@@ -3879,8 +3888,8 @@ func (s *CreateLoadBalancerInput) SetName(v string) *CreateLoadBalancerInput {
 }
 
 // SetScheme sets the Scheme field's value.
-func (s *CreateLoadBalancerInput) SetScheme(v string) *CreateLoadBalancerInput {
-	s.Scheme = &v
+func (s *CreateLoadBalancerInput) SetScheme(v LoadBalancerSchemeEnum) *CreateLoadBalancerInput {
+	s.Scheme = v
 	return s
 }
 
@@ -3909,8 +3918,8 @@ func (s *CreateLoadBalancerInput) SetTags(v []*Tag) *CreateLoadBalancerInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateLoadBalancerInput) SetType(v string) *CreateLoadBalancerInput {
-	s.Type = &v
+func (s *CreateLoadBalancerInput) SetType(v LoadBalancerTypeEnum) *CreateLoadBalancerInput {
+	s.Type = v
 	return s
 }
 
@@ -4005,15 +4014,19 @@ func (s CreateRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
+
 	if s.Actions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
+
 	if s.Conditions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Conditions"))
 	}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
+
 	if s.Priority == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
@@ -4108,7 +4121,7 @@ type CreateTargetGroupInput struct {
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP. For Application Load Balancers, the default is HTTP. For Network Load
 	// Balancers, the default is TCP.
-	HealthCheckProtocol *string `type:"string" enum:"ProtocolEnum"`
+	HealthCheckProtocol ProtocolEnum `type:"string"`
 
 	// The amount of time, in seconds, during which no response from a target means
 	// a failed health check. For Application Load Balancers, the range is 2 to
@@ -4146,7 +4159,7 @@ type CreateTargetGroupInput struct {
 	// the supported protocol is TCP.
 	//
 	// Protocol is a required field
-	Protocol *string `type:"string" required:"true" enum:"ProtocolEnum"`
+	Protocol ProtocolEnum `type:"string" required:"true"`
 
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
@@ -4158,7 +4171,7 @@ type CreateTargetGroupInput struct {
 	// private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8,
 	// 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10).
 	// You can't specify publicly routable IP addresses.
-	TargetType *string `type:"string" enum:"TargetTypeEnum"`
+	TargetType TargetTypeEnum `type:"string"`
 
 	// The number of consecutive health check failures required before considering
 	// a target unhealthy. For Application Load Balancers, the default is 2. For
@@ -4197,21 +4210,24 @@ func (s *CreateTargetGroupInput) Validate() error {
 	if s.HealthyThresholdCount != nil && *s.HealthyThresholdCount < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("HealthyThresholdCount", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Port == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Port"))
 	}
 	if s.Port != nil && *s.Port < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
-	if s.Protocol == nil {
+	if len(s.Protocol) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.UnhealthyThresholdCount != nil && *s.UnhealthyThresholdCount < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThresholdCount", 2))
 	}
+
 	if s.VpcId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
@@ -4246,8 +4262,8 @@ func (s *CreateTargetGroupInput) SetHealthCheckPort(v string) *CreateTargetGroup
 }
 
 // SetHealthCheckProtocol sets the HealthCheckProtocol field's value.
-func (s *CreateTargetGroupInput) SetHealthCheckProtocol(v string) *CreateTargetGroupInput {
-	s.HealthCheckProtocol = &v
+func (s *CreateTargetGroupInput) SetHealthCheckProtocol(v ProtocolEnum) *CreateTargetGroupInput {
+	s.HealthCheckProtocol = v
 	return s
 }
 
@@ -4282,14 +4298,14 @@ func (s *CreateTargetGroupInput) SetPort(v int64) *CreateTargetGroupInput {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *CreateTargetGroupInput) SetProtocol(v string) *CreateTargetGroupInput {
-	s.Protocol = &v
+func (s *CreateTargetGroupInput) SetProtocol(v ProtocolEnum) *CreateTargetGroupInput {
+	s.Protocol = v
 	return s
 }
 
 // SetTargetType sets the TargetType field's value.
-func (s *CreateTargetGroupInput) SetTargetType(v string) *CreateTargetGroupInput {
-	s.TargetType = &v
+func (s *CreateTargetGroupInput) SetTargetType(v TargetTypeEnum) *CreateTargetGroupInput {
+	s.TargetType = v
 	return s
 }
 
@@ -4352,6 +4368,7 @@ func (s DeleteListenerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteListenerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteListenerInput"}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
@@ -4406,6 +4423,7 @@ func (s DeleteLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
@@ -4460,6 +4478,7 @@ func (s DeleteRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
+
 	if s.RuleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleArn"))
 	}
@@ -4514,6 +4533,7 @@ func (s DeleteTargetGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTargetGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTargetGroupInput"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
@@ -4574,9 +4594,11 @@ func (s DeregisterTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetsInput"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
@@ -4735,6 +4757,7 @@ func (s DescribeListenerCertificatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeListenerCertificatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenerCertificatesInput"}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
@@ -4922,6 +4945,7 @@ func (s DescribeLoadBalancerAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancerAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
@@ -5274,6 +5298,7 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.ResourceArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
@@ -5337,6 +5362,7 @@ func (s DescribeTargetGroupAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTargetGroupAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetGroupAttributesInput"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
@@ -5511,6 +5537,7 @@ func (s DescribeTargetHealthInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTargetHealthInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetHealthInput"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
@@ -5637,7 +5664,7 @@ type Listener struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol for connections from clients to the load balancer.
-	Protocol *string `type:"string" enum:"ProtocolEnum"`
+	Protocol ProtocolEnum `type:"string"`
 
 	// The security policy that defines which ciphers and protocols are supported.
 	// The default is the current predefined security policy.
@@ -5685,8 +5712,8 @@ func (s *Listener) SetPort(v int64) *Listener {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *Listener) SetProtocol(v string) *Listener {
-	s.Protocol = &v
+func (s *Listener) SetProtocol(v ProtocolEnum) *Listener {
+	s.Protocol = v
 	return s
 }
 
@@ -5716,7 +5743,7 @@ type LoadBalancer struct {
 	// The type of IP addresses used by the subnets for your load balancer. The
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and
 	// IPv6 addresses).
-	IpAddressType *string `type:"string" enum:"IpAddressType"`
+	IpAddressType IpAddressType `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	LoadBalancerArn *string `type:"string"`
@@ -5733,7 +5760,7 @@ type LoadBalancer struct {
 	// DNS name of an internal load balancer is publicly resolvable to the private
 	// IP addresses of the nodes. Therefore, internal load balancers can only route
 	// requests from clients with access to the VPC for the load balancer.
-	Scheme *string `type:"string" enum:"LoadBalancerSchemeEnum"`
+	Scheme LoadBalancerSchemeEnum `type:"string"`
 
 	// The IDs of the security groups for the load balancer.
 	SecurityGroups []*string `type:"list"`
@@ -5742,7 +5769,7 @@ type LoadBalancer struct {
 	State *LoadBalancerState `type:"structure"`
 
 	// The type of load balancer.
-	Type *string `type:"string" enum:"LoadBalancerTypeEnum"`
+	Type LoadBalancerTypeEnum `type:"string"`
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string `type:"string"`
@@ -5783,8 +5810,8 @@ func (s *LoadBalancer) SetDNSName(v string) *LoadBalancer {
 }
 
 // SetIpAddressType sets the IpAddressType field's value.
-func (s *LoadBalancer) SetIpAddressType(v string) *LoadBalancer {
-	s.IpAddressType = &v
+func (s *LoadBalancer) SetIpAddressType(v IpAddressType) *LoadBalancer {
+	s.IpAddressType = v
 	return s
 }
 
@@ -5801,8 +5828,8 @@ func (s *LoadBalancer) SetLoadBalancerName(v string) *LoadBalancer {
 }
 
 // SetScheme sets the Scheme field's value.
-func (s *LoadBalancer) SetScheme(v string) *LoadBalancer {
-	s.Scheme = &v
+func (s *LoadBalancer) SetScheme(v LoadBalancerSchemeEnum) *LoadBalancer {
+	s.Scheme = v
 	return s
 }
 
@@ -5819,8 +5846,8 @@ func (s *LoadBalancer) SetState(v *LoadBalancerState) *LoadBalancer {
 }
 
 // SetType sets the Type field's value.
-func (s *LoadBalancer) SetType(v string) *LoadBalancer {
-	s.Type = &v
+func (s *LoadBalancer) SetType(v LoadBalancerTypeEnum) *LoadBalancer {
+	s.Type = v
 	return s
 }
 
@@ -5926,7 +5953,7 @@ type LoadBalancerState struct {
 	// The state code. The initial state of the load balancer is provisioning. After
 	// the load balancer is fully set up and ready to route traffic, its state is
 	// active. If the load balancer could not be set up, its state is failed.
-	Code *string `type:"string" enum:"LoadBalancerStateEnum"`
+	Code LoadBalancerStateEnum `type:"string"`
 
 	// A description of the state.
 	Reason *string `type:"string"`
@@ -5943,8 +5970,8 @@ func (s LoadBalancerState) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *LoadBalancerState) SetCode(v string) *LoadBalancerState {
-	s.Code = &v
+func (s *LoadBalancerState) SetCode(v LoadBalancerStateEnum) *LoadBalancerState {
+	s.Code = v
 	return s
 }
 
@@ -5984,6 +6011,7 @@ func (s Matcher) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Matcher) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Matcher"}
+
 	if s.HttpCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HttpCode"))
 	}
@@ -6023,7 +6051,7 @@ type ModifyListenerInput struct {
 	// The protocol for connections from clients to the load balancer. Application
 	// Load Balancers support HTTP and HTTPS and Network Load Balancers support
 	// TCP.
-	Protocol *string `type:"string" enum:"ProtocolEnum"`
+	Protocol ProtocolEnum `type:"string"`
 
 	// The security policy that defines which protocols and ciphers are supported.
 	// For more information, see Security Policies (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
@@ -6044,6 +6072,7 @@ func (s ModifyListenerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyListenerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyListenerInput"}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
@@ -6092,8 +6121,8 @@ func (s *ModifyListenerInput) SetPort(v int64) *ModifyListenerInput {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *ModifyListenerInput) SetProtocol(v string) *ModifyListenerInput {
-	s.Protocol = &v
+func (s *ModifyListenerInput) SetProtocol(v ProtocolEnum) *ModifyListenerInput {
+	s.Protocol = v
 	return s
 }
 
@@ -6155,9 +6184,11 @@ func (s ModifyLoadBalancerAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLoadBalancerAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
@@ -6233,6 +6264,7 @@ func (s ModifyRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyRuleInput"}
+
 	if s.RuleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleArn"))
 	}
@@ -6323,9 +6355,11 @@ func (s ModifyTargetGroupAttributesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyTargetGroupAttributesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyTargetGroupAttributesInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
@@ -6391,7 +6425,7 @@ type ModifyTargetGroupInput struct {
 	// The protocol the load balancer uses when performing health checks on targets.
 	// The TCP protocol is supported only if the protocol of the target group is
 	// TCP.
-	HealthCheckProtocol *string `type:"string" enum:"ProtocolEnum"`
+	HealthCheckProtocol ProtocolEnum `type:"string"`
 
 	// [HTTP/HTTPS health checks] The amount of time, in seconds, during which no
 	// response means a failed health check.
@@ -6441,6 +6475,7 @@ func (s *ModifyTargetGroupInput) Validate() error {
 	if s.HealthyThresholdCount != nil && *s.HealthyThresholdCount < 2 {
 		invalidParams.Add(aws.NewErrParamMinValue("HealthyThresholdCount", 2))
 	}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
@@ -6478,8 +6513,8 @@ func (s *ModifyTargetGroupInput) SetHealthCheckPort(v string) *ModifyTargetGroup
 }
 
 // SetHealthCheckProtocol sets the HealthCheckProtocol field's value.
-func (s *ModifyTargetGroupInput) SetHealthCheckProtocol(v string) *ModifyTargetGroupInput {
-	s.HealthCheckProtocol = &v
+func (s *ModifyTargetGroupInput) SetHealthCheckProtocol(v ProtocolEnum) *ModifyTargetGroupInput {
+	s.HealthCheckProtocol = v
 	return s
 }
 
@@ -6565,9 +6600,11 @@ func (s RegisterTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterTargetsInput"}
+
 	if s.TargetGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
+
 	if s.Targets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
@@ -6643,9 +6680,11 @@ func (s RemoveListenerCertificatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveListenerCertificatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveListenerCertificatesInput"}
+
 	if s.Certificates == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
 	}
+
 	if s.ListenerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
@@ -6711,9 +6750,11 @@ func (s RemoveTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
+
 	if s.ResourceArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -6930,7 +6971,7 @@ type SetIpAddressTypeInput struct {
 	// ipv4.
 	//
 	// IpAddressType is a required field
-	IpAddressType *string `type:"string" required:"true" enum:"IpAddressType"`
+	IpAddressType IpAddressType `type:"string" required:"true"`
 
 	// The Amazon Resource Name (ARN) of the load balancer.
 	//
@@ -6951,9 +6992,10 @@ func (s SetIpAddressTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIpAddressTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIpAddressTypeInput"}
-	if s.IpAddressType == nil {
+	if len(s.IpAddressType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("IpAddressType"))
 	}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
@@ -6965,8 +7007,8 @@ func (s *SetIpAddressTypeInput) Validate() error {
 }
 
 // SetIpAddressType sets the IpAddressType field's value.
-func (s *SetIpAddressTypeInput) SetIpAddressType(v string) *SetIpAddressTypeInput {
-	s.IpAddressType = &v
+func (s *SetIpAddressTypeInput) SetIpAddressType(v IpAddressType) *SetIpAddressTypeInput {
+	s.IpAddressType = v
 	return s
 }
 
@@ -6981,7 +7023,7 @@ type SetIpAddressTypeOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The IP address type.
-	IpAddressType *string `type:"string" enum:"IpAddressType"`
+	IpAddressType IpAddressType `type:"string"`
 }
 
 // String returns the string representation
@@ -6995,8 +7037,8 @@ func (s SetIpAddressTypeOutput) GoString() string {
 }
 
 // SetIpAddressType sets the IpAddressType field's value.
-func (s *SetIpAddressTypeOutput) SetIpAddressType(v string) *SetIpAddressTypeOutput {
-	s.IpAddressType = &v
+func (s *SetIpAddressTypeOutput) SetIpAddressType(v IpAddressType) *SetIpAddressTypeOutput {
+	s.IpAddressType = v
 	return s
 }
 
@@ -7023,6 +7065,7 @@ func (s SetRulePrioritiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetRulePrioritiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetRulePrioritiesInput"}
+
 	if s.RulePriorities == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RulePriorities"))
 	}
@@ -7101,9 +7144,11 @@ func (s SetSecurityGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSecurityGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetSecurityGroupsInput"}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
+
 	if s.SecurityGroups == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
 	}
@@ -7188,9 +7233,11 @@ func (s SetSubnetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSubnetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetSubnetsInput"}
+
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
+
 	if s.Subnets == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
@@ -7347,6 +7394,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -7447,6 +7495,7 @@ func (s TargetDescription) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetDescription) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TargetDescription"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7494,7 +7543,7 @@ type TargetGroup struct {
 	HealthCheckPort *string `type:"string"`
 
 	// The protocol to use to connect with the target.
-	HealthCheckProtocol *string `type:"string" enum:"ProtocolEnum"`
+	HealthCheckProtocol ProtocolEnum `type:"string"`
 
 	// The amount of time, in seconds, during which no response means a failed health
 	// check.
@@ -7515,7 +7564,7 @@ type TargetGroup struct {
 	Port *int64 `min:"1" type:"integer"`
 
 	// The protocol to use for routing traffic to the targets.
-	Protocol *string `type:"string" enum:"ProtocolEnum"`
+	Protocol ProtocolEnum `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the target group.
 	TargetGroupArn *string `type:"string"`
@@ -7526,7 +7575,7 @@ type TargetGroup struct {
 	// The type of target that you must specify when registering targets with this
 	// target group. The possible values are instance (targets are specified by
 	// instance ID) or ip (targets are specified by IP address).
-	TargetType *string `type:"string" enum:"TargetTypeEnum"`
+	TargetType TargetTypeEnum `type:"string"`
 
 	// The number of consecutive health check failures required before considering
 	// the target unhealthy.
@@ -7565,8 +7614,8 @@ func (s *TargetGroup) SetHealthCheckPort(v string) *TargetGroup {
 }
 
 // SetHealthCheckProtocol sets the HealthCheckProtocol field's value.
-func (s *TargetGroup) SetHealthCheckProtocol(v string) *TargetGroup {
-	s.HealthCheckProtocol = &v
+func (s *TargetGroup) SetHealthCheckProtocol(v ProtocolEnum) *TargetGroup {
+	s.HealthCheckProtocol = v
 	return s
 }
 
@@ -7601,8 +7650,8 @@ func (s *TargetGroup) SetPort(v int64) *TargetGroup {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *TargetGroup) SetProtocol(v string) *TargetGroup {
-	s.Protocol = &v
+func (s *TargetGroup) SetProtocol(v ProtocolEnum) *TargetGroup {
+	s.Protocol = v
 	return s
 }
 
@@ -7619,8 +7668,8 @@ func (s *TargetGroup) SetTargetGroupName(v string) *TargetGroup {
 }
 
 // SetTargetType sets the TargetType field's value.
-func (s *TargetGroup) SetTargetType(v string) *TargetGroup {
-	s.TargetType = &v
+func (s *TargetGroup) SetTargetType(v TargetTypeEnum) *TargetGroup {
+	s.TargetType = v
 	return s
 }
 
@@ -7740,10 +7789,10 @@ type TargetHealth struct {
 	//
 	//    * Target.DeregistrationInProgress - The target is in the process of being
 	//    deregistered and the deregistration delay period has not expired.
-	Reason *string `type:"string" enum:"TargetHealthReasonEnum"`
+	Reason TargetHealthReasonEnum `type:"string"`
 
 	// The state of the target.
-	State *string `type:"string" enum:"TargetHealthStateEnum"`
+	State TargetHealthStateEnum `type:"string"`
 }
 
 // String returns the string representation
@@ -7763,14 +7812,14 @@ func (s *TargetHealth) SetDescription(v string) *TargetHealth {
 }
 
 // SetReason sets the Reason field's value.
-func (s *TargetHealth) SetReason(v string) *TargetHealth {
-	s.Reason = &v
+func (s *TargetHealth) SetReason(v TargetHealthReasonEnum) *TargetHealth {
+	s.Reason = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *TargetHealth) SetState(v string) *TargetHealth {
-	s.State = &v
+func (s *TargetHealth) SetState(v TargetHealthStateEnum) *TargetHealth {
+	s.State = v
 	return s
 }
 
@@ -7817,119 +7866,89 @@ func (s *TargetHealthDescription) SetTargetHealth(v *TargetHealth) *TargetHealth
 	return s
 }
 
+type ActionTypeEnum string
+
+// Enum values for ActionTypeEnum
 const (
-	// ActionTypeEnumForward is a ActionTypeEnum enum value
-	ActionTypeEnumForward = "forward"
+	ActionTypeEnumForward ActionTypeEnum = "forward"
 )
 
-const (
-	// IpAddressTypeIpv4 is a IpAddressType enum value
-	IpAddressTypeIpv4 = "ipv4"
+type IpAddressType string
 
-	// IpAddressTypeDualstack is a IpAddressType enum value
-	IpAddressTypeDualstack = "dualstack"
+// Enum values for IpAddressType
+const (
+	IpAddressTypeIpv4      IpAddressType = "ipv4"
+	IpAddressTypeDualstack IpAddressType = "dualstack"
 )
 
-const (
-	// LoadBalancerSchemeEnumInternetFacing is a LoadBalancerSchemeEnum enum value
-	LoadBalancerSchemeEnumInternetFacing = "internet-facing"
+type LoadBalancerSchemeEnum string
 
-	// LoadBalancerSchemeEnumInternal is a LoadBalancerSchemeEnum enum value
-	LoadBalancerSchemeEnumInternal = "internal"
+// Enum values for LoadBalancerSchemeEnum
+const (
+	LoadBalancerSchemeEnumInternetFacing LoadBalancerSchemeEnum = "internet-facing"
+	LoadBalancerSchemeEnumInternal       LoadBalancerSchemeEnum = "internal"
 )
 
+type LoadBalancerStateEnum string
+
+// Enum values for LoadBalancerStateEnum
 const (
-	// LoadBalancerStateEnumActive is a LoadBalancerStateEnum enum value
-	LoadBalancerStateEnumActive = "active"
-
-	// LoadBalancerStateEnumProvisioning is a LoadBalancerStateEnum enum value
-	LoadBalancerStateEnumProvisioning = "provisioning"
-
-	// LoadBalancerStateEnumActiveImpaired is a LoadBalancerStateEnum enum value
-	LoadBalancerStateEnumActiveImpaired = "active_impaired"
-
-	// LoadBalancerStateEnumFailed is a LoadBalancerStateEnum enum value
-	LoadBalancerStateEnumFailed = "failed"
+	LoadBalancerStateEnumActive         LoadBalancerStateEnum = "active"
+	LoadBalancerStateEnumProvisioning   LoadBalancerStateEnum = "provisioning"
+	LoadBalancerStateEnumActiveImpaired LoadBalancerStateEnum = "active_impaired"
+	LoadBalancerStateEnumFailed         LoadBalancerStateEnum = "failed"
 )
 
-const (
-	// LoadBalancerTypeEnumApplication is a LoadBalancerTypeEnum enum value
-	LoadBalancerTypeEnumApplication = "application"
+type LoadBalancerTypeEnum string
 
-	// LoadBalancerTypeEnumNetwork is a LoadBalancerTypeEnum enum value
-	LoadBalancerTypeEnumNetwork = "network"
+// Enum values for LoadBalancerTypeEnum
+const (
+	LoadBalancerTypeEnumApplication LoadBalancerTypeEnum = "application"
+	LoadBalancerTypeEnumNetwork     LoadBalancerTypeEnum = "network"
 )
 
+type ProtocolEnum string
+
+// Enum values for ProtocolEnum
 const (
-	// ProtocolEnumHttp is a ProtocolEnum enum value
-	ProtocolEnumHttp = "HTTP"
-
-	// ProtocolEnumHttps is a ProtocolEnum enum value
-	ProtocolEnumHttps = "HTTPS"
-
-	// ProtocolEnumTcp is a ProtocolEnum enum value
-	ProtocolEnumTcp = "TCP"
+	ProtocolEnumHttp  ProtocolEnum = "HTTP"
+	ProtocolEnumHttps ProtocolEnum = "HTTPS"
+	ProtocolEnumTcp   ProtocolEnum = "TCP"
 )
 
+type TargetHealthReasonEnum string
+
+// Enum values for TargetHealthReasonEnum
 const (
-	// TargetHealthReasonEnumElbRegistrationInProgress is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumElbRegistrationInProgress = "Elb.RegistrationInProgress"
-
-	// TargetHealthReasonEnumElbInitialHealthChecking is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumElbInitialHealthChecking = "Elb.InitialHealthChecking"
-
-	// TargetHealthReasonEnumTargetResponseCodeMismatch is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetResponseCodeMismatch = "Target.ResponseCodeMismatch"
-
-	// TargetHealthReasonEnumTargetTimeout is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetTimeout = "Target.Timeout"
-
-	// TargetHealthReasonEnumTargetFailedHealthChecks is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetFailedHealthChecks = "Target.FailedHealthChecks"
-
-	// TargetHealthReasonEnumTargetNotRegistered is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetNotRegistered = "Target.NotRegistered"
-
-	// TargetHealthReasonEnumTargetNotInUse is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetNotInUse = "Target.NotInUse"
-
-	// TargetHealthReasonEnumTargetDeregistrationInProgress is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetDeregistrationInProgress = "Target.DeregistrationInProgress"
-
-	// TargetHealthReasonEnumTargetInvalidState is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetInvalidState = "Target.InvalidState"
-
-	// TargetHealthReasonEnumTargetIpUnusable is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumTargetIpUnusable = "Target.IpUnusable"
-
-	// TargetHealthReasonEnumElbInternalError is a TargetHealthReasonEnum enum value
-	TargetHealthReasonEnumElbInternalError = "Elb.InternalError"
+	TargetHealthReasonEnumElbRegistrationInProgress      TargetHealthReasonEnum = "Elb.RegistrationInProgress"
+	TargetHealthReasonEnumElbInitialHealthChecking       TargetHealthReasonEnum = "Elb.InitialHealthChecking"
+	TargetHealthReasonEnumTargetResponseCodeMismatch     TargetHealthReasonEnum = "Target.ResponseCodeMismatch"
+	TargetHealthReasonEnumTargetTimeout                  TargetHealthReasonEnum = "Target.Timeout"
+	TargetHealthReasonEnumTargetFailedHealthChecks       TargetHealthReasonEnum = "Target.FailedHealthChecks"
+	TargetHealthReasonEnumTargetNotRegistered            TargetHealthReasonEnum = "Target.NotRegistered"
+	TargetHealthReasonEnumTargetNotInUse                 TargetHealthReasonEnum = "Target.NotInUse"
+	TargetHealthReasonEnumTargetDeregistrationInProgress TargetHealthReasonEnum = "Target.DeregistrationInProgress"
+	TargetHealthReasonEnumTargetInvalidState             TargetHealthReasonEnum = "Target.InvalidState"
+	TargetHealthReasonEnumTargetIpUnusable               TargetHealthReasonEnum = "Target.IpUnusable"
+	TargetHealthReasonEnumElbInternalError               TargetHealthReasonEnum = "Elb.InternalError"
 )
 
+type TargetHealthStateEnum string
+
+// Enum values for TargetHealthStateEnum
 const (
-	// TargetHealthStateEnumInitial is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumInitial = "initial"
-
-	// TargetHealthStateEnumHealthy is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumHealthy = "healthy"
-
-	// TargetHealthStateEnumUnhealthy is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumUnhealthy = "unhealthy"
-
-	// TargetHealthStateEnumUnused is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumUnused = "unused"
-
-	// TargetHealthStateEnumDraining is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumDraining = "draining"
-
-	// TargetHealthStateEnumUnavailable is a TargetHealthStateEnum enum value
-	TargetHealthStateEnumUnavailable = "unavailable"
+	TargetHealthStateEnumInitial     TargetHealthStateEnum = "initial"
+	TargetHealthStateEnumHealthy     TargetHealthStateEnum = "healthy"
+	TargetHealthStateEnumUnhealthy   TargetHealthStateEnum = "unhealthy"
+	TargetHealthStateEnumUnused      TargetHealthStateEnum = "unused"
+	TargetHealthStateEnumDraining    TargetHealthStateEnum = "draining"
+	TargetHealthStateEnumUnavailable TargetHealthStateEnum = "unavailable"
 )
 
-const (
-	// TargetTypeEnumInstance is a TargetTypeEnum enum value
-	TargetTypeEnumInstance = "instance"
+type TargetTypeEnum string
 
-	// TargetTypeEnumIp is a TargetTypeEnum enum value
-	TargetTypeEnumIp = "ip"
+// Enum values for TargetTypeEnum
+const (
+	TargetTypeEnumInstance TargetTypeEnum = "instance"
+	TargetTypeEnumIp       TargetTypeEnum = "ip"
 )

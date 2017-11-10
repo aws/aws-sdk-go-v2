@@ -51,16 +51,22 @@ func (q *queryParser) parseValue(v url.Values, value reflect.Value, prefix strin
 		}
 	}
 
+	var err error
 	switch t {
 	case "structure":
-		return q.parseStruct(v, value, prefix)
+		err = q.parseStruct(v, value, prefix)
 	case "list":
-		return q.parseList(v, value, prefix, tag)
+		err = q.parseList(v, value, prefix, tag)
 	case "map":
-		return q.parseMap(v, value, prefix, tag)
+		err = q.parseMap(v, value, prefix, tag)
 	default:
-		return q.parseScalar(v, value, prefix, tag)
+		err = q.parseScalar(v, value, prefix, tag)
 	}
+
+	if protocol.IsNotSetError(err) {
+		return nil
+	}
+	return err
 }
 
 func (q *queryParser) parseStruct(v url.Values, value reflect.Value, prefix string) error {
@@ -214,6 +220,14 @@ func (q *queryParser) parseMap(v url.Values, value reflect.Value, prefix string,
 }
 
 func (q *queryParser) parseScalar(v url.Values, r reflect.Value, name string, tag reflect.StructTag) error {
+	if r.Kind() == reflect.String {
+		val, err := protocol.GetValue(r)
+		if err == nil {
+			v.Set(name, val)
+		}
+		return err
+	}
+
 	switch value := r.Interface().(type) {
 	case string:
 		v.Set(name, value)

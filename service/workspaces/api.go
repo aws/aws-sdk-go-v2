@@ -1361,7 +1361,7 @@ type ComputeType struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the compute type for the bundle.
-	Name *string `type:"string" enum:"Compute"`
+	Name Compute `type:"string"`
 }
 
 // String returns the string representation
@@ -1375,8 +1375,8 @@ func (s ComputeType) GoString() string {
 }
 
 // SetName sets the Name field's value.
-func (s *ComputeType) SetName(v string) *ComputeType {
-	s.Name = &v
+func (s *ComputeType) SetName(v Compute) *ComputeType {
+	s.Name = v
 	return s
 }
 
@@ -1409,12 +1409,14 @@ func (s CreateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -1487,6 +1489,7 @@ func (s CreateWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkspacesInput"}
+
 	if s.Workspaces == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Workspaces"))
 	}
@@ -1647,12 +1650,14 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -1715,6 +1720,7 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -2296,9 +2302,11 @@ func (s ModifyWorkspacePropertiesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyWorkspacePropertiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyWorkspacePropertiesInput"}
+
 	if s.WorkspaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
+
 	if s.WorkspaceProperties == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkspaceProperties"))
 	}
@@ -2361,6 +2369,7 @@ func (s RebootRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootRequest"}
+
 	if s.WorkspaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
@@ -2401,6 +2410,7 @@ func (s RebootWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootWorkspacesInput"}
+
 	if s.RebootWorkspaceRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RebootWorkspaceRequests"))
 	}
@@ -2480,6 +2490,7 @@ func (s RebuildRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebuildRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebuildRequest"}
+
 	if s.WorkspaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
@@ -2520,6 +2531,7 @@ func (s RebuildWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebuildWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebuildWorkspacesInput"}
+
 	if s.RebuildWorkspaceRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RebuildWorkspaceRequests"))
 	}
@@ -2622,6 +2634,7 @@ func (s StartWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartWorkspacesInput"}
+
 	if s.StartWorkspaceRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartWorkspaceRequests"))
 	}
@@ -2713,6 +2726,7 @@ func (s StopWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopWorkspacesInput"}
+
 	if s.StopWorkspaceRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StopWorkspaceRequests"))
 	}
@@ -2783,6 +2797,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -2833,6 +2848,7 @@ func (s TerminateRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateRequest"}
+
 	if s.WorkspaceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
 	}
@@ -2873,6 +2889,7 @@ func (s TerminateWorkspacesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateWorkspacesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TerminateWorkspacesInput"}
+
 	if s.TerminateWorkspaceRequests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TerminateWorkspaceRequests"))
 	}
@@ -2981,7 +2998,7 @@ type Workspace struct {
 	RootVolumeEncryptionEnabled *bool `type:"boolean"`
 
 	// The operational state of the WorkSpace.
-	State *string `type:"string" enum:"WorkspaceState"`
+	State WorkspaceState `type:"string"`
 
 	// The identifier of the subnet that the WorkSpace is in.
 	SubnetId *string `type:"string"`
@@ -3055,8 +3072,8 @@ func (s *Workspace) SetRootVolumeEncryptionEnabled(v bool) *Workspace {
 }
 
 // SetState sets the State field's value.
-func (s *Workspace) SetState(v string) *Workspace {
-	s.State = &v
+func (s *Workspace) SetState(v WorkspaceState) *Workspace {
+	s.State = v
 	return s
 }
 
@@ -3175,7 +3192,7 @@ type WorkspaceConnectionStatus struct {
 
 	// The connection state of the WorkSpace. Returns UNKOWN if the WorkSpace is
 	// in a Stopped state.
-	ConnectionState *string `type:"string" enum:"ConnectionState"`
+	ConnectionState ConnectionState `type:"string"`
 
 	// The timestamp of the connection state check.
 	ConnectionStateCheckTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -3198,8 +3215,8 @@ func (s WorkspaceConnectionStatus) GoString() string {
 }
 
 // SetConnectionState sets the ConnectionState field's value.
-func (s *WorkspaceConnectionStatus) SetConnectionState(v string) *WorkspaceConnectionStatus {
-	s.ConnectionState = &v
+func (s *WorkspaceConnectionStatus) SetConnectionState(v ConnectionState) *WorkspaceConnectionStatus {
+	s.ConnectionState = v
 	return s
 }
 
@@ -3240,7 +3257,7 @@ type WorkspaceDirectory struct {
 	DirectoryName *string `type:"string"`
 
 	// The directory type.
-	DirectoryType *string `type:"string" enum:"WorkspaceDirectoryType"`
+	DirectoryType WorkspaceDirectoryType `type:"string"`
 
 	// An array of strings that contains the IP addresses of the DNS servers for
 	// the directory.
@@ -3255,7 +3272,7 @@ type WorkspaceDirectory struct {
 	RegistrationCode *string `min:"1" type:"string"`
 
 	// The state of the directory's registration with Amazon WorkSpaces
-	State *string `type:"string" enum:"WorkspaceDirectoryState"`
+	State WorkspaceDirectoryState `type:"string"`
 
 	// An array of strings that contains the identifiers of the subnets used with
 	// the directory.
@@ -3304,8 +3321,8 @@ func (s *WorkspaceDirectory) SetDirectoryName(v string) *WorkspaceDirectory {
 }
 
 // SetDirectoryType sets the DirectoryType field's value.
-func (s *WorkspaceDirectory) SetDirectoryType(v string) *WorkspaceDirectory {
-	s.DirectoryType = &v
+func (s *WorkspaceDirectory) SetDirectoryType(v WorkspaceDirectoryType) *WorkspaceDirectory {
+	s.DirectoryType = v
 	return s
 }
 
@@ -3328,8 +3345,8 @@ func (s *WorkspaceDirectory) SetRegistrationCode(v string) *WorkspaceDirectory {
 }
 
 // SetState sets the State field's value.
-func (s *WorkspaceDirectory) SetState(v string) *WorkspaceDirectory {
-	s.State = &v
+func (s *WorkspaceDirectory) SetState(v WorkspaceDirectoryState) *WorkspaceDirectory {
+	s.State = v
 	return s
 }
 
@@ -3359,7 +3376,7 @@ type WorkspaceProperties struct {
 	// The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed monthly.
 	// AutoStop WorkSpaces are billed by the hour and stopped when no longer being
 	// used in order to save on costs.
-	RunningMode *string `type:"string" enum:"RunningMode"`
+	RunningMode RunningMode `type:"string"`
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
 	// Configured in 60 minute intervals.
@@ -3377,8 +3394,8 @@ func (s WorkspaceProperties) GoString() string {
 }
 
 // SetRunningMode sets the RunningMode field's value.
-func (s *WorkspaceProperties) SetRunningMode(v string) *WorkspaceProperties {
-	s.RunningMode = &v
+func (s *WorkspaceProperties) SetRunningMode(v RunningMode) *WorkspaceProperties {
+	s.RunningMode = v
 	return s
 }
 
@@ -3442,12 +3459,15 @@ func (s WorkspaceRequest) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkspaceRequest) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "WorkspaceRequest"}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
+
 	if s.DirectoryId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
+
 	if s.UserName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserName"))
 	}
@@ -3519,101 +3539,67 @@ func (s *WorkspaceRequest) SetWorkspaceProperties(v *WorkspaceProperties) *Works
 	return s
 }
 
+type Compute string
+
+// Enum values for Compute
 const (
-	// ComputeValue is a Compute enum value
-	ComputeValue = "VALUE"
-
-	// ComputeStandard is a Compute enum value
-	ComputeStandard = "STANDARD"
-
-	// ComputePerformance is a Compute enum value
-	ComputePerformance = "PERFORMANCE"
+	ComputeValue       Compute = "VALUE"
+	ComputeStandard    Compute = "STANDARD"
+	ComputePerformance Compute = "PERFORMANCE"
 )
 
+type ConnectionState string
+
+// Enum values for ConnectionState
 const (
-	// ConnectionStateConnected is a ConnectionState enum value
-	ConnectionStateConnected = "CONNECTED"
-
-	// ConnectionStateDisconnected is a ConnectionState enum value
-	ConnectionStateDisconnected = "DISCONNECTED"
-
-	// ConnectionStateUnknown is a ConnectionState enum value
-	ConnectionStateUnknown = "UNKNOWN"
+	ConnectionStateConnected    ConnectionState = "CONNECTED"
+	ConnectionStateDisconnected ConnectionState = "DISCONNECTED"
+	ConnectionStateUnknown      ConnectionState = "UNKNOWN"
 )
 
-const (
-	// RunningModeAutoStop is a RunningMode enum value
-	RunningModeAutoStop = "AUTO_STOP"
+type RunningMode string
 
-	// RunningModeAlwaysOn is a RunningMode enum value
-	RunningModeAlwaysOn = "ALWAYS_ON"
+// Enum values for RunningMode
+const (
+	RunningModeAutoStop RunningMode = "AUTO_STOP"
+	RunningModeAlwaysOn RunningMode = "ALWAYS_ON"
 )
 
+type WorkspaceDirectoryState string
+
+// Enum values for WorkspaceDirectoryState
 const (
-	// WorkspaceDirectoryStateRegistering is a WorkspaceDirectoryState enum value
-	WorkspaceDirectoryStateRegistering = "REGISTERING"
-
-	// WorkspaceDirectoryStateRegistered is a WorkspaceDirectoryState enum value
-	WorkspaceDirectoryStateRegistered = "REGISTERED"
-
-	// WorkspaceDirectoryStateDeregistering is a WorkspaceDirectoryState enum value
-	WorkspaceDirectoryStateDeregistering = "DEREGISTERING"
-
-	// WorkspaceDirectoryStateDeregistered is a WorkspaceDirectoryState enum value
-	WorkspaceDirectoryStateDeregistered = "DEREGISTERED"
-
-	// WorkspaceDirectoryStateError is a WorkspaceDirectoryState enum value
-	WorkspaceDirectoryStateError = "ERROR"
+	WorkspaceDirectoryStateRegistering   WorkspaceDirectoryState = "REGISTERING"
+	WorkspaceDirectoryStateRegistered    WorkspaceDirectoryState = "REGISTERED"
+	WorkspaceDirectoryStateDeregistering WorkspaceDirectoryState = "DEREGISTERING"
+	WorkspaceDirectoryStateDeregistered  WorkspaceDirectoryState = "DEREGISTERED"
+	WorkspaceDirectoryStateError         WorkspaceDirectoryState = "ERROR"
 )
 
-const (
-	// WorkspaceDirectoryTypeSimpleAd is a WorkspaceDirectoryType enum value
-	WorkspaceDirectoryTypeSimpleAd = "SIMPLE_AD"
+type WorkspaceDirectoryType string
 
-	// WorkspaceDirectoryTypeAdConnector is a WorkspaceDirectoryType enum value
-	WorkspaceDirectoryTypeAdConnector = "AD_CONNECTOR"
+// Enum values for WorkspaceDirectoryType
+const (
+	WorkspaceDirectoryTypeSimpleAd    WorkspaceDirectoryType = "SIMPLE_AD"
+	WorkspaceDirectoryTypeAdConnector WorkspaceDirectoryType = "AD_CONNECTOR"
 )
 
+type WorkspaceState string
+
+// Enum values for WorkspaceState
 const (
-	// WorkspaceStatePending is a WorkspaceState enum value
-	WorkspaceStatePending = "PENDING"
-
-	// WorkspaceStateAvailable is a WorkspaceState enum value
-	WorkspaceStateAvailable = "AVAILABLE"
-
-	// WorkspaceStateImpaired is a WorkspaceState enum value
-	WorkspaceStateImpaired = "IMPAIRED"
-
-	// WorkspaceStateUnhealthy is a WorkspaceState enum value
-	WorkspaceStateUnhealthy = "UNHEALTHY"
-
-	// WorkspaceStateRebooting is a WorkspaceState enum value
-	WorkspaceStateRebooting = "REBOOTING"
-
-	// WorkspaceStateStarting is a WorkspaceState enum value
-	WorkspaceStateStarting = "STARTING"
-
-	// WorkspaceStateRebuilding is a WorkspaceState enum value
-	WorkspaceStateRebuilding = "REBUILDING"
-
-	// WorkspaceStateMaintenance is a WorkspaceState enum value
-	WorkspaceStateMaintenance = "MAINTENANCE"
-
-	// WorkspaceStateTerminating is a WorkspaceState enum value
-	WorkspaceStateTerminating = "TERMINATING"
-
-	// WorkspaceStateTerminated is a WorkspaceState enum value
-	WorkspaceStateTerminated = "TERMINATED"
-
-	// WorkspaceStateSuspended is a WorkspaceState enum value
-	WorkspaceStateSuspended = "SUSPENDED"
-
-	// WorkspaceStateStopping is a WorkspaceState enum value
-	WorkspaceStateStopping = "STOPPING"
-
-	// WorkspaceStateStopped is a WorkspaceState enum value
-	WorkspaceStateStopped = "STOPPED"
-
-	// WorkspaceStateError is a WorkspaceState enum value
-	WorkspaceStateError = "ERROR"
+	WorkspaceStatePending     WorkspaceState = "PENDING"
+	WorkspaceStateAvailable   WorkspaceState = "AVAILABLE"
+	WorkspaceStateImpaired    WorkspaceState = "IMPAIRED"
+	WorkspaceStateUnhealthy   WorkspaceState = "UNHEALTHY"
+	WorkspaceStateRebooting   WorkspaceState = "REBOOTING"
+	WorkspaceStateStarting    WorkspaceState = "STARTING"
+	WorkspaceStateRebuilding  WorkspaceState = "REBUILDING"
+	WorkspaceStateMaintenance WorkspaceState = "MAINTENANCE"
+	WorkspaceStateTerminating WorkspaceState = "TERMINATING"
+	WorkspaceStateTerminated  WorkspaceState = "TERMINATED"
+	WorkspaceStateSuspended   WorkspaceState = "SUSPENDED"
+	WorkspaceStateStopping    WorkspaceState = "STOPPING"
+	WorkspaceStateStopped     WorkspaceState = "STOPPED"
+	WorkspaceStateError       WorkspaceState = "ERROR"
 )

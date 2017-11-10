@@ -2038,7 +2038,7 @@ func ExampleRDS_DescribeEvents_shared00() {
 			aws.String("backup"),
 		},
 		SourceIdentifier: aws.String("mymysqlinstance"),
-		SourceType:       aws.String("db-instance"),
+		SourceType:       rds.SourceTypeDbInstance,
 	}
 
 	result, err := svc.DescribeEvents(input)
@@ -2498,7 +2498,7 @@ func ExampleRDS_ModifyDBClusterParameterGroup_shared00() {
 		DBClusterParameterGroupName: aws.String("mydbclusterparametergroup"),
 		Parameters: []*rds.Parameter{
 			{
-				ApplyMethod:    aws.String("immediate"),
+				ApplyMethod:    rds.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
 				ParameterValue: aws.String("America/Phoenix"),
 			},
@@ -2660,7 +2660,7 @@ func ExampleRDS_ModifyDBParameterGroup_shared00() {
 		DBParameterGroupName: aws.String("mymysqlparametergroup"),
 		Parameters: []*rds.Parameter{
 			{
-				ApplyMethod:    aws.String("immediate"),
+				ApplyMethod:    rds.ApplyMethodImmediate,
 				ParameterName:  aws.String("time_zone"),
 				ParameterValue: aws.String("America/Phoenix"),
 			},

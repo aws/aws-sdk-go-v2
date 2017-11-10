@@ -27,6 +27,7 @@ import (
 var emptyList = []string{}
 
 func val(i interface{}, s string) interface{} {
+	fmt.Println("INNER", i)
 	v, err := awsutil.ValuesAtPath(i, s)
 	if err != nil || len(v) == 0 {
 		return nil
@@ -106,7 +107,7 @@ func TestUploadOrderMulti(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key"),
 		Body:                 bytes.NewReader(buf12MB),
-		ServerSideEncryption: aws.String("aws:kms"),
+		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -169,7 +170,7 @@ func TestUploadOrderMulti(t *testing.T) {
 
 	// Custom headers
 	e := val((*args)[0], "ServerSideEncryption")
-	if e != "aws:kms" {
+	if e.(s3.ServerSideEncryption) != s3.ServerSideEncryptionAwsKms {
 		t.Errorf("Expected %q, but received %q", "aws:kms", e)
 	}
 
@@ -284,7 +285,7 @@ func TestUploadOrderSingle(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key"),
 		Body:                 bytes.NewReader(buf2MB),
-		ServerSideEncryption: aws.String("aws:kms"),
+		ServerSideEncryption: s3.ServerSideEncryptionAwsKms,
 		SSEKMSKeyId:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
 	})
@@ -309,7 +310,7 @@ func TestUploadOrderSingle(t *testing.T) {
 		t.Errorf("Expected empty string, but received %q", resp.UploadID)
 	}
 
-	if e, a := "aws:kms", val((*args)[0], "ServerSideEncryption").(string); e != a {
+	if e, a := s3.ServerSideEncryptionAwsKms, val((*args)[0], "ServerSideEncryption").(s3.ServerSideEncryption); e != a {
 		t.Errorf("Expected %q, but received %q", e, a)
 	}
 

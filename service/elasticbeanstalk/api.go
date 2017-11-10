@@ -3812,7 +3812,7 @@ type ApplicationVersionDescription struct {
 	SourceBundle *S3Location `type:"structure"`
 
 	// The processing status of the application version.
-	Status *string `type:"string" enum:"ApplicationVersionStatus"`
+	Status ApplicationVersionStatus `type:"string"`
 
 	// A unique identifier for the application version.
 	VersionLabel *string `min:"1" type:"string"`
@@ -3871,8 +3871,8 @@ func (s *ApplicationVersionDescription) SetSourceBundle(v *S3Location) *Applicat
 }
 
 // SetStatus sets the Status field's value.
-func (s *ApplicationVersionDescription) SetStatus(v string) *ApplicationVersionDescription {
-	s.Status = &v
+func (s *ApplicationVersionDescription) SetStatus(v ApplicationVersionStatus) *ApplicationVersionDescription {
+	s.Status = v
 	return s
 }
 
@@ -3999,6 +3999,7 @@ func (s ApplyEnvironmentManagedActionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplyEnvironmentManagedActionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApplyEnvironmentManagedActionInput"}
+
 	if s.ActionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ActionId"))
 	}
@@ -4039,7 +4040,7 @@ type ApplyEnvironmentManagedActionOutput struct {
 	ActionId *string `type:"string"`
 
 	// The type of managed action.
-	ActionType *string `type:"string" enum:"ActionType"`
+	ActionType ActionType `type:"string"`
 
 	// The status of the managed action.
 	Status *string `type:"string"`
@@ -4068,8 +4069,8 @@ func (s *ApplyEnvironmentManagedActionOutput) SetActionId(v string) *ApplyEnviro
 }
 
 // SetActionType sets the ActionType field's value.
-func (s *ApplyEnvironmentManagedActionOutput) SetActionType(v string) *ApplyEnvironmentManagedActionOutput {
-	s.ActionType = &v
+func (s *ApplyEnvironmentManagedActionOutput) SetActionType(v ActionType) *ApplyEnvironmentManagedActionOutput {
+	s.ActionType = v
 	return s
 }
 
@@ -4129,7 +4130,7 @@ type BuildConfiguration struct {
 	//    * BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds
 	//
 	//    * BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for builds
-	ComputeType *string `type:"string" enum:"ComputeType"`
+	ComputeType ComputeType `type:"string"`
 
 	// The ID of the Docker image to use for this build project.
 	//
@@ -4155,9 +4156,11 @@ func (s BuildConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BuildConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BuildConfiguration"}
+
 	if s.CodeBuildServiceRole == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CodeBuildServiceRole"))
 	}
+
 	if s.Image == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
@@ -4181,8 +4184,8 @@ func (s *BuildConfiguration) SetCodeBuildServiceRole(v string) *BuildConfigurati
 }
 
 // SetComputeType sets the ComputeType field's value.
-func (s *BuildConfiguration) SetComputeType(v string) *BuildConfiguration {
-	s.ComputeType = &v
+func (s *BuildConfiguration) SetComputeType(v ComputeType) *BuildConfiguration {
+	s.ComputeType = v
 	return s
 }
 
@@ -4333,6 +4336,7 @@ func (s CheckDNSAvailabilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDNSAvailabilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CheckDNSAvailabilityInput"}
+
 	if s.CNAMEPrefix == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CNAMEPrefix"))
 	}
@@ -4533,7 +4537,7 @@ type ConfigurationOptionDescription struct {
 	//    * Boolean : Values for this option are either true or false .
 	//
 	//    * Json : Values for this option are a JSON representation of a ConfigDocument.
-	ValueType *string `type:"string" enum:"ConfigurationOptionValueType"`
+	ValueType ConfigurationOptionValueType `type:"string"`
 }
 
 // String returns the string representation
@@ -4607,8 +4611,8 @@ func (s *ConfigurationOptionDescription) SetValueOptions(v []*string) *Configura
 }
 
 // SetValueType sets the ValueType field's value.
-func (s *ConfigurationOptionDescription) SetValueType(v string) *ConfigurationOptionDescription {
-	s.ValueType = &v
+func (s *ConfigurationOptionDescription) SetValueType(v ConfigurationOptionValueType) *ConfigurationOptionDescription {
+	s.ValueType = v
 	return s
 }
 
@@ -4706,7 +4710,7 @@ type ConfigurationSettingsDescription struct {
 	//    associated running environment.
 	//
 	//    * failed: This is a draft configuration that failed to successfully deploy.
-	DeploymentStatus *string `type:"string" enum:"ConfigurationDeploymentStatus"`
+	DeploymentStatus ConfigurationDeploymentStatus `type:"string"`
 
 	// Describes this configuration set.
 	Description *string `type:"string"`
@@ -4758,8 +4762,8 @@ func (s *ConfigurationSettingsDescription) SetDateUpdated(v time.Time) *Configur
 }
 
 // SetDeploymentStatus sets the DeploymentStatus field's value.
-func (s *ConfigurationSettingsDescription) SetDeploymentStatus(v string) *ConfigurationSettingsDescription {
-	s.DeploymentStatus = &v
+func (s *ConfigurationSettingsDescription) SetDeploymentStatus(v ConfigurationDeploymentStatus) *ConfigurationSettingsDescription {
+	s.DeploymentStatus = v
 	return s
 }
 
@@ -4833,6 +4837,7 @@ func (s CreateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -4931,12 +4936,14 @@ func (s CreateApplicationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationVersionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.VersionLabel == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
@@ -5087,12 +5094,14 @@ func (s CreateConfigurationTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationTemplateInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.TemplateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
@@ -5260,6 +5269,7 @@ func (s CreateEnvironmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEnvironmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateEnvironmentInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5439,12 +5449,15 @@ func (s *CreatePlatformVersionInput) Validate() error {
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
+
 	if s.PlatformDefinitionBundle == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformDefinitionBundle"))
 	}
+
 	if s.PlatformName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformName"))
 	}
+
 	if s.PlatformVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PlatformVersion"))
 	}
@@ -5630,6 +5643,7 @@ func (s DeleteApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5704,12 +5718,14 @@ func (s DeleteApplicationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationVersionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.VersionLabel == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
@@ -5785,12 +5801,14 @@ func (s DeleteConfigurationTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationTemplateInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.TemplateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
@@ -5860,12 +5878,14 @@ func (s DeleteEnvironmentConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEnvironmentConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEnvironmentConfigurationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.EnvironmentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EnvironmentName"))
 	}
@@ -6363,6 +6383,7 @@ func (s DescribeConfigurationSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSettingsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -6432,7 +6453,7 @@ type DescribeEnvironmentHealthInput struct {
 
 	// Specify the response elements to return. To retrieve all attributes, set
 	// to All. If no attribute names are specified, returns the name of the environment.
-	AttributeNames []*string `type:"list"`
+	AttributeNames []EnvironmentHealthAttribute `type:"list"`
 
 	// Specify the environment by ID.
 	//
@@ -6469,7 +6490,7 @@ func (s *DescribeEnvironmentHealthInput) Validate() error {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *DescribeEnvironmentHealthInput) SetAttributeNames(v []*string) *DescribeEnvironmentHealthInput {
+func (s *DescribeEnvironmentHealthInput) SetAttributeNames(v []EnvironmentHealthAttribute) *DescribeEnvironmentHealthInput {
 	s.AttributeNames = v
 	return s
 }
@@ -6517,7 +6538,7 @@ type DescribeEnvironmentHealthOutput struct {
 
 	// The environment's operational status. Ready, Launching, Updating, Terminating,
 	// or Terminated.
-	Status *string `type:"string" enum:"EnvironmentHealth"`
+	Status EnvironmentHealth `type:"string"`
 }
 
 // String returns the string representation
@@ -6573,8 +6594,8 @@ func (s *DescribeEnvironmentHealthOutput) SetRefreshedAt(v time.Time) *DescribeE
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeEnvironmentHealthOutput) SetStatus(v string) *DescribeEnvironmentHealthOutput {
-	s.Status = &v
+func (s *DescribeEnvironmentHealthOutput) SetStatus(v EnvironmentHealth) *DescribeEnvironmentHealthOutput {
+	s.Status = v
 	return s
 }
 
@@ -6690,7 +6711,7 @@ type DescribeEnvironmentManagedActionsInput struct {
 	EnvironmentName *string `type:"string"`
 
 	// To show only actions with a particular status, specify a status.
-	Status *string `type:"string" enum:"ActionStatus"`
+	Status ActionStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -6716,8 +6737,8 @@ func (s *DescribeEnvironmentManagedActionsInput) SetEnvironmentName(v string) *D
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeEnvironmentManagedActionsInput) SetStatus(v string) *DescribeEnvironmentManagedActionsInput {
-	s.Status = &v
+func (s *DescribeEnvironmentManagedActionsInput) SetStatus(v ActionStatus) *DescribeEnvironmentManagedActionsInput {
+	s.Status = v
 	return s
 }
 
@@ -6988,7 +7009,7 @@ type DescribeEventsInput struct {
 
 	// If specified, limits the events returned from this call to include only those
 	// with the specified severity or higher.
-	Severity *string `type:"string" enum:"EventSeverity"`
+	Severity EventSeverity `type:"string"`
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// those that occur on or after this time.
@@ -7087,8 +7108,8 @@ func (s *DescribeEventsInput) SetRequestId(v string) *DescribeEventsInput {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *DescribeEventsInput) SetSeverity(v string) *DescribeEventsInput {
-	s.Severity = &v
+func (s *DescribeEventsInput) SetSeverity(v EventSeverity) *DescribeEventsInput {
+	s.Severity = v
 	return s
 }
 
@@ -7152,7 +7173,7 @@ type DescribeInstancesHealthInput struct {
 
 	// Specifies the response elements you wish to receive. To retrieve all attributes,
 	// set to All. If no attribute names are specified, returns a list of instances.
-	AttributeNames []*string `type:"list"`
+	AttributeNames []InstancesHealthAttribute `type:"list"`
 
 	// Specify the AWS Elastic Beanstalk environment by ID.
 	EnvironmentId *string `type:"string"`
@@ -7191,7 +7212,7 @@ func (s *DescribeInstancesHealthInput) Validate() error {
 }
 
 // SetAttributeNames sets the AttributeNames field's value.
-func (s *DescribeInstancesHealthInput) SetAttributeNames(v []*string) *DescribeInstancesHealthInput {
+func (s *DescribeInstancesHealthInput) SetAttributeNames(v []InstancesHealthAttribute) *DescribeInstancesHealthInput {
 	s.AttributeNames = v
 	return s
 }
@@ -7367,11 +7388,11 @@ type EnvironmentDescription struct {
 	//    during an UpdateEnvironment or RestartEnvironement request.
 	//
 	// Default: Grey
-	Health *string `type:"string" enum:"EnvironmentHealth"`
+	Health EnvironmentHealth `type:"string"`
 
 	// Returns the health status of the application running in your environment.
 	// For more information, see Health Colors and Statuses (http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-	HealthStatus *string `type:"string" enum:"EnvironmentHealthStatus"`
+	HealthStatus EnvironmentHealthStatus `type:"string"`
 
 	// The ARN of the platform.
 	PlatformArn *string `type:"string"`
@@ -7395,7 +7416,7 @@ type EnvironmentDescription struct {
 	//    * Terminating: Environment is in the shut-down process.
 	//
 	//    * Terminated: Environment is not running.
-	Status *string `type:"string" enum:"EnvironmentStatus"`
+	Status EnvironmentStatus `type:"string"`
 
 	// The name of the configuration template used to originally launch this environment.
 	TemplateName *string `min:"1" type:"string"`
@@ -7484,14 +7505,14 @@ func (s *EnvironmentDescription) SetEnvironmentName(v string) *EnvironmentDescri
 }
 
 // SetHealth sets the Health field's value.
-func (s *EnvironmentDescription) SetHealth(v string) *EnvironmentDescription {
-	s.Health = &v
+func (s *EnvironmentDescription) SetHealth(v EnvironmentHealth) *EnvironmentDescription {
+	s.Health = v
 	return s
 }
 
 // SetHealthStatus sets the HealthStatus field's value.
-func (s *EnvironmentDescription) SetHealthStatus(v string) *EnvironmentDescription {
-	s.HealthStatus = &v
+func (s *EnvironmentDescription) SetHealthStatus(v EnvironmentHealthStatus) *EnvironmentDescription {
+	s.HealthStatus = v
 	return s
 }
 
@@ -7514,8 +7535,8 @@ func (s *EnvironmentDescription) SetSolutionStackName(v string) *EnvironmentDesc
 }
 
 // SetStatus sets the Status field's value.
-func (s *EnvironmentDescription) SetStatus(v string) *EnvironmentDescription {
-	s.Status = &v
+func (s *EnvironmentDescription) SetStatus(v EnvironmentStatus) *EnvironmentDescription {
+	s.Status = v
 	return s
 }
 
@@ -7581,7 +7602,7 @@ type EnvironmentInfoDescription struct {
 	Ec2InstanceId *string `type:"string"`
 
 	// The type of information retrieved.
-	InfoType *string `type:"string" enum:"EnvironmentInfoType"`
+	InfoType EnvironmentInfoType `type:"string"`
 
 	// The retrieved information.
 	Message *string `type:"string"`
@@ -7607,8 +7628,8 @@ func (s *EnvironmentInfoDescription) SetEc2InstanceId(v string) *EnvironmentInfo
 }
 
 // SetInfoType sets the InfoType field's value.
-func (s *EnvironmentInfoDescription) SetInfoType(v string) *EnvironmentInfoDescription {
-	s.InfoType = &v
+func (s *EnvironmentInfoDescription) SetInfoType(v EnvironmentInfoType) *EnvironmentInfoDescription {
+	s.InfoType = v
 	return s
 }
 
@@ -7834,7 +7855,7 @@ type EventDescription struct {
 	RequestId *string `type:"string"`
 
 	// The severity level of this event.
-	Severity *string `type:"string" enum:"EventSeverity"`
+	Severity EventSeverity `type:"string"`
 
 	// The name of the configuration associated with this event.
 	TemplateName *string `min:"1" type:"string"`
@@ -7890,8 +7911,8 @@ func (s *EventDescription) SetRequestId(v string) *EventDescription {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *EventDescription) SetSeverity(v string) *EventDescription {
-	s.Severity = &v
+func (s *EventDescription) SetSeverity(v EventSeverity) *EventDescription {
+	s.Severity = v
 	return s
 }
 
@@ -8403,11 +8424,11 @@ type ManagedAction struct {
 	ActionId *string `type:"string"`
 
 	// The type of managed action.
-	ActionType *string `type:"string" enum:"ActionType"`
+	ActionType ActionType `type:"string"`
 
 	// The status of the managed action. If the action is Scheduled, you can apply
 	// it immediately with ApplyEnvironmentManagedAction.
-	Status *string `type:"string" enum:"ActionStatus"`
+	Status ActionStatus `type:"string"`
 
 	// The start time of the maintenance window in which the managed action will
 	// execute.
@@ -8437,14 +8458,14 @@ func (s *ManagedAction) SetActionId(v string) *ManagedAction {
 }
 
 // SetActionType sets the ActionType field's value.
-func (s *ManagedAction) SetActionType(v string) *ManagedAction {
-	s.ActionType = &v
+func (s *ManagedAction) SetActionType(v ActionType) *ManagedAction {
+	s.ActionType = v
 	return s
 }
 
 // SetStatus sets the Status field's value.
-func (s *ManagedAction) SetStatus(v string) *ManagedAction {
-	s.Status = &v
+func (s *ManagedAction) SetStatus(v ActionStatus) *ManagedAction {
+	s.Status = v
 	return s
 }
 
@@ -8466,7 +8487,7 @@ type ManagedActionHistoryItem struct {
 	ActionId *string `type:"string"`
 
 	// The type of the managed action.
-	ActionType *string `type:"string" enum:"ActionType"`
+	ActionType ActionType `type:"string"`
 
 	// The date and time that the action started executing.
 	ExecutedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
@@ -8475,13 +8496,13 @@ type ManagedActionHistoryItem struct {
 	FailureDescription *string `type:"string"`
 
 	// If the action failed, the type of failure.
-	FailureType *string `type:"string" enum:"FailureType"`
+	FailureType FailureType `type:"string"`
 
 	// The date and time that the action finished executing.
 	FinishedTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The status of the action.
-	Status *string `type:"string" enum:"ActionHistoryStatus"`
+	Status ActionHistoryStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -8507,8 +8528,8 @@ func (s *ManagedActionHistoryItem) SetActionId(v string) *ManagedActionHistoryIt
 }
 
 // SetActionType sets the ActionType field's value.
-func (s *ManagedActionHistoryItem) SetActionType(v string) *ManagedActionHistoryItem {
-	s.ActionType = &v
+func (s *ManagedActionHistoryItem) SetActionType(v ActionType) *ManagedActionHistoryItem {
+	s.ActionType = v
 	return s
 }
 
@@ -8525,8 +8546,8 @@ func (s *ManagedActionHistoryItem) SetFailureDescription(v string) *ManagedActio
 }
 
 // SetFailureType sets the FailureType field's value.
-func (s *ManagedActionHistoryItem) SetFailureType(v string) *ManagedActionHistoryItem {
-	s.FailureType = &v
+func (s *ManagedActionHistoryItem) SetFailureType(v FailureType) *ManagedActionHistoryItem {
+	s.FailureType = v
 	return s
 }
 
@@ -8537,8 +8558,8 @@ func (s *ManagedActionHistoryItem) SetFinishedTime(v time.Time) *ManagedActionHi
 }
 
 // SetStatus sets the Status field's value.
-func (s *ManagedActionHistoryItem) SetStatus(v string) *ManagedActionHistoryItem {
-	s.Status = &v
+func (s *ManagedActionHistoryItem) SetStatus(v ActionHistoryStatus) *ManagedActionHistoryItem {
+	s.Status = v
 	return s
 }
 
@@ -8574,6 +8595,7 @@ func (s MaxAgeRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaxAgeRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MaxAgeRule"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -8634,6 +8656,7 @@ func (s MaxCountRule) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaxCountRule) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MaxCountRule"}
+
 	if s.Enabled == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
@@ -8796,7 +8819,7 @@ type PlatformDescription struct {
 	PlatformOwner *string `type:"string"`
 
 	// The status of the platform.
-	PlatformStatus *string `type:"string" enum:"PlatformStatus"`
+	PlatformStatus PlatformStatus `type:"string"`
 
 	// The version of the platform.
 	PlatformVersion *string `type:"string"`
@@ -8897,8 +8920,8 @@ func (s *PlatformDescription) SetPlatformOwner(v string) *PlatformDescription {
 }
 
 // SetPlatformStatus sets the PlatformStatus field's value.
-func (s *PlatformDescription) SetPlatformStatus(v string) *PlatformDescription {
-	s.PlatformStatus = &v
+func (s *PlatformDescription) SetPlatformStatus(v PlatformStatus) *PlatformDescription {
+	s.PlatformStatus = v
 	return s
 }
 
@@ -9075,7 +9098,7 @@ type PlatformSummary struct {
 
 	// The status of the platform. You can create an environment from the platform
 	// once it is ready.
-	PlatformStatus *string `type:"string" enum:"PlatformStatus"`
+	PlatformStatus PlatformStatus `type:"string"`
 
 	// The additions associated with the platform.
 	SupportedAddonList []*string `type:"list"`
@@ -9125,8 +9148,8 @@ func (s *PlatformSummary) SetPlatformOwner(v string) *PlatformSummary {
 }
 
 // SetPlatformStatus sets the PlatformStatus field's value.
-func (s *PlatformSummary) SetPlatformStatus(v string) *PlatformSummary {
-	s.PlatformStatus = &v
+func (s *PlatformSummary) SetPlatformStatus(v PlatformStatus) *PlatformSummary {
+	s.PlatformStatus = v
 	return s
 }
 
@@ -9274,7 +9297,7 @@ type RequestEnvironmentInfoInput struct {
 	// The type of information to request.
 	//
 	// InfoType is a required field
-	InfoType *string `type:"string" required:"true" enum:"EnvironmentInfoType"`
+	InfoType EnvironmentInfoType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9293,7 +9316,7 @@ func (s *RequestEnvironmentInfoInput) Validate() error {
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
-	if s.InfoType == nil {
+	if len(s.InfoType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InfoType"))
 	}
 
@@ -9316,8 +9339,8 @@ func (s *RequestEnvironmentInfoInput) SetEnvironmentName(v string) *RequestEnvir
 }
 
 // SetInfoType sets the InfoType field's value.
-func (s *RequestEnvironmentInfoInput) SetInfoType(v string) *RequestEnvironmentInfoInput {
-	s.InfoType = &v
+func (s *RequestEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *RequestEnvironmentInfoInput {
+	s.InfoType = v
 	return s
 }
 
@@ -9431,7 +9454,7 @@ type RetrieveEnvironmentInfoInput struct {
 	// The type of information to retrieve.
 	//
 	// InfoType is a required field
-	InfoType *string `type:"string" required:"true" enum:"EnvironmentInfoType"`
+	InfoType EnvironmentInfoType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9450,7 +9473,7 @@ func (s *RetrieveEnvironmentInfoInput) Validate() error {
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
-	if s.InfoType == nil {
+	if len(s.InfoType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("InfoType"))
 	}
 
@@ -9473,8 +9496,8 @@ func (s *RetrieveEnvironmentInfoInput) SetEnvironmentName(v string) *RetrieveEnv
 }
 
 // SetInfoType sets the InfoType field's value.
-func (s *RetrieveEnvironmentInfoInput) SetInfoType(v string) *RetrieveEnvironmentInfoInput {
-	s.InfoType = &v
+func (s *RetrieveEnvironmentInfoInput) SetInfoType(v EnvironmentInfoType) *RetrieveEnvironmentInfoInput {
+	s.InfoType = v
 	return s
 }
 
@@ -9706,7 +9729,7 @@ type SourceBuildInformation struct {
 	//    * S3
 	//
 	// SourceRepository is a required field
-	SourceRepository *string `type:"string" required:"true" enum:"SourceRepository"`
+	SourceRepository SourceRepository `type:"string" required:"true"`
 
 	// The type of repository.
 	//
@@ -9715,7 +9738,7 @@ type SourceBuildInformation struct {
 	//    * Zip
 	//
 	// SourceType is a required field
-	SourceType *string `type:"string" required:"true" enum:"SourceType"`
+	SourceType SourceType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9731,16 +9754,17 @@ func (s SourceBuildInformation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceBuildInformation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SourceBuildInformation"}
+
 	if s.SourceLocation == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceLocation"))
 	}
 	if s.SourceLocation != nil && len(*s.SourceLocation) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("SourceLocation", 3))
 	}
-	if s.SourceRepository == nil {
+	if len(s.SourceRepository) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SourceRepository"))
 	}
-	if s.SourceType == nil {
+	if len(s.SourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SourceType"))
 	}
 
@@ -9757,14 +9781,14 @@ func (s *SourceBuildInformation) SetSourceLocation(v string) *SourceBuildInforma
 }
 
 // SetSourceRepository sets the SourceRepository field's value.
-func (s *SourceBuildInformation) SetSourceRepository(v string) *SourceBuildInformation {
-	s.SourceRepository = &v
+func (s *SourceBuildInformation) SetSourceRepository(v SourceRepository) *SourceBuildInformation {
+	s.SourceRepository = v
 	return s
 }
 
 // SetSourceType sets the SourceType field's value.
-func (s *SourceBuildInformation) SetSourceType(v string) *SourceBuildInformation {
-	s.SourceType = &v
+func (s *SourceBuildInformation) SetSourceType(v SourceType) *SourceBuildInformation {
+	s.SourceType = v
 	return s
 }
 
@@ -10202,6 +10226,7 @@ func (s UpdateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -10255,12 +10280,14 @@ func (s UpdateApplicationResourceLifecycleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationResourceLifecycleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationResourceLifecycleInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.ResourceLifecycleConfig == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceLifecycleConfig"))
 	}
@@ -10358,12 +10385,14 @@ func (s UpdateApplicationVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationVersionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.VersionLabel == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
@@ -10443,12 +10472,14 @@ func (s UpdateConfigurationTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationTemplateInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.TemplateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
@@ -10749,6 +10780,7 @@ func (s ValidateConfigurationSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidateConfigurationSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ValidateConfigurationSettingsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -10758,6 +10790,7 @@ func (s *ValidateConfigurationSettingsInput) Validate() error {
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
+
 	if s.OptionSettings == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OptionSettings"))
 	}
@@ -10851,7 +10884,7 @@ type ValidationMessage struct {
 	//
 	//    * warning: This message is providing information you should take into
 	//    account.
-	Severity *string `type:"string" enum:"ValidationSeverity"`
+	Severity ValidationSeverity `type:"string"`
 }
 
 // String returns the string representation
@@ -10883,300 +10916,206 @@ func (s *ValidationMessage) SetOptionName(v string) *ValidationMessage {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *ValidationMessage) SetSeverity(v string) *ValidationMessage {
-	s.Severity = &v
+func (s *ValidationMessage) SetSeverity(v ValidationSeverity) *ValidationMessage {
+	s.Severity = v
 	return s
 }
 
+type ActionHistoryStatus string
+
+// Enum values for ActionHistoryStatus
 const (
-	// ActionHistoryStatusCompleted is a ActionHistoryStatus enum value
-	ActionHistoryStatusCompleted = "Completed"
-
-	// ActionHistoryStatusFailed is a ActionHistoryStatus enum value
-	ActionHistoryStatusFailed = "Failed"
-
-	// ActionHistoryStatusUnknown is a ActionHistoryStatus enum value
-	ActionHistoryStatusUnknown = "Unknown"
+	ActionHistoryStatusCompleted ActionHistoryStatus = "Completed"
+	ActionHistoryStatusFailed    ActionHistoryStatus = "Failed"
+	ActionHistoryStatusUnknown   ActionHistoryStatus = "Unknown"
 )
 
+type ActionStatus string
+
+// Enum values for ActionStatus
 const (
-	// ActionStatusScheduled is a ActionStatus enum value
-	ActionStatusScheduled = "Scheduled"
-
-	// ActionStatusPending is a ActionStatus enum value
-	ActionStatusPending = "Pending"
-
-	// ActionStatusRunning is a ActionStatus enum value
-	ActionStatusRunning = "Running"
-
-	// ActionStatusUnknown is a ActionStatus enum value
-	ActionStatusUnknown = "Unknown"
+	ActionStatusScheduled ActionStatus = "Scheduled"
+	ActionStatusPending   ActionStatus = "Pending"
+	ActionStatusRunning   ActionStatus = "Running"
+	ActionStatusUnknown   ActionStatus = "Unknown"
 )
 
+type ActionType string
+
+// Enum values for ActionType
 const (
-	// ActionTypeInstanceRefresh is a ActionType enum value
-	ActionTypeInstanceRefresh = "InstanceRefresh"
-
-	// ActionTypePlatformUpdate is a ActionType enum value
-	ActionTypePlatformUpdate = "PlatformUpdate"
-
-	// ActionTypeUnknown is a ActionType enum value
-	ActionTypeUnknown = "Unknown"
+	ActionTypeInstanceRefresh ActionType = "InstanceRefresh"
+	ActionTypePlatformUpdate  ActionType = "PlatformUpdate"
+	ActionTypeUnknown         ActionType = "Unknown"
 )
 
+type ApplicationVersionStatus string
+
+// Enum values for ApplicationVersionStatus
 const (
-	// ApplicationVersionStatusProcessed is a ApplicationVersionStatus enum value
-	ApplicationVersionStatusProcessed = "Processed"
-
-	// ApplicationVersionStatusUnprocessed is a ApplicationVersionStatus enum value
-	ApplicationVersionStatusUnprocessed = "Unprocessed"
-
-	// ApplicationVersionStatusFailed is a ApplicationVersionStatus enum value
-	ApplicationVersionStatusFailed = "Failed"
-
-	// ApplicationVersionStatusProcessing is a ApplicationVersionStatus enum value
-	ApplicationVersionStatusProcessing = "Processing"
-
-	// ApplicationVersionStatusBuilding is a ApplicationVersionStatus enum value
-	ApplicationVersionStatusBuilding = "Building"
+	ApplicationVersionStatusProcessed   ApplicationVersionStatus = "Processed"
+	ApplicationVersionStatusUnprocessed ApplicationVersionStatus = "Unprocessed"
+	ApplicationVersionStatusFailed      ApplicationVersionStatus = "Failed"
+	ApplicationVersionStatusProcessing  ApplicationVersionStatus = "Processing"
+	ApplicationVersionStatusBuilding    ApplicationVersionStatus = "Building"
 )
 
+type ComputeType string
+
+// Enum values for ComputeType
 const (
-	// ComputeTypeBuildGeneral1Small is a ComputeType enum value
-	ComputeTypeBuildGeneral1Small = "BUILD_GENERAL1_SMALL"
-
-	// ComputeTypeBuildGeneral1Medium is a ComputeType enum value
-	ComputeTypeBuildGeneral1Medium = "BUILD_GENERAL1_MEDIUM"
-
-	// ComputeTypeBuildGeneral1Large is a ComputeType enum value
-	ComputeTypeBuildGeneral1Large = "BUILD_GENERAL1_LARGE"
+	ComputeTypeBuildGeneral1Small  ComputeType = "BUILD_GENERAL1_SMALL"
+	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
+	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
+type ConfigurationDeploymentStatus string
+
+// Enum values for ConfigurationDeploymentStatus
 const (
-	// ConfigurationDeploymentStatusDeployed is a ConfigurationDeploymentStatus enum value
-	ConfigurationDeploymentStatusDeployed = "deployed"
-
-	// ConfigurationDeploymentStatusPending is a ConfigurationDeploymentStatus enum value
-	ConfigurationDeploymentStatusPending = "pending"
-
-	// ConfigurationDeploymentStatusFailed is a ConfigurationDeploymentStatus enum value
-	ConfigurationDeploymentStatusFailed = "failed"
+	ConfigurationDeploymentStatusDeployed ConfigurationDeploymentStatus = "deployed"
+	ConfigurationDeploymentStatusPending  ConfigurationDeploymentStatus = "pending"
+	ConfigurationDeploymentStatusFailed   ConfigurationDeploymentStatus = "failed"
 )
 
-const (
-	// ConfigurationOptionValueTypeScalar is a ConfigurationOptionValueType enum value
-	ConfigurationOptionValueTypeScalar = "Scalar"
+type ConfigurationOptionValueType string
 
-	// ConfigurationOptionValueTypeList is a ConfigurationOptionValueType enum value
-	ConfigurationOptionValueTypeList = "List"
+// Enum values for ConfigurationOptionValueType
+const (
+	ConfigurationOptionValueTypeScalar ConfigurationOptionValueType = "Scalar"
+	ConfigurationOptionValueTypeList   ConfigurationOptionValueType = "List"
 )
 
+type EnvironmentHealth string
+
+// Enum values for EnvironmentHealth
 const (
-	// EnvironmentHealthGreen is a EnvironmentHealth enum value
-	EnvironmentHealthGreen = "Green"
-
-	// EnvironmentHealthYellow is a EnvironmentHealth enum value
-	EnvironmentHealthYellow = "Yellow"
-
-	// EnvironmentHealthRed is a EnvironmentHealth enum value
-	EnvironmentHealthRed = "Red"
-
-	// EnvironmentHealthGrey is a EnvironmentHealth enum value
-	EnvironmentHealthGrey = "Grey"
+	EnvironmentHealthGreen  EnvironmentHealth = "Green"
+	EnvironmentHealthYellow EnvironmentHealth = "Yellow"
+	EnvironmentHealthRed    EnvironmentHealth = "Red"
+	EnvironmentHealthGrey   EnvironmentHealth = "Grey"
 )
 
+type EnvironmentHealthAttribute string
+
+// Enum values for EnvironmentHealthAttribute
 const (
-	// EnvironmentHealthAttributeStatus is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeStatus = "Status"
-
-	// EnvironmentHealthAttributeColor is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeColor = "Color"
-
-	// EnvironmentHealthAttributeCauses is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeCauses = "Causes"
-
-	// EnvironmentHealthAttributeApplicationMetrics is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeApplicationMetrics = "ApplicationMetrics"
-
-	// EnvironmentHealthAttributeInstancesHealth is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeInstancesHealth = "InstancesHealth"
-
-	// EnvironmentHealthAttributeAll is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeAll = "All"
-
-	// EnvironmentHealthAttributeHealthStatus is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeHealthStatus = "HealthStatus"
-
-	// EnvironmentHealthAttributeRefreshedAt is a EnvironmentHealthAttribute enum value
-	EnvironmentHealthAttributeRefreshedAt = "RefreshedAt"
+	EnvironmentHealthAttributeStatus             EnvironmentHealthAttribute = "Status"
+	EnvironmentHealthAttributeColor              EnvironmentHealthAttribute = "Color"
+	EnvironmentHealthAttributeCauses             EnvironmentHealthAttribute = "Causes"
+	EnvironmentHealthAttributeApplicationMetrics EnvironmentHealthAttribute = "ApplicationMetrics"
+	EnvironmentHealthAttributeInstancesHealth    EnvironmentHealthAttribute = "InstancesHealth"
+	EnvironmentHealthAttributeAll                EnvironmentHealthAttribute = "All"
+	EnvironmentHealthAttributeHealthStatus       EnvironmentHealthAttribute = "HealthStatus"
+	EnvironmentHealthAttributeRefreshedAt        EnvironmentHealthAttribute = "RefreshedAt"
 )
 
+type EnvironmentHealthStatus string
+
+// Enum values for EnvironmentHealthStatus
 const (
-	// EnvironmentHealthStatusNoData is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusNoData = "NoData"
-
-	// EnvironmentHealthStatusUnknown is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusUnknown = "Unknown"
-
-	// EnvironmentHealthStatusPending is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusPending = "Pending"
-
-	// EnvironmentHealthStatusOk is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusOk = "Ok"
-
-	// EnvironmentHealthStatusInfo is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusInfo = "Info"
-
-	// EnvironmentHealthStatusWarning is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusWarning = "Warning"
-
-	// EnvironmentHealthStatusDegraded is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusDegraded = "Degraded"
-
-	// EnvironmentHealthStatusSevere is a EnvironmentHealthStatus enum value
-	EnvironmentHealthStatusSevere = "Severe"
+	EnvironmentHealthStatusNoData   EnvironmentHealthStatus = "NoData"
+	EnvironmentHealthStatusUnknown  EnvironmentHealthStatus = "Unknown"
+	EnvironmentHealthStatusPending  EnvironmentHealthStatus = "Pending"
+	EnvironmentHealthStatusOk       EnvironmentHealthStatus = "Ok"
+	EnvironmentHealthStatusInfo     EnvironmentHealthStatus = "Info"
+	EnvironmentHealthStatusWarning  EnvironmentHealthStatus = "Warning"
+	EnvironmentHealthStatusDegraded EnvironmentHealthStatus = "Degraded"
+	EnvironmentHealthStatusSevere   EnvironmentHealthStatus = "Severe"
 )
 
-const (
-	// EnvironmentInfoTypeTail is a EnvironmentInfoType enum value
-	EnvironmentInfoTypeTail = "tail"
+type EnvironmentInfoType string
 
-	// EnvironmentInfoTypeBundle is a EnvironmentInfoType enum value
-	EnvironmentInfoTypeBundle = "bundle"
+// Enum values for EnvironmentInfoType
+const (
+	EnvironmentInfoTypeTail   EnvironmentInfoType = "tail"
+	EnvironmentInfoTypeBundle EnvironmentInfoType = "bundle"
 )
 
+type EnvironmentStatus string
+
+// Enum values for EnvironmentStatus
 const (
-	// EnvironmentStatusLaunching is a EnvironmentStatus enum value
-	EnvironmentStatusLaunching = "Launching"
-
-	// EnvironmentStatusUpdating is a EnvironmentStatus enum value
-	EnvironmentStatusUpdating = "Updating"
-
-	// EnvironmentStatusReady is a EnvironmentStatus enum value
-	EnvironmentStatusReady = "Ready"
-
-	// EnvironmentStatusTerminating is a EnvironmentStatus enum value
-	EnvironmentStatusTerminating = "Terminating"
-
-	// EnvironmentStatusTerminated is a EnvironmentStatus enum value
-	EnvironmentStatusTerminated = "Terminated"
+	EnvironmentStatusLaunching   EnvironmentStatus = "Launching"
+	EnvironmentStatusUpdating    EnvironmentStatus = "Updating"
+	EnvironmentStatusReady       EnvironmentStatus = "Ready"
+	EnvironmentStatusTerminating EnvironmentStatus = "Terminating"
+	EnvironmentStatusTerminated  EnvironmentStatus = "Terminated"
 )
 
+type EventSeverity string
+
+// Enum values for EventSeverity
 const (
-	// EventSeverityTrace is a EventSeverity enum value
-	EventSeverityTrace = "TRACE"
-
-	// EventSeverityDebug is a EventSeverity enum value
-	EventSeverityDebug = "DEBUG"
-
-	// EventSeverityInfo is a EventSeverity enum value
-	EventSeverityInfo = "INFO"
-
-	// EventSeverityWarn is a EventSeverity enum value
-	EventSeverityWarn = "WARN"
-
-	// EventSeverityError is a EventSeverity enum value
-	EventSeverityError = "ERROR"
-
-	// EventSeverityFatal is a EventSeverity enum value
-	EventSeverityFatal = "FATAL"
+	EventSeverityTrace EventSeverity = "TRACE"
+	EventSeverityDebug EventSeverity = "DEBUG"
+	EventSeverityInfo  EventSeverity = "INFO"
+	EventSeverityWarn  EventSeverity = "WARN"
+	EventSeverityError EventSeverity = "ERROR"
+	EventSeverityFatal EventSeverity = "FATAL"
 )
 
+type FailureType string
+
+// Enum values for FailureType
 const (
-	// FailureTypeUpdateCancelled is a FailureType enum value
-	FailureTypeUpdateCancelled = "UpdateCancelled"
-
-	// FailureTypeCancellationFailed is a FailureType enum value
-	FailureTypeCancellationFailed = "CancellationFailed"
-
-	// FailureTypeRollbackFailed is a FailureType enum value
-	FailureTypeRollbackFailed = "RollbackFailed"
-
-	// FailureTypeRollbackSuccessful is a FailureType enum value
-	FailureTypeRollbackSuccessful = "RollbackSuccessful"
-
-	// FailureTypeInternalFailure is a FailureType enum value
-	FailureTypeInternalFailure = "InternalFailure"
-
-	// FailureTypeInvalidEnvironmentState is a FailureType enum value
-	FailureTypeInvalidEnvironmentState = "InvalidEnvironmentState"
-
-	// FailureTypePermissionsError is a FailureType enum value
-	FailureTypePermissionsError = "PermissionsError"
+	FailureTypeUpdateCancelled         FailureType = "UpdateCancelled"
+	FailureTypeCancellationFailed      FailureType = "CancellationFailed"
+	FailureTypeRollbackFailed          FailureType = "RollbackFailed"
+	FailureTypeRollbackSuccessful      FailureType = "RollbackSuccessful"
+	FailureTypeInternalFailure         FailureType = "InternalFailure"
+	FailureTypeInvalidEnvironmentState FailureType = "InvalidEnvironmentState"
+	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
 
+type InstancesHealthAttribute string
+
+// Enum values for InstancesHealthAttribute
 const (
-	// InstancesHealthAttributeHealthStatus is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeHealthStatus = "HealthStatus"
-
-	// InstancesHealthAttributeColor is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeColor = "Color"
-
-	// InstancesHealthAttributeCauses is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeCauses = "Causes"
-
-	// InstancesHealthAttributeApplicationMetrics is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeApplicationMetrics = "ApplicationMetrics"
-
-	// InstancesHealthAttributeRefreshedAt is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeRefreshedAt = "RefreshedAt"
-
-	// InstancesHealthAttributeLaunchedAt is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeLaunchedAt = "LaunchedAt"
-
-	// InstancesHealthAttributeSystem is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeSystem = "System"
-
-	// InstancesHealthAttributeDeployment is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeDeployment = "Deployment"
-
-	// InstancesHealthAttributeAvailabilityZone is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeAvailabilityZone = "AvailabilityZone"
-
-	// InstancesHealthAttributeInstanceType is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeInstanceType = "InstanceType"
-
-	// InstancesHealthAttributeAll is a InstancesHealthAttribute enum value
-	InstancesHealthAttributeAll = "All"
+	InstancesHealthAttributeHealthStatus       InstancesHealthAttribute = "HealthStatus"
+	InstancesHealthAttributeColor              InstancesHealthAttribute = "Color"
+	InstancesHealthAttributeCauses             InstancesHealthAttribute = "Causes"
+	InstancesHealthAttributeApplicationMetrics InstancesHealthAttribute = "ApplicationMetrics"
+	InstancesHealthAttributeRefreshedAt        InstancesHealthAttribute = "RefreshedAt"
+	InstancesHealthAttributeLaunchedAt         InstancesHealthAttribute = "LaunchedAt"
+	InstancesHealthAttributeSystem             InstancesHealthAttribute = "System"
+	InstancesHealthAttributeDeployment         InstancesHealthAttribute = "Deployment"
+	InstancesHealthAttributeAvailabilityZone   InstancesHealthAttribute = "AvailabilityZone"
+	InstancesHealthAttributeInstanceType       InstancesHealthAttribute = "InstanceType"
+	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
+type PlatformStatus string
+
+// Enum values for PlatformStatus
 const (
-	// PlatformStatusCreating is a PlatformStatus enum value
-	PlatformStatusCreating = "Creating"
-
-	// PlatformStatusFailed is a PlatformStatus enum value
-	PlatformStatusFailed = "Failed"
-
-	// PlatformStatusReady is a PlatformStatus enum value
-	PlatformStatusReady = "Ready"
-
-	// PlatformStatusDeleting is a PlatformStatus enum value
-	PlatformStatusDeleting = "Deleting"
-
-	// PlatformStatusDeleted is a PlatformStatus enum value
-	PlatformStatusDeleted = "Deleted"
+	PlatformStatusCreating PlatformStatus = "Creating"
+	PlatformStatusFailed   PlatformStatus = "Failed"
+	PlatformStatusReady    PlatformStatus = "Ready"
+	PlatformStatusDeleting PlatformStatus = "Deleting"
+	PlatformStatusDeleted  PlatformStatus = "Deleted"
 )
 
-const (
-	// SourceRepositoryCodeCommit is a SourceRepository enum value
-	SourceRepositoryCodeCommit = "CodeCommit"
+type SourceRepository string
 
-	// SourceRepositoryS3 is a SourceRepository enum value
-	SourceRepositoryS3 = "S3"
+// Enum values for SourceRepository
+const (
+	SourceRepositoryCodeCommit SourceRepository = "CodeCommit"
+	SourceRepositoryS3         SourceRepository = "S3"
 )
 
-const (
-	// SourceTypeGit is a SourceType enum value
-	SourceTypeGit = "Git"
+type SourceType string
 
-	// SourceTypeZip is a SourceType enum value
-	SourceTypeZip = "Zip"
+// Enum values for SourceType
+const (
+	SourceTypeGit SourceType = "Git"
+	SourceTypeZip SourceType = "Zip"
 )
 
-const (
-	// ValidationSeverityError is a ValidationSeverity enum value
-	ValidationSeverityError = "error"
+type ValidationSeverity string
 
-	// ValidationSeverityWarning is a ValidationSeverity enum value
-	ValidationSeverityWarning = "warning"
+// Enum values for ValidationSeverity
+const (
+	ValidationSeverityError   ValidationSeverity = "error"
+	ValidationSeverityWarning ValidationSeverity = "warning"
 )

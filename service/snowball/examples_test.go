@@ -165,7 +165,7 @@ func ExampleSnowball_CreateCluster_shared00() {
 	input := &snowball.CreateClusterInput{
 		AddressId:   aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description: aws.String("MyCluster"),
-		JobType:     aws.String("LOCAL_USE"),
+		JobType:     snowball.JobTypeLocalUse,
 		KmsKeyARN:   aws.String("arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456"),
 		Notification: &snowball.Notification{
 			NotifyAll: aws.Bool(false),
@@ -178,8 +178,8 @@ func ExampleSnowball_CreateCluster_shared00() {
 			},
 		},
 		RoleARN:        aws.String("arn:aws:iam::123456789012:role/snowball-import-S3-role"),
-		ShippingOption: aws.String("SECOND_DAY"),
-		SnowballType:   aws.String("EDGE"),
+		ShippingOption: snowball.ShippingOptionSecondDay,
+		SnowballType:   snowball.TypeEdge,
 	}
 
 	result, err := svc.CreateCluster(input)
@@ -223,7 +223,7 @@ func ExampleSnowball_CreateJob_shared00() {
 	input := &snowball.CreateJobInput{
 		AddressId:   aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description: aws.String("My Job"),
-		JobType:     aws.String("IMPORT"),
+		JobType:     snowball.JobTypeImport,
 		KmsKeyARN:   aws.String("arn:aws:kms:us-east-1:123456789012:key/abcd1234-12ab-34cd-56ef-123456123456"),
 		Notification: &snowball.Notification{
 			NotifyAll: aws.Bool(false),
@@ -236,9 +236,9 @@ func ExampleSnowball_CreateJob_shared00() {
 			},
 		},
 		RoleARN:                    aws.String("arn:aws:iam::123456789012:role/snowball-import-S3-role"),
-		ShippingOption:             aws.String("SECOND_DAY"),
-		SnowballCapacityPreference: aws.String("T80"),
-		SnowballType:               aws.String("STANDARD"),
+		ShippingOption:             snowball.ShippingOptionSecondDay,
+		SnowballCapacityPreference: snowball.CapacityT80,
+		SnowballType:               snowball.TypeStandard,
 	}
 
 	result, err := svc.CreateJob(input)
@@ -706,8 +706,8 @@ func ExampleSnowball_UpdateJob_shared00() {
 		AddressId:                  aws.String("ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b"),
 		Description:                aws.String("Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS."),
 		JobId:                      aws.String("JID123e4567-e89b-12d3-a456-426655440000"),
-		ShippingOption:             aws.String("NEXT_DAY"),
-		SnowballCapacityPreference: aws.String("T100"),
+		ShippingOption:             snowball.ShippingOptionNextDay,
+		SnowballCapacityPreference: snowball.CapacityT100,
 	}
 
 	result, err := svc.UpdateJob(input)

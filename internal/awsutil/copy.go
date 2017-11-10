@@ -51,7 +51,11 @@ func rcopy(dst, src reflect.Value, root bool) {
 			e := src.Type().Elem()
 			if dst.CanSet() && !src.IsNil() {
 				if _, ok := src.Interface().(*time.Time); !ok {
-					dst.Set(reflect.New(e))
+					if dst.Kind() == reflect.String {
+						dst.SetString(e.String())
+					} else {
+						dst.Set(reflect.New(e))
+					}
 				} else {
 					tempValue := reflect.New(e)
 					tempValue.Elem().Set(src.Elem())
@@ -59,7 +63,7 @@ func rcopy(dst, src reflect.Value, root bool) {
 					dst.Set(tempValue)
 				}
 			}
-			if src.Elem().IsValid() {
+			if dst.Kind() != reflect.String && src.Elem().IsValid() {
 				// Keep the current root state since the depth hasn't changed
 				rcopy(dst.Elem(), src.Elem(), root)
 			}

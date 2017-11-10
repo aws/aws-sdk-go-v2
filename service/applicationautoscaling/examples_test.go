@@ -39,8 +39,8 @@ func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
 	input := &applicationautoscaling.DeleteScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-lt-25"),
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: aws.String("ecs:service:DesiredCount"),
-		ServiceNamespace:  aws.String("ecs"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.DeleteScalingPolicy(input)
@@ -82,8 +82,8 @@ func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DeregisterScalableTargetInput{
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: aws.String("ecs:service:DesiredCount"),
-		ServiceNamespace:  aws.String("ecs"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.DeregisterScalableTarget(input)
@@ -123,7 +123,7 @@ func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
 
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalableTargetsInput{
-		ServiceNamespace: aws.String("ecs"),
+		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.DescribeScalableTargets(input)
@@ -165,8 +165,8 @@ func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalingActivitiesInput{
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: aws.String("ecs:service:DesiredCount"),
-		ServiceNamespace:  aws.String("ecs"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.DescribeScalingActivities(input)
@@ -206,7 +206,7 @@ func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
 
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalingPoliciesInput{
-		ServiceNamespace: aws.String("ecs"),
+		ServiceNamespace: applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.DescribeScalingPolicies(input)
@@ -251,12 +251,12 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.PutScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-gt-75"),
-		PolicyType:        aws.String("StepScaling"),
+		PolicyType:        applicationautoscaling.PolicyTypeStepScaling,
 		ResourceId:        aws.String("service/default/web-app"),
-		ScalableDimension: aws.String("ecs:service:DesiredCount"),
-		ServiceNamespace:  aws.String("ecs"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
-			AdjustmentType: aws.String("PercentChangeInCapacity"),
+			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(60),
 			StepAdjustments: []*applicationautoscaling.StepAdjustment{
 				{
@@ -312,12 +312,12 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
 	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.PutScalingPolicyInput{
 		PolicyName:        aws.String("fleet-cpu-gt-75"),
-		PolicyType:        aws.String("StepScaling"),
+		PolicyType:        applicationautoscaling.PolicyTypeStepScaling,
 		ResourceId:        aws.String("spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3"),
-		ScalableDimension: aws.String("ec2:spot-fleet-request:TargetCapacity"),
-		ServiceNamespace:  aws.String("ec2"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEc2,
 		StepScalingPolicyConfiguration: &applicationautoscaling.StepScalingPolicyConfiguration{
-			AdjustmentType: aws.String("PercentChangeInCapacity"),
+			AdjustmentType: applicationautoscaling.AdjustmentTypePercentChangeInCapacity,
 			Cooldown:       aws.Int64(180),
 			StepAdjustments: []*applicationautoscaling.StepAdjustment{
 				{
@@ -375,8 +375,8 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
 		MinCapacity:       aws.Int64(1),
 		ResourceId:        aws.String("service/default/web-app"),
 		RoleARN:           aws.String("arn:aws:iam::012345678910:role/ApplicationAutoscalingECSRole"),
-		ScalableDimension: aws.String("ecs:service:DesiredCount"),
-		ServiceNamespace:  aws.String("ecs"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEcsServiceDesiredCount,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEcs,
 	}
 
 	result, err := svc.RegisterScalableTarget(input)
@@ -421,8 +421,8 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared01() {
 		MinCapacity:       aws.Int64(1),
 		ResourceId:        aws.String("spot-fleet-request/sfr-45e69d8a-be48-4539-bbf3-3464e99c50c3"),
 		RoleARN:           aws.String("arn:aws:iam::012345678910:role/ApplicationAutoscalingSpotRole"),
-		ScalableDimension: aws.String("ec2:spot-fleet-request:TargetCapacity"),
-		ServiceNamespace:  aws.String("ec2"),
+		ScalableDimension: applicationautoscaling.ScalableDimensionEc2SpotFleetRequestTargetCapacity,
+		ServiceNamespace:  applicationautoscaling.ServiceNamespaceEc2,
 	}
 
 	result, err := svc.RegisterScalableTarget(input)

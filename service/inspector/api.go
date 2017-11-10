@@ -3502,9 +3502,11 @@ func (s AddAttributesToFindingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddAttributesToFindingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddAttributesToFindingsInput"}
+
 	if s.Attributes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
+
 	if s.FindingArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FindingArns"))
 	}
@@ -3618,12 +3620,12 @@ type AgentFilter struct {
 	// SHUTDOWN, UNHEALTHY, THROTTLED, and UNKNOWN.
 	//
 	// AgentHealthCodes is a required field
-	AgentHealthCodes []*string `locationName:"agentHealthCodes" type:"list" required:"true"`
+	AgentHealthCodes []AgentHealthCode `locationName:"agentHealthCodes" type:"list" required:"true"`
 
 	// The current health state of the agent. Values can be set to HEALTHY or UNHEALTHY.
 	//
 	// AgentHealths is a required field
-	AgentHealths []*string `locationName:"agentHealths" type:"list" required:"true"`
+	AgentHealths []AgentHealth `locationName:"agentHealths" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -3639,9 +3641,11 @@ func (s AgentFilter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AgentFilter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AgentFilter"}
+
 	if s.AgentHealthCodes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AgentHealthCodes"))
 	}
+
 	if s.AgentHealths == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AgentHealths"))
 	}
@@ -3653,13 +3657,13 @@ func (s *AgentFilter) Validate() error {
 }
 
 // SetAgentHealthCodes sets the AgentHealthCodes field's value.
-func (s *AgentFilter) SetAgentHealthCodes(v []*string) *AgentFilter {
+func (s *AgentFilter) SetAgentHealthCodes(v []AgentHealthCode) *AgentFilter {
 	s.AgentHealthCodes = v
 	return s
 }
 
 // SetAgentHealths sets the AgentHealths field's value.
-func (s *AgentFilter) SetAgentHealths(v []*string) *AgentFilter {
+func (s *AgentFilter) SetAgentHealths(v []AgentHealth) *AgentFilter {
 	s.AgentHealths = v
 	return s
 }
@@ -3766,7 +3770,7 @@ type AssessmentRun struct {
 	// The state of the assessment run.
 	//
 	// State is a required field
-	State *string `locationName:"state" type:"string" required:"true" enum:"AssessmentRunState"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
 
 	// The last time when the assessment run's state changed.
 	//
@@ -3861,8 +3865,8 @@ func (s *AssessmentRun) SetStartedAt(v time.Time) *AssessmentRun {
 }
 
 // SetState sets the State field's value.
-func (s *AssessmentRun) SetState(v string) *AssessmentRun {
-	s.State = &v
+func (s *AssessmentRun) SetState(v AssessmentRunState) *AssessmentRun {
+	s.State = v
 	return s
 }
 
@@ -3893,12 +3897,12 @@ type AssessmentRunAgent struct {
 	// The current health state of the agent.
 	//
 	// AgentHealth is a required field
-	AgentHealth *string `locationName:"agentHealth" type:"string" required:"true" enum:"AgentHealth"`
+	AgentHealth AgentHealth `locationName:"agentHealth" type:"string" required:"true"`
 
 	// The detailed health state of the agent.
 	//
 	// AgentHealthCode is a required field
-	AgentHealthCode *string `locationName:"agentHealthCode" type:"string" required:"true" enum:"AgentHealthCode"`
+	AgentHealthCode AgentHealthCode `locationName:"agentHealthCode" type:"string" required:"true"`
 
 	// The description for the agent health code.
 	AgentHealthDetails *string `locationName:"agentHealthDetails" type:"string"`
@@ -3934,14 +3938,14 @@ func (s AssessmentRunAgent) GoString() string {
 }
 
 // SetAgentHealth sets the AgentHealth field's value.
-func (s *AssessmentRunAgent) SetAgentHealth(v string) *AssessmentRunAgent {
-	s.AgentHealth = &v
+func (s *AssessmentRunAgent) SetAgentHealth(v AgentHealth) *AssessmentRunAgent {
+	s.AgentHealth = v
 	return s
 }
 
 // SetAgentHealthCode sets the AgentHealthCode field's value.
-func (s *AssessmentRunAgent) SetAgentHealthCode(v string) *AssessmentRunAgent {
-	s.AgentHealthCode = &v
+func (s *AssessmentRunAgent) SetAgentHealthCode(v AgentHealthCode) *AssessmentRunAgent {
+	s.AgentHealthCode = v
 	return s
 }
 
@@ -4015,7 +4019,7 @@ type AssessmentRunFilter struct {
 	// For a record to match a filter, one of the values specified for this data
 	// type property must be the exact match of the value of the assessmentRunState
 	// property of the AssessmentRun data type.
-	States []*string `locationName:"states" type:"list"`
+	States []AssessmentRunState `locationName:"states" type:"list"`
 }
 
 // String returns the string representation
@@ -4083,7 +4087,7 @@ func (s *AssessmentRunFilter) SetStateChangeTimeRange(v *TimestampRange) *Assess
 }
 
 // SetStates sets the States field's value.
-func (s *AssessmentRunFilter) SetStates(v []*string) *AssessmentRunFilter {
+func (s *AssessmentRunFilter) SetStates(v []AssessmentRunState) *AssessmentRunFilter {
 	s.States = v
 	return s
 }
@@ -4106,13 +4110,13 @@ type AssessmentRunNotification struct {
 	// The event for which a notification is sent.
 	//
 	// Event is a required field
-	Event *string `locationName:"event" type:"string" required:"true" enum:"Event"`
+	Event Event `locationName:"event" type:"string" required:"true"`
 
 	// The message included in the notification.
 	Message *string `locationName:"message" type:"string"`
 
 	// The status code of the SNS notification.
-	SnsPublishStatusCode *string `locationName:"snsPublishStatusCode" type:"string" enum:"AssessmentRunNotificationSnsStatusCode"`
+	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode `locationName:"snsPublishStatusCode" type:"string"`
 
 	// The SNS topic to which the SNS notification is sent.
 	SnsTopicArn *string `locationName:"snsTopicArn" min:"1" type:"string"`
@@ -4141,8 +4145,8 @@ func (s *AssessmentRunNotification) SetError(v bool) *AssessmentRunNotification 
 }
 
 // SetEvent sets the Event field's value.
-func (s *AssessmentRunNotification) SetEvent(v string) *AssessmentRunNotification {
-	s.Event = &v
+func (s *AssessmentRunNotification) SetEvent(v Event) *AssessmentRunNotification {
+	s.Event = v
 	return s
 }
 
@@ -4153,8 +4157,8 @@ func (s *AssessmentRunNotification) SetMessage(v string) *AssessmentRunNotificat
 }
 
 // SetSnsPublishStatusCode sets the SnsPublishStatusCode field's value.
-func (s *AssessmentRunNotification) SetSnsPublishStatusCode(v string) *AssessmentRunNotification {
-	s.SnsPublishStatusCode = &v
+func (s *AssessmentRunNotification) SetSnsPublishStatusCode(v AssessmentRunNotificationSnsStatusCode) *AssessmentRunNotification {
+	s.SnsPublishStatusCode = v
 	return s
 }
 
@@ -4172,7 +4176,7 @@ type AssessmentRunStateChange struct {
 	// The assessment run state.
 	//
 	// State is a required field
-	State *string `locationName:"state" type:"string" required:"true" enum:"AssessmentRunState"`
+	State AssessmentRunState `locationName:"state" type:"string" required:"true"`
 
 	// The last time the assessment run state changed.
 	//
@@ -4191,8 +4195,8 @@ func (s AssessmentRunStateChange) GoString() string {
 }
 
 // SetState sets the State field's value.
-func (s *AssessmentRunStateChange) SetState(v string) *AssessmentRunStateChange {
-	s.State = &v
+func (s *AssessmentRunStateChange) SetState(v AssessmentRunState) *AssessmentRunStateChange {
+	s.State = v
 	return s
 }
 
@@ -4582,6 +4586,7 @@ func (s Attribute) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Attribute) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Attribute"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -4640,12 +4645,14 @@ func (s CreateAssessmentTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssessmentTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssessmentTargetInput"}
+
 	if s.AssessmentTargetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetName"))
 	}
 	if s.AssessmentTargetName != nil && len(*s.AssessmentTargetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetName", 1))
 	}
+
 	if s.ResourceGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupArn"))
 	}
@@ -4747,24 +4754,28 @@ func (s CreateAssessmentTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssessmentTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAssessmentTemplateInput"}
+
 	if s.AssessmentTargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetArn"))
 	}
 	if s.AssessmentTargetArn != nil && len(*s.AssessmentTargetArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetArn", 1))
 	}
+
 	if s.AssessmentTemplateName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateName"))
 	}
 	if s.AssessmentTemplateName != nil && len(*s.AssessmentTemplateName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTemplateName", 1))
 	}
+
 	if s.DurationInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DurationInSeconds"))
 	}
 	if s.DurationInSeconds != nil && *s.DurationInSeconds < 180 {
 		invalidParams.Add(aws.NewErrParamMinValue("DurationInSeconds", 180))
 	}
+
 	if s.RulesPackageArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RulesPackageArns"))
 	}
@@ -4866,6 +4877,7 @@ func (s CreateResourceGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceGroupInput"}
+
 	if s.ResourceGroupTags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupTags"))
 	}
@@ -4944,6 +4956,7 @@ func (s DeleteAssessmentRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAssessmentRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAssessmentRunInput"}
+
 	if s.AssessmentRunArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
 	}
@@ -5001,6 +5014,7 @@ func (s DeleteAssessmentTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAssessmentTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAssessmentTargetInput"}
+
 	if s.AssessmentTargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetArn"))
 	}
@@ -5058,6 +5072,7 @@ func (s DeleteAssessmentTemplateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAssessmentTemplateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAssessmentTemplateInput"}
+
 	if s.AssessmentTemplateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
 	}
@@ -5115,6 +5130,7 @@ func (s DescribeAssessmentRunsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAssessmentRunsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentRunsInput"}
+
 	if s.AssessmentRunArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArns"))
 	}
@@ -5195,6 +5211,7 @@ func (s DescribeAssessmentTargetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAssessmentTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentTargetsInput"}
+
 	if s.AssessmentTargetArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetArns"))
 	}
@@ -5273,6 +5290,7 @@ func (s DescribeAssessmentTemplatesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAssessmentTemplatesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAssessmentTemplatesInput"}
+
 	if s.AssessmentTemplateArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArns"))
 	}
@@ -5406,7 +5424,7 @@ type DescribeFindingsInput struct {
 
 	// The locale into which you want to translate a finding description, recommendation,
 	// and the short description that identifies the finding.
-	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string"`
 }
 
 // String returns the string representation
@@ -5422,6 +5440,7 @@ func (s DescribeFindingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFindingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeFindingsInput"}
+
 	if s.FindingArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FindingArns"))
 	}
@@ -5442,8 +5461,8 @@ func (s *DescribeFindingsInput) SetFindingArns(v []*string) *DescribeFindingsInp
 }
 
 // SetLocale sets the Locale field's value.
-func (s *DescribeFindingsInput) SetLocale(v string) *DescribeFindingsInput {
-	s.Locale = &v
+func (s *DescribeFindingsInput) SetLocale(v Locale) *DescribeFindingsInput {
+	s.Locale = v
 	return s
 }
 
@@ -5508,6 +5527,7 @@ func (s DescribeResourceGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResourceGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceGroupsInput"}
+
 	if s.ResourceGroupArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupArns"))
 	}
@@ -5570,7 +5590,7 @@ type DescribeRulesPackagesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The locale that you want to translate a rules package description into.
-	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string"`
 
 	// The ARN that specifies the rules package that you want to describe.
 	//
@@ -5591,6 +5611,7 @@ func (s DescribeRulesPackagesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRulesPackagesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRulesPackagesInput"}
+
 	if s.RulesPackageArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RulesPackageArns"))
 	}
@@ -5605,8 +5626,8 @@ func (s *DescribeRulesPackagesInput) Validate() error {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *DescribeRulesPackagesInput) SetLocale(v string) *DescribeRulesPackagesInput {
-	s.Locale = &v
+func (s *DescribeRulesPackagesInput) SetLocale(v Locale) *DescribeRulesPackagesInput {
+	s.Locale = v
 	return s
 }
 
@@ -5714,7 +5735,7 @@ type EventSubscription struct {
 	// are sent.
 	//
 	// Event is a required field
-	Event *string `locationName:"event" type:"string" required:"true" enum:"Event"`
+	Event Event `locationName:"event" type:"string" required:"true"`
 
 	// The time at which SubscribeToEvent is called.
 	//
@@ -5733,8 +5754,8 @@ func (s EventSubscription) GoString() string {
 }
 
 // SetEvent sets the Event field's value.
-func (s *EventSubscription) SetEvent(v string) *EventSubscription {
-	s.Event = &v
+func (s *EventSubscription) SetEvent(v Event) *EventSubscription {
+	s.Event = v
 	return s
 }
 
@@ -5752,7 +5773,7 @@ type FailedItemDetails struct {
 	// The status code of a failed item.
 	//
 	// FailureCode is a required field
-	FailureCode *string `locationName:"failureCode" type:"string" required:"true" enum:"FailedItemErrorCode"`
+	FailureCode FailedItemErrorCode `locationName:"failureCode" type:"string" required:"true"`
 
 	// Indicates whether you can immediately retry a request for this item for a
 	// specified resource.
@@ -5772,8 +5793,8 @@ func (s FailedItemDetails) GoString() string {
 }
 
 // SetFailureCode sets the FailureCode field's value.
-func (s *FailedItemDetails) SetFailureCode(v string) *FailedItemDetails {
-	s.FailureCode = &v
+func (s *FailedItemDetails) SetFailureCode(v FailedItemErrorCode) *FailedItemDetails {
+	s.FailureCode = v
 	return s
 }
 
@@ -5798,7 +5819,7 @@ type Finding struct {
 	AssetAttributes *AssetAttributes `locationName:"assetAttributes" type:"structure"`
 
 	// The type of the host from which the finding is generated.
-	AssetType *string `locationName:"assetType" type:"string" enum:"AssetType"`
+	AssetType AssetType `locationName:"assetType" type:"string"`
 
 	// The system-defined attributes for the finding.
 	//
@@ -5838,7 +5859,7 @@ type Finding struct {
 	ServiceAttributes *ServiceAttributes `locationName:"serviceAttributes" type:"structure"`
 
 	// The finding severity. Values can be set to High, Medium, Low, and Informational.
-	Severity *string `locationName:"severity" type:"string" enum:"Severity"`
+	Severity Severity `locationName:"severity" type:"string"`
 
 	// The name of the finding.
 	Title *string `locationName:"title" type:"string"`
@@ -5877,8 +5898,8 @@ func (s *Finding) SetAssetAttributes(v *AssetAttributes) *Finding {
 }
 
 // SetAssetType sets the AssetType field's value.
-func (s *Finding) SetAssetType(v string) *Finding {
-	s.AssetType = &v
+func (s *Finding) SetAssetType(v AssetType) *Finding {
+	s.AssetType = v
 	return s
 }
 
@@ -5949,8 +5970,8 @@ func (s *Finding) SetServiceAttributes(v *ServiceAttributes) *Finding {
 }
 
 // SetSeverity sets the Severity field's value.
-func (s *Finding) SetSeverity(v string) *Finding {
-	s.Severity = &v
+func (s *Finding) SetSeverity(v Severity) *Finding {
+	s.Severity = v
 	return s
 }
 
@@ -6008,7 +6029,7 @@ type FindingFilter struct {
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the severity property
 	// of the Finding data type.
-	Severities []*string `locationName:"severities" type:"list"`
+	Severities []Severity `locationName:"severities" type:"list"`
 
 	// For a record to match a filter, the value that is specified for this data
 	// type property must be contained in the list of values of the userAttributes
@@ -6093,7 +6114,7 @@ func (s *FindingFilter) SetRulesPackageArns(v []*string) *FindingFilter {
 }
 
 // SetSeverities sets the Severities field's value.
-func (s *FindingFilter) SetSeverities(v []*string) *FindingFilter {
+func (s *FindingFilter) SetSeverities(v []Severity) *FindingFilter {
 	s.Severities = v
 	return s
 }
@@ -6118,14 +6139,14 @@ type GetAssessmentReportInput struct {
 	// want to generate.
 	//
 	// ReportFileFormat is a required field
-	ReportFileFormat *string `locationName:"reportFileFormat" type:"string" required:"true" enum:"ReportFileFormat"`
+	ReportFileFormat ReportFileFormat `locationName:"reportFileFormat" type:"string" required:"true"`
 
 	// Specifies the type of the assessment report that you want to generate. There
 	// are two types of assessment reports: a finding report and a full report.
 	// For more information, see Assessment Reports (http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html).
 	//
 	// ReportType is a required field
-	ReportType *string `locationName:"reportType" type:"string" required:"true" enum:"ReportType"`
+	ReportType ReportType `locationName:"reportType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6141,16 +6162,17 @@ func (s GetAssessmentReportInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAssessmentReportInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAssessmentReportInput"}
+
 	if s.AssessmentRunArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
 	}
 	if s.AssessmentRunArn != nil && len(*s.AssessmentRunArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunArn", 1))
 	}
-	if s.ReportFileFormat == nil {
+	if len(s.ReportFileFormat) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ReportFileFormat"))
 	}
-	if s.ReportType == nil {
+	if len(s.ReportType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ReportType"))
 	}
 
@@ -6167,14 +6189,14 @@ func (s *GetAssessmentReportInput) SetAssessmentRunArn(v string) *GetAssessmentR
 }
 
 // SetReportFileFormat sets the ReportFileFormat field's value.
-func (s *GetAssessmentReportInput) SetReportFileFormat(v string) *GetAssessmentReportInput {
-	s.ReportFileFormat = &v
+func (s *GetAssessmentReportInput) SetReportFileFormat(v ReportFileFormat) *GetAssessmentReportInput {
+	s.ReportFileFormat = v
 	return s
 }
 
 // SetReportType sets the ReportType field's value.
-func (s *GetAssessmentReportInput) SetReportType(v string) *GetAssessmentReportInput {
-	s.ReportType = &v
+func (s *GetAssessmentReportInput) SetReportType(v ReportType) *GetAssessmentReportInput {
+	s.ReportType = v
 	return s
 }
 
@@ -6185,7 +6207,7 @@ type GetAssessmentReportOutput struct {
 	// Specifies the status of the request to generate an assessment report.
 	//
 	// Status is a required field
-	Status *string `locationName:"status" type:"string" required:"true" enum:"ReportStatus"`
+	Status ReportStatus `locationName:"status" type:"string" required:"true"`
 
 	// Specifies the URL where you can find the generated assessment report. This
 	// parameter is only returned if the report is successfully generated.
@@ -6203,8 +6225,8 @@ func (s GetAssessmentReportOutput) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetAssessmentReportOutput) SetStatus(v string) *GetAssessmentReportOutput {
-	s.Status = &v
+func (s *GetAssessmentReportOutput) SetStatus(v ReportStatus) *GetAssessmentReportOutput {
+	s.Status = v
 	return s
 }
 
@@ -6238,6 +6260,7 @@ func (s GetTelemetryMetadataInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTelemetryMetadataInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTelemetryMetadataInput"}
+
 	if s.AssessmentRunArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
 	}
@@ -6324,6 +6347,7 @@ func (s ListAssessmentRunAgentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssessmentRunAgentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAssessmentRunAgentsInput"}
+
 	if s.AssessmentRunArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
 	}
@@ -7079,6 +7103,7 @@ func (s ListTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -7160,6 +7185,7 @@ func (s *PreviewAgentsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.PreviewAgentsArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PreviewAgentsArn"))
 	}
@@ -7253,6 +7279,7 @@ func (s RegisterCrossAccountAccessRoleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterCrossAccountAccessRoleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterCrossAccountAccessRoleInput"}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -7315,9 +7342,11 @@ func (s RemoveAttributesFromFindingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAttributesFromFindingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveAttributesFromFindingsInput"}
+
 	if s.AttributeKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AttributeKeys"))
 	}
+
 	if s.FindingArns == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FindingArns"))
 	}
@@ -7450,6 +7479,7 @@ func (s ResourceGroupTag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceGroupTag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ResourceGroupTag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -7620,6 +7650,7 @@ func (s SetTagsForResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTagsForResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTagsForResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -7701,6 +7732,7 @@ func (s *StartAssessmentRunInput) Validate() error {
 	if s.AssessmentRunName != nil && len(*s.AssessmentRunName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentRunName", 1))
 	}
+
 	if s.AssessmentTemplateArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTemplateArn"))
 	}
@@ -7766,7 +7798,7 @@ type StopAssessmentRunInput struct {
 	// data and begins the results evaluation and the findings generation process.
 	// SKIP_EVALUATION cancels the assessment run immediately, after which no findings
 	// are generated.
-	StopAction *string `locationName:"stopAction" type:"string" enum:"StopAction"`
+	StopAction StopAction `locationName:"stopAction" type:"string"`
 }
 
 // String returns the string representation
@@ -7782,6 +7814,7 @@ func (s StopAssessmentRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopAssessmentRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopAssessmentRunInput"}
+
 	if s.AssessmentRunArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentRunArn"))
 	}
@@ -7802,8 +7835,8 @@ func (s *StopAssessmentRunInput) SetAssessmentRunArn(v string) *StopAssessmentRu
 }
 
 // SetStopAction sets the StopAction field's value.
-func (s *StopAssessmentRunInput) SetStopAction(v string) *StopAssessmentRunInput {
-	s.StopAction = &v
+func (s *StopAssessmentRunInput) SetStopAction(v StopAction) *StopAssessmentRunInput {
+	s.StopAction = v
 	return s
 }
 
@@ -7829,7 +7862,7 @@ type SubscribeToEventInput struct {
 	// The event for which you want to receive SNS notifications.
 	//
 	// Event is a required field
-	Event *string `locationName:"event" type:"string" required:"true" enum:"Event"`
+	Event Event `locationName:"event" type:"string" required:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to receive SNS notifications.
@@ -7856,15 +7889,17 @@ func (s SubscribeToEventInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubscribeToEventInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SubscribeToEventInput"}
-	if s.Event == nil {
+	if len(s.Event) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Event"))
 	}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -7879,8 +7914,8 @@ func (s *SubscribeToEventInput) Validate() error {
 }
 
 // SetEvent sets the Event field's value.
-func (s *SubscribeToEventInput) SetEvent(v string) *SubscribeToEventInput {
-	s.Event = &v
+func (s *SubscribeToEventInput) SetEvent(v Event) *SubscribeToEventInput {
+	s.Event = v
 	return s
 }
 
@@ -7992,6 +8027,7 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
@@ -8110,7 +8146,7 @@ type UnsubscribeFromEventInput struct {
 	// The event for which you want to stop receiving SNS notifications.
 	//
 	// Event is a required field
-	Event *string `locationName:"event" type:"string" required:"true" enum:"Event"`
+	Event Event `locationName:"event" type:"string" required:"true"`
 
 	// The ARN of the assessment template that is used during the event for which
 	// you want to stop receiving SNS notifications.
@@ -8137,15 +8173,17 @@ func (s UnsubscribeFromEventInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnsubscribeFromEventInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeFromEventInput"}
-	if s.Event == nil {
+	if len(s.Event) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Event"))
 	}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
+
 	if s.TopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
@@ -8160,8 +8198,8 @@ func (s *UnsubscribeFromEventInput) Validate() error {
 }
 
 // SetEvent sets the Event field's value.
-func (s *UnsubscribeFromEventInput) SetEvent(v string) *UnsubscribeFromEventInput {
-	s.Event = &v
+func (s *UnsubscribeFromEventInput) SetEvent(v Event) *UnsubscribeFromEventInput {
+	s.Event = v
 	return s
 }
 
@@ -8226,18 +8264,21 @@ func (s UpdateAssessmentTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssessmentTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssessmentTargetInput"}
+
 	if s.AssessmentTargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetArn"))
 	}
 	if s.AssessmentTargetArn != nil && len(*s.AssessmentTargetArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetArn", 1))
 	}
+
 	if s.AssessmentTargetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssessmentTargetName"))
 	}
 	if s.AssessmentTargetName != nil && len(*s.AssessmentTargetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssessmentTargetName", 1))
 	}
+
 	if s.ResourceGroupArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceGroupArn"))
 	}
@@ -8284,425 +8325,239 @@ func (s UpdateAssessmentTargetOutput) GoString() string {
 	return s.String()
 }
 
+type AccessDeniedErrorCode string
+
+// Enum values for AccessDeniedErrorCode
 const (
-	// AccessDeniedErrorCodeAccessDeniedToAssessmentTarget is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToAssessmentTarget = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
-
-	// AccessDeniedErrorCodeAccessDeniedToAssessmentTemplate is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToAssessmentTemplate = "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
-
-	// AccessDeniedErrorCodeAccessDeniedToAssessmentRun is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToAssessmentRun = "ACCESS_DENIED_TO_ASSESSMENT_RUN"
-
-	// AccessDeniedErrorCodeAccessDeniedToFinding is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToFinding = "ACCESS_DENIED_TO_FINDING"
-
-	// AccessDeniedErrorCodeAccessDeniedToResourceGroup is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToResourceGroup = "ACCESS_DENIED_TO_RESOURCE_GROUP"
-
-	// AccessDeniedErrorCodeAccessDeniedToRulesPackage is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToRulesPackage = "ACCESS_DENIED_TO_RULES_PACKAGE"
-
-	// AccessDeniedErrorCodeAccessDeniedToSnsTopic is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToSnsTopic = "ACCESS_DENIED_TO_SNS_TOPIC"
-
-	// AccessDeniedErrorCodeAccessDeniedToIamRole is a AccessDeniedErrorCode enum value
-	AccessDeniedErrorCodeAccessDeniedToIamRole = "ACCESS_DENIED_TO_IAM_ROLE"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentTarget   AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TARGET"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentTemplate AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE"
+	AccessDeniedErrorCodeAccessDeniedToAssessmentRun      AccessDeniedErrorCode = "ACCESS_DENIED_TO_ASSESSMENT_RUN"
+	AccessDeniedErrorCodeAccessDeniedToFinding            AccessDeniedErrorCode = "ACCESS_DENIED_TO_FINDING"
+	AccessDeniedErrorCodeAccessDeniedToResourceGroup      AccessDeniedErrorCode = "ACCESS_DENIED_TO_RESOURCE_GROUP"
+	AccessDeniedErrorCodeAccessDeniedToRulesPackage       AccessDeniedErrorCode = "ACCESS_DENIED_TO_RULES_PACKAGE"
+	AccessDeniedErrorCodeAccessDeniedToSnsTopic           AccessDeniedErrorCode = "ACCESS_DENIED_TO_SNS_TOPIC"
+	AccessDeniedErrorCodeAccessDeniedToIamRole            AccessDeniedErrorCode = "ACCESS_DENIED_TO_IAM_ROLE"
 )
 
-const (
-	// AgentHealthHealthy is a AgentHealth enum value
-	AgentHealthHealthy = "HEALTHY"
+type AgentHealth string
 
-	// AgentHealthUnhealthy is a AgentHealth enum value
-	AgentHealthUnhealthy = "UNHEALTHY"
+// Enum values for AgentHealth
+const (
+	AgentHealthHealthy   AgentHealth = "HEALTHY"
+	AgentHealthUnhealthy AgentHealth = "UNHEALTHY"
 )
 
+type AgentHealthCode string
+
+// Enum values for AgentHealthCode
 const (
-	// AgentHealthCodeIdle is a AgentHealthCode enum value
-	AgentHealthCodeIdle = "IDLE"
-
-	// AgentHealthCodeRunning is a AgentHealthCode enum value
-	AgentHealthCodeRunning = "RUNNING"
-
-	// AgentHealthCodeShutdown is a AgentHealthCode enum value
-	AgentHealthCodeShutdown = "SHUTDOWN"
-
-	// AgentHealthCodeUnhealthy is a AgentHealthCode enum value
-	AgentHealthCodeUnhealthy = "UNHEALTHY"
-
-	// AgentHealthCodeThrottled is a AgentHealthCode enum value
-	AgentHealthCodeThrottled = "THROTTLED"
-
-	// AgentHealthCodeUnknown is a AgentHealthCode enum value
-	AgentHealthCodeUnknown = "UNKNOWN"
+	AgentHealthCodeIdle      AgentHealthCode = "IDLE"
+	AgentHealthCodeRunning   AgentHealthCode = "RUNNING"
+	AgentHealthCodeShutdown  AgentHealthCode = "SHUTDOWN"
+	AgentHealthCodeUnhealthy AgentHealthCode = "UNHEALTHY"
+	AgentHealthCodeThrottled AgentHealthCode = "THROTTLED"
+	AgentHealthCodeUnknown   AgentHealthCode = "UNKNOWN"
 )
 
+type AssessmentRunNotificationSnsStatusCode string
+
+// Enum values for AssessmentRunNotificationSnsStatusCode
 const (
-	// AssessmentRunNotificationSnsStatusCodeSuccess is a AssessmentRunNotificationSnsStatusCode enum value
-	AssessmentRunNotificationSnsStatusCodeSuccess = "SUCCESS"
-
-	// AssessmentRunNotificationSnsStatusCodeTopicDoesNotExist is a AssessmentRunNotificationSnsStatusCode enum value
-	AssessmentRunNotificationSnsStatusCodeTopicDoesNotExist = "TOPIC_DOES_NOT_EXIST"
-
-	// AssessmentRunNotificationSnsStatusCodeAccessDenied is a AssessmentRunNotificationSnsStatusCode enum value
-	AssessmentRunNotificationSnsStatusCodeAccessDenied = "ACCESS_DENIED"
-
-	// AssessmentRunNotificationSnsStatusCodeInternalError is a AssessmentRunNotificationSnsStatusCode enum value
-	AssessmentRunNotificationSnsStatusCodeInternalError = "INTERNAL_ERROR"
+	AssessmentRunNotificationSnsStatusCodeSuccess           AssessmentRunNotificationSnsStatusCode = "SUCCESS"
+	AssessmentRunNotificationSnsStatusCodeTopicDoesNotExist AssessmentRunNotificationSnsStatusCode = "TOPIC_DOES_NOT_EXIST"
+	AssessmentRunNotificationSnsStatusCodeAccessDenied      AssessmentRunNotificationSnsStatusCode = "ACCESS_DENIED"
+	AssessmentRunNotificationSnsStatusCodeInternalError     AssessmentRunNotificationSnsStatusCode = "INTERNAL_ERROR"
 )
 
+type AssessmentRunState string
+
+// Enum values for AssessmentRunState
 const (
-	// AssessmentRunStateCreated is a AssessmentRunState enum value
-	AssessmentRunStateCreated = "CREATED"
-
-	// AssessmentRunStateStartDataCollectionPending is a AssessmentRunState enum value
-	AssessmentRunStateStartDataCollectionPending = "START_DATA_COLLECTION_PENDING"
-
-	// AssessmentRunStateStartDataCollectionInProgress is a AssessmentRunState enum value
-	AssessmentRunStateStartDataCollectionInProgress = "START_DATA_COLLECTION_IN_PROGRESS"
-
-	// AssessmentRunStateCollectingData is a AssessmentRunState enum value
-	AssessmentRunStateCollectingData = "COLLECTING_DATA"
-
-	// AssessmentRunStateStopDataCollectionPending is a AssessmentRunState enum value
-	AssessmentRunStateStopDataCollectionPending = "STOP_DATA_COLLECTION_PENDING"
-
-	// AssessmentRunStateDataCollected is a AssessmentRunState enum value
-	AssessmentRunStateDataCollected = "DATA_COLLECTED"
-
-	// AssessmentRunStateStartEvaluatingRulesPending is a AssessmentRunState enum value
-	AssessmentRunStateStartEvaluatingRulesPending = "START_EVALUATING_RULES_PENDING"
-
-	// AssessmentRunStateEvaluatingRules is a AssessmentRunState enum value
-	AssessmentRunStateEvaluatingRules = "EVALUATING_RULES"
-
-	// AssessmentRunStateFailed is a AssessmentRunState enum value
-	AssessmentRunStateFailed = "FAILED"
-
-	// AssessmentRunStateError is a AssessmentRunState enum value
-	AssessmentRunStateError = "ERROR"
-
-	// AssessmentRunStateCompleted is a AssessmentRunState enum value
-	AssessmentRunStateCompleted = "COMPLETED"
-
-	// AssessmentRunStateCompletedWithErrors is a AssessmentRunState enum value
-	AssessmentRunStateCompletedWithErrors = "COMPLETED_WITH_ERRORS"
-
-	// AssessmentRunStateCanceled is a AssessmentRunState enum value
-	AssessmentRunStateCanceled = "CANCELED"
+	AssessmentRunStateCreated                       AssessmentRunState = "CREATED"
+	AssessmentRunStateStartDataCollectionPending    AssessmentRunState = "START_DATA_COLLECTION_PENDING"
+	AssessmentRunStateStartDataCollectionInProgress AssessmentRunState = "START_DATA_COLLECTION_IN_PROGRESS"
+	AssessmentRunStateCollectingData                AssessmentRunState = "COLLECTING_DATA"
+	AssessmentRunStateStopDataCollectionPending     AssessmentRunState = "STOP_DATA_COLLECTION_PENDING"
+	AssessmentRunStateDataCollected                 AssessmentRunState = "DATA_COLLECTED"
+	AssessmentRunStateStartEvaluatingRulesPending   AssessmentRunState = "START_EVALUATING_RULES_PENDING"
+	AssessmentRunStateEvaluatingRules               AssessmentRunState = "EVALUATING_RULES"
+	AssessmentRunStateFailed                        AssessmentRunState = "FAILED"
+	AssessmentRunStateError                         AssessmentRunState = "ERROR"
+	AssessmentRunStateCompleted                     AssessmentRunState = "COMPLETED"
+	AssessmentRunStateCompletedWithErrors           AssessmentRunState = "COMPLETED_WITH_ERRORS"
+	AssessmentRunStateCanceled                      AssessmentRunState = "CANCELED"
 )
 
+type AssetType string
+
+// Enum values for AssetType
 const (
-	// AssetTypeEc2Instance is a AssetType enum value
-	AssetTypeEc2Instance = "ec2-instance"
+	AssetTypeEc2Instance AssetType = "ec2-instance"
 )
 
+type Event string
+
+// Enum values for Event
 const (
-	// EventAssessmentRunStarted is a Event enum value
-	EventAssessmentRunStarted = "ASSESSMENT_RUN_STARTED"
-
-	// EventAssessmentRunCompleted is a Event enum value
-	EventAssessmentRunCompleted = "ASSESSMENT_RUN_COMPLETED"
-
-	// EventAssessmentRunStateChanged is a Event enum value
-	EventAssessmentRunStateChanged = "ASSESSMENT_RUN_STATE_CHANGED"
-
-	// EventFindingReported is a Event enum value
-	EventFindingReported = "FINDING_REPORTED"
-
-	// EventOther is a Event enum value
-	EventOther = "OTHER"
+	EventAssessmentRunStarted      Event = "ASSESSMENT_RUN_STARTED"
+	EventAssessmentRunCompleted    Event = "ASSESSMENT_RUN_COMPLETED"
+	EventAssessmentRunStateChanged Event = "ASSESSMENT_RUN_STATE_CHANGED"
+	EventFindingReported           Event = "FINDING_REPORTED"
+	EventOther                     Event = "OTHER"
 )
 
+type FailedItemErrorCode string
+
+// Enum values for FailedItemErrorCode
 const (
-	// FailedItemErrorCodeInvalidArn is a FailedItemErrorCode enum value
-	FailedItemErrorCodeInvalidArn = "INVALID_ARN"
-
-	// FailedItemErrorCodeDuplicateArn is a FailedItemErrorCode enum value
-	FailedItemErrorCodeDuplicateArn = "DUPLICATE_ARN"
-
-	// FailedItemErrorCodeItemDoesNotExist is a FailedItemErrorCode enum value
-	FailedItemErrorCodeItemDoesNotExist = "ITEM_DOES_NOT_EXIST"
-
-	// FailedItemErrorCodeAccessDenied is a FailedItemErrorCode enum value
-	FailedItemErrorCodeAccessDenied = "ACCESS_DENIED"
-
-	// FailedItemErrorCodeLimitExceeded is a FailedItemErrorCode enum value
-	FailedItemErrorCodeLimitExceeded = "LIMIT_EXCEEDED"
-
-	// FailedItemErrorCodeInternalError is a FailedItemErrorCode enum value
-	FailedItemErrorCodeInternalError = "INTERNAL_ERROR"
+	FailedItemErrorCodeInvalidArn       FailedItemErrorCode = "INVALID_ARN"
+	FailedItemErrorCodeDuplicateArn     FailedItemErrorCode = "DUPLICATE_ARN"
+	FailedItemErrorCodeItemDoesNotExist FailedItemErrorCode = "ITEM_DOES_NOT_EXIST"
+	FailedItemErrorCodeAccessDenied     FailedItemErrorCode = "ACCESS_DENIED"
+	FailedItemErrorCodeLimitExceeded    FailedItemErrorCode = "LIMIT_EXCEEDED"
+	FailedItemErrorCodeInternalError    FailedItemErrorCode = "INTERNAL_ERROR"
 )
 
-const (
-	// InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship is a InvalidCrossAccountRoleErrorCode enum value
-	InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
+type InvalidCrossAccountRoleErrorCode string
 
-	// InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy is a InvalidCrossAccountRoleErrorCode enum value
-	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
+// Enum values for InvalidCrossAccountRoleErrorCode
+const (
+	InvalidCrossAccountRoleErrorCodeRoleDoesNotExistOrInvalidTrustRelationship InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP"
+	InvalidCrossAccountRoleErrorCodeRoleDoesNotHaveCorrectPolicy               InvalidCrossAccountRoleErrorCode = "ROLE_DOES_NOT_HAVE_CORRECT_POLICY"
 )
 
+type InvalidInputErrorCode string
+
+// Enum values for InvalidInputErrorCode
 const (
-	// InvalidInputErrorCodeInvalidAssessmentTargetArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTargetArn = "INVALID_ASSESSMENT_TARGET_ARN"
-
-	// InvalidInputErrorCodeInvalidAssessmentTemplateArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTemplateArn = "INVALID_ASSESSMENT_TEMPLATE_ARN"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunArn = "INVALID_ASSESSMENT_RUN_ARN"
-
-	// InvalidInputErrorCodeInvalidFindingArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidFindingArn = "INVALID_FINDING_ARN"
-
-	// InvalidInputErrorCodeInvalidResourceGroupArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidResourceGroupArn = "INVALID_RESOURCE_GROUP_ARN"
-
-	// InvalidInputErrorCodeInvalidRulesPackageArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidRulesPackageArn = "INVALID_RULES_PACKAGE_ARN"
-
-	// InvalidInputErrorCodeInvalidResourceArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidResourceArn = "INVALID_RESOURCE_ARN"
-
-	// InvalidInputErrorCodeInvalidSnsTopicArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidSnsTopicArn = "INVALID_SNS_TOPIC_ARN"
-
-	// InvalidInputErrorCodeInvalidIamRoleArn is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidIamRoleArn = "INVALID_IAM_ROLE_ARN"
-
-	// InvalidInputErrorCodeInvalidAssessmentTargetName is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTargetName = "INVALID_ASSESSMENT_TARGET_NAME"
-
-	// InvalidInputErrorCodeInvalidAssessmentTargetNamePattern is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTargetNamePattern = "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
-
-	// InvalidInputErrorCodeInvalidAssessmentTemplateName is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTemplateName = "INVALID_ASSESSMENT_TEMPLATE_NAME"
-
-	// InvalidInputErrorCodeInvalidAssessmentTemplateNamePattern is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTemplateNamePattern = "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
-
-	// InvalidInputErrorCodeInvalidAssessmentTemplateDuration is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTemplateDuration = "INVALID_ASSESSMENT_TEMPLATE_DURATION"
-
-	// InvalidInputErrorCodeInvalidAssessmentTemplateDurationRange is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentTemplateDurationRange = "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunDurationRange is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunDurationRange = "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunStartTimeRange is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunStartTimeRange = "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunCompletionTimeRange is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunCompletionTimeRange = "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunStateChangeTimeRange is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunStateChangeTimeRange = "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
-
-	// InvalidInputErrorCodeInvalidAssessmentRunState is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAssessmentRunState = "INVALID_ASSESSMENT_RUN_STATE"
-
-	// InvalidInputErrorCodeInvalidTag is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidTag = "INVALID_TAG"
-
-	// InvalidInputErrorCodeInvalidTagKey is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidTagKey = "INVALID_TAG_KEY"
-
-	// InvalidInputErrorCodeInvalidTagValue is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidTagValue = "INVALID_TAG_VALUE"
-
-	// InvalidInputErrorCodeInvalidResourceGroupTagKey is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidResourceGroupTagKey = "INVALID_RESOURCE_GROUP_TAG_KEY"
-
-	// InvalidInputErrorCodeInvalidResourceGroupTagValue is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidResourceGroupTagValue = "INVALID_RESOURCE_GROUP_TAG_VALUE"
-
-	// InvalidInputErrorCodeInvalidAttribute is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAttribute = "INVALID_ATTRIBUTE"
-
-	// InvalidInputErrorCodeInvalidUserAttribute is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidUserAttribute = "INVALID_USER_ATTRIBUTE"
-
-	// InvalidInputErrorCodeInvalidUserAttributeKey is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidUserAttributeKey = "INVALID_USER_ATTRIBUTE_KEY"
-
-	// InvalidInputErrorCodeInvalidUserAttributeValue is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidUserAttributeValue = "INVALID_USER_ATTRIBUTE_VALUE"
-
-	// InvalidInputErrorCodeInvalidPaginationToken is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidPaginationToken = "INVALID_PAGINATION_TOKEN"
-
-	// InvalidInputErrorCodeInvalidMaxResults is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidMaxResults = "INVALID_MAX_RESULTS"
-
-	// InvalidInputErrorCodeInvalidAgentId is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAgentId = "INVALID_AGENT_ID"
-
-	// InvalidInputErrorCodeInvalidAutoScalingGroup is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidAutoScalingGroup = "INVALID_AUTO_SCALING_GROUP"
-
-	// InvalidInputErrorCodeInvalidRuleName is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidRuleName = "INVALID_RULE_NAME"
-
-	// InvalidInputErrorCodeInvalidSeverity is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidSeverity = "INVALID_SEVERITY"
-
-	// InvalidInputErrorCodeInvalidLocale is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidLocale = "INVALID_LOCALE"
-
-	// InvalidInputErrorCodeInvalidEvent is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidEvent = "INVALID_EVENT"
-
-	// InvalidInputErrorCodeAssessmentTargetNameAlreadyTaken is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeAssessmentTargetNameAlreadyTaken = "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
-
-	// InvalidInputErrorCodeAssessmentTemplateNameAlreadyTaken is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeAssessmentTemplateNameAlreadyTaken = "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
-
-	// InvalidInputErrorCodeInvalidNumberOfAssessmentTargetArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAssessmentTargetArns = "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfAssessmentTemplateArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAssessmentTemplateArns = "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfAssessmentRunArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAssessmentRunArns = "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfFindingArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfFindingArns = "INVALID_NUMBER_OF_FINDING_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfResourceGroupArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfResourceGroupArns = "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfRulesPackageArns is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfRulesPackageArns = "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
-
-	// InvalidInputErrorCodeInvalidNumberOfAssessmentRunStates is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAssessmentRunStates = "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
-
-	// InvalidInputErrorCodeInvalidNumberOfTags is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfTags = "INVALID_NUMBER_OF_TAGS"
-
-	// InvalidInputErrorCodeInvalidNumberOfResourceGroupTags is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfResourceGroupTags = "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
-
-	// InvalidInputErrorCodeInvalidNumberOfAttributes is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAttributes = "INVALID_NUMBER_OF_ATTRIBUTES"
-
-	// InvalidInputErrorCodeInvalidNumberOfUserAttributes is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfUserAttributes = "INVALID_NUMBER_OF_USER_ATTRIBUTES"
-
-	// InvalidInputErrorCodeInvalidNumberOfAgentIds is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAgentIds = "INVALID_NUMBER_OF_AGENT_IDS"
-
-	// InvalidInputErrorCodeInvalidNumberOfAutoScalingGroups is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfAutoScalingGroups = "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
-
-	// InvalidInputErrorCodeInvalidNumberOfRuleNames is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfRuleNames = "INVALID_NUMBER_OF_RULE_NAMES"
-
-	// InvalidInputErrorCodeInvalidNumberOfSeverities is a InvalidInputErrorCode enum value
-	InvalidInputErrorCodeInvalidNumberOfSeverities = "INVALID_NUMBER_OF_SEVERITIES"
+	InvalidInputErrorCodeInvalidAssessmentTargetArn               InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_ARN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateArn             InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_ARN"
+	InvalidInputErrorCodeInvalidAssessmentRunArn                  InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_ARN"
+	InvalidInputErrorCodeInvalidFindingArn                        InvalidInputErrorCode = "INVALID_FINDING_ARN"
+	InvalidInputErrorCodeInvalidResourceGroupArn                  InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_ARN"
+	InvalidInputErrorCodeInvalidRulesPackageArn                   InvalidInputErrorCode = "INVALID_RULES_PACKAGE_ARN"
+	InvalidInputErrorCodeInvalidResourceArn                       InvalidInputErrorCode = "INVALID_RESOURCE_ARN"
+	InvalidInputErrorCodeInvalidSnsTopicArn                       InvalidInputErrorCode = "INVALID_SNS_TOPIC_ARN"
+	InvalidInputErrorCodeInvalidIamRoleArn                        InvalidInputErrorCode = "INVALID_IAM_ROLE_ARN"
+	InvalidInputErrorCodeInvalidAssessmentTargetName              InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME"
+	InvalidInputErrorCodeInvalidAssessmentTargetNamePattern       InvalidInputErrorCode = "INVALID_ASSESSMENT_TARGET_NAME_PATTERN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateName            InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME"
+	InvalidInputErrorCodeInvalidAssessmentTemplateNamePattern     InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN"
+	InvalidInputErrorCodeInvalidAssessmentTemplateDuration        InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION"
+	InvalidInputErrorCodeInvalidAssessmentTemplateDurationRange   InvalidInputErrorCode = "INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunDurationRange        InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_DURATION_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunStartTimeRange       InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_START_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunCompletionTimeRange  InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunStateChangeTimeRange InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE"
+	InvalidInputErrorCodeInvalidAssessmentRunState                InvalidInputErrorCode = "INVALID_ASSESSMENT_RUN_STATE"
+	InvalidInputErrorCodeInvalidTag                               InvalidInputErrorCode = "INVALID_TAG"
+	InvalidInputErrorCodeInvalidTagKey                            InvalidInputErrorCode = "INVALID_TAG_KEY"
+	InvalidInputErrorCodeInvalidTagValue                          InvalidInputErrorCode = "INVALID_TAG_VALUE"
+	InvalidInputErrorCodeInvalidResourceGroupTagKey               InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_KEY"
+	InvalidInputErrorCodeInvalidResourceGroupTagValue             InvalidInputErrorCode = "INVALID_RESOURCE_GROUP_TAG_VALUE"
+	InvalidInputErrorCodeInvalidAttribute                         InvalidInputErrorCode = "INVALID_ATTRIBUTE"
+	InvalidInputErrorCodeInvalidUserAttribute                     InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE"
+	InvalidInputErrorCodeInvalidUserAttributeKey                  InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_KEY"
+	InvalidInputErrorCodeInvalidUserAttributeValue                InvalidInputErrorCode = "INVALID_USER_ATTRIBUTE_VALUE"
+	InvalidInputErrorCodeInvalidPaginationToken                   InvalidInputErrorCode = "INVALID_PAGINATION_TOKEN"
+	InvalidInputErrorCodeInvalidMaxResults                        InvalidInputErrorCode = "INVALID_MAX_RESULTS"
+	InvalidInputErrorCodeInvalidAgentId                           InvalidInputErrorCode = "INVALID_AGENT_ID"
+	InvalidInputErrorCodeInvalidAutoScalingGroup                  InvalidInputErrorCode = "INVALID_AUTO_SCALING_GROUP"
+	InvalidInputErrorCodeInvalidRuleName                          InvalidInputErrorCode = "INVALID_RULE_NAME"
+	InvalidInputErrorCodeInvalidSeverity                          InvalidInputErrorCode = "INVALID_SEVERITY"
+	InvalidInputErrorCodeInvalidLocale                            InvalidInputErrorCode = "INVALID_LOCALE"
+	InvalidInputErrorCodeInvalidEvent                             InvalidInputErrorCode = "INVALID_EVENT"
+	InvalidInputErrorCodeAssessmentTargetNameAlreadyTaken         InvalidInputErrorCode = "ASSESSMENT_TARGET_NAME_ALREADY_TAKEN"
+	InvalidInputErrorCodeAssessmentTemplateNameAlreadyTaken       InvalidInputErrorCode = "ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentTargetArns      InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentTemplateArns    InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentRunArns         InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfFindingArns               InvalidInputErrorCode = "INVALID_NUMBER_OF_FINDING_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfResourceGroupArns         InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfRulesPackageArns          InvalidInputErrorCode = "INVALID_NUMBER_OF_RULES_PACKAGE_ARNS"
+	InvalidInputErrorCodeInvalidNumberOfAssessmentRunStates       InvalidInputErrorCode = "INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES"
+	InvalidInputErrorCodeInvalidNumberOfTags                      InvalidInputErrorCode = "INVALID_NUMBER_OF_TAGS"
+	InvalidInputErrorCodeInvalidNumberOfResourceGroupTags         InvalidInputErrorCode = "INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS"
+	InvalidInputErrorCodeInvalidNumberOfAttributes                InvalidInputErrorCode = "INVALID_NUMBER_OF_ATTRIBUTES"
+	InvalidInputErrorCodeInvalidNumberOfUserAttributes            InvalidInputErrorCode = "INVALID_NUMBER_OF_USER_ATTRIBUTES"
+	InvalidInputErrorCodeInvalidNumberOfAgentIds                  InvalidInputErrorCode = "INVALID_NUMBER_OF_AGENT_IDS"
+	InvalidInputErrorCodeInvalidNumberOfAutoScalingGroups         InvalidInputErrorCode = "INVALID_NUMBER_OF_AUTO_SCALING_GROUPS"
+	InvalidInputErrorCodeInvalidNumberOfRuleNames                 InvalidInputErrorCode = "INVALID_NUMBER_OF_RULE_NAMES"
+	InvalidInputErrorCodeInvalidNumberOfSeverities                InvalidInputErrorCode = "INVALID_NUMBER_OF_SEVERITIES"
 )
 
+type LimitExceededErrorCode string
+
+// Enum values for LimitExceededErrorCode
 const (
-	// LimitExceededErrorCodeAssessmentTargetLimitExceeded is a LimitExceededErrorCode enum value
-	LimitExceededErrorCodeAssessmentTargetLimitExceeded = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
-
-	// LimitExceededErrorCodeAssessmentTemplateLimitExceeded is a LimitExceededErrorCode enum value
-	LimitExceededErrorCodeAssessmentTemplateLimitExceeded = "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
-
-	// LimitExceededErrorCodeAssessmentRunLimitExceeded is a LimitExceededErrorCode enum value
-	LimitExceededErrorCodeAssessmentRunLimitExceeded = "ASSESSMENT_RUN_LIMIT_EXCEEDED"
-
-	// LimitExceededErrorCodeResourceGroupLimitExceeded is a LimitExceededErrorCode enum value
-	LimitExceededErrorCodeResourceGroupLimitExceeded = "RESOURCE_GROUP_LIMIT_EXCEEDED"
-
-	// LimitExceededErrorCodeEventSubscriptionLimitExceeded is a LimitExceededErrorCode enum value
-	LimitExceededErrorCodeEventSubscriptionLimitExceeded = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentTargetLimitExceeded   LimitExceededErrorCode = "ASSESSMENT_TARGET_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentTemplateLimitExceeded LimitExceededErrorCode = "ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeAssessmentRunLimitExceeded      LimitExceededErrorCode = "ASSESSMENT_RUN_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeResourceGroupLimitExceeded      LimitExceededErrorCode = "RESOURCE_GROUP_LIMIT_EXCEEDED"
+	LimitExceededErrorCodeEventSubscriptionLimitExceeded  LimitExceededErrorCode = "EVENT_SUBSCRIPTION_LIMIT_EXCEEDED"
 )
 
+type Locale string
+
+// Enum values for Locale
 const (
-	// LocaleEnUs is a Locale enum value
-	LocaleEnUs = "EN_US"
+	LocaleEnUs Locale = "EN_US"
 )
 
+type NoSuchEntityErrorCode string
+
+// Enum values for NoSuchEntityErrorCode
 const (
-	// NoSuchEntityErrorCodeAssessmentTargetDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeAssessmentTargetDoesNotExist = "ASSESSMENT_TARGET_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeAssessmentTemplateDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeAssessmentTemplateDoesNotExist = "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeAssessmentRunDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeAssessmentRunDoesNotExist = "ASSESSMENT_RUN_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeFindingDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeFindingDoesNotExist = "FINDING_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeResourceGroupDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeResourceGroupDoesNotExist = "RESOURCE_GROUP_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeRulesPackageDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeRulesPackageDoesNotExist = "RULES_PACKAGE_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeSnsTopicDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeSnsTopicDoesNotExist = "SNS_TOPIC_DOES_NOT_EXIST"
-
-	// NoSuchEntityErrorCodeIamRoleDoesNotExist is a NoSuchEntityErrorCode enum value
-	NoSuchEntityErrorCodeIamRoleDoesNotExist = "IAM_ROLE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentTargetDoesNotExist   NoSuchEntityErrorCode = "ASSESSMENT_TARGET_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentTemplateDoesNotExist NoSuchEntityErrorCode = "ASSESSMENT_TEMPLATE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeAssessmentRunDoesNotExist      NoSuchEntityErrorCode = "ASSESSMENT_RUN_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeFindingDoesNotExist            NoSuchEntityErrorCode = "FINDING_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeResourceGroupDoesNotExist      NoSuchEntityErrorCode = "RESOURCE_GROUP_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeRulesPackageDoesNotExist       NoSuchEntityErrorCode = "RULES_PACKAGE_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeSnsTopicDoesNotExist           NoSuchEntityErrorCode = "SNS_TOPIC_DOES_NOT_EXIST"
+	NoSuchEntityErrorCodeIamRoleDoesNotExist            NoSuchEntityErrorCode = "IAM_ROLE_DOES_NOT_EXIST"
 )
 
-const (
-	// ReportFileFormatHtml is a ReportFileFormat enum value
-	ReportFileFormatHtml = "HTML"
+type ReportFileFormat string
 
-	// ReportFileFormatPdf is a ReportFileFormat enum value
-	ReportFileFormatPdf = "PDF"
+// Enum values for ReportFileFormat
+const (
+	ReportFileFormatHtml ReportFileFormat = "HTML"
+	ReportFileFormatPdf  ReportFileFormat = "PDF"
 )
 
+type ReportStatus string
+
+// Enum values for ReportStatus
 const (
-	// ReportStatusWorkInProgress is a ReportStatus enum value
-	ReportStatusWorkInProgress = "WORK_IN_PROGRESS"
-
-	// ReportStatusFailed is a ReportStatus enum value
-	ReportStatusFailed = "FAILED"
-
-	// ReportStatusCompleted is a ReportStatus enum value
-	ReportStatusCompleted = "COMPLETED"
+	ReportStatusWorkInProgress ReportStatus = "WORK_IN_PROGRESS"
+	ReportStatusFailed         ReportStatus = "FAILED"
+	ReportStatusCompleted      ReportStatus = "COMPLETED"
 )
 
-const (
-	// ReportTypeFinding is a ReportType enum value
-	ReportTypeFinding = "FINDING"
+type ReportType string
 
-	// ReportTypeFull is a ReportType enum value
-	ReportTypeFull = "FULL"
+// Enum values for ReportType
+const (
+	ReportTypeFinding ReportType = "FINDING"
+	ReportTypeFull    ReportType = "FULL"
 )
 
+type Severity string
+
+// Enum values for Severity
 const (
-	// SeverityLow is a Severity enum value
-	SeverityLow = "Low"
-
-	// SeverityMedium is a Severity enum value
-	SeverityMedium = "Medium"
-
-	// SeverityHigh is a Severity enum value
-	SeverityHigh = "High"
-
-	// SeverityInformational is a Severity enum value
-	SeverityInformational = "Informational"
-
-	// SeverityUndefined is a Severity enum value
-	SeverityUndefined = "Undefined"
+	SeverityLow           Severity = "Low"
+	SeverityMedium        Severity = "Medium"
+	SeverityHigh          Severity = "High"
+	SeverityInformational Severity = "Informational"
+	SeverityUndefined     Severity = "Undefined"
 )
 
-const (
-	// StopActionStartEvaluation is a StopAction enum value
-	StopActionStartEvaluation = "START_EVALUATION"
+type StopAction string
 
-	// StopActionSkipEvaluation is a StopAction enum value
-	StopActionSkipEvaluation = "SKIP_EVALUATION"
+// Enum values for StopAction
+const (
+	StopActionStartEvaluation StopAction = "START_EVALUATION"
+	StopActionSkipEvaluation  StopAction = "SKIP_EVALUATION"
 )

@@ -299,7 +299,7 @@ type GenerateDataSetInput struct {
 	// on the 15th day of the month by 5:00 PM Pacific Time.
 	//
 	// DataSetType is a required field
-	DataSetType *string `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"DataSetType"`
+	DataSetType DataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//
@@ -343,27 +343,28 @@ func (s *GenerateDataSetInput) Validate() error {
 	if s.CustomerDefinedValues != nil && len(s.CustomerDefinedValues) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomerDefinedValues", 1))
 	}
+
 	if s.DataSetPublicationDate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DataSetPublicationDate"))
 	}
-	if s.DataSetType == nil {
+	if len(s.DataSetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("DataSetType"))
 	}
-	if s.DataSetType != nil && len(*s.DataSetType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DataSetType", 1))
-	}
+
 	if s.DestinationS3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationS3BucketName"))
 	}
 	if s.DestinationS3BucketName != nil && len(*s.DestinationS3BucketName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DestinationS3BucketName", 1))
 	}
+
 	if s.RoleNameArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleNameArn"))
 	}
 	if s.RoleNameArn != nil && len(*s.RoleNameArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleNameArn", 1))
 	}
+
 	if s.SnsTopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
@@ -390,8 +391,8 @@ func (s *GenerateDataSetInput) SetDataSetPublicationDate(v time.Time) *GenerateD
 }
 
 // SetDataSetType sets the DataSetType field's value.
-func (s *GenerateDataSetInput) SetDataSetType(v string) *GenerateDataSetInput {
-	s.DataSetType = &v
+func (s *GenerateDataSetInput) SetDataSetType(v DataSetType) *GenerateDataSetInput {
+	s.DataSetType = v
 	return s
 }
 
@@ -469,7 +470,7 @@ type StartSupportDataExportInput struct {
 	// test data in the same format as customer_support_contacts_data
 	//
 	// DataSetType is a required field
-	DataSetType *string `locationName:"dataSetType" min:"1" type:"string" required:"true" enum:"SupportDataSetType"`
+	DataSetType SupportDataSetType `locationName:"dataSetType" min:"1" type:"string" required:"true"`
 
 	// The name (friendly name, not ARN) of the destination S3 bucket.
 	//
@@ -519,27 +520,28 @@ func (s *StartSupportDataExportInput) Validate() error {
 	if s.CustomerDefinedValues != nil && len(s.CustomerDefinedValues) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomerDefinedValues", 1))
 	}
-	if s.DataSetType == nil {
+	if len(s.DataSetType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("DataSetType"))
 	}
-	if s.DataSetType != nil && len(*s.DataSetType) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DataSetType", 1))
-	}
+
 	if s.DestinationS3BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationS3BucketName"))
 	}
 	if s.DestinationS3BucketName != nil && len(*s.DestinationS3BucketName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DestinationS3BucketName", 1))
 	}
+
 	if s.FromDate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FromDate"))
 	}
+
 	if s.RoleNameArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleNameArn"))
 	}
 	if s.RoleNameArn != nil && len(*s.RoleNameArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleNameArn", 1))
 	}
+
 	if s.SnsTopicArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
@@ -560,8 +562,8 @@ func (s *StartSupportDataExportInput) SetCustomerDefinedValues(v map[string]*str
 }
 
 // SetDataSetType sets the DataSetType field's value.
-func (s *StartSupportDataExportInput) SetDataSetType(v string) *StartSupportDataExportInput {
-	s.DataSetType = &v
+func (s *StartSupportDataExportInput) SetDataSetType(v SupportDataSetType) *StartSupportDataExportInput {
+	s.DataSetType = v
 	return s
 }
 
@@ -622,75 +624,37 @@ func (s *StartSupportDataExportOutput) SetDataSetRequestId(v string) *StartSuppo
 	return s
 }
 
+type DataSetType string
+
+// Enum values for DataSetType
 const (
-	// DataSetTypeCustomerSubscriberHourlyMonthlySubscriptions is a DataSetType enum value
-	DataSetTypeCustomerSubscriberHourlyMonthlySubscriptions = "customer_subscriber_hourly_monthly_subscriptions"
-
-	// DataSetTypeCustomerSubscriberAnnualSubscriptions is a DataSetType enum value
-	DataSetTypeCustomerSubscriberAnnualSubscriptions = "customer_subscriber_annual_subscriptions"
-
-	// DataSetTypeDailyBusinessUsageByInstanceType is a DataSetType enum value
-	DataSetTypeDailyBusinessUsageByInstanceType = "daily_business_usage_by_instance_type"
-
-	// DataSetTypeDailyBusinessFees is a DataSetType enum value
-	DataSetTypeDailyBusinessFees = "daily_business_fees"
-
-	// DataSetTypeDailyBusinessFreeTrialConversions is a DataSetType enum value
-	DataSetTypeDailyBusinessFreeTrialConversions = "daily_business_free_trial_conversions"
-
-	// DataSetTypeDailyBusinessNewInstances is a DataSetType enum value
-	DataSetTypeDailyBusinessNewInstances = "daily_business_new_instances"
-
-	// DataSetTypeDailyBusinessNewProductSubscribers is a DataSetType enum value
-	DataSetTypeDailyBusinessNewProductSubscribers = "daily_business_new_product_subscribers"
-
-	// DataSetTypeDailyBusinessCanceledProductSubscribers is a DataSetType enum value
-	DataSetTypeDailyBusinessCanceledProductSubscribers = "daily_business_canceled_product_subscribers"
-
-	// DataSetTypeMonthlyRevenueBillingAndRevenueData is a DataSetType enum value
-	DataSetTypeMonthlyRevenueBillingAndRevenueData = "monthly_revenue_billing_and_revenue_data"
-
-	// DataSetTypeMonthlyRevenueAnnualSubscriptions is a DataSetType enum value
-	DataSetTypeMonthlyRevenueAnnualSubscriptions = "monthly_revenue_annual_subscriptions"
-
-	// DataSetTypeDisbursedAmountByProduct is a DataSetType enum value
-	DataSetTypeDisbursedAmountByProduct = "disbursed_amount_by_product"
-
-	// DataSetTypeDisbursedAmountByProductWithUncollectedFunds is a DataSetType enum value
-	DataSetTypeDisbursedAmountByProductWithUncollectedFunds = "disbursed_amount_by_product_with_uncollected_funds"
-
-	// DataSetTypeDisbursedAmountByInstanceHours is a DataSetType enum value
-	DataSetTypeDisbursedAmountByInstanceHours = "disbursed_amount_by_instance_hours"
-
-	// DataSetTypeDisbursedAmountByCustomerGeo is a DataSetType enum value
-	DataSetTypeDisbursedAmountByCustomerGeo = "disbursed_amount_by_customer_geo"
-
-	// DataSetTypeDisbursedAmountByAgeOfUncollectedFunds is a DataSetType enum value
-	DataSetTypeDisbursedAmountByAgeOfUncollectedFunds = "disbursed_amount_by_age_of_uncollected_funds"
-
-	// DataSetTypeDisbursedAmountByAgeOfDisbursedFunds is a DataSetType enum value
-	DataSetTypeDisbursedAmountByAgeOfDisbursedFunds = "disbursed_amount_by_age_of_disbursed_funds"
-
-	// DataSetTypeCustomerProfileByIndustry is a DataSetType enum value
-	DataSetTypeCustomerProfileByIndustry = "customer_profile_by_industry"
-
-	// DataSetTypeCustomerProfileByRevenue is a DataSetType enum value
-	DataSetTypeCustomerProfileByRevenue = "customer_profile_by_revenue"
-
-	// DataSetTypeCustomerProfileByGeography is a DataSetType enum value
-	DataSetTypeCustomerProfileByGeography = "customer_profile_by_geography"
-
-	// DataSetTypeSalesCompensationBilledRevenue is a DataSetType enum value
-	DataSetTypeSalesCompensationBilledRevenue = "sales_compensation_billed_revenue"
-
-	// DataSetTypeUsSalesAndUseTaxRecords is a DataSetType enum value
-	DataSetTypeUsSalesAndUseTaxRecords = "us_sales_and_use_tax_records"
+	DataSetTypeCustomerSubscriberHourlyMonthlySubscriptions DataSetType = "customer_subscriber_hourly_monthly_subscriptions"
+	DataSetTypeCustomerSubscriberAnnualSubscriptions        DataSetType = "customer_subscriber_annual_subscriptions"
+	DataSetTypeDailyBusinessUsageByInstanceType             DataSetType = "daily_business_usage_by_instance_type"
+	DataSetTypeDailyBusinessFees                            DataSetType = "daily_business_fees"
+	DataSetTypeDailyBusinessFreeTrialConversions            DataSetType = "daily_business_free_trial_conversions"
+	DataSetTypeDailyBusinessNewInstances                    DataSetType = "daily_business_new_instances"
+	DataSetTypeDailyBusinessNewProductSubscribers           DataSetType = "daily_business_new_product_subscribers"
+	DataSetTypeDailyBusinessCanceledProductSubscribers      DataSetType = "daily_business_canceled_product_subscribers"
+	DataSetTypeMonthlyRevenueBillingAndRevenueData          DataSetType = "monthly_revenue_billing_and_revenue_data"
+	DataSetTypeMonthlyRevenueAnnualSubscriptions            DataSetType = "monthly_revenue_annual_subscriptions"
+	DataSetTypeDisbursedAmountByProduct                     DataSetType = "disbursed_amount_by_product"
+	DataSetTypeDisbursedAmountByProductWithUncollectedFunds DataSetType = "disbursed_amount_by_product_with_uncollected_funds"
+	DataSetTypeDisbursedAmountByInstanceHours               DataSetType = "disbursed_amount_by_instance_hours"
+	DataSetTypeDisbursedAmountByCustomerGeo                 DataSetType = "disbursed_amount_by_customer_geo"
+	DataSetTypeDisbursedAmountByAgeOfUncollectedFunds       DataSetType = "disbursed_amount_by_age_of_uncollected_funds"
+	DataSetTypeDisbursedAmountByAgeOfDisbursedFunds         DataSetType = "disbursed_amount_by_age_of_disbursed_funds"
+	DataSetTypeCustomerProfileByIndustry                    DataSetType = "customer_profile_by_industry"
+	DataSetTypeCustomerProfileByRevenue                     DataSetType = "customer_profile_by_revenue"
+	DataSetTypeCustomerProfileByGeography                   DataSetType = "customer_profile_by_geography"
+	DataSetTypeSalesCompensationBilledRevenue               DataSetType = "sales_compensation_billed_revenue"
+	DataSetTypeUsSalesAndUseTaxRecords                      DataSetType = "us_sales_and_use_tax_records"
 )
 
-const (
-	// SupportDataSetTypeCustomerSupportContactsData is a SupportDataSetType enum value
-	SupportDataSetTypeCustomerSupportContactsData = "customer_support_contacts_data"
+type SupportDataSetType string
 
-	// SupportDataSetTypeTestCustomerSupportContactsData is a SupportDataSetType enum value
-	SupportDataSetTypeTestCustomerSupportContactsData = "test_customer_support_contacts_data"
+// Enum values for SupportDataSetType
+const (
+	SupportDataSetTypeCustomerSupportContactsData     SupportDataSetType = "customer_support_contacts_data"
+	SupportDataSetTypeTestCustomerSupportContactsData SupportDataSetType = "test_customer_support_contacts_data"
 )

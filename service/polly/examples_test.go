@@ -74,7 +74,7 @@ func ExamplePolly_DescribeVoices_shared00() {
 
 	svc := polly.New(cfg)
 	input := &polly.DescribeVoicesInput{
-		LanguageCode: aws.String("en-GB"),
+		LanguageCode: polly.LanguageCodeEnGb,
 	}
 
 	result, err := svc.DescribeVoices(input)
@@ -230,11 +230,11 @@ func ExamplePolly_SynthesizeSpeech_shared00() {
 		LexiconNames: []*string{
 			aws.String("example"),
 		},
-		OutputFormat: aws.String("mp3"),
+		OutputFormat: polly.OutputFormatMp3,
 		SampleRate:   aws.String("8000"),
 		Text:         aws.String("All Gaul is divided into three parts"),
-		TextType:     aws.String("text"),
-		VoiceId:      aws.String("Joanna"),
+		TextType:     polly.TextTypeText,
+		VoiceId:      polly.VoiceIdJoanna,
 	}
 
 	result, err := svc.SynthesizeSpeech(input)

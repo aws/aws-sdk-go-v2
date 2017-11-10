@@ -2600,12 +2600,14 @@ func (s AddTagsToStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToStreamInput"}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -2683,12 +2685,14 @@ func (s CreateStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamInput"}
+
 	if s.ShardCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardCount"))
 	}
 	if s.ShardCount != nil && *s.ShardCount < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ShardCount", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -2759,12 +2763,14 @@ func (s DecreaseStreamRetentionPeriodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecreaseStreamRetentionPeriodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DecreaseStreamRetentionPeriodInput"}
+
 	if s.RetentionPeriodHours == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodHours"))
 	}
 	if s.RetentionPeriodHours != nil && *s.RetentionPeriodHours < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodHours", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -2829,6 +2835,7 @@ func (s DeleteStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamInput"}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -2952,6 +2959,7 @@ func (s *DescribeStreamInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3042,7 +3050,7 @@ type DisableEnhancedMonitoringInput struct {
 	// in the Amazon Kinesis Streams Developer Guide.
 	//
 	// ShardLevelMetrics is a required field
-	ShardLevelMetrics []*string `min:"1" type:"list" required:"true"`
+	ShardLevelMetrics []MetricsName `min:"1" type:"list" required:"true"`
 
 	// The name of the Amazon Kinesis stream for which to disable enhanced monitoring.
 	//
@@ -3063,12 +3071,14 @@ func (s DisableEnhancedMonitoringInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableEnhancedMonitoringInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableEnhancedMonitoringInput"}
+
 	if s.ShardLevelMetrics == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardLevelMetrics"))
 	}
 	if s.ShardLevelMetrics != nil && len(s.ShardLevelMetrics) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardLevelMetrics", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3083,7 +3093,7 @@ func (s *DisableEnhancedMonitoringInput) Validate() error {
 }
 
 // SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *DisableEnhancedMonitoringInput) SetShardLevelMetrics(v []*string) *DisableEnhancedMonitoringInput {
+func (s *DisableEnhancedMonitoringInput) SetShardLevelMetrics(v []MetricsName) *DisableEnhancedMonitoringInput {
 	s.ShardLevelMetrics = v
 	return s
 }
@@ -3125,7 +3135,7 @@ type EnableEnhancedMonitoringInput struct {
 	// in the Amazon Kinesis Streams Developer Guide.
 	//
 	// ShardLevelMetrics is a required field
-	ShardLevelMetrics []*string `min:"1" type:"list" required:"true"`
+	ShardLevelMetrics []MetricsName `min:"1" type:"list" required:"true"`
 
 	// The name of the stream for which to enable enhanced monitoring.
 	//
@@ -3146,12 +3156,14 @@ func (s EnableEnhancedMonitoringInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableEnhancedMonitoringInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableEnhancedMonitoringInput"}
+
 	if s.ShardLevelMetrics == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardLevelMetrics"))
 	}
 	if s.ShardLevelMetrics != nil && len(s.ShardLevelMetrics) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardLevelMetrics", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3166,7 +3178,7 @@ func (s *EnableEnhancedMonitoringInput) Validate() error {
 }
 
 // SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *EnableEnhancedMonitoringInput) SetShardLevelMetrics(v []*string) *EnableEnhancedMonitoringInput {
+func (s *EnableEnhancedMonitoringInput) SetShardLevelMetrics(v []MetricsName) *EnableEnhancedMonitoringInput {
 	s.ShardLevelMetrics = v
 	return s
 }
@@ -3206,7 +3218,7 @@ type EnhancedMetrics struct {
 	// For more information, see Monitoring the Amazon Kinesis Streams Service with
 	// Amazon CloudWatch (http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html)
 	// in the Amazon Kinesis Streams Developer Guide.
-	ShardLevelMetrics []*string `min:"1" type:"list"`
+	ShardLevelMetrics []MetricsName `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -3220,7 +3232,7 @@ func (s EnhancedMetrics) GoString() string {
 }
 
 // SetShardLevelMetrics sets the ShardLevelMetrics field's value.
-func (s *EnhancedMetrics) SetShardLevelMetrics(v []*string) *EnhancedMetrics {
+func (s *EnhancedMetrics) SetShardLevelMetrics(v []MetricsName) *EnhancedMetrics {
 	s.ShardLevelMetrics = v
 	return s
 }
@@ -3232,11 +3244,11 @@ type EnhancedMonitoringOutput struct {
 
 	// Represents the current state of the metrics that are in the enhanced state
 	// before the operation.
-	CurrentShardLevelMetrics []*string `min:"1" type:"list"`
+	CurrentShardLevelMetrics []MetricsName `min:"1" type:"list"`
 
 	// Represents the list of all the metrics that would be in the enhanced state
 	// after the operation.
-	DesiredShardLevelMetrics []*string `min:"1" type:"list"`
+	DesiredShardLevelMetrics []MetricsName `min:"1" type:"list"`
 
 	// The name of the Amazon Kinesis stream.
 	StreamName *string `min:"1" type:"string"`
@@ -3253,13 +3265,13 @@ func (s EnhancedMonitoringOutput) GoString() string {
 }
 
 // SetCurrentShardLevelMetrics sets the CurrentShardLevelMetrics field's value.
-func (s *EnhancedMonitoringOutput) SetCurrentShardLevelMetrics(v []*string) *EnhancedMonitoringOutput {
+func (s *EnhancedMonitoringOutput) SetCurrentShardLevelMetrics(v []MetricsName) *EnhancedMonitoringOutput {
 	s.CurrentShardLevelMetrics = v
 	return s
 }
 
 // SetDesiredShardLevelMetrics sets the DesiredShardLevelMetrics field's value.
-func (s *EnhancedMonitoringOutput) SetDesiredShardLevelMetrics(v []*string) *EnhancedMonitoringOutput {
+func (s *EnhancedMonitoringOutput) SetDesiredShardLevelMetrics(v []MetricsName) *EnhancedMonitoringOutput {
 	s.DesiredShardLevelMetrics = v
 	return s
 }
@@ -3303,6 +3315,7 @@ func (s *GetRecordsInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.ShardIterator == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardIterator"))
 	}
@@ -3409,7 +3422,7 @@ type GetShardIteratorInput struct {
 	//    so that you always read the most recent data in the shard.
 	//
 	// ShardIteratorType is a required field
-	ShardIteratorType *string `type:"string" required:"true" enum:"ShardIteratorType"`
+	ShardIteratorType ShardIteratorType `type:"string" required:"true"`
 
 	// The sequence number of the data record in the shard from which to start reading.
 	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
@@ -3443,15 +3456,17 @@ func (s GetShardIteratorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetShardIteratorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetShardIteratorInput"}
+
 	if s.ShardId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardId"))
 	}
 	if s.ShardId != nil && len(*s.ShardId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardId", 1))
 	}
-	if s.ShardIteratorType == nil {
+	if len(s.ShardIteratorType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ShardIteratorType"))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3472,8 +3487,8 @@ func (s *GetShardIteratorInput) SetShardId(v string) *GetShardIteratorInput {
 }
 
 // SetShardIteratorType sets the ShardIteratorType field's value.
-func (s *GetShardIteratorInput) SetShardIteratorType(v string) *GetShardIteratorInput {
-	s.ShardIteratorType = &v
+func (s *GetShardIteratorInput) SetShardIteratorType(v ShardIteratorType) *GetShardIteratorInput {
+	s.ShardIteratorType = v
 	return s
 }
 
@@ -3591,12 +3606,14 @@ func (s IncreaseStreamRetentionPeriodInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IncreaseStreamRetentionPeriodInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "IncreaseStreamRetentionPeriodInput"}
+
 	if s.RetentionPeriodHours == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodHours"))
 	}
 	if s.RetentionPeriodHours != nil && *s.RetentionPeriodHours < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodHours", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3765,6 +3782,7 @@ func (s *ListTagsForStreamInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3870,18 +3888,21 @@ func (s MergeShardsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MergeShardsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MergeShardsInput"}
+
 	if s.AdjacentShardToMerge == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AdjacentShardToMerge"))
 	}
 	if s.AdjacentShardToMerge != nil && len(*s.AdjacentShardToMerge) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AdjacentShardToMerge", 1))
 	}
+
 	if s.ShardToMerge == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardToMerge"))
 	}
 	if s.ShardToMerge != nil && len(*s.ShardToMerge) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardToMerge", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -3985,15 +4006,18 @@ func (s PutRecordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
+
 	if s.Data == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
+
 	if s.PartitionKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionKey"))
 	}
 	if s.PartitionKey != nil && len(*s.PartitionKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PartitionKey", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -4049,7 +4073,7 @@ type PutRecordOutput struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType *string `type:"string" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string"`
 
 	// The sequence number identifier that was assigned to the put data record.
 	// The sequence number for the record is unique across all records in the stream.
@@ -4076,8 +4100,8 @@ func (s PutRecordOutput) GoString() string {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *PutRecordOutput) SetEncryptionType(v string) *PutRecordOutput {
-	s.EncryptionType = &v
+func (s *PutRecordOutput) SetEncryptionType(v EncryptionType) *PutRecordOutput {
+	s.EncryptionType = v
 	return s
 }
 
@@ -4122,12 +4146,14 @@ func (s PutRecordsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRecordsInput"}
+
 	if s.Records == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Records"))
 	}
 	if s.Records != nil && len(s.Records) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Records", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -4175,7 +4201,7 @@ type PutRecordsOutput struct {
 	//
 	//    * KMS: Use server-side encryption on the records using a customer-managed
 	//    KMS key.
-	EncryptionType *string `type:"string" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string"`
 
 	// The number of unsuccessfully processed records in a PutRecords request.
 	FailedRecordCount *int64 `min:"1" type:"integer"`
@@ -4201,8 +4227,8 @@ func (s PutRecordsOutput) GoString() string {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *PutRecordsOutput) SetEncryptionType(v string) *PutRecordsOutput {
-	s.EncryptionType = &v
+func (s *PutRecordsOutput) SetEncryptionType(v EncryptionType) *PutRecordsOutput {
+	s.EncryptionType = v
 	return s
 }
 
@@ -4263,9 +4289,11 @@ func (s PutRecordsRequestEntry) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordsRequestEntry) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRecordsRequestEntry"}
+
 	if s.Data == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
+
 	if s.PartitionKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartitionKey"))
 	}
@@ -4383,7 +4411,7 @@ type Record struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType *string `type:"string" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string"`
 
 	// Identifies which shard in the stream the data record is assigned to.
 	//
@@ -4419,8 +4447,8 @@ func (s *Record) SetData(v []byte) *Record {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *Record) SetEncryptionType(v string) *Record {
-	s.EncryptionType = &v
+func (s *Record) SetEncryptionType(v EncryptionType) *Record {
+	s.EncryptionType = v
 	return s
 }
 
@@ -4465,12 +4493,14 @@ func (s RemoveTagsFromStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromStreamInput"}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -4656,15 +4686,18 @@ func (s SplitShardInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SplitShardInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SplitShardInput"}
+
 	if s.NewStartingHashKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NewStartingHashKey"))
 	}
+
 	if s.ShardToSplit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ShardToSplit"))
 	}
 	if s.ShardToSplit != nil && len(*s.ShardToSplit) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ShardToSplit", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -4724,7 +4757,7 @@ type StartStreamEncryptionInput struct {
 	//    customer-managed KMS key.
 	//
 	// EncryptionType is a required field
-	EncryptionType *string `type:"string" required:"true" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string" required:"true"`
 
 	// The GUID for the customer-managed KMS key to use for encryption. You can
 	// also use a Kinesis-owned master key by specifying the alias aws/kinesis.
@@ -4751,15 +4784,17 @@ func (s StartStreamEncryptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartStreamEncryptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartStreamEncryptionInput"}
-	if s.EncryptionType == nil {
+	if len(s.EncryptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -4774,8 +4809,8 @@ func (s *StartStreamEncryptionInput) Validate() error {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *StartStreamEncryptionInput) SetEncryptionType(v string) *StartStreamEncryptionInput {
-	s.EncryptionType = &v
+func (s *StartStreamEncryptionInput) SetEncryptionType(v EncryptionType) *StartStreamEncryptionInput {
+	s.EncryptionType = v
 	return s
 }
 
@@ -4819,7 +4854,7 @@ type StopStreamEncryptionInput struct {
 	//    customer-managed KMS key.
 	//
 	// EncryptionType is a required field
-	EncryptionType *string `type:"string" required:"true" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string" required:"true"`
 
 	// The GUID for the customer-managed key that was used for encryption.
 	//
@@ -4845,15 +4880,17 @@ func (s StopStreamEncryptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStreamEncryptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopStreamEncryptionInput"}
-	if s.EncryptionType == nil {
+	if len(s.EncryptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -4868,8 +4905,8 @@ func (s *StopStreamEncryptionInput) Validate() error {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *StopStreamEncryptionInput) SetEncryptionType(v string) *StopStreamEncryptionInput {
-	s.EncryptionType = &v
+func (s *StopStreamEncryptionInput) SetEncryptionType(v EncryptionType) *StopStreamEncryptionInput {
+	s.EncryptionType = v
 	return s
 }
 
@@ -4912,7 +4949,7 @@ type StreamDescription struct {
 	//
 	//    * KMS: Use server-side encryption on the records in the stream using a
 	//    customer-managed KMS key.
-	EncryptionType *string `type:"string" enum:"EncryptionType"`
+	EncryptionType EncryptionType `type:"string"`
 
 	// Represents the current enhanced monitoring settings of the stream.
 	//
@@ -4970,7 +5007,7 @@ type StreamDescription struct {
 	//    state.
 	//
 	// StreamStatus is a required field
-	StreamStatus *string `type:"string" required:"true" enum:"StreamStatus"`
+	StreamStatus StreamStatus `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4984,8 +5021,8 @@ func (s StreamDescription) GoString() string {
 }
 
 // SetEncryptionType sets the EncryptionType field's value.
-func (s *StreamDescription) SetEncryptionType(v string) *StreamDescription {
-	s.EncryptionType = &v
+func (s *StreamDescription) SetEncryptionType(v EncryptionType) *StreamDescription {
+	s.EncryptionType = v
 	return s
 }
 
@@ -5038,8 +5075,8 @@ func (s *StreamDescription) SetStreamName(v string) *StreamDescription {
 }
 
 // SetStreamStatus sets the StreamStatus field's value.
-func (s *StreamDescription) SetStreamStatus(v string) *StreamDescription {
-	s.StreamStatus = &v
+func (s *StreamDescription) SetStreamStatus(v StreamStatus) *StreamDescription {
+	s.StreamStatus = v
 	return s
 }
 
@@ -5089,7 +5126,7 @@ type UpdateShardCountInput struct {
 	// The scaling type. Uniform scaling creates shards of equal size.
 	//
 	// ScalingType is a required field
-	ScalingType *string `type:"string" required:"true" enum:"ScalingType"`
+	ScalingType ScalingType `type:"string" required:"true"`
 
 	// The name of the stream.
 	//
@@ -5115,15 +5152,17 @@ func (s UpdateShardCountInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateShardCountInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateShardCountInput"}
-	if s.ScalingType == nil {
+	if len(s.ScalingType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ScalingType"))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
+
 	if s.TargetShardCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetShardCount"))
 	}
@@ -5138,8 +5177,8 @@ func (s *UpdateShardCountInput) Validate() error {
 }
 
 // SetScalingType sets the ScalingType field's value.
-func (s *UpdateShardCountInput) SetScalingType(v string) *UpdateShardCountInput {
-	s.ScalingType = &v
+func (s *UpdateShardCountInput) SetScalingType(v ScalingType) *UpdateShardCountInput {
+	s.ScalingType = v
 	return s
 }
 
@@ -5197,72 +5236,52 @@ func (s *UpdateShardCountOutput) SetTargetShardCount(v int64) *UpdateShardCountO
 	return s
 }
 
-const (
-	// EncryptionTypeNone is a EncryptionType enum value
-	EncryptionTypeNone = "NONE"
+type EncryptionType string
 
-	// EncryptionTypeKms is a EncryptionType enum value
-	EncryptionTypeKms = "KMS"
+// Enum values for EncryptionType
+const (
+	EncryptionTypeNone EncryptionType = "NONE"
+	EncryptionTypeKms  EncryptionType = "KMS"
 )
 
+type MetricsName string
+
+// Enum values for MetricsName
 const (
-	// MetricsNameIncomingBytes is a MetricsName enum value
-	MetricsNameIncomingBytes = "IncomingBytes"
-
-	// MetricsNameIncomingRecords is a MetricsName enum value
-	MetricsNameIncomingRecords = "IncomingRecords"
-
-	// MetricsNameOutgoingBytes is a MetricsName enum value
-	MetricsNameOutgoingBytes = "OutgoingBytes"
-
-	// MetricsNameOutgoingRecords is a MetricsName enum value
-	MetricsNameOutgoingRecords = "OutgoingRecords"
-
-	// MetricsNameWriteProvisionedThroughputExceeded is a MetricsName enum value
-	MetricsNameWriteProvisionedThroughputExceeded = "WriteProvisionedThroughputExceeded"
-
-	// MetricsNameReadProvisionedThroughputExceeded is a MetricsName enum value
-	MetricsNameReadProvisionedThroughputExceeded = "ReadProvisionedThroughputExceeded"
-
-	// MetricsNameIteratorAgeMilliseconds is a MetricsName enum value
-	MetricsNameIteratorAgeMilliseconds = "IteratorAgeMilliseconds"
-
-	// MetricsNameAll is a MetricsName enum value
-	MetricsNameAll = "ALL"
+	MetricsNameIncomingBytes                      MetricsName = "IncomingBytes"
+	MetricsNameIncomingRecords                    MetricsName = "IncomingRecords"
+	MetricsNameOutgoingBytes                      MetricsName = "OutgoingBytes"
+	MetricsNameOutgoingRecords                    MetricsName = "OutgoingRecords"
+	MetricsNameWriteProvisionedThroughputExceeded MetricsName = "WriteProvisionedThroughputExceeded"
+	MetricsNameReadProvisionedThroughputExceeded  MetricsName = "ReadProvisionedThroughputExceeded"
+	MetricsNameIteratorAgeMilliseconds            MetricsName = "IteratorAgeMilliseconds"
+	MetricsNameAll                                MetricsName = "ALL"
 )
 
+type ScalingType string
+
+// Enum values for ScalingType
 const (
-	// ScalingTypeUniformScaling is a ScalingType enum value
-	ScalingTypeUniformScaling = "UNIFORM_SCALING"
+	ScalingTypeUniformScaling ScalingType = "UNIFORM_SCALING"
 )
 
+type ShardIteratorType string
+
+// Enum values for ShardIteratorType
 const (
-	// ShardIteratorTypeAtSequenceNumber is a ShardIteratorType enum value
-	ShardIteratorTypeAtSequenceNumber = "AT_SEQUENCE_NUMBER"
-
-	// ShardIteratorTypeAfterSequenceNumber is a ShardIteratorType enum value
-	ShardIteratorTypeAfterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
-
-	// ShardIteratorTypeTrimHorizon is a ShardIteratorType enum value
-	ShardIteratorTypeTrimHorizon = "TRIM_HORIZON"
-
-	// ShardIteratorTypeLatest is a ShardIteratorType enum value
-	ShardIteratorTypeLatest = "LATEST"
-
-	// ShardIteratorTypeAtTimestamp is a ShardIteratorType enum value
-	ShardIteratorTypeAtTimestamp = "AT_TIMESTAMP"
+	ShardIteratorTypeAtSequenceNumber    ShardIteratorType = "AT_SEQUENCE_NUMBER"
+	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
+	ShardIteratorTypeTrimHorizon         ShardIteratorType = "TRIM_HORIZON"
+	ShardIteratorTypeLatest              ShardIteratorType = "LATEST"
+	ShardIteratorTypeAtTimestamp         ShardIteratorType = "AT_TIMESTAMP"
 )
 
+type StreamStatus string
+
+// Enum values for StreamStatus
 const (
-	// StreamStatusCreating is a StreamStatus enum value
-	StreamStatusCreating = "CREATING"
-
-	// StreamStatusDeleting is a StreamStatus enum value
-	StreamStatusDeleting = "DELETING"
-
-	// StreamStatusActive is a StreamStatus enum value
-	StreamStatusActive = "ACTIVE"
-
-	// StreamStatusUpdating is a StreamStatus enum value
-	StreamStatusUpdating = "UPDATING"
+	StreamStatusCreating StreamStatus = "CREATING"
+	StreamStatusDeleting StreamStatus = "DELETING"
+	StreamStatusActive   StreamStatus = "ACTIVE"
+	StreamStatusUpdating StreamStatus = "UPDATING"
 )

@@ -36,7 +36,7 @@ func ExampleEC2_AllocateAddress_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.AllocateAddressInput{
-		Domain: aws.String("vpc"),
+		Domain: ec2.DomainTypeVpc,
 	}
 
 	result, err := svc.AllocateAddress(input)
@@ -652,7 +652,7 @@ func ExampleEC2_CreateCustomerGateway_shared00() {
 	input := &ec2.CreateCustomerGatewayInput{
 		BgpAsn:   aws.Int64(65534),
 		PublicIp: aws.String("12.1.2.3"),
-		Type:     aws.String("ipsec.1"),
+		Type:     ec2.GatewayTypeIpsec1,
 	}
 
 	result, err := svc.CreateCustomerGateway(input)
@@ -861,7 +861,7 @@ func ExampleEC2_CreateNetworkAclEntry_shared00() {
 			To:   aws.Int64(53),
 		},
 		Protocol:   aws.String("udp"),
-		RuleAction: aws.String("allow"),
+		RuleAction: ec2.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
@@ -932,7 +932,7 @@ func ExampleEC2_CreatePlacementGroup_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.CreatePlacementGroupInput{
 		GroupName: aws.String("my-cluster"),
-		Strategy:  aws.String("cluster"),
+		Strategy:  ec2.PlacementStrategyCluster,
 	}
 
 	result, err := svc.CreatePlacementGroup(input)
@@ -1176,7 +1176,7 @@ func ExampleEC2_CreateVolume_shared00() {
 	input := &ec2.CreateVolumeInput{
 		AvailabilityZone: aws.String("us-east-1a"),
 		Size:             aws.Int64(80),
-		VolumeType:       aws.String("gp2"),
+		VolumeType:       ec2.VolumeTypeGp2,
 	}
 
 	result, err := svc.CreateVolume(input)
@@ -1212,7 +1212,7 @@ func ExampleEC2_CreateVolume_shared01() {
 		AvailabilityZone: aws.String("us-east-1a"),
 		Iops:             aws.Int64(1000),
 		SnapshotId:       aws.String("snap-066877671789bd71b"),
-		VolumeType:       aws.String("io1"),
+		VolumeType:       ec2.VolumeTypeIo1,
 	}
 
 	result, err := svc.CreateVolume(input)
@@ -1832,8 +1832,8 @@ func ExampleEC2_DescribeAccountAttributes_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeAccountAttributesInput{
-		AttributeNames: []*string{
-			aws.String("supported-platforms"),
+		AttributeNames: []ec2.AccountAttributeName{
+			ec2.AccountAttributeName("supported-platforms"),
 		},
 	}
 
@@ -2104,7 +2104,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  aws.String("instanceType"),
+		Attribute:  ec2.InstanceAttributeNameInstanceType,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2138,7 +2138,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared01() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  aws.String("disableApiTermination"),
+		Attribute:  ec2.InstanceAttributeNameDisableApiTermination,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2172,7 +2172,7 @@ func ExampleEC2_DescribeInstanceAttribute_shared02() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
-		Attribute:  aws.String("blockDeviceMapping"),
+		Attribute:  ec2.InstanceAttributeNameBlockDeviceMapping,
 		InstanceId: aws.String("i-1234567890abcdef0"),
 	}
 
@@ -2381,7 +2381,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          aws.String("attachment"),
+		Attribute:          ec2.NetworkInterfaceAttributeAttachment,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -2414,7 +2414,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          aws.String("description"),
+		Attribute:          ec2.NetworkInterfaceAttributeDescription,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -2447,7 +2447,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          aws.String("groupSet"),
+		Attribute:          ec2.NetworkInterfaceAttributeGroupSet,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -2480,7 +2480,7 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
-		Attribute:          aws.String("sourceDestCheck"),
+		Attribute:          ec2.NetworkInterfaceAttributeSourceDestCheck,
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 	}
 
@@ -2689,7 +2689,7 @@ func ExampleEC2_DescribeSnapshotAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeSnapshotAttributeInput{
-		Attribute:  aws.String("createVolumePermission"),
+		Attribute:  ec2.SnapshotAttributeNameCreateVolumePermission,
 		SnapshotId: aws.String("snap-066877671789bd71b"),
 	}
 
@@ -2965,8 +2965,8 @@ func ExampleEC2_DescribeSpotPriceHistory_shared00() {
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotPriceHistoryInput{
 		EndTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T08:09:10"),
-		InstanceTypes: []*string{
-			aws.String("m1.xlarge"),
+		InstanceTypes: []ec2.InstanceType{
+			ec2.InstanceType("m1.xlarge"),
 		},
 		ProductDescriptions: []*string{
 			aws.String("Linux/UNIX (Amazon VPC)"),
@@ -3081,7 +3081,7 @@ func ExampleEC2_DescribeVolumeAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumeAttributeInput{
-		Attribute: aws.String("autoEnableIO"),
+		Attribute: ec2.VolumeAttributeNameAutoEnableIo,
 		VolumeId:  aws.String("vol-049df61146c4d7901"),
 	}
 
@@ -3267,7 +3267,7 @@ func ExampleEC2_DescribeVpcAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeVpcAttributeInput{
-		Attribute: aws.String("enableDnsSupport"),
+		Attribute: ec2.VpcAttributeNameEnableDnsSupport,
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
@@ -3302,7 +3302,7 @@ func ExampleEC2_DescribeVpcAttribute_shared01() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.DescribeVpcAttributeInput{
-		Attribute: aws.String("enableDnsHostnames"),
+		Attribute: ec2.VpcAttributeNameEnableDnsHostnames,
 		VpcId:     aws.String("vpc-a01106c2"),
 	}
 
@@ -3808,8 +3808,8 @@ func ExampleEC2_ModifySnapshotAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.ModifySnapshotAttributeInput{
-		Attribute:     aws.String("createVolumePermission"),
-		OperationType: aws.String("remove"),
+		Attribute:     ec2.SnapshotAttributeNameCreateVolumePermission,
+		OperationType: ec2.OperationTypeRemove,
 		SnapshotId:    aws.String("snap-1234567890abcdef0"),
 		UserIds: []*string{
 			aws.String("123456789012"),
@@ -3845,11 +3845,11 @@ func ExampleEC2_ModifySnapshotAttribute_shared01() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.ModifySnapshotAttributeInput{
-		Attribute: aws.String("createVolumePermission"),
+		Attribute: ec2.SnapshotAttributeNameCreateVolumePermission,
 		GroupNames: []*string{
 			aws.String("all"),
 		},
-		OperationType: aws.String("add"),
+		OperationType: ec2.OperationTypeAdd,
 		SnapshotId:    aws.String("snap-1234567890abcdef0"),
 	}
 
@@ -3916,7 +3916,7 @@ func ExampleEC2_ModifySpotFleetRequest_shared01() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.ModifySpotFleetRequestInput{
-		ExcessCapacityTerminationPolicy: aws.String("NoTermination "),
+		ExcessCapacityTerminationPolicy: ec2.ExcessCapacityTerminationPolicy("NoTermination "),
 		SpotFleetRequestId:              aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		TargetCapacity:                  aws.Int64(10),
 	}
@@ -4274,7 +4274,7 @@ func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
 			To:   aws.Int64(53),
 		},
 		Protocol:   aws.String("udp"),
-		RuleAction: aws.String("allow"),
+		RuleAction: ec2.RuleActionAllow,
 		RuleNumber: aws.Int64(100),
 	}
 
@@ -4387,7 +4387,7 @@ func ExampleEC2_RequestSpotFleet_shared00() {
 			LaunchSpecifications: []*ec2.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("m3.medium"),
+					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
 					SecurityGroups: []*ec2.GroupIdentifier{
 						{
@@ -4441,7 +4441,7 @@ func ExampleEC2_RequestSpotFleet_shared01() {
 			LaunchSpecifications: []*ec2.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("m3.medium"),
+					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
 					SecurityGroups: []*ec2.GroupIdentifier{
 						{
@@ -4491,7 +4491,7 @@ func ExampleEC2_RequestSpotFleet_shared02() {
 			LaunchSpecifications: []*ec2.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("m3.medium"),
+					InstanceType: ec2.InstanceTypeM3Medium,
 					KeyName:      aws.String("my-key-pair"),
 					NetworkInterfaces: []*ec2.InstanceNetworkInterfaceSpecification{
 						{
@@ -4543,22 +4543,22 @@ func ExampleEC2_RequestSpotFleet_shared03() {
 	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotFleetInput{
 		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
-			AllocationStrategy: aws.String("diversified"),
+			AllocationStrategy: ec2.AllocationStrategyDiversified,
 			IamFleetRole:       aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
 			LaunchSpecifications: []*ec2.SpotFleetLaunchSpecification{
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("c4.2xlarge"),
+					InstanceType: ec2.InstanceTypeC42xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("m3.2xlarge"),
+					InstanceType: ec2.InstanceTypeM32xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 				{
 					ImageId:      aws.String("ami-1a2b3c4d"),
-					InstanceType: aws.String("r3.2xlarge"),
+					InstanceType: ec2.InstanceTypeR32xlarge,
 					SubnetId:     aws.String("subnet-1a2b3c4d"),
 				},
 			},
@@ -4606,7 +4606,7 @@ func ExampleEC2_RequestSpotInstances_shared00() {
 				Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
 			},
 			ImageId:      aws.String("ami-1a2b3c4d"),
-			InstanceType: aws.String("m3.medium"),
+			InstanceType: ec2.InstanceTypeM3Medium,
 			KeyName:      aws.String("my-key-pair"),
 			Placement: &ec2.SpotPlacement{
 				AvailabilityZone: aws.String("us-west-2a"),
@@ -4616,7 +4616,7 @@ func ExampleEC2_RequestSpotInstances_shared00() {
 			},
 		},
 		SpotPrice: aws.String("0.03"),
-		Type:      aws.String("one-time"),
+		Type:      ec2.SpotInstanceTypeOneTime,
 	}
 
 	result, err := svc.RequestSpotInstances(input)
@@ -4657,14 +4657,14 @@ func ExampleEC2_RequestSpotInstances_shared01() {
 				Arn: aws.String("arn:aws:iam::123456789012:instance-profile/my-iam-role"),
 			},
 			ImageId:      aws.String("ami-1a2b3c4d"),
-			InstanceType: aws.String("m3.medium"),
+			InstanceType: ec2.InstanceTypeM3Medium,
 			SecurityGroupIds: []*string{
 				aws.String("sg-1a2b3c4d"),
 			},
 			SubnetId: aws.String("subnet-1a2b3c4d"),
 		},
 		SpotPrice: aws.String("0.050"),
-		Type:      aws.String("one-time"),
+		Type:      ec2.SpotInstanceTypeOneTime,
 	}
 
 	result, err := svc.RequestSpotInstances(input)
@@ -4697,7 +4697,7 @@ func ExampleEC2_ResetSnapshotAttribute_shared00() {
 
 	svc := ec2.New(cfg)
 	input := &ec2.ResetSnapshotAttributeInput{
-		Attribute:  aws.String("createVolumePermission"),
+		Attribute:  ec2.SnapshotAttributeNameCreateVolumePermission,
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
 

@@ -3493,9 +3493,11 @@ func (s AssociateKmsKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateKmsKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateKmsKeyInput"}
+
 	if s.KmsKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KmsKeyId"))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -3559,6 +3561,7 @@ func (s CancelExportTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelExportTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelExportTaskInput"}
+
 	if s.TaskId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
@@ -3647,15 +3650,18 @@ func (s CreateExportTaskInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateExportTaskInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateExportTaskInput"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.Destination != nil && len(*s.Destination) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Destination", 1))
 	}
+
 	if s.From == nil {
 		invalidParams.Add(aws.NewErrParamRequired("From"))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -3668,6 +3674,7 @@ func (s *CreateExportTaskInput) Validate() error {
 	if s.TaskName != nil && len(*s.TaskName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TaskName", 1))
 	}
+
 	if s.To == nil {
 		invalidParams.Add(aws.NewErrParamRequired("To"))
 	}
@@ -3775,6 +3782,7 @@ func (s CreateLogGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLogGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLogGroupInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -3852,12 +3860,14 @@ func (s CreateLogStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLogStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLogStreamInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.LogStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
@@ -3921,6 +3931,7 @@ func (s DeleteDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDestinationInput"}
+
 	if s.DestinationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
@@ -3978,6 +3989,7 @@ func (s DeleteLogGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLogGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogGroupInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -4040,12 +4052,14 @@ func (s DeleteLogStreamInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLogStreamInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogStreamInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.LogStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
@@ -4114,12 +4128,14 @@ func (s DeleteMetricFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMetricFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMetricFilterInput"}
+
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -4222,6 +4238,7 @@ func (s DeleteRetentionPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRetentionPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRetentionPolicyInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -4284,12 +4301,14 @@ func (s DeleteSubscriptionFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriptionFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionFilterInput"}
+
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -4441,7 +4460,7 @@ type DescribeExportTasksInput struct {
 
 	// The status code of the export task. Specifying a status code filters the
 	// results to zero or more export tasks.
-	StatusCode *string `locationName:"statusCode" type:"string" enum:"ExportTaskStatusCode"`
+	StatusCode ExportTaskStatusCode `locationName:"statusCode" type:"string"`
 
 	// The ID of the export task. Specifying a task ID filters the results to zero
 	// or one export tasks.
@@ -4490,8 +4509,8 @@ func (s *DescribeExportTasksInput) SetNextToken(v string) *DescribeExportTasksIn
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *DescribeExportTasksInput) SetStatusCode(v string) *DescribeExportTasksInput {
-	s.StatusCode = &v
+func (s *DescribeExportTasksInput) SetStatusCode(v ExportTaskStatusCode) *DescribeExportTasksInput {
+	s.StatusCode = v
 	return s
 }
 
@@ -4671,7 +4690,7 @@ type DescribeLogStreamsInput struct {
 	// milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on
 	// an eventual consistency basis. It typically updates in less than an hour
 	// from ingestion, but may take longer in some rare situations.
-	OrderBy *string `locationName:"orderBy" type:"string" enum:"OrderBy"`
+	OrderBy OrderBy `locationName:"orderBy" type:"string"`
 }
 
 // String returns the string representation
@@ -4690,6 +4709,7 @@ func (s *DescribeLogStreamsInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -4740,8 +4760,8 @@ func (s *DescribeLogStreamsInput) SetNextToken(v string) *DescribeLogStreamsInpu
 }
 
 // SetOrderBy sets the OrderBy field's value.
-func (s *DescribeLogStreamsInput) SetOrderBy(v string) *DescribeLogStreamsInput {
-	s.OrderBy = &v
+func (s *DescribeLogStreamsInput) SetOrderBy(v OrderBy) *DescribeLogStreamsInput {
+	s.OrderBy = v
 	return s
 }
 
@@ -5032,6 +5052,7 @@ func (s *DescribeSubscriptionFiltersInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -5202,6 +5223,7 @@ func (s DisassociateKmsKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateKmsKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateKmsKeyInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -5377,7 +5399,7 @@ type ExportTaskStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The status code of the export task.
-	Code *string `locationName:"code" type:"string" enum:"ExportTaskStatusCode"`
+	Code ExportTaskStatusCode `locationName:"code" type:"string"`
 
 	// The status message related to the status code.
 	Message *string `locationName:"message" type:"string"`
@@ -5394,8 +5416,8 @@ func (s ExportTaskStatus) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *ExportTaskStatus) SetCode(v string) *ExportTaskStatus {
-	s.Code = &v
+func (s *ExportTaskStatus) SetCode(v ExportTaskStatusCode) *ExportTaskStatus {
+	s.Code = v
 	return s
 }
 
@@ -5461,6 +5483,7 @@ func (s *FilterLogEventsInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -5690,12 +5713,14 @@ func (s *GetLogEventsInput) Validate() error {
 	if s.Limit != nil && *s.Limit < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.LogStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
@@ -5829,12 +5854,14 @@ func (s InputLogEvent) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputLogEvent) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InputLogEvent"}
+
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Message != nil && len(*s.Message) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
 	}
+
 	if s.Timestamp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
@@ -5880,6 +5907,7 @@ func (s ListTagsLogGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsLogGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsLogGroupInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -6251,12 +6279,15 @@ func (s MetricTransformation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricTransformation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MetricTransformation"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.MetricNamespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricNamespace"))
 	}
+
 	if s.MetricValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricValue"))
 	}
@@ -6370,18 +6401,21 @@ func (s PutDestinationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDestinationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutDestinationInput"}
+
 	if s.DestinationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
 	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
+
 	if s.TargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
@@ -6466,12 +6500,14 @@ func (s PutDestinationPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDestinationPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutDestinationPolicyInput"}
+
 	if s.AccessPolicy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccessPolicy"))
 	}
 	if s.AccessPolicy != nil && len(*s.AccessPolicy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccessPolicy", 1))
 	}
+
 	if s.DestinationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
@@ -6552,18 +6588,21 @@ func (s PutLogEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutLogEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutLogEventsInput"}
+
 	if s.LogEvents == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogEvents"))
 	}
 	if s.LogEvents != nil && len(s.LogEvents) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogEvents", 1))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.LogStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
@@ -6685,21 +6724,25 @@ func (s PutMetricFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutMetricFilterInput"}
+
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
+
 	if s.FilterPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.MetricTransformations == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricTransformations"))
 	}
@@ -6871,12 +6914,14 @@ func (s PutRetentionPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRetentionPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutRetentionPolicyInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.RetentionInDays == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetentionInDays"))
 	}
@@ -6940,7 +6985,7 @@ type PutSubscriptionFilterInput struct {
 	// data is grouped by log stream, but the grouping can be set to random for
 	// a more even distribution. This property is only applicable when the destination
 	// is an Amazon Kinesis stream.
-	Distribution *string `locationName:"distribution" type:"string" enum:"Distribution"`
+	Distribution Distribution `locationName:"distribution" type:"string"`
 
 	// A name for the subscription filter. If you are updating an existing filter,
 	// you must specify the correct name in filterName. Otherwise, the call fails
@@ -6980,21 +7025,25 @@ func (s PutSubscriptionFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSubscriptionFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutSubscriptionFilterInput"}
+
 	if s.DestinationArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationArn"))
 	}
 	if s.DestinationArn != nil && len(*s.DestinationArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DestinationArn", 1))
 	}
+
 	if s.FilterName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
+
 	if s.FilterPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
@@ -7018,8 +7067,8 @@ func (s *PutSubscriptionFilterInput) SetDestinationArn(v string) *PutSubscriptio
 }
 
 // SetDistribution sets the Distribution field's value.
-func (s *PutSubscriptionFilterInput) SetDistribution(v string) *PutSubscriptionFilterInput {
-	s.Distribution = &v
+func (s *PutSubscriptionFilterInput) SetDistribution(v Distribution) *PutSubscriptionFilterInput {
+	s.Distribution = v
 	return s
 }
 
@@ -7198,7 +7247,7 @@ type SubscriptionFilter struct {
 
 	// The method used to distribute log data to the destination, which can be either
 	// random or grouped by log stream.
-	Distribution *string `locationName:"distribution" type:"string" enum:"Distribution"`
+	Distribution Distribution `locationName:"distribution" type:"string"`
 
 	// The name of the subscription filter.
 	FilterName *string `locationName:"filterName" min:"1" type:"string"`
@@ -7238,8 +7287,8 @@ func (s *SubscriptionFilter) SetDestinationArn(v string) *SubscriptionFilter {
 }
 
 // SetDistribution sets the Distribution field's value.
-func (s *SubscriptionFilter) SetDistribution(v string) *SubscriptionFilter {
-	s.Distribution = &v
+func (s *SubscriptionFilter) SetDistribution(v Distribution) *SubscriptionFilter {
+	s.Distribution = v
 	return s
 }
 
@@ -7295,12 +7344,14 @@ func (s TagLogGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagLogGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagLogGroupInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7372,9 +7423,11 @@ func (s TestMetricFilterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestMetricFilterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TestMetricFilterInput"}
+
 	if s.FilterPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
+
 	if s.LogEventMessages == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogEventMessages"))
 	}
@@ -7452,12 +7505,14 @@ func (s UntagLogGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagLogGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagLogGroupInput"}
+
 	if s.LogGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7500,38 +7555,30 @@ func (s UntagLogGroupOutput) GoString() string {
 
 // The method used to distribute log data to the destination, which can be either
 // random or grouped by log stream.
-const (
-	// DistributionRandom is a Distribution enum value
-	DistributionRandom = "Random"
+type Distribution string
 
-	// DistributionByLogStream is a Distribution enum value
-	DistributionByLogStream = "ByLogStream"
+// Enum values for Distribution
+const (
+	DistributionRandom      Distribution = "Random"
+	DistributionByLogStream Distribution = "ByLogStream"
 )
 
+type ExportTaskStatusCode string
+
+// Enum values for ExportTaskStatusCode
 const (
-	// ExportTaskStatusCodeCancelled is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodeCancelled = "CANCELLED"
-
-	// ExportTaskStatusCodeCompleted is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodeCompleted = "COMPLETED"
-
-	// ExportTaskStatusCodeFailed is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodeFailed = "FAILED"
-
-	// ExportTaskStatusCodePending is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodePending = "PENDING"
-
-	// ExportTaskStatusCodePendingCancel is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodePendingCancel = "PENDING_CANCEL"
-
-	// ExportTaskStatusCodeRunning is a ExportTaskStatusCode enum value
-	ExportTaskStatusCodeRunning = "RUNNING"
+	ExportTaskStatusCodeCancelled     ExportTaskStatusCode = "CANCELLED"
+	ExportTaskStatusCodeCompleted     ExportTaskStatusCode = "COMPLETED"
+	ExportTaskStatusCodeFailed        ExportTaskStatusCode = "FAILED"
+	ExportTaskStatusCodePending       ExportTaskStatusCode = "PENDING"
+	ExportTaskStatusCodePendingCancel ExportTaskStatusCode = "PENDING_CANCEL"
+	ExportTaskStatusCodeRunning       ExportTaskStatusCode = "RUNNING"
 )
 
-const (
-	// OrderByLogStreamName is a OrderBy enum value
-	OrderByLogStreamName = "LogStreamName"
+type OrderBy string
 
-	// OrderByLastEventTime is a OrderBy enum value
-	OrderByLastEventTime = "LastEventTime"
+// Enum values for OrderBy
+const (
+	OrderByLogStreamName OrderBy = "LogStreamName"
+	OrderByLastEventTime OrderBy = "LastEventTime"
 )

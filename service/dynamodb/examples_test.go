@@ -197,21 +197,21 @@ func ExampleDynamoDB_CreateTable_shared00() {
 		AttributeDefinitions: []*dynamodb.AttributeDefinition{
 			{
 				AttributeName: aws.String("Artist"),
-				AttributeType: aws.String("S"),
+				AttributeType: dynamodb.ScalarAttributeTypeS,
 			},
 			{
 				AttributeName: aws.String("SongTitle"),
-				AttributeType: aws.String("S"),
+				AttributeType: dynamodb.ScalarAttributeTypeS,
 			},
 		},
 		KeySchema: []*dynamodb.KeySchemaElement{
 			{
 				AttributeName: aws.String("Artist"),
-				KeyType:       aws.String("HASH"),
+				KeyType:       dynamodb.KeyTypeHash,
 			},
 			{
 				AttributeName: aws.String("SongTitle"),
-				KeyType:       aws.String("RANGE"),
+				KeyType:       dynamodb.KeyTypeRange,
 			},
 		},
 		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
@@ -506,7 +506,7 @@ func ExampleDynamoDB_PutItem_shared00() {
 				S: aws.String("Call Me Today"),
 			},
 		},
-		ReturnConsumedCapacity: aws.String("TOTAL"),
+		ReturnConsumedCapacity: dynamodb.ReturnConsumedCapacityTotal,
 		TableName:              aws.String("Music"),
 	}
 
@@ -669,7 +669,7 @@ func ExampleDynamoDB_UpdateItem_shared00() {
 				S: aws.String("Happy Day"),
 			},
 		},
-		ReturnValues:     aws.String("ALL_NEW"),
+		ReturnValues:     dynamodb.ReturnValueAllNew,
 		TableName:        aws.String("Music"),
 		UpdateExpression: aws.String("SET #Y = :y, #AT = :t"),
 	}

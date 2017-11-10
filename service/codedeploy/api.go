@@ -4089,9 +4089,11 @@ func (s AddTagsToOnPremisesInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToOnPremisesInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToOnPremisesInstancesInput"}
+
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -4280,7 +4282,7 @@ type AutoRollbackConfiguration struct {
 	Enabled *bool `locationName:"enabled" type:"boolean"`
 
 	// The event type or types that trigger a rollback.
-	Events []*string `locationName:"events" type:"list"`
+	Events []AutoRollbackEvent `locationName:"events" type:"list"`
 }
 
 // String returns the string representation
@@ -4300,7 +4302,7 @@ func (s *AutoRollbackConfiguration) SetEnabled(v bool) *AutoRollbackConfiguratio
 }
 
 // SetEvents sets the Events field's value.
-func (s *AutoRollbackConfiguration) SetEvents(v []*string) *AutoRollbackConfiguration {
+func (s *AutoRollbackConfiguration) SetEvents(v []AutoRollbackEvent) *AutoRollbackConfiguration {
 	s.Events = v
 	return s
 }
@@ -4368,12 +4370,14 @@ func (s BatchGetApplicationRevisionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetApplicationRevisionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetApplicationRevisionsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.Revisions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Revisions"))
 	}
@@ -4519,12 +4523,14 @@ func (s BatchGetDeploymentGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetDeploymentGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentGroupsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.DeploymentGroupNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupNames"))
 	}
@@ -4610,9 +4616,11 @@ func (s BatchGetDeploymentInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetDeploymentInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentInstancesInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -4828,7 +4836,7 @@ type BlueInstanceTerminationOption struct {
 	//
 	//    * KEEP_ALIVE: Instances are left running after they are deregistered from
 	//    the load balancer and removed from the deployment group.
-	Action *string `locationName:"action" type:"string" enum:"InstanceAction"`
+	Action InstanceAction `locationName:"action" type:"string"`
 
 	// The number of minutes to wait after a successful blue/green deployment before
 	// terminating instances from the original environment.
@@ -4846,8 +4854,8 @@ func (s BlueInstanceTerminationOption) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *BlueInstanceTerminationOption) SetAction(v string) *BlueInstanceTerminationOption {
-	s.Action = &v
+func (s *BlueInstanceTerminationOption) SetAction(v InstanceAction) *BlueInstanceTerminationOption {
+	s.Action = v
 	return s
 }
 
@@ -4922,6 +4930,7 @@ func (s CreateApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5013,12 +5022,14 @@ func (s CreateDeploymentConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentConfigInput"}
+
 	if s.DeploymentConfigName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
+
 	if s.MinimumHealthyHosts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MinimumHealthyHosts"))
 	}
@@ -5162,6 +5173,7 @@ func (s CreateDeploymentGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentGroupInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5171,12 +5183,14 @@ func (s *CreateDeploymentGroupInput) Validate() error {
 	if s.DeploymentConfigName != nil && len(*s.DeploymentConfigName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
+
 	if s.DeploymentGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
 	if s.DeploymentGroupName != nil && len(*s.DeploymentGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeploymentGroupName", 1))
 	}
+
 	if s.ServiceRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
@@ -5345,7 +5359,7 @@ type CreateDeploymentInput struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior *string `locationName:"fileExistsBehavior" type:"string" enum:"FileExistsBehavior"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
 
 	// If set to true, then if the deployment causes the ApplicationStop deployment
 	// lifecycle event to an instance to fail, the deployment to that instance will
@@ -5383,6 +5397,7 @@ func (s CreateDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5433,8 +5448,8 @@ func (s *CreateDeploymentInput) SetDescription(v string) *CreateDeploymentInput 
 }
 
 // SetFileExistsBehavior sets the FileExistsBehavior field's value.
-func (s *CreateDeploymentInput) SetFileExistsBehavior(v string) *CreateDeploymentInput {
-	s.FileExistsBehavior = &v
+func (s *CreateDeploymentInput) SetFileExistsBehavior(v FileExistsBehavior) *CreateDeploymentInput {
+	s.FileExistsBehavior = v
 	return s
 }
 
@@ -5512,6 +5527,7 @@ func (s DeleteApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -5571,6 +5587,7 @@ func (s DeleteDeploymentConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentConfigInput"}
+
 	if s.DeploymentConfigName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
@@ -5635,12 +5652,14 @@ func (s DeleteDeploymentGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeploymentGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeploymentGroupInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.DeploymentGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
@@ -5978,7 +5997,7 @@ type DeploymentInfo struct {
 	//    * autoscaling: Auto Scaling created the deployment.
 	//
 	//    * codeDeployRollback: A rollback process created the deployment.
-	Creator *string `locationName:"creator" type:"string" enum:"DeploymentCreator"`
+	Creator DeploymentCreator `locationName:"creator" type:"string"`
 
 	// The deployment configuration name.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
@@ -6014,7 +6033,7 @@ type DeploymentInfo struct {
 	//
 	//    * RETAIN: The version of the file already on the instance is kept and
 	//    used as part of the new deployment.
-	FileExistsBehavior *string `locationName:"fileExistsBehavior" type:"string" enum:"FileExistsBehavior"`
+	FileExistsBehavior FileExistsBehavior `locationName:"fileExistsBehavior" type:"string"`
 
 	// If true, then if the deployment causes the ApplicationStop deployment lifecycle
 	// event to an instance to fail, the deployment to that instance will not be
@@ -6056,7 +6075,7 @@ type DeploymentInfo struct {
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The current state of the deployment as a whole.
-	Status *string `locationName:"status" type:"string" enum:"DeploymentStatus"`
+	Status DeploymentStatus `locationName:"status" type:"string"`
 
 	// Information about the instances that belong to the replacement environment
 	// in a blue/green deployment.
@@ -6114,8 +6133,8 @@ func (s *DeploymentInfo) SetCreateTime(v time.Time) *DeploymentInfo {
 }
 
 // SetCreator sets the Creator field's value.
-func (s *DeploymentInfo) SetCreator(v string) *DeploymentInfo {
-	s.Creator = &v
+func (s *DeploymentInfo) SetCreator(v DeploymentCreator) *DeploymentInfo {
+	s.Creator = v
 	return s
 }
 
@@ -6162,8 +6181,8 @@ func (s *DeploymentInfo) SetErrorInformation(v *ErrorInformation) *DeploymentInf
 }
 
 // SetFileExistsBehavior sets the FileExistsBehavior field's value.
-func (s *DeploymentInfo) SetFileExistsBehavior(v string) *DeploymentInfo {
-	s.FileExistsBehavior = &v
+func (s *DeploymentInfo) SetFileExistsBehavior(v FileExistsBehavior) *DeploymentInfo {
+	s.FileExistsBehavior = v
 	return s
 }
 
@@ -6210,8 +6229,8 @@ func (s *DeploymentInfo) SetStartTime(v time.Time) *DeploymentInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *DeploymentInfo) SetStatus(v string) *DeploymentInfo {
-	s.Status = &v
+func (s *DeploymentInfo) SetStatus(v DeploymentStatus) *DeploymentInfo {
+	s.Status = v
 	return s
 }
 
@@ -6316,7 +6335,7 @@ type DeploymentReadyOption struct {
 	//    traffic is rerouted manually. If traffic is not rerouted manually before
 	//    the end of the specified wait period, the deployment status is changed
 	//    to Stopped.
-	ActionOnTimeout *string `locationName:"actionOnTimeout" type:"string" enum:"DeploymentReadyAction"`
+	ActionOnTimeout DeploymentReadyAction `locationName:"actionOnTimeout" type:"string"`
 
 	// The number of minutes to wait before the status of a blue/green deployment
 	// changed to Stopped if rerouting is not started manually. Applies only to
@@ -6335,8 +6354,8 @@ func (s DeploymentReadyOption) GoString() string {
 }
 
 // SetActionOnTimeout sets the ActionOnTimeout field's value.
-func (s *DeploymentReadyOption) SetActionOnTimeout(v string) *DeploymentReadyOption {
-	s.ActionOnTimeout = &v
+func (s *DeploymentReadyOption) SetActionOnTimeout(v DeploymentReadyAction) *DeploymentReadyOption {
+	s.ActionOnTimeout = v
 	return s
 }
 
@@ -6353,10 +6372,10 @@ type DeploymentStyle struct {
 	_ struct{} `type:"structure"`
 
 	// Indicates whether to route deployment traffic behind a load balancer.
-	DeploymentOption *string `locationName:"deploymentOption" type:"string" enum:"DeploymentOption"`
+	DeploymentOption DeploymentOption `locationName:"deploymentOption" type:"string"`
 
 	// Indicates whether to run an in-place deployment or a blue/green deployment.
-	DeploymentType *string `locationName:"deploymentType" type:"string" enum:"DeploymentType"`
+	DeploymentType DeploymentType `locationName:"deploymentType" type:"string"`
 }
 
 // String returns the string representation
@@ -6370,14 +6389,14 @@ func (s DeploymentStyle) GoString() string {
 }
 
 // SetDeploymentOption sets the DeploymentOption field's value.
-func (s *DeploymentStyle) SetDeploymentOption(v string) *DeploymentStyle {
-	s.DeploymentOption = &v
+func (s *DeploymentStyle) SetDeploymentOption(v DeploymentOption) *DeploymentStyle {
+	s.DeploymentOption = v
 	return s
 }
 
 // SetDeploymentType sets the DeploymentType field's value.
-func (s *DeploymentStyle) SetDeploymentType(v string) *DeploymentStyle {
-	s.DeploymentType = &v
+func (s *DeploymentStyle) SetDeploymentType(v DeploymentType) *DeploymentStyle {
+	s.DeploymentType = v
 	return s
 }
 
@@ -6405,6 +6424,7 @@ func (s DeregisterOnPremisesInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterOnPremisesInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterOnPremisesInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -6456,7 +6476,7 @@ type Diagnostics struct {
 	//    * ScriptFailed: The specified script failed to run as expected.
 	//
 	//    * UnknownError: The specified script did not run for an unknown reason.
-	ErrorCode *string `locationName:"errorCode" type:"string" enum:"LifecycleErrorCode"`
+	ErrorCode LifecycleErrorCode `locationName:"errorCode" type:"string"`
 
 	// The last portion of the diagnostic log.
 	//
@@ -6482,8 +6502,8 @@ func (s Diagnostics) GoString() string {
 }
 
 // SetErrorCode sets the ErrorCode field's value.
-func (s *Diagnostics) SetErrorCode(v string) *Diagnostics {
-	s.ErrorCode = &v
+func (s *Diagnostics) SetErrorCode(v LifecycleErrorCode) *Diagnostics {
+	s.ErrorCode = v
 	return s
 }
 
@@ -6520,7 +6540,7 @@ type EC2TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type *string `type:"string" enum:"EC2TagFilterType"`
+	Type EC2TagFilterType `type:"string"`
 
 	// The tag filter value.
 	Value *string `type:"string"`
@@ -6543,8 +6563,8 @@ func (s *EC2TagFilter) SetKey(v string) *EC2TagFilter {
 }
 
 // SetType sets the Type field's value.
-func (s *EC2TagFilter) SetType(v string) *EC2TagFilter {
-	s.Type = &v
+func (s *EC2TagFilter) SetType(v EC2TagFilterType) *EC2TagFilter {
+	s.Type = v
 	return s
 }
 
@@ -6658,7 +6678,7 @@ type ErrorInformation struct {
 	//    * REVISION_MISSING: The revision ID was missing. This error code will
 	//    most likely be raised if the revision is deleted after the deployment
 	//    is created but before it is started.
-	Code *string `locationName:"code" type:"string" enum:"ErrorCode"`
+	Code ErrorCode `locationName:"code" type:"string"`
 
 	// An accompanying error message.
 	Message *string `locationName:"message" type:"string"`
@@ -6675,8 +6695,8 @@ func (s ErrorInformation) GoString() string {
 }
 
 // SetCode sets the Code field's value.
-func (s *ErrorInformation) SetCode(v string) *ErrorInformation {
-	s.Code = &v
+func (s *ErrorInformation) SetCode(v ErrorCode) *ErrorInformation {
+	s.Code = v
 	return s
 }
 
@@ -6772,6 +6792,7 @@ func (s GetApplicationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -6845,12 +6866,14 @@ func (s GetApplicationRevisionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationRevisionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationRevisionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.Revision == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Revision"))
 	}
@@ -6941,6 +6964,7 @@ func (s GetDeploymentConfigInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentConfigInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentConfigInput"}
+
 	if s.DeploymentConfigName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentConfigName"))
 	}
@@ -7015,12 +7039,14 @@ func (s GetDeploymentGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentGroupInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.DeploymentGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentGroupName"))
 	}
@@ -7095,6 +7121,7 @@ func (s GetDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
@@ -7140,9 +7167,11 @@ func (s GetDeploymentInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentInstanceInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -7239,6 +7268,7 @@ func (s GetOnPremisesInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOnPremisesInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetOnPremisesInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -7331,7 +7361,7 @@ type GreenFleetProvisioningOption struct {
 	//
 	//    * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling
 	//    group to define and create instances in a new Auto Scaling group.
-	Action *string `locationName:"action" type:"string" enum:"GreenFleetProvisioningAction"`
+	Action GreenFleetProvisioningAction `locationName:"action" type:"string"`
 }
 
 // String returns the string representation
@@ -7345,8 +7375,8 @@ func (s GreenFleetProvisioningOption) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *GreenFleetProvisioningOption) SetAction(v string) *GreenFleetProvisioningOption {
-	s.Action = &v
+func (s *GreenFleetProvisioningOption) SetAction(v GreenFleetProvisioningAction) *GreenFleetProvisioningOption {
+	s.Action = v
 	return s
 }
 
@@ -7447,7 +7477,7 @@ type InstanceSummary struct {
 	//    * BLUE: The instance is part of the original environment.
 	//
 	//    * GREEN: The instance is part of the replacement environment.
-	InstanceType *string `locationName:"instanceType" type:"string" enum:"InstanceType"`
+	InstanceType InstanceType `locationName:"instanceType" type:"string"`
 
 	// A timestamp indicating when the instance information was last updated.
 	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" timestampFormat:"unix"`
@@ -7468,7 +7498,7 @@ type InstanceSummary struct {
 	//    * Skipped: The deployment has been skipped for this instance.
 	//
 	//    * Unknown: The deployment status is unknown for this instance.
-	Status *string `locationName:"status" type:"string" enum:"InstanceStatus"`
+	Status InstanceStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -7494,8 +7524,8 @@ func (s *InstanceSummary) SetInstanceId(v string) *InstanceSummary {
 }
 
 // SetInstanceType sets the InstanceType field's value.
-func (s *InstanceSummary) SetInstanceType(v string) *InstanceSummary {
-	s.InstanceType = &v
+func (s *InstanceSummary) SetInstanceType(v InstanceType) *InstanceSummary {
+	s.InstanceType = v
 	return s
 }
 
@@ -7512,8 +7542,8 @@ func (s *InstanceSummary) SetLifecycleEvents(v []*LifecycleEvent) *InstanceSumma
 }
 
 // SetStatus sets the Status field's value.
-func (s *InstanceSummary) SetStatus(v string) *InstanceSummary {
-	s.Status = &v
+func (s *InstanceSummary) SetStatus(v InstanceStatus) *InstanceSummary {
+	s.Status = v
 	return s
 }
 
@@ -7535,7 +7565,7 @@ type LastDeploymentInfo struct {
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the most recent deployment.
-	Status *string `locationName:"status" type:"string" enum:"DeploymentStatus"`
+	Status DeploymentStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -7567,8 +7597,8 @@ func (s *LastDeploymentInfo) SetEndTime(v time.Time) *LastDeploymentInfo {
 }
 
 // SetStatus sets the Status field's value.
-func (s *LastDeploymentInfo) SetStatus(v string) *LastDeploymentInfo {
-	s.Status = &v
+func (s *LastDeploymentInfo) SetStatus(v DeploymentStatus) *LastDeploymentInfo {
+	s.Status = v
 	return s
 }
 
@@ -7603,7 +7633,7 @@ type LifecycleEvent struct {
 	//    * Skipped: The deployment lifecycle event has been skipped.
 	//
 	//    * Unknown: The deployment lifecycle event is unknown.
-	Status *string `locationName:"status" type:"string" enum:"LifecycleEventStatus"`
+	Status LifecycleEventStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -7641,8 +7671,8 @@ func (s *LifecycleEvent) SetStartTime(v time.Time) *LifecycleEvent {
 }
 
 // SetStatus sets the Status field's value.
-func (s *LifecycleEvent) SetStatus(v string) *LifecycleEvent {
-	s.Status = &v
+func (s *LifecycleEvent) SetStatus(v LifecycleEventStatus) *LifecycleEvent {
+	s.Status = v
 	return s
 }
 
@@ -7666,7 +7696,7 @@ type ListApplicationRevisionsInput struct {
 	//    group.
 	//
 	//    * ignore: List all revisions.
-	Deployed *string `locationName:"deployed" type:"string" enum:"ListStateFilterAction"`
+	Deployed ListStateFilterAction `locationName:"deployed" type:"string"`
 
 	// An identifier returned from the previous list application revisions call.
 	// It can be used to return the next set of applications in the list.
@@ -7691,7 +7721,7 @@ type ListApplicationRevisionsInput struct {
 	//
 	// If not specified or set to null, the results will be returned in an arbitrary
 	// order.
-	SortBy *string `locationName:"sortBy" type:"string" enum:"ApplicationRevisionSortBy"`
+	SortBy ApplicationRevisionSortBy `locationName:"sortBy" type:"string"`
 
 	// The order in which to sort the list results:
 	//
@@ -7702,7 +7732,7 @@ type ListApplicationRevisionsInput struct {
 	// If not specified, the results will be sorted in ascending order.
 	//
 	// If set to null, the results will be sorted in an arbitrary order.
-	SortOrder *string `locationName:"sortOrder" type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `locationName:"sortOrder" type:"string"`
 }
 
 // String returns the string representation
@@ -7718,6 +7748,7 @@ func (s ListApplicationRevisionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListApplicationRevisionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationRevisionsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -7738,8 +7769,8 @@ func (s *ListApplicationRevisionsInput) SetApplicationName(v string) *ListApplic
 }
 
 // SetDeployed sets the Deployed field's value.
-func (s *ListApplicationRevisionsInput) SetDeployed(v string) *ListApplicationRevisionsInput {
-	s.Deployed = &v
+func (s *ListApplicationRevisionsInput) SetDeployed(v ListStateFilterAction) *ListApplicationRevisionsInput {
+	s.Deployed = v
 	return s
 }
 
@@ -7762,14 +7793,14 @@ func (s *ListApplicationRevisionsInput) SetS3KeyPrefix(v string) *ListApplicatio
 }
 
 // SetSortBy sets the SortBy field's value.
-func (s *ListApplicationRevisionsInput) SetSortBy(v string) *ListApplicationRevisionsInput {
-	s.SortBy = &v
+func (s *ListApplicationRevisionsInput) SetSortBy(v ApplicationRevisionSortBy) *ListApplicationRevisionsInput {
+	s.SortBy = v
 	return s
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *ListApplicationRevisionsInput) SetSortOrder(v string) *ListApplicationRevisionsInput {
-	s.SortOrder = &v
+func (s *ListApplicationRevisionsInput) SetSortOrder(v SortOrder) *ListApplicationRevisionsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -7964,6 +7995,7 @@ func (s ListDeploymentGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentGroupsInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
@@ -8057,12 +8089,12 @@ type ListDeploymentInstancesInput struct {
 	//    * Skipped: Include those instance with skipped deployments.
 	//
 	//    * Unknown: Include those instance with deployments in an unknown state.
-	InstanceStatusFilter []*string `locationName:"instanceStatusFilter" type:"list"`
+	InstanceStatusFilter []InstanceStatus `locationName:"instanceStatusFilter" type:"list"`
 
 	// The set of instances in a blue/green deployment, either those in the original
 	// environment ("BLUE") or those in the replacement environment ("GREEN"), for
 	// which you want to view instance information.
-	InstanceTypeFilter []*string `locationName:"instanceTypeFilter" type:"list"`
+	InstanceTypeFilter []InstanceType `locationName:"instanceTypeFilter" type:"list"`
 
 	// An identifier returned from the previous list deployment instances call.
 	// It can be used to return the next set of deployment instances in the list.
@@ -8082,6 +8114,7 @@ func (s ListDeploymentInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentInstancesInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
@@ -8099,13 +8132,13 @@ func (s *ListDeploymentInstancesInput) SetDeploymentId(v string) *ListDeployment
 }
 
 // SetInstanceStatusFilter sets the InstanceStatusFilter field's value.
-func (s *ListDeploymentInstancesInput) SetInstanceStatusFilter(v []*string) *ListDeploymentInstancesInput {
+func (s *ListDeploymentInstancesInput) SetInstanceStatusFilter(v []InstanceStatus) *ListDeploymentInstancesInput {
 	s.InstanceStatusFilter = v
 	return s
 }
 
 // SetInstanceTypeFilter sets the InstanceTypeFilter field's value.
-func (s *ListDeploymentInstancesInput) SetInstanceTypeFilter(v []*string) *ListDeploymentInstancesInput {
+func (s *ListDeploymentInstancesInput) SetInstanceTypeFilter(v []InstanceType) *ListDeploymentInstancesInput {
 	s.InstanceTypeFilter = v
 	return s
 }
@@ -8180,7 +8213,7 @@ type ListDeploymentsInput struct {
 	//    * Failed: Include failed deployments in the resulting list.
 	//
 	//    * Stopped: Include stopped deployments in the resulting list.
-	IncludeOnlyStatuses []*string `locationName:"includeOnlyStatuses" type:"list"`
+	IncludeOnlyStatuses []DeploymentStatus `locationName:"includeOnlyStatuses" type:"list"`
 
 	// An identifier returned from the previous list deployments call. It can be
 	// used to return the next set of deployments in the list.
@@ -8232,7 +8265,7 @@ func (s *ListDeploymentsInput) SetDeploymentGroupName(v string) *ListDeployments
 }
 
 // SetIncludeOnlyStatuses sets the IncludeOnlyStatuses field's value.
-func (s *ListDeploymentsInput) SetIncludeOnlyStatuses(v []*string) *ListDeploymentsInput {
+func (s *ListDeploymentsInput) SetIncludeOnlyStatuses(v []DeploymentStatus) *ListDeploymentsInput {
 	s.IncludeOnlyStatuses = v
 	return s
 }
@@ -8357,7 +8390,7 @@ type ListOnPremisesInstancesInput struct {
 	//
 	//    * Registered: Include registered on-premises instances in the resulting
 	//    list.
-	RegistrationStatus *string `locationName:"registrationStatus" type:"string" enum:"RegistrationStatus"`
+	RegistrationStatus RegistrationStatus `locationName:"registrationStatus" type:"string"`
 
 	// The on-premises instance tags that will be used to restrict the corresponding
 	// on-premises instance names returned.
@@ -8381,8 +8414,8 @@ func (s *ListOnPremisesInstancesInput) SetNextToken(v string) *ListOnPremisesIns
 }
 
 // SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListOnPremisesInstancesInput) SetRegistrationStatus(v string) *ListOnPremisesInstancesInput {
-	s.RegistrationStatus = &v
+func (s *ListOnPremisesInstancesInput) SetRegistrationStatus(v RegistrationStatus) *ListOnPremisesInstancesInput {
+	s.RegistrationStatus = v
 	return s
 }
 
@@ -8498,7 +8531,7 @@ type MinimumHealthyHosts struct {
 	//
 	// For more information, see AWS CodeDeploy Instance Health (http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the AWS CodeDeploy User Guide.
-	Type *string `locationName:"type" type:"string" enum:"MinimumHealthyHostsType"`
+	Type MinimumHealthyHostsType `locationName:"type" type:"string"`
 
 	// The minimum healthy instance value.
 	Value *int64 `locationName:"value" type:"integer"`
@@ -8515,8 +8548,8 @@ func (s MinimumHealthyHosts) GoString() string {
 }
 
 // SetType sets the Type field's value.
-func (s *MinimumHealthyHosts) SetType(v string) *MinimumHealthyHosts {
-	s.Type = &v
+func (s *MinimumHealthyHosts) SetType(v MinimumHealthyHostsType) *MinimumHealthyHosts {
+	s.Type = v
 	return s
 }
 
@@ -8587,12 +8620,14 @@ func (s RegisterApplicationRevisionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterApplicationRevisionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterApplicationRevisionInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.Revision == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Revision"))
 	}
@@ -8666,6 +8701,7 @@ func (s RegisterOnPremisesInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterOnPremisesInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterOnPremisesInstanceInput"}
+
 	if s.InstanceName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceName"))
 	}
@@ -8738,9 +8774,11 @@ func (s RemoveTagsFromOnPremisesInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromOnPremisesInstancesInput"}
+
 	if s.InstanceNames == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -8826,7 +8864,7 @@ type RevisionLocation struct {
 	//    * S3: An application revision stored in Amazon S3.
 	//
 	//    * GitHub: An application revision stored in GitHub.
-	RevisionType *string `locationName:"revisionType" type:"string" enum:"RevisionLocationType"`
+	RevisionType RevisionLocationType `locationName:"revisionType" type:"string"`
 
 	// Information about the location of application artifacts stored in Amazon
 	// S3.
@@ -8850,8 +8888,8 @@ func (s *RevisionLocation) SetGitHubLocation(v *GitHubLocation) *RevisionLocatio
 }
 
 // SetRevisionType sets the RevisionType field's value.
-func (s *RevisionLocation) SetRevisionType(v string) *RevisionLocation {
-	s.RevisionType = &v
+func (s *RevisionLocation) SetRevisionType(v RevisionLocationType) *RevisionLocation {
+	s.RevisionType = v
 	return s
 }
 
@@ -8922,7 +8960,7 @@ type S3Location struct {
 	//    * tgz: A compressed tar archive file.
 	//
 	//    * zip: A zip archive file.
-	BundleType *string `locationName:"bundleType" type:"string" enum:"BundleType"`
+	BundleType BundleType `locationName:"bundleType" type:"string"`
 
 	// The ETag of the Amazon S3 object that represents the bundled artifacts for
 	// the application revision.
@@ -8960,8 +8998,8 @@ func (s *S3Location) SetBucket(v string) *S3Location {
 }
 
 // SetBundleType sets the BundleType field's value.
-func (s *S3Location) SetBundleType(v string) *S3Location {
-	s.BundleType = &v
+func (s *S3Location) SetBundleType(v BundleType) *S3Location {
+	s.BundleType = v
 	return s
 }
 
@@ -9052,6 +9090,7 @@ func (s StopDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopDeploymentInput"}
+
 	if s.DeploymentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
@@ -9084,7 +9123,7 @@ type StopDeploymentOutput struct {
 	//    * Pending: The stop operation is pending.
 	//
 	//    * Succeeded: The stop operation was successful.
-	Status *string `locationName:"status" type:"string" enum:"StopStatus"`
+	Status StopStatus `locationName:"status" type:"string"`
 
 	// An accompanying status message.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -9101,8 +9140,8 @@ func (s StopDeploymentOutput) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *StopDeploymentOutput) SetStatus(v string) *StopDeploymentOutput {
-	s.Status = &v
+func (s *StopDeploymentOutput) SetStatus(v StopStatus) *StopDeploymentOutput {
+	s.Status = v
 	return s
 }
 
@@ -9161,7 +9200,7 @@ type TagFilter struct {
 	//    * VALUE_ONLY: Value only.
 	//
 	//    * KEY_AND_VALUE: Key and value.
-	Type *string `type:"string" enum:"TagFilterType"`
+	Type TagFilterType `type:"string"`
 
 	// The on-premises instance tag filter value.
 	Value *string `type:"string"`
@@ -9184,8 +9223,8 @@ func (s *TagFilter) SetKey(v string) *TagFilter {
 }
 
 // SetType sets the Type field's value.
-func (s *TagFilter) SetType(v string) *TagFilter {
-	s.Type = &v
+func (s *TagFilter) SetType(v TagFilterType) *TagFilter {
+	s.Type = v
 	return s
 }
 
@@ -9319,7 +9358,7 @@ type TriggerConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The event type or types for which notifications are triggered.
-	TriggerEvents []*string `locationName:"triggerEvents" type:"list"`
+	TriggerEvents []TriggerEventType `locationName:"triggerEvents" type:"list"`
 
 	// The name of the notification trigger.
 	TriggerName *string `locationName:"triggerName" type:"string"`
@@ -9340,7 +9379,7 @@ func (s TriggerConfig) GoString() string {
 }
 
 // SetTriggerEvents sets the TriggerEvents field's value.
-func (s *TriggerConfig) SetTriggerEvents(v []*string) *TriggerConfig {
+func (s *TriggerConfig) SetTriggerEvents(v []TriggerEventType) *TriggerConfig {
 	s.TriggerEvents = v
 	return s
 }
@@ -9508,12 +9547,14 @@ func (s UpdateDeploymentGroupInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeploymentGroupInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeploymentGroupInput"}
+
 	if s.ApplicationName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
+
 	if s.CurrentDeploymentGroupName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CurrentDeploymentGroupName"))
 	}
@@ -9658,352 +9699,252 @@ func (s *UpdateDeploymentGroupOutput) SetHooksNotCleanedUp(v []*AutoScalingGroup
 	return s
 }
 
+type ApplicationRevisionSortBy string
+
+// Enum values for ApplicationRevisionSortBy
 const (
-	// ApplicationRevisionSortByRegisterTime is a ApplicationRevisionSortBy enum value
-	ApplicationRevisionSortByRegisterTime = "registerTime"
-
-	// ApplicationRevisionSortByFirstUsedTime is a ApplicationRevisionSortBy enum value
-	ApplicationRevisionSortByFirstUsedTime = "firstUsedTime"
-
-	// ApplicationRevisionSortByLastUsedTime is a ApplicationRevisionSortBy enum value
-	ApplicationRevisionSortByLastUsedTime = "lastUsedTime"
+	ApplicationRevisionSortByRegisterTime  ApplicationRevisionSortBy = "registerTime"
+	ApplicationRevisionSortByFirstUsedTime ApplicationRevisionSortBy = "firstUsedTime"
+	ApplicationRevisionSortByLastUsedTime  ApplicationRevisionSortBy = "lastUsedTime"
 )
 
+type AutoRollbackEvent string
+
+// Enum values for AutoRollbackEvent
 const (
-	// AutoRollbackEventDeploymentFailure is a AutoRollbackEvent enum value
-	AutoRollbackEventDeploymentFailure = "DEPLOYMENT_FAILURE"
-
-	// AutoRollbackEventDeploymentStopOnAlarm is a AutoRollbackEvent enum value
-	AutoRollbackEventDeploymentStopOnAlarm = "DEPLOYMENT_STOP_ON_ALARM"
-
-	// AutoRollbackEventDeploymentStopOnRequest is a AutoRollbackEvent enum value
-	AutoRollbackEventDeploymentStopOnRequest = "DEPLOYMENT_STOP_ON_REQUEST"
+	AutoRollbackEventDeploymentFailure       AutoRollbackEvent = "DEPLOYMENT_FAILURE"
+	AutoRollbackEventDeploymentStopOnAlarm   AutoRollbackEvent = "DEPLOYMENT_STOP_ON_ALARM"
+	AutoRollbackEventDeploymentStopOnRequest AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
 )
 
+type BundleType string
+
+// Enum values for BundleType
 const (
-	// BundleTypeTar is a BundleType enum value
-	BundleTypeTar = "tar"
-
-	// BundleTypeTgz is a BundleType enum value
-	BundleTypeTgz = "tgz"
-
-	// BundleTypeZip is a BundleType enum value
-	BundleTypeZip = "zip"
+	BundleTypeTar BundleType = "tar"
+	BundleTypeTgz BundleType = "tgz"
+	BundleTypeZip BundleType = "zip"
 )
 
+type DeploymentCreator string
+
+// Enum values for DeploymentCreator
 const (
-	// DeploymentCreatorUser is a DeploymentCreator enum value
-	DeploymentCreatorUser = "user"
-
-	// DeploymentCreatorAutoscaling is a DeploymentCreator enum value
-	DeploymentCreatorAutoscaling = "autoscaling"
-
-	// DeploymentCreatorCodeDeployRollback is a DeploymentCreator enum value
-	DeploymentCreatorCodeDeployRollback = "codeDeployRollback"
+	DeploymentCreatorUser               DeploymentCreator = "user"
+	DeploymentCreatorAutoscaling        DeploymentCreator = "autoscaling"
+	DeploymentCreatorCodeDeployRollback DeploymentCreator = "codeDeployRollback"
 )
 
-const (
-	// DeploymentOptionWithTrafficControl is a DeploymentOption enum value
-	DeploymentOptionWithTrafficControl = "WITH_TRAFFIC_CONTROL"
+type DeploymentOption string
 
-	// DeploymentOptionWithoutTrafficControl is a DeploymentOption enum value
-	DeploymentOptionWithoutTrafficControl = "WITHOUT_TRAFFIC_CONTROL"
+// Enum values for DeploymentOption
+const (
+	DeploymentOptionWithTrafficControl    DeploymentOption = "WITH_TRAFFIC_CONTROL"
+	DeploymentOptionWithoutTrafficControl DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
 )
 
-const (
-	// DeploymentReadyActionContinueDeployment is a DeploymentReadyAction enum value
-	DeploymentReadyActionContinueDeployment = "CONTINUE_DEPLOYMENT"
+type DeploymentReadyAction string
 
-	// DeploymentReadyActionStopDeployment is a DeploymentReadyAction enum value
-	DeploymentReadyActionStopDeployment = "STOP_DEPLOYMENT"
+// Enum values for DeploymentReadyAction
+const (
+	DeploymentReadyActionContinueDeployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
+	DeploymentReadyActionStopDeployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
 )
 
+type DeploymentStatus string
+
+// Enum values for DeploymentStatus
 const (
-	// DeploymentStatusCreated is a DeploymentStatus enum value
-	DeploymentStatusCreated = "Created"
-
-	// DeploymentStatusQueued is a DeploymentStatus enum value
-	DeploymentStatusQueued = "Queued"
-
-	// DeploymentStatusInProgress is a DeploymentStatus enum value
-	DeploymentStatusInProgress = "InProgress"
-
-	// DeploymentStatusSucceeded is a DeploymentStatus enum value
-	DeploymentStatusSucceeded = "Succeeded"
-
-	// DeploymentStatusFailed is a DeploymentStatus enum value
-	DeploymentStatusFailed = "Failed"
-
-	// DeploymentStatusStopped is a DeploymentStatus enum value
-	DeploymentStatusStopped = "Stopped"
-
-	// DeploymentStatusReady is a DeploymentStatus enum value
-	DeploymentStatusReady = "Ready"
+	DeploymentStatusCreated    DeploymentStatus = "Created"
+	DeploymentStatusQueued     DeploymentStatus = "Queued"
+	DeploymentStatusInProgress DeploymentStatus = "InProgress"
+	DeploymentStatusSucceeded  DeploymentStatus = "Succeeded"
+	DeploymentStatusFailed     DeploymentStatus = "Failed"
+	DeploymentStatusStopped    DeploymentStatus = "Stopped"
+	DeploymentStatusReady      DeploymentStatus = "Ready"
 )
 
-const (
-	// DeploymentTypeInPlace is a DeploymentType enum value
-	DeploymentTypeInPlace = "IN_PLACE"
+type DeploymentType string
 
-	// DeploymentTypeBlueGreen is a DeploymentType enum value
-	DeploymentTypeBlueGreen = "BLUE_GREEN"
+// Enum values for DeploymentType
+const (
+	DeploymentTypeInPlace   DeploymentType = "IN_PLACE"
+	DeploymentTypeBlueGreen DeploymentType = "BLUE_GREEN"
 )
 
+type EC2TagFilterType string
+
+// Enum values for EC2TagFilterType
 const (
-	// EC2TagFilterTypeKeyOnly is a EC2TagFilterType enum value
-	EC2TagFilterTypeKeyOnly = "KEY_ONLY"
-
-	// EC2TagFilterTypeValueOnly is a EC2TagFilterType enum value
-	EC2TagFilterTypeValueOnly = "VALUE_ONLY"
-
-	// EC2TagFilterTypeKeyAndValue is a EC2TagFilterType enum value
-	EC2TagFilterTypeKeyAndValue = "KEY_AND_VALUE"
+	EC2TagFilterTypeKeyOnly     EC2TagFilterType = "KEY_ONLY"
+	EC2TagFilterTypeValueOnly   EC2TagFilterType = "VALUE_ONLY"
+	EC2TagFilterTypeKeyAndValue EC2TagFilterType = "KEY_AND_VALUE"
 )
 
+type ErrorCode string
+
+// Enum values for ErrorCode
 const (
-	// ErrorCodeDeploymentGroupMissing is a ErrorCode enum value
-	ErrorCodeDeploymentGroupMissing = "DEPLOYMENT_GROUP_MISSING"
-
-	// ErrorCodeApplicationMissing is a ErrorCode enum value
-	ErrorCodeApplicationMissing = "APPLICATION_MISSING"
-
-	// ErrorCodeRevisionMissing is a ErrorCode enum value
-	ErrorCodeRevisionMissing = "REVISION_MISSING"
-
-	// ErrorCodeIamRoleMissing is a ErrorCode enum value
-	ErrorCodeIamRoleMissing = "IAM_ROLE_MISSING"
-
-	// ErrorCodeIamRolePermissions is a ErrorCode enum value
-	ErrorCodeIamRolePermissions = "IAM_ROLE_PERMISSIONS"
-
-	// ErrorCodeNoEc2Subscription is a ErrorCode enum value
-	ErrorCodeNoEc2Subscription = "NO_EC2_SUBSCRIPTION"
-
-	// ErrorCodeOverMaxInstances is a ErrorCode enum value
-	ErrorCodeOverMaxInstances = "OVER_MAX_INSTANCES"
-
-	// ErrorCodeNoInstances is a ErrorCode enum value
-	ErrorCodeNoInstances = "NO_INSTANCES"
-
-	// ErrorCodeTimeout is a ErrorCode enum value
-	ErrorCodeTimeout = "TIMEOUT"
-
-	// ErrorCodeHealthConstraintsInvalid is a ErrorCode enum value
-	ErrorCodeHealthConstraintsInvalid = "HEALTH_CONSTRAINTS_INVALID"
-
-	// ErrorCodeHealthConstraints is a ErrorCode enum value
-	ErrorCodeHealthConstraints = "HEALTH_CONSTRAINTS"
-
-	// ErrorCodeInternalError is a ErrorCode enum value
-	ErrorCodeInternalError = "INTERNAL_ERROR"
-
-	// ErrorCodeThrottled is a ErrorCode enum value
-	ErrorCodeThrottled = "THROTTLED"
-
-	// ErrorCodeAlarmActive is a ErrorCode enum value
-	ErrorCodeAlarmActive = "ALARM_ACTIVE"
-
-	// ErrorCodeAgentIssue is a ErrorCode enum value
-	ErrorCodeAgentIssue = "AGENT_ISSUE"
-
-	// ErrorCodeAutoScalingIamRolePermissions is a ErrorCode enum value
-	ErrorCodeAutoScalingIamRolePermissions = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
-
-	// ErrorCodeAutoScalingConfiguration is a ErrorCode enum value
-	ErrorCodeAutoScalingConfiguration = "AUTO_SCALING_CONFIGURATION"
-
-	// ErrorCodeManualStop is a ErrorCode enum value
-	ErrorCodeManualStop = "MANUAL_STOP"
+	ErrorCodeDeploymentGroupMissing        ErrorCode = "DEPLOYMENT_GROUP_MISSING"
+	ErrorCodeApplicationMissing            ErrorCode = "APPLICATION_MISSING"
+	ErrorCodeRevisionMissing               ErrorCode = "REVISION_MISSING"
+	ErrorCodeIamRoleMissing                ErrorCode = "IAM_ROLE_MISSING"
+	ErrorCodeIamRolePermissions            ErrorCode = "IAM_ROLE_PERMISSIONS"
+	ErrorCodeNoEc2Subscription             ErrorCode = "NO_EC2_SUBSCRIPTION"
+	ErrorCodeOverMaxInstances              ErrorCode = "OVER_MAX_INSTANCES"
+	ErrorCodeNoInstances                   ErrorCode = "NO_INSTANCES"
+	ErrorCodeTimeout                       ErrorCode = "TIMEOUT"
+	ErrorCodeHealthConstraintsInvalid      ErrorCode = "HEALTH_CONSTRAINTS_INVALID"
+	ErrorCodeHealthConstraints             ErrorCode = "HEALTH_CONSTRAINTS"
+	ErrorCodeInternalError                 ErrorCode = "INTERNAL_ERROR"
+	ErrorCodeThrottled                     ErrorCode = "THROTTLED"
+	ErrorCodeAlarmActive                   ErrorCode = "ALARM_ACTIVE"
+	ErrorCodeAgentIssue                    ErrorCode = "AGENT_ISSUE"
+	ErrorCodeAutoScalingIamRolePermissions ErrorCode = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
+	ErrorCodeAutoScalingConfiguration      ErrorCode = "AUTO_SCALING_CONFIGURATION"
+	ErrorCodeManualStop                    ErrorCode = "MANUAL_STOP"
 )
 
+type FileExistsBehavior string
+
+// Enum values for FileExistsBehavior
 const (
-	// FileExistsBehaviorDisallow is a FileExistsBehavior enum value
-	FileExistsBehaviorDisallow = "DISALLOW"
-
-	// FileExistsBehaviorOverwrite is a FileExistsBehavior enum value
-	FileExistsBehaviorOverwrite = "OVERWRITE"
-
-	// FileExistsBehaviorRetain is a FileExistsBehavior enum value
-	FileExistsBehaviorRetain = "RETAIN"
+	FileExistsBehaviorDisallow  FileExistsBehavior = "DISALLOW"
+	FileExistsBehaviorOverwrite FileExistsBehavior = "OVERWRITE"
+	FileExistsBehaviorRetain    FileExistsBehavior = "RETAIN"
 )
 
-const (
-	// GreenFleetProvisioningActionDiscoverExisting is a GreenFleetProvisioningAction enum value
-	GreenFleetProvisioningActionDiscoverExisting = "DISCOVER_EXISTING"
+type GreenFleetProvisioningAction string
 
-	// GreenFleetProvisioningActionCopyAutoScalingGroup is a GreenFleetProvisioningAction enum value
-	GreenFleetProvisioningActionCopyAutoScalingGroup = "COPY_AUTO_SCALING_GROUP"
+// Enum values for GreenFleetProvisioningAction
+const (
+	GreenFleetProvisioningActionDiscoverExisting     GreenFleetProvisioningAction = "DISCOVER_EXISTING"
+	GreenFleetProvisioningActionCopyAutoScalingGroup GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
 )
 
-const (
-	// InstanceActionTerminate is a InstanceAction enum value
-	InstanceActionTerminate = "TERMINATE"
+type InstanceAction string
 
-	// InstanceActionKeepAlive is a InstanceAction enum value
-	InstanceActionKeepAlive = "KEEP_ALIVE"
+// Enum values for InstanceAction
+const (
+	InstanceActionTerminate InstanceAction = "TERMINATE"
+	InstanceActionKeepAlive InstanceAction = "KEEP_ALIVE"
 )
 
+type InstanceStatus string
+
+// Enum values for InstanceStatus
 const (
-	// InstanceStatusPending is a InstanceStatus enum value
-	InstanceStatusPending = "Pending"
-
-	// InstanceStatusInProgress is a InstanceStatus enum value
-	InstanceStatusInProgress = "InProgress"
-
-	// InstanceStatusSucceeded is a InstanceStatus enum value
-	InstanceStatusSucceeded = "Succeeded"
-
-	// InstanceStatusFailed is a InstanceStatus enum value
-	InstanceStatusFailed = "Failed"
-
-	// InstanceStatusSkipped is a InstanceStatus enum value
-	InstanceStatusSkipped = "Skipped"
-
-	// InstanceStatusUnknown is a InstanceStatus enum value
-	InstanceStatusUnknown = "Unknown"
-
-	// InstanceStatusReady is a InstanceStatus enum value
-	InstanceStatusReady = "Ready"
+	InstanceStatusPending    InstanceStatus = "Pending"
+	InstanceStatusInProgress InstanceStatus = "InProgress"
+	InstanceStatusSucceeded  InstanceStatus = "Succeeded"
+	InstanceStatusFailed     InstanceStatus = "Failed"
+	InstanceStatusSkipped    InstanceStatus = "Skipped"
+	InstanceStatusUnknown    InstanceStatus = "Unknown"
+	InstanceStatusReady      InstanceStatus = "Ready"
 )
 
-const (
-	// InstanceTypeBlue is a InstanceType enum value
-	InstanceTypeBlue = "Blue"
+type InstanceType string
 
-	// InstanceTypeGreen is a InstanceType enum value
-	InstanceTypeGreen = "Green"
+// Enum values for InstanceType
+const (
+	InstanceTypeBlue  InstanceType = "Blue"
+	InstanceTypeGreen InstanceType = "Green"
 )
 
+type LifecycleErrorCode string
+
+// Enum values for LifecycleErrorCode
 const (
-	// LifecycleErrorCodeSuccess is a LifecycleErrorCode enum value
-	LifecycleErrorCodeSuccess = "Success"
-
-	// LifecycleErrorCodeScriptMissing is a LifecycleErrorCode enum value
-	LifecycleErrorCodeScriptMissing = "ScriptMissing"
-
-	// LifecycleErrorCodeScriptNotExecutable is a LifecycleErrorCode enum value
-	LifecycleErrorCodeScriptNotExecutable = "ScriptNotExecutable"
-
-	// LifecycleErrorCodeScriptTimedOut is a LifecycleErrorCode enum value
-	LifecycleErrorCodeScriptTimedOut = "ScriptTimedOut"
-
-	// LifecycleErrorCodeScriptFailed is a LifecycleErrorCode enum value
-	LifecycleErrorCodeScriptFailed = "ScriptFailed"
-
-	// LifecycleErrorCodeUnknownError is a LifecycleErrorCode enum value
-	LifecycleErrorCodeUnknownError = "UnknownError"
+	LifecycleErrorCodeSuccess             LifecycleErrorCode = "Success"
+	LifecycleErrorCodeScriptMissing       LifecycleErrorCode = "ScriptMissing"
+	LifecycleErrorCodeScriptNotExecutable LifecycleErrorCode = "ScriptNotExecutable"
+	LifecycleErrorCodeScriptTimedOut      LifecycleErrorCode = "ScriptTimedOut"
+	LifecycleErrorCodeScriptFailed        LifecycleErrorCode = "ScriptFailed"
+	LifecycleErrorCodeUnknownError        LifecycleErrorCode = "UnknownError"
 )
 
+type LifecycleEventStatus string
+
+// Enum values for LifecycleEventStatus
 const (
-	// LifecycleEventStatusPending is a LifecycleEventStatus enum value
-	LifecycleEventStatusPending = "Pending"
-
-	// LifecycleEventStatusInProgress is a LifecycleEventStatus enum value
-	LifecycleEventStatusInProgress = "InProgress"
-
-	// LifecycleEventStatusSucceeded is a LifecycleEventStatus enum value
-	LifecycleEventStatusSucceeded = "Succeeded"
-
-	// LifecycleEventStatusFailed is a LifecycleEventStatus enum value
-	LifecycleEventStatusFailed = "Failed"
-
-	// LifecycleEventStatusSkipped is a LifecycleEventStatus enum value
-	LifecycleEventStatusSkipped = "Skipped"
-
-	// LifecycleEventStatusUnknown is a LifecycleEventStatus enum value
-	LifecycleEventStatusUnknown = "Unknown"
+	LifecycleEventStatusPending    LifecycleEventStatus = "Pending"
+	LifecycleEventStatusInProgress LifecycleEventStatus = "InProgress"
+	LifecycleEventStatusSucceeded  LifecycleEventStatus = "Succeeded"
+	LifecycleEventStatusFailed     LifecycleEventStatus = "Failed"
+	LifecycleEventStatusSkipped    LifecycleEventStatus = "Skipped"
+	LifecycleEventStatusUnknown    LifecycleEventStatus = "Unknown"
 )
 
+type ListStateFilterAction string
+
+// Enum values for ListStateFilterAction
 const (
-	// ListStateFilterActionInclude is a ListStateFilterAction enum value
-	ListStateFilterActionInclude = "include"
-
-	// ListStateFilterActionExclude is a ListStateFilterAction enum value
-	ListStateFilterActionExclude = "exclude"
-
-	// ListStateFilterActionIgnore is a ListStateFilterAction enum value
-	ListStateFilterActionIgnore = "ignore"
+	ListStateFilterActionInclude ListStateFilterAction = "include"
+	ListStateFilterActionExclude ListStateFilterAction = "exclude"
+	ListStateFilterActionIgnore  ListStateFilterAction = "ignore"
 )
 
-const (
-	// MinimumHealthyHostsTypeHostCount is a MinimumHealthyHostsType enum value
-	MinimumHealthyHostsTypeHostCount = "HOST_COUNT"
+type MinimumHealthyHostsType string
 
-	// MinimumHealthyHostsTypeFleetPercent is a MinimumHealthyHostsType enum value
-	MinimumHealthyHostsTypeFleetPercent = "FLEET_PERCENT"
+// Enum values for MinimumHealthyHostsType
+const (
+	MinimumHealthyHostsTypeHostCount    MinimumHealthyHostsType = "HOST_COUNT"
+	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
 
-const (
-	// RegistrationStatusRegistered is a RegistrationStatus enum value
-	RegistrationStatusRegistered = "Registered"
+type RegistrationStatus string
 
-	// RegistrationStatusDeregistered is a RegistrationStatus enum value
-	RegistrationStatusDeregistered = "Deregistered"
+// Enum values for RegistrationStatus
+const (
+	RegistrationStatusRegistered   RegistrationStatus = "Registered"
+	RegistrationStatusDeregistered RegistrationStatus = "Deregistered"
 )
 
-const (
-	// RevisionLocationTypeS3 is a RevisionLocationType enum value
-	RevisionLocationTypeS3 = "S3"
+type RevisionLocationType string
 
-	// RevisionLocationTypeGitHub is a RevisionLocationType enum value
-	RevisionLocationTypeGitHub = "GitHub"
+// Enum values for RevisionLocationType
+const (
+	RevisionLocationTypeS3     RevisionLocationType = "S3"
+	RevisionLocationTypeGitHub RevisionLocationType = "GitHub"
 )
 
-const (
-	// SortOrderAscending is a SortOrder enum value
-	SortOrderAscending = "ascending"
+type SortOrder string
 
-	// SortOrderDescending is a SortOrder enum value
-	SortOrderDescending = "descending"
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ascending"
+	SortOrderDescending SortOrder = "descending"
 )
 
-const (
-	// StopStatusPending is a StopStatus enum value
-	StopStatusPending = "Pending"
+type StopStatus string
 
-	// StopStatusSucceeded is a StopStatus enum value
-	StopStatusSucceeded = "Succeeded"
+// Enum values for StopStatus
+const (
+	StopStatusPending   StopStatus = "Pending"
+	StopStatusSucceeded StopStatus = "Succeeded"
 )
 
+type TagFilterType string
+
+// Enum values for TagFilterType
 const (
-	// TagFilterTypeKeyOnly is a TagFilterType enum value
-	TagFilterTypeKeyOnly = "KEY_ONLY"
-
-	// TagFilterTypeValueOnly is a TagFilterType enum value
-	TagFilterTypeValueOnly = "VALUE_ONLY"
-
-	// TagFilterTypeKeyAndValue is a TagFilterType enum value
-	TagFilterTypeKeyAndValue = "KEY_AND_VALUE"
+	TagFilterTypeKeyOnly     TagFilterType = "KEY_ONLY"
+	TagFilterTypeValueOnly   TagFilterType = "VALUE_ONLY"
+	TagFilterTypeKeyAndValue TagFilterType = "KEY_AND_VALUE"
 )
 
+type TriggerEventType string
+
+// Enum values for TriggerEventType
 const (
-	// TriggerEventTypeDeploymentStart is a TriggerEventType enum value
-	TriggerEventTypeDeploymentStart = "DeploymentStart"
-
-	// TriggerEventTypeDeploymentSuccess is a TriggerEventType enum value
-	TriggerEventTypeDeploymentSuccess = "DeploymentSuccess"
-
-	// TriggerEventTypeDeploymentFailure is a TriggerEventType enum value
-	TriggerEventTypeDeploymentFailure = "DeploymentFailure"
-
-	// TriggerEventTypeDeploymentStop is a TriggerEventType enum value
-	TriggerEventTypeDeploymentStop = "DeploymentStop"
-
-	// TriggerEventTypeDeploymentRollback is a TriggerEventType enum value
-	TriggerEventTypeDeploymentRollback = "DeploymentRollback"
-
-	// TriggerEventTypeDeploymentReady is a TriggerEventType enum value
-	TriggerEventTypeDeploymentReady = "DeploymentReady"
-
-	// TriggerEventTypeInstanceStart is a TriggerEventType enum value
-	TriggerEventTypeInstanceStart = "InstanceStart"
-
-	// TriggerEventTypeInstanceSuccess is a TriggerEventType enum value
-	TriggerEventTypeInstanceSuccess = "InstanceSuccess"
-
-	// TriggerEventTypeInstanceFailure is a TriggerEventType enum value
-	TriggerEventTypeInstanceFailure = "InstanceFailure"
-
-	// TriggerEventTypeInstanceReady is a TriggerEventType enum value
-	TriggerEventTypeInstanceReady = "InstanceReady"
+	TriggerEventTypeDeploymentStart    TriggerEventType = "DeploymentStart"
+	TriggerEventTypeDeploymentSuccess  TriggerEventType = "DeploymentSuccess"
+	TriggerEventTypeDeploymentFailure  TriggerEventType = "DeploymentFailure"
+	TriggerEventTypeDeploymentStop     TriggerEventType = "DeploymentStop"
+	TriggerEventTypeDeploymentRollback TriggerEventType = "DeploymentRollback"
+	TriggerEventTypeDeploymentReady    TriggerEventType = "DeploymentReady"
+	TriggerEventTypeInstanceStart      TriggerEventType = "InstanceStart"
+	TriggerEventTypeInstanceSuccess    TriggerEventType = "InstanceSuccess"
+	TriggerEventTypeInstanceFailure    TriggerEventType = "InstanceFailure"
+	TriggerEventTypeInstanceReady      TriggerEventType = "InstanceReady"
 )

@@ -238,7 +238,7 @@ func ExampleBuilder_WithUpdate() {
 				S: aws.String("Happy Day"),
 			},
 		},
-		ReturnValues:     aws.String("ALL_NEW"),
+		ReturnValues:     dynamodb.ReturnValueAllNew,
 		TableName:        aws.String("Music"),
 		UpdateExpression: expr.Update(),
 	}

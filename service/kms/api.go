@@ -4154,6 +4154,7 @@ func (s CancelKeyDeletionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelKeyDeletionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelKeyDeletionInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -4233,12 +4234,14 @@ func (s CreateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
+
 	if s.AliasName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
 	if s.AliasName != nil && len(*s.AliasName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
 	}
+
 	if s.TargetKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
 	}
@@ -4336,7 +4339,7 @@ type CreateGrantInput struct {
 	Name *string `min:"1" type:"string"`
 
 	// A list of operations that the grant permits.
-	Operations []*string `type:"list"`
+	Operations []GrantOperation `type:"list"`
 
 	// The principal that is given permission to retire the grant by using RetireGrant
 	// operation.
@@ -4363,12 +4366,14 @@ func (s CreateGrantInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGrantInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateGrantInput"}
+
 	if s.GranteePrincipal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GranteePrincipal"))
 	}
 	if s.GranteePrincipal != nil && len(*s.GranteePrincipal) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GranteePrincipal", 1))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -4419,7 +4424,7 @@ func (s *CreateGrantInput) SetName(v string) *CreateGrantInput {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *CreateGrantInput) SetOperations(v []*string) *CreateGrantInput {
+func (s *CreateGrantInput) SetOperations(v []GrantOperation) *CreateGrantInput {
 	s.Operations = v
 	return s
 }
@@ -4496,7 +4501,7 @@ type CreateKeyInput struct {
 	// The intended use of the CMK.
 	//
 	// You can use CMKs only for symmetric encryption and decryption.
-	KeyUsage *string `type:"string" enum:"KeyUsageType"`
+	KeyUsage KeyUsageType `type:"string"`
 
 	// The source of the CMK's key material.
 	//
@@ -4508,7 +4513,7 @@ type CreateKeyInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// The CMK's Origin is immutable and is set when the CMK is created.
-	Origin *string `type:"string" enum:"OriginType"`
+	Origin OriginType `type:"string"`
 
 	// The key policy to attach to the CMK.
 	//
@@ -4590,14 +4595,14 @@ func (s *CreateKeyInput) SetDescription(v string) *CreateKeyInput {
 }
 
 // SetKeyUsage sets the KeyUsage field's value.
-func (s *CreateKeyInput) SetKeyUsage(v string) *CreateKeyInput {
-	s.KeyUsage = &v
+func (s *CreateKeyInput) SetKeyUsage(v KeyUsageType) *CreateKeyInput {
+	s.KeyUsage = v
 	return s
 }
 
 // SetOrigin sets the Origin field's value.
-func (s *CreateKeyInput) SetOrigin(v string) *CreateKeyInput {
-	s.Origin = &v
+func (s *CreateKeyInput) SetOrigin(v OriginType) *CreateKeyInput {
+	s.Origin = v
 	return s
 }
 
@@ -4673,6 +4678,7 @@ func (s DecryptInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecryptInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DecryptInput"}
+
 	if s.CiphertextBlob == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CiphertextBlob"))
 	}
@@ -4765,6 +4771,7 @@ func (s DeleteAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
+
 	if s.AliasName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
@@ -4830,6 +4837,7 @@ func (s DeleteImportedKeyMaterialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImportedKeyMaterialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteImportedKeyMaterialInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -4903,6 +4911,7 @@ func (s DescribeKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -4981,6 +4990,7 @@ func (s DisableKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5043,6 +5053,7 @@ func (s DisableKeyRotationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableKeyRotationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableKeyRotationInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5105,6 +5116,7 @@ func (s EnableKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5167,6 +5179,7 @@ func (s EnableKeyRotationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableKeyRotationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableKeyRotationInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5253,12 +5266,14 @@ func (s EncryptInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EncryptInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.Plaintext == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Plaintext"))
 	}
@@ -5368,7 +5383,7 @@ type GenerateDataKeyInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec *string `type:"string" enum:"DataKeySpec"`
+	KeySpec DataKeySpec `type:"string"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -5390,6 +5405,7 @@ func (s GenerateDataKeyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateDataKeyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GenerateDataKeyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5425,8 +5441,8 @@ func (s *GenerateDataKeyInput) SetKeyId(v string) *GenerateDataKeyInput {
 }
 
 // SetKeySpec sets the KeySpec field's value.
-func (s *GenerateDataKeyInput) SetKeySpec(v string) *GenerateDataKeyInput {
-	s.KeySpec = &v
+func (s *GenerateDataKeyInput) SetKeySpec(v DataKeySpec) *GenerateDataKeyInput {
+	s.KeySpec = v
 	return s
 }
 
@@ -5520,7 +5536,7 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 
 	// The length of the data encryption key. Use AES_128 to generate a 128-bit
 	// symmetric key, or AES_256 to generate a 256-bit symmetric key.
-	KeySpec *string `type:"string" enum:"DataKeySpec"`
+	KeySpec DataKeySpec `type:"string"`
 
 	// The length of the data encryption key in bytes. For example, use the value
 	// 64 to generate a 512-bit data key (64 bytes is 512 bits). For common key
@@ -5542,6 +5558,7 @@ func (s GenerateDataKeyWithoutPlaintextInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateDataKeyWithoutPlaintextInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GenerateDataKeyWithoutPlaintextInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5577,8 +5594,8 @@ func (s *GenerateDataKeyWithoutPlaintextInput) SetKeyId(v string) *GenerateDataK
 }
 
 // SetKeySpec sets the KeySpec field's value.
-func (s *GenerateDataKeyWithoutPlaintextInput) SetKeySpec(v string) *GenerateDataKeyWithoutPlaintextInput {
-	s.KeySpec = &v
+func (s *GenerateDataKeyWithoutPlaintextInput) SetKeySpec(v DataKeySpec) *GenerateDataKeyWithoutPlaintextInput {
+	s.KeySpec = v
 	return s
 }
 
@@ -5721,12 +5738,14 @@ func (s GetKeyPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPolicyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -5804,6 +5823,7 @@ func (s GetKeyRotationStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyRotationStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetKeyRotationStatusInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -5870,13 +5890,13 @@ type GetParametersForImportInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	//
 	// WrappingAlgorithm is a required field
-	WrappingAlgorithm *string `type:"string" required:"true" enum:"AlgorithmSpec"`
+	WrappingAlgorithm AlgorithmSpec `type:"string" required:"true"`
 
 	// The type of wrapping key (public key) to return in the response. Only 2048-bit
 	// RSA public keys are supported.
 	//
 	// WrappingKeySpec is a required field
-	WrappingKeySpec *string `type:"string" required:"true" enum:"WrappingKeySpec"`
+	WrappingKeySpec WrappingKeySpec `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5892,16 +5912,17 @@ func (s GetParametersForImportInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParametersForImportInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetParametersForImportInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
-	if s.WrappingAlgorithm == nil {
+	if len(s.WrappingAlgorithm) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("WrappingAlgorithm"))
 	}
-	if s.WrappingKeySpec == nil {
+	if len(s.WrappingKeySpec) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("WrappingKeySpec"))
 	}
 
@@ -5918,14 +5939,14 @@ func (s *GetParametersForImportInput) SetKeyId(v string) *GetParametersForImport
 }
 
 // SetWrappingAlgorithm sets the WrappingAlgorithm field's value.
-func (s *GetParametersForImportInput) SetWrappingAlgorithm(v string) *GetParametersForImportInput {
-	s.WrappingAlgorithm = &v
+func (s *GetParametersForImportInput) SetWrappingAlgorithm(v AlgorithmSpec) *GetParametersForImportInput {
+	s.WrappingAlgorithm = v
 	return s
 }
 
 // SetWrappingKeySpec sets the WrappingKeySpec field's value.
-func (s *GetParametersForImportInput) SetWrappingKeySpec(v string) *GetParametersForImportInput {
-	s.WrappingKeySpec = &v
+func (s *GetParametersForImportInput) SetWrappingKeySpec(v WrappingKeySpec) *GetParametersForImportInput {
+	s.WrappingKeySpec = v
 	return s
 }
 
@@ -6071,7 +6092,7 @@ type GrantListEntry struct {
 	Name *string `min:"1" type:"string"`
 
 	// The list of operations permitted by the grant.
-	Operations []*string `type:"list"`
+	Operations []GrantOperation `type:"list"`
 
 	// The principal that can retire the grant.
 	RetiringPrincipal *string `min:"1" type:"string"`
@@ -6130,7 +6151,7 @@ func (s *GrantListEntry) SetName(v string) *GrantListEntry {
 }
 
 // SetOperations sets the Operations field's value.
-func (s *GrantListEntry) SetOperations(v []*string) *GrantListEntry {
+func (s *GrantListEntry) SetOperations(v []GrantOperation) *GrantListEntry {
 	s.Operations = v
 	return s
 }
@@ -6157,7 +6178,7 @@ type ImportKeyMaterialInput struct {
 	// Specifies whether the key material expires. The default is KEY_MATERIAL_EXPIRES,
 	// in which case you must include the ValidTo parameter. When this parameter
 	// is set to KEY_MATERIAL_DOES_NOT_EXPIRE, you must omit the ValidTo parameter.
-	ExpirationModel *string `type:"string" enum:"ExpirationModelType"`
+	ExpirationModel ExpirationModelType `type:"string"`
 
 	// The import token that you received in the response to a previous GetParametersForImport
 	// request. It must be from the same response that contained the public key
@@ -6201,18 +6222,21 @@ func (s ImportKeyMaterialInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportKeyMaterialInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyMaterialInput"}
+
 	if s.EncryptedKeyMaterial == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EncryptedKeyMaterial"))
 	}
 	if s.EncryptedKeyMaterial != nil && len(s.EncryptedKeyMaterial) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EncryptedKeyMaterial", 1))
 	}
+
 	if s.ImportToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImportToken"))
 	}
 	if s.ImportToken != nil && len(s.ImportToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImportToken", 1))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -6233,8 +6257,8 @@ func (s *ImportKeyMaterialInput) SetEncryptedKeyMaterial(v []byte) *ImportKeyMat
 }
 
 // SetExpirationModel sets the ExpirationModel field's value.
-func (s *ImportKeyMaterialInput) SetExpirationModel(v string) *ImportKeyMaterialInput {
-	s.ExpirationModel = &v
+func (s *ImportKeyMaterialInput) SetExpirationModel(v ExpirationModelType) *ImportKeyMaterialInput {
+	s.ExpirationModel = v
 	return s
 }
 
@@ -6337,7 +6361,7 @@ type KeyMetadata struct {
 
 	// Specifies whether the CMK's key material expires. This value is present only
 	// when Origin is EXTERNAL, otherwise this value is omitted.
-	ExpirationModel *string `type:"string" enum:"ExpirationModelType"`
+	ExpirationModel ExpirationModelType `type:"string"`
 
 	// The globally unique identifier for the CMK.
 	//
@@ -6347,25 +6371,25 @@ type KeyMetadata struct {
 	// The CMK's manager. CMKs are either customer-managed or AWS-managed. For more
 	// information about the difference, see Customer Master Keys (http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
 	// in the AWS Key Management Service Developer Guide.
-	KeyManager *string `type:"string" enum:"KeyManagerType"`
+	KeyManager KeyManagerType `type:"string"`
 
 	// The state of the CMK.
 	//
 	// For more information about how key state affects the use of a CMK, see How
 	// Key State Affects the Use of a Customer Master Key (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 	// in the AWS Key Management Service Developer Guide.
-	KeyState *string `type:"string" enum:"KeyState"`
+	KeyState KeyState `type:"string"`
 
 	// The cryptographic operations for which you can use the CMK. Currently the
 	// only allowed value is ENCRYPT_DECRYPT, which means you can use the CMK for
 	// the Encrypt and Decrypt operations.
-	KeyUsage *string `type:"string" enum:"KeyUsageType"`
+	KeyUsage KeyUsageType `type:"string"`
 
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
 	// created the key material. When this value is EXTERNAL, the key material was
 	// imported from your existing key management infrastructure or the CMK lacks
 	// key material.
-	Origin *string `type:"string" enum:"OriginType"`
+	Origin OriginType `type:"string"`
 
 	// The time at which the imported key material expires. When the key material
 	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
@@ -6421,8 +6445,8 @@ func (s *KeyMetadata) SetEnabled(v bool) *KeyMetadata {
 }
 
 // SetExpirationModel sets the ExpirationModel field's value.
-func (s *KeyMetadata) SetExpirationModel(v string) *KeyMetadata {
-	s.ExpirationModel = &v
+func (s *KeyMetadata) SetExpirationModel(v ExpirationModelType) *KeyMetadata {
+	s.ExpirationModel = v
 	return s
 }
 
@@ -6433,26 +6457,26 @@ func (s *KeyMetadata) SetKeyId(v string) *KeyMetadata {
 }
 
 // SetKeyManager sets the KeyManager field's value.
-func (s *KeyMetadata) SetKeyManager(v string) *KeyMetadata {
-	s.KeyManager = &v
+func (s *KeyMetadata) SetKeyManager(v KeyManagerType) *KeyMetadata {
+	s.KeyManager = v
 	return s
 }
 
 // SetKeyState sets the KeyState field's value.
-func (s *KeyMetadata) SetKeyState(v string) *KeyMetadata {
-	s.KeyState = &v
+func (s *KeyMetadata) SetKeyState(v KeyState) *KeyMetadata {
+	s.KeyState = v
 	return s
 }
 
 // SetKeyUsage sets the KeyUsage field's value.
-func (s *KeyMetadata) SetKeyUsage(v string) *KeyMetadata {
-	s.KeyUsage = &v
+func (s *KeyMetadata) SetKeyUsage(v KeyUsageType) *KeyMetadata {
+	s.KeyUsage = v
 	return s
 }
 
 // SetOrigin sets the Origin field's value.
-func (s *KeyMetadata) SetOrigin(v string) *KeyMetadata {
-	s.Origin = &v
+func (s *KeyMetadata) SetOrigin(v OriginType) *KeyMetadata {
+	s.Origin = v
 	return s
 }
 
@@ -6605,6 +6629,7 @@ func (s ListGrantsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGrantsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListGrantsInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -6731,6 +6756,7 @@ func (s ListKeyPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListKeyPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListKeyPoliciesInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -6961,6 +6987,7 @@ func (s ListResourceTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListResourceTagsInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -7095,6 +7122,7 @@ func (s *ListRetirableGrantsInput) Validate() error {
 	if s.Marker != nil && len(*s.Marker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
+
 	if s.RetiringPrincipal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RetiringPrincipal"))
 	}
@@ -7200,18 +7228,21 @@ func (s PutKeyPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutKeyPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutKeyPolicyInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.Policy == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -7317,12 +7348,14 @@ func (s ReEncryptInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReEncryptInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReEncryptInput"}
+
 	if s.CiphertextBlob == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CiphertextBlob"))
 	}
 	if s.CiphertextBlob != nil && len(s.CiphertextBlob) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CiphertextBlob", 1))
 	}
+
 	if s.DestinationKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationKeyId"))
 	}
@@ -7525,12 +7558,14 @@ func (s RevokeGrantInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeGrantInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RevokeGrantInput"}
+
 	if s.GrantId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GrantId"))
 	}
 	if s.GrantId != nil && len(*s.GrantId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GrantId", 1))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -7611,6 +7646,7 @@ func (s ScheduleKeyDeletionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleKeyDeletionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ScheduleKeyDeletionInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -7703,12 +7739,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.TagKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKey"))
 	}
 	if s.TagKey != nil && len(*s.TagKey) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TagKey", 1))
 	}
+
 	if s.TagValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagValue"))
 	}
@@ -7764,12 +7802,14 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -7850,12 +7890,14 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -7932,12 +7974,14 @@ func (s UpdateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
+
 	if s.AliasName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
 	if s.AliasName != nil && len(*s.AliasName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
 	}
+
 	if s.TargetKeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
 	}
@@ -8011,9 +8055,11 @@ func (s UpdateKeyDescriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateKeyDescriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateKeyDescriptionInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.KeyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
@@ -8054,98 +8100,82 @@ func (s UpdateKeyDescriptionOutput) GoString() string {
 	return s.String()
 }
 
+type AlgorithmSpec string
+
+// Enum values for AlgorithmSpec
 const (
-	// AlgorithmSpecRsaesPkcs1V15 is a AlgorithmSpec enum value
-	AlgorithmSpecRsaesPkcs1V15 = "RSAES_PKCS1_V1_5"
-
-	// AlgorithmSpecRsaesOaepSha1 is a AlgorithmSpec enum value
-	AlgorithmSpecRsaesOaepSha1 = "RSAES_OAEP_SHA_1"
-
-	// AlgorithmSpecRsaesOaepSha256 is a AlgorithmSpec enum value
-	AlgorithmSpecRsaesOaepSha256 = "RSAES_OAEP_SHA_256"
+	AlgorithmSpecRsaesPkcs1V15   AlgorithmSpec = "RSAES_PKCS1_V1_5"
+	AlgorithmSpecRsaesOaepSha1   AlgorithmSpec = "RSAES_OAEP_SHA_1"
+	AlgorithmSpecRsaesOaepSha256 AlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
-const (
-	// DataKeySpecAes256 is a DataKeySpec enum value
-	DataKeySpecAes256 = "AES_256"
+type DataKeySpec string
 
-	// DataKeySpecAes128 is a DataKeySpec enum value
-	DataKeySpecAes128 = "AES_128"
+// Enum values for DataKeySpec
+const (
+	DataKeySpecAes256 DataKeySpec = "AES_256"
+	DataKeySpecAes128 DataKeySpec = "AES_128"
 )
 
-const (
-	// ExpirationModelTypeKeyMaterialExpires is a ExpirationModelType enum value
-	ExpirationModelTypeKeyMaterialExpires = "KEY_MATERIAL_EXPIRES"
+type ExpirationModelType string
 
-	// ExpirationModelTypeKeyMaterialDoesNotExpire is a ExpirationModelType enum value
-	ExpirationModelTypeKeyMaterialDoesNotExpire = "KEY_MATERIAL_DOES_NOT_EXPIRE"
+// Enum values for ExpirationModelType
+const (
+	ExpirationModelTypeKeyMaterialExpires       ExpirationModelType = "KEY_MATERIAL_EXPIRES"
+	ExpirationModelTypeKeyMaterialDoesNotExpire ExpirationModelType = "KEY_MATERIAL_DOES_NOT_EXPIRE"
 )
 
+type GrantOperation string
+
+// Enum values for GrantOperation
 const (
-	// GrantOperationDecrypt is a GrantOperation enum value
-	GrantOperationDecrypt = "Decrypt"
-
-	// GrantOperationEncrypt is a GrantOperation enum value
-	GrantOperationEncrypt = "Encrypt"
-
-	// GrantOperationGenerateDataKey is a GrantOperation enum value
-	GrantOperationGenerateDataKey = "GenerateDataKey"
-
-	// GrantOperationGenerateDataKeyWithoutPlaintext is a GrantOperation enum value
-	GrantOperationGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
-
-	// GrantOperationReEncryptFrom is a GrantOperation enum value
-	GrantOperationReEncryptFrom = "ReEncryptFrom"
-
-	// GrantOperationReEncryptTo is a GrantOperation enum value
-	GrantOperationReEncryptTo = "ReEncryptTo"
-
-	// GrantOperationCreateGrant is a GrantOperation enum value
-	GrantOperationCreateGrant = "CreateGrant"
-
-	// GrantOperationRetireGrant is a GrantOperation enum value
-	GrantOperationRetireGrant = "RetireGrant"
-
-	// GrantOperationDescribeKey is a GrantOperation enum value
-	GrantOperationDescribeKey = "DescribeKey"
+	GrantOperationDecrypt                         GrantOperation = "Decrypt"
+	GrantOperationEncrypt                         GrantOperation = "Encrypt"
+	GrantOperationGenerateDataKey                 GrantOperation = "GenerateDataKey"
+	GrantOperationGenerateDataKeyWithoutPlaintext GrantOperation = "GenerateDataKeyWithoutPlaintext"
+	GrantOperationReEncryptFrom                   GrantOperation = "ReEncryptFrom"
+	GrantOperationReEncryptTo                     GrantOperation = "ReEncryptTo"
+	GrantOperationCreateGrant                     GrantOperation = "CreateGrant"
+	GrantOperationRetireGrant                     GrantOperation = "RetireGrant"
+	GrantOperationDescribeKey                     GrantOperation = "DescribeKey"
 )
 
-const (
-	// KeyManagerTypeAws is a KeyManagerType enum value
-	KeyManagerTypeAws = "AWS"
+type KeyManagerType string
 
-	// KeyManagerTypeCustomer is a KeyManagerType enum value
-	KeyManagerTypeCustomer = "CUSTOMER"
+// Enum values for KeyManagerType
+const (
+	KeyManagerTypeAws      KeyManagerType = "AWS"
+	KeyManagerTypeCustomer KeyManagerType = "CUSTOMER"
 )
 
+type KeyState string
+
+// Enum values for KeyState
 const (
-	// KeyStateEnabled is a KeyState enum value
-	KeyStateEnabled = "Enabled"
-
-	// KeyStateDisabled is a KeyState enum value
-	KeyStateDisabled = "Disabled"
-
-	// KeyStatePendingDeletion is a KeyState enum value
-	KeyStatePendingDeletion = "PendingDeletion"
-
-	// KeyStatePendingImport is a KeyState enum value
-	KeyStatePendingImport = "PendingImport"
+	KeyStateEnabled         KeyState = "Enabled"
+	KeyStateDisabled        KeyState = "Disabled"
+	KeyStatePendingDeletion KeyState = "PendingDeletion"
+	KeyStatePendingImport   KeyState = "PendingImport"
 )
 
+type KeyUsageType string
+
+// Enum values for KeyUsageType
 const (
-	// KeyUsageTypeEncryptDecrypt is a KeyUsageType enum value
-	KeyUsageTypeEncryptDecrypt = "ENCRYPT_DECRYPT"
+	KeyUsageTypeEncryptDecrypt KeyUsageType = "ENCRYPT_DECRYPT"
 )
 
-const (
-	// OriginTypeAwsKms is a OriginType enum value
-	OriginTypeAwsKms = "AWS_KMS"
+type OriginType string
 
-	// OriginTypeExternal is a OriginType enum value
-	OriginTypeExternal = "EXTERNAL"
+// Enum values for OriginType
+const (
+	OriginTypeAwsKms   OriginType = "AWS_KMS"
+	OriginTypeExternal OriginType = "EXTERNAL"
 )
 
+type WrappingKeySpec string
+
+// Enum values for WrappingKeySpec
 const (
-	// WrappingKeySpecRsa2048 is a WrappingKeySpec enum value
-	WrappingKeySpecRsa2048 = "RSA_2048"
+	WrappingKeySpecRsa2048 WrappingKeySpec = "RSA_2048"
 )

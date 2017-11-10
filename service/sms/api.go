@@ -1274,7 +1274,7 @@ type Connector struct {
 	AssociatedOn *time.Time `locationName:"associatedOn" type:"timestamp" timestampFormat:"unix"`
 
 	// List of Connector Capabilities
-	CapabilityList []*string `locationName:"capabilityList" locationNameList:"item" type:"list"`
+	CapabilityList []ConnectorCapability `locationName:"capabilityList" locationNameList:"item" type:"list"`
 
 	// Unique Identifier for Connector
 	ConnectorId *string `locationName:"connectorId" type:"string"`
@@ -1286,7 +1286,7 @@ type Connector struct {
 	MacAddress *string `locationName:"macAddress" type:"string"`
 
 	// Status of on-premise Connector
-	Status *string `locationName:"status" type:"string" enum:"ConnectorStatus"`
+	Status ConnectorStatus `locationName:"status" type:"string"`
 
 	// Connector version string
 	Version *string `locationName:"version" type:"string"`
@@ -1298,7 +1298,7 @@ type Connector struct {
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
 	// VM Management Product
-	VmManagerType *string `locationName:"vmManagerType" type:"string" enum:"VmManagerType"`
+	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string"`
 }
 
 // String returns the string representation
@@ -1318,7 +1318,7 @@ func (s *Connector) SetAssociatedOn(v time.Time) *Connector {
 }
 
 // SetCapabilityList sets the CapabilityList field's value.
-func (s *Connector) SetCapabilityList(v []*string) *Connector {
+func (s *Connector) SetCapabilityList(v []ConnectorCapability) *Connector {
 	s.CapabilityList = v
 	return s
 }
@@ -1342,8 +1342,8 @@ func (s *Connector) SetMacAddress(v string) *Connector {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Connector) SetStatus(v string) *Connector {
-	s.Status = &v
+func (s *Connector) SetStatus(v ConnectorStatus) *Connector {
+	s.Status = v
 	return s
 }
 
@@ -1366,8 +1366,8 @@ func (s *Connector) SetVmManagerName(v string) *Connector {
 }
 
 // SetVmManagerType sets the VmManagerType field's value.
-func (s *Connector) SetVmManagerType(v string) *Connector {
-	s.VmManagerType = &v
+func (s *Connector) SetVmManagerType(v VmManagerType) *Connector {
+	s.VmManagerType = v
 	return s
 }
 
@@ -1386,7 +1386,7 @@ type CreateReplicationJobInput struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType *string `locationName:"licenseType" type:"string" enum:"LicenseType"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string"`
 
 	// Name of service role in customer's account to be used by SMS service.
 	RoleName *string `locationName:"roleName" type:"string"`
@@ -1415,12 +1415,15 @@ func (s CreateReplicationJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationJobInput"}
+
 	if s.Frequency == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Frequency"))
 	}
+
 	if s.SeedReplicationTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SeedReplicationTime"))
 	}
+
 	if s.ServerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
@@ -1444,8 +1447,8 @@ func (s *CreateReplicationJobInput) SetFrequency(v int64) *CreateReplicationJobI
 }
 
 // SetLicenseType sets the LicenseType field's value.
-func (s *CreateReplicationJobInput) SetLicenseType(v string) *CreateReplicationJobInput {
-	s.LicenseType = &v
+func (s *CreateReplicationJobInput) SetLicenseType(v LicenseType) *CreateReplicationJobInput {
+	s.LicenseType = v
 	return s
 }
 
@@ -1514,6 +1517,7 @@ func (s DeleteReplicationJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationJobInput"}
+
 	if s.ReplicationJobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
@@ -1598,6 +1602,7 @@ func (s DisassociateConnectorInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConnectorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConnectorInput"}
+
 	if s.ConnectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ConnectorId"))
 	}
@@ -1802,6 +1807,7 @@ func (s GetReplicationRunsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetReplicationRunsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetReplicationRunsInput"}
+
 	if s.ReplicationJobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
@@ -1917,7 +1923,7 @@ type GetServersOutput struct {
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// Status of Server catalog
-	ServerCatalogStatus *string `locationName:"serverCatalogStatus" type:"string" enum:"ServerCatalogStatus"`
+	ServerCatalogStatus ServerCatalogStatus `locationName:"serverCatalogStatus" type:"string"`
 
 	// List of servers from catalog
 	ServerList []*Server `locationName:"serverList" locationNameList:"item" type:"list"`
@@ -1946,8 +1952,8 @@ func (s *GetServersOutput) SetNextToken(v string) *GetServersOutput {
 }
 
 // SetServerCatalogStatus sets the ServerCatalogStatus field's value.
-func (s *GetServersOutput) SetServerCatalogStatus(v string) *GetServersOutput {
-	s.ServerCatalogStatus = &v
+func (s *GetServersOutput) SetServerCatalogStatus(v ServerCatalogStatus) *GetServersOutput {
+	s.ServerCatalogStatus = v
 	return s
 }
 
@@ -2004,7 +2010,7 @@ type ReplicationJob struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType *string `locationName:"licenseType" type:"string" enum:"LicenseType"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string"`
 
 	// Timestamp of an operation
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
@@ -2025,10 +2031,10 @@ type ReplicationJob struct {
 	ServerId *string `locationName:"serverId" type:"string"`
 
 	// Type of server.
-	ServerType *string `locationName:"serverType" type:"string" enum:"ServerType"`
+	ServerType ServerType `locationName:"serverType" type:"string"`
 
 	// Current state of Replication Job
-	State *string `locationName:"state" type:"string" enum:"ReplicationJobState"`
+	State ReplicationJobState `locationName:"state" type:"string"`
 
 	// String describing current status of Replication Job
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -2066,8 +2072,8 @@ func (s *ReplicationJob) SetLatestAmiId(v string) *ReplicationJob {
 }
 
 // SetLicenseType sets the LicenseType field's value.
-func (s *ReplicationJob) SetLicenseType(v string) *ReplicationJob {
-	s.LicenseType = &v
+func (s *ReplicationJob) SetLicenseType(v LicenseType) *ReplicationJob {
+	s.LicenseType = v
 	return s
 }
 
@@ -2108,14 +2114,14 @@ func (s *ReplicationJob) SetServerId(v string) *ReplicationJob {
 }
 
 // SetServerType sets the ServerType field's value.
-func (s *ReplicationJob) SetServerType(v string) *ReplicationJob {
-	s.ServerType = &v
+func (s *ReplicationJob) SetServerType(v ServerType) *ReplicationJob {
+	s.ServerType = v
 	return s
 }
 
 // SetState sets the State field's value.
-func (s *ReplicationJob) SetState(v string) *ReplicationJob {
-	s.State = &v
+func (s *ReplicationJob) SetState(v ReplicationJobState) *ReplicationJob {
+	s.State = v
 	return s
 }
 
@@ -2152,13 +2158,13 @@ type ReplicationRun struct {
 	ScheduledStartTime *time.Time `locationName:"scheduledStartTime" type:"timestamp" timestampFormat:"unix"`
 
 	// Current state of Replication Run
-	State *string `locationName:"state" type:"string" enum:"ReplicationRunState"`
+	State ReplicationRunState `locationName:"state" type:"string"`
 
 	// String describing current status of Replication Run
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
 
 	// Type of Replication Run
-	Type *string `locationName:"type" type:"string" enum:"ReplicationRunType"`
+	Type ReplicationRunType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -2202,8 +2208,8 @@ func (s *ReplicationRun) SetScheduledStartTime(v time.Time) *ReplicationRun {
 }
 
 // SetState sets the State field's value.
-func (s *ReplicationRun) SetState(v string) *ReplicationRun {
-	s.State = &v
+func (s *ReplicationRun) SetState(v ReplicationRunState) *ReplicationRun {
+	s.State = v
 	return s
 }
 
@@ -2214,8 +2220,8 @@ func (s *ReplicationRun) SetStatusMessage(v string) *ReplicationRun {
 }
 
 // SetType sets the Type field's value.
-func (s *ReplicationRun) SetType(v string) *ReplicationRun {
-	s.Type = &v
+func (s *ReplicationRun) SetType(v ReplicationRunType) *ReplicationRun {
+	s.Type = v
 	return s
 }
 
@@ -2234,7 +2240,7 @@ type Server struct {
 	ServerId *string `locationName:"serverId" type:"string"`
 
 	// Type of server.
-	ServerType *string `locationName:"serverType" type:"string" enum:"ServerType"`
+	ServerType ServerType `locationName:"serverType" type:"string"`
 
 	// Object representing a VM server
 	VmServer *VmServer `locationName:"vmServer" type:"structure"`
@@ -2269,8 +2275,8 @@ func (s *Server) SetServerId(v string) *Server {
 }
 
 // SetServerType sets the ServerType field's value.
-func (s *Server) SetServerType(v string) *Server {
-	s.ServerType = &v
+func (s *Server) SetServerType(v ServerType) *Server {
+	s.ServerType = v
 	return s
 }
 
@@ -2306,6 +2312,7 @@ func (s StartOnDemandReplicationRunInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartOnDemandReplicationRunInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartOnDemandReplicationRunInput"}
+
 	if s.ReplicationJobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
@@ -2365,7 +2372,7 @@ type UpdateReplicationJobInput struct {
 
 	// The license type to be used for the Amazon Machine Image (AMI) created after
 	// a successful ReplicationRun.
-	LicenseType *string `locationName:"licenseType" type:"string" enum:"LicenseType"`
+	LicenseType LicenseType `locationName:"licenseType" type:"string"`
 
 	// Timestamp of an operation
 	NextReplicationRunStartTime *time.Time `locationName:"nextReplicationRunStartTime" type:"timestamp" timestampFormat:"unix"`
@@ -2392,6 +2399,7 @@ func (s UpdateReplicationJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateReplicationJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateReplicationJobInput"}
+
 	if s.ReplicationJobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
@@ -2415,8 +2423,8 @@ func (s *UpdateReplicationJobInput) SetFrequency(v int64) *UpdateReplicationJobI
 }
 
 // SetLicenseType sets the LicenseType field's value.
-func (s *UpdateReplicationJobInput) SetLicenseType(v string) *UpdateReplicationJobInput {
-	s.LicenseType = &v
+func (s *UpdateReplicationJobInput) SetLicenseType(v LicenseType) *UpdateReplicationJobInput {
+	s.LicenseType = v
 	return s
 }
 
@@ -2462,7 +2470,7 @@ type VmServer struct {
 	VmManagerName *string `locationName:"vmManagerName" type:"string"`
 
 	// VM Management Product
-	VmManagerType *string `locationName:"vmManagerType" type:"string" enum:"VmManagerType"`
+	VmManagerType VmManagerType `locationName:"vmManagerType" type:"string"`
 
 	// Name of Virtual Machine
 	VmName *string `locationName:"vmName" type:"string"`
@@ -2491,8 +2499,8 @@ func (s *VmServer) SetVmManagerName(v string) *VmServer {
 }
 
 // SetVmManagerType sets the VmManagerType field's value.
-func (s *VmServer) SetVmManagerType(v string) *VmServer {
-	s.VmManagerType = &v
+func (s *VmServer) SetVmManagerType(v VmManagerType) *VmServer {
+	s.VmManagerType = v
 	return s
 }
 
@@ -2549,107 +2557,91 @@ func (s *VmServerAddress) SetVmManagerId(v string) *VmServerAddress {
 }
 
 // Capabilities for a Connector
+type ConnectorCapability string
+
+// Enum values for ConnectorCapability
 const (
-	// ConnectorCapabilityVsphere is a ConnectorCapability enum value
-	ConnectorCapabilityVsphere = "VSPHERE"
+	ConnectorCapabilityVsphere ConnectorCapability = "VSPHERE"
 )
 
 // Status of on-premise Connector
-const (
-	// ConnectorStatusHealthy is a ConnectorStatus enum value
-	ConnectorStatusHealthy = "HEALTHY"
+type ConnectorStatus string
 
-	// ConnectorStatusUnhealthy is a ConnectorStatus enum value
-	ConnectorStatusUnhealthy = "UNHEALTHY"
+// Enum values for ConnectorStatus
+const (
+	ConnectorStatusHealthy   ConnectorStatus = "HEALTHY"
+	ConnectorStatusUnhealthy ConnectorStatus = "UNHEALTHY"
 )
 
 // The license type to be used for the Amazon Machine Image (AMI) created after
 // a successful ReplicationRun.
-const (
-	// LicenseTypeAws is a LicenseType enum value
-	LicenseTypeAws = "AWS"
+type LicenseType string
 
-	// LicenseTypeByol is a LicenseType enum value
-	LicenseTypeByol = "BYOL"
+// Enum values for LicenseType
+const (
+	LicenseTypeAws  LicenseType = "AWS"
+	LicenseTypeByol LicenseType = "BYOL"
 )
 
 // Current state of Replication Job
+type ReplicationJobState string
+
+// Enum values for ReplicationJobState
 const (
-	// ReplicationJobStatePending is a ReplicationJobState enum value
-	ReplicationJobStatePending = "PENDING"
-
-	// ReplicationJobStateActive is a ReplicationJobState enum value
-	ReplicationJobStateActive = "ACTIVE"
-
-	// ReplicationJobStateFailed is a ReplicationJobState enum value
-	ReplicationJobStateFailed = "FAILED"
-
-	// ReplicationJobStateDeleting is a ReplicationJobState enum value
-	ReplicationJobStateDeleting = "DELETING"
-
-	// ReplicationJobStateDeleted is a ReplicationJobState enum value
-	ReplicationJobStateDeleted = "DELETED"
+	ReplicationJobStatePending  ReplicationJobState = "PENDING"
+	ReplicationJobStateActive   ReplicationJobState = "ACTIVE"
+	ReplicationJobStateFailed   ReplicationJobState = "FAILED"
+	ReplicationJobStateDeleting ReplicationJobState = "DELETING"
+	ReplicationJobStateDeleted  ReplicationJobState = "DELETED"
 )
 
 // Current state of Replication Run
+type ReplicationRunState string
+
+// Enum values for ReplicationRunState
 const (
-	// ReplicationRunStatePending is a ReplicationRunState enum value
-	ReplicationRunStatePending = "PENDING"
-
-	// ReplicationRunStateMissed is a ReplicationRunState enum value
-	ReplicationRunStateMissed = "MISSED"
-
-	// ReplicationRunStateActive is a ReplicationRunState enum value
-	ReplicationRunStateActive = "ACTIVE"
-
-	// ReplicationRunStateFailed is a ReplicationRunState enum value
-	ReplicationRunStateFailed = "FAILED"
-
-	// ReplicationRunStateCompleted is a ReplicationRunState enum value
-	ReplicationRunStateCompleted = "COMPLETED"
-
-	// ReplicationRunStateDeleting is a ReplicationRunState enum value
-	ReplicationRunStateDeleting = "DELETING"
-
-	// ReplicationRunStateDeleted is a ReplicationRunState enum value
-	ReplicationRunStateDeleted = "DELETED"
+	ReplicationRunStatePending   ReplicationRunState = "PENDING"
+	ReplicationRunStateMissed    ReplicationRunState = "MISSED"
+	ReplicationRunStateActive    ReplicationRunState = "ACTIVE"
+	ReplicationRunStateFailed    ReplicationRunState = "FAILED"
+	ReplicationRunStateCompleted ReplicationRunState = "COMPLETED"
+	ReplicationRunStateDeleting  ReplicationRunState = "DELETING"
+	ReplicationRunStateDeleted   ReplicationRunState = "DELETED"
 )
 
 // Type of Replication Run
-const (
-	// ReplicationRunTypeOnDemand is a ReplicationRunType enum value
-	ReplicationRunTypeOnDemand = "ON_DEMAND"
+type ReplicationRunType string
 
-	// ReplicationRunTypeAutomatic is a ReplicationRunType enum value
-	ReplicationRunTypeAutomatic = "AUTOMATIC"
+// Enum values for ReplicationRunType
+const (
+	ReplicationRunTypeOnDemand  ReplicationRunType = "ON_DEMAND"
+	ReplicationRunTypeAutomatic ReplicationRunType = "AUTOMATIC"
 )
 
 // Status of Server catalog
+type ServerCatalogStatus string
+
+// Enum values for ServerCatalogStatus
 const (
-	// ServerCatalogStatusNotImported is a ServerCatalogStatus enum value
-	ServerCatalogStatusNotImported = "NOT_IMPORTED"
-
-	// ServerCatalogStatusImporting is a ServerCatalogStatus enum value
-	ServerCatalogStatusImporting = "IMPORTING"
-
-	// ServerCatalogStatusAvailable is a ServerCatalogStatus enum value
-	ServerCatalogStatusAvailable = "AVAILABLE"
-
-	// ServerCatalogStatusDeleted is a ServerCatalogStatus enum value
-	ServerCatalogStatusDeleted = "DELETED"
-
-	// ServerCatalogStatusExpired is a ServerCatalogStatus enum value
-	ServerCatalogStatusExpired = "EXPIRED"
+	ServerCatalogStatusNotImported ServerCatalogStatus = "NOT_IMPORTED"
+	ServerCatalogStatusImporting   ServerCatalogStatus = "IMPORTING"
+	ServerCatalogStatusAvailable   ServerCatalogStatus = "AVAILABLE"
+	ServerCatalogStatusDeleted     ServerCatalogStatus = "DELETED"
+	ServerCatalogStatusExpired     ServerCatalogStatus = "EXPIRED"
 )
 
 // Type of server.
+type ServerType string
+
+// Enum values for ServerType
 const (
-	// ServerTypeVirtualMachine is a ServerType enum value
-	ServerTypeVirtualMachine = "VIRTUAL_MACHINE"
+	ServerTypeVirtualMachine ServerType = "VIRTUAL_MACHINE"
 )
 
 // VM Management Product
+type VmManagerType string
+
+// Enum values for VmManagerType
 const (
-	// VmManagerTypeVsphere is a VmManagerType enum value
-	VmManagerTypeVsphere = "VSPHERE"
+	VmManagerTypeVsphere VmManagerType = "VSPHERE"
 )

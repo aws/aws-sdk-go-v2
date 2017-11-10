@@ -6660,7 +6660,7 @@ type App struct {
 	StackId *string `type:"string"`
 
 	// The app type.
-	Type *string `type:"string" enum:"AppType"`
+	Type AppType `type:"string"`
 }
 
 // String returns the string representation
@@ -6752,8 +6752,8 @@ func (s *App) SetStackId(v string) *App {
 }
 
 // SetType sets the Type field's value.
-func (s *App) SetType(v string) *App {
-	s.Type = &v
+func (s *App) SetType(v AppType) *App {
+	s.Type = v
 	return s
 }
 
@@ -6786,9 +6786,11 @@ func (s AssignInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssignInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
+
 	if s.LayerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
@@ -6852,6 +6854,7 @@ func (s AssignVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssignVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -6915,6 +6918,7 @@ func (s AssociateElasticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateElasticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateElasticIpInput"}
+
 	if s.ElasticIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
@@ -6981,9 +6985,11 @@ func (s AttachElasticLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachElasticLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachElasticLoadBalancerInput"}
+
 	if s.ElasticLoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
 	}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -7329,7 +7335,7 @@ type CloneStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the cloned stack, but you can override it when you create an instance.
 	// For more information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	DefaultRootDeviceType RootDeviceType `type:"string"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -7474,9 +7480,11 @@ func (s CloneStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloneStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloneStackInput"}
+
 	if s.ServiceRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
+
 	if s.SourceStackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceStackId"))
 	}
@@ -7554,8 +7562,8 @@ func (s *CloneStackInput) SetDefaultOs(v string) *CloneStackInput {
 }
 
 // SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *CloneStackInput) SetDefaultRootDeviceType(v string) *CloneStackInput {
-	s.DefaultRootDeviceType = &v
+func (s *CloneStackInput) SetDefaultRootDeviceType(v RootDeviceType) *CloneStackInput {
+	s.DefaultRootDeviceType = v
 	return s
 }
 
@@ -7705,7 +7713,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies the encoding of the log file so that the file can be read correctly.
 	// The default is utf_8. Encodings supported by Python codecs.decode() can be
 	// used here.
-	Encoding *string `type:"string" enum:"CloudWatchLogsEncoding"`
+	Encoding CloudWatchLogsEncoding `type:"string"`
 
 	// Specifies log files that you want to push to CloudWatch Logs.
 	//
@@ -7732,7 +7740,7 @@ type CloudWatchLogsLogStream struct {
 	// Specifies where to start to read data (start_of_file or end_of_file). The
 	// default is start_of_file. This setting is only used if there is no state
 	// persisted for that log stream.
-	InitialPosition *string `type:"string" enum:"CloudWatchLogsInitialPosition"`
+	InitialPosition CloudWatchLogsInitialPosition `type:"string"`
 
 	// Specifies the destination log group. A log group is created automatically
 	// if it doesn't already exist. Log group names can be between 1 and 512 characters
@@ -7744,7 +7752,7 @@ type CloudWatchLogsLogStream struct {
 	MultiLineStartPattern *string `type:"string"`
 
 	// Specifies the time zone of log event time stamps.
-	TimeZone *string `type:"string" enum:"CloudWatchLogsTimeZone"`
+	TimeZone CloudWatchLogsTimeZone `type:"string"`
 }
 
 // String returns the string representation
@@ -7782,8 +7790,8 @@ func (s *CloudWatchLogsLogStream) SetDatetimeFormat(v string) *CloudWatchLogsLog
 }
 
 // SetEncoding sets the Encoding field's value.
-func (s *CloudWatchLogsLogStream) SetEncoding(v string) *CloudWatchLogsLogStream {
-	s.Encoding = &v
+func (s *CloudWatchLogsLogStream) SetEncoding(v CloudWatchLogsEncoding) *CloudWatchLogsLogStream {
+	s.Encoding = v
 	return s
 }
 
@@ -7800,8 +7808,8 @@ func (s *CloudWatchLogsLogStream) SetFileFingerprintLines(v string) *CloudWatchL
 }
 
 // SetInitialPosition sets the InitialPosition field's value.
-func (s *CloudWatchLogsLogStream) SetInitialPosition(v string) *CloudWatchLogsLogStream {
-	s.InitialPosition = &v
+func (s *CloudWatchLogsLogStream) SetInitialPosition(v CloudWatchLogsInitialPosition) *CloudWatchLogsLogStream {
+	s.InitialPosition = v
 	return s
 }
 
@@ -7818,8 +7826,8 @@ func (s *CloudWatchLogsLogStream) SetMultiLineStartPattern(v string) *CloudWatch
 }
 
 // SetTimeZone sets the TimeZone field's value.
-func (s *CloudWatchLogsLogStream) SetTimeZone(v string) *CloudWatchLogsLogStream {
-	s.TimeZone = &v
+func (s *CloudWatchLogsLogStream) SetTimeZone(v CloudWatchLogsTimeZone) *CloudWatchLogsLogStream {
+	s.TimeZone = v
 	return s
 }
 
@@ -8023,7 +8031,7 @@ type CreateAppInput struct {
 	// prefer to implement your own Deploy recipes, specify other.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"AppType"`
+	Type AppType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8039,13 +8047,15 @@ func (s CreateAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Environment != nil {
@@ -8137,8 +8147,8 @@ func (s *CreateAppInput) SetStackId(v string) *CreateAppInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateAppInput) SetType(v string) *CreateAppInput {
-	s.Type = &v
+func (s *CreateAppInput) SetType(v AppType) *CreateAppInput {
+	s.Type = v
 	return s
 }
 
@@ -8219,9 +8229,11 @@ func (s CreateDeploymentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
+
 	if s.Command == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Command"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -8335,11 +8347,11 @@ type CreateInstanceInput struct {
 	// not necessarily support both architectures. For a list of the architectures
 	// that are supported by the different instance types, see Instance Families
 	// and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture *string `type:"string" enum:"Architecture"`
+	Architecture Architecture `type:"string"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType *string `type:"string" enum:"AutoScalingType"`
+	AutoScalingType AutoScalingType `type:"string"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -8415,7 +8427,7 @@ type CreateInstanceInput struct {
 
 	// The instance root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	RootDeviceType RootDeviceType `type:"string"`
 
 	// The instance's Amazon EC2 key-pair name.
 	SshKeyName *string `type:"string"`
@@ -8459,12 +8471,15 @@ func (s CreateInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceInput"}
+
 	if s.InstanceType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
+
 	if s.LayerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -8488,14 +8503,14 @@ func (s *CreateInstanceInput) SetAmiId(v string) *CreateInstanceInput {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *CreateInstanceInput) SetArchitecture(v string) *CreateInstanceInput {
-	s.Architecture = &v
+func (s *CreateInstanceInput) SetArchitecture(v Architecture) *CreateInstanceInput {
+	s.Architecture = v
 	return s
 }
 
 // SetAutoScalingType sets the AutoScalingType field's value.
-func (s *CreateInstanceInput) SetAutoScalingType(v string) *CreateInstanceInput {
-	s.AutoScalingType = &v
+func (s *CreateInstanceInput) SetAutoScalingType(v AutoScalingType) *CreateInstanceInput {
+	s.AutoScalingType = v
 	return s
 }
 
@@ -8548,8 +8563,8 @@ func (s *CreateInstanceInput) SetOs(v string) *CreateInstanceInput {
 }
 
 // SetRootDeviceType sets the RootDeviceType field's value.
-func (s *CreateInstanceInput) SetRootDeviceType(v string) *CreateInstanceInput {
-	s.RootDeviceType = &v
+func (s *CreateInstanceInput) SetRootDeviceType(v RootDeviceType) *CreateInstanceInput {
+	s.RootDeviceType = v
 	return s
 }
 
@@ -8695,7 +8710,7 @@ type CreateLayerInput struct {
 	// in Chef 12 stacks.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"LayerType"`
+	Type LayerType `type:"string" required:"true"`
 
 	// Whether to use Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
@@ -8717,16 +8732,19 @@ func (s CreateLayerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLayerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateLayerInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Shortname == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Shortname"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.VolumeConfigurations != nil {
@@ -8837,8 +8855,8 @@ func (s *CreateLayerInput) SetStackId(v string) *CreateLayerInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreateLayerInput) SetType(v string) *CreateLayerInput {
-	s.Type = &v
+func (s *CreateLayerInput) SetType(v LayerType) *CreateLayerInput {
+	s.Type = v
 	return s
 }
 
@@ -8977,7 +8995,7 @@ type CreateStackInput struct {
 	// in the stack, but you can override it when you create an instance. The default
 	// option is instance-store. For more information, see Storage for the Root
 	// Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	DefaultRootDeviceType RootDeviceType `type:"string"`
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify
 	// a key pair name, AWS OpsWorks installs the public key on the instance and
@@ -9114,15 +9132,19 @@ func (s CreateStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
+
 	if s.DefaultInstanceProfileArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DefaultInstanceProfileArn"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Region == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Region"))
 	}
+
 	if s.ServiceRoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
@@ -9188,8 +9210,8 @@ func (s *CreateStackInput) SetDefaultOs(v string) *CreateStackInput {
 }
 
 // SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *CreateStackInput) SetDefaultRootDeviceType(v string) *CreateStackInput {
-	s.DefaultRootDeviceType = &v
+func (s *CreateStackInput) SetDefaultRootDeviceType(v RootDeviceType) *CreateStackInput {
+	s.DefaultRootDeviceType = v
 	return s
 }
 
@@ -9310,6 +9332,7 @@ func (s CreateUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateUserProfileInput"}
+
 	if s.IamUserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
@@ -9436,6 +9459,7 @@ func (s DeleteAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAppInput"}
+
 	if s.AppId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AppId"))
 	}
@@ -9496,6 +9520,7 @@ func (s DeleteInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -9562,6 +9587,7 @@ func (s DeleteLayerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLayerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteLayerInput"}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -9616,6 +9642,7 @@ func (s DeleteStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -9670,6 +9697,7 @@ func (s DeleteUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserProfileInput"}
+
 	if s.IamUserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
@@ -9903,7 +9931,7 @@ type DeploymentCommand struct {
 	//    * undeploy: Undeploy the app.
 	//
 	// Name is a required field
-	Name *string `type:"string" required:"true" enum:"DeploymentCommandName"`
+	Name DeploymentCommandName `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9919,7 +9947,7 @@ func (s DeploymentCommand) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeploymentCommand) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeploymentCommand"}
-	if s.Name == nil {
+	if len(s.Name) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
@@ -9936,8 +9964,8 @@ func (s *DeploymentCommand) SetArgs(v map[string][]*string) *DeploymentCommand {
 }
 
 // SetName sets the Name field's value.
-func (s *DeploymentCommand) SetName(v string) *DeploymentCommand {
-	s.Name = &v
+func (s *DeploymentCommand) SetName(v DeploymentCommandName) *DeploymentCommand {
+	s.Name = v
 	return s
 }
 
@@ -9964,6 +9992,7 @@ func (s DeregisterEcsClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterEcsClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEcsClusterInput"}
+
 	if s.EcsClusterArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
 	}
@@ -10018,6 +10047,7 @@ func (s DeregisterElasticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterElasticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterElasticIpInput"}
+
 	if s.ElasticIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
@@ -10072,6 +10102,7 @@ func (s DeregisterInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -10126,6 +10157,7 @@ func (s DeregisterRdsDbInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterRdsDbInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterRdsDbInstanceInput"}
+
 	if s.RdsDbInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
@@ -10182,6 +10214,7 @@ func (s DeregisterVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeregisterVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -10858,6 +10891,7 @@ func (s DescribeLoadBasedAutoScalingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBasedAutoScalingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBasedAutoScalingInput"}
+
 	if s.LayerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
@@ -11106,6 +11140,7 @@ func (s DescribeRdsDbInstancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRdsDbInstancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRdsDbInstancesInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -11247,6 +11282,7 @@ func (s DescribeStackProvisioningParametersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackProvisioningParametersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackProvisioningParametersInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -11320,6 +11356,7 @@ func (s DescribeStackSummaryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSummaryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSummaryInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -11434,6 +11471,7 @@ func (s DescribeTimeBasedAutoScalingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTimeBasedAutoScalingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTimeBasedAutoScalingInput"}
+
 	if s.InstanceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
@@ -11634,9 +11672,11 @@ func (s DetachElasticLoadBalancerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachElasticLoadBalancerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachElasticLoadBalancerInput"}
+
 	if s.ElasticLoadBalancerName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
 	}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -11697,6 +11737,7 @@ func (s DisassociateElasticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateElasticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateElasticIpInput"}
+
 	if s.ElasticIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
@@ -11750,7 +11791,7 @@ type EbsBlockDevice struct {
 
 	// The volume type. gp2 for General Purpose (SSD) volumes, io1 for Provisioned
 	// IOPS (SSD) volumes, and standard for Magnetic volumes.
-	VolumeType *string `type:"string" enum:"VolumeType"`
+	VolumeType VolumeType `type:"string"`
 }
 
 // String returns the string representation
@@ -11788,8 +11829,8 @@ func (s *EbsBlockDevice) SetVolumeSize(v int64) *EbsBlockDevice {
 }
 
 // SetVolumeType sets the VolumeType field's value.
-func (s *EbsBlockDevice) SetVolumeType(v string) *EbsBlockDevice {
-	s.VolumeType = &v
+func (s *EbsBlockDevice) SetVolumeType(v VolumeType) *EbsBlockDevice {
+	s.VolumeType = v
 	return s
 }
 
@@ -12044,9 +12085,11 @@ func (s EnvironmentVariable) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnvironmentVariable) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnvironmentVariable"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -12098,6 +12141,7 @@ func (s GetHostnameSuggestionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHostnameSuggestionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHostnameSuggestionInput"}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -12177,6 +12221,7 @@ func (s GrantAccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GrantAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GrantAccessInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -12242,12 +12287,12 @@ type Instance struct {
 	AmiId *string `type:"string"`
 
 	// The instance architecture: "i386" or "x86_64".
-	Architecture *string `type:"string" enum:"Architecture"`
+	Architecture Architecture `type:"string"`
 
 	Arn *string `type:"string"`
 
 	// For load-based or time-based instances, the type.
-	AutoScalingType *string `type:"string" enum:"AutoScalingType"`
+	AutoScalingType AutoScalingType `type:"string"`
 
 	// The instance Availability Zone. For more information, see Regions and Endpoints
 	// (http://docs.aws.amazon.com/general/latest/gr/rande.html).
@@ -12336,7 +12381,7 @@ type Instance struct {
 
 	// The instance's root device type. For more information, see Storage for the
 	// Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	RootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	RootDeviceType RootDeviceType `type:"string"`
 
 	// The root device volume ID.
 	RootDeviceVolumeId *string `type:"string"`
@@ -12396,7 +12441,7 @@ type Instance struct {
 	Tenancy *string `type:"string"`
 
 	// The instance's virtualization type: paravirtual or hvm.
-	VirtualizationType *string `type:"string" enum:"VirtualizationType"`
+	VirtualizationType VirtualizationType `type:"string"`
 }
 
 // String returns the string representation
@@ -12422,8 +12467,8 @@ func (s *Instance) SetAmiId(v string) *Instance {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *Instance) SetArchitecture(v string) *Instance {
-	s.Architecture = &v
+func (s *Instance) SetArchitecture(v Architecture) *Instance {
+	s.Architecture = v
 	return s
 }
 
@@ -12434,8 +12479,8 @@ func (s *Instance) SetArn(v string) *Instance {
 }
 
 // SetAutoScalingType sets the AutoScalingType field's value.
-func (s *Instance) SetAutoScalingType(v string) *Instance {
-	s.AutoScalingType = &v
+func (s *Instance) SetAutoScalingType(v AutoScalingType) *Instance {
+	s.AutoScalingType = v
 	return s
 }
 
@@ -12590,8 +12635,8 @@ func (s *Instance) SetReportedOs(v *ReportedOs) *Instance {
 }
 
 // SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Instance) SetRootDeviceType(v string) *Instance {
-	s.RootDeviceType = &v
+func (s *Instance) SetRootDeviceType(v RootDeviceType) *Instance {
+	s.RootDeviceType = v
 	return s
 }
 
@@ -12650,8 +12695,8 @@ func (s *Instance) SetTenancy(v string) *Instance {
 }
 
 // SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Instance) SetVirtualizationType(v string) *Instance {
-	s.VirtualizationType = &v
+func (s *Instance) SetVirtualizationType(v VirtualizationType) *Instance {
+	s.VirtualizationType = v
 	return s
 }
 
@@ -12971,7 +13016,7 @@ type Layer struct {
 	StackId *string `type:"string"`
 
 	// The layer type.
-	Type *string `type:"string" enum:"LayerType"`
+	Type LayerType `type:"string"`
 
 	// Whether the layer uses Amazon EBS-optimized instances.
 	UseEbsOptimizedInstances *bool `type:"boolean"`
@@ -13111,8 +13156,8 @@ func (s *Layer) SetStackId(v string) *Layer {
 }
 
 // SetType sets the Type field's value.
-func (s *Layer) SetType(v string) *Layer {
-	s.Type = &v
+func (s *Layer) SetType(v LayerType) *Layer {
+	s.Type = v
 	return s
 }
 
@@ -13184,6 +13229,7 @@ func (s ListTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
@@ -13636,6 +13682,7 @@ func (s RebootInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RebootInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -13767,9 +13814,11 @@ func (s RegisterEcsClusterInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterEcsClusterInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterEcsClusterInput"}
+
 	if s.EcsClusterArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -13845,9 +13894,11 @@ func (s RegisterElasticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterElasticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterElasticIpInput"}
+
 	if s.ElasticIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -13937,6 +13988,7 @@ func (s RegisterInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstanceInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -14052,15 +14104,19 @@ func (s RegisterRdsDbInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterRdsDbInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterRdsDbInstanceInput"}
+
 	if s.DbPassword == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DbPassword"))
 	}
+
 	if s.DbUser == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
 	}
+
 	if s.RdsDbInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -14136,6 +14192,7 @@ func (s RegisterVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterVolumeInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -14384,6 +14441,7 @@ func (s SetLoadBasedAutoScalingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBasedAutoScalingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBasedAutoScalingInput"}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -14494,9 +14552,11 @@ func (s SetPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetPermissionInput"}
+
 	if s.IamUserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -14578,6 +14638,7 @@ func (s SetTimeBasedAutoScalingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTimeBasedAutoScalingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetTimeBasedAutoScalingInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -14685,7 +14746,7 @@ type Source struct {
 	SshKey *string `type:"string"`
 
 	// The repository type.
-	Type *string `type:"string" enum:"SourceType"`
+	Type SourceType `type:"string"`
 
 	// The source URL. The following is an example of an Amazon S3 source URL: https://s3.amazonaws.com/opsworks-demo-bucket/opsworks_cookbook_demo.tar.gz.
 	Url *string `type:"string"`
@@ -14729,8 +14790,8 @@ func (s *Source) SetSshKey(v string) *Source {
 }
 
 // SetType sets the Type field's value.
-func (s *Source) SetType(v string) *Source {
-	s.Type = &v
+func (s *Source) SetType(v SourceType) *Source {
+	s.Type = v
 	return s
 }
 
@@ -14779,9 +14840,11 @@ func (s SslConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SslConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SslConfiguration"}
+
 	if s.Certificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
+
 	if s.PrivateKey == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
 	}
@@ -14866,7 +14929,7 @@ type Stack struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	DefaultRootDeviceType RootDeviceType `type:"string"`
 
 	// A default Amazon EC2 key pair for the stack's instances. You can override
 	// this value when you create or update an instance.
@@ -14979,8 +15042,8 @@ func (s *Stack) SetDefaultOs(v string) *Stack {
 }
 
 // SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *Stack) SetDefaultRootDeviceType(v string) *Stack {
-	s.DefaultRootDeviceType = &v
+func (s *Stack) SetDefaultRootDeviceType(v RootDeviceType) *Stack {
+	s.DefaultRootDeviceType = v
 	return s
 }
 
@@ -15173,6 +15236,7 @@ func (s StartInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -15227,6 +15291,7 @@ func (s StartStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartStackInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -15281,6 +15346,7 @@ func (s StopInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -15335,6 +15401,7 @@ func (s StopStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StopStackInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -15410,9 +15477,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -15563,6 +15632,7 @@ func (s UnassignInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnassignInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -15617,6 +15687,7 @@ func (s UnassignVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnassignVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -15676,9 +15747,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -15767,7 +15840,7 @@ type UpdateAppInput struct {
 	SslConfiguration *SslConfiguration `type:"structure"`
 
 	// The app type.
-	Type *string `type:"string" enum:"AppType"`
+	Type AppType `type:"string"`
 }
 
 // String returns the string representation
@@ -15783,6 +15856,7 @@ func (s UpdateAppInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAppInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAppInput"}
+
 	if s.AppId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AppId"))
 	}
@@ -15869,8 +15943,8 @@ func (s *UpdateAppInput) SetSslConfiguration(v *SslConfiguration) *UpdateAppInpu
 }
 
 // SetType sets the Type field's value.
-func (s *UpdateAppInput) SetType(v string) *UpdateAppInput {
-	s.Type = &v
+func (s *UpdateAppInput) SetType(v AppType) *UpdateAppInput {
+	s.Type = v
 	return s
 }
 
@@ -15915,6 +15989,7 @@ func (s UpdateElasticIpInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateElasticIpInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateElasticIpInput"}
+
 	if s.ElasticIp == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
@@ -15981,11 +16056,11 @@ type UpdateInstanceInput struct {
 	// The instance architecture. Instance types do not necessarily support both
 	// architectures. For a list of the architectures that are supported by the
 	// different instance types, see Instance Families and Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html).
-	Architecture *string `type:"string" enum:"Architecture"`
+	Architecture Architecture `type:"string"`
 
 	// For load-based or time-based instances, the type. Windows stacks can use
 	// only time-based instances.
-	AutoScalingType *string `type:"string" enum:"AutoScalingType"`
+	AutoScalingType AutoScalingType `type:"string"`
 
 	// This property cannot be updated.
 	EbsOptimized *bool `type:"boolean"`
@@ -16069,6 +16144,7 @@ func (s UpdateInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceInput"}
+
 	if s.InstanceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
@@ -16092,14 +16168,14 @@ func (s *UpdateInstanceInput) SetAmiId(v string) *UpdateInstanceInput {
 }
 
 // SetArchitecture sets the Architecture field's value.
-func (s *UpdateInstanceInput) SetArchitecture(v string) *UpdateInstanceInput {
-	s.Architecture = &v
+func (s *UpdateInstanceInput) SetArchitecture(v Architecture) *UpdateInstanceInput {
+	s.Architecture = v
 	return s
 }
 
 // SetAutoScalingType sets the AutoScalingType field's value.
-func (s *UpdateInstanceInput) SetAutoScalingType(v string) *UpdateInstanceInput {
-	s.AutoScalingType = &v
+func (s *UpdateInstanceInput) SetAutoScalingType(v AutoScalingType) *UpdateInstanceInput {
+	s.AutoScalingType = v
 	return s
 }
 
@@ -16258,6 +16334,7 @@ func (s UpdateLayerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLayerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateLayerInput"}
+
 	if s.LayerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
@@ -16463,6 +16540,7 @@ func (s UpdateRdsDbInstanceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRdsDbInstanceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRdsDbInstanceInput"}
+
 	if s.RdsDbInstanceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
@@ -16600,7 +16678,7 @@ type UpdateStackInput struct {
 	// The default root device type. This value is used by default for all instances
 	// in the stack, but you can override it when you create an instance. For more
 	// information, see Storage for the Root Device (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType *string `type:"string" enum:"RootDeviceType"`
+	DefaultRootDeviceType RootDeviceType `type:"string"`
 
 	// A default Amazon EC2 key-pair name. The default value is none. If you specify
 	// a key-pair name, AWS OpsWorks Stacks installs the public key on the instance
@@ -16700,6 +16778,7 @@ func (s UpdateStackInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
+
 	if s.StackId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
@@ -16765,8 +16844,8 @@ func (s *UpdateStackInput) SetDefaultOs(v string) *UpdateStackInput {
 }
 
 // SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *UpdateStackInput) SetDefaultRootDeviceType(v string) *UpdateStackInput {
-	s.DefaultRootDeviceType = &v
+func (s *UpdateStackInput) SetDefaultRootDeviceType(v RootDeviceType) *UpdateStackInput {
+	s.DefaultRootDeviceType = v
 	return s
 }
 
@@ -16870,6 +16949,7 @@ func (s UpdateUserProfileInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserProfileInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserProfileInput"}
+
 	if s.IamUserArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
@@ -16948,6 +17028,7 @@ func (s UpdateVolumeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateVolumeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateVolumeInput"}
+
 	if s.VolumeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
@@ -17237,12 +17318,15 @@ func (s VolumeConfiguration) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VolumeConfiguration) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "VolumeConfiguration"}
+
 	if s.MountPoint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MountPoint"))
 	}
+
 	if s.NumberOfDisks == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NumberOfDisks"))
 	}
+
 	if s.Size == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
@@ -17385,556 +17469,272 @@ func (s *WeeklyAutoScalingSchedule) SetWednesday(v map[string]*string) *WeeklyAu
 	return s
 }
 
+type AppAttributesKeys string
+
+// Enum values for AppAttributesKeys
 const (
-	// AppAttributesKeysDocumentRoot is a AppAttributesKeys enum value
-	AppAttributesKeysDocumentRoot = "DocumentRoot"
-
-	// AppAttributesKeysRailsEnv is a AppAttributesKeys enum value
-	AppAttributesKeysRailsEnv = "RailsEnv"
-
-	// AppAttributesKeysAutoBundleOnDeploy is a AppAttributesKeys enum value
-	AppAttributesKeysAutoBundleOnDeploy = "AutoBundleOnDeploy"
-
-	// AppAttributesKeysAwsFlowRubySettings is a AppAttributesKeys enum value
-	AppAttributesKeysAwsFlowRubySettings = "AwsFlowRubySettings"
+	AppAttributesKeysDocumentRoot        AppAttributesKeys = "DocumentRoot"
+	AppAttributesKeysRailsEnv            AppAttributesKeys = "RailsEnv"
+	AppAttributesKeysAutoBundleOnDeploy  AppAttributesKeys = "AutoBundleOnDeploy"
+	AppAttributesKeysAwsFlowRubySettings AppAttributesKeys = "AwsFlowRubySettings"
 )
 
+type AppType string
+
+// Enum values for AppType
 const (
-	// AppTypeAwsFlowRuby is a AppType enum value
-	AppTypeAwsFlowRuby = "aws-flow-ruby"
-
-	// AppTypeJava is a AppType enum value
-	AppTypeJava = "java"
-
-	// AppTypeRails is a AppType enum value
-	AppTypeRails = "rails"
-
-	// AppTypePhp is a AppType enum value
-	AppTypePhp = "php"
-
-	// AppTypeNodejs is a AppType enum value
-	AppTypeNodejs = "nodejs"
-
-	// AppTypeStatic is a AppType enum value
-	AppTypeStatic = "static"
-
-	// AppTypeOther is a AppType enum value
-	AppTypeOther = "other"
+	AppTypeAwsFlowRuby AppType = "aws-flow-ruby"
+	AppTypeJava        AppType = "java"
+	AppTypeRails       AppType = "rails"
+	AppTypePhp         AppType = "php"
+	AppTypeNodejs      AppType = "nodejs"
+	AppTypeStatic      AppType = "static"
+	AppTypeOther       AppType = "other"
 )
 
-const (
-	// ArchitectureX8664 is a Architecture enum value
-	ArchitectureX8664 = "x86_64"
+type Architecture string
 
-	// ArchitectureI386 is a Architecture enum value
-	ArchitectureI386 = "i386"
+// Enum values for Architecture
+const (
+	ArchitectureX8664 Architecture = "x86_64"
+	ArchitectureI386  Architecture = "i386"
 )
 
-const (
-	// AutoScalingTypeLoad is a AutoScalingType enum value
-	AutoScalingTypeLoad = "load"
+type AutoScalingType string
 
-	// AutoScalingTypeTimer is a AutoScalingType enum value
-	AutoScalingTypeTimer = "timer"
+// Enum values for AutoScalingType
+const (
+	AutoScalingTypeLoad  AutoScalingType = "load"
+	AutoScalingTypeTimer AutoScalingType = "timer"
 )
 
 // Specifies the encoding of the log file so that the file can be read correctly.
 // The default is utf_8. Encodings supported by Python codecs.decode() can be
 // used here.
+type CloudWatchLogsEncoding string
+
+// Enum values for CloudWatchLogsEncoding
 const (
-	// CloudWatchLogsEncodingAscii is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingAscii = "ascii"
-
-	// CloudWatchLogsEncodingBig5 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingBig5 = "big5"
-
-	// CloudWatchLogsEncodingBig5hkscs is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingBig5hkscs = "big5hkscs"
-
-	// CloudWatchLogsEncodingCp037 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp037 = "cp037"
-
-	// CloudWatchLogsEncodingCp424 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp424 = "cp424"
-
-	// CloudWatchLogsEncodingCp437 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp437 = "cp437"
-
-	// CloudWatchLogsEncodingCp500 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp500 = "cp500"
-
-	// CloudWatchLogsEncodingCp720 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp720 = "cp720"
-
-	// CloudWatchLogsEncodingCp737 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp737 = "cp737"
-
-	// CloudWatchLogsEncodingCp775 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp775 = "cp775"
-
-	// CloudWatchLogsEncodingCp850 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp850 = "cp850"
-
-	// CloudWatchLogsEncodingCp852 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp852 = "cp852"
-
-	// CloudWatchLogsEncodingCp855 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp855 = "cp855"
-
-	// CloudWatchLogsEncodingCp856 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp856 = "cp856"
-
-	// CloudWatchLogsEncodingCp857 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp857 = "cp857"
-
-	// CloudWatchLogsEncodingCp858 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp858 = "cp858"
-
-	// CloudWatchLogsEncodingCp860 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp860 = "cp860"
-
-	// CloudWatchLogsEncodingCp861 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp861 = "cp861"
-
-	// CloudWatchLogsEncodingCp862 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp862 = "cp862"
-
-	// CloudWatchLogsEncodingCp863 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp863 = "cp863"
-
-	// CloudWatchLogsEncodingCp864 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp864 = "cp864"
-
-	// CloudWatchLogsEncodingCp865 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp865 = "cp865"
-
-	// CloudWatchLogsEncodingCp866 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp866 = "cp866"
-
-	// CloudWatchLogsEncodingCp869 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp869 = "cp869"
-
-	// CloudWatchLogsEncodingCp874 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp874 = "cp874"
-
-	// CloudWatchLogsEncodingCp875 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp875 = "cp875"
-
-	// CloudWatchLogsEncodingCp932 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp932 = "cp932"
-
-	// CloudWatchLogsEncodingCp949 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp949 = "cp949"
-
-	// CloudWatchLogsEncodingCp950 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp950 = "cp950"
-
-	// CloudWatchLogsEncodingCp1006 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1006 = "cp1006"
-
-	// CloudWatchLogsEncodingCp1026 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1026 = "cp1026"
-
-	// CloudWatchLogsEncodingCp1140 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1140 = "cp1140"
-
-	// CloudWatchLogsEncodingCp1250 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1250 = "cp1250"
-
-	// CloudWatchLogsEncodingCp1251 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1251 = "cp1251"
-
-	// CloudWatchLogsEncodingCp1252 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1252 = "cp1252"
-
-	// CloudWatchLogsEncodingCp1253 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1253 = "cp1253"
-
-	// CloudWatchLogsEncodingCp1254 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1254 = "cp1254"
-
-	// CloudWatchLogsEncodingCp1255 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1255 = "cp1255"
-
-	// CloudWatchLogsEncodingCp1256 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1256 = "cp1256"
-
-	// CloudWatchLogsEncodingCp1257 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1257 = "cp1257"
-
-	// CloudWatchLogsEncodingCp1258 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingCp1258 = "cp1258"
-
-	// CloudWatchLogsEncodingEucJp is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingEucJp = "euc_jp"
-
-	// CloudWatchLogsEncodingEucJis2004 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingEucJis2004 = "euc_jis_2004"
-
-	// CloudWatchLogsEncodingEucJisx0213 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingEucJisx0213 = "euc_jisx0213"
-
-	// CloudWatchLogsEncodingEucKr is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingEucKr = "euc_kr"
-
-	// CloudWatchLogsEncodingGb2312 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingGb2312 = "gb2312"
-
-	// CloudWatchLogsEncodingGbk is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingGbk = "gbk"
-
-	// CloudWatchLogsEncodingGb18030 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingGb18030 = "gb18030"
-
-	// CloudWatchLogsEncodingHz is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingHz = "hz"
-
-	// CloudWatchLogsEncodingIso2022Jp is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Jp = "iso2022_jp"
-
-	// CloudWatchLogsEncodingIso2022Jp1 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Jp1 = "iso2022_jp_1"
-
-	// CloudWatchLogsEncodingIso2022Jp2 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Jp2 = "iso2022_jp_2"
-
-	// CloudWatchLogsEncodingIso2022Jp2004 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Jp2004 = "iso2022_jp_2004"
-
-	// CloudWatchLogsEncodingIso2022Jp3 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Jp3 = "iso2022_jp_3"
-
-	// CloudWatchLogsEncodingIso2022JpExt is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022JpExt = "iso2022_jp_ext"
-
-	// CloudWatchLogsEncodingIso2022Kr is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso2022Kr = "iso2022_kr"
-
-	// CloudWatchLogsEncodingLatin1 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingLatin1 = "latin_1"
-
-	// CloudWatchLogsEncodingIso88592 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88592 = "iso8859_2"
-
-	// CloudWatchLogsEncodingIso88593 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88593 = "iso8859_3"
-
-	// CloudWatchLogsEncodingIso88594 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88594 = "iso8859_4"
-
-	// CloudWatchLogsEncodingIso88595 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88595 = "iso8859_5"
-
-	// CloudWatchLogsEncodingIso88596 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88596 = "iso8859_6"
-
-	// CloudWatchLogsEncodingIso88597 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88597 = "iso8859_7"
-
-	// CloudWatchLogsEncodingIso88598 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88598 = "iso8859_8"
-
-	// CloudWatchLogsEncodingIso88599 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso88599 = "iso8859_9"
-
-	// CloudWatchLogsEncodingIso885910 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso885910 = "iso8859_10"
-
-	// CloudWatchLogsEncodingIso885913 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso885913 = "iso8859_13"
-
-	// CloudWatchLogsEncodingIso885914 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso885914 = "iso8859_14"
-
-	// CloudWatchLogsEncodingIso885915 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso885915 = "iso8859_15"
-
-	// CloudWatchLogsEncodingIso885916 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingIso885916 = "iso8859_16"
-
-	// CloudWatchLogsEncodingJohab is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingJohab = "johab"
-
-	// CloudWatchLogsEncodingKoi8R is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingKoi8R = "koi8_r"
-
-	// CloudWatchLogsEncodingKoi8U is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingKoi8U = "koi8_u"
-
-	// CloudWatchLogsEncodingMacCyrillic is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacCyrillic = "mac_cyrillic"
-
-	// CloudWatchLogsEncodingMacGreek is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacGreek = "mac_greek"
-
-	// CloudWatchLogsEncodingMacIceland is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacIceland = "mac_iceland"
-
-	// CloudWatchLogsEncodingMacLatin2 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacLatin2 = "mac_latin2"
-
-	// CloudWatchLogsEncodingMacRoman is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacRoman = "mac_roman"
-
-	// CloudWatchLogsEncodingMacTurkish is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingMacTurkish = "mac_turkish"
-
-	// CloudWatchLogsEncodingPtcp154 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingPtcp154 = "ptcp154"
-
-	// CloudWatchLogsEncodingShiftJis is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingShiftJis = "shift_jis"
-
-	// CloudWatchLogsEncodingShiftJis2004 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingShiftJis2004 = "shift_jis_2004"
-
-	// CloudWatchLogsEncodingShiftJisx0213 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingShiftJisx0213 = "shift_jisx0213"
-
-	// CloudWatchLogsEncodingUtf32 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf32 = "utf_32"
-
-	// CloudWatchLogsEncodingUtf32Be is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf32Be = "utf_32_be"
-
-	// CloudWatchLogsEncodingUtf32Le is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf32Le = "utf_32_le"
-
-	// CloudWatchLogsEncodingUtf16 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf16 = "utf_16"
-
-	// CloudWatchLogsEncodingUtf16Be is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf16Be = "utf_16_be"
-
-	// CloudWatchLogsEncodingUtf16Le is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf16Le = "utf_16_le"
-
-	// CloudWatchLogsEncodingUtf7 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf7 = "utf_7"
-
-	// CloudWatchLogsEncodingUtf8 is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf8 = "utf_8"
-
-	// CloudWatchLogsEncodingUtf8Sig is a CloudWatchLogsEncoding enum value
-	CloudWatchLogsEncodingUtf8Sig = "utf_8_sig"
+	CloudWatchLogsEncodingAscii         CloudWatchLogsEncoding = "ascii"
+	CloudWatchLogsEncodingBig5          CloudWatchLogsEncoding = "big5"
+	CloudWatchLogsEncodingBig5hkscs     CloudWatchLogsEncoding = "big5hkscs"
+	CloudWatchLogsEncodingCp037         CloudWatchLogsEncoding = "cp037"
+	CloudWatchLogsEncodingCp424         CloudWatchLogsEncoding = "cp424"
+	CloudWatchLogsEncodingCp437         CloudWatchLogsEncoding = "cp437"
+	CloudWatchLogsEncodingCp500         CloudWatchLogsEncoding = "cp500"
+	CloudWatchLogsEncodingCp720         CloudWatchLogsEncoding = "cp720"
+	CloudWatchLogsEncodingCp737         CloudWatchLogsEncoding = "cp737"
+	CloudWatchLogsEncodingCp775         CloudWatchLogsEncoding = "cp775"
+	CloudWatchLogsEncodingCp850         CloudWatchLogsEncoding = "cp850"
+	CloudWatchLogsEncodingCp852         CloudWatchLogsEncoding = "cp852"
+	CloudWatchLogsEncodingCp855         CloudWatchLogsEncoding = "cp855"
+	CloudWatchLogsEncodingCp856         CloudWatchLogsEncoding = "cp856"
+	CloudWatchLogsEncodingCp857         CloudWatchLogsEncoding = "cp857"
+	CloudWatchLogsEncodingCp858         CloudWatchLogsEncoding = "cp858"
+	CloudWatchLogsEncodingCp860         CloudWatchLogsEncoding = "cp860"
+	CloudWatchLogsEncodingCp861         CloudWatchLogsEncoding = "cp861"
+	CloudWatchLogsEncodingCp862         CloudWatchLogsEncoding = "cp862"
+	CloudWatchLogsEncodingCp863         CloudWatchLogsEncoding = "cp863"
+	CloudWatchLogsEncodingCp864         CloudWatchLogsEncoding = "cp864"
+	CloudWatchLogsEncodingCp865         CloudWatchLogsEncoding = "cp865"
+	CloudWatchLogsEncodingCp866         CloudWatchLogsEncoding = "cp866"
+	CloudWatchLogsEncodingCp869         CloudWatchLogsEncoding = "cp869"
+	CloudWatchLogsEncodingCp874         CloudWatchLogsEncoding = "cp874"
+	CloudWatchLogsEncodingCp875         CloudWatchLogsEncoding = "cp875"
+	CloudWatchLogsEncodingCp932         CloudWatchLogsEncoding = "cp932"
+	CloudWatchLogsEncodingCp949         CloudWatchLogsEncoding = "cp949"
+	CloudWatchLogsEncodingCp950         CloudWatchLogsEncoding = "cp950"
+	CloudWatchLogsEncodingCp1006        CloudWatchLogsEncoding = "cp1006"
+	CloudWatchLogsEncodingCp1026        CloudWatchLogsEncoding = "cp1026"
+	CloudWatchLogsEncodingCp1140        CloudWatchLogsEncoding = "cp1140"
+	CloudWatchLogsEncodingCp1250        CloudWatchLogsEncoding = "cp1250"
+	CloudWatchLogsEncodingCp1251        CloudWatchLogsEncoding = "cp1251"
+	CloudWatchLogsEncodingCp1252        CloudWatchLogsEncoding = "cp1252"
+	CloudWatchLogsEncodingCp1253        CloudWatchLogsEncoding = "cp1253"
+	CloudWatchLogsEncodingCp1254        CloudWatchLogsEncoding = "cp1254"
+	CloudWatchLogsEncodingCp1255        CloudWatchLogsEncoding = "cp1255"
+	CloudWatchLogsEncodingCp1256        CloudWatchLogsEncoding = "cp1256"
+	CloudWatchLogsEncodingCp1257        CloudWatchLogsEncoding = "cp1257"
+	CloudWatchLogsEncodingCp1258        CloudWatchLogsEncoding = "cp1258"
+	CloudWatchLogsEncodingEucJp         CloudWatchLogsEncoding = "euc_jp"
+	CloudWatchLogsEncodingEucJis2004    CloudWatchLogsEncoding = "euc_jis_2004"
+	CloudWatchLogsEncodingEucJisx0213   CloudWatchLogsEncoding = "euc_jisx0213"
+	CloudWatchLogsEncodingEucKr         CloudWatchLogsEncoding = "euc_kr"
+	CloudWatchLogsEncodingGb2312        CloudWatchLogsEncoding = "gb2312"
+	CloudWatchLogsEncodingGbk           CloudWatchLogsEncoding = "gbk"
+	CloudWatchLogsEncodingGb18030       CloudWatchLogsEncoding = "gb18030"
+	CloudWatchLogsEncodingHz            CloudWatchLogsEncoding = "hz"
+	CloudWatchLogsEncodingIso2022Jp     CloudWatchLogsEncoding = "iso2022_jp"
+	CloudWatchLogsEncodingIso2022Jp1    CloudWatchLogsEncoding = "iso2022_jp_1"
+	CloudWatchLogsEncodingIso2022Jp2    CloudWatchLogsEncoding = "iso2022_jp_2"
+	CloudWatchLogsEncodingIso2022Jp2004 CloudWatchLogsEncoding = "iso2022_jp_2004"
+	CloudWatchLogsEncodingIso2022Jp3    CloudWatchLogsEncoding = "iso2022_jp_3"
+	CloudWatchLogsEncodingIso2022JpExt  CloudWatchLogsEncoding = "iso2022_jp_ext"
+	CloudWatchLogsEncodingIso2022Kr     CloudWatchLogsEncoding = "iso2022_kr"
+	CloudWatchLogsEncodingLatin1        CloudWatchLogsEncoding = "latin_1"
+	CloudWatchLogsEncodingIso88592      CloudWatchLogsEncoding = "iso8859_2"
+	CloudWatchLogsEncodingIso88593      CloudWatchLogsEncoding = "iso8859_3"
+	CloudWatchLogsEncodingIso88594      CloudWatchLogsEncoding = "iso8859_4"
+	CloudWatchLogsEncodingIso88595      CloudWatchLogsEncoding = "iso8859_5"
+	CloudWatchLogsEncodingIso88596      CloudWatchLogsEncoding = "iso8859_6"
+	CloudWatchLogsEncodingIso88597      CloudWatchLogsEncoding = "iso8859_7"
+	CloudWatchLogsEncodingIso88598      CloudWatchLogsEncoding = "iso8859_8"
+	CloudWatchLogsEncodingIso88599      CloudWatchLogsEncoding = "iso8859_9"
+	CloudWatchLogsEncodingIso885910     CloudWatchLogsEncoding = "iso8859_10"
+	CloudWatchLogsEncodingIso885913     CloudWatchLogsEncoding = "iso8859_13"
+	CloudWatchLogsEncodingIso885914     CloudWatchLogsEncoding = "iso8859_14"
+	CloudWatchLogsEncodingIso885915     CloudWatchLogsEncoding = "iso8859_15"
+	CloudWatchLogsEncodingIso885916     CloudWatchLogsEncoding = "iso8859_16"
+	CloudWatchLogsEncodingJohab         CloudWatchLogsEncoding = "johab"
+	CloudWatchLogsEncodingKoi8R         CloudWatchLogsEncoding = "koi8_r"
+	CloudWatchLogsEncodingKoi8U         CloudWatchLogsEncoding = "koi8_u"
+	CloudWatchLogsEncodingMacCyrillic   CloudWatchLogsEncoding = "mac_cyrillic"
+	CloudWatchLogsEncodingMacGreek      CloudWatchLogsEncoding = "mac_greek"
+	CloudWatchLogsEncodingMacIceland    CloudWatchLogsEncoding = "mac_iceland"
+	CloudWatchLogsEncodingMacLatin2     CloudWatchLogsEncoding = "mac_latin2"
+	CloudWatchLogsEncodingMacRoman      CloudWatchLogsEncoding = "mac_roman"
+	CloudWatchLogsEncodingMacTurkish    CloudWatchLogsEncoding = "mac_turkish"
+	CloudWatchLogsEncodingPtcp154       CloudWatchLogsEncoding = "ptcp154"
+	CloudWatchLogsEncodingShiftJis      CloudWatchLogsEncoding = "shift_jis"
+	CloudWatchLogsEncodingShiftJis2004  CloudWatchLogsEncoding = "shift_jis_2004"
+	CloudWatchLogsEncodingShiftJisx0213 CloudWatchLogsEncoding = "shift_jisx0213"
+	CloudWatchLogsEncodingUtf32         CloudWatchLogsEncoding = "utf_32"
+	CloudWatchLogsEncodingUtf32Be       CloudWatchLogsEncoding = "utf_32_be"
+	CloudWatchLogsEncodingUtf32Le       CloudWatchLogsEncoding = "utf_32_le"
+	CloudWatchLogsEncodingUtf16         CloudWatchLogsEncoding = "utf_16"
+	CloudWatchLogsEncodingUtf16Be       CloudWatchLogsEncoding = "utf_16_be"
+	CloudWatchLogsEncodingUtf16Le       CloudWatchLogsEncoding = "utf_16_le"
+	CloudWatchLogsEncodingUtf7          CloudWatchLogsEncoding = "utf_7"
+	CloudWatchLogsEncodingUtf8          CloudWatchLogsEncoding = "utf_8"
+	CloudWatchLogsEncodingUtf8Sig       CloudWatchLogsEncoding = "utf_8_sig"
 )
 
 // Specifies where to start to read data (start_of_file or end_of_file). The
 // default is start_of_file. It's only used if there is no state persisted for
 // that log stream.
-const (
-	// CloudWatchLogsInitialPositionStartOfFile is a CloudWatchLogsInitialPosition enum value
-	CloudWatchLogsInitialPositionStartOfFile = "start_of_file"
+type CloudWatchLogsInitialPosition string
 
-	// CloudWatchLogsInitialPositionEndOfFile is a CloudWatchLogsInitialPosition enum value
-	CloudWatchLogsInitialPositionEndOfFile = "end_of_file"
+// Enum values for CloudWatchLogsInitialPosition
+const (
+	CloudWatchLogsInitialPositionStartOfFile CloudWatchLogsInitialPosition = "start_of_file"
+	CloudWatchLogsInitialPositionEndOfFile   CloudWatchLogsInitialPosition = "end_of_file"
 )
 
 // The preferred time zone for logs streamed to CloudWatch Logs. Valid values
 // are LOCAL and UTC, for Coordinated Universal Time.
-const (
-	// CloudWatchLogsTimeZoneLocal is a CloudWatchLogsTimeZone enum value
-	CloudWatchLogsTimeZoneLocal = "LOCAL"
+type CloudWatchLogsTimeZone string
 
-	// CloudWatchLogsTimeZoneUtc is a CloudWatchLogsTimeZone enum value
-	CloudWatchLogsTimeZoneUtc = "UTC"
+// Enum values for CloudWatchLogsTimeZone
+const (
+	CloudWatchLogsTimeZoneLocal CloudWatchLogsTimeZone = "LOCAL"
+	CloudWatchLogsTimeZoneUtc   CloudWatchLogsTimeZone = "UTC"
 )
 
+type DeploymentCommandName string
+
+// Enum values for DeploymentCommandName
 const (
-	// DeploymentCommandNameInstallDependencies is a DeploymentCommandName enum value
-	DeploymentCommandNameInstallDependencies = "install_dependencies"
-
-	// DeploymentCommandNameUpdateDependencies is a DeploymentCommandName enum value
-	DeploymentCommandNameUpdateDependencies = "update_dependencies"
-
-	// DeploymentCommandNameUpdateCustomCookbooks is a DeploymentCommandName enum value
-	DeploymentCommandNameUpdateCustomCookbooks = "update_custom_cookbooks"
-
-	// DeploymentCommandNameExecuteRecipes is a DeploymentCommandName enum value
-	DeploymentCommandNameExecuteRecipes = "execute_recipes"
-
-	// DeploymentCommandNameConfigure is a DeploymentCommandName enum value
-	DeploymentCommandNameConfigure = "configure"
-
-	// DeploymentCommandNameSetup is a DeploymentCommandName enum value
-	DeploymentCommandNameSetup = "setup"
-
-	// DeploymentCommandNameDeploy is a DeploymentCommandName enum value
-	DeploymentCommandNameDeploy = "deploy"
-
-	// DeploymentCommandNameRollback is a DeploymentCommandName enum value
-	DeploymentCommandNameRollback = "rollback"
-
-	// DeploymentCommandNameStart is a DeploymentCommandName enum value
-	DeploymentCommandNameStart = "start"
-
-	// DeploymentCommandNameStop is a DeploymentCommandName enum value
-	DeploymentCommandNameStop = "stop"
-
-	// DeploymentCommandNameRestart is a DeploymentCommandName enum value
-	DeploymentCommandNameRestart = "restart"
-
-	// DeploymentCommandNameUndeploy is a DeploymentCommandName enum value
-	DeploymentCommandNameUndeploy = "undeploy"
+	DeploymentCommandNameInstallDependencies   DeploymentCommandName = "install_dependencies"
+	DeploymentCommandNameUpdateDependencies    DeploymentCommandName = "update_dependencies"
+	DeploymentCommandNameUpdateCustomCookbooks DeploymentCommandName = "update_custom_cookbooks"
+	DeploymentCommandNameExecuteRecipes        DeploymentCommandName = "execute_recipes"
+	DeploymentCommandNameConfigure             DeploymentCommandName = "configure"
+	DeploymentCommandNameSetup                 DeploymentCommandName = "setup"
+	DeploymentCommandNameDeploy                DeploymentCommandName = "deploy"
+	DeploymentCommandNameRollback              DeploymentCommandName = "rollback"
+	DeploymentCommandNameStart                 DeploymentCommandName = "start"
+	DeploymentCommandNameStop                  DeploymentCommandName = "stop"
+	DeploymentCommandNameRestart               DeploymentCommandName = "restart"
+	DeploymentCommandNameUndeploy              DeploymentCommandName = "undeploy"
 )
 
+type LayerAttributesKeys string
+
+// Enum values for LayerAttributesKeys
 const (
-	// LayerAttributesKeysEcsClusterArn is a LayerAttributesKeys enum value
-	LayerAttributesKeysEcsClusterArn = "EcsClusterArn"
-
-	// LayerAttributesKeysEnableHaproxyStats is a LayerAttributesKeys enum value
-	LayerAttributesKeysEnableHaproxyStats = "EnableHaproxyStats"
-
-	// LayerAttributesKeysHaproxyStatsUrl is a LayerAttributesKeys enum value
-	LayerAttributesKeysHaproxyStatsUrl = "HaproxyStatsUrl"
-
-	// LayerAttributesKeysHaproxyStatsUser is a LayerAttributesKeys enum value
-	LayerAttributesKeysHaproxyStatsUser = "HaproxyStatsUser"
-
-	// LayerAttributesKeysHaproxyStatsPassword is a LayerAttributesKeys enum value
-	LayerAttributesKeysHaproxyStatsPassword = "HaproxyStatsPassword"
-
-	// LayerAttributesKeysHaproxyHealthCheckUrl is a LayerAttributesKeys enum value
-	LayerAttributesKeysHaproxyHealthCheckUrl = "HaproxyHealthCheckUrl"
-
-	// LayerAttributesKeysHaproxyHealthCheckMethod is a LayerAttributesKeys enum value
-	LayerAttributesKeysHaproxyHealthCheckMethod = "HaproxyHealthCheckMethod"
-
-	// LayerAttributesKeysMysqlRootPassword is a LayerAttributesKeys enum value
-	LayerAttributesKeysMysqlRootPassword = "MysqlRootPassword"
-
-	// LayerAttributesKeysMysqlRootPasswordUbiquitous is a LayerAttributesKeys enum value
-	LayerAttributesKeysMysqlRootPasswordUbiquitous = "MysqlRootPasswordUbiquitous"
-
-	// LayerAttributesKeysGangliaUrl is a LayerAttributesKeys enum value
-	LayerAttributesKeysGangliaUrl = "GangliaUrl"
-
-	// LayerAttributesKeysGangliaUser is a LayerAttributesKeys enum value
-	LayerAttributesKeysGangliaUser = "GangliaUser"
-
-	// LayerAttributesKeysGangliaPassword is a LayerAttributesKeys enum value
-	LayerAttributesKeysGangliaPassword = "GangliaPassword"
-
-	// LayerAttributesKeysMemcachedMemory is a LayerAttributesKeys enum value
-	LayerAttributesKeysMemcachedMemory = "MemcachedMemory"
-
-	// LayerAttributesKeysNodejsVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysNodejsVersion = "NodejsVersion"
-
-	// LayerAttributesKeysRubyVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysRubyVersion = "RubyVersion"
-
-	// LayerAttributesKeysRubygemsVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysRubygemsVersion = "RubygemsVersion"
-
-	// LayerAttributesKeysManageBundler is a LayerAttributesKeys enum value
-	LayerAttributesKeysManageBundler = "ManageBundler"
-
-	// LayerAttributesKeysBundlerVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysBundlerVersion = "BundlerVersion"
-
-	// LayerAttributesKeysRailsStack is a LayerAttributesKeys enum value
-	LayerAttributesKeysRailsStack = "RailsStack"
-
-	// LayerAttributesKeysPassengerVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysPassengerVersion = "PassengerVersion"
-
-	// LayerAttributesKeysJvm is a LayerAttributesKeys enum value
-	LayerAttributesKeysJvm = "Jvm"
-
-	// LayerAttributesKeysJvmVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysJvmVersion = "JvmVersion"
-
-	// LayerAttributesKeysJvmOptions is a LayerAttributesKeys enum value
-	LayerAttributesKeysJvmOptions = "JvmOptions"
-
-	// LayerAttributesKeysJavaAppServer is a LayerAttributesKeys enum value
-	LayerAttributesKeysJavaAppServer = "JavaAppServer"
-
-	// LayerAttributesKeysJavaAppServerVersion is a LayerAttributesKeys enum value
-	LayerAttributesKeysJavaAppServerVersion = "JavaAppServerVersion"
+	LayerAttributesKeysEcsClusterArn               LayerAttributesKeys = "EcsClusterArn"
+	LayerAttributesKeysEnableHaproxyStats          LayerAttributesKeys = "EnableHaproxyStats"
+	LayerAttributesKeysHaproxyStatsUrl             LayerAttributesKeys = "HaproxyStatsUrl"
+	LayerAttributesKeysHaproxyStatsUser            LayerAttributesKeys = "HaproxyStatsUser"
+	LayerAttributesKeysHaproxyStatsPassword        LayerAttributesKeys = "HaproxyStatsPassword"
+	LayerAttributesKeysHaproxyHealthCheckUrl       LayerAttributesKeys = "HaproxyHealthCheckUrl"
+	LayerAttributesKeysHaproxyHealthCheckMethod    LayerAttributesKeys = "HaproxyHealthCheckMethod"
+	LayerAttributesKeysMysqlRootPassword           LayerAttributesKeys = "MysqlRootPassword"
+	LayerAttributesKeysMysqlRootPasswordUbiquitous LayerAttributesKeys = "MysqlRootPasswordUbiquitous"
+	LayerAttributesKeysGangliaUrl                  LayerAttributesKeys = "GangliaUrl"
+	LayerAttributesKeysGangliaUser                 LayerAttributesKeys = "GangliaUser"
+	LayerAttributesKeysGangliaPassword             LayerAttributesKeys = "GangliaPassword"
+	LayerAttributesKeysMemcachedMemory             LayerAttributesKeys = "MemcachedMemory"
+	LayerAttributesKeysNodejsVersion               LayerAttributesKeys = "NodejsVersion"
+	LayerAttributesKeysRubyVersion                 LayerAttributesKeys = "RubyVersion"
+	LayerAttributesKeysRubygemsVersion             LayerAttributesKeys = "RubygemsVersion"
+	LayerAttributesKeysManageBundler               LayerAttributesKeys = "ManageBundler"
+	LayerAttributesKeysBundlerVersion              LayerAttributesKeys = "BundlerVersion"
+	LayerAttributesKeysRailsStack                  LayerAttributesKeys = "RailsStack"
+	LayerAttributesKeysPassengerVersion            LayerAttributesKeys = "PassengerVersion"
+	LayerAttributesKeysJvm                         LayerAttributesKeys = "Jvm"
+	LayerAttributesKeysJvmVersion                  LayerAttributesKeys = "JvmVersion"
+	LayerAttributesKeysJvmOptions                  LayerAttributesKeys = "JvmOptions"
+	LayerAttributesKeysJavaAppServer               LayerAttributesKeys = "JavaAppServer"
+	LayerAttributesKeysJavaAppServerVersion        LayerAttributesKeys = "JavaAppServerVersion"
 )
 
+type LayerType string
+
+// Enum values for LayerType
 const (
-	// LayerTypeAwsFlowRuby is a LayerType enum value
-	LayerTypeAwsFlowRuby = "aws-flow-ruby"
-
-	// LayerTypeEcsCluster is a LayerType enum value
-	LayerTypeEcsCluster = "ecs-cluster"
-
-	// LayerTypeJavaApp is a LayerType enum value
-	LayerTypeJavaApp = "java-app"
-
-	// LayerTypeLb is a LayerType enum value
-	LayerTypeLb = "lb"
-
-	// LayerTypeWeb is a LayerType enum value
-	LayerTypeWeb = "web"
-
-	// LayerTypePhpApp is a LayerType enum value
-	LayerTypePhpApp = "php-app"
-
-	// LayerTypeRailsApp is a LayerType enum value
-	LayerTypeRailsApp = "rails-app"
-
-	// LayerTypeNodejsApp is a LayerType enum value
-	LayerTypeNodejsApp = "nodejs-app"
-
-	// LayerTypeMemcached is a LayerType enum value
-	LayerTypeMemcached = "memcached"
-
-	// LayerTypeDbMaster is a LayerType enum value
-	LayerTypeDbMaster = "db-master"
-
-	// LayerTypeMonitoringMaster is a LayerType enum value
-	LayerTypeMonitoringMaster = "monitoring-master"
-
-	// LayerTypeCustom is a LayerType enum value
-	LayerTypeCustom = "custom"
+	LayerTypeAwsFlowRuby      LayerType = "aws-flow-ruby"
+	LayerTypeEcsCluster       LayerType = "ecs-cluster"
+	LayerTypeJavaApp          LayerType = "java-app"
+	LayerTypeLb               LayerType = "lb"
+	LayerTypeWeb              LayerType = "web"
+	LayerTypePhpApp           LayerType = "php-app"
+	LayerTypeRailsApp         LayerType = "rails-app"
+	LayerTypeNodejsApp        LayerType = "nodejs-app"
+	LayerTypeMemcached        LayerType = "memcached"
+	LayerTypeDbMaster         LayerType = "db-master"
+	LayerTypeMonitoringMaster LayerType = "monitoring-master"
+	LayerTypeCustom           LayerType = "custom"
 )
 
-const (
-	// RootDeviceTypeEbs is a RootDeviceType enum value
-	RootDeviceTypeEbs = "ebs"
+type RootDeviceType string
 
-	// RootDeviceTypeInstanceStore is a RootDeviceType enum value
-	RootDeviceTypeInstanceStore = "instance-store"
+// Enum values for RootDeviceType
+const (
+	RootDeviceTypeEbs           RootDeviceType = "ebs"
+	RootDeviceTypeInstanceStore RootDeviceType = "instance-store"
 )
 
+type SourceType string
+
+// Enum values for SourceType
 const (
-	// SourceTypeGit is a SourceType enum value
-	SourceTypeGit = "git"
-
-	// SourceTypeSvn is a SourceType enum value
-	SourceTypeSvn = "svn"
-
-	// SourceTypeArchive is a SourceType enum value
-	SourceTypeArchive = "archive"
-
-	// SourceTypeS3 is a SourceType enum value
-	SourceTypeS3 = "s3"
+	SourceTypeGit     SourceType = "git"
+	SourceTypeSvn     SourceType = "svn"
+	SourceTypeArchive SourceType = "archive"
+	SourceTypeS3      SourceType = "s3"
 )
 
+type StackAttributesKeys string
+
+// Enum values for StackAttributesKeys
 const (
-	// StackAttributesKeysColor is a StackAttributesKeys enum value
-	StackAttributesKeysColor = "Color"
+	StackAttributesKeysColor StackAttributesKeys = "Color"
 )
 
-const (
-	// VirtualizationTypeParavirtual is a VirtualizationType enum value
-	VirtualizationTypeParavirtual = "paravirtual"
+type VirtualizationType string
 
-	// VirtualizationTypeHvm is a VirtualizationType enum value
-	VirtualizationTypeHvm = "hvm"
+// Enum values for VirtualizationType
+const (
+	VirtualizationTypeParavirtual VirtualizationType = "paravirtual"
+	VirtualizationTypeHvm         VirtualizationType = "hvm"
 )
 
+type VolumeType string
+
+// Enum values for VolumeType
 const (
-	// VolumeTypeGp2 is a VolumeType enum value
-	VolumeTypeGp2 = "gp2"
-
-	// VolumeTypeIo1 is a VolumeType enum value
-	VolumeTypeIo1 = "io1"
-
-	// VolumeTypeStandard is a VolumeType enum value
-	VolumeTypeStandard = "standard"
+	VolumeTypeGp2      VolumeType = "gp2"
+	VolumeTypeIo1      VolumeType = "io1"
+	VolumeTypeStandard VolumeType = "standard"
 )

@@ -4022,12 +4022,14 @@ func (s *AbortDocumentVersionUploadInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -4104,6 +4106,7 @@ func (s *ActivateUserInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -4184,7 +4187,7 @@ type Activity struct {
 	TimeStamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The activity type.
-	Type *string `type:"string" enum:"ActivityType"`
+	Type ActivityType `type:"string"`
 }
 
 // String returns the string representation
@@ -4240,8 +4243,8 @@ func (s *Activity) SetTimeStamp(v time.Time) *Activity {
 }
 
 // SetType sets the Type field's value.
-func (s *Activity) SetType(v string) *Activity {
-	s.Type = &v
+func (s *Activity) SetType(v ActivityType) *Activity {
+	s.Type = v
 	return s
 }
 
@@ -4280,9 +4283,11 @@ func (s *AddResourcePermissionsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.Principals == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principals"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -4372,7 +4377,7 @@ type Comment struct {
 	RecipientId *string `min:"1" type:"string"`
 
 	// The status of the comment.
-	Status *string `type:"string" enum:"CommentStatusType"`
+	Status CommentStatusType `type:"string"`
 
 	// The text of the comment.
 	Text *string `min:"1" type:"string"`
@@ -4383,7 +4388,7 @@ type Comment struct {
 	// The visibility of the comment. Options are either PRIVATE, where the comment
 	// is visible only to the comment author and document owner and co-owners, or
 	// PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
-	Visibility *string `type:"string" enum:"CommentVisibilityType"`
+	Visibility CommentVisibilityType `type:"string"`
 }
 
 // String returns the string representation
@@ -4427,8 +4432,8 @@ func (s *Comment) SetRecipientId(v string) *Comment {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Comment) SetStatus(v string) *Comment {
-	s.Status = &v
+func (s *Comment) SetStatus(v CommentStatusType) *Comment {
+	s.Status = v
 	return s
 }
 
@@ -4445,8 +4450,8 @@ func (s *Comment) SetThreadId(v string) *Comment {
 }
 
 // SetVisibility sets the Visibility field's value.
-func (s *Comment) SetVisibility(v string) *Comment {
-	s.Visibility = &v
+func (s *Comment) SetVisibility(v CommentVisibilityType) *Comment {
+	s.Visibility = v
 	return s
 }
 
@@ -4458,7 +4463,7 @@ type CommentMetadata struct {
 	// The ID of the comment.
 	CommentId *string `min:"1" type:"string"`
 
-	CommentStatus *string `type:"string" enum:"CommentStatusType"`
+	CommentStatus CommentStatusType `type:"string"`
 
 	// The user who made the comment.
 	Contributor *User `type:"structure"`
@@ -4486,8 +4491,8 @@ func (s *CommentMetadata) SetCommentId(v string) *CommentMetadata {
 }
 
 // SetCommentStatus sets the CommentStatus field's value.
-func (s *CommentMetadata) SetCommentStatus(v string) *CommentMetadata {
-	s.CommentStatus = &v
+func (s *CommentMetadata) SetCommentStatus(v CommentStatusType) *CommentMetadata {
+	s.CommentStatus = v
 	return s
 }
 
@@ -4545,7 +4550,7 @@ type CreateCommentInput struct {
 	// The visibility of the comment. Options are either PRIVATE, where the comment
 	// is visible only to the comment author and document owner and co-owners, or
 	// PUBLIC, where the comment is visible to document owners, co-owners, and contributors.
-	Visibility *string `type:"string" enum:"CommentVisibilityType"`
+	Visibility CommentVisibilityType `type:"string"`
 }
 
 // String returns the string representation
@@ -4564,6 +4569,7 @@ func (s *CreateCommentInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -4573,6 +4579,7 @@ func (s *CreateCommentInput) Validate() error {
 	if s.ParentId != nil && len(*s.ParentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ParentId", 1))
 	}
+
 	if s.Text == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Text"))
 	}
@@ -4582,6 +4589,7 @@ func (s *CreateCommentInput) Validate() error {
 	if s.ThreadId != nil && len(*s.ThreadId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ThreadId", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -4638,8 +4646,8 @@ func (s *CreateCommentInput) SetVersionId(v string) *CreateCommentInput {
 }
 
 // SetVisibility sets the Visibility field's value.
-func (s *CreateCommentInput) SetVisibility(v string) *CreateCommentInput {
-	s.Visibility = &v
+func (s *CreateCommentInput) SetVisibility(v CommentVisibilityType) *CreateCommentInput {
+	s.Visibility = v
 	return s
 }
 
@@ -4706,12 +4714,14 @@ func (s *CreateCustomMetadataInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.CustomMetadata == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CustomMetadata"))
 	}
 	if s.CustomMetadata != nil && len(s.CustomMetadata) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CustomMetadata", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -4803,6 +4813,7 @@ func (s *CreateFolderInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.ParentFolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
 	}
@@ -4893,9 +4904,11 @@ func (s *CreateLabelsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.Labels == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Labels"))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -4961,12 +4974,12 @@ type CreateNotificationSubscriptionInput struct {
 	// messasges using HTTPS POST.
 	//
 	// Protocol is a required field
-	Protocol *string `type:"string" required:"true" enum:"SubscriptionProtocolType"`
+	Protocol SubscriptionProtocolType `type:"string" required:"true"`
 
 	// The notification type.
 	//
 	// SubscriptionType is a required field
-	SubscriptionType *string `type:"string" required:"true" enum:"SubscriptionType"`
+	SubscriptionType SubscriptionType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4982,22 +4995,24 @@ func (s CreateNotificationSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNotificationSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateNotificationSubscriptionInput"}
+
 	if s.Endpoint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
 	}
 	if s.Endpoint != nil && len(*s.Endpoint) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Endpoint", 1))
 	}
+
 	if s.OrganizationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
-	if s.Protocol == nil {
+	if len(s.Protocol) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
-	if s.SubscriptionType == nil {
+	if len(s.SubscriptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
@@ -5020,14 +5035,14 @@ func (s *CreateNotificationSubscriptionInput) SetOrganizationId(v string) *Creat
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *CreateNotificationSubscriptionInput) SetProtocol(v string) *CreateNotificationSubscriptionInput {
-	s.Protocol = &v
+func (s *CreateNotificationSubscriptionInput) SetProtocol(v SubscriptionProtocolType) *CreateNotificationSubscriptionInput {
+	s.Protocol = v
 	return s
 }
 
 // SetSubscriptionType sets the SubscriptionType field's value.
-func (s *CreateNotificationSubscriptionInput) SetSubscriptionType(v string) *CreateNotificationSubscriptionInput {
-	s.SubscriptionType = &v
+func (s *CreateNotificationSubscriptionInput) SetSubscriptionType(v SubscriptionType) *CreateNotificationSubscriptionInput {
+	s.SubscriptionType = v
 	return s
 }
 
@@ -5115,6 +5130,7 @@ func (s *CreateUserInput) Validate() error {
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 1))
 	}
+
 	if s.GivenName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("GivenName"))
 	}
@@ -5124,12 +5140,14 @@ func (s *CreateUserInput) Validate() error {
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
+
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 4 {
 		invalidParams.Add(aws.NewErrParamMinLen("Password", 4))
 	}
+
 	if s.Surname == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Surname"))
 	}
@@ -5139,6 +5157,7 @@ func (s *CreateUserInput) Validate() error {
 	if s.TimeZoneId != nil && len(*s.TimeZoneId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TimeZoneId", 1))
 	}
+
 	if s.Username == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
@@ -5260,6 +5279,7 @@ func (s *DeactivateUserInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -5340,18 +5360,21 @@ func (s *DeleteCommentInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.CommentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CommentId"))
 	}
 	if s.CommentId != nil && len(*s.CommentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CommentId", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -5445,6 +5468,7 @@ func (s *DeleteCustomMetadataInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -5536,6 +5560,7 @@ func (s *DeleteDocumentInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -5606,6 +5631,7 @@ func (s *DeleteFolderContentsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -5676,6 +5702,7 @@ func (s *DeleteFolderInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -5752,6 +5779,7 @@ func (s *DeleteLabelsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -5832,12 +5860,14 @@ func (s DeleteNotificationSubscriptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNotificationSubscriptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationSubscriptionInput"}
+
 	if s.OrganizationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
+
 	if s.SubscriptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionId"))
 	}
@@ -5908,6 +5938,7 @@ func (s *DeleteUserInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -6133,6 +6164,7 @@ func (s *DescribeCommentsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -6145,6 +6177,7 @@ func (s *DescribeCommentsInput) Validate() error {
 	if s.Marker != nil && len(*s.Marker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -6267,6 +6300,7 @@ func (s *DescribeDocumentVersionsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -6386,13 +6420,13 @@ type DescribeFolderContentsInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 
 	// The order for the contents of the folder.
-	Order *string `location:"querystring" locationName:"order" type:"string" enum:"OrderType"`
+	Order OrderType `location:"querystring" locationName:"order" type:"string"`
 
 	// The sorting criteria.
-	Sort *string `location:"querystring" locationName:"sort" type:"string" enum:"ResourceSortType"`
+	Sort ResourceSortType `location:"querystring" locationName:"sort" type:"string"`
 
 	// The type of items.
-	Type *string `location:"querystring" locationName:"type" type:"string" enum:"FolderContentType"`
+	Type FolderContentType `location:"querystring" locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -6411,6 +6445,7 @@ func (s *DescribeFolderContentsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -6464,20 +6499,20 @@ func (s *DescribeFolderContentsInput) SetMarker(v string) *DescribeFolderContent
 }
 
 // SetOrder sets the Order field's value.
-func (s *DescribeFolderContentsInput) SetOrder(v string) *DescribeFolderContentsInput {
-	s.Order = &v
+func (s *DescribeFolderContentsInput) SetOrder(v OrderType) *DescribeFolderContentsInput {
+	s.Order = v
 	return s
 }
 
 // SetSort sets the Sort field's value.
-func (s *DescribeFolderContentsInput) SetSort(v string) *DescribeFolderContentsInput {
-	s.Sort = &v
+func (s *DescribeFolderContentsInput) SetSort(v ResourceSortType) *DescribeFolderContentsInput {
+	s.Sort = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *DescribeFolderContentsInput) SetType(v string) *DescribeFolderContentsInput {
-	s.Type = &v
+func (s *DescribeFolderContentsInput) SetType(v FolderContentType) *DescribeFolderContentsInput {
+	s.Type = v
 	return s
 }
 
@@ -6560,6 +6595,7 @@ func (s *DescribeNotificationSubscriptionsInput) Validate() error {
 	if s.Marker != nil && len(*s.Marker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
+
 	if s.OrganizationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
@@ -6668,6 +6704,7 @@ func (s *DescribeResourcePermissionsInput) Validate() error {
 	if s.Marker != nil && len(*s.Marker) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -6770,6 +6807,7 @@ func (s DescribeRootFoldersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRootFoldersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRootFoldersInput"}
+
 	if s.AuthenticationToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
 	}
@@ -6853,7 +6891,7 @@ type DescribeUsersInput struct {
 	Fields *string `location:"querystring" locationName:"fields" min:"1" type:"string"`
 
 	// The state of the users. Specify "ALL" to include inactive users.
-	Include *string `location:"querystring" locationName:"include" type:"string" enum:"UserFilterType"`
+	Include UserFilterType `location:"querystring" locationName:"include" type:"string"`
 
 	// The maximum number of items to return.
 	Limit *int64 `location:"querystring" locationName:"limit" min:"1" type:"integer"`
@@ -6863,7 +6901,7 @@ type DescribeUsersInput struct {
 	Marker *string `location:"querystring" locationName:"marker" min:"1" type:"string"`
 
 	// The order for the results.
-	Order *string `location:"querystring" locationName:"order" type:"string" enum:"OrderType"`
+	Order OrderType `location:"querystring" locationName:"order" type:"string"`
 
 	// The ID of the organization.
 	OrganizationId *string `location:"querystring" locationName:"organizationId" min:"1" type:"string"`
@@ -6872,7 +6910,7 @@ type DescribeUsersInput struct {
 	Query *string `location:"querystring" locationName:"query" min:"1" type:"string"`
 
 	// The sorting criteria.
-	Sort *string `location:"querystring" locationName:"sort" type:"string" enum:"UserSortType"`
+	Sort UserSortType `location:"querystring" locationName:"sort" type:"string"`
 
 	// The IDs of the users.
 	UserIds *string `location:"querystring" locationName:"userIds" min:"1" type:"string"`
@@ -6932,8 +6970,8 @@ func (s *DescribeUsersInput) SetFields(v string) *DescribeUsersInput {
 }
 
 // SetInclude sets the Include field's value.
-func (s *DescribeUsersInput) SetInclude(v string) *DescribeUsersInput {
-	s.Include = &v
+func (s *DescribeUsersInput) SetInclude(v UserFilterType) *DescribeUsersInput {
+	s.Include = v
 	return s
 }
 
@@ -6950,8 +6988,8 @@ func (s *DescribeUsersInput) SetMarker(v string) *DescribeUsersInput {
 }
 
 // SetOrder sets the Order field's value.
-func (s *DescribeUsersInput) SetOrder(v string) *DescribeUsersInput {
-	s.Order = &v
+func (s *DescribeUsersInput) SetOrder(v OrderType) *DescribeUsersInput {
+	s.Order = v
 	return s
 }
 
@@ -6968,8 +7006,8 @@ func (s *DescribeUsersInput) SetQuery(v string) *DescribeUsersInput {
 }
 
 // SetSort sets the Sort field's value.
-func (s *DescribeUsersInput) SetSort(v string) *DescribeUsersInput {
-	s.Sort = &v
+func (s *DescribeUsersInput) SetSort(v UserSortType) *DescribeUsersInput {
+	s.Sort = v
 	return s
 }
 
@@ -7049,7 +7087,7 @@ type DocumentMetadata struct {
 	ParentFolderId *string `min:"1" type:"string"`
 
 	// The resource state.
-	ResourceState *string `type:"string" enum:"ResourceStateType"`
+	ResourceState ResourceStateType `type:"string"`
 }
 
 // String returns the string representation
@@ -7105,8 +7143,8 @@ func (s *DocumentMetadata) SetParentFolderId(v string) *DocumentMetadata {
 }
 
 // SetResourceState sets the ResourceState field's value.
-func (s *DocumentMetadata) SetResourceState(v string) *DocumentMetadata {
-	s.ResourceState = &v
+func (s *DocumentMetadata) SetResourceState(v ResourceStateType) *DocumentMetadata {
+	s.ResourceState = v
 	return s
 }
 
@@ -7149,7 +7187,7 @@ type DocumentVersionMetadata struct {
 	Source map[string]*string `type:"map"`
 
 	// The status of the document.
-	Status *string `type:"string" enum:"DocumentStatusType"`
+	Status DocumentStatusType `type:"string"`
 
 	// The thumbnail of the document.
 	Thumbnail map[string]*string `type:"map"`
@@ -7232,8 +7270,8 @@ func (s *DocumentVersionMetadata) SetSource(v map[string]*string) *DocumentVersi
 }
 
 // SetStatus sets the Status field's value.
-func (s *DocumentVersionMetadata) SetStatus(v string) *DocumentVersionMetadata {
-	s.Status = &v
+func (s *DocumentVersionMetadata) SetStatus(v DocumentStatusType) *DocumentVersionMetadata {
+	s.Status = v
 	return s
 }
 
@@ -7273,7 +7311,7 @@ type FolderMetadata struct {
 	ParentFolderId *string `min:"1" type:"string"`
 
 	// The resource state of the folder.
-	ResourceState *string `type:"string" enum:"ResourceStateType"`
+	ResourceState ResourceStateType `type:"string"`
 
 	// The unique identifier created from the subfolders and documents of the folder.
 	Signature *string `type:"string"`
@@ -7341,8 +7379,8 @@ func (s *FolderMetadata) SetParentFolderId(v string) *FolderMetadata {
 }
 
 // SetResourceState sets the ResourceState field's value.
-func (s *FolderMetadata) SetResourceState(v string) *FolderMetadata {
-	s.ResourceState = &v
+func (s *FolderMetadata) SetResourceState(v ResourceStateType) *FolderMetadata {
+	s.ResourceState = v
 	return s
 }
 
@@ -7381,6 +7419,7 @@ func (s GetCurrentUserInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCurrentUserInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCurrentUserInput"}
+
 	if s.AuthenticationToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
 	}
@@ -7457,6 +7496,7 @@ func (s *GetDocumentInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -7561,6 +7601,7 @@ func (s *GetDocumentPathInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -7679,6 +7720,7 @@ func (s *GetDocumentVersionInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -7688,6 +7730,7 @@ func (s *GetDocumentVersionInput) Validate() error {
 	if s.Fields != nil && len(*s.Fields) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -7797,6 +7840,7 @@ func (s *GetFolderInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -7904,6 +7948,7 @@ func (s *GetFolderPathInput) Validate() error {
 	if s.Fields != nil && len(*s.Fields) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -8068,6 +8113,7 @@ func (s *InitiateDocumentVersionUploadInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.ParentFolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
 	}
@@ -8202,10 +8248,10 @@ type PermissionInfo struct {
 	_ struct{} `type:"structure"`
 
 	// The role of the user.
-	Role *string `type:"string" enum:"RoleType"`
+	Role RoleType `type:"string"`
 
 	// The type of permissions.
-	Type *string `type:"string" enum:"RolePermissionType"`
+	Type RolePermissionType `type:"string"`
 }
 
 // String returns the string representation
@@ -8219,14 +8265,14 @@ func (s PermissionInfo) GoString() string {
 }
 
 // SetRole sets the Role field's value.
-func (s *PermissionInfo) SetRole(v string) *PermissionInfo {
-	s.Role = &v
+func (s *PermissionInfo) SetRole(v RoleType) *PermissionInfo {
+	s.Role = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *PermissionInfo) SetType(v string) *PermissionInfo {
-	s.Type = &v
+func (s *PermissionInfo) SetType(v RolePermissionType) *PermissionInfo {
+	s.Type = v
 	return s
 }
 
@@ -8242,7 +8288,7 @@ type Principal struct {
 	Roles []*PermissionInfo `type:"list"`
 
 	// The type of resource.
-	Type *string `type:"string" enum:"PrincipalType"`
+	Type PrincipalType `type:"string"`
 }
 
 // String returns the string representation
@@ -8268,8 +8314,8 @@ func (s *Principal) SetRoles(v []*PermissionInfo) *Principal {
 }
 
 // SetType sets the Type field's value.
-func (s *Principal) SetType(v string) *Principal {
-	s.Type = &v
+func (s *Principal) SetType(v PrincipalType) *Principal {
+	s.Type = v
 	return s
 }
 
@@ -8303,6 +8349,7 @@ func (s *RemoveAllResourcePermissionsInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -8357,7 +8404,7 @@ type RemoveResourcePermissionInput struct {
 	PrincipalId *string `location:"uri" locationName:"PrincipalId" min:"1" type:"string" required:"true"`
 
 	// The principal type of the resource.
-	PrincipalType *string `location:"querystring" locationName:"type" type:"string" enum:"PrincipalType"`
+	PrincipalType PrincipalType `location:"querystring" locationName:"type" type:"string"`
 
 	// The ID of the resource.
 	//
@@ -8381,12 +8428,14 @@ func (s *RemoveResourcePermissionInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.PrincipalId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalId"))
 	}
 	if s.PrincipalId != nil && len(*s.PrincipalId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PrincipalId", 1))
 	}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
@@ -8413,8 +8462,8 @@ func (s *RemoveResourcePermissionInput) SetPrincipalId(v string) *RemoveResource
 }
 
 // SetPrincipalType sets the PrincipalType field's value.
-func (s *RemoveResourcePermissionInput) SetPrincipalType(v string) *RemoveResourcePermissionInput {
-	s.PrincipalType = &v
+func (s *RemoveResourcePermissionInput) SetPrincipalType(v PrincipalType) *RemoveResourcePermissionInput {
+	s.PrincipalType = v
 	return s
 }
 
@@ -8460,7 +8509,7 @@ type ResourceMetadata struct {
 	ParentId *string `min:"1" type:"string"`
 
 	// The type of resource.
-	Type *string `type:"string" enum:"ResourceType"`
+	Type ResourceType `type:"string"`
 
 	// The version ID of the resource. This is an optional field and is filled for
 	// action on document version.
@@ -8508,8 +8557,8 @@ func (s *ResourceMetadata) SetParentId(v string) *ResourceMetadata {
 }
 
 // SetType sets the Type field's value.
-func (s *ResourceMetadata) SetType(v string) *ResourceMetadata {
-	s.Type = &v
+func (s *ResourceMetadata) SetType(v ResourceType) *ResourceMetadata {
+	s.Type = v
 	return s
 }
 
@@ -8591,12 +8640,12 @@ type SharePrincipal struct {
 	// The role of the recipient.
 	//
 	// Role is a required field
-	Role *string `type:"string" required:"true" enum:"RoleType"`
+	Role RoleType `type:"string" required:"true"`
 
 	// The type of the recipient.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"PrincipalType"`
+	Type PrincipalType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8612,16 +8661,17 @@ func (s SharePrincipal) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SharePrincipal) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SharePrincipal"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
-	if s.Role == nil {
+	if len(s.Role) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -8638,14 +8688,14 @@ func (s *SharePrincipal) SetId(v string) *SharePrincipal {
 }
 
 // SetRole sets the Role field's value.
-func (s *SharePrincipal) SetRole(v string) *SharePrincipal {
-	s.Role = &v
+func (s *SharePrincipal) SetRole(v RoleType) *SharePrincipal {
+	s.Role = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *SharePrincipal) SetType(v string) *SharePrincipal {
-	s.Type = &v
+func (s *SharePrincipal) SetType(v PrincipalType) *SharePrincipal {
+	s.Type = v
 	return s
 }
 
@@ -8658,13 +8708,13 @@ type ShareResult struct {
 	PrincipalId *string `min:"1" type:"string"`
 
 	// The role.
-	Role *string `type:"string" enum:"RoleType"`
+	Role RoleType `type:"string"`
 
 	// The ID of the resource that was shared.
 	ShareId *string `min:"1" type:"string"`
 
 	// The status.
-	Status *string `type:"string" enum:"ShareStatusType"`
+	Status ShareStatusType `type:"string"`
 
 	// The status message.
 	StatusMessage *string `type:"string"`
@@ -8687,8 +8737,8 @@ func (s *ShareResult) SetPrincipalId(v string) *ShareResult {
 }
 
 // SetRole sets the Role field's value.
-func (s *ShareResult) SetRole(v string) *ShareResult {
-	s.Role = &v
+func (s *ShareResult) SetRole(v RoleType) *ShareResult {
+	s.Role = v
 	return s
 }
 
@@ -8699,8 +8749,8 @@ func (s *ShareResult) SetShareId(v string) *ShareResult {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ShareResult) SetStatus(v string) *ShareResult {
-	s.Status = &v
+func (s *ShareResult) SetStatus(v ShareStatusType) *ShareResult {
+	s.Status = v
 	return s
 }
 
@@ -8719,7 +8769,7 @@ type StorageRuleType struct {
 	StorageAllocatedInBytes *int64 `type:"long"`
 
 	// The type of storage.
-	StorageType *string `type:"string" enum:"StorageType"`
+	StorageType StorageType `type:"string"`
 }
 
 // String returns the string representation
@@ -8739,8 +8789,8 @@ func (s *StorageRuleType) SetStorageAllocatedInBytes(v int64) *StorageRuleType {
 }
 
 // SetStorageType sets the StorageType field's value.
-func (s *StorageRuleType) SetStorageType(v string) *StorageRuleType {
-	s.StorageType = &v
+func (s *StorageRuleType) SetStorageType(v StorageType) *StorageRuleType {
+	s.StorageType = v
 	return s
 }
 
@@ -8753,7 +8803,7 @@ type Subscription struct {
 	EndPoint *string `min:"1" type:"string"`
 
 	// The protocol of the subscription.
-	Protocol *string `type:"string" enum:"SubscriptionProtocolType"`
+	Protocol SubscriptionProtocolType `type:"string"`
 
 	// The ID of the subscription.
 	SubscriptionId *string `min:"1" type:"string"`
@@ -8776,8 +8826,8 @@ func (s *Subscription) SetEndPoint(v string) *Subscription {
 }
 
 // SetProtocol sets the Protocol field's value.
-func (s *Subscription) SetProtocol(v string) *Subscription {
-	s.Protocol = &v
+func (s *Subscription) SetProtocol(v SubscriptionProtocolType) *Subscription {
+	s.Protocol = v
 	return s
 }
 
@@ -8808,7 +8858,7 @@ type UpdateDocumentInput struct {
 
 	// The resource state of the document. Note that only ACTIVE and RECYCLED are
 	// supported.
-	ResourceState *string `type:"string" enum:"ResourceStateType"`
+	ResourceState ResourceStateType `type:"string"`
 }
 
 // String returns the string representation
@@ -8827,6 +8877,7 @@ func (s *UpdateDocumentInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
@@ -8871,8 +8922,8 @@ func (s *UpdateDocumentInput) SetParentFolderId(v string) *UpdateDocumentInput {
 }
 
 // SetResourceState sets the ResourceState field's value.
-func (s *UpdateDocumentInput) SetResourceState(v string) *UpdateDocumentInput {
-	s.ResourceState = &v
+func (s *UpdateDocumentInput) SetResourceState(v ResourceStateType) *UpdateDocumentInput {
+	s.ResourceState = v
 	return s
 }
 
@@ -8910,7 +8961,7 @@ type UpdateDocumentVersionInput struct {
 	VersionId *string `location:"uri" locationName:"VersionId" min:"1" type:"string" required:"true"`
 
 	// The status of the version.
-	VersionStatus *string `type:"string" enum:"DocumentVersionStatus"`
+	VersionStatus DocumentVersionStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -8929,12 +8980,14 @@ func (s *UpdateDocumentVersionInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.DocumentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
+
 	if s.VersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
@@ -8967,8 +9020,8 @@ func (s *UpdateDocumentVersionInput) SetVersionId(v string) *UpdateDocumentVersi
 }
 
 // SetVersionStatus sets the VersionStatus field's value.
-func (s *UpdateDocumentVersionInput) SetVersionStatus(v string) *UpdateDocumentVersionInput {
-	s.VersionStatus = &v
+func (s *UpdateDocumentVersionInput) SetVersionStatus(v DocumentVersionStatus) *UpdateDocumentVersionInput {
+	s.VersionStatus = v
 	return s
 }
 
@@ -9008,7 +9061,7 @@ type UpdateFolderInput struct {
 
 	// The resource state of the folder. Note that only ACTIVE and RECYCLED are
 	// accepted values from the API.
-	ResourceState *string `type:"string" enum:"ResourceStateType"`
+	ResourceState ResourceStateType `type:"string"`
 }
 
 // String returns the string representation
@@ -9027,6 +9080,7 @@ func (s *UpdateFolderInput) Validate() error {
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
+
 	if s.FolderId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
@@ -9071,8 +9125,8 @@ func (s *UpdateFolderInput) SetParentFolderId(v string) *UpdateFolderInput {
 }
 
 // SetResourceState sets the ResourceState field's value.
-func (s *UpdateFolderInput) SetResourceState(v string) *UpdateFolderInput {
-	s.ResourceState = &v
+func (s *UpdateFolderInput) SetResourceState(v ResourceStateType) *UpdateFolderInput {
+	s.ResourceState = v
 	return s
 }
 
@@ -9103,7 +9157,7 @@ type UpdateUserInput struct {
 	GivenName *string `min:"1" type:"string"`
 
 	// The locale of the user.
-	Locale *string `type:"string" enum:"LocaleType"`
+	Locale LocaleType `type:"string"`
 
 	// The amount of storage for the user.
 	StorageRule *StorageRuleType `type:"structure"`
@@ -9115,7 +9169,7 @@ type UpdateUserInput struct {
 	TimeZoneId *string `min:"1" type:"string"`
 
 	// The type of the user.
-	Type *string `type:"string" enum:"UserType"`
+	Type UserType `type:"string"`
 
 	// The ID of the user.
 	//
@@ -9148,6 +9202,7 @@ func (s *UpdateUserInput) Validate() error {
 	if s.TimeZoneId != nil && len(*s.TimeZoneId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TimeZoneId", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -9174,8 +9229,8 @@ func (s *UpdateUserInput) SetGivenName(v string) *UpdateUserInput {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *UpdateUserInput) SetLocale(v string) *UpdateUserInput {
-	s.Locale = &v
+func (s *UpdateUserInput) SetLocale(v LocaleType) *UpdateUserInput {
+	s.Locale = v
 	return s
 }
 
@@ -9198,8 +9253,8 @@ func (s *UpdateUserInput) SetTimeZoneId(v string) *UpdateUserInput {
 }
 
 // SetType sets the Type field's value.
-func (s *UpdateUserInput) SetType(v string) *UpdateUserInput {
-	s.Type = &v
+func (s *UpdateUserInput) SetType(v UserType) *UpdateUserInput {
+	s.Type = v
 	return s
 }
 
@@ -9285,7 +9340,7 @@ type User struct {
 	Id *string `min:"1" type:"string"`
 
 	// The locale of the user.
-	Locale *string `type:"string" enum:"LocaleType"`
+	Locale LocaleType `type:"string"`
 
 	// The time when the user was modified.
 	ModifiedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -9300,7 +9355,7 @@ type User struct {
 	RootFolderId *string `min:"1" type:"string"`
 
 	// The status of the user.
-	Status *string `type:"string" enum:"UserStatusType"`
+	Status UserStatusType `type:"string"`
 
 	// The storage for the user.
 	Storage *UserStorageMetadata `type:"structure"`
@@ -9312,7 +9367,7 @@ type User struct {
 	TimeZoneId *string `min:"1" type:"string"`
 
 	// The type of user.
-	Type *string `type:"string" enum:"UserType"`
+	Type UserType `type:"string"`
 
 	// The login name of the user.
 	Username *string `min:"1" type:"string"`
@@ -9353,8 +9408,8 @@ func (s *User) SetId(v string) *User {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *User) SetLocale(v string) *User {
-	s.Locale = &v
+func (s *User) SetLocale(v LocaleType) *User {
+	s.Locale = v
 	return s
 }
 
@@ -9383,8 +9438,8 @@ func (s *User) SetRootFolderId(v string) *User {
 }
 
 // SetStatus sets the Status field's value.
-func (s *User) SetStatus(v string) *User {
-	s.Status = &v
+func (s *User) SetStatus(v UserStatusType) *User {
+	s.Status = v
 	return s
 }
 
@@ -9407,8 +9462,8 @@ func (s *User) SetTimeZoneId(v string) *User {
 }
 
 // SetType sets the Type field's value.
-func (s *User) SetType(v string) *User {
-	s.Type = &v
+func (s *User) SetType(v UserType) *User {
+	s.Type = v
 	return s
 }
 
@@ -9513,341 +9568,243 @@ func (s *UserStorageMetadata) SetStorageUtilizedInBytes(v int64) *UserStorageMet
 	return s
 }
 
+type ActivityType string
+
+// Enum values for ActivityType
 const (
-	// ActivityTypeDocumentCheckedIn is a ActivityType enum value
-	ActivityTypeDocumentCheckedIn = "DOCUMENT_CHECKED_IN"
-
-	// ActivityTypeDocumentCheckedOut is a ActivityType enum value
-	ActivityTypeDocumentCheckedOut = "DOCUMENT_CHECKED_OUT"
-
-	// ActivityTypeDocumentRenamed is a ActivityType enum value
-	ActivityTypeDocumentRenamed = "DOCUMENT_RENAMED"
-
-	// ActivityTypeDocumentVersionUploaded is a ActivityType enum value
-	ActivityTypeDocumentVersionUploaded = "DOCUMENT_VERSION_UPLOADED"
-
-	// ActivityTypeDocumentVersionDeleted is a ActivityType enum value
-	ActivityTypeDocumentVersionDeleted = "DOCUMENT_VERSION_DELETED"
-
-	// ActivityTypeDocumentRecycled is a ActivityType enum value
-	ActivityTypeDocumentRecycled = "DOCUMENT_RECYCLED"
-
-	// ActivityTypeDocumentRestored is a ActivityType enum value
-	ActivityTypeDocumentRestored = "DOCUMENT_RESTORED"
-
-	// ActivityTypeDocumentReverted is a ActivityType enum value
-	ActivityTypeDocumentReverted = "DOCUMENT_REVERTED"
-
-	// ActivityTypeDocumentShared is a ActivityType enum value
-	ActivityTypeDocumentShared = "DOCUMENT_SHARED"
-
-	// ActivityTypeDocumentUnshared is a ActivityType enum value
-	ActivityTypeDocumentUnshared = "DOCUMENT_UNSHARED"
-
-	// ActivityTypeDocumentSharePermissionChanged is a ActivityType enum value
-	ActivityTypeDocumentSharePermissionChanged = "DOCUMENT_SHARE_PERMISSION_CHANGED"
-
-	// ActivityTypeDocumentShareableLinkCreated is a ActivityType enum value
-	ActivityTypeDocumentShareableLinkCreated = "DOCUMENT_SHAREABLE_LINK_CREATED"
-
-	// ActivityTypeDocumentShareableLinkRemoved is a ActivityType enum value
-	ActivityTypeDocumentShareableLinkRemoved = "DOCUMENT_SHAREABLE_LINK_REMOVED"
-
-	// ActivityTypeDocumentShareableLinkPermissionChanged is a ActivityType enum value
-	ActivityTypeDocumentShareableLinkPermissionChanged = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
-
-	// ActivityTypeDocumentMoved is a ActivityType enum value
-	ActivityTypeDocumentMoved = "DOCUMENT_MOVED"
-
-	// ActivityTypeDocumentCommentAdded is a ActivityType enum value
-	ActivityTypeDocumentCommentAdded = "DOCUMENT_COMMENT_ADDED"
-
-	// ActivityTypeDocumentCommentDeleted is a ActivityType enum value
-	ActivityTypeDocumentCommentDeleted = "DOCUMENT_COMMENT_DELETED"
-
-	// ActivityTypeDocumentAnnotationAdded is a ActivityType enum value
-	ActivityTypeDocumentAnnotationAdded = "DOCUMENT_ANNOTATION_ADDED"
-
-	// ActivityTypeDocumentAnnotationDeleted is a ActivityType enum value
-	ActivityTypeDocumentAnnotationDeleted = "DOCUMENT_ANNOTATION_DELETED"
-
-	// ActivityTypeFolderCreated is a ActivityType enum value
-	ActivityTypeFolderCreated = "FOLDER_CREATED"
-
-	// ActivityTypeFolderDeleted is a ActivityType enum value
-	ActivityTypeFolderDeleted = "FOLDER_DELETED"
-
-	// ActivityTypeFolderRenamed is a ActivityType enum value
-	ActivityTypeFolderRenamed = "FOLDER_RENAMED"
-
-	// ActivityTypeFolderRecycled is a ActivityType enum value
-	ActivityTypeFolderRecycled = "FOLDER_RECYCLED"
-
-	// ActivityTypeFolderRestored is a ActivityType enum value
-	ActivityTypeFolderRestored = "FOLDER_RESTORED"
-
-	// ActivityTypeFolderShared is a ActivityType enum value
-	ActivityTypeFolderShared = "FOLDER_SHARED"
-
-	// ActivityTypeFolderUnshared is a ActivityType enum value
-	ActivityTypeFolderUnshared = "FOLDER_UNSHARED"
-
-	// ActivityTypeFolderSharePermissionChanged is a ActivityType enum value
-	ActivityTypeFolderSharePermissionChanged = "FOLDER_SHARE_PERMISSION_CHANGED"
-
-	// ActivityTypeFolderShareableLinkCreated is a ActivityType enum value
-	ActivityTypeFolderShareableLinkCreated = "FOLDER_SHAREABLE_LINK_CREATED"
-
-	// ActivityTypeFolderShareableLinkRemoved is a ActivityType enum value
-	ActivityTypeFolderShareableLinkRemoved = "FOLDER_SHAREABLE_LINK_REMOVED"
-
-	// ActivityTypeFolderShareableLinkPermissionChanged is a ActivityType enum value
-	ActivityTypeFolderShareableLinkPermissionChanged = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
-
-	// ActivityTypeFolderMoved is a ActivityType enum value
-	ActivityTypeFolderMoved = "FOLDER_MOVED"
+	ActivityTypeDocumentCheckedIn                      ActivityType = "DOCUMENT_CHECKED_IN"
+	ActivityTypeDocumentCheckedOut                     ActivityType = "DOCUMENT_CHECKED_OUT"
+	ActivityTypeDocumentRenamed                        ActivityType = "DOCUMENT_RENAMED"
+	ActivityTypeDocumentVersionUploaded                ActivityType = "DOCUMENT_VERSION_UPLOADED"
+	ActivityTypeDocumentVersionDeleted                 ActivityType = "DOCUMENT_VERSION_DELETED"
+	ActivityTypeDocumentRecycled                       ActivityType = "DOCUMENT_RECYCLED"
+	ActivityTypeDocumentRestored                       ActivityType = "DOCUMENT_RESTORED"
+	ActivityTypeDocumentReverted                       ActivityType = "DOCUMENT_REVERTED"
+	ActivityTypeDocumentShared                         ActivityType = "DOCUMENT_SHARED"
+	ActivityTypeDocumentUnshared                       ActivityType = "DOCUMENT_UNSHARED"
+	ActivityTypeDocumentSharePermissionChanged         ActivityType = "DOCUMENT_SHARE_PERMISSION_CHANGED"
+	ActivityTypeDocumentShareableLinkCreated           ActivityType = "DOCUMENT_SHAREABLE_LINK_CREATED"
+	ActivityTypeDocumentShareableLinkRemoved           ActivityType = "DOCUMENT_SHAREABLE_LINK_REMOVED"
+	ActivityTypeDocumentShareableLinkPermissionChanged ActivityType = "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED"
+	ActivityTypeDocumentMoved                          ActivityType = "DOCUMENT_MOVED"
+	ActivityTypeDocumentCommentAdded                   ActivityType = "DOCUMENT_COMMENT_ADDED"
+	ActivityTypeDocumentCommentDeleted                 ActivityType = "DOCUMENT_COMMENT_DELETED"
+	ActivityTypeDocumentAnnotationAdded                ActivityType = "DOCUMENT_ANNOTATION_ADDED"
+	ActivityTypeDocumentAnnotationDeleted              ActivityType = "DOCUMENT_ANNOTATION_DELETED"
+	ActivityTypeFolderCreated                          ActivityType = "FOLDER_CREATED"
+	ActivityTypeFolderDeleted                          ActivityType = "FOLDER_DELETED"
+	ActivityTypeFolderRenamed                          ActivityType = "FOLDER_RENAMED"
+	ActivityTypeFolderRecycled                         ActivityType = "FOLDER_RECYCLED"
+	ActivityTypeFolderRestored                         ActivityType = "FOLDER_RESTORED"
+	ActivityTypeFolderShared                           ActivityType = "FOLDER_SHARED"
+	ActivityTypeFolderUnshared                         ActivityType = "FOLDER_UNSHARED"
+	ActivityTypeFolderSharePermissionChanged           ActivityType = "FOLDER_SHARE_PERMISSION_CHANGED"
+	ActivityTypeFolderShareableLinkCreated             ActivityType = "FOLDER_SHAREABLE_LINK_CREATED"
+	ActivityTypeFolderShareableLinkRemoved             ActivityType = "FOLDER_SHAREABLE_LINK_REMOVED"
+	ActivityTypeFolderShareableLinkPermissionChanged   ActivityType = "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED"
+	ActivityTypeFolderMoved                            ActivityType = "FOLDER_MOVED"
 )
 
+type CommentStatusType string
+
+// Enum values for CommentStatusType
 const (
-	// CommentStatusTypeDraft is a CommentStatusType enum value
-	CommentStatusTypeDraft = "DRAFT"
-
-	// CommentStatusTypePublished is a CommentStatusType enum value
-	CommentStatusTypePublished = "PUBLISHED"
-
-	// CommentStatusTypeDeleted is a CommentStatusType enum value
-	CommentStatusTypeDeleted = "DELETED"
+	CommentStatusTypeDraft     CommentStatusType = "DRAFT"
+	CommentStatusTypePublished CommentStatusType = "PUBLISHED"
+	CommentStatusTypeDeleted   CommentStatusType = "DELETED"
 )
 
-const (
-	// CommentVisibilityTypePublic is a CommentVisibilityType enum value
-	CommentVisibilityTypePublic = "PUBLIC"
+type CommentVisibilityType string
 
-	// CommentVisibilityTypePrivate is a CommentVisibilityType enum value
-	CommentVisibilityTypePrivate = "PRIVATE"
+// Enum values for CommentVisibilityType
+const (
+	CommentVisibilityTypePublic  CommentVisibilityType = "PUBLIC"
+	CommentVisibilityTypePrivate CommentVisibilityType = "PRIVATE"
 )
 
-const (
-	// DocumentSourceTypeOriginal is a DocumentSourceType enum value
-	DocumentSourceTypeOriginal = "ORIGINAL"
+type DocumentSourceType string
 
-	// DocumentSourceTypeWithComments is a DocumentSourceType enum value
-	DocumentSourceTypeWithComments = "WITH_COMMENTS"
+// Enum values for DocumentSourceType
+const (
+	DocumentSourceTypeOriginal     DocumentSourceType = "ORIGINAL"
+	DocumentSourceTypeWithComments DocumentSourceType = "WITH_COMMENTS"
 )
 
-const (
-	// DocumentStatusTypeInitialized is a DocumentStatusType enum value
-	DocumentStatusTypeInitialized = "INITIALIZED"
+type DocumentStatusType string
 
-	// DocumentStatusTypeActive is a DocumentStatusType enum value
-	DocumentStatusTypeActive = "ACTIVE"
+// Enum values for DocumentStatusType
+const (
+	DocumentStatusTypeInitialized DocumentStatusType = "INITIALIZED"
+	DocumentStatusTypeActive      DocumentStatusType = "ACTIVE"
 )
 
+type DocumentThumbnailType string
+
+// Enum values for DocumentThumbnailType
 const (
-	// DocumentThumbnailTypeSmall is a DocumentThumbnailType enum value
-	DocumentThumbnailTypeSmall = "SMALL"
-
-	// DocumentThumbnailTypeSmallHq is a DocumentThumbnailType enum value
-	DocumentThumbnailTypeSmallHq = "SMALL_HQ"
-
-	// DocumentThumbnailTypeLarge is a DocumentThumbnailType enum value
-	DocumentThumbnailTypeLarge = "LARGE"
+	DocumentThumbnailTypeSmall   DocumentThumbnailType = "SMALL"
+	DocumentThumbnailTypeSmallHq DocumentThumbnailType = "SMALL_HQ"
+	DocumentThumbnailTypeLarge   DocumentThumbnailType = "LARGE"
 )
 
+type DocumentVersionStatus string
+
+// Enum values for DocumentVersionStatus
 const (
-	// DocumentVersionStatusActive is a DocumentVersionStatus enum value
-	DocumentVersionStatusActive = "ACTIVE"
+	DocumentVersionStatusActive DocumentVersionStatus = "ACTIVE"
 )
 
+type FolderContentType string
+
+// Enum values for FolderContentType
 const (
-	// FolderContentTypeAll is a FolderContentType enum value
-	FolderContentTypeAll = "ALL"
-
-	// FolderContentTypeDocument is a FolderContentType enum value
-	FolderContentTypeDocument = "DOCUMENT"
-
-	// FolderContentTypeFolder is a FolderContentType enum value
-	FolderContentTypeFolder = "FOLDER"
+	FolderContentTypeAll      FolderContentType = "ALL"
+	FolderContentTypeDocument FolderContentType = "DOCUMENT"
+	FolderContentTypeFolder   FolderContentType = "FOLDER"
 )
 
+type LocaleType string
+
+// Enum values for LocaleType
 const (
-	// LocaleTypeEn is a LocaleType enum value
-	LocaleTypeEn = "en"
-
-	// LocaleTypeFr is a LocaleType enum value
-	LocaleTypeFr = "fr"
-
-	// LocaleTypeKo is a LocaleType enum value
-	LocaleTypeKo = "ko"
-
-	// LocaleTypeDe is a LocaleType enum value
-	LocaleTypeDe = "de"
-
-	// LocaleTypeEs is a LocaleType enum value
-	LocaleTypeEs = "es"
-
-	// LocaleTypeJa is a LocaleType enum value
-	LocaleTypeJa = "ja"
-
-	// LocaleTypeRu is a LocaleType enum value
-	LocaleTypeRu = "ru"
-
-	// LocaleTypeZhCn is a LocaleType enum value
-	LocaleTypeZhCn = "zh_CN"
-
-	// LocaleTypeZhTw is a LocaleType enum value
-	LocaleTypeZhTw = "zh_TW"
-
-	// LocaleTypePtBr is a LocaleType enum value
-	LocaleTypePtBr = "pt_BR"
-
-	// LocaleTypeDefault is a LocaleType enum value
-	LocaleTypeDefault = "default"
+	LocaleTypeEn      LocaleType = "en"
+	LocaleTypeFr      LocaleType = "fr"
+	LocaleTypeKo      LocaleType = "ko"
+	LocaleTypeDe      LocaleType = "de"
+	LocaleTypeEs      LocaleType = "es"
+	LocaleTypeJa      LocaleType = "ja"
+	LocaleTypeRu      LocaleType = "ru"
+	LocaleTypeZhCn    LocaleType = "zh_CN"
+	LocaleTypeZhTw    LocaleType = "zh_TW"
+	LocaleTypePtBr    LocaleType = "pt_BR"
+	LocaleTypeDefault LocaleType = "default"
 )
 
-const (
-	// OrderTypeAscending is a OrderType enum value
-	OrderTypeAscending = "ASCENDING"
+type OrderType string
 
-	// OrderTypeDescending is a OrderType enum value
-	OrderTypeDescending = "DESCENDING"
+// Enum values for OrderType
+const (
+	OrderTypeAscending  OrderType = "ASCENDING"
+	OrderTypeDescending OrderType = "DESCENDING"
 )
 
+type PrincipalType string
+
+// Enum values for PrincipalType
 const (
-	// PrincipalTypeUser is a PrincipalType enum value
-	PrincipalTypeUser = "USER"
-
-	// PrincipalTypeGroup is a PrincipalType enum value
-	PrincipalTypeGroup = "GROUP"
-
-	// PrincipalTypeInvite is a PrincipalType enum value
-	PrincipalTypeInvite = "INVITE"
-
-	// PrincipalTypeAnonymous is a PrincipalType enum value
-	PrincipalTypeAnonymous = "ANONYMOUS"
-
-	// PrincipalTypeOrganization is a PrincipalType enum value
-	PrincipalTypeOrganization = "ORGANIZATION"
+	PrincipalTypeUser         PrincipalType = "USER"
+	PrincipalTypeGroup        PrincipalType = "GROUP"
+	PrincipalTypeInvite       PrincipalType = "INVITE"
+	PrincipalTypeAnonymous    PrincipalType = "ANONYMOUS"
+	PrincipalTypeOrganization PrincipalType = "ORGANIZATION"
 )
 
-const (
-	// ResourceSortTypeDate is a ResourceSortType enum value
-	ResourceSortTypeDate = "DATE"
+type ResourceSortType string
 
-	// ResourceSortTypeName is a ResourceSortType enum value
-	ResourceSortTypeName = "NAME"
+// Enum values for ResourceSortType
+const (
+	ResourceSortTypeDate ResourceSortType = "DATE"
+	ResourceSortTypeName ResourceSortType = "NAME"
 )
 
+type ResourceStateType string
+
+// Enum values for ResourceStateType
 const (
-	// ResourceStateTypeActive is a ResourceStateType enum value
-	ResourceStateTypeActive = "ACTIVE"
-
-	// ResourceStateTypeRestoring is a ResourceStateType enum value
-	ResourceStateTypeRestoring = "RESTORING"
-
-	// ResourceStateTypeRecycling is a ResourceStateType enum value
-	ResourceStateTypeRecycling = "RECYCLING"
-
-	// ResourceStateTypeRecycled is a ResourceStateType enum value
-	ResourceStateTypeRecycled = "RECYCLED"
+	ResourceStateTypeActive    ResourceStateType = "ACTIVE"
+	ResourceStateTypeRestoring ResourceStateType = "RESTORING"
+	ResourceStateTypeRecycling ResourceStateType = "RECYCLING"
+	ResourceStateTypeRecycled  ResourceStateType = "RECYCLED"
 )
 
-const (
-	// ResourceTypeFolder is a ResourceType enum value
-	ResourceTypeFolder = "FOLDER"
+type ResourceType string
 
-	// ResourceTypeDocument is a ResourceType enum value
-	ResourceTypeDocument = "DOCUMENT"
+// Enum values for ResourceType
+const (
+	ResourceTypeFolder   ResourceType = "FOLDER"
+	ResourceTypeDocument ResourceType = "DOCUMENT"
 )
 
-const (
-	// RolePermissionTypeDirect is a RolePermissionType enum value
-	RolePermissionTypeDirect = "DIRECT"
+type RolePermissionType string
 
-	// RolePermissionTypeInherited is a RolePermissionType enum value
-	RolePermissionTypeInherited = "INHERITED"
+// Enum values for RolePermissionType
+const (
+	RolePermissionTypeDirect    RolePermissionType = "DIRECT"
+	RolePermissionTypeInherited RolePermissionType = "INHERITED"
 )
 
+type RoleType string
+
+// Enum values for RoleType
 const (
-	// RoleTypeViewer is a RoleType enum value
-	RoleTypeViewer = "VIEWER"
-
-	// RoleTypeContributor is a RoleType enum value
-	RoleTypeContributor = "CONTRIBUTOR"
-
-	// RoleTypeOwner is a RoleType enum value
-	RoleTypeOwner = "OWNER"
-
-	// RoleTypeCoowner is a RoleType enum value
-	RoleTypeCoowner = "COOWNER"
+	RoleTypeViewer      RoleType = "VIEWER"
+	RoleTypeContributor RoleType = "CONTRIBUTOR"
+	RoleTypeOwner       RoleType = "OWNER"
+	RoleTypeCoowner     RoleType = "COOWNER"
 )
 
-const (
-	// ShareStatusTypeSuccess is a ShareStatusType enum value
-	ShareStatusTypeSuccess = "SUCCESS"
+type ShareStatusType string
 
-	// ShareStatusTypeFailure is a ShareStatusType enum value
-	ShareStatusTypeFailure = "FAILURE"
+// Enum values for ShareStatusType
+const (
+	ShareStatusTypeSuccess ShareStatusType = "SUCCESS"
+	ShareStatusTypeFailure ShareStatusType = "FAILURE"
 )
 
-const (
-	// StorageTypeUnlimited is a StorageType enum value
-	StorageTypeUnlimited = "UNLIMITED"
+type StorageType string
 
-	// StorageTypeQuota is a StorageType enum value
-	StorageTypeQuota = "QUOTA"
+// Enum values for StorageType
+const (
+	StorageTypeUnlimited StorageType = "UNLIMITED"
+	StorageTypeQuota     StorageType = "QUOTA"
 )
 
+type SubscriptionProtocolType string
+
+// Enum values for SubscriptionProtocolType
 const (
-	// SubscriptionProtocolTypeHttps is a SubscriptionProtocolType enum value
-	SubscriptionProtocolTypeHttps = "HTTPS"
+	SubscriptionProtocolTypeHttps SubscriptionProtocolType = "HTTPS"
 )
 
+type SubscriptionType string
+
+// Enum values for SubscriptionType
 const (
-	// SubscriptionTypeAll is a SubscriptionType enum value
-	SubscriptionTypeAll = "ALL"
+	SubscriptionTypeAll SubscriptionType = "ALL"
 )
 
-const (
-	// UserFilterTypeAll is a UserFilterType enum value
-	UserFilterTypeAll = "ALL"
+type UserFilterType string
 
-	// UserFilterTypeActivePending is a UserFilterType enum value
-	UserFilterTypeActivePending = "ACTIVE_PENDING"
+// Enum values for UserFilterType
+const (
+	UserFilterTypeAll           UserFilterType = "ALL"
+	UserFilterTypeActivePending UserFilterType = "ACTIVE_PENDING"
 )
 
+type UserSortType string
+
+// Enum values for UserSortType
 const (
-	// UserSortTypeUserName is a UserSortType enum value
-	UserSortTypeUserName = "USER_NAME"
-
-	// UserSortTypeFullName is a UserSortType enum value
-	UserSortTypeFullName = "FULL_NAME"
-
-	// UserSortTypeStorageLimit is a UserSortType enum value
-	UserSortTypeStorageLimit = "STORAGE_LIMIT"
-
-	// UserSortTypeUserStatus is a UserSortType enum value
-	UserSortTypeUserStatus = "USER_STATUS"
-
-	// UserSortTypeStorageUsed is a UserSortType enum value
-	UserSortTypeStorageUsed = "STORAGE_USED"
+	UserSortTypeUserName     UserSortType = "USER_NAME"
+	UserSortTypeFullName     UserSortType = "FULL_NAME"
+	UserSortTypeStorageLimit UserSortType = "STORAGE_LIMIT"
+	UserSortTypeUserStatus   UserSortType = "USER_STATUS"
+	UserSortTypeStorageUsed  UserSortType = "STORAGE_USED"
 )
 
+type UserStatusType string
+
+// Enum values for UserStatusType
 const (
-	// UserStatusTypeActive is a UserStatusType enum value
-	UserStatusTypeActive = "ACTIVE"
-
-	// UserStatusTypeInactive is a UserStatusType enum value
-	UserStatusTypeInactive = "INACTIVE"
-
-	// UserStatusTypePending is a UserStatusType enum value
-	UserStatusTypePending = "PENDING"
+	UserStatusTypeActive   UserStatusType = "ACTIVE"
+	UserStatusTypeInactive UserStatusType = "INACTIVE"
+	UserStatusTypePending  UserStatusType = "PENDING"
 )
 
-const (
-	// UserTypeUser is a UserType enum value
-	UserTypeUser = "USER"
+type UserType string
 
-	// UserTypeAdmin is a UserType enum value
-	UserTypeAdmin = "ADMIN"
+// Enum values for UserType
+const (
+	UserTypeUser  UserType = "USER"
+	UserTypeAdmin UserType = "ADMIN"
 )

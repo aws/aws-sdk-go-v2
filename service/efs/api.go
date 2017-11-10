@@ -1336,7 +1336,7 @@ type CreateFileSystemInput struct {
 	// can scale to higher levels of aggregate throughput and operations per second
 	// with a tradeoff of slightly higher latencies for most file operations. This
 	// can't be changed after the file system has been created.
-	PerformanceMode *string `type:"string" enum:"PerformanceMode"`
+	PerformanceMode PerformanceMode `type:"string"`
 }
 
 // String returns the string representation
@@ -1352,6 +1352,7 @@ func (s CreateFileSystemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFileSystemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFileSystemInput"}
+
 	if s.CreationToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreationToken"))
 	}
@@ -1387,8 +1388,8 @@ func (s *CreateFileSystemInput) SetKmsKeyId(v string) *CreateFileSystemInput {
 }
 
 // SetPerformanceMode sets the PerformanceMode field's value.
-func (s *CreateFileSystemInput) SetPerformanceMode(v string) *CreateFileSystemInput {
-	s.PerformanceMode = &v
+func (s *CreateFileSystemInput) SetPerformanceMode(v PerformanceMode) *CreateFileSystemInput {
+	s.PerformanceMode = v
 	return s
 }
 
@@ -1427,9 +1428,11 @@ func (s CreateMountTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMountTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateMountTargetInput"}
+
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
+
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
@@ -1493,9 +1496,11 @@ func (s CreateTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
+
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -1566,6 +1571,7 @@ func (s DeleteFileSystemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFileSystemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileSystemInput"}
+
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
@@ -1620,6 +1626,7 @@ func (s DeleteMountTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMountTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteMountTargetInput"}
+
 	if s.MountTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
@@ -1679,9 +1686,11 @@ func (s DeleteTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
+
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -1860,6 +1869,7 @@ func (s DescribeMountTargetSecurityGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMountTargetSecurityGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeMountTargetSecurityGroupsInput"}
+
 	if s.MountTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
@@ -2049,6 +2059,7 @@ func (s DescribeTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
+
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
@@ -2157,7 +2168,7 @@ type FileSystemDescription struct {
 	// Lifecycle phase of the file system.
 	//
 	// LifeCycleState is a required field
-	LifeCycleState *string `type:"string" required:"true" enum:"LifeCycleState"`
+	LifeCycleState LifeCycleState `type:"string" required:"true"`
 
 	// You can add tags to a file system, including a Name tag. For more information,
 	// see CreateTags. If the file system has a Name tag, Amazon EFS returns the
@@ -2179,7 +2190,7 @@ type FileSystemDescription struct {
 	// The PerformanceMode of the file system.
 	//
 	// PerformanceMode is a required field
-	PerformanceMode *string `type:"string" required:"true" enum:"PerformanceMode"`
+	PerformanceMode PerformanceMode `type:"string" required:"true"`
 
 	// Latest known metered size (in bytes) of data stored in the file system, in
 	// bytes, in its Value field, and the time at which that size was determined
@@ -2236,8 +2247,8 @@ func (s *FileSystemDescription) SetKmsKeyId(v string) *FileSystemDescription {
 }
 
 // SetLifeCycleState sets the LifeCycleState field's value.
-func (s *FileSystemDescription) SetLifeCycleState(v string) *FileSystemDescription {
-	s.LifeCycleState = &v
+func (s *FileSystemDescription) SetLifeCycleState(v LifeCycleState) *FileSystemDescription {
+	s.LifeCycleState = v
 	return s
 }
 
@@ -2260,8 +2271,8 @@ func (s *FileSystemDescription) SetOwnerId(v string) *FileSystemDescription {
 }
 
 // SetPerformanceMode sets the PerformanceMode field's value.
-func (s *FileSystemDescription) SetPerformanceMode(v string) *FileSystemDescription {
-	s.PerformanceMode = &v
+func (s *FileSystemDescription) SetPerformanceMode(v PerformanceMode) *FileSystemDescription {
+	s.PerformanceMode = v
 	return s
 }
 
@@ -2341,6 +2352,7 @@ func (s ModifyMountTargetSecurityGroupsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyMountTargetSecurityGroupsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ModifyMountTargetSecurityGroupsInput"}
+
 	if s.MountTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
@@ -2394,7 +2406,7 @@ type MountTargetDescription struct {
 	// Lifecycle state of the mount target.
 	//
 	// LifeCycleState is a required field
-	LifeCycleState *string `type:"string" required:"true" enum:"LifeCycleState"`
+	LifeCycleState LifeCycleState `type:"string" required:"true"`
 
 	// System-assigned mount target ID.
 	//
@@ -2437,8 +2449,8 @@ func (s *MountTargetDescription) SetIpAddress(v string) *MountTargetDescription 
 }
 
 // SetLifeCycleState sets the LifeCycleState field's value.
-func (s *MountTargetDescription) SetLifeCycleState(v string) *MountTargetDescription {
-	s.LifeCycleState = &v
+func (s *MountTargetDescription) SetLifeCycleState(v LifeCycleState) *MountTargetDescription {
+	s.LifeCycleState = v
 	return s
 }
 
@@ -2496,12 +2508,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -2524,24 +2538,20 @@ func (s *Tag) SetValue(v string) *Tag {
 	return s
 }
 
+type LifeCycleState string
+
+// Enum values for LifeCycleState
 const (
-	// LifeCycleStateCreating is a LifeCycleState enum value
-	LifeCycleStateCreating = "creating"
-
-	// LifeCycleStateAvailable is a LifeCycleState enum value
-	LifeCycleStateAvailable = "available"
-
-	// LifeCycleStateDeleting is a LifeCycleState enum value
-	LifeCycleStateDeleting = "deleting"
-
-	// LifeCycleStateDeleted is a LifeCycleState enum value
-	LifeCycleStateDeleted = "deleted"
+	LifeCycleStateCreating  LifeCycleState = "creating"
+	LifeCycleStateAvailable LifeCycleState = "available"
+	LifeCycleStateDeleting  LifeCycleState = "deleting"
+	LifeCycleStateDeleted   LifeCycleState = "deleted"
 )
 
-const (
-	// PerformanceModeGeneralPurpose is a PerformanceMode enum value
-	PerformanceModeGeneralPurpose = "generalPurpose"
+type PerformanceMode string
 
-	// PerformanceModeMaxIo is a PerformanceMode enum value
-	PerformanceModeMaxIo = "maxIO"
+// Enum values for PerformanceMode
+const (
+	PerformanceModeGeneralPurpose PerformanceMode = "generalPurpose"
+	PerformanceModeMaxIo          PerformanceMode = "maxIO"
 )

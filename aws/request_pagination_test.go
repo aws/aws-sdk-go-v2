@@ -1,9 +1,8 @@
 package aws_test
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -77,28 +76,40 @@ func TestPaginationQueryPage(t *testing.T) {
 		}
 		if last {
 			if gotToEnd {
-				assert.Fail(t, "last=true happened twice")
+				t.Fatal("last == true, happened twice")
 			}
 			gotToEnd = true
 		}
 		return true
 	})
-	assert.Nil(t, err)
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
 
-	assert.Equal(t,
-		[]map[string]*dynamodb.AttributeValue{
-			{"key": {S: aws.String("key1")}},
-			{"key": {S: aws.String("key2")}},
-		}, tokens)
-	assert.Equal(t,
-		[]map[string]*dynamodb.AttributeValue{
-			{"key": {S: aws.String("key1")}},
-			{"key": {S: aws.String("key2")}},
-			{"key": {S: aws.String("key3")}},
-		}, pages)
-	assert.Equal(t, 3, numPages)
-	assert.True(t, gotToEnd)
-	assert.Nil(t, params.ExclusiveStartKey)
+	if e, a := []map[string]*dynamodb.AttributeValue{
+		{"key": {S: aws.String("key1")}},
+		{"key": {S: aws.String("key2")}},
+	}, tokens; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+
+	if e, a := []map[string]*dynamodb.AttributeValue{
+		{"key": {S: aws.String("key1")}},
+		{"key": {S: aws.String("key2")}},
+		{"key": {S: aws.String("key3")}},
+	}, pages; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+
+	if e, a := 3, numPages; e != a {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if !gotToEnd {
+		t.Error("did not reach of the end of the pagination")
+	}
+	if params.ExclusiveStartKey != nil {
+		t.Errorf("expected a nil value, but received %v", params.ExclusiveStartKey)
+	}
 }
 
 // Use DynamoDB methods for simplicity
@@ -138,19 +149,32 @@ func TestPagination(t *testing.T) {
 		}
 		if last {
 			if gotToEnd {
-				assert.Fail(t, "last=true happened twice")
+				t.Fatal("last == true, happened twice")
 			}
 			gotToEnd = true
 		}
 		return true
 	})
 
-	assert.Equal(t, []string{"Table2", "Table4"}, tokens)
-	assert.Equal(t, []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages)
-	assert.Equal(t, 3, numPages)
-	assert.True(t, gotToEnd)
-	assert.Nil(t, err)
-	assert.Nil(t, params.ExclusiveStartTableName)
+	if e, a := []string{"Table2", "Table4"}, tokens; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if e, a := []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+
+	if e, a := 3, numPages; e != a {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if !gotToEnd {
+		t.Error("did not reach of the end of the pagination")
+	}
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
+	if params.ExclusiveStartTableName != nil {
+		t.Errorf("expected nil value, but received %v", params.ExclusiveStartTableName)
+	}
 }
 
 // Use DynamoDB methods for simplicity
@@ -191,7 +215,7 @@ func TestPaginationEachPage(t *testing.T) {
 		}
 		if last {
 			if gotToEnd {
-				assert.Fail(t, "last=true happened twice")
+				t.Fatal("last == true, happened twice")
 			}
 			gotToEnd = true
 		}
@@ -199,11 +223,21 @@ func TestPaginationEachPage(t *testing.T) {
 		return true
 	})
 
-	assert.Equal(t, []string{"Table2", "Table4"}, tokens)
-	assert.Equal(t, []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages)
-	assert.Equal(t, 3, numPages)
-	assert.True(t, gotToEnd)
-	assert.Nil(t, err)
+	if e, a := []string{"Table2", "Table4"}, tokens; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if e, a := []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if e, a := 3, numPages; e != a {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if !gotToEnd {
+		t.Error("did not reach of the end of the pagination")
+	}
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
 }
 
 // Use DynamoDB methods for simplicity
@@ -235,16 +269,22 @@ func TestPaginationEarlyExit(t *testing.T) {
 		}
 		if last {
 			if gotToEnd {
-				assert.Fail(t, "last=true happened twice")
+				t.Fatal("last == true, happened twice")
 			}
 			gotToEnd = true
 		}
 		return true
 	})
 
-	assert.Equal(t, 2, numPages)
-	assert.False(t, gotToEnd)
-	assert.Nil(t, err)
+	if e, a := 2, numPages; e != a {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if gotToEnd {
+		t.Error("should not have reached the end of pagination")
+	}
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
 }
 
 func TestSkipPagination(t *testing.T) {
@@ -267,8 +307,12 @@ func TestSkipPagination(t *testing.T) {
 		}
 		return true
 	})
-	assert.Equal(t, 1, numPages)
-	assert.True(t, gotToEnd)
+	if e, a := 1, numPages; e != a {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if !gotToEnd {
+		t.Error("did not reach of the end of the pagination")
+	}
 }
 
 // Use S3 for simplicity
@@ -300,8 +344,12 @@ func TestPaginationTruncation(t *testing.T) {
 		return true
 	})
 
-	assert.Equal(t, []string{"Key1", "Key2", "Key3"}, results)
-	assert.Nil(t, err)
+	if e, a := []string{"Key1", "Key2", "Key3"}, results; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
 
 	// Try again without truncation token at all
 	reqNum = 0
@@ -313,8 +361,12 @@ func TestPaginationTruncation(t *testing.T) {
 		return true
 	})
 
-	assert.Equal(t, []string{"Key1", "Key2"}, results)
-	assert.Nil(t, err)
+	if e, a := []string{"Key1", "Key2"}, results; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
 }
 
 func TestPaginationNilToken(t *testing.T) {
@@ -328,7 +380,7 @@ func TestPaginationNilToken(t *testing.T) {
 			},
 			IsTruncated:          aws.Bool(true),
 			NextRecordName:       aws.String("second.example.com."),
-			NextRecordType:       aws.String("MX"),
+			NextRecordType:       route53.RRTypeMx,
 			NextRecordIdentifier: aws.String("second"),
 			MaxItems:             aws.String("1"),
 		},
@@ -338,7 +390,7 @@ func TestPaginationNilToken(t *testing.T) {
 			},
 			IsTruncated:    aws.Bool(true),
 			NextRecordName: aws.String("third.example.com."),
-			NextRecordType: aws.String("MX"),
+			NextRecordType: route53.RRTypeMx,
 			MaxItems:       aws.String("1"),
 		},
 		{
@@ -375,9 +427,15 @@ func TestPaginationNilToken(t *testing.T) {
 		return true
 	})
 
-	assert.NoError(t, err)
-	assert.Equal(t, []string{"", "second", ""}, idents)
-	assert.Equal(t, []string{"first.example.com.", "second.example.com.", "third.example.com."}, results)
+	if err != nil {
+		t.Errorf("expected no error, but received %v", err)
+	}
+	if e, a := []string{"", "second", ""}, idents; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
+	if e, a := []string{"first.example.com.", "second.example.com.", "third.example.com."}, results; !reflect.DeepEqual(e, a) {
+		t.Errorf("expected %v, but received %v", e, a)
+	}
 }
 
 func TestPaginationNilInput(t *testing.T) {

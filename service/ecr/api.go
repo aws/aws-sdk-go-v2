@@ -1862,12 +1862,14 @@ func (s BatchCheckLayerAvailabilityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCheckLayerAvailabilityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchCheckLayerAvailabilityInput"}
+
 	if s.LayerDigests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
 	}
 	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -1968,12 +1970,14 @@ func (s BatchDeleteImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteImageInput"}
+
 	if s.ImageIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
 	}
 	if s.ImageIds != nil && len(s.ImageIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2080,12 +2084,14 @@ func (s *BatchGetImageInput) Validate() error {
 	if s.AcceptedMediaTypes != nil && len(s.AcceptedMediaTypes) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AcceptedMediaTypes", 1))
 	}
+
 	if s.ImageIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageIds"))
 	}
 	if s.ImageIds != nil && len(s.ImageIds) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ImageIds", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2194,18 +2200,21 @@ func (s CompleteLayerUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteLayerUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompleteLayerUploadInput"}
+
 	if s.LayerDigests == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerDigests"))
 	}
 	if s.LayerDigests != nil && len(s.LayerDigests) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LayerDigests", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -2316,6 +2325,7 @@ func (s CreateRepositoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRepositoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateRepositoryInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2389,6 +2399,7 @@ func (s DeleteRepositoryInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2473,6 +2484,7 @@ func (s DeleteRepositoryPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryPolicyInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2547,7 +2559,7 @@ type DescribeImagesFilter struct {
 
 	// The tag status with which to filter your DescribeImages results. You can
 	// filter results based on whether they are TAGGED or UNTAGGED.
-	TagStatus *string `locationName:"tagStatus" type:"string" enum:"TagStatus"`
+	TagStatus TagStatus `locationName:"tagStatus" type:"string"`
 }
 
 // String returns the string representation
@@ -2561,8 +2573,8 @@ func (s DescribeImagesFilter) GoString() string {
 }
 
 // SetTagStatus sets the TagStatus field's value.
-func (s *DescribeImagesFilter) SetTagStatus(v string) *DescribeImagesFilter {
-	s.TagStatus = &v
+func (s *DescribeImagesFilter) SetTagStatus(v TagStatus) *DescribeImagesFilter {
+	s.TagStatus = v
 	return s
 }
 
@@ -2622,6 +2634,7 @@ func (s *DescribeImagesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -2922,9 +2935,11 @@ func (s GetDownloadUrlForLayerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDownloadUrlForLayerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDownloadUrlForLayerInput"}
+
 	if s.LayerDigest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerDigest"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3016,6 +3031,7 @@ func (s GetRepositoryPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryPolicyInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3217,7 +3233,7 @@ type ImageFailure struct {
 	_ struct{} `type:"structure"`
 
 	// The code associated with the failure.
-	FailureCode *string `locationName:"failureCode" type:"string" enum:"ImageFailureCode"`
+	FailureCode ImageFailureCode `locationName:"failureCode" type:"string"`
 
 	// The reason for the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
@@ -3237,8 +3253,8 @@ func (s ImageFailure) GoString() string {
 }
 
 // SetFailureCode sets the FailureCode field's value.
-func (s *ImageFailure) SetFailureCode(v string) *ImageFailure {
-	s.FailureCode = &v
+func (s *ImageFailure) SetFailureCode(v ImageFailureCode) *ImageFailure {
+	s.FailureCode = v
 	return s
 }
 
@@ -3315,6 +3331,7 @@ func (s InitiateLayerUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateLayerUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitiateLayerUploadInput"}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3381,7 +3398,7 @@ type Layer struct {
 	_ struct{} `type:"structure"`
 
 	// The availability status of the image layer.
-	LayerAvailability *string `locationName:"layerAvailability" type:"string" enum:"LayerAvailability"`
+	LayerAvailability LayerAvailability `locationName:"layerAvailability" type:"string"`
 
 	// The sha256 digest of the image layer.
 	LayerDigest *string `locationName:"layerDigest" type:"string"`
@@ -3405,8 +3422,8 @@ func (s Layer) GoString() string {
 }
 
 // SetLayerAvailability sets the LayerAvailability field's value.
-func (s *Layer) SetLayerAvailability(v string) *Layer {
-	s.LayerAvailability = &v
+func (s *Layer) SetLayerAvailability(v LayerAvailability) *Layer {
+	s.LayerAvailability = v
 	return s
 }
 
@@ -3434,7 +3451,7 @@ type LayerFailure struct {
 	_ struct{} `type:"structure"`
 
 	// The failure code associated with the failure.
-	FailureCode *string `locationName:"failureCode" type:"string" enum:"LayerFailureCode"`
+	FailureCode LayerFailureCode `locationName:"failureCode" type:"string"`
 
 	// The reason for the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
@@ -3454,8 +3471,8 @@ func (s LayerFailure) GoString() string {
 }
 
 // SetFailureCode sets the FailureCode field's value.
-func (s *LayerFailure) SetFailureCode(v string) *LayerFailure {
-	s.FailureCode = &v
+func (s *LayerFailure) SetFailureCode(v LayerFailureCode) *LayerFailure {
+	s.FailureCode = v
 	return s
 }
 
@@ -3478,7 +3495,7 @@ type ListImagesFilter struct {
 
 	// The tag status with which to filter your ListImages results. You can filter
 	// results based on whether they are TAGGED or UNTAGGED.
-	TagStatus *string `locationName:"tagStatus" type:"string" enum:"TagStatus"`
+	TagStatus TagStatus `locationName:"tagStatus" type:"string"`
 }
 
 // String returns the string representation
@@ -3492,8 +3509,8 @@ func (s ListImagesFilter) GoString() string {
 }
 
 // SetTagStatus sets the TagStatus field's value.
-func (s *ListImagesFilter) SetTagStatus(v string) *ListImagesFilter {
-	s.TagStatus = &v
+func (s *ListImagesFilter) SetTagStatus(v TagStatus) *ListImagesFilter {
+	s.TagStatus = v
 	return s
 }
 
@@ -3549,6 +3566,7 @@ func (s *ListImagesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3665,9 +3683,11 @@ func (s PutImageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutImageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutImageInput"}
+
 	if s.ImageManifest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageManifest"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3832,9 +3852,11 @@ func (s SetRepositoryPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetRepositoryPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetRepositoryPolicyInput"}
+
 	if s.PolicyText == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyText"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
@@ -3964,21 +3986,26 @@ func (s UploadLayerPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadLayerPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadLayerPartInput"}
+
 	if s.LayerPartBlob == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LayerPartBlob"))
 	}
+
 	if s.PartFirstByte == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartFirstByte"))
 	}
+
 	if s.PartLastByte == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PartLastByte"))
 	}
+
 	if s.RepositoryName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 2))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
@@ -4076,43 +4103,37 @@ func (s *UploadLayerPartOutput) SetUploadId(v string) *UploadLayerPartOutput {
 	return s
 }
 
+type ImageFailureCode string
+
+// Enum values for ImageFailureCode
 const (
-	// ImageFailureCodeInvalidImageDigest is a ImageFailureCode enum value
-	ImageFailureCodeInvalidImageDigest = "InvalidImageDigest"
-
-	// ImageFailureCodeInvalidImageTag is a ImageFailureCode enum value
-	ImageFailureCodeInvalidImageTag = "InvalidImageTag"
-
-	// ImageFailureCodeImageTagDoesNotMatchDigest is a ImageFailureCode enum value
-	ImageFailureCodeImageTagDoesNotMatchDigest = "ImageTagDoesNotMatchDigest"
-
-	// ImageFailureCodeImageNotFound is a ImageFailureCode enum value
-	ImageFailureCodeImageNotFound = "ImageNotFound"
-
-	// ImageFailureCodeMissingDigestAndTag is a ImageFailureCode enum value
-	ImageFailureCodeMissingDigestAndTag = "MissingDigestAndTag"
+	ImageFailureCodeInvalidImageDigest         ImageFailureCode = "InvalidImageDigest"
+	ImageFailureCodeInvalidImageTag            ImageFailureCode = "InvalidImageTag"
+	ImageFailureCodeImageTagDoesNotMatchDigest ImageFailureCode = "ImageTagDoesNotMatchDigest"
+	ImageFailureCodeImageNotFound              ImageFailureCode = "ImageNotFound"
+	ImageFailureCodeMissingDigestAndTag        ImageFailureCode = "MissingDigestAndTag"
 )
 
-const (
-	// LayerAvailabilityAvailable is a LayerAvailability enum value
-	LayerAvailabilityAvailable = "AVAILABLE"
+type LayerAvailability string
 
-	// LayerAvailabilityUnavailable is a LayerAvailability enum value
-	LayerAvailabilityUnavailable = "UNAVAILABLE"
+// Enum values for LayerAvailability
+const (
+	LayerAvailabilityAvailable   LayerAvailability = "AVAILABLE"
+	LayerAvailabilityUnavailable LayerAvailability = "UNAVAILABLE"
 )
 
-const (
-	// LayerFailureCodeInvalidLayerDigest is a LayerFailureCode enum value
-	LayerFailureCodeInvalidLayerDigest = "InvalidLayerDigest"
+type LayerFailureCode string
 
-	// LayerFailureCodeMissingLayerDigest is a LayerFailureCode enum value
-	LayerFailureCodeMissingLayerDigest = "MissingLayerDigest"
+// Enum values for LayerFailureCode
+const (
+	LayerFailureCodeInvalidLayerDigest LayerFailureCode = "InvalidLayerDigest"
+	LayerFailureCodeMissingLayerDigest LayerFailureCode = "MissingLayerDigest"
 )
 
-const (
-	// TagStatusTagged is a TagStatus enum value
-	TagStatusTagged = "TAGGED"
+type TagStatus string
 
-	// TagStatusUntagged is a TagStatus enum value
-	TagStatusUntagged = "UNTAGGED"
+// Enum values for TagStatus
+const (
+	TagStatusTagged   TagStatus = "TAGGED"
+	TagStatusUntagged TagStatus = "UNTAGGED"
 )

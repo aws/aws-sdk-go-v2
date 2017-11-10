@@ -38,7 +38,7 @@ func ExampleEFS_CreateFileSystem_shared00() {
 	svc := efs.New(cfg)
 	input := &efs.CreateFileSystemInput{
 		CreationToken:   aws.String("tokenstring"),
-		PerformanceMode: aws.String("generalPurpose"),
+		PerformanceMode: efs.PerformanceModeGeneralPurpose,
 	}
 
 	result, err := svc.CreateFileSystem(input)

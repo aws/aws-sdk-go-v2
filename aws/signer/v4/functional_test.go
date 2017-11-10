@@ -40,7 +40,7 @@ func TestPresignHandler(t *testing.T) {
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),
-		ACL:                aws.String("public-read"),
+		ACL:                s3.ObjectCannedACLPublicRead,
 	})
 	req.Time = time.Unix(0, 0)
 	urlstr, err := req.Presign(5 * time.Minute)
@@ -93,7 +93,7 @@ func TestPresignRequest(t *testing.T) {
 		Bucket:             aws.String("bucket"),
 		Key:                aws.String("key"),
 		ContentDisposition: aws.String("a+b c$d"),
-		ACL:                aws.String("public-read"),
+		ACL:                s3.ObjectCannedACLPublicRead,
 	})
 	req.Time = time.Unix(0, 0)
 	urlstr, headers, err := req.PresignRequest(5 * time.Minute)

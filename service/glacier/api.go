@@ -3896,12 +3896,15 @@ func (s AbortMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -3977,9 +3980,11 @@ func (s AbortVaultLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortVaultLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AbortVaultLockInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4052,9 +4057,11 @@ func (s AddTagsToVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4193,12 +4200,15 @@ func (s CompleteMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4277,12 +4287,15 @@ func (s CompleteVaultLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteVaultLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CompleteVaultLockInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.LockId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LockId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4358,9 +4371,11 @@ func (s CreateVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4508,12 +4523,15 @@ func (s DeleteArchiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteArchiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteArchiveInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.ArchiveId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ArchiveId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4588,9 +4606,11 @@ func (s DeleteVaultAccessPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultAccessPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultAccessPolicyInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4659,9 +4679,11 @@ func (s DeleteVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4717,9 +4739,11 @@ func (s DeleteVaultNotificationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVaultNotificationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVaultNotificationsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4807,12 +4831,15 @@ func (s DescribeJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -4873,9 +4900,11 @@ func (s DescribeVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5002,6 +5031,7 @@ func (s GetDataRetrievalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDataRetrievalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetDataRetrievalPolicyInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -5110,12 +5140,15 @@ func (s GetJobOutputInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobOutputInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetJobOutputInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5282,9 +5315,11 @@ func (s GetVaultAccessPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultAccessPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetVaultAccessPolicyInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5363,9 +5398,11 @@ func (s GetVaultLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetVaultLockInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5474,9 +5511,11 @@ func (s GetVaultNotificationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetVaultNotificationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetVaultNotificationsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5558,9 +5597,11 @@ func (s InitiateJobInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateJobInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitiateJobInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5666,9 +5707,11 @@ func (s InitiateMultipartUploadInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateMultipartUploadInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitiateMultipartUploadInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5773,9 +5816,11 @@ func (s InitiateVaultLockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateVaultLockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InitiateVaultLockInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -5964,7 +6009,7 @@ type JobDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The job type. It is either ArchiveRetrieval or InventoryRetrieval.
-	Action *string `type:"string" enum:"ActionCode"`
+	Action ActionCode `type:"string"`
 
 	// For an ArchiveRetrieval job, this is the archive ID requested for download.
 	// Otherwise, this field is null.
@@ -6033,7 +6078,7 @@ type JobDescription struct {
 
 	// The status code can be InProgress, Succeeded, or Failed, and indicates the
 	// status of the job.
-	StatusCode *string `type:"string" enum:"StatusCode"`
+	StatusCode StatusCode `type:"string"`
 
 	// A friendly message that describes the job status.
 	StatusMessage *string `type:"string"`
@@ -6058,8 +6103,8 @@ func (s JobDescription) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *JobDescription) SetAction(v string) *JobDescription {
-	s.Action = &v
+func (s *JobDescription) SetAction(v ActionCode) *JobDescription {
+	s.Action = v
 	return s
 }
 
@@ -6142,8 +6187,8 @@ func (s *JobDescription) SetSNSTopic(v string) *JobDescription {
 }
 
 // SetStatusCode sets the StatusCode field's value.
-func (s *JobDescription) SetStatusCode(v string) *JobDescription {
-	s.StatusCode = &v
+func (s *JobDescription) SetStatusCode(v StatusCode) *JobDescription {
+	s.StatusCode = v
 	return s
 }
 
@@ -6322,9 +6367,11 @@ func (s ListJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -6451,9 +6498,11 @@ func (s ListMultipartUploadsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMultipartUploadsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -6573,12 +6622,15 @@ func (s ListPartsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPartsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPartsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -6729,6 +6781,7 @@ func (s ListProvisionedCapacityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProvisionedCapacityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListProvisionedCapacityInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -6800,9 +6853,11 @@ func (s ListTagsForVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -6887,6 +6942,7 @@ func (s ListVaultsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVaultsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListVaultsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -7053,6 +7109,7 @@ func (s PurchaseProvisionedCapacityInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseProvisionedCapacityInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PurchaseProvisionedCapacityInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -7127,9 +7184,11 @@ func (s RemoveTagsFromVaultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromVaultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromVaultInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -7203,6 +7262,7 @@ func (s SetDataRetrievalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDataRetrievalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetDataRetrievalPolicyInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -7274,9 +7334,11 @@ func (s SetVaultAccessPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVaultAccessPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetVaultAccessPolicyInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -7355,9 +7417,11 @@ func (s SetVaultNotificationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVaultNotificationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetVaultNotificationsInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -7441,9 +7505,11 @@ func (s UploadArchiveInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadArchiveInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadArchiveInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -7596,12 +7662,15 @@ func (s UploadMultipartPartInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadMultipartPartInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadMultipartPartInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.UploadId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
+
 	if s.VaultName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
@@ -7755,21 +7824,19 @@ func (s *VaultNotificationConfig) SetSNSTopic(v string) *VaultNotificationConfig
 	return s
 }
 
-const (
-	// ActionCodeArchiveRetrieval is a ActionCode enum value
-	ActionCodeArchiveRetrieval = "ArchiveRetrieval"
+type ActionCode string
 
-	// ActionCodeInventoryRetrieval is a ActionCode enum value
-	ActionCodeInventoryRetrieval = "InventoryRetrieval"
+// Enum values for ActionCode
+const (
+	ActionCodeArchiveRetrieval   ActionCode = "ArchiveRetrieval"
+	ActionCodeInventoryRetrieval ActionCode = "InventoryRetrieval"
 )
 
+type StatusCode string
+
+// Enum values for StatusCode
 const (
-	// StatusCodeInProgress is a StatusCode enum value
-	StatusCodeInProgress = "InProgress"
-
-	// StatusCodeSucceeded is a StatusCode enum value
-	StatusCodeSucceeded = "Succeeded"
-
-	// StatusCodeFailed is a StatusCode enum value
-	StatusCodeFailed = "Failed"
+	StatusCodeInProgress StatusCode = "InProgress"
+	StatusCodeSucceeded  StatusCode = "Succeeded"
+	StatusCodeFailed     StatusCode = "Failed"
 )

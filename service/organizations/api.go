@@ -8133,6 +8133,7 @@ func (s AcceptHandshakeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptHandshakeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptHandshakeInput"}
+
 	if s.HandshakeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
@@ -8198,7 +8199,7 @@ type Account struct {
 	Id *string `type:"string"`
 
 	// The method by which the account joined the organization.
-	JoinedMethod *string `type:"string" enum:"AccountJoinedMethod"`
+	JoinedMethod AccountJoinedMethod `type:"string"`
 
 	// The date the account became a part of the organization.
 	JoinedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -8211,7 +8212,7 @@ type Account struct {
 	Name *string `min:"1" type:"string"`
 
 	// The status of the account in the organization.
-	Status *string `type:"string" enum:"AccountStatus"`
+	Status AccountStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -8243,8 +8244,8 @@ func (s *Account) SetId(v string) *Account {
 }
 
 // SetJoinedMethod sets the JoinedMethod field's value.
-func (s *Account) SetJoinedMethod(v string) *Account {
-	s.JoinedMethod = &v
+func (s *Account) SetJoinedMethod(v AccountJoinedMethod) *Account {
+	s.JoinedMethod = v
 	return s
 }
 
@@ -8261,8 +8262,8 @@ func (s *Account) SetName(v string) *Account {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Account) SetStatus(v string) *Account {
-	s.Status = &v
+func (s *Account) SetStatus(v AccountStatus) *Account {
+	s.Status = v
 	return s
 }
 
@@ -8313,9 +8314,11 @@ func (s AttachPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
+
 	if s.TargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
@@ -8380,6 +8383,7 @@ func (s CancelHandshakeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelHandshakeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelHandshakeInput"}
+
 	if s.HandshakeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
@@ -8439,7 +8443,7 @@ type Child struct {
 	Id *string `type:"string"`
 
 	// The type of this child entity.
-	Type *string `type:"string" enum:"ChildType"`
+	Type ChildType `type:"string"`
 }
 
 // String returns the string representation
@@ -8459,8 +8463,8 @@ func (s *Child) SetId(v string) *Child {
 }
 
 // SetType sets the Type field's value.
-func (s *Child) SetType(v string) *Child {
-	s.Type = &v
+func (s *Child) SetType(v ChildType) *Child {
+	s.Type = v
 	return s
 }
 
@@ -8492,7 +8496,7 @@ type CreateAccountInput struct {
 	// If you do not specify this parameter, the value defaults to ALLOW, and IAM
 	// users and roles with the required permissions can access billing information
 	// for the new account.
-	IamUserAccessToBilling *string `type:"string" enum:"IAMUserAccessToBilling"`
+	IamUserAccessToBilling IAMUserAccessToBilling `type:"string"`
 
 	// (Optional)
 	//
@@ -8530,12 +8534,14 @@ func (s CreateAccountInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAccountInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAccountInput"}
+
 	if s.AccountName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountName"))
 	}
 	if s.AccountName != nil && len(*s.AccountName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AccountName", 1))
 	}
+
 	if s.Email == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Email"))
 	}
@@ -8562,8 +8568,8 @@ func (s *CreateAccountInput) SetEmail(v string) *CreateAccountInput {
 }
 
 // SetIamUserAccessToBilling sets the IamUserAccessToBilling field's value.
-func (s *CreateAccountInput) SetIamUserAccessToBilling(v string) *CreateAccountInput {
-	s.IamUserAccessToBilling = &v
+func (s *CreateAccountInput) SetIamUserAccessToBilling(v IAMUserAccessToBilling) *CreateAccountInput {
+	s.IamUserAccessToBilling = v
 	return s
 }
 
@@ -8636,7 +8642,7 @@ type CreateAccountStatus struct {
 	//
 	//    * INTERNAL_FAILURE: The account could not be created because of an internal
 	//    failure. Try again later. If the problem persists, contact Customer Support.
-	FailureReason *string `type:"string" enum:"CreateAccountFailureReason"`
+	FailureReason CreateAccountFailureReason `type:"string"`
 
 	// The unique identifier (ID) that references this request. You get this value
 	// from the response of the initial CreateAccount request to create the account.
@@ -8650,7 +8656,7 @@ type CreateAccountStatus struct {
 	RequestedTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The status of the request.
-	State *string `type:"string" enum:"CreateAccountState"`
+	State CreateAccountState `type:"string"`
 }
 
 // String returns the string representation
@@ -8682,8 +8688,8 @@ func (s *CreateAccountStatus) SetCompletedTimestamp(v time.Time) *CreateAccountS
 }
 
 // SetFailureReason sets the FailureReason field's value.
-func (s *CreateAccountStatus) SetFailureReason(v string) *CreateAccountStatus {
-	s.FailureReason = &v
+func (s *CreateAccountStatus) SetFailureReason(v CreateAccountFailureReason) *CreateAccountStatus {
+	s.FailureReason = v
 	return s
 }
 
@@ -8700,8 +8706,8 @@ func (s *CreateAccountStatus) SetRequestedTimestamp(v time.Time) *CreateAccountS
 }
 
 // SetState sets the State field's value.
-func (s *CreateAccountStatus) SetState(v string) *CreateAccountStatus {
-	s.State = &v
+func (s *CreateAccountStatus) SetState(v CreateAccountState) *CreateAccountStatus {
+	s.State = v
 	return s
 }
 
@@ -8722,7 +8728,7 @@ type CreateOrganizationInput struct {
 	//    member account in the organization. For more information, see All features
 	//    (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all)
 	//    in the AWS Organizations User Guide.
-	FeatureSet *string `type:"string" enum:"OrganizationFeatureSet"`
+	FeatureSet OrganizationFeatureSet `type:"string"`
 }
 
 // String returns the string representation
@@ -8736,8 +8742,8 @@ func (s CreateOrganizationInput) GoString() string {
 }
 
 // SetFeatureSet sets the FeatureSet field's value.
-func (s *CreateOrganizationInput) SetFeatureSet(v string) *CreateOrganizationInput {
-	s.FeatureSet = &v
+func (s *CreateOrganizationInput) SetFeatureSet(v OrganizationFeatureSet) *CreateOrganizationInput {
+	s.FeatureSet = v
 	return s
 }
 
@@ -8805,12 +8811,14 @@ func (s CreateOrganizationalUnitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateOrganizationalUnitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateOrganizationalUnitInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.ParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
@@ -8892,7 +8900,7 @@ type CreatePolicyInput struct {
 	// service control policy (SCP).
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"PolicyType"`
+	Type PolicyType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8908,22 +8916,25 @@ func (s CreatePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
+
 	if s.Content == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -8952,8 +8963,8 @@ func (s *CreatePolicyInput) SetName(v string) *CreatePolicyInput {
 }
 
 // SetType sets the Type field's value.
-func (s *CreatePolicyInput) SetType(v string) *CreatePolicyInput {
-	s.Type = &v
+func (s *CreatePolicyInput) SetType(v PolicyType) *CreatePolicyInput {
+	s.Type = v
 	return s
 }
 
@@ -9008,6 +9019,7 @@ func (s DeclineHandshakeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeclineHandshakeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeclineHandshakeInput"}
+
 	if s.HandshakeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
@@ -9108,6 +9120,7 @@ func (s DeleteOrganizationalUnitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteOrganizationalUnitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteOrganizationalUnitInput"}
+
 	if s.OrganizationalUnitId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
@@ -9166,6 +9179,7 @@ func (s DeletePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
@@ -9224,6 +9238,7 @@ func (s DescribeAccountInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAccountInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -9293,6 +9308,7 @@ func (s DescribeCreateAccountStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCreateAccountStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCreateAccountStatusInput"}
+
 	if s.CreateAccountRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CreateAccountRequestId"))
 	}
@@ -9361,6 +9377,7 @@ func (s DescribeHandshakeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHandshakeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeHandshakeInput"}
+
 	if s.HandshakeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HandshakeId"))
 	}
@@ -9469,6 +9486,7 @@ func (s DescribeOrganizationalUnitInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeOrganizationalUnitInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeOrganizationalUnitInput"}
+
 	if s.OrganizationalUnitId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
@@ -9536,6 +9554,7 @@ func (s DescribePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePolicyInput"}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
@@ -9623,9 +9642,11 @@ func (s DetachPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachPolicyInput"}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
+
 	if s.TargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
@@ -9670,7 +9691,7 @@ type DisablePolicyTypeInput struct {
 	// The policy type that you want to disable in this root.
 	//
 	// PolicyType is a required field
-	PolicyType *string `type:"string" required:"true" enum:"PolicyType"`
+	PolicyType PolicyType `type:"string" required:"true"`
 
 	// The unique identifier (ID) of the root in which you want to disable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -9695,9 +9716,10 @@ func (s DisablePolicyTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisablePolicyTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisablePolicyTypeInput"}
-	if s.PolicyType == nil {
+	if len(s.PolicyType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
 	}
+
 	if s.RootId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RootId"))
 	}
@@ -9709,8 +9731,8 @@ func (s *DisablePolicyTypeInput) Validate() error {
 }
 
 // SetPolicyType sets the PolicyType field's value.
-func (s *DisablePolicyTypeInput) SetPolicyType(v string) *DisablePolicyTypeInput {
-	s.PolicyType = &v
+func (s *DisablePolicyTypeInput) SetPolicyType(v PolicyType) *DisablePolicyTypeInput {
+	s.PolicyType = v
 	return s
 }
 
@@ -9791,7 +9813,7 @@ type EnablePolicyTypeInput struct {
 	// The policy type that you want to enable.
 	//
 	// PolicyType is a required field
-	PolicyType *string `type:"string" required:"true" enum:"PolicyType"`
+	PolicyType PolicyType `type:"string" required:"true"`
 
 	// The unique identifier (ID) of the root in which you want to enable a policy
 	// type. You can get the ID from the ListRoots operation.
@@ -9816,9 +9838,10 @@ func (s EnablePolicyTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnablePolicyTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnablePolicyTypeInput"}
-	if s.PolicyType == nil {
+	if len(s.PolicyType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyType"))
 	}
+
 	if s.RootId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RootId"))
 	}
@@ -9830,8 +9853,8 @@ func (s *EnablePolicyTypeInput) Validate() error {
 }
 
 // SetPolicyType sets the PolicyType field's value.
-func (s *EnablePolicyTypeInput) SetPolicyType(v string) *EnablePolicyTypeInput {
-	s.PolicyType = &v
+func (s *EnablePolicyTypeInput) SetPolicyType(v PolicyType) *EnablePolicyTypeInput {
+	s.PolicyType = v
 	return s
 }
 
@@ -9879,7 +9902,7 @@ type Handshake struct {
 
 	// The type of handshake, indicating what action occurs when the recipient accepts
 	// the handshake.
-	Action *string `type:"string" enum:"ActionType"`
+	Action ActionType `type:"string"`
 
 	// The Amazon Resource Name (ARN) of a handshake.
 	//
@@ -9933,7 +9956,7 @@ type Handshake struct {
 	//    * EXPIRED: This handshake is no longer active because the originator did
 	//    not receive a response of any kind from the recipient before the expiration
 	//    time (15 days).
-	State *string `type:"string" enum:"HandshakeState"`
+	State HandshakeState `type:"string"`
 }
 
 // String returns the string representation
@@ -9947,8 +9970,8 @@ func (s Handshake) GoString() string {
 }
 
 // SetAction sets the Action field's value.
-func (s *Handshake) SetAction(v string) *Handshake {
-	s.Action = &v
+func (s *Handshake) SetAction(v ActionType) *Handshake {
+	s.Action = v
 	return s
 }
 
@@ -9989,8 +10012,8 @@ func (s *Handshake) SetResources(v []*HandshakeResource) *Handshake {
 }
 
 // SetState sets the State field's value.
-func (s *Handshake) SetState(v string) *Handshake {
-	s.State = &v
+func (s *Handshake) SetState(v HandshakeState) *Handshake {
+	s.State = v
 	return s
 }
 
@@ -10002,7 +10025,7 @@ type HandshakeFilter struct {
 	// Specifies the type of handshake action.
 	//
 	// If you specify ActionType, you cannot also specify ParentHandshakeId.
-	ActionType *string `type:"string" enum:"ActionType"`
+	ActionType ActionType `type:"string"`
 
 	// Specifies the parent handshake. Only used for handshake types that are a
 	// child of another type.
@@ -10025,8 +10048,8 @@ func (s HandshakeFilter) GoString() string {
 }
 
 // SetActionType sets the ActionType field's value.
-func (s *HandshakeFilter) SetActionType(v string) *HandshakeFilter {
-	s.ActionType = &v
+func (s *HandshakeFilter) SetActionType(v ActionType) *HandshakeFilter {
+	s.ActionType = v
 	return s
 }
 
@@ -10052,7 +10075,7 @@ type HandshakeParty struct {
 	// The type of party.
 	//
 	// Type is a required field
-	Type *string `type:"string" required:"true" enum:"HandshakePartyType"`
+	Type HandshakePartyType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -10068,13 +10091,14 @@ func (s HandshakeParty) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HandshakeParty) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HandshakeParty"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
@@ -10091,8 +10115,8 @@ func (s *HandshakeParty) SetId(v string) *HandshakeParty {
 }
 
 // SetType sets the Type field's value.
-func (s *HandshakeParty) SetType(v string) *HandshakeParty {
-	s.Type = &v
+func (s *HandshakeParty) SetType(v HandshakePartyType) *HandshakeParty {
+	s.Type = v
 	return s
 }
 
@@ -10122,7 +10146,7 @@ type HandshakeResource struct {
 	//
 	//    * NOTES - Additional text provided by the handshake initiator and intended
 	//    for the recipient to read.
-	Type *string `type:"string" enum:"HandshakeResourceType"`
+	Type HandshakeResourceType `type:"string"`
 
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
@@ -10146,8 +10170,8 @@ func (s *HandshakeResource) SetResources(v []*HandshakeResource) *HandshakeResou
 }
 
 // SetType sets the Type field's value.
-func (s *HandshakeResource) SetType(v string) *HandshakeResource {
-	s.Type = &v
+func (s *HandshakeResource) SetType(v HandshakeResourceType) *HandshakeResource {
+	s.Type = v
 	return s
 }
 
@@ -10198,6 +10222,7 @@ func (s InviteAccountToOrganizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InviteAccountToOrganizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InviteAccountToOrganizationInput"}
+
 	if s.Target == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
@@ -10324,6 +10349,7 @@ func (s *ListAccountsForParentInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
@@ -10490,7 +10516,7 @@ type ListChildrenInput struct {
 	// Filters the output to include only the specified child type.
 	//
 	// ChildType is a required field
-	ChildType *string `type:"string" required:"true" enum:"ChildType"`
+	ChildType ChildType `type:"string" required:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -10540,12 +10566,13 @@ func (s ListChildrenInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListChildrenInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListChildrenInput"}
-	if s.ChildType == nil {
+	if len(s.ChildType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ChildType"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
@@ -10557,8 +10584,8 @@ func (s *ListChildrenInput) Validate() error {
 }
 
 // SetChildType sets the ChildType field's value.
-func (s *ListChildrenInput) SetChildType(v string) *ListChildrenInput {
-	s.ChildType = &v
+func (s *ListChildrenInput) SetChildType(v ChildType) *ListChildrenInput {
+	s.ChildType = v
 	return s
 }
 
@@ -10640,7 +10667,7 @@ type ListCreateAccountStatusInput struct {
 
 	// A list of one or more states that you want included in the response. If this
 	// parameter is not present, then all requests are included in the response.
-	States []*string `type:"list"`
+	States []CreateAccountState `type:"list"`
 }
 
 // String returns the string representation
@@ -10679,7 +10706,7 @@ func (s *ListCreateAccountStatusInput) SetNextToken(v string) *ListCreateAccount
 }
 
 // SetStates sets the States field's value.
-func (s *ListCreateAccountStatusInput) SetStates(v []*string) *ListCreateAccountStatusInput {
+func (s *ListCreateAccountStatusInput) SetStates(v []CreateAccountState) *ListCreateAccountStatusInput {
 	s.States = v
 	return s
 }
@@ -10996,6 +11023,7 @@ func (s *ListOrganizationalUnitsForParentInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.ParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ParentId"))
 	}
@@ -11112,6 +11140,7 @@ func (s ListParentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListParentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListParentsInput"}
+
 	if s.ChildId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChildId"))
 	}
@@ -11187,7 +11216,7 @@ type ListPoliciesForTargetInput struct {
 	// The type of policy that you want to include in the returned list.
 	//
 	// Filter is a required field
-	Filter *string `type:"string" required:"true" enum:"PolicyType"`
+	Filter PolicyType `type:"string" required:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -11239,12 +11268,13 @@ func (s ListPoliciesForTargetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPoliciesForTargetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesForTargetInput"}
-	if s.Filter == nil {
+	if len(s.Filter) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.TargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetId"))
 	}
@@ -11256,8 +11286,8 @@ func (s *ListPoliciesForTargetInput) Validate() error {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *ListPoliciesForTargetInput) SetFilter(v string) *ListPoliciesForTargetInput {
-	s.Filter = &v
+func (s *ListPoliciesForTargetInput) SetFilter(v PolicyType) *ListPoliciesForTargetInput {
+	s.Filter = v
 	return s
 }
 
@@ -11323,7 +11353,7 @@ type ListPoliciesInput struct {
 	// Specifies the type of policy that you want to include in the response.
 	//
 	// Filter is a required field
-	Filter *string `type:"string" required:"true" enum:"PolicyType"`
+	Filter PolicyType `type:"string" required:"true"`
 
 	// (Optional) Use this to limit the number of results you want included in the
 	// response. If you do not include this parameter, it defaults to a value that
@@ -11356,7 +11386,7 @@ func (s ListPoliciesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPoliciesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesInput"}
-	if s.Filter == nil {
+	if len(s.Filter) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
@@ -11370,8 +11400,8 @@ func (s *ListPoliciesInput) Validate() error {
 }
 
 // SetFilter sets the Filter field's value.
-func (s *ListPoliciesInput) SetFilter(v string) *ListPoliciesInput {
-	s.Filter = &v
+func (s *ListPoliciesInput) SetFilter(v PolicyType) *ListPoliciesInput {
+	s.Filter = v
 	return s
 }
 
@@ -11566,6 +11596,7 @@ func (s *ListTargetsForPolicyInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
@@ -11692,12 +11723,15 @@ func (s MoveAccountInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MoveAccountInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "MoveAccountInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.DestinationParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DestinationParentId"))
 	}
+
 	if s.SourceParentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceParentId"))
 	}
@@ -11767,7 +11801,7 @@ type Organization struct {
 	// consolidated billing functionality is available. For more information, see
 	// Enabling All Features in Your Organization (http://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html)
 	// in the AWS Organizations User Guide.
-	FeatureSet *string `type:"string" enum:"OrganizationFeatureSet"`
+	FeatureSet OrganizationFeatureSet `type:"string"`
 
 	// The unique identifier (ID) of an organization.
 	//
@@ -11817,8 +11851,8 @@ func (s *Organization) SetAvailablePolicyTypes(v []*PolicyTypeSummary) *Organiza
 }
 
 // SetFeatureSet sets the FeatureSet field's value.
-func (s *Organization) SetFeatureSet(v string) *Organization {
-	s.FeatureSet = &v
+func (s *Organization) SetFeatureSet(v OrganizationFeatureSet) *Organization {
+	s.FeatureSet = v
 	return s
 }
 
@@ -11925,7 +11959,7 @@ type Parent struct {
 	Id *string `type:"string"`
 
 	// The type of the parent entity.
-	Type *string `type:"string" enum:"ParentType"`
+	Type ParentType `type:"string"`
 }
 
 // String returns the string representation
@@ -11945,8 +11979,8 @@ func (s *Parent) SetId(v string) *Parent {
 }
 
 // SetType sets the Type field's value.
-func (s *Parent) SetType(v string) *Parent {
-	s.Type = &v
+func (s *Parent) SetType(v ParentType) *Parent {
+	s.Type = v
 	return s
 }
 
@@ -12021,7 +12055,7 @@ type PolicySummary struct {
 	Name *string `min:"1" type:"string"`
 
 	// The type of policy.
-	Type *string `type:"string" enum:"PolicyType"`
+	Type PolicyType `type:"string"`
 }
 
 // String returns the string representation
@@ -12065,8 +12099,8 @@ func (s *PolicySummary) SetName(v string) *PolicySummary {
 }
 
 // SetType sets the Type field's value.
-func (s *PolicySummary) SetType(v string) *PolicySummary {
-	s.Type = &v
+func (s *PolicySummary) SetType(v PolicyType) *PolicySummary {
+	s.Type = v
 	return s
 }
 
@@ -12107,7 +12141,7 @@ type PolicyTargetSummary struct {
 	TargetId *string `type:"string"`
 
 	// The type of the policy target.
-	Type *string `type:"string" enum:"TargetType"`
+	Type TargetType `type:"string"`
 }
 
 // String returns the string representation
@@ -12139,8 +12173,8 @@ func (s *PolicyTargetSummary) SetTargetId(v string) *PolicyTargetSummary {
 }
 
 // SetType sets the Type field's value.
-func (s *PolicyTargetSummary) SetType(v string) *PolicyTargetSummary {
-	s.Type = &v
+func (s *PolicyTargetSummary) SetType(v TargetType) *PolicyTargetSummary {
+	s.Type = v
 	return s
 }
 
@@ -12153,10 +12187,10 @@ type PolicyTypeSummary struct {
 	// The status of the policy type as it relates to the associated root. To attach
 	// a policy of the specified type to a root or to an OU or account in that root,
 	// it must be available in the organization and enabled for that root.
-	Status *string `type:"string" enum:"PolicyTypeStatus"`
+	Status PolicyTypeStatus `type:"string"`
 
 	// The name of the policy type.
-	Type *string `type:"string" enum:"PolicyType"`
+	Type PolicyType `type:"string"`
 }
 
 // String returns the string representation
@@ -12170,14 +12204,14 @@ func (s PolicyTypeSummary) GoString() string {
 }
 
 // SetStatus sets the Status field's value.
-func (s *PolicyTypeSummary) SetStatus(v string) *PolicyTypeSummary {
-	s.Status = &v
+func (s *PolicyTypeSummary) SetStatus(v PolicyTypeStatus) *PolicyTypeSummary {
+	s.Status = v
 	return s
 }
 
 // SetType sets the Type field's value.
-func (s *PolicyTypeSummary) SetType(v string) *PolicyTypeSummary {
-	s.Type = &v
+func (s *PolicyTypeSummary) SetType(v PolicyType) *PolicyTypeSummary {
+	s.Type = v
 	return s
 }
 
@@ -12208,6 +12242,7 @@ func (s RemoveAccountFromOrganizationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAccountFromOrganizationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemoveAccountFromOrganizationInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
@@ -12346,6 +12381,7 @@ func (s *UpdateOrganizationalUnitInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.OrganizationalUnitId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitId"))
 	}
@@ -12441,6 +12477,7 @@ func (s *UpdatePolicyInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.PolicyId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyId"))
 	}
@@ -12500,299 +12537,197 @@ func (s *UpdatePolicyOutput) SetPolicy(v *Policy) *UpdatePolicyOutput {
 	return s
 }
 
-const (
-	// AccountJoinedMethodInvited is a AccountJoinedMethod enum value
-	AccountJoinedMethodInvited = "INVITED"
+type AccountJoinedMethod string
 
-	// AccountJoinedMethodCreated is a AccountJoinedMethod enum value
-	AccountJoinedMethodCreated = "CREATED"
+// Enum values for AccountJoinedMethod
+const (
+	AccountJoinedMethodInvited AccountJoinedMethod = "INVITED"
+	AccountJoinedMethodCreated AccountJoinedMethod = "CREATED"
 )
 
-const (
-	// AccountStatusActive is a AccountStatus enum value
-	AccountStatusActive = "ACTIVE"
+type AccountStatus string
 
-	// AccountStatusSuspended is a AccountStatus enum value
-	AccountStatusSuspended = "SUSPENDED"
+// Enum values for AccountStatus
+const (
+	AccountStatusActive    AccountStatus = "ACTIVE"
+	AccountStatusSuspended AccountStatus = "SUSPENDED"
 )
 
+type ActionType string
+
+// Enum values for ActionType
 const (
-	// ActionTypeInvite is a ActionType enum value
-	ActionTypeInvite = "INVITE"
-
-	// ActionTypeEnableAllFeatures is a ActionType enum value
-	ActionTypeEnableAllFeatures = "ENABLE_ALL_FEATURES"
-
-	// ActionTypeApproveAllFeatures is a ActionType enum value
-	ActionTypeApproveAllFeatures = "APPROVE_ALL_FEATURES"
+	ActionTypeInvite             ActionType = "INVITE"
+	ActionTypeEnableAllFeatures  ActionType = "ENABLE_ALL_FEATURES"
+	ActionTypeApproveAllFeatures ActionType = "APPROVE_ALL_FEATURES"
 )
 
-const (
-	// ChildTypeAccount is a ChildType enum value
-	ChildTypeAccount = "ACCOUNT"
+type ChildType string
 
-	// ChildTypeOrganizationalUnit is a ChildType enum value
-	ChildTypeOrganizationalUnit = "ORGANIZATIONAL_UNIT"
+// Enum values for ChildType
+const (
+	ChildTypeAccount            ChildType = "ACCOUNT"
+	ChildTypeOrganizationalUnit ChildType = "ORGANIZATIONAL_UNIT"
 )
 
+type ConstraintViolationExceptionReason string
+
+// Enum values for ConstraintViolationExceptionReason
 const (
-	// ConstraintViolationExceptionReasonAccountNumberLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonAccountNumberLimitExceeded = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonHandshakeRateLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonHandshakeRateLimitExceeded = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonOuNumberLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonOuNumberLimitExceeded = "OU_NUMBER_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonOuDepthLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonOuDepthLimitExceeded = "OU_DEPTH_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonPolicyNumberLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonPolicyNumberLimitExceeded = "POLICY_NUMBER_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonAccountCannotLeaveOrganization is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonAccountCannotLeaveOrganization = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
-
-	// ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
-
-	// ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
-
-	// ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-
-	// ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
-
-	// ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
-
-	// ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
-
-	// ConstraintViolationExceptionReasonMasterAccountMissingContactInfo is a ConstraintViolationExceptionReason enum value
-	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
+	ConstraintViolationExceptionReasonAccountNumberLimitExceeded                  ConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonHandshakeRateLimitExceeded                  ConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuNumberLimitExceeded                       ConstraintViolationExceptionReason = "OU_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonOuDepthLimitExceeded                        ConstraintViolationExceptionReason = "OU_DEPTH_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonPolicyNumberLimitExceeded                   ConstraintViolationExceptionReason = "POLICY_NUMBER_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMaxPolicyTypeAttachmentLimitExceeded        ConstraintViolationExceptionReason = "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMinPolicyTypeAttachmentLimitExceeded        ConstraintViolationExceptionReason = "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonAccountCannotLeaveOrganization              ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_ORGANIZATION"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutEula               ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA"
+	ConstraintViolationExceptionReasonAccountCannotLeaveWithoutPhoneVerification  ConstraintViolationExceptionReason = "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION"
+	ConstraintViolationExceptionReasonMasterAccountPaymentInstrumentRequired      ConstraintViolationExceptionReason = "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonMemberAccountPaymentInstrumentRequired      ConstraintViolationExceptionReason = "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED"
+	ConstraintViolationExceptionReasonAccountCreationRateLimitExceeded            ConstraintViolationExceptionReason = "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED"
+	ConstraintViolationExceptionReasonMasterAccountAddressDoesNotMatchMarketplace ConstraintViolationExceptionReason = "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE"
+	ConstraintViolationExceptionReasonMasterAccountMissingContactInfo             ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_CONTACT_INFO"
 )
 
+type CreateAccountFailureReason string
+
+// Enum values for CreateAccountFailureReason
 const (
-	// CreateAccountFailureReasonAccountLimitExceeded is a CreateAccountFailureReason enum value
-	CreateAccountFailureReasonAccountLimitExceeded = "ACCOUNT_LIMIT_EXCEEDED"
-
-	// CreateAccountFailureReasonEmailAlreadyExists is a CreateAccountFailureReason enum value
-	CreateAccountFailureReasonEmailAlreadyExists = "EMAIL_ALREADY_EXISTS"
-
-	// CreateAccountFailureReasonInvalidAddress is a CreateAccountFailureReason enum value
-	CreateAccountFailureReasonInvalidAddress = "INVALID_ADDRESS"
-
-	// CreateAccountFailureReasonInvalidEmail is a CreateAccountFailureReason enum value
-	CreateAccountFailureReasonInvalidEmail = "INVALID_EMAIL"
-
-	// CreateAccountFailureReasonInternalFailure is a CreateAccountFailureReason enum value
-	CreateAccountFailureReasonInternalFailure = "INTERNAL_FAILURE"
+	CreateAccountFailureReasonAccountLimitExceeded CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
+	CreateAccountFailureReasonEmailAlreadyExists   CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
+	CreateAccountFailureReasonInvalidAddress       CreateAccountFailureReason = "INVALID_ADDRESS"
+	CreateAccountFailureReasonInvalidEmail         CreateAccountFailureReason = "INVALID_EMAIL"
+	CreateAccountFailureReasonInternalFailure      CreateAccountFailureReason = "INTERNAL_FAILURE"
 )
 
+type CreateAccountState string
+
+// Enum values for CreateAccountState
 const (
-	// CreateAccountStateInProgress is a CreateAccountState enum value
-	CreateAccountStateInProgress = "IN_PROGRESS"
-
-	// CreateAccountStateSucceeded is a CreateAccountState enum value
-	CreateAccountStateSucceeded = "SUCCEEDED"
-
-	// CreateAccountStateFailed is a CreateAccountState enum value
-	CreateAccountStateFailed = "FAILED"
+	CreateAccountStateInProgress CreateAccountState = "IN_PROGRESS"
+	CreateAccountStateSucceeded  CreateAccountState = "SUCCEEDED"
+	CreateAccountStateFailed     CreateAccountState = "FAILED"
 )
 
+type HandshakeConstraintViolationExceptionReason string
+
+// Enum values for HandshakeConstraintViolationExceptionReason
 const (
-	// HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
-
-	// HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
-
-	// HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization = "ALREADY_IN_AN_ORGANIZATION"
-
-	// HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
-
-	// HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
-
-	// HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired = "PAYMENT_INSTRUMENT_REQUIRED"
-
-	// HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
-
-	// HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded is a HandshakeConstraintViolationExceptionReason enum value
-	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAccountNumberLimitExceeded                    HandshakeConstraintViolationExceptionReason = "ACCOUNT_NUMBER_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonHandshakeRateLimitExceeded                    HandshakeConstraintViolationExceptionReason = "HANDSHAKE_RATE_LIMIT_EXCEEDED"
+	HandshakeConstraintViolationExceptionReasonAlreadyInAnOrganization                       HandshakeConstraintViolationExceptionReason = "ALREADY_IN_AN_ORGANIZATION"
+	HandshakeConstraintViolationExceptionReasonOrganizationAlreadyHasAllFeatures             HandshakeConstraintViolationExceptionReason = "ORGANIZATION_ALREADY_HAS_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonInviteDisabledDuringEnableAllFeatures         HandshakeConstraintViolationExceptionReason = "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES"
+	HandshakeConstraintViolationExceptionReasonPaymentInstrumentRequired                     HandshakeConstraintViolationExceptionReason = "PAYMENT_INSTRUMENT_REQUIRED"
+	HandshakeConstraintViolationExceptionReasonOrganizationFromDifferentSellerOfRecord       HandshakeConstraintViolationExceptionReason = "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD"
+	HandshakeConstraintViolationExceptionReasonOrganizationMembershipChangeRateLimitExceeded HandshakeConstraintViolationExceptionReason = "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED"
 )
 
+type HandshakePartyType string
+
+// Enum values for HandshakePartyType
 const (
-	// HandshakePartyTypeAccount is a HandshakePartyType enum value
-	HandshakePartyTypeAccount = "ACCOUNT"
-
-	// HandshakePartyTypeOrganization is a HandshakePartyType enum value
-	HandshakePartyTypeOrganization = "ORGANIZATION"
-
-	// HandshakePartyTypeEmail is a HandshakePartyType enum value
-	HandshakePartyTypeEmail = "EMAIL"
+	HandshakePartyTypeAccount      HandshakePartyType = "ACCOUNT"
+	HandshakePartyTypeOrganization HandshakePartyType = "ORGANIZATION"
+	HandshakePartyTypeEmail        HandshakePartyType = "EMAIL"
 )
 
+type HandshakeResourceType string
+
+// Enum values for HandshakeResourceType
 const (
-	// HandshakeResourceTypeAccount is a HandshakeResourceType enum value
-	HandshakeResourceTypeAccount = "ACCOUNT"
-
-	// HandshakeResourceTypeOrganization is a HandshakeResourceType enum value
-	HandshakeResourceTypeOrganization = "ORGANIZATION"
-
-	// HandshakeResourceTypeOrganizationFeatureSet is a HandshakeResourceType enum value
-	HandshakeResourceTypeOrganizationFeatureSet = "ORGANIZATION_FEATURE_SET"
-
-	// HandshakeResourceTypeEmail is a HandshakeResourceType enum value
-	HandshakeResourceTypeEmail = "EMAIL"
-
-	// HandshakeResourceTypeMasterEmail is a HandshakeResourceType enum value
-	HandshakeResourceTypeMasterEmail = "MASTER_EMAIL"
-
-	// HandshakeResourceTypeMasterName is a HandshakeResourceType enum value
-	HandshakeResourceTypeMasterName = "MASTER_NAME"
-
-	// HandshakeResourceTypeNotes is a HandshakeResourceType enum value
-	HandshakeResourceTypeNotes = "NOTES"
-
-	// HandshakeResourceTypeParentHandshake is a HandshakeResourceType enum value
-	HandshakeResourceTypeParentHandshake = "PARENT_HANDSHAKE"
+	HandshakeResourceTypeAccount                HandshakeResourceType = "ACCOUNT"
+	HandshakeResourceTypeOrganization           HandshakeResourceType = "ORGANIZATION"
+	HandshakeResourceTypeOrganizationFeatureSet HandshakeResourceType = "ORGANIZATION_FEATURE_SET"
+	HandshakeResourceTypeEmail                  HandshakeResourceType = "EMAIL"
+	HandshakeResourceTypeMasterEmail            HandshakeResourceType = "MASTER_EMAIL"
+	HandshakeResourceTypeMasterName             HandshakeResourceType = "MASTER_NAME"
+	HandshakeResourceTypeNotes                  HandshakeResourceType = "NOTES"
+	HandshakeResourceTypeParentHandshake        HandshakeResourceType = "PARENT_HANDSHAKE"
 )
 
+type HandshakeState string
+
+// Enum values for HandshakeState
 const (
-	// HandshakeStateRequested is a HandshakeState enum value
-	HandshakeStateRequested = "REQUESTED"
-
-	// HandshakeStateOpen is a HandshakeState enum value
-	HandshakeStateOpen = "OPEN"
-
-	// HandshakeStateCanceled is a HandshakeState enum value
-	HandshakeStateCanceled = "CANCELED"
-
-	// HandshakeStateAccepted is a HandshakeState enum value
-	HandshakeStateAccepted = "ACCEPTED"
-
-	// HandshakeStateDeclined is a HandshakeState enum value
-	HandshakeStateDeclined = "DECLINED"
-
-	// HandshakeStateExpired is a HandshakeState enum value
-	HandshakeStateExpired = "EXPIRED"
+	HandshakeStateRequested HandshakeState = "REQUESTED"
+	HandshakeStateOpen      HandshakeState = "OPEN"
+	HandshakeStateCanceled  HandshakeState = "CANCELED"
+	HandshakeStateAccepted  HandshakeState = "ACCEPTED"
+	HandshakeStateDeclined  HandshakeState = "DECLINED"
+	HandshakeStateExpired   HandshakeState = "EXPIRED"
 )
 
-const (
-	// IAMUserAccessToBillingAllow is a IAMUserAccessToBilling enum value
-	IAMUserAccessToBillingAllow = "ALLOW"
+type IAMUserAccessToBilling string
 
-	// IAMUserAccessToBillingDeny is a IAMUserAccessToBilling enum value
-	IAMUserAccessToBillingDeny = "DENY"
+// Enum values for IAMUserAccessToBilling
+const (
+	IAMUserAccessToBillingAllow IAMUserAccessToBilling = "ALLOW"
+	IAMUserAccessToBillingDeny  IAMUserAccessToBilling = "DENY"
 )
 
+type InvalidInputExceptionReason string
+
+// Enum values for InvalidInputExceptionReason
 const (
-	// InvalidInputExceptionReasonInvalidPartyTypeTarget is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidPartyTypeTarget = "INVALID_PARTY_TYPE_TARGET"
-
-	// InvalidInputExceptionReasonInvalidSyntaxOrganizationArn is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidSyntaxOrganizationArn = "INVALID_SYNTAX_ORGANIZATION_ARN"
-
-	// InvalidInputExceptionReasonInvalidSyntaxPolicyId is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidSyntaxPolicyId = "INVALID_SYNTAX_POLICY_ID"
-
-	// InvalidInputExceptionReasonInvalidEnum is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidEnum = "INVALID_ENUM"
-
-	// InvalidInputExceptionReasonInvalidListMember is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidListMember = "INVALID_LIST_MEMBER"
-
-	// InvalidInputExceptionReasonMaxLengthExceeded is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMaxLengthExceeded = "MAX_LENGTH_EXCEEDED"
-
-	// InvalidInputExceptionReasonMaxValueExceeded is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMaxValueExceeded = "MAX_VALUE_EXCEEDED"
-
-	// InvalidInputExceptionReasonMinLengthExceeded is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMinLengthExceeded = "MIN_LENGTH_EXCEEDED"
-
-	// InvalidInputExceptionReasonMinValueExceeded is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMinValueExceeded = "MIN_VALUE_EXCEEDED"
-
-	// InvalidInputExceptionReasonImmutablePolicy is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonImmutablePolicy = "IMMUTABLE_POLICY"
-
-	// InvalidInputExceptionReasonInvalidPattern is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidPattern = "INVALID_PATTERN"
-
-	// InvalidInputExceptionReasonInvalidPatternTargetId is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidPatternTargetId = "INVALID_PATTERN_TARGET_ID"
-
-	// InvalidInputExceptionReasonInputRequired is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInputRequired = "INPUT_REQUIRED"
-
-	// InvalidInputExceptionReasonInvalidNextToken is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidNextToken = "INVALID_NEXT_TOKEN"
-
-	// InvalidInputExceptionReasonMaxLimitExceededFilter is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMaxLimitExceededFilter = "MAX_LIMIT_EXCEEDED_FILTER"
-
-	// InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
-
-	// InvalidInputExceptionReasonInvalidFullNameTarget is a InvalidInputExceptionReason enum value
-	InvalidInputExceptionReasonInvalidFullNameTarget = "INVALID_FULL_NAME_TARGET"
+	InvalidInputExceptionReasonInvalidPartyTypeTarget             InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
+	InvalidInputExceptionReasonInvalidSyntaxOrganizationArn       InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
+	InvalidInputExceptionReasonInvalidSyntaxPolicyId              InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
+	InvalidInputExceptionReasonInvalidEnum                        InvalidInputExceptionReason = "INVALID_ENUM"
+	InvalidInputExceptionReasonInvalidListMember                  InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
+	InvalidInputExceptionReasonMaxLengthExceeded                  InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMaxValueExceeded                   InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonMinLengthExceeded                  InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMinValueExceeded                   InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonImmutablePolicy                    InvalidInputExceptionReason = "IMMUTABLE_POLICY"
+	InvalidInputExceptionReasonInvalidPattern                     InvalidInputExceptionReason = "INVALID_PATTERN"
+	InvalidInputExceptionReasonInvalidPatternTargetId             InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
+	InvalidInputExceptionReasonInputRequired                      InvalidInputExceptionReason = "INPUT_REQUIRED"
+	InvalidInputExceptionReasonInvalidNextToken                   InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
+	InvalidInputExceptionReasonMaxLimitExceededFilter             InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
+	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
+	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
 )
 
-const (
-	// OrganizationFeatureSetAll is a OrganizationFeatureSet enum value
-	OrganizationFeatureSetAll = "ALL"
+type OrganizationFeatureSet string
 
-	// OrganizationFeatureSetConsolidatedBilling is a OrganizationFeatureSet enum value
-	OrganizationFeatureSetConsolidatedBilling = "CONSOLIDATED_BILLING"
+// Enum values for OrganizationFeatureSet
+const (
+	OrganizationFeatureSetAll                 OrganizationFeatureSet = "ALL"
+	OrganizationFeatureSetConsolidatedBilling OrganizationFeatureSet = "CONSOLIDATED_BILLING"
 )
 
-const (
-	// ParentTypeRoot is a ParentType enum value
-	ParentTypeRoot = "ROOT"
+type ParentType string
 
-	// ParentTypeOrganizationalUnit is a ParentType enum value
-	ParentTypeOrganizationalUnit = "ORGANIZATIONAL_UNIT"
+// Enum values for ParentType
+const (
+	ParentTypeRoot               ParentType = "ROOT"
+	ParentTypeOrganizationalUnit ParentType = "ORGANIZATIONAL_UNIT"
 )
 
+type PolicyType string
+
+// Enum values for PolicyType
 const (
-	// PolicyTypeServiceControlPolicy is a PolicyType enum value
-	PolicyTypeServiceControlPolicy = "SERVICE_CONTROL_POLICY"
+	PolicyTypeServiceControlPolicy PolicyType = "SERVICE_CONTROL_POLICY"
 )
 
+type PolicyTypeStatus string
+
+// Enum values for PolicyTypeStatus
 const (
-	// PolicyTypeStatusEnabled is a PolicyTypeStatus enum value
-	PolicyTypeStatusEnabled = "ENABLED"
-
-	// PolicyTypeStatusPendingEnable is a PolicyTypeStatus enum value
-	PolicyTypeStatusPendingEnable = "PENDING_ENABLE"
-
-	// PolicyTypeStatusPendingDisable is a PolicyTypeStatus enum value
-	PolicyTypeStatusPendingDisable = "PENDING_DISABLE"
+	PolicyTypeStatusEnabled        PolicyTypeStatus = "ENABLED"
+	PolicyTypeStatusPendingEnable  PolicyTypeStatus = "PENDING_ENABLE"
+	PolicyTypeStatusPendingDisable PolicyTypeStatus = "PENDING_DISABLE"
 )
 
+type TargetType string
+
+// Enum values for TargetType
 const (
-	// TargetTypeAccount is a TargetType enum value
-	TargetTypeAccount = "ACCOUNT"
-
-	// TargetTypeOrganizationalUnit is a TargetType enum value
-	TargetTypeOrganizationalUnit = "ORGANIZATIONAL_UNIT"
-
-	// TargetTypeRoot is a TargetType enum value
-	TargetTypeRoot = "ROOT"
+	TargetTypeAccount            TargetType = "ACCOUNT"
+	TargetTypeOrganizationalUnit TargetType = "ORGANIZATIONAL_UNIT"
+	TargetTypeRoot               TargetType = "ROOT"
 )

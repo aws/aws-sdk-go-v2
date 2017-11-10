@@ -218,6 +218,11 @@ func parseMapEntry(r reflect.Value, node *XMLNode, tag reflect.StructTag) error 
 // Error is returned if the deserialization fails due to invalid type conversion,
 // or unsupported interface type.
 func parseScalar(r reflect.Value, node *XMLNode, tag reflect.StructTag) error {
+	if r.Kind() == reflect.String {
+		r.SetString(node.Text)
+		return nil
+	}
+
 	switch r.Interface().(type) {
 	case *string:
 		r.Set(reflect.ValueOf(&node.Text))

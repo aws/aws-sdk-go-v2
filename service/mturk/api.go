@@ -4094,6 +4094,7 @@ func (s AcceptQualificationRequestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptQualificationRequestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptQualificationRequestInput"}
+
 	if s.QualificationRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
 	}
@@ -4163,6 +4164,7 @@ func (s ApproveAssignmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApproveAssignmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ApproveAssignmentInput"}
+
 	if s.AssignmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
@@ -4235,7 +4237,7 @@ type Assignment struct {
 	AssignmentId *string `min:"1" type:"string"`
 
 	// The status of the assignment.
-	AssignmentStatus *string `type:"string" enum:"AssignmentStatus"`
+	AssignmentStatus AssignmentStatus `type:"string"`
 
 	// If results have been submitted, AutoApprovalTime is the date and time the
 	// results of the assignment results are considered Approved automatically if
@@ -4306,8 +4308,8 @@ func (s *Assignment) SetAssignmentId(v string) *Assignment {
 }
 
 // SetAssignmentStatus sets the AssignmentStatus field's value.
-func (s *Assignment) SetAssignmentStatus(v string) *Assignment {
-	s.AssignmentStatus = &v
+func (s *Assignment) SetAssignmentStatus(v AssignmentStatus) *Assignment {
+	s.AssignmentStatus = v
 	return s
 }
 
@@ -4390,12 +4392,14 @@ func (s AssociateQualificationWithWorkerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateQualificationWithWorkerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateQualificationWithWorkerInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -4545,12 +4549,14 @@ func (s CreateAdditionalAssignmentsForHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAdditionalAssignmentsForHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAdditionalAssignmentsForHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
+
 	if s.NumberOfAdditionalAssignments == nil {
 		invalidParams.Add(aws.NewErrParamRequired("NumberOfAdditionalAssignments"))
 	}
@@ -4725,21 +4731,26 @@ func (s CreateHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHITInput"}
+
 	if s.AssignmentDurationInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.HITLayoutId != nil && len(*s.HITLayoutId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HITLayoutId", 1))
 	}
+
 	if s.LifetimeInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifetimeInSeconds"))
 	}
+
 	if s.Reward == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reward"))
 	}
+
 	if s.Title == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Title"))
 	}
@@ -4966,15 +4977,19 @@ func (s CreateHITTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHITTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateHITTypeInput"}
+
 	if s.AssignmentDurationInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.Reward == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reward"))
 	}
+
 	if s.Title == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Title"))
 	}
@@ -5153,12 +5168,14 @@ func (s *CreateHITWithHITTypeInput) Validate() error {
 	if s.HITLayoutId != nil && len(*s.HITLayoutId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HITLayoutId", 1))
 	}
+
 	if s.HITTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
 	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
 	}
+
 	if s.LifetimeInSeconds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LifetimeInSeconds"))
 	}
@@ -5324,7 +5341,7 @@ type CreateQualificationTypeInput struct {
 	// Constraints: Valid values are: Active | Inactive
 	//
 	// QualificationTypeStatus is a required field
-	QualificationTypeStatus *string `type:"string" required:"true" enum:"QualificationTypeStatus"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string" required:"true"`
 
 	// The number of seconds that a Worker must wait after requesting a Qualification
 	// of the Qualification type before the worker can retry the Qualification request.
@@ -5366,13 +5383,15 @@ func (s CreateQualificationTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQualificationTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateQualificationTypeInput"}
+
 	if s.Description == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
-	if s.QualificationTypeStatus == nil {
+	if len(s.QualificationTypeStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeStatus"))
 	}
 
@@ -5419,8 +5438,8 @@ func (s *CreateQualificationTypeInput) SetName(v string) *CreateQualificationTyp
 }
 
 // SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *CreateQualificationTypeInput) SetQualificationTypeStatus(v string) *CreateQualificationTypeInput {
-	s.QualificationTypeStatus = &v
+func (s *CreateQualificationTypeInput) SetQualificationTypeStatus(v QualificationTypeStatus) *CreateQualificationTypeInput {
+	s.QualificationTypeStatus = v
 	return s
 }
 
@@ -5495,9 +5514,11 @@ func (s CreateWorkerBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWorkerBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkerBlockInput"}
+
 	if s.Reason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -5561,6 +5582,7 @@ func (s DeleteHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -5618,6 +5640,7 @@ func (s DeleteQualificationTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQualificationTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteQualificationTypeInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -5679,6 +5702,7 @@ func (s DeleteWorkerBlockInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWorkerBlockInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkerBlockInput"}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -5751,12 +5775,14 @@ func (s DisassociateQualificationFromWorkerInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateQualificationFromWorkerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateQualificationFromWorkerInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -5874,6 +5900,7 @@ func (s GetAssignmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAssignmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAssignmentInput"}
+
 	if s.AssignmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
@@ -5955,12 +5982,14 @@ func (s GetFileUploadURLInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFileUploadURLInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFileUploadURLInput"}
+
 	if s.AssignmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
+
 	if s.QuestionIdentifier == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QuestionIdentifier"))
 	}
@@ -6030,6 +6059,7 @@ func (s GetHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -6101,12 +6131,14 @@ func (s GetQualificationScoreInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQualificationScoreInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationScoreInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -6180,6 +6212,7 @@ func (s GetQualificationTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQualificationTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationTypeInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -6260,11 +6293,11 @@ type HIT struct {
 
 	// Indicates the review status of the HIT. Valid Values are NotReviewed | MarkedForReview
 	// | ReviewedAppropriate | ReviewedInappropriate.
-	HITReviewStatus *string `type:"string" enum:"HITReviewStatus"`
+	HITReviewStatus HITReviewStatus `type:"string"`
 
 	// The status of the HIT and its assignments. Valid Values are Assignable |
 	// Unassignable | Reviewable | Reviewing | Disposed.
-	HITStatus *string `type:"string" enum:"HITStatus"`
+	HITStatus HITStatus `type:"string"`
 
 	// The ID of the HIT type of this HIT
 	HITTypeId *string `min:"1" type:"string"`
@@ -6369,14 +6402,14 @@ func (s *HIT) SetHITLayoutId(v string) *HIT {
 }
 
 // SetHITReviewStatus sets the HITReviewStatus field's value.
-func (s *HIT) SetHITReviewStatus(v string) *HIT {
-	s.HITReviewStatus = &v
+func (s *HIT) SetHITReviewStatus(v HITReviewStatus) *HIT {
+	s.HITReviewStatus = v
 	return s
 }
 
 // SetHITStatus sets the HITStatus field's value.
-func (s *HIT) SetHITStatus(v string) *HIT {
-	s.HITStatus = &v
+func (s *HIT) SetHITStatus(v HITStatus) *HIT {
+	s.HITStatus = v
 	return s
 }
 
@@ -6477,9 +6510,11 @@ func (s HITLayoutParameter) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HITLayoutParameter) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "HITLayoutParameter"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -6507,7 +6542,7 @@ type ListAssignmentsForHITInput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the assignments to return: Submitted | Approved | Rejected
-	AssignmentStatuses []*string `type:"list"`
+	AssignmentStatuses []AssignmentStatus `type:"list"`
 
 	// The ID of the HIT.
 	//
@@ -6533,6 +6568,7 @@ func (s ListAssignmentsForHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssignmentsForHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAssignmentsForHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -6553,7 +6589,7 @@ func (s *ListAssignmentsForHITInput) Validate() error {
 }
 
 // SetAssignmentStatuses sets the AssignmentStatuses field's value.
-func (s *ListAssignmentsForHITInput) SetAssignmentStatuses(v []*string) *ListAssignmentsForHITInput {
+func (s *ListAssignmentsForHITInput) SetAssignmentStatuses(v []AssignmentStatus) *ListAssignmentsForHITInput {
 	s.AssignmentStatuses = v
 	return s
 }
@@ -6778,6 +6814,7 @@ func (s *ListHITsForQualificationTypeInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -7103,6 +7140,7 @@ func (s *ListQualificationTypesInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.MustBeRequestable == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MustBeRequestable"))
 	}
@@ -7209,7 +7247,7 @@ type ListReviewPolicyResultsForHITInput struct {
 	// The Policy Level(s) to retrieve review results for - HIT or Assignment. If
 	// omitted, the default behavior is to retrieve all data for both policy levels.
 	// For a list of all the described policies, see Review Policies.
-	PolicyLevels []*string `type:"list"`
+	PolicyLevels []ReviewPolicyLevel `type:"list"`
 
 	// Specify if the operation should retrieve a list of the actions taken executing
 	// the Review Policies and their outcomes.
@@ -7233,6 +7271,7 @@ func (s ListReviewPolicyResultsForHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListReviewPolicyResultsForHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListReviewPolicyResultsForHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -7271,7 +7310,7 @@ func (s *ListReviewPolicyResultsForHITInput) SetNextToken(v string) *ListReviewP
 }
 
 // SetPolicyLevels sets the PolicyLevels field's value.
-func (s *ListReviewPolicyResultsForHITInput) SetPolicyLevels(v []*string) *ListReviewPolicyResultsForHITInput {
+func (s *ListReviewPolicyResultsForHITInput) SetPolicyLevels(v []ReviewPolicyLevel) *ListReviewPolicyResultsForHITInput {
 	s.PolicyLevels = v
 	return s
 }
@@ -7376,7 +7415,7 @@ type ListReviewableHITsInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// Can be either Reviewable or Reviewing. Reviewable is the default value.
-	Status *string `type:"string" enum:"ReviewableHITStatus"`
+	Status ReviewableHITStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -7427,8 +7466,8 @@ func (s *ListReviewableHITsInput) SetNextToken(v string) *ListReviewableHITsInpu
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListReviewableHITsInput) SetStatus(v string) *ListReviewableHITsInput {
-	s.Status = &v
+func (s *ListReviewableHITsInput) SetStatus(v ReviewableHITStatus) *ListReviewableHITsInput {
+	s.Status = v
 	return s
 }
 
@@ -7587,7 +7626,7 @@ type ListWorkersWithQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 
 	// The status of the Qualifications to return. Can be Granted | Revoked.
-	Status *string `type:"string" enum:"QualificationStatus"`
+	Status QualificationStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -7609,6 +7648,7 @@ func (s *ListWorkersWithQualificationTypeInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -7641,8 +7681,8 @@ func (s *ListWorkersWithQualificationTypeInput) SetQualificationTypeId(v string)
 }
 
 // SetStatus sets the Status field's value.
-func (s *ListWorkersWithQualificationTypeInput) SetStatus(v string) *ListWorkersWithQualificationTypeInput {
-	s.Status = &v
+func (s *ListWorkersWithQualificationTypeInput) SetStatus(v QualificationStatus) *ListWorkersWithQualificationTypeInput {
+	s.Status = v
 	return s
 }
 
@@ -7720,6 +7760,7 @@ func (s Locale) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Locale) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Locale"}
+
 	if s.Country == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Country"))
 	}
@@ -7773,13 +7814,13 @@ type NotificationSpecification struct {
 	// SendTestEventNotification operation.
 	//
 	// EventTypes is a required field
-	EventTypes []*string `type:"list" required:"true"`
+	EventTypes []EventType `type:"list" required:"true"`
 
 	// The method Amazon Mechanical Turk uses to send the notification. Valid Values:
 	// Email | SQS | SNS.
 	//
 	// Transport is a required field
-	Transport *string `type:"string" required:"true" enum:"NotificationTransport"`
+	Transport NotificationTransport `type:"string" required:"true"`
 
 	// The version of the Notification API to use. Valid value is 2006-05-05.
 	//
@@ -7800,15 +7841,18 @@ func (s NotificationSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotificationSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NotificationSpecification"}
+
 	if s.Destination == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
+
 	if s.EventTypes == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventTypes"))
 	}
-	if s.Transport == nil {
+	if len(s.Transport) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Transport"))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -7826,14 +7870,14 @@ func (s *NotificationSpecification) SetDestination(v string) *NotificationSpecif
 }
 
 // SetEventTypes sets the EventTypes field's value.
-func (s *NotificationSpecification) SetEventTypes(v []*string) *NotificationSpecification {
+func (s *NotificationSpecification) SetEventTypes(v []EventType) *NotificationSpecification {
 	s.EventTypes = v
 	return s
 }
 
 // SetTransport sets the Transport field's value.
-func (s *NotificationSpecification) SetTransport(v string) *NotificationSpecification {
-	s.Transport = &v
+func (s *NotificationSpecification) SetTransport(v NotificationTransport) *NotificationSpecification {
+	s.Transport = v
 	return s
 }
 
@@ -7850,7 +7894,7 @@ type NotifyWorkersFailureStatus struct {
 	_ struct{} `type:"structure"`
 
 	// Encoded value for the failure type.
-	NotifyWorkersFailureCode *string `type:"string" enum:"NotifyWorkersFailureCode"`
+	NotifyWorkersFailureCode NotifyWorkersFailureCode `type:"string"`
 
 	// A message detailing the reason the Worker could not be notified.
 	NotifyWorkersFailureMessage *string `type:"string"`
@@ -7870,8 +7914,8 @@ func (s NotifyWorkersFailureStatus) GoString() string {
 }
 
 // SetNotifyWorkersFailureCode sets the NotifyWorkersFailureCode field's value.
-func (s *NotifyWorkersFailureStatus) SetNotifyWorkersFailureCode(v string) *NotifyWorkersFailureStatus {
-	s.NotifyWorkersFailureCode = &v
+func (s *NotifyWorkersFailureStatus) SetNotifyWorkersFailureCode(v NotifyWorkersFailureCode) *NotifyWorkersFailureStatus {
+	s.NotifyWorkersFailureCode = v
 	return s
 }
 
@@ -7921,12 +7965,15 @@ func (s NotifyWorkersInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyWorkersInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "NotifyWorkersInput"}
+
 	if s.MessageText == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageText"))
 	}
+
 	if s.Subject == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
+
 	if s.WorkerIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerIds"))
 	}
@@ -8084,7 +8131,7 @@ type Qualification struct {
 	QualificationTypeId *string `min:"1" type:"string"`
 
 	// The status of the Qualification. Valid values are Granted | Revoked.
-	Status *string `type:"string" enum:"QualificationStatus"`
+	Status QualificationStatus `type:"string"`
 
 	// The ID of the Worker who possesses the Qualification.
 	WorkerId *string `min:"1" type:"string"`
@@ -8125,8 +8172,8 @@ func (s *Qualification) SetQualificationTypeId(v string) *Qualification {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Qualification) SetStatus(v string) *Qualification {
-	s.Status = &v
+func (s *Qualification) SetStatus(v QualificationStatus) *Qualification {
+	s.Status = v
 	return s
 }
 
@@ -8235,7 +8282,7 @@ type QualificationRequirement struct {
 	// regardless of its value.
 	//
 	// Comparator is a required field
-	Comparator *string `type:"string" required:"true" enum:"Comparator"`
+	Comparator Comparator `type:"string" required:"true"`
 
 	// The integer value to compare against the Qualification's value. IntegerValue
 	// must not be present if Comparator is Exists or DoesNotExist. IntegerValue
@@ -8284,9 +8331,10 @@ func (s QualificationRequirement) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QualificationRequirement) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "QualificationRequirement"}
-	if s.Comparator == nil {
+	if len(s.Comparator) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Comparator"))
 	}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -8308,8 +8356,8 @@ func (s *QualificationRequirement) Validate() error {
 }
 
 // SetComparator sets the Comparator field's value.
-func (s *QualificationRequirement) SetComparator(v string) *QualificationRequirement {
-	s.Comparator = &v
+func (s *QualificationRequirement) SetComparator(v Comparator) *QualificationRequirement {
+	s.Comparator = v
 	return s
 }
 
@@ -8386,7 +8434,7 @@ type QualificationType struct {
 	// if users can apply to receive a Qualification of this type, and if HITs can
 	// be created with requirements based on this type. Valid values are Active
 	// | Inactive.
-	QualificationTypeStatus *string `type:"string" enum:"QualificationTypeStatus"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string"`
 
 	// The amount of time, in seconds, Workers must wait after taking the Qualification
 	// test before they can take it again. Workers can take a Qualification test
@@ -8472,8 +8520,8 @@ func (s *QualificationType) SetQualificationTypeId(v string) *QualificationType 
 }
 
 // SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *QualificationType) SetQualificationTypeStatus(v string) *QualificationType {
-	s.QualificationTypeStatus = &v
+func (s *QualificationType) SetQualificationTypeStatus(v QualificationTypeStatus) *QualificationType {
+	s.QualificationTypeStatus = v
 	return s
 }
 
@@ -8525,12 +8573,14 @@ func (s RejectAssignmentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectAssignmentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RejectAssignmentInput"}
+
 	if s.AssignmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
+
 	if s.RequesterFeedback == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequesterFeedback"))
 	}
@@ -8596,6 +8646,7 @@ func (s RejectQualificationRequestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectQualificationRequestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RejectQualificationRequestInput"}
+
 	if s.QualificationRequestId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
 	}
@@ -8658,7 +8709,7 @@ type ReviewActionDetail struct {
 	Result *string `type:"string"`
 
 	// The current disposition of the action: INTENDED, SUCCEEDED, FAILED, or CANCELLED.
-	Status *string `type:"string" enum:"ReviewActionStatus"`
+	Status ReviewActionStatus `type:"string"`
 
 	// The specific HITId or AssignmentID targeted by the action.
 	TargetId *string `min:"1" type:"string"`
@@ -8708,8 +8759,8 @@ func (s *ReviewActionDetail) SetResult(v string) *ReviewActionDetail {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ReviewActionDetail) SetStatus(v string) *ReviewActionDetail {
-	s.Status = &v
+func (s *ReviewActionDetail) SetStatus(v ReviewActionStatus) *ReviewActionDetail {
+	s.Status = v
 	return s
 }
 
@@ -8753,6 +8804,7 @@ func (s ReviewPolicy) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReviewPolicy) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReviewPolicy"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -8937,21 +8989,25 @@ func (s SendBonusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendBonusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendBonusInput"}
+
 	if s.AssignmentId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
+
 	if s.BonusAmount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BonusAmount"))
 	}
+
 	if s.Reason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
 	}
+
 	if s.WorkerId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
@@ -9027,7 +9083,7 @@ type SendTestEventNotificationInput struct {
 	// out the test event.
 	//
 	// TestEventType is a required field
-	TestEventType *string `type:"string" required:"true" enum:"EventType"`
+	TestEventType EventType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -9043,10 +9099,11 @@ func (s SendTestEventNotificationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTestEventNotificationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SendTestEventNotificationInput"}
+
 	if s.Notification == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
-	if s.TestEventType == nil {
+	if len(s.TestEventType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("TestEventType"))
 	}
 	if s.Notification != nil {
@@ -9068,8 +9125,8 @@ func (s *SendTestEventNotificationInput) SetNotification(v *NotificationSpecific
 }
 
 // SetTestEventType sets the TestEventType field's value.
-func (s *SendTestEventNotificationInput) SetTestEventType(v string) *SendTestEventNotificationInput {
-	s.TestEventType = &v
+func (s *SendTestEventNotificationInput) SetTestEventType(v EventType) *SendTestEventNotificationInput {
+	s.TestEventType = v
 	return s
 }
 
@@ -9116,9 +9173,11 @@ func (s UpdateExpirationForHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateExpirationForHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateExpirationForHITInput"}
+
 	if s.ExpireAt == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExpireAt"))
 	}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -9190,6 +9249,7 @@ func (s UpdateHITReviewStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHITReviewStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITReviewStatusInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
@@ -9258,12 +9318,14 @@ func (s UpdateHITTypeOfHITInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHITTypeOfHITInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITTypeOfHITInput"}
+
 	if s.HITId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
+
 	if s.HITTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
@@ -9336,6 +9398,7 @@ func (s UpdateNotificationSettingsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNotificationSettingsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationSettingsInput"}
+
 	if s.HITTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
@@ -9415,7 +9478,7 @@ type UpdateQualificationTypeInput struct {
 	QualificationTypeId *string `min:"1" type:"string" required:"true"`
 
 	// The new status of the Qualification type - Active | Inactive
-	QualificationTypeStatus *string `type:"string" enum:"QualificationTypeStatus"`
+	QualificationTypeStatus QualificationTypeStatus `type:"string"`
 
 	// The amount of time, in seconds, that Workers must wait after requesting a
 	// Qualification of the specified Qualification type before they can retry the
@@ -9455,6 +9518,7 @@ func (s UpdateQualificationTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateQualificationTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateQualificationTypeInput"}
+
 	if s.QualificationTypeId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
@@ -9499,8 +9563,8 @@ func (s *UpdateQualificationTypeInput) SetQualificationTypeId(v string) *UpdateQ
 }
 
 // SetQualificationTypeStatus sets the QualificationTypeStatus field's value.
-func (s *UpdateQualificationTypeInput) SetQualificationTypeStatus(v string) *UpdateQualificationTypeInput {
-	s.QualificationTypeStatus = &v
+func (s *UpdateQualificationTypeInput) SetQualificationTypeStatus(v QualificationTypeStatus) *UpdateQualificationTypeInput {
+	s.QualificationTypeStatus = v
 	return s
 }
 
@@ -9581,179 +9645,125 @@ func (s *WorkerBlock) SetWorkerId(v string) *WorkerBlock {
 	return s
 }
 
+type AssignmentStatus string
+
+// Enum values for AssignmentStatus
 const (
-	// AssignmentStatusSubmitted is a AssignmentStatus enum value
-	AssignmentStatusSubmitted = "Submitted"
-
-	// AssignmentStatusApproved is a AssignmentStatus enum value
-	AssignmentStatusApproved = "Approved"
-
-	// AssignmentStatusRejected is a AssignmentStatus enum value
-	AssignmentStatusRejected = "Rejected"
+	AssignmentStatusSubmitted AssignmentStatus = "Submitted"
+	AssignmentStatusApproved  AssignmentStatus = "Approved"
+	AssignmentStatusRejected  AssignmentStatus = "Rejected"
 )
 
+type Comparator string
+
+// Enum values for Comparator
 const (
-	// ComparatorLessThan is a Comparator enum value
-	ComparatorLessThan = "LessThan"
-
-	// ComparatorLessThanOrEqualTo is a Comparator enum value
-	ComparatorLessThanOrEqualTo = "LessThanOrEqualTo"
-
-	// ComparatorGreaterThan is a Comparator enum value
-	ComparatorGreaterThan = "GreaterThan"
-
-	// ComparatorGreaterThanOrEqualTo is a Comparator enum value
-	ComparatorGreaterThanOrEqualTo = "GreaterThanOrEqualTo"
-
-	// ComparatorEqualTo is a Comparator enum value
-	ComparatorEqualTo = "EqualTo"
-
-	// ComparatorNotEqualTo is a Comparator enum value
-	ComparatorNotEqualTo = "NotEqualTo"
-
-	// ComparatorExists is a Comparator enum value
-	ComparatorExists = "Exists"
-
-	// ComparatorDoesNotExist is a Comparator enum value
-	ComparatorDoesNotExist = "DoesNotExist"
-
-	// ComparatorIn is a Comparator enum value
-	ComparatorIn = "In"
-
-	// ComparatorNotIn is a Comparator enum value
-	ComparatorNotIn = "NotIn"
+	ComparatorLessThan             Comparator = "LessThan"
+	ComparatorLessThanOrEqualTo    Comparator = "LessThanOrEqualTo"
+	ComparatorGreaterThan          Comparator = "GreaterThan"
+	ComparatorGreaterThanOrEqualTo Comparator = "GreaterThanOrEqualTo"
+	ComparatorEqualTo              Comparator = "EqualTo"
+	ComparatorNotEqualTo           Comparator = "NotEqualTo"
+	ComparatorExists               Comparator = "Exists"
+	ComparatorDoesNotExist         Comparator = "DoesNotExist"
+	ComparatorIn                   Comparator = "In"
+	ComparatorNotIn                Comparator = "NotIn"
 )
 
+type EventType string
+
+// Enum values for EventType
 const (
-	// EventTypeAssignmentAccepted is a EventType enum value
-	EventTypeAssignmentAccepted = "AssignmentAccepted"
-
-	// EventTypeAssignmentAbandoned is a EventType enum value
-	EventTypeAssignmentAbandoned = "AssignmentAbandoned"
-
-	// EventTypeAssignmentReturned is a EventType enum value
-	EventTypeAssignmentReturned = "AssignmentReturned"
-
-	// EventTypeAssignmentSubmitted is a EventType enum value
-	EventTypeAssignmentSubmitted = "AssignmentSubmitted"
-
-	// EventTypeAssignmentRejected is a EventType enum value
-	EventTypeAssignmentRejected = "AssignmentRejected"
-
-	// EventTypeAssignmentApproved is a EventType enum value
-	EventTypeAssignmentApproved = "AssignmentApproved"
-
-	// EventTypeHitcreated is a EventType enum value
-	EventTypeHitcreated = "HITCreated"
-
-	// EventTypeHitexpired is a EventType enum value
-	EventTypeHitexpired = "HITExpired"
-
-	// EventTypeHitreviewable is a EventType enum value
-	EventTypeHitreviewable = "HITReviewable"
-
-	// EventTypeHitextended is a EventType enum value
-	EventTypeHitextended = "HITExtended"
-
-	// EventTypeHitdisposed is a EventType enum value
-	EventTypeHitdisposed = "HITDisposed"
-
-	// EventTypePing is a EventType enum value
-	EventTypePing = "Ping"
+	EventTypeAssignmentAccepted  EventType = "AssignmentAccepted"
+	EventTypeAssignmentAbandoned EventType = "AssignmentAbandoned"
+	EventTypeAssignmentReturned  EventType = "AssignmentReturned"
+	EventTypeAssignmentSubmitted EventType = "AssignmentSubmitted"
+	EventTypeAssignmentRejected  EventType = "AssignmentRejected"
+	EventTypeAssignmentApproved  EventType = "AssignmentApproved"
+	EventTypeHitcreated          EventType = "HITCreated"
+	EventTypeHitexpired          EventType = "HITExpired"
+	EventTypeHitreviewable       EventType = "HITReviewable"
+	EventTypeHitextended         EventType = "HITExtended"
+	EventTypeHitdisposed         EventType = "HITDisposed"
+	EventTypePing                EventType = "Ping"
 )
 
+type HITReviewStatus string
+
+// Enum values for HITReviewStatus
 const (
-	// HITReviewStatusNotReviewed is a HITReviewStatus enum value
-	HITReviewStatusNotReviewed = "NotReviewed"
-
-	// HITReviewStatusMarkedForReview is a HITReviewStatus enum value
-	HITReviewStatusMarkedForReview = "MarkedForReview"
-
-	// HITReviewStatusReviewedAppropriate is a HITReviewStatus enum value
-	HITReviewStatusReviewedAppropriate = "ReviewedAppropriate"
-
-	// HITReviewStatusReviewedInappropriate is a HITReviewStatus enum value
-	HITReviewStatusReviewedInappropriate = "ReviewedInappropriate"
+	HITReviewStatusNotReviewed           HITReviewStatus = "NotReviewed"
+	HITReviewStatusMarkedForReview       HITReviewStatus = "MarkedForReview"
+	HITReviewStatusReviewedAppropriate   HITReviewStatus = "ReviewedAppropriate"
+	HITReviewStatusReviewedInappropriate HITReviewStatus = "ReviewedInappropriate"
 )
 
+type HITStatus string
+
+// Enum values for HITStatus
 const (
-	// HITStatusAssignable is a HITStatus enum value
-	HITStatusAssignable = "Assignable"
-
-	// HITStatusUnassignable is a HITStatus enum value
-	HITStatusUnassignable = "Unassignable"
-
-	// HITStatusReviewable is a HITStatus enum value
-	HITStatusReviewable = "Reviewable"
-
-	// HITStatusReviewing is a HITStatus enum value
-	HITStatusReviewing = "Reviewing"
-
-	// HITStatusDisposed is a HITStatus enum value
-	HITStatusDisposed = "Disposed"
+	HITStatusAssignable   HITStatus = "Assignable"
+	HITStatusUnassignable HITStatus = "Unassignable"
+	HITStatusReviewable   HITStatus = "Reviewable"
+	HITStatusReviewing    HITStatus = "Reviewing"
+	HITStatusDisposed     HITStatus = "Disposed"
 )
 
+type NotificationTransport string
+
+// Enum values for NotificationTransport
 const (
-	// NotificationTransportEmail is a NotificationTransport enum value
-	NotificationTransportEmail = "Email"
-
-	// NotificationTransportSqs is a NotificationTransport enum value
-	NotificationTransportSqs = "SQS"
-
-	// NotificationTransportSns is a NotificationTransport enum value
-	NotificationTransportSns = "SNS"
+	NotificationTransportEmail NotificationTransport = "Email"
+	NotificationTransportSqs   NotificationTransport = "SQS"
+	NotificationTransportSns   NotificationTransport = "SNS"
 )
 
-const (
-	// NotifyWorkersFailureCodeSoftFailure is a NotifyWorkersFailureCode enum value
-	NotifyWorkersFailureCodeSoftFailure = "SoftFailure"
+type NotifyWorkersFailureCode string
 
-	// NotifyWorkersFailureCodeHardFailure is a NotifyWorkersFailureCode enum value
-	NotifyWorkersFailureCodeHardFailure = "HardFailure"
+// Enum values for NotifyWorkersFailureCode
+const (
+	NotifyWorkersFailureCodeSoftFailure NotifyWorkersFailureCode = "SoftFailure"
+	NotifyWorkersFailureCodeHardFailure NotifyWorkersFailureCode = "HardFailure"
 )
 
-const (
-	// QualificationStatusGranted is a QualificationStatus enum value
-	QualificationStatusGranted = "Granted"
+type QualificationStatus string
 
-	// QualificationStatusRevoked is a QualificationStatus enum value
-	QualificationStatusRevoked = "Revoked"
+// Enum values for QualificationStatus
+const (
+	QualificationStatusGranted QualificationStatus = "Granted"
+	QualificationStatusRevoked QualificationStatus = "Revoked"
 )
 
-const (
-	// QualificationTypeStatusActive is a QualificationTypeStatus enum value
-	QualificationTypeStatusActive = "Active"
+type QualificationTypeStatus string
 
-	// QualificationTypeStatusInactive is a QualificationTypeStatus enum value
-	QualificationTypeStatusInactive = "Inactive"
+// Enum values for QualificationTypeStatus
+const (
+	QualificationTypeStatusActive   QualificationTypeStatus = "Active"
+	QualificationTypeStatusInactive QualificationTypeStatus = "Inactive"
 )
 
+type ReviewActionStatus string
+
+// Enum values for ReviewActionStatus
 const (
-	// ReviewActionStatusIntended is a ReviewActionStatus enum value
-	ReviewActionStatusIntended = "Intended"
-
-	// ReviewActionStatusSucceeded is a ReviewActionStatus enum value
-	ReviewActionStatusSucceeded = "Succeeded"
-
-	// ReviewActionStatusFailed is a ReviewActionStatus enum value
-	ReviewActionStatusFailed = "Failed"
-
-	// ReviewActionStatusCancelled is a ReviewActionStatus enum value
-	ReviewActionStatusCancelled = "Cancelled"
+	ReviewActionStatusIntended  ReviewActionStatus = "Intended"
+	ReviewActionStatusSucceeded ReviewActionStatus = "Succeeded"
+	ReviewActionStatusFailed    ReviewActionStatus = "Failed"
+	ReviewActionStatusCancelled ReviewActionStatus = "Cancelled"
 )
 
-const (
-	// ReviewPolicyLevelAssignment is a ReviewPolicyLevel enum value
-	ReviewPolicyLevelAssignment = "Assignment"
+type ReviewPolicyLevel string
 
-	// ReviewPolicyLevelHit is a ReviewPolicyLevel enum value
-	ReviewPolicyLevelHit = "HIT"
+// Enum values for ReviewPolicyLevel
+const (
+	ReviewPolicyLevelAssignment ReviewPolicyLevel = "Assignment"
+	ReviewPolicyLevelHit        ReviewPolicyLevel = "HIT"
 )
 
-const (
-	// ReviewableHITStatusReviewable is a ReviewableHITStatus enum value
-	ReviewableHITStatusReviewable = "Reviewable"
+type ReviewableHITStatus string
 
-	// ReviewableHITStatusReviewing is a ReviewableHITStatus enum value
-	ReviewableHITStatusReviewing = "Reviewing"
+// Enum values for ReviewableHITStatus
+const (
+	ReviewableHITStatusReviewable ReviewableHITStatus = "Reviewable"
+	ReviewableHITStatusReviewing  ReviewableHITStatus = "Reviewing"
 )

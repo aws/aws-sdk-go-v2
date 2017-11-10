@@ -4167,7 +4167,7 @@ type BotChannelAssociation struct {
 
 	// Specifies the type of association by indicating the type of channel being
 	// established between the Amazon Lex bot and the external messaging platform.
-	Type *string `locationName:"type" type:"string" enum:"ChannelType"`
+	Type ChannelType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -4217,8 +4217,8 @@ func (s *BotChannelAssociation) SetName(v string) *BotChannelAssociation {
 }
 
 // SetType sets the Type field's value.
-func (s *BotChannelAssociation) SetType(v string) *BotChannelAssociation {
-	s.Type = &v
+func (s *BotChannelAssociation) SetType(v ChannelType) *BotChannelAssociation {
+	s.Type = v
 	return s
 }
 
@@ -4241,7 +4241,7 @@ type BotMetadata struct {
 	Name *string `locationName:"name" min:"2" type:"string"`
 
 	// The status of the bot.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -4282,8 +4282,8 @@ func (s *BotMetadata) SetName(v string) *BotMetadata {
 }
 
 // SetStatus sets the Status field's value.
-func (s *BotMetadata) SetStatus(v string) *BotMetadata {
-	s.Status = &v
+func (s *BotMetadata) SetStatus(v Status) *BotMetadata {
+	s.Status = v
 	return s
 }
 
@@ -4304,7 +4304,7 @@ type BuiltinIntentMetadata struct {
 	Signature *string `locationName:"signature" type:"string"`
 
 	// A list of identifiers for the locales that the intent supports.
-	SupportedLocales []*string `locationName:"supportedLocales" type:"list"`
+	SupportedLocales []Locale `locationName:"supportedLocales" type:"list"`
 }
 
 // String returns the string representation
@@ -4324,7 +4324,7 @@ func (s *BuiltinIntentMetadata) SetSignature(v string) *BuiltinIntentMetadata {
 }
 
 // SetSupportedLocales sets the SupportedLocales field's value.
-func (s *BuiltinIntentMetadata) SetSupportedLocales(v []*string) *BuiltinIntentMetadata {
+func (s *BuiltinIntentMetadata) SetSupportedLocales(v []Locale) *BuiltinIntentMetadata {
 	s.SupportedLocales = v
 	return s
 }
@@ -4365,7 +4365,7 @@ type BuiltinSlotTypeMetadata struct {
 	Signature *string `locationName:"signature" type:"string"`
 
 	// A list of target locales for the slot.
-	SupportedLocales []*string `locationName:"supportedLocales" type:"list"`
+	SupportedLocales []Locale `locationName:"supportedLocales" type:"list"`
 }
 
 // String returns the string representation
@@ -4385,7 +4385,7 @@ func (s *BuiltinSlotTypeMetadata) SetSignature(v string) *BuiltinSlotTypeMetadat
 }
 
 // SetSupportedLocales sets the SupportedLocales field's value.
-func (s *BuiltinSlotTypeMetadata) SetSupportedLocales(v []*string) *BuiltinSlotTypeMetadata {
+func (s *BuiltinSlotTypeMetadata) SetSupportedLocales(v []Locale) *BuiltinSlotTypeMetadata {
 	s.SupportedLocales = v
 	return s
 }
@@ -4421,12 +4421,14 @@ func (s CodeHook) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeHook) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CodeHook"}
+
 	if s.MessageVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MessageVersion"))
 	}
 	if s.MessageVersion != nil && len(*s.MessageVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MessageVersion", 1))
 	}
+
 	if s.Uri == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Uri"))
 	}
@@ -4483,6 +4485,7 @@ func (s CreateBotVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBotVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateBotVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4569,7 +4572,7 @@ type CreateBotVersionOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// Specifies the target locale for the bot.
-	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -4578,7 +4581,7 @@ type CreateBotVersionOutput struct {
 	// response element to BUILDING. After Amazon Lex builds the bot, it sets status
 	// to READY. If Amazon Lex can't build the bot, it sets status to FAILED. Amazon
 	// Lex returns the reason for the failure in the failureReason response element.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 
 	// The version of the bot.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -4659,8 +4662,8 @@ func (s *CreateBotVersionOutput) SetLastUpdatedDate(v time.Time) *CreateBotVersi
 }
 
 // SetLocale sets the Locale field's value.
-func (s *CreateBotVersionOutput) SetLocale(v string) *CreateBotVersionOutput {
-	s.Locale = &v
+func (s *CreateBotVersionOutput) SetLocale(v Locale) *CreateBotVersionOutput {
+	s.Locale = v
 	return s
 }
 
@@ -4671,8 +4674,8 @@ func (s *CreateBotVersionOutput) SetName(v string) *CreateBotVersionOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CreateBotVersionOutput) SetStatus(v string) *CreateBotVersionOutput {
-	s.Status = &v
+func (s *CreateBotVersionOutput) SetStatus(v Status) *CreateBotVersionOutput {
+	s.Status = v
 	return s
 }
 
@@ -4719,6 +4722,7 @@ func (s CreateIntentVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIntentVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateIntentVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4930,6 +4934,7 @@ func (s CreateSlotTypeVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSlotTypeVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateSlotTypeVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4981,7 +4986,7 @@ type CreateSlotTypeVersionOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy *string `locationName:"valueSelectionStrategy" type:"string" enum:"SlotValueSelectionStrategy"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
 
 	// The version assigned to the new slot type version.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -5034,8 +5039,8 @@ func (s *CreateSlotTypeVersionOutput) SetName(v string) *CreateSlotTypeVersionOu
 }
 
 // SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *CreateSlotTypeVersionOutput) SetValueSelectionStrategy(v string) *CreateSlotTypeVersionOutput {
-	s.ValueSelectionStrategy = &v
+func (s *CreateSlotTypeVersionOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *CreateSlotTypeVersionOutput {
+	s.ValueSelectionStrategy = v
 	return s
 }
 
@@ -5073,12 +5078,14 @@ func (s DeleteBotAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotAliasInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5153,18 +5160,21 @@ func (s DeleteBotChannelAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotChannelAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotChannelAssociationInput"}
+
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5234,6 +5244,7 @@ func (s DeleteBotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5297,12 +5308,14 @@ func (s DeleteBotVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -5366,6 +5379,7 @@ func (s DeleteIntentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5429,12 +5443,14 @@ func (s DeleteIntentVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntentVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntentVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -5498,6 +5514,7 @@ func (s DeleteSlotTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSlotTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -5561,12 +5578,14 @@ func (s DeleteSlotTypeVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSlotTypeVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeVersionInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -5638,12 +5657,14 @@ func (s DeleteUtterancesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUtterancesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteUtterancesInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -5722,6 +5743,7 @@ func (s EnumerationValue) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnumerationValue) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnumerationValue"}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -5779,9 +5801,11 @@ func (s FollowUpPrompt) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FollowUpPrompt) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FollowUpPrompt"}
+
 	if s.Prompt == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Prompt"))
 	}
+
 	if s.RejectionStatement == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RejectionStatement"))
 	}
@@ -5843,7 +5867,7 @@ type FulfillmentActivity struct {
 	// by returning the slot data to the client application.
 	//
 	// Type is a required field
-	Type *string `locationName:"type" type:"string" required:"true" enum:"FulfillmentActivityType"`
+	Type FulfillmentActivityType `locationName:"type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5859,7 +5883,7 @@ func (s FulfillmentActivity) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FulfillmentActivity) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FulfillmentActivity"}
-	if s.Type == nil {
+	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.CodeHook != nil {
@@ -5881,8 +5905,8 @@ func (s *FulfillmentActivity) SetCodeHook(v *CodeHook) *FulfillmentActivity {
 }
 
 // SetType sets the Type field's value.
-func (s *FulfillmentActivity) SetType(v string) *FulfillmentActivity {
-	s.Type = &v
+func (s *FulfillmentActivity) SetType(v FulfillmentActivityType) *FulfillmentActivity {
+	s.Type = v
 	return s
 }
 
@@ -5914,12 +5938,14 @@ func (s GetBotAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBotAliasInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6062,6 +6088,7 @@ func (s GetBotAliasesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotAliasesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBotAliasesInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
@@ -6176,18 +6203,21 @@ func (s GetBotChannelAssociationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotChannelAssociationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBotChannelAssociationInput"}
+
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6244,7 +6274,7 @@ type GetBotChannelAssociationOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the messaging platform.
-	Type *string `locationName:"type" type:"string" enum:"ChannelType"`
+	Type ChannelType `locationName:"type" type:"string"`
 }
 
 // String returns the string representation
@@ -6294,8 +6324,8 @@ func (s *GetBotChannelAssociationOutput) SetName(v string) *GetBotChannelAssocia
 }
 
 // SetType sets the Type field's value.
-func (s *GetBotChannelAssociationOutput) SetType(v string) *GetBotChannelAssociationOutput {
-	s.Type = &v
+func (s *GetBotChannelAssociationOutput) SetType(v ChannelType) *GetBotChannelAssociationOutput {
+	s.Type = v
 	return s
 }
 
@@ -6344,12 +6374,14 @@ func (s GetBotChannelAssociationsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotChannelAssociationsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBotChannelAssociationsInput"}
+
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
@@ -6464,12 +6496,14 @@ func (s GetBotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBotInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
+
 	if s.VersionOrAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VersionOrAlias"))
 	}
@@ -6554,7 +6588,7 @@ type GetBotOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -6563,7 +6597,7 @@ type GetBotOutput struct {
 	// there was a problem with building the bot, the status is FAILED and the failureReason
 	// explains why the bot did not build. If the bot was saved but not built, the
 	// status is NOT BUILT.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -6644,8 +6678,8 @@ func (s *GetBotOutput) SetLastUpdatedDate(v time.Time) *GetBotOutput {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *GetBotOutput) SetLocale(v string) *GetBotOutput {
-	s.Locale = &v
+func (s *GetBotOutput) SetLocale(v Locale) *GetBotOutput {
+	s.Locale = v
 	return s
 }
 
@@ -6656,8 +6690,8 @@ func (s *GetBotOutput) SetName(v string) *GetBotOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *GetBotOutput) SetStatus(v string) *GetBotOutput {
-	s.Status = &v
+func (s *GetBotOutput) SetStatus(v Status) *GetBotOutput {
+	s.Status = v
 	return s
 }
 
@@ -6709,6 +6743,7 @@ func (s *GetBotVersionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6900,6 +6935,7 @@ func (s GetBuiltinIntentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBuiltinIntentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinIntentInput"}
+
 	if s.Signature == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Signature"))
 	}
@@ -6928,7 +6964,7 @@ type GetBuiltinIntentOutput struct {
 	Slots []*BuiltinIntentSlot `locationName:"slots" type:"list"`
 
 	// A list of locales that the intent supports.
-	SupportedLocales []*string `locationName:"supportedLocales" type:"list"`
+	SupportedLocales []Locale `locationName:"supportedLocales" type:"list"`
 }
 
 // String returns the string representation
@@ -6954,7 +6990,7 @@ func (s *GetBuiltinIntentOutput) SetSlots(v []*BuiltinIntentSlot) *GetBuiltinInt
 }
 
 // SetSupportedLocales sets the SupportedLocales field's value.
-func (s *GetBuiltinIntentOutput) SetSupportedLocales(v []*string) *GetBuiltinIntentOutput {
+func (s *GetBuiltinIntentOutput) SetSupportedLocales(v []Locale) *GetBuiltinIntentOutput {
 	s.SupportedLocales = v
 	return s
 }
@@ -6964,7 +7000,7 @@ type GetBuiltinIntentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the intent supports.
-	Locale *string `location:"querystring" locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
 
 	// The maximum number of intents to return in the response. The default is 10.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -7006,8 +7042,8 @@ func (s *GetBuiltinIntentsInput) Validate() error {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *GetBuiltinIntentsInput) SetLocale(v string) *GetBuiltinIntentsInput {
-	s.Locale = &v
+func (s *GetBuiltinIntentsInput) SetLocale(v Locale) *GetBuiltinIntentsInput {
+	s.Locale = v
 	return s
 }
 
@@ -7070,7 +7106,7 @@ type GetBuiltinSlotTypesInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of locales that the slot type supports.
-	Locale *string `location:"querystring" locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `location:"querystring" locationName:"locale" type:"string"`
 
 	// The maximum number of slot types to return in the response. The default is
 	// 10.
@@ -7112,8 +7148,8 @@ func (s *GetBuiltinSlotTypesInput) Validate() error {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *GetBuiltinSlotTypesInput) SetLocale(v string) *GetBuiltinSlotTypesInput {
-	s.Locale = &v
+func (s *GetBuiltinSlotTypesInput) SetLocale(v Locale) *GetBuiltinSlotTypesInput {
+	s.Locale = v
 	return s
 }
 
@@ -7177,7 +7213,7 @@ type GetExportInput struct {
 	// The format of the exported data.
 	//
 	// ExportType is a required field
-	ExportType *string `location:"querystring" locationName:"exportType" type:"string" required:"true" enum:"ExportType"`
+	ExportType ExportType `location:"querystring" locationName:"exportType" type:"string" required:"true"`
 
 	// The name of the bot to export.
 	//
@@ -7187,7 +7223,7 @@ type GetExportInput struct {
 	// The type of resource to export.
 	//
 	// ResourceType is a required field
-	ResourceType *string `location:"querystring" locationName:"resourceType" type:"string" required:"true" enum:"ResourceType"`
+	ResourceType ResourceType `location:"querystring" locationName:"resourceType" type:"string" required:"true"`
 
 	// The version of the bot to export.
 	//
@@ -7208,18 +7244,20 @@ func (s GetExportInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExportInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetExportInput"}
-	if s.ExportType == nil {
+	if len(s.ExportType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ExportType"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-	if s.ResourceType == nil {
+	if len(s.ResourceType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -7234,8 +7272,8 @@ func (s *GetExportInput) Validate() error {
 }
 
 // SetExportType sets the ExportType field's value.
-func (s *GetExportInput) SetExportType(v string) *GetExportInput {
-	s.ExportType = &v
+func (s *GetExportInput) SetExportType(v ExportType) *GetExportInput {
+	s.ExportType = v
 	return s
 }
 
@@ -7246,8 +7284,8 @@ func (s *GetExportInput) SetName(v string) *GetExportInput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *GetExportInput) SetResourceType(v string) *GetExportInput {
-	s.ResourceType = &v
+func (s *GetExportInput) SetResourceType(v ResourceType) *GetExportInput {
+	s.ResourceType = v
 	return s
 }
 
@@ -7268,10 +7306,10 @@ type GetExportOutput struct {
 	//    * READY - The export is complete.
 	//
 	//    * FAILED - The export could not be completed.
-	ExportStatus *string `locationName:"exportStatus" type:"string" enum:"ExportStatus"`
+	ExportStatus ExportStatus `locationName:"exportStatus" type:"string"`
 
 	// The format of the exported data.
-	ExportType *string `locationName:"exportType" type:"string" enum:"ExportType"`
+	ExportType ExportType `locationName:"exportType" type:"string"`
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to export
 	// the resource.
@@ -7281,7 +7319,7 @@ type GetExportOutput struct {
 	Name *string `locationName:"name" min:"1" type:"string"`
 
 	// The type of the exported resource.
-	ResourceType *string `locationName:"resourceType" type:"string" enum:"ResourceType"`
+	ResourceType ResourceType `locationName:"resourceType" type:"string"`
 
 	// An S3 pre-signed URL that provides the location of the exported resource.
 	// The exported resource is a ZIP archive that contains the exported resource
@@ -7304,14 +7342,14 @@ func (s GetExportOutput) GoString() string {
 }
 
 // SetExportStatus sets the ExportStatus field's value.
-func (s *GetExportOutput) SetExportStatus(v string) *GetExportOutput {
-	s.ExportStatus = &v
+func (s *GetExportOutput) SetExportStatus(v ExportStatus) *GetExportOutput {
+	s.ExportStatus = v
 	return s
 }
 
 // SetExportType sets the ExportType field's value.
-func (s *GetExportOutput) SetExportType(v string) *GetExportOutput {
-	s.ExportType = &v
+func (s *GetExportOutput) SetExportType(v ExportType) *GetExportOutput {
+	s.ExportType = v
 	return s
 }
 
@@ -7328,8 +7366,8 @@ func (s *GetExportOutput) SetName(v string) *GetExportOutput {
 }
 
 // SetResourceType sets the ResourceType field's value.
-func (s *GetExportOutput) SetResourceType(v string) *GetExportOutput {
-	s.ResourceType = &v
+func (s *GetExportOutput) SetResourceType(v ResourceType) *GetExportOutput {
+	s.ResourceType = v
 	return s
 }
 
@@ -7373,12 +7411,14 @@ func (s GetIntentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIntentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -7596,6 +7636,7 @@ func (s *GetIntentVersionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -7789,12 +7830,14 @@ func (s GetSlotTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSlotTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetSlotTypeInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+
 	if s.Version == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
@@ -7846,7 +7889,7 @@ type GetSlotTypeOutput struct {
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For
 	// more information, see PutSlotType.
-	ValueSelectionStrategy *string `locationName:"valueSelectionStrategy" type:"string" enum:"SlotValueSelectionStrategy"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
 
 	// The version of the slot type.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -7899,8 +7942,8 @@ func (s *GetSlotTypeOutput) SetName(v string) *GetSlotTypeOutput {
 }
 
 // SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *GetSlotTypeOutput) SetValueSelectionStrategy(v string) *GetSlotTypeOutput {
-	s.ValueSelectionStrategy = &v
+func (s *GetSlotTypeOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *GetSlotTypeOutput {
+	s.ValueSelectionStrategy = v
 	return s
 }
 
@@ -7946,6 +7989,7 @@ func (s *GetSlotTypeVersionsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8132,7 +8176,7 @@ type GetUtterancesViewInput struct {
 	// utterances that were not recognized, use Missed.
 	//
 	// StatusType is a required field
-	StatusType *string `location:"querystring" locationName:"status_type" type:"string" required:"true" enum:"StatusType"`
+	StatusType StatusType `location:"querystring" locationName:"status_type" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8148,19 +8192,21 @@ func (s GetUtterancesViewInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUtterancesViewInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetUtterancesViewInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.BotVersions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotVersions"))
 	}
 	if s.BotVersions != nil && len(s.BotVersions) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotVersions", 1))
 	}
-	if s.StatusType == nil {
+	if len(s.StatusType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("StatusType"))
 	}
 
@@ -8183,8 +8229,8 @@ func (s *GetUtterancesViewInput) SetBotVersions(v []*string) *GetUtterancesViewI
 }
 
 // SetStatusType sets the StatusType field's value.
-func (s *GetUtterancesViewInput) SetStatusType(v string) *GetUtterancesViewInput {
-	s.StatusType = &v
+func (s *GetUtterancesViewInput) SetStatusType(v StatusType) *GetUtterancesViewInput {
+	s.StatusType = v
 	return s
 }
 
@@ -8252,12 +8298,14 @@ func (s Intent) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Intent) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Intent"}
+
 	if s.IntentName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IntentName"))
 	}
 	if s.IntentName != nil && len(*s.IntentName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IntentName", 1))
 	}
+
 	if s.IntentVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IntentVersion"))
 	}
@@ -8358,7 +8406,7 @@ type Message struct {
 	// The content type of the message string.
 	//
 	// ContentType is a required field
-	ContentType *string `locationName:"contentType" type:"string" required:"true" enum:"ContentType"`
+	ContentType ContentType `locationName:"contentType" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -8374,13 +8422,14 @@ func (s Message) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Message) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Message"}
+
 	if s.Content == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
-	if s.ContentType == nil {
+	if len(s.ContentType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
 
@@ -8397,8 +8446,8 @@ func (s *Message) SetContent(v string) *Message {
 }
 
 // SetContentType sets the ContentType field's value.
-func (s *Message) SetContentType(v string) *Message {
-	s.ContentType = &v
+func (s *Message) SetContentType(v ContentType) *Message {
+	s.ContentType = v
 	return s
 }
 
@@ -8441,12 +8490,14 @@ func (s Prompt) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Prompt) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Prompt"}
+
 	if s.MaxAttempts == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MaxAttempts"))
 	}
 	if s.MaxAttempts != nil && *s.MaxAttempts < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxAttempts", 1))
 	}
+
 	if s.Messages == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Messages"))
 	}
@@ -8538,18 +8589,21 @@ func (s PutBotAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBotAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBotAliasInput"}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
+
 	if s.BotVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotVersion"))
 	}
 	if s.BotVersion != nil && len(*s.BotVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("BotVersion", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8774,7 +8828,7 @@ type PutBotInput struct {
 	// The default is en-US.
 	//
 	// Locale is a required field
-	Locale *string `locationName:"locale" type:"string" required:"true" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string" required:"true"`
 
 	// The name of the bot. The name is not case sensitive.
 	//
@@ -8786,7 +8840,7 @@ type PutBotInput struct {
 	// bot, but doesn't build it.
 	//
 	// If you don't specify this value, the default value is Save.
-	ProcessBehavior *string `locationName:"processBehavior" type:"string" enum:"ProcessBehavior"`
+	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string"`
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
 	// with the user. The locale configured for the voice must match the locale
@@ -8808,15 +8862,17 @@ func (s PutBotInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBotInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutBotInput"}
+
 	if s.ChildDirected == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ChildDirected"))
 	}
 	if s.IdleSessionTTLInSeconds != nil && *s.IdleSessionTTLInSeconds < 60 {
 		invalidParams.Add(aws.NewErrParamMinValue("IdleSessionTTLInSeconds", 60))
 	}
-	if s.Locale == nil {
+	if len(s.Locale) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Locale"))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -8893,8 +8949,8 @@ func (s *PutBotInput) SetIntents(v []*Intent) *PutBotInput {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *PutBotInput) SetLocale(v string) *PutBotInput {
-	s.Locale = &v
+func (s *PutBotInput) SetLocale(v Locale) *PutBotInput {
+	s.Locale = v
 	return s
 }
 
@@ -8905,8 +8961,8 @@ func (s *PutBotInput) SetName(v string) *PutBotInput {
 }
 
 // SetProcessBehavior sets the ProcessBehavior field's value.
-func (s *PutBotInput) SetProcessBehavior(v string) *PutBotInput {
-	s.ProcessBehavior = &v
+func (s *PutBotInput) SetProcessBehavior(v ProcessBehavior) *PutBotInput {
+	s.ProcessBehavior = v
 	return s
 }
 
@@ -8978,7 +9034,7 @@ type PutBotOutput struct {
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The target locale for the bot.
-	Locale *string `locationName:"locale" type:"string" enum:"Locale"`
+	Locale Locale `locationName:"locale" type:"string"`
 
 	// The name of the bot.
 	Name *string `locationName:"name" min:"2" type:"string"`
@@ -8991,7 +9047,7 @@ type PutBotOutput struct {
 	//
 	// When you set processBehaviorto SAVE, Amazon Lex sets the status code to NOT
 	// BUILT.
-	Status *string `locationName:"status" type:"string" enum:"Status"`
+	Status Status `locationName:"status" type:"string"`
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string `locationName:"version" min:"1" type:"string"`
@@ -9072,8 +9128,8 @@ func (s *PutBotOutput) SetLastUpdatedDate(v time.Time) *PutBotOutput {
 }
 
 // SetLocale sets the Locale field's value.
-func (s *PutBotOutput) SetLocale(v string) *PutBotOutput {
-	s.Locale = &v
+func (s *PutBotOutput) SetLocale(v Locale) *PutBotOutput {
+	s.Locale = v
 	return s
 }
 
@@ -9084,8 +9140,8 @@ func (s *PutBotOutput) SetName(v string) *PutBotOutput {
 }
 
 // SetStatus sets the Status field's value.
-func (s *PutBotOutput) SetStatus(v string) *PutBotOutput {
-	s.Status = &v
+func (s *PutBotOutput) SetStatus(v Status) *PutBotOutput {
+	s.Status = v
 	return s
 }
 
@@ -9234,6 +9290,7 @@ func (s PutIntentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutIntentInput"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9571,7 +9628,7 @@ type PutSlotTypeInput struct {
 	//    is no resolution list, null is returned.
 	//
 	// If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	ValueSelectionStrategy *string `locationName:"valueSelectionStrategy" type:"string" enum:"SlotValueSelectionStrategy"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
 }
 
 // String returns the string representation
@@ -9590,6 +9647,7 @@ func (s *PutSlotTypeInput) Validate() error {
 	if s.EnumerationValues != nil && len(s.EnumerationValues) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EnumerationValues", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9638,8 +9696,8 @@ func (s *PutSlotTypeInput) SetName(v string) *PutSlotTypeInput {
 }
 
 // SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *PutSlotTypeInput) SetValueSelectionStrategy(v string) *PutSlotTypeInput {
-	s.ValueSelectionStrategy = &v
+func (s *PutSlotTypeInput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *PutSlotTypeInput {
+	s.ValueSelectionStrategy = v
 	return s
 }
 
@@ -9669,7 +9727,7 @@ type PutSlotTypeOutput struct {
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value
 	// of the slot. For more information, see PutSlotType.
-	ValueSelectionStrategy *string `locationName:"valueSelectionStrategy" type:"string" enum:"SlotValueSelectionStrategy"`
+	ValueSelectionStrategy SlotValueSelectionStrategy `locationName:"valueSelectionStrategy" type:"string"`
 
 	// The version of the slot type. For a new slot type, the version is always
 	// $LATEST.
@@ -9723,8 +9781,8 @@ func (s *PutSlotTypeOutput) SetName(v string) *PutSlotTypeOutput {
 }
 
 // SetValueSelectionStrategy sets the ValueSelectionStrategy field's value.
-func (s *PutSlotTypeOutput) SetValueSelectionStrategy(v string) *PutSlotTypeOutput {
-	s.ValueSelectionStrategy = &v
+func (s *PutSlotTypeOutput) SetValueSelectionStrategy(v SlotValueSelectionStrategy) *PutSlotTypeOutput {
+	s.ValueSelectionStrategy = v
 	return s
 }
 
@@ -9807,7 +9865,7 @@ type Slot struct {
 	// Specifies whether the slot is required or optional.
 	//
 	// SlotConstraint is a required field
-	SlotConstraint *string `locationName:"slotConstraint" type:"string" required:"true" enum:"SlotConstraint"`
+	SlotConstraint SlotConstraint `locationName:"slotConstraint" type:"string" required:"true"`
 
 	// The type of the slot, either a custom slot type that you defined or one of
 	// the built-in slot types.
@@ -9833,6 +9891,7 @@ func (s Slot) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Slot) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Slot"}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -9842,7 +9901,7 @@ func (s *Slot) Validate() error {
 	if s.ResponseCard != nil && len(*s.ResponseCard) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ResponseCard", 1))
 	}
-	if s.SlotConstraint == nil {
+	if len(s.SlotConstraint) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SlotConstraint"))
 	}
 	if s.SlotType != nil && len(*s.SlotType) < 1 {
@@ -9894,8 +9953,8 @@ func (s *Slot) SetSampleUtterances(v []*string) *Slot {
 }
 
 // SetSlotConstraint sets the SlotConstraint field's value.
-func (s *Slot) SetSlotConstraint(v string) *Slot {
-	s.SlotConstraint = &v
+func (s *Slot) SetSlotConstraint(v SlotConstraint) *Slot {
+	s.SlotConstraint = v
 	return s
 }
 
@@ -10010,6 +10069,7 @@ func (s Statement) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Statement) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Statement"}
+
 	if s.Messages == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Messages"))
 	}
@@ -10146,115 +10206,109 @@ func (s *UtteranceList) SetUtterances(v []*UtteranceData) *UtteranceList {
 	return s
 }
 
+type ChannelType string
+
+// Enum values for ChannelType
 const (
-	// ChannelTypeFacebook is a ChannelType enum value
-	ChannelTypeFacebook = "Facebook"
-
-	// ChannelTypeSlack is a ChannelType enum value
-	ChannelTypeSlack = "Slack"
-
-	// ChannelTypeTwilioSms is a ChannelType enum value
-	ChannelTypeTwilioSms = "Twilio-Sms"
+	ChannelTypeFacebook  ChannelType = "Facebook"
+	ChannelTypeSlack     ChannelType = "Slack"
+	ChannelTypeTwilioSms ChannelType = "Twilio-Sms"
 )
 
-const (
-	// ContentTypePlainText is a ContentType enum value
-	ContentTypePlainText = "PlainText"
+type ContentType string
 
-	// ContentTypeSsml is a ContentType enum value
-	ContentTypeSsml = "SSML"
+// Enum values for ContentType
+const (
+	ContentTypePlainText ContentType = "PlainText"
+	ContentTypeSsml      ContentType = "SSML"
 )
 
+type ExportStatus string
+
+// Enum values for ExportStatus
 const (
-	// ExportStatusInProgress is a ExportStatus enum value
-	ExportStatusInProgress = "IN_PROGRESS"
-
-	// ExportStatusReady is a ExportStatus enum value
-	ExportStatusReady = "READY"
-
-	// ExportStatusFailed is a ExportStatus enum value
-	ExportStatusFailed = "FAILED"
+	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
+	ExportStatusReady      ExportStatus = "READY"
+	ExportStatusFailed     ExportStatus = "FAILED"
 )
 
+type ExportType string
+
+// Enum values for ExportType
 const (
-	// ExportTypeAlexaSkillsKit is a ExportType enum value
-	ExportTypeAlexaSkillsKit = "ALEXA_SKILLS_KIT"
+	ExportTypeAlexaSkillsKit ExportType = "ALEXA_SKILLS_KIT"
 )
 
-const (
-	// FulfillmentActivityTypeReturnIntent is a FulfillmentActivityType enum value
-	FulfillmentActivityTypeReturnIntent = "ReturnIntent"
+type FulfillmentActivityType string
 
-	// FulfillmentActivityTypeCodeHook is a FulfillmentActivityType enum value
-	FulfillmentActivityTypeCodeHook = "CodeHook"
+// Enum values for FulfillmentActivityType
+const (
+	FulfillmentActivityTypeReturnIntent FulfillmentActivityType = "ReturnIntent"
+	FulfillmentActivityTypeCodeHook     FulfillmentActivityType = "CodeHook"
 )
 
+type Locale string
+
+// Enum values for Locale
 const (
-	// LocaleEnUs is a Locale enum value
-	LocaleEnUs = "en-US"
+	LocaleEnUs Locale = "en-US"
 )
 
-const (
-	// ProcessBehaviorSave is a ProcessBehavior enum value
-	ProcessBehaviorSave = "SAVE"
+type ProcessBehavior string
 
-	// ProcessBehaviorBuild is a ProcessBehavior enum value
-	ProcessBehaviorBuild = "BUILD"
+// Enum values for ProcessBehavior
+const (
+	ProcessBehaviorSave  ProcessBehavior = "SAVE"
+	ProcessBehaviorBuild ProcessBehavior = "BUILD"
 )
 
+type ReferenceType string
+
+// Enum values for ReferenceType
 const (
-	// ReferenceTypeIntent is a ReferenceType enum value
-	ReferenceTypeIntent = "Intent"
-
-	// ReferenceTypeBot is a ReferenceType enum value
-	ReferenceTypeBot = "Bot"
-
-	// ReferenceTypeBotAlias is a ReferenceType enum value
-	ReferenceTypeBotAlias = "BotAlias"
-
-	// ReferenceTypeBotChannel is a ReferenceType enum value
-	ReferenceTypeBotChannel = "BotChannel"
+	ReferenceTypeIntent     ReferenceType = "Intent"
+	ReferenceTypeBot        ReferenceType = "Bot"
+	ReferenceTypeBotAlias   ReferenceType = "BotAlias"
+	ReferenceTypeBotChannel ReferenceType = "BotChannel"
 )
 
+type ResourceType string
+
+// Enum values for ResourceType
 const (
-	// ResourceTypeBot is a ResourceType enum value
-	ResourceTypeBot = "BOT"
+	ResourceTypeBot ResourceType = "BOT"
 )
 
-const (
-	// SlotConstraintRequired is a SlotConstraint enum value
-	SlotConstraintRequired = "Required"
+type SlotConstraint string
 
-	// SlotConstraintOptional is a SlotConstraint enum value
-	SlotConstraintOptional = "Optional"
+// Enum values for SlotConstraint
+const (
+	SlotConstraintRequired SlotConstraint = "Required"
+	SlotConstraintOptional SlotConstraint = "Optional"
 )
 
-const (
-	// SlotValueSelectionStrategyOriginalValue is a SlotValueSelectionStrategy enum value
-	SlotValueSelectionStrategyOriginalValue = "ORIGINAL_VALUE"
+type SlotValueSelectionStrategy string
 
-	// SlotValueSelectionStrategyTopResolution is a SlotValueSelectionStrategy enum value
-	SlotValueSelectionStrategyTopResolution = "TOP_RESOLUTION"
+// Enum values for SlotValueSelectionStrategy
+const (
+	SlotValueSelectionStrategyOriginalValue SlotValueSelectionStrategy = "ORIGINAL_VALUE"
+	SlotValueSelectionStrategyTopResolution SlotValueSelectionStrategy = "TOP_RESOLUTION"
 )
 
+type Status string
+
+// Enum values for Status
 const (
-	// StatusBuilding is a Status enum value
-	StatusBuilding = "BUILDING"
-
-	// StatusReady is a Status enum value
-	StatusReady = "READY"
-
-	// StatusFailed is a Status enum value
-	StatusFailed = "FAILED"
-
-	// StatusNotBuilt is a Status enum value
-	StatusNotBuilt = "NOT_BUILT"
+	StatusBuilding Status = "BUILDING"
+	StatusReady    Status = "READY"
+	StatusFailed   Status = "FAILED"
+	StatusNotBuilt Status = "NOT_BUILT"
 )
 
-const (
-	// StatusTypeDetected is a StatusType enum value
-	StatusTypeDetected = "Detected"
+type StatusType string
 
-	// StatusTypeMissed is a StatusType enum value
-	StatusTypeMissed = "Missed"
+// Enum values for StatusType
+const (
+	StatusTypeDetected StatusType = "Detected"
+	StatusTypeMissed   StatusType = "Missed"
 )

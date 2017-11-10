@@ -744,6 +744,7 @@ func (s BatchGetTracesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetTracesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchGetTracesInput"}
+
 	if s.TraceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
 	}
@@ -1049,9 +1050,11 @@ func (s GetServiceGraphInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetServiceGraphInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetServiceGraphInput"}
+
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
@@ -1158,6 +1161,7 @@ func (s GetTraceGraphInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTraceGraphInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTraceGraphInput"}
+
 	if s.TraceIds == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TraceIds"))
 	}
@@ -1252,9 +1256,11 @@ func (s GetTraceSummariesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTraceSummariesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTraceSummariesInput"}
+
 	if s.EndTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
+
 	if s.StartTime == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
@@ -1471,6 +1477,7 @@ func (s PutTelemetryRecordsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTelemetryRecordsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutTelemetryRecordsInput"}
+
 	if s.TelemetryRecords == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TelemetryRecords"))
 	}
@@ -1543,6 +1550,7 @@ func (s PutTraceSegmentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTraceSegmentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutTraceSegmentsInput"}
+
 	if s.TraceSegmentDocuments == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TraceSegmentDocuments"))
 	}

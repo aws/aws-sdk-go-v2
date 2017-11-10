@@ -453,6 +453,14 @@ func GenerateAssertions(out interface{}, shape *api.Shape, prefix string) string
 	if shape == nil {
 		return ""
 	}
+
+	if shape.IsEnum() {
+		return fmtAssertEqual(
+			fmt.Sprintf("%s(%#v)", shape.EnumType(), out),
+			fmt.Sprintf("%s", prefix),
+		)
+	}
+
 	switch t := out.(type) {
 	case map[string]interface{}:
 		keys := util.SortedKeys(t)

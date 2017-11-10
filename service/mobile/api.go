@@ -1017,7 +1017,7 @@ type BundleDetails struct {
 	_ struct{} `type:"structure"`
 
 	// Developer desktop or mobile app or website platforms.
-	AvailablePlatforms []*string `locationName:"availablePlatforms" type:"list"`
+	AvailablePlatforms []Platform `locationName:"availablePlatforms" type:"list"`
 
 	// Unique bundle identifier.
 	BundleId *string `locationName:"bundleId" type:"string"`
@@ -1046,7 +1046,7 @@ func (s BundleDetails) GoString() string {
 }
 
 // SetAvailablePlatforms sets the AvailablePlatforms field's value.
-func (s *BundleDetails) SetAvailablePlatforms(v []*string) *BundleDetails {
+func (s *BundleDetails) SetAvailablePlatforms(v []Platform) *BundleDetails {
 	s.AvailablePlatforms = v
 	return s
 }
@@ -1185,6 +1185,7 @@ func (s DeleteProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -1260,6 +1261,7 @@ func (s DescribeBundleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBundleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeBundleInput"}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
@@ -1330,6 +1332,7 @@ func (s DescribeProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProjectInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -1389,7 +1392,7 @@ type ExportBundleInput struct {
 	BundleId *string `location:"uri" locationName:"bundleId" type:"string" required:"true"`
 
 	// Developer desktop or target application platform.
-	Platform *string `location:"querystring" locationName:"platform" type:"string" enum:"Platform"`
+	Platform Platform `location:"querystring" locationName:"platform" type:"string"`
 
 	// Unique project identifier.
 	ProjectId *string `location:"querystring" locationName:"projectId" type:"string"`
@@ -1408,6 +1411,7 @@ func (s ExportBundleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportBundleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExportBundleInput"}
+
 	if s.BundleId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
@@ -1425,8 +1429,8 @@ func (s *ExportBundleInput) SetBundleId(v string) *ExportBundleInput {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *ExportBundleInput) SetPlatform(v string) *ExportBundleInput {
-	s.Platform = &v
+func (s *ExportBundleInput) SetPlatform(v Platform) *ExportBundleInput {
+	s.Platform = v
 	return s
 }
 
@@ -1489,6 +1493,7 @@ func (s ExportProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExportProjectInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -1724,7 +1729,7 @@ type ProjectDetails struct {
 	Resources []*Resource `locationName:"resources" type:"list"`
 
 	// Synchronization state for a project.
-	State *string `locationName:"state" type:"string" enum:"ProjectState"`
+	State ProjectState `locationName:"state" type:"string"`
 }
 
 // String returns the string representation
@@ -1780,8 +1785,8 @@ func (s *ProjectDetails) SetResources(v []*Resource) *ProjectDetails {
 }
 
 // SetState sets the State field's value.
-func (s *ProjectDetails) SetState(v string) *ProjectDetails {
-	s.State = &v
+func (s *ProjectDetails) SetState(v ProjectState) *ProjectDetails {
+	s.State = v
 	return s
 }
 
@@ -1910,6 +1915,7 @@ func (s UpdateProjectInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
+
 	if s.ProjectId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
@@ -1958,37 +1964,25 @@ func (s *UpdateProjectOutput) SetDetails(v *ProjectDetails) *UpdateProjectOutput
 }
 
 // Developer desktop or target mobile app or website platform.
+type Platform string
+
+// Enum values for Platform
 const (
-	// PlatformOsx is a Platform enum value
-	PlatformOsx = "OSX"
-
-	// PlatformWindows is a Platform enum value
-	PlatformWindows = "WINDOWS"
-
-	// PlatformLinux is a Platform enum value
-	PlatformLinux = "LINUX"
-
-	// PlatformObjc is a Platform enum value
-	PlatformObjc = "OBJC"
-
-	// PlatformSwift is a Platform enum value
-	PlatformSwift = "SWIFT"
-
-	// PlatformAndroid is a Platform enum value
-	PlatformAndroid = "ANDROID"
-
-	// PlatformJavascript is a Platform enum value
-	PlatformJavascript = "JAVASCRIPT"
+	PlatformOsx        Platform = "OSX"
+	PlatformWindows    Platform = "WINDOWS"
+	PlatformLinux      Platform = "LINUX"
+	PlatformObjc       Platform = "OBJC"
+	PlatformSwift      Platform = "SWIFT"
+	PlatformAndroid    Platform = "ANDROID"
+	PlatformJavascript Platform = "JAVASCRIPT"
 )
 
 // Synchronization state for a project.
+type ProjectState string
+
+// Enum values for ProjectState
 const (
-	// ProjectStateNormal is a ProjectState enum value
-	ProjectStateNormal = "NORMAL"
-
-	// ProjectStateSyncing is a ProjectState enum value
-	ProjectStateSyncing = "SYNCING"
-
-	// ProjectStateImporting is a ProjectState enum value
-	ProjectStateImporting = "IMPORTING"
+	ProjectStateNormal    ProjectState = "NORMAL"
+	ProjectStateSyncing   ProjectState = "SYNCING"
+	ProjectStateImporting ProjectState = "IMPORTING"
 )

@@ -1059,6 +1059,160 @@ func (s *OutputService6TestShapeOutputService6TestCaseOperation1Output) SetStrTy
 	return s
 }
 
+// OutputService7ProtocolTest provides the API operation methods for making requests to
+// . See this package's package overview docs
+// for details on the service.
+//
+// OutputService7ProtocolTest methods are safe to use concurrently. It is not safe to
+// modify mutate any of the struct's properties though.
+type OutputService7ProtocolTest struct {
+	*aws.Client
+}
+
+// New creates a new instance of the OutputService7ProtocolTest client with a config.
+// If additional configuration is needed for the client instance use the optional
+// aws.Config parameter to add your extra config.
+//
+// Example:
+//     // Create a OutputService7ProtocolTest client from just a config.
+//     svc := outputservice7protocoltest.New(myConfig)
+//
+//     // Create a OutputService7ProtocolTest client with additional configuration
+//     svc := outputservice7protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewOutputService7ProtocolTest(config aws.Config) *OutputService7ProtocolTest {
+	var signingName string
+	signingRegion := config.Region
+
+	svc := &OutputService7ProtocolTest{
+		Client: aws.NewClient(
+			config,
+			aws.Metadata{
+				ServiceName:   "outputservice7protocoltest",
+				SigningName:   signingName,
+				SigningRegion: signingRegion,
+				APIVersion:    "",
+			},
+		),
+	}
+
+	// Handlers
+	svc.Handlers.Sign.PushBackNamed(v4.SignRequestHandler)
+	svc.Handlers.Build.PushBackNamed(jsonrpc.BuildHandler)
+	svc.Handlers.Unmarshal.PushBackNamed(jsonrpc.UnmarshalHandler)
+	svc.Handlers.UnmarshalMeta.PushBackNamed(jsonrpc.UnmarshalMetaHandler)
+	svc.Handlers.UnmarshalError.PushBackNamed(jsonrpc.UnmarshalErrorHandler)
+
+	return svc
+}
+
+// newRequest creates a new request for a OutputService7ProtocolTest operation and runs any
+// custom request initialization.
+func (c *OutputService7ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
+	req := c.NewRequest(op, params, data)
+
+	return req
+}
+
+const opOutputService7TestCaseOperation1 = "OperationName"
+
+// OutputService7TestCaseOperation1Request generates a "aws.Request" representing the
+// client's request for the OutputService7TestCaseOperation1 operation. The "output" return
+// value will be populated with the request's response once the request complets
+// successfuly.
+//
+// Use "Send" method on the returned Request to send the API call to the service.
+// the "output" return value is not valid until after Send returns without error.
+//
+// See OutputService7TestCaseOperation1 for more information on using the OutputService7TestCaseOperation1
+// API call, and error handling.
+//
+// This method is useful when you want to inject custom logic or configuration
+// into the SDK's request lifecycle. Such as custom headers, or retry logic.
+//
+//
+//    // Example sending a request using the OutputService7TestCaseOperation1Request method.
+//    req, resp := client.OutputService7TestCaseOperation1Request(params)
+//
+//    err := req.Send()
+//    if err == nil { // resp is now filled
+//        fmt.Println(resp)
+//    }
+func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1Request(input *OutputService7TestShapeOutputService7TestCaseOperation1Input) (req *aws.Request, output *OutputService7TestShapeOutputService7TestCaseOperation1Output) {
+	op := &aws.Operation{
+		Name:     opOutputService7TestCaseOperation1,
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService7TestShapeOutputService7TestCaseOperation1Input{}
+	}
+
+	output = &OutputService7TestShapeOutputService7TestCaseOperation1Output{}
+	req = c.newRequest(op, input, output)
+	return
+}
+
+// OutputService7TestCaseOperation1 API operation for .
+//
+// Returns awserr.Error for service API and SDK errors. Use runtime type assertions
+// with awserr.Error's Code and Message methods to get detailed information about
+// the error.
+//
+// See the AWS API reference guide for 's
+// API operation OutputService7TestCaseOperation1 for usage and error information.
+func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1(input *OutputService7TestShapeOutputService7TestCaseOperation1Input) (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
+	req, out := c.OutputService7TestCaseOperation1Request(input)
+	return out, req.Send()
+}
+
+// OutputService7TestCaseOperation1WithContext is the same as OutputService7TestCaseOperation1 with the addition of
+// the ability to pass a context and additional request options.
+//
+// See OutputService7TestCaseOperation1 for details on how to use this API operation.
+//
+// The context must be non-nil and will be used for request cancellation. If
+// the context is nil a panic will occur. In the future the SDK may create
+// sub-contexts for http.Requests. See https://golang.org/pkg/context/
+// for more information on using Contexts.
+func (c *OutputService7ProtocolTest) OutputService7TestCaseOperation1WithContext(ctx aws.Context, input *OutputService7TestShapeOutputService7TestCaseOperation1Input, opts ...aws.Option) (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
+	req, out := c.OutputService7TestCaseOperation1Request(input)
+	req.SetContext(ctx)
+	req.ApplyOptions(opts...)
+	return out, req.Send()
+}
+
+type OutputService7TestShapeOutputService7TestCaseOperation1Input struct {
+	_ struct{} `type:"structure"`
+}
+
+type OutputService7TestShapeOutputService7TestCaseOperation1Output struct {
+	_ struct{} `type:"structure"`
+
+	FooEnum OutputService7TestShapeJSONEnumType `type:"string"`
+
+	ListEnums []OutputService7TestShapeJSONEnumType `type:"list"`
+}
+
+// SetFooEnum sets the FooEnum field's value.
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetFooEnum(v OutputService7TestShapeJSONEnumType) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
+	s.FooEnum = v
+	return s
+}
+
+// SetListEnums sets the ListEnums field's value.
+func (s *OutputService7TestShapeOutputService7TestCaseOperation1Output) SetListEnums(v []OutputService7TestShapeJSONEnumType) *OutputService7TestShapeOutputService7TestCaseOperation1Output {
+	s.ListEnums = v
+	return s
+}
+
+type OutputService7TestShapeJSONEnumType string
+
+// Enum values for OutputService7TestShapeJSONEnumType
+const (
+	JSONEnumTypeFoo OutputService7TestShapeJSONEnumType = "foo"
+	JSONEnumTypeBar OutputService7TestShapeJSONEnumType = "bar"
+)
+
 //
 // Tests begin here
 //
@@ -1313,6 +1467,41 @@ func TestOutputService6ProtocolTestIgnoresExtraDataCase1(t *testing.T) {
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")
+	}
+
+}
+
+func TestOutputService7ProtocolTestEnumOutputCase1(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService7ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"bar\"]}"))
+	req, out := svc.OutputService7TestCaseOperation1Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	jsonrpc.UnmarshalMeta(req)
+	jsonrpc.Unmarshal(req)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	if e, a := OutputService7TestShapeJSONEnumType("foo"), out.FooEnum; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService7TestShapeJSONEnumType("foo"), out.ListEnums[0]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := OutputService7TestShapeJSONEnumType("bar"), out.ListEnums[1]; e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
 
 }

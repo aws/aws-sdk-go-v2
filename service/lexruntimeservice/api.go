@@ -590,18 +590,23 @@ func (s PostContentInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PostContentInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PostContentInput"}
+
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
+
 	if s.ContentType == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
+
 	if s.InputStream == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputStream"))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -720,7 +725,7 @@ type PostContentOutput struct {
 	//    an appropriate response to prompts from the service (you can configure
 	//    how many times Amazon Lex can prompt a user for specific information),
 	//    or if the Lambda function fails to fulfill the intent.
-	DialogState *string `location:"header" locationName:"x-amz-lex-dialog-state" type:"string" enum:"DialogState"`
+	DialogState DialogState `location:"header" locationName:"x-amz-lex-dialog-state" type:"string"`
 
 	// The text used to process the request.
 	//
@@ -791,8 +796,8 @@ func (s *PostContentOutput) SetContentType(v string) *PostContentOutput {
 }
 
 // SetDialogState sets the DialogState field's value.
-func (s *PostContentOutput) SetDialogState(v string) *PostContentOutput {
-	s.DialogState = &v
+func (s *PostContentOutput) SetDialogState(v DialogState) *PostContentOutput {
+	s.DialogState = v
 	return s
 }
 
@@ -905,18 +910,22 @@ func (s PostTextInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PostTextInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PostTextInput"}
+
 	if s.BotAlias == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
+
 	if s.BotName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
+
 	if s.InputText == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputText"))
 	}
 	if s.InputText != nil && len(*s.InputText) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("InputText", 1))
 	}
+
 	if s.UserId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
@@ -1012,7 +1021,7 @@ type PostTextOutput struct {
 	//    an appropriate response to prompts from the service (you can configure
 	//    how many times Amazon Lex can prompt a user for specific information),
 	//    or the Lambda function failed to fulfill the intent.
-	DialogState *string `locationName:"dialogState" type:"string" enum:"DialogState"`
+	DialogState DialogState `locationName:"dialogState" type:"string"`
 
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string `locationName:"intentName" type:"string"`
@@ -1067,8 +1076,8 @@ func (s PostTextOutput) GoString() string {
 }
 
 // SetDialogState sets the DialogState field's value.
-func (s *PostTextOutput) SetDialogState(v string) *PostTextOutput {
-	s.DialogState = &v
+func (s *PostTextOutput) SetDialogState(v DialogState) *PostTextOutput {
+	s.DialogState = v
 	return s
 }
 
@@ -1117,7 +1126,7 @@ type ResponseCard struct {
 	_ struct{} `type:"structure"`
 
 	// The content type of the response.
-	ContentType *string `locationName:"contentType" type:"string" enum:"ContentType"`
+	ContentType ContentType `locationName:"contentType" type:"string"`
 
 	// An array of attachment objects representing options.
 	GenericAttachments []*GenericAttachment `locationName:"genericAttachments" type:"list"`
@@ -1137,8 +1146,8 @@ func (s ResponseCard) GoString() string {
 }
 
 // SetContentType sets the ContentType field's value.
-func (s *ResponseCard) SetContentType(v string) *ResponseCard {
-	s.ContentType = &v
+func (s *ResponseCard) SetContentType(v ContentType) *ResponseCard {
+	s.ContentType = v
 	return s
 }
 
@@ -1154,27 +1163,21 @@ func (s *ResponseCard) SetVersion(v string) *ResponseCard {
 	return s
 }
 
+type ContentType string
+
+// Enum values for ContentType
 const (
-	// ContentTypeApplicationVndAmazonawsCardGeneric is a ContentType enum value
-	ContentTypeApplicationVndAmazonawsCardGeneric = "application/vnd.amazonaws.card.generic"
+	ContentTypeApplicationVndAmazonawsCardGeneric ContentType = "application/vnd.amazonaws.card.generic"
 )
 
+type DialogState string
+
+// Enum values for DialogState
 const (
-	// DialogStateElicitIntent is a DialogState enum value
-	DialogStateElicitIntent = "ElicitIntent"
-
-	// DialogStateConfirmIntent is a DialogState enum value
-	DialogStateConfirmIntent = "ConfirmIntent"
-
-	// DialogStateElicitSlot is a DialogState enum value
-	DialogStateElicitSlot = "ElicitSlot"
-
-	// DialogStateFulfilled is a DialogState enum value
-	DialogStateFulfilled = "Fulfilled"
-
-	// DialogStateReadyForFulfillment is a DialogState enum value
-	DialogStateReadyForFulfillment = "ReadyForFulfillment"
-
-	// DialogStateFailed is a DialogState enum value
-	DialogStateFailed = "Failed"
+	DialogStateElicitIntent        DialogState = "ElicitIntent"
+	DialogStateConfirmIntent       DialogState = "ConfirmIntent"
+	DialogStateElicitSlot          DialogState = "ElicitSlot"
+	DialogStateFulfilled           DialogState = "Fulfilled"
+	DialogStateReadyForFulfillment DialogState = "ReadyForFulfillment"
+	DialogStateFailed              DialogState = "Failed"
 )

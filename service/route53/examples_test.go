@@ -41,7 +41,7 @@ func ExampleRoute53_AssociateVPCWithHostedZone_shared00() {
 		HostedZoneId: aws.String("Z3M3LMPEXAMPLE"),
 		VPC: &route53.VPC{
 			VPCId:     aws.String("vpc-1a2b3c4d"),
-			VPCRegion: aws.String("us-east-2"),
+			VPCRegion: route53.VPCRegionUsEast2,
 		},
 	}
 
@@ -92,7 +92,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared00() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Web server for example.com"),
@@ -144,10 +144,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared01() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Web servers for example.com"),
@@ -198,7 +198,7 @@ func ExampleRoute53_ChangeResourceRecordSets_shared02() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("CloudFront distribution for example.com"),
@@ -251,10 +251,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared03() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("ELB load balancers for example.com"),
@@ -306,10 +306,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared04() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("EC2 instances for example.com"),
@@ -361,10 +361,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared05() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("ELB load balancers for example.com"),
@@ -417,10 +417,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared06() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Failover configuration for example.com"),
@@ -473,10 +473,10 @@ func ExampleRoute53_ChangeResourceRecordSets_shared07() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Failover alias configuration for example.com"),
@@ -529,16 +529,16 @@ func ExampleRoute53_ChangeResourceRecordSets_shared08() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Geolocation configuration for example.com"),
@@ -591,16 +591,16 @@ func ExampleRoute53_ChangeResourceRecordSets_shared09() {
 		ChangeBatch: &route53.ChangeBatch{
 			Changes: []*route53.Change{
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 				{
-					Action: aws.String("CREATE"),
+					Action: route53.ChangeActionCreate,
 				},
 			},
 			Comment: aws.String("Geolocation alias configuration for example.com"),
@@ -662,7 +662,7 @@ func ExampleRoute53_ChangeTagsForResource_shared00() {
 			aws.String("Nadir"),
 		},
 		ResourceId:   aws.String("Z3M3LMPEXAMPLE"),
-		ResourceType: aws.String("hostedzone"),
+		ResourceType: route53.TagResourceTypeHostedzone,
 	}
 
 	result, err := svc.ChangeTagsForResource(input)

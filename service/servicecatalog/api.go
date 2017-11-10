@@ -5099,6 +5099,7 @@ func (s AcceptPortfolioShareInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptPortfolioShareInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptPortfolioShareInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -5151,7 +5152,7 @@ type AccessLevelFilter struct {
 	// Role allows results based on the federated role of the specified user.
 	//
 	// User allows results limited to the specified user.
-	Key *string `type:"string" enum:"AccessLevelFilterKey"`
+	Key AccessLevelFilterKey `type:"string"`
 
 	// Specifies the user to which the access level applies. A value of Self is
 	// currently supported.
@@ -5169,8 +5170,8 @@ func (s AccessLevelFilter) GoString() string {
 }
 
 // SetKey sets the Key field's value.
-func (s *AccessLevelFilter) SetKey(v string) *AccessLevelFilter {
-	s.Key = &v
+func (s *AccessLevelFilter) SetKey(v AccessLevelFilterKey) *AccessLevelFilter {
+	s.Key = v
 	return s
 }
 
@@ -5206,7 +5207,7 @@ type AssociatePrincipalWithPortfolioInput struct {
 	// The principal type. Must be IAM
 	//
 	// PrincipalType is a required field
-	PrincipalType *string `type:"string" required:"true" enum:"PrincipalType"`
+	PrincipalType PrincipalType `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -5222,19 +5223,21 @@ func (s AssociatePrincipalWithPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociatePrincipalWithPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociatePrincipalWithPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
+
 	if s.PrincipalARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalARN"))
 	}
 	if s.PrincipalARN != nil && len(*s.PrincipalARN) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PrincipalARN", 1))
 	}
-	if s.PrincipalType == nil {
+	if len(s.PrincipalType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalType"))
 	}
 
@@ -5263,8 +5266,8 @@ func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalARN(v string) *Associ
 }
 
 // SetPrincipalType sets the PrincipalType field's value.
-func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalType(v string) *AssociatePrincipalWithPortfolioInput {
-	s.PrincipalType = &v
+func (s *AssociatePrincipalWithPortfolioInput) SetPrincipalType(v PrincipalType) *AssociatePrincipalWithPortfolioInput {
+	s.PrincipalType = v
 	return s
 }
 
@@ -5323,12 +5326,14 @@ func (s AssociateProductWithPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateProductWithPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateProductWithPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -5412,9 +5417,11 @@ func (s AssociateTagOptionWithResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateTagOptionWithResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociateTagOptionWithResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagOptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
@@ -5556,7 +5563,7 @@ type CopyProductInput struct {
 
 	// The copy options. If the value is CopyTags, the tags from the source product
 	// are copied to the target product.
-	CopyOptions []*string `type:"list"`
+	CopyOptions []CopyOption `type:"list"`
 
 	// A token to disambiguate duplicate requests. You can use the same input in
 	// multiple requests, provided that you also specify a different idempotency
@@ -5594,12 +5601,14 @@ func (s CopyProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CopyProductInput"}
+
 	if s.IdempotencyToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.SourceProductArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SourceProductArn"))
 	}
@@ -5623,7 +5632,7 @@ func (s *CopyProductInput) SetAcceptLanguage(v string) *CopyProductInput {
 }
 
 // SetCopyOptions sets the CopyOptions field's value.
-func (s *CopyProductInput) SetCopyOptions(v []*string) *CopyProductInput {
+func (s *CopyProductInput) SetCopyOptions(v []CopyOption) *CopyProductInput {
 	s.CopyOptions = v
 	return s
 }
@@ -5748,27 +5757,32 @@ func (s CreateConstraintInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConstraintInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateConstraintInput"}
+
 	if s.IdempotencyToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.Parameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.Type == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -5835,7 +5849,7 @@ type CreateConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -5861,8 +5875,8 @@ func (s *CreateConstraintOutput) SetConstraintParameters(v string) *CreateConstr
 }
 
 // SetStatus sets the Status field's value.
-func (s *CreateConstraintOutput) SetStatus(v string) *CreateConstraintOutput {
-	s.Status = &v
+func (s *CreateConstraintOutput) SetStatus(v Status) *CreateConstraintOutput {
+	s.Status = v
 	return s
 }
 
@@ -5916,18 +5930,21 @@ func (s CreatePortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePortfolioInput"}
+
 	if s.DisplayName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
 	}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
+
 	if s.IdempotencyToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.ProviderName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
@@ -6057,9 +6074,11 @@ func (s CreatePortfolioShareInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePortfolioShareInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePortfolioShareInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -6145,7 +6164,7 @@ type CreateProductInput struct {
 	// The type of the product to create.
 	//
 	// ProductType is a required field
-	ProductType *string `type:"string" required:"true" enum:"ProductType"`
+	ProductType ProductType `type:"string" required:"true"`
 
 	// Parameters for the provisioning artifact.
 	//
@@ -6178,21 +6197,25 @@ func (s CreateProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProductInput"}
+
 	if s.IdempotencyToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+
 	if s.Owner == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Owner"))
 	}
-	if s.ProductType == nil {
+	if len(s.ProductType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ProductType"))
 	}
+
 	if s.ProvisioningArtifactParameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactParameters"))
 	}
@@ -6255,8 +6278,8 @@ func (s *CreateProductInput) SetOwner(v string) *CreateProductInput {
 }
 
 // SetProductType sets the ProductType field's value.
-func (s *CreateProductInput) SetProductType(v string) *CreateProductInput {
-	s.ProductType = &v
+func (s *CreateProductInput) SetProductType(v ProductType) *CreateProductInput {
+	s.ProductType = v
 	return s
 }
 
@@ -6376,15 +6399,18 @@ func (s CreateProvisioningArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProvisioningArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateProvisioningArtifactInput"}
+
 	if s.IdempotencyToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
+
 	if s.Parameters == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -6438,7 +6464,7 @@ type CreateProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -6464,8 +6490,8 @@ func (s *CreateProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *Prov
 }
 
 // SetStatus sets the Status field's value.
-func (s *CreateProvisioningArtifactOutput) SetStatus(v string) *CreateProvisioningArtifactOutput {
-	s.Status = &v
+func (s *CreateProvisioningArtifactOutput) SetStatus(v Status) *CreateProvisioningArtifactOutput {
+	s.Status = v
 	return s
 }
 
@@ -6497,12 +6523,14 @@ func (s CreateTagOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTagOptionInput"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -6584,6 +6612,7 @@ func (s DeleteConstraintInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConstraintInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteConstraintInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6656,6 +6685,7 @@ func (s DeletePortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6733,9 +6763,11 @@ func (s DeletePortfolioShareInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePortfolioShareInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioShareInput"}
+
 	if s.AccountId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -6814,6 +6846,7 @@ func (s DeleteProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProductInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -6892,12 +6925,14 @@ func (s DeleteProvisioningArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProvisioningArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteProvisioningArtifactInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.ProvisioningArtifactId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
@@ -6976,6 +7011,7 @@ func (s DescribeConstraintInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConstraintInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeConstraintInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7012,7 +7048,7 @@ type DescribeConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -7038,8 +7074,8 @@ func (s *DescribeConstraintOutput) SetConstraintParameters(v string) *DescribeCo
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeConstraintOutput) SetStatus(v string) *DescribeConstraintOutput {
-	s.Status = &v
+func (s *DescribeConstraintOutput) SetStatus(v Status) *DescribeConstraintOutput {
+	s.Status = v
 	return s
 }
 
@@ -7075,6 +7111,7 @@ func (s DescribeCopyProductStatusInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCopyProductStatusInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCopyProductStatusInput"}
+
 	if s.CopyProductToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CopyProductToken"))
 	}
@@ -7105,7 +7142,7 @@ type DescribeCopyProductStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The status of the copy product operation.
-	CopyProductStatus *string `type:"string" enum:"CopyProductStatus"`
+	CopyProductStatus CopyProductStatus `type:"string"`
 
 	// The status message.
 	StatusDetail *string `type:"string"`
@@ -7125,8 +7162,8 @@ func (s DescribeCopyProductStatusOutput) GoString() string {
 }
 
 // SetCopyProductStatus sets the CopyProductStatus field's value.
-func (s *DescribeCopyProductStatusOutput) SetCopyProductStatus(v string) *DescribeCopyProductStatusOutput {
-	s.CopyProductStatus = &v
+func (s *DescribeCopyProductStatusOutput) SetCopyProductStatus(v CopyProductStatus) *DescribeCopyProductStatusOutput {
+	s.CopyProductStatus = v
 	return s
 }
 
@@ -7174,6 +7211,7 @@ func (s DescribePortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribePortfolioInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7273,6 +7311,7 @@ func (s DescribeProductAsAdminInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductAsAdminInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductAsAdminInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7381,6 +7420,7 @@ func (s DescribeProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7472,6 +7512,7 @@ func (s DescribeProductViewInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductViewInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductViewInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7563,6 +7604,7 @@ func (s DescribeProvisionedProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisionedProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedProductInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -7653,12 +7695,14 @@ func (s DescribeProvisioningArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisioningArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisioningArtifactInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.ProvisioningArtifactId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
@@ -7707,7 +7751,7 @@ type DescribeProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -7733,8 +7777,8 @@ func (s *DescribeProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *Pr
 }
 
 // SetStatus sets the Status field's value.
-func (s *DescribeProvisioningArtifactOutput) SetStatus(v string) *DescribeProvisioningArtifactOutput {
-	s.Status = &v
+func (s *DescribeProvisioningArtifactOutput) SetStatus(v Status) *DescribeProvisioningArtifactOutput {
+	s.Status = v
 	return s
 }
 
@@ -7784,12 +7828,14 @@ func (s *DescribeProvisioningParametersInput) Validate() error {
 	if s.PathId != nil && len(*s.PathId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.ProvisioningArtifactId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
@@ -7923,6 +7969,7 @@ func (s DescribeRecordInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRecordInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeRecordInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8028,6 +8075,7 @@ func (s DescribeTagOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagOptionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -8108,12 +8156,14 @@ func (s DisassociatePrincipalFromPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociatePrincipalFromPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePrincipalFromPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
+
 	if s.PrincipalARN == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PrincipalARN"))
 	}
@@ -8197,12 +8247,14 @@ func (s DisassociateProductFromPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateProductFromPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateProductFromPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -8277,9 +8329,11 @@ func (s DisassociateTagOptionFromResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateTagOptionFromResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTagOptionFromResourceInput"}
+
 	if s.ResourceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
+
 	if s.TagOptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
@@ -8502,6 +8556,7 @@ func (s ListConstraintsForPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListConstraintsForPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListConstraintsForPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -8624,6 +8679,7 @@ func (s ListLaunchPathsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLaunchPathsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListLaunchPathsInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -8727,6 +8783,7 @@ func (s ListPortfolioAccessInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPortfolioAccessInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPortfolioAccessInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -8827,6 +8884,7 @@ func (s ListPortfoliosForProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPortfoliosForProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPortfoliosForProductInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -9024,6 +9082,7 @@ func (s ListPrincipalsForPortfolioInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPrincipalsForPortfolioInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPrincipalsForPortfolioInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -9127,6 +9186,7 @@ func (s ListProvisioningArtifactsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProvisioningArtifactsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListProvisioningArtifactsInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
@@ -9359,6 +9419,7 @@ func (s ListResourcesForTagOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourcesForTagOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesForTagOptionInput"}
+
 	if s.TagOptionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
@@ -9688,7 +9749,7 @@ type Principal struct {
 	PrincipalARN *string `min:"1" type:"string"`
 
 	// The principal type. Must be IAM
-	PrincipalType *string `type:"string" enum:"PrincipalType"`
+	PrincipalType PrincipalType `type:"string"`
 }
 
 // String returns the string representation
@@ -9708,8 +9769,8 @@ func (s *Principal) SetPrincipalARN(v string) *Principal {
 }
 
 // SetPrincipalType sets the PrincipalType field's value.
-func (s *Principal) SetPrincipalType(v string) *Principal {
-	s.PrincipalType = &v
+func (s *Principal) SetPrincipalType(v PrincipalType) *Principal {
+	s.PrincipalType = v
 	return s
 }
 
@@ -9769,7 +9830,7 @@ type ProductViewDetail struct {
 	// CREATING - Creation of product started, not ready for use.
 	//
 	// FAILED - Action on product failed.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -9801,8 +9862,8 @@ func (s *ProductViewDetail) SetProductViewSummary(v *ProductViewSummary) *Produc
 }
 
 // SetStatus sets the Status field's value.
-func (s *ProductViewDetail) SetStatus(v string) *ProductViewDetail {
-	s.Status = &v
+func (s *ProductViewDetail) SetStatus(v Status) *ProductViewDetail {
+	s.Status = v
 	return s
 }
 
@@ -9850,7 +9911,7 @@ type ProductViewSummary struct {
 	// The product type. Contact the product administrator for the significance
 	// of this value. If this value is MARKETPLACE, the product was created by AWS
 	// Marketplace.
-	Type *string `type:"string" enum:"ProductType"`
+	Type ProductType `type:"string"`
 }
 
 // String returns the string representation
@@ -9924,8 +9985,8 @@ func (s *ProductViewSummary) SetSupportUrl(v string) *ProductViewSummary {
 }
 
 // SetType sets the Type field's value.
-func (s *ProductViewSummary) SetType(v string) *ProductViewSummary {
-	s.Type = &v
+func (s *ProductViewSummary) SetType(v ProductType) *ProductViewSummary {
+	s.Type = v
 	return s
 }
 
@@ -9998,24 +10059,28 @@ func (s *ProvisionProductInput) Validate() error {
 	if s.PathId != nil && len(*s.PathId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
 	}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.ProvisionToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionToken"))
 	}
 	if s.ProvisionToken != nil && len(*s.ProvisionToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProvisionToken", 1))
 	}
+
 	if s.ProvisionedProductName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductName"))
 	}
 	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
 	}
+
 	if s.ProvisioningArtifactId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
@@ -10172,7 +10237,7 @@ type ProvisionedProductDetail struct {
 	// ERROR - Something unexpected happened such that the provisioned product exists
 	// but the stack is not running. For example, CloudFormation received an invalid
 	// parameter value and could not launch the stack.
-	Status *string `type:"string" enum:"ProvisionedProductStatus"`
+	Status ProvisionedProductStatus `type:"string"`
 
 	// The current status message of the ProvisionedProduct.
 	StatusMessage *string `type:"string"`
@@ -10228,8 +10293,8 @@ func (s *ProvisionedProductDetail) SetName(v string) *ProvisionedProductDetail {
 }
 
 // SetStatus sets the Status field's value.
-func (s *ProvisionedProductDetail) SetStatus(v string) *ProvisionedProductDetail {
-	s.Status = &v
+func (s *ProvisionedProductDetail) SetStatus(v ProvisionedProductStatus) *ProvisionedProductDetail {
+	s.Status = v
 	return s
 }
 
@@ -10322,7 +10387,7 @@ type ProvisioningArtifactDetail struct {
 	// MARKETPLACE_AMI - AMI products.
 	//
 	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
-	Type *string `type:"string" enum:"ProvisioningArtifactType"`
+	Type ProvisioningArtifactType `type:"string"`
 }
 
 // String returns the string representation
@@ -10360,8 +10425,8 @@ func (s *ProvisioningArtifactDetail) SetName(v string) *ProvisioningArtifactDeta
 }
 
 // SetType sets the Type field's value.
-func (s *ProvisioningArtifactDetail) SetType(v string) *ProvisioningArtifactDetail {
-	s.Type = &v
+func (s *ProvisioningArtifactDetail) SetType(v ProvisioningArtifactType) *ProvisioningArtifactDetail {
+	s.Type = v
 	return s
 }
 
@@ -10462,7 +10527,7 @@ type ProvisioningArtifactProperties struct {
 	// MARKETPLACE_AMI - AMI products.
 	//
 	// MARKETPLACE_CAR - CAR (Cluster and AWS Resources) products.
-	Type *string `type:"string" enum:"ProvisioningArtifactType"`
+	Type ProvisioningArtifactType `type:"string"`
 }
 
 // String returns the string representation
@@ -10478,6 +10543,7 @@ func (s ProvisioningArtifactProperties) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisioningArtifactProperties) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ProvisioningArtifactProperties"}
+
 	if s.Info == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Info"))
 	}
@@ -10510,8 +10576,8 @@ func (s *ProvisioningArtifactProperties) SetName(v string) *ProvisioningArtifact
 }
 
 // SetType sets the Type field's value.
-func (s *ProvisioningArtifactProperties) SetType(v string) *ProvisioningArtifactProperties {
-	s.Type = &v
+func (s *ProvisioningArtifactProperties) SetType(v ProvisioningArtifactType) *ProvisioningArtifactProperties {
+	s.Type = v
 	return s
 }
 
@@ -10677,7 +10743,7 @@ type RecordDetail struct {
 	//
 	// FAILED - The requested operation has completed but has failed. Investigate
 	// using the error messages returned.
-	Status *string `type:"string" enum:"RecordStatus"`
+	Status RecordStatus `type:"string"`
 
 	// The time when the record for the ProvisionedProduct object was last updated.
 	UpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -10760,8 +10826,8 @@ func (s *RecordDetail) SetRecordType(v string) *RecordDetail {
 }
 
 // SetStatus sets the Status field's value.
-func (s *RecordDetail) SetStatus(v string) *RecordDetail {
-	s.Status = &v
+func (s *RecordDetail) SetStatus(v RecordStatus) *RecordDetail {
+	s.Status = v
 	return s
 }
 
@@ -10916,6 +10982,7 @@ func (s RejectPortfolioShareInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectPortfolioShareInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RejectPortfolioShareInput"}
+
 	if s.PortfolioId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
@@ -11143,13 +11210,13 @@ type SearchProductsAsAdminInput struct {
 	PortfolioId *string `min:"1" type:"string"`
 
 	// Access level of the source of the product.
-	ProductSource *string `type:"string" enum:"ProductSource"`
+	ProductSource ProductSource `type:"string"`
 
 	// The sort field specifier. If no value is specified, results are not sorted.
-	SortBy *string `type:"string" enum:"ProductViewSortBy"`
+	SortBy ProductViewSortBy `type:"string"`
 
 	// The sort order specifier. If no value is specified, results are not sorted.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -11206,20 +11273,20 @@ func (s *SearchProductsAsAdminInput) SetPortfolioId(v string) *SearchProductsAsA
 }
 
 // SetProductSource sets the ProductSource field's value.
-func (s *SearchProductsAsAdminInput) SetProductSource(v string) *SearchProductsAsAdminInput {
-	s.ProductSource = &v
+func (s *SearchProductsAsAdminInput) SetProductSource(v ProductSource) *SearchProductsAsAdminInput {
+	s.ProductSource = v
 	return s
 }
 
 // SetSortBy sets the SortBy field's value.
-func (s *SearchProductsAsAdminInput) SetSortBy(v string) *SearchProductsAsAdminInput {
-	s.SortBy = &v
+func (s *SearchProductsAsAdminInput) SetSortBy(v ProductViewSortBy) *SearchProductsAsAdminInput {
+	s.SortBy = v
 	return s
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *SearchProductsAsAdminInput) SetSortOrder(v string) *SearchProductsAsAdminInput {
-	s.SortOrder = &v
+func (s *SearchProductsAsAdminInput) SetSortOrder(v SortOrder) *SearchProductsAsAdminInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -11285,10 +11352,10 @@ type SearchProductsInput struct {
 	PageToken *string `type:"string"`
 
 	// The sort field specifier. If no value is specified, results are not sorted.
-	SortBy *string `type:"string" enum:"ProductViewSortBy"`
+	SortBy ProductViewSortBy `type:"string"`
 
 	// The sort order specifier. If no value is specified, results are not sorted.
-	SortOrder *string `type:"string" enum:"SortOrder"`
+	SortOrder SortOrder `type:"string"`
 }
 
 // String returns the string representation
@@ -11326,14 +11393,14 @@ func (s *SearchProductsInput) SetPageToken(v string) *SearchProductsInput {
 }
 
 // SetSortBy sets the SortBy field's value.
-func (s *SearchProductsInput) SetSortBy(v string) *SearchProductsInput {
-	s.SortBy = &v
+func (s *SearchProductsInput) SetSortBy(v ProductViewSortBy) *SearchProductsInput {
+	s.SortBy = v
 	return s
 }
 
 // SetSortOrder sets the SortOrder field's value.
-func (s *SearchProductsInput) SetSortOrder(v string) *SearchProductsInput {
-	s.SortOrder = &v
+func (s *SearchProductsInput) SetSortOrder(v SortOrder) *SearchProductsInput {
+	s.SortOrder = v
 	return s
 }
 
@@ -11410,12 +11477,14 @@ func (s Tag) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
+
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
@@ -11580,6 +11649,7 @@ func (s *TerminateProvisionedProductInput) Validate() error {
 	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
 	}
+
 	if s.TerminateToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TerminateToken"))
 	}
@@ -11685,6 +11755,7 @@ func (s UpdateConstraintInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConstraintInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateConstraintInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -11727,7 +11798,7 @@ type UpdateConstraintOutput struct {
 	ConstraintParameters *string `type:"string"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -11753,8 +11824,8 @@ func (s *UpdateConstraintOutput) SetConstraintParameters(v string) *UpdateConstr
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateConstraintOutput) SetStatus(v string) *UpdateConstraintOutput {
-	s.Status = &v
+func (s *UpdateConstraintOutput) SetStatus(v Status) *UpdateConstraintOutput {
+	s.Status = v
 	return s
 }
 
@@ -11808,6 +11879,7 @@ func (s *UpdatePortfolioInput) Validate() error {
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -11968,6 +12040,7 @@ func (s UpdateProductInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProductInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProductInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -12161,6 +12234,7 @@ func (s *UpdateProvisionedProductInput) Validate() error {
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
+
 	if s.UpdateToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UpdateToken"))
 	}
@@ -12303,12 +12377,14 @@ func (s UpdateProvisioningArtifactInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProvisioningArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisioningArtifactInput"}
+
 	if s.ProductId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
+
 	if s.ProvisioningArtifactId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
@@ -12363,7 +12439,7 @@ type UpdateProvisioningArtifactOutput struct {
 	ProvisioningArtifactDetail *ProvisioningArtifactDetail `type:"structure"`
 
 	// The status of the current request.
-	Status *string `type:"string" enum:"Status"`
+	Status Status `type:"string"`
 }
 
 // String returns the string representation
@@ -12389,8 +12465,8 @@ func (s *UpdateProvisioningArtifactOutput) SetProvisioningArtifactDetail(v *Prov
 }
 
 // SetStatus sets the Status field's value.
-func (s *UpdateProvisioningArtifactOutput) SetStatus(v string) *UpdateProvisioningArtifactOutput {
-	s.Status = &v
+func (s *UpdateProvisioningArtifactOutput) SetStatus(v Status) *UpdateProvisioningArtifactOutput {
+	s.Status = v
 	return s
 }
 
@@ -12483,6 +12559,7 @@ func (s UpdateTagOptionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTagOptionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagOptionInput"}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
@@ -12575,138 +12652,122 @@ func (s *UsageInstruction) SetValue(v string) *UsageInstruction {
 	return s
 }
 
+type AccessLevelFilterKey string
+
+// Enum values for AccessLevelFilterKey
 const (
-	// AccessLevelFilterKeyAccount is a AccessLevelFilterKey enum value
-	AccessLevelFilterKeyAccount = "Account"
-
-	// AccessLevelFilterKeyRole is a AccessLevelFilterKey enum value
-	AccessLevelFilterKeyRole = "Role"
-
-	// AccessLevelFilterKeyUser is a AccessLevelFilterKey enum value
-	AccessLevelFilterKeyUser = "User"
+	AccessLevelFilterKeyAccount AccessLevelFilterKey = "Account"
+	AccessLevelFilterKeyRole    AccessLevelFilterKey = "Role"
+	AccessLevelFilterKeyUser    AccessLevelFilterKey = "User"
 )
 
+type CopyOption string
+
+// Enum values for CopyOption
 const (
-	// CopyOptionCopyTags is a CopyOption enum value
-	CopyOptionCopyTags = "CopyTags"
+	CopyOptionCopyTags CopyOption = "CopyTags"
 )
 
+type CopyProductStatus string
+
+// Enum values for CopyProductStatus
 const (
-	// CopyProductStatusSucceeded is a CopyProductStatus enum value
-	CopyProductStatusSucceeded = "SUCCEEDED"
-
-	// CopyProductStatusInProgress is a CopyProductStatus enum value
-	CopyProductStatusInProgress = "IN_PROGRESS"
-
-	// CopyProductStatusFailed is a CopyProductStatus enum value
-	CopyProductStatusFailed = "FAILED"
+	CopyProductStatusSucceeded  CopyProductStatus = "SUCCEEDED"
+	CopyProductStatusInProgress CopyProductStatus = "IN_PROGRESS"
+	CopyProductStatusFailed     CopyProductStatus = "FAILED"
 )
 
+type PrincipalType string
+
+// Enum values for PrincipalType
 const (
-	// PrincipalTypeIam is a PrincipalType enum value
-	PrincipalTypeIam = "IAM"
+	PrincipalTypeIam PrincipalType = "IAM"
 )
 
+type ProductSource string
+
+// Enum values for ProductSource
 const (
-	// ProductSourceAccount is a ProductSource enum value
-	ProductSourceAccount = "ACCOUNT"
+	ProductSourceAccount ProductSource = "ACCOUNT"
 )
 
-const (
-	// ProductTypeCloudFormationTemplate is a ProductType enum value
-	ProductTypeCloudFormationTemplate = "CLOUD_FORMATION_TEMPLATE"
+type ProductType string
 
-	// ProductTypeMarketplace is a ProductType enum value
-	ProductTypeMarketplace = "MARKETPLACE"
+// Enum values for ProductType
+const (
+	ProductTypeCloudFormationTemplate ProductType = "CLOUD_FORMATION_TEMPLATE"
+	ProductTypeMarketplace            ProductType = "MARKETPLACE"
 )
 
+type ProductViewFilterBy string
+
+// Enum values for ProductViewFilterBy
 const (
-	// ProductViewFilterByFullTextSearch is a ProductViewFilterBy enum value
-	ProductViewFilterByFullTextSearch = "FullTextSearch"
-
-	// ProductViewFilterByOwner is a ProductViewFilterBy enum value
-	ProductViewFilterByOwner = "Owner"
-
-	// ProductViewFilterByProductType is a ProductViewFilterBy enum value
-	ProductViewFilterByProductType = "ProductType"
-
-	// ProductViewFilterBySourceProductId is a ProductViewFilterBy enum value
-	ProductViewFilterBySourceProductId = "SourceProductId"
+	ProductViewFilterByFullTextSearch  ProductViewFilterBy = "FullTextSearch"
+	ProductViewFilterByOwner           ProductViewFilterBy = "Owner"
+	ProductViewFilterByProductType     ProductViewFilterBy = "ProductType"
+	ProductViewFilterBySourceProductId ProductViewFilterBy = "SourceProductId"
 )
 
+type ProductViewSortBy string
+
+// Enum values for ProductViewSortBy
 const (
-	// ProductViewSortByTitle is a ProductViewSortBy enum value
-	ProductViewSortByTitle = "Title"
-
-	// ProductViewSortByVersionCount is a ProductViewSortBy enum value
-	ProductViewSortByVersionCount = "VersionCount"
-
-	// ProductViewSortByCreationDate is a ProductViewSortBy enum value
-	ProductViewSortByCreationDate = "CreationDate"
+	ProductViewSortByTitle        ProductViewSortBy = "Title"
+	ProductViewSortByVersionCount ProductViewSortBy = "VersionCount"
+	ProductViewSortByCreationDate ProductViewSortBy = "CreationDate"
 )
 
+type ProvisionedProductStatus string
+
+// Enum values for ProvisionedProductStatus
 const (
-	// ProvisionedProductStatusAvailable is a ProvisionedProductStatus enum value
-	ProvisionedProductStatusAvailable = "AVAILABLE"
-
-	// ProvisionedProductStatusUnderChange is a ProvisionedProductStatus enum value
-	ProvisionedProductStatusUnderChange = "UNDER_CHANGE"
-
-	// ProvisionedProductStatusTainted is a ProvisionedProductStatus enum value
-	ProvisionedProductStatusTainted = "TAINTED"
-
-	// ProvisionedProductStatusError is a ProvisionedProductStatus enum value
-	ProvisionedProductStatusError = "ERROR"
+	ProvisionedProductStatusAvailable   ProvisionedProductStatus = "AVAILABLE"
+	ProvisionedProductStatusUnderChange ProvisionedProductStatus = "UNDER_CHANGE"
+	ProvisionedProductStatusTainted     ProvisionedProductStatus = "TAINTED"
+	ProvisionedProductStatusError       ProvisionedProductStatus = "ERROR"
 )
 
+type ProvisioningArtifactPropertyName string
+
+// Enum values for ProvisioningArtifactPropertyName
 const (
-	// ProvisioningArtifactPropertyNameId is a ProvisioningArtifactPropertyName enum value
-	ProvisioningArtifactPropertyNameId = "Id"
+	ProvisioningArtifactPropertyNameId ProvisioningArtifactPropertyName = "Id"
 )
 
+type ProvisioningArtifactType string
+
+// Enum values for ProvisioningArtifactType
 const (
-	// ProvisioningArtifactTypeCloudFormationTemplate is a ProvisioningArtifactType enum value
-	ProvisioningArtifactTypeCloudFormationTemplate = "CLOUD_FORMATION_TEMPLATE"
-
-	// ProvisioningArtifactTypeMarketplaceAmi is a ProvisioningArtifactType enum value
-	ProvisioningArtifactTypeMarketplaceAmi = "MARKETPLACE_AMI"
-
-	// ProvisioningArtifactTypeMarketplaceCar is a ProvisioningArtifactType enum value
-	ProvisioningArtifactTypeMarketplaceCar = "MARKETPLACE_CAR"
+	ProvisioningArtifactTypeCloudFormationTemplate ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"
+	ProvisioningArtifactTypeMarketplaceAmi         ProvisioningArtifactType = "MARKETPLACE_AMI"
+	ProvisioningArtifactTypeMarketplaceCar         ProvisioningArtifactType = "MARKETPLACE_CAR"
 )
 
+type RecordStatus string
+
+// Enum values for RecordStatus
 const (
-	// RecordStatusCreated is a RecordStatus enum value
-	RecordStatusCreated = "CREATED"
-
-	// RecordStatusInProgress is a RecordStatus enum value
-	RecordStatusInProgress = "IN_PROGRESS"
-
-	// RecordStatusInProgressInError is a RecordStatus enum value
-	RecordStatusInProgressInError = "IN_PROGRESS_IN_ERROR"
-
-	// RecordStatusSucceeded is a RecordStatus enum value
-	RecordStatusSucceeded = "SUCCEEDED"
-
-	// RecordStatusFailed is a RecordStatus enum value
-	RecordStatusFailed = "FAILED"
+	RecordStatusCreated           RecordStatus = "CREATED"
+	RecordStatusInProgress        RecordStatus = "IN_PROGRESS"
+	RecordStatusInProgressInError RecordStatus = "IN_PROGRESS_IN_ERROR"
+	RecordStatusSucceeded         RecordStatus = "SUCCEEDED"
+	RecordStatusFailed            RecordStatus = "FAILED"
 )
 
-const (
-	// SortOrderAscending is a SortOrder enum value
-	SortOrderAscending = "ASCENDING"
+type SortOrder string
 
-	// SortOrderDescending is a SortOrder enum value
-	SortOrderDescending = "DESCENDING"
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
 )
 
+type Status string
+
+// Enum values for Status
 const (
-	// StatusAvailable is a Status enum value
-	StatusAvailable = "AVAILABLE"
-
-	// StatusCreating is a Status enum value
-	StatusCreating = "CREATING"
-
-	// StatusFailed is a Status enum value
-	StatusFailed = "FAILED"
+	StatusAvailable Status = "AVAILABLE"
+	StatusCreating  Status = "CREATING"
+	StatusFailed    Status = "FAILED"
 )

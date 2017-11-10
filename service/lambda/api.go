@@ -3187,21 +3187,25 @@ func (s AddPermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
+
 	if s.Action == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
+
 	if s.StatementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
@@ -3381,18 +3385,21 @@ func (s CreateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.FunctionVersion == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionVersion"))
 	}
 	if s.FunctionVersion != nil && len(*s.FunctionVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionVersion", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3476,7 +3483,7 @@ type CreateEventSourceMappingInput struct {
 	// in the Amazon Kinesis API Reference.
 	//
 	// StartingPosition is a required field
-	StartingPosition *string `type:"string" required:"true" enum:"EventSourcePosition"`
+	StartingPosition EventSourcePosition `type:"string" required:"true"`
 
 	// The timestamp of the data record from which to start reading. Used with shard
 	// iterator type (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType)
@@ -3503,16 +3510,18 @@ func (s *CreateEventSourceMappingInput) Validate() error {
 	if s.BatchSize != nil && *s.BatchSize < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("BatchSize", 1))
 	}
+
 	if s.EventSourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventSourceArn"))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
-	if s.StartingPosition == nil {
+	if len(s.StartingPosition) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("StartingPosition"))
 	}
 
@@ -3547,8 +3556,8 @@ func (s *CreateEventSourceMappingInput) SetFunctionName(v string) *CreateEventSo
 }
 
 // SetStartingPosition sets the StartingPosition field's value.
-func (s *CreateEventSourceMappingInput) SetStartingPosition(v string) *CreateEventSourceMappingInput {
-	s.StartingPosition = &v
+func (s *CreateEventSourceMappingInput) SetStartingPosition(v EventSourcePosition) *CreateEventSourceMappingInput {
+	s.StartingPosition = v
 	return s
 }
 
@@ -3635,7 +3644,7 @@ type CreateFunctionInput struct {
 	// that contains functions written in the Node v0.10.42 runtime.
 	//
 	// Runtime is a required field
-	Runtime *string `type:"string" required:"true" enum:"Runtime"`
+	Runtime Runtime `type:"string" required:"true"`
 
 	// The list of tags (key-value pairs) assigned to the new function.
 	Tags map[string]*string `type:"map"`
@@ -3668,25 +3677,29 @@ func (s CreateFunctionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFunctionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionInput"}
+
 	if s.Code == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Code"))
 	}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.Handler == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Handler"))
 	}
 	if s.MemorySize != nil && *s.MemorySize < 128 {
 		invalidParams.Add(aws.NewErrParamMinValue("MemorySize", 128))
 	}
+
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
-	if s.Runtime == nil {
+	if len(s.Runtime) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Runtime"))
 	}
 	if s.Timeout != nil && *s.Timeout < 1 {
@@ -3765,8 +3778,8 @@ func (s *CreateFunctionInput) SetRole(v string) *CreateFunctionInput {
 }
 
 // SetRuntime sets the Runtime field's value.
-func (s *CreateFunctionInput) SetRuntime(v string) *CreateFunctionInput {
-	s.Runtime = &v
+func (s *CreateFunctionInput) SetRuntime(v Runtime) *CreateFunctionInput {
+	s.Runtime = v
 	return s
 }
 
@@ -3852,12 +3865,14 @@ func (s DeleteAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -3921,6 +3936,7 @@ func (s DeleteEventSourceMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSourceMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSourceMappingInput"}
+
 	if s.UUID == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
@@ -3984,6 +4000,7 @@ func (s DeleteFunctionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFunctionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -4387,7 +4404,7 @@ type FunctionConfiguration struct {
 	Role *string `type:"string"`
 
 	// The runtime environment for the Lambda function.
-	Runtime *string `type:"string" enum:"Runtime"`
+	Runtime Runtime `type:"string"`
 
 	// The function execution time at which Lambda should terminate the function.
 	// Because the execution time has cost implications, we recommend you set this
@@ -4493,8 +4510,8 @@ func (s *FunctionConfiguration) SetRole(v string) *FunctionConfiguration {
 }
 
 // SetRuntime sets the Runtime field's value.
-func (s *FunctionConfiguration) SetRuntime(v string) *FunctionConfiguration {
-	s.Runtime = &v
+func (s *FunctionConfiguration) SetRuntime(v Runtime) *FunctionConfiguration {
+	s.Runtime = v
 	return s
 }
 
@@ -4604,12 +4621,14 @@ func (s GetAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetAliasInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -4658,6 +4677,7 @@ func (s GetEventSourceMappingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventSourceMappingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEventSourceMappingInput"}
+
 	if s.UUID == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
@@ -4714,6 +4734,7 @@ func (s GetFunctionConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionConfigurationInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -4780,6 +4801,7 @@ func (s GetFunctionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -4889,6 +4911,7 @@ func (s GetPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -4973,12 +4996,14 @@ func (s InvokeAsyncInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvokeAsyncInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InvokeAsyncInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.InvokeArgs == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InvokeArgs"))
 	}
@@ -5057,13 +5082,13 @@ type InvokeInput struct {
 	// invoke the function and if the inputs are valid. You request this by specifying
 	// DryRun as the InvocationType. This is useful in a cross-account scenario
 	// when you want to verify access to a function without running it.
-	InvocationType *string `location:"header" locationName:"X-Amz-Invocation-Type" type:"string" enum:"InvocationType"`
+	InvocationType InvocationType `location:"header" locationName:"X-Amz-Invocation-Type" type:"string"`
 
 	// You can set this optional parameter to Tail in the request only if you specify
 	// the InvocationType parameter with value RequestResponse. In this case, AWS
 	// Lambda returns the base64-encoded last 4 KB of log data produced by your
 	// Lambda function in the x-amz-log-result header.
-	LogType *string `location:"header" locationName:"X-Amz-Log-Type" type:"string" enum:"LogType"`
+	LogType LogType `location:"header" locationName:"X-Amz-Log-Type" type:"string"`
 
 	// JSON that you want to provide to your Lambda function as input.
 	Payload []byte `type:"blob"`
@@ -5092,6 +5117,7 @@ func (s InvokeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvokeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InvokeInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -5121,14 +5147,14 @@ func (s *InvokeInput) SetFunctionName(v string) *InvokeInput {
 }
 
 // SetInvocationType sets the InvocationType field's value.
-func (s *InvokeInput) SetInvocationType(v string) *InvokeInput {
-	s.InvocationType = &v
+func (s *InvokeInput) SetInvocationType(v InvocationType) *InvokeInput {
+	s.InvocationType = v
 	return s
 }
 
 // SetLogType sets the LogType field's value.
-func (s *InvokeInput) SetLogType(v string) *InvokeInput {
-	s.LogType = &v
+func (s *InvokeInput) SetLogType(v LogType) *InvokeInput {
+	s.LogType = v
 	return s
 }
 
@@ -5249,6 +5275,7 @@ func (s ListAliasesInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAliasesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -5450,7 +5477,7 @@ type ListFunctionsInput struct {
 	//
 	// ALL _ Will return all versions, including $LATEST which will have fully qualified
 	// ARNs (Amazon Resource Names).
-	FunctionVersion *string `location:"querystring" locationName:"FunctionVersion" type:"string" enum:"FunctionVersion"`
+	FunctionVersion FunctionVersion `location:"querystring" locationName:"FunctionVersion" type:"string"`
 
 	// Optional string. An opaque pagination token returned from a previous ListFunctions
 	// operation. If present, indicates where to continue the listing.
@@ -5497,8 +5524,8 @@ func (s *ListFunctionsInput) Validate() error {
 }
 
 // SetFunctionVersion sets the FunctionVersion field's value.
-func (s *ListFunctionsInput) SetFunctionVersion(v string) *ListFunctionsInput {
-	s.FunctionVersion = &v
+func (s *ListFunctionsInput) SetFunctionVersion(v FunctionVersion) *ListFunctionsInput {
+	s.FunctionVersion = v
 	return s
 }
 
@@ -5577,6 +5604,7 @@ func (s ListTagsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
@@ -5653,6 +5681,7 @@ func (s ListVersionsByFunctionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVersionsByFunctionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListVersionsByFunctionInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -5758,6 +5787,7 @@ func (s PublishVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PublishVersionInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -5829,6 +5859,7 @@ func (s RemovePermissionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -5838,6 +5869,7 @@ func (s *RemovePermissionInput) Validate() error {
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
+
 	if s.StatementId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
@@ -5912,9 +5944,11 @@ func (s TagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.Tags == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
@@ -5962,7 +5996,7 @@ type TracingConfig struct {
 	// "sampled=1". If Active, Lambda will respect any tracing header it receives
 	// from an upstream service. If no tracing header is received, Lambda will call
 	// X-Ray for a tracing decision.
-	Mode *string `type:"string" enum:"TracingMode"`
+	Mode TracingMode `type:"string"`
 }
 
 // String returns the string representation
@@ -5976,8 +6010,8 @@ func (s TracingConfig) GoString() string {
 }
 
 // SetMode sets the Mode field's value.
-func (s *TracingConfig) SetMode(v string) *TracingConfig {
-	s.Mode = &v
+func (s *TracingConfig) SetMode(v TracingMode) *TracingConfig {
+	s.Mode = v
 	return s
 }
 
@@ -5987,7 +6021,7 @@ type TracingConfigResponse struct {
 	_ struct{} `type:"structure"`
 
 	// The tracing mode associated with your Lambda function.
-	Mode *string `type:"string" enum:"TracingMode"`
+	Mode TracingMode `type:"string"`
 }
 
 // String returns the string representation
@@ -6001,8 +6035,8 @@ func (s TracingConfigResponse) GoString() string {
 }
 
 // SetMode sets the Mode field's value.
-func (s *TracingConfigResponse) SetMode(v string) *TracingConfigResponse {
-	s.Mode = &v
+func (s *TracingConfigResponse) SetMode(v TracingMode) *TracingConfigResponse {
+	s.Mode = v
 	return s
 }
 
@@ -6034,9 +6068,11 @@ func (s UntagResourceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
 	if s.Resource == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
+
 	if s.TagKeys == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
@@ -6111,6 +6147,7 @@ func (s UpdateAliasInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -6120,6 +6157,7 @@ func (s *UpdateAliasInput) Validate() error {
 	if s.FunctionVersion != nil && len(*s.FunctionVersion) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionVersion", 1))
 	}
+
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
@@ -6211,6 +6249,7 @@ func (s *UpdateEventSourceMappingInput) Validate() error {
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
+
 	if s.UUID == nil {
 		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
@@ -6307,6 +6346,7 @@ func (s UpdateFunctionCodeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionCodeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionCodeInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -6433,7 +6473,7 @@ type UpdateFunctionConfigurationInput struct {
 	// provided. Failure to do so will result in an invalid parameter error being
 	// returned. Note that you will have to follow this procedure for each region
 	// that contains functions written in the Node v0.10.42 runtime.
-	Runtime *string `type:"string" enum:"Runtime"`
+	Runtime Runtime `type:"string"`
 
 	// The function execution time at which AWS Lambda should terminate the function.
 	// Because the execution time has cost implications, we recommend you set this
@@ -6463,6 +6503,7 @@ func (s UpdateFunctionConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionConfigurationInput"}
+
 	if s.FunctionName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
@@ -6531,8 +6572,8 @@ func (s *UpdateFunctionConfigurationInput) SetRole(v string) *UpdateFunctionConf
 }
 
 // SetRuntime sets the Runtime field's value.
-func (s *UpdateFunctionConfigurationInput) SetRuntime(v string) *UpdateFunctionConfigurationInput {
-	s.Runtime = &v
+func (s *UpdateFunctionConfigurationInput) SetRuntime(v Runtime) *UpdateFunctionConfigurationInput {
+	s.Runtime = v
 	return s
 }
 
@@ -6634,82 +6675,66 @@ func (s *VpcConfigResponse) SetVpcId(v string) *VpcConfigResponse {
 	return s
 }
 
+type EventSourcePosition string
+
+// Enum values for EventSourcePosition
 const (
-	// EventSourcePositionTrimHorizon is a EventSourcePosition enum value
-	EventSourcePositionTrimHorizon = "TRIM_HORIZON"
-
-	// EventSourcePositionLatest is a EventSourcePosition enum value
-	EventSourcePositionLatest = "LATEST"
-
-	// EventSourcePositionAtTimestamp is a EventSourcePosition enum value
-	EventSourcePositionAtTimestamp = "AT_TIMESTAMP"
+	EventSourcePositionTrimHorizon EventSourcePosition = "TRIM_HORIZON"
+	EventSourcePositionLatest      EventSourcePosition = "LATEST"
+	EventSourcePositionAtTimestamp EventSourcePosition = "AT_TIMESTAMP"
 )
 
+type FunctionVersion string
+
+// Enum values for FunctionVersion
 const (
-	// FunctionVersionAll is a FunctionVersion enum value
-	FunctionVersionAll = "ALL"
+	FunctionVersionAll FunctionVersion = "ALL"
 )
 
+type InvocationType string
+
+// Enum values for InvocationType
 const (
-	// InvocationTypeEvent is a InvocationType enum value
-	InvocationTypeEvent = "Event"
-
-	// InvocationTypeRequestResponse is a InvocationType enum value
-	InvocationTypeRequestResponse = "RequestResponse"
-
-	// InvocationTypeDryRun is a InvocationType enum value
-	InvocationTypeDryRun = "DryRun"
+	InvocationTypeEvent           InvocationType = "Event"
+	InvocationTypeRequestResponse InvocationType = "RequestResponse"
+	InvocationTypeDryRun          InvocationType = "DryRun"
 )
 
-const (
-	// LogTypeNone is a LogType enum value
-	LogTypeNone = "None"
+type LogType string
 
-	// LogTypeTail is a LogType enum value
-	LogTypeTail = "Tail"
+// Enum values for LogType
+const (
+	LogTypeNone LogType = "None"
+	LogTypeTail LogType = "Tail"
 )
 
+type Runtime string
+
+// Enum values for Runtime
 const (
-	// RuntimeNodejs is a Runtime enum value
-	RuntimeNodejs = "nodejs"
-
-	// RuntimeNodejs43 is a Runtime enum value
-	RuntimeNodejs43 = "nodejs4.3"
-
-	// RuntimeNodejs610 is a Runtime enum value
-	RuntimeNodejs610 = "nodejs6.10"
-
-	// RuntimeJava8 is a Runtime enum value
-	RuntimeJava8 = "java8"
-
-	// RuntimePython27 is a Runtime enum value
-	RuntimePython27 = "python2.7"
-
-	// RuntimePython36 is a Runtime enum value
-	RuntimePython36 = "python3.6"
-
-	// RuntimeDotnetcore10 is a Runtime enum value
-	RuntimeDotnetcore10 = "dotnetcore1.0"
-
-	// RuntimeNodejs43Edge is a Runtime enum value
-	RuntimeNodejs43Edge = "nodejs4.3-edge"
+	RuntimeNodejs       Runtime = "nodejs"
+	RuntimeNodejs43     Runtime = "nodejs4.3"
+	RuntimeNodejs610    Runtime = "nodejs6.10"
+	RuntimeJava8        Runtime = "java8"
+	RuntimePython27     Runtime = "python2.7"
+	RuntimePython36     Runtime = "python3.6"
+	RuntimeDotnetcore10 Runtime = "dotnetcore1.0"
+	RuntimeNodejs43Edge Runtime = "nodejs4.3-edge"
 )
 
+type ThrottleReason string
+
+// Enum values for ThrottleReason
 const (
-	// ThrottleReasonConcurrentInvocationLimitExceeded is a ThrottleReason enum value
-	ThrottleReasonConcurrentInvocationLimitExceeded = "ConcurrentInvocationLimitExceeded"
-
-	// ThrottleReasonFunctionInvocationRateLimitExceeded is a ThrottleReason enum value
-	ThrottleReasonFunctionInvocationRateLimitExceeded = "FunctionInvocationRateLimitExceeded"
-
-	// ThrottleReasonCallerRateLimitExceeded is a ThrottleReason enum value
-	ThrottleReasonCallerRateLimitExceeded = "CallerRateLimitExceeded"
+	ThrottleReasonConcurrentInvocationLimitExceeded   ThrottleReason = "ConcurrentInvocationLimitExceeded"
+	ThrottleReasonFunctionInvocationRateLimitExceeded ThrottleReason = "FunctionInvocationRateLimitExceeded"
+	ThrottleReasonCallerRateLimitExceeded             ThrottleReason = "CallerRateLimitExceeded"
 )
 
-const (
-	// TracingModeActive is a TracingMode enum value
-	TracingModeActive = "Active"
+type TracingMode string
 
-	// TracingModePassThrough is a TracingMode enum value
-	TracingModePassThrough = "PassThrough"
+// Enum values for TracingMode
+const (
+	TracingModeActive      TracingMode = "Active"
+	TracingModePassThrough TracingMode = "PassThrough"
 )

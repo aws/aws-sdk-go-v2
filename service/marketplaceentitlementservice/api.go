@@ -266,6 +266,7 @@ func (s GetEntitlementsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEntitlementsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetEntitlementsInput"}
+
 	if s.ProductCode == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
@@ -341,10 +342,10 @@ func (s *GetEntitlementsOutput) SetNextToken(v string) *GetEntitlementsOutput {
 	return s
 }
 
-const (
-	// GetEntitlementFilterNameCustomerIdentifier is a GetEntitlementFilterName enum value
-	GetEntitlementFilterNameCustomerIdentifier = "CUSTOMER_IDENTIFIER"
+type GetEntitlementFilterName string
 
-	// GetEntitlementFilterNameDimension is a GetEntitlementFilterName enum value
-	GetEntitlementFilterNameDimension = "DIMENSION"
+// Enum values for GetEntitlementFilterName
+const (
+	GetEntitlementFilterNameCustomerIdentifier GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
+	GetEntitlementFilterNameDimension          GetEntitlementFilterName = "DIMENSION"
 )

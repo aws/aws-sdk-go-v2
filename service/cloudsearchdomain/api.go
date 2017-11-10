@@ -851,7 +851,7 @@ type SearchInput struct {
 	//    * dismax: search using the simplified subset of the Apache Lucene query
 	//    parser syntax defined by the DisMax query parser. For more information,
 	//    see DisMax Query Parser Syntax (http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax).
-	QueryParser *string `location:"querystring" locationName:"q.parser" type:"string" enum:"QueryParser"`
+	QueryParser QueryParser `location:"querystring" locationName:"q.parser" type:"string"`
 
 	// Specifies the field and expression values to include in the response. Multiple
 	// fields or expressions are specified as a comma-separated list. By default,
@@ -905,6 +905,7 @@ func (s SearchInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SearchInput"}
+
 	if s.Query == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Query"))
 	}
@@ -964,8 +965,8 @@ func (s *SearchInput) SetQueryOptions(v string) *SearchInput {
 }
 
 // SetQueryParser sets the QueryParser field's value.
-func (s *SearchInput) SetQueryParser(v string) *SearchInput {
-	s.QueryParser = &v
+func (s *SearchInput) SetQueryParser(v QueryParser) *SearchInput {
+	s.QueryParser = v
 	return s
 }
 
@@ -1116,9 +1117,11 @@ func (s SuggestInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SuggestInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SuggestInput"}
+
 	if s.Query == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Query"))
 	}
+
 	if s.Suggester == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Suggester"))
 	}
@@ -1310,7 +1313,7 @@ type UploadDocumentsInput struct {
 	//    * application/xml
 	//
 	// ContentType is a required field
-	ContentType *string `location:"header" locationName:"Content-Type" type:"string" required:"true" enum:"ContentType"`
+	ContentType ContentType `location:"header" locationName:"Content-Type" type:"string" required:"true"`
 
 	// A batch of documents formatted in JSON or HTML.
 	//
@@ -1331,9 +1334,10 @@ func (s UploadDocumentsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadDocumentsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UploadDocumentsInput"}
-	if s.ContentType == nil {
+	if len(s.ContentType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
+
 	if s.Documents == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Documents"))
 	}
@@ -1345,8 +1349,8 @@ func (s *UploadDocumentsInput) Validate() error {
 }
 
 // SetContentType sets the ContentType field's value.
-func (s *UploadDocumentsInput) SetContentType(v string) *UploadDocumentsInput {
-	s.ContentType = &v
+func (s *UploadDocumentsInput) SetContentType(v ContentType) *UploadDocumentsInput {
+	s.ContentType = v
 	return s
 }
 
@@ -1407,24 +1411,20 @@ func (s *UploadDocumentsOutput) SetWarnings(v []*DocumentServiceWarning) *Upload
 	return s
 }
 
-const (
-	// ContentTypeApplicationJson is a ContentType enum value
-	ContentTypeApplicationJson = "application/json"
+type ContentType string
 
-	// ContentTypeApplicationXml is a ContentType enum value
-	ContentTypeApplicationXml = "application/xml"
+// Enum values for ContentType
+const (
+	ContentTypeApplicationJson ContentType = "application/json"
+	ContentTypeApplicationXml  ContentType = "application/xml"
 )
 
+type QueryParser string
+
+// Enum values for QueryParser
 const (
-	// QueryParserSimple is a QueryParser enum value
-	QueryParserSimple = "simple"
-
-	// QueryParserStructured is a QueryParser enum value
-	QueryParserStructured = "structured"
-
-	// QueryParserLucene is a QueryParser enum value
-	QueryParserLucene = "lucene"
-
-	// QueryParserDismax is a QueryParser enum value
-	QueryParserDismax = "dismax"
+	QueryParserSimple     QueryParser = "simple"
+	QueryParserStructured QueryParser = "structured"
+	QueryParserLucene     QueryParser = "lucene"
+	QueryParserDismax     QueryParser = "dismax"
 )

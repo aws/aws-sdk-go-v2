@@ -18,6 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 // RFC822 returns an RFC822 formatted timestamp for AWS protocols
@@ -25,8 +26,6 @@ const RFC822 = "Mon, 2 Jan 2006 15:04:05 GMT"
 
 // Whether the byte value can be sent without escaping in AWS URLs
 var noEscape [256]bool
-
-var errValueNotSet = fmt.Errorf("value not set")
 
 func init() {
 	for i := 0; i < len(noEscape); i++ {
@@ -83,16 +82,14 @@ func buildLocationElements(r *request.Request, v reflect.Value, buildGETQuery bo
 			if name == "" {
 				name = field.Name
 			}
-			if kind := m.Kind(); kind == reflect.Ptr {
-				m = m.Elem()
-			} else if kind == reflect.Interface {
+
+			switch m.Kind() {
+			case reflect.Ptr, reflect.Interface:
 				if !m.Elem().IsValid() {
 					continue
 				}
 			}
-			if !m.IsValid() {
-				continue
-			}
+
 			if field.Tag.Get("ignore") != "" {
 				continue
 			}
@@ -111,6 +108,10 @@ func buildLocationElements(r *request.Request, v reflect.Value, buildGETQuery bo
 				if buildGETQuery {
 					err = buildQueryString(query, m, name, field.Tag)
 				}
+			}
+
+			if protocol.IsNotSetError(err) {
+				err = nil
 			}
 			r.Error = err
 		}
@@ -151,8 +152,16 @@ func buildBody(r *request.Request, v reflect.Value) {
 }
 
 func buildHeader(header *http.Header, v reflect.Value, name string, tag reflect.StructTag) error {
-	str, err := convertType(v, tag)
-	if err == errValueNotSet {
+	var err error
+	str := ""
+
+	if v.Kind() == reflect.String {
+		str, err = protocol.GetValue(v)
+	} else {
+		str, err = convertType(v, tag)
+	}
+
+	if protocol.IsNotSetError(err) {
 		return nil
 	} else if err != nil {
 		return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -167,7 +176,7 @@ func buildHeaderMap(header *http.Header, v reflect.Value, tag reflect.StructTag)
 	prefix := tag.Get("locationName")
 	for _, key := range v.MapKeys() {
 		str, err := convertType(v.MapIndex(key), tag)
-		if err == errValueNotSet {
+		if protocol.IsNotSetError(err) {
 			continue
 		} else if err != nil {
 			return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -180,8 +189,15 @@ func buildHeaderMap(header *http.Header, v reflect.Value, tag reflect.StructTag)
 }
 
 func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) error {
-	value, err := convertType(v, tag)
-	if err == errValueNotSet {
+	value := ""
+	var err error
+	if v.Kind() == reflect.String {
+		value, err = protocol.GetValue(v)
+	} else {
+		value, err = convertType(v, tag)
+	}
+
+	if protocol.IsNotSetError(err) {
 		return nil
 	} else if err != nil {
 		return awserr.New("SerializationError", "failed to encode REST request", err)
@@ -197,6 +213,23 @@ func buildURI(u *url.URL, v reflect.Value, name string, tag reflect.StructTag) e
 }
 
 func buildQueryString(query url.Values, v reflect.Value, name string, tag reflect.StructTag) error {
+	if kind := v.Kind(); kind == reflect.String {
+		value, err := protocol.GetValue(v)
+		if err == nil {
+			query.Add(name, value)
+		}
+		return err
+	} else if kind == reflect.Ptr {
+		v = v.Elem()
+	}
+
+	if v.Kind() == reflect.Slice && v.Type().Elem().Kind() == reflect.String {
+		for i := 0; i < v.Len(); i++ {
+			query.Add(name, v.Index(i).String())
+		}
+		return nil
+	}
+
 	switch value := v.Interface().(type) {
 	case []*string:
 		for _, item := range value {
@@ -214,11 +247,12 @@ func buildQueryString(query url.Values, v reflect.Value, name string, tag reflec
 		}
 	default:
 		str, err := convertType(v, tag)
-		if err == errValueNotSet {
+		if protocol.IsNotSetError(err) {
 			return nil
 		} else if err != nil {
 			return awserr.New("SerializationError", "failed to encode REST request", err)
 		}
+
 		query.Set(name, str)
 	}
 
@@ -255,7 +289,7 @@ func EscapePath(path string, encodeSep bool) string {
 func convertType(v reflect.Value, tag reflect.StructTag) (string, error) {
 	v = reflect.Indirect(v)
 	if !v.IsValid() {
-		return "", errValueNotSet
+		return "", &protocol.ErrValueNotSet{}
 	}
 
 	var str string

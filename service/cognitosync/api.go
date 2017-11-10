@@ -1693,6 +1693,7 @@ func (s BulkPublishInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BulkPublishInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BulkPublishInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -1757,7 +1758,7 @@ type CognitoStreams struct {
 	//
 	// DISABLED - Streaming of updates to identity pool is disabled. Bulk publish
 	// will also fail if StreamingStatus is DISABLED.
-	StreamingStatus *string `type:"string" enum:"StreamingStatus"`
+	StreamingStatus StreamingStatus `type:"string"`
 }
 
 // String returns the string representation
@@ -1799,8 +1800,8 @@ func (s *CognitoStreams) SetStreamName(v string) *CognitoStreams {
 }
 
 // SetStreamingStatus sets the StreamingStatus field's value.
-func (s *CognitoStreams) SetStreamingStatus(v string) *CognitoStreams {
-	s.StreamingStatus = &v
+func (s *CognitoStreams) SetStreamingStatus(v StreamingStatus) *CognitoStreams {
+	s.StreamingStatus = v
 	return s
 }
 
@@ -1926,18 +1927,21 @@ func (s DeleteDatasetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDatasetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatasetInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2036,18 +2040,21 @@ func (s DescribeDatasetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDatasetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeDatasetInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2133,6 +2140,7 @@ func (s DescribeIdentityPoolUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityPoolUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityPoolUsageInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2208,12 +2216,14 @@ func (s DescribeIdentityUsageInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityUsageInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityUsageInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2289,6 +2299,7 @@ func (s GetBulkPublishDetailsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBulkPublishDetailsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetBulkPublishDetailsInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2330,7 +2341,7 @@ type GetBulkPublishDetailsOutput struct {
 	//
 	// FAILED - Some portion of the data has failed to publish, check FailureMessage
 	// for the cause.
-	BulkPublishStatus *string `type:"string" enum:"BulkPublishStatus"`
+	BulkPublishStatus BulkPublishStatus `type:"string"`
 
 	// If BulkPublishStatus is FAILED this field will contain the error message
 	// that caused the bulk publish to fail.
@@ -2364,8 +2375,8 @@ func (s *GetBulkPublishDetailsOutput) SetBulkPublishStartTime(v time.Time) *GetB
 }
 
 // SetBulkPublishStatus sets the BulkPublishStatus field's value.
-func (s *GetBulkPublishDetailsOutput) SetBulkPublishStatus(v string) *GetBulkPublishDetailsOutput {
-	s.BulkPublishStatus = &v
+func (s *GetBulkPublishDetailsOutput) SetBulkPublishStatus(v BulkPublishStatus) *GetBulkPublishDetailsOutput {
+	s.BulkPublishStatus = v
 	return s
 }
 
@@ -2405,6 +2416,7 @@ func (s GetCognitoEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCognitoEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetCognitoEventsInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2475,6 +2487,7 @@ func (s GetIdentityPoolConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityPoolConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoolConfigurationInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2691,12 +2704,14 @@ func (s ListDatasetsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDatasetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListDatasetsInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -2912,18 +2927,21 @@ func (s ListRecordsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRecordsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListRecordsInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3209,7 +3227,7 @@ type RecordPatch struct {
 	// An operation, either replace or remove.
 	//
 	// Op is a required field
-	Op *string `type:"string" required:"true" enum:"Operation"`
+	Op Operation `type:"string" required:"true"`
 
 	// Last known server sync count for this record. Set to 0 if unknown.
 	//
@@ -3233,15 +3251,17 @@ func (s RecordPatch) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordPatch) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RecordPatch"}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
-	if s.Op == nil {
+	if len(s.Op) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Op"))
 	}
+
 	if s.SyncCount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SyncCount"))
 	}
@@ -3265,8 +3285,8 @@ func (s *RecordPatch) SetKey(v string) *RecordPatch {
 }
 
 // SetOp sets the Op field's value.
-func (s *RecordPatch) SetOp(v string) *RecordPatch {
-	s.Op = &v
+func (s *RecordPatch) SetOp(v Operation) *RecordPatch {
+	s.Op = v
 	return s
 }
 
@@ -3302,7 +3322,7 @@ type RegisterDeviceInput struct {
 	// The SNS platform type (e.g. GCM, SDM, APNS, APNS_SANDBOX).
 	//
 	// Platform is a required field
-	Platform *string `type:"string" required:"true" enum:"Platform"`
+	Platform Platform `type:"string" required:"true"`
 
 	// The push token.
 	//
@@ -3323,21 +3343,24 @@ func (s RegisterDeviceInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDeviceInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterDeviceInput"}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
-	if s.Platform == nil {
+	if len(s.Platform) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Platform"))
 	}
+
 	if s.Token == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
@@ -3361,8 +3384,8 @@ func (s *RegisterDeviceInput) SetIdentityPoolId(v string) *RegisterDeviceInput {
 }
 
 // SetPlatform sets the Platform field's value.
-func (s *RegisterDeviceInput) SetPlatform(v string) *RegisterDeviceInput {
-	s.Platform = &v
+func (s *RegisterDeviceInput) SetPlatform(v Platform) *RegisterDeviceInput {
+	s.Platform = v
 	return s
 }
 
@@ -3426,9 +3449,11 @@ func (s SetCognitoEventsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetCognitoEventsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetCognitoEventsInput"}
+
 	if s.Events == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3500,6 +3525,7 @@ func (s SetIdentityPoolConfigurationInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityPoolConfigurationInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityPoolConfigurationInput"}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3625,24 +3651,28 @@ func (s SubscribeToDatasetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubscribeToDatasetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SubscribeToDatasetInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+
 	if s.DeviceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
 	}
 	if s.DeviceId != nil && len(*s.DeviceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceId", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3736,24 +3766,28 @@ func (s UnsubscribeFromDatasetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnsubscribeFromDatasetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UnsubscribeFromDatasetInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
 	if s.DatasetName != nil && len(*s.DatasetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatasetName", 1))
 	}
+
 	if s.DeviceId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeviceId"))
 	}
 	if s.DeviceId != nil && len(*s.DeviceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceId", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
@@ -3861,6 +3895,7 @@ func (s UpdateRecordsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRecordsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateRecordsInput"}
+
 	if s.DatasetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatasetName"))
 	}
@@ -3870,18 +3905,21 @@ func (s *UpdateRecordsInput) Validate() error {
 	if s.DeviceId != nil && len(*s.DeviceId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceId", 1))
 	}
+
 	if s.IdentityId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityId"))
 	}
 	if s.IdentityId != nil && len(*s.IdentityId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityId", 1))
 	}
+
 	if s.IdentityPoolId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("IdentityPoolId"))
 	}
 	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
 	}
+
 	if s.SyncSessionToken == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SyncSessionToken"))
 	}
@@ -3969,46 +4007,38 @@ func (s *UpdateRecordsOutput) SetRecords(v []*Record) *UpdateRecordsOutput {
 	return s
 }
 
+type BulkPublishStatus string
+
+// Enum values for BulkPublishStatus
 const (
-	// BulkPublishStatusNotStarted is a BulkPublishStatus enum value
-	BulkPublishStatusNotStarted = "NOT_STARTED"
-
-	// BulkPublishStatusInProgress is a BulkPublishStatus enum value
-	BulkPublishStatusInProgress = "IN_PROGRESS"
-
-	// BulkPublishStatusFailed is a BulkPublishStatus enum value
-	BulkPublishStatusFailed = "FAILED"
-
-	// BulkPublishStatusSucceeded is a BulkPublishStatus enum value
-	BulkPublishStatusSucceeded = "SUCCEEDED"
+	BulkPublishStatusNotStarted BulkPublishStatus = "NOT_STARTED"
+	BulkPublishStatusInProgress BulkPublishStatus = "IN_PROGRESS"
+	BulkPublishStatusFailed     BulkPublishStatus = "FAILED"
+	BulkPublishStatusSucceeded  BulkPublishStatus = "SUCCEEDED"
 )
 
-const (
-	// OperationReplace is a Operation enum value
-	OperationReplace = "replace"
+type Operation string
 
-	// OperationRemove is a Operation enum value
-	OperationRemove = "remove"
+// Enum values for Operation
+const (
+	OperationReplace Operation = "replace"
+	OperationRemove  Operation = "remove"
 )
 
+type Platform string
+
+// Enum values for Platform
 const (
-	// PlatformApns is a Platform enum value
-	PlatformApns = "APNS"
-
-	// PlatformApnsSandbox is a Platform enum value
-	PlatformApnsSandbox = "APNS_SANDBOX"
-
-	// PlatformGcm is a Platform enum value
-	PlatformGcm = "GCM"
-
-	// PlatformAdm is a Platform enum value
-	PlatformAdm = "ADM"
+	PlatformApns        Platform = "APNS"
+	PlatformApnsSandbox Platform = "APNS_SANDBOX"
+	PlatformGcm         Platform = "GCM"
+	PlatformAdm         Platform = "ADM"
 )
 
-const (
-	// StreamingStatusEnabled is a StreamingStatus enum value
-	StreamingStatusEnabled = "ENABLED"
+type StreamingStatus string
 
-	// StreamingStatusDisabled is a StreamingStatus enum value
-	StreamingStatusDisabled = "DISABLED"
+// Enum values for StreamingStatus
+const (
+	StreamingStatusEnabled  StreamingStatus = "ENABLED"
+	StreamingStatusDisabled StreamingStatus = "DISABLED"
 )

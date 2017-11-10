@@ -5384,6 +5384,7 @@ func (s AcceptCertificateTransferInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptCertificateTransferInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AcceptCertificateTransferInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -5661,12 +5662,14 @@ func (s AttachPrincipalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPrincipalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachPrincipalPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
@@ -5731,9 +5734,11 @@ func (s AttachThingPrincipalInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachThingPrincipalInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachThingPrincipalInput"}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -5831,7 +5836,7 @@ type CACertificate struct {
 	// The status of the CA certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status *string `locationName:"status" type:"string" enum:"CACertificateStatus"`
+	Status CACertificateStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -5863,8 +5868,8 @@ func (s *CACertificate) SetCreationDate(v time.Time) *CACertificate {
 }
 
 // SetStatus sets the Status field's value.
-func (s *CACertificate) SetStatus(v string) *CACertificate {
-	s.Status = &v
+func (s *CACertificate) SetStatus(v CACertificateStatus) *CACertificate {
+	s.Status = v
 	return s
 }
 
@@ -5874,7 +5879,7 @@ type CACertificateDescription struct {
 
 	// Whether the CA certificate configured for auto registration of device certificates.
 	// Valid values are "ENABLE" and "DISABLE"
-	AutoRegistrationStatus *string `locationName:"autoRegistrationStatus" type:"string" enum:"AutoRegistrationStatus"`
+	AutoRegistrationStatus AutoRegistrationStatus `locationName:"autoRegistrationStatus" type:"string"`
 
 	// The CA certificate ARN.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
@@ -5892,7 +5897,7 @@ type CACertificateDescription struct {
 	OwnedBy *string `locationName:"ownedBy" type:"string"`
 
 	// The status of a CA certificate.
-	Status *string `locationName:"status" type:"string" enum:"CACertificateStatus"`
+	Status CACertificateStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -5906,8 +5911,8 @@ func (s CACertificateDescription) GoString() string {
 }
 
 // SetAutoRegistrationStatus sets the AutoRegistrationStatus field's value.
-func (s *CACertificateDescription) SetAutoRegistrationStatus(v string) *CACertificateDescription {
-	s.AutoRegistrationStatus = &v
+func (s *CACertificateDescription) SetAutoRegistrationStatus(v AutoRegistrationStatus) *CACertificateDescription {
+	s.AutoRegistrationStatus = v
 	return s
 }
 
@@ -5942,8 +5947,8 @@ func (s *CACertificateDescription) SetOwnedBy(v string) *CACertificateDescriptio
 }
 
 // SetStatus sets the Status field's value.
-func (s *CACertificateDescription) SetStatus(v string) *CACertificateDescription {
-	s.Status = &v
+func (s *CACertificateDescription) SetStatus(v CACertificateStatus) *CACertificateDescription {
+	s.Status = v
 	return s
 }
 
@@ -5970,6 +5975,7 @@ func (s CancelCertificateTransferInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelCertificateTransferInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CancelCertificateTransferInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -6019,7 +6025,7 @@ type Certificate struct {
 	// The status of the certificate.
 	//
 	// The status value REGISTER_INACTIVE is deprecated and should not be used.
-	Status *string `locationName:"status" type:"string" enum:"CertificateStatus"`
+	Status CertificateStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -6051,8 +6057,8 @@ func (s *Certificate) SetCreationDate(v time.Time) *Certificate {
 }
 
 // SetStatus sets the Status field's value.
-func (s *Certificate) SetStatus(v string) *Certificate {
-	s.Status = &v
+func (s *Certificate) SetStatus(v CertificateStatus) *Certificate {
+	s.Status = v
 	return s
 }
 
@@ -6085,7 +6091,7 @@ type CertificateDescription struct {
 	PreviousOwnedBy *string `locationName:"previousOwnedBy" type:"string"`
 
 	// The status of the certificate.
-	Status *string `locationName:"status" type:"string" enum:"CertificateStatus"`
+	Status CertificateStatus `locationName:"status" type:"string"`
 
 	// The transfer data.
 	TransferData *TransferData `locationName:"transferData" type:"structure"`
@@ -6150,8 +6156,8 @@ func (s *CertificateDescription) SetPreviousOwnedBy(v string) *CertificateDescri
 }
 
 // SetStatus sets the Status field's value.
-func (s *CertificateDescription) SetStatus(v string) *CertificateDescription {
-	s.Status = &v
+func (s *CertificateDescription) SetStatus(v CertificateStatus) *CertificateDescription {
+	s.Status = v
 	return s
 }
 
@@ -6199,15 +6205,19 @@ func (s CloudwatchAlarmAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudwatchAlarmAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudwatchAlarmAction"}
+
 	if s.AlarmName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.StateReason == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateReason"))
 	}
+
 	if s.StateValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StateValue"))
 	}
@@ -6289,18 +6299,23 @@ func (s CloudwatchMetricAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudwatchMetricAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CloudwatchMetricAction"}
+
 	if s.MetricName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
+
 	if s.MetricNamespace == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricNamespace"))
 	}
+
 	if s.MetricUnit == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricUnit"))
 	}
+
 	if s.MetricValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MetricValue"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -6373,6 +6388,7 @@ func (s CreateCertificateFromCsrInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCertificateFromCsrInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateCertificateFromCsrInput"}
+
 	if s.CertificateSigningRequest == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateSigningRequest"))
 	}
@@ -6547,9 +6563,11 @@ func (s CreatePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -6660,9 +6678,11 @@ func (s CreatePolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyVersionInput"}
+
 	if s.PolicyDocument == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -6777,6 +6797,7 @@ func (s CreateThingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateThingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateThingInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -6872,6 +6893,7 @@ func (s CreateThingTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateThingTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateThingTypeInput"}
+
 	if s.ThingTypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
@@ -6958,12 +6980,14 @@ func (s CreateTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
+
 	if s.TopicRulePayload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicRulePayload"))
 	}
@@ -7028,6 +7052,7 @@ func (s DeleteCACertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCACertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCACertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -7085,6 +7110,7 @@ func (s DeleteCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -7141,6 +7167,7 @@ func (s DeletePolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -7202,12 +7229,14 @@ func (s DeletePolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyVersionInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.PolicyVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
@@ -7302,6 +7331,7 @@ func (s DeleteThingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -7365,6 +7395,7 @@ func (s DeleteThingTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingTypeInput"}
+
 	if s.ThingTypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
@@ -7422,6 +7453,7 @@ func (s DeleteTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
@@ -7482,6 +7514,7 @@ func (s DeprecateThingTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateThingTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeprecateThingTypeInput"}
+
 	if s.ThingTypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
@@ -7545,6 +7578,7 @@ func (s DescribeCACertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCACertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCACertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -7611,6 +7645,7 @@ func (s DescribeCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -7716,6 +7751,7 @@ func (s DescribeThingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeThingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -7822,6 +7858,7 @@ func (s DescribeThingTypeInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeThingTypeInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingTypeInput"}
+
 	if s.ThingTypeName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
@@ -7917,12 +7954,14 @@ func (s DetachPrincipalPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPrincipalPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachPrincipalPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
@@ -7989,9 +8028,11 @@ func (s DetachThingPrincipalInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachThingPrincipalInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetachThingPrincipalInput"}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -8055,6 +8096,7 @@ func (s DisableTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisableTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
@@ -8114,7 +8156,7 @@ type DynamoDBAction struct {
 	HashKeyField *string `locationName:"hashKeyField" type:"string" required:"true"`
 
 	// The hash key type. Valid values are "STRING" or "NUMBER"
-	HashKeyType *string `locationName:"hashKeyType" type:"string" enum:"DynamoKeyType"`
+	HashKeyType DynamoKeyType `locationName:"hashKeyType" type:"string"`
 
 	// The hash key value.
 	//
@@ -8133,7 +8175,7 @@ type DynamoDBAction struct {
 	RangeKeyField *string `locationName:"rangeKeyField" type:"string"`
 
 	// The range key type. Valid values are "STRING" or "NUMBER"
-	RangeKeyType *string `locationName:"rangeKeyType" type:"string" enum:"DynamoKeyType"`
+	RangeKeyType DynamoKeyType `locationName:"rangeKeyType" type:"string"`
 
 	// The range key value.
 	RangeKeyValue *string `locationName:"rangeKeyValue" type:"string"`
@@ -8162,15 +8204,19 @@ func (s DynamoDBAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDBAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBAction"}
+
 	if s.HashKeyField == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HashKeyField"))
 	}
+
 	if s.HashKeyValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("HashKeyValue"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -8188,8 +8234,8 @@ func (s *DynamoDBAction) SetHashKeyField(v string) *DynamoDBAction {
 }
 
 // SetHashKeyType sets the HashKeyType field's value.
-func (s *DynamoDBAction) SetHashKeyType(v string) *DynamoDBAction {
-	s.HashKeyType = &v
+func (s *DynamoDBAction) SetHashKeyType(v DynamoKeyType) *DynamoDBAction {
+	s.HashKeyType = v
 	return s
 }
 
@@ -8218,8 +8264,8 @@ func (s *DynamoDBAction) SetRangeKeyField(v string) *DynamoDBAction {
 }
 
 // SetRangeKeyType sets the RangeKeyType field's value.
-func (s *DynamoDBAction) SetRangeKeyType(v string) *DynamoDBAction {
-	s.RangeKeyType = &v
+func (s *DynamoDBAction) SetRangeKeyType(v DynamoKeyType) *DynamoDBAction {
+	s.RangeKeyType = v
 	return s
 }
 
@@ -8342,18 +8388,23 @@ func (s ElasticsearchAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchAction"}
+
 	if s.Endpoint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
 	}
+
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+
 	if s.Index == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Index"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.Type == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
@@ -8417,6 +8468,7 @@ func (s EnableTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EnableTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
@@ -8483,9 +8535,11 @@ func (s FirehoseAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FirehoseAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FirehoseAction"}
+
 	if s.DeliveryStreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -8534,7 +8588,7 @@ type GetLoggingOptionsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel *string `locationName:"logLevel" type:"string" enum:"LogLevel"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string"`
 
 	// The ARN of the IAM role that grants access.
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -8551,8 +8605,8 @@ func (s GetLoggingOptionsOutput) GoString() string {
 }
 
 // SetLogLevel sets the LogLevel field's value.
-func (s *GetLoggingOptionsOutput) SetLogLevel(v string) *GetLoggingOptionsOutput {
-	s.LogLevel = &v
+func (s *GetLoggingOptionsOutput) SetLogLevel(v LogLevel) *GetLoggingOptionsOutput {
+	s.LogLevel = v
 	return s
 }
 
@@ -8585,6 +8639,7 @@ func (s GetPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -8683,12 +8738,14 @@ func (s GetPolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyVersionInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.PolicyVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
@@ -8833,6 +8890,7 @@ func (s GetTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
@@ -8949,9 +9007,11 @@ func (s KinesisAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "KinesisAction"}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.StreamName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
@@ -9003,6 +9063,7 @@ func (s LambdaAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LambdaAction"}
+
 	if s.FunctionArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FunctionArn"))
 	}
@@ -9141,6 +9202,7 @@ func (s ListCertificatesByCAInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCertificatesByCAInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesByCAInput"}
+
 	if s.CaCertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CaCertificateId"))
 	}
@@ -9520,6 +9582,7 @@ func (s *ListPolicyPrincipalsInput) Validate() error {
 	if s.PageSize != nil && *s.PageSize < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -9614,6 +9677,7 @@ func (s ListPolicyVersionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPolicyVersionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyVersionsInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
@@ -9693,6 +9757,7 @@ func (s *ListPrincipalPoliciesInput) Validate() error {
 	if s.PageSize != nil && *s.PageSize < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
@@ -9794,6 +9859,7 @@ func (s *ListPrincipalThingsInput) Validate() error {
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
+
 	if s.Principal == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
@@ -9879,6 +9945,7 @@ func (s ListThingPrincipalsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListThingPrincipalsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListThingPrincipalsInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -10228,7 +10295,7 @@ type LoggingOptionsPayload struct {
 	_ struct{} `type:"structure"`
 
 	// The logging level.
-	LogLevel *string `locationName:"logLevel" type:"string" enum:"LogLevel"`
+	LogLevel LogLevel `locationName:"logLevel" type:"string"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -10249,6 +10316,7 @@ func (s LoggingOptionsPayload) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingOptionsPayload) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "LoggingOptionsPayload"}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -10260,8 +10328,8 @@ func (s *LoggingOptionsPayload) Validate() error {
 }
 
 // SetLogLevel sets the LogLevel field's value.
-func (s *LoggingOptionsPayload) SetLogLevel(v string) *LoggingOptionsPayload {
-	s.LogLevel = &v
+func (s *LoggingOptionsPayload) SetLogLevel(v LogLevel) *LoggingOptionsPayload {
+	s.LogLevel = v
 	return s
 }
 
@@ -10439,6 +10507,7 @@ func (s PutItemInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutItemInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutItemInput"}
+
 	if s.TableName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
@@ -10489,12 +10558,14 @@ func (s RegisterCACertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterCACertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RegisterCACertificateInput"}
+
 	if s.CaCertificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CaCertificate"))
 	}
 	if s.CaCertificate != nil && len(*s.CaCertificate) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CaCertificate", 1))
 	}
+
 	if s.VerificationCertificate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VerificationCertificate"))
 	}
@@ -10581,7 +10652,7 @@ type RegisterCertificateInput struct {
 	SetAsActive *bool `location:"querystring" locationName:"setAsActive" deprecated:"true" type:"boolean"`
 
 	// The status of the register certificate request.
-	Status *string `locationName:"status" type:"string" enum:"CertificateStatus"`
+	Status CertificateStatus `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -10600,6 +10671,7 @@ func (s *RegisterCertificateInput) Validate() error {
 	if s.CaCertificatePem != nil && len(*s.CaCertificatePem) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CaCertificatePem", 1))
 	}
+
 	if s.CertificatePem == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificatePem"))
 	}
@@ -10632,8 +10704,8 @@ func (s *RegisterCertificateInput) SetSetAsActive(v bool) *RegisterCertificateIn
 }
 
 // SetStatus sets the Status field's value.
-func (s *RegisterCertificateInput) SetStatus(v string) *RegisterCertificateInput {
-	s.Status = &v
+func (s *RegisterCertificateInput) SetStatus(v CertificateStatus) *RegisterCertificateInput {
+	s.Status = v
 	return s
 }
 
@@ -10696,6 +10768,7 @@ func (s RejectCertificateTransferInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectCertificateTransferInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RejectCertificateTransferInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -10763,12 +10836,14 @@ func (s ReplaceTopicRuleInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceTopicRuleInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ReplaceTopicRuleInput"}
+
 	if s.RuleName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
+
 	if s.TopicRulePayload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TopicRulePayload"))
 	}
@@ -10838,9 +10913,11 @@ func (s RepublishAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RepublishAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RepublishAction"}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.Topic == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Topic"))
 	}
@@ -10874,7 +10951,7 @@ type S3Action struct {
 
 	// The Amazon S3 canned ACL that controls access to the object identified by
 	// the object key. For more information, see S3 canned ACLs (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
-	CannedAcl *string `locationName:"cannedAcl" type:"string" enum:"CannedAccessControlList"`
+	CannedAcl CannedAccessControlList `locationName:"cannedAcl" type:"string"`
 
 	// The object key.
 	//
@@ -10900,12 +10977,15 @@ func (s S3Action) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "S3Action"}
+
 	if s.BucketName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
+
 	if s.Key == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -10923,8 +11003,8 @@ func (s *S3Action) SetBucketName(v string) *S3Action {
 }
 
 // SetCannedAcl sets the CannedAcl field's value.
-func (s *S3Action) SetCannedAcl(v string) *S3Action {
-	s.CannedAcl = &v
+func (s *S3Action) SetCannedAcl(v CannedAccessControlList) *S3Action {
+	s.CannedAcl = v
 	return s
 }
 
@@ -10971,12 +11051,14 @@ func (s SalesforceAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SalesforceAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SalesforceAction"}
+
 	if s.Token == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
 	if s.Token != nil && len(*s.Token) < 40 {
 		invalidParams.Add(aws.NewErrParamMinLen("Token", 40))
 	}
+
 	if s.Url == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Url"))
 	}
@@ -11027,12 +11109,14 @@ func (s SetDefaultPolicyVersionInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDefaultPolicyVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
+
 	if s.PolicyName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
+
 	if s.PolicyVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
@@ -11092,6 +11176,7 @@ func (s SetLoggingOptionsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoggingOptionsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SetLoggingOptionsInput"}
+
 	if s.LoggingOptionsPayload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoggingOptionsPayload"))
 	}
@@ -11137,7 +11222,7 @@ type SnsAction struct {
 	// bits of the payload should be extracted. To read more about SNS message formats,
 	// see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html (http://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
 	// refer to their official documentation.
-	MessageFormat *string `locationName:"messageFormat" type:"string" enum:"MessageFormat"`
+	MessageFormat MessageFormat `locationName:"messageFormat" type:"string"`
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -11163,9 +11248,11 @@ func (s SnsAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SnsAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SnsAction"}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
+
 	if s.TargetArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
@@ -11177,8 +11264,8 @@ func (s *SnsAction) Validate() error {
 }
 
 // SetMessageFormat sets the MessageFormat field's value.
-func (s *SnsAction) SetMessageFormat(v string) *SnsAction {
-	s.MessageFormat = &v
+func (s *SnsAction) SetMessageFormat(v MessageFormat) *SnsAction {
+	s.MessageFormat = v
 	return s
 }
 
@@ -11225,9 +11312,11 @@ func (s SqsAction) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqsAction) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "SqsAction"}
+
 	if s.QueueUrl == nil {
 		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
+
 	if s.RoleArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
@@ -11609,9 +11698,11 @@ func (s TopicRulePayload) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TopicRulePayload) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TopicRulePayload"}
+
 	if s.Actions == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
+
 	if s.Sql == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Sql"))
 	}
@@ -11693,12 +11784,14 @@ func (s TransferCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TransferCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TransferCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
+
 	if s.TargetAwsAccount == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetAwsAccount"))
 	}
@@ -11822,13 +11915,13 @@ type UpdateCACertificateInput struct {
 
 	// The new value for the auto registration status. Valid values are: "ENABLE"
 	// or "DISABLE".
-	NewAutoRegistrationStatus *string `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string" enum:"AutoRegistrationStatus"`
+	NewAutoRegistrationStatus AutoRegistrationStatus `location:"querystring" locationName:"newAutoRegistrationStatus" type:"string"`
 
 	// The updated status of the CA certificate.
 	//
 	// Note: The status value REGISTER_INACTIVE is deprecated and should not be
 	// used.
-	NewStatus *string `location:"querystring" locationName:"newStatus" type:"string" enum:"CACertificateStatus"`
+	NewStatus CACertificateStatus `location:"querystring" locationName:"newStatus" type:"string"`
 }
 
 // String returns the string representation
@@ -11844,6 +11937,7 @@ func (s UpdateCACertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCACertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCACertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
@@ -11864,14 +11958,14 @@ func (s *UpdateCACertificateInput) SetCertificateId(v string) *UpdateCACertifica
 }
 
 // SetNewAutoRegistrationStatus sets the NewAutoRegistrationStatus field's value.
-func (s *UpdateCACertificateInput) SetNewAutoRegistrationStatus(v string) *UpdateCACertificateInput {
-	s.NewAutoRegistrationStatus = &v
+func (s *UpdateCACertificateInput) SetNewAutoRegistrationStatus(v AutoRegistrationStatus) *UpdateCACertificateInput {
+	s.NewAutoRegistrationStatus = v
 	return s
 }
 
 // SetNewStatus sets the NewStatus field's value.
-func (s *UpdateCACertificateInput) SetNewStatus(v string) *UpdateCACertificateInput {
-	s.NewStatus = &v
+func (s *UpdateCACertificateInput) SetNewStatus(v CACertificateStatus) *UpdateCACertificateInput {
+	s.NewStatus = v
 	return s
 }
 
@@ -11908,7 +12002,7 @@ type UpdateCertificateInput struct {
 	// used.
 	//
 	// NewStatus is a required field
-	NewStatus *string `location:"querystring" locationName:"newStatus" type:"string" required:"true" enum:"CertificateStatus"`
+	NewStatus CertificateStatus `location:"querystring" locationName:"newStatus" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -11924,13 +12018,14 @@ func (s UpdateCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateInput"}
+
 	if s.CertificateId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
 		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
-	if s.NewStatus == nil {
+	if len(s.NewStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("NewStatus"))
 	}
 
@@ -11947,8 +12042,8 @@ func (s *UpdateCertificateInput) SetCertificateId(v string) *UpdateCertificateIn
 }
 
 // SetNewStatus sets the NewStatus field's value.
-func (s *UpdateCertificateInput) SetNewStatus(v string) *UpdateCertificateInput {
-	s.NewStatus = &v
+func (s *UpdateCertificateInput) SetNewStatus(v CertificateStatus) *UpdateCertificateInput {
+	s.NewStatus = v
 	return s
 }
 
@@ -12008,6 +12103,7 @@ func (s UpdateThingInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateThingInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingInput"}
+
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
@@ -12069,97 +12165,71 @@ func (s UpdateThingOutput) GoString() string {
 	return s.String()
 }
 
-const (
-	// AutoRegistrationStatusEnable is a AutoRegistrationStatus enum value
-	AutoRegistrationStatusEnable = "ENABLE"
+type AutoRegistrationStatus string
 
-	// AutoRegistrationStatusDisable is a AutoRegistrationStatus enum value
-	AutoRegistrationStatusDisable = "DISABLE"
+// Enum values for AutoRegistrationStatus
+const (
+	AutoRegistrationStatusEnable  AutoRegistrationStatus = "ENABLE"
+	AutoRegistrationStatusDisable AutoRegistrationStatus = "DISABLE"
 )
 
-const (
-	// CACertificateStatusActive is a CACertificateStatus enum value
-	CACertificateStatusActive = "ACTIVE"
+type CACertificateStatus string
 
-	// CACertificateStatusInactive is a CACertificateStatus enum value
-	CACertificateStatusInactive = "INACTIVE"
+// Enum values for CACertificateStatus
+const (
+	CACertificateStatusActive   CACertificateStatus = "ACTIVE"
+	CACertificateStatusInactive CACertificateStatus = "INACTIVE"
 )
 
+type CannedAccessControlList string
+
+// Enum values for CannedAccessControlList
 const (
-	// CannedAccessControlListPrivate is a CannedAccessControlList enum value
-	CannedAccessControlListPrivate = "private"
-
-	// CannedAccessControlListPublicRead is a CannedAccessControlList enum value
-	CannedAccessControlListPublicRead = "public-read"
-
-	// CannedAccessControlListPublicReadWrite is a CannedAccessControlList enum value
-	CannedAccessControlListPublicReadWrite = "public-read-write"
-
-	// CannedAccessControlListAwsExecRead is a CannedAccessControlList enum value
-	CannedAccessControlListAwsExecRead = "aws-exec-read"
-
-	// CannedAccessControlListAuthenticatedRead is a CannedAccessControlList enum value
-	CannedAccessControlListAuthenticatedRead = "authenticated-read"
-
-	// CannedAccessControlListBucketOwnerRead is a CannedAccessControlList enum value
-	CannedAccessControlListBucketOwnerRead = "bucket-owner-read"
-
-	// CannedAccessControlListBucketOwnerFullControl is a CannedAccessControlList enum value
-	CannedAccessControlListBucketOwnerFullControl = "bucket-owner-full-control"
-
-	// CannedAccessControlListLogDeliveryWrite is a CannedAccessControlList enum value
-	CannedAccessControlListLogDeliveryWrite = "log-delivery-write"
+	CannedAccessControlListPrivate                CannedAccessControlList = "private"
+	CannedAccessControlListPublicRead             CannedAccessControlList = "public-read"
+	CannedAccessControlListPublicReadWrite        CannedAccessControlList = "public-read-write"
+	CannedAccessControlListAwsExecRead            CannedAccessControlList = "aws-exec-read"
+	CannedAccessControlListAuthenticatedRead      CannedAccessControlList = "authenticated-read"
+	CannedAccessControlListBucketOwnerRead        CannedAccessControlList = "bucket-owner-read"
+	CannedAccessControlListBucketOwnerFullControl CannedAccessControlList = "bucket-owner-full-control"
+	CannedAccessControlListLogDeliveryWrite       CannedAccessControlList = "log-delivery-write"
 )
 
+type CertificateStatus string
+
+// Enum values for CertificateStatus
 const (
-	// CertificateStatusActive is a CertificateStatus enum value
-	CertificateStatusActive = "ACTIVE"
-
-	// CertificateStatusInactive is a CertificateStatus enum value
-	CertificateStatusInactive = "INACTIVE"
-
-	// CertificateStatusRevoked is a CertificateStatus enum value
-	CertificateStatusRevoked = "REVOKED"
-
-	// CertificateStatusPendingTransfer is a CertificateStatus enum value
-	CertificateStatusPendingTransfer = "PENDING_TRANSFER"
-
-	// CertificateStatusRegisterInactive is a CertificateStatus enum value
-	CertificateStatusRegisterInactive = "REGISTER_INACTIVE"
-
-	// CertificateStatusPendingActivation is a CertificateStatus enum value
-	CertificateStatusPendingActivation = "PENDING_ACTIVATION"
+	CertificateStatusActive            CertificateStatus = "ACTIVE"
+	CertificateStatusInactive          CertificateStatus = "INACTIVE"
+	CertificateStatusRevoked           CertificateStatus = "REVOKED"
+	CertificateStatusPendingTransfer   CertificateStatus = "PENDING_TRANSFER"
+	CertificateStatusRegisterInactive  CertificateStatus = "REGISTER_INACTIVE"
+	CertificateStatusPendingActivation CertificateStatus = "PENDING_ACTIVATION"
 )
 
-const (
-	// DynamoKeyTypeString is a DynamoKeyType enum value
-	DynamoKeyTypeString = "STRING"
+type DynamoKeyType string
 
-	// DynamoKeyTypeNumber is a DynamoKeyType enum value
-	DynamoKeyTypeNumber = "NUMBER"
+// Enum values for DynamoKeyType
+const (
+	DynamoKeyTypeString DynamoKeyType = "STRING"
+	DynamoKeyTypeNumber DynamoKeyType = "NUMBER"
 )
 
+type LogLevel string
+
+// Enum values for LogLevel
 const (
-	// LogLevelDebug is a LogLevel enum value
-	LogLevelDebug = "DEBUG"
-
-	// LogLevelInfo is a LogLevel enum value
-	LogLevelInfo = "INFO"
-
-	// LogLevelError is a LogLevel enum value
-	LogLevelError = "ERROR"
-
-	// LogLevelWarn is a LogLevel enum value
-	LogLevelWarn = "WARN"
-
-	// LogLevelDisabled is a LogLevel enum value
-	LogLevelDisabled = "DISABLED"
+	LogLevelDebug    LogLevel = "DEBUG"
+	LogLevelInfo     LogLevel = "INFO"
+	LogLevelError    LogLevel = "ERROR"
+	LogLevelWarn     LogLevel = "WARN"
+	LogLevelDisabled LogLevel = "DISABLED"
 )
 
-const (
-	// MessageFormatRaw is a MessageFormat enum value
-	MessageFormatRaw = "RAW"
+type MessageFormat string
 
-	// MessageFormatJson is a MessageFormat enum value
-	MessageFormatJson = "JSON"
+// Enum values for MessageFormat
+const (
+	MessageFormatRaw  MessageFormat = "RAW"
+	MessageFormatJson MessageFormat = "JSON"
 )
