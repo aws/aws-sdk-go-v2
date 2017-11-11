@@ -21,7 +21,7 @@ type AddTagsToStreamRequest struct {
 }
 
 // Send marshals and sends the AddTagsToStream API request.
-func (r *AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
+func (r AddTagsToStreamRequest) Send() (*AddTagsToStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type CreateStreamRequest struct {
 }
 
 // Send marshals and sends the CreateStream API request.
-func (r *CreateStreamRequest) Send() (*CreateStreamOutput, error) {
+func (r CreateStreamRequest) Send() (*CreateStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ type DecreaseStreamRetentionPeriodRequest struct {
 }
 
 // Send marshals and sends the DecreaseStreamRetentionPeriod API request.
-func (r *DecreaseStreamRetentionPeriodRequest) Send() (*DecreaseStreamRetentionPeriodOutput, error) {
+func (r DecreaseStreamRetentionPeriodRequest) Send() (*DecreaseStreamRetentionPeriodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -212,7 +212,7 @@ type DeleteStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteStream API request.
-func (r *DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
+func (r DeleteStreamRequest) Send() (*DeleteStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -279,7 +279,7 @@ type DescribeLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeLimits API request.
-func (r *DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
+func (r DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +330,7 @@ type DescribeStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeStream API request.
-func (r *DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +450,7 @@ type DisableEnhancedMonitoringRequest struct {
 }
 
 // Send marshals and sends the DisableEnhancedMonitoring API request.
-func (r *DisableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+func (r DisableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -496,7 +496,7 @@ type EnableEnhancedMonitoringRequest struct {
 }
 
 // Send marshals and sends the EnableEnhancedMonitoring API request.
-func (r *EnableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
+func (r EnableEnhancedMonitoringRequest) Send() (*EnableEnhancedMonitoringOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -542,7 +542,7 @@ type GetRecordsRequest struct {
 }
 
 // Send marshals and sends the GetRecords API request.
-func (r *GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -640,7 +640,7 @@ type GetShardIteratorRequest struct {
 }
 
 // Send marshals and sends the GetShardIterator API request.
-func (r *GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -723,7 +723,7 @@ type IncreaseStreamRetentionPeriodRequest struct {
 }
 
 // Send marshals and sends the IncreaseStreamRetentionPeriod API request.
-func (r *IncreaseStreamRetentionPeriodRequest) Send() (*IncreaseStreamRetentionPeriodOutput, error) {
+func (r IncreaseStreamRetentionPeriodRequest) Send() (*IncreaseStreamRetentionPeriodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,7 +781,7 @@ type ListStreamsRequest struct {
 }
 
 // Send marshals and sends the ListStreams API request.
-func (r *ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -898,7 +898,7 @@ type ListTagsForStreamRequest struct {
 }
 
 // Send marshals and sends the ListTagsForStream API request.
-func (r *ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
+func (r ListTagsForStreamRequest) Send() (*ListTagsForStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +944,7 @@ type MergeShardsRequest struct {
 }
 
 // Send marshals and sends the MergeShards API request.
-func (r *MergeShardsRequest) Send() (*MergeShardsOutput, error) {
+func (r MergeShardsRequest) Send() (*MergeShardsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1027,7 +1027,7 @@ type PutRecordRequest struct {
 }
 
 // Send marshals and sends the PutRecord API request.
-func (r *PutRecordRequest) Send() (*PutRecordOutput, error) {
+func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1111,7 +1111,7 @@ type PutRecordsRequest struct {
 }
 
 // Send marshals and sends the PutRecords API request.
-func (r *PutRecordsRequest) Send() (*PutRecordsOutput, error) {
+func (r PutRecordsRequest) Send() (*PutRecordsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1215,7 +1215,7 @@ type RemoveTagsFromStreamRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromStream API request.
-func (r *RemoveTagsFromStreamRequest) Send() (*RemoveTagsFromStreamOutput, error) {
+func (r RemoveTagsFromStreamRequest) Send() (*RemoveTagsFromStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1266,7 +1266,7 @@ type SplitShardRequest struct {
 }
 
 // Send marshals and sends the SplitShard API request.
-func (r *SplitShardRequest) Send() (*SplitShardOutput, error) {
+func (r SplitShardRequest) Send() (*SplitShardOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1358,7 +1358,7 @@ type StartStreamEncryptionRequest struct {
 }
 
 // Send marshals and sends the StartStreamEncryption API request.
-func (r *StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, error) {
+func (r StartStreamEncryptionRequest) Send() (*StartStreamEncryptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1423,7 +1423,7 @@ type StopStreamEncryptionRequest struct {
 }
 
 // Send marshals and sends the StopStreamEncryption API request.
-func (r *StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error) {
+func (r StopStreamEncryptionRequest) Send() (*StopStreamEncryptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1488,7 +1488,7 @@ type UpdateShardCountRequest struct {
 }
 
 // Send marshals and sends the UpdateShardCount API request.
-func (r *UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
+func (r UpdateShardCountRequest) Send() (*UpdateShardCountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

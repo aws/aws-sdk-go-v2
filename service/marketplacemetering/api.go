@@ -19,7 +19,7 @@ type BatchMeterUsageRequest struct {
 }
 
 // Send marshals and sends the BatchMeterUsage API request.
-func (r *BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
+func (r BatchMeterUsageRequest) Send() (*BatchMeterUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ type MeterUsageRequest struct {
 }
 
 // Send marshals and sends the MeterUsage API request.
-func (r *MeterUsageRequest) Send() (*MeterUsageOutput, error) {
+func (r MeterUsageRequest) Send() (*MeterUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ type ResolveCustomerRequest struct {
 }
 
 // Send marshals and sends the ResolveCustomer API request.
-func (r *ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
+func (r ResolveCustomerRequest) Send() (*ResolveCustomerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

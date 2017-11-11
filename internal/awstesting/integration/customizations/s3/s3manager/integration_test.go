@@ -54,7 +54,7 @@ func setup() error {
 	bucketName = aws.String(
 		fmt.Sprintf("aws-sdk-go-integration-%d-%s", time.Now().Unix(), integration.UniqueID()))
 
-	_, err := svc.CreateBucket(&s3.CreateBucketInput{Bucket: bucketName})
+	_, err := svc.CreateBucketRequest(&s3.CreateBucketInput{Bucket: bucketName}).Send()
 	if err != nil {
 		return fmt.Errorf("failed to create bucket %q, %v", *bucketName, err)
 	}
@@ -71,29 +71,29 @@ func setup() error {
 func teardown() error {
 	svc := s3.New(integration.Config())
 
-	objs, err := svc.ListObjects(&s3.ListObjectsInput{Bucket: bucketName})
+	objs, err := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: bucketName}).Send()
 	if err != nil {
 		return fmt.Errorf("failed to list bucket %q objects, %v", bucketName, err)
 	}
 
 	for _, o := range objs.Contents {
-		svc.DeleteObject(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key})
+		svc.DeleteObjectRequest(&s3.DeleteObjectInput{Bucket: bucketName, Key: o.Key}).Send()
 	}
 
-	uploads, err := svc.ListMultipartUploads(&s3.ListMultipartUploadsInput{Bucket: bucketName})
+	uploads, err := svc.ListMultipartUploadsRequest(&s3.ListMultipartUploadsInput{Bucket: bucketName}).Send()
 	if err != nil {
 		return fmt.Errorf("failed to list bucket %q multipart objects, %v", bucketName, err)
 	}
 
 	for _, u := range uploads.Uploads {
-		svc.AbortMultipartUpload(&s3.AbortMultipartUploadInput{
+		svc.AbortMultipartUploadRequest(&s3.AbortMultipartUploadInput{
 			Bucket:   bucketName,
 			Key:      u.Key,
 			UploadId: u.UploadId,
-		})
+		}).Send()
 	}
 
-	_, err = svc.DeleteBucket(&s3.DeleteBucketInput{Bucket: bucketName})
+	_, err = svc.DeleteBucketRequest(&s3.DeleteBucketInput{Bucket: bucketName}).Send()
 	if err != nil {
 		return fmt.Errorf("failed to delete bucket %q, %v", bucketName, err)
 	}
@@ -201,9 +201,9 @@ func TestUploadFailCleanup(t *testing.T) {
 		t.Errorf("expect upload ID to not be empty, but was")
 	}
 
-	_, err = svc.ListParts(&s3.ListPartsInput{
+	_, err = svc.ListPartsRequest(&s3.ListPartsInput{
 		Bucket: bucketName, Key: &key, UploadId: &uploadID,
-	})
+	}).Send()
 	if err == nil {
 		t.Errorf("expect error for list parts, but got none")
 	}

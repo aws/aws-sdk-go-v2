@@ -21,7 +21,7 @@ type AddTagsToCertificateRequest struct {
 }
 
 // Send marshals and sends the AddTagsToCertificate API request.
-func (r *AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error) {
+func (r AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -85,7 +85,7 @@ type DeleteCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteCertificate API request.
-func (r *DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -141,7 +141,7 @@ type DescribeCertificateRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificate API request.
-func (r *DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
+func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -187,7 +187,7 @@ type GetCertificateRequest struct {
 }
 
 // Send marshals and sends the GetCertificate API request.
-func (r *GetCertificateRequest) Send() (*GetCertificateOutput, error) {
+func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -241,7 +241,7 @@ type ImportCertificateRequest struct {
 }
 
 // Send marshals and sends the ImportCertificate API request.
-func (r *ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -312,7 +312,7 @@ type ListCertificatesRequest struct {
 }
 
 // Send marshals and sends the ListCertificates API request.
-func (r *ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
+func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -416,7 +416,7 @@ type ListTagsForCertificateRequest struct {
 }
 
 // Send marshals and sends the ListTagsForCertificate API request.
-func (r *ListTagsForCertificateRequest) Send() (*ListTagsForCertificateOutput, error) {
+func (r ListTagsForCertificateRequest) Send() (*ListTagsForCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -465,7 +465,7 @@ type RemoveTagsFromCertificateRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromCertificate API request.
-func (r *RemoveTagsFromCertificateRequest) Send() (*RemoveTagsFromCertificateOutput, error) {
+func (r RemoveTagsFromCertificateRequest) Send() (*RemoveTagsFromCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +520,7 @@ type RequestCertificateRequest struct {
 }
 
 // Send marshals and sends the RequestCertificate API request.
-func (r *RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
+func (r RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -572,7 +572,7 @@ type ResendValidationEmailRequest struct {
 }
 
 // Send marshals and sends the ResendValidationEmail API request.
-func (r *ResendValidationEmailRequest) Send() (*ResendValidationEmailOutput, error) {
+func (r ResendValidationEmailRequest) Send() (*ResendValidationEmailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

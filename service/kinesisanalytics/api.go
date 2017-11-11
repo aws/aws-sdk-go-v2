@@ -19,7 +19,7 @@ type AddApplicationCloudWatchLoggingOptionRequest struct {
 }
 
 // Send marshals and sends the AddApplicationCloudWatchLoggingOption API request.
-func (r *AddApplicationCloudWatchLoggingOptionRequest) Send() (*AddApplicationCloudWatchLoggingOptionOutput, error) {
+func (r AddApplicationCloudWatchLoggingOptionRequest) Send() (*AddApplicationCloudWatchLoggingOptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ type AddApplicationInputRequest struct {
 }
 
 // Send marshals and sends the AddApplicationInput API request.
-func (r *AddApplicationInputRequest) Send() (*AddApplicationInputOutput, error) {
+func (r AddApplicationInputRequest) Send() (*AddApplicationInputOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ type AddApplicationInputProcessingConfigurationRequest struct {
 }
 
 // Send marshals and sends the AddApplicationInputProcessingConfiguration API request.
-func (r *AddApplicationInputProcessingConfigurationRequest) Send() (*AddApplicationInputProcessingConfigurationOutput, error) {
+func (r AddApplicationInputProcessingConfigurationRequest) Send() (*AddApplicationInputProcessingConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ type AddApplicationOutputRequest struct {
 }
 
 // Send marshals and sends the AddApplicationOutput API request.
-func (r *AddApplicationOutputRequest) Send() (*AddApplicationOutputOutput, error) {
+func (r AddApplicationOutputRequest) Send() (*AddApplicationOutputOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -241,7 +241,7 @@ type AddApplicationReferenceDataSourceRequest struct {
 }
 
 // Send marshals and sends the AddApplicationReferenceDataSource API request.
-func (r *AddApplicationReferenceDataSourceRequest) Send() (*AddApplicationReferenceDataSourceOutput, error) {
+func (r AddApplicationReferenceDataSourceRequest) Send() (*AddApplicationReferenceDataSourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -301,7 +301,7 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r *CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send() (*CreateApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -372,7 +372,7 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r *DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -423,7 +423,7 @@ type DeleteApplicationCloudWatchLoggingOptionRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationCloudWatchLoggingOption API request.
-func (r *DeleteApplicationCloudWatchLoggingOptionRequest) Send() (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
+func (r DeleteApplicationCloudWatchLoggingOptionRequest) Send() (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -471,7 +471,7 @@ type DeleteApplicationInputProcessingConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationInputProcessingConfiguration API request.
-func (r *DeleteApplicationInputProcessingConfigurationRequest) Send() (*DeleteApplicationInputProcessingConfigurationOutput, error) {
+func (r DeleteApplicationInputProcessingConfigurationRequest) Send() (*DeleteApplicationInputProcessingConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -517,7 +517,7 @@ type DeleteApplicationOutputRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationOutput API request.
-func (r *DeleteApplicationOutputRequest) Send() (*DeleteApplicationOutputOutput, error) {
+func (r DeleteApplicationOutputRequest) Send() (*DeleteApplicationOutputOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +568,7 @@ type DeleteApplicationReferenceDataSourceRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationReferenceDataSource API request.
-func (r *DeleteApplicationReferenceDataSourceRequest) Send() (*DeleteApplicationReferenceDataSourceOutput, error) {
+func (r DeleteApplicationReferenceDataSourceRequest) Send() (*DeleteApplicationReferenceDataSourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -622,7 +622,7 @@ type DescribeApplicationRequest struct {
 }
 
 // Send marshals and sends the DescribeApplication API request.
-func (r *DescribeApplicationRequest) Send() (*DescribeApplicationOutput, error) {
+func (r DescribeApplicationRequest) Send() (*DescribeApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,7 +675,7 @@ type DiscoverInputSchemaRequest struct {
 }
 
 // Send marshals and sends the DiscoverInputSchema API request.
-func (r *DiscoverInputSchemaRequest) Send() (*DiscoverInputSchemaOutput, error) {
+func (r DiscoverInputSchemaRequest) Send() (*DiscoverInputSchemaOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -734,7 +734,7 @@ type ListApplicationsRequest struct {
 }
 
 // Send marshals and sends the ListApplications API request.
-func (r *ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
+func (r ListApplicationsRequest) Send() (*ListApplicationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -790,7 +790,7 @@ type StartApplicationRequest struct {
 }
 
 // Send marshals and sends the StartApplication API request.
-func (r *StartApplicationRequest) Send() (*StartApplicationOutput, error) {
+func (r StartApplicationRequest) Send() (*StartApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,7 +850,7 @@ type StopApplicationRequest struct {
 }
 
 // Send marshals and sends the StopApplication API request.
-func (r *StopApplicationRequest) Send() (*StopApplicationOutput, error) {
+func (r StopApplicationRequest) Send() (*StopApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -903,7 +903,7 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r *UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

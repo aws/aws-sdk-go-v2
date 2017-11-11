@@ -18,7 +18,7 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ type CreateHapgRequest struct {
 }
 
 // Send marshals and sends the CreateHapg API request.
-func (r *CreateHapgRequest) Send() (*CreateHapgOutput, error) {
+func (r CreateHapgRequest) Send() (*CreateHapgOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ type CreateHsmRequest struct {
 }
 
 // Send marshals and sends the CreateHsm API request.
-func (r *CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -169,7 +169,7 @@ type CreateLunaClientRequest struct {
 }
 
 // Send marshals and sends the CreateLunaClient API request.
-func (r *CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
+func (r CreateLunaClientRequest) Send() (*CreateLunaClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -215,7 +215,7 @@ type DeleteHapgRequest struct {
 }
 
 // Send marshals and sends the DeleteHapg API request.
-func (r *DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
+func (r DeleteHapgRequest) Send() (*DeleteHapgOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -261,7 +261,7 @@ type DeleteHsmRequest struct {
 }
 
 // Send marshals and sends the DeleteHsm API request.
-func (r *DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +308,7 @@ type DeleteLunaClientRequest struct {
 }
 
 // Send marshals and sends the DeleteLunaClient API request.
-func (r *DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
+func (r DeleteLunaClientRequest) Send() (*DeleteLunaClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -354,7 +354,7 @@ type DescribeHapgRequest struct {
 }
 
 // Send marshals and sends the DescribeHapg API request.
-func (r *DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
+func (r DescribeHapgRequest) Send() (*DescribeHapgOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,7 +400,7 @@ type DescribeHsmRequest struct {
 }
 
 // Send marshals and sends the DescribeHsm API request.
-func (r *DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
+func (r DescribeHsmRequest) Send() (*DescribeHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +447,7 @@ type DescribeLunaClientRequest struct {
 }
 
 // Send marshals and sends the DescribeLunaClient API request.
-func (r *DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
+func (r DescribeLunaClientRequest) Send() (*DescribeLunaClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +493,7 @@ type GetConfigRequest struct {
 }
 
 // Send marshals and sends the GetConfig API request.
-func (r *GetConfigRequest) Send() (*GetConfigOutput, error) {
+func (r GetConfigRequest) Send() (*GetConfigOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +540,7 @@ type ListAvailableZonesRequest struct {
 }
 
 // Send marshals and sends the ListAvailableZones API request.
-func (r *ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
+func (r ListAvailableZonesRequest) Send() (*ListAvailableZonesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,7 +586,7 @@ type ListHapgsRequest struct {
 }
 
 // Send marshals and sends the ListHapgs API request.
-func (r *ListHapgsRequest) Send() (*ListHapgsOutput, error) {
+func (r ListHapgsRequest) Send() (*ListHapgsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +637,7 @@ type ListHsmsRequest struct {
 }
 
 // Send marshals and sends the ListHsms API request.
-func (r *ListHsmsRequest) Send() (*ListHsmsOutput, error) {
+func (r ListHsmsRequest) Send() (*ListHsmsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -689,7 +689,7 @@ type ListLunaClientsRequest struct {
 }
 
 // Send marshals and sends the ListLunaClients API request.
-func (r *ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
+func (r ListLunaClientsRequest) Send() (*ListLunaClientsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -740,7 +740,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -786,7 +786,7 @@ type ModifyHapgRequest struct {
 }
 
 // Send marshals and sends the ModifyHapg API request.
-func (r *ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
+func (r ModifyHapgRequest) Send() (*ModifyHapgOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -832,7 +832,7 @@ type ModifyHsmRequest struct {
 }
 
 // Send marshals and sends the ModifyHsm API request.
-func (r *ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
+func (r ModifyHsmRequest) Send() (*ModifyHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -884,7 +884,7 @@ type ModifyLunaClientRequest struct {
 }
 
 // Send marshals and sends the ModifyLunaClient API request.
-func (r *ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
+func (r ModifyLunaClientRequest) Send() (*ModifyLunaClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -933,7 +933,7 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -18,7 +18,7 @@ type AssumeRoleRequest struct {
 }
 
 // Send marshals and sends the AssumeRole API request.
-func (r *AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
+func (r AssumeRoleRequest) Send() (*AssumeRoleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -152,7 +152,7 @@ type AssumeRoleWithSAMLRequest struct {
 }
 
 // Send marshals and sends the AssumeRoleWithSAML API request.
-func (r *AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
+func (r AssumeRoleWithSAMLRequest) Send() (*AssumeRoleWithSAMLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -264,7 +264,7 @@ type AssumeRoleWithWebIdentityRequest struct {
 }
 
 // Send marshals and sends the AssumeRoleWithWebIdentity API request.
-func (r *AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutput, error) {
+func (r AssumeRoleWithWebIdentityRequest) Send() (*AssumeRoleWithWebIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +398,7 @@ type DecodeAuthorizationMessageRequest struct {
 }
 
 // Send marshals and sends the DecodeAuthorizationMessage API request.
-func (r *DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOutput, error) {
+func (r DecodeAuthorizationMessageRequest) Send() (*DecodeAuthorizationMessageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -475,7 +475,7 @@ type GetCallerIdentityRequest struct {
 }
 
 // Send marshals and sends the GetCallerIdentity API request.
-func (r *GetCallerIdentityRequest) Send() (*GetCallerIdentityOutput, error) {
+func (r GetCallerIdentityRequest) Send() (*GetCallerIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -522,7 +522,7 @@ type GetFederationTokenRequest struct {
 }
 
 // Send marshals and sends the GetFederationToken API request.
-func (r *GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
+func (r GetFederationTokenRequest) Send() (*GetFederationTokenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +645,7 @@ type GetSessionTokenRequest struct {
 }
 
 // Send marshals and sends the GetSessionToken API request.
-func (r *GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
+func (r GetSessionTokenRequest) Send() (*GetSessionTokenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

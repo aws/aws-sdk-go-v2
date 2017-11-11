@@ -21,7 +21,7 @@ type AddRoleToDBClusterRequest struct {
 }
 
 // Send marshals and sends the AddRoleToDBCluster API request.
-func (r *AddRoleToDBClusterRequest) Send() (*AddRoleToDBClusterOutput, error) {
+func (r AddRoleToDBClusterRequest) Send() (*AddRoleToDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ type AddSourceIdentifierToSubscriptionRequest struct {
 }
 
 // Send marshals and sends the AddSourceIdentifierToSubscription API request.
-func (r *AddSourceIdentifierToSubscriptionRequest) Send() (*AddSourceIdentifierToSubscriptionOutput, error) {
+func (r AddSourceIdentifierToSubscriptionRequest) Send() (*AddSourceIdentifierToSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -170,7 +170,7 @@ type ApplyPendingMaintenanceActionRequest struct {
 }
 
 // Send marshals and sends the ApplyPendingMaintenanceAction API request.
-func (r *ApplyPendingMaintenanceActionRequest) Send() (*ApplyPendingMaintenanceActionOutput, error) {
+func (r ApplyPendingMaintenanceActionRequest) Send() (*ApplyPendingMaintenanceActionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -217,7 +217,7 @@ type AuthorizeDBSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeDBSecurityGroupIngress API request.
-func (r *AuthorizeDBSecurityGroupIngressRequest) Send() (*AuthorizeDBSecurityGroupIngressOutput, error) {
+func (r AuthorizeDBSecurityGroupIngressRequest) Send() (*AuthorizeDBSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -275,7 +275,7 @@ type CopyDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CopyDBClusterParameterGroup API request.
-func (r *CopyDBClusterParameterGroupRequest) Send() (*CopyDBClusterParameterGroupOutput, error) {
+func (r CopyDBClusterParameterGroupRequest) Send() (*CopyDBClusterParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -321,7 +321,7 @@ type CopyDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CopyDBClusterSnapshot API request.
-func (r *CopyDBClusterSnapshotRequest) Send() (*CopyDBClusterSnapshotOutput, error) {
+func (r CopyDBClusterSnapshotRequest) Send() (*CopyDBClusterSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -429,7 +429,7 @@ type CopyDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CopyDBParameterGroup API request.
-func (r *CopyDBParameterGroupRequest) Send() (*CopyDBParameterGroupOutput, error) {
+func (r CopyDBParameterGroupRequest) Send() (*CopyDBParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -475,7 +475,7 @@ type CopyDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the CopyDBSnapshot API request.
-func (r *CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
+func (r CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -531,7 +531,7 @@ type CopyOptionGroupRequest struct {
 }
 
 // Send marshals and sends the CopyOptionGroup API request.
-func (r *CopyOptionGroupRequest) Send() (*CopyOptionGroupOutput, error) {
+func (r CopyOptionGroupRequest) Send() (*CopyOptionGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,7 +577,7 @@ type CreateDBClusterRequest struct {
 }
 
 // Send marshals and sends the CreateDBCluster API request.
-func (r *CreateDBClusterRequest) Send() (*CreateDBClusterOutput, error) {
+func (r CreateDBClusterRequest) Send() (*CreateDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -631,7 +631,7 @@ type CreateDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBClusterParameterGroup API request.
-func (r *CreateDBClusterParameterGroupRequest) Send() (*CreateDBClusterParameterGroupOutput, error) {
+func (r CreateDBClusterParameterGroupRequest) Send() (*CreateDBClusterParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -704,7 +704,7 @@ type CreateDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateDBClusterSnapshot API request.
-func (r *CreateDBClusterSnapshotRequest) Send() (*CreateDBClusterSnapshotOutput, error) {
+func (r CreateDBClusterSnapshotRequest) Send() (*CreateDBClusterSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -752,7 +752,7 @@ type CreateDBInstanceRequest struct {
 }
 
 // Send marshals and sends the CreateDBInstance API request.
-func (r *CreateDBInstanceRequest) Send() (*CreateDBInstanceOutput, error) {
+func (r CreateDBInstanceRequest) Send() (*CreateDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +798,7 @@ type CreateDBInstanceReadReplicaRequest struct {
 }
 
 // Send marshals and sends the CreateDBInstanceReadReplica API request.
-func (r *CreateDBInstanceReadReplicaRequest) Send() (*CreateDBInstanceReadReplicaOutput, error) {
+func (r CreateDBInstanceReadReplicaRequest) Send() (*CreateDBInstanceReadReplicaOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -859,7 +859,7 @@ type CreateDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBParameterGroup API request.
-func (r *CreateDBParameterGroupRequest) Send() (*CreateDBParameterGroupOutput, error) {
+func (r CreateDBParameterGroupRequest) Send() (*CreateDBParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -925,7 +925,7 @@ type CreateDBSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBSecurityGroup API request.
-func (r *CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, error) {
+func (r CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -972,7 +972,7 @@ type CreateDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateDBSnapshot API request.
-func (r *CreateDBSnapshotRequest) Send() (*CreateDBSnapshotOutput, error) {
+func (r CreateDBSnapshotRequest) Send() (*CreateDBSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1018,7 +1018,7 @@ type CreateDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateDBSubnetGroup API request.
-func (r *CreateDBSubnetGroupRequest) Send() (*CreateDBSubnetGroupOutput, error) {
+func (r CreateDBSubnetGroupRequest) Send() (*CreateDBSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1065,7 +1065,7 @@ type CreateEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
-func (r *CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1128,7 +1128,7 @@ type CreateOptionGroupRequest struct {
 }
 
 // Send marshals and sends the CreateOptionGroup API request.
-func (r *CreateOptionGroupRequest) Send() (*CreateOptionGroupOutput, error) {
+func (r CreateOptionGroupRequest) Send() (*CreateOptionGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1174,7 +1174,7 @@ type DeleteDBClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteDBCluster API request.
-func (r *DeleteDBClusterRequest) Send() (*DeleteDBClusterOutput, error) {
+func (r DeleteDBClusterRequest) Send() (*DeleteDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1225,7 +1225,7 @@ type DeleteDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBClusterParameterGroup API request.
-func (r *DeleteDBClusterParameterGroupRequest) Send() (*DeleteDBClusterParameterGroupOutput, error) {
+func (r DeleteDBClusterParameterGroupRequest) Send() (*DeleteDBClusterParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1277,7 +1277,7 @@ type DeleteDBClusterSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteDBClusterSnapshot API request.
-func (r *DeleteDBClusterSnapshotRequest) Send() (*DeleteDBClusterSnapshotOutput, error) {
+func (r DeleteDBClusterSnapshotRequest) Send() (*DeleteDBClusterSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1329,7 +1329,7 @@ type DeleteDBInstanceRequest struct {
 }
 
 // Send marshals and sends the DeleteDBInstance API request.
-func (r *DeleteDBInstanceRequest) Send() (*DeleteDBInstanceOutput, error) {
+func (r DeleteDBInstanceRequest) Send() (*DeleteDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1399,7 +1399,7 @@ type DeleteDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBParameterGroup API request.
-func (r *DeleteDBParameterGroupRequest) Send() (*DeleteDBParameterGroupOutput, error) {
+func (r DeleteDBParameterGroupRequest) Send() (*DeleteDBParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1448,7 +1448,7 @@ type DeleteDBSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSecurityGroup API request.
-func (r *DeleteDBSecurityGroupRequest) Send() (*DeleteDBSecurityGroupOutput, error) {
+func (r DeleteDBSecurityGroupRequest) Send() (*DeleteDBSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1498,7 +1498,7 @@ type DeleteDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSnapshot API request.
-func (r *DeleteDBSnapshotRequest) Send() (*DeleteDBSnapshotOutput, error) {
+func (r DeleteDBSnapshotRequest) Send() (*DeleteDBSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1547,7 +1547,7 @@ type DeleteDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteDBSubnetGroup API request.
-func (r *DeleteDBSubnetGroupRequest) Send() (*DeleteDBSubnetGroupOutput, error) {
+func (r DeleteDBSubnetGroupRequest) Send() (*DeleteDBSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1597,7 +1597,7 @@ type DeleteEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
-func (r *DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1643,7 +1643,7 @@ type DeleteOptionGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteOptionGroup API request.
-func (r *DeleteOptionGroupRequest) Send() (*DeleteOptionGroupOutput, error) {
+func (r DeleteOptionGroupRequest) Send() (*DeleteOptionGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1691,7 +1691,7 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1742,7 +1742,7 @@ type DescribeCertificatesRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificates API request.
-func (r *DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+func (r DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1788,7 +1788,7 @@ type DescribeDBClusterParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterParameterGroups API request.
-func (r *DescribeDBClusterParameterGroupsRequest) Send() (*DescribeDBClusterParameterGroupsOutput, error) {
+func (r DescribeDBClusterParameterGroupsRequest) Send() (*DescribeDBClusterParameterGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1839,7 +1839,7 @@ type DescribeDBClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterParameters API request.
-func (r *DescribeDBClusterParametersRequest) Send() (*DescribeDBClusterParametersOutput, error) {
+func (r DescribeDBClusterParametersRequest) Send() (*DescribeDBClusterParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1889,7 +1889,7 @@ type DescribeDBClusterSnapshotAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshotAttributes API request.
-func (r *DescribeDBClusterSnapshotAttributesRequest) Send() (*DescribeDBClusterSnapshotAttributesOutput, error) {
+func (r DescribeDBClusterSnapshotAttributesRequest) Send() (*DescribeDBClusterSnapshotAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1946,7 +1946,7 @@ type DescribeDBClusterSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshots API request.
-func (r *DescribeDBClusterSnapshotsRequest) Send() (*DescribeDBClusterSnapshotsOutput, error) {
+func (r DescribeDBClusterSnapshotsRequest) Send() (*DescribeDBClusterSnapshotsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1996,7 +1996,7 @@ type DescribeDBClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBClusters API request.
-func (r *DescribeDBClustersRequest) Send() (*DescribeDBClustersOutput, error) {
+func (r DescribeDBClustersRequest) Send() (*DescribeDBClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2046,7 +2046,7 @@ type DescribeDBEngineVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBEngineVersions API request.
-func (r *DescribeDBEngineVersionsRequest) Send() (*DescribeDBEngineVersionsOutput, error) {
+func (r DescribeDBEngineVersionsRequest) Send() (*DescribeDBEngineVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2148,7 +2148,7 @@ type DescribeDBInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBInstances API request.
-func (r *DescribeDBInstancesRequest) Send() (*DescribeDBInstancesOutput, error) {
+func (r DescribeDBInstancesRequest) Send() (*DescribeDBInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2250,7 +2250,7 @@ type DescribeDBLogFilesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBLogFiles API request.
-func (r *DescribeDBLogFilesRequest) Send() (*DescribeDBLogFilesOutput, error) {
+func (r DescribeDBLogFilesRequest) Send() (*DescribeDBLogFilesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2352,7 +2352,7 @@ type DescribeDBParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBParameterGroups API request.
-func (r *DescribeDBParameterGroupsRequest) Send() (*DescribeDBParameterGroupsOutput, error) {
+func (r DescribeDBParameterGroupsRequest) Send() (*DescribeDBParameterGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2456,7 +2456,7 @@ type DescribeDBParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeDBParameters API request.
-func (r *DescribeDBParametersRequest) Send() (*DescribeDBParametersOutput, error) {
+func (r DescribeDBParametersRequest) Send() (*DescribeDBParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2558,7 +2558,7 @@ type DescribeDBSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSecurityGroups API request.
-func (r *DescribeDBSecurityGroupsRequest) Send() (*DescribeDBSecurityGroupsOutput, error) {
+func (r DescribeDBSecurityGroupsRequest) Send() (*DescribeDBSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2662,7 +2662,7 @@ type DescribeDBSnapshotAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSnapshotAttributes API request.
-func (r *DescribeDBSnapshotAttributesRequest) Send() (*DescribeDBSnapshotAttributesOutput, error) {
+func (r DescribeDBSnapshotAttributesRequest) Send() (*DescribeDBSnapshotAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2719,7 +2719,7 @@ type DescribeDBSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSnapshots API request.
-func (r *DescribeDBSnapshotsRequest) Send() (*DescribeDBSnapshotsOutput, error) {
+func (r DescribeDBSnapshotsRequest) Send() (*DescribeDBSnapshotsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2821,7 +2821,7 @@ type DescribeDBSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeDBSubnetGroups API request.
-func (r *DescribeDBSubnetGroupsRequest) Send() (*DescribeDBSubnetGroupsOutput, error) {
+func (r DescribeDBSubnetGroupsRequest) Send() (*DescribeDBSubnetGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2926,7 +2926,7 @@ type DescribeEngineDefaultClusterParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultClusterParameters API request.
-func (r *DescribeEngineDefaultClusterParametersRequest) Send() (*DescribeEngineDefaultClusterParametersOutput, error) {
+func (r DescribeEngineDefaultClusterParametersRequest) Send() (*DescribeEngineDefaultClusterParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2976,7 +2976,7 @@ type DescribeEngineDefaultParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
-func (r *DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3079,7 +3079,7 @@ type DescribeEventCategoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
-func (r *DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3128,7 +3128,7 @@ type DescribeEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
-func (r *DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3234,7 +3234,7 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3340,7 +3340,7 @@ type DescribeOptionGroupOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeOptionGroupOptions API request.
-func (r *DescribeOptionGroupOptionsRequest) Send() (*DescribeOptionGroupOptionsOutput, error) {
+func (r DescribeOptionGroupOptionsRequest) Send() (*DescribeOptionGroupOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3442,7 +3442,7 @@ type DescribeOptionGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeOptionGroups API request.
-func (r *DescribeOptionGroupsRequest) Send() (*DescribeOptionGroupsOutput, error) {
+func (r DescribeOptionGroupsRequest) Send() (*DescribeOptionGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3544,7 +3544,7 @@ type DescribeOrderableDBInstanceOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeOrderableDBInstanceOptions API request.
-func (r *DescribeOrderableDBInstanceOptionsRequest) Send() (*DescribeOrderableDBInstanceOptionsOutput, error) {
+func (r DescribeOrderableDBInstanceOptionsRequest) Send() (*DescribeOrderableDBInstanceOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3646,7 +3646,7 @@ type DescribePendingMaintenanceActionsRequest struct {
 }
 
 // Send marshals and sends the DescribePendingMaintenanceActions API request.
-func (r *DescribePendingMaintenanceActionsRequest) Send() (*DescribePendingMaintenanceActionsOutput, error) {
+func (r DescribePendingMaintenanceActionsRequest) Send() (*DescribePendingMaintenanceActionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3693,7 +3693,7 @@ type DescribeReservedDBInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedDBInstances API request.
-func (r *DescribeReservedDBInstancesRequest) Send() (*DescribeReservedDBInstancesOutput, error) {
+func (r DescribeReservedDBInstancesRequest) Send() (*DescribeReservedDBInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3796,7 +3796,7 @@ type DescribeReservedDBInstancesOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedDBInstancesOfferings API request.
-func (r *DescribeReservedDBInstancesOfferingsRequest) Send() (*DescribeReservedDBInstancesOfferingsOutput, error) {
+func (r DescribeReservedDBInstancesOfferingsRequest) Send() (*DescribeReservedDBInstancesOfferingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3898,7 +3898,7 @@ type DescribeSourceRegionsRequest struct {
 }
 
 // Send marshals and sends the DescribeSourceRegions API request.
-func (r *DescribeSourceRegionsRequest) Send() (*DescribeSourceRegionsOutput, error) {
+func (r DescribeSourceRegionsRequest) Send() (*DescribeSourceRegionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3946,7 +3946,7 @@ type DownloadDBLogFilePortionRequest struct {
 }
 
 // Send marshals and sends the DownloadDBLogFilePortion API request.
-func (r *DownloadDBLogFilePortionRequest) Send() (*DownloadDBLogFilePortionOutput, error) {
+func (r DownloadDBLogFilePortionRequest) Send() (*DownloadDBLogFilePortionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4048,7 +4048,7 @@ type FailoverDBClusterRequest struct {
 }
 
 // Send marshals and sends the FailoverDBCluster API request.
-func (r *FailoverDBClusterRequest) Send() (*FailoverDBClusterOutput, error) {
+func (r FailoverDBClusterRequest) Send() (*FailoverDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4107,7 +4107,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4156,7 +4156,7 @@ type ModifyDBClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyDBCluster API request.
-func (r *ModifyDBClusterRequest) Send() (*ModifyDBClusterOutput, error) {
+func (r ModifyDBClusterRequest) Send() (*ModifyDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4206,7 +4206,7 @@ type ModifyDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBClusterParameterGroup API request.
-func (r *ModifyDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+func (r ModifyDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4272,7 +4272,7 @@ type ModifyDBClusterSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyDBClusterSnapshotAttribute API request.
-func (r *ModifyDBClusterSnapshotAttributeRequest) Send() (*ModifyDBClusterSnapshotAttributeOutput, error) {
+func (r ModifyDBClusterSnapshotAttributeRequest) Send() (*ModifyDBClusterSnapshotAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4334,7 +4334,7 @@ type ModifyDBInstanceRequest struct {
 }
 
 // Send marshals and sends the ModifyDBInstance API request.
-func (r *ModifyDBInstanceRequest) Send() (*ModifyDBInstanceOutput, error) {
+func (r ModifyDBInstanceRequest) Send() (*ModifyDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4382,7 +4382,7 @@ type ModifyDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBParameterGroup API request.
-func (r *ModifyDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+func (r ModifyDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4445,7 +4445,7 @@ type ModifyDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSnapshot API request.
-func (r *ModifyDBSnapshotRequest) Send() (*ModifyDBSnapshotOutput, error) {
+func (r ModifyDBSnapshotRequest) Send() (*ModifyDBSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4494,7 +4494,7 @@ type ModifyDBSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSnapshotAttribute API request.
-func (r *ModifyDBSnapshotAttributeRequest) Send() (*ModifyDBSnapshotAttributeOutput, error) {
+func (r ModifyDBSnapshotAttributeRequest) Send() (*ModifyDBSnapshotAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4556,7 +4556,7 @@ type ModifyDBSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyDBSubnetGroup API request.
-func (r *ModifyDBSubnetGroupRequest) Send() (*ModifyDBSubnetGroupOutput, error) {
+func (r ModifyDBSubnetGroupRequest) Send() (*ModifyDBSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4603,7 +4603,7 @@ type ModifyEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
-func (r *ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4657,7 +4657,7 @@ type ModifyOptionGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyOptionGroup API request.
-func (r *ModifyOptionGroupRequest) Send() (*ModifyOptionGroupOutput, error) {
+func (r ModifyOptionGroupRequest) Send() (*ModifyOptionGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4703,7 +4703,7 @@ type PromoteReadReplicaRequest struct {
 }
 
 // Send marshals and sends the PromoteReadReplica API request.
-func (r *PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
+func (r PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4754,7 +4754,7 @@ type PromoteReadReplicaDBClusterRequest struct {
 }
 
 // Send marshals and sends the PromoteReadReplicaDBCluster API request.
-func (r *PromoteReadReplicaDBClusterRequest) Send() (*PromoteReadReplicaDBClusterOutput, error) {
+func (r PromoteReadReplicaDBClusterRequest) Send() (*PromoteReadReplicaDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4800,7 +4800,7 @@ type PurchaseReservedDBInstancesOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedDBInstancesOffering API request.
-func (r *PurchaseReservedDBInstancesOfferingRequest) Send() (*PurchaseReservedDBInstancesOfferingOutput, error) {
+func (r PurchaseReservedDBInstancesOfferingRequest) Send() (*PurchaseReservedDBInstancesOfferingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4846,7 +4846,7 @@ type RebootDBInstanceRequest struct {
 }
 
 // Send marshals and sends the RebootDBInstance API request.
-func (r *RebootDBInstanceRequest) Send() (*RebootDBInstanceOutput, error) {
+func (r RebootDBInstanceRequest) Send() (*RebootDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4908,7 +4908,7 @@ type RemoveRoleFromDBClusterRequest struct {
 }
 
 // Send marshals and sends the RemoveRoleFromDBCluster API request.
-func (r *RemoveRoleFromDBClusterRequest) Send() (*RemoveRoleFromDBClusterOutput, error) {
+func (r RemoveRoleFromDBClusterRequest) Send() (*RemoveRoleFromDBClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4958,7 +4958,7 @@ type RemoveSourceIdentifierFromSubscriptionRequest struct {
 }
 
 // Send marshals and sends the RemoveSourceIdentifierFromSubscription API request.
-func (r *RemoveSourceIdentifierFromSubscriptionRequest) Send() (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
+func (r RemoveSourceIdentifierFromSubscriptionRequest) Send() (*RemoveSourceIdentifierFromSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5004,7 +5004,7 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5055,7 +5055,7 @@ type ResetDBClusterParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetDBClusterParameterGroup API request.
-func (r *ResetDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
+func (r ResetDBClusterParameterGroupRequest) Send() (*ResetDBClusterParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5113,7 +5113,7 @@ type ResetDBParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetDBParameterGroup API request.
-func (r *ResetDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
+func (r ResetDBParameterGroupRequest) Send() (*ResetDBParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5165,7 +5165,7 @@ type RestoreDBClusterFromS3Request struct {
 }
 
 // Send marshals and sends the RestoreDBClusterFromS3 API request.
-func (r *RestoreDBClusterFromS3Request) Send() (*RestoreDBClusterFromS3Output, error) {
+func (r RestoreDBClusterFromS3Request) Send() (*RestoreDBClusterFromS3Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5214,7 +5214,7 @@ type RestoreDBClusterFromSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreDBClusterFromSnapshot API request.
-func (r *RestoreDBClusterFromSnapshotRequest) Send() (*RestoreDBClusterFromSnapshotOutput, error) {
+func (r RestoreDBClusterFromSnapshotRequest) Send() (*RestoreDBClusterFromSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5271,7 +5271,7 @@ type RestoreDBClusterToPointInTimeRequest struct {
 }
 
 // Send marshals and sends the RestoreDBClusterToPointInTime API request.
-func (r *RestoreDBClusterToPointInTimeRequest) Send() (*RestoreDBClusterToPointInTimeOutput, error) {
+func (r RestoreDBClusterToPointInTimeRequest) Send() (*RestoreDBClusterToPointInTimeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5331,7 +5331,7 @@ type RestoreDBInstanceFromDBSnapshotRequest struct {
 }
 
 // Send marshals and sends the RestoreDBInstanceFromDBSnapshot API request.
-func (r *RestoreDBInstanceFromDBSnapshotRequest) Send() (*RestoreDBInstanceFromDBSnapshotOutput, error) {
+func (r RestoreDBInstanceFromDBSnapshotRequest) Send() (*RestoreDBInstanceFromDBSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5395,7 +5395,7 @@ type RestoreDBInstanceToPointInTimeRequest struct {
 }
 
 // Send marshals and sends the RestoreDBInstanceToPointInTime API request.
-func (r *RestoreDBInstanceToPointInTimeRequest) Send() (*RestoreDBInstanceToPointInTimeOutput, error) {
+func (r RestoreDBInstanceToPointInTimeRequest) Send() (*RestoreDBInstanceToPointInTimeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5452,7 +5452,7 @@ type RevokeDBSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeDBSecurityGroupIngress API request.
-func (r *RevokeDBSecurityGroupIngressRequest) Send() (*RevokeDBSecurityGroupIngressOutput, error) {
+func (r RevokeDBSecurityGroupIngressRequest) Send() (*RevokeDBSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5501,7 +5501,7 @@ type StartDBInstanceRequest struct {
 }
 
 // Send marshals and sends the StartDBInstance API request.
-func (r *StartDBInstanceRequest) Send() (*StartDBInstanceOutput, error) {
+func (r StartDBInstanceRequest) Send() (*StartDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5549,7 +5549,7 @@ type StopDBInstanceRequest struct {
 }
 
 // Send marshals and sends the StopDBInstance API request.
-func (r *StopDBInstanceRequest) Send() (*StopDBInstanceOutput, error) {
+func (r StopDBInstanceRequest) Send() (*StopDBInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

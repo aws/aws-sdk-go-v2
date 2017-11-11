@@ -19,7 +19,7 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r *CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ type CreateServiceRequest struct {
 }
 
 // Send marshals and sends the CreateService API request.
-func (r *CreateServiceRequest) Send() (*CreateServiceOutput, error) {
+func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ type DeleteAttributesRequest struct {
 }
 
 // Send marshals and sends the DeleteAttributes API request.
-func (r *DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -217,7 +217,7 @@ type DeleteClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCluster API request.
-func (r *DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -265,7 +265,7 @@ type DeleteServiceRequest struct {
 }
 
 // Send marshals and sends the DeleteService API request.
-func (r *DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
+func (r DeleteServiceRequest) Send() (*DeleteServiceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -324,7 +324,7 @@ type DeregisterContainerInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterContainerInstance API request.
-func (r *DeregisterContainerInstanceRequest) Send() (*DeregisterContainerInstanceOutput, error) {
+func (r DeregisterContainerInstanceRequest) Send() (*DeregisterContainerInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +384,7 @@ type DeregisterTaskDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeregisterTaskDefinition API request.
-func (r *DeregisterTaskDefinitionRequest) Send() (*DeregisterTaskDefinitionOutput, error) {
+func (r DeregisterTaskDefinitionRequest) Send() (*DeregisterTaskDefinitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -444,7 +444,7 @@ type DescribeClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeClusters API request.
-func (r *DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -490,7 +490,7 @@ type DescribeContainerInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeContainerInstances API request.
-func (r *DescribeContainerInstancesRequest) Send() (*DescribeContainerInstancesOutput, error) {
+func (r DescribeContainerInstancesRequest) Send() (*DescribeContainerInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -537,7 +537,7 @@ type DescribeServicesRequest struct {
 }
 
 // Send marshals and sends the DescribeServices API request.
-func (r *DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
+func (r DescribeServicesRequest) Send() (*DescribeServicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -583,7 +583,7 @@ type DescribeTaskDefinitionRequest struct {
 }
 
 // Send marshals and sends the DescribeTaskDefinition API request.
-func (r *DescribeTaskDefinitionRequest) Send() (*DescribeTaskDefinitionOutput, error) {
+func (r DescribeTaskDefinitionRequest) Send() (*DescribeTaskDefinitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -634,7 +634,7 @@ type DescribeTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeTasks API request.
-func (r *DescribeTasksRequest) Send() (*DescribeTasksOutput, error) {
+func (r DescribeTasksRequest) Send() (*DescribeTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -680,7 +680,7 @@ type DiscoverPollEndpointRequest struct {
 }
 
 // Send marshals and sends the DiscoverPollEndpoint API request.
-func (r *DiscoverPollEndpointRequest) Send() (*DiscoverPollEndpointOutput, error) {
+func (r DiscoverPollEndpointRequest) Send() (*DiscoverPollEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -730,7 +730,7 @@ type ListAttributesRequest struct {
 }
 
 // Send marshals and sends the ListAttributes API request.
-func (r *ListAttributesRequest) Send() (*ListAttributesOutput, error) {
+func (r ListAttributesRequest) Send() (*ListAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -782,7 +782,7 @@ type ListClustersRequest struct {
 }
 
 // Send marshals and sends the ListClusters API request.
-func (r *ListClustersRequest) Send() (*ListClustersOutput, error) {
+func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -884,7 +884,7 @@ type ListContainerInstancesRequest struct {
 }
 
 // Send marshals and sends the ListContainerInstances API request.
-func (r *ListContainerInstancesRequest) Send() (*ListContainerInstancesOutput, error) {
+func (r ListContainerInstancesRequest) Send() (*ListContainerInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -990,7 +990,7 @@ type ListServicesRequest struct {
 }
 
 // Send marshals and sends the ListServices API request.
-func (r *ListServicesRequest) Send() (*ListServicesOutput, error) {
+func (r ListServicesRequest) Send() (*ListServicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1092,7 +1092,7 @@ type ListTaskDefinitionFamiliesRequest struct {
 }
 
 // Send marshals and sends the ListTaskDefinitionFamilies API request.
-func (r *ListTaskDefinitionFamiliesRequest) Send() (*ListTaskDefinitionFamiliesOutput, error) {
+func (r ListTaskDefinitionFamiliesRequest) Send() (*ListTaskDefinitionFamiliesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1200,7 +1200,7 @@ type ListTaskDefinitionsRequest struct {
 }
 
 // Send marshals and sends the ListTaskDefinitions API request.
-func (r *ListTaskDefinitionsRequest) Send() (*ListTaskDefinitionsOutput, error) {
+func (r ListTaskDefinitionsRequest) Send() (*ListTaskDefinitionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1304,7 +1304,7 @@ type ListTasksRequest struct {
 }
 
 // Send marshals and sends the ListTasks API request.
-func (r *ListTasksRequest) Send() (*ListTasksOutput, error) {
+func (r ListTasksRequest) Send() (*ListTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1411,7 +1411,7 @@ type PutAttributesRequest struct {
 }
 
 // Send marshals and sends the PutAttributes API request.
-func (r *PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1461,7 +1461,7 @@ type RegisterContainerInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterContainerInstance API request.
-func (r *RegisterContainerInstanceRequest) Send() (*RegisterContainerInstanceOutput, error) {
+func (r RegisterContainerInstanceRequest) Send() (*RegisterContainerInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1511,7 +1511,7 @@ type RegisterTaskDefinitionRequest struct {
 }
 
 // Send marshals and sends the RegisterTaskDefinition API request.
-func (r *RegisterTaskDefinitionRequest) Send() (*RegisterTaskDefinitionOutput, error) {
+func (r RegisterTaskDefinitionRequest) Send() (*RegisterTaskDefinitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1573,7 +1573,7 @@ type RunTaskRequest struct {
 }
 
 // Send marshals and sends the RunTask API request.
-func (r *RunTaskRequest) Send() (*RunTaskOutput, error) {
+func (r RunTaskRequest) Send() (*RunTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1627,7 +1627,7 @@ type StartTaskRequest struct {
 }
 
 // Send marshals and sends the StartTask API request.
-func (r *StartTaskRequest) Send() (*StartTaskOutput, error) {
+func (r StartTaskRequest) Send() (*StartTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1678,7 +1678,7 @@ type StopTaskRequest struct {
 }
 
 // Send marshals and sends the StopTask API request.
-func (r *StopTaskRequest) Send() (*StopTaskOutput, error) {
+func (r StopTaskRequest) Send() (*StopTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1735,7 +1735,7 @@ type SubmitContainerStateChangeRequest struct {
 }
 
 // Send marshals and sends the SubmitContainerStateChange API request.
-func (r *SubmitContainerStateChangeRequest) Send() (*SubmitContainerStateChangeOutput, error) {
+func (r SubmitContainerStateChangeRequest) Send() (*SubmitContainerStateChangeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1784,7 +1784,7 @@ type SubmitTaskStateChangeRequest struct {
 }
 
 // Send marshals and sends the SubmitTaskStateChange API request.
-func (r *SubmitTaskStateChangeRequest) Send() (*SubmitTaskStateChangeOutput, error) {
+func (r SubmitTaskStateChangeRequest) Send() (*SubmitTaskStateChangeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1833,7 +1833,7 @@ type UpdateContainerAgentRequest struct {
 }
 
 // Send marshals and sends the UpdateContainerAgent API request.
-func (r *UpdateContainerAgentRequest) Send() (*UpdateContainerAgentOutput, error) {
+func (r UpdateContainerAgentRequest) Send() (*UpdateContainerAgentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1889,7 +1889,7 @@ type UpdateContainerInstancesStateRequest struct {
 }
 
 // Send marshals and sends the UpdateContainerInstancesState API request.
-func (r *UpdateContainerInstancesStateRequest) Send() (*UpdateContainerInstancesStateOutput, error) {
+func (r UpdateContainerInstancesStateRequest) Send() (*UpdateContainerInstancesStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1978,7 +1978,7 @@ type UpdateServiceRequest struct {
 }
 
 // Send marshals and sends the UpdateService API request.
-func (r *UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
+func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

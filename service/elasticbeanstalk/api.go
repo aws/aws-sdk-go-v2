@@ -21,7 +21,7 @@ type AbortEnvironmentUpdateRequest struct {
 }
 
 // Send marshals and sends the AbortEnvironmentUpdate API request.
-func (r *AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, error) {
+func (r AbortEnvironmentUpdateRequest) Send() (*AbortEnvironmentUpdateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ type ApplyEnvironmentManagedActionRequest struct {
 }
 
 // Send marshals and sends the ApplyEnvironmentManagedAction API request.
-func (r *ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedActionOutput, error) {
+func (r ApplyEnvironmentManagedActionRequest) Send() (*ApplyEnvironmentManagedActionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ type CheckDNSAvailabilityRequest struct {
 }
 
 // Send marshals and sends the CheckDNSAvailability API request.
-func (r *CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error) {
+func (r CheckDNSAvailabilityRequest) Send() (*CheckDNSAvailabilityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type ComposeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the ComposeEnvironments API request.
-func (r *ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+func (r ComposeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -216,7 +216,7 @@ type CreateApplicationRequest struct {
 }
 
 // Send marshals and sends the CreateApplication API request.
-func (r *CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r CreateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -263,7 +263,7 @@ type CreateApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
-func (r *CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+func (r CreateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -325,7 +325,7 @@ type CreateConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationTemplate API request.
-func (r *CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+func (r CreateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -381,7 +381,7 @@ type CreateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the CreateEnvironment API request.
-func (r *CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r CreateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -428,7 +428,7 @@ type CreatePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the CreatePlatformVersion API request.
-func (r *CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, error) {
+func (r CreatePlatformVersionRequest) Send() (*CreatePlatformVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +474,7 @@ type CreateStorageLocationRequest struct {
 }
 
 // Send marshals and sends the CreateStorageLocation API request.
-func (r *CreateStorageLocationRequest) Send() (*CreateStorageLocationOutput, error) {
+func (r CreateStorageLocationRequest) Send() (*CreateStorageLocationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -522,7 +522,7 @@ type DeleteApplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteApplication API request.
-func (r *DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -574,7 +574,7 @@ type DeleteApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteApplicationVersion API request.
-func (r *DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput, error) {
+func (r DeleteApplicationVersionRequest) Send() (*DeleteApplicationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -625,7 +625,7 @@ type DeleteConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationTemplate API request.
-func (r *DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplateOutput, error) {
+func (r DeleteConfigurationTemplateRequest) Send() (*DeleteConfigurationTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -677,7 +677,7 @@ type DeleteEnvironmentConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteEnvironmentConfiguration API request.
-func (r *DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigurationOutput, error) {
+func (r DeleteEnvironmentConfigurationRequest) Send() (*DeleteEnvironmentConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -732,7 +732,7 @@ type DeletePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the DeletePlatformVersion API request.
-func (r *DeletePlatformVersionRequest) Send() (*DeletePlatformVersionOutput, error) {
+func (r DeletePlatformVersionRequest) Send() (*DeletePlatformVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -778,7 +778,7 @@ type DescribeApplicationVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeApplicationVersions API request.
-func (r *DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersionsOutput, error) {
+func (r DescribeApplicationVersionsRequest) Send() (*DescribeApplicationVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -824,7 +824,7 @@ type DescribeApplicationsRequest struct {
 }
 
 // Send marshals and sends the DescribeApplications API request.
-func (r *DescribeApplicationsRequest) Send() (*DescribeApplicationsOutput, error) {
+func (r DescribeApplicationsRequest) Send() (*DescribeApplicationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -870,7 +870,7 @@ type DescribeConfigurationOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationOptions API request.
-func (r *DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptionsOutput, error) {
+func (r DescribeConfigurationOptionsRequest) Send() (*DescribeConfigurationOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -920,7 +920,7 @@ type DescribeConfigurationSettingsRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationSettings API request.
-func (r *DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSettingsOutput, error) {
+func (r DescribeConfigurationSettingsRequest) Send() (*DescribeConfigurationSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -978,7 +978,7 @@ type DescribeEnvironmentHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentHealth API request.
-func (r *DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutput, error) {
+func (r DescribeEnvironmentHealthRequest) Send() (*DescribeEnvironmentHealthOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1026,7 +1026,7 @@ type DescribeEnvironmentManagedActionHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
-func (r *DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+func (r DescribeEnvironmentManagedActionHistoryRequest) Send() (*DescribeEnvironmentManagedActionHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1072,7 +1072,7 @@ type DescribeEnvironmentManagedActionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActions API request.
-func (r *DescribeEnvironmentManagedActionsRequest) Send() (*DescribeEnvironmentManagedActionsOutput, error) {
+func (r DescribeEnvironmentManagedActionsRequest) Send() (*DescribeEnvironmentManagedActionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1118,7 +1118,7 @@ type DescribeEnvironmentResourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironmentResources API request.
-func (r *DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourcesOutput, error) {
+func (r DescribeEnvironmentResourcesRequest) Send() (*DescribeEnvironmentResourcesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1164,7 +1164,7 @@ type DescribeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the DescribeEnvironments API request.
-func (r *DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
+func (r DescribeEnvironmentsRequest) Send() (*DescribeEnvironmentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1210,7 +1210,7 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1314,7 +1314,7 @@ type DescribeInstancesHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeInstancesHealth API request.
-func (r *DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, error) {
+func (r DescribeInstancesHealthRequest) Send() (*DescribeInstancesHealthOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1361,7 +1361,7 @@ type DescribePlatformVersionRequest struct {
 }
 
 // Send marshals and sends the DescribePlatformVersion API request.
-func (r *DescribePlatformVersionRequest) Send() (*DescribePlatformVersionOutput, error) {
+func (r DescribePlatformVersionRequest) Send() (*DescribePlatformVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1407,7 +1407,7 @@ type ListAvailableSolutionStacksRequest struct {
 }
 
 // Send marshals and sends the ListAvailableSolutionStacks API request.
-func (r *ListAvailableSolutionStacksRequest) Send() (*ListAvailableSolutionStacksOutput, error) {
+func (r ListAvailableSolutionStacksRequest) Send() (*ListAvailableSolutionStacksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1454,7 +1454,7 @@ type ListPlatformVersionsRequest struct {
 }
 
 // Send marshals and sends the ListPlatformVersions API request.
-func (r *ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error) {
+func (r ListPlatformVersionsRequest) Send() (*ListPlatformVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1500,7 +1500,7 @@ type RebuildEnvironmentRequest struct {
 }
 
 // Send marshals and sends the RebuildEnvironment API request.
-func (r *RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
+func (r RebuildEnvironmentRequest) Send() (*RebuildEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1549,7 +1549,7 @@ type RequestEnvironmentInfoRequest struct {
 }
 
 // Send marshals and sends the RequestEnvironmentInfo API request.
-func (r *RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, error) {
+func (r RequestEnvironmentInfoRequest) Send() (*RequestEnvironmentInfoOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1611,7 +1611,7 @@ type RestartAppServerRequest struct {
 }
 
 // Send marshals and sends the RestartAppServer API request.
-func (r *RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
+func (r RestartAppServerRequest) Send() (*RestartAppServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1660,7 +1660,7 @@ type RetrieveEnvironmentInfoRequest struct {
 }
 
 // Send marshals and sends the RetrieveEnvironmentInfo API request.
-func (r *RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, error) {
+func (r RetrieveEnvironmentInfoRequest) Send() (*RetrieveEnvironmentInfoOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1710,7 +1710,7 @@ type SwapEnvironmentCNAMEsRequest struct {
 }
 
 // Send marshals and sends the SwapEnvironmentCNAMEs API request.
-func (r *SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, error) {
+func (r SwapEnvironmentCNAMEsRequest) Send() (*SwapEnvironmentCNAMEsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1758,7 +1758,7 @@ type TerminateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the TerminateEnvironment API request.
-func (r *TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r TerminateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1804,7 +1804,7 @@ type UpdateApplicationRequest struct {
 }
 
 // Send marshals and sends the UpdateApplication API request.
-func (r *UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
+func (r UpdateApplicationRequest) Send() (*UpdateApplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1853,7 +1853,7 @@ type UpdateApplicationResourceLifecycleRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationResourceLifecycle API request.
-func (r *UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationResourceLifecycleOutput, error) {
+func (r UpdateApplicationResourceLifecycleRequest) Send() (*UpdateApplicationResourceLifecycleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1899,7 +1899,7 @@ type UpdateApplicationVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationVersion API request.
-func (r *UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
+func (r UpdateApplicationVersionRequest) Send() (*UpdateApplicationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1948,7 +1948,7 @@ type UpdateConfigurationTemplateRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationTemplate API request.
-func (r *UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
+func (r UpdateConfigurationTemplateRequest) Send() (*UpdateConfigurationTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2002,7 +2002,7 @@ type UpdateEnvironmentRequest struct {
 }
 
 // Send marshals and sends the UpdateEnvironment API request.
-func (r *UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
+func (r UpdateEnvironmentRequest) Send() (*UpdateEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2058,7 +2058,7 @@ type ValidateConfigurationSettingsRequest struct {
 }
 
 // Send marshals and sends the ValidateConfigurationSettings API request.
-func (r *ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSettingsOutput, error) {
+func (r ValidateConfigurationSettingsRequest) Send() (*ValidateConfigurationSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

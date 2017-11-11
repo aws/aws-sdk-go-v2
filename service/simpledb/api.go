@@ -20,7 +20,7 @@ type BatchDeleteAttributesRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteAttributes API request.
-func (r *BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, error) {
+func (r BatchDeleteAttributesRequest) Send() (*BatchDeleteAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ type BatchPutAttributesRequest struct {
 }
 
 // Send marshals and sends the BatchPutAttributes API request.
-func (r *BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
+func (r BatchPutAttributesRequest) Send() (*BatchPutAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,7 +177,7 @@ type CreateDomainRequest struct {
 }
 
 // Send marshals and sends the CreateDomain API request.
-func (r *CreateDomainRequest) Send() (*CreateDomainOutput, error) {
+func (r CreateDomainRequest) Send() (*CreateDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -231,7 +231,7 @@ type DeleteAttributesRequest struct {
 }
 
 // Send marshals and sends the DeleteAttributes API request.
-func (r *DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
+func (r DeleteAttributesRequest) Send() (*DeleteAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +287,7 @@ type DeleteDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteDomain API request.
-func (r *DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
+func (r DeleteDomainRequest) Send() (*DeleteDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +338,7 @@ type DomainMetadataRequest struct {
 }
 
 // Send marshals and sends the DomainMetadata API request.
-func (r *DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
+func (r DomainMetadataRequest) Send() (*DomainMetadataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +384,7 @@ type GetAttributesRequest struct {
 }
 
 // Send marshals and sends the GetAttributes API request.
-func (r *GetAttributesRequest) Send() (*GetAttributesOutput, error) {
+func (r GetAttributesRequest) Send() (*GetAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -437,7 +437,7 @@ type ListDomainsRequest struct {
 }
 
 // Send marshals and sends the ListDomains API request.
-func (r *ListDomainsRequest) Send() (*ListDomainsOutput, error) {
+func (r ListDomainsRequest) Send() (*ListDomainsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -542,7 +542,7 @@ type PutAttributesRequest struct {
 }
 
 // Send marshals and sends the PutAttributes API request.
-func (r *PutAttributesRequest) Send() (*PutAttributesOutput, error) {
+func (r PutAttributesRequest) Send() (*PutAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -618,7 +618,7 @@ type SelectRequest struct {
 }
 
 // Send marshals and sends the Select API request.
-func (r *SelectRequest) Send() (*SelectOutput, error) {
+func (r SelectRequest) Send() (*SelectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

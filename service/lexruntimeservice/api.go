@@ -19,7 +19,7 @@ type PostContentRequest struct {
 }
 
 // Send marshals and sends the PostContent API request.
-func (r *PostContentRequest) Send() (*PostContentOutput, error) {
+func (r PostContentRequest) Send() (*PostContentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ type PostTextRequest struct {
 }
 
 // Send marshals and sends the PostText API request.
-func (r *PostTextRequest) Send() (*PostTextOutput, error) {
+func (r PostTextRequest) Send() (*PostTextOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

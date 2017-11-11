@@ -18,7 +18,7 @@ type GenerateDataSetRequest struct {
 }
 
 // Send marshals and sends the GenerateDataSet API request.
-func (r *GenerateDataSetRequest) Send() (*GenerateDataSetOutput, error) {
+func (r GenerateDataSetRequest) Send() (*GenerateDataSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type StartSupportDataExportRequest struct {
 }
 
 // Send marshals and sends the StartSupportDataExport API request.
-func (r *StartSupportDataExportRequest) Send() (*StartSupportDataExportOutput, error) {
+func (r StartSupportDataExportRequest) Send() (*StartSupportDataExportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

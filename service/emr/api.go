@@ -21,7 +21,7 @@ type AddInstanceFleetRequest struct {
 }
 
 // Send marshals and sends the AddInstanceFleet API request.
-func (r *AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
+func (r AddInstanceFleetRequest) Send() (*AddInstanceFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ type AddInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the AddInstanceGroups API request.
-func (r *AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
+func (r AddInstanceGroupsRequest) Send() (*AddInstanceGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ type AddJobFlowStepsRequest struct {
 }
 
 // Send marshals and sends the AddJobFlowSteps API request.
-func (r *AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
+func (r AddJobFlowStepsRequest) Send() (*AddJobFlowStepsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -184,7 +184,7 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -233,7 +233,7 @@ type CancelStepsRequest struct {
 }
 
 // Send marshals and sends the CancelSteps API request.
-func (r *CancelStepsRequest) Send() (*CancelStepsOutput, error) {
+func (r CancelStepsRequest) Send() (*CancelStepsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -283,7 +283,7 @@ type CreateSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the CreateSecurityConfiguration API request.
-func (r *CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
+func (r CreateSecurityConfigurationRequest) Send() (*CreateSecurityConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +330,7 @@ type DeleteSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteSecurityConfiguration API request.
-func (r *DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
+func (r DeleteSecurityConfigurationRequest) Send() (*DeleteSecurityConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -376,7 +376,7 @@ type DescribeClusterRequest struct {
 }
 
 // Send marshals and sends the DescribeCluster API request.
-func (r *DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
+func (r DescribeClusterRequest) Send() (*DescribeClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -423,7 +423,7 @@ type DescribeJobFlowsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobFlows API request.
-func (r *DescribeJobFlowsRequest) Send() (*DescribeJobFlowsOutput, error) {
+func (r DescribeJobFlowsRequest) Send() (*DescribeJobFlowsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,7 +491,7 @@ type DescribeSecurityConfigurationRequest struct {
 }
 
 // Send marshals and sends the DescribeSecurityConfiguration API request.
-func (r *DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigurationOutput, error) {
+func (r DescribeSecurityConfigurationRequest) Send() (*DescribeSecurityConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,7 +538,7 @@ type DescribeStepRequest struct {
 }
 
 // Send marshals and sends the DescribeStep API request.
-func (r *DescribeStepRequest) Send() (*DescribeStepOutput, error) {
+func (r DescribeStepRequest) Send() (*DescribeStepOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -584,7 +584,7 @@ type ListBootstrapActionsRequest struct {
 }
 
 // Send marshals and sends the ListBootstrapActions API request.
-func (r *ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error) {
+func (r ListBootstrapActionsRequest) Send() (*ListBootstrapActionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -686,7 +686,7 @@ type ListClustersRequest struct {
 }
 
 // Send marshals and sends the ListClusters API request.
-func (r *ListClustersRequest) Send() (*ListClustersOutput, error) {
+func (r ListClustersRequest) Send() (*ListClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -792,7 +792,7 @@ type ListInstanceFleetsRequest struct {
 }
 
 // Send marshals and sends the ListInstanceFleets API request.
-func (r *ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
+func (r ListInstanceFleetsRequest) Send() (*ListInstanceFleetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -897,7 +897,7 @@ type ListInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the ListInstanceGroups API request.
-func (r *ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
+func (r ListInstanceGroupsRequest) Send() (*ListInstanceGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -999,7 +999,7 @@ type ListInstancesRequest struct {
 }
 
 // Send marshals and sends the ListInstances API request.
-func (r *ListInstancesRequest) Send() (*ListInstancesOutput, error) {
+func (r ListInstancesRequest) Send() (*ListInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1104,7 +1104,7 @@ type ListSecurityConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListSecurityConfigurations API request.
-func (r *ListSecurityConfigurationsRequest) Send() (*ListSecurityConfigurationsOutput, error) {
+func (r ListSecurityConfigurationsRequest) Send() (*ListSecurityConfigurationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1153,7 +1153,7 @@ type ListStepsRequest struct {
 }
 
 // Send marshals and sends the ListSteps API request.
-func (r *ListStepsRequest) Send() (*ListStepsOutput, error) {
+func (r ListStepsRequest) Send() (*ListStepsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1256,7 +1256,7 @@ type ModifyInstanceFleetRequest struct {
 }
 
 // Send marshals and sends the ModifyInstanceFleet API request.
-func (r *ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
+func (r ModifyInstanceFleetRequest) Send() (*ModifyInstanceFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1309,7 +1309,7 @@ type ModifyInstanceGroupsRequest struct {
 }
 
 // Send marshals and sends the ModifyInstanceGroups API request.
-func (r *ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error) {
+func (r ModifyInstanceGroupsRequest) Send() (*ModifyInstanceGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1360,7 +1360,7 @@ type PutAutoScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutAutoScalingPolicy API request.
-func (r *PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error) {
+func (r PutAutoScalingPolicyRequest) Send() (*PutAutoScalingPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1409,7 +1409,7 @@ type RemoveAutoScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the RemoveAutoScalingPolicy API request.
-func (r *RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, error) {
+func (r RemoveAutoScalingPolicyRequest) Send() (*RemoveAutoScalingPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1456,7 +1456,7 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r *RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1507,7 +1507,7 @@ type RunJobFlowRequest struct {
 }
 
 // Send marshals and sends the RunJobFlow API request.
-func (r *RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
+func (r RunJobFlowRequest) Send() (*RunJobFlowOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1579,7 +1579,7 @@ type SetTerminationProtectionRequest struct {
 }
 
 // Send marshals and sends the SetTerminationProtection API request.
-func (r *SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput, error) {
+func (r SetTerminationProtectionRequest) Send() (*SetTerminationProtectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1643,7 +1643,7 @@ type SetVisibleToAllUsersRequest struct {
 }
 
 // Send marshals and sends the SetVisibleToAllUsers API request.
-func (r *SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error) {
+func (r SetVisibleToAllUsersRequest) Send() (*SetVisibleToAllUsersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1696,7 +1696,7 @@ type TerminateJobFlowsRequest struct {
 }
 
 // Send marshals and sends the TerminateJobFlows API request.
-func (r *TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
+func (r TerminateJobFlowsRequest) Send() (*TerminateJobFlowsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

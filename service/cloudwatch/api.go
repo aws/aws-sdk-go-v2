@@ -21,7 +21,7 @@ type DeleteAlarmsRequest struct {
 }
 
 // Send marshals and sends the DeleteAlarms API request.
-func (r *DeleteAlarmsRequest) Send() (*DeleteAlarmsOutput, error) {
+func (r DeleteAlarmsRequest) Send() (*DeleteAlarmsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ type DeleteDashboardsRequest struct {
 }
 
 // Send marshals and sends the DeleteDashboards API request.
-func (r *DeleteDashboardsRequest) Send() (*DeleteDashboardsOutput, error) {
+func (r DeleteDashboardsRequest) Send() (*DeleteDashboardsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ type DescribeAlarmHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarmHistory API request.
-func (r *DescribeAlarmHistoryRequest) Send() (*DescribeAlarmHistoryOutput, error) {
+func (r DescribeAlarmHistoryRequest) Send() (*DescribeAlarmHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -222,7 +222,7 @@ type DescribeAlarmsRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarms API request.
-func (r *DescribeAlarmsRequest) Send() (*DescribeAlarmsOutput, error) {
+func (r DescribeAlarmsRequest) Send() (*DescribeAlarmsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,7 +326,7 @@ type DescribeAlarmsForMetricRequest struct {
 }
 
 // Send marshals and sends the DescribeAlarmsForMetric API request.
-func (r *DescribeAlarmsForMetricRequest) Send() (*DescribeAlarmsForMetricOutput, error) {
+func (r DescribeAlarmsForMetricRequest) Send() (*DescribeAlarmsForMetricOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -373,7 +373,7 @@ type DisableAlarmActionsRequest struct {
 }
 
 // Send marshals and sends the DisableAlarmActions API request.
-func (r *DisableAlarmActionsRequest) Send() (*DisableAlarmActionsOutput, error) {
+func (r DisableAlarmActionsRequest) Send() (*DisableAlarmActionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -422,7 +422,7 @@ type EnableAlarmActionsRequest struct {
 }
 
 // Send marshals and sends the EnableAlarmActions API request.
-func (r *EnableAlarmActionsRequest) Send() (*EnableAlarmActionsOutput, error) {
+func (r EnableAlarmActionsRequest) Send() (*EnableAlarmActionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -470,7 +470,7 @@ type GetDashboardRequest struct {
 }
 
 // Send marshals and sends the GetDashboard API request.
-func (r *GetDashboardRequest) Send() (*GetDashboardOutput, error) {
+func (r GetDashboardRequest) Send() (*GetDashboardOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +520,7 @@ type GetMetricStatisticsRequest struct {
 }
 
 // Send marshals and sends the GetMetricStatistics API request.
-func (r *GetMetricStatisticsRequest) Send() (*GetMetricStatisticsOutput, error) {
+func (r GetMetricStatisticsRequest) Send() (*GetMetricStatisticsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -616,7 +616,7 @@ type ListDashboardsRequest struct {
 }
 
 // Send marshals and sends the ListDashboards API request.
-func (r *ListDashboardsRequest) Send() (*ListDashboardsOutput, error) {
+func (r ListDashboardsRequest) Send() (*ListDashboardsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -664,7 +664,7 @@ type ListMetricsRequest struct {
 }
 
 // Send marshals and sends the ListMetrics API request.
-func (r *ListMetricsRequest) Send() (*ListMetricsOutput, error) {
+func (r ListMetricsRequest) Send() (*ListMetricsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -774,7 +774,7 @@ type PutDashboardRequest struct {
 }
 
 // Send marshals and sends the PutDashboard API request.
-func (r *PutDashboardRequest) Send() (*PutDashboardOutput, error) {
+func (r PutDashboardRequest) Send() (*PutDashboardOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +838,7 @@ type PutMetricAlarmRequest struct {
 }
 
 // Send marshals and sends the PutMetricAlarm API request.
-func (r *PutMetricAlarmRequest) Send() (*PutMetricAlarmOutput, error) {
+func (r PutMetricAlarmRequest) Send() (*PutMetricAlarmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -925,7 +925,7 @@ type PutMetricDataRequest struct {
 }
 
 // Send marshals and sends the PutMetricData API request.
-func (r *PutMetricDataRequest) Send() (*PutMetricDataOutput, error) {
+func (r PutMetricDataRequest) Send() (*PutMetricDataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1001,7 +1001,7 @@ type SetAlarmStateRequest struct {
 }
 
 // Send marshals and sends the SetAlarmState API request.
-func (r *SetAlarmStateRequest) Send() (*SetAlarmStateOutput, error) {
+func (r SetAlarmStateRequest) Send() (*SetAlarmStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

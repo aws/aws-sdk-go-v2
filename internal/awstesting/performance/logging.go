@@ -104,7 +104,7 @@ func (out dynamodbOut) output(data record) error {
 	}
 
 	input.Item = item
-	_, err = out.db.PutItem(input)
+	_, err = out.db.PutItemRequest(input).Send()
 	return err
 }
 

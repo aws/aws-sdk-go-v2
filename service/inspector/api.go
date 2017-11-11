@@ -21,7 +21,7 @@ type AddAttributesToFindingsRequest struct {
 }
 
 // Send marshals and sends the AddAttributesToFindings API request.
-func (r *AddAttributesToFindingsRequest) Send() (*AddAttributesToFindingsOutput, error) {
+func (r AddAttributesToFindingsRequest) Send() (*AddAttributesToFindingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ type CreateAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the CreateAssessmentTarget API request.
-func (r *CreateAssessmentTargetRequest) Send() (*CreateAssessmentTargetOutput, error) {
+func (r CreateAssessmentTargetRequest) Send() (*CreateAssessmentTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type CreateAssessmentTemplateRequest struct {
 }
 
 // Send marshals and sends the CreateAssessmentTemplate API request.
-func (r *CreateAssessmentTemplateRequest) Send() (*CreateAssessmentTemplateOutput, error) {
+func (r CreateAssessmentTemplateRequest) Send() (*CreateAssessmentTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type CreateResourceGroupRequest struct {
 }
 
 // Send marshals and sends the CreateResourceGroup API request.
-func (r *CreateResourceGroupRequest) Send() (*CreateResourceGroupOutput, error) {
+func (r CreateResourceGroupRequest) Send() (*CreateResourceGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ type DeleteAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentRun API request.
-func (r *DeleteAssessmentRunRequest) Send() (*DeleteAssessmentRunOutput, error) {
+func (r DeleteAssessmentRunRequest) Send() (*DeleteAssessmentRunOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,7 +262,7 @@ type DeleteAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentTarget API request.
-func (r *DeleteAssessmentTargetRequest) Send() (*DeleteAssessmentTargetOutput, error) {
+func (r DeleteAssessmentTargetRequest) Send() (*DeleteAssessmentTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,7 +311,7 @@ type DeleteAssessmentTemplateRequest struct {
 }
 
 // Send marshals and sends the DeleteAssessmentTemplate API request.
-func (r *DeleteAssessmentTemplateRequest) Send() (*DeleteAssessmentTemplateOutput, error) {
+func (r DeleteAssessmentTemplateRequest) Send() (*DeleteAssessmentTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -360,7 +360,7 @@ type DescribeAssessmentRunsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentRuns API request.
-func (r *DescribeAssessmentRunsRequest) Send() (*DescribeAssessmentRunsOutput, error) {
+func (r DescribeAssessmentRunsRequest) Send() (*DescribeAssessmentRunsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -407,7 +407,7 @@ type DescribeAssessmentTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentTargets API request.
-func (r *DescribeAssessmentTargetsRequest) Send() (*DescribeAssessmentTargetsOutput, error) {
+func (r DescribeAssessmentTargetsRequest) Send() (*DescribeAssessmentTargetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -454,7 +454,7 @@ type DescribeAssessmentTemplatesRequest struct {
 }
 
 // Send marshals and sends the DescribeAssessmentTemplates API request.
-func (r *DescribeAssessmentTemplatesRequest) Send() (*DescribeAssessmentTemplatesOutput, error) {
+func (r DescribeAssessmentTemplatesRequest) Send() (*DescribeAssessmentTemplatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +501,7 @@ type DescribeCrossAccountAccessRoleRequest struct {
 }
 
 // Send marshals and sends the DescribeCrossAccountAccessRole API request.
-func (r *DescribeCrossAccountAccessRoleRequest) Send() (*DescribeCrossAccountAccessRoleOutput, error) {
+func (r DescribeCrossAccountAccessRoleRequest) Send() (*DescribeCrossAccountAccessRoleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +547,7 @@ type DescribeFindingsRequest struct {
 }
 
 // Send marshals and sends the DescribeFindings API request.
-func (r *DescribeFindingsRequest) Send() (*DescribeFindingsOutput, error) {
+func (r DescribeFindingsRequest) Send() (*DescribeFindingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -593,7 +593,7 @@ type DescribeResourceGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeResourceGroups API request.
-func (r *DescribeResourceGroupsRequest) Send() (*DescribeResourceGroupsOutput, error) {
+func (r DescribeResourceGroupsRequest) Send() (*DescribeResourceGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -640,7 +640,7 @@ type DescribeRulesPackagesRequest struct {
 }
 
 // Send marshals and sends the DescribeRulesPackages API request.
-func (r *DescribeRulesPackagesRequest) Send() (*DescribeRulesPackagesOutput, error) {
+func (r DescribeRulesPackagesRequest) Send() (*DescribeRulesPackagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,7 +687,7 @@ type GetAssessmentReportRequest struct {
 }
 
 // Send marshals and sends the GetAssessmentReport API request.
-func (r *GetAssessmentReportRequest) Send() (*GetAssessmentReportOutput, error) {
+func (r GetAssessmentReportRequest) Send() (*GetAssessmentReportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -734,7 +734,7 @@ type GetTelemetryMetadataRequest struct {
 }
 
 // Send marshals and sends the GetTelemetryMetadata API request.
-func (r *GetTelemetryMetadataRequest) Send() (*GetTelemetryMetadataOutput, error) {
+func (r GetTelemetryMetadataRequest) Send() (*GetTelemetryMetadataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,7 +781,7 @@ type ListAssessmentRunAgentsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentRunAgents API request.
-func (r *ListAssessmentRunAgentsRequest) Send() (*ListAssessmentRunAgentsOutput, error) {
+func (r ListAssessmentRunAgentsRequest) Send() (*ListAssessmentRunAgentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -884,7 +884,7 @@ type ListAssessmentRunsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentRuns API request.
-func (r *ListAssessmentRunsRequest) Send() (*ListAssessmentRunsOutput, error) {
+func (r ListAssessmentRunsRequest) Send() (*ListAssessmentRunsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -987,7 +987,7 @@ type ListAssessmentTargetsRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentTargets API request.
-func (r *ListAssessmentTargetsRequest) Send() (*ListAssessmentTargetsOutput, error) {
+func (r ListAssessmentTargetsRequest) Send() (*ListAssessmentTargetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1091,7 +1091,7 @@ type ListAssessmentTemplatesRequest struct {
 }
 
 // Send marshals and sends the ListAssessmentTemplates API request.
-func (r *ListAssessmentTemplatesRequest) Send() (*ListAssessmentTemplatesOutput, error) {
+func (r ListAssessmentTemplatesRequest) Send() (*ListAssessmentTemplatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1194,7 +1194,7 @@ type ListEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the ListEventSubscriptions API request.
-func (r *ListEventSubscriptionsRequest) Send() (*ListEventSubscriptionsOutput, error) {
+func (r ListEventSubscriptionsRequest) Send() (*ListEventSubscriptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1298,7 +1298,7 @@ type ListFindingsRequest struct {
 }
 
 // Send marshals and sends the ListFindings API request.
-func (r *ListFindingsRequest) Send() (*ListFindingsOutput, error) {
+func (r ListFindingsRequest) Send() (*ListFindingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1401,7 +1401,7 @@ type ListRulesPackagesRequest struct {
 }
 
 // Send marshals and sends the ListRulesPackages API request.
-func (r *ListRulesPackagesRequest) Send() (*ListRulesPackagesOutput, error) {
+func (r ListRulesPackagesRequest) Send() (*ListRulesPackagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1503,7 +1503,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1549,7 +1549,7 @@ type PreviewAgentsRequest struct {
 }
 
 // Send marshals and sends the PreviewAgents API request.
-func (r *PreviewAgentsRequest) Send() (*PreviewAgentsOutput, error) {
+func (r PreviewAgentsRequest) Send() (*PreviewAgentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1652,7 +1652,7 @@ type RegisterCrossAccountAccessRoleRequest struct {
 }
 
 // Send marshals and sends the RegisterCrossAccountAccessRole API request.
-func (r *RegisterCrossAccountAccessRoleRequest) Send() (*RegisterCrossAccountAccessRoleOutput, error) {
+func (r RegisterCrossAccountAccessRoleRequest) Send() (*RegisterCrossAccountAccessRoleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1701,7 +1701,7 @@ type RemoveAttributesFromFindingsRequest struct {
 }
 
 // Send marshals and sends the RemoveAttributesFromFindings API request.
-func (r *RemoveAttributesFromFindingsRequest) Send() (*RemoveAttributesFromFindingsOutput, error) {
+func (r RemoveAttributesFromFindingsRequest) Send() (*RemoveAttributesFromFindingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1749,7 +1749,7 @@ type SetTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the SetTagsForResource API request.
-func (r *SetTagsForResourceRequest) Send() (*SetTagsForResourceOutput, error) {
+func (r SetTagsForResourceRequest) Send() (*SetTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1798,7 +1798,7 @@ type StartAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the StartAssessmentRun API request.
-func (r *StartAssessmentRunRequest) Send() (*StartAssessmentRunOutput, error) {
+func (r StartAssessmentRunRequest) Send() (*StartAssessmentRunOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1846,7 +1846,7 @@ type StopAssessmentRunRequest struct {
 }
 
 // Send marshals and sends the StopAssessmentRun API request.
-func (r *StopAssessmentRunRequest) Send() (*StopAssessmentRunOutput, error) {
+func (r StopAssessmentRunRequest) Send() (*StopAssessmentRunOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1894,7 +1894,7 @@ type SubscribeToEventRequest struct {
 }
 
 // Send marshals and sends the SubscribeToEvent API request.
-func (r *SubscribeToEventRequest) Send() (*SubscribeToEventOutput, error) {
+func (r SubscribeToEventRequest) Send() (*SubscribeToEventOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1943,7 +1943,7 @@ type UnsubscribeFromEventRequest struct {
 }
 
 // Send marshals and sends the UnsubscribeFromEvent API request.
-func (r *UnsubscribeFromEventRequest) Send() (*UnsubscribeFromEventOutput, error) {
+func (r UnsubscribeFromEventRequest) Send() (*UnsubscribeFromEventOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1992,7 +1992,7 @@ type UpdateAssessmentTargetRequest struct {
 }
 
 // Send marshals and sends the UpdateAssessmentTarget API request.
-func (r *UpdateAssessmentTargetRequest) Send() (*UpdateAssessmentTargetOutput, error) {
+func (r UpdateAssessmentTargetRequest) Send() (*UpdateAssessmentTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -20,7 +20,7 @@ type AddPermissionRequest struct {
 }
 
 // Send marshals and sends the AddPermission API request.
-func (r *AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ type ChangeMessageVisibilityRequest struct {
 }
 
 // Send marshals and sends the ChangeMessageVisibility API request.
-func (r *ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, error) {
+func (r ChangeMessageVisibilityRequest) Send() (*ChangeMessageVisibilityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -170,7 +170,7 @@ type ChangeMessageVisibilityBatchRequest struct {
 }
 
 // Send marshals and sends the ChangeMessageVisibilityBatch API request.
-func (r *ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBatchOutput, error) {
+func (r ChangeMessageVisibilityBatchRequest) Send() (*ChangeMessageVisibilityBatchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -231,7 +231,7 @@ type CreateQueueRequest struct {
 }
 
 // Send marshals and sends the CreateQueue API request.
-func (r *CreateQueueRequest) Send() (*CreateQueueOutput, error) {
+func (r CreateQueueRequest) Send() (*CreateQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,7 +316,7 @@ type DeleteMessageRequest struct {
 }
 
 // Send marshals and sends the DeleteMessage API request.
-func (r *DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
+func (r DeleteMessageRequest) Send() (*DeleteMessageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -383,7 +383,7 @@ type DeleteMessageBatchRequest struct {
 }
 
 // Send marshals and sends the DeleteMessageBatch API request.
-func (r *DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
+func (r DeleteMessageBatchRequest) Send() (*DeleteMessageBatchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -443,7 +443,7 @@ type DeleteQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteQueue API request.
-func (r *DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
+func (r DeleteQueueRequest) Send() (*DeleteQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -503,7 +503,7 @@ type GetQueueAttributesRequest struct {
 }
 
 // Send marshals and sends the GetQueueAttributes API request.
-func (r *GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
+func (r GetQueueAttributesRequest) Send() (*GetQueueAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -560,7 +560,7 @@ type GetQueueUrlRequest struct {
 }
 
 // Send marshals and sends the GetQueueUrl API request.
-func (r *GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
+func (r GetQueueUrlRequest) Send() (*GetQueueUrlOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -613,7 +613,7 @@ type ListDeadLetterSourceQueuesRequest struct {
 }
 
 // Send marshals and sends the ListDeadLetterSourceQueues API request.
-func (r *ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOutput, error) {
+func (r ListDeadLetterSourceQueuesRequest) Send() (*ListDeadLetterSourceQueuesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -664,7 +664,7 @@ type ListQueuesRequest struct {
 }
 
 // Send marshals and sends the ListQueues API request.
-func (r *ListQueuesRequest) Send() (*ListQueuesOutput, error) {
+func (r ListQueuesRequest) Send() (*ListQueuesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -712,7 +712,7 @@ type PurgeQueueRequest struct {
 }
 
 // Send marshals and sends the PurgeQueue API request.
-func (r *PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
+func (r PurgeQueueRequest) Send() (*PurgeQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -769,7 +769,7 @@ type ReceiveMessageRequest struct {
 }
 
 // Send marshals and sends the ReceiveMessage API request.
-func (r *ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
+func (r ReceiveMessageRequest) Send() (*ReceiveMessageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -861,7 +861,7 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r *RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -910,7 +910,7 @@ type SendMessageRequest struct {
 }
 
 // Send marshals and sends the SendMessage API request.
-func (r *SendMessageRequest) Send() (*SendMessageOutput, error) {
+func (r SendMessageRequest) Send() (*SendMessageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -964,7 +964,7 @@ type SendMessageBatchRequest struct {
 }
 
 // Send marshals and sends the SendMessageBatch API request.
-func (r *SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
+func (r SendMessageBatchRequest) Send() (*SendMessageBatchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1040,7 +1040,7 @@ type SetQueueAttributesRequest struct {
 }
 
 // Send marshals and sends the SetQueueAttributes API request.
-func (r *SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
+func (r SetQueueAttributesRequest) Send() (*SetQueueAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

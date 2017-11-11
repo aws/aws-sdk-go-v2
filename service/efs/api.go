@@ -21,7 +21,7 @@ type CreateFileSystemRequest struct {
 }
 
 // Send marshals and sends the CreateFileSystem API request.
-func (r *CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
+func (r CreateFileSystemRequest) Send() (*CreateFileSystemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ type CreateMountTargetRequest struct {
 }
 
 // Send marshals and sends the CreateMountTarget API request.
-func (r *CreateMountTargetRequest) Send() (*CreateMountTargetOutput, error) {
+func (r CreateMountTargetRequest) Send() (*CreateMountTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -252,7 +252,7 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r *CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,7 +306,7 @@ type DeleteFileSystemRequest struct {
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
-func (r *DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
+func (r DeleteFileSystemRequest) Send() (*DeleteFileSystemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -369,7 +369,7 @@ type DeleteMountTargetRequest struct {
 }
 
 // Send marshals and sends the DeleteMountTarget API request.
-func (r *DeleteMountTargetRequest) Send() (*DeleteMountTargetOutput, error) {
+func (r DeleteMountTargetRequest) Send() (*DeleteMountTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -441,7 +441,7 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -496,7 +496,7 @@ type DescribeFileSystemsRequest struct {
 }
 
 // Send marshals and sends the DescribeFileSystems API request.
-func (r *DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
+func (r DescribeFileSystemsRequest) Send() (*DescribeFileSystemsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -567,7 +567,7 @@ type DescribeMountTargetSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeMountTargetSecurityGroups API request.
-func (r *DescribeMountTargetSecurityGroupsRequest) Send() (*DescribeMountTargetSecurityGroupsOutput, error) {
+func (r DescribeMountTargetSecurityGroupsRequest) Send() (*DescribeMountTargetSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -623,7 +623,7 @@ type DescribeMountTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeMountTargets API request.
-func (r *DescribeMountTargetsRequest) Send() (*DescribeMountTargetsOutput, error) {
+func (r DescribeMountTargetsRequest) Send() (*DescribeMountTargetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -675,7 +675,7 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -726,7 +726,7 @@ type ModifyMountTargetSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the ModifyMountTargetSecurityGroups API request.
-func (r *ModifyMountTargetSecurityGroupsRequest) Send() (*ModifyMountTargetSecurityGroupsOutput, error) {
+func (r ModifyMountTargetSecurityGroupsRequest) Send() (*ModifyMountTargetSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

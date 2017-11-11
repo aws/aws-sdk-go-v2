@@ -19,7 +19,7 @@ type ActivateGatewayRequest struct {
 }
 
 // Send marshals and sends the ActivateGateway API request.
-func (r *ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
+func (r ActivateGatewayRequest) Send() (*ActivateGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type AddCacheRequest struct {
 }
 
 // Send marshals and sends the AddCache API request.
-func (r *AddCacheRequest) Send() (*AddCacheOutput, error) {
+func (r AddCacheRequest) Send() (*AddCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -184,7 +184,7 @@ type AddUploadBufferRequest struct {
 }
 
 // Send marshals and sends the AddUploadBuffer API request.
-func (r *AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
+func (r AddUploadBufferRequest) Send() (*AddUploadBufferOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -236,7 +236,7 @@ type AddWorkingStorageRequest struct {
 }
 
 // Send marshals and sends the AddWorkingStorage API request.
-func (r *AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
+func (r AddWorkingStorageRequest) Send() (*AddWorkingStorageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -292,7 +292,7 @@ type CancelArchivalRequest struct {
 }
 
 // Send marshals and sends the CancelArchival API request.
-func (r *CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
+func (r CancelArchivalRequest) Send() (*CancelArchivalOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +340,7 @@ type CancelRetrievalRequest struct {
 }
 
 // Send marshals and sends the CancelRetrieval API request.
-func (r *CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
+func (r CancelRetrievalRequest) Send() (*CancelRetrievalOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -388,7 +388,7 @@ type CreateCachediSCSIVolumeRequest struct {
 }
 
 // Send marshals and sends the CreateCachediSCSIVolume API request.
-func (r *CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, error) {
+func (r CreateCachediSCSIVolumeRequest) Send() (*CreateCachediSCSIVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +450,7 @@ type CreateNFSFileShareRequest struct {
 }
 
 // Send marshals and sends the CreateNFSFileShare API request.
-func (r *CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
+func (r CreateNFSFileShareRequest) Send() (*CreateNFSFileShareOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -508,7 +508,7 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r *CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -577,7 +577,7 @@ type CreateSnapshotFromVolumeRecoveryPointRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
-func (r *CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
+func (r CreateSnapshotFromVolumeRecoveryPointRequest) Send() (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -639,7 +639,7 @@ type CreateStorediSCSIVolumeRequest struct {
 }
 
 // Send marshals and sends the CreateStorediSCSIVolume API request.
-func (r *CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, error) {
+func (r CreateStorediSCSIVolumeRequest) Send() (*CreateStorediSCSIVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -697,7 +697,7 @@ type CreateTapeWithBarcodeRequest struct {
 }
 
 // Send marshals and sends the CreateTapeWithBarcode API request.
-func (r *CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, error) {
+func (r CreateTapeWithBarcodeRequest) Send() (*CreateTapeWithBarcodeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +749,7 @@ type CreateTapesRequest struct {
 }
 
 // Send marshals and sends the CreateTapes API request.
-func (r *CreateTapesRequest) Send() (*CreateTapesOutput, error) {
+func (r CreateTapesRequest) Send() (*CreateTapesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -800,7 +800,7 @@ type DeleteBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the DeleteBandwidthRateLimit API request.
-func (r *DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput, error) {
+func (r DeleteBandwidthRateLimitRequest) Send() (*DeleteBandwidthRateLimitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,7 +850,7 @@ type DeleteChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the DeleteChapCredentials API request.
-func (r *DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, error) {
+func (r DeleteChapCredentialsRequest) Send() (*DeleteChapCredentialsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -897,7 +897,7 @@ type DeleteFileShareRequest struct {
 }
 
 // Send marshals and sends the DeleteFileShare API request.
-func (r *DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
+func (r DeleteFileShareRequest) Send() (*DeleteFileShareOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +944,7 @@ type DeleteGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteGateway API request.
-func (r *DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
+func (r DeleteGatewayRequest) Send() (*DeleteGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1005,7 +1005,7 @@ type DeleteSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshotSchedule API request.
-func (r *DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, error) {
+func (r DeleteSnapshotScheduleRequest) Send() (*DeleteSnapshotScheduleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1060,7 +1060,7 @@ type DeleteTapeRequest struct {
 }
 
 // Send marshals and sends the DeleteTape API request.
-func (r *DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
+func (r DeleteTapeRequest) Send() (*DeleteTapeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1107,7 +1107,7 @@ type DeleteTapeArchiveRequest struct {
 }
 
 // Send marshals and sends the DeleteTapeArchive API request.
-func (r *DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
+func (r DeleteTapeArchiveRequest) Send() (*DeleteTapeArchiveOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1154,7 +1154,7 @@ type DeleteVolumeRequest struct {
 }
 
 // Send marshals and sends the DeleteVolume API request.
-func (r *DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
+func (r DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1215,7 +1215,7 @@ type DescribeBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the DescribeBandwidthRateLimit API request.
-func (r *DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOutput, error) {
+func (r DescribeBandwidthRateLimitRequest) Send() (*DescribeBandwidthRateLimitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1267,7 +1267,7 @@ type DescribeCacheRequest struct {
 }
 
 // Send marshals and sends the DescribeCache API request.
-func (r *DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
+func (r DescribeCacheRequest) Send() (*DescribeCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1317,7 +1317,7 @@ type DescribeCachediSCSIVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeCachediSCSIVolumes API request.
-func (r *DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOutput, error) {
+func (r DescribeCachediSCSIVolumesRequest) Send() (*DescribeCachediSCSIVolumesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1368,7 +1368,7 @@ type DescribeChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the DescribeChapCredentials API request.
-func (r *DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, error) {
+func (r DescribeChapCredentialsRequest) Send() (*DescribeChapCredentialsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1415,7 +1415,7 @@ type DescribeGatewayInformationRequest struct {
 }
 
 // Send marshals and sends the DescribeGatewayInformation API request.
-func (r *DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOutput, error) {
+func (r DescribeGatewayInformationRequest) Send() (*DescribeGatewayInformationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1464,7 +1464,7 @@ type DescribeMaintenanceStartTimeRequest struct {
 }
 
 // Send marshals and sends the DescribeMaintenanceStartTime API request.
-func (r *DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTimeOutput, error) {
+func (r DescribeMaintenanceStartTimeRequest) Send() (*DescribeMaintenanceStartTimeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1511,7 +1511,7 @@ type DescribeNFSFileSharesRequest struct {
 }
 
 // Send marshals and sends the DescribeNFSFileShares API request.
-func (r *DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, error) {
+func (r DescribeNFSFileSharesRequest) Send() (*DescribeNFSFileSharesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1558,7 +1558,7 @@ type DescribeSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshotSchedule API request.
-func (r *DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput, error) {
+func (r DescribeSnapshotScheduleRequest) Send() (*DescribeSnapshotScheduleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1607,7 +1607,7 @@ type DescribeStorediSCSIVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeStorediSCSIVolumes API request.
-func (r *DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOutput, error) {
+func (r DescribeStorediSCSIVolumesRequest) Send() (*DescribeStorediSCSIVolumesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1656,7 +1656,7 @@ type DescribeTapeArchivesRequest struct {
 }
 
 // Send marshals and sends the DescribeTapeArchives API request.
-func (r *DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error) {
+func (r DescribeTapeArchivesRequest) Send() (*DescribeTapeArchivesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1762,7 +1762,7 @@ type DescribeTapeRecoveryPointsRequest struct {
 }
 
 // Send marshals and sends the DescribeTapeRecoveryPoints API request.
-func (r *DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOutput, error) {
+func (r DescribeTapeRecoveryPointsRequest) Send() (*DescribeTapeRecoveryPointsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1870,7 +1870,7 @@ type DescribeTapesRequest struct {
 }
 
 // Send marshals and sends the DescribeTapes API request.
-func (r *DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
+func (r DescribeTapesRequest) Send() (*DescribeTapesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1975,7 +1975,7 @@ type DescribeUploadBufferRequest struct {
 }
 
 // Send marshals and sends the DescribeUploadBuffer API request.
-func (r *DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error) {
+func (r DescribeUploadBufferRequest) Send() (*DescribeUploadBufferOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2025,7 +2025,7 @@ type DescribeVTLDevicesRequest struct {
 }
 
 // Send marshals and sends the DescribeVTLDevices API request.
-func (r *DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
+func (r DescribeVTLDevicesRequest) Send() (*DescribeVTLDevicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2130,7 +2130,7 @@ type DescribeWorkingStorageRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkingStorage API request.
-func (r *DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, error) {
+func (r DescribeWorkingStorageRequest) Send() (*DescribeWorkingStorageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2185,7 +2185,7 @@ type DisableGatewayRequest struct {
 }
 
 // Send marshals and sends the DisableGateway API request.
-func (r *DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
+func (r DisableGatewayRequest) Send() (*DisableGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2238,7 +2238,7 @@ type ListFileSharesRequest struct {
 }
 
 // Send marshals and sends the ListFileShares API request.
-func (r *ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
+func (r ListFileSharesRequest) Send() (*ListFileSharesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2286,7 +2286,7 @@ type ListGatewaysRequest struct {
 }
 
 // Send marshals and sends the ListGateways API request.
-func (r *ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
+func (r ListGatewaysRequest) Send() (*ListGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2398,7 +2398,7 @@ type ListLocalDisksRequest struct {
 }
 
 // Send marshals and sends the ListLocalDisks API request.
-func (r *ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
+func (r ListLocalDisksRequest) Send() (*ListLocalDisksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2453,7 +2453,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2500,7 +2500,7 @@ type ListTapesRequest struct {
 }
 
 // Send marshals and sends the ListTapes API request.
-func (r *ListTapesRequest) Send() (*ListTapesOutput, error) {
+func (r ListTapesRequest) Send() (*ListTapesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2556,7 +2556,7 @@ type ListVolumeInitiatorsRequest struct {
 }
 
 // Send marshals and sends the ListVolumeInitiators API request.
-func (r *ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error) {
+func (r ListVolumeInitiatorsRequest) Send() (*ListVolumeInitiatorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2604,7 +2604,7 @@ type ListVolumeRecoveryPointsRequest struct {
 }
 
 // Send marshals and sends the ListVolumeRecoveryPoints API request.
-func (r *ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput, error) {
+func (r ListVolumeRecoveryPointsRequest) Send() (*ListVolumeRecoveryPointsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2657,7 +2657,7 @@ type ListVolumesRequest struct {
 }
 
 // Send marshals and sends the ListVolumes API request.
-func (r *ListVolumesRequest) Send() (*ListVolumesOutput, error) {
+func (r ListVolumesRequest) Send() (*ListVolumesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2770,7 +2770,7 @@ type RefreshCacheRequest struct {
 }
 
 // Send marshals and sends the RefreshCache API request.
-func (r *RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
+func (r RefreshCacheRequest) Send() (*RefreshCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2818,7 +2818,7 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2865,7 +2865,7 @@ type ResetCacheRequest struct {
 }
 
 // Send marshals and sends the ResetCache API request.
-func (r *ResetCacheRequest) Send() (*ResetCacheOutput, error) {
+func (r ResetCacheRequest) Send() (*ResetCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2923,7 +2923,7 @@ type RetrieveTapeArchiveRequest struct {
 }
 
 // Send marshals and sends the RetrieveTapeArchive API request.
-func (r *RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
+func (r RetrieveTapeArchiveRequest) Send() (*RetrieveTapeArchiveOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2978,7 +2978,7 @@ type RetrieveTapeRecoveryPointRequest struct {
 }
 
 // Send marshals and sends the RetrieveTapeRecoveryPoint API request.
-func (r *RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutput, error) {
+func (r RetrieveTapeRecoveryPointRequest) Send() (*RetrieveTapeRecoveryPointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3033,7 +3033,7 @@ type SetLocalConsolePasswordRequest struct {
 }
 
 // Send marshals and sends the SetLocalConsolePassword API request.
-func (r *SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, error) {
+func (r SetLocalConsolePasswordRequest) Send() (*SetLocalConsolePasswordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3082,7 +3082,7 @@ type ShutdownGatewayRequest struct {
 }
 
 // Send marshals and sends the ShutdownGateway API request.
-func (r *ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
+func (r ShutdownGatewayRequest) Send() (*ShutdownGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3148,7 +3148,7 @@ type StartGatewayRequest struct {
 }
 
 // Send marshals and sends the StartGateway API request.
-func (r *StartGatewayRequest) Send() (*StartGatewayOutput, error) {
+func (r StartGatewayRequest) Send() (*StartGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3205,7 +3205,7 @@ type UpdateBandwidthRateLimitRequest struct {
 }
 
 // Send marshals and sends the UpdateBandwidthRateLimit API request.
-func (r *UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput, error) {
+func (r UpdateBandwidthRateLimitRequest) Send() (*UpdateBandwidthRateLimitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3260,7 +3260,7 @@ type UpdateChapCredentialsRequest struct {
 }
 
 // Send marshals and sends the UpdateChapCredentials API request.
-func (r *UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, error) {
+func (r UpdateChapCredentialsRequest) Send() (*UpdateChapCredentialsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3311,7 +3311,7 @@ type UpdateGatewayInformationRequest struct {
 }
 
 // Send marshals and sends the UpdateGatewayInformation API request.
-func (r *UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput, error) {
+func (r UpdateGatewayInformationRequest) Send() (*UpdateGatewayInformationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3363,7 +3363,7 @@ type UpdateGatewaySoftwareNowRequest struct {
 }
 
 // Send marshals and sends the UpdateGatewaySoftwareNow API request.
-func (r *UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput, error) {
+func (r UpdateGatewaySoftwareNowRequest) Send() (*UpdateGatewaySoftwareNowOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3423,7 +3423,7 @@ type UpdateMaintenanceStartTimeRequest struct {
 }
 
 // Send marshals and sends the UpdateMaintenanceStartTime API request.
-func (r *UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOutput, error) {
+func (r UpdateMaintenanceStartTimeRequest) Send() (*UpdateMaintenanceStartTimeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3471,7 +3471,7 @@ type UpdateNFSFileShareRequest struct {
 }
 
 // Send marshals and sends the UpdateNFSFileShare API request.
-func (r *UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
+func (r UpdateNFSFileShareRequest) Send() (*UpdateNFSFileShareOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3536,7 +3536,7 @@ type UpdateSnapshotScheduleRequest struct {
 }
 
 // Send marshals and sends the UpdateSnapshotSchedule API request.
-func (r *UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, error) {
+func (r UpdateSnapshotScheduleRequest) Send() (*UpdateSnapshotScheduleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3591,7 +3591,7 @@ type UpdateVTLDeviceTypeRequest struct {
 }
 
 // Send marshals and sends the UpdateVTLDeviceType API request.
-func (r *UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
+func (r UpdateVTLDeviceTypeRequest) Send() (*UpdateVTLDeviceTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

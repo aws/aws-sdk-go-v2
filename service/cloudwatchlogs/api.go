@@ -20,7 +20,7 @@ type AssociateKmsKeyRequest struct {
 }
 
 // Send marshals and sends the AssociateKmsKey API request.
-func (r *AssociateKmsKeyRequest) Send() (*AssociateKmsKeyOutput, error) {
+func (r AssociateKmsKeyRequest) Send() (*AssociateKmsKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ type CancelExportTaskRequest struct {
 }
 
 // Send marshals and sends the CancelExportTask API request.
-func (r *CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
+func (r CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ type CreateExportTaskRequest struct {
 }
 
 // Send marshals and sends the CreateExportTask API request.
-func (r *CreateExportTaskRequest) Send() (*CreateExportTaskOutput, error) {
+func (r CreateExportTaskRequest) Send() (*CreateExportTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -188,7 +188,7 @@ type CreateLogGroupRequest struct {
 }
 
 // Send marshals and sends the CreateLogGroup API request.
-func (r *CreateLogGroupRequest) Send() (*CreateLogGroupOutput, error) {
+func (r CreateLogGroupRequest) Send() (*CreateLogGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,7 +257,7 @@ type CreateLogStreamRequest struct {
 }
 
 // Send marshals and sends the CreateLogStream API request.
-func (r *CreateLogStreamRequest) Send() (*CreateLogStreamOutput, error) {
+func (r CreateLogStreamRequest) Send() (*CreateLogStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,7 +316,7 @@ type DeleteDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteDestination API request.
-func (r *DeleteDestinationRequest) Send() (*DeleteDestinationOutput, error) {
+func (r DeleteDestinationRequest) Send() (*DeleteDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -366,7 +366,7 @@ type DeleteLogGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteLogGroup API request.
-func (r *DeleteLogGroupRequest) Send() (*DeleteLogGroupOutput, error) {
+func (r DeleteLogGroupRequest) Send() (*DeleteLogGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -415,7 +415,7 @@ type DeleteLogStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteLogStream API request.
-func (r *DeleteLogStreamRequest) Send() (*DeleteLogStreamOutput, error) {
+func (r DeleteLogStreamRequest) Send() (*DeleteLogStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -464,7 +464,7 @@ type DeleteMetricFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteMetricFilter API request.
-func (r *DeleteMetricFilterRequest) Send() (*DeleteMetricFilterOutput, error) {
+func (r DeleteMetricFilterRequest) Send() (*DeleteMetricFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -512,7 +512,7 @@ type DeleteResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
-func (r *DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
+func (r DeleteResourcePolicyRequest) Send() (*DeleteResourcePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -561,7 +561,7 @@ type DeleteRetentionPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteRetentionPolicy API request.
-func (r *DeleteRetentionPolicyRequest) Send() (*DeleteRetentionPolicyOutput, error) {
+func (r DeleteRetentionPolicyRequest) Send() (*DeleteRetentionPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -612,7 +612,7 @@ type DeleteSubscriptionFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscriptionFilter API request.
-func (r *DeleteSubscriptionFilterRequest) Send() (*DeleteSubscriptionFilterOutput, error) {
+func (r DeleteSubscriptionFilterRequest) Send() (*DeleteSubscriptionFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -660,7 +660,7 @@ type DescribeDestinationsRequest struct {
 }
 
 // Send marshals and sends the DescribeDestinations API request.
-func (r *DescribeDestinationsRequest) Send() (*DescribeDestinationsOutput, error) {
+func (r DescribeDestinationsRequest) Send() (*DescribeDestinationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -763,7 +763,7 @@ type DescribeExportTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
-func (r *DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -810,7 +810,7 @@ type DescribeLogGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeLogGroups API request.
-func (r *DescribeLogGroupsRequest) Send() (*DescribeLogGroupsOutput, error) {
+func (r DescribeLogGroupsRequest) Send() (*DescribeLogGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -913,7 +913,7 @@ type DescribeLogStreamsRequest struct {
 }
 
 // Send marshals and sends the DescribeLogStreams API request.
-func (r *DescribeLogStreamsRequest) Send() (*DescribeLogStreamsOutput, error) {
+func (r DescribeLogStreamsRequest) Send() (*DescribeLogStreamsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1020,7 +1020,7 @@ type DescribeMetricFiltersRequest struct {
 }
 
 // Send marshals and sends the DescribeMetricFilters API request.
-func (r *DescribeMetricFiltersRequest) Send() (*DescribeMetricFiltersOutput, error) {
+func (r DescribeMetricFiltersRequest) Send() (*DescribeMetricFiltersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1124,7 +1124,7 @@ type DescribeResourcePoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeResourcePolicies API request.
-func (r *DescribeResourcePoliciesRequest) Send() (*DescribeResourcePoliciesOutput, error) {
+func (r DescribeResourcePoliciesRequest) Send() (*DescribeResourcePoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1170,7 +1170,7 @@ type DescribeSubscriptionFiltersRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscriptionFilters API request.
-func (r *DescribeSubscriptionFiltersRequest) Send() (*DescribeSubscriptionFiltersOutput, error) {
+func (r DescribeSubscriptionFiltersRequest) Send() (*DescribeSubscriptionFiltersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1274,7 +1274,7 @@ type DisassociateKmsKeyRequest struct {
 }
 
 // Send marshals and sends the DisassociateKmsKey API request.
-func (r *DisassociateKmsKeyRequest) Send() (*DisassociateKmsKeyOutput, error) {
+func (r DisassociateKmsKeyRequest) Send() (*DisassociateKmsKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1330,7 +1330,7 @@ type FilterLogEventsRequest struct {
 }
 
 // Send marshals and sends the FilterLogEvents API request.
-func (r *FilterLogEventsRequest) Send() (*FilterLogEventsOutput, error) {
+func (r FilterLogEventsRequest) Send() (*FilterLogEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1440,7 +1440,7 @@ type GetLogEventsRequest struct {
 }
 
 // Send marshals and sends the GetLogEvents API request.
-func (r *GetLogEventsRequest) Send() (*GetLogEventsOutput, error) {
+func (r GetLogEventsRequest) Send() (*GetLogEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1547,7 +1547,7 @@ type ListTagsLogGroupRequest struct {
 }
 
 // Send marshals and sends the ListTagsLogGroup API request.
-func (r *ListTagsLogGroupRequest) Send() (*ListTagsLogGroupOutput, error) {
+func (r ListTagsLogGroupRequest) Send() (*ListTagsLogGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1593,7 +1593,7 @@ type PutDestinationRequest struct {
 }
 
 // Send marshals and sends the PutDestination API request.
-func (r *PutDestinationRequest) Send() (*PutDestinationOutput, error) {
+func (r PutDestinationRequest) Send() (*PutDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1649,7 +1649,7 @@ type PutDestinationPolicyRequest struct {
 }
 
 // Send marshals and sends the PutDestinationPolicy API request.
-func (r *PutDestinationPolicyRequest) Send() (*PutDestinationPolicyOutput, error) {
+func (r PutDestinationPolicyRequest) Send() (*PutDestinationPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1700,7 +1700,7 @@ type PutLogEventsRequest struct {
 }
 
 // Send marshals and sends the PutLogEvents API request.
-func (r *PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
+func (r PutLogEventsRequest) Send() (*PutLogEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1773,7 +1773,7 @@ type PutMetricFilterRequest struct {
 }
 
 // Send marshals and sends the PutMetricFilter API request.
-func (r *PutMetricFilterRequest) Send() (*PutMetricFilterOutput, error) {
+func (r PutMetricFilterRequest) Send() (*PutMetricFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1826,7 +1826,7 @@ type PutResourcePolicyRequest struct {
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
-func (r *PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
+func (r PutResourcePolicyRequest) Send() (*PutResourcePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1874,7 +1874,7 @@ type PutRetentionPolicyRequest struct {
 }
 
 // Send marshals and sends the PutRetentionPolicy API request.
-func (r *PutRetentionPolicyRequest) Send() (*PutRetentionPolicyOutput, error) {
+func (r PutRetentionPolicyRequest) Send() (*PutRetentionPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1924,7 +1924,7 @@ type PutSubscriptionFilterRequest struct {
 }
 
 // Send marshals and sends the PutSubscriptionFilter API request.
-func (r *PutSubscriptionFilterRequest) Send() (*PutSubscriptionFilterOutput, error) {
+func (r PutSubscriptionFilterRequest) Send() (*PutSubscriptionFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1992,7 +1992,7 @@ type TagLogGroupRequest struct {
 }
 
 // Send marshals and sends the TagLogGroup API request.
-func (r *TagLogGroupRequest) Send() (*TagLogGroupOutput, error) {
+func (r TagLogGroupRequest) Send() (*TagLogGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2047,7 +2047,7 @@ type TestMetricFilterRequest struct {
 }
 
 // Send marshals and sends the TestMetricFilter API request.
-func (r *TestMetricFilterRequest) Send() (*TestMetricFilterOutput, error) {
+func (r TestMetricFilterRequest) Send() (*TestMetricFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2095,7 +2095,7 @@ type UntagLogGroupRequest struct {
 }
 
 // Send marshals and sends the UntagLogGroup API request.
-func (r *UntagLogGroupRequest) Send() (*UntagLogGroupOutput, error) {
+func (r UntagLogGroupRequest) Send() (*UntagLogGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

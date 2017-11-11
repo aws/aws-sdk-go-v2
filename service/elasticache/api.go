@@ -20,7 +20,7 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r *AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ type AuthorizeCacheSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeCacheSecurityGroupIngress API request.
-func (r *AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+func (r AuthorizeCacheSecurityGroupIngressRequest) Send() (*AuthorizeCacheSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -127,7 +127,7 @@ type CopySnapshotRequest struct {
 }
 
 // Send marshals and sends the CopySnapshot API request.
-func (r *CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -237,7 +237,7 @@ type CreateCacheClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCacheCluster API request.
-func (r *CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
+func (r CreateCacheClusterRequest) Send() (*CreateCacheClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -288,7 +288,7 @@ type CreateCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheParameterGroup API request.
-func (r *CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutput, error) {
+func (r CreateCacheParameterGroupRequest) Send() (*CreateCacheParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -347,7 +347,7 @@ type CreateCacheSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheSecurityGroup API request.
-func (r *CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput, error) {
+func (r CreateCacheSecurityGroupRequest) Send() (*CreateCacheSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,7 +399,7 @@ type CreateCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateCacheSubnetGroup API request.
-func (r *CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, error) {
+func (r CreateCacheSubnetGroupRequest) Send() (*CreateCacheSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -448,7 +448,7 @@ type CreateReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationGroup API request.
-func (r *CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, error) {
+func (r CreateReplicationGroupRequest) Send() (*CreateReplicationGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -517,7 +517,7 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r *CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -566,7 +566,7 @@ type DeleteCacheClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheCluster API request.
-func (r *DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
+func (r DeleteCacheClusterRequest) Send() (*DeleteCacheClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -625,7 +625,7 @@ type DeleteCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheParameterGroup API request.
-func (r *DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutput, error) {
+func (r DeleteCacheParameterGroupRequest) Send() (*DeleteCacheParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,7 +674,7 @@ type DeleteCacheSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheSecurityGroup API request.
-func (r *DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput, error) {
+func (r DeleteCacheSecurityGroupRequest) Send() (*DeleteCacheSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -725,7 +725,7 @@ type DeleteCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteCacheSubnetGroup API request.
-func (r *DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, error) {
+func (r DeleteCacheSubnetGroupRequest) Send() (*DeleteCacheSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -776,7 +776,7 @@ type DeleteReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationGroup API request.
-func (r *DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, error) {
+func (r DeleteReplicationGroupRequest) Send() (*DeleteReplicationGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -832,7 +832,7 @@ type DeleteSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
-func (r *DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -882,7 +882,7 @@ type DescribeCacheClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheClusters API request.
-func (r *DescribeCacheClustersRequest) Send() (*DescribeCacheClustersOutput, error) {
+func (r DescribeCacheClustersRequest) Send() (*DescribeCacheClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1005,7 +1005,7 @@ type DescribeCacheEngineVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheEngineVersions API request.
-func (r *DescribeCacheEngineVersionsRequest) Send() (*DescribeCacheEngineVersionsOutput, error) {
+func (r DescribeCacheEngineVersionsRequest) Send() (*DescribeCacheEngineVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1107,7 +1107,7 @@ type DescribeCacheParameterGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheParameterGroups API request.
-func (r *DescribeCacheParameterGroupsRequest) Send() (*DescribeCacheParameterGroupsOutput, error) {
+func (r DescribeCacheParameterGroupsRequest) Send() (*DescribeCacheParameterGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1211,7 +1211,7 @@ type DescribeCacheParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheParameters API request.
-func (r *DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, error) {
+func (r DescribeCacheParametersRequest) Send() (*DescribeCacheParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1313,7 +1313,7 @@ type DescribeCacheSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheSecurityGroups API request.
-func (r *DescribeCacheSecurityGroupsRequest) Send() (*DescribeCacheSecurityGroupsOutput, error) {
+func (r DescribeCacheSecurityGroupsRequest) Send() (*DescribeCacheSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1416,7 +1416,7 @@ type DescribeCacheSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeCacheSubnetGroups API request.
-func (r *DescribeCacheSubnetGroupsRequest) Send() (*DescribeCacheSubnetGroupsOutput, error) {
+func (r DescribeCacheSubnetGroupsRequest) Send() (*DescribeCacheSubnetGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1519,7 +1519,7 @@ type DescribeEngineDefaultParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
-func (r *DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
+func (r DescribeEngineDefaultParametersRequest) Send() (*DescribeEngineDefaultParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1622,7 +1622,7 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1730,7 +1730,7 @@ type DescribeReplicationGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeReplicationGroups API request.
-func (r *DescribeReplicationGroupsRequest) Send() (*DescribeReplicationGroupsOutput, error) {
+func (r DescribeReplicationGroupsRequest) Send() (*DescribeReplicationGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1836,7 +1836,7 @@ type DescribeReservedCacheNodesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedCacheNodes API request.
-func (r *DescribeReservedCacheNodesRequest) Send() (*DescribeReservedCacheNodesOutput, error) {
+func (r DescribeReservedCacheNodesRequest) Send() (*DescribeReservedCacheNodesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1939,7 +1939,7 @@ type DescribeReservedCacheNodesOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedCacheNodesOfferings API request.
-func (r *DescribeReservedCacheNodesOfferingsRequest) Send() (*DescribeReservedCacheNodesOfferingsOutput, error) {
+func (r DescribeReservedCacheNodesOfferingsRequest) Send() (*DescribeReservedCacheNodesOfferingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2041,7 +2041,7 @@ type DescribeSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
-func (r *DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
+func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2148,7 +2148,7 @@ type ListAllowedNodeTypeModificationsRequest struct {
 }
 
 // Send marshals and sends the ListAllowedNodeTypeModifications API request.
-func (r *ListAllowedNodeTypeModificationsRequest) Send() (*ListAllowedNodeTypeModificationsOutput, error) {
+func (r ListAllowedNodeTypeModificationsRequest) Send() (*ListAllowedNodeTypeModificationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2199,7 +2199,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2252,7 +2252,7 @@ type ModifyCacheClusterRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheCluster API request.
-func (r *ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
+func (r ModifyCacheClusterRequest) Send() (*ModifyCacheClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2300,7 +2300,7 @@ type ModifyCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheParameterGroup API request.
-func (r *ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+func (r ModifyCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2348,7 +2348,7 @@ type ModifyCacheSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyCacheSubnetGroup API request.
-func (r *ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, error) {
+func (r ModifyCacheSubnetGroupRequest) Send() (*ModifyCacheSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2394,7 +2394,7 @@ type ModifyReplicationGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationGroup API request.
-func (r *ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, error) {
+func (r ModifyReplicationGroupRequest) Send() (*ModifyReplicationGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2446,7 +2446,7 @@ type PurchaseReservedCacheNodesOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
-func (r *PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCacheNodesOfferingOutput, error) {
+func (r PurchaseReservedCacheNodesOfferingRequest) Send() (*PurchaseReservedCacheNodesOfferingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2492,7 +2492,7 @@ type RebootCacheClusterRequest struct {
 }
 
 // Send marshals and sends the RebootCacheCluster API request.
-func (r *RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
+func (r RebootCacheClusterRequest) Send() (*RebootCacheClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2547,7 +2547,7 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2593,7 +2593,7 @@ type ResetCacheParameterGroupRequest struct {
 }
 
 // Send marshals and sends the ResetCacheParameterGroup API request.
-func (r *ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
+func (r ResetCacheParameterGroupRequest) Send() (*ResetCacheParameterGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2642,7 +2642,7 @@ type RevokeCacheSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
-func (r *RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGroupIngressOutput, error) {
+func (r RevokeCacheSecurityGroupIngressRequest) Send() (*RevokeCacheSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2689,7 +2689,7 @@ type TestFailoverRequest struct {
 }
 
 // Send marshals and sends the TestFailover API request.
-func (r *TestFailoverRequest) Send() (*TestFailoverOutput, error) {
+func (r TestFailoverRequest) Send() (*TestFailoverOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

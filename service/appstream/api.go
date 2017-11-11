@@ -19,7 +19,7 @@ type AssociateFleetRequest struct {
 }
 
 // Send marshals and sends the AssociateFleet API request.
-func (r *AssociateFleetRequest) Send() (*AssociateFleetOutput, error) {
+func (r AssociateFleetRequest) Send() (*AssociateFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type CreateDirectoryConfigRequest struct {
 }
 
 // Send marshals and sends the CreateDirectoryConfig API request.
-func (r *CreateDirectoryConfigRequest) Send() (*CreateDirectoryConfigOutput, error) {
+func (r CreateDirectoryConfigRequest) Send() (*CreateDirectoryConfigOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ type CreateFleetRequest struct {
 }
 
 // Send marshals and sends the CreateFleet API request.
-func (r *CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ type CreateImageBuilderRequest struct {
 }
 
 // Send marshals and sends the CreateImageBuilder API request.
-func (r *CreateImageBuilderRequest) Send() (*CreateImageBuilderOutput, error) {
+func (r CreateImageBuilderRequest) Send() (*CreateImageBuilderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +201,7 @@ type CreateImageBuilderStreamingURLRequest struct {
 }
 
 // Send marshals and sends the CreateImageBuilderStreamingURL API request.
-func (r *CreateImageBuilderStreamingURLRequest) Send() (*CreateImageBuilderStreamingURLOutput, error) {
+func (r CreateImageBuilderStreamingURLRequest) Send() (*CreateImageBuilderStreamingURLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -245,7 +245,7 @@ type CreateStackRequest struct {
 }
 
 // Send marshals and sends the CreateStack API request.
-func (r *CreateStackRequest) Send() (*CreateStackOutput, error) {
+func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -291,7 +291,7 @@ type CreateStreamingURLRequest struct {
 }
 
 // Send marshals and sends the CreateStreamingURL API request.
-func (r *CreateStreamingURLRequest) Send() (*CreateStreamingURLOutput, error) {
+func (r CreateStreamingURLRequest) Send() (*CreateStreamingURLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +340,7 @@ type DeleteDirectoryConfigRequest struct {
 }
 
 // Send marshals and sends the DeleteDirectoryConfig API request.
-func (r *DeleteDirectoryConfigRequest) Send() (*DeleteDirectoryConfigOutput, error) {
+func (r DeleteDirectoryConfigRequest) Send() (*DeleteDirectoryConfigOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -386,7 +386,7 @@ type DeleteFleetRequest struct {
 }
 
 // Send marshals and sends the DeleteFleet API request.
-func (r *DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
+func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -432,7 +432,7 @@ type DeleteImageRequest struct {
 }
 
 // Send marshals and sends the DeleteImage API request.
-func (r *DeleteImageRequest) Send() (*DeleteImageOutput, error) {
+func (r DeleteImageRequest) Send() (*DeleteImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -476,7 +476,7 @@ type DeleteImageBuilderRequest struct {
 }
 
 // Send marshals and sends the DeleteImageBuilder API request.
-func (r *DeleteImageBuilderRequest) Send() (*DeleteImageBuilderOutput, error) {
+func (r DeleteImageBuilderRequest) Send() (*DeleteImageBuilderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +520,7 @@ type DeleteStackRequest struct {
 }
 
 // Send marshals and sends the DeleteStack API request.
-func (r *DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -567,7 +567,7 @@ type DescribeDirectoryConfigsRequest struct {
 }
 
 // Send marshals and sends the DescribeDirectoryConfigs API request.
-func (r *DescribeDirectoryConfigsRequest) Send() (*DescribeDirectoryConfigsOutput, error) {
+func (r DescribeDirectoryConfigsRequest) Send() (*DescribeDirectoryConfigsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -613,7 +613,7 @@ type DescribeFleetsRequest struct {
 }
 
 // Send marshals and sends the DescribeFleets API request.
-func (r *DescribeFleetsRequest) Send() (*DescribeFleetsOutput, error) {
+func (r DescribeFleetsRequest) Send() (*DescribeFleetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -659,7 +659,7 @@ type DescribeImageBuildersRequest struct {
 }
 
 // Send marshals and sends the DescribeImageBuilders API request.
-func (r *DescribeImageBuildersRequest) Send() (*DescribeImageBuildersOutput, error) {
+func (r DescribeImageBuildersRequest) Send() (*DescribeImageBuildersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -703,7 +703,7 @@ type DescribeImagesRequest struct {
 }
 
 // Send marshals and sends the DescribeImages API request.
-func (r *DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +749,7 @@ type DescribeSessionsRequest struct {
 }
 
 // Send marshals and sends the DescribeSessions API request.
-func (r *DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
+func (r DescribeSessionsRequest) Send() (*DescribeSessionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +798,7 @@ type DescribeStacksRequest struct {
 }
 
 // Send marshals and sends the DescribeStacks API request.
-func (r *DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -844,7 +844,7 @@ type DisassociateFleetRequest struct {
 }
 
 // Send marshals and sends the DisassociateFleet API request.
-func (r *DisassociateFleetRequest) Send() (*DisassociateFleetOutput, error) {
+func (r DisassociateFleetRequest) Send() (*DisassociateFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +890,7 @@ type ExpireSessionRequest struct {
 }
 
 // Send marshals and sends the ExpireSession API request.
-func (r *ExpireSessionRequest) Send() (*ExpireSessionOutput, error) {
+func (r ExpireSessionRequest) Send() (*ExpireSessionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -936,7 +936,7 @@ type ListAssociatedFleetsRequest struct {
 }
 
 // Send marshals and sends the ListAssociatedFleets API request.
-func (r *ListAssociatedFleetsRequest) Send() (*ListAssociatedFleetsOutput, error) {
+func (r ListAssociatedFleetsRequest) Send() (*ListAssociatedFleetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -982,7 +982,7 @@ type ListAssociatedStacksRequest struct {
 }
 
 // Send marshals and sends the ListAssociatedStacks API request.
-func (r *ListAssociatedStacksRequest) Send() (*ListAssociatedStacksOutput, error) {
+func (r ListAssociatedStacksRequest) Send() (*ListAssociatedStacksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1028,7 +1028,7 @@ type StartFleetRequest struct {
 }
 
 // Send marshals and sends the StartFleet API request.
-func (r *StartFleetRequest) Send() (*StartFleetOutput, error) {
+func (r StartFleetRequest) Send() (*StartFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1074,7 +1074,7 @@ type StartImageBuilderRequest struct {
 }
 
 // Send marshals and sends the StartImageBuilder API request.
-func (r *StartImageBuilderRequest) Send() (*StartImageBuilderOutput, error) {
+func (r StartImageBuilderRequest) Send() (*StartImageBuilderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1118,7 +1118,7 @@ type StopFleetRequest struct {
 }
 
 // Send marshals and sends the StopFleet API request.
-func (r *StopFleetRequest) Send() (*StopFleetOutput, error) {
+func (r StopFleetRequest) Send() (*StopFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1164,7 +1164,7 @@ type StopImageBuilderRequest struct {
 }
 
 // Send marshals and sends the StopImageBuilder API request.
-func (r *StopImageBuilderRequest) Send() (*StopImageBuilderOutput, error) {
+func (r StopImageBuilderRequest) Send() (*StopImageBuilderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1208,7 +1208,7 @@ type UpdateDirectoryConfigRequest struct {
 }
 
 // Send marshals and sends the UpdateDirectoryConfig API request.
-func (r *UpdateDirectoryConfigRequest) Send() (*UpdateDirectoryConfigOutput, error) {
+func (r UpdateDirectoryConfigRequest) Send() (*UpdateDirectoryConfigOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1254,7 +1254,7 @@ type UpdateFleetRequest struct {
 }
 
 // Send marshals and sends the UpdateFleet API request.
-func (r *UpdateFleetRequest) Send() (*UpdateFleetOutput, error) {
+func (r UpdateFleetRequest) Send() (*UpdateFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1305,7 +1305,7 @@ type UpdateStackRequest struct {
 }
 
 // Send marshals and sends the UpdateStack API request.
-func (r *UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

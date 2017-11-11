@@ -21,7 +21,7 @@ type BulkPublishRequest struct {
 }
 
 // Send marshals and sends the BulkPublish API request.
-func (r *BulkPublishRequest) Send() (*BulkPublishOutput, error) {
+func (r BulkPublishRequest) Send() (*BulkPublishOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type DeleteDatasetRequest struct {
 }
 
 // Send marshals and sends the DeleteDataset API request.
-func (r *DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
+func (r DeleteDatasetRequest) Send() (*DeleteDatasetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ type DescribeDatasetRequest struct {
 }
 
 // Send marshals and sends the DescribeDataset API request.
-func (r *DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
+func (r DescribeDatasetRequest) Send() (*DescribeDatasetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -177,7 +177,7 @@ type DescribeIdentityPoolUsageRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityPoolUsage API request.
-func (r *DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutput, error) {
+func (r DescribeIdentityPoolUsageRequest) Send() (*DescribeIdentityPoolUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -227,7 +227,7 @@ type DescribeIdentityUsageRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityUsage API request.
-func (r *DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, error) {
+func (r DescribeIdentityUsageRequest) Send() (*DescribeIdentityUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -277,7 +277,7 @@ type GetBulkPublishDetailsRequest struct {
 }
 
 // Send marshals and sends the GetBulkPublishDetails API request.
-func (r *GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, error) {
+func (r GetBulkPublishDetailsRequest) Send() (*GetBulkPublishDetailsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,7 +326,7 @@ type GetCognitoEventsRequest struct {
 }
 
 // Send marshals and sends the GetCognitoEvents API request.
-func (r *GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
+func (r GetCognitoEventsRequest) Send() (*GetCognitoEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -376,7 +376,7 @@ type GetIdentityPoolConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPoolConfiguration API request.
-func (r *GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurationOutput, error) {
+func (r GetIdentityPoolConfigurationRequest) Send() (*GetIdentityPoolConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -425,7 +425,7 @@ type ListDatasetsRequest struct {
 }
 
 // Send marshals and sends the ListDatasets API request.
-func (r *ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
+func (r ListDatasetsRequest) Send() (*ListDatasetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -477,7 +477,7 @@ type ListIdentityPoolUsageRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPoolUsage API request.
-func (r *ListIdentityPoolUsageRequest) Send() (*ListIdentityPoolUsageOutput, error) {
+func (r ListIdentityPoolUsageRequest) Send() (*ListIdentityPoolUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -527,7 +527,7 @@ type ListRecordsRequest struct {
 }
 
 // Send marshals and sends the ListRecords API request.
-func (r *ListRecordsRequest) Send() (*ListRecordsOutput, error) {
+func (r ListRecordsRequest) Send() (*ListRecordsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,7 +580,7 @@ type RegisterDeviceRequest struct {
 }
 
 // Send marshals and sends the RegisterDevice API request.
-func (r *RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
+func (r RegisterDeviceRequest) Send() (*RegisterDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -629,7 +629,7 @@ type SetCognitoEventsRequest struct {
 }
 
 // Send marshals and sends the SetCognitoEvents API request.
-func (r *SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
+func (r SetCognitoEventsRequest) Send() (*SetCognitoEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,7 +683,7 @@ type SetIdentityPoolConfigurationRequest struct {
 }
 
 // Send marshals and sends the SetIdentityPoolConfiguration API request.
-func (r *SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurationOutput, error) {
+func (r SetIdentityPoolConfigurationRequest) Send() (*SetIdentityPoolConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -732,7 +732,7 @@ type SubscribeToDatasetRequest struct {
 }
 
 // Send marshals and sends the SubscribeToDataset API request.
-func (r *SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
+func (r SubscribeToDatasetRequest) Send() (*SubscribeToDatasetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -782,7 +782,7 @@ type UnsubscribeFromDatasetRequest struct {
 }
 
 // Send marshals and sends the UnsubscribeFromDataset API request.
-func (r *UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, error) {
+func (r UnsubscribeFromDatasetRequest) Send() (*UnsubscribeFromDatasetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -832,7 +832,7 @@ type UpdateRecordsRequest struct {
 }
 
 // Send marshals and sends the UpdateRecords API request.
-func (r *UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
+func (r UpdateRecordsRequest) Send() (*UpdateRecordsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

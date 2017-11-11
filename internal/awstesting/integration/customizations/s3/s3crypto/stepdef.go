@@ -26,10 +26,10 @@ func init() {
 			baseFolder := "crypto_tests/" + cekAlg
 			s3Client := gucumber.World["client"].(*s3.S3)
 
-			out, err := s3Client.ListObjects(&s3.ListObjectsInput{
+			out, err := s3Client.ListObjectsRequest(&s3.ListObjectsInput{
 				Bucket: aws.String(bucket),
 				Prefix: aws.String(baseFolder + "/" + prefix),
-			})
+			}).Send()
 			if err != nil {
 				gucumber.T.Errorf("expect no error, got %v", err)
 			}
@@ -37,10 +37,10 @@ func init() {
 			plaintexts := make(map[string][]byte)
 			for _, obj := range out.Contents {
 				plaintextKey := obj.Key
-				ptObj, err := s3Client.GetObject(&s3.GetObjectInput{
+				ptObj, err := s3Client.GetObjectRequest(&s3.GetObjectInput{
 					Bucket: aws.String(bucket),
 					Key:    plaintextKey,
-				})
+				}).Send()
 				if err != nil {
 					gucumber.T.Errorf("expect no error, got %v", err)
 				}
@@ -71,10 +71,10 @@ func init() {
 			cipherKey := baseFolder + "/" + version + "/" + language + "/" + prefix + caseKey
 
 			// To get metadata for encryption key
-			ctObj, err := s3Client.GetObject(&s3.GetObjectInput{
+			ctObj, err := s3Client.GetObjectRequest(&s3.GetObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    &cipherKey,
-			})
+			}).Send()
 			if err != nil {
 				continue
 			}
@@ -84,11 +84,10 @@ func init() {
 				continue
 			}
 
-			ctObj, err = s3CryptoClient.GetObject(&s3.GetObjectInput{
+			ctObj, err = s3CryptoClient.GetObjectRequest(&s3.GetObjectInput{
 				Bucket: aws.String(bucket),
 				Key:    &cipherKey,
-			},
-			)
+			}).Send()
 			if err != nil {
 				gucumber.T.Errorf("expect no error, got %v", err)
 			}
@@ -195,9 +194,9 @@ func getAliasInformation(alias, region string) (string, error) {
 	truncated := true
 	var marker *string
 	for truncated {
-		out, err := svc.ListAliases(&kms.ListAliasesInput{
+		out, err := svc.ListAliasesRequest(&kms.ListAliasesInput{
 			Marker: marker,
-		})
+		}).Send()
 		if err != nil {
 			return arn, err
 		}

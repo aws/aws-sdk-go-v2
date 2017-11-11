@@ -19,7 +19,7 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r *CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type CreateWorkspacesRequest struct {
 }
 
 // Send marshals and sends the CreateWorkspaces API request.
-func (r *CreateWorkspacesRequest) Send() (*CreateWorkspacesOutput, error) {
+func (r CreateWorkspacesRequest) Send() (*CreateWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -113,7 +113,7 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -159,7 +159,7 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -205,7 +205,7 @@ type DescribeWorkspaceBundlesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaceBundles API request.
-func (r *DescribeWorkspaceBundlesRequest) Send() (*DescribeWorkspaceBundlesOutput, error) {
+func (r DescribeWorkspaceBundlesRequest) Send() (*DescribeWorkspaceBundlesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -316,7 +316,7 @@ type DescribeWorkspaceDirectoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaceDirectories API request.
-func (r *DescribeWorkspaceDirectoriesRequest) Send() (*DescribeWorkspaceDirectoriesOutput, error) {
+func (r DescribeWorkspaceDirectoriesRequest) Send() (*DescribeWorkspaceDirectoriesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -425,7 +425,7 @@ type DescribeWorkspacesRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspaces API request.
-func (r *DescribeWorkspacesRequest) Send() (*DescribeWorkspacesOutput, error) {
+func (r DescribeWorkspacesRequest) Send() (*DescribeWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -535,7 +535,7 @@ type DescribeWorkspacesConnectionStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeWorkspacesConnectionStatus API request.
-func (r *DescribeWorkspacesConnectionStatusRequest) Send() (*DescribeWorkspacesConnectionStatusOutput, error) {
+func (r DescribeWorkspacesConnectionStatusRequest) Send() (*DescribeWorkspacesConnectionStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -581,7 +581,7 @@ type ModifyWorkspacePropertiesRequest struct {
 }
 
 // Send marshals and sends the ModifyWorkspaceProperties API request.
-func (r *ModifyWorkspacePropertiesRequest) Send() (*ModifyWorkspacePropertiesOutput, error) {
+func (r ModifyWorkspacePropertiesRequest) Send() (*ModifyWorkspacePropertiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -628,7 +628,7 @@ type RebootWorkspacesRequest struct {
 }
 
 // Send marshals and sends the RebootWorkspaces API request.
-func (r *RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
+func (r RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -679,7 +679,7 @@ type RebuildWorkspacesRequest struct {
 }
 
 // Send marshals and sends the RebuildWorkspaces API request.
-func (r *RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
+func (r RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -743,7 +743,7 @@ type StartWorkspacesRequest struct {
 }
 
 // Send marshals and sends the StartWorkspaces API request.
-func (r *StartWorkspacesRequest) Send() (*StartWorkspacesOutput, error) {
+func (r StartWorkspacesRequest) Send() (*StartWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -790,7 +790,7 @@ type StopWorkspacesRequest struct {
 }
 
 // Send marshals and sends the StopWorkspaces API request.
-func (r *StopWorkspacesRequest) Send() (*StopWorkspacesOutput, error) {
+func (r StopWorkspacesRequest) Send() (*StopWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -837,7 +837,7 @@ type TerminateWorkspacesRequest struct {
 }
 
 // Send marshals and sends the TerminateWorkspaces API request.
-func (r *TerminateWorkspacesRequest) Send() (*TerminateWorkspacesOutput, error) {
+func (r TerminateWorkspacesRequest) Send() (*TerminateWorkspacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

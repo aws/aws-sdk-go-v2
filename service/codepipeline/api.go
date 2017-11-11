@@ -21,7 +21,7 @@ type AcknowledgeJobRequest struct {
 }
 
 // Send marshals and sends the AcknowledgeJob API request.
-func (r *AcknowledgeJobRequest) Send() (*AcknowledgeJobOutput, error) {
+func (r AcknowledgeJobRequest) Send() (*AcknowledgeJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ type AcknowledgeThirdPartyJobRequest struct {
 }
 
 // Send marshals and sends the AcknowledgeThirdPartyJob API request.
-func (r *AcknowledgeThirdPartyJobRequest) Send() (*AcknowledgeThirdPartyJobOutput, error) {
+func (r AcknowledgeThirdPartyJobRequest) Send() (*AcknowledgeThirdPartyJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -115,7 +115,7 @@ type CreateCustomActionTypeRequest struct {
 }
 
 // Send marshals and sends the CreateCustomActionType API request.
-func (r *CreateCustomActionTypeRequest) Send() (*CreateCustomActionTypeOutput, error) {
+func (r CreateCustomActionTypeRequest) Send() (*CreateCustomActionTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -162,7 +162,7 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r *CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -208,7 +208,7 @@ type DeleteCustomActionTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomActionType API request.
-func (r *DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, error) {
+func (r DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -260,7 +260,7 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r *DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -308,7 +308,7 @@ type DisableStageTransitionRequest struct {
 }
 
 // Send marshals and sends the DisableStageTransition API request.
-func (r *DisableStageTransitionRequest) Send() (*DisableStageTransitionOutput, error) {
+func (r DisableStageTransitionRequest) Send() (*DisableStageTransitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -357,7 +357,7 @@ type EnableStageTransitionRequest struct {
 }
 
 // Send marshals and sends the EnableStageTransition API request.
-func (r *EnableStageTransitionRequest) Send() (*EnableStageTransitionOutput, error) {
+func (r EnableStageTransitionRequest) Send() (*EnableStageTransitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +405,7 @@ type GetJobDetailsRequest struct {
 }
 
 // Send marshals and sends the GetJobDetails API request.
-func (r *GetJobDetailsRequest) Send() (*GetJobDetailsOutput, error) {
+func (r GetJobDetailsRequest) Send() (*GetJobDetailsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -456,7 +456,7 @@ type GetPipelineRequest struct {
 }
 
 // Send marshals and sends the GetPipeline API request.
-func (r *GetPipelineRequest) Send() (*GetPipelineOutput, error) {
+func (r GetPipelineRequest) Send() (*GetPipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -504,7 +504,7 @@ type GetPipelineExecutionRequest struct {
 }
 
 // Send marshals and sends the GetPipelineExecution API request.
-func (r *GetPipelineExecutionRequest) Send() (*GetPipelineExecutionOutput, error) {
+func (r GetPipelineExecutionRequest) Send() (*GetPipelineExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -552,7 +552,7 @@ type GetPipelineStateRequest struct {
 }
 
 // Send marshals and sends the GetPipelineState API request.
-func (r *GetPipelineStateRequest) Send() (*GetPipelineStateOutput, error) {
+func (r GetPipelineStateRequest) Send() (*GetPipelineStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -599,7 +599,7 @@ type GetThirdPartyJobDetailsRequest struct {
 }
 
 // Send marshals and sends the GetThirdPartyJobDetails API request.
-func (r *GetThirdPartyJobDetailsRequest) Send() (*GetThirdPartyJobDetailsOutput, error) {
+func (r GetThirdPartyJobDetailsRequest) Send() (*GetThirdPartyJobDetailsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -651,7 +651,7 @@ type ListActionTypesRequest struct {
 }
 
 // Send marshals and sends the ListActionTypes API request.
-func (r *ListActionTypesRequest) Send() (*ListActionTypesOutput, error) {
+func (r ListActionTypesRequest) Send() (*ListActionTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -698,7 +698,7 @@ type ListPipelineExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListPipelineExecutions API request.
-func (r *ListPipelineExecutionsRequest) Send() (*ListPipelineExecutionsOutput, error) {
+func (r ListPipelineExecutionsRequest) Send() (*ListPipelineExecutionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -744,7 +744,7 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r *ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -790,7 +790,7 @@ type PollForJobsRequest struct {
 }
 
 // Send marshals and sends the PollForJobs API request.
-func (r *PollForJobsRequest) Send() (*PollForJobsOutput, error) {
+func (r PollForJobsRequest) Send() (*PollForJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -841,7 +841,7 @@ type PollForThirdPartyJobsRequest struct {
 }
 
 // Send marshals and sends the PollForThirdPartyJobs API request.
-func (r *PollForThirdPartyJobsRequest) Send() (*PollForThirdPartyJobsOutput, error) {
+func (r PollForThirdPartyJobsRequest) Send() (*PollForThirdPartyJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -892,7 +892,7 @@ type PutActionRevisionRequest struct {
 }
 
 // Send marshals and sends the PutActionRevision API request.
-func (r *PutActionRevisionRequest) Send() (*PutActionRevisionOutput, error) {
+func (r PutActionRevisionRequest) Send() (*PutActionRevisionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -938,7 +938,7 @@ type PutApprovalResultRequest struct {
 }
 
 // Send marshals and sends the PutApprovalResult API request.
-func (r *PutApprovalResultRequest) Send() (*PutApprovalResultOutput, error) {
+func (r PutApprovalResultRequest) Send() (*PutApprovalResultOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -985,7 +985,7 @@ type PutJobFailureResultRequest struct {
 }
 
 // Send marshals and sends the PutJobFailureResult API request.
-func (r *PutJobFailureResultRequest) Send() (*PutJobFailureResultOutput, error) {
+func (r PutJobFailureResultRequest) Send() (*PutJobFailureResultOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1034,7 +1034,7 @@ type PutJobSuccessResultRequest struct {
 }
 
 // Send marshals and sends the PutJobSuccessResult API request.
-func (r *PutJobSuccessResultRequest) Send() (*PutJobSuccessResultOutput, error) {
+func (r PutJobSuccessResultRequest) Send() (*PutJobSuccessResultOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1083,7 +1083,7 @@ type PutThirdPartyJobFailureResultRequest struct {
 }
 
 // Send marshals and sends the PutThirdPartyJobFailureResult API request.
-func (r *PutThirdPartyJobFailureResultRequest) Send() (*PutThirdPartyJobFailureResultOutput, error) {
+func (r PutThirdPartyJobFailureResultRequest) Send() (*PutThirdPartyJobFailureResultOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1132,7 +1132,7 @@ type PutThirdPartyJobSuccessResultRequest struct {
 }
 
 // Send marshals and sends the PutThirdPartyJobSuccessResult API request.
-func (r *PutThirdPartyJobSuccessResultRequest) Send() (*PutThirdPartyJobSuccessResultOutput, error) {
+func (r PutThirdPartyJobSuccessResultRequest) Send() (*PutThirdPartyJobSuccessResultOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1181,7 +1181,7 @@ type RetryStageExecutionRequest struct {
 }
 
 // Send marshals and sends the RetryStageExecution API request.
-func (r *RetryStageExecutionRequest) Send() (*RetryStageExecutionOutput, error) {
+func (r RetryStageExecutionRequest) Send() (*RetryStageExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1227,7 +1227,7 @@ type StartPipelineExecutionRequest struct {
 }
 
 // Send marshals and sends the StartPipelineExecution API request.
-func (r *StartPipelineExecutionRequest) Send() (*StartPipelineExecutionOutput, error) {
+func (r StartPipelineExecutionRequest) Send() (*StartPipelineExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1274,7 +1274,7 @@ type UpdatePipelineRequest struct {
 }
 
 // Send marshals and sends the UpdatePipeline API request.
-func (r *UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

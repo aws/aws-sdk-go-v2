@@ -16,7 +16,7 @@ type CompareFacesRequest struct {
 }
 
 // Send marshals and sends the CompareFaces API request.
-func (r *CompareFacesRequest) Send() (*CompareFacesOutput, error) {
+func (r CompareFacesRequest) Send() (*CompareFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -93,7 +93,7 @@ type CreateCollectionRequest struct {
 }
 
 // Send marshals and sends the CreateCollection API request.
-func (r *CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
+func (r CreateCollectionRequest) Send() (*CreateCollectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -150,7 +150,7 @@ type DeleteCollectionRequest struct {
 }
 
 // Send marshals and sends the DeleteCollection API request.
-func (r *DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
+func (r DeleteCollectionRequest) Send() (*DeleteCollectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -198,7 +198,7 @@ type DeleteFacesRequest struct {
 }
 
 // Send marshals and sends the DeleteFaces API request.
-func (r *DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
+func (r DeleteFacesRequest) Send() (*DeleteFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +246,7 @@ type DetectFacesRequest struct {
 }
 
 // Send marshals and sends the DetectFaces API request.
-func (r *DetectFacesRequest) Send() (*DetectFacesOutput, error) {
+func (r DetectFacesRequest) Send() (*DetectFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -307,7 +307,7 @@ type DetectLabelsRequest struct {
 }
 
 // Send marshals and sends the DetectLabels API request.
-func (r *DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
+func (r DetectLabelsRequest) Send() (*DetectLabelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -396,7 +396,7 @@ type DetectModerationLabelsRequest struct {
 }
 
 // Send marshals and sends the DetectModerationLabels API request.
-func (r *DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, error) {
+func (r DetectModerationLabelsRequest) Send() (*DetectModerationLabelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +447,7 @@ type GetCelebrityInfoRequest struct {
 }
 
 // Send marshals and sends the GetCelebrityInfo API request.
-func (r *GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
+func (r GetCelebrityInfoRequest) Send() (*GetCelebrityInfoOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -497,7 +497,7 @@ type IndexFacesRequest struct {
 }
 
 // Send marshals and sends the IndexFaces API request.
-func (r *IndexFacesRequest) Send() (*IndexFacesOutput, error) {
+func (r IndexFacesRequest) Send() (*IndexFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -569,7 +569,7 @@ type ListCollectionsRequest struct {
 }
 
 // Send marshals and sends the ListCollections API request.
-func (r *ListCollectionsRequest) Send() (*ListCollectionsOutput, error) {
+func (r ListCollectionsRequest) Send() (*ListCollectionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -676,7 +676,7 @@ type ListFacesRequest struct {
 }
 
 // Send marshals and sends the ListFaces API request.
-func (r *ListFacesRequest) Send() (*ListFacesOutput, error) {
+func (r ListFacesRequest) Send() (*ListFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -781,7 +781,7 @@ type RecognizeCelebritiesRequest struct {
 }
 
 // Send marshals and sends the RecognizeCelebrities API request.
-func (r *RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error) {
+func (r RecognizeCelebritiesRequest) Send() (*RecognizeCelebritiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -850,7 +850,7 @@ type SearchFacesRequest struct {
 }
 
 // Send marshals and sends the SearchFaces API request.
-func (r *SearchFacesRequest) Send() (*SearchFacesOutput, error) {
+func (r SearchFacesRequest) Send() (*SearchFacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -911,7 +911,7 @@ type SearchFacesByImageRequest struct {
 }
 
 // Send marshals and sends the SearchFacesByImage API request.
-func (r *SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
+func (r SearchFacesByImageRequest) Send() (*SearchFacesByImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -21,7 +21,7 @@ type AcceptReservedInstancesExchangeQuoteRequest struct {
 }
 
 // Send marshals and sends the AcceptReservedInstancesExchangeQuote API request.
-func (r *AcceptReservedInstancesExchangeQuoteRequest) Send() (*AcceptReservedInstancesExchangeQuoteOutput, error) {
+func (r AcceptReservedInstancesExchangeQuoteRequest) Send() (*AcceptReservedInstancesExchangeQuoteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ type AcceptVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the AcceptVpcPeeringConnection API request.
-func (r *AcceptVpcPeeringConnectionRequest) Send() (*AcceptVpcPeeringConnectionOutput, error) {
+func (r AcceptVpcPeeringConnectionRequest) Send() (*AcceptVpcPeeringConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type AllocateAddressRequest struct {
 }
 
 // Send marshals and sends the AllocateAddress API request.
-func (r *AllocateAddressRequest) Send() (*AllocateAddressOutput, error) {
+func (r AllocateAddressRequest) Send() (*AllocateAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ type AllocateHostsRequest struct {
 }
 
 // Send marshals and sends the AllocateHosts API request.
-func (r *AllocateHostsRequest) Send() (*AllocateHostsOutput, error) {
+func (r AllocateHostsRequest) Send() (*AllocateHostsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -223,7 +223,7 @@ type AssignIpv6AddressesRequest struct {
 }
 
 // Send marshals and sends the AssignIpv6Addresses API request.
-func (r *AssignIpv6AddressesRequest) Send() (*AssignIpv6AddressesOutput, error) {
+func (r AssignIpv6AddressesRequest) Send() (*AssignIpv6AddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -276,7 +276,7 @@ type AssignPrivateIpAddressesRequest struct {
 }
 
 // Send marshals and sends the AssignPrivateIpAddresses API request.
-func (r *AssignPrivateIpAddressesRequest) Send() (*AssignPrivateIpAddressesOutput, error) {
+func (r AssignPrivateIpAddressesRequest) Send() (*AssignPrivateIpAddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -334,7 +334,7 @@ type AssociateAddressRequest struct {
 }
 
 // Send marshals and sends the AssociateAddress API request.
-func (r *AssociateAddressRequest) Send() (*AssociateAddressOutput, error) {
+func (r AssociateAddressRequest) Send() (*AssociateAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -403,7 +403,7 @@ type AssociateDhcpOptionsRequest struct {
 }
 
 // Send marshals and sends the AssociateDhcpOptions API request.
-func (r *AssociateDhcpOptionsRequest) Send() (*AssociateDhcpOptionsOutput, error) {
+func (r AssociateDhcpOptionsRequest) Send() (*AssociateDhcpOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -462,7 +462,7 @@ type AssociateIamInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the AssociateIamInstanceProfile API request.
-func (r *AssociateIamInstanceProfileRequest) Send() (*AssociateIamInstanceProfileOutput, error) {
+func (r AssociateIamInstanceProfileRequest) Send() (*AssociateIamInstanceProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -509,7 +509,7 @@ type AssociateRouteTableRequest struct {
 }
 
 // Send marshals and sends the AssociateRouteTable API request.
-func (r *AssociateRouteTableRequest) Send() (*AssociateRouteTableOutput, error) {
+func (r AssociateRouteTableRequest) Send() (*AssociateRouteTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -562,7 +562,7 @@ type AssociateSubnetCidrBlockRequest struct {
 }
 
 // Send marshals and sends the AssociateSubnetCidrBlock API request.
-func (r *AssociateSubnetCidrBlockRequest) Send() (*AssociateSubnetCidrBlockOutput, error) {
+func (r AssociateSubnetCidrBlockRequest) Send() (*AssociateSubnetCidrBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -610,7 +610,7 @@ type AssociateVpcCidrBlockRequest struct {
 }
 
 // Send marshals and sends the AssociateVpcCidrBlock API request.
-func (r *AssociateVpcCidrBlockRequest) Send() (*AssociateVpcCidrBlockOutput, error) {
+func (r AssociateVpcCidrBlockRequest) Send() (*AssociateVpcCidrBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -662,7 +662,7 @@ type AttachClassicLinkVpcRequest struct {
 }
 
 // Send marshals and sends the AttachClassicLinkVpc API request.
-func (r *AttachClassicLinkVpcRequest) Send() (*AttachClassicLinkVpcOutput, error) {
+func (r AttachClassicLinkVpcRequest) Send() (*AttachClassicLinkVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -719,7 +719,7 @@ type AttachInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the AttachInternetGateway API request.
-func (r *AttachInternetGatewayRequest) Send() (*AttachInternetGatewayOutput, error) {
+func (r AttachInternetGatewayRequest) Send() (*AttachInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -769,7 +769,7 @@ type AttachNetworkInterfaceRequest struct {
 }
 
 // Send marshals and sends the AttachNetworkInterface API request.
-func (r *AttachNetworkInterfaceRequest) Send() (*AttachNetworkInterfaceOutput, error) {
+func (r AttachNetworkInterfaceRequest) Send() (*AttachNetworkInterfaceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -815,7 +815,7 @@ type AttachVolumeRequest struct {
 }
 
 // Send marshals and sends the AttachVolume API request.
-func (r *AttachVolumeRequest) Send() (*DetachVolumeOutput, error) {
+func (r AttachVolumeRequest) Send() (*DetachVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +890,7 @@ type AttachVpnGatewayRequest struct {
 }
 
 // Send marshals and sends the AttachVpnGateway API request.
-func (r *AttachVpnGatewayRequest) Send() (*AttachVpnGatewayOutput, error) {
+func (r AttachVpnGatewayRequest) Send() (*AttachVpnGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -940,7 +940,7 @@ type AuthorizeSecurityGroupEgressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupEgress API request.
-func (r *AuthorizeSecurityGroupEgressRequest) Send() (*AuthorizeSecurityGroupEgressOutput, error) {
+func (r AuthorizeSecurityGroupEgressRequest) Send() (*AuthorizeSecurityGroupEgressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1005,7 +1005,7 @@ type AuthorizeSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupIngress API request.
-func (r *AuthorizeSecurityGroupIngressRequest) Send() (*AuthorizeSecurityGroupIngressOutput, error) {
+func (r AuthorizeSecurityGroupIngressRequest) Send() (*AuthorizeSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,7 +1071,7 @@ type BundleInstanceRequest struct {
 }
 
 // Send marshals and sends the BundleInstance API request.
-func (r *BundleInstanceRequest) Send() (*BundleInstanceOutput, error) {
+func (r BundleInstanceRequest) Send() (*BundleInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1125,7 +1125,7 @@ type CancelBundleTaskRequest struct {
 }
 
 // Send marshals and sends the CancelBundleTask API request.
-func (r *CancelBundleTaskRequest) Send() (*CancelBundleTaskOutput, error) {
+func (r CancelBundleTaskRequest) Send() (*CancelBundleTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1171,7 +1171,7 @@ type CancelConversionTaskRequest struct {
 }
 
 // Send marshals and sends the CancelConversionTask API request.
-func (r *CancelConversionTaskRequest) Send() (*CancelConversionTaskOutput, error) {
+func (r CancelConversionTaskRequest) Send() (*CancelConversionTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1226,7 +1226,7 @@ type CancelExportTaskRequest struct {
 }
 
 // Send marshals and sends the CancelExportTask API request.
-func (r *CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
+func (r CancelExportTaskRequest) Send() (*CancelExportTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1277,7 +1277,7 @@ type CancelImportTaskRequest struct {
 }
 
 // Send marshals and sends the CancelImportTask API request.
-func (r *CancelImportTaskRequest) Send() (*CancelImportTaskOutput, error) {
+func (r CancelImportTaskRequest) Send() (*CancelImportTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1323,7 +1323,7 @@ type CancelReservedInstancesListingRequest struct {
 }
 
 // Send marshals and sends the CancelReservedInstancesListing API request.
-func (r *CancelReservedInstancesListingRequest) Send() (*CancelReservedInstancesListingOutput, error) {
+func (r CancelReservedInstancesListingRequest) Send() (*CancelReservedInstancesListingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1373,7 +1373,7 @@ type CancelSpotFleetRequestsRequest struct {
 }
 
 // Send marshals and sends the CancelSpotFleetRequests API request.
-func (r *CancelSpotFleetRequestsRequest) Send() (*CancelSpotFleetRequestsOutput, error) {
+func (r CancelSpotFleetRequestsRequest) Send() (*CancelSpotFleetRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1426,7 +1426,7 @@ type CancelSpotInstanceRequestsRequest struct {
 }
 
 // Send marshals and sends the CancelSpotInstanceRequests API request.
-func (r *CancelSpotInstanceRequestsRequest) Send() (*CancelSpotInstanceRequestsOutput, error) {
+func (r CancelSpotInstanceRequestsRequest) Send() (*CancelSpotInstanceRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1480,7 +1480,7 @@ type ConfirmProductInstanceRequest struct {
 }
 
 // Send marshals and sends the ConfirmProductInstance API request.
-func (r *ConfirmProductInstanceRequest) Send() (*ConfirmProductInstanceOutput, error) {
+func (r ConfirmProductInstanceRequest) Send() (*ConfirmProductInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1528,7 +1528,7 @@ type CopyFpgaImageRequest struct {
 }
 
 // Send marshals and sends the CopyFpgaImage API request.
-func (r *CopyFpgaImageRequest) Send() (*CopyFpgaImageOutput, error) {
+func (r CopyFpgaImageRequest) Send() (*CopyFpgaImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1574,7 +1574,7 @@ type CopyImageRequest struct {
 }
 
 // Send marshals and sends the CopyImage API request.
-func (r *CopyImageRequest) Send() (*CopyImageOutput, error) {
+func (r CopyImageRequest) Send() (*CopyImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,7 +1626,7 @@ type CopySnapshotRequest struct {
 }
 
 // Send marshals and sends the CopySnapshot API request.
-func (r *CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
+func (r CopySnapshotRequest) Send() (*CopySnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1691,7 +1691,7 @@ type CreateCustomerGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateCustomerGateway API request.
-func (r *CreateCustomerGatewayRequest) Send() (*CreateCustomerGatewayOutput, error) {
+func (r CreateCustomerGatewayRequest) Send() (*CreateCustomerGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1761,7 +1761,7 @@ type CreateDefaultVpcRequest struct {
 }
 
 // Send marshals and sends the CreateDefaultVpc API request.
-func (r *CreateDefaultVpcRequest) Send() (*CreateDefaultVpcOutput, error) {
+func (r CreateDefaultVpcRequest) Send() (*CreateDefaultVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1819,7 +1819,7 @@ type CreateDhcpOptionsRequest struct {
 }
 
 // Send marshals and sends the CreateDhcpOptions API request.
-func (r *CreateDhcpOptionsRequest) Send() (*CreateDhcpOptionsOutput, error) {
+func (r CreateDhcpOptionsRequest) Send() (*CreateDhcpOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1904,7 +1904,7 @@ type CreateEgressOnlyInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateEgressOnlyInternetGateway API request.
-func (r *CreateEgressOnlyInternetGatewayRequest) Send() (*CreateEgressOnlyInternetGatewayOutput, error) {
+func (r CreateEgressOnlyInternetGatewayRequest) Send() (*CreateEgressOnlyInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1953,7 +1953,7 @@ type CreateFlowLogsRequest struct {
 }
 
 // Send marshals and sends the CreateFlowLogs API request.
-func (r *CreateFlowLogsRequest) Send() (*CreateFlowLogsOutput, error) {
+func (r CreateFlowLogsRequest) Send() (*CreateFlowLogsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2008,7 +2008,7 @@ type CreateFpgaImageRequest struct {
 }
 
 // Send marshals and sends the CreateFpgaImage API request.
-func (r *CreateFpgaImageRequest) Send() (*CreateFpgaImageOutput, error) {
+func (r CreateFpgaImageRequest) Send() (*CreateFpgaImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2061,7 +2061,7 @@ type CreateImageRequest struct {
 }
 
 // Send marshals and sends the CreateImage API request.
-func (r *CreateImageRequest) Send() (*CreateImageOutput, error) {
+func (r CreateImageRequest) Send() (*CreateImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2116,7 +2116,7 @@ type CreateInstanceExportTaskRequest struct {
 }
 
 // Send marshals and sends the CreateInstanceExportTask API request.
-func (r *CreateInstanceExportTaskRequest) Send() (*CreateInstanceExportTaskOutput, error) {
+func (r CreateInstanceExportTaskRequest) Send() (*CreateInstanceExportTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2167,7 +2167,7 @@ type CreateInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateInternetGateway API request.
-func (r *CreateInternetGatewayRequest) Send() (*CreateInternetGatewayOutput, error) {
+func (r CreateInternetGatewayRequest) Send() (*CreateInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2217,7 +2217,7 @@ type CreateKeyPairRequest struct {
 }
 
 // Send marshals and sends the CreateKeyPair API request.
-func (r *CreateKeyPairRequest) Send() (*CreateKeyPairOutput, error) {
+func (r CreateKeyPairRequest) Send() (*CreateKeyPairOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2274,7 +2274,7 @@ type CreateNatGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateNatGateway API request.
-func (r *CreateNatGatewayRequest) Send() (*CreateNatGatewayOutput, error) {
+func (r CreateNatGatewayRequest) Send() (*CreateNatGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2325,7 +2325,7 @@ type CreateNetworkAclRequest struct {
 }
 
 // Send marshals and sends the CreateNetworkAcl API request.
-func (r *CreateNetworkAclRequest) Send() (*CreateNetworkAclOutput, error) {
+func (r CreateNetworkAclRequest) Send() (*CreateNetworkAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2375,7 +2375,7 @@ type CreateNetworkAclEntryRequest struct {
 }
 
 // Send marshals and sends the CreateNetworkAclEntry API request.
-func (r *CreateNetworkAclEntryRequest) Send() (*CreateNetworkAclEntryOutput, error) {
+func (r CreateNetworkAclEntryRequest) Send() (*CreateNetworkAclEntryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2439,7 +2439,7 @@ type CreateNetworkInterfaceRequest struct {
 }
 
 // Send marshals and sends the CreateNetworkInterface API request.
-func (r *CreateNetworkInterfaceRequest) Send() (*CreateNetworkInterfaceOutput, error) {
+func (r CreateNetworkInterfaceRequest) Send() (*CreateNetworkInterfaceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2489,7 +2489,7 @@ type CreateNetworkInterfacePermissionRequest struct {
 }
 
 // Send marshals and sends the CreateNetworkInterfacePermission API request.
-func (r *CreateNetworkInterfacePermissionRequest) Send() (*CreateNetworkInterfacePermissionOutput, error) {
+func (r CreateNetworkInterfacePermissionRequest) Send() (*CreateNetworkInterfacePermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2539,7 +2539,7 @@ type CreatePlacementGroupRequest struct {
 }
 
 // Send marshals and sends the CreatePlacementGroup API request.
-func (r *CreatePlacementGroupRequest) Send() (*CreatePlacementGroupOutput, error) {
+func (r CreatePlacementGroupRequest) Send() (*CreatePlacementGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2592,7 +2592,7 @@ type CreateReservedInstancesListingRequest struct {
 }
 
 // Send marshals and sends the CreateReservedInstancesListing API request.
-func (r *CreateReservedInstancesListingRequest) Send() (*CreateReservedInstancesListingOutput, error) {
+func (r CreateReservedInstancesListingRequest) Send() (*CreateReservedInstancesListingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2661,7 +2661,7 @@ type CreateRouteRequest struct {
 }
 
 // Send marshals and sends the CreateRoute API request.
-func (r *CreateRouteRequest) Send() (*CreateRouteOutput, error) {
+func (r CreateRouteRequest) Send() (*CreateRouteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2726,7 +2726,7 @@ type CreateRouteTableRequest struct {
 }
 
 // Send marshals and sends the CreateRouteTable API request.
-func (r *CreateRouteTableRequest) Send() (*CreateRouteTableOutput, error) {
+func (r CreateRouteTableRequest) Send() (*CreateRouteTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2776,7 +2776,7 @@ type CreateSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the CreateSecurityGroup API request.
-func (r *CreateSecurityGroupRequest) Send() (*CreateSecurityGroupOutput, error) {
+func (r CreateSecurityGroupRequest) Send() (*CreateSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2848,7 +2848,7 @@ type CreateSnapshotRequest struct {
 }
 
 // Send marshals and sends the CreateSnapshot API request.
-func (r *CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
+func (r CreateSnapshotRequest) Send() (*CreateSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2921,7 +2921,7 @@ type CreateSpotDatafeedSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateSpotDatafeedSubscription API request.
-func (r *CreateSpotDatafeedSubscriptionRequest) Send() (*CreateSpotDatafeedSubscriptionOutput, error) {
+func (r CreateSpotDatafeedSubscriptionRequest) Send() (*CreateSpotDatafeedSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2970,7 +2970,7 @@ type CreateSubnetRequest struct {
 }
 
 // Send marshals and sends the CreateSubnet API request.
-func (r *CreateSubnetRequest) Send() (*CreateSubnetOutput, error) {
+func (r CreateSubnetRequest) Send() (*CreateSubnetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3042,7 +3042,7 @@ type CreateTagsRequest struct {
 }
 
 // Send marshals and sends the CreateTags API request.
-func (r *CreateTagsRequest) Send() (*CreateTagsOutput, error) {
+func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3098,7 +3098,7 @@ type CreateVolumeRequest struct {
 }
 
 // Send marshals and sends the CreateVolume API request.
-func (r *CreateVolumeRequest) Send() (*CreateVolumeOutput, error) {
+func (r CreateVolumeRequest) Send() (*CreateVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3162,7 +3162,7 @@ type CreateVpcRequest struct {
 }
 
 // Send marshals and sends the CreateVpc API request.
-func (r *CreateVpcRequest) Send() (*CreateVpcOutput, error) {
+func (r CreateVpcRequest) Send() (*CreateVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3226,7 +3226,7 @@ type CreateVpcEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateVpcEndpoint API request.
-func (r *CreateVpcEndpointRequest) Send() (*CreateVpcEndpointOutput, error) {
+func (r CreateVpcEndpointRequest) Send() (*CreateVpcEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3278,7 +3278,7 @@ type CreateVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
-func (r *CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOutput, error) {
+func (r CreateVpcPeeringConnectionRequest) Send() (*CreateVpcPeeringConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3334,7 +3334,7 @@ type CreateVpnConnectionRequest struct {
 }
 
 // Send marshals and sends the CreateVpnConnection API request.
-func (r *CreateVpnConnectionRequest) Send() (*CreateVpnConnectionOutput, error) {
+func (r CreateVpnConnectionRequest) Send() (*CreateVpnConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3398,7 +3398,7 @@ type CreateVpnConnectionRouteRequest struct {
 }
 
 // Send marshals and sends the CreateVpnConnectionRoute API request.
-func (r *CreateVpnConnectionRouteRequest) Send() (*CreateVpnConnectionRouteOutput, error) {
+func (r CreateVpnConnectionRouteRequest) Send() (*CreateVpnConnectionRouteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3453,7 +3453,7 @@ type CreateVpnGatewayRequest struct {
 }
 
 // Send marshals and sends the CreateVpnGateway API request.
-func (r *CreateVpnGatewayRequest) Send() (*CreateVpnGatewayOutput, error) {
+func (r CreateVpnGatewayRequest) Send() (*CreateVpnGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3505,7 +3505,7 @@ type DeleteCustomerGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomerGateway API request.
-func (r *DeleteCustomerGatewayRequest) Send() (*DeleteCustomerGatewayOutput, error) {
+func (r DeleteCustomerGatewayRequest) Send() (*DeleteCustomerGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3554,7 +3554,7 @@ type DeleteDhcpOptionsRequest struct {
 }
 
 // Send marshals and sends the DeleteDhcpOptions API request.
-func (r *DeleteDhcpOptionsRequest) Send() (*DeleteDhcpOptionsOutput, error) {
+func (r DeleteDhcpOptionsRequest) Send() (*DeleteDhcpOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3605,7 +3605,7 @@ type DeleteEgressOnlyInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteEgressOnlyInternetGateway API request.
-func (r *DeleteEgressOnlyInternetGatewayRequest) Send() (*DeleteEgressOnlyInternetGatewayOutput, error) {
+func (r DeleteEgressOnlyInternetGatewayRequest) Send() (*DeleteEgressOnlyInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3651,7 +3651,7 @@ type DeleteFlowLogsRequest struct {
 }
 
 // Send marshals and sends the DeleteFlowLogs API request.
-func (r *DeleteFlowLogsRequest) Send() (*DeleteFlowLogsOutput, error) {
+func (r DeleteFlowLogsRequest) Send() (*DeleteFlowLogsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3697,7 +3697,7 @@ type DeleteFpgaImageRequest struct {
 }
 
 // Send marshals and sends the DeleteFpgaImage API request.
-func (r *DeleteFpgaImageRequest) Send() (*DeleteFpgaImageOutput, error) {
+func (r DeleteFpgaImageRequest) Send() (*DeleteFpgaImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3743,7 +3743,7 @@ type DeleteInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteInternetGateway API request.
-func (r *DeleteInternetGatewayRequest) Send() (*DeleteInternetGatewayOutput, error) {
+func (r DeleteInternetGatewayRequest) Send() (*DeleteInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3792,7 +3792,7 @@ type DeleteKeyPairRequest struct {
 }
 
 // Send marshals and sends the DeleteKeyPair API request.
-func (r *DeleteKeyPairRequest) Send() (*DeleteKeyPairOutput, error) {
+func (r DeleteKeyPairRequest) Send() (*DeleteKeyPairOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3840,7 +3840,7 @@ type DeleteNatGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteNatGateway API request.
-func (r *DeleteNatGatewayRequest) Send() (*DeleteNatGatewayOutput, error) {
+func (r DeleteNatGatewayRequest) Send() (*DeleteNatGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3888,7 +3888,7 @@ type DeleteNetworkAclRequest struct {
 }
 
 // Send marshals and sends the DeleteNetworkAcl API request.
-func (r *DeleteNetworkAclRequest) Send() (*DeleteNetworkAclOutput, error) {
+func (r DeleteNetworkAclRequest) Send() (*DeleteNetworkAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3937,7 +3937,7 @@ type DeleteNetworkAclEntryRequest struct {
 }
 
 // Send marshals and sends the DeleteNetworkAclEntry API request.
-func (r *DeleteNetworkAclEntryRequest) Send() (*DeleteNetworkAclEntryOutput, error) {
+func (r DeleteNetworkAclEntryRequest) Send() (*DeleteNetworkAclEntryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3986,7 +3986,7 @@ type DeleteNetworkInterfaceRequest struct {
 }
 
 // Send marshals and sends the DeleteNetworkInterface API request.
-func (r *DeleteNetworkInterfaceRequest) Send() (*DeleteNetworkInterfaceOutput, error) {
+func (r DeleteNetworkInterfaceRequest) Send() (*DeleteNetworkInterfaceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4035,7 +4035,7 @@ type DeleteNetworkInterfacePermissionRequest struct {
 }
 
 // Send marshals and sends the DeleteNetworkInterfacePermission API request.
-func (r *DeleteNetworkInterfacePermissionRequest) Send() (*DeleteNetworkInterfacePermissionOutput, error) {
+func (r DeleteNetworkInterfacePermissionRequest) Send() (*DeleteNetworkInterfacePermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4084,7 +4084,7 @@ type DeletePlacementGroupRequest struct {
 }
 
 // Send marshals and sends the DeletePlacementGroup API request.
-func (r *DeletePlacementGroupRequest) Send() (*DeletePlacementGroupOutput, error) {
+func (r DeletePlacementGroupRequest) Send() (*DeletePlacementGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4135,7 +4135,7 @@ type DeleteRouteRequest struct {
 }
 
 // Send marshals and sends the DeleteRoute API request.
-func (r *DeleteRouteRequest) Send() (*DeleteRouteOutput, error) {
+func (r DeleteRouteRequest) Send() (*DeleteRouteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4183,7 +4183,7 @@ type DeleteRouteTableRequest struct {
 }
 
 // Send marshals and sends the DeleteRouteTable API request.
-func (r *DeleteRouteTableRequest) Send() (*DeleteRouteTableOutput, error) {
+func (r DeleteRouteTableRequest) Send() (*DeleteRouteTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4233,7 +4233,7 @@ type DeleteSecurityGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteSecurityGroup API request.
-func (r *DeleteSecurityGroupRequest) Send() (*DeleteSecurityGroupOutput, error) {
+func (r DeleteSecurityGroupRequest) Send() (*DeleteSecurityGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4285,7 +4285,7 @@ type DeleteSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
-func (r *DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
+func (r DeleteSnapshotRequest) Send() (*DeleteSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4347,7 +4347,7 @@ type DeleteSpotDatafeedSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteSpotDatafeedSubscription API request.
-func (r *DeleteSpotDatafeedSubscriptionRequest) Send() (*DeleteSpotDatafeedSubscriptionOutput, error) {
+func (r DeleteSpotDatafeedSubscriptionRequest) Send() (*DeleteSpotDatafeedSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4395,7 +4395,7 @@ type DeleteSubnetRequest struct {
 }
 
 // Send marshals and sends the DeleteSubnet API request.
-func (r *DeleteSubnetRequest) Send() (*DeleteSubnetOutput, error) {
+func (r DeleteSubnetRequest) Send() (*DeleteSubnetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4444,7 +4444,7 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4496,7 +4496,7 @@ type DeleteVolumeRequest struct {
 }
 
 // Send marshals and sends the DeleteVolume API request.
-func (r *DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
+func (r DeleteVolumeRequest) Send() (*DeleteVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4550,7 +4550,7 @@ type DeleteVpcRequest struct {
 }
 
 // Send marshals and sends the DeleteVpc API request.
-func (r *DeleteVpcRequest) Send() (*DeleteVpcOutput, error) {
+func (r DeleteVpcRequest) Send() (*DeleteVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4602,7 +4602,7 @@ type DeleteVpcEndpointsRequest struct {
 }
 
 // Send marshals and sends the DeleteVpcEndpoints API request.
-func (r *DeleteVpcEndpointsRequest) Send() (*DeleteVpcEndpointsOutput, error) {
+func (r DeleteVpcEndpointsRequest) Send() (*DeleteVpcEndpointsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4649,7 +4649,7 @@ type DeleteVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
-func (r *DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOutput, error) {
+func (r DeleteVpcPeeringConnectionRequest) Send() (*DeleteVpcPeeringConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4698,7 +4698,7 @@ type DeleteVpnConnectionRequest struct {
 }
 
 // Send marshals and sends the DeleteVpnConnection API request.
-func (r *DeleteVpnConnectionRequest) Send() (*DeleteVpnConnectionOutput, error) {
+func (r DeleteVpnConnectionRequest) Send() (*DeleteVpnConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4755,7 +4755,7 @@ type DeleteVpnConnectionRouteRequest struct {
 }
 
 // Send marshals and sends the DeleteVpnConnectionRoute API request.
-func (r *DeleteVpnConnectionRouteRequest) Send() (*DeleteVpnConnectionRouteOutput, error) {
+func (r DeleteVpnConnectionRouteRequest) Send() (*DeleteVpnConnectionRouteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4806,7 +4806,7 @@ type DeleteVpnGatewayRequest struct {
 }
 
 // Send marshals and sends the DeleteVpnGateway API request.
-func (r *DeleteVpnGatewayRequest) Send() (*DeleteVpnGatewayOutput, error) {
+func (r DeleteVpnGatewayRequest) Send() (*DeleteVpnGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4858,7 +4858,7 @@ type DeregisterImageRequest struct {
 }
 
 // Send marshals and sends the DeregisterImage API request.
-func (r *DeregisterImageRequest) Send() (*DeregisterImageOutput, error) {
+func (r DeregisterImageRequest) Send() (*DeregisterImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4914,7 +4914,7 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4978,7 +4978,7 @@ type DescribeAddressesRequest struct {
 }
 
 // Send marshals and sends the DescribeAddresses API request.
-func (r *DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
+func (r DescribeAddressesRequest) Send() (*DescribeAddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5028,7 +5028,7 @@ type DescribeAvailabilityZonesRequest struct {
 }
 
 // Send marshals and sends the DescribeAvailabilityZones API request.
-func (r *DescribeAvailabilityZonesRequest) Send() (*DescribeAvailabilityZonesOutput, error) {
+func (r DescribeAvailabilityZonesRequest) Send() (*DescribeAvailabilityZonesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5080,7 +5080,7 @@ type DescribeBundleTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeBundleTasks API request.
-func (r *DescribeBundleTasksRequest) Send() (*DescribeBundleTasksOutput, error) {
+func (r DescribeBundleTasksRequest) Send() (*DescribeBundleTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5131,7 +5131,7 @@ type DescribeClassicLinkInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeClassicLinkInstances API request.
-func (r *DescribeClassicLinkInstancesRequest) Send() (*DescribeClassicLinkInstancesOutput, error) {
+func (r DescribeClassicLinkInstancesRequest) Send() (*DescribeClassicLinkInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5180,7 +5180,7 @@ type DescribeConversionTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeConversionTasks API request.
-func (r *DescribeConversionTasksRequest) Send() (*DescribeConversionTasksOutput, error) {
+func (r DescribeConversionTasksRequest) Send() (*DescribeConversionTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5230,7 +5230,7 @@ type DescribeCustomerGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeCustomerGateways API request.
-func (r *DescribeCustomerGatewaysRequest) Send() (*DescribeCustomerGatewaysOutput, error) {
+func (r DescribeCustomerGatewaysRequest) Send() (*DescribeCustomerGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5280,7 +5280,7 @@ type DescribeDhcpOptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDhcpOptions API request.
-func (r *DescribeDhcpOptionsRequest) Send() (*DescribeDhcpOptionsOutput, error) {
+func (r DescribeDhcpOptionsRequest) Send() (*DescribeDhcpOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5329,7 +5329,7 @@ type DescribeEgressOnlyInternetGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeEgressOnlyInternetGateways API request.
-func (r *DescribeEgressOnlyInternetGatewaysRequest) Send() (*DescribeEgressOnlyInternetGatewaysOutput, error) {
+func (r DescribeEgressOnlyInternetGatewaysRequest) Send() (*DescribeEgressOnlyInternetGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5375,7 +5375,7 @@ type DescribeElasticGpusRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticGpus API request.
-func (r *DescribeElasticGpusRequest) Send() (*DescribeElasticGpusOutput, error) {
+func (r DescribeElasticGpusRequest) Send() (*DescribeElasticGpusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5422,7 +5422,7 @@ type DescribeExportTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
-func (r *DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
+func (r DescribeExportTasksRequest) Send() (*DescribeExportTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5468,7 +5468,7 @@ type DescribeFlowLogsRequest struct {
 }
 
 // Send marshals and sends the DescribeFlowLogs API request.
-func (r *DescribeFlowLogsRequest) Send() (*DescribeFlowLogsOutput, error) {
+func (r DescribeFlowLogsRequest) Send() (*DescribeFlowLogsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5516,7 +5516,7 @@ type DescribeFpgaImageAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeFpgaImageAttribute API request.
-func (r *DescribeFpgaImageAttributeRequest) Send() (*DescribeFpgaImageAttributeOutput, error) {
+func (r DescribeFpgaImageAttributeRequest) Send() (*DescribeFpgaImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5562,7 +5562,7 @@ type DescribeFpgaImagesRequest struct {
 }
 
 // Send marshals and sends the DescribeFpgaImages API request.
-func (r *DescribeFpgaImagesRequest) Send() (*DescribeFpgaImagesOutput, error) {
+func (r DescribeFpgaImagesRequest) Send() (*DescribeFpgaImagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5610,7 +5610,7 @@ type DescribeHostReservationOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeHostReservationOfferings API request.
-func (r *DescribeHostReservationOfferingsRequest) Send() (*DescribeHostReservationOfferingsOutput, error) {
+func (r DescribeHostReservationOfferingsRequest) Send() (*DescribeHostReservationOfferingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5664,7 +5664,7 @@ type DescribeHostReservationsRequest struct {
 }
 
 // Send marshals and sends the DescribeHostReservations API request.
-func (r *DescribeHostReservationsRequest) Send() (*DescribeHostReservationsOutput, error) {
+func (r DescribeHostReservationsRequest) Send() (*DescribeHostReservationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5711,7 +5711,7 @@ type DescribeHostsRequest struct {
 }
 
 // Send marshals and sends the DescribeHosts API request.
-func (r *DescribeHostsRequest) Send() (*DescribeHostsOutput, error) {
+func (r DescribeHostsRequest) Send() (*DescribeHostsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5761,7 +5761,7 @@ type DescribeIamInstanceProfileAssociationsRequest struct {
 }
 
 // Send marshals and sends the DescribeIamInstanceProfileAssociations API request.
-func (r *DescribeIamInstanceProfileAssociationsRequest) Send() (*DescribeIamInstanceProfileAssociationsOutput, error) {
+func (r DescribeIamInstanceProfileAssociationsRequest) Send() (*DescribeIamInstanceProfileAssociationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5807,7 +5807,7 @@ type DescribeIdFormatRequest struct {
 }
 
 // Send marshals and sends the DescribeIdFormat API request.
-func (r *DescribeIdFormatRequest) Send() (*DescribeIdFormatOutput, error) {
+func (r DescribeIdFormatRequest) Send() (*DescribeIdFormatOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5866,7 +5866,7 @@ type DescribeIdentityIdFormatRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityIdFormat API request.
-func (r *DescribeIdentityIdFormatRequest) Send() (*DescribeIdentityIdFormatOutput, error) {
+func (r DescribeIdentityIdFormatRequest) Send() (*DescribeIdentityIdFormatOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5923,7 +5923,7 @@ type DescribeImageAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeImageAttribute API request.
-func (r *DescribeImageAttributeRequest) Send() (*DescribeImageAttributeOutput, error) {
+func (r DescribeImageAttributeRequest) Send() (*DescribeImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5970,7 +5970,7 @@ type DescribeImagesRequest struct {
 }
 
 // Send marshals and sends the DescribeImages API request.
-func (r *DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
+func (r DescribeImagesRequest) Send() (*DescribeImagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6022,7 +6022,7 @@ type DescribeImportImageTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeImportImageTasks API request.
-func (r *DescribeImportImageTasksRequest) Send() (*DescribeImportImageTasksOutput, error) {
+func (r DescribeImportImageTasksRequest) Send() (*DescribeImportImageTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6069,7 +6069,7 @@ type DescribeImportSnapshotTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeImportSnapshotTasks API request.
-func (r *DescribeImportSnapshotTasksRequest) Send() (*DescribeImportSnapshotTasksOutput, error) {
+func (r DescribeImportSnapshotTasksRequest) Send() (*DescribeImportSnapshotTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6115,7 +6115,7 @@ type DescribeInstanceAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceAttribute API request.
-func (r *DescribeInstanceAttributeRequest) Send() (*DescribeInstanceAttributeOutput, error) {
+func (r DescribeInstanceAttributeRequest) Send() (*DescribeInstanceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6165,7 +6165,7 @@ type DescribeInstanceStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceStatus API request.
-func (r *DescribeInstanceStatusRequest) Send() (*DescribeInstanceStatusOutput, error) {
+func (r DescribeInstanceStatusRequest) Send() (*DescribeInstanceStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6288,7 +6288,7 @@ type DescribeInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstances API request.
-func (r *DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6405,7 +6405,7 @@ type DescribeInternetGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeInternetGateways API request.
-func (r *DescribeInternetGatewaysRequest) Send() (*DescribeInternetGatewaysOutput, error) {
+func (r DescribeInternetGatewaysRequest) Send() (*DescribeInternetGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6451,7 +6451,7 @@ type DescribeKeyPairsRequest struct {
 }
 
 // Send marshals and sends the DescribeKeyPairs API request.
-func (r *DescribeKeyPairsRequest) Send() (*DescribeKeyPairsOutput, error) {
+func (r DescribeKeyPairsRequest) Send() (*DescribeKeyPairsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6500,7 +6500,7 @@ type DescribeMovingAddressesRequest struct {
 }
 
 // Send marshals and sends the DescribeMovingAddresses API request.
-func (r *DescribeMovingAddressesRequest) Send() (*DescribeMovingAddressesOutput, error) {
+func (r DescribeMovingAddressesRequest) Send() (*DescribeMovingAddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6548,7 +6548,7 @@ type DescribeNatGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeNatGateways API request.
-func (r *DescribeNatGatewaysRequest) Send() (*DescribeNatGatewaysOutput, error) {
+func (r DescribeNatGatewaysRequest) Send() (*DescribeNatGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6650,7 +6650,7 @@ type DescribeNetworkAclsRequest struct {
 }
 
 // Send marshals and sends the DescribeNetworkAcls API request.
-func (r *DescribeNetworkAclsRequest) Send() (*DescribeNetworkAclsOutput, error) {
+func (r DescribeNetworkAclsRequest) Send() (*DescribeNetworkAclsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6699,7 +6699,7 @@ type DescribeNetworkInterfaceAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeNetworkInterfaceAttribute API request.
-func (r *DescribeNetworkInterfaceAttributeRequest) Send() (*DescribeNetworkInterfaceAttributeOutput, error) {
+func (r DescribeNetworkInterfaceAttributeRequest) Send() (*DescribeNetworkInterfaceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6746,7 +6746,7 @@ type DescribeNetworkInterfacePermissionsRequest struct {
 }
 
 // Send marshals and sends the DescribeNetworkInterfacePermissions API request.
-func (r *DescribeNetworkInterfacePermissionsRequest) Send() (*DescribeNetworkInterfacePermissionsOutput, error) {
+func (r DescribeNetworkInterfacePermissionsRequest) Send() (*DescribeNetworkInterfacePermissionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6792,7 +6792,7 @@ type DescribeNetworkInterfacesRequest struct {
 }
 
 // Send marshals and sends the DescribeNetworkInterfaces API request.
-func (r *DescribeNetworkInterfacesRequest) Send() (*DescribeNetworkInterfacesOutput, error) {
+func (r DescribeNetworkInterfacesRequest) Send() (*DescribeNetworkInterfacesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6838,7 +6838,7 @@ type DescribePlacementGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribePlacementGroups API request.
-func (r *DescribePlacementGroupsRequest) Send() (*DescribePlacementGroupsOutput, error) {
+func (r DescribePlacementGroupsRequest) Send() (*DescribePlacementGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6886,7 +6886,7 @@ type DescribePrefixListsRequest struct {
 }
 
 // Send marshals and sends the DescribePrefixLists API request.
-func (r *DescribePrefixListsRequest) Send() (*DescribePrefixListsOutput, error) {
+func (r DescribePrefixListsRequest) Send() (*DescribePrefixListsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6936,7 +6936,7 @@ type DescribeRegionsRequest struct {
 }
 
 // Send marshals and sends the DescribeRegions API request.
-func (r *DescribeRegionsRequest) Send() (*DescribeRegionsOutput, error) {
+func (r DescribeRegionsRequest) Send() (*DescribeRegionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -6985,7 +6985,7 @@ type DescribeReservedInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedInstances API request.
-func (r *DescribeReservedInstancesRequest) Send() (*DescribeReservedInstancesOutput, error) {
+func (r DescribeReservedInstancesRequest) Send() (*DescribeReservedInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7034,7 +7034,7 @@ type DescribeReservedInstancesListingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedInstancesListings API request.
-func (r *DescribeReservedInstancesListingsRequest) Send() (*DescribeReservedInstancesListingsOutput, error) {
+func (r DescribeReservedInstancesListingsRequest) Send() (*DescribeReservedInstancesListingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7101,7 +7101,7 @@ type DescribeReservedInstancesModificationsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedInstancesModifications API request.
-func (r *DescribeReservedInstancesModificationsRequest) Send() (*DescribeReservedInstancesModificationsOutput, error) {
+func (r DescribeReservedInstancesModificationsRequest) Send() (*DescribeReservedInstancesModificationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7209,7 +7209,7 @@ type DescribeReservedInstancesOfferingsRequest struct {
 }
 
 // Send marshals and sends the DescribeReservedInstancesOfferings API request.
-func (r *DescribeReservedInstancesOfferingsRequest) Send() (*DescribeReservedInstancesOfferingsOutput, error) {
+func (r DescribeReservedInstancesOfferingsRequest) Send() (*DescribeReservedInstancesOfferingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7322,7 +7322,7 @@ type DescribeRouteTablesRequest struct {
 }
 
 // Send marshals and sends the DescribeRouteTables API request.
-func (r *DescribeRouteTablesRequest) Send() (*DescribeRouteTablesOutput, error) {
+func (r DescribeRouteTablesRequest) Send() (*DescribeRouteTablesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7376,7 +7376,7 @@ type DescribeScheduledInstanceAvailabilityRequest struct {
 }
 
 // Send marshals and sends the DescribeScheduledInstanceAvailability API request.
-func (r *DescribeScheduledInstanceAvailabilityRequest) Send() (*DescribeScheduledInstanceAvailabilityOutput, error) {
+func (r DescribeScheduledInstanceAvailabilityRequest) Send() (*DescribeScheduledInstanceAvailabilityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7430,7 +7430,7 @@ type DescribeScheduledInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeScheduledInstances API request.
-func (r *DescribeScheduledInstancesRequest) Send() (*DescribeScheduledInstancesOutput, error) {
+func (r DescribeScheduledInstancesRequest) Send() (*DescribeScheduledInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7476,7 +7476,7 @@ type DescribeSecurityGroupReferencesRequest struct {
 }
 
 // Send marshals and sends the DescribeSecurityGroupReferences API request.
-func (r *DescribeSecurityGroupReferencesRequest) Send() (*DescribeSecurityGroupReferencesOutput, error) {
+func (r DescribeSecurityGroupReferencesRequest) Send() (*DescribeSecurityGroupReferencesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7523,7 +7523,7 @@ type DescribeSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeSecurityGroups API request.
-func (r *DescribeSecurityGroupsRequest) Send() (*DescribeSecurityGroupsOutput, error) {
+func (r DescribeSecurityGroupsRequest) Send() (*DescribeSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7576,7 +7576,7 @@ type DescribeSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshotAttribute API request.
-func (r *DescribeSnapshotAttributeRequest) Send() (*DescribeSnapshotAttributeOutput, error) {
+func (r DescribeSnapshotAttributeRequest) Send() (*DescribeSnapshotAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7626,7 +7626,7 @@ type DescribeSnapshotsRequest struct {
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
-func (r *DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
+func (r DescribeSnapshotsRequest) Send() (*DescribeSnapshotsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7773,7 +7773,7 @@ type DescribeSpotDatafeedSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotDatafeedSubscription API request.
-func (r *DescribeSpotDatafeedSubscriptionRequest) Send() (*DescribeSpotDatafeedSubscriptionOutput, error) {
+func (r DescribeSpotDatafeedSubscriptionRequest) Send() (*DescribeSpotDatafeedSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7821,7 +7821,7 @@ type DescribeSpotFleetInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotFleetInstances API request.
-func (r *DescribeSpotFleetInstancesRequest) Send() (*DescribeSpotFleetInstancesOutput, error) {
+func (r DescribeSpotFleetInstancesRequest) Send() (*DescribeSpotFleetInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7867,7 +7867,7 @@ type DescribeSpotFleetRequestHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotFleetRequestHistory API request.
-func (r *DescribeSpotFleetRequestHistoryRequest) Send() (*DescribeSpotFleetRequestHistoryOutput, error) {
+func (r DescribeSpotFleetRequestHistoryRequest) Send() (*DescribeSpotFleetRequestHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -7918,7 +7918,7 @@ type DescribeSpotFleetRequestsRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotFleetRequests API request.
-func (r *DescribeSpotFleetRequestsRequest) Send() (*DescribeSpotFleetRequestsOutput, error) {
+func (r DescribeSpotFleetRequestsRequest) Send() (*DescribeSpotFleetRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8023,7 +8023,7 @@ type DescribeSpotInstanceRequestsRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotInstanceRequests API request.
-func (r *DescribeSpotInstanceRequestsRequest) Send() (*DescribeSpotInstanceRequestsOutput, error) {
+func (r DescribeSpotInstanceRequestsRequest) Send() (*DescribeSpotInstanceRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8083,7 +8083,7 @@ type DescribeSpotPriceHistoryRequest struct {
 }
 
 // Send marshals and sends the DescribeSpotPriceHistory API request.
-func (r *DescribeSpotPriceHistoryRequest) Send() (*DescribeSpotPriceHistoryOutput, error) {
+func (r DescribeSpotPriceHistoryRequest) Send() (*DescribeSpotPriceHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8192,7 +8192,7 @@ type DescribeStaleSecurityGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeStaleSecurityGroups API request.
-func (r *DescribeStaleSecurityGroupsRequest) Send() (*DescribeStaleSecurityGroupsOutput, error) {
+func (r DescribeStaleSecurityGroupsRequest) Send() (*DescribeStaleSecurityGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8241,7 +8241,7 @@ type DescribeSubnetsRequest struct {
 }
 
 // Send marshals and sends the DescribeSubnets API request.
-func (r *DescribeSubnetsRequest) Send() (*DescribeSubnetsOutput, error) {
+func (r DescribeSubnetsRequest) Send() (*DescribeSubnetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8290,7 +8290,7 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8395,7 +8395,7 @@ type DescribeVolumeAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeVolumeAttribute API request.
-func (r *DescribeVolumeAttributeRequest) Send() (*DescribeVolumeAttributeOutput, error) {
+func (r DescribeVolumeAttributeRequest) Send() (*DescribeVolumeAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8445,7 +8445,7 @@ type DescribeVolumeStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeVolumeStatus API request.
-func (r *DescribeVolumeStatusRequest) Send() (*DescribeVolumeStatusOutput, error) {
+func (r DescribeVolumeStatusRequest) Send() (*DescribeVolumeStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8581,7 +8581,7 @@ type DescribeVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeVolumes API request.
-func (r *DescribeVolumesRequest) Send() (*DescribeVolumesOutput, error) {
+func (r DescribeVolumesRequest) Send() (*DescribeVolumesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8693,7 +8693,7 @@ type DescribeVolumesModificationsRequest struct {
 }
 
 // Send marshals and sends the DescribeVolumesModifications API request.
-func (r *DescribeVolumesModificationsRequest) Send() (*DescribeVolumesModificationsOutput, error) {
+func (r DescribeVolumesModificationsRequest) Send() (*DescribeVolumesModificationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8751,7 +8751,7 @@ type DescribeVpcAttributeRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcAttribute API request.
-func (r *DescribeVpcAttributeRequest) Send() (*DescribeVpcAttributeOutput, error) {
+func (r DescribeVpcAttributeRequest) Send() (*DescribeVpcAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8798,7 +8798,7 @@ type DescribeVpcClassicLinkRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcClassicLink API request.
-func (r *DescribeVpcClassicLinkRequest) Send() (*DescribeVpcClassicLinkOutput, error) {
+func (r DescribeVpcClassicLinkRequest) Send() (*DescribeVpcClassicLinkOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8844,7 +8844,7 @@ type DescribeVpcClassicLinkDnsSupportRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcClassicLinkDnsSupport API request.
-func (r *DescribeVpcClassicLinkDnsSupportRequest) Send() (*DescribeVpcClassicLinkDnsSupportOutput, error) {
+func (r DescribeVpcClassicLinkDnsSupportRequest) Send() (*DescribeVpcClassicLinkDnsSupportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8896,7 +8896,7 @@ type DescribeVpcEndpointServicesRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcEndpointServices API request.
-func (r *DescribeVpcEndpointServicesRequest) Send() (*DescribeVpcEndpointServicesOutput, error) {
+func (r DescribeVpcEndpointServicesRequest) Send() (*DescribeVpcEndpointServicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8943,7 +8943,7 @@ type DescribeVpcEndpointsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcEndpoints API request.
-func (r *DescribeVpcEndpointsRequest) Send() (*DescribeVpcEndpointsOutput, error) {
+func (r DescribeVpcEndpointsRequest) Send() (*DescribeVpcEndpointsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -8989,7 +8989,7 @@ type DescribeVpcPeeringConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcPeeringConnections API request.
-func (r *DescribeVpcPeeringConnectionsRequest) Send() (*DescribeVpcPeeringConnectionsOutput, error) {
+func (r DescribeVpcPeeringConnectionsRequest) Send() (*DescribeVpcPeeringConnectionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9035,7 +9035,7 @@ type DescribeVpcsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpcs API request.
-func (r *DescribeVpcsRequest) Send() (*DescribeVpcsOutput, error) {
+func (r DescribeVpcsRequest) Send() (*DescribeVpcsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9081,7 +9081,7 @@ type DescribeVpnConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeVpnConnections API request.
-func (r *DescribeVpnConnectionsRequest) Send() (*DescribeVpnConnectionsOutput, error) {
+func (r DescribeVpnConnectionsRequest) Send() (*DescribeVpnConnectionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9131,7 +9131,7 @@ type DescribeVpnGatewaysRequest struct {
 }
 
 // Send marshals and sends the DescribeVpnGateways API request.
-func (r *DescribeVpnGatewaysRequest) Send() (*DescribeVpnGatewaysOutput, error) {
+func (r DescribeVpnGatewaysRequest) Send() (*DescribeVpnGatewaysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9181,7 +9181,7 @@ type DetachClassicLinkVpcRequest struct {
 }
 
 // Send marshals and sends the DetachClassicLinkVpc API request.
-func (r *DetachClassicLinkVpcRequest) Send() (*DetachClassicLinkVpcOutput, error) {
+func (r DetachClassicLinkVpcRequest) Send() (*DetachClassicLinkVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9229,7 +9229,7 @@ type DetachInternetGatewayRequest struct {
 }
 
 // Send marshals and sends the DetachInternetGateway API request.
-func (r *DetachInternetGatewayRequest) Send() (*DetachInternetGatewayOutput, error) {
+func (r DetachInternetGatewayRequest) Send() (*DetachInternetGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9279,7 +9279,7 @@ type DetachNetworkInterfaceRequest struct {
 }
 
 // Send marshals and sends the DetachNetworkInterface API request.
-func (r *DetachNetworkInterfaceRequest) Send() (*DetachNetworkInterfaceOutput, error) {
+func (r DetachNetworkInterfaceRequest) Send() (*DetachNetworkInterfaceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9327,7 +9327,7 @@ type DetachVolumeRequest struct {
 }
 
 // Send marshals and sends the DetachVolume API request.
-func (r *DetachVolumeRequest) Send() (*DetachVolumeOutput, error) {
+func (r DetachVolumeRequest) Send() (*DetachVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9386,7 +9386,7 @@ type DetachVpnGatewayRequest struct {
 }
 
 // Send marshals and sends the DetachVpnGateway API request.
-func (r *DetachVpnGatewayRequest) Send() (*DetachVpnGatewayOutput, error) {
+func (r DetachVpnGatewayRequest) Send() (*DetachVpnGatewayOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9441,7 +9441,7 @@ type DisableVgwRoutePropagationRequest struct {
 }
 
 // Send marshals and sends the DisableVgwRoutePropagation API request.
-func (r *DisableVgwRoutePropagationRequest) Send() (*DisableVgwRoutePropagationOutput, error) {
+func (r DisableVgwRoutePropagationRequest) Send() (*DisableVgwRoutePropagationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9490,7 +9490,7 @@ type DisableVpcClassicLinkRequest struct {
 }
 
 // Send marshals and sends the DisableVpcClassicLink API request.
-func (r *DisableVpcClassicLinkRequest) Send() (*DisableVpcClassicLinkOutput, error) {
+func (r DisableVpcClassicLinkRequest) Send() (*DisableVpcClassicLinkOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9537,7 +9537,7 @@ type DisableVpcClassicLinkDnsSupportRequest struct {
 }
 
 // Send marshals and sends the DisableVpcClassicLinkDnsSupport API request.
-func (r *DisableVpcClassicLinkDnsSupportRequest) Send() (*DisableVpcClassicLinkDnsSupportOutput, error) {
+func (r DisableVpcClassicLinkDnsSupportRequest) Send() (*DisableVpcClassicLinkDnsSupportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9587,7 +9587,7 @@ type DisassociateAddressRequest struct {
 }
 
 // Send marshals and sends the DisassociateAddress API request.
-func (r *DisassociateAddressRequest) Send() (*DisassociateAddressOutput, error) {
+func (r DisassociateAddressRequest) Send() (*DisassociateAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9643,7 +9643,7 @@ type DisassociateIamInstanceProfileRequest struct {
 }
 
 // Send marshals and sends the DisassociateIamInstanceProfile API request.
-func (r *DisassociateIamInstanceProfileRequest) Send() (*DisassociateIamInstanceProfileOutput, error) {
+func (r DisassociateIamInstanceProfileRequest) Send() (*DisassociateIamInstanceProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9691,7 +9691,7 @@ type DisassociateRouteTableRequest struct {
 }
 
 // Send marshals and sends the DisassociateRouteTable API request.
-func (r *DisassociateRouteTableRequest) Send() (*DisassociateRouteTableOutput, error) {
+func (r DisassociateRouteTableRequest) Send() (*DisassociateRouteTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9744,7 +9744,7 @@ type DisassociateSubnetCidrBlockRequest struct {
 }
 
 // Send marshals and sends the DisassociateSubnetCidrBlock API request.
-func (r *DisassociateSubnetCidrBlockRequest) Send() (*DisassociateSubnetCidrBlockOutput, error) {
+func (r DisassociateSubnetCidrBlockRequest) Send() (*DisassociateSubnetCidrBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9792,7 +9792,7 @@ type DisassociateVpcCidrBlockRequest struct {
 }
 
 // Send marshals and sends the DisassociateVpcCidrBlock API request.
-func (r *DisassociateVpcCidrBlockRequest) Send() (*DisassociateVpcCidrBlockOutput, error) {
+func (r DisassociateVpcCidrBlockRequest) Send() (*DisassociateVpcCidrBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9844,7 +9844,7 @@ type EnableVgwRoutePropagationRequest struct {
 }
 
 // Send marshals and sends the EnableVgwRoutePropagation API request.
-func (r *EnableVgwRoutePropagationRequest) Send() (*EnableVgwRoutePropagationOutput, error) {
+func (r EnableVgwRoutePropagationRequest) Send() (*EnableVgwRoutePropagationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9893,7 +9893,7 @@ type EnableVolumeIORequest struct {
 }
 
 // Send marshals and sends the EnableVolumeIO API request.
-func (r *EnableVolumeIORequest) Send() (*EnableVolumeIOOutput, error) {
+func (r EnableVolumeIORequest) Send() (*EnableVolumeIOOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9942,7 +9942,7 @@ type EnableVpcClassicLinkRequest struct {
 }
 
 // Send marshals and sends the EnableVpcClassicLink API request.
-func (r *EnableVpcClassicLinkRequest) Send() (*EnableVpcClassicLinkOutput, error) {
+func (r EnableVpcClassicLinkRequest) Send() (*EnableVpcClassicLinkOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -9994,7 +9994,7 @@ type EnableVpcClassicLinkDnsSupportRequest struct {
 }
 
 // Send marshals and sends the EnableVpcClassicLinkDnsSupport API request.
-func (r *EnableVpcClassicLinkDnsSupportRequest) Send() (*EnableVpcClassicLinkDnsSupportOutput, error) {
+func (r EnableVpcClassicLinkDnsSupportRequest) Send() (*EnableVpcClassicLinkDnsSupportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10046,7 +10046,7 @@ type GetConsoleOutputRequest struct {
 }
 
 // Send marshals and sends the GetConsoleOutput API request.
-func (r *GetConsoleOutputRequest) Send() (*GetConsoleOutputOutput, error) {
+func (r GetConsoleOutputRequest) Send() (*GetConsoleOutputOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10109,7 +10109,7 @@ type GetConsoleScreenshotRequest struct {
 }
 
 // Send marshals and sends the GetConsoleScreenshot API request.
-func (r *GetConsoleScreenshotRequest) Send() (*GetConsoleScreenshotOutput, error) {
+func (r GetConsoleScreenshotRequest) Send() (*GetConsoleScreenshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10157,7 +10157,7 @@ type GetHostReservationPurchasePreviewRequest struct {
 }
 
 // Send marshals and sends the GetHostReservationPurchasePreview API request.
-func (r *GetHostReservationPurchasePreviewRequest) Send() (*GetHostReservationPurchasePreviewOutput, error) {
+func (r GetHostReservationPurchasePreviewRequest) Send() (*GetHostReservationPurchasePreviewOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10208,7 +10208,7 @@ type GetPasswordDataRequest struct {
 }
 
 // Send marshals and sends the GetPasswordData API request.
-func (r *GetPasswordDataRequest) Send() (*GetPasswordDataOutput, error) {
+func (r GetPasswordDataRequest) Send() (*GetPasswordDataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10271,7 +10271,7 @@ type GetReservedInstancesExchangeQuoteRequest struct {
 }
 
 // Send marshals and sends the GetReservedInstancesExchangeQuote API request.
-func (r *GetReservedInstancesExchangeQuoteRequest) Send() (*GetReservedInstancesExchangeQuoteOutput, error) {
+func (r GetReservedInstancesExchangeQuoteRequest) Send() (*GetReservedInstancesExchangeQuoteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10319,7 +10319,7 @@ type ImportImageRequest struct {
 }
 
 // Send marshals and sends the ImportImage API request.
-func (r *ImportImageRequest) Send() (*ImportImageOutput, error) {
+func (r ImportImageRequest) Send() (*ImportImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10368,7 +10368,7 @@ type ImportInstanceRequest struct {
 }
 
 // Send marshals and sends the ImportInstance API request.
-func (r *ImportInstanceRequest) Send() (*ImportInstanceOutput, error) {
+func (r ImportInstanceRequest) Send() (*ImportInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10420,7 +10420,7 @@ type ImportKeyPairRequest struct {
 }
 
 // Send marshals and sends the ImportKeyPair API request.
-func (r *ImportKeyPairRequest) Send() (*ImportKeyPairOutput, error) {
+func (r ImportKeyPairRequest) Send() (*ImportKeyPairOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10473,7 +10473,7 @@ type ImportSnapshotRequest struct {
 }
 
 // Send marshals and sends the ImportSnapshot API request.
-func (r *ImportSnapshotRequest) Send() (*ImportSnapshotOutput, error) {
+func (r ImportSnapshotRequest) Send() (*ImportSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10519,7 +10519,7 @@ type ImportVolumeRequest struct {
 }
 
 // Send marshals and sends the ImportVolume API request.
-func (r *ImportVolumeRequest) Send() (*ImportVolumeOutput, error) {
+func (r ImportVolumeRequest) Send() (*ImportVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10569,7 +10569,7 @@ type ModifyFpgaImageAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyFpgaImageAttribute API request.
-func (r *ModifyFpgaImageAttributeRequest) Send() (*ModifyFpgaImageAttributeOutput, error) {
+func (r ModifyFpgaImageAttributeRequest) Send() (*ModifyFpgaImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10615,7 +10615,7 @@ type ModifyHostsRequest struct {
 }
 
 // Send marshals and sends the ModifyHosts API request.
-func (r *ModifyHostsRequest) Send() (*ModifyHostsOutput, error) {
+func (r ModifyHostsRequest) Send() (*ModifyHostsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10667,7 +10667,7 @@ type ModifyIdFormatRequest struct {
 }
 
 // Send marshals and sends the ModifyIdFormat API request.
-func (r *ModifyIdFormatRequest) Send() (*ModifyIdFormatOutput, error) {
+func (r ModifyIdFormatRequest) Send() (*ModifyIdFormatOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10729,7 +10729,7 @@ type ModifyIdentityIdFormatRequest struct {
 }
 
 // Send marshals and sends the ModifyIdentityIdFormat API request.
-func (r *ModifyIdentityIdFormatRequest) Send() (*ModifyIdentityIdFormatOutput, error) {
+func (r ModifyIdentityIdFormatRequest) Send() (*ModifyIdentityIdFormatOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10791,7 +10791,7 @@ type ModifyImageAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyImageAttribute API request.
-func (r *ModifyImageAttributeRequest) Send() (*ModifyImageAttributeOutput, error) {
+func (r ModifyImageAttributeRequest) Send() (*ModifyImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10848,7 +10848,7 @@ type ModifyInstanceAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyInstanceAttribute API request.
-func (r *ModifyInstanceAttributeRequest) Send() (*ModifyInstanceAttributeOutput, error) {
+func (r ModifyInstanceAttributeRequest) Send() (*ModifyInstanceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10901,7 +10901,7 @@ type ModifyInstancePlacementRequest struct {
 }
 
 // Send marshals and sends the ModifyInstancePlacement API request.
-func (r *ModifyInstancePlacementRequest) Send() (*ModifyInstancePlacementOutput, error) {
+func (r ModifyInstancePlacementRequest) Send() (*ModifyInstancePlacementOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -10965,7 +10965,7 @@ type ModifyNetworkInterfaceAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyNetworkInterfaceAttribute API request.
-func (r *ModifyNetworkInterfaceAttributeRequest) Send() (*ModifyNetworkInterfaceAttributeOutput, error) {
+func (r ModifyNetworkInterfaceAttributeRequest) Send() (*ModifyNetworkInterfaceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11014,7 +11014,7 @@ type ModifyReservedInstancesRequest struct {
 }
 
 // Send marshals and sends the ModifyReservedInstances API request.
-func (r *ModifyReservedInstancesRequest) Send() (*ModifyReservedInstancesOutput, error) {
+func (r ModifyReservedInstancesRequest) Send() (*ModifyReservedInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11066,7 +11066,7 @@ type ModifySnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifySnapshotAttribute API request.
-func (r *ModifySnapshotAttributeRequest) Send() (*ModifySnapshotAttributeOutput, error) {
+func (r ModifySnapshotAttributeRequest) Send() (*ModifySnapshotAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11126,7 +11126,7 @@ type ModifySpotFleetRequestRequest struct {
 }
 
 // Send marshals and sends the ModifySpotFleetRequest API request.
-func (r *ModifySpotFleetRequestRequest) Send() (*ModifySpotFleetRequestOutput, error) {
+func (r ModifySpotFleetRequestRequest) Send() (*ModifySpotFleetRequestOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11191,7 +11191,7 @@ type ModifySubnetAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifySubnetAttribute API request.
-func (r *ModifySubnetAttributeRequest) Send() (*ModifySubnetAttributeOutput, error) {
+func (r ModifySubnetAttributeRequest) Send() (*ModifySubnetAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11239,7 +11239,7 @@ type ModifyVolumeRequest struct {
 }
 
 // Send marshals and sends the ModifyVolume API request.
-func (r *ModifyVolumeRequest) Send() (*ModifyVolumeOutput, error) {
+func (r ModifyVolumeRequest) Send() (*ModifyVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11317,7 +11317,7 @@ type ModifyVolumeAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyVolumeAttribute API request.
-func (r *ModifyVolumeAttributeRequest) Send() (*ModifyVolumeAttributeOutput, error) {
+func (r ModifyVolumeAttributeRequest) Send() (*ModifyVolumeAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11374,7 +11374,7 @@ type ModifyVpcAttributeRequest struct {
 }
 
 // Send marshals and sends the ModifyVpcAttribute API request.
-func (r *ModifyVpcAttributeRequest) Send() (*ModifyVpcAttributeOutput, error) {
+func (r ModifyVpcAttributeRequest) Send() (*ModifyVpcAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11422,7 +11422,7 @@ type ModifyVpcEndpointRequest struct {
 }
 
 // Send marshals and sends the ModifyVpcEndpoint API request.
-func (r *ModifyVpcEndpointRequest) Send() (*ModifyVpcEndpointOutput, error) {
+func (r ModifyVpcEndpointRequest) Send() (*ModifyVpcEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11470,7 +11470,7 @@ type ModifyVpcPeeringConnectionOptionsRequest struct {
 }
 
 // Send marshals and sends the ModifyVpcPeeringConnectionOptions API request.
-func (r *ModifyVpcPeeringConnectionOptionsRequest) Send() (*ModifyVpcPeeringConnectionOptionsOutput, error) {
+func (r ModifyVpcPeeringConnectionOptionsRequest) Send() (*ModifyVpcPeeringConnectionOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11535,7 +11535,7 @@ type MonitorInstancesRequest struct {
 }
 
 // Send marshals and sends the MonitorInstances API request.
-func (r *MonitorInstancesRequest) Send() (*MonitorInstancesOutput, error) {
+func (r MonitorInstancesRequest) Send() (*MonitorInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11586,7 +11586,7 @@ type MoveAddressToVpcRequest struct {
 }
 
 // Send marshals and sends the MoveAddressToVpc API request.
-func (r *MoveAddressToVpcRequest) Send() (*MoveAddressToVpcOutput, error) {
+func (r MoveAddressToVpcRequest) Send() (*MoveAddressToVpcOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11638,7 +11638,7 @@ type PurchaseHostReservationRequest struct {
 }
 
 // Send marshals and sends the PurchaseHostReservation API request.
-func (r *PurchaseHostReservationRequest) Send() (*PurchaseHostReservationOutput, error) {
+func (r PurchaseHostReservationRequest) Send() (*PurchaseHostReservationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11687,7 +11687,7 @@ type PurchaseReservedInstancesOfferingRequest struct {
 }
 
 // Send marshals and sends the PurchaseReservedInstancesOffering API request.
-func (r *PurchaseReservedInstancesOfferingRequest) Send() (*PurchaseReservedInstancesOfferingOutput, error) {
+func (r PurchaseReservedInstancesOfferingRequest) Send() (*PurchaseReservedInstancesOfferingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11742,7 +11742,7 @@ type PurchaseScheduledInstancesRequest struct {
 }
 
 // Send marshals and sends the PurchaseScheduledInstances API request.
-func (r *PurchaseScheduledInstancesRequest) Send() (*PurchaseScheduledInstancesOutput, error) {
+func (r PurchaseScheduledInstancesRequest) Send() (*PurchaseScheduledInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11797,7 +11797,7 @@ type RebootInstancesRequest struct {
 }
 
 // Send marshals and sends the RebootInstances API request.
-func (r *RebootInstancesRequest) Send() (*RebootInstancesOutput, error) {
+func (r RebootInstancesRequest) Send() (*RebootInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11855,7 +11855,7 @@ type RegisterImageRequest struct {
 }
 
 // Send marshals and sends the RegisterImage API request.
-func (r *RegisterImageRequest) Send() (*RegisterImageOutput, error) {
+func (r RegisterImageRequest) Send() (*RegisterImageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11929,7 +11929,7 @@ type RejectVpcPeeringConnectionRequest struct {
 }
 
 // Send marshals and sends the RejectVpcPeeringConnection API request.
-func (r *RejectVpcPeeringConnectionRequest) Send() (*RejectVpcPeeringConnectionOutput, error) {
+func (r RejectVpcPeeringConnectionRequest) Send() (*RejectVpcPeeringConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -11979,7 +11979,7 @@ type ReleaseAddressRequest struct {
 }
 
 // Send marshals and sends the ReleaseAddress API request.
-func (r *ReleaseAddressRequest) Send() (*ReleaseAddressOutput, error) {
+func (r ReleaseAddressRequest) Send() (*ReleaseAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12044,7 +12044,7 @@ type ReleaseHostsRequest struct {
 }
 
 // Send marshals and sends the ReleaseHosts API request.
-func (r *ReleaseHostsRequest) Send() (*ReleaseHostsOutput, error) {
+func (r ReleaseHostsRequest) Send() (*ReleaseHostsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12101,7 +12101,7 @@ type ReplaceIamInstanceProfileAssociationRequest struct {
 }
 
 // Send marshals and sends the ReplaceIamInstanceProfileAssociation API request.
-func (r *ReplaceIamInstanceProfileAssociationRequest) Send() (*ReplaceIamInstanceProfileAssociationOutput, error) {
+func (r ReplaceIamInstanceProfileAssociationRequest) Send() (*ReplaceIamInstanceProfileAssociationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12152,7 +12152,7 @@ type ReplaceNetworkAclAssociationRequest struct {
 }
 
 // Send marshals and sends the ReplaceNetworkAclAssociation API request.
-func (r *ReplaceNetworkAclAssociationRequest) Send() (*ReplaceNetworkAclAssociationOutput, error) {
+func (r ReplaceNetworkAclAssociationRequest) Send() (*ReplaceNetworkAclAssociationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12201,7 +12201,7 @@ type ReplaceNetworkAclEntryRequest struct {
 }
 
 // Send marshals and sends the ReplaceNetworkAclEntry API request.
-func (r *ReplaceNetworkAclEntryRequest) Send() (*ReplaceNetworkAclEntryOutput, error) {
+func (r ReplaceNetworkAclEntryRequest) Send() (*ReplaceNetworkAclEntryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12251,7 +12251,7 @@ type ReplaceRouteRequest struct {
 }
 
 // Send marshals and sends the ReplaceRoute API request.
-func (r *ReplaceRouteRequest) Send() (*ReplaceRouteOutput, error) {
+func (r ReplaceRouteRequest) Send() (*ReplaceRouteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12305,7 +12305,7 @@ type ReplaceRouteTableAssociationRequest struct {
 }
 
 // Send marshals and sends the ReplaceRouteTableAssociation API request.
-func (r *ReplaceRouteTableAssociationRequest) Send() (*ReplaceRouteTableAssociationOutput, error) {
+func (r ReplaceRouteTableAssociationRequest) Send() (*ReplaceRouteTableAssociationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12359,7 +12359,7 @@ type ReportInstanceStatusRequest struct {
 }
 
 // Send marshals and sends the ReportInstanceStatus API request.
-func (r *ReportInstanceStatusRequest) Send() (*ReportInstanceStatusOutput, error) {
+func (r ReportInstanceStatusRequest) Send() (*ReportInstanceStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12413,7 +12413,7 @@ type RequestSpotFleetRequest struct {
 }
 
 // Send marshals and sends the RequestSpotFleet API request.
-func (r *RequestSpotFleetRequest) Send() (*RequestSpotFleetOutput, error) {
+func (r RequestSpotFleetRequest) Send() (*RequestSpotFleetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12475,7 +12475,7 @@ type RequestSpotInstancesRequest struct {
 }
 
 // Send marshals and sends the RequestSpotInstances API request.
-func (r *RequestSpotInstancesRequest) Send() (*RequestSpotInstancesOutput, error) {
+func (r RequestSpotInstancesRequest) Send() (*RequestSpotInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12526,7 +12526,7 @@ type ResetFpgaImageAttributeRequest struct {
 }
 
 // Send marshals and sends the ResetFpgaImageAttribute API request.
-func (r *ResetFpgaImageAttributeRequest) Send() (*ResetFpgaImageAttributeOutput, error) {
+func (r ResetFpgaImageAttributeRequest) Send() (*ResetFpgaImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12573,7 +12573,7 @@ type ResetImageAttributeRequest struct {
 }
 
 // Send marshals and sends the ResetImageAttribute API request.
-func (r *ResetImageAttributeRequest) Send() (*ResetImageAttributeOutput, error) {
+func (r ResetImageAttributeRequest) Send() (*ResetImageAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12623,7 +12623,7 @@ type ResetInstanceAttributeRequest struct {
 }
 
 // Send marshals and sends the ResetInstanceAttribute API request.
-func (r *ResetInstanceAttributeRequest) Send() (*ResetInstanceAttributeOutput, error) {
+func (r ResetInstanceAttributeRequest) Send() (*ResetInstanceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12679,7 +12679,7 @@ type ResetNetworkInterfaceAttributeRequest struct {
 }
 
 // Send marshals and sends the ResetNetworkInterfaceAttribute API request.
-func (r *ResetNetworkInterfaceAttributeRequest) Send() (*ResetNetworkInterfaceAttributeOutput, error) {
+func (r ResetNetworkInterfaceAttributeRequest) Send() (*ResetNetworkInterfaceAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12728,7 +12728,7 @@ type ResetSnapshotAttributeRequest struct {
 }
 
 // Send marshals and sends the ResetSnapshotAttribute API request.
-func (r *ResetSnapshotAttributeRequest) Send() (*ResetSnapshotAttributeOutput, error) {
+func (r ResetSnapshotAttributeRequest) Send() (*ResetSnapshotAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12780,7 +12780,7 @@ type RestoreAddressToClassicRequest struct {
 }
 
 // Send marshals and sends the RestoreAddressToClassic API request.
-func (r *RestoreAddressToClassicRequest) Send() (*RestoreAddressToClassicOutput, error) {
+func (r RestoreAddressToClassicRequest) Send() (*RestoreAddressToClassicOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12829,7 +12829,7 @@ type RevokeSecurityGroupEgressRequest struct {
 }
 
 // Send marshals and sends the RevokeSecurityGroupEgress API request.
-func (r *RevokeSecurityGroupEgressRequest) Send() (*RevokeSecurityGroupEgressOutput, error) {
+func (r RevokeSecurityGroupEgressRequest) Send() (*RevokeSecurityGroupEgressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12889,7 +12889,7 @@ type RevokeSecurityGroupIngressRequest struct {
 }
 
 // Send marshals and sends the RevokeSecurityGroupIngress API request.
-func (r *RevokeSecurityGroupIngressRequest) Send() (*RevokeSecurityGroupIngressOutput, error) {
+func (r RevokeSecurityGroupIngressRequest) Send() (*RevokeSecurityGroupIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -12952,7 +12952,7 @@ type RunInstancesRequest struct {
 }
 
 // Send marshals and sends the RunInstances API request.
-func (r *RunInstancesRequest) Send() (*RunInstancesOutput, error) {
+func (r RunInstancesRequest) Send() (*RunInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13046,7 +13046,7 @@ type RunScheduledInstancesRequest struct {
 }
 
 // Send marshals and sends the RunScheduledInstances API request.
-func (r *RunScheduledInstancesRequest) Send() (*RunScheduledInstancesOutput, error) {
+func (r RunScheduledInstancesRequest) Send() (*RunScheduledInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13102,7 +13102,7 @@ type StartInstancesRequest struct {
 }
 
 // Send marshals and sends the StartInstances API request.
-func (r *StartInstancesRequest) Send() (*StartInstancesOutput, error) {
+func (r StartInstancesRequest) Send() (*StartInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13170,7 +13170,7 @@ type StopInstancesRequest struct {
 }
 
 // Send marshals and sends the StopInstances API request.
-func (r *StopInstancesRequest) Send() (*StopInstancesOutput, error) {
+func (r StopInstancesRequest) Send() (*StopInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13248,7 +13248,7 @@ type TerminateInstancesRequest struct {
 }
 
 // Send marshals and sends the TerminateInstances API request.
-func (r *TerminateInstancesRequest) Send() (*TerminateInstancesOutput, error) {
+func (r TerminateInstancesRequest) Send() (*TerminateInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13318,7 +13318,7 @@ type UnassignIpv6AddressesRequest struct {
 }
 
 // Send marshals and sends the UnassignIpv6Addresses API request.
-func (r *UnassignIpv6AddressesRequest) Send() (*UnassignIpv6AddressesOutput, error) {
+func (r UnassignIpv6AddressesRequest) Send() (*UnassignIpv6AddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13364,7 +13364,7 @@ type UnassignPrivateIpAddressesRequest struct {
 }
 
 // Send marshals and sends the UnassignPrivateIpAddresses API request.
-func (r *UnassignPrivateIpAddressesRequest) Send() (*UnassignPrivateIpAddressesOutput, error) {
+func (r UnassignPrivateIpAddressesRequest) Send() (*UnassignPrivateIpAddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13412,7 +13412,7 @@ type UnmonitorInstancesRequest struct {
 }
 
 // Send marshals and sends the UnmonitorInstances API request.
-func (r *UnmonitorInstancesRequest) Send() (*UnmonitorInstancesOutput, error) {
+func (r UnmonitorInstancesRequest) Send() (*UnmonitorInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13460,7 +13460,7 @@ type UpdateSecurityGroupRuleDescriptionsEgressRequest struct {
 }
 
 // Send marshals and sends the UpdateSecurityGroupRuleDescriptionsEgress API request.
-func (r *UpdateSecurityGroupRuleDescriptionsEgressRequest) Send() (*UpdateSecurityGroupRuleDescriptionsEgressOutput, error) {
+func (r UpdateSecurityGroupRuleDescriptionsEgressRequest) Send() (*UpdateSecurityGroupRuleDescriptionsEgressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -13512,7 +13512,7 @@ type UpdateSecurityGroupRuleDescriptionsIngressRequest struct {
 }
 
 // Send marshals and sends the UpdateSecurityGroupRuleDescriptionsIngress API request.
-func (r *UpdateSecurityGroupRuleDescriptionsIngressRequest) Send() (*UpdateSecurityGroupRuleDescriptionsIngressOutput, error) {
+func (r UpdateSecurityGroupRuleDescriptionsIngressRequest) Send() (*UpdateSecurityGroupRuleDescriptionsIngressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

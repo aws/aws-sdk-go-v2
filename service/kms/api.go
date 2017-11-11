@@ -21,7 +21,7 @@ type CancelKeyDeletionRequest struct {
 }
 
 // Send marshals and sends the CancelKeyDeletion API request.
-func (r *CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
+func (r CancelKeyDeletionRequest) Send() (*CancelKeyDeletionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r *CreateAliasRequest) Send() (*CreateAliasOutput, error) {
+func (r CreateAliasRequest) Send() (*CreateAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ type CreateGrantRequest struct {
 }
 
 // Send marshals and sends the CreateGrant API request.
-func (r *CreateGrantRequest) Send() (*CreateGrantOutput, error) {
+func (r CreateGrantRequest) Send() (*CreateGrantOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -182,7 +182,7 @@ type CreateKeyRequest struct {
 }
 
 // Send marshals and sends the CreateKey API request.
-func (r *CreateKeyRequest) Send() (*CreateKeyOutput, error) {
+func (r CreateKeyRequest) Send() (*CreateKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -238,7 +238,7 @@ type DecryptRequest struct {
 }
 
 // Send marshals and sends the Decrypt API request.
-func (r *DecryptRequest) Send() (*DecryptOutput, error) {
+func (r DecryptRequest) Send() (*DecryptOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -300,7 +300,7 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r *DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,7 +348,7 @@ type DeleteImportedKeyMaterialRequest struct {
 }
 
 // Send marshals and sends the DeleteImportedKeyMaterial API request.
-func (r *DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutput, error) {
+func (r DeleteImportedKeyMaterialRequest) Send() (*DeleteImportedKeyMaterialOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -405,7 +405,7 @@ type DescribeKeyRequest struct {
 }
 
 // Send marshals and sends the DescribeKey API request.
-func (r *DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
+func (r DescribeKeyRequest) Send() (*DescribeKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -451,7 +451,7 @@ type DisableKeyRequest struct {
 }
 
 // Send marshals and sends the DisableKey API request.
-func (r *DisableKeyRequest) Send() (*DisableKeyOutput, error) {
+func (r DisableKeyRequest) Send() (*DisableKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -503,7 +503,7 @@ type DisableKeyRotationRequest struct {
 }
 
 // Send marshals and sends the DisableKeyRotation API request.
-func (r *DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
+func (r DisableKeyRotationRequest) Send() (*DisableKeyRotationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -551,7 +551,7 @@ type EnableKeyRequest struct {
 }
 
 // Send marshals and sends the EnableKey API request.
-func (r *EnableKeyRequest) Send() (*EnableKeyOutput, error) {
+func (r EnableKeyRequest) Send() (*EnableKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -599,7 +599,7 @@ type EnableKeyRotationRequest struct {
 }
 
 // Send marshals and sends the EnableKeyRotation API request.
-func (r *EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
+func (r EnableKeyRotationRequest) Send() (*EnableKeyRotationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +647,7 @@ type EncryptRequest struct {
 }
 
 // Send marshals and sends the Encrypt API request.
-func (r *EncryptRequest) Send() (*EncryptOutput, error) {
+func (r EncryptRequest) Send() (*EncryptOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -712,7 +712,7 @@ type GenerateDataKeyRequest struct {
 }
 
 // Send marshals and sends the GenerateDataKey API request.
-func (r *GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
+func (r GenerateDataKeyRequest) Send() (*GenerateDataKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -801,7 +801,7 @@ type GenerateDataKeyWithoutPlaintextRequest struct {
 }
 
 // Send marshals and sends the GenerateDataKeyWithoutPlaintext API request.
-func (r *GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutPlaintextOutput, error) {
+func (r GenerateDataKeyWithoutPlaintextRequest) Send() (*GenerateDataKeyWithoutPlaintextOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -861,7 +861,7 @@ type GenerateRandomRequest struct {
 }
 
 // Send marshals and sends the GenerateRandom API request.
-func (r *GenerateRandomRequest) Send() (*GenerateRandomOutput, error) {
+func (r GenerateRandomRequest) Send() (*GenerateRandomOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -911,7 +911,7 @@ type GetKeyPolicyRequest struct {
 }
 
 // Send marshals and sends the GetKeyPolicy API request.
-func (r *GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
+func (r GetKeyPolicyRequest) Send() (*GetKeyPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -957,7 +957,7 @@ type GetKeyRotationStatusRequest struct {
 }
 
 // Send marshals and sends the GetKeyRotationStatus API request.
-func (r *GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error) {
+func (r GetKeyRotationStatusRequest) Send() (*GetKeyRotationStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1004,7 +1004,7 @@ type GetParametersForImportRequest struct {
 }
 
 // Send marshals and sends the GetParametersForImport API request.
-func (r *GetParametersForImportRequest) Send() (*GetParametersForImportOutput, error) {
+func (r GetParametersForImportRequest) Send() (*GetParametersForImportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1065,7 +1065,7 @@ type ImportKeyMaterialRequest struct {
 }
 
 // Send marshals and sends the ImportKeyMaterial API request.
-func (r *ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
+func (r ImportKeyMaterialRequest) Send() (*ImportKeyMaterialOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1131,7 +1131,7 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r *ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1233,7 +1233,7 @@ type ListGrantsRequest struct {
 }
 
 // Send marshals and sends the ListGrants API request.
-func (r *ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+func (r ListGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1335,7 +1335,7 @@ type ListKeyPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListKeyPolicies API request.
-func (r *ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
+func (r ListKeyPoliciesRequest) Send() (*ListKeyPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1437,7 +1437,7 @@ type ListKeysRequest struct {
 }
 
 // Send marshals and sends the ListKeys API request.
-func (r *ListKeysRequest) Send() (*ListKeysOutput, error) {
+func (r ListKeysRequest) Send() (*ListKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1539,7 +1539,7 @@ type ListResourceTagsRequest struct {
 }
 
 // Send marshals and sends the ListResourceTags API request.
-func (r *ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
+func (r ListResourceTagsRequest) Send() (*ListResourceTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1585,7 +1585,7 @@ type ListRetirableGrantsRequest struct {
 }
 
 // Send marshals and sends the ListRetirableGrants API request.
-func (r *ListRetirableGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
+func (r ListRetirableGrantsRequest) Send() (*ListRetirableGrantsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1635,7 +1635,7 @@ type PutKeyPolicyRequest struct {
 }
 
 // Send marshals and sends the PutKeyPolicy API request.
-func (r *PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
+func (r PutKeyPolicyRequest) Send() (*PutKeyPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1686,7 +1686,7 @@ type ReEncryptRequest struct {
 }
 
 // Send marshals and sends the ReEncrypt API request.
-func (r *ReEncryptRequest) Send() (*ReEncryptOutput, error) {
+func (r ReEncryptRequest) Send() (*ReEncryptOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1743,7 +1743,7 @@ type RetireGrantRequest struct {
 }
 
 // Send marshals and sends the RetireGrant API request.
-func (r *RetireGrantRequest) Send() (*RetireGrantOutput, error) {
+func (r RetireGrantRequest) Send() (*RetireGrantOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1806,7 +1806,7 @@ type RevokeGrantRequest struct {
 }
 
 // Send marshals and sends the RevokeGrant API request.
-func (r *RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
+func (r RevokeGrantRequest) Send() (*RevokeGrantOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1855,7 +1855,7 @@ type ScheduleKeyDeletionRequest struct {
 }
 
 // Send marshals and sends the ScheduleKeyDeletion API request.
-func (r *ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
+func (r ScheduleKeyDeletionRequest) Send() (*ScheduleKeyDeletionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1916,7 +1916,7 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1974,7 +1974,7 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2027,7 +2027,7 @@ type UpdateAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateAlias API request.
-func (r *UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2087,7 +2087,7 @@ type UpdateKeyDescriptionRequest struct {
 }
 
 // Send marshals and sends the UpdateKeyDescription API request.
-func (r *UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error) {
+func (r UpdateKeyDescriptionRequest) Send() (*UpdateKeyDescriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

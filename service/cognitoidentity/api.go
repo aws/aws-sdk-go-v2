@@ -21,7 +21,7 @@ type CreateIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the CreateIdentityPool API request.
-func (r *CreateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r CreateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ type DeleteIdentitiesRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentities API request.
-func (r *DeleteIdentitiesRequest) Send() (*DeleteIdentitiesOutput, error) {
+func (r DeleteIdentitiesRequest) Send() (*DeleteIdentitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ type DeleteIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentityPool API request.
-func (r *DeleteIdentityPoolRequest) Send() (*DeleteIdentityPoolOutput, error) {
+func (r DeleteIdentityPoolRequest) Send() (*DeleteIdentityPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ type DescribeIdentityRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentity API request.
-func (r *DescribeIdentityRequest) Send() (*DescribeIdentityOutput, error) {
+func (r DescribeIdentityRequest) Send() (*DescribeIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -230,7 +230,7 @@ type DescribeIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityPool API request.
-func (r *DescribeIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r DescribeIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -279,7 +279,7 @@ type GetCredentialsForIdentityRequest struct {
 }
 
 // Send marshals and sends the GetCredentialsForIdentity API request.
-func (r *GetCredentialsForIdentityRequest) Send() (*GetCredentialsForIdentityOutput, error) {
+func (r GetCredentialsForIdentityRequest) Send() (*GetCredentialsForIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -330,7 +330,7 @@ type GetIdRequest struct {
 }
 
 // Send marshals and sends the GetId API request.
-func (r *GetIdRequest) Send() (*GetIdOutput, error) {
+func (r GetIdRequest) Send() (*GetIdOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -379,7 +379,7 @@ type GetIdentityPoolRolesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPoolRoles API request.
-func (r *GetIdentityPoolRolesRequest) Send() (*GetIdentityPoolRolesOutput, error) {
+func (r GetIdentityPoolRolesRequest) Send() (*GetIdentityPoolRolesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -427,7 +427,7 @@ type GetOpenIdTokenRequest struct {
 }
 
 // Send marshals and sends the GetOpenIdToken API request.
-func (r *GetOpenIdTokenRequest) Send() (*GetOpenIdTokenOutput, error) {
+func (r GetOpenIdTokenRequest) Send() (*GetOpenIdTokenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -479,7 +479,7 @@ type GetOpenIdTokenForDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the GetOpenIdTokenForDeveloperIdentity API request.
-func (r *GetOpenIdTokenForDeveloperIdentityRequest) Send() (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
+func (r GetOpenIdTokenForDeveloperIdentityRequest) Send() (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +540,7 @@ type ListIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListIdentities API request.
-func (r *ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
+func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -588,7 +588,7 @@ type ListIdentityPoolsRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPools API request.
-func (r *ListIdentityPoolsRequest) Send() (*ListIdentityPoolsOutput, error) {
+func (r ListIdentityPoolsRequest) Send() (*ListIdentityPoolsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -636,7 +636,7 @@ type LookupDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the LookupDeveloperIdentity API request.
-func (r *LookupDeveloperIdentityRequest) Send() (*LookupDeveloperIdentityOutput, error) {
+func (r LookupDeveloperIdentityRequest) Send() (*LookupDeveloperIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +691,7 @@ type MergeDeveloperIdentitiesRequest struct {
 }
 
 // Send marshals and sends the MergeDeveloperIdentities API request.
-func (r *MergeDeveloperIdentitiesRequest) Send() (*MergeDeveloperIdentitiesOutput, error) {
+func (r MergeDeveloperIdentitiesRequest) Send() (*MergeDeveloperIdentitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -745,7 +745,7 @@ type SetIdentityPoolRolesRequest struct {
 }
 
 // Send marshals and sends the SetIdentityPoolRoles API request.
-func (r *SetIdentityPoolRolesRequest) Send() (*SetIdentityPoolRolesOutput, error) {
+func (r SetIdentityPoolRolesRequest) Send() (*SetIdentityPoolRolesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -796,7 +796,7 @@ type UnlinkDeveloperIdentityRequest struct {
 }
 
 // Send marshals and sends the UnlinkDeveloperIdentity API request.
-func (r *UnlinkDeveloperIdentityRequest) Send() (*UnlinkDeveloperIdentityOutput, error) {
+func (r UnlinkDeveloperIdentityRequest) Send() (*UnlinkDeveloperIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -849,7 +849,7 @@ type UnlinkIdentityRequest struct {
 }
 
 // Send marshals and sends the UnlinkIdentity API request.
-func (r *UnlinkIdentityRequest) Send() (*UnlinkIdentityOutput, error) {
+func (r UnlinkIdentityRequest) Send() (*UnlinkIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -901,7 +901,7 @@ type UpdateIdentityPoolRequest struct {
 }
 
 // Send marshals and sends the UpdateIdentityPool API request.
-func (r *UpdateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
+func (r UpdateIdentityPoolRequest) Send() (*UpdateIdentityPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

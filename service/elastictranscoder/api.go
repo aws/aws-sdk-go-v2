@@ -18,7 +18,7 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r *CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ type CreateJobRequest struct {
 }
 
 // Send marshals and sends the CreateJob API request.
-func (r *CreateJobRequest) Send() (*CreateJobResponse, error) {
+func (r CreateJobRequest) Send() (*CreateJobResponse, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ type CreatePipelineRequest struct {
 }
 
 // Send marshals and sends the CreatePipeline API request.
-func (r *CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
+func (r CreatePipelineRequest) Send() (*CreatePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ type CreatePresetRequest struct {
 }
 
 // Send marshals and sends the CreatePreset API request.
-func (r *CreatePresetRequest) Send() (*CreatePresetOutput, error) {
+func (r CreatePresetRequest) Send() (*CreatePresetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,7 +218,7 @@ type DeletePipelineRequest struct {
 }
 
 // Send marshals and sends the DeletePipeline API request.
-func (r *DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
+func (r DeletePipelineRequest) Send() (*DeletePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +266,7 @@ type DeletePresetRequest struct {
 }
 
 // Send marshals and sends the DeletePreset API request.
-func (r *DeletePresetRequest) Send() (*DeletePresetOutput, error) {
+func (r DeletePresetRequest) Send() (*DeletePresetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -312,7 +312,7 @@ type ListJobsByPipelineRequest struct {
 }
 
 // Send marshals and sends the ListJobsByPipeline API request.
-func (r *ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
+func (r ListJobsByPipelineRequest) Send() (*ListJobsByPipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -416,7 +416,7 @@ type ListJobsByStatusRequest struct {
 }
 
 // Send marshals and sends the ListJobsByStatus API request.
-func (r *ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
+func (r ListJobsByStatusRequest) Send() (*ListJobsByStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -518,7 +518,7 @@ type ListPipelinesRequest struct {
 }
 
 // Send marshals and sends the ListPipelines API request.
-func (r *ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
+func (r ListPipelinesRequest) Send() (*ListPipelinesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,7 +619,7 @@ type ListPresetsRequest struct {
 }
 
 // Send marshals and sends the ListPresets API request.
-func (r *ListPresetsRequest) Send() (*ListPresetsOutput, error) {
+func (r ListPresetsRequest) Send() (*ListPresetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -720,7 +720,7 @@ type ReadJobRequest struct {
 }
 
 // Send marshals and sends the ReadJob API request.
-func (r *ReadJobRequest) Send() (*ReadJobOutput, error) {
+func (r ReadJobRequest) Send() (*ReadJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -764,7 +764,7 @@ type ReadPipelineRequest struct {
 }
 
 // Send marshals and sends the ReadPipeline API request.
-func (r *ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
+func (r ReadPipelineRequest) Send() (*ReadPipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -808,7 +808,7 @@ type ReadPresetRequest struct {
 }
 
 // Send marshals and sends the ReadPreset API request.
-func (r *ReadPresetRequest) Send() (*ReadPresetOutput, error) {
+func (r ReadPresetRequest) Send() (*ReadPresetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +852,7 @@ type TestRoleRequest struct {
 }
 
 // Send marshals and sends the TestRole API request.
-func (r *TestRoleRequest) Send() (*TestRoleOutput, error) {
+func (r TestRoleRequest) Send() (*TestRoleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -905,7 +905,7 @@ type UpdatePipelineRequest struct {
 }
 
 // Send marshals and sends the UpdatePipeline API request.
-func (r *UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
+func (r UpdatePipelineRequest) Send() (*UpdatePipelineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +954,7 @@ type UpdatePipelineNotificationsRequest struct {
 }
 
 // Send marshals and sends the UpdatePipelineNotifications API request.
-func (r *UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotificationsOutput, error) {
+func (r UpdatePipelineNotificationsRequest) Send() (*UpdatePipelineNotificationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1002,7 +1002,7 @@ type UpdatePipelineStatusRequest struct {
 }
 
 // Send marshals and sends the UpdatePipelineStatus API request.
-func (r *UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error) {
+func (r UpdatePipelineStatusRequest) Send() (*UpdatePipelineStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

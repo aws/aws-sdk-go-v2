@@ -104,7 +104,7 @@ type OutputService1TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService1TestCaseOperation1 API request.
-func (r *OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
+func (r OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +296,7 @@ type OutputService2TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService2TestCaseOperation1 API request.
-func (r *OutputService2TestCaseOperation1Request) Send() (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
+func (r OutputService2TestCaseOperation1Request) Send() (*OutputService2TestShapeOutputService2TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -430,7 +430,7 @@ type OutputService3TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService3TestCaseOperation1 API request.
-func (r *OutputService3TestCaseOperation1Request) Send() (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
+func (r OutputService3TestCaseOperation1Request) Send() (*OutputService3TestShapeOutputService3TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -562,7 +562,7 @@ type OutputService4TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService4TestCaseOperation1 API request.
-func (r *OutputService4TestCaseOperation1Request) Send() (*OutputService4TestShapeOutputService4TestCaseOperation1Output, error) {
+func (r OutputService4TestCaseOperation1Request) Send() (*OutputService4TestShapeOutputService4TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,7 +674,7 @@ type OutputService5TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService5TestCaseOperation1 API request.
-func (r *OutputService5TestCaseOperation1Request) Send() (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
+func (r OutputService5TestCaseOperation1Request) Send() (*OutputService5TestShapeOutputService5TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +798,7 @@ type OutputService6TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService6TestCaseOperation1 API request.
-func (r *OutputService6TestCaseOperation1Request) Send() (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
+func (r OutputService6TestCaseOperation1Request) Send() (*OutputService6TestShapeOutputService6TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -910,7 +910,7 @@ type OutputService7TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService7TestCaseOperation1 API request.
-func (r *OutputService7TestCaseOperation1Request) Send() (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
+func (r OutputService7TestCaseOperation1Request) Send() (*OutputService7TestShapeOutputService7TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1022,7 +1022,7 @@ type OutputService8TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService8TestCaseOperation1 API request.
-func (r *OutputService8TestCaseOperation1Request) Send() (*OutputService8TestShapeOutputService8TestCaseOperation1Output, error) {
+func (r OutputService8TestCaseOperation1Request) Send() (*OutputService8TestShapeOutputService8TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1134,7 +1134,7 @@ type OutputService9TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService9TestCaseOperation1 API request.
-func (r *OutputService9TestCaseOperation1Request) Send() (*OutputService9TestShapeOutputService9TestCaseOperation1Output, error) {
+func (r OutputService9TestCaseOperation1Request) Send() (*OutputService9TestShapeOutputService9TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1254,7 +1254,7 @@ type OutputService10TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService10TestCaseOperation1 API request.
-func (r *OutputService10TestCaseOperation1Request) Send() (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
+func (r OutputService10TestCaseOperation1Request) Send() (*OutputService10TestShapeOutputService10TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1386,7 +1386,7 @@ type OutputService11TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService11TestCaseOperation1 API request.
-func (r *OutputService11TestCaseOperation1Request) Send() (*OutputService11TestShapeOutputService11TestCaseOperation1Output, error) {
+func (r OutputService11TestCaseOperation1Request) Send() (*OutputService11TestShapeOutputService11TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1498,7 +1498,7 @@ type OutputService12TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService12TestCaseOperation1 API request.
-func (r *OutputService12TestCaseOperation1Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation1Output, error) {
+func (r OutputService12TestCaseOperation1Request) Send() (*OutputService12TestShapeOutputService12TestCaseOperation1Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1610,7 +1610,7 @@ type OutputService13TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService13TestCaseOperation1 API request.
-func (r *OutputService13TestCaseOperation1Request) Send() (*OutputService13TestShapeOutputService13TestCaseOperation2Input, error) {
+func (r OutputService13TestCaseOperation1Request) Send() (*OutputService13TestShapeOutputService13TestCaseOperation2Input, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1652,7 +1652,7 @@ type OutputService13TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the OutputService13TestCaseOperation2 API request.
-func (r *OutputService13TestCaseOperation2Request) Send() (*OutputService13TestShapeOutputService13TestCaseOperation2Output, error) {
+func (r OutputService13TestCaseOperation2Request) Send() (*OutputService13TestShapeOutputService13TestCaseOperation2Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

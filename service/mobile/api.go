@@ -18,7 +18,7 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r *CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r *DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ type DescribeBundleRequest struct {
 }
 
 // Send marshals and sends the DescribeBundle API request.
-func (r *DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
+func (r DescribeBundleRequest) Send() (*DescribeBundleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ type DescribeProjectRequest struct {
 }
 
 // Send marshals and sends the DescribeProject API request.
-func (r *DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
+func (r DescribeProjectRequest) Send() (*DescribeProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -202,7 +202,7 @@ type ExportBundleRequest struct {
 }
 
 // Send marshals and sends the ExportBundle API request.
-func (r *ExportBundleRequest) Send() (*ExportBundleOutput, error) {
+func (r ExportBundleRequest) Send() (*ExportBundleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +249,7 @@ type ExportProjectRequest struct {
 }
 
 // Send marshals and sends the ExportProject API request.
-func (r *ExportProjectRequest) Send() (*ExportProjectOutput, error) {
+func (r ExportProjectRequest) Send() (*ExportProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -297,7 +297,7 @@ type ListBundlesRequest struct {
 }
 
 // Send marshals and sends the ListBundles API request.
-func (r *ListBundlesRequest) Send() (*ListBundlesOutput, error) {
+func (r ListBundlesRequest) Send() (*ListBundlesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,7 +399,7 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r *ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +501,7 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r *UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

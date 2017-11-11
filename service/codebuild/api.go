@@ -19,7 +19,7 @@ type BatchDeleteBuildsRequest struct {
 }
 
 // Send marshals and sends the BatchDeleteBuilds API request.
-func (r *BatchDeleteBuildsRequest) Send() (*BatchDeleteBuildsOutput, error) {
+func (r BatchDeleteBuildsRequest) Send() (*BatchDeleteBuildsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type BatchGetBuildsRequest struct {
 }
 
 // Send marshals and sends the BatchGetBuilds API request.
-func (r *BatchGetBuildsRequest) Send() (*BatchGetBuildsOutput, error) {
+func (r BatchGetBuildsRequest) Send() (*BatchGetBuildsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ type BatchGetProjectsRequest struct {
 }
 
 // Send marshals and sends the BatchGetProjects API request.
-func (r *BatchGetProjectsRequest) Send() (*BatchGetProjectsOutput, error) {
+func (r BatchGetProjectsRequest) Send() (*BatchGetProjectsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ type CreateProjectRequest struct {
 }
 
 // Send marshals and sends the CreateProject API request.
-func (r *CreateProjectRequest) Send() (*CreateProjectOutput, error) {
+func (r CreateProjectRequest) Send() (*CreateProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +203,7 @@ type CreateWebhookRequest struct {
 }
 
 // Send marshals and sends the CreateWebhook API request.
-func (r *CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
+func (r CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -260,7 +260,7 @@ type DeleteProjectRequest struct {
 }
 
 // Send marshals and sends the DeleteProject API request.
-func (r *DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
+func (r DeleteProjectRequest) Send() (*DeleteProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -306,7 +306,7 @@ type DeleteWebhookRequest struct {
 }
 
 // Send marshals and sends the DeleteWebhook API request.
-func (r *DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
+func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -354,7 +354,7 @@ type ListBuildsRequest struct {
 }
 
 // Send marshals and sends the ListBuilds API request.
-func (r *ListBuildsRequest) Send() (*ListBuildsOutput, error) {
+func (r ListBuildsRequest) Send() (*ListBuildsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -400,7 +400,7 @@ type ListBuildsForProjectRequest struct {
 }
 
 // Send marshals and sends the ListBuildsForProject API request.
-func (r *ListBuildsForProjectRequest) Send() (*ListBuildsForProjectOutput, error) {
+func (r ListBuildsForProjectRequest) Send() (*ListBuildsForProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -447,7 +447,7 @@ type ListCuratedEnvironmentImagesRequest struct {
 }
 
 // Send marshals and sends the ListCuratedEnvironmentImages API request.
-func (r *ListCuratedEnvironmentImagesRequest) Send() (*ListCuratedEnvironmentImagesOutput, error) {
+func (r ListCuratedEnvironmentImagesRequest) Send() (*ListCuratedEnvironmentImagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -493,7 +493,7 @@ type ListProjectsRequest struct {
 }
 
 // Send marshals and sends the ListProjects API request.
-func (r *ListProjectsRequest) Send() (*ListProjectsOutput, error) {
+func (r ListProjectsRequest) Send() (*ListProjectsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +540,7 @@ type StartBuildRequest struct {
 }
 
 // Send marshals and sends the StartBuild API request.
-func (r *StartBuildRequest) Send() (*StartBuildOutput, error) {
+func (r StartBuildRequest) Send() (*StartBuildOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,7 +586,7 @@ type StopBuildRequest struct {
 }
 
 // Send marshals and sends the StopBuild API request.
-func (r *StopBuildRequest) Send() (*StopBuildOutput, error) {
+func (r StopBuildRequest) Send() (*StopBuildOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -632,7 +632,7 @@ type UpdateProjectRequest struct {
 }
 
 // Send marshals and sends the UpdateProject API request.
-func (r *UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
+func (r UpdateProjectRequest) Send() (*UpdateProjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

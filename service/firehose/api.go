@@ -19,7 +19,7 @@ type CreateDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the CreateDeliveryStream API request.
-func (r *CreateDeliveryStreamRequest) Send() (*CreateDeliveryStreamOutput, error) {
+func (r CreateDeliveryStreamRequest) Send() (*CreateDeliveryStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ type DeleteDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteDeliveryStream API request.
-func (r *DeleteDeliveryStreamRequest) Send() (*DeleteDeliveryStreamOutput, error) {
+func (r DeleteDeliveryStreamRequest) Send() (*DeleteDeliveryStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -173,7 +173,7 @@ type DescribeDeliveryStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryStream API request.
-func (r *DescribeDeliveryStreamRequest) Send() (*DescribeDeliveryStreamOutput, error) {
+func (r DescribeDeliveryStreamRequest) Send() (*DescribeDeliveryStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -222,7 +222,7 @@ type GetKinesisStreamRequest struct {
 }
 
 // Send marshals and sends the GetKinesisStream API request.
-func (r *GetKinesisStreamRequest) Send() (*GetKinesisStreamOutput, error) {
+func (r GetKinesisStreamRequest) Send() (*GetKinesisStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -266,7 +266,7 @@ type ListDeliveryStreamsRequest struct {
 }
 
 // Send marshals and sends the ListDeliveryStreams API request.
-func (r *ListDeliveryStreamsRequest) Send() (*ListDeliveryStreamsOutput, error) {
+func (r ListDeliveryStreamsRequest) Send() (*ListDeliveryStreamsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -320,7 +320,7 @@ type PutRecordRequest struct {
 }
 
 // Send marshals and sends the PutRecord API request.
-func (r *PutRecordRequest) Send() (*PutRecordOutput, error) {
+func (r PutRecordRequest) Send() (*PutRecordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -398,7 +398,7 @@ type PutRecordBatchRequest struct {
 }
 
 // Send marshals and sends the PutRecordBatch API request.
-func (r *PutRecordBatchRequest) Send() (*PutRecordBatchOutput, error) {
+func (r PutRecordBatchRequest) Send() (*PutRecordBatchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -501,7 +501,7 @@ type UpdateDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateDestination API request.
-func (r *UpdateDestinationRequest) Send() (*UpdateDestinationOutput, error) {
+func (r UpdateDestinationRequest) Send() (*UpdateDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

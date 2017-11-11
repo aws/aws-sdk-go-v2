@@ -19,7 +19,7 @@ type CreateClusterRequest struct {
 }
 
 // Send marshals and sends the CreateCluster API request.
-func (r *CreateClusterRequest) Send() (*CreateClusterOutput, error) {
+func (r CreateClusterRequest) Send() (*CreateClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type CreateHsmRequest struct {
 }
 
 // Send marshals and sends the CreateHsm API request.
-func (r *CreateHsmRequest) Send() (*CreateHsmOutput, error) {
+func (r CreateHsmRequest) Send() (*CreateHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ type DeleteClusterRequest struct {
 }
 
 // Send marshals and sends the DeleteCluster API request.
-func (r *DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
+func (r DeleteClusterRequest) Send() (*DeleteClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ type DeleteHsmRequest struct {
 }
 
 // Send marshals and sends the DeleteHsm API request.
-func (r *DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
+func (r DeleteHsmRequest) Send() (*DeleteHsmOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -209,7 +209,7 @@ type DescribeBackupsRequest struct {
 }
 
 // Send marshals and sends the DescribeBackups API request.
-func (r *DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
+func (r DescribeBackupsRequest) Send() (*DescribeBackupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -318,7 +318,7 @@ type DescribeClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeClusters API request.
-func (r *DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
+func (r DescribeClustersRequest) Send() (*DescribeClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -427,7 +427,7 @@ type InitializeClusterRequest struct {
 }
 
 // Send marshals and sends the InitializeCluster API request.
-func (r *InitializeClusterRequest) Send() (*InitializeClusterOutput, error) {
+func (r InitializeClusterRequest) Send() (*InitializeClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -476,7 +476,7 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -584,7 +584,7 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -630,7 +630,7 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

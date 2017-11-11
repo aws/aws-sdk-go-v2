@@ -19,7 +19,7 @@ type AddTagsToResourceRequest struct {
 }
 
 // Send marshals and sends the AddTagsToResource API request.
-func (r *AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
+func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ type CreateEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateEndpoint API request.
-func (r *CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
+func (r CreateEndpointRequest) Send() (*CreateEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -114,7 +114,7 @@ type CreateEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
-func (r *CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
+func (r CreateEventSubscriptionRequest) Send() (*CreateEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ type CreateReplicationInstanceRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationInstance API request.
-func (r *CreateReplicationInstanceRequest) Send() (*CreateReplicationInstanceOutput, error) {
+func (r CreateReplicationInstanceRequest) Send() (*CreateReplicationInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -222,7 +222,7 @@ type CreateReplicationSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationSubnetGroup API request.
-func (r *CreateReplicationSubnetGroupRequest) Send() (*CreateReplicationSubnetGroupOutput, error) {
+func (r CreateReplicationSubnetGroupRequest) Send() (*CreateReplicationSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -268,7 +268,7 @@ type CreateReplicationTaskRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationTask API request.
-func (r *CreateReplicationTaskRequest) Send() (*CreateReplicationTaskOutput, error) {
+func (r CreateReplicationTaskRequest) Send() (*CreateReplicationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -314,7 +314,7 @@ type DeleteCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteCertificate API request.
-func (r *DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
+func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -360,7 +360,7 @@ type DeleteEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
-func (r *DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -409,7 +409,7 @@ type DeleteEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
-func (r *DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
+func (r DeleteEventSubscriptionRequest) Send() (*DeleteEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -455,7 +455,7 @@ type DeleteReplicationInstanceRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationInstance API request.
-func (r *DeleteReplicationInstanceRequest) Send() (*DeleteReplicationInstanceOutput, error) {
+func (r DeleteReplicationInstanceRequest) Send() (*DeleteReplicationInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -504,7 +504,7 @@ type DeleteReplicationSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationSubnetGroup API request.
-func (r *DeleteReplicationSubnetGroupRequest) Send() (*DeleteReplicationSubnetGroupOutput, error) {
+func (r DeleteReplicationSubnetGroupRequest) Send() (*DeleteReplicationSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -550,7 +550,7 @@ type DeleteReplicationTaskRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationTask API request.
-func (r *DeleteReplicationTaskRequest) Send() (*DeleteReplicationTaskOutput, error) {
+func (r DeleteReplicationTaskRequest) Send() (*DeleteReplicationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -596,7 +596,7 @@ type DescribeAccountAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
-func (r *DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -647,7 +647,7 @@ type DescribeCertificatesRequest struct {
 }
 
 // Send marshals and sends the DescribeCertificates API request.
-func (r *DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
+func (r DescribeCertificatesRequest) Send() (*DescribeCertificatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -749,7 +749,7 @@ type DescribeConnectionsRequest struct {
 }
 
 // Send marshals and sends the DescribeConnections API request.
-func (r *DescribeConnectionsRequest) Send() (*DescribeConnectionsOutput, error) {
+func (r DescribeConnectionsRequest) Send() (*DescribeConnectionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +852,7 @@ type DescribeEndpointTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpointTypes API request.
-func (r *DescribeEndpointTypesRequest) Send() (*DescribeEndpointTypesOutput, error) {
+func (r DescribeEndpointTypesRequest) Send() (*DescribeEndpointTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -954,7 +954,7 @@ type DescribeEndpointsRequest struct {
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
-func (r *DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
+func (r DescribeEndpointsRequest) Send() (*DescribeEndpointsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1056,7 +1056,7 @@ type DescribeEventCategoriesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
-func (r *DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
+func (r DescribeEventCategoriesRequest) Send() (*DescribeEventCategoriesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1105,7 +1105,7 @@ type DescribeEventSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
-func (r *DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
+func (r DescribeEventSubscriptionsRequest) Send() (*DescribeEventSubscriptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,7 +1212,7 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1316,7 +1316,7 @@ type DescribeOrderableReplicationInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeOrderableReplicationInstances API request.
-func (r *DescribeOrderableReplicationInstancesRequest) Send() (*DescribeOrderableReplicationInstancesOutput, error) {
+func (r DescribeOrderableReplicationInstancesRequest) Send() (*DescribeOrderableReplicationInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1419,7 +1419,7 @@ type DescribeRefreshSchemasStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeRefreshSchemasStatus API request.
-func (r *DescribeRefreshSchemasStatusRequest) Send() (*DescribeRefreshSchemasStatusOutput, error) {
+func (r DescribeRefreshSchemasStatusRequest) Send() (*DescribeRefreshSchemasStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1465,7 +1465,7 @@ type DescribeReplicationInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeReplicationInstances API request.
-func (r *DescribeReplicationInstancesRequest) Send() (*DescribeReplicationInstancesOutput, error) {
+func (r DescribeReplicationInstancesRequest) Send() (*DescribeReplicationInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1568,7 +1568,7 @@ type DescribeReplicationSubnetGroupsRequest struct {
 }
 
 // Send marshals and sends the DescribeReplicationSubnetGroups API request.
-func (r *DescribeReplicationSubnetGroupsRequest) Send() (*DescribeReplicationSubnetGroupsOutput, error) {
+func (r DescribeReplicationSubnetGroupsRequest) Send() (*DescribeReplicationSubnetGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1670,7 +1670,7 @@ type DescribeReplicationTasksRequest struct {
 }
 
 // Send marshals and sends the DescribeReplicationTasks API request.
-func (r *DescribeReplicationTasksRequest) Send() (*DescribeReplicationTasksOutput, error) {
+func (r DescribeReplicationTasksRequest) Send() (*DescribeReplicationTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1773,7 +1773,7 @@ type DescribeSchemasRequest struct {
 }
 
 // Send marshals and sends the DescribeSchemas API request.
-func (r *DescribeSchemasRequest) Send() (*DescribeSchemasOutput, error) {
+func (r DescribeSchemasRequest) Send() (*DescribeSchemasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1875,7 +1875,7 @@ type DescribeTableStatisticsRequest struct {
 }
 
 // Send marshals and sends the DescribeTableStatistics API request.
-func (r *DescribeTableStatisticsRequest) Send() (*DescribeTableStatisticsOutput, error) {
+func (r DescribeTableStatisticsRequest) Send() (*DescribeTableStatisticsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1978,7 +1978,7 @@ type ImportCertificateRequest struct {
 }
 
 // Send marshals and sends the ImportCertificate API request.
-func (r *ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
+func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2024,7 +2024,7 @@ type ListTagsForResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsForResource API request.
-func (r *ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2070,7 +2070,7 @@ type ModifyEndpointRequest struct {
 }
 
 // Send marshals and sends the ModifyEndpoint API request.
-func (r *ModifyEndpointRequest) Send() (*ModifyEndpointOutput, error) {
+func (r ModifyEndpointRequest) Send() (*ModifyEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2116,7 +2116,7 @@ type ModifyEventSubscriptionRequest struct {
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
-func (r *ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
+func (r ModifyEventSubscriptionRequest) Send() (*ModifyEventSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2162,7 +2162,7 @@ type ModifyReplicationInstanceRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationInstance API request.
-func (r *ModifyReplicationInstanceRequest) Send() (*ModifyReplicationInstanceOutput, error) {
+func (r ModifyReplicationInstanceRequest) Send() (*ModifyReplicationInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2212,7 +2212,7 @@ type ModifyReplicationSubnetGroupRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationSubnetGroup API request.
-func (r *ModifyReplicationSubnetGroupRequest) Send() (*ModifyReplicationSubnetGroupOutput, error) {
+func (r ModifyReplicationSubnetGroupRequest) Send() (*ModifyReplicationSubnetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2258,7 +2258,7 @@ type ModifyReplicationTaskRequest struct {
 }
 
 // Send marshals and sends the ModifyReplicationTask API request.
-func (r *ModifyReplicationTaskRequest) Send() (*ModifyReplicationTaskOutput, error) {
+func (r ModifyReplicationTaskRequest) Send() (*ModifyReplicationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2310,7 +2310,7 @@ type RefreshSchemasRequest struct {
 }
 
 // Send marshals and sends the RefreshSchemas API request.
-func (r *RefreshSchemasRequest) Send() (*RefreshSchemasOutput, error) {
+func (r RefreshSchemasRequest) Send() (*RefreshSchemasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2358,7 +2358,7 @@ type ReloadTablesRequest struct {
 }
 
 // Send marshals and sends the ReloadTables API request.
-func (r *ReloadTablesRequest) Send() (*ReloadTablesOutput, error) {
+func (r ReloadTablesRequest) Send() (*ReloadTablesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2404,7 +2404,7 @@ type RemoveTagsFromResourceRequest struct {
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
-func (r *RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
+func (r RemoveTagsFromResourceRequest) Send() (*RemoveTagsFromResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2450,7 +2450,7 @@ type StartReplicationTaskRequest struct {
 }
 
 // Send marshals and sends the StartReplicationTask API request.
-func (r *StartReplicationTaskRequest) Send() (*StartReplicationTaskOutput, error) {
+func (r StartReplicationTaskRequest) Send() (*StartReplicationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2499,7 +2499,7 @@ type StopReplicationTaskRequest struct {
 }
 
 // Send marshals and sends the StopReplicationTask API request.
-func (r *StopReplicationTaskRequest) Send() (*StopReplicationTaskOutput, error) {
+func (r StopReplicationTaskRequest) Send() (*StopReplicationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2545,7 +2545,7 @@ type TestConnectionRequest struct {
 }
 
 // Send marshals and sends the TestConnection API request.
-func (r *TestConnectionRequest) Send() (*TestConnectionOutput, error) {
+func (r TestConnectionRequest) Send() (*TestConnectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

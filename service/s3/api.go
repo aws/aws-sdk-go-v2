@@ -22,7 +22,7 @@ type AbortMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
-func (r *AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
+func (r AbortMultipartUploadRequest) Send() (*AbortMultipartUploadOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ type CompleteMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
-func (r *CompleteMultipartUploadRequest) Send() (*CompleteMultipartUploadOutput, error) {
+func (r CompleteMultipartUploadRequest) Send() (*CompleteMultipartUploadOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ type CopyObjectRequest struct {
 }
 
 // Send marshals and sends the CopyObject API request.
-func (r *CopyObjectRequest) Send() (*CopyObjectOutput, error) {
+func (r CopyObjectRequest) Send() (*CopyObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type CreateBucketRequest struct {
 }
 
 // Send marshals and sends the CreateBucket API request.
-func (r *CreateBucketRequest) Send() (*CreateBucketOutput, error) {
+func (r CreateBucketRequest) Send() (*CreateBucketOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,7 +210,7 @@ type CreateMultipartUploadRequest struct {
 }
 
 // Send marshals and sends the CreateMultipartUpload API request.
-func (r *CreateMultipartUploadRequest) Send() (*CreateMultipartUploadOutput, error) {
+func (r CreateMultipartUploadRequest) Send() (*CreateMultipartUploadOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -262,7 +262,7 @@ type DeleteBucketRequest struct {
 }
 
 // Send marshals and sends the DeleteBucket API request.
-func (r *DeleteBucketRequest) Send() (*DeleteBucketOutput, error) {
+func (r DeleteBucketRequest) Send() (*DeleteBucketOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -311,7 +311,7 @@ type DeleteBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketAnalyticsConfiguration API request.
-func (r *DeleteBucketAnalyticsConfigurationRequest) Send() (*DeleteBucketAnalyticsConfigurationOutput, error) {
+func (r DeleteBucketAnalyticsConfigurationRequest) Send() (*DeleteBucketAnalyticsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -360,7 +360,7 @@ type DeleteBucketCorsRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketCors API request.
-func (r *DeleteBucketCorsRequest) Send() (*DeleteBucketCorsOutput, error) {
+func (r DeleteBucketCorsRequest) Send() (*DeleteBucketCorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -408,7 +408,7 @@ type DeleteBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketInventoryConfiguration API request.
-func (r *DeleteBucketInventoryConfigurationRequest) Send() (*DeleteBucketInventoryConfigurationOutput, error) {
+func (r DeleteBucketInventoryConfigurationRequest) Send() (*DeleteBucketInventoryConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -457,7 +457,7 @@ type DeleteBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketLifecycle API request.
-func (r *DeleteBucketLifecycleRequest) Send() (*DeleteBucketLifecycleOutput, error) {
+func (r DeleteBucketLifecycleRequest) Send() (*DeleteBucketLifecycleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,7 +505,7 @@ type DeleteBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketMetricsConfiguration API request.
-func (r *DeleteBucketMetricsConfigurationRequest) Send() (*DeleteBucketMetricsConfigurationOutput, error) {
+func (r DeleteBucketMetricsConfigurationRequest) Send() (*DeleteBucketMetricsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -554,7 +554,7 @@ type DeleteBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketPolicy API request.
-func (r *DeleteBucketPolicyRequest) Send() (*DeleteBucketPolicyOutput, error) {
+func (r DeleteBucketPolicyRequest) Send() (*DeleteBucketPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -602,7 +602,7 @@ type DeleteBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketReplication API request.
-func (r *DeleteBucketReplicationRequest) Send() (*DeleteBucketReplicationOutput, error) {
+func (r DeleteBucketReplicationRequest) Send() (*DeleteBucketReplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -650,7 +650,7 @@ type DeleteBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketTagging API request.
-func (r *DeleteBucketTaggingRequest) Send() (*DeleteBucketTaggingOutput, error) {
+func (r DeleteBucketTaggingRequest) Send() (*DeleteBucketTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -698,7 +698,7 @@ type DeleteBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the DeleteBucketWebsite API request.
-func (r *DeleteBucketWebsiteRequest) Send() (*DeleteBucketWebsiteOutput, error) {
+func (r DeleteBucketWebsiteRequest) Send() (*DeleteBucketWebsiteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -746,7 +746,7 @@ type DeleteObjectRequest struct {
 }
 
 // Send marshals and sends the DeleteObject API request.
-func (r *DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
+func (r DeleteObjectRequest) Send() (*DeleteObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,7 +794,7 @@ type DeleteObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the DeleteObjectTagging API request.
-func (r *DeleteObjectTaggingRequest) Send() (*DeleteObjectTaggingOutput, error) {
+func (r DeleteObjectTaggingRequest) Send() (*DeleteObjectTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -840,7 +840,7 @@ type DeleteObjectsRequest struct {
 }
 
 // Send marshals and sends the DeleteObjects API request.
-func (r *DeleteObjectsRequest) Send() (*DeleteObjectsOutput, error) {
+func (r DeleteObjectsRequest) Send() (*DeleteObjectsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -887,7 +887,7 @@ type GetBucketAccelerateConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketAccelerateConfiguration API request.
-func (r *GetBucketAccelerateConfigurationRequest) Send() (*GetBucketAccelerateConfigurationOutput, error) {
+func (r GetBucketAccelerateConfigurationRequest) Send() (*GetBucketAccelerateConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -933,7 +933,7 @@ type GetBucketAclRequest struct {
 }
 
 // Send marshals and sends the GetBucketAcl API request.
-func (r *GetBucketAclRequest) Send() (*GetBucketAclOutput, error) {
+func (r GetBucketAclRequest) Send() (*GetBucketAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -979,7 +979,7 @@ type GetBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketAnalyticsConfiguration API request.
-func (r *GetBucketAnalyticsConfigurationRequest) Send() (*GetBucketAnalyticsConfigurationOutput, error) {
+func (r GetBucketAnalyticsConfigurationRequest) Send() (*GetBucketAnalyticsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1026,7 +1026,7 @@ type GetBucketCorsRequest struct {
 }
 
 // Send marshals and sends the GetBucketCors API request.
-func (r *GetBucketCorsRequest) Send() (*GetBucketCorsOutput, error) {
+func (r GetBucketCorsRequest) Send() (*GetBucketCorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1072,7 +1072,7 @@ type GetBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketInventoryConfiguration API request.
-func (r *GetBucketInventoryConfigurationRequest) Send() (*GetBucketInventoryConfigurationOutput, error) {
+func (r GetBucketInventoryConfigurationRequest) Send() (*GetBucketInventoryConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1119,7 +1119,7 @@ type GetBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the GetBucketLifecycle API request.
-func (r *GetBucketLifecycleRequest) Send() (*GetBucketLifecycleOutput, error) {
+func (r GetBucketLifecycleRequest) Send() (*GetBucketLifecycleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1168,7 +1168,7 @@ type GetBucketLifecycleConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketLifecycleConfiguration API request.
-func (r *GetBucketLifecycleConfigurationRequest) Send() (*GetBucketLifecycleConfigurationOutput, error) {
+func (r GetBucketLifecycleConfigurationRequest) Send() (*GetBucketLifecycleConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1214,7 +1214,7 @@ type GetBucketLocationRequest struct {
 }
 
 // Send marshals and sends the GetBucketLocation API request.
-func (r *GetBucketLocationRequest) Send() (*GetBucketLocationOutput, error) {
+func (r GetBucketLocationRequest) Send() (*GetBucketLocationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1260,7 +1260,7 @@ type GetBucketLoggingRequest struct {
 }
 
 // Send marshals and sends the GetBucketLogging API request.
-func (r *GetBucketLoggingRequest) Send() (*GetBucketLoggingOutput, error) {
+func (r GetBucketLoggingRequest) Send() (*GetBucketLoggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1307,7 +1307,7 @@ type GetBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketMetricsConfiguration API request.
-func (r *GetBucketMetricsConfigurationRequest) Send() (*GetBucketMetricsConfigurationOutput, error) {
+func (r GetBucketMetricsConfigurationRequest) Send() (*GetBucketMetricsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1354,7 +1354,7 @@ type GetBucketNotificationRequest struct {
 }
 
 // Send marshals and sends the GetBucketNotification API request.
-func (r *GetBucketNotificationRequest) Send() (*GetBucketNotificationOutput, error) {
+func (r GetBucketNotificationRequest) Send() (*GetBucketNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1403,7 +1403,7 @@ type GetBucketNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetBucketNotificationConfiguration API request.
-func (r *GetBucketNotificationConfigurationRequest) Send() (*GetBucketNotificationConfigurationOutput, error) {
+func (r GetBucketNotificationConfigurationRequest) Send() (*GetBucketNotificationConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1449,7 +1449,7 @@ type GetBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the GetBucketPolicy API request.
-func (r *GetBucketPolicyRequest) Send() (*GetBucketPolicyOutput, error) {
+func (r GetBucketPolicyRequest) Send() (*GetBucketPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1495,7 +1495,7 @@ type GetBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the GetBucketReplication API request.
-func (r *GetBucketReplicationRequest) Send() (*GetBucketReplicationOutput, error) {
+func (r GetBucketReplicationRequest) Send() (*GetBucketReplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1541,7 +1541,7 @@ type GetBucketRequestPaymentRequest struct {
 }
 
 // Send marshals and sends the GetBucketRequestPayment API request.
-func (r *GetBucketRequestPaymentRequest) Send() (*GetBucketRequestPaymentOutput, error) {
+func (r GetBucketRequestPaymentRequest) Send() (*GetBucketRequestPaymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1587,7 +1587,7 @@ type GetBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the GetBucketTagging API request.
-func (r *GetBucketTaggingRequest) Send() (*GetBucketTaggingOutput, error) {
+func (r GetBucketTaggingRequest) Send() (*GetBucketTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1633,7 +1633,7 @@ type GetBucketVersioningRequest struct {
 }
 
 // Send marshals and sends the GetBucketVersioning API request.
-func (r *GetBucketVersioningRequest) Send() (*GetBucketVersioningOutput, error) {
+func (r GetBucketVersioningRequest) Send() (*GetBucketVersioningOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1679,7 +1679,7 @@ type GetBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the GetBucketWebsite API request.
-func (r *GetBucketWebsiteRequest) Send() (*GetBucketWebsiteOutput, error) {
+func (r GetBucketWebsiteRequest) Send() (*GetBucketWebsiteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1725,7 +1725,7 @@ type GetObjectRequest struct {
 }
 
 // Send marshals and sends the GetObject API request.
-func (r *GetObjectRequest) Send() (*GetObjectOutput, error) {
+func (r GetObjectRequest) Send() (*GetObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1771,7 +1771,7 @@ type GetObjectAclRequest struct {
 }
 
 // Send marshals and sends the GetObjectAcl API request.
-func (r *GetObjectAclRequest) Send() (*GetObjectAclOutput, error) {
+func (r GetObjectAclRequest) Send() (*GetObjectAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1817,7 +1817,7 @@ type GetObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the GetObjectTagging API request.
-func (r *GetObjectTaggingRequest) Send() (*GetObjectTaggingOutput, error) {
+func (r GetObjectTaggingRequest) Send() (*GetObjectTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1863,7 +1863,7 @@ type GetObjectTorrentRequest struct {
 }
 
 // Send marshals and sends the GetObjectTorrent API request.
-func (r *GetObjectTorrentRequest) Send() (*GetObjectTorrentOutput, error) {
+func (r GetObjectTorrentRequest) Send() (*GetObjectTorrentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1909,7 +1909,7 @@ type HeadBucketRequest struct {
 }
 
 // Send marshals and sends the HeadBucket API request.
-func (r *HeadBucketRequest) Send() (*HeadBucketOutput, error) {
+func (r HeadBucketRequest) Send() (*HeadBucketOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1958,7 +1958,7 @@ type HeadObjectRequest struct {
 }
 
 // Send marshals and sends the HeadObject API request.
-func (r *HeadObjectRequest) Send() (*HeadObjectOutput, error) {
+func (r HeadObjectRequest) Send() (*HeadObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2009,7 +2009,7 @@ type ListBucketAnalyticsConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketAnalyticsConfigurations API request.
-func (r *ListBucketAnalyticsConfigurationsRequest) Send() (*ListBucketAnalyticsConfigurationsOutput, error) {
+func (r ListBucketAnalyticsConfigurationsRequest) Send() (*ListBucketAnalyticsConfigurationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2055,7 +2055,7 @@ type ListBucketInventoryConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketInventoryConfigurations API request.
-func (r *ListBucketInventoryConfigurationsRequest) Send() (*ListBucketInventoryConfigurationsOutput, error) {
+func (r ListBucketInventoryConfigurationsRequest) Send() (*ListBucketInventoryConfigurationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2101,7 +2101,7 @@ type ListBucketMetricsConfigurationsRequest struct {
 }
 
 // Send marshals and sends the ListBucketMetricsConfigurations API request.
-func (r *ListBucketMetricsConfigurationsRequest) Send() (*ListBucketMetricsConfigurationsOutput, error) {
+func (r ListBucketMetricsConfigurationsRequest) Send() (*ListBucketMetricsConfigurationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2147,7 +2147,7 @@ type ListBucketsRequest struct {
 }
 
 // Send marshals and sends the ListBuckets API request.
-func (r *ListBucketsRequest) Send() (*ListBucketsOutput, error) {
+func (r ListBucketsRequest) Send() (*ListBucketsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2193,7 +2193,7 @@ type ListMultipartUploadsRequest struct {
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
-func (r *ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
+func (r ListMultipartUploadsRequest) Send() (*ListMultipartUploadsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2295,7 +2295,7 @@ type ListObjectVersionsRequest struct {
 }
 
 // Send marshals and sends the ListObjectVersions API request.
-func (r *ListObjectVersionsRequest) Send() (*ListObjectVersionsOutput, error) {
+func (r ListObjectVersionsRequest) Send() (*ListObjectVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2397,7 +2397,7 @@ type ListObjectsRequest struct {
 }
 
 // Send marshals and sends the ListObjects API request.
-func (r *ListObjectsRequest) Send() (*ListObjectsOutput, error) {
+func (r ListObjectsRequest) Send() (*ListObjectsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2501,7 +2501,7 @@ type ListObjectsV2Request struct {
 }
 
 // Send marshals and sends the ListObjectsV2 API request.
-func (r *ListObjectsV2Request) Send() (*ListObjectsV2Output, error) {
+func (r ListObjectsV2Request) Send() (*ListObjectsV2Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2606,7 +2606,7 @@ type ListPartsRequest struct {
 }
 
 // Send marshals and sends the ListParts API request.
-func (r *ListPartsRequest) Send() (*ListPartsOutput, error) {
+func (r ListPartsRequest) Send() (*ListPartsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2708,7 +2708,7 @@ type PutBucketAccelerateConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketAccelerateConfiguration API request.
-func (r *PutBucketAccelerateConfigurationRequest) Send() (*PutBucketAccelerateConfigurationOutput, error) {
+func (r PutBucketAccelerateConfigurationRequest) Send() (*PutBucketAccelerateConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2756,7 +2756,7 @@ type PutBucketAclRequest struct {
 }
 
 // Send marshals and sends the PutBucketAcl API request.
-func (r *PutBucketAclRequest) Send() (*PutBucketAclOutput, error) {
+func (r PutBucketAclRequest) Send() (*PutBucketAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2804,7 +2804,7 @@ type PutBucketAnalyticsConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketAnalyticsConfiguration API request.
-func (r *PutBucketAnalyticsConfigurationRequest) Send() (*PutBucketAnalyticsConfigurationOutput, error) {
+func (r PutBucketAnalyticsConfigurationRequest) Send() (*PutBucketAnalyticsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2853,7 +2853,7 @@ type PutBucketCorsRequest struct {
 }
 
 // Send marshals and sends the PutBucketCors API request.
-func (r *PutBucketCorsRequest) Send() (*PutBucketCorsOutput, error) {
+func (r PutBucketCorsRequest) Send() (*PutBucketCorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2901,7 +2901,7 @@ type PutBucketInventoryConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketInventoryConfiguration API request.
-func (r *PutBucketInventoryConfigurationRequest) Send() (*PutBucketInventoryConfigurationOutput, error) {
+func (r PutBucketInventoryConfigurationRequest) Send() (*PutBucketInventoryConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2950,7 +2950,7 @@ type PutBucketLifecycleRequest struct {
 }
 
 // Send marshals and sends the PutBucketLifecycle API request.
-func (r *PutBucketLifecycleRequest) Send() (*PutBucketLifecycleOutput, error) {
+func (r PutBucketLifecycleRequest) Send() (*PutBucketLifecycleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3001,7 +3001,7 @@ type PutBucketLifecycleConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketLifecycleConfiguration API request.
-func (r *PutBucketLifecycleConfigurationRequest) Send() (*PutBucketLifecycleConfigurationOutput, error) {
+func (r PutBucketLifecycleConfigurationRequest) Send() (*PutBucketLifecycleConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3050,7 +3050,7 @@ type PutBucketLoggingRequest struct {
 }
 
 // Send marshals and sends the PutBucketLogging API request.
-func (r *PutBucketLoggingRequest) Send() (*PutBucketLoggingOutput, error) {
+func (r PutBucketLoggingRequest) Send() (*PutBucketLoggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3100,7 +3100,7 @@ type PutBucketMetricsConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketMetricsConfiguration API request.
-func (r *PutBucketMetricsConfigurationRequest) Send() (*PutBucketMetricsConfigurationOutput, error) {
+func (r PutBucketMetricsConfigurationRequest) Send() (*PutBucketMetricsConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3149,7 +3149,7 @@ type PutBucketNotificationRequest struct {
 }
 
 // Send marshals and sends the PutBucketNotification API request.
-func (r *PutBucketNotificationRequest) Send() (*PutBucketNotificationOutput, error) {
+func (r PutBucketNotificationRequest) Send() (*PutBucketNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3200,7 +3200,7 @@ type PutBucketNotificationConfigurationRequest struct {
 }
 
 // Send marshals and sends the PutBucketNotificationConfiguration API request.
-func (r *PutBucketNotificationConfigurationRequest) Send() (*PutBucketNotificationConfigurationOutput, error) {
+func (r PutBucketNotificationConfigurationRequest) Send() (*PutBucketNotificationConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3248,7 +3248,7 @@ type PutBucketPolicyRequest struct {
 }
 
 // Send marshals and sends the PutBucketPolicy API request.
-func (r *PutBucketPolicyRequest) Send() (*PutBucketPolicyOutput, error) {
+func (r PutBucketPolicyRequest) Send() (*PutBucketPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3297,7 +3297,7 @@ type PutBucketReplicationRequest struct {
 }
 
 // Send marshals and sends the PutBucketReplication API request.
-func (r *PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error) {
+func (r PutBucketReplicationRequest) Send() (*PutBucketReplicationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3346,7 +3346,7 @@ type PutBucketRequestPaymentRequest struct {
 }
 
 // Send marshals and sends the PutBucketRequestPayment API request.
-func (r *PutBucketRequestPaymentRequest) Send() (*PutBucketRequestPaymentOutput, error) {
+func (r PutBucketRequestPaymentRequest) Send() (*PutBucketRequestPaymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3398,7 +3398,7 @@ type PutBucketTaggingRequest struct {
 }
 
 // Send marshals and sends the PutBucketTagging API request.
-func (r *PutBucketTaggingRequest) Send() (*PutBucketTaggingOutput, error) {
+func (r PutBucketTaggingRequest) Send() (*PutBucketTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3446,7 +3446,7 @@ type PutBucketVersioningRequest struct {
 }
 
 // Send marshals and sends the PutBucketVersioning API request.
-func (r *PutBucketVersioningRequest) Send() (*PutBucketVersioningOutput, error) {
+func (r PutBucketVersioningRequest) Send() (*PutBucketVersioningOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3495,7 +3495,7 @@ type PutBucketWebsiteRequest struct {
 }
 
 // Send marshals and sends the PutBucketWebsite API request.
-func (r *PutBucketWebsiteRequest) Send() (*PutBucketWebsiteOutput, error) {
+func (r PutBucketWebsiteRequest) Send() (*PutBucketWebsiteOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3543,7 +3543,7 @@ type PutObjectRequest struct {
 }
 
 // Send marshals and sends the PutObject API request.
-func (r *PutObjectRequest) Send() (*PutObjectOutput, error) {
+func (r PutObjectRequest) Send() (*PutObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3589,7 +3589,7 @@ type PutObjectAclRequest struct {
 }
 
 // Send marshals and sends the PutObjectAcl API request.
-func (r *PutObjectAclRequest) Send() (*PutObjectAclOutput, error) {
+func (r PutObjectAclRequest) Send() (*PutObjectAclOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3636,7 +3636,7 @@ type PutObjectTaggingRequest struct {
 }
 
 // Send marshals and sends the PutObjectTagging API request.
-func (r *PutObjectTaggingRequest) Send() (*PutObjectTaggingOutput, error) {
+func (r PutObjectTaggingRequest) Send() (*PutObjectTaggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3682,7 +3682,7 @@ type RestoreObjectRequest struct {
 }
 
 // Send marshals and sends the RestoreObject API request.
-func (r *RestoreObjectRequest) Send() (*RestoreObjectOutput, error) {
+func (r RestoreObjectRequest) Send() (*RestoreObjectOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3728,7 +3728,7 @@ type UploadPartRequest struct {
 }
 
 // Send marshals and sends the UploadPart API request.
-func (r *UploadPartRequest) Send() (*UploadPartOutput, error) {
+func (r UploadPartRequest) Send() (*UploadPartOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3780,7 +3780,7 @@ type UploadPartCopyRequest struct {
 }
 
 // Send marshals and sends the UploadPartCopy API request.
-func (r *UploadPartCopyRequest) Send() (*UploadPartCopyOutput, error) {
+func (r UploadPartCopyRequest) Send() (*UploadPartCopyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

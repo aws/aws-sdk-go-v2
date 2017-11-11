@@ -21,7 +21,7 @@ type BatchGetItemRequest struct {
 }
 
 // Send marshals and sends the BatchGetItem API request.
-func (r *BatchGetItemRequest) Send() (*BatchGetItemOutput, error) {
+func (r BatchGetItemRequest) Send() (*BatchGetItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -171,7 +171,7 @@ type BatchWriteItemRequest struct {
 }
 
 // Send marshals and sends the BatchWriteItem API request.
-func (r *BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
+func (r BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -285,7 +285,7 @@ type CreateTableRequest struct {
 }
 
 // Send marshals and sends the CreateTable API request.
-func (r *CreateTableRequest) Send() (*CreateTableOutput, error) {
+func (r CreateTableRequest) Send() (*CreateTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -345,7 +345,7 @@ type DeleteItemRequest struct {
 }
 
 // Send marshals and sends the DeleteItem API request.
-func (r *DeleteItemRequest) Send() (*DeleteItemOutput, error) {
+func (r DeleteItemRequest) Send() (*DeleteItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -404,7 +404,7 @@ type DeleteTableRequest struct {
 }
 
 // Send marshals and sends the DeleteTable API request.
-func (r *DeleteTableRequest) Send() (*DeleteTableOutput, error) {
+func (r DeleteTableRequest) Send() (*DeleteTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -467,7 +467,7 @@ type DescribeLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeLimits API request.
-func (r *DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
+func (r DescribeLimitsRequest) Send() (*DescribeLimitsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -569,7 +569,7 @@ type DescribeTableRequest struct {
 }
 
 // Send marshals and sends the DescribeTable API request.
-func (r *DescribeTableRequest) Send() (*DescribeTableOutput, error) {
+func (r DescribeTableRequest) Send() (*DescribeTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -623,7 +623,7 @@ type DescribeTimeToLiveRequest struct {
 }
 
 // Send marshals and sends the DescribeTimeToLive API request.
-func (r *DescribeTimeToLiveRequest) Send() (*DescribeTimeToLiveOutput, error) {
+func (r DescribeTimeToLiveRequest) Send() (*DescribeTimeToLiveOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -669,7 +669,7 @@ type GetItemRequest struct {
 }
 
 // Send marshals and sends the GetItem API request.
-func (r *GetItemRequest) Send() (*GetItemOutput, error) {
+func (r GetItemRequest) Send() (*GetItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -722,7 +722,7 @@ type ListTablesRequest struct {
 }
 
 // Send marshals and sends the ListTables API request.
-func (r *ListTablesRequest) Send() (*ListTablesOutput, error) {
+func (r ListTablesRequest) Send() (*ListTablesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -826,7 +826,7 @@ type ListTagsOfResourceRequest struct {
 }
 
 // Send marshals and sends the ListTagsOfResource API request.
-func (r *ListTagsOfResourceRequest) Send() (*ListTagsOfResourceOutput, error) {
+func (r ListTagsOfResourceRequest) Send() (*ListTagsOfResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -876,7 +876,7 @@ type PutItemRequest struct {
 }
 
 // Send marshals and sends the PutItem API request.
-func (r *PutItemRequest) Send() (*PutItemOutput, error) {
+func (r PutItemRequest) Send() (*PutItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -965,7 +965,7 @@ type QueryRequest struct {
 }
 
 // Send marshals and sends the Query API request.
-func (r *QueryRequest) Send() (*QueryOutput, error) {
+func (r QueryRequest) Send() (*QueryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1114,7 +1114,7 @@ type ScanRequest struct {
 }
 
 // Send marshals and sends the Scan API request.
-func (r *ScanRequest) Send() (*ScanOutput, error) {
+func (r ScanRequest) Send() (*ScanOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1243,7 +1243,7 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1297,7 +1297,7 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1349,7 +1349,7 @@ type UpdateItemRequest struct {
 }
 
 // Send marshals and sends the UpdateItem API request.
-func (r *UpdateItemRequest) Send() (*UpdateItemOutput, error) {
+func (r UpdateItemRequest) Send() (*UpdateItemOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1402,7 +1402,7 @@ type UpdateTableRequest struct {
 }
 
 // Send marshals and sends the UpdateTable API request.
-func (r *UpdateTableRequest) Send() (*UpdateTableOutput, error) {
+func (r UpdateTableRequest) Send() (*UpdateTableOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1465,7 +1465,7 @@ type UpdateTimeToLiveRequest struct {
 }
 
 // Send marshals and sends the UpdateTimeToLive API request.
-func (r *UpdateTimeToLiveRequest) Send() (*UpdateTimeToLiveOutput, error) {
+func (r UpdateTimeToLiveRequest) Send() (*UpdateTimeToLiveOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

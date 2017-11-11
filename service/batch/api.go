@@ -18,7 +18,7 @@ type CancelJobRequest struct {
 }
 
 // Send marshals and sends the CancelJob API request.
-func (r *CancelJobRequest) Send() (*CancelJobOutput, error) {
+func (r CancelJobRequest) Send() (*CancelJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -68,7 +68,7 @@ type CreateComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the CreateComputeEnvironment API request.
-func (r *CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput, error) {
+func (r CreateComputeEnvironmentRequest) Send() (*CreateComputeEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -135,7 +135,7 @@ type CreateJobQueueRequest struct {
 }
 
 // Send marshals and sends the CreateJobQueue API request.
-func (r *CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
+func (r CreateJobQueueRequest) Send() (*CreateJobQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -189,7 +189,7 @@ type DeleteComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the DeleteComputeEnvironment API request.
-func (r *DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput, error) {
+func (r DeleteComputeEnvironmentRequest) Send() (*DeleteComputeEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -239,7 +239,7 @@ type DeleteJobQueueRequest struct {
 }
 
 // Send marshals and sends the DeleteJobQueue API request.
-func (r *DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
+func (r DeleteJobQueueRequest) Send() (*DeleteJobQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -290,7 +290,7 @@ type DeregisterJobDefinitionRequest struct {
 }
 
 // Send marshals and sends the DeregisterJobDefinition API request.
-func (r *DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, error) {
+func (r DeregisterJobDefinitionRequest) Send() (*DeregisterJobDefinitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -336,7 +336,7 @@ type DescribeComputeEnvironmentsRequest struct {
 }
 
 // Send marshals and sends the DescribeComputeEnvironments API request.
-func (r *DescribeComputeEnvironmentsRequest) Send() (*DescribeComputeEnvironmentsOutput, error) {
+func (r DescribeComputeEnvironmentsRequest) Send() (*DescribeComputeEnvironmentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -386,7 +386,7 @@ type DescribeJobDefinitionsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobDefinitions API request.
-func (r *DescribeJobDefinitionsRequest) Send() (*DescribeJobDefinitionsOutput, error) {
+func (r DescribeJobDefinitionsRequest) Send() (*DescribeJobDefinitionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -433,7 +433,7 @@ type DescribeJobQueuesRequest struct {
 }
 
 // Send marshals and sends the DescribeJobQueues API request.
-func (r *DescribeJobQueuesRequest) Send() (*DescribeJobQueuesOutput, error) {
+func (r DescribeJobQueuesRequest) Send() (*DescribeJobQueuesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -479,7 +479,7 @@ type DescribeJobsRequest struct {
 }
 
 // Send marshals and sends the DescribeJobs API request.
-func (r *DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
+func (r DescribeJobsRequest) Send() (*DescribeJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -525,7 +525,7 @@ type ListJobsRequest struct {
 }
 
 // Send marshals and sends the ListJobs API request.
-func (r *ListJobsRequest) Send() (*ListJobsOutput, error) {
+func (r ListJobsRequest) Send() (*ListJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -573,7 +573,7 @@ type RegisterJobDefinitionRequest struct {
 }
 
 // Send marshals and sends the RegisterJobDefinition API request.
-func (r *RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, error) {
+func (r RegisterJobDefinitionRequest) Send() (*RegisterJobDefinitionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,7 +619,7 @@ type SubmitJobRequest struct {
 }
 
 // Send marshals and sends the SubmitJob API request.
-func (r *SubmitJobRequest) Send() (*SubmitJobOutput, error) {
+func (r SubmitJobRequest) Send() (*SubmitJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,7 +666,7 @@ type TerminateJobRequest struct {
 }
 
 // Send marshals and sends the TerminateJob API request.
-func (r *TerminateJobRequest) Send() (*TerminateJobOutput, error) {
+func (r TerminateJobRequest) Send() (*TerminateJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -714,7 +714,7 @@ type UpdateComputeEnvironmentRequest struct {
 }
 
 // Send marshals and sends the UpdateComputeEnvironment API request.
-func (r *UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput, error) {
+func (r UpdateComputeEnvironmentRequest) Send() (*UpdateComputeEnvironmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -760,7 +760,7 @@ type UpdateJobQueueRequest struct {
 }
 
 // Send marshals and sends the UpdateJobQueue API request.
-func (r *UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
+func (r UpdateJobQueueRequest) Send() (*UpdateJobQueueOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

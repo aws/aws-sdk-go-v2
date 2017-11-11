@@ -19,7 +19,7 @@ type DescribeStreamRequest struct {
 }
 
 // Send marshals and sends the DescribeStream API request.
-func (r *DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
+func (r DescribeStreamRequest) Send() (*DescribeStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ type GetRecordsRequest struct {
 }
 
 // Send marshals and sends the GetRecords API request.
-func (r *GetRecordsRequest) Send() (*GetRecordsOutput, error) {
+func (r GetRecordsRequest) Send() (*GetRecordsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ type GetShardIteratorRequest struct {
 }
 
 // Send marshals and sends the GetShardIterator API request.
-func (r *GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
+func (r GetShardIteratorRequest) Send() (*GetShardIteratorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ type ListStreamsRequest struct {
 }
 
 // Send marshals and sends the ListStreams API request.
-func (r *ListStreamsRequest) Send() (*ListStreamsOutput, error) {
+func (r ListStreamsRequest) Send() (*ListStreamsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

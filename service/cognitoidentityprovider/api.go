@@ -21,7 +21,7 @@ type AddCustomAttributesRequest struct {
 }
 
 // Send marshals and sends the AddCustomAttributes API request.
-func (r *AddCustomAttributesRequest) Send() (*AddCustomAttributesOutput, error) {
+func (r AddCustomAttributesRequest) Send() (*AddCustomAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ type AdminAddUserToGroupRequest struct {
 }
 
 // Send marshals and sends the AdminAddUserToGroup API request.
-func (r *AdminAddUserToGroupRequest) Send() (*AdminAddUserToGroupOutput, error) {
+func (r AdminAddUserToGroupRequest) Send() (*AdminAddUserToGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type AdminConfirmSignUpRequest struct {
 }
 
 // Send marshals and sends the AdminConfirmSignUp API request.
-func (r *AdminConfirmSignUpRequest) Send() (*AdminConfirmSignUpOutput, error) {
+func (r AdminConfirmSignUpRequest) Send() (*AdminConfirmSignUpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ type AdminCreateUserRequest struct {
 }
 
 // Send marshals and sends the AdminCreateUser API request.
-func (r *AdminCreateUserRequest) Send() (*AdminCreateUserOutput, error) {
+func (r AdminCreateUserRequest) Send() (*AdminCreateUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -218,7 +218,7 @@ type AdminDeleteUserRequest struct {
 }
 
 // Send marshals and sends the AdminDeleteUser API request.
-func (r *AdminDeleteUserRequest) Send() (*AdminDeleteUserOutput, error) {
+func (r AdminDeleteUserRequest) Send() (*AdminDeleteUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -268,7 +268,7 @@ type AdminDeleteUserAttributesRequest struct {
 }
 
 // Send marshals and sends the AdminDeleteUserAttributes API request.
-func (r *AdminDeleteUserAttributesRequest) Send() (*AdminDeleteUserAttributesOutput, error) {
+func (r AdminDeleteUserAttributesRequest) Send() (*AdminDeleteUserAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -317,7 +317,7 @@ type AdminDisableProviderForUserRequest struct {
 }
 
 // Send marshals and sends the AdminDisableProviderForUser API request.
-func (r *AdminDisableProviderForUserRequest) Send() (*AdminDisableProviderForUserOutput, error) {
+func (r AdminDisableProviderForUserRequest) Send() (*AdminDisableProviderForUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -392,7 +392,7 @@ type AdminDisableUserRequest struct {
 }
 
 // Send marshals and sends the AdminDisableUser API request.
-func (r *AdminDisableUserRequest) Send() (*AdminDisableUserOutput, error) {
+func (r AdminDisableUserRequest) Send() (*AdminDisableUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -440,7 +440,7 @@ type AdminEnableUserRequest struct {
 }
 
 // Send marshals and sends the AdminEnableUser API request.
-func (r *AdminEnableUserRequest) Send() (*AdminEnableUserOutput, error) {
+func (r AdminEnableUserRequest) Send() (*AdminEnableUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -488,7 +488,7 @@ type AdminForgetDeviceRequest struct {
 }
 
 // Send marshals and sends the AdminForgetDevice API request.
-func (r *AdminForgetDeviceRequest) Send() (*AdminForgetDeviceOutput, error) {
+func (r AdminForgetDeviceRequest) Send() (*AdminForgetDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -538,7 +538,7 @@ type AdminGetDeviceRequest struct {
 }
 
 // Send marshals and sends the AdminGetDevice API request.
-func (r *AdminGetDeviceRequest) Send() (*AdminGetDeviceOutput, error) {
+func (r AdminGetDeviceRequest) Send() (*AdminGetDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -586,7 +586,7 @@ type AdminGetUserRequest struct {
 }
 
 // Send marshals and sends the AdminGetUser API request.
-func (r *AdminGetUserRequest) Send() (*AdminGetUserOutput, error) {
+func (r AdminGetUserRequest) Send() (*AdminGetUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -635,7 +635,7 @@ type AdminInitiateAuthRequest struct {
 }
 
 // Send marshals and sends the AdminInitiateAuth API request.
-func (r *AdminInitiateAuthRequest) Send() (*AdminInitiateAuthOutput, error) {
+func (r AdminInitiateAuthRequest) Send() (*AdminInitiateAuthOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -683,7 +683,7 @@ type AdminLinkProviderForUserRequest struct {
 }
 
 // Send marshals and sends the AdminLinkProviderForUser API request.
-func (r *AdminLinkProviderForUserRequest) Send() (*AdminLinkProviderForUserOutput, error) {
+func (r AdminLinkProviderForUserRequest) Send() (*AdminLinkProviderForUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -747,7 +747,7 @@ type AdminListDevicesRequest struct {
 }
 
 // Send marshals and sends the AdminListDevices API request.
-func (r *AdminListDevicesRequest) Send() (*AdminListDevicesOutput, error) {
+func (r AdminListDevicesRequest) Send() (*AdminListDevicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -795,7 +795,7 @@ type AdminListGroupsForUserRequest struct {
 }
 
 // Send marshals and sends the AdminListGroupsForUser API request.
-func (r *AdminListGroupsForUserRequest) Send() (*AdminListGroupsForUserOutput, error) {
+func (r AdminListGroupsForUserRequest) Send() (*AdminListGroupsForUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -843,7 +843,7 @@ type AdminRemoveUserFromGroupRequest struct {
 }
 
 // Send marshals and sends the AdminRemoveUserFromGroup API request.
-func (r *AdminRemoveUserFromGroupRequest) Send() (*AdminRemoveUserFromGroupOutput, error) {
+func (r AdminRemoveUserFromGroupRequest) Send() (*AdminRemoveUserFromGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -893,7 +893,7 @@ type AdminResetUserPasswordRequest struct {
 }
 
 // Send marshals and sends the AdminResetUserPassword API request.
-func (r *AdminResetUserPasswordRequest) Send() (*AdminResetUserPasswordOutput, error) {
+func (r AdminResetUserPasswordRequest) Send() (*AdminResetUserPasswordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -952,7 +952,7 @@ type AdminRespondToAuthChallengeRequest struct {
 }
 
 // Send marshals and sends the AdminRespondToAuthChallenge API request.
-func (r *AdminRespondToAuthChallengeRequest) Send() (*AdminRespondToAuthChallengeOutput, error) {
+func (r AdminRespondToAuthChallengeRequest) Send() (*AdminRespondToAuthChallengeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1000,7 +1000,7 @@ type AdminSetUserSettingsRequest struct {
 }
 
 // Send marshals and sends the AdminSetUserSettings API request.
-func (r *AdminSetUserSettingsRequest) Send() (*AdminSetUserSettingsOutput, error) {
+func (r AdminSetUserSettingsRequest) Send() (*AdminSetUserSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1048,7 +1048,7 @@ type AdminUpdateDeviceStatusRequest struct {
 }
 
 // Send marshals and sends the AdminUpdateDeviceStatus API request.
-func (r *AdminUpdateDeviceStatusRequest) Send() (*AdminUpdateDeviceStatusOutput, error) {
+func (r AdminUpdateDeviceStatusRequest) Send() (*AdminUpdateDeviceStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1096,7 +1096,7 @@ type AdminUpdateUserAttributesRequest struct {
 }
 
 // Send marshals and sends the AdminUpdateUserAttributes API request.
-func (r *AdminUpdateUserAttributesRequest) Send() (*AdminUpdateUserAttributesOutput, error) {
+func (r AdminUpdateUserAttributesRequest) Send() (*AdminUpdateUserAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1151,7 +1151,7 @@ type AdminUserGlobalSignOutRequest struct {
 }
 
 // Send marshals and sends the AdminUserGlobalSignOut API request.
-func (r *AdminUserGlobalSignOutRequest) Send() (*AdminUserGlobalSignOutOutput, error) {
+func (r AdminUserGlobalSignOutRequest) Send() (*AdminUserGlobalSignOutOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1199,7 +1199,7 @@ type ChangePasswordRequest struct {
 }
 
 // Send marshals and sends the ChangePassword API request.
-func (r *ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
+func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1246,7 +1246,7 @@ type ConfirmDeviceRequest struct {
 }
 
 // Send marshals and sends the ConfirmDevice API request.
-func (r *ConfirmDeviceRequest) Send() (*ConfirmDeviceOutput, error) {
+func (r ConfirmDeviceRequest) Send() (*ConfirmDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1293,7 +1293,7 @@ type ConfirmForgotPasswordRequest struct {
 }
 
 // Send marshals and sends the ConfirmForgotPassword API request.
-func (r *ConfirmForgotPasswordRequest) Send() (*ConfirmForgotPasswordOutput, error) {
+func (r ConfirmForgotPasswordRequest) Send() (*ConfirmForgotPasswordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1340,7 +1340,7 @@ type ConfirmSignUpRequest struct {
 }
 
 // Send marshals and sends the ConfirmSignUp API request.
-func (r *ConfirmSignUpRequest) Send() (*ConfirmSignUpOutput, error) {
+func (r ConfirmSignUpRequest) Send() (*ConfirmSignUpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1388,7 +1388,7 @@ type CreateGroupRequest struct {
 }
 
 // Send marshals and sends the CreateGroup API request.
-func (r *CreateGroupRequest) Send() (*CreateGroupOutput, error) {
+func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1436,7 +1436,7 @@ type CreateIdentityProviderRequest struct {
 }
 
 // Send marshals and sends the CreateIdentityProvider API request.
-func (r *CreateIdentityProviderRequest) Send() (*CreateIdentityProviderOutput, error) {
+func (r CreateIdentityProviderRequest) Send() (*CreateIdentityProviderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1482,7 +1482,7 @@ type CreateResourceServerRequest struct {
 }
 
 // Send marshals and sends the CreateResourceServer API request.
-func (r *CreateResourceServerRequest) Send() (*CreateResourceServerOutput, error) {
+func (r CreateResourceServerRequest) Send() (*CreateResourceServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1528,7 +1528,7 @@ type CreateUserImportJobRequest struct {
 }
 
 // Send marshals and sends the CreateUserImportJob API request.
-func (r *CreateUserImportJobRequest) Send() (*CreateUserImportJobOutput, error) {
+func (r CreateUserImportJobRequest) Send() (*CreateUserImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1574,7 +1574,7 @@ type CreateUserPoolRequest struct {
 }
 
 // Send marshals and sends the CreateUserPool API request.
-func (r *CreateUserPoolRequest) Send() (*CreateUserPoolOutput, error) {
+func (r CreateUserPoolRequest) Send() (*CreateUserPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1621,7 +1621,7 @@ type CreateUserPoolClientRequest struct {
 }
 
 // Send marshals and sends the CreateUserPoolClient API request.
-func (r *CreateUserPoolClientRequest) Send() (*CreateUserPoolClientOutput, error) {
+func (r CreateUserPoolClientRequest) Send() (*CreateUserPoolClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1667,7 +1667,7 @@ type CreateUserPoolDomainRequest struct {
 }
 
 // Send marshals and sends the CreateUserPoolDomain API request.
-func (r *CreateUserPoolDomainRequest) Send() (*CreateUserPoolDomainOutput, error) {
+func (r CreateUserPoolDomainRequest) Send() (*CreateUserPoolDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1713,7 +1713,7 @@ type DeleteGroupRequest struct {
 }
 
 // Send marshals and sends the DeleteGroup API request.
-func (r *DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
+func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1763,7 +1763,7 @@ type DeleteIdentityProviderRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentityProvider API request.
-func (r *DeleteIdentityProviderRequest) Send() (*DeleteIdentityProviderOutput, error) {
+func (r DeleteIdentityProviderRequest) Send() (*DeleteIdentityProviderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1811,7 +1811,7 @@ type DeleteResourceServerRequest struct {
 }
 
 // Send marshals and sends the DeleteResourceServer API request.
-func (r *DeleteResourceServerRequest) Send() (*DeleteResourceServerOutput, error) {
+func (r DeleteResourceServerRequest) Send() (*DeleteResourceServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1859,7 +1859,7 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r *DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1908,7 +1908,7 @@ type DeleteUserAttributesRequest struct {
 }
 
 // Send marshals and sends the DeleteUserAttributes API request.
-func (r *DeleteUserAttributesRequest) Send() (*DeleteUserAttributesOutput, error) {
+func (r DeleteUserAttributesRequest) Send() (*DeleteUserAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1955,7 +1955,7 @@ type DeleteUserPoolRequest struct {
 }
 
 // Send marshals and sends the DeleteUserPool API request.
-func (r *DeleteUserPoolRequest) Send() (*DeleteUserPoolOutput, error) {
+func (r DeleteUserPoolRequest) Send() (*DeleteUserPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2003,7 +2003,7 @@ type DeleteUserPoolClientRequest struct {
 }
 
 // Send marshals and sends the DeleteUserPoolClient API request.
-func (r *DeleteUserPoolClientRequest) Send() (*DeleteUserPoolClientOutput, error) {
+func (r DeleteUserPoolClientRequest) Send() (*DeleteUserPoolClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2051,7 +2051,7 @@ type DeleteUserPoolDomainRequest struct {
 }
 
 // Send marshals and sends the DeleteUserPoolDomain API request.
-func (r *DeleteUserPoolDomainRequest) Send() (*DeleteUserPoolDomainOutput, error) {
+func (r DeleteUserPoolDomainRequest) Send() (*DeleteUserPoolDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2097,7 +2097,7 @@ type DescribeIdentityProviderRequest struct {
 }
 
 // Send marshals and sends the DescribeIdentityProvider API request.
-func (r *DescribeIdentityProviderRequest) Send() (*DescribeIdentityProviderOutput, error) {
+func (r DescribeIdentityProviderRequest) Send() (*DescribeIdentityProviderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2143,7 +2143,7 @@ type DescribeResourceServerRequest struct {
 }
 
 // Send marshals and sends the DescribeResourceServer API request.
-func (r *DescribeResourceServerRequest) Send() (*DescribeResourceServerOutput, error) {
+func (r DescribeResourceServerRequest) Send() (*DescribeResourceServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2189,7 +2189,7 @@ type DescribeUserImportJobRequest struct {
 }
 
 // Send marshals and sends the DescribeUserImportJob API request.
-func (r *DescribeUserImportJobRequest) Send() (*DescribeUserImportJobOutput, error) {
+func (r DescribeUserImportJobRequest) Send() (*DescribeUserImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2235,7 +2235,7 @@ type DescribeUserPoolRequest struct {
 }
 
 // Send marshals and sends the DescribeUserPool API request.
-func (r *DescribeUserPoolRequest) Send() (*DescribeUserPoolOutput, error) {
+func (r DescribeUserPoolRequest) Send() (*DescribeUserPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2282,7 +2282,7 @@ type DescribeUserPoolClientRequest struct {
 }
 
 // Send marshals and sends the DescribeUserPoolClient API request.
-func (r *DescribeUserPoolClientRequest) Send() (*DescribeUserPoolClientOutput, error) {
+func (r DescribeUserPoolClientRequest) Send() (*DescribeUserPoolClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2329,7 +2329,7 @@ type DescribeUserPoolDomainRequest struct {
 }
 
 // Send marshals and sends the DescribeUserPoolDomain API request.
-func (r *DescribeUserPoolDomainRequest) Send() (*DescribeUserPoolDomainOutput, error) {
+func (r DescribeUserPoolDomainRequest) Send() (*DescribeUserPoolDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2375,7 +2375,7 @@ type ForgetDeviceRequest struct {
 }
 
 // Send marshals and sends the ForgetDevice API request.
-func (r *ForgetDeviceRequest) Send() (*ForgetDeviceOutput, error) {
+func (r ForgetDeviceRequest) Send() (*ForgetDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2423,7 +2423,7 @@ type ForgotPasswordRequest struct {
 }
 
 // Send marshals and sends the ForgotPassword API request.
-func (r *ForgotPasswordRequest) Send() (*ForgotPasswordOutput, error) {
+func (r ForgotPasswordRequest) Send() (*ForgotPasswordOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2477,7 +2477,7 @@ type GetCSVHeaderRequest struct {
 }
 
 // Send marshals and sends the GetCSVHeader API request.
-func (r *GetCSVHeaderRequest) Send() (*GetCSVHeaderOutput, error) {
+func (r GetCSVHeaderRequest) Send() (*GetCSVHeaderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2524,7 +2524,7 @@ type GetDeviceRequest struct {
 }
 
 // Send marshals and sends the GetDevice API request.
-func (r *GetDeviceRequest) Send() (*GetDeviceOutput, error) {
+func (r GetDeviceRequest) Send() (*GetDeviceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2570,7 +2570,7 @@ type GetGroupRequest struct {
 }
 
 // Send marshals and sends the GetGroup API request.
-func (r *GetGroupRequest) Send() (*GetGroupOutput, error) {
+func (r GetGroupRequest) Send() (*GetGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2618,7 +2618,7 @@ type GetIdentityProviderByIdentifierRequest struct {
 }
 
 // Send marshals and sends the GetIdentityProviderByIdentifier API request.
-func (r *GetIdentityProviderByIdentifierRequest) Send() (*GetIdentityProviderByIdentifierOutput, error) {
+func (r GetIdentityProviderByIdentifierRequest) Send() (*GetIdentityProviderByIdentifierOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2664,7 +2664,7 @@ type GetUICustomizationRequest struct {
 }
 
 // Send marshals and sends the GetUICustomization API request.
-func (r *GetUICustomizationRequest) Send() (*GetUICustomizationOutput, error) {
+func (r GetUICustomizationRequest) Send() (*GetUICustomizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2713,7 +2713,7 @@ type GetUserRequest struct {
 }
 
 // Send marshals and sends the GetUser API request.
-func (r *GetUserRequest) Send() (*GetUserOutput, error) {
+func (r GetUserRequest) Send() (*GetUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2760,7 +2760,7 @@ type GetUserAttributeVerificationCodeRequest struct {
 }
 
 // Send marshals and sends the GetUserAttributeVerificationCode API request.
-func (r *GetUserAttributeVerificationCodeRequest) Send() (*GetUserAttributeVerificationCodeOutput, error) {
+func (r GetUserAttributeVerificationCodeRequest) Send() (*GetUserAttributeVerificationCodeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2807,7 +2807,7 @@ type GlobalSignOutRequest struct {
 }
 
 // Send marshals and sends the GlobalSignOut API request.
-func (r *GlobalSignOutRequest) Send() (*GlobalSignOutOutput, error) {
+func (r GlobalSignOutRequest) Send() (*GlobalSignOutOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2853,7 +2853,7 @@ type InitiateAuthRequest struct {
 }
 
 // Send marshals and sends the InitiateAuth API request.
-func (r *InitiateAuthRequest) Send() (*InitiateAuthOutput, error) {
+func (r InitiateAuthRequest) Send() (*InitiateAuthOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2899,7 +2899,7 @@ type ListDevicesRequest struct {
 }
 
 // Send marshals and sends the ListDevices API request.
-func (r *ListDevicesRequest) Send() (*ListDevicesOutput, error) {
+func (r ListDevicesRequest) Send() (*ListDevicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2945,7 +2945,7 @@ type ListGroupsRequest struct {
 }
 
 // Send marshals and sends the ListGroups API request.
-func (r *ListGroupsRequest) Send() (*ListGroupsOutput, error) {
+func (r ListGroupsRequest) Send() (*ListGroupsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2993,7 +2993,7 @@ type ListIdentityProvidersRequest struct {
 }
 
 // Send marshals and sends the ListIdentityProviders API request.
-func (r *ListIdentityProvidersRequest) Send() (*ListIdentityProvidersOutput, error) {
+func (r ListIdentityProvidersRequest) Send() (*ListIdentityProvidersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3039,7 +3039,7 @@ type ListResourceServersRequest struct {
 }
 
 // Send marshals and sends the ListResourceServers API request.
-func (r *ListResourceServersRequest) Send() (*ListResourceServersOutput, error) {
+func (r ListResourceServersRequest) Send() (*ListResourceServersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3085,7 +3085,7 @@ type ListUserImportJobsRequest struct {
 }
 
 // Send marshals and sends the ListUserImportJobs API request.
-func (r *ListUserImportJobsRequest) Send() (*ListUserImportJobsOutput, error) {
+func (r ListUserImportJobsRequest) Send() (*ListUserImportJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3131,7 +3131,7 @@ type ListUserPoolClientsRequest struct {
 }
 
 // Send marshals and sends the ListUserPoolClients API request.
-func (r *ListUserPoolClientsRequest) Send() (*ListUserPoolClientsOutput, error) {
+func (r ListUserPoolClientsRequest) Send() (*ListUserPoolClientsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3177,7 +3177,7 @@ type ListUserPoolsRequest struct {
 }
 
 // Send marshals and sends the ListUserPools API request.
-func (r *ListUserPoolsRequest) Send() (*ListUserPoolsOutput, error) {
+func (r ListUserPoolsRequest) Send() (*ListUserPoolsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3223,7 +3223,7 @@ type ListUsersRequest struct {
 }
 
 // Send marshals and sends the ListUsers API request.
-func (r *ListUsersRequest) Send() (*ListUsersOutput, error) {
+func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3269,7 +3269,7 @@ type ListUsersInGroupRequest struct {
 }
 
 // Send marshals and sends the ListUsersInGroup API request.
-func (r *ListUsersInGroupRequest) Send() (*ListUsersInGroupOutput, error) {
+func (r ListUsersInGroupRequest) Send() (*ListUsersInGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3317,7 +3317,7 @@ type ResendConfirmationCodeRequest struct {
 }
 
 // Send marshals and sends the ResendConfirmationCode API request.
-func (r *ResendConfirmationCodeRequest) Send() (*ResendConfirmationCodeOutput, error) {
+func (r ResendConfirmationCodeRequest) Send() (*ResendConfirmationCodeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3365,7 +3365,7 @@ type RespondToAuthChallengeRequest struct {
 }
 
 // Send marshals and sends the RespondToAuthChallenge API request.
-func (r *RespondToAuthChallengeRequest) Send() (*RespondToAuthChallengeOutput, error) {
+func (r RespondToAuthChallengeRequest) Send() (*RespondToAuthChallengeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3411,7 +3411,7 @@ type SetUICustomizationRequest struct {
 }
 
 // Send marshals and sends the SetUICustomization API request.
-func (r *SetUICustomizationRequest) Send() (*SetUICustomizationOutput, error) {
+func (r SetUICustomizationRequest) Send() (*SetUICustomizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3468,7 +3468,7 @@ type SetUserSettingsRequest struct {
 }
 
 // Send marshals and sends the SetUserSettings API request.
-func (r *SetUserSettingsRequest) Send() (*SetUserSettingsOutput, error) {
+func (r SetUserSettingsRequest) Send() (*SetUserSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3517,7 +3517,7 @@ type SignUpRequest struct {
 }
 
 // Send marshals and sends the SignUp API request.
-func (r *SignUpRequest) Send() (*SignUpOutput, error) {
+func (r SignUpRequest) Send() (*SignUpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3565,7 +3565,7 @@ type StartUserImportJobRequest struct {
 }
 
 // Send marshals and sends the StartUserImportJob API request.
-func (r *StartUserImportJobRequest) Send() (*StartUserImportJobOutput, error) {
+func (r StartUserImportJobRequest) Send() (*StartUserImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3611,7 +3611,7 @@ type StopUserImportJobRequest struct {
 }
 
 // Send marshals and sends the StopUserImportJob API request.
-func (r *StopUserImportJobRequest) Send() (*StopUserImportJobOutput, error) {
+func (r StopUserImportJobRequest) Send() (*StopUserImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3657,7 +3657,7 @@ type UpdateDeviceStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateDeviceStatus API request.
-func (r *UpdateDeviceStatusRequest) Send() (*UpdateDeviceStatusOutput, error) {
+func (r UpdateDeviceStatusRequest) Send() (*UpdateDeviceStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3703,7 +3703,7 @@ type UpdateGroupRequest struct {
 }
 
 // Send marshals and sends the UpdateGroup API request.
-func (r *UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
+func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3751,7 +3751,7 @@ type UpdateIdentityProviderRequest struct {
 }
 
 // Send marshals and sends the UpdateIdentityProvider API request.
-func (r *UpdateIdentityProviderRequest) Send() (*UpdateIdentityProviderOutput, error) {
+func (r UpdateIdentityProviderRequest) Send() (*UpdateIdentityProviderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3797,7 +3797,7 @@ type UpdateResourceServerRequest struct {
 }
 
 // Send marshals and sends the UpdateResourceServer API request.
-func (r *UpdateResourceServerRequest) Send() (*UpdateResourceServerOutput, error) {
+func (r UpdateResourceServerRequest) Send() (*UpdateResourceServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3843,7 +3843,7 @@ type UpdateUserAttributesRequest struct {
 }
 
 // Send marshals and sends the UpdateUserAttributes API request.
-func (r *UpdateUserAttributesRequest) Send() (*UpdateUserAttributesOutput, error) {
+func (r UpdateUserAttributesRequest) Send() (*UpdateUserAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3890,7 +3890,7 @@ type UpdateUserPoolRequest struct {
 }
 
 // Send marshals and sends the UpdateUserPool API request.
-func (r *UpdateUserPoolRequest) Send() (*UpdateUserPoolOutput, error) {
+func (r UpdateUserPoolRequest) Send() (*UpdateUserPoolOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3936,7 +3936,7 @@ type UpdateUserPoolClientRequest struct {
 }
 
 // Send marshals and sends the UpdateUserPoolClient API request.
-func (r *UpdateUserPoolClientRequest) Send() (*UpdateUserPoolClientOutput, error) {
+func (r UpdateUserPoolClientRequest) Send() (*UpdateUserPoolClientOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3983,7 +3983,7 @@ type VerifyUserAttributeRequest struct {
 }
 
 // Send marshals and sends the VerifyUserAttribute API request.
-func (r *VerifyUserAttributeRequest) Send() (*VerifyUserAttributeOutput, error) {
+func (r VerifyUserAttributeRequest) Send() (*VerifyUserAttributeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

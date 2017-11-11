@@ -21,7 +21,7 @@ type AbortDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the AbortDocumentVersionUpload API request.
-func (r *AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOutput, error) {
+func (r AbortDocumentVersionUploadRequest) Send() (*AbortDocumentVersionUploadOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ type ActivateUserRequest struct {
 }
 
 // Send marshals and sends the ActivateUser API request.
-func (r *ActivateUserRequest) Send() (*ActivateUserOutput, error) {
+func (r ActivateUserRequest) Send() (*ActivateUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type AddResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the AddResourcePermissions API request.
-func (r *AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, error) {
+func (r AddResourcePermissionsRequest) Send() (*AddResourcePermissionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type CreateCommentRequest struct {
 }
 
 // Send marshals and sends the CreateComment API request.
-func (r *CreateCommentRequest) Send() (*CreateCommentOutput, error) {
+func (r CreateCommentRequest) Send() (*CreateCommentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -210,7 +210,7 @@ type CreateCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the CreateCustomMetadata API request.
-func (r *CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error) {
+func (r CreateCustomMetadataRequest) Send() (*CreateCustomMetadataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -257,7 +257,7 @@ type CreateFolderRequest struct {
 }
 
 // Send marshals and sends the CreateFolder API request.
-func (r *CreateFolderRequest) Send() (*CreateFolderOutput, error) {
+func (r CreateFolderRequest) Send() (*CreateFolderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -303,7 +303,7 @@ type CreateLabelsRequest struct {
 }
 
 // Send marshals and sends the CreateLabels API request.
-func (r *CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
+func (r CreateLabelsRequest) Send() (*CreateLabelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -349,7 +349,7 @@ type CreateNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateNotificationSubscription API request.
-func (r *CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscriptionOutput, error) {
+func (r CreateNotificationSubscriptionRequest) Send() (*CreateNotificationSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -399,7 +399,7 @@ type CreateUserRequest struct {
 }
 
 // Send marshals and sends the CreateUser API request.
-func (r *CreateUserRequest) Send() (*CreateUserOutput, error) {
+func (r CreateUserRequest) Send() (*CreateUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -446,7 +446,7 @@ type DeactivateUserRequest struct {
 }
 
 // Send marshals and sends the DeactivateUser API request.
-func (r *DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
+func (r DeactivateUserRequest) Send() (*DeactivateUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -495,7 +495,7 @@ type DeleteCommentRequest struct {
 }
 
 // Send marshals and sends the DeleteComment API request.
-func (r *DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
+func (r DeleteCommentRequest) Send() (*DeleteCommentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -543,7 +543,7 @@ type DeleteCustomMetadataRequest struct {
 }
 
 // Send marshals and sends the DeleteCustomMetadata API request.
-func (r *DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error) {
+func (r DeleteCustomMetadataRequest) Send() (*DeleteCustomMetadataOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -589,7 +589,7 @@ type DeleteDocumentRequest struct {
 }
 
 // Send marshals and sends the DeleteDocument API request.
-func (r *DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
+func (r DeleteDocumentRequest) Send() (*DeleteDocumentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -637,7 +637,7 @@ type DeleteFolderRequest struct {
 }
 
 // Send marshals and sends the DeleteFolder API request.
-func (r *DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
+func (r DeleteFolderRequest) Send() (*DeleteFolderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -685,7 +685,7 @@ type DeleteFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DeleteFolderContents API request.
-func (r *DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error) {
+func (r DeleteFolderContentsRequest) Send() (*DeleteFolderContentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -733,7 +733,7 @@ type DeleteLabelsRequest struct {
 }
 
 // Send marshals and sends the DeleteLabels API request.
-func (r *DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
+func (r DeleteLabelsRequest) Send() (*DeleteLabelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,7 +779,7 @@ type DeleteNotificationSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteNotificationSubscription API request.
-func (r *DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscriptionOutput, error) {
+func (r DeleteNotificationSubscriptionRequest) Send() (*DeleteNotificationSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -827,7 +827,7 @@ type DeleteUserRequest struct {
 }
 
 // Send marshals and sends the DeleteUser API request.
-func (r *DeleteUserRequest) Send() (*DeleteUserOutput, error) {
+func (r DeleteUserRequest) Send() (*DeleteUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -875,7 +875,7 @@ type DescribeActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeActivities API request.
-func (r *DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
+func (r DescribeActivitiesRequest) Send() (*DescribeActivitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -921,7 +921,7 @@ type DescribeCommentsRequest struct {
 }
 
 // Send marshals and sends the DescribeComments API request.
-func (r *DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
+func (r DescribeCommentsRequest) Send() (*DescribeCommentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -967,7 +967,7 @@ type DescribeDocumentVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeDocumentVersions API request.
-func (r *DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput, error) {
+func (r DescribeDocumentVersionsRequest) Send() (*DescribeDocumentVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1071,7 +1071,7 @@ type DescribeFolderContentsRequest struct {
 }
 
 // Send marshals and sends the DescribeFolderContents API request.
-func (r *DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, error) {
+func (r DescribeFolderContentsRequest) Send() (*DescribeFolderContentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1179,7 +1179,7 @@ type DescribeNotificationSubscriptionsRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationSubscriptions API request.
-func (r *DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationSubscriptionsOutput, error) {
+func (r DescribeNotificationSubscriptionsRequest) Send() (*DescribeNotificationSubscriptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1225,7 +1225,7 @@ type DescribeResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the DescribeResourcePermissions API request.
-func (r *DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissionsOutput, error) {
+func (r DescribeResourcePermissionsRequest) Send() (*DescribeResourcePermissionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1271,7 +1271,7 @@ type DescribeRootFoldersRequest struct {
 }
 
 // Send marshals and sends the DescribeRootFolders API request.
-func (r *DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
+func (r DescribeRootFoldersRequest) Send() (*DescribeRootFoldersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1320,7 +1320,7 @@ type DescribeUsersRequest struct {
 }
 
 // Send marshals and sends the DescribeUsers API request.
-func (r *DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
+func (r DescribeUsersRequest) Send() (*DescribeUsersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1427,7 +1427,7 @@ type GetCurrentUserRequest struct {
 }
 
 // Send marshals and sends the GetCurrentUser API request.
-func (r *GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
+func (r GetCurrentUserRequest) Send() (*GetCurrentUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1474,7 +1474,7 @@ type GetDocumentRequest struct {
 }
 
 // Send marshals and sends the GetDocument API request.
-func (r *GetDocumentRequest) Send() (*GetDocumentOutput, error) {
+func (r GetDocumentRequest) Send() (*GetDocumentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1520,7 +1520,7 @@ type GetDocumentPathRequest struct {
 }
 
 // Send marshals and sends the GetDocumentPath API request.
-func (r *GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
+func (r GetDocumentPathRequest) Send() (*GetDocumentPathOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1572,7 +1572,7 @@ type GetDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the GetDocumentVersion API request.
-func (r *GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
+func (r GetDocumentVersionRequest) Send() (*GetDocumentVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1618,7 +1618,7 @@ type GetFolderRequest struct {
 }
 
 // Send marshals and sends the GetFolder API request.
-func (r *GetFolderRequest) Send() (*GetFolderOutput, error) {
+func (r GetFolderRequest) Send() (*GetFolderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1664,7 +1664,7 @@ type GetFolderPathRequest struct {
 }
 
 // Send marshals and sends the GetFolderPath API request.
-func (r *GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
+func (r GetFolderPathRequest) Send() (*GetFolderPathOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1716,7 +1716,7 @@ type InitiateDocumentVersionUploadRequest struct {
 }
 
 // Send marshals and sends the InitiateDocumentVersionUpload API request.
-func (r *InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUploadOutput, error) {
+func (r InitiateDocumentVersionUploadRequest) Send() (*InitiateDocumentVersionUploadOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1769,7 +1769,7 @@ type RemoveAllResourcePermissionsRequest struct {
 }
 
 // Send marshals and sends the RemoveAllResourcePermissions API request.
-func (r *RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissionsOutput, error) {
+func (r RemoveAllResourcePermissionsRequest) Send() (*RemoveAllResourcePermissionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1817,7 +1817,7 @@ type RemoveResourcePermissionRequest struct {
 }
 
 // Send marshals and sends the RemoveResourcePermission API request.
-func (r *RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput, error) {
+func (r RemoveResourcePermissionRequest) Send() (*RemoveResourcePermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1865,7 +1865,7 @@ type UpdateDocumentRequest struct {
 }
 
 // Send marshals and sends the UpdateDocument API request.
-func (r *UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
+func (r UpdateDocumentRequest) Send() (*UpdateDocumentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1914,7 +1914,7 @@ type UpdateDocumentVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentVersion API request.
-func (r *UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, error) {
+func (r UpdateDocumentVersionRequest) Send() (*UpdateDocumentVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1966,7 +1966,7 @@ type UpdateFolderRequest struct {
 }
 
 // Send marshals and sends the UpdateFolder API request.
-func (r *UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
+func (r UpdateFolderRequest) Send() (*UpdateFolderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2015,7 +2015,7 @@ type UpdateUserRequest struct {
 }
 
 // Send marshals and sends the UpdateUser API request.
-func (r *UpdateUserRequest) Send() (*UpdateUserOutput, error) {
+func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

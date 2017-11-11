@@ -19,7 +19,7 @@ type CreateByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateByteMatchSet API request.
-func (r *CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
+func (r CreateByteMatchSetRequest) Send() (*CreateByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ type CreateIPSetRequest struct {
 }
 
 // Send marshals and sends the CreateIPSet API request.
-func (r *CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
+func (r CreateIPSetRequest) Send() (*CreateIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ type CreateRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the CreateRateBasedRule API request.
-func (r *CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
+func (r CreateRateBasedRuleRequest) Send() (*CreateRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -259,7 +259,7 @@ type CreateRuleRequest struct {
 }
 
 // Send marshals and sends the CreateRule API request.
-func (r *CreateRuleRequest) Send() (*CreateRuleOutput, error) {
+func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -340,7 +340,7 @@ type CreateSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
-func (r *CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, error) {
+func (r CreateSizeConstraintSetRequest) Send() (*CreateSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -408,7 +408,7 @@ type CreateSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateSqlInjectionMatchSet API request.
-func (r *CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOutput, error) {
+func (r CreateSqlInjectionMatchSetRequest) Send() (*CreateSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -472,7 +472,7 @@ type CreateWebACLRequest struct {
 }
 
 // Send marshals and sends the CreateWebACL API request.
-func (r *CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
+func (r CreateWebACLRequest) Send() (*CreateWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -548,7 +548,7 @@ type CreateXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the CreateXssMatchSet API request.
-func (r *CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
+func (r CreateXssMatchSetRequest) Send() (*CreateXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -613,7 +613,7 @@ type DeleteByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteByteMatchSet API request.
-func (r *DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
+func (r DeleteByteMatchSetRequest) Send() (*DeleteByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -673,7 +673,7 @@ type DeleteIPSetRequest struct {
 }
 
 // Send marshals and sends the DeleteIPSet API request.
-func (r *DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
+func (r DeleteIPSetRequest) Send() (*DeleteIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -732,7 +732,7 @@ type DeleteRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteRateBasedRule API request.
-func (r *DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
+func (r DeleteRateBasedRuleRequest) Send() (*DeleteRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,7 +793,7 @@ type DeleteRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteRule API request.
-func (r *DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
+func (r DeleteRuleRequest) Send() (*DeleteRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -852,7 +852,7 @@ type DeleteSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
-func (r *DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, error) {
+func (r DeleteSizeConstraintSetRequest) Send() (*DeleteSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -912,7 +912,7 @@ type DeleteSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
-func (r *DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOutput, error) {
+func (r DeleteSqlInjectionMatchSetRequest) Send() (*DeleteSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -973,7 +973,7 @@ type DeleteWebACLRequest struct {
 }
 
 // Send marshals and sends the DeleteWebACL API request.
-func (r *DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
+func (r DeleteWebACLRequest) Send() (*DeleteWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1029,7 +1029,7 @@ type DeleteXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the DeleteXssMatchSet API request.
-func (r *DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
+func (r DeleteXssMatchSetRequest) Send() (*DeleteXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1089,7 +1089,7 @@ type GetByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetByteMatchSet API request.
-func (r *GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
+func (r GetByteMatchSetRequest) Send() (*GetByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1135,7 +1135,7 @@ type GetChangeTokenRequest struct {
 }
 
 // Send marshals and sends the GetChangeToken API request.
-func (r *GetChangeTokenRequest) Send() (*GetChangeTokenOutput, error) {
+func (r GetChangeTokenRequest) Send() (*GetChangeTokenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1195,7 +1195,7 @@ type GetChangeTokenStatusRequest struct {
 }
 
 // Send marshals and sends the GetChangeTokenStatus API request.
-func (r *GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error) {
+func (r GetChangeTokenStatusRequest) Send() (*GetChangeTokenStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1251,7 +1251,7 @@ type GetIPSetRequest struct {
 }
 
 // Send marshals and sends the GetIPSet API request.
-func (r *GetIPSetRequest) Send() (*GetIPSetOutput, error) {
+func (r GetIPSetRequest) Send() (*GetIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1297,7 +1297,7 @@ type GetRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the GetRateBasedRule API request.
-func (r *GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
+func (r GetRateBasedRuleRequest) Send() (*GetRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1344,7 +1344,7 @@ type GetRateBasedRuleManagedKeysRequest struct {
 }
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
-func (r *GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeysOutput, error) {
+func (r GetRateBasedRuleManagedKeysRequest) Send() (*GetRateBasedRuleManagedKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1393,7 +1393,7 @@ type GetRuleRequest struct {
 }
 
 // Send marshals and sends the GetRule API request.
-func (r *GetRuleRequest) Send() (*GetRuleOutput, error) {
+func (r GetRuleRequest) Send() (*GetRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1440,7 +1440,7 @@ type GetSampledRequestsRequest struct {
 }
 
 // Send marshals and sends the GetSampledRequests API request.
-func (r *GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
+func (r GetSampledRequestsRequest) Send() (*GetSampledRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1496,7 +1496,7 @@ type GetSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the GetSizeConstraintSet API request.
-func (r *GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error) {
+func (r GetSizeConstraintSetRequest) Send() (*GetSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1542,7 +1542,7 @@ type GetSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
-func (r *GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, error) {
+func (r GetSqlInjectionMatchSetRequest) Send() (*GetSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1588,7 +1588,7 @@ type GetWebACLRequest struct {
 }
 
 // Send marshals and sends the GetWebACL API request.
-func (r *GetWebACLRequest) Send() (*GetWebACLOutput, error) {
+func (r GetWebACLRequest) Send() (*GetWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1634,7 +1634,7 @@ type GetXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the GetXssMatchSet API request.
-func (r *GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
+func (r GetXssMatchSetRequest) Send() (*GetXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1680,7 +1680,7 @@ type ListByteMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListByteMatchSets API request.
-func (r *ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
+func (r ListByteMatchSetsRequest) Send() (*ListByteMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1726,7 +1726,7 @@ type ListIPSetsRequest struct {
 }
 
 // Send marshals and sends the ListIPSets API request.
-func (r *ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
+func (r ListIPSetsRequest) Send() (*ListIPSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1772,7 +1772,7 @@ type ListRateBasedRulesRequest struct {
 }
 
 // Send marshals and sends the ListRateBasedRules API request.
-func (r *ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
+func (r ListRateBasedRulesRequest) Send() (*ListRateBasedRulesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1818,7 +1818,7 @@ type ListRulesRequest struct {
 }
 
 // Send marshals and sends the ListRules API request.
-func (r *ListRulesRequest) Send() (*ListRulesOutput, error) {
+func (r ListRulesRequest) Send() (*ListRulesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1864,7 +1864,7 @@ type ListSizeConstraintSetsRequest struct {
 }
 
 // Send marshals and sends the ListSizeConstraintSets API request.
-func (r *ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, error) {
+func (r ListSizeConstraintSetsRequest) Send() (*ListSizeConstraintSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1910,7 +1910,7 @@ type ListSqlInjectionMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
-func (r *ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutput, error) {
+func (r ListSqlInjectionMatchSetsRequest) Send() (*ListSqlInjectionMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1956,7 +1956,7 @@ type ListWebACLsRequest struct {
 }
 
 // Send marshals and sends the ListWebACLs API request.
-func (r *ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
+func (r ListWebACLsRequest) Send() (*ListWebACLsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2002,7 +2002,7 @@ type ListXssMatchSetsRequest struct {
 }
 
 // Send marshals and sends the ListXssMatchSets API request.
-func (r *ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
+func (r ListXssMatchSetsRequest) Send() (*ListXssMatchSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2048,7 +2048,7 @@ type UpdateByteMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateByteMatchSet API request.
-func (r *UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
+func (r UpdateByteMatchSetRequest) Send() (*UpdateByteMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2130,7 +2130,7 @@ type UpdateIPSetRequest struct {
 }
 
 // Send marshals and sends the UpdateIPSet API request.
-func (r *UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
+func (r UpdateIPSetRequest) Send() (*UpdateIPSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2224,7 +2224,7 @@ type UpdateRateBasedRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateRateBasedRule API request.
-func (r *UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
+func (r UpdateRateBasedRuleRequest) Send() (*UpdateRateBasedRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2307,7 +2307,7 @@ type UpdateRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateRule API request.
-func (r *UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
+func (r UpdateRuleRequest) Send() (*UpdateRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2385,7 +2385,7 @@ type UpdateSizeConstraintSetRequest struct {
 }
 
 // Send marshals and sends the UpdateSizeConstraintSet API request.
-func (r *UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, error) {
+func (r UpdateSizeConstraintSetRequest) Send() (*UpdateSizeConstraintSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2469,7 +2469,7 @@ type UpdateSqlInjectionMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
-func (r *UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOutput, error) {
+func (r UpdateSqlInjectionMatchSetRequest) Send() (*UpdateSqlInjectionMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2546,7 +2546,7 @@ type UpdateWebACLRequest struct {
 }
 
 // Send marshals and sends the UpdateWebACL API request.
-func (r *UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
+func (r UpdateWebACLRequest) Send() (*UpdateWebACLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2639,7 +2639,7 @@ type UpdateXssMatchSetRequest struct {
 }
 
 // Send marshals and sends the UpdateXssMatchSet API request.
-func (r *UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
+func (r UpdateXssMatchSetRequest) Send() (*UpdateXssMatchSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -18,7 +18,7 @@ type CreateReplicationJobRequest struct {
 }
 
 // Send marshals and sends the CreateReplicationJob API request.
-func (r *CreateReplicationJobRequest) Send() (*CreateReplicationJobOutput, error) {
+func (r CreateReplicationJobRequest) Send() (*CreateReplicationJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -67,7 +67,7 @@ type DeleteReplicationJobRequest struct {
 }
 
 // Send marshals and sends the DeleteReplicationJob API request.
-func (r *DeleteReplicationJobRequest) Send() (*DeleteReplicationJobOutput, error) {
+func (r DeleteReplicationJobRequest) Send() (*DeleteReplicationJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -116,7 +116,7 @@ type DeleteServerCatalogRequest struct {
 }
 
 // Send marshals and sends the DeleteServerCatalog API request.
-func (r *DeleteServerCatalogRequest) Send() (*DeleteServerCatalogOutput, error) {
+func (r DeleteServerCatalogRequest) Send() (*DeleteServerCatalogOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type DisassociateConnectorRequest struct {
 }
 
 // Send marshals and sends the DisassociateConnector API request.
-func (r *DisassociateConnectorRequest) Send() (*DisassociateConnectorOutput, error) {
+func (r DisassociateConnectorRequest) Send() (*DisassociateConnectorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -211,7 +211,7 @@ type GetConnectorsRequest struct {
 }
 
 // Send marshals and sends the GetConnectors API request.
-func (r *GetConnectorsRequest) Send() (*GetConnectorsOutput, error) {
+func (r GetConnectorsRequest) Send() (*GetConnectorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -314,7 +314,7 @@ type GetReplicationJobsRequest struct {
 }
 
 // Send marshals and sends the GetReplicationJobs API request.
-func (r *GetReplicationJobsRequest) Send() (*GetReplicationJobsOutput, error) {
+func (r GetReplicationJobsRequest) Send() (*GetReplicationJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -418,7 +418,7 @@ type GetReplicationRunsRequest struct {
 }
 
 // Send marshals and sends the GetReplicationRuns API request.
-func (r *GetReplicationRunsRequest) Send() (*GetReplicationRunsOutput, error) {
+func (r GetReplicationRunsRequest) Send() (*GetReplicationRunsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -522,7 +522,7 @@ type GetServersRequest struct {
 }
 
 // Send marshals and sends the GetServers API request.
-func (r *GetServersRequest) Send() (*GetServersOutput, error) {
+func (r GetServersRequest) Send() (*GetServersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -625,7 +625,7 @@ type ImportServerCatalogRequest struct {
 }
 
 // Send marshals and sends the ImportServerCatalog API request.
-func (r *ImportServerCatalogRequest) Send() (*ImportServerCatalogOutput, error) {
+func (r ImportServerCatalogRequest) Send() (*ImportServerCatalogOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -674,7 +674,7 @@ type StartOnDemandReplicationRunRequest struct {
 }
 
 // Send marshals and sends the StartOnDemandReplicationRun API request.
-func (r *StartOnDemandReplicationRunRequest) Send() (*StartOnDemandReplicationRunOutput, error) {
+func (r StartOnDemandReplicationRunRequest) Send() (*StartOnDemandReplicationRunOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -724,7 +724,7 @@ type UpdateReplicationJobRequest struct {
 }
 
 // Send marshals and sends the UpdateReplicationJob API request.
-func (r *UpdateReplicationJobRequest) Send() (*UpdateReplicationJobOutput, error) {
+func (r UpdateReplicationJobRequest) Send() (*UpdateReplicationJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

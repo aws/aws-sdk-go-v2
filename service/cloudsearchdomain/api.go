@@ -18,7 +18,7 @@ type SearchRequest struct {
 }
 
 // Send marshals and sends the Search API request.
-func (r *SearchRequest) Send() (*SearchOutput, error) {
+func (r SearchRequest) Send() (*SearchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -82,7 +82,7 @@ type SuggestRequest struct {
 }
 
 // Send marshals and sends the Suggest API request.
-func (r *SuggestRequest) Send() (*SuggestOutput, error) {
+func (r SuggestRequest) Send() (*SuggestOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -142,7 +142,7 @@ type UploadDocumentsRequest struct {
 }
 
 // Send marshals and sends the UploadDocuments API request.
-func (r *UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
+func (r UploadDocumentsRequest) Send() (*UploadDocumentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

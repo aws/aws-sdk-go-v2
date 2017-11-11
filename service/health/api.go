@@ -18,7 +18,7 @@ type DescribeAffectedEntitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeAffectedEntities API request.
-func (r *DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput, error) {
+func (r DescribeAffectedEntitiesRequest) Send() (*DescribeAffectedEntitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -128,7 +128,7 @@ type DescribeEntityAggregatesRequest struct {
 }
 
 // Send marshals and sends the DescribeEntityAggregates API request.
-func (r *DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput, error) {
+func (r DescribeEntityAggregatesRequest) Send() (*DescribeEntityAggregatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -176,7 +176,7 @@ type DescribeEventAggregatesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventAggregates API request.
-func (r *DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, error) {
+func (r DescribeEventAggregatesRequest) Send() (*DescribeEventAggregatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -280,7 +280,7 @@ type DescribeEventDetailsRequest struct {
 }
 
 // Send marshals and sends the DescribeEventDetails API request.
-func (r *DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error) {
+func (r DescribeEventDetailsRequest) Send() (*DescribeEventDetailsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -333,7 +333,7 @@ type DescribeEventTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeEventTypes API request.
-func (r *DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
+func (r DescribeEventTypesRequest) Send() (*DescribeEventTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -436,7 +436,7 @@ type DescribeEventsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvents API request.
-func (r *DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
+func (r DescribeEventsRequest) Send() (*DescribeEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

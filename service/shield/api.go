@@ -18,7 +18,7 @@ type CreateProtectionRequest struct {
 }
 
 // Send marshals and sends the CreateProtection API request.
-func (r *CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
+func (r CreateProtectionRequest) Send() (*CreateProtectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ type CreateSubscriptionRequest struct {
 }
 
 // Send marshals and sends the CreateSubscription API request.
-func (r *CreateSubscriptionRequest) Send() (*CreateSubscriptionOutput, error) {
+func (r CreateSubscriptionRequest) Send() (*CreateSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ type DeleteProtectionRequest struct {
 }
 
 // Send marshals and sends the DeleteProtection API request.
-func (r *DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
+func (r DeleteProtectionRequest) Send() (*DeleteProtectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ type DeleteSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscription API request.
-func (r *DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
+func (r DeleteSubscriptionRequest) Send() (*DeleteSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -204,7 +204,7 @@ type DescribeAttackRequest struct {
 }
 
 // Send marshals and sends the DescribeAttack API request.
-func (r *DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
+func (r DescribeAttackRequest) Send() (*DescribeAttackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -250,7 +250,7 @@ type DescribeProtectionRequest struct {
 }
 
 // Send marshals and sends the DescribeProtection API request.
-func (r *DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
+func (r DescribeProtectionRequest) Send() (*DescribeProtectionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -296,7 +296,7 @@ type DescribeSubscriptionRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscription API request.
-func (r *DescribeSubscriptionRequest) Send() (*DescribeSubscriptionOutput, error) {
+func (r DescribeSubscriptionRequest) Send() (*DescribeSubscriptionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -342,7 +342,7 @@ type ListAttacksRequest struct {
 }
 
 // Send marshals and sends the ListAttacks API request.
-func (r *ListAttacksRequest) Send() (*ListAttacksOutput, error) {
+func (r ListAttacksRequest) Send() (*ListAttacksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -389,7 +389,7 @@ type ListProtectionsRequest struct {
 }
 
 // Send marshals and sends the ListProtections API request.
-func (r *ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
+func (r ListProtectionsRequest) Send() (*ListProtectionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

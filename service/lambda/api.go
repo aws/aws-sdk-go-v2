@@ -21,7 +21,7 @@ type AddPermissionRequest struct {
 }
 
 // Send marshals and sends the AddPermission API request.
-func (r *AddPermissionRequest) Send() (*AddPermissionOutput, error) {
+func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ type CreateAliasRequest struct {
 }
 
 // Send marshals and sends the CreateAlias API request.
-func (r *CreateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r CreateAliasRequest) Send() (*UpdateAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ type CreateEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the CreateEventSourceMapping API request.
-func (r *CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +201,7 @@ type CreateFunctionRequest struct {
 }
 
 // Send marshals and sends the CreateFunction API request.
-func (r *CreateFunctionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r CreateFunctionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -256,7 +256,7 @@ type DeleteAliasRequest struct {
 }
 
 // Send marshals and sends the DeleteAlias API request.
-func (r *DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
+func (r DeleteAliasRequest) Send() (*DeleteAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -307,7 +307,7 @@ type DeleteEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the DeleteEventSourceMapping API request.
-func (r *DeleteEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r DeleteEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -357,7 +357,7 @@ type DeleteFunctionRequest struct {
 }
 
 // Send marshals and sends the DeleteFunction API request.
-func (r *DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
+func (r DeleteFunctionRequest) Send() (*DeleteFunctionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -417,7 +417,7 @@ type GetAccountSettingsRequest struct {
 }
 
 // Send marshals and sends the GetAccountSettings API request.
-func (r *GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
+func (r GetAccountSettingsRequest) Send() (*GetAccountSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -469,7 +469,7 @@ type GetAliasRequest struct {
 }
 
 // Send marshals and sends the GetAlias API request.
-func (r *GetAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r GetAliasRequest) Send() (*UpdateAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -519,7 +519,7 @@ type GetEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the GetEventSourceMapping API request.
-func (r *GetEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r GetEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +568,7 @@ type GetFunctionRequest struct {
 }
 
 // Send marshals and sends the GetFunction API request.
-func (r *GetFunctionRequest) Send() (*GetFunctionOutput, error) {
+func (r GetFunctionRequest) Send() (*GetFunctionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -626,7 +626,7 @@ type GetFunctionConfigurationRequest struct {
 }
 
 // Send marshals and sends the GetFunctionConfiguration API request.
-func (r *GetFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r GetFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -684,7 +684,7 @@ type GetPolicyRequest struct {
 }
 
 // Send marshals and sends the GetPolicy API request.
-func (r *GetPolicyRequest) Send() (*GetPolicyOutput, error) {
+func (r GetPolicyRequest) Send() (*GetPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -737,7 +737,7 @@ type InvokeRequest struct {
 }
 
 // Send marshals and sends the Invoke API request.
-func (r *InvokeRequest) Send() (*InvokeOutput, error) {
+func (r InvokeRequest) Send() (*InvokeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,7 +794,7 @@ type InvokeAsyncRequest struct {
 }
 
 // Send marshals and sends the InvokeAsync API request.
-func (r *InvokeAsyncRequest) Send() (*InvokeAsyncOutput, error) {
+func (r InvokeAsyncRequest) Send() (*InvokeAsyncOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -849,7 +849,7 @@ type ListAliasesRequest struct {
 }
 
 // Send marshals and sends the ListAliases API request.
-func (r *ListAliasesRequest) Send() (*ListAliasesOutput, error) {
+func (r ListAliasesRequest) Send() (*ListAliasesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -900,7 +900,7 @@ type ListEventSourceMappingsRequest struct {
 }
 
 // Send marshals and sends the ListEventSourceMappings API request.
-func (r *ListEventSourceMappingsRequest) Send() (*ListEventSourceMappingsOutput, error) {
+func (r ListEventSourceMappingsRequest) Send() (*ListEventSourceMappingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1014,7 +1014,7 @@ type ListFunctionsRequest struct {
 }
 
 // Send marshals and sends the ListFunctions API request.
-func (r *ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
+func (r ListFunctionsRequest) Send() (*ListFunctionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1124,7 +1124,7 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1171,7 +1171,7 @@ type ListVersionsByFunctionRequest struct {
 }
 
 // Send marshals and sends the ListVersionsByFunction API request.
-func (r *ListVersionsByFunctionRequest) Send() (*ListVersionsByFunctionOutput, error) {
+func (r ListVersionsByFunctionRequest) Send() (*ListVersionsByFunctionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1218,7 +1218,7 @@ type PublishVersionRequest struct {
 }
 
 // Send marshals and sends the PublishVersion API request.
-func (r *PublishVersionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r PublishVersionRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1268,7 +1268,7 @@ type RemovePermissionRequest struct {
 }
 
 // Send marshals and sends the RemovePermission API request.
-func (r *RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
+func (r RemovePermissionRequest) Send() (*RemovePermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1328,7 +1328,7 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1378,7 +1378,7 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1427,7 +1427,7 @@ type UpdateAliasRequest struct {
 }
 
 // Send marshals and sends the UpdateAlias API request.
-func (r *UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
+func (r UpdateAliasRequest) Send() (*UpdateAliasOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1477,7 +1477,7 @@ type UpdateEventSourceMappingRequest struct {
 }
 
 // Send marshals and sends the UpdateEventSourceMapping API request.
-func (r *UpdateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
+func (r UpdateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1539,7 +1539,7 @@ type UpdateFunctionCodeRequest struct {
 }
 
 // Send marshals and sends the UpdateFunctionCode API request.
-func (r *UpdateFunctionCodeRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r UpdateFunctionCodeRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1593,7 +1593,7 @@ type UpdateFunctionConfigurationRequest struct {
 }
 
 // Send marshals and sends the UpdateFunctionConfiguration API request.
-func (r *UpdateFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
+func (r UpdateFunctionConfigurationRequest) Send() (*UpdateFunctionConfigurationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -18,7 +18,7 @@ type DeleteThingShadowRequest struct {
 }
 
 // Send marshals and sends the DeleteThingShadow API request.
-func (r *DeleteThingShadowRequest) Send() (*DeleteThingShadowOutput, error) {
+func (r DeleteThingShadowRequest) Send() (*DeleteThingShadowOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type GetThingShadowRequest struct {
 }
 
 // Send marshals and sends the GetThingShadow API request.
-func (r *GetThingShadowRequest) Send() (*GetThingShadowOutput, error) {
+func (r GetThingShadowRequest) Send() (*GetThingShadowOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ type PublishRequest struct {
 }
 
 // Send marshals and sends the Publish API request.
-func (r *PublishRequest) Send() (*PublishOutput, error) {
+func (r PublishRequest) Send() (*PublishOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -161,7 +161,7 @@ type UpdateThingShadowRequest struct {
 }
 
 // Send marshals and sends the UpdateThingShadow API request.
-func (r *UpdateThingShadowRequest) Send() (*UpdateThingShadowOutput, error) {
+func (r UpdateThingShadowRequest) Send() (*UpdateThingShadowOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

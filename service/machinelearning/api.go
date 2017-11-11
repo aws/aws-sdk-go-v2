@@ -19,7 +19,7 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ type CreateBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the CreateBatchPrediction API request.
-func (r *CreateBatchPredictionRequest) Send() (*CreateBatchPredictionOutput, error) {
+func (r CreateBatchPredictionRequest) Send() (*CreateBatchPredictionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ type CreateDataSourceFromRDSRequest struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromRDS API request.
-func (r *CreateDataSourceFromRDSRequest) Send() (*CreateDataSourceFromRDSOutput, error) {
+func (r CreateDataSourceFromRDSRequest) Send() (*CreateDataSourceFromRDSOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -179,7 +179,7 @@ type CreateDataSourceFromRedshiftRequest struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromRedshift API request.
-func (r *CreateDataSourceFromRedshiftRequest) Send() (*CreateDataSourceFromRedshiftOutput, error) {
+func (r CreateDataSourceFromRedshiftRequest) Send() (*CreateDataSourceFromRedshiftOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -255,7 +255,7 @@ type CreateDataSourceFromS3Request struct {
 }
 
 // Send marshals and sends the CreateDataSourceFromS3 API request.
-func (r *CreateDataSourceFromS3Request) Send() (*CreateDataSourceFromS3Output, error) {
+func (r CreateDataSourceFromS3Request) Send() (*CreateDataSourceFromS3Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -326,7 +326,7 @@ type CreateEvaluationRequest struct {
 }
 
 // Send marshals and sends the CreateEvaluation API request.
-func (r *CreateEvaluationRequest) Send() (*CreateEvaluationOutput, error) {
+func (r CreateEvaluationRequest) Send() (*CreateEvaluationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -385,7 +385,7 @@ type CreateMLModelRequest struct {
 }
 
 // Send marshals and sends the CreateMLModel API request.
-func (r *CreateMLModelRequest) Send() (*CreateMLModelOutput, error) {
+func (r CreateMLModelRequest) Send() (*CreateMLModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -445,7 +445,7 @@ type CreateRealtimeEndpointRequest struct {
 }
 
 // Send marshals and sends the CreateRealtimeEndpoint API request.
-func (r *CreateRealtimeEndpointRequest) Send() (*CreateRealtimeEndpointOutput, error) {
+func (r CreateRealtimeEndpointRequest) Send() (*CreateRealtimeEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -491,7 +491,7 @@ type DeleteBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the DeleteBatchPrediction API request.
-func (r *DeleteBatchPredictionRequest) Send() (*DeleteBatchPredictionOutput, error) {
+func (r DeleteBatchPredictionRequest) Send() (*DeleteBatchPredictionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -540,7 +540,7 @@ type DeleteDataSourceRequest struct {
 }
 
 // Send marshals and sends the DeleteDataSource API request.
-func (r *DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
+func (r DeleteDataSourceRequest) Send() (*DeleteDataSourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -589,7 +589,7 @@ type DeleteEvaluationRequest struct {
 }
 
 // Send marshals and sends the DeleteEvaluation API request.
-func (r *DeleteEvaluationRequest) Send() (*DeleteEvaluationOutput, error) {
+func (r DeleteEvaluationRequest) Send() (*DeleteEvaluationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -638,7 +638,7 @@ type DeleteMLModelRequest struct {
 }
 
 // Send marshals and sends the DeleteMLModel API request.
-func (r *DeleteMLModelRequest) Send() (*DeleteMLModelOutput, error) {
+func (r DeleteMLModelRequest) Send() (*DeleteMLModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -687,7 +687,7 @@ type DeleteRealtimeEndpointRequest struct {
 }
 
 // Send marshals and sends the DeleteRealtimeEndpoint API request.
-func (r *DeleteRealtimeEndpointRequest) Send() (*DeleteRealtimeEndpointOutput, error) {
+func (r DeleteRealtimeEndpointRequest) Send() (*DeleteRealtimeEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -731,7 +731,7 @@ type DeleteTagsRequest struct {
 }
 
 // Send marshals and sends the DeleteTags API request.
-func (r *DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
+func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -778,7 +778,7 @@ type DescribeBatchPredictionsRequest struct {
 }
 
 // Send marshals and sends the DescribeBatchPredictions API request.
-func (r *DescribeBatchPredictionsRequest) Send() (*DescribeBatchPredictionsOutput, error) {
+func (r DescribeBatchPredictionsRequest) Send() (*DescribeBatchPredictionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -879,7 +879,7 @@ type DescribeDataSourcesRequest struct {
 }
 
 // Send marshals and sends the DescribeDataSources API request.
-func (r *DescribeDataSourcesRequest) Send() (*DescribeDataSourcesOutput, error) {
+func (r DescribeDataSourcesRequest) Send() (*DescribeDataSourcesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -979,7 +979,7 @@ type DescribeEvaluationsRequest struct {
 }
 
 // Send marshals and sends the DescribeEvaluations API request.
-func (r *DescribeEvaluationsRequest) Send() (*DescribeEvaluationsOutput, error) {
+func (r DescribeEvaluationsRequest) Send() (*DescribeEvaluationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1080,7 +1080,7 @@ type DescribeMLModelsRequest struct {
 }
 
 // Send marshals and sends the DescribeMLModels API request.
-func (r *DescribeMLModelsRequest) Send() (*DescribeMLModelsOutput, error) {
+func (r DescribeMLModelsRequest) Send() (*DescribeMLModelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1180,7 +1180,7 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1224,7 +1224,7 @@ type GetBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the GetBatchPrediction API request.
-func (r *GetBatchPredictionRequest) Send() (*GetBatchPredictionOutput, error) {
+func (r GetBatchPredictionRequest) Send() (*GetBatchPredictionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1269,7 +1269,7 @@ type GetDataSourceRequest struct {
 }
 
 // Send marshals and sends the GetDataSource API request.
-func (r *GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
+func (r GetDataSourceRequest) Send() (*GetDataSourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1318,7 +1318,7 @@ type GetEvaluationRequest struct {
 }
 
 // Send marshals and sends the GetEvaluation API request.
-func (r *GetEvaluationRequest) Send() (*GetEvaluationOutput, error) {
+func (r GetEvaluationRequest) Send() (*GetEvaluationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1363,7 +1363,7 @@ type GetMLModelRequest struct {
 }
 
 // Send marshals and sends the GetMLModel API request.
-func (r *GetMLModelRequest) Send() (*GetMLModelOutput, error) {
+func (r GetMLModelRequest) Send() (*GetMLModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1410,7 +1410,7 @@ type PredictRequest struct {
 }
 
 // Send marshals and sends the Predict API request.
-func (r *PredictRequest) Send() (*PredictOutput, error) {
+func (r PredictRequest) Send() (*PredictOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1457,7 +1457,7 @@ type UpdateBatchPredictionRequest struct {
 }
 
 // Send marshals and sends the UpdateBatchPrediction API request.
-func (r *UpdateBatchPredictionRequest) Send() (*UpdateBatchPredictionOutput, error) {
+func (r UpdateBatchPredictionRequest) Send() (*UpdateBatchPredictionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1504,7 +1504,7 @@ type UpdateDataSourceRequest struct {
 }
 
 // Send marshals and sends the UpdateDataSource API request.
-func (r *UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
+func (r UpdateDataSourceRequest) Send() (*UpdateDataSourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1551,7 +1551,7 @@ type UpdateEvaluationRequest struct {
 }
 
 // Send marshals and sends the UpdateEvaluation API request.
-func (r *UpdateEvaluationRequest) Send() (*UpdateEvaluationOutput, error) {
+func (r UpdateEvaluationRequest) Send() (*UpdateEvaluationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1598,7 +1598,7 @@ type UpdateMLModelRequest struct {
 }
 
 // Send marshals and sends the UpdateMLModel API request.
-func (r *UpdateMLModelRequest) Send() (*UpdateMLModelOutput, error) {
+func (r UpdateMLModelRequest) Send() (*UpdateMLModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

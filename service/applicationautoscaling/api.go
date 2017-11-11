@@ -19,7 +19,7 @@ type DeleteScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
-func (r *DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
+func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ type DeregisterScalableTargetRequest struct {
 }
 
 // Send marshals and sends the DeregisterScalableTarget API request.
-func (r *DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput, error) {
+func (r DeregisterScalableTargetRequest) Send() (*DeregisterScalableTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ type DescribeScalableTargetsRequest struct {
 }
 
 // Send marshals and sends the DescribeScalableTargets API request.
-func (r *DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, error) {
+func (r DescribeScalableTargetsRequest) Send() (*DescribeScalableTargetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -231,7 +231,7 @@ type DescribeScalingActivitiesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
-func (r *DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
+func (r DescribeScalingActivitiesRequest) Send() (*DescribeScalingActivitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,7 +341,7 @@ type DescribeScalingPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
-func (r *DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
+func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -450,7 +450,7 @@ type PutScalingPolicyRequest struct {
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
-func (r *PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
+func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -508,7 +508,7 @@ type RegisterScalableTargetRequest struct {
 }
 
 // Send marshals and sends the RegisterScalableTarget API request.
-func (r *RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, error) {
+func (r RegisterScalableTargetRequest) Send() (*RegisterScalableTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

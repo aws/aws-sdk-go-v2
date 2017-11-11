@@ -20,7 +20,7 @@ type CreateApiKeyRequest struct {
 }
 
 // Send marshals and sends the CreateApiKey API request.
-func (r *CreateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
+func (r CreateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ type CreateAuthorizerRequest struct {
 }
 
 // Send marshals and sends the CreateAuthorizer API request.
-func (r *CreateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
+func (r CreateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -112,7 +112,7 @@ type CreateBasePathMappingRequest struct {
 }
 
 // Send marshals and sends the CreateBasePathMapping API request.
-func (r *CreateBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
+func (r CreateBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ type CreateDeploymentRequest struct {
 }
 
 // Send marshals and sends the CreateDeployment API request.
-func (r *CreateDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
+func (r CreateDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -201,7 +201,7 @@ type CreateDocumentationPartRequest struct {
 }
 
 // Send marshals and sends the CreateDocumentationPart API request.
-func (r *CreateDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
+func (r CreateDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -243,7 +243,7 @@ type CreateDocumentationVersionRequest struct {
 }
 
 // Send marshals and sends the CreateDocumentationVersion API request.
-func (r *CreateDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
+func (r CreateDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -285,7 +285,7 @@ type CreateDomainNameRequest struct {
 }
 
 // Send marshals and sends the CreateDomainName API request.
-func (r *CreateDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
+func (r CreateDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -329,7 +329,7 @@ type CreateModelRequest struct {
 }
 
 // Send marshals and sends the CreateModel API request.
-func (r *CreateModelRequest) Send() (*UpdateModelOutput, error) {
+func (r CreateModelRequest) Send() (*UpdateModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -373,7 +373,7 @@ type CreateRequestValidatorRequest struct {
 }
 
 // Send marshals and sends the CreateRequestValidator API request.
-func (r *CreateRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
+func (r CreateRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -417,7 +417,7 @@ type CreateResourceRequest struct {
 }
 
 // Send marshals and sends the CreateResource API request.
-func (r *CreateResourceRequest) Send() (*UpdateResourceOutput, error) {
+func (r CreateResourceRequest) Send() (*UpdateResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +461,7 @@ type CreateRestApiRequest struct {
 }
 
 // Send marshals and sends the CreateRestApi API request.
-func (r *CreateRestApiRequest) Send() (*UpdateRestApiOutput, error) {
+func (r CreateRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -505,7 +505,7 @@ type CreateStageRequest struct {
 }
 
 // Send marshals and sends the CreateStage API request.
-func (r *CreateStageRequest) Send() (*UpdateStageOutput, error) {
+func (r CreateStageRequest) Send() (*UpdateStageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -550,7 +550,7 @@ type CreateUsagePlanRequest struct {
 }
 
 // Send marshals and sends the CreateUsagePlan API request.
-func (r *CreateUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
+func (r CreateUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -595,7 +595,7 @@ type CreateUsagePlanKeyRequest struct {
 }
 
 // Send marshals and sends the CreateUsagePlanKey API request.
-func (r *CreateUsagePlanKeyRequest) Send() (*GetUsagePlanKeyOutput, error) {
+func (r CreateUsagePlanKeyRequest) Send() (*GetUsagePlanKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -639,7 +639,7 @@ type DeleteApiKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteApiKey API request.
-func (r *DeleteApiKeyRequest) Send() (*DeleteApiKeyOutput, error) {
+func (r DeleteApiKeyRequest) Send() (*DeleteApiKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -685,7 +685,7 @@ type DeleteAuthorizerRequest struct {
 }
 
 // Send marshals and sends the DeleteAuthorizer API request.
-func (r *DeleteAuthorizerRequest) Send() (*DeleteAuthorizerOutput, error) {
+func (r DeleteAuthorizerRequest) Send() (*DeleteAuthorizerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -733,7 +733,7 @@ type DeleteBasePathMappingRequest struct {
 }
 
 // Send marshals and sends the DeleteBasePathMapping API request.
-func (r *DeleteBasePathMappingRequest) Send() (*DeleteBasePathMappingOutput, error) {
+func (r DeleteBasePathMappingRequest) Send() (*DeleteBasePathMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -779,7 +779,7 @@ type DeleteClientCertificateRequest struct {
 }
 
 // Send marshals and sends the DeleteClientCertificate API request.
-func (r *DeleteClientCertificateRequest) Send() (*DeleteClientCertificateOutput, error) {
+func (r DeleteClientCertificateRequest) Send() (*DeleteClientCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -825,7 +825,7 @@ type DeleteDeploymentRequest struct {
 }
 
 // Send marshals and sends the DeleteDeployment API request.
-func (r *DeleteDeploymentRequest) Send() (*DeleteDeploymentOutput, error) {
+func (r DeleteDeploymentRequest) Send() (*DeleteDeploymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -872,7 +872,7 @@ type DeleteDocumentationPartRequest struct {
 }
 
 // Send marshals and sends the DeleteDocumentationPart API request.
-func (r *DeleteDocumentationPartRequest) Send() (*DeleteDocumentationPartOutput, error) {
+func (r DeleteDocumentationPartRequest) Send() (*DeleteDocumentationPartOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -916,7 +916,7 @@ type DeleteDocumentationVersionRequest struct {
 }
 
 // Send marshals and sends the DeleteDocumentationVersion API request.
-func (r *DeleteDocumentationVersionRequest) Send() (*DeleteDocumentationVersionOutput, error) {
+func (r DeleteDocumentationVersionRequest) Send() (*DeleteDocumentationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -960,7 +960,7 @@ type DeleteDomainNameRequest struct {
 }
 
 // Send marshals and sends the DeleteDomainName API request.
-func (r *DeleteDomainNameRequest) Send() (*DeleteDomainNameOutput, error) {
+func (r DeleteDomainNameRequest) Send() (*DeleteDomainNameOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1006,7 +1006,7 @@ type DeleteGatewayResponseRequest struct {
 }
 
 // Send marshals and sends the DeleteGatewayResponse API request.
-func (r *DeleteGatewayResponseRequest) Send() (*DeleteGatewayResponseOutput, error) {
+func (r DeleteGatewayResponseRequest) Send() (*DeleteGatewayResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,7 +1053,7 @@ type DeleteIntegrationRequest struct {
 }
 
 // Send marshals and sends the DeleteIntegration API request.
-func (r *DeleteIntegrationRequest) Send() (*DeleteIntegrationOutput, error) {
+func (r DeleteIntegrationRequest) Send() (*DeleteIntegrationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1099,7 +1099,7 @@ type DeleteIntegrationResponseRequest struct {
 }
 
 // Send marshals and sends the DeleteIntegrationResponse API request.
-func (r *DeleteIntegrationResponseRequest) Send() (*DeleteIntegrationResponseOutput, error) {
+func (r DeleteIntegrationResponseRequest) Send() (*DeleteIntegrationResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1145,7 +1145,7 @@ type DeleteMethodRequest struct {
 }
 
 // Send marshals and sends the DeleteMethod API request.
-func (r *DeleteMethodRequest) Send() (*DeleteMethodOutput, error) {
+func (r DeleteMethodRequest) Send() (*DeleteMethodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1191,7 +1191,7 @@ type DeleteMethodResponseRequest struct {
 }
 
 // Send marshals and sends the DeleteMethodResponse API request.
-func (r *DeleteMethodResponseRequest) Send() (*DeleteMethodResponseOutput, error) {
+func (r DeleteMethodResponseRequest) Send() (*DeleteMethodResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1237,7 +1237,7 @@ type DeleteModelRequest struct {
 }
 
 // Send marshals and sends the DeleteModel API request.
-func (r *DeleteModelRequest) Send() (*DeleteModelOutput, error) {
+func (r DeleteModelRequest) Send() (*DeleteModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1283,7 +1283,7 @@ type DeleteRequestValidatorRequest struct {
 }
 
 // Send marshals and sends the DeleteRequestValidator API request.
-func (r *DeleteRequestValidatorRequest) Send() (*DeleteRequestValidatorOutput, error) {
+func (r DeleteRequestValidatorRequest) Send() (*DeleteRequestValidatorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1329,7 +1329,7 @@ type DeleteResourceRequest struct {
 }
 
 // Send marshals and sends the DeleteResource API request.
-func (r *DeleteResourceRequest) Send() (*DeleteResourceOutput, error) {
+func (r DeleteResourceRequest) Send() (*DeleteResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1375,7 +1375,7 @@ type DeleteRestApiRequest struct {
 }
 
 // Send marshals and sends the DeleteRestApi API request.
-func (r *DeleteRestApiRequest) Send() (*DeleteRestApiOutput, error) {
+func (r DeleteRestApiRequest) Send() (*DeleteRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1421,7 +1421,7 @@ type DeleteStageRequest struct {
 }
 
 // Send marshals and sends the DeleteStage API request.
-func (r *DeleteStageRequest) Send() (*DeleteStageOutput, error) {
+func (r DeleteStageRequest) Send() (*DeleteStageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1467,7 +1467,7 @@ type DeleteUsagePlanRequest struct {
 }
 
 // Send marshals and sends the DeleteUsagePlan API request.
-func (r *DeleteUsagePlanRequest) Send() (*DeleteUsagePlanOutput, error) {
+func (r DeleteUsagePlanRequest) Send() (*DeleteUsagePlanOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1513,7 +1513,7 @@ type DeleteUsagePlanKeyRequest struct {
 }
 
 // Send marshals and sends the DeleteUsagePlanKey API request.
-func (r *DeleteUsagePlanKeyRequest) Send() (*DeleteUsagePlanKeyOutput, error) {
+func (r DeleteUsagePlanKeyRequest) Send() (*DeleteUsagePlanKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1560,7 +1560,7 @@ type FlushStageAuthorizersCacheRequest struct {
 }
 
 // Send marshals and sends the FlushStageAuthorizersCache API request.
-func (r *FlushStageAuthorizersCacheRequest) Send() (*FlushStageAuthorizersCacheOutput, error) {
+func (r FlushStageAuthorizersCacheRequest) Send() (*FlushStageAuthorizersCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1606,7 +1606,7 @@ type FlushStageCacheRequest struct {
 }
 
 // Send marshals and sends the FlushStageCache API request.
-func (r *FlushStageCacheRequest) Send() (*FlushStageCacheOutput, error) {
+func (r FlushStageCacheRequest) Send() (*FlushStageCacheOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1652,7 +1652,7 @@ type GenerateClientCertificateRequest struct {
 }
 
 // Send marshals and sends the GenerateClientCertificate API request.
-func (r *GenerateClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
+func (r GenerateClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1696,7 +1696,7 @@ type GetAccountRequest struct {
 }
 
 // Send marshals and sends the GetAccount API request.
-func (r *GetAccountRequest) Send() (*UpdateAccountOutput, error) {
+func (r GetAccountRequest) Send() (*UpdateAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1740,7 +1740,7 @@ type GetApiKeyRequest struct {
 }
 
 // Send marshals and sends the GetApiKey API request.
-func (r *GetApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
+func (r GetApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1784,7 +1784,7 @@ type GetApiKeysRequest struct {
 }
 
 // Send marshals and sends the GetApiKeys API request.
-func (r *GetApiKeysRequest) Send() (*GetApiKeysOutput, error) {
+func (r GetApiKeysRequest) Send() (*GetApiKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1884,7 +1884,7 @@ type GetAuthorizerRequest struct {
 }
 
 // Send marshals and sends the GetAuthorizer API request.
-func (r *GetAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
+func (r GetAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1930,7 +1930,7 @@ type GetAuthorizersRequest struct {
 }
 
 // Send marshals and sends the GetAuthorizers API request.
-func (r *GetAuthorizersRequest) Send() (*GetAuthorizersOutput, error) {
+func (r GetAuthorizersRequest) Send() (*GetAuthorizersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1976,7 +1976,7 @@ type GetBasePathMappingRequest struct {
 }
 
 // Send marshals and sends the GetBasePathMapping API request.
-func (r *GetBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
+func (r GetBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2020,7 +2020,7 @@ type GetBasePathMappingsRequest struct {
 }
 
 // Send marshals and sends the GetBasePathMappings API request.
-func (r *GetBasePathMappingsRequest) Send() (*GetBasePathMappingsOutput, error) {
+func (r GetBasePathMappingsRequest) Send() (*GetBasePathMappingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2120,7 +2120,7 @@ type GetClientCertificateRequest struct {
 }
 
 // Send marshals and sends the GetClientCertificate API request.
-func (r *GetClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
+func (r GetClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2164,7 +2164,7 @@ type GetClientCertificatesRequest struct {
 }
 
 // Send marshals and sends the GetClientCertificates API request.
-func (r *GetClientCertificatesRequest) Send() (*GetClientCertificatesOutput, error) {
+func (r GetClientCertificatesRequest) Send() (*GetClientCertificatesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2264,7 +2264,7 @@ type GetDeploymentRequest struct {
 }
 
 // Send marshals and sends the GetDeployment API request.
-func (r *GetDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
+func (r GetDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,7 +2308,7 @@ type GetDeploymentsRequest struct {
 }
 
 // Send marshals and sends the GetDeployments API request.
-func (r *GetDeploymentsRequest) Send() (*GetDeploymentsOutput, error) {
+func (r GetDeploymentsRequest) Send() (*GetDeploymentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2408,7 +2408,7 @@ type GetDocumentationPartRequest struct {
 }
 
 // Send marshals and sends the GetDocumentationPart API request.
-func (r *GetDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
+func (r GetDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2450,7 +2450,7 @@ type GetDocumentationPartsRequest struct {
 }
 
 // Send marshals and sends the GetDocumentationParts API request.
-func (r *GetDocumentationPartsRequest) Send() (*GetDocumentationPartsOutput, error) {
+func (r GetDocumentationPartsRequest) Send() (*GetDocumentationPartsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2492,7 +2492,7 @@ type GetDocumentationVersionRequest struct {
 }
 
 // Send marshals and sends the GetDocumentationVersion API request.
-func (r *GetDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
+func (r GetDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2534,7 +2534,7 @@ type GetDocumentationVersionsRequest struct {
 }
 
 // Send marshals and sends the GetDocumentationVersions API request.
-func (r *GetDocumentationVersionsRequest) Send() (*GetDocumentationVersionsOutput, error) {
+func (r GetDocumentationVersionsRequest) Send() (*GetDocumentationVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2576,7 +2576,7 @@ type GetDomainNameRequest struct {
 }
 
 // Send marshals and sends the GetDomainName API request.
-func (r *GetDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
+func (r GetDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2621,7 +2621,7 @@ type GetDomainNamesRequest struct {
 }
 
 // Send marshals and sends the GetDomainNames API request.
-func (r *GetDomainNamesRequest) Send() (*GetDomainNamesOutput, error) {
+func (r GetDomainNamesRequest) Send() (*GetDomainNamesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2721,7 +2721,7 @@ type GetExportRequest struct {
 }
 
 // Send marshals and sends the GetExport API request.
-func (r *GetExportRequest) Send() (*GetExportOutput, error) {
+func (r GetExportRequest) Send() (*GetExportOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2765,7 +2765,7 @@ type GetGatewayResponseRequest struct {
 }
 
 // Send marshals and sends the GetGatewayResponse API request.
-func (r *GetGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
+func (r GetGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2809,7 +2809,7 @@ type GetGatewayResponsesRequest struct {
 }
 
 // Send marshals and sends the GetGatewayResponses API request.
-func (r *GetGatewayResponsesRequest) Send() (*GetGatewayResponsesOutput, error) {
+func (r GetGatewayResponsesRequest) Send() (*GetGatewayResponsesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2856,7 +2856,7 @@ type GetIntegrationRequest struct {
 }
 
 // Send marshals and sends the GetIntegration API request.
-func (r *GetIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
+func (r GetIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2900,7 +2900,7 @@ type GetIntegrationResponseRequest struct {
 }
 
 // Send marshals and sends the GetIntegrationResponse API request.
-func (r *GetIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
+func (r GetIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2944,7 +2944,7 @@ type GetMethodRequest struct {
 }
 
 // Send marshals and sends the GetMethod API request.
-func (r *GetMethodRequest) Send() (*UpdateMethodOutput, error) {
+func (r GetMethodRequest) Send() (*UpdateMethodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2988,7 +2988,7 @@ type GetMethodResponseRequest struct {
 }
 
 // Send marshals and sends the GetMethodResponse API request.
-func (r *GetMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
+func (r GetMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3032,7 +3032,7 @@ type GetModelRequest struct {
 }
 
 // Send marshals and sends the GetModel API request.
-func (r *GetModelRequest) Send() (*UpdateModelOutput, error) {
+func (r GetModelRequest) Send() (*UpdateModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3076,7 +3076,7 @@ type GetModelTemplateRequest struct {
 }
 
 // Send marshals and sends the GetModelTemplate API request.
-func (r *GetModelTemplateRequest) Send() (*GetModelTemplateOutput, error) {
+func (r GetModelTemplateRequest) Send() (*GetModelTemplateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3121,7 +3121,7 @@ type GetModelsRequest struct {
 }
 
 // Send marshals and sends the GetModels API request.
-func (r *GetModelsRequest) Send() (*GetModelsOutput, error) {
+func (r GetModelsRequest) Send() (*GetModelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3221,7 +3221,7 @@ type GetRequestValidatorRequest struct {
 }
 
 // Send marshals and sends the GetRequestValidator API request.
-func (r *GetRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
+func (r GetRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3265,7 +3265,7 @@ type GetRequestValidatorsRequest struct {
 }
 
 // Send marshals and sends the GetRequestValidators API request.
-func (r *GetRequestValidatorsRequest) Send() (*GetRequestValidatorsOutput, error) {
+func (r GetRequestValidatorsRequest) Send() (*GetRequestValidatorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3309,7 +3309,7 @@ type GetResourceRequest struct {
 }
 
 // Send marshals and sends the GetResource API request.
-func (r *GetResourceRequest) Send() (*UpdateResourceOutput, error) {
+func (r GetResourceRequest) Send() (*UpdateResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3353,7 +3353,7 @@ type GetResourcesRequest struct {
 }
 
 // Send marshals and sends the GetResources API request.
-func (r *GetResourcesRequest) Send() (*GetResourcesOutput, error) {
+func (r GetResourcesRequest) Send() (*GetResourcesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3453,7 +3453,7 @@ type GetRestApiRequest struct {
 }
 
 // Send marshals and sends the GetRestApi API request.
-func (r *GetRestApiRequest) Send() (*UpdateRestApiOutput, error) {
+func (r GetRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3497,7 +3497,7 @@ type GetRestApisRequest struct {
 }
 
 // Send marshals and sends the GetRestApis API request.
-func (r *GetRestApisRequest) Send() (*GetRestApisOutput, error) {
+func (r GetRestApisRequest) Send() (*GetRestApisOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3597,7 +3597,7 @@ type GetSdkRequest struct {
 }
 
 // Send marshals and sends the GetSdk API request.
-func (r *GetSdkRequest) Send() (*GetSdkOutput, error) {
+func (r GetSdkRequest) Send() (*GetSdkOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3641,7 +3641,7 @@ type GetSdkTypeRequest struct {
 }
 
 // Send marshals and sends the GetSdkType API request.
-func (r *GetSdkTypeRequest) Send() (*GetSdkTypeOutput, error) {
+func (r GetSdkTypeRequest) Send() (*GetSdkTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3683,7 +3683,7 @@ type GetSdkTypesRequest struct {
 }
 
 // Send marshals and sends the GetSdkTypes API request.
-func (r *GetSdkTypesRequest) Send() (*GetSdkTypesOutput, error) {
+func (r GetSdkTypesRequest) Send() (*GetSdkTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3725,7 +3725,7 @@ type GetStageRequest struct {
 }
 
 // Send marshals and sends the GetStage API request.
-func (r *GetStageRequest) Send() (*UpdateStageOutput, error) {
+func (r GetStageRequest) Send() (*UpdateStageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3769,7 +3769,7 @@ type GetStagesRequest struct {
 }
 
 // Send marshals and sends the GetStages API request.
-func (r *GetStagesRequest) Send() (*GetStagesOutput, error) {
+func (r GetStagesRequest) Send() (*GetStagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3813,7 +3813,7 @@ type GetUsageRequest struct {
 }
 
 // Send marshals and sends the GetUsage API request.
-func (r *GetUsageRequest) Send() (*UpdateUsageOutput, error) {
+func (r GetUsageRequest) Send() (*UpdateUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3913,7 +3913,7 @@ type GetUsagePlanRequest struct {
 }
 
 // Send marshals and sends the GetUsagePlan API request.
-func (r *GetUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
+func (r GetUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3957,7 +3957,7 @@ type GetUsagePlanKeyRequest struct {
 }
 
 // Send marshals and sends the GetUsagePlanKey API request.
-func (r *GetUsagePlanKeyRequest) Send() (*GetUsagePlanKeyOutput, error) {
+func (r GetUsagePlanKeyRequest) Send() (*GetUsagePlanKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4001,7 +4001,7 @@ type GetUsagePlanKeysRequest struct {
 }
 
 // Send marshals and sends the GetUsagePlanKeys API request.
-func (r *GetUsagePlanKeysRequest) Send() (*GetUsagePlanKeysOutput, error) {
+func (r GetUsagePlanKeysRequest) Send() (*GetUsagePlanKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4102,7 +4102,7 @@ type GetUsagePlansRequest struct {
 }
 
 // Send marshals and sends the GetUsagePlans API request.
-func (r *GetUsagePlansRequest) Send() (*GetUsagePlansOutput, error) {
+func (r GetUsagePlansRequest) Send() (*GetUsagePlansOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4202,7 +4202,7 @@ type ImportApiKeysRequest struct {
 }
 
 // Send marshals and sends the ImportApiKeys API request.
-func (r *ImportApiKeysRequest) Send() (*ImportApiKeysOutput, error) {
+func (r ImportApiKeysRequest) Send() (*ImportApiKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4246,7 +4246,7 @@ type ImportDocumentationPartsRequest struct {
 }
 
 // Send marshals and sends the ImportDocumentationParts API request.
-func (r *ImportDocumentationPartsRequest) Send() (*ImportDocumentationPartsOutput, error) {
+func (r ImportDocumentationPartsRequest) Send() (*ImportDocumentationPartsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4288,7 +4288,7 @@ type ImportRestApiRequest struct {
 }
 
 // Send marshals and sends the ImportRestApi API request.
-func (r *ImportRestApiRequest) Send() (*UpdateRestApiOutput, error) {
+func (r ImportRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4333,7 +4333,7 @@ type PutGatewayResponseRequest struct {
 }
 
 // Send marshals and sends the PutGatewayResponse API request.
-func (r *PutGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
+func (r PutGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4378,7 +4378,7 @@ type PutIntegrationRequest struct {
 }
 
 // Send marshals and sends the PutIntegration API request.
-func (r *PutIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
+func (r PutIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4422,7 +4422,7 @@ type PutIntegrationResponseRequest struct {
 }
 
 // Send marshals and sends the PutIntegrationResponse API request.
-func (r *PutIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
+func (r PutIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4466,7 +4466,7 @@ type PutMethodRequest struct {
 }
 
 // Send marshals and sends the PutMethod API request.
-func (r *PutMethodRequest) Send() (*UpdateMethodOutput, error) {
+func (r PutMethodRequest) Send() (*UpdateMethodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4510,7 +4510,7 @@ type PutMethodResponseRequest struct {
 }
 
 // Send marshals and sends the PutMethodResponse API request.
-func (r *PutMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
+func (r PutMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4554,7 +4554,7 @@ type PutRestApiRequest struct {
 }
 
 // Send marshals and sends the PutRestApi API request.
-func (r *PutRestApiRequest) Send() (*UpdateRestApiOutput, error) {
+func (r PutRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4601,7 +4601,7 @@ type TestInvokeAuthorizerRequest struct {
 }
 
 // Send marshals and sends the TestInvokeAuthorizer API request.
-func (r *TestInvokeAuthorizerRequest) Send() (*TestInvokeAuthorizerOutput, error) {
+func (r TestInvokeAuthorizerRequest) Send() (*TestInvokeAuthorizerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4648,7 +4648,7 @@ type TestInvokeMethodRequest struct {
 }
 
 // Send marshals and sends the TestInvokeMethod API request.
-func (r *TestInvokeMethodRequest) Send() (*TestInvokeMethodOutput, error) {
+func (r TestInvokeMethodRequest) Send() (*TestInvokeMethodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4693,7 +4693,7 @@ type UpdateAccountRequest struct {
 }
 
 // Send marshals and sends the UpdateAccount API request.
-func (r *UpdateAccountRequest) Send() (*UpdateAccountOutput, error) {
+func (r UpdateAccountRequest) Send() (*UpdateAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4737,7 +4737,7 @@ type UpdateApiKeyRequest struct {
 }
 
 // Send marshals and sends the UpdateApiKey API request.
-func (r *UpdateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
+func (r UpdateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4781,7 +4781,7 @@ type UpdateAuthorizerRequest struct {
 }
 
 // Send marshals and sends the UpdateAuthorizer API request.
-func (r *UpdateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
+func (r UpdateAuthorizerRequest) Send() (*UpdateAuthorizerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4827,7 +4827,7 @@ type UpdateBasePathMappingRequest struct {
 }
 
 // Send marshals and sends the UpdateBasePathMapping API request.
-func (r *UpdateBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
+func (r UpdateBasePathMappingRequest) Send() (*UpdateBasePathMappingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4871,7 +4871,7 @@ type UpdateClientCertificateRequest struct {
 }
 
 // Send marshals and sends the UpdateClientCertificate API request.
-func (r *UpdateClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
+func (r UpdateClientCertificateRequest) Send() (*UpdateClientCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4915,7 +4915,7 @@ type UpdateDeploymentRequest struct {
 }
 
 // Send marshals and sends the UpdateDeployment API request.
-func (r *UpdateDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
+func (r UpdateDeploymentRequest) Send() (*UpdateDeploymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -4959,7 +4959,7 @@ type UpdateDocumentationPartRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentationPart API request.
-func (r *UpdateDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
+func (r UpdateDocumentationPartRequest) Send() (*UpdateDocumentationPartOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5001,7 +5001,7 @@ type UpdateDocumentationVersionRequest struct {
 }
 
 // Send marshals and sends the UpdateDocumentationVersion API request.
-func (r *UpdateDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
+func (r UpdateDocumentationVersionRequest) Send() (*UpdateDocumentationVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5043,7 +5043,7 @@ type UpdateDomainNameRequest struct {
 }
 
 // Send marshals and sends the UpdateDomainName API request.
-func (r *UpdateDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
+func (r UpdateDomainNameRequest) Send() (*UpdateDomainNameOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5087,7 +5087,7 @@ type UpdateGatewayResponseRequest struct {
 }
 
 // Send marshals and sends the UpdateGatewayResponse API request.
-func (r *UpdateGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
+func (r UpdateGatewayResponseRequest) Send() (*UpdateGatewayResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5131,7 +5131,7 @@ type UpdateIntegrationRequest struct {
 }
 
 // Send marshals and sends the UpdateIntegration API request.
-func (r *UpdateIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
+func (r UpdateIntegrationRequest) Send() (*UpdateIntegrationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5175,7 +5175,7 @@ type UpdateIntegrationResponseRequest struct {
 }
 
 // Send marshals and sends the UpdateIntegrationResponse API request.
-func (r *UpdateIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
+func (r UpdateIntegrationResponseRequest) Send() (*UpdateIntegrationResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5219,7 +5219,7 @@ type UpdateMethodRequest struct {
 }
 
 // Send marshals and sends the UpdateMethod API request.
-func (r *UpdateMethodRequest) Send() (*UpdateMethodOutput, error) {
+func (r UpdateMethodRequest) Send() (*UpdateMethodOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5263,7 +5263,7 @@ type UpdateMethodResponseRequest struct {
 }
 
 // Send marshals and sends the UpdateMethodResponse API request.
-func (r *UpdateMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
+func (r UpdateMethodResponseRequest) Send() (*UpdateMethodResponseOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5307,7 +5307,7 @@ type UpdateModelRequest struct {
 }
 
 // Send marshals and sends the UpdateModel API request.
-func (r *UpdateModelRequest) Send() (*UpdateModelOutput, error) {
+func (r UpdateModelRequest) Send() (*UpdateModelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5351,7 +5351,7 @@ type UpdateRequestValidatorRequest struct {
 }
 
 // Send marshals and sends the UpdateRequestValidator API request.
-func (r *UpdateRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
+func (r UpdateRequestValidatorRequest) Send() (*UpdateRequestValidatorOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5395,7 +5395,7 @@ type UpdateResourceRequest struct {
 }
 
 // Send marshals and sends the UpdateResource API request.
-func (r *UpdateResourceRequest) Send() (*UpdateResourceOutput, error) {
+func (r UpdateResourceRequest) Send() (*UpdateResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5439,7 +5439,7 @@ type UpdateRestApiRequest struct {
 }
 
 // Send marshals and sends the UpdateRestApi API request.
-func (r *UpdateRestApiRequest) Send() (*UpdateRestApiOutput, error) {
+func (r UpdateRestApiRequest) Send() (*UpdateRestApiOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5483,7 +5483,7 @@ type UpdateStageRequest struct {
 }
 
 // Send marshals and sends the UpdateStage API request.
-func (r *UpdateStageRequest) Send() (*UpdateStageOutput, error) {
+func (r UpdateStageRequest) Send() (*UpdateStageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5527,7 +5527,7 @@ type UpdateUsageRequest struct {
 }
 
 // Send marshals and sends the UpdateUsage API request.
-func (r *UpdateUsageRequest) Send() (*UpdateUsageOutput, error) {
+func (r UpdateUsageRequest) Send() (*UpdateUsageOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -5572,7 +5572,7 @@ type UpdateUsagePlanRequest struct {
 }
 
 // Send marshals and sends the UpdateUsagePlan API request.
-func (r *UpdateUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
+func (r UpdateUsagePlanRequest) Send() (*UpdateUsagePlanOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

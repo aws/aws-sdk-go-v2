@@ -19,7 +19,7 @@ type CreateBudgetRequest struct {
 }
 
 // Send marshals and sends the CreateBudget API request.
-func (r *CreateBudgetRequest) Send() (*CreateBudgetOutput, error) {
+func (r CreateBudgetRequest) Send() (*CreateBudgetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ type CreateNotificationRequest struct {
 }
 
 // Send marshals and sends the CreateNotification API request.
-func (r *CreateNotificationRequest) Send() (*CreateNotificationOutput, error) {
+func (r CreateNotificationRequest) Send() (*CreateNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -107,7 +107,7 @@ type CreateSubscriberRequest struct {
 }
 
 // Send marshals and sends the CreateSubscriber API request.
-func (r *CreateSubscriberRequest) Send() (*CreateSubscriberOutput, error) {
+func (r CreateSubscriberRequest) Send() (*CreateSubscriberOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ type DeleteBudgetRequest struct {
 }
 
 // Send marshals and sends the DeleteBudget API request.
-func (r *DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
+func (r DeleteBudgetRequest) Send() (*DeleteBudgetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -195,7 +195,7 @@ type DeleteNotificationRequest struct {
 }
 
 // Send marshals and sends the DeleteNotification API request.
-func (r *DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
+func (r DeleteNotificationRequest) Send() (*DeleteNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -239,7 +239,7 @@ type DeleteSubscriberRequest struct {
 }
 
 // Send marshals and sends the DeleteSubscriber API request.
-func (r *DeleteSubscriberRequest) Send() (*DeleteSubscriberOutput, error) {
+func (r DeleteSubscriberRequest) Send() (*DeleteSubscriberOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -283,7 +283,7 @@ type DescribeBudgetRequest struct {
 }
 
 // Send marshals and sends the DescribeBudget API request.
-func (r *DescribeBudgetRequest) Send() (*DescribeBudgetOutput, error) {
+func (r DescribeBudgetRequest) Send() (*DescribeBudgetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -327,7 +327,7 @@ type DescribeBudgetsRequest struct {
 }
 
 // Send marshals and sends the DescribeBudgets API request.
-func (r *DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
+func (r DescribeBudgetsRequest) Send() (*DescribeBudgetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -371,7 +371,7 @@ type DescribeNotificationsForBudgetRequest struct {
 }
 
 // Send marshals and sends the DescribeNotificationsForBudget API request.
-func (r *DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsForBudgetOutput, error) {
+func (r DescribeNotificationsForBudgetRequest) Send() (*DescribeNotificationsForBudgetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -415,7 +415,7 @@ type DescribeSubscribersForNotificationRequest struct {
 }
 
 // Send marshals and sends the DescribeSubscribersForNotification API request.
-func (r *DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersForNotificationOutput, error) {
+func (r DescribeSubscribersForNotificationRequest) Send() (*DescribeSubscribersForNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -459,7 +459,7 @@ type UpdateBudgetRequest struct {
 }
 
 // Send marshals and sends the UpdateBudget API request.
-func (r *UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
+func (r UpdateBudgetRequest) Send() (*UpdateBudgetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -503,7 +503,7 @@ type UpdateNotificationRequest struct {
 }
 
 // Send marshals and sends the UpdateNotification API request.
-func (r *UpdateNotificationRequest) Send() (*UpdateNotificationOutput, error) {
+func (r UpdateNotificationRequest) Send() (*UpdateNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +547,7 @@ type UpdateSubscriberRequest struct {
 }
 
 // Send marshals and sends the UpdateSubscriber API request.
-func (r *UpdateSubscriberRequest) Send() (*UpdateSubscriberOutput, error) {
+func (r UpdateSubscriberRequest) Send() (*UpdateSubscriberOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

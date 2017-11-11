@@ -20,7 +20,7 @@ type AssignInstanceRequest struct {
 }
 
 // Send marshals and sends the AssignInstance API request.
-func (r *AssignInstanceRequest) Send() (*AssignInstanceOutput, error) {
+func (r AssignInstanceRequest) Send() (*AssignInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -80,7 +80,7 @@ type AssignVolumeRequest struct {
 }
 
 // Send marshals and sends the AssignVolume API request.
-func (r *AssignVolumeRequest) Send() (*AssignVolumeOutput, error) {
+func (r AssignVolumeRequest) Send() (*AssignVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -137,7 +137,7 @@ type AssociateElasticIpRequest struct {
 }
 
 // Send marshals and sends the AssociateElasticIp API request.
-func (r *AssociateElasticIpRequest) Send() (*AssociateElasticIpOutput, error) {
+func (r AssociateElasticIpRequest) Send() (*AssociateElasticIpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -192,7 +192,7 @@ type AttachElasticLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the AttachElasticLoadBalancer API request.
-func (r *AttachElasticLoadBalancerRequest) Send() (*AttachElasticLoadBalancerOutput, error) {
+func (r AttachElasticLoadBalancerRequest) Send() (*AttachElasticLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -252,7 +252,7 @@ type CloneStackRequest struct {
 }
 
 // Send marshals and sends the CloneStack API request.
-func (r *CloneStackRequest) Send() (*CloneStackOutput, error) {
+func (r CloneStackRequest) Send() (*CloneStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -304,7 +304,7 @@ type CreateAppRequest struct {
 }
 
 // Send marshals and sends the CreateApp API request.
-func (r *CreateAppRequest) Send() (*CreateAppOutput, error) {
+func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -356,7 +356,7 @@ type CreateDeploymentRequest struct {
 }
 
 // Send marshals and sends the CreateDeployment API request.
-func (r *CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
+func (r CreateDeploymentRequest) Send() (*CreateDeploymentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -409,7 +409,7 @@ type CreateInstanceRequest struct {
 }
 
 // Send marshals and sends the CreateInstance API request.
-func (r *CreateInstanceRequest) Send() (*CreateInstanceOutput, error) {
+func (r CreateInstanceRequest) Send() (*CreateInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -461,7 +461,7 @@ type CreateLayerRequest struct {
 }
 
 // Send marshals and sends the CreateLayer API request.
-func (r *CreateLayerRequest) Send() (*CreateLayerOutput, error) {
+func (r CreateLayerRequest) Send() (*CreateLayerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -519,7 +519,7 @@ type CreateStackRequest struct {
 }
 
 // Send marshals and sends the CreateStack API request.
-func (r *CreateStackRequest) Send() (*CreateStackOutput, error) {
+func (r CreateStackRequest) Send() (*CreateStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -569,7 +569,7 @@ type CreateUserProfileRequest struct {
 }
 
 // Send marshals and sends the CreateUserProfile API request.
-func (r *CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
+func (r CreateUserProfileRequest) Send() (*CreateUserProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -619,7 +619,7 @@ type DeleteAppRequest struct {
 }
 
 // Send marshals and sends the DeleteApp API request.
-func (r *DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -672,7 +672,7 @@ type DeleteInstanceRequest struct {
 }
 
 // Send marshals and sends the DeleteInstance API request.
-func (r *DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
+func (r DeleteInstanceRequest) Send() (*DeleteInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -728,7 +728,7 @@ type DeleteLayerRequest struct {
 }
 
 // Send marshals and sends the DeleteLayer API request.
-func (r *DeleteLayerRequest) Send() (*DeleteLayerOutput, error) {
+func (r DeleteLayerRequest) Send() (*DeleteLayerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -783,7 +783,7 @@ type DeleteStackRequest struct {
 }
 
 // Send marshals and sends the DeleteStack API request.
-func (r *DeleteStackRequest) Send() (*DeleteStackOutput, error) {
+func (r DeleteStackRequest) Send() (*DeleteStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -838,7 +838,7 @@ type DeleteUserProfileRequest struct {
 }
 
 // Send marshals and sends the DeleteUserProfile API request.
-func (r *DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
+func (r DeleteUserProfileRequest) Send() (*DeleteUserProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +890,7 @@ type DeregisterEcsClusterRequest struct {
 }
 
 // Send marshals and sends the DeregisterEcsCluster API request.
-func (r *DeregisterEcsClusterRequest) Send() (*DeregisterEcsClusterOutput, error) {
+func (r DeregisterEcsClusterRequest) Send() (*DeregisterEcsClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -944,7 +944,7 @@ type DeregisterElasticIpRequest struct {
 }
 
 // Send marshals and sends the DeregisterElasticIp API request.
-func (r *DeregisterElasticIpRequest) Send() (*DeregisterElasticIpOutput, error) {
+func (r DeregisterElasticIpRequest) Send() (*DeregisterElasticIpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -998,7 +998,7 @@ type DeregisterInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterInstance API request.
-func (r *DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
+func (r DeregisterInstanceRequest) Send() (*DeregisterInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1053,7 +1053,7 @@ type DeregisterRdsDbInstanceRequest struct {
 }
 
 // Send marshals and sends the DeregisterRdsDbInstance API request.
-func (r *DeregisterRdsDbInstanceRequest) Send() (*DeregisterRdsDbInstanceOutput, error) {
+func (r DeregisterRdsDbInstanceRequest) Send() (*DeregisterRdsDbInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1106,7 +1106,7 @@ type DeregisterVolumeRequest struct {
 }
 
 // Send marshals and sends the DeregisterVolume API request.
-func (r *DeregisterVolumeRequest) Send() (*DeregisterVolumeOutput, error) {
+func (r DeregisterVolumeRequest) Send() (*DeregisterVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1160,7 +1160,7 @@ type DescribeAgentVersionsRequest struct {
 }
 
 // Send marshals and sends the DescribeAgentVersions API request.
-func (r *DescribeAgentVersionsRequest) Send() (*DescribeAgentVersionsOutput, error) {
+func (r DescribeAgentVersionsRequest) Send() (*DescribeAgentVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1208,7 +1208,7 @@ type DescribeAppsRequest struct {
 }
 
 // Send marshals and sends the DescribeApps API request.
-func (r *DescribeAppsRequest) Send() (*DescribeAppsOutput, error) {
+func (r DescribeAppsRequest) Send() (*DescribeAppsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1261,7 +1261,7 @@ type DescribeCommandsRequest struct {
 }
 
 // Send marshals and sends the DescribeCommands API request.
-func (r *DescribeCommandsRequest) Send() (*DescribeCommandsOutput, error) {
+func (r DescribeCommandsRequest) Send() (*DescribeCommandsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1314,7 +1314,7 @@ type DescribeDeploymentsRequest struct {
 }
 
 // Send marshals and sends the DescribeDeployments API request.
-func (r *DescribeDeploymentsRequest) Send() (*DescribeDeploymentsOutput, error) {
+func (r DescribeDeploymentsRequest) Send() (*DescribeDeploymentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1367,7 +1367,7 @@ type DescribeEcsClustersRequest struct {
 }
 
 // Send marshals and sends the DescribeEcsClusters API request.
-func (r *DescribeEcsClustersRequest) Send() (*DescribeEcsClustersOutput, error) {
+func (r DescribeEcsClustersRequest) Send() (*DescribeEcsClustersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1479,7 +1479,7 @@ type DescribeElasticIpsRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticIps API request.
-func (r *DescribeElasticIpsRequest) Send() (*DescribeElasticIpsOutput, error) {
+func (r DescribeElasticIpsRequest) Send() (*DescribeElasticIpsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1532,7 +1532,7 @@ type DescribeElasticLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the DescribeElasticLoadBalancers API request.
-func (r *DescribeElasticLoadBalancersRequest) Send() (*DescribeElasticLoadBalancersOutput, error) {
+func (r DescribeElasticLoadBalancersRequest) Send() (*DescribeElasticLoadBalancersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1585,7 +1585,7 @@ type DescribeInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeInstances API request.
-func (r *DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
+func (r DescribeInstancesRequest) Send() (*DescribeInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1638,7 +1638,7 @@ type DescribeLayersRequest struct {
 }
 
 // Send marshals and sends the DescribeLayers API request.
-func (r *DescribeLayersRequest) Send() (*DescribeLayersOutput, error) {
+func (r DescribeLayersRequest) Send() (*DescribeLayersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1691,7 +1691,7 @@ type DescribeLoadBasedAutoScalingRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBasedAutoScaling API request.
-func (r *DescribeLoadBasedAutoScalingRequest) Send() (*DescribeLoadBasedAutoScalingOutput, error) {
+func (r DescribeLoadBasedAutoScalingRequest) Send() (*DescribeLoadBasedAutoScalingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1744,7 +1744,7 @@ type DescribeMyUserProfileRequest struct {
 }
 
 // Send marshals and sends the DescribeMyUserProfile API request.
-func (r *DescribeMyUserProfileRequest) Send() (*DescribeMyUserProfileOutput, error) {
+func (r DescribeMyUserProfileRequest) Send() (*DescribeMyUserProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1794,7 +1794,7 @@ type DescribePermissionsRequest struct {
 }
 
 // Send marshals and sends the DescribePermissions API request.
-func (r *DescribePermissionsRequest) Send() (*DescribePermissionsOutput, error) {
+func (r DescribePermissionsRequest) Send() (*DescribePermissionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1845,7 +1845,7 @@ type DescribeRaidArraysRequest struct {
 }
 
 // Send marshals and sends the DescribeRaidArrays API request.
-func (r *DescribeRaidArraysRequest) Send() (*DescribeRaidArraysOutput, error) {
+func (r DescribeRaidArraysRequest) Send() (*DescribeRaidArraysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1898,7 +1898,7 @@ type DescribeRdsDbInstancesRequest struct {
 }
 
 // Send marshals and sends the DescribeRdsDbInstances API request.
-func (r *DescribeRdsDbInstancesRequest) Send() (*DescribeRdsDbInstancesOutput, error) {
+func (r DescribeRdsDbInstancesRequest) Send() (*DescribeRdsDbInstancesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1951,7 +1951,7 @@ type DescribeServiceErrorsRequest struct {
 }
 
 // Send marshals and sends the DescribeServiceErrors API request.
-func (r *DescribeServiceErrorsRequest) Send() (*DescribeServiceErrorsOutput, error) {
+func (r DescribeServiceErrorsRequest) Send() (*DescribeServiceErrorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2004,7 +2004,7 @@ type DescribeStackProvisioningParametersRequest struct {
 }
 
 // Send marshals and sends the DescribeStackProvisioningParameters API request.
-func (r *DescribeStackProvisioningParametersRequest) Send() (*DescribeStackProvisioningParametersOutput, error) {
+func (r DescribeStackProvisioningParametersRequest) Send() (*DescribeStackProvisioningParametersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2055,7 +2055,7 @@ type DescribeStackSummaryRequest struct {
 }
 
 // Send marshals and sends the DescribeStackSummary API request.
-func (r *DescribeStackSummaryRequest) Send() (*DescribeStackSummaryOutput, error) {
+func (r DescribeStackSummaryRequest) Send() (*DescribeStackSummaryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2107,7 +2107,7 @@ type DescribeStacksRequest struct {
 }
 
 // Send marshals and sends the DescribeStacks API request.
-func (r *DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
+func (r DescribeStacksRequest) Send() (*DescribeStacksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2158,7 +2158,7 @@ type DescribeTimeBasedAutoScalingRequest struct {
 }
 
 // Send marshals and sends the DescribeTimeBasedAutoScaling API request.
-func (r *DescribeTimeBasedAutoScalingRequest) Send() (*DescribeTimeBasedAutoScalingOutput, error) {
+func (r DescribeTimeBasedAutoScalingRequest) Send() (*DescribeTimeBasedAutoScalingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2211,7 +2211,7 @@ type DescribeUserProfilesRequest struct {
 }
 
 // Send marshals and sends the DescribeUserProfiles API request.
-func (r *DescribeUserProfilesRequest) Send() (*DescribeUserProfilesOutput, error) {
+func (r DescribeUserProfilesRequest) Send() (*DescribeUserProfilesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2261,7 +2261,7 @@ type DescribeVolumesRequest struct {
 }
 
 // Send marshals and sends the DescribeVolumes API request.
-func (r *DescribeVolumesRequest) Send() (*DescribeVolumesOutput, error) {
+func (r DescribeVolumesRequest) Send() (*DescribeVolumesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2314,7 +2314,7 @@ type DetachElasticLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DetachElasticLoadBalancer API request.
-func (r *DetachElasticLoadBalancerRequest) Send() (*DetachElasticLoadBalancerOutput, error) {
+func (r DetachElasticLoadBalancerRequest) Send() (*DetachElasticLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2367,7 +2367,7 @@ type DisassociateElasticIpRequest struct {
 }
 
 // Send marshals and sends the DisassociateElasticIp API request.
-func (r *DisassociateElasticIpRequest) Send() (*DisassociateElasticIpOutput, error) {
+func (r DisassociateElasticIpRequest) Send() (*DisassociateElasticIpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2422,7 +2422,7 @@ type GetHostnameSuggestionRequest struct {
 }
 
 // Send marshals and sends the GetHostnameSuggestion API request.
-func (r *GetHostnameSuggestionRequest) Send() (*GetHostnameSuggestionOutput, error) {
+func (r GetHostnameSuggestionRequest) Send() (*GetHostnameSuggestionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2474,7 +2474,7 @@ type GrantAccessRequest struct {
 }
 
 // Send marshals and sends the GrantAccess API request.
-func (r *GrantAccessRequest) Send() (*GrantAccessOutput, error) {
+func (r GrantAccessRequest) Send() (*GrantAccessOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2522,7 +2522,7 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2568,7 +2568,7 @@ type RebootInstanceRequest struct {
 }
 
 // Send marshals and sends the RebootInstance API request.
-func (r *RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
+func (r RebootInstanceRequest) Send() (*RebootInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2622,7 +2622,7 @@ type RegisterEcsClusterRequest struct {
 }
 
 // Send marshals and sends the RegisterEcsCluster API request.
-func (r *RegisterEcsClusterRequest) Send() (*RegisterEcsClusterOutput, error) {
+func (r RegisterEcsClusterRequest) Send() (*RegisterEcsClusterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2675,7 +2675,7 @@ type RegisterElasticIpRequest struct {
 }
 
 // Send marshals and sends the RegisterElasticIp API request.
-func (r *RegisterElasticIpRequest) Send() (*RegisterElasticIpOutput, error) {
+func (r RegisterElasticIpRequest) Send() (*RegisterElasticIpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2729,7 +2729,7 @@ type RegisterInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterInstance API request.
-func (r *RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
+func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2794,7 +2794,7 @@ type RegisterRdsDbInstanceRequest struct {
 }
 
 // Send marshals and sends the RegisterRdsDbInstance API request.
-func (r *RegisterRdsDbInstanceRequest) Send() (*RegisterRdsDbInstanceOutput, error) {
+func (r RegisterRdsDbInstanceRequest) Send() (*RegisterRdsDbInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2847,7 +2847,7 @@ type RegisterVolumeRequest struct {
 }
 
 // Send marshals and sends the RegisterVolume API request.
-func (r *RegisterVolumeRequest) Send() (*RegisterVolumeOutput, error) {
+func (r RegisterVolumeRequest) Send() (*RegisterVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2901,7 +2901,7 @@ type SetLoadBasedAutoScalingRequest struct {
 }
 
 // Send marshals and sends the SetLoadBasedAutoScaling API request.
-func (r *SetLoadBasedAutoScalingRequest) Send() (*SetLoadBasedAutoScalingOutput, error) {
+func (r SetLoadBasedAutoScalingRequest) Send() (*SetLoadBasedAutoScalingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2961,7 +2961,7 @@ type SetPermissionRequest struct {
 }
 
 // Send marshals and sends the SetPermission API request.
-func (r *SetPermissionRequest) Send() (*SetPermissionOutput, error) {
+func (r SetPermissionRequest) Send() (*SetPermissionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3015,7 +3015,7 @@ type SetTimeBasedAutoScalingRequest struct {
 }
 
 // Send marshals and sends the SetTimeBasedAutoScaling API request.
-func (r *SetTimeBasedAutoScalingRequest) Send() (*SetTimeBasedAutoScalingOutput, error) {
+func (r SetTimeBasedAutoScalingRequest) Send() (*SetTimeBasedAutoScalingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3070,7 +3070,7 @@ type StartInstanceRequest struct {
 }
 
 // Send marshals and sends the StartInstance API request.
-func (r *StartInstanceRequest) Send() (*StartInstanceOutput, error) {
+func (r StartInstanceRequest) Send() (*StartInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3124,7 +3124,7 @@ type StartStackRequest struct {
 }
 
 // Send marshals and sends the StartStack API request.
-func (r *StartStackRequest) Send() (*StartStackOutput, error) {
+func (r StartStackRequest) Send() (*StartStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3177,7 +3177,7 @@ type StopInstanceRequest struct {
 }
 
 // Send marshals and sends the StopInstance API request.
-func (r *StopInstanceRequest) Send() (*StopInstanceOutput, error) {
+func (r StopInstanceRequest) Send() (*StopInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3233,7 +3233,7 @@ type StopStackRequest struct {
 }
 
 // Send marshals and sends the StopStack API request.
-func (r *StopStackRequest) Send() (*StopStackOutput, error) {
+func (r StopStackRequest) Send() (*StopStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3286,7 +3286,7 @@ type TagResourceRequest struct {
 }
 
 // Send marshals and sends the TagResource API request.
-func (r *TagResourceRequest) Send() (*TagResourceOutput, error) {
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3336,7 +3336,7 @@ type UnassignInstanceRequest struct {
 }
 
 // Send marshals and sends the UnassignInstance API request.
-func (r *UnassignInstanceRequest) Send() (*UnassignInstanceOutput, error) {
+func (r UnassignInstanceRequest) Send() (*UnassignInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3392,7 +3392,7 @@ type UnassignVolumeRequest struct {
 }
 
 // Send marshals and sends the UnassignVolume API request.
-func (r *UnassignVolumeRequest) Send() (*UnassignVolumeOutput, error) {
+func (r UnassignVolumeRequest) Send() (*UnassignVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3446,7 +3446,7 @@ type UntagResourceRequest struct {
 }
 
 // Send marshals and sends the UntagResource API request.
-func (r *UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3494,7 +3494,7 @@ type UpdateAppRequest struct {
 }
 
 // Send marshals and sends the UpdateApp API request.
-func (r *UpdateAppRequest) Send() (*UpdateAppOutput, error) {
+func (r UpdateAppRequest) Send() (*UpdateAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3547,7 +3547,7 @@ type UpdateElasticIpRequest struct {
 }
 
 // Send marshals and sends the UpdateElasticIp API request.
-func (r *UpdateElasticIpRequest) Send() (*UpdateElasticIpOutput, error) {
+func (r UpdateElasticIpRequest) Send() (*UpdateElasticIpOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3601,7 +3601,7 @@ type UpdateInstanceRequest struct {
 }
 
 // Send marshals and sends the UpdateInstance API request.
-func (r *UpdateInstanceRequest) Send() (*UpdateInstanceOutput, error) {
+func (r UpdateInstanceRequest) Send() (*UpdateInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3654,7 +3654,7 @@ type UpdateLayerRequest struct {
 }
 
 // Send marshals and sends the UpdateLayer API request.
-func (r *UpdateLayerRequest) Send() (*UpdateLayerOutput, error) {
+func (r UpdateLayerRequest) Send() (*UpdateLayerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3707,7 +3707,7 @@ type UpdateMyUserProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateMyUserProfile API request.
-func (r *UpdateMyUserProfileRequest) Send() (*UpdateMyUserProfileOutput, error) {
+func (r UpdateMyUserProfileRequest) Send() (*UpdateMyUserProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3759,7 +3759,7 @@ type UpdateRdsDbInstanceRequest struct {
 }
 
 // Send marshals and sends the UpdateRdsDbInstance API request.
-func (r *UpdateRdsDbInstanceRequest) Send() (*UpdateRdsDbInstanceOutput, error) {
+func (r UpdateRdsDbInstanceRequest) Send() (*UpdateRdsDbInstanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3812,7 +3812,7 @@ type UpdateStackRequest struct {
 }
 
 // Send marshals and sends the UpdateStack API request.
-func (r *UpdateStackRequest) Send() (*UpdateStackOutput, error) {
+func (r UpdateStackRequest) Send() (*UpdateStackOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3865,7 +3865,7 @@ type UpdateUserProfileRequest struct {
 }
 
 // Send marshals and sends the UpdateUserProfile API request.
-func (r *UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
+func (r UpdateUserProfileRequest) Send() (*UpdateUserProfileOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -3917,7 +3917,7 @@ type UpdateVolumeRequest struct {
 }
 
 // Send marshals and sends the UpdateVolume API request.
-func (r *UpdateVolumeRequest) Send() (*UpdateVolumeOutput, error) {
+func (r UpdateVolumeRequest) Send() (*UpdateVolumeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

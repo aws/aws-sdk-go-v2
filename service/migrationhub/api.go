@@ -19,7 +19,7 @@ type AssociateCreatedArtifactRequest struct {
 }
 
 // Send marshals and sends the AssociateCreatedArtifact API request.
-func (r *AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput, error) {
+func (r AssociateCreatedArtifactRequest) Send() (*AssociateCreatedArtifactOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -77,7 +77,7 @@ type AssociateDiscoveredResourceRequest struct {
 }
 
 // Send marshals and sends the AssociateDiscoveredResource API request.
-func (r *AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResourceOutput, error) {
+func (r AssociateDiscoveredResourceRequest) Send() (*AssociateDiscoveredResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ type CreateProgressUpdateStreamRequest struct {
 }
 
 // Send marshals and sends the CreateProgressUpdateStream API request.
-func (r *CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOutput, error) {
+func (r CreateProgressUpdateStreamRequest) Send() (*CreateProgressUpdateStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -174,7 +174,7 @@ type DeleteProgressUpdateStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteProgressUpdateStream API request.
-func (r *DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOutput, error) {
+func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -242,7 +242,7 @@ type DescribeApplicationStateRequest struct {
 }
 
 // Send marshals and sends the DescribeApplicationState API request.
-func (r *DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput, error) {
+func (r DescribeApplicationStateRequest) Send() (*DescribeApplicationStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -288,7 +288,7 @@ type DescribeMigrationTaskRequest struct {
 }
 
 // Send marshals and sends the DescribeMigrationTask API request.
-func (r *DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, error) {
+func (r DescribeMigrationTaskRequest) Send() (*DescribeMigrationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -334,7 +334,7 @@ type DisassociateCreatedArtifactRequest struct {
 }
 
 // Send marshals and sends the DisassociateCreatedArtifact API request.
-func (r *DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifactOutput, error) {
+func (r DisassociateCreatedArtifactRequest) Send() (*DisassociateCreatedArtifactOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -392,7 +392,7 @@ type DisassociateDiscoveredResourceRequest struct {
 }
 
 // Send marshals and sends the DisassociateDiscoveredResource API request.
-func (r *DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredResourceOutput, error) {
+func (r DisassociateDiscoveredResourceRequest) Send() (*DisassociateDiscoveredResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -439,7 +439,7 @@ type ImportMigrationTaskRequest struct {
 }
 
 // Send marshals and sends the ImportMigrationTask API request.
-func (r *ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
+func (r ImportMigrationTaskRequest) Send() (*ImportMigrationTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -490,7 +490,7 @@ type ListCreatedArtifactsRequest struct {
 }
 
 // Send marshals and sends the ListCreatedArtifacts API request.
-func (r *ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error) {
+func (r ListCreatedArtifactsRequest) Send() (*ListCreatedArtifactsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -544,7 +544,7 @@ type ListDiscoveredResourcesRequest struct {
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
-func (r *ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -590,7 +590,7 @@ type ListMigrationTasksRequest struct {
 }
 
 // Send marshals and sends the ListMigrationTasks API request.
-func (r *ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
+func (r ListMigrationTasksRequest) Send() (*ListMigrationTasksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -644,7 +644,7 @@ type ListProgressUpdateStreamsRequest struct {
 }
 
 // Send marshals and sends the ListProgressUpdateStreams API request.
-func (r *ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutput, error) {
+func (r ListProgressUpdateStreamsRequest) Send() (*ListProgressUpdateStreamsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -691,7 +691,7 @@ type NotifyApplicationStateRequest struct {
 }
 
 // Send marshals and sends the NotifyApplicationState API request.
-func (r *NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, error) {
+func (r NotifyApplicationStateRequest) Send() (*NotifyApplicationStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -739,7 +739,7 @@ type NotifyMigrationTaskStateRequest struct {
 }
 
 // Send marshals and sends the NotifyMigrationTaskState API request.
-func (r *NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput, error) {
+func (r NotifyMigrationTaskStateRequest) Send() (*NotifyMigrationTaskStateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -794,7 +794,7 @@ type PutResourceAttributesRequest struct {
 }
 
 // Send marshals and sends the PutResourceAttributes API request.
-func (r *PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, error) {
+func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

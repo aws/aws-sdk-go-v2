@@ -21,7 +21,7 @@ type CloneReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the CloneReceiptRuleSet API request.
-func (r *CloneReceiptRuleSetRequest) Send() (*CloneReceiptRuleSetOutput, error) {
+func (r CloneReceiptRuleSetRequest) Send() (*CloneReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ type CreateConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
-func (r *CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, error) {
+func (r CreateConfigurationSetRequest) Send() (*CreateConfigurationSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -125,7 +125,7 @@ type CreateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
-func (r *CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurationSetEventDestinationOutput, error) {
+func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurationSetEventDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -181,7 +181,7 @@ type CreateConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the CreateConfigurationSetTrackingOptions API request.
-func (r *CreateConfigurationSetTrackingOptionsRequest) Send() (*CreateConfigurationSetTrackingOptionsOutput, error) {
+func (r CreateConfigurationSetTrackingOptionsRequest) Send() (*CreateConfigurationSetTrackingOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -235,7 +235,7 @@ type CreateReceiptFilterRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptFilter API request.
-func (r *CreateReceiptFilterRequest) Send() (*CreateReceiptFilterOutput, error) {
+func (r CreateReceiptFilterRequest) Send() (*CreateReceiptFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +286,7 @@ type CreateReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptRule API request.
-func (r *CreateReceiptRuleRequest) Send() (*CreateReceiptRuleOutput, error) {
+func (r CreateReceiptRuleRequest) Send() (*CreateReceiptRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -337,7 +337,7 @@ type CreateReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the CreateReceiptRuleSet API request.
-func (r *CreateReceiptRuleSetRequest) Send() (*CreateReceiptRuleSetOutput, error) {
+func (r CreateReceiptRuleSetRequest) Send() (*CreateReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -388,7 +388,7 @@ type DeleteConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
-func (r *DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, error) {
+func (r DeleteConfigurationSetRequest) Send() (*DeleteConfigurationSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -438,7 +438,7 @@ type DeleteConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
-func (r *DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurationSetEventDestinationOutput, error) {
+func (r DeleteConfigurationSetEventDestinationRequest) Send() (*DeleteConfigurationSetEventDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -489,7 +489,7 @@ type DeleteConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationSetTrackingOptions API request.
-func (r *DeleteConfigurationSetTrackingOptionsRequest) Send() (*DeleteConfigurationSetTrackingOptionsOutput, error) {
+func (r DeleteConfigurationSetTrackingOptionsRequest) Send() (*DeleteConfigurationSetTrackingOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +547,7 @@ type DeleteIdentityRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentity API request.
-func (r *DeleteIdentityRequest) Send() (*DeleteIdentityOutput, error) {
+func (r DeleteIdentityRequest) Send() (*DeleteIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -596,7 +596,7 @@ type DeleteIdentityPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteIdentityPolicy API request.
-func (r *DeleteIdentityPolicyRequest) Send() (*DeleteIdentityPolicyOutput, error) {
+func (r DeleteIdentityPolicyRequest) Send() (*DeleteIdentityPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -653,7 +653,7 @@ type DeleteReceiptFilterRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptFilter API request.
-func (r *DeleteReceiptFilterRequest) Send() (*DeleteReceiptFilterOutput, error) {
+func (r DeleteReceiptFilterRequest) Send() (*DeleteReceiptFilterOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -704,7 +704,7 @@ type DeleteReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptRule API request.
-func (r *DeleteReceiptRuleRequest) Send() (*DeleteReceiptRuleOutput, error) {
+func (r DeleteReceiptRuleRequest) Send() (*DeleteReceiptRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -755,7 +755,7 @@ type DeleteReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DeleteReceiptRuleSet API request.
-func (r *DeleteReceiptRuleSetRequest) Send() (*DeleteReceiptRuleSetOutput, error) {
+func (r DeleteReceiptRuleSetRequest) Send() (*DeleteReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -808,7 +808,7 @@ type DeleteVerifiedEmailAddressRequest struct {
 }
 
 // Send marshals and sends the DeleteVerifiedEmailAddress API request.
-func (r *DeleteVerifiedEmailAddressRequest) Send() (*DeleteVerifiedEmailAddressOutput, error) {
+func (r DeleteVerifiedEmailAddressRequest) Send() (*DeleteVerifiedEmailAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -857,7 +857,7 @@ type DescribeActiveReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DescribeActiveReceiptRuleSet API request.
-func (r *DescribeActiveReceiptRuleSetRequest) Send() (*DescribeActiveReceiptRuleSetOutput, error) {
+func (r DescribeActiveReceiptRuleSetRequest) Send() (*DescribeActiveReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -909,7 +909,7 @@ type DescribeConfigurationSetRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationSet API request.
-func (r *DescribeConfigurationSetRequest) Send() (*DescribeConfigurationSetOutput, error) {
+func (r DescribeConfigurationSetRequest) Send() (*DescribeConfigurationSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -958,7 +958,7 @@ type DescribeReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the DescribeReceiptRule API request.
-func (r *DescribeReceiptRuleRequest) Send() (*DescribeReceiptRuleOutput, error) {
+func (r DescribeReceiptRuleRequest) Send() (*DescribeReceiptRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1009,7 +1009,7 @@ type DescribeReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the DescribeReceiptRuleSet API request.
-func (r *DescribeReceiptRuleSetRequest) Send() (*DescribeReceiptRuleSetOutput, error) {
+func (r DescribeReceiptRuleSetRequest) Send() (*DescribeReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1060,7 +1060,7 @@ type GetIdentityDkimAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityDkimAttributes API request.
-func (r *GetIdentityDkimAttributesRequest) Send() (*GetIdentityDkimAttributesOutput, error) {
+func (r GetIdentityDkimAttributesRequest) Send() (*GetIdentityDkimAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1127,7 +1127,7 @@ type GetIdentityMailFromDomainAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityMailFromDomainAttributes API request.
-func (r *GetIdentityMailFromDomainAttributesRequest) Send() (*GetIdentityMailFromDomainAttributesOutput, error) {
+func (r GetIdentityMailFromDomainAttributesRequest) Send() (*GetIdentityMailFromDomainAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1177,7 +1177,7 @@ type GetIdentityNotificationAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityNotificationAttributes API request.
-func (r *GetIdentityNotificationAttributesRequest) Send() (*GetIdentityNotificationAttributesOutput, error) {
+func (r GetIdentityNotificationAttributesRequest) Send() (*GetIdentityNotificationAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1230,7 +1230,7 @@ type GetIdentityPoliciesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityPolicies API request.
-func (r *GetIdentityPoliciesRequest) Send() (*GetIdentityPoliciesOutput, error) {
+func (r GetIdentityPoliciesRequest) Send() (*GetIdentityPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1288,7 +1288,7 @@ type GetIdentityVerificationAttributesRequest struct {
 }
 
 // Send marshals and sends the GetIdentityVerificationAttributes API request.
-func (r *GetIdentityVerificationAttributesRequest) Send() (*GetIdentityVerificationAttributesOutput, error) {
+func (r GetIdentityVerificationAttributesRequest) Send() (*GetIdentityVerificationAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1355,7 +1355,7 @@ type GetSendQuotaRequest struct {
 }
 
 // Send marshals and sends the GetSendQuota API request.
-func (r *GetSendQuotaRequest) Send() (*GetSendQuotaOutput, error) {
+func (r GetSendQuotaRequest) Send() (*GetSendQuotaOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1403,7 +1403,7 @@ type GetSendStatisticsRequest struct {
 }
 
 // Send marshals and sends the GetSendStatistics API request.
-func (r *GetSendStatisticsRequest) Send() (*GetSendStatisticsOutput, error) {
+func (r GetSendStatisticsRequest) Send() (*GetSendStatisticsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1453,7 +1453,7 @@ type ListConfigurationSetsRequest struct {
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
-func (r *ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, error) {
+func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1509,7 +1509,7 @@ type ListIdentitiesRequest struct {
 }
 
 // Send marshals and sends the ListIdentities API request.
-func (r *ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
+func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1614,7 +1614,7 @@ type ListIdentityPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListIdentityPolicies API request.
-func (r *ListIdentityPoliciesRequest) Send() (*ListIdentityPoliciesOutput, error) {
+func (r ListIdentityPoliciesRequest) Send() (*ListIdentityPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1671,7 +1671,7 @@ type ListReceiptFiltersRequest struct {
 }
 
 // Send marshals and sends the ListReceiptFilters API request.
-func (r *ListReceiptFiltersRequest) Send() (*ListReceiptFiltersOutput, error) {
+func (r ListReceiptFiltersRequest) Send() (*ListReceiptFiltersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1722,7 +1722,7 @@ type ListReceiptRuleSetsRequest struct {
 }
 
 // Send marshals and sends the ListReceiptRuleSets API request.
-func (r *ListReceiptRuleSetsRequest) Send() (*ListReceiptRuleSetsOutput, error) {
+func (r ListReceiptRuleSetsRequest) Send() (*ListReceiptRuleSetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1776,7 +1776,7 @@ type ListVerifiedEmailAddressesRequest struct {
 }
 
 // Send marshals and sends the ListVerifiedEmailAddresses API request.
-func (r *ListVerifiedEmailAddressesRequest) Send() (*ListVerifiedEmailAddressesOutput, error) {
+func (r ListVerifiedEmailAddressesRequest) Send() (*ListVerifiedEmailAddressesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1823,7 +1823,7 @@ type PutIdentityPolicyRequest struct {
 }
 
 // Send marshals and sends the PutIdentityPolicy API request.
-func (r *PutIdentityPolicyRequest) Send() (*PutIdentityPolicyOutput, error) {
+func (r PutIdentityPolicyRequest) Send() (*PutIdentityPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1879,7 +1879,7 @@ type ReorderReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the ReorderReceiptRuleSet API request.
-func (r *ReorderReceiptRuleSetRequest) Send() (*ReorderReceiptRuleSetOutput, error) {
+func (r ReorderReceiptRuleSetRequest) Send() (*ReorderReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1934,7 +1934,7 @@ type SendBounceRequest struct {
 }
 
 // Send marshals and sends the SendBounce API request.
-func (r *SendBounceRequest) Send() (*SendBounceOutput, error) {
+func (r SendBounceRequest) Send() (*SendBounceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1990,7 +1990,7 @@ type SendEmailRequest struct {
 }
 
 // Send marshals and sends the SendEmail API request.
-func (r *SendEmailRequest) Send() (*SendEmailOutput, error) {
+func (r SendEmailRequest) Send() (*SendEmailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2070,7 +2070,7 @@ type SendRawEmailRequest struct {
 }
 
 // Send marshals and sends the SendRawEmail API request.
-func (r *SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
+func (r SendRawEmailRequest) Send() (*SendRawEmailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2186,7 +2186,7 @@ type SetActiveReceiptRuleSetRequest struct {
 }
 
 // Send marshals and sends the SetActiveReceiptRuleSet API request.
-func (r *SetActiveReceiptRuleSetRequest) Send() (*SetActiveReceiptRuleSetOutput, error) {
+func (r SetActiveReceiptRuleSetRequest) Send() (*SetActiveReceiptRuleSetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2240,7 +2240,7 @@ type SetIdentityDkimEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityDkimEnabled API request.
-func (r *SetIdentityDkimEnabledRequest) Send() (*SetIdentityDkimEnabledOutput, error) {
+func (r SetIdentityDkimEnabledRequest) Send() (*SetIdentityDkimEnabledOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2303,7 +2303,7 @@ type SetIdentityFeedbackForwardingEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityFeedbackForwardingEnabled API request.
-func (r *SetIdentityFeedbackForwardingEnabledRequest) Send() (*SetIdentityFeedbackForwardingEnabledOutput, error) {
+func (r SetIdentityFeedbackForwardingEnabledRequest) Send() (*SetIdentityFeedbackForwardingEnabledOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2360,7 +2360,7 @@ type SetIdentityHeadersInNotificationsEnabledRequest struct {
 }
 
 // Send marshals and sends the SetIdentityHeadersInNotificationsEnabled API request.
-func (r *SetIdentityHeadersInNotificationsEnabledRequest) Send() (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
+func (r SetIdentityHeadersInNotificationsEnabledRequest) Send() (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2413,7 +2413,7 @@ type SetIdentityMailFromDomainRequest struct {
 }
 
 // Send marshals and sends the SetIdentityMailFromDomain API request.
-func (r *SetIdentityMailFromDomainRequest) Send() (*SetIdentityMailFromDomainOutput, error) {
+func (r SetIdentityMailFromDomainRequest) Send() (*SetIdentityMailFromDomainOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2467,7 +2467,7 @@ type SetIdentityNotificationTopicRequest struct {
 }
 
 // Send marshals and sends the SetIdentityNotificationTopic API request.
-func (r *SetIdentityNotificationTopicRequest) Send() (*SetIdentityNotificationTopicOutput, error) {
+func (r SetIdentityNotificationTopicRequest) Send() (*SetIdentityNotificationTopicOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2524,7 +2524,7 @@ type SetReceiptRulePositionRequest struct {
 }
 
 // Send marshals and sends the SetReceiptRulePosition API request.
-func (r *SetReceiptRulePositionRequest) Send() (*SetReceiptRulePositionOutput, error) {
+func (r SetReceiptRulePositionRequest) Send() (*SetReceiptRulePositionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2575,7 +2575,7 @@ type UpdateConfigurationSetEventDestinationRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
-func (r *UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurationSetEventDestinationOutput, error) {
+func (r UpdateConfigurationSetEventDestinationRequest) Send() (*UpdateConfigurationSetEventDestinationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2632,7 +2632,7 @@ type UpdateConfigurationSetTrackingOptionsRequest struct {
 }
 
 // Send marshals and sends the UpdateConfigurationSetTrackingOptions API request.
-func (r *UpdateConfigurationSetTrackingOptionsRequest) Send() (*UpdateConfigurationSetTrackingOptionsOutput, error) {
+func (r UpdateConfigurationSetTrackingOptionsRequest) Send() (*UpdateConfigurationSetTrackingOptionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2686,7 +2686,7 @@ type UpdateReceiptRuleRequest struct {
 }
 
 // Send marshals and sends the UpdateReceiptRule API request.
-func (r *UpdateReceiptRuleRequest) Send() (*UpdateReceiptRuleOutput, error) {
+func (r UpdateReceiptRuleRequest) Send() (*UpdateReceiptRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2737,7 +2737,7 @@ type VerifyDomainDkimRequest struct {
 }
 
 // Send marshals and sends the VerifyDomainDkim API request.
-func (r *VerifyDomainDkimRequest) Send() (*VerifyDomainDkimOutput, error) {
+func (r VerifyDomainDkimRequest) Send() (*VerifyDomainDkimOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2797,7 +2797,7 @@ type VerifyDomainIdentityRequest struct {
 }
 
 // Send marshals and sends the VerifyDomainIdentity API request.
-func (r *VerifyDomainIdentityRequest) Send() (*VerifyDomainIdentityOutput, error) {
+func (r VerifyDomainIdentityRequest) Send() (*VerifyDomainIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2848,7 +2848,7 @@ type VerifyEmailAddressRequest struct {
 }
 
 // Send marshals and sends the VerifyEmailAddress API request.
-func (r *VerifyEmailAddressRequest) Send() (*VerifyEmailAddressOutput, error) {
+func (r VerifyEmailAddressRequest) Send() (*VerifyEmailAddressOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2896,7 +2896,7 @@ type VerifyEmailIdentityRequest struct {
 }
 
 // Send marshals and sends the VerifyEmailIdentity API request.
-func (r *VerifyEmailIdentityRequest) Send() (*VerifyEmailIdentityOutput, error) {
+func (r VerifyEmailIdentityRequest) Send() (*VerifyEmailIdentityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

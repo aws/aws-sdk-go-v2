@@ -19,7 +19,7 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -70,7 +70,7 @@ type CreateTrailRequest struct {
 }
 
 // Send marshals and sends the CreateTrail API request.
-func (r *CreateTrailRequest) Send() (*CreateTrailOutput, error) {
+func (r CreateTrailRequest) Send() (*CreateTrailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -118,7 +118,7 @@ type DeleteTrailRequest struct {
 }
 
 // Send marshals and sends the DeleteTrail API request.
-func (r *DeleteTrailRequest) Send() (*DeleteTrailOutput, error) {
+func (r DeleteTrailRequest) Send() (*DeleteTrailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ type DescribeTrailsRequest struct {
 }
 
 // Send marshals and sends the DescribeTrails API request.
-func (r *DescribeTrailsRequest) Send() (*DescribeTrailsOutput, error) {
+func (r DescribeTrailsRequest) Send() (*DescribeTrailsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -213,7 +213,7 @@ type GetEventSelectorsRequest struct {
 }
 
 // Send marshals and sends the GetEventSelectors API request.
-func (r *GetEventSelectorsRequest) Send() (*GetEventSelectorsOutput, error) {
+func (r GetEventSelectorsRequest) Send() (*GetEventSelectorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -271,7 +271,7 @@ type GetTrailStatusRequest struct {
 }
 
 // Send marshals and sends the GetTrailStatus API request.
-func (r *GetTrailStatusRequest) Send() (*GetTrailStatusOutput, error) {
+func (r GetTrailStatusRequest) Send() (*GetTrailStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -321,7 +321,7 @@ type ListPublicKeysRequest struct {
 }
 
 // Send marshals and sends the ListPublicKeys API request.
-func (r *ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
+func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -374,7 +374,7 @@ type ListTagsRequest struct {
 }
 
 // Send marshals and sends the ListTags API request.
-func (r *ListTagsRequest) Send() (*ListTagsOutput, error) {
+func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -420,7 +420,7 @@ type LookupEventsRequest struct {
 }
 
 // Send marshals and sends the LookupEvents API request.
-func (r *LookupEventsRequest) Send() (*LookupEventsOutput, error) {
+func (r LookupEventsRequest) Send() (*LookupEventsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -547,7 +547,7 @@ type PutEventSelectorsRequest struct {
 }
 
 // Send marshals and sends the PutEventSelectors API request.
-func (r *PutEventSelectorsRequest) Send() (*PutEventSelectorsOutput, error) {
+func (r PutEventSelectorsRequest) Send() (*PutEventSelectorsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -620,7 +620,7 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r *RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -666,7 +666,7 @@ type StartLoggingRequest struct {
 }
 
 // Send marshals and sends the StartLogging API request.
-func (r *StartLoggingRequest) Send() (*StartLoggingOutput, error) {
+func (r StartLoggingRequest) Send() (*StartLoggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -716,7 +716,7 @@ type StopLoggingRequest struct {
 }
 
 // Send marshals and sends the StopLogging API request.
-func (r *StopLoggingRequest) Send() (*StopLoggingOutput, error) {
+func (r StopLoggingRequest) Send() (*StopLoggingOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -768,7 +768,7 @@ type UpdateTrailRequest struct {
 }
 
 // Send marshals and sends the UpdateTrail API request.
-func (r *UpdateTrailRequest) Send() (*UpdateTrailOutput, error) {
+func (r UpdateTrailRequest) Send() (*UpdateTrailOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

@@ -19,7 +19,7 @@ type DeleteLexiconRequest struct {
 }
 
 // Send marshals and sends the DeleteLexicon API request.
-func (r *DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
+func (r DeleteLexiconRequest) Send() (*DeleteLexiconOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ type DescribeVoicesRequest struct {
 }
 
 // Send marshals and sends the DescribeVoices API request.
-func (r *DescribeVoicesRequest) Send() (*DescribeVoicesOutput, error) {
+func (r DescribeVoicesRequest) Send() (*DescribeVoicesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -131,7 +131,7 @@ type GetLexiconRequest struct {
 }
 
 // Send marshals and sends the GetLexicon API request.
-func (r *GetLexiconRequest) Send() (*GetLexiconOutput, error) {
+func (r GetLexiconRequest) Send() (*GetLexiconOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -178,7 +178,7 @@ type ListLexiconsRequest struct {
 }
 
 // Send marshals and sends the ListLexicons API request.
-func (r *ListLexiconsRequest) Send() (*ListLexiconsOutput, error) {
+func (r ListLexiconsRequest) Send() (*ListLexiconsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -225,7 +225,7 @@ type PutLexiconRequest struct {
 }
 
 // Send marshals and sends the PutLexicon API request.
-func (r *PutLexiconRequest) Send() (*PutLexiconOutput, error) {
+func (r PutLexiconRequest) Send() (*PutLexiconOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -276,7 +276,7 @@ type SynthesizeSpeechRequest struct {
 }
 
 // Send marshals and sends the SynthesizeSpeech API request.
-func (r *SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
+func (r SynthesizeSpeechRequest) Send() (*SynthesizeSpeechOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

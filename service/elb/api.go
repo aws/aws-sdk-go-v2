@@ -19,7 +19,7 @@ type AddTagsRequest struct {
 }
 
 // Send marshals and sends the AddTags API request.
-func (r *AddTagsRequest) Send() (*AddTagsOutput, error) {
+func (r AddTagsRequest) Send() (*AddTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ type ApplySecurityGroupsToLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the ApplySecurityGroupsToLoadBalancer API request.
-func (r *ApplySecurityGroupsToLoadBalancerRequest) Send() (*ApplySecurityGroupsToLoadBalancerOutput, error) {
+func (r ApplySecurityGroupsToLoadBalancerRequest) Send() (*ApplySecurityGroupsToLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ type AttachLoadBalancerToSubnetsRequest struct {
 }
 
 // Send marshals and sends the AttachLoadBalancerToSubnets API request.
-func (r *AttachLoadBalancerToSubnetsRequest) Send() (*AttachLoadBalancerToSubnetsOutput, error) {
+func (r AttachLoadBalancerToSubnetsRequest) Send() (*AttachLoadBalancerToSubnetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -175,7 +175,7 @@ type ConfigureHealthCheckRequest struct {
 }
 
 // Send marshals and sends the ConfigureHealthCheck API request.
-func (r *ConfigureHealthCheckRequest) Send() (*ConfigureHealthCheckOutput, error) {
+func (r ConfigureHealthCheckRequest) Send() (*ConfigureHealthCheckOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -226,7 +226,7 @@ type CreateAppCookieStickinessPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateAppCookieStickinessPolicy API request.
-func (r *CreateAppCookieStickinessPolicyRequest) Send() (*CreateAppCookieStickinessPolicyOutput, error) {
+func (r CreateAppCookieStickinessPolicyRequest) Send() (*CreateAppCookieStickinessPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -286,7 +286,7 @@ type CreateLBCookieStickinessPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateLBCookieStickinessPolicy API request.
-func (r *CreateLBCookieStickinessPolicyRequest) Send() (*CreateLBCookieStickinessPolicyOutput, error) {
+func (r CreateLBCookieStickinessPolicyRequest) Send() (*CreateLBCookieStickinessPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -348,7 +348,7 @@ type CreateLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
-func (r *CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
+func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -406,7 +406,7 @@ type CreateLoadBalancerListenersRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancerListeners API request.
-func (r *CreateLoadBalancerListenersRequest) Send() (*CreateLoadBalancerListenersOutput, error) {
+func (r CreateLoadBalancerListenersRequest) Send() (*CreateLoadBalancerListenersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -458,7 +458,7 @@ type CreateLoadBalancerPolicyRequest struct {
 }
 
 // Send marshals and sends the CreateLoadBalancerPolicy API request.
-func (r *CreateLoadBalancerPolicyRequest) Send() (*CreateLoadBalancerPolicyOutput, error) {
+func (r CreateLoadBalancerPolicyRequest) Send() (*CreateLoadBalancerPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -508,7 +508,7 @@ type DeleteLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
-func (r *DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
+func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -563,7 +563,7 @@ type DeleteLoadBalancerListenersRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancerListeners API request.
-func (r *DeleteLoadBalancerListenersRequest) Send() (*DeleteLoadBalancerListenersOutput, error) {
+func (r DeleteLoadBalancerListenersRequest) Send() (*DeleteLoadBalancerListenersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -609,7 +609,7 @@ type DeleteLoadBalancerPolicyRequest struct {
 }
 
 // Send marshals and sends the DeleteLoadBalancerPolicy API request.
-func (r *DeleteLoadBalancerPolicyRequest) Send() (*DeleteLoadBalancerPolicyOutput, error) {
+func (r DeleteLoadBalancerPolicyRequest) Send() (*DeleteLoadBalancerPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -656,7 +656,7 @@ type DeregisterInstancesFromLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DeregisterInstancesFromLoadBalancer API request.
-func (r *DeregisterInstancesFromLoadBalancerRequest) Send() (*DeregisterInstancesFromLoadBalancerOutput, error) {
+func (r DeregisterInstancesFromLoadBalancerRequest) Send() (*DeregisterInstancesFromLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +710,7 @@ type DescribeAccountLimitsRequest struct {
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
-func (r *DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
+func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -760,7 +760,7 @@ type DescribeInstanceHealthRequest struct {
 }
 
 // Send marshals and sends the DescribeInstanceHealth API request.
-func (r *DescribeInstanceHealthRequest) Send() (*DescribeInstanceHealthOutput, error) {
+func (r DescribeInstanceHealthRequest) Send() (*DescribeInstanceHealthOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -811,7 +811,7 @@ type DescribeLoadBalancerAttributesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
-func (r *DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttributesOutput, error) {
+func (r DescribeLoadBalancerAttributesRequest) Send() (*DescribeLoadBalancerAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -857,7 +857,7 @@ type DescribeLoadBalancerPoliciesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicies API request.
-func (r *DescribeLoadBalancerPoliciesRequest) Send() (*DescribeLoadBalancerPoliciesOutput, error) {
+func (r DescribeLoadBalancerPoliciesRequest) Send() (*DescribeLoadBalancerPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -910,7 +910,7 @@ type DescribeLoadBalancerPolicyTypesRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicyTypes API request.
-func (r *DescribeLoadBalancerPolicyTypesRequest) Send() (*DescribeLoadBalancerPolicyTypesOutput, error) {
+func (r DescribeLoadBalancerPolicyTypesRequest) Send() (*DescribeLoadBalancerPolicyTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -967,7 +967,7 @@ type DescribeLoadBalancersRequest struct {
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
-func (r *DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
+func (r DescribeLoadBalancersRequest) Send() (*DescribeLoadBalancersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1070,7 +1070,7 @@ type DescribeTagsRequest struct {
 }
 
 // Send marshals and sends the DescribeTags API request.
-func (r *DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
+func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1116,7 +1116,7 @@ type DetachLoadBalancerFromSubnetsRequest struct {
 }
 
 // Send marshals and sends the DetachLoadBalancerFromSubnets API request.
-func (r *DetachLoadBalancerFromSubnetsRequest) Send() (*DetachLoadBalancerFromSubnetsOutput, error) {
+func (r DetachLoadBalancerFromSubnetsRequest) Send() (*DetachLoadBalancerFromSubnetsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1167,7 +1167,7 @@ type DisableAvailabilityZonesForLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the DisableAvailabilityZonesForLoadBalancer API request.
-func (r *DisableAvailabilityZonesForLoadBalancerRequest) Send() (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
+func (r DisableAvailabilityZonesForLoadBalancerRequest) Send() (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1223,7 +1223,7 @@ type EnableAvailabilityZonesForLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the EnableAvailabilityZonesForLoadBalancer API request.
-func (r *EnableAvailabilityZonesForLoadBalancerRequest) Send() (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
+func (r EnableAvailabilityZonesForLoadBalancerRequest) Send() (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1276,7 +1276,7 @@ type ModifyLoadBalancerAttributesRequest struct {
 }
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
-func (r *ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttributesOutput, error) {
+func (r ModifyLoadBalancerAttributesRequest) Send() (*ModifyLoadBalancerAttributesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1337,7 +1337,7 @@ type RegisterInstancesWithLoadBalancerRequest struct {
 }
 
 // Send marshals and sends the RegisterInstancesWithLoadBalancer API request.
-func (r *RegisterInstancesWithLoadBalancerRequest) Send() (*RegisterInstancesWithLoadBalancerOutput, error) {
+func (r RegisterInstancesWithLoadBalancerRequest) Send() (*RegisterInstancesWithLoadBalancerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1405,7 +1405,7 @@ type RemoveTagsRequest struct {
 }
 
 // Send marshals and sends the RemoveTags API request.
-func (r *RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
+func (r RemoveTagsRequest) Send() (*RemoveTagsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1451,7 +1451,7 @@ type SetLoadBalancerListenerSSLCertificateRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerListenerSSLCertificate API request.
-func (r *SetLoadBalancerListenerSSLCertificateRequest) Send() (*SetLoadBalancerListenerSSLCertificateOutput, error) {
+func (r SetLoadBalancerListenerSSLCertificateRequest) Send() (*SetLoadBalancerListenerSSLCertificateOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1503,7 +1503,7 @@ type SetLoadBalancerPoliciesForBackendServerRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesForBackendServer API request.
-func (r *SetLoadBalancerPoliciesForBackendServerRequest) Send() (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
+func (r SetLoadBalancerPoliciesForBackendServerRequest) Send() (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1564,7 +1564,7 @@ type SetLoadBalancerPoliciesOfListenerRequest struct {
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesOfListener API request.
-func (r *SetLoadBalancerPoliciesOfListenerRequest) Send() (*SetLoadBalancerPoliciesOfListenerOutput, error) {
+func (r SetLoadBalancerPoliciesOfListenerRequest) Send() (*SetLoadBalancerPoliciesOfListenerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

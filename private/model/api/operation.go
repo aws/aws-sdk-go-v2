@@ -79,7 +79,7 @@ type {{ $reqType}} struct {
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request. 
-func (r *{{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
+func (r {{ $reqType }}) Send() ({{ .OutputRef.GoType }}, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

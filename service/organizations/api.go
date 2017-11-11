@@ -20,7 +20,7 @@ type AcceptHandshakeRequest struct {
 }
 
 // Send marshals and sends the AcceptHandshake API request.
-func (r *AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
+func (r AcceptHandshakeRequest) Send() (*AcceptHandshakeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -86,7 +86,7 @@ type AttachPolicyRequest struct {
 }
 
 // Send marshals and sends the AttachPolicy API request.
-func (r *AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
+func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -172,7 +172,7 @@ type CancelHandshakeRequest struct {
 }
 
 // Send marshals and sends the CancelHandshake API request.
-func (r *CancelHandshakeRequest) Send() (*CancelHandshakeOutput, error) {
+func (r CancelHandshakeRequest) Send() (*CancelHandshakeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -226,7 +226,7 @@ type CreateAccountRequest struct {
 }
 
 // Send marshals and sends the CreateAccount API request.
-func (r *CreateAccountRequest) Send() (*CreateAccountOutput, error) {
+func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -309,7 +309,7 @@ type CreateOrganizationRequest struct {
 }
 
 // Send marshals and sends the CreateOrganization API request.
-func (r *CreateOrganizationRequest) Send() (*CreateOrganizationOutput, error) {
+func (r CreateOrganizationRequest) Send() (*CreateOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -368,7 +368,7 @@ type CreateOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the CreateOrganizationalUnit API request.
-func (r *CreateOrganizationalUnitRequest) Send() (*CreateOrganizationalUnitOutput, error) {
+func (r CreateOrganizationalUnitRequest) Send() (*CreateOrganizationalUnitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -423,7 +423,7 @@ type CreatePolicyRequest struct {
 }
 
 // Send marshals and sends the CreatePolicy API request.
-func (r *CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
+func (r CreatePolicyRequest) Send() (*CreatePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -475,7 +475,7 @@ type DeclineHandshakeRequest struct {
 }
 
 // Send marshals and sends the DeclineHandshake API request.
-func (r *DeclineHandshakeRequest) Send() (*DeclineHandshakeOutput, error) {
+func (r DeclineHandshakeRequest) Send() (*DeclineHandshakeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -530,7 +530,7 @@ type DeleteOrganizationRequest struct {
 }
 
 // Send marshals and sends the DeleteOrganization API request.
-func (r *DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
+func (r DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -580,7 +580,7 @@ type DeleteOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the DeleteOrganizationalUnit API request.
-func (r *DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput, error) {
+func (r DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -631,7 +631,7 @@ type DeletePolicyRequest struct {
 }
 
 // Send marshals and sends the DeletePolicy API request.
-func (r *DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
+func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -682,7 +682,7 @@ type DescribeAccountRequest struct {
 }
 
 // Send marshals and sends the DescribeAccount API request.
-func (r *DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
+func (r DescribeAccountRequest) Send() (*DescribeAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -730,7 +730,7 @@ type DescribeCreateAccountStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeCreateAccountStatus API request.
-func (r *DescribeCreateAccountStatusRequest) Send() (*DescribeCreateAccountStatusOutput, error) {
+func (r DescribeCreateAccountStatusRequest) Send() (*DescribeCreateAccountStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -778,7 +778,7 @@ type DescribeHandshakeRequest struct {
 }
 
 // Send marshals and sends the DescribeHandshake API request.
-func (r *DescribeHandshakeRequest) Send() (*DescribeHandshakeOutput, error) {
+func (r DescribeHandshakeRequest) Send() (*DescribeHandshakeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -832,7 +832,7 @@ type DescribeOrganizationRequest struct {
 }
 
 // Send marshals and sends the DescribeOrganization API request.
-func (r *DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error) {
+func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -881,7 +881,7 @@ type DescribeOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the DescribeOrganizationalUnit API request.
-func (r *DescribeOrganizationalUnitRequest) Send() (*DescribeOrganizationalUnitOutput, error) {
+func (r DescribeOrganizationalUnitRequest) Send() (*DescribeOrganizationalUnitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -929,7 +929,7 @@ type DescribePolicyRequest struct {
 }
 
 // Send marshals and sends the DescribePolicy API request.
-func (r *DescribePolicyRequest) Send() (*DescribePolicyOutput, error) {
+func (r DescribePolicyRequest) Send() (*DescribePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -977,7 +977,7 @@ type DetachPolicyRequest struct {
 }
 
 // Send marshals and sends the DetachPolicy API request.
-func (r *DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
+func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1039,7 +1039,7 @@ type DisablePolicyTypeRequest struct {
 }
 
 // Send marshals and sends the DisablePolicyType API request.
-func (r *DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
+func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1091,7 +1091,7 @@ type EnableAllFeaturesRequest struct {
 }
 
 // Send marshals and sends the EnableAllFeatures API request.
-func (r *EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
+func (r EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1163,7 +1163,7 @@ type EnablePolicyTypeRequest struct {
 }
 
 // Send marshals and sends the EnablePolicyType API request.
-func (r *EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
+func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1213,7 +1213,7 @@ type InviteAccountToOrganizationRequest struct {
 }
 
 // Send marshals and sends the InviteAccountToOrganization API request.
-func (r *InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganizationOutput, error) {
+func (r InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1275,7 +1275,7 @@ type LeaveOrganizationRequest struct {
 }
 
 // Send marshals and sends the LeaveOrganization API request.
-func (r *LeaveOrganizationRequest) Send() (*LeaveOrganizationOutput, error) {
+func (r LeaveOrganizationRequest) Send() (*LeaveOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1351,7 +1351,7 @@ type ListAccountsRequest struct {
 }
 
 // Send marshals and sends the ListAccounts API request.
-func (r *ListAccountsRequest) Send() (*ListAccountsOutput, error) {
+func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1456,7 +1456,7 @@ type ListAccountsForParentRequest struct {
 }
 
 // Send marshals and sends the ListAccountsForParent API request.
-func (r *ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, error) {
+func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1563,7 +1563,7 @@ type ListChildrenRequest struct {
 }
 
 // Send marshals and sends the ListChildren API request.
-func (r *ListChildrenRequest) Send() (*ListChildrenOutput, error) {
+func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1667,7 +1667,7 @@ type ListCreateAccountStatusRequest struct {
 }
 
 // Send marshals and sends the ListCreateAccountStatus API request.
-func (r *ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, error) {
+func (r ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1772,7 +1772,7 @@ type ListHandshakesForAccountRequest struct {
 }
 
 // Send marshals and sends the ListHandshakesForAccount API request.
-func (r *ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput, error) {
+func (r ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1881,7 +1881,7 @@ type ListHandshakesForOrganizationRequest struct {
 }
 
 // Send marshals and sends the ListHandshakesForOrganization API request.
-func (r *ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganizationOutput, error) {
+func (r ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1992,7 +1992,7 @@ type ListOrganizationalUnitsForParentRequest struct {
 }
 
 // Send marshals and sends the ListOrganizationalUnitsForParent API request.
-func (r *ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnitsForParentOutput, error) {
+func (r ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnitsForParentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2096,7 +2096,7 @@ type ListParentsRequest struct {
 }
 
 // Send marshals and sends the ListParents API request.
-func (r *ListParentsRequest) Send() (*ListParentsOutput, error) {
+func (r ListParentsRequest) Send() (*ListParentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2204,7 +2204,7 @@ type ListPoliciesRequest struct {
 }
 
 // Send marshals and sends the ListPolicies API request.
-func (r *ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
+func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2308,7 +2308,7 @@ type ListPoliciesForTargetRequest struct {
 }
 
 // Send marshals and sends the ListPoliciesForTarget API request.
-func (r *ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, error) {
+func (r ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2414,7 +2414,7 @@ type ListRootsRequest struct {
 }
 
 // Send marshals and sends the ListRoots API request.
-func (r *ListRootsRequest) Send() (*ListRootsOutput, error) {
+func (r ListRootsRequest) Send() (*ListRootsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2518,7 +2518,7 @@ type ListTargetsForPolicyRequest struct {
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
-func (r *ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error) {
+func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2622,7 +2622,7 @@ type MoveAccountRequest struct {
 }
 
 // Send marshals and sends the MoveAccount API request.
-func (r *MoveAccountRequest) Send() (*MoveAccountOutput, error) {
+func (r MoveAccountRequest) Send() (*MoveAccountOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2673,7 +2673,7 @@ type RemoveAccountFromOrganizationRequest struct {
 }
 
 // Send marshals and sends the RemoveAccountFromOrganization API request.
-func (r *RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganizationOutput, error) {
+func (r RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganizationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2750,7 +2750,7 @@ type UpdateOrganizationalUnitRequest struct {
 }
 
 // Send marshals and sends the UpdateOrganizationalUnit API request.
-func (r *UpdateOrganizationalUnitRequest) Send() (*UpdateOrganizationalUnitOutput, error) {
+func (r UpdateOrganizationalUnitRequest) Send() (*UpdateOrganizationalUnitOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2800,7 +2800,7 @@ type UpdatePolicyRequest struct {
 }
 
 // Send marshals and sends the UpdatePolicy API request.
-func (r *UpdatePolicyRequest) Send() (*UpdatePolicyOutput, error) {
+func (r UpdatePolicyRequest) Send() (*UpdatePolicyOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

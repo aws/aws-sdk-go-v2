@@ -15,7 +15,7 @@ import (
 func init() {
 	gucumber.Before("@iotdataplane", func() {
 		svc := iot.New(integration.Config())
-		result, err := svc.DescribeEndpoint(&iot.DescribeEndpointInput{})
+		result, err := svc.DescribeEndpointRequest(&iot.DescribeEndpointInput{}).Send()
 		if err != nil {
 			gucumber.World["error"] = err
 			return

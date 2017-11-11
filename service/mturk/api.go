@@ -19,7 +19,7 @@ type AcceptQualificationRequestRequest struct {
 }
 
 // Send marshals and sends the AcceptQualificationRequest API request.
-func (r *AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOutput, error) {
+func (r AcceptQualificationRequestRequest) Send() (*AcceptQualificationRequestOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -72,7 +72,7 @@ type ApproveAssignmentRequest struct {
 }
 
 // Send marshals and sends the ApproveAssignment API request.
-func (r *ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
+func (r ApproveAssignmentRequest) Send() (*ApproveAssignmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -136,7 +136,7 @@ type AssociateQualificationWithWorkerRequest struct {
 }
 
 // Send marshals and sends the AssociateQualificationWithWorker API request.
-func (r *AssociateQualificationWithWorkerRequest) Send() (*AssociateQualificationWithWorkerOutput, error) {
+func (r AssociateQualificationWithWorkerRequest) Send() (*AssociateQualificationWithWorkerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -194,7 +194,7 @@ type CreateAdditionalAssignmentsForHITRequest struct {
 }
 
 // Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
-func (r *CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssignmentsForHITOutput, error) {
+func (r CreateAdditionalAssignmentsForHITRequest) Send() (*CreateAdditionalAssignmentsForHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -254,7 +254,7 @@ type CreateHITRequest struct {
 }
 
 // Send marshals and sends the CreateHIT API request.
-func (r *CreateHITRequest) Send() (*CreateHITOutput, error) {
+func (r CreateHITRequest) Send() (*CreateHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -321,7 +321,7 @@ type CreateHITTypeRequest struct {
 }
 
 // Send marshals and sends the CreateHITType API request.
-func (r *CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
+func (r CreateHITTypeRequest) Send() (*CreateHITTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -370,7 +370,7 @@ type CreateHITWithHITTypeRequest struct {
 }
 
 // Send marshals and sends the CreateHITWithHITType API request.
-func (r *CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error) {
+func (r CreateHITWithHITTypeRequest) Send() (*CreateHITWithHITTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -428,7 +428,7 @@ type CreateQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the CreateQualificationType API request.
-func (r *CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, error) {
+func (r CreateQualificationTypeRequest) Send() (*CreateQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -475,7 +475,7 @@ type CreateWorkerBlockRequest struct {
 }
 
 // Send marshals and sends the CreateWorkerBlock API request.
-func (r *CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
+func (r CreateWorkerBlockRequest) Send() (*CreateWorkerBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -523,7 +523,7 @@ type DeleteHITRequest struct {
 }
 
 // Send marshals and sends the DeleteHIT API request.
-func (r *DeleteHITRequest) Send() (*DeleteHITOutput, error) {
+func (r DeleteHITRequest) Send() (*DeleteHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -587,7 +587,7 @@ type DeleteQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the DeleteQualificationType API request.
-func (r *DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, error) {
+func (r DeleteQualificationTypeRequest) Send() (*DeleteQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -645,7 +645,7 @@ type DeleteWorkerBlockRequest struct {
 }
 
 // Send marshals and sends the DeleteWorkerBlock API request.
-func (r *DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
+func (r DeleteWorkerBlockRequest) Send() (*DeleteWorkerBlockOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -696,7 +696,7 @@ type DisassociateQualificationFromWorkerRequest struct {
 }
 
 // Send marshals and sends the DisassociateQualificationFromWorker API request.
-func (r *DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualificationFromWorkerOutput, error) {
+func (r DisassociateQualificationFromWorkerRequest) Send() (*DisassociateQualificationFromWorkerOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -746,7 +746,7 @@ type GetAccountBalanceRequest struct {
 }
 
 // Send marshals and sends the GetAccountBalance API request.
-func (r *GetAccountBalanceRequest) Send() (*GetAccountBalanceOutput, error) {
+func (r GetAccountBalanceRequest) Send() (*GetAccountBalanceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -793,7 +793,7 @@ type GetAssignmentRequest struct {
 }
 
 // Send marshals and sends the GetAssignment API request.
-func (r *GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
+func (r GetAssignmentRequest) Send() (*GetAssignmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -839,7 +839,7 @@ type GetFileUploadURLRequest struct {
 }
 
 // Send marshals and sends the GetFileUploadURL API request.
-func (r *GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
+func (r GetFileUploadURLRequest) Send() (*GetFileUploadURLOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -891,7 +891,7 @@ type GetHITRequest struct {
 }
 
 // Send marshals and sends the GetHIT API request.
-func (r *GetHITRequest) Send() (*GetHITOutput, error) {
+func (r GetHITRequest) Send() (*GetHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -937,7 +937,7 @@ type GetQualificationScoreRequest struct {
 }
 
 // Send marshals and sends the GetQualificationScore API request.
-func (r *GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, error) {
+func (r GetQualificationScoreRequest) Send() (*GetQualificationScoreOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -991,7 +991,7 @@ type GetQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the GetQualificationType API request.
-func (r *GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error) {
+func (r GetQualificationTypeRequest) Send() (*GetQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1038,7 +1038,7 @@ type ListAssignmentsForHITRequest struct {
 }
 
 // Send marshals and sends the ListAssignmentsForHIT API request.
-func (r *ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, error) {
+func (r ListAssignmentsForHITRequest) Send() (*ListAssignmentsForHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1160,7 +1160,7 @@ type ListBonusPaymentsRequest struct {
 }
 
 // Send marshals and sends the ListBonusPayments API request.
-func (r *ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
+func (r ListBonusPaymentsRequest) Send() (*ListBonusPaymentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1263,7 +1263,7 @@ type ListHITsRequest struct {
 }
 
 // Send marshals and sends the ListHITs API request.
-func (r *ListHITsRequest) Send() (*ListHITsOutput, error) {
+func (r ListHITsRequest) Send() (*ListHITsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1367,7 +1367,7 @@ type ListHITsForQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the ListHITsForQualificationType API request.
-func (r *ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTypeOutput, error) {
+func (r ListHITsForQualificationTypeRequest) Send() (*ListHITsForQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1472,7 +1472,7 @@ type ListQualificationRequestsRequest struct {
 }
 
 // Send marshals and sends the ListQualificationRequests API request.
-func (r *ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutput, error) {
+func (r ListQualificationRequestsRequest) Send() (*ListQualificationRequestsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1577,7 +1577,7 @@ type ListQualificationTypesRequest struct {
 }
 
 // Send marshals and sends the ListQualificationTypes API request.
-func (r *ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, error) {
+func (r ListQualificationTypesRequest) Send() (*ListQualificationTypesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1682,7 +1682,7 @@ type ListReviewPolicyResultsForHITRequest struct {
 }
 
 // Send marshals and sends the ListReviewPolicyResultsForHIT API request.
-func (r *ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsForHITOutput, error) {
+func (r ListReviewPolicyResultsForHITRequest) Send() (*ListReviewPolicyResultsForHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1788,7 +1788,7 @@ type ListReviewableHITsRequest struct {
 }
 
 // Send marshals and sends the ListReviewableHITs API request.
-func (r *ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
+func (r ListReviewableHITsRequest) Send() (*ListReviewableHITsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1892,7 +1892,7 @@ type ListWorkerBlocksRequest struct {
 }
 
 // Send marshals and sends the ListWorkerBlocks API request.
-func (r *ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
+func (r ListWorkerBlocksRequest) Send() (*ListWorkerBlocksOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1995,7 +1995,7 @@ type ListWorkersWithQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the ListWorkersWithQualificationType API request.
-func (r *ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualificationTypeOutput, error) {
+func (r ListWorkersWithQualificationTypeRequest) Send() (*ListWorkersWithQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2098,7 +2098,7 @@ type NotifyWorkersRequest struct {
 }
 
 // Send marshals and sends the NotifyWorkers API request.
-func (r *NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
+func (r NotifyWorkersRequest) Send() (*NotifyWorkersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2148,7 +2148,7 @@ type RejectAssignmentRequest struct {
 }
 
 // Send marshals and sends the RejectAssignment API request.
-func (r *RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
+func (r RejectAssignmentRequest) Send() (*RejectAssignmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2202,7 +2202,7 @@ type RejectQualificationRequestRequest struct {
 }
 
 // Send marshals and sends the RejectQualificationRequest API request.
-func (r *RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOutput, error) {
+func (r RejectQualificationRequestRequest) Send() (*RejectQualificationRequestOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2251,7 +2251,7 @@ type SendBonusRequest struct {
 }
 
 // Send marshals and sends the SendBonus API request.
-func (r *SendBonusRequest) Send() (*SendBonusOutput, error) {
+func (r SendBonusRequest) Send() (*SendBonusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2305,7 +2305,7 @@ type SendTestEventNotificationRequest struct {
 }
 
 // Send marshals and sends the SendTestEventNotification API request.
-func (r *SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutput, error) {
+func (r SendTestEventNotificationRequest) Send() (*SendTestEventNotificationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2356,7 +2356,7 @@ type UpdateExpirationForHITRequest struct {
 }
 
 // Send marshals and sends the UpdateExpirationForHIT API request.
-func (r *UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, error) {
+func (r UpdateExpirationForHITRequest) Send() (*UpdateExpirationForHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2404,7 +2404,7 @@ type UpdateHITReviewStatusRequest struct {
 }
 
 // Send marshals and sends the UpdateHITReviewStatus API request.
-func (r *UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, error) {
+func (r UpdateHITReviewStatusRequest) Send() (*UpdateHITReviewStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2452,7 +2452,7 @@ type UpdateHITTypeOfHITRequest struct {
 }
 
 // Send marshals and sends the UpdateHITTypeOfHIT API request.
-func (r *UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
+func (r UpdateHITTypeOfHITRequest) Send() (*UpdateHITTypeOfHITOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2501,7 +2501,7 @@ type UpdateNotificationSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateNotificationSettings API request.
-func (r *UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOutput, error) {
+func (r UpdateNotificationSettingsRequest) Send() (*UpdateNotificationSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2556,7 +2556,7 @@ type UpdateQualificationTypeRequest struct {
 }
 
 // Send marshals and sends the UpdateQualificationType API request.
-func (r *UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, error) {
+func (r UpdateQualificationTypeRequest) Send() (*UpdateQualificationTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

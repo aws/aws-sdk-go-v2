@@ -16,7 +16,7 @@ type CreateAppRequest struct {
 }
 
 // Send marshals and sends the CreateApp API request.
-func (r *CreateAppRequest) Send() (*CreateAppOutput, error) {
+func (r CreateAppRequest) Send() (*CreateAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ type CreateCampaignRequest struct {
 }
 
 // Send marshals and sends the CreateCampaign API request.
-func (r *CreateCampaignRequest) Send() (*CreateCampaignOutput, error) {
+func (r CreateCampaignRequest) Send() (*CreateCampaignOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ type CreateImportJobRequest struct {
 }
 
 // Send marshals and sends the CreateImportJob API request.
-func (r *CreateImportJobRequest) Send() (*CreateImportJobOutput, error) {
+func (r CreateImportJobRequest) Send() (*CreateImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -154,7 +154,7 @@ type CreateSegmentRequest struct {
 }
 
 // Send marshals and sends the CreateSegment API request.
-func (r *CreateSegmentRequest) Send() (*CreateSegmentOutput, error) {
+func (r CreateSegmentRequest) Send() (*CreateSegmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -200,7 +200,7 @@ type DeleteAdmChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteAdmChannel API request.
-func (r *DeleteAdmChannelRequest) Send() (*DeleteAdmChannelOutput, error) {
+func (r DeleteAdmChannelRequest) Send() (*DeleteAdmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -246,7 +246,7 @@ type DeleteApnsChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsChannel API request.
-func (r *DeleteApnsChannelRequest) Send() (*DeleteApnsChannelOutput, error) {
+func (r DeleteApnsChannelRequest) Send() (*DeleteApnsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -292,7 +292,7 @@ type DeleteApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteApnsSandboxChannel API request.
-func (r *DeleteApnsSandboxChannelRequest) Send() (*DeleteApnsSandboxChannelOutput, error) {
+func (r DeleteApnsSandboxChannelRequest) Send() (*DeleteApnsSandboxChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -338,7 +338,7 @@ type DeleteAppRequest struct {
 }
 
 // Send marshals and sends the DeleteApp API request.
-func (r *DeleteAppRequest) Send() (*DeleteAppOutput, error) {
+func (r DeleteAppRequest) Send() (*DeleteAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -384,7 +384,7 @@ type DeleteBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteBaiduChannel API request.
-func (r *DeleteBaiduChannelRequest) Send() (*DeleteBaiduChannelOutput, error) {
+func (r DeleteBaiduChannelRequest) Send() (*DeleteBaiduChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -430,7 +430,7 @@ type DeleteCampaignRequest struct {
 }
 
 // Send marshals and sends the DeleteCampaign API request.
-func (r *DeleteCampaignRequest) Send() (*DeleteCampaignOutput, error) {
+func (r DeleteCampaignRequest) Send() (*DeleteCampaignOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -476,7 +476,7 @@ type DeleteEmailChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteEmailChannel API request.
-func (r *DeleteEmailChannelRequest) Send() (*DeleteEmailChannelOutput, error) {
+func (r DeleteEmailChannelRequest) Send() (*DeleteEmailChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -522,7 +522,7 @@ type DeleteEventStreamRequest struct {
 }
 
 // Send marshals and sends the DeleteEventStream API request.
-func (r *DeleteEventStreamRequest) Send() (*DeleteEventStreamOutput, error) {
+func (r DeleteEventStreamRequest) Send() (*DeleteEventStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -568,7 +568,7 @@ type DeleteGcmChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteGcmChannel API request.
-func (r *DeleteGcmChannelRequest) Send() (*DeleteGcmChannelOutput, error) {
+func (r DeleteGcmChannelRequest) Send() (*DeleteGcmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -614,7 +614,7 @@ type DeleteSegmentRequest struct {
 }
 
 // Send marshals and sends the DeleteSegment API request.
-func (r *DeleteSegmentRequest) Send() (*DeleteSegmentOutput, error) {
+func (r DeleteSegmentRequest) Send() (*DeleteSegmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -660,7 +660,7 @@ type DeleteSmsChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteSmsChannel API request.
-func (r *DeleteSmsChannelRequest) Send() (*DeleteSmsChannelOutput, error) {
+func (r DeleteSmsChannelRequest) Send() (*DeleteSmsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -706,7 +706,7 @@ type GetAdmChannelRequest struct {
 }
 
 // Send marshals and sends the GetAdmChannel API request.
-func (r *GetAdmChannelRequest) Send() (*GetAdmChannelOutput, error) {
+func (r GetAdmChannelRequest) Send() (*GetAdmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -752,7 +752,7 @@ type GetApnsChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsChannel API request.
-func (r *GetApnsChannelRequest) Send() (*GetApnsChannelOutput, error) {
+func (r GetApnsChannelRequest) Send() (*GetApnsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -798,7 +798,7 @@ type GetApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the GetApnsSandboxChannel API request.
-func (r *GetApnsSandboxChannelRequest) Send() (*GetApnsSandboxChannelOutput, error) {
+func (r GetApnsSandboxChannelRequest) Send() (*GetApnsSandboxChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -844,7 +844,7 @@ type GetAppRequest struct {
 }
 
 // Send marshals and sends the GetApp API request.
-func (r *GetAppRequest) Send() (*GetAppOutput, error) {
+func (r GetAppRequest) Send() (*GetAppOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -890,7 +890,7 @@ type GetApplicationSettingsRequest struct {
 }
 
 // Send marshals and sends the GetApplicationSettings API request.
-func (r *GetApplicationSettingsRequest) Send() (*GetApplicationSettingsOutput, error) {
+func (r GetApplicationSettingsRequest) Send() (*GetApplicationSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -936,7 +936,7 @@ type GetAppsRequest struct {
 }
 
 // Send marshals and sends the GetApps API request.
-func (r *GetAppsRequest) Send() (*GetAppsOutput, error) {
+func (r GetAppsRequest) Send() (*GetAppsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -982,7 +982,7 @@ type GetBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the GetBaiduChannel API request.
-func (r *GetBaiduChannelRequest) Send() (*GetBaiduChannelOutput, error) {
+func (r GetBaiduChannelRequest) Send() (*GetBaiduChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1028,7 +1028,7 @@ type GetCampaignRequest struct {
 }
 
 // Send marshals and sends the GetCampaign API request.
-func (r *GetCampaignRequest) Send() (*GetCampaignOutput, error) {
+func (r GetCampaignRequest) Send() (*GetCampaignOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1074,7 +1074,7 @@ type GetCampaignActivitiesRequest struct {
 }
 
 // Send marshals and sends the GetCampaignActivities API request.
-func (r *GetCampaignActivitiesRequest) Send() (*GetCampaignActivitiesOutput, error) {
+func (r GetCampaignActivitiesRequest) Send() (*GetCampaignActivitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1120,7 +1120,7 @@ type GetCampaignVersionRequest struct {
 }
 
 // Send marshals and sends the GetCampaignVersion API request.
-func (r *GetCampaignVersionRequest) Send() (*GetCampaignVersionOutput, error) {
+func (r GetCampaignVersionRequest) Send() (*GetCampaignVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1166,7 +1166,7 @@ type GetCampaignVersionsRequest struct {
 }
 
 // Send marshals and sends the GetCampaignVersions API request.
-func (r *GetCampaignVersionsRequest) Send() (*GetCampaignVersionsOutput, error) {
+func (r GetCampaignVersionsRequest) Send() (*GetCampaignVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1212,7 +1212,7 @@ type GetCampaignsRequest struct {
 }
 
 // Send marshals and sends the GetCampaigns API request.
-func (r *GetCampaignsRequest) Send() (*GetCampaignsOutput, error) {
+func (r GetCampaignsRequest) Send() (*GetCampaignsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1258,7 +1258,7 @@ type GetEmailChannelRequest struct {
 }
 
 // Send marshals and sends the GetEmailChannel API request.
-func (r *GetEmailChannelRequest) Send() (*GetEmailChannelOutput, error) {
+func (r GetEmailChannelRequest) Send() (*GetEmailChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1304,7 +1304,7 @@ type GetEndpointRequest struct {
 }
 
 // Send marshals and sends the GetEndpoint API request.
-func (r *GetEndpointRequest) Send() (*GetEndpointOutput, error) {
+func (r GetEndpointRequest) Send() (*GetEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1350,7 +1350,7 @@ type GetEventStreamRequest struct {
 }
 
 // Send marshals and sends the GetEventStream API request.
-func (r *GetEventStreamRequest) Send() (*GetEventStreamOutput, error) {
+func (r GetEventStreamRequest) Send() (*GetEventStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1396,7 +1396,7 @@ type GetGcmChannelRequest struct {
 }
 
 // Send marshals and sends the GetGcmChannel API request.
-func (r *GetGcmChannelRequest) Send() (*GetGcmChannelOutput, error) {
+func (r GetGcmChannelRequest) Send() (*GetGcmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1442,7 +1442,7 @@ type GetImportJobRequest struct {
 }
 
 // Send marshals and sends the GetImportJob API request.
-func (r *GetImportJobRequest) Send() (*GetImportJobOutput, error) {
+func (r GetImportJobRequest) Send() (*GetImportJobOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1488,7 +1488,7 @@ type GetImportJobsRequest struct {
 }
 
 // Send marshals and sends the GetImportJobs API request.
-func (r *GetImportJobsRequest) Send() (*GetImportJobsOutput, error) {
+func (r GetImportJobsRequest) Send() (*GetImportJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1534,7 +1534,7 @@ type GetSegmentRequest struct {
 }
 
 // Send marshals and sends the GetSegment API request.
-func (r *GetSegmentRequest) Send() (*GetSegmentOutput, error) {
+func (r GetSegmentRequest) Send() (*GetSegmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1580,7 +1580,7 @@ type GetSegmentImportJobsRequest struct {
 }
 
 // Send marshals and sends the GetSegmentImportJobs API request.
-func (r *GetSegmentImportJobsRequest) Send() (*GetSegmentImportJobsOutput, error) {
+func (r GetSegmentImportJobsRequest) Send() (*GetSegmentImportJobsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1626,7 +1626,7 @@ type GetSegmentVersionRequest struct {
 }
 
 // Send marshals and sends the GetSegmentVersion API request.
-func (r *GetSegmentVersionRequest) Send() (*GetSegmentVersionOutput, error) {
+func (r GetSegmentVersionRequest) Send() (*GetSegmentVersionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1672,7 +1672,7 @@ type GetSegmentVersionsRequest struct {
 }
 
 // Send marshals and sends the GetSegmentVersions API request.
-func (r *GetSegmentVersionsRequest) Send() (*GetSegmentVersionsOutput, error) {
+func (r GetSegmentVersionsRequest) Send() (*GetSegmentVersionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1718,7 +1718,7 @@ type GetSegmentsRequest struct {
 }
 
 // Send marshals and sends the GetSegments API request.
-func (r *GetSegmentsRequest) Send() (*GetSegmentsOutput, error) {
+func (r GetSegmentsRequest) Send() (*GetSegmentsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1764,7 +1764,7 @@ type GetSmsChannelRequest struct {
 }
 
 // Send marshals and sends the GetSmsChannel API request.
-func (r *GetSmsChannelRequest) Send() (*GetSmsChannelOutput, error) {
+func (r GetSmsChannelRequest) Send() (*GetSmsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1810,7 +1810,7 @@ type PutEventStreamRequest struct {
 }
 
 // Send marshals and sends the PutEventStream API request.
-func (r *PutEventStreamRequest) Send() (*PutEventStreamOutput, error) {
+func (r PutEventStreamRequest) Send() (*PutEventStreamOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1856,7 +1856,7 @@ type SendMessagesRequest struct {
 }
 
 // Send marshals and sends the SendMessages API request.
-func (r *SendMessagesRequest) Send() (*SendMessagesOutput, error) {
+func (r SendMessagesRequest) Send() (*SendMessagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1902,7 +1902,7 @@ type SendUsersMessagesRequest struct {
 }
 
 // Send marshals and sends the SendUsersMessages API request.
-func (r *SendUsersMessagesRequest) Send() (*SendUsersMessagesOutput, error) {
+func (r SendUsersMessagesRequest) Send() (*SendUsersMessagesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1948,7 +1948,7 @@ type UpdateAdmChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateAdmChannel API request.
-func (r *UpdateAdmChannelRequest) Send() (*UpdateAdmChannelOutput, error) {
+func (r UpdateAdmChannelRequest) Send() (*UpdateAdmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1994,7 +1994,7 @@ type UpdateApnsChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsChannel API request.
-func (r *UpdateApnsChannelRequest) Send() (*UpdateApnsChannelOutput, error) {
+func (r UpdateApnsChannelRequest) Send() (*UpdateApnsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2040,7 +2040,7 @@ type UpdateApnsSandboxChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateApnsSandboxChannel API request.
-func (r *UpdateApnsSandboxChannelRequest) Send() (*UpdateApnsSandboxChannelOutput, error) {
+func (r UpdateApnsSandboxChannelRequest) Send() (*UpdateApnsSandboxChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2086,7 +2086,7 @@ type UpdateApplicationSettingsRequest struct {
 }
 
 // Send marshals and sends the UpdateApplicationSettings API request.
-func (r *UpdateApplicationSettingsRequest) Send() (*UpdateApplicationSettingsOutput, error) {
+func (r UpdateApplicationSettingsRequest) Send() (*UpdateApplicationSettingsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2132,7 +2132,7 @@ type UpdateBaiduChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateBaiduChannel API request.
-func (r *UpdateBaiduChannelRequest) Send() (*UpdateBaiduChannelOutput, error) {
+func (r UpdateBaiduChannelRequest) Send() (*UpdateBaiduChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2178,7 +2178,7 @@ type UpdateCampaignRequest struct {
 }
 
 // Send marshals and sends the UpdateCampaign API request.
-func (r *UpdateCampaignRequest) Send() (*UpdateCampaignOutput, error) {
+func (r UpdateCampaignRequest) Send() (*UpdateCampaignOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2224,7 +2224,7 @@ type UpdateEmailChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateEmailChannel API request.
-func (r *UpdateEmailChannelRequest) Send() (*UpdateEmailChannelOutput, error) {
+func (r UpdateEmailChannelRequest) Send() (*UpdateEmailChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2270,7 +2270,7 @@ type UpdateEndpointRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
-func (r *UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
+func (r UpdateEndpointRequest) Send() (*UpdateEndpointOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2316,7 +2316,7 @@ type UpdateEndpointsBatchRequest struct {
 }
 
 // Send marshals and sends the UpdateEndpointsBatch API request.
-func (r *UpdateEndpointsBatchRequest) Send() (*UpdateEndpointsBatchOutput, error) {
+func (r UpdateEndpointsBatchRequest) Send() (*UpdateEndpointsBatchOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2362,7 +2362,7 @@ type UpdateGcmChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateGcmChannel API request.
-func (r *UpdateGcmChannelRequest) Send() (*UpdateGcmChannelOutput, error) {
+func (r UpdateGcmChannelRequest) Send() (*UpdateGcmChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2408,7 +2408,7 @@ type UpdateSegmentRequest struct {
 }
 
 // Send marshals and sends the UpdateSegment API request.
-func (r *UpdateSegmentRequest) Send() (*UpdateSegmentOutput, error) {
+func (r UpdateSegmentRequest) Send() (*UpdateSegmentOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -2454,7 +2454,7 @@ type UpdateSmsChannelRequest struct {
 }
 
 // Send marshals and sends the UpdateSmsChannel API request.
-func (r *UpdateSmsChannelRequest) Send() (*UpdateSmsChannelOutput, error) {
+func (r UpdateSmsChannelRequest) Send() (*UpdateSmsChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

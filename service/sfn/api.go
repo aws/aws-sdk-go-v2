@@ -18,7 +18,7 @@ type CreateActivityRequest struct {
 }
 
 // Send marshals and sends the CreateActivity API request.
-func (r *CreateActivityRequest) Send() (*CreateActivityOutput, error) {
+func (r CreateActivityRequest) Send() (*CreateActivityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ type CreateStateMachineRequest struct {
 }
 
 // Send marshals and sends the CreateStateMachine API request.
-func (r *CreateStateMachineRequest) Send() (*CreateStateMachineOutput, error) {
+func (r CreateStateMachineRequest) Send() (*CreateStateMachineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -110,7 +110,7 @@ type DeleteActivityRequest struct {
 }
 
 // Send marshals and sends the DeleteActivity API request.
-func (r *DeleteActivityRequest) Send() (*DeleteActivityOutput, error) {
+func (r DeleteActivityRequest) Send() (*DeleteActivityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ type DeleteStateMachineRequest struct {
 }
 
 // Send marshals and sends the DeleteStateMachine API request.
-func (r *DeleteStateMachineRequest) Send() (*DeleteStateMachineOutput, error) {
+func (r DeleteStateMachineRequest) Send() (*DeleteStateMachineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -203,7 +203,7 @@ type DescribeActivityRequest struct {
 }
 
 // Send marshals and sends the DescribeActivity API request.
-func (r *DescribeActivityRequest) Send() (*DescribeActivityOutput, error) {
+func (r DescribeActivityRequest) Send() (*DescribeActivityOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -249,7 +249,7 @@ type DescribeExecutionRequest struct {
 }
 
 // Send marshals and sends the DescribeExecution API request.
-func (r *DescribeExecutionRequest) Send() (*DescribeExecutionOutput, error) {
+func (r DescribeExecutionRequest) Send() (*DescribeExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -295,7 +295,7 @@ type DescribeStateMachineRequest struct {
 }
 
 // Send marshals and sends the DescribeStateMachine API request.
-func (r *DescribeStateMachineRequest) Send() (*DescribeStateMachineOutput, error) {
+func (r DescribeStateMachineRequest) Send() (*DescribeStateMachineOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -341,7 +341,7 @@ type GetActivityTaskRequest struct {
 }
 
 // Send marshals and sends the GetActivityTask API request.
-func (r *GetActivityTaskRequest) Send() (*GetActivityTaskOutput, error) {
+func (r GetActivityTaskRequest) Send() (*GetActivityTaskOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -396,7 +396,7 @@ type GetExecutionHistoryRequest struct {
 }
 
 // Send marshals and sends the GetExecutionHistory API request.
-func (r *GetExecutionHistoryRequest) Send() (*GetExecutionHistoryOutput, error) {
+func (r GetExecutionHistoryRequest) Send() (*GetExecutionHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -502,7 +502,7 @@ type ListActivitiesRequest struct {
 }
 
 // Send marshals and sends the ListActivities API request.
-func (r *ListActivitiesRequest) Send() (*ListActivitiesOutput, error) {
+func (r ListActivitiesRequest) Send() (*ListActivitiesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -606,7 +606,7 @@ type ListExecutionsRequest struct {
 }
 
 // Send marshals and sends the ListExecutions API request.
-func (r *ListExecutionsRequest) Send() (*ListExecutionsOutput, error) {
+func (r ListExecutionsRequest) Send() (*ListExecutionsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -710,7 +710,7 @@ type ListStateMachinesRequest struct {
 }
 
 // Send marshals and sends the ListStateMachines API request.
-func (r *ListStateMachinesRequest) Send() (*ListStateMachinesOutput, error) {
+func (r ListStateMachinesRequest) Send() (*ListStateMachinesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -814,7 +814,7 @@ type SendTaskFailureRequest struct {
 }
 
 // Send marshals and sends the SendTaskFailure API request.
-func (r *SendTaskFailureRequest) Send() (*SendTaskFailureOutput, error) {
+func (r SendTaskFailureRequest) Send() (*SendTaskFailureOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -860,7 +860,7 @@ type SendTaskHeartbeatRequest struct {
 }
 
 // Send marshals and sends the SendTaskHeartbeat API request.
-func (r *SendTaskHeartbeatRequest) Send() (*SendTaskHeartbeatOutput, error) {
+func (r SendTaskHeartbeatRequest) Send() (*SendTaskHeartbeatOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -918,7 +918,7 @@ type SendTaskSuccessRequest struct {
 }
 
 // Send marshals and sends the SendTaskSuccess API request.
-func (r *SendTaskSuccessRequest) Send() (*SendTaskSuccessOutput, error) {
+func (r SendTaskSuccessRequest) Send() (*SendTaskSuccessOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -965,7 +965,7 @@ type StartExecutionRequest struct {
 }
 
 // Send marshals and sends the StartExecution API request.
-func (r *StartExecutionRequest) Send() (*StartExecutionOutput, error) {
+func (r StartExecutionRequest) Send() (*StartExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1011,7 +1011,7 @@ type StopExecutionRequest struct {
 }
 
 // Send marshals and sends the StopExecution API request.
-func (r *StopExecutionRequest) Send() (*StopExecutionOutput, error) {
+func (r StopExecutionRequest) Send() (*StopExecutionOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err

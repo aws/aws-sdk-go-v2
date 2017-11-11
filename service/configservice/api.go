@@ -21,7 +21,7 @@ type DeleteConfigRuleRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigRule API request.
-func (r *DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
+func (r DeleteConfigRuleRequest) Send() (*DeleteConfigRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -75,7 +75,7 @@ type DeleteConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the DeleteConfigurationRecorder API request.
-func (r *DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorderOutput, error) {
+func (r DeleteConfigurationRecorderRequest) Send() (*DeleteConfigurationRecorderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -132,7 +132,7 @@ type DeleteDeliveryChannelRequest struct {
 }
 
 // Send marshals and sends the DeleteDeliveryChannel API request.
-func (r *DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, error) {
+func (r DeleteDeliveryChannelRequest) Send() (*DeleteDeliveryChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ type DeleteEvaluationResultsRequest struct {
 }
 
 // Send marshals and sends the DeleteEvaluationResults API request.
-func (r *DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, error) {
+func (r DeleteEvaluationResultsRequest) Send() (*DeleteEvaluationResultsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -232,7 +232,7 @@ type DeliverConfigSnapshotRequest struct {
 }
 
 // Send marshals and sends the DeliverConfigSnapshot API request.
-func (r *DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, error) {
+func (r DeliverConfigSnapshotRequest) Send() (*DeliverConfigSnapshotOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -287,7 +287,7 @@ type DescribeComplianceByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the DescribeComplianceByConfigRule API request.
-func (r *DescribeComplianceByConfigRuleRequest) Send() (*DescribeComplianceByConfigRuleOutput, error) {
+func (r DescribeComplianceByConfigRuleRequest) Send() (*DescribeComplianceByConfigRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -355,7 +355,7 @@ type DescribeComplianceByResourceRequest struct {
 }
 
 // Send marshals and sends the DescribeComplianceByResource API request.
-func (r *DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResourceOutput, error) {
+func (r DescribeComplianceByResourceRequest) Send() (*DescribeComplianceByResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -425,7 +425,7 @@ type DescribeConfigRuleEvaluationStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigRuleEvaluationStatus API request.
-func (r *DescribeConfigRuleEvaluationStatusRequest) Send() (*DescribeConfigRuleEvaluationStatusOutput, error) {
+func (r DescribeConfigRuleEvaluationStatusRequest) Send() (*DescribeConfigRuleEvaluationStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -474,7 +474,7 @@ type DescribeConfigRulesRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigRules API request.
-func (r *DescribeConfigRulesRequest) Send() (*DescribeConfigRulesOutput, error) {
+func (r DescribeConfigRulesRequest) Send() (*DescribeConfigRulesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -520,7 +520,7 @@ type DescribeConfigurationRecorderStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRecorderStatus API request.
-func (r *DescribeConfigurationRecorderStatusRequest) Send() (*DescribeConfigurationRecorderStatusOutput, error) {
+func (r DescribeConfigurationRecorderStatusRequest) Send() (*DescribeConfigurationRecorderStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -571,7 +571,7 @@ type DescribeConfigurationRecordersRequest struct {
 }
 
 // Send marshals and sends the DescribeConfigurationRecorders API request.
-func (r *DescribeConfigurationRecordersRequest) Send() (*DescribeConfigurationRecordersOutput, error) {
+func (r DescribeConfigurationRecordersRequest) Send() (*DescribeConfigurationRecordersOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -622,7 +622,7 @@ type DescribeDeliveryChannelStatusRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryChannelStatus API request.
-func (r *DescribeDeliveryChannelStatusRequest) Send() (*DescribeDeliveryChannelStatusOutput, error) {
+func (r DescribeDeliveryChannelStatusRequest) Send() (*DescribeDeliveryChannelStatusOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -672,7 +672,7 @@ type DescribeDeliveryChannelsRequest struct {
 }
 
 // Send marshals and sends the DescribeDeliveryChannels API request.
-func (r *DescribeDeliveryChannelsRequest) Send() (*DescribeDeliveryChannelsOutput, error) {
+func (r DescribeDeliveryChannelsRequest) Send() (*DescribeDeliveryChannelsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -722,7 +722,7 @@ type GetComplianceDetailsByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the GetComplianceDetailsByConfigRule API request.
-func (r *GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsByConfigRuleOutput, error) {
+func (r GetComplianceDetailsByConfigRuleRequest) Send() (*GetComplianceDetailsByConfigRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -770,7 +770,7 @@ type GetComplianceDetailsByResourceRequest struct {
 }
 
 // Send marshals and sends the GetComplianceDetailsByResource API request.
-func (r *GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByResourceOutput, error) {
+func (r GetComplianceDetailsByResourceRequest) Send() (*GetComplianceDetailsByResourceOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -818,7 +818,7 @@ type GetComplianceSummaryByConfigRuleRequest struct {
 }
 
 // Send marshals and sends the GetComplianceSummaryByConfigRule API request.
-func (r *GetComplianceSummaryByConfigRuleRequest) Send() (*GetComplianceSummaryByConfigRuleOutput, error) {
+func (r GetComplianceSummaryByConfigRuleRequest) Send() (*GetComplianceSummaryByConfigRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -865,7 +865,7 @@ type GetComplianceSummaryByResourceTypeRequest struct {
 }
 
 // Send marshals and sends the GetComplianceSummaryByResourceType API request.
-func (r *GetComplianceSummaryByResourceTypeRequest) Send() (*GetComplianceSummaryByResourceTypeOutput, error) {
+func (r GetComplianceSummaryByResourceTypeRequest) Send() (*GetComplianceSummaryByResourceTypeOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -913,7 +913,7 @@ type GetDiscoveredResourceCountsRequest struct {
 }
 
 // Send marshals and sends the GetDiscoveredResourceCounts API request.
-func (r *GetDiscoveredResourceCountsRequest) Send() (*GetDiscoveredResourceCountsOutput, error) {
+func (r GetDiscoveredResourceCountsRequest) Send() (*GetDiscoveredResourceCountsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -992,7 +992,7 @@ type GetResourceConfigHistoryRequest struct {
 }
 
 // Send marshals and sends the GetResourceConfigHistory API request.
-func (r *GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput, error) {
+func (r GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1105,7 +1105,7 @@ type ListDiscoveredResourcesRequest struct {
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
-func (r *ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
+func (r ListDiscoveredResourcesRequest) Send() (*ListDiscoveredResourcesOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1164,7 +1164,7 @@ type PutConfigRuleRequest struct {
 }
 
 // Send marshals and sends the PutConfigRule API request.
-func (r *PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
+func (r PutConfigRuleRequest) Send() (*PutConfigRuleOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1246,7 +1246,7 @@ type PutConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the PutConfigurationRecorder API request.
-func (r *PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput, error) {
+func (r PutConfigurationRecorderRequest) Send() (*PutConfigurationRecorderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1304,7 +1304,7 @@ type PutDeliveryChannelRequest struct {
 }
 
 // Send marshals and sends the PutDeliveryChannel API request.
-func (r *PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
+func (r PutDeliveryChannelRequest) Send() (*PutDeliveryChannelOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1365,7 +1365,7 @@ type PutEvaluationsRequest struct {
 }
 
 // Send marshals and sends the PutEvaluations API request.
-func (r *PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
+func (r PutEvaluationsRequest) Send() (*PutEvaluationsOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1413,7 +1413,7 @@ type StartConfigRulesEvaluationRequest struct {
 }
 
 // Send marshals and sends the StartConfigRulesEvaluation API request.
-func (r *StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOutput, error) {
+func (r StartConfigRulesEvaluationRequest) Send() (*StartConfigRulesEvaluationOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1488,7 +1488,7 @@ type StartConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the StartConfigurationRecorder API request.
-func (r *StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOutput, error) {
+func (r StartConfigurationRecorderRequest) Send() (*StartConfigurationRecorderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
@@ -1540,7 +1540,7 @@ type StopConfigurationRecorderRequest struct {
 }
 
 // Send marshals and sends the StopConfigurationRecorder API request.
-func (r *StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutput, error) {
+func (r StopConfigurationRecorderRequest) Send() (*StopConfigurationRecorderOutput, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
