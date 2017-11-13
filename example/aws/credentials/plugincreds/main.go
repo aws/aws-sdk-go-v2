@@ -56,7 +56,7 @@ func main() {
 	if err != nil {
 		exitErrorf("failed to load config, %v", err)
 	}
-	cfg.Credentials = creds,
+	cfg.Credentials = creds
 
 	// If the region is not available attempt to derive the bucket's region
 	// from a query to S3 for the bucket's metadata

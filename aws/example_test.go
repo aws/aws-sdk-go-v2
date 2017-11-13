@@ -2,7 +2,7 @@ package aws_test
 
 import (
 	"fmt"
-	
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/modeledendpoints"

@@ -28,7 +28,7 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
-	 foo, err := req.Send()
+	foo, err := req.Send()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -42,7 +42,7 @@ func (c *client) concatenate(key1, key2, key3 string, uploadID *string) (*string
 		Key:        &key3,
 		UploadId:   uploadID,
 	})
-	 bar, err := req.Send()
+	bar, err := req.Send()
 	if err != nil {
 		return nil, nil, err
 	}
@@ -79,7 +79,7 @@ func main() {
 		Bucket: &bucket,
 		Key:    &key3,
 	})
-	 output, err := createReq.Send()
+	output, err := createReq.Send()
 
 	if err != nil {
 		exitErrorf("failed to create upload, %v", err)
