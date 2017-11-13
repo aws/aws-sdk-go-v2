@@ -126,11 +126,6 @@ func (a *API) renameToplevelShapes() {
 			name := v.ExportedName + "Input"
 			switch {
 			case a.Shapes[name] == nil:
-				if service, ok := shamelist[a.name]; ok {
-					if check, ok := service[v.Name]; ok && check.input {
-						break
-					}
-				}
 				v.InputRef.Shape.Rename(name)
 			}
 		}
@@ -138,11 +133,6 @@ func (a *API) renameToplevelShapes() {
 			name := v.ExportedName + "Output"
 			switch {
 			case a.Shapes[name] == nil:
-				if service, ok := shamelist[a.name]; ok {
-					if check, ok := service[v.Name]; ok && check.output {
-						break
-					}
-				}
 				v.OutputRef.Shape.Rename(name)
 			}
 		}
