@@ -215,6 +215,8 @@ func setValue(dstVal reflect.Value, src interface{}) {
 			srcVal = reflect.ValueOf(src).Elem()
 		}
 		dstVal.Set(srcVal)
+	} else if dstVal.Kind() == reflect.String {
+		dstVal.SetString(srcVal.Interface().(string))
 	} else {
 		dstVal.Set(srcVal)
 	}
