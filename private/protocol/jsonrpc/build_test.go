@@ -2399,6 +2399,7 @@ func TestInputService8ProtocolTestEnumCase1(t *testing.T) {
 		FooEnum: InputService8TestShapeEnumType("foo"),
 		ListEnums: []InputService8TestShapeEnumType{
 			InputService8TestShapeEnumType("foo"),
+			InputService8TestShapeEnumType(""),
 			InputService8TestShapeEnumType("bar"),
 		},
 	}
@@ -2416,7 +2417,7 @@ func TestInputService8ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body, _ := ioutil.ReadAll(r.Body)
-	awstesting.AssertJSON(t, `{"FooEnum":"foo","ListEnums":["foo","bar"]}`, util.Trim(string(body)))
+	awstesting.AssertJSON(t, `{"FooEnum":"foo","ListEnums":["foo","","bar"]}`, util.Trim(string(body)))
 
 	// assert URL
 	awstesting.AssertURL(t, "https://test/", r.URL.String())

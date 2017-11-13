@@ -1426,13 +1426,13 @@
 					"HeaderEnum": "baz",
           "FooEnum": "foo",
           "QueryFooEnum": "bar",
-					"ListEnums": ["foo", "bar"],
-					"QueryListEnums": ["0", "1"]
+					"ListEnums": ["foo", "", "bar"],
+					"QueryListEnums": ["0", "", "1"]
         },
         "serialized": {
-          "uri": "/path?Enum=bar&List=0&List=1",
+          "uri": "/path?Enum=bar&List=0&List=1&List=",
           "headers": {"x-amz-enum": "baz"},
-          "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"bar\"]}"
+          "body": "{\"FooEnum\": \"foo\", \"ListEnums\": [\"foo\", \"\", \"bar\"]}"
         }
       },
       {

@@ -450,12 +450,12 @@
           "name": "OperationName"
         },
         "params": {
-          "ListEnums": ["foo", "bar"]
+          "ListEnums": ["foo", "", "bar"]
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "Action=OperationName&Version=2014-01-01&ListEnums.1=foo&ListEnums.2=bar"
+          "body": "Action=OperationName&Version=2014-01-01&ListEnums.1=foo&ListEnums.2=&ListEnums.3=bar"
         }
       },
       {

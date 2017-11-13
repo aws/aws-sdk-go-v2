@@ -880,12 +880,12 @@
         },
         "params": {
           "FooEnum": "foo",
-          "ListEnums": ["foo", "bar"]
+          "ListEnums": ["foo", "", "bar"]
         },
         "serialized": {
           "uri": "/",
           "headers": {},
-          "body": "Action=OperationName&Version=2014-01-01&FooEnum=foo&ListEnums.member.1=foo&ListEnums.member.2=bar"
+          "body": "Action=OperationName&Version=2014-01-01&FooEnum=foo&ListEnums.member.1=foo&ListEnums.member.2=&ListEnums.member.3=bar"
         }
       },
       {

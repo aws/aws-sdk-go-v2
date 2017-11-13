@@ -6276,11 +6276,13 @@ func TestInputService25ProtocolTestEnumCase1(t *testing.T) {
 		HeaderEnum: InputService25TestShapeEnumType("baz"),
 		ListEnums: []InputService25TestShapeEnumType{
 			InputService25TestShapeEnumType("foo"),
+			InputService25TestShapeEnumType(""),
 			InputService25TestShapeEnumType("bar"),
 		},
 		URIFooEnum: InputService25TestShapeEnumType("bar"),
 		URIListEnums: []InputService25TestShapeEnumType{
 			InputService25TestShapeEnumType("0"),
+			InputService25TestShapeEnumType(""),
 			InputService25TestShapeEnumType("1"),
 		},
 	}
@@ -6298,10 +6300,10 @@ func TestInputService25ProtocolTestEnumCase1(t *testing.T) {
 		t.Errorf("expect body not to be nil")
 	}
 	body := util.SortXML(r.Body)
-	awstesting.AssertXML(t, `<InputShape><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member>bar</member></ListEnums></InputShape>`, util.Trim(string(body)), InputService25TestShapeInputService25TestCaseOperation2Input{})
+	awstesting.AssertXML(t, `<InputShape><FooEnum>foo</FooEnum><ListEnums><member>foo</member><member></member><member>bar</member></ListEnums></InputShape>`, util.Trim(string(body)), InputService25TestShapeInputService25TestCaseOperation2Input{})
 
 	// assert URL
-	awstesting.AssertURL(t, "https://test/Enum/bar?ListEnums=0&ListEnums=1", r.URL.String())
+	awstesting.AssertURL(t, "https://test/Enum/bar?ListEnums=0&ListEnums=&ListEnums=1", r.URL.String())
 
 	// assert headers
 	if e, a := "baz", r.Header.Get("x-amz-enum"); e != a {

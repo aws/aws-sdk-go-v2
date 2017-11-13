@@ -22,11 +22,11 @@ var byteSliceType = reflect.ValueOf([]byte{}).Type()
 func BuildJSON(v interface{}) ([]byte, error) {
 	var buf bytes.Buffer
 
-	err := buildAny(reflect.ValueOf(v), &buf, "")
+	err := buildAny(reflect.ValueOf(v), &buf, "", false)
 	return buf.Bytes(), err
 }
 
-func buildAny(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) error {
+func buildAny(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, parentCollection bool) error {
 	origVal := value
 	value = reflect.Indirect(value)
 	if !value.IsValid() {
@@ -64,7 +64,7 @@ func buildAny(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) err
 	case "map":
 		return buildMap(value, buf, tag)
 	default:
-		return buildScalar(origVal, buf, tag)
+		return buildScalar(origVal, buf, tag, parentCollection)
 	}
 }
 
@@ -116,7 +116,7 @@ func buildStruct(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) 
 
 		if (member.Kind() == reflect.Ptr || member.Kind() == reflect.Slice || member.Kind() == reflect.Map) && member.IsNil() {
 			continue // ignore unset fields
-		} else if member.Kind() != reflect.Ptr && !member.IsValid() {
+		} else if member.Kind() == reflect.String && member.Len() == 0 {
 			continue
 		}
 
@@ -135,7 +135,7 @@ func buildStruct(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) 
 		writeString(name, buf)
 		buf.WriteString(`:`)
 
-		err := buildAny(member, buf, field.Tag)
+		err := buildAny(member, buf, field.Tag, false)
 		if err != nil {
 			return err
 		}
@@ -151,7 +151,8 @@ func buildList(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) er
 	buf.WriteString("[")
 
 	for i := 0; i < value.Len(); i++ {
-		buildAny(value.Index(i), buf, "")
+		elem := value.Index(i)
+		buildAny(elem, buf, "", true)
 
 		if i < value.Len()-1 {
 			buf.WriteString(",")
@@ -183,7 +184,7 @@ func buildMap(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) err
 		writeString(k.String(), buf)
 		buf.WriteString(`:`)
 
-		buildAny(value.MapIndex(k), buf, "")
+		buildAny(value.MapIndex(k), buf, "", true)
 	}
 
 	buf.WriteString("}")
@@ -191,12 +192,15 @@ func buildMap(value reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) err
 	return nil
 }
 
-func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag) error {
+func buildScalar(v reflect.Value, buf *bytes.Buffer, tag reflect.StructTag, parentCollection bool) error {
 	// prevents allocation on the heap.
 	scratch := [64]byte{}
 	switch value := reflect.Indirect(v); value.Kind() {
 	case reflect.String:
-		writeString(value.String(), buf)
+		str := value.String()
+		if parentCollection || len(str) > 0 {
+			writeString(str, buf)
+		}
 	case reflect.Bool:
 		if value.Bool() {
 			buf.WriteString("true")
